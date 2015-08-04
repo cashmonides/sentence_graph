@@ -1,0 +1,13 @@
+set not implemented in explorer and safari
+so, question 1: is set doable at all?
+question 2: why do a set in the first place if it has to be converted into a list?
+
+
+
+TODO
+
+make new clause objects when the button is clicked (main clause, subordinate clause, etc.)
+
+coordination
+
+keyboard tagging
