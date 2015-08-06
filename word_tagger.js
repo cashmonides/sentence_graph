@@ -25,7 +25,7 @@ var words_to_clauses = {};                     //words_to_clauses will be a dict
 
 
 //basic string processing
-//todo make conjunction characters taggable e.g. ([{<
+
 
 function is_word_char (c){
     return (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z');
@@ -88,9 +88,9 @@ function convert_wordset_to_list () {
 }
 
 function submit_tag(tag_type){
-    tag_type = tag_list[tag_type];
+    var tag = new SingleRegionTag(tag_list[tag_type]);
     console.log("submit tag triggered here");
-    console.log("TEST OF tag type", tag_type, words_in_play.size, words_in_play.values());
+    console.log("TEST OF tag type", tag, words_in_play.size, words_in_play.values());
 
     words_in_play.forEach(function(x){
       document.getElementById(x).style.background = "white";
@@ -102,12 +102,12 @@ function submit_tag(tag_type){
     console.log(indices);
     var region = sentence.get_region(indices);
     if (region != undefined && region != null) {
-        console.log("ADDING TAG ", tag_type);
-        region.add_tag(tag_type);
+        console.log("ADDING TAG ", tag);
+        region.add_tag(tag);
         //todo additions below
-        if (tag_type.indexOf("clause") !== -1) {
-            region.make_clause(tag_type);
-        }
+        //if (tag.indexOf("clause") !== -1) {
+        //    region.make_clause(tag);
+        //}
     }
     console.log(sentence);
 
@@ -282,26 +282,57 @@ function generate_tags() {
 }
 
 
-
-
-//todo is this old, obsolete or just not integrated yet?
 function generate_regions() {
     var e = document.getElementById("regions");
     e.innerHTML = "";
     var dd = document.getElementById("tags");
-    var tag = dd.options[dd.selectedIndex].value;
-    console.log(tag);
+    var tag = dd.options[dd.selectedIndex].value;               //tag will be a string
+    console.log("target tag = ", tag);
 
     for (var r in sentence.regions) {
-        for (var t in sentence.regions[r].tags) {               //todo these need to be tag objects
-            var ct = sentence.regions[r].tags[t];
+        var cr = sentence.regions[r];
+        for (var t in cr.tags) {               //todo these need to be tag objects
+            var ct = cr.tags[t];               //ct is an object, not a string (current tag)
             console.log(ct);
-            if (ct === tag) {
+            if (ct.get_tag_type() === tag) {
+                var o = document.createElement("option");
+                o.innerHTML = indices_to_string(cr.get_indices());
+                e.appendChild(o);
                 console.log("found tag", sentence.regions[r].indices);
             }
         }
     }
 }
+
+
+function indices_to_string(is) {
+    output = "";
+    for (var i in is) {
+        output += (word_map[is[i]]) + " ";
+    }
+    return output;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

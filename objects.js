@@ -146,24 +146,28 @@ var Region = function (indices) {
     };
 
     //todo old version below
-    //this.add_tag = function (tag) {
-    //    this.tags.push(tag);
-    //};
-
-    //new version below
     this.add_tag = function (tag) {
-        if (tag.indexOf("clause") !== -1) {                             //if clause is in our tag
-            this.tags = this.tags.filter(function(x) {                  //we remove any other clause tags that might have been accidentally associated with it
-                return x.indexOf("clause") === -1
-            });
-        }
         this.tags.push(tag);
     };
+
+
+
+    //todo cahnge below to tag.get_tag_type().indexOf("clause") !== -1
+    //new version below
+    //this.add_tag = function (tag) {
+    //    if (tag.indexOf("clause") !== -1) {                             //if clause is in our tag
+    //        this.tags = this.tags.filter(function(x) {                  //we remove any other clause tags that might have been accidentally associated with it
+    //            return x.indexOf("clause") === -1
+    //        });
+    //    }
+    //    this.tags.push(tag);
+    //};
 
     //todo old version below
     //this.make_clause = function (clause_type) {
     //    this.clause = new Clause (clause_type)
     //};
+
 
     //new version below
     this.make_clause = function (clause_type) {
@@ -209,9 +213,8 @@ var SubordinateClause = function () {
 //motivation: we want to reduce classes and so we want a single class which can give us
 // tag type - stores type and region
 // useful for: noun, verb, adjective, adverb
-var SingleRegionTag = function (type, region) {
+var SingleRegionTag = function (type) {
     this.type = type;
-    this.region = region;
     this.get_tag_type = function () {
         return this.type;
     }
