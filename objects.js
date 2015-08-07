@@ -170,15 +170,15 @@ var Region = function (indices) {
 
 
     //new version below
-    this.make_clause = function (clause_type) {
-        if (!this.clause) {                                             //if a region has no clause property
-            this.clause = new Clause(clause_type, indices);           //we make onb
-        }
-        else {                                                              //but if a region already has a clause, and all we want to do is assign it a clause type
-            this.clause.clause_type = clause_type;
-        }
+    // this.make_clause = function (clause_type) {
+    //     if (!this.clause) {                                             //if a region has no clause property
+    //         this.clause = new Clause(clause_type, indices);           //we make onb
+    //     }
+    //     else {                                                              //but if a region already has a clause, and all we want to do is assign it a clause type
+    //         this.clause.clause_type = clause_type;
+    //     }
 
-    }
+    // }
 
 };
 
@@ -194,7 +194,7 @@ var Clause = function (clause_type, indices) {
     this.clause_type = clause_type;
     this.indices = indices;
     this.get_tag_type = function () {
-        return TagType.Clause;
+        return this.clause_type;
     }
 
 
@@ -202,12 +202,15 @@ var Clause = function (clause_type, indices) {
 };
 
 var SubordinateClause = function () {
+    
     this.superordinate = null;
     this.subordinate = null;
     this.subordinating_conjunction = null;
+    
     this.get_tag_type = function () {
-        return TagType.SubordinateClause;
+        return "subordinate clause";
     }
+    
 };
 
 //motivation: we want to reduce classes and so we want a single class which can give us

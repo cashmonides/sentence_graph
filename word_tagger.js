@@ -1,7 +1,7 @@
 //var text = "A baryon is a composite subatomic particle made up of three quarks (as distinct from mesons, which are composed of one quark and one antiquark). Baryons and mesons belong to the hadron family of particles, which are the quark-based particles. The name \"baryon\" comes from the Greek word for \"heavy\" (βαρύς, barys), because, at the time of their naming, most known elementary particles had lower masses than the baryons.";
 var text = "the dog jumps (when the bell (which my father made) rings ) .";
 //var text = "a confucius (who lived  in a country (which we now call China) a long time ago (rich in empire and roaring with war )) said  in his book (which is called the Analects) (that revenge is a dish (which tastes best cold)).";
-//var text = "the dog jumps when the bell rings.";
+// var text = "the dog jumps when the bell rings.";
 //var text = "(when you embark on a journey of revenge) dig two graves.";
 
 
@@ -14,14 +14,14 @@ var word_map = {};
 
 var words_in_play = new Set();      //a set of unique integer ids for each word
 
-var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate clause: relative", "subordinate clause: indirect statement", "subordinate clause: indirect question", "subordinate clause: temporal", "adverb", "ADD OPEN BRACKET LEFT", "ADD CLOSED BRACKET RIGHT"];
+var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate clause", "adverb"];
 
 var tag_map = {};
 
 var previous_id = null;
 
 var words_to_clauses = {};                     //words_to_clauses will be a dictionary from indices to clause_regions
-                                            //its goal is to have an easy way of finding out what clause a word is in
+                                               //its goal is to have an easy way of finding out what clause a word is in
 
 
 //basic string processing
@@ -206,9 +206,9 @@ function process_bracketed_text (words) {
     var clause_region;
 
 
-    for (var i = 0; i < words.length; i++) {
+    for (var i = 1; i <= words.length; i++) {
         console.log("CLAUSE STACK = ", JSON.stringify(clause_stack));
-        if (words[i] === '(') {
+        if (word_map[i] === '(') {
             //a subordinate clause has been detected so we want to add it to the clause stack
             //so we create a list [i] and push it to the stack
             clause_stack.push([i]);
@@ -222,15 +222,19 @@ function process_bracketed_text (words) {
             //and we want to remove the clause that just closed from the clause stack
             //and we want to make a new region with region.clause = the clause we just removed
             //in other words, wehn we hit a close bracket we want to assign the clause region and throw it out of the stack because the stack is for current clauses
-            if (words[i] === ')') {
+            if (word_map[i] === ')') {
                 var y = clause_stack.pop();                 //this does two things at once, return y and pops
                 if (clause_stack.length !== 0) {            //when clause_stack.length == 0 we have a problem because we've ended the main clause with a close bracket
-                    clause_region = new Region(y);
-                    clause_region.make_clause('subordinate clause');
-                    y.forEach(function(x) {                         //we iterate over the indices and populate the map of words to clauses
-                        words_to_clauses[x] = clause_region;
-                    });
-                    sentence.regions.push(clause_region);           //we want our new clause (that just closed) to be in sentence
+                
+                    // clause_region = new Region(y);
+                    // clause_region.make_clause('subordinate clause');
+                    // y.forEach(function(x) {                         //we iterate over the indices and populate the map of words to clauses
+                    //     words_to_clauses[x] = clause_region;
+                    // });
+                    // sentence.regions.push(clause_region);           //we want our new clause (that just closed) to be in sentence
+                
+                    sentence.get_region(y).add_tag(new SubordinateClause());
+                    
                 } else {                                        //this is a case with too many closing brackets
                     throw "bad tagging";
                 }
@@ -314,7 +318,11 @@ function indices_to_string(is) {
 }
 
 
-
+function submit_sentence(){
+    
+    save(sentence);
+    
+}
 
 
 

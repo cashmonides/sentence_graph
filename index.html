@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+	<script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
     <script src="word_tagger.js"></script>
     <script src="objects.js"></script>
+    <script src="persist.js"></script>
     <meta charset="UTF-8">
     <title></title>
 </head>
@@ -13,6 +15,10 @@
     <select multiple size = "10" id="tags"></select>
 
     <select multiple size = "10" id="regions"></select>
+    
+    <button onclick="submit_sentence()">submit</button>
+   
+   
 
 </body>
 </html>
