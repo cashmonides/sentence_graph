@@ -145,28 +145,32 @@ var Region = function (indices) {
         }
     };
 
-    //todo old version below
-    this.add_tag = function (tag) {
-        this.tags.push(tag);
-    };
-
-
-
-    //todo cahnge below to tag.get_tag_type().indexOf("clause") !== -1
-    //new version below
+    //todo old version below CHECK
     //this.add_tag = function (tag) {
-    //    if (tag.indexOf("clause") !== -1) {                             //if clause is in our tag
-    //        this.tags = this.tags.filter(function(x) {                  //we remove any other clause tags that might have been accidentally associated with it
-    //            return x.indexOf("clause") === -1
-    //        });
-    //    }
     //    this.tags.push(tag);
     //};
 
+
+
+
+
+    //todo new version below CHECK
+    this.add_tag = function (tag) {
+        if (tag.get_tag_type().indexOf("clause") !== -1) {              //trying to avoid having multiple tags with the word clause in it
+            this.tags = this.tags.filter(function(x) {                  //we remove any other clause tags that might have been accidentally associated with it
+                return x.get_tag_type().indexOf("clause") === -1
+            });
+        }
+        this.tags.push(tag);
+
+
+
+    };
+
     //todo old version below
-    //this.make_clause = function (clause_type) {
-    //    this.clause = new Clause (clause_type)
-    //};
+    this.make_clause = function (clause_type) {
+        this.clause = new Clause (clause_type)
+    };
 
 
     //new version below
@@ -184,12 +188,13 @@ var Region = function (indices) {
 
 
 
-
+//this is an object
 var Clause = function (clause_type, indices) {
     this.subject = null;       //todo change this to list?
     this.object = null;
     this.verb = null;
     this.predicate = null;
+
     //todo, added below
     this.clause_type = clause_type;
     this.indices = indices;
@@ -201,8 +206,20 @@ var Clause = function (clause_type, indices) {
 
 };
 
+
+
+//although called a clause, it's really a tag
 var SubordinateClause = function () {
-    
+
+
+    //quick and dirty additions to get some funcitonality (possibly collapse sub and main clause together)
+    this.subject = null;
+    this.object = null;
+    this.verb = null;
+    this.predicate = null;
+    this.clause_type = "subordinate clause";
+    this.indices = null;
+
     this.superordinate = null;
     this.subordinate = null;
     this.subordinating_conjunction = null;

@@ -11,3 +11,200 @@ make new clause objects when the button is clicked (main clause, subordinate cla
 coordination
 
 keyboard tagging
+
+
+
+TODO
+
+make main clause processed by process bracketed text (currently it only creates subordinate clauses)
+
+
+
+
+TODO
+
+where did make clauses go - where should it go
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+this.add_tag = function(tag) {
+        if(tag.get_tag_type().indexOf("clause") !== -1) {
+            region.make_clause(tag_type);
+        }
+    };
+
+
+
+
+Dan's code
+some returns true if some satisfy the condition
+
+
+
+
+
+
+
+
+
+POSSIBLE IMPROVEMENTS
+make words in play a parameter not a global variable
+
+
+
+AGENDA FOR SUNDAY
+
+
+
+
+
+- indices issue
+- add open-bracket tagger
+- run some twine grammar game questions as a test
+- run some latin sentences
+
+TODO NEXT
+- clause.superordinate & clause.subordinate & clause.coordinate_left & clause.coordinate_right
+- adding coordinating functions
+- create an ability to highlight multiple words and then click button and that gives separate regions (subject, object, noun, verb, etc)
+- auto-tagging
+    - expand auto-tagging dictionary
+        - add more pronouns, etc.
+    - link auto-tagging dictionary to a web scraper (which would auto tag nouns, verb, adjs, advs, etc.)
+    - display auto-tags and confirm/disconfirm
+
+
+TODO IN LATIN GENERATOR
+
+- make a map from level to allowed parameters (language dependent)
+- create a mental verb module
+- make a kernel/conjunction generator
+- make agreement and the verb to be
+- make_conjunction
+
+
+
+
+TODO with Gio
+make multiple highlights not all add as a single region (e.g. dog bell father should be three separate regions)
+(maybe make a separate action for multiple buttons)
+
+
+
+TODO cleanup
+make a nicer clean output with regions and clause.subject
+
+
+TODO bugs
+- subordinate clause is getting entered twice
+- in CLEAN OUTPUT we get undefined=which my father made ) rings
+
+
+
+TODO bigger fixes
+- make process_bracketed_text only display the brackets in the box, not actually add them as words
+
+
+
+TODO questions
+- how shouls quotes be tagged
+    - author, work, integer
+    - author + integer (with an option for anonymous, unknown, author?)
+    - integer (sounds like a bad idea)
+
+
+TODO add functionality
+- create a dictionary of auto-tagged words (when, the, a, under)
+
+
+
+TODO brute force tasks
+- bracket some latin sentences for tagging
+- bracket some sentences from the twine grammar game
+- build up a dictionary of words that can automatically tag words: the, a, under, when, although, if
+
+
+TODO
+- add specific clause property to AS code
+- review and add dan's bracket tagger
+- merge indices
+- run some tests (including latin sentences)
+
+
+
+PRIORITIZE
+1) - find and fix bug and as progressing pay attention to little differences
+(debug.sat
+
+2) get specific clause property into AS
+
+3) get open bracket tagging
+
+4) DS look at the tagged-boxes
+
+TODO
+bugs
+- subordinate clause shows up twice
+
+
+
+TODO MERGE CODE
+DS FUNCTIONALITY
+- add properties such as clause.subject to a clause
+- open-bracket tagging (tag an open bracket and it tags the entire clause)
+
+AS FUNCTIONALITY
+- tagged-boxes
+- firebase addition
+
+
+MISMATCHES
+- indexing starting at 1...
+
+
+LITTLE THINGS IN AS CODE
+- the bug
+- when AS processes bracketed text, the main clause is not tagged and producexd
+
+
+
+
+
+
+
+
+
+
+
+TODO DILEMMA
+- on the one hand:
+    - we want a region to be tagged with something like "main clause, subordinate clause, etc."
+        (i.e. we want this to be parallel with the tagging of nouns and subjects)
+
+- on the other hand:
+    - we want an easy way to access the different clauses in a sentence
+        e.g. we want to be able to ask easily clause.subject is what?
+
+
+the fork in the road:
+1) - make a Clause object which is the tag of a region'
+    - it's accessed via region.tags[0] or some semi-clunky way (is there a better way to access it?)
+2) make a property of each region which is region.clause
+    - obviously this would be irrelevant for nouns and verbs etc.
+    - but it would be easy to access
+
+
+

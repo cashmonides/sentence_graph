@@ -1,0 +1,33 @@
+//generate HTML page
+
+GENERATE_BUTTONS
+GENERATE_TAGS
+
+
+//start
+
+LOAD_SENTENCE
+
+
+PROCESS_BRACKETED_TEXT
+
+
+
+
+
+
+GENERATE_REGIONS (right hand sad of tag explorer)
+
+
+
+click "submit button"
+calls:
+SUBMIT_SENTENCE
+
+    calls SAVE (found in persist.js)
+            (pushes Sentence object to firebase)
+            (in this format:   data : JSON.stringify(sentence))
+
+
+
+
