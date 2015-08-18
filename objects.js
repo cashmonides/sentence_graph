@@ -146,30 +146,30 @@ var Region = function (indices) {
     };
 
     //todo old version below CHECK
-    //this.add_tag = function (tag) {
-    //    this.tags.push(tag);
-    //};
+    this.add_tag = function (tag) {
+        this.tags.push(tag);
+    };
 
 
 
 
 
     //todo new version below CHECK
-    this.add_tag = function (tag) {
-        if (tag.get_tag_type().indexOf("clause") !== -1) {              //trying to avoid having multiple tags with the word clause in it
-            this.tags = this.tags.filter(function(x) {                  //we remove any other clause tags that might have been accidentally associated with it
-                return x.get_tag_type().indexOf("clause") === -1
-            });
-        }
-        this.tags.push(tag);
+    // this.add_tag = function (tag) {
+    //     if (tag.get_tag_type().indexOf("clause") !== -1) {              //trying to avoid having multiple tags with the word clause in it
+    //         this.tags = this.tags.filter(function(x) {                  //we remove any other clause tags that might have been accidentally associated with it
+    //             return x.get_tag_type().indexOf("clause") === -1
+    //         });
+    //     }
+    //     this.tags.push(tag);
 
 
 
-    };
+    // };
 
     //todo old version below
     this.make_clause = function (clause_type) {
-        this.clause = new Clause (clause_type)
+        this.clause = new Clause (clause_type);
     };
 
 
@@ -190,22 +190,24 @@ var Region = function (indices) {
 
 //this is an object
 var Clause = function (clause_type, indices) {
+    
+    this.id = 0;
+    
     this.subject = null;       //todo change this to list?
     this.object = null;
     this.verb = null;
+    
     this.predicate = null;
 
-    //todo, added below
     this.clause_type = clause_type;
-    this.indices = indices;
+    this.superordinate_clause = null;
+    this.conjunction = null;
+
     this.get_tag_type = function () {
         return this.clause_type;
     }
 
-
-
 };
-
 
 
 //although called a clause, it's really a tag

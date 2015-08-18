@@ -1,26 +1,179 @@
-var test = "the dog sleeps / and the cat hunts (while the fish swims  / and the rabbit jumps)";
 
+/*
+
+    text
+    if supports brackets
+        [text -> words with brackets]
+        [remove brackets -> words]
+    else
+        text -> words
+    create sentence using words
+    [populate tags based on words with brackets]
+    manual tag through gui
+
+
+
+    
+
+
+
+ */
+
+
+
+var test2 = "the dog chases the cat (while the fish eats the worm)";
+// region 1 = "the dog chases the cat"
+//     tag.clause = "tag enumeration"
+var test5 = "the dog sleeps / and the cat hunts (while the fish swims  / and the rabbit (who ate the carrot) jumps)";
+
+var test = "the dog sleeps / and the cat hunts (while the fish swims  / and the rabbit jumps)";
+//A B C D
+//iteration returns this information:
+// C.superordinate_clause = [A, B]
+//C.coordinate_right = D
+//D.coordinate_left = C
+
+//inferrable from above:
+//D.superordinate_clause = B 
+
+
+//quizzable questions:
+//click on the subordinate clause?
+
+var test3 = "john went home / and mark went to the store (which closes at 8) (to buy milk)";
+var test4 = "john went to war / and mark went to college (in order that they might impress their girlfriends)";
+var test5 = "the dog jumps ( when the bell rings / and the flag is lifted ) into the lake";
+var test6 = "the dog ( which you found in the park ) jumps ( when the bell ( which my father made ) rings )";
+var test7 = "the cat sleeps / and the dog runs / and the fish swims";
 
 window.onload = function () {
-    process_bracketed_text(test);
+
+    var words = test6.split(/ /);
+    var sentence = new Sentence();
+    process_bracketed_text2(0, words, sentence, null);
+
 };
 
 
-//input = a list of words (with brackets in it)
-//outputs currently = nothing, just side effects
-// outputs should = a sentence, which will have as a property a bunch of new Region objects, each of which has properties of Clause objects
 
-function process_bracketed_text (words) {
+/*
 
-    //todo in order to make this totally modular we need to initialize a sentence object somewhere up here
-    //todo in order to make this totally modular we don't want indices_to_region to be a global variable
+    the dog jumps (when the bell rings)
+    
+    
+    the dog jumps (
+        when the bell rings
+    )
+    
+    the dog jumps 
+        (when the bell rings)
 
-    //todo modularize Sentence (created here and returned here)
-    //todo modularize indices_to_regions (created here and returned here
 
-    var sentence = new Sentence(words);
+    the dog jumps (when the bell rings / and the flag is lifted)
+    
+    the dog jumps 
+        (when the bell rings / 
+            and the flag is lifted
+        )
+
+
+
+*/
+
+
+// input - list of words including brackets
+// output - index from which to continue processing
+
+var id = 0;
+
+function process_bracketed_text2 (start, words, sentence, parent) {
+    
+    console.log("recursive call:", start, words, words[start]);
+
+    var clause = new Clause();
+    id++;
+    clause.id = id;
+    
+    
+    if(parent != null){
+        clause.superordinate_clause = parent;
+        console.log("our parent is: " + parent.id);
+    }
+    var indices = []
+    
+    var started_with_paren = false;
+    
+    if(words[start] == "("){
+        start++;
+        started_with_paren = true;
+    }
+    
+    console.log("started with paren?", started_with_paren);
+    
+    var i;
+    outer:
+    for(i = start; i < words.length; i++){
+        var w = words[i];
+        switch(w){
+            case "(":
+                i = process_bracketed_text2(i, words, sentence, clause);
+                console.log("i jumped to:", i);
+                break;
+            case ")":
+                if(started_with_paren){
+                    i += 1
+                }
+                break outer;
+            case "/": 
+                i = process_bracketed_text2(i + 1, words, sentence, clause);
+                console.log("i jumped to:", i);
+                break;
+            default: 
+                // console.log("should be a word:", w, i);
+                indices.push(i);
+        }
+    }
+    
+    sentence.get_region(indices).add_tag(clause);
+    console.log("indices:", indices, indices.map(function(i){ return words[i]; }), clause.id, (clause.superordinate_clause == null ? "" : clause.superordinate_clause.id));
+    return i - 1;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function process_bracketed_text (words, sentence) {
+
+    //these were global variable (which I was trying to modularize and isolate)
+    //they need to be initialized when we initialize sentence
+    //todo move these to some function like create_sentence
+    
+    //todo comment this out
     var indices_to_regions = {};
-    var word_map = {};
+    // var word_map = {};
 
     //clause_stack is a stack of all the clauses (i.e. their indices) which haven't been processed yet
     // = list of lists of indices
@@ -126,9 +279,6 @@ function process_bracketed_text (words) {
     return sentence;
 }
 
-
-
-
 //this will add properties (super/sub/coordinate) to a given clause
 function add_properties (clause, info_stack) {
 
@@ -184,8 +334,6 @@ function add_properties (clause, info_stack) {
 
 }
 
-
-
 function log_relationships(sentence, words) {
     for (var j = 0; j < sentence.regions.length; j++) {
         console.log('clause');
@@ -207,7 +355,6 @@ function log_relationships(sentence, words) {
         )
     }
 }
-
 
 function indices_to_string(is, words) {
     var output = "";
