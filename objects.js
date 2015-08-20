@@ -115,10 +115,29 @@ var Sentence = function (words) {
         return nr;
     };
 
-
+    this.get_sub_regions = function (region) {
+        var superset = new Set (region.indices);
+        var results = [];
+        for (var i in this.regions) {
+            if (is_subset(superset, this.regions[i].indices))  {
+                results.push(this.regions[i]);
+            }
+        }
+        return results;
+    };
 
 
 };
+
+function is_subset(superset, subset) {
+   for (var i in subset) {
+       if (!superset.has(subset[i])) {
+           return false;
+       }
+   }
+   return true;
+}
+
 
 var Region = function (indices) {
     this.indices = indices;
@@ -129,6 +148,7 @@ var Region = function (indices) {
     this.get_indices = function () {
         return this.indices;
     };
+
 
 
     this.equals_list = function (indices) {
@@ -162,10 +182,9 @@ var Region = function (indices) {
     //         });
     //     }
     //     this.tags.push(tag);
+    //};
+    
 
-
-
-    // };
 
     //todo old version below
     this.make_clause = function (clause_type) {
@@ -182,7 +201,7 @@ var Region = function (indices) {
     //         this.clause.clause_type = clause_type;
     //     }
 
-    // }
+    // };
 
 };
 
@@ -190,8 +209,6 @@ var Region = function (indices) {
 
 //this is an object
 var Clause = function (clause_type, indices) {
-    
-    this.id = 0;
     
     this.subject = null;       //todo change this to list?
     this.object = null;

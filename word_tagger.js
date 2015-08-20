@@ -1,5 +1,5 @@
 //var text = "A baryon is a composite subatomic particle made up of three quarks (as distinct from mesons, which are composed of one quark and one antiquark). Baryons and mesons belong to the hadron family of particles, which are the quark-based particles. The name \"baryon\" comes from the Greek word for \"heavy\" (βαρύς, barys), because, at the time of their naming, most known elementary particles had lower masses than the baryons.";
-//var text = "the dog jumps (when the bell (which my father made) rings ) .";
+var text = "the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .";
 //var text = "the poets utter wise things (which they do not understand).";
 // var text = "a confucius (who lived  in a country (which we now call China) a long time ago (rich in empire and roaring with war )) said  in his book (which is called the Analects) (that revenge is a dish (which tastes best cold)).";
 // var text = "the dog jumps when the bell rings.";
@@ -7,7 +7,7 @@
 //var text = "Silence is a true friend (who never betrays).";
 //var text = "There was an old man (who supposed (that the street door was partially closed)) but some very large rats ate his coat and his hats, (while that futile old gentleman dozed).";
 //var text = "(What we achieve inwardly) will change outer reality.";
-var text = "There was an old woman (who lived in a shoe).";
+// var text = "There was an old woman (who lived in a shoe).";
 
 
 //initializing global variables
@@ -116,12 +116,15 @@ var auto_tagging_map = {
 
 var word_selector = null;
 
+var conjunction_characters = new Set(['(', ')', '[', ']', '{', '}', '/']);
+
+
 function is_word_char (c){
     return (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z');
 }
 
 function is_conj_char (c){
-    return (c === '[' || c === '(' || c === '<' || c === '{' || c === ']' || c === ')' || c === '>' || c === '}');
+    return conjunction_characters.has(c);
 }
 
 
@@ -143,18 +146,19 @@ window.onload = function (){
     word_selector = new WordSelector("box", words);
     word_selector.setup();
     
-    // process_bracketed_text(words);
+    process_bracketed_text(words);
 
-    // process_auto_tags(words);
+    process_auto_tags(words);
 
-
-
+    update_region_list();
+    document.getElementById("allregions").addEventListener("change", function(x){
+        update_subregions();
+    });
 
     //debugging below
     console.log(JSON.stringify(sentence));
 
 };
-
 
 
 
@@ -176,6 +180,7 @@ function submit_tag(tag_type){
     if (region != undefined && region != null) {
         console.log("ADDING TAG ", tag);
         region.add_tag(tag);
+        update_region_list();
         //todo additions below
         //if (tag.indexOf("clause") !== -1) {
         //    region.make_clause(tag);
@@ -244,7 +249,7 @@ function debug(indices){
 
 function parse_words (input_box) {
     var start = -1;               //-1 is an out of band value - a number that's not valid but within the range of the data type we're using
-    var id = 1;
+    // var id = 0;
     var words = [];
     var word;
 
@@ -256,13 +261,13 @@ function parse_words (input_box) {
                 words.push(word);
                 // word_map[id] = word;
                 // input_box.innerHTML += "<span id=\"" + id + "\" onclick=\"click_2(event, " + id + ")\">" + word + "</span>";
-                id += 1;
+                // id += 1;
             }
             var bracket = c;
             words.push(bracket);
             // word_map[id] = bracket;
             // input_box.innerHTML += "<span id=\"" + id + "\" onclick=\"click_2(event, "+id+")\">" + bracket + "</span>";
-            id += 1;
+            // id += 1;
             start = -1;
 
         } else if (is_word_char(c)) {
@@ -275,7 +280,7 @@ function parse_words (input_box) {
                 words.push(word);
                 // word_map[id] = word;
                 // input_box.innerHTML += "<span id=\"" + id + "\" onclick=\"click_2(event, "+id+")\">" + word + "</span>";
-                id += 1;
+                // id += 1;
                 start = -1;
             }
             // input_box.innerHTML += c;
@@ -383,10 +388,10 @@ function process_auto_tags(words){
     for (var i = 0; i < words.length; i++) {
         var word = words[i];
         if (word in auto_tagging_map) {
-            var new_region = sentence.get_region([i + 1]);
+            var new_region = sentence.get_region([i]);
             new_region.add_tag(new SingleRegionTag(auto_tagging_map[word]));
             console.log("TEST OF AUTO TAGGER START");
-            console.log("desired index", (i + 1));
+            console.log("desired index", (i));
             console.log("desired word = ", auto_tagging_map[word]);
         }
     }
@@ -440,7 +445,49 @@ function generate_regions() {
 }
 
 
+function update_region_list(){
+    
+    var e = document.getElementById("allregions");
+    e.innerHTML = "";
+    
+    for(var i in sentence.regions){
+        
+        var r = sentence.regions[i];
+        var o = document.createElement("option");
+        o.innerHTML = region_to_text(r);
+        e.appendChild(o);
+        console.log(i, r);
+        
+    }
+    
+}
 
+
+function update_subregions(){
+    
+    var e = document.getElementById("subregions");
+    e.innerHTML = "";
+    
+    var dd = document.getElementById("allregions");                   //dd = drop-down optios on the left hand side
+    var region = sentence.regions[dd.selectedIndex];                   
+    console.log(region, sentence);
+    var subregion = sentence.get_sub_regions(region);
+    
+    for(var i in subregion){
+        var o = document.createElement("option");
+        o.innerHTML = region_to_text(subregion[i]);
+        e.appendChild(o);
+    }
+    
+}
+
+function region_to_text(region){
+    
+    var text = word_selector.get_text(region.get_indices());
+    var tags = region.tags.map(function(x){ return x.get_tag_type(); }).join(", ");
+    return text + " = " + tags;
+    
+}
 
 function submit_sentence(){
     

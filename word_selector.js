@@ -39,9 +39,9 @@ var WordSelector = function(element_id, words){
     
     this.click_2 = function(event, id){
         // console.log(event, i, this.words[i]);
-        
+        id = parseInt(id);
         var word = this.words[id];
-        console.log("TAGGED! ", id, word, this.words_in_play);
+        console.log("TAGGED! ", id, typeof(id),  word, this.words_in_play);
     
         //check if shift key is held down
         if (event.shiftKey) {
@@ -51,7 +51,7 @@ var WordSelector = function(element_id, words){
                 var end = this.previous_id > id ? this.previous_id : id;
                 for (var i = start; i <= end; i++) {
                     var e = document.getElementById(i);
-                    this.words_in_play.add(i + "");         //todo we should make a consistent conventions
+                    this.words_in_play.add(i);        
                     e.style.background = "red";
                 }
             }
@@ -62,6 +62,7 @@ var WordSelector = function(element_id, words){
                 e.style.background = "white";
             } else if (word === '(' || word === '/') {              //todo this is the addition here
                 var indices_of_open_bracket_clause = this.open_bracket_clause(id);
+                console.log(indices_of_open_bracket_clause);
                 //add these indices to words_in_play and turn red
                 for (var i = 0; i < indices_of_open_bracket_clause.length; i++) {
                     this.words_in_play.add(indices_of_open_bracket_clause[i]);      //todo turn i into a sring?
@@ -119,13 +120,13 @@ var WordSelector = function(element_id, words){
     //argument will be an index (the index of the bracket user has clicked on)
     //this will return a list of indices
     this.open_bracket_clause = function (i) {
-        var list = [i];
+        //todo defensively program against clicking on close bracket ')' or clicking on the final character
+        var list = []; 
         //depth is a measure of how "deep" we are in the subordination, i.e. how many levels deep we are
         var depth = 0;
         //advance the index
         i++;
-        //while true is a useful way to run a loop that only breaks when you want it to
-        while (true) {
+        for (; i < this.words.length; i++) {
             //we might get to the end without hitting any break-inducing character - namely ')' or '/')
             if (this.words[i] === undefined) {
                 break;
@@ -140,9 +141,7 @@ var WordSelector = function(element_id, words){
                 //check if we are under any subordination
                 if (depth === 0) {
                     //if so, we consider our clause to have ended
-                    //so first we need to push the close bracket
-                    list.push(i);
-                    //secondly we need to exit the loop because we're done
+                    //so we need to exit the loop because we're done
                     break;
                 }
                 //but we might be under a subordination
@@ -162,7 +161,6 @@ var WordSelector = function(element_id, words){
             else if (depth === 0) {
                 list.push(i);
             }
-            i++;
         }
         return list;
     };

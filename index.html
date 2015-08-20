@@ -2,8 +2,8 @@
 <html>
 <head lang="en">
 	<script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
+	<script src="objects.js"></script>
     <script src="word_tagger.js"></script>
-    <script src="objects.js"></script>
     <script src="persist.js"></script>
     <script src="word_selector.js"></script>
     <meta charset="UTF-8">
@@ -13,8 +13,9 @@
     <div id="box"></div>
     <div id="buttons"></div>
     <select multiple size = "10" id="tags"></select>
-
-    <select multiple size = "10" id="regions"></select>
+    <select multiple size = "10" id="regions" min-width="200"></select>
+    <select multiple size = "10" id="allregions"></select>
+    <select multiple size = "10" id="subregions"></select>
     
     <button onclick="submit_sentence()">submit</button>
    
