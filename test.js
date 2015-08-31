@@ -1,6 +1,12 @@
 window.onload = test;
 
-function test () {
+function test(){
+    
+    load();
+    
+}
+
+function test1 () {
     var text = "the dog jumps (when the bell rings)";
     //["the"0, "dog"1, "jumps"2, "when"3, "the"4, "bell"5, "rings"6]
     var words = convert (text);

@@ -88,6 +88,8 @@ var TagType = {
 
 
 var Sentence = function (words) {
+    
+    this.class_id = 1;
     this.words = words;
     this.regions = [];
 
@@ -140,6 +142,8 @@ function is_subset(superset, subset) {
 
 
 var Region = function (indices) {
+    
+    this.class_id = 2;
     this.indices = indices;
     this.sentence = null;
     this.tags = [];
@@ -210,6 +214,7 @@ var Region = function (indices) {
 //this is an object
 var Clause = function (clause_type, indices) {
     
+    this.class_id = 4;
     this.subject = null;       //todo change this to list?
     this.object = null;
     this.verb = null;
@@ -232,6 +237,7 @@ var SubordinateClause = function () {
 
 
     //quick and dirty additions to get some funcitonality (possibly collapse sub and main clause together)
+    this.class_id = 5;
     this.subject = null;
     this.object = null;
     this.verb = null;
@@ -253,6 +259,7 @@ var SubordinateClause = function () {
 // tag type - stores type and region
 // useful for: noun, verb, adjective, adverb
 var SingleRegionTag = function (type) {
+    this.class_id = 3;
     this.type = type;
     this.get_tag_type = function () {
         return this.type;
