@@ -30,19 +30,23 @@ function save (sentence) {
     );
 
 
-};
+}
 
-
+//load will load a tagged sentence from firebase so we can use it to make a quiz
+//this needs to be implemented as a callback
 function load (callback) {
     fbase.child("sentence").once("value", callback);
-};
+}
 
 
+//firebase data will be serialized (i.e. packed up in a string format (basically JSON??)
+//but we want access to all the properties of the object
+//so we need to deserialize the data (i.e. turn it back into an object)
 function deserialize(data){
 
     var all_sentences = data.val();
 
-    var unique_ids = Object.keys(all_sentences)
+    var unique_ids = Object.keys(all_sentences);
     console.log(unique_ids);
     
     var one_sentence = all_sentences[unique_ids[0]]; 
@@ -51,8 +55,9 @@ function deserialize(data){
     // console.log(x);
     return x;
 
-};
+}
 
+//the reviver will
 function reviver(key, value){
     
     // console.log(key, value);
@@ -63,7 +68,7 @@ function reviver(key, value){
         var obj;
         
         switch(value.class_id){
-            case 1: obj = new Sentence(); break
+            case 1: obj = new Sentence(); break;
             case 2: obj = new Region(); break;
             case 3: obj = new SingleRegionTag(); break;
             case 4: obj = new Clause(); break;
