@@ -14,6 +14,19 @@ var WordSelector = function(element_id, words){
     this.words_in_play = new Set();
     this.previous_id = null;
     
+    this.clear = function(){
+        
+        this.words_in_play.forEach(function(id){
+            var e = document.getElementById(id);
+            e.style.background = "white";
+        });
+        
+        this.words_in_play = new Set();
+        
+    
+        
+    }
+    
     this.setup = function(){
         
         var e = document.getElementById(element_id);

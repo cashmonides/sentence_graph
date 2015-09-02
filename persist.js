@@ -48,12 +48,16 @@ function deserialize(data){
 
     var unique_ids = Object.keys(all_sentences);
     console.log(unique_ids);
+    var sentences = [];
     
-    var one_sentence = all_sentences[unique_ids[0]]; 
+    for(var i in unique_ids){
+        var ser_str = all_sentences[unique_ids[i]];
+        var sentence = JSON.parse(ser_str.data, reviver);
+        // console.log(sentence);
+        sentences.push(sentence);
+    }
     
-    var x = JSON.parse(one_sentence.data, reviver);
-    // console.log(x);
-    return x;
+    return sentences;
 
 }
 

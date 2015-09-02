@@ -154,6 +154,17 @@ var Region = function (indices) {
     };
 
 
+    //below is a method to extract a list of all tags on a region
+    //in easy single-interface form (because .tags method will return objects not strings)
+    this.get_tag_types = function () {
+        
+        return this.tags.map(function(t){
+            return t.get_tag_type();
+        });
+    };
+        
+
+
 
     this.equals_list = function (indices) {
         if (this.indices.length === indices.length) {

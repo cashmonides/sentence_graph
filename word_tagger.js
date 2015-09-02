@@ -1,6 +1,6 @@
 //var text = "A baryon is a composite subatomic particle made up of three quarks (as distinct from mesons, which are composed of one quark and one antiquark). Baryons and mesons belong to the hadron family of particles, which are the quark-based particles. The name \"baryon\" comes from the Greek word for \"heavy\" (βαρύς, barys), because, at the time of their naming, most known elementary particles had lower masses than the baryons.";
-var text = "the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .";
-//var text = "the poets utter wise things (which they do not understand).";
+// var text = "the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .";
+var default_text = "the poets utter wise things (which they do not understand).";
 // var text = "a confucius (who lived  in a country (which we now call China) a long time ago (rich in empire and roaring with war )) said  in his book (which is called the Analects) (that revenge is a dish (which tastes best cold)).";
 // var text = "the dog jumps when the bell rings.";
 //var text = "(when you embark on a journey of revenge) dig two graves.";
@@ -129,20 +129,33 @@ function is_conj_char (c){
 
 
 
-
+function sentence_entered(){
+    
+    var text = document.getElementById("sentencebox").value;
+    console.log(text);
+    new_text(text);
+    
+}
 
 
 //START
 window.onload = function (){
-    var x = document.getElementById("box");        //an expensive operation so we assign it to a variable before the for loop
+    
+    // var x = document.getElementById("box");        //an expensive operation so we assign it to a variable before the for loop
 
     generate_buttons();
     generate_tags();
 
+    new_text(default_text);
 
-    var words = parse_words(x);
+}
+
+function new_text(text){
+
+    var words = parse_words(text);
     sentence = new Sentence(words);
     
+    document.getElementById("box").innerHTML = "";
     word_selector = new WordSelector("box", words);
     word_selector.setup();
     
@@ -247,7 +260,7 @@ function debug(indices){
 
 
 
-function parse_words (input_box) {
+function parse_words (text) {
     var start = -1;               //-1 is an out of band value - a number that's not valid but within the range of the data type we're using
     // var id = 0;
     var words = [];
