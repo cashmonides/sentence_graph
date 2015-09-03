@@ -34,14 +34,16 @@ function generate_question(sentences){
     document.getElementById("scorebox").innerHTML = "Correct: " + count_correct + ", Incorrect: " + count_incorrect;
 
     var available_tags = [];
-    sentence = sentences[Math.floor(sentences.length * Math.random())];
+    sentence = random_choice(sentences);
+    
     
     for (var i in sentence.regions) {
         var r = sentence.regions[i];
+        console.log("DEBUG 9-3 r.tags = ", r.get_tag_types(), sentence.get_region_text(r));
         available_tags = available_tags.concat(r.tags); 
         console.log("tag concatenated!");
     }
-    target_tag = available_tags[Math.floor(available_tags.length * Math.random())];
+    target_tag = random_choice(available_tags);
     console.log(":target_tag = " + target_tag);
    
     document.getElementById("questionbox").innerHTML = "Click on the word that matches " + target_tag.get_tag_type();
@@ -78,6 +80,7 @@ function submit_answer() {
         
     }
     
+    display_feedback();
     generate_question(sentences);
     
     //safe version
@@ -91,3 +94,24 @@ function submit_answer() {
     // }
     
 }
+
+function display_feedback(){
+    
+    var fbox = document.getElementById("feedbackbox");
+    fbox.innerHTML = "";
+    
+    for(var ri in sentence.get_regions()){
+        var r = sentence.get_regions()[ri];
+        for(ti in r.get_tags()){
+            var t = r.get_tags()[ti];
+            if(t.get_tag_type() == target_tag.get_tag_type()){
+                var text = sentence.get_region_text(r);
+                console.log("this was a solution:", text);
+                fbox.innerHTML += text + "<br>";
+            }
+        }
+    }
+    
+}
+
+

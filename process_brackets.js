@@ -202,7 +202,7 @@ function process_bracketed_text (words, sentence) {
         } else if (words[i] === '/') {
             //coordination has been detected
             //therefore we push i (namely the slash character) to the current item in the stack
-            clause_stack[clause_stack.length - 1].push(i);
+            peek(clause_stack).push(i);
             //therefore one clause has finished so we pop it from the clause stack
             y = clause_stack.pop();
             // so, since a new clause has just finished, we want to add it to our sentence object. So this makes the region
@@ -219,13 +219,13 @@ function process_bracketed_text (words, sentence) {
                 }
             );
             //now we want to clear the children in the last item of the stack
-            info_stack[info_stack.length - 1].children = [];
+            peek(info_stack).children = [];
             //we've just popped y, so we want to push an empty list, which will be eventually filled
             clause_stack.push([]);
 
         } else if (words[i] === ')') {
             //end of clause detected so we push the ) character
-            clause_stack[clause_stack.length - 1].push(i);
+            peek(clause_stack).push(i);
             y = clause_stack.pop();
             //defensive programming: sentence might not be tagged correctly
             // first we deal with the unproblematic situation, where there is an open bracket
@@ -244,7 +244,7 @@ function process_bracketed_text (words, sentence) {
 
         } else {
             //if we don't hit a bracket character (i.e. a regular word) we push the word
-            clause_stack[clause_stack.length - 1].push(i);
+            peek(clause_stack).push(i);
         }
 
     }
@@ -286,7 +286,7 @@ function add_properties (clause, info_stack) {
     //below will deal with subordination and superordinate
     //first we initialize a variable for all the children of the argument clause
     //so info_stack[info_stack.length - 1] = most recent clause
-    var children = info_stack[info_stack.length - 1].children;
+    var children = peek(info_stack).children;
 
     //there are two possibilities
     //either we're in the main clause (info_stack.length = 1)
@@ -309,7 +309,7 @@ function add_properties (clause, info_stack) {
 
     //now we want to deal with coordination
     //we initialize a variable for all the siblings of the argument clause
-    var siblings = info_stack[info_stack.length - 1].siblings;
+    var siblings = peek(info_stack).siblings;
 
     //we push our argument clause into the siblings group (which modifies the info_stack)
     siblings.push(clause);

@@ -1,6 +1,6 @@
 //var text = "A baryon is a composite subatomic particle made up of three quarks (as distinct from mesons, which are composed of one quark and one antiquark). Baryons and mesons belong to the hadron family of particles, which are the quark-based particles. The name \"baryon\" comes from the Greek word for \"heavy\" (βαρύς, barys), because, at the time of their naming, most known elementary particles had lower masses than the baryons.";
-// var text = "the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .";
-var default_text = "the poets utter wise things (which they do not understand).";
+var default_text = "the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .";
+// var default_text = "the poets utter wise things (which they do not understand).";
 // var text = "a confucius (who lived  in a country (which we now call China) a long time ago (rich in empire and roaring with war )) said  in his book (which is called the Analects) (that revenge is a dish (which tastes best cold)).";
 // var text = "the dog jumps when the bell rings.";
 //var text = "(when you embark on a journey of revenge) dig two graves.";
@@ -234,7 +234,7 @@ function debug(indices){
     console.log("Subject of clause below = ", word_selector.get_text([clause.subject]));
     console.log("Object of clause below = ", word_selector.get_text([clause.object]));
     console.log("Verb of clause below = ", word_selector.get_text([clause.verb]));
-    console.log("Clause = ", word_selector.get_text(clause.indices));
+    console.log("Clause = ", word_selector.get_text(clause.get_indices()));
     console.log("clause type of clause = ", clause.clause_type);
 
 
@@ -246,7 +246,7 @@ function debug(indices){
     console.log("REGION + TAGS", JSON.stringify(region));
     console.log("REGION SUMMARY");
     // console.log("words = ", indices.map(function (x) {return word_map[x]}).join(' '));
-    console.log("indices = ", JSON.stringify(region.indices));
+    console.log("indices = ", JSON.stringify(region.get_indices()));
     console.log("tags = ", JSON.stringify(region.tags));
     if (region.clause) {
         console.log("clause_type = ", JSON.stringify(region.clause.clause_type));
@@ -267,37 +267,27 @@ function parse_words (text) {
     var word;
 
     for (var pos in text){                                                                                              //todo make text not a global variable
+    
         var c = text[pos];
-        if (is_conj_char(c)) {
-            if (start >= 0) {
-                word = text.substring(start, pos);
-                words.push(word);
-                // word_map[id] = word;
-                // input_box.innerHTML += "<span id=\"" + id + "\" onclick=\"click_2(event, " + id + ")\">" + word + "</span>";
-                // id += 1;
-            }
-            var bracket = c;
-            words.push(bracket);
-            // word_map[id] = bracket;
-            // input_box.innerHTML += "<span id=\"" + id + "\" onclick=\"click_2(event, "+id+")\">" + bracket + "</span>";
-            // id += 1;
-            start = -1;
+        var terminal_is_word = is_word_char(c) && pos == text.length - 1;
 
-        } else if (is_word_char(c)) {
-            if (start == -1) {
-                start = pos
-            }
-        } else {
+        if (terminal_is_word || !is_word_char(c)) {
             if (start >= 0){
-                word = text.substring(start, pos);
+                word = text.substring(start, terminal_is_word ? pos + 1 : pos);
                 words.push(word);
-                // word_map[id] = word;
-                // input_box.innerHTML += "<span id=\"" + id + "\" onclick=\"click_2(event, "+id+")\">" + word + "</span>";
-                // id += 1;
                 start = -1;
             }
-            // input_box.innerHTML += c;
         }
+        
+        if (is_conj_char(c)) {
+            words.push(c);
+        } 
+        
+        if (is_word_char(c) && start == -1) {
+            start = pos
+        } 
+
+        
     }
     // sentence = new Sentence(words);
     return words;
@@ -321,12 +311,10 @@ function process_bracketed_text (words) {
         //console.log("CLAUSE STACK = ", JSON.stringify(clause_stack));
         if (word_selector.words[i] === '(') {
             //a subordinate clause has been detected so we want to add it to the clause stack
-            //so we create a list [i] and push it to the stack
-            clause_stack.push([i]);
+            //so we create an empty list [] and push it to the stack
+            clause_stack.push([]);
         } else {
-            //no subordinate clause has been detected
-            //so we want to push our new word (i.e. an index) into the current clause (i.e. the top item of the clause_stack)
-            clause_stack[clause_stack.length - 1]. push(i);
+            
 
             //but we might have hit a closed bracket, meaning a clause has ended
             //in which case we want to close a clause
@@ -353,7 +341,7 @@ function process_bracketed_text (words) {
                     new_region.add_tag(new SubordinateClause());
 
                     //quick and dirty check
-                    new_region.tags[0].indices = y;
+                    // new_region.tags[0].indices = y;
 
 
 
@@ -370,6 +358,11 @@ function process_bracketed_text (words) {
                     throw "bad tagging";
                 }
             }
+            else {
+                //no subordinate clause has been detected
+                //so we want to push our new word (i.e. an index) into the current clause (i.e. the top item of the clause_stack)
+                peek(clause_stack).push(i);
+            }
         }
     }
     if (clause_stack.length !== 1) {                            //this tests for too many open clause
@@ -385,8 +378,8 @@ function process_bracketed_text (words) {
     console.log("WORDS TO CLAUSES = ", words_to_clauses);
     console.log("SENTENCE.REGIONS = ", sentence.regions);
 
-    var clean_regions = sentence.regions.map(function(x) {
-        return x.tags[0].clause_type + '=' + x.indices.map(function (z) {return word_selector.words[z]}).join(' ')
+    var clean_regions = sentence.regions.map(function(r) {
+        return r.tags[0].clause_type + '=' + r.get_indices().map(function (z) {return word_selector.words[z]}).join(' ')
     }).join('\n');
 
 
@@ -451,7 +444,7 @@ function generate_regions() {
                 var o = document.createElement("option");
                 o.innerHTML = word_selector.get_text(cr.get_indices());
                 e.appendChild(o);
-                console.log("found tag", sentence.regions[r].indices);
+                console.log("found tag", sentence.regions[r].get_indices());
             }
         }
     }

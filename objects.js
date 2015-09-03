@@ -92,6 +92,10 @@ var Sentence = function (words) {
     this.class_id = 1;
     this.words = words;
     this.regions = [];
+    
+    this.get_regions = function(){
+      return this.regions;  
+    };
 
     //todo should this be renamed make_region?
     this.get_region2 = function (indices) {
@@ -118,17 +122,25 @@ var Sentence = function (words) {
     };
 
     this.get_sub_regions = function (region) {
-        var superset = new Set (region.indices);
+        var superset = new Set (region.get_indices());
         var results = [];
         for (var i in this.regions) {
-            if (is_subset(superset, this.regions[i].indices))  {
+            if (is_subset(superset, this.regions[i].get_indices()))  {
                 results.push(this.regions[i]);
             }
         }
         return results;
     };
-
-
+    
+    this.get_region_text = function(region){
+        
+        var ws = this.words;
+        var is = region.get_indices();
+        console.log("is", is);
+        return is.map(function(i){ return ws[i];}).join(" ");
+        
+    };
+    
 };
 
 function is_subset(superset, subset) {
@@ -145,12 +157,20 @@ var Region = function (indices) {
     
     this.class_id = 2;
     this.indices = indices;
-    this.sentence = null;
+    // this.sentence = null;
     this.tags = [];
 
+    this.get_tags = function(){
+        return this.tags;
+    }
 
+    //we want this to return a sorted set, not a list
     this.get_indices = function () {
-        return this.indices;
+        var set_of_indices = new Set (this.indices);
+        var list_of_indices = Array.from(set_of_indices);
+        //a-b retur s
+        return list_of_indices.sort(function(a, b){return a-b;});
+        
     };
 
 
@@ -254,7 +274,6 @@ var SubordinateClause = function () {
     this.verb = null;
     this.predicate = null;
     this.clause_type = "subordinate clause";
-    this.indices = null;
 
     this.superordinate = null;
     this.subordinate = null;
