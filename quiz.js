@@ -107,7 +107,7 @@ function display_feedback(){
             if(t.get_tag_type() == target_tag.get_tag_type()){
                 var text = sentence.get_region_text(r);
                 console.log("this was a solution:", text);
-                fbox.innerHTML += text + "<br>";
+                fbox.innerHTML += target_tag.get_tag_type() + " = " + text + "<br>";
             }
         }
     }
