@@ -120,7 +120,8 @@ var conjunction_characters = new Set(['(', ')', '[', ']', '{', '}', '/']);
 
 
 function is_word_char (c){
-    return (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z');
+    // return (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c === '');
+    return /[a-zA-Z',\-]/.test(c);
 }
 
 function is_conj_char (c){
@@ -307,7 +308,7 @@ function process_bracketed_text (words) {
     var clause_region;
 
 
-    for (var i = 1; i <= words.length; i++) {
+    for (var i = 0; i < words.length; i++) {
         //console.log("CLAUSE STACK = ", JSON.stringify(clause_stack));
         if (word_selector.words[i] === '(') {
             //a subordinate clause has been detected so we want to add it to the clause stack
@@ -471,11 +472,18 @@ function update_region_list(){
 
 function update_subregions(){
     
+    
+    
     var e = document.getElementById("subregions");
     e.innerHTML = "";
     
-    var dd = document.getElementById("allregions");                   //dd = drop-down optios on the left hand side
-    var region = sentence.regions[dd.selectedIndex];                   
+                  
+    var dd = document.getElementById("allregions");         //dd = drop-down optios on the left hand side
+    if (dd.selectedIndex < 0) {
+        return;
+    }
+    var region = sentence.regions[dd.selectedIndex]; 
+                     
     console.log(region, sentence);
     var subregion = sentence.get_sub_regions(region);
     
@@ -485,6 +493,9 @@ function update_subregions(){
         e.appendChild(o);
     }
     
+    // select words in the gui
+    word_selector.set_indices(region.get_indices());
+    
 }
 
 function region_to_text(region){
@@ -492,6 +503,16 @@ function region_to_text(region){
     var text = word_selector.get_text(region.get_indices());
     var tags = region.tags.map(function(x){ return x.get_tag_type(); }).join(", ");
     return text + " = " + tags;
+    
+}
+
+
+function delete_tags(){
+    var indices = word_selector.get_selected_indices();
+    var region = sentence.get_region(indices);
+    region.clear_tags();
+    update_region_list();
+    update_subregions();
     
 }
 

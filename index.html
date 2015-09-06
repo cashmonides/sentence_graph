@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body>
-    <input type="text" id="sentencebox" width="500" maxlength="50" onkeydown="if (event.keyCode == 13) sentence_entered()"><br>
+    <input type="text" id="sentencebox" width="500" onkeydown="if (event.keyCode == 13) sentence_entered()"><br>
     <div id="box"></div>
     <div id="buttons"></div>
     <select multiple size = "10" id="tags"></select>
@@ -20,6 +20,7 @@
     <select multiple size = "10" id="subregions"></select>
     
     <button onclick="submit_sentence()">submit</button>
+    <button onclick="delete_tags()">delete tags</button>
    
    
 

@@ -50,11 +50,39 @@ var WordSelector = function(element_id, words){
         
     };
     
+        // input: integer index, will toggle that index
+    this.click_3 = function(id){
+        
+        var word = this.words[id];
+        //console.log("TAGGED! ", id, typeof(id),  word, this.words_in_play);
+        
+        var e = document.getElementById(id);
+        if (this.words_in_play.has(id)){                        //if...tests if it's already highlighted, in which case it gets unhighlighted
+            this.words_in_play.delete(id);
+            e.style.background = "white";
+        } else if (word === '(' || word === '/') {              //todo this is the addition here
+            var indices_of_open_bracket_clause = this.open_bracket_clause(id);
+            console.log(indices_of_open_bracket_clause);
+            //add these indices to words_in_play and turn red
+            for (var i = 0; i < indices_of_open_bracket_clause.length; i++) {
+                this.words_in_play.add(indices_of_open_bracket_clause[i]);      //todo turn i into a sring?
+                var e2 = document.getElementById(indices_of_open_bracket_clause[i]);
+                e2.style.background = "red";
+            }
+        }
+        //this deals with the case of neither being highlighted nor a metacharacter
+        else {
+            this.words_in_play.add(id);  // TODO - why is ID a string?
+            e.style.background = "red";
+        }    
+        
+        
+    };
+    
+    
     this.click_2 = function(event, id){
         // console.log(event, i, this.words[i]);
         id = parseInt(id);
-        var word = this.words[id];
-        console.log("TAGGED! ", id, typeof(id),  word, this.words_in_play);
     
         //check if shift key is held down
         if (event.shiftKey) {
@@ -68,30 +96,22 @@ var WordSelector = function(element_id, words){
                     e.style.background = "red";
                 }
             }
+            this.previous_id = null;
         } else {
-            var e = document.getElementById(id);
-            if (this.words_in_play.has(id)){                        //if...tests if it's already highlighted, in which case it gets unhighlighted
-                this.words_in_play.delete(id);
-                e.style.background = "white";
-            } else if (word === '(' || word === '/') {              //todo this is the addition here
-                var indices_of_open_bracket_clause = this.open_bracket_clause(id);
-                console.log(indices_of_open_bracket_clause);
-                //add these indices to words_in_play and turn red
-                for (var i = 0; i < indices_of_open_bracket_clause.length; i++) {
-                    this.words_in_play.add(indices_of_open_bracket_clause[i]);      //todo turn i into a sring?
-                    var e2 = document.getElementById(indices_of_open_bracket_clause[i]);
-                    e2.style.background = "red";
-                }
-            }
-            //this deals with the case of neither being highlighted nor a metacharacter
-            else {
-                this.words_in_play.add(id);  // TODO - why is ID a string?
-                e.style.background = "red";
-            }
+            this.click_3(id);
+            this.previous_id = id;
         }
     
-        this.previous_id = id;
         console.log("currently selected: ", this.words_in_play);
+        
+    };
+    
+    this.set_indices = function(indices){
+        
+        this.clear();
+        for(var i in indices){
+            this.click_3(indices[i]);
+        }
         
     };
     
@@ -125,6 +145,7 @@ var WordSelector = function(element_id, words){
     };
 
 
+    
 
 
     //todo new functionality below

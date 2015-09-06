@@ -87,18 +87,20 @@ var TagType = {
 };
 
 
-var Sentence = function (words) {
+var Sentence = function (words) {   /// automagically creates: var Sentence = {prototype: {}}
     
     this.class_id = 1;
     this.words = words;
     this.regions = [];
     
-    this.get_regions = function(){
+};
+    
+    Sentence.prototype.get_regions = function(){
       return this.regions;  
     };
 
     //todo should this be renamed make_region?
-    this.get_region2 = function (indices) {
+    Sentence.prototype.get_region2 = function (indices) {
         for (var i in this.regions) {
             if (this.regions[i].equals_list(indices)){
                 return ;        //todo this seems to return undefined which will get us into trouble at submit_tag because if the region is undefined, submit_tag will skip the step add_tag
@@ -110,7 +112,7 @@ var Sentence = function (words) {
     };
 
     //dan's version
-    this.get_region = function (indices) {
+    Sentence.prototype.get_region = function (indices) {
         for (var i in this.regions) {
             if (this.regions[i].equals_list(indices)){
                 return this.regions[i];
@@ -121,7 +123,7 @@ var Sentence = function (words) {
         return nr;
     };
 
-    this.get_sub_regions = function (region) {
+    Sentence.prototype.get_sub_regions = function (region) {
         var superset = new Set (region.get_indices());
         var results = [];
         for (var i in this.regions) {
@@ -132,7 +134,7 @@ var Sentence = function (words) {
         return results;
     };
     
-    this.get_region_text = function(region){
+    Sentence.prototype.get_region_text = function(region){
         
         var ws = this.words;
         var is = region.get_indices();
@@ -141,7 +143,7 @@ var Sentence = function (words) {
         
     };
     
-};
+
 
 function is_subset(superset, subset) {
    for (var i in subset) {
@@ -159,13 +161,15 @@ var Region = function (indices) {
     this.indices = indices;
     // this.sentence = null;
     this.tags = [];
+    
+};
 
-    this.get_tags = function(){
+    Region.prototype.get_tags = function(){
         return this.tags;
-    }
+    };
 
     //we want this to return a sorted set, not a list
-    this.get_indices = function () {
+    Region.prototype.get_indices = function () {
         var set_of_indices = new Set (this.indices);
         var list_of_indices = Array.from(set_of_indices);
         //a-b retur s
@@ -176,7 +180,7 @@ var Region = function (indices) {
 
     //below is a method to extract a list of all tags on a region
     //in easy single-interface form (because .tags method will return objects not strings)
-    this.get_tag_types = function () {
+    Region.prototype.get_tag_types = function () {
         
         return this.tags.map(function(t){
             return t.get_tag_type();
@@ -186,7 +190,7 @@ var Region = function (indices) {
 
 
 
-    this.equals_list = function (indices) {
+    Region.prototype.equals_list = function (indices) {
         if (this.indices.length === indices.length) {
             for (var i in this.indices) {
                 if (this.indices[i] != indices[i]) {
@@ -201,12 +205,14 @@ var Region = function (indices) {
     };
 
     //todo old version below CHECK
-    this.add_tag = function (tag) {
+    Region.prototype.add_tag = function (tag) {
         this.tags.push(tag);
     };
 
 
-
+    Region.prototype.clear_tags = function () {
+        this.tags = [];
+    };
 
 
     //todo new version below CHECK
@@ -222,7 +228,7 @@ var Region = function (indices) {
 
 
     //todo old version below
-    this.make_clause = function (clause_type) {
+    Region.prototype.make_clause = function (clause_type) {
         this.clause = new Clause (clause_type);
     };
 
@@ -237,8 +243,6 @@ var Region = function (indices) {
     //     }
 
     // };
-
-};
 
 
 
@@ -256,11 +260,11 @@ var Clause = function (clause_type, indices) {
     this.superordinate_clause = null;
     this.conjunction = null;
 
-    this.get_tag_type = function () {
-        return this.clause_type;
-    }
-
 };
+
+    Clause.prototype.get_tag_type = function () {
+        return this.clause_type;
+    };
 
 
 //although called a clause, it's really a tag
@@ -278,12 +282,12 @@ var SubordinateClause = function () {
     this.superordinate = null;
     this.subordinate = null;
     this.subordinating_conjunction = null;
-    
-    this.get_tag_type = function () {
-        return "subordinate clause";
-    }
-    
+
 };
+
+    SubordinateClause.prototype.get_tag_type = function () {
+        return "subordinate clause";
+    };
 
 //motivation: we want to reduce classes and so we want a single class which can give us
 // tag type - stores type and region
@@ -291,10 +295,11 @@ var SubordinateClause = function () {
 var SingleRegionTag = function (type) {
     this.class_id = 3;
     this.type = type;
-    this.get_tag_type = function () {
-        return this.type;
-    }
 };
+
+    SingleRegionTag.prototype.get_tag_type = function () {
+        return this.type;
+    };
 
 
 
