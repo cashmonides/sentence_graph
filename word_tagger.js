@@ -180,13 +180,7 @@ function submit_tag(tag_type){
     
     var tag = new SingleRegionTag(tag_list[tag_type]);
     console.log("submit tag triggered here");
-    console.log("TEST OF tag type", tag, word_selector.words_in_play.size, word_selector.words_in_play.values());
-
-    word_selector.words_in_play.forEach(function(x){
-      document.getElementById(x).style.background = "white";
-    });
-
-
+    console.log("TEST OF tag type", tag, word_selector.highlighted_words.size, word_selector.highlighted_words.values());
 
     var indices = word_selector.get_selected_indices();                                                                //indices = highlighted words
     console.log(indices);
@@ -201,7 +195,7 @@ function submit_tag(tag_type){
         //}
     }
     console.log(sentence);
-    word_selector.words_in_play.clear();
+    word_selector.clear();
     // debug(indices);
     
 }
@@ -242,7 +236,7 @@ function debug(indices){
     console.log("CHECKPOINT 1A complete");
 
 
-    console.log("WORDS in play after clear", word_selector.words_in_play.size);
+    console.log("WORDS in play after clear", word_selector.highlighted_words.size);
 
     console.log("REGION + TAGS", JSON.stringify(region));
     console.log("REGION SUMMARY");
@@ -490,7 +484,10 @@ function update_subregions(){
     }
     
     // select words in the gui
-    word_selector.set_indices(region.get_indices());
+    var is = region.get_indices();
+    for(var i in is){
+        word_selector.set_highlighted(is[i], true);
+    }
     
 }
 

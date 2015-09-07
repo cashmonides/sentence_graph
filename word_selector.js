@@ -11,19 +11,70 @@ var WordSelector = function(element_id, words){
     
     this.element_id = element_id;
     this.words = words;
-    this.words_in_play = new Set();
+    this.highlighted_words = new Set();
     this.previous_id = null;
     
-    this.clear = function(){
-        this.words_in_play.forEach(function(id){
-            var e = document.getElementById(id);
+};
+
+    WordSelector.prototype.toggle = function(index){
+
+        var word = this.words[index];
+        
+        if (word === '(' || word === '/') {
+            var indices_of_open_bracket_clause = this.open_bracket_clause(index);
+            for (var i = 0; i < indices_of_open_bracket_clause.length; i++) {
+                this.set_highlighted(indices_of_open_bracket_clause[i], true);
+            }
+        } else {
+            this.set_highlighted(index, !this.is_highlighted(index));
+        }
+
+    }
+    
+    WordSelector.prototype.is_highlighted = function(index){
+        return this.highlighted_words.has(index);
+    }
+    
+    WordSelector.prototype.set_highlighted = function(index, flag){
+        
+        var e = document.getElementById(index);
+        
+        if(flag){
+            this.highlighted_words.add(index);
+            e.style.background = "red";
+        } else {
+            this.highlighted_words.delete(index);
             e.style.background = "white";
+        }
+        
+    }
+    
+    WordSelector.prototype.clear = function(){
+        this.highlighted_words.forEach(function(index){
+            this.set_highlighted(index, false);
         });
-        this.words_in_play = new Set();
+        this.highlighted_words = new Set();
     };
     
-    this.setup = function(){
-        var e = document.getElementById(element_id);
+    //returns a sorted list of highlighted indices
+    WordSelector.prototype.get_selected_indices = function (){
+        var list = [];
+        var callback = function (e) {
+            list.push(e);
+        };
+        this.highlighted_words.forEach(callback);
+        list.sort();
+        return list;
+    };
+    
+    WordSelector.prototype.get_word = function(index){
+        return this.words[index];
+    }
+    
+    // ----------------------------------------------------------------------------------------
+    
+    WordSelector.prototype.setup = function(){
+        var e = document.getElementById(this.element_id);
         e.innerHTML = "";
         for(var i in this.words){
             var s = document.createElement("span");
@@ -35,45 +86,14 @@ var WordSelector = function(element_id, words){
         }
     };
     
-    this.create_closure = function(i){
+    WordSelector.prototype.create_closure = function(i){
         var self = this;
-        return function(event){ self.click_2(event, i); };
+        return function(event){ self.click_received(event, i); };
     };
 
-
-    // input: integer index
-    // result: toggle that index between red and white and adds to word-in-play
-    this.click_3 = function(index){
-        
-        var word = this.words[index];
-        //console.log("TAGGED! ", index, typeof(index),  word, this.words_in_play);
-        
-        var e = document.getElementById(index);
-        //first we deal with the case where the word is already highlighted, in which case we unhighlight and remove from words_in_play
-        if (this.words_in_play.has(index)){
-            this.words_in_play.delete(index);                                   //mutates a property of word selector
-            e.style.background = "white";                                       //alters the html
-        }
-        //next we deal with the case of a clause opener, to allow easy highlighting of an entire clause
-        else if (word === '(' || word === '/') {
-            var indices_of_open_bracket_clause = this.open_bracket_clause(index);
-            //add these indices to words_in_play and turn red
-            for (var i = 0; i < indices_of_open_bracket_clause.length; i++) {
-                this.words_in_play.add(indices_of_open_bracket_clause[i]);
-                var e2 = document.getElementById(indices_of_open_bracket_clause[i]);
-                e2.style.background = "red";
-            }
-        }
-        //lastly we deal with the case of neither highlighted nor a bracket character
-        else {
-            this.words_in_play.add(index);
-            e.style.background = "red";
-        }
-    };
-    
     //click_2 contains click_3
     //two options - either we have a simple click or a click with the shift key held down
-    this.click_2 = function(event, index){
+    WordSelector.prototype.click_received = function(event, index){
         index = parseInt(index);                                                                          //id is a string and we need to convert it to an integer
         //check if shift key is held down
         if (event.shiftKey) {
@@ -82,29 +102,19 @@ var WordSelector = function(element_id, words){
                 var start = this.previous_id < index ? this.previous_id : index;
                 var end = this.previous_id > index ? this.previous_id : index;
                 for (var i = start; i <= end; i++) {
-                    var e = document.getElementById(i);
-                    this.words_in_play.add(i);        
-                    e.style.background = "red";
+                    this.set_highlighted(i, true);
                 }
             }
             this.previous_id = null;
         } else {
-            this.click_3(index);
+            this.toggle(index);
             this.previous_id = index;
         }
     };
 
-    //a utility function that will allow us to take a list of indices and "click" on them - i.e. highlight them and add the to words in play
-    this.set_indices = function(indices){
-        this.clear();
-        for(var i in indices){
-            this.click_3(indices[i]);
-        }
-    };
-    
     //a utility function that will allow us to turn indices into a string
-    this.get_text = function (indices) {
-        output = "";
+    WordSelector.prototype.get_text = function (indices) {
+        var output = "";
         for (var i in indices) {
             output += (this.words[indices[i]]) + " ";
         }
@@ -112,22 +122,12 @@ var WordSelector = function(element_id, words){
     };
 
 
-    //returns a sorted list of highlighted indices
-    this.get_selected_indices = function (){
-        var list = [];
-        var callback = function (e) {
-            list.push(e);
-        };
-        this.words_in_play.forEach(callback);
-        list.sort();
-        return list;
-    };
 
 
     //argument will be an index (the index of the bracket user has clicked on)
     //input: single integer, index
     //output: list of indices
-    this.open_bracket_clause = function (i) {
+    WordSelector.prototype.open_bracket_clause = function (i) {
         //todo defensively program against clicking on close bracket ')' or clicking on the final character
         var list = []; 
         //depth is a measure of how "deep" we are in the subordination, i.e. how many levels deep we are
@@ -172,9 +172,3 @@ var WordSelector = function(element_id, words){
         }
         return list;
     };
-
-
-
-
-
-};
