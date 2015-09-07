@@ -232,7 +232,7 @@ function debug(indices){
     clause[tag_list[tag_type]] = indices;
     //clause["subject"] = region         this assigns a list of indices to the clause.subject property
 
-    console.log("Subject of clause below = ", word_selector.get_text([clause.subject]));
+    console.log("Subject of clause below (9-7)  = ", word_selector.get_text([clause.subject]));
     console.log("Object of clause below = ", word_selector.get_text([clause.object]));
     console.log("Verb of clause below = ", word_selector.get_text([clause.verb]));
     console.log("Clause = ", word_selector.get_text(clause.get_indices()));
@@ -471,13 +471,9 @@ function update_region_list(){
 
 
 function update_subregions(){
-    
-    
-    
     var e = document.getElementById("subregions");
     e.innerHTML = "";
-    
-                  
+
     var dd = document.getElementById("allregions");         //dd = drop-down optios on the left hand side
     if (dd.selectedIndex < 0) {
         return;

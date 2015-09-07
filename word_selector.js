@@ -15,23 +15,16 @@ var WordSelector = function(element_id, words){
     this.previous_id = null;
     
     this.clear = function(){
-        
         this.words_in_play.forEach(function(id){
             var e = document.getElementById(id);
             e.style.background = "white";
         });
-        
         this.words_in_play = new Set();
-        
-    
-        
-    }
+    };
     
     this.setup = function(){
-        
         var e = document.getElementById(element_id);
         e.innerHTML = "";
-        
         for(var i in this.words){
             var s = document.createElement("span");
             s.setAttribute("id", i);
@@ -40,56 +33,54 @@ var WordSelector = function(element_id, words){
             s.addEventListener("click", f);
             e.appendChild(s);
         }
-        
     };
     
     this.create_closure = function(i){
-        
         var self = this;
         return function(event){ self.click_2(event, i); };
-        
     };
-    
-        // input: integer index, will toggle that index
-    this.click_3 = function(id){
+
+
+    // input: integer index
+    // result: toggle that index between red and white and adds to word-in-play
+    this.click_3 = function(index){
         
-        var word = this.words[id];
-        //console.log("TAGGED! ", id, typeof(id),  word, this.words_in_play);
+        var word = this.words[index];
+        //console.log("TAGGED! ", index, typeof(index),  word, this.words_in_play);
         
-        var e = document.getElementById(id);
-        if (this.words_in_play.has(id)){                        //if...tests if it's already highlighted, in which case it gets unhighlighted
-            this.words_in_play.delete(id);
-            e.style.background = "white";
-        } else if (word === '(' || word === '/') {              //todo this is the addition here
-            var indices_of_open_bracket_clause = this.open_bracket_clause(id);
-            console.log(indices_of_open_bracket_clause);
+        var e = document.getElementById(index);
+        //first we deal with the case where the word is already highlighted, in which case we unhighlight and remove from words_in_play
+        if (this.words_in_play.has(index)){
+            this.words_in_play.delete(index);                                   //mutates a property of word selector
+            e.style.background = "white";                                       //alters the html
+        }
+        //next we deal with the case of a clause opener, to allow easy highlighting of an entire clause
+        else if (word === '(' || word === '/') {
+            var indices_of_open_bracket_clause = this.open_bracket_clause(index);
             //add these indices to words_in_play and turn red
             for (var i = 0; i < indices_of_open_bracket_clause.length; i++) {
-                this.words_in_play.add(indices_of_open_bracket_clause[i]);      //todo turn i into a sring?
+                this.words_in_play.add(indices_of_open_bracket_clause[i]);
                 var e2 = document.getElementById(indices_of_open_bracket_clause[i]);
                 e2.style.background = "red";
             }
         }
-        //this deals with the case of neither being highlighted nor a metacharacter
+        //lastly we deal with the case of neither highlighted nor a bracket character
         else {
-            this.words_in_play.add(id);  // TODO - why is ID a string?
+            this.words_in_play.add(index);
             e.style.background = "red";
-        }    
-        
-        
+        }
     };
     
-    
-    this.click_2 = function(event, id){
-        // console.log(event, i, this.words[i]);
-        id = parseInt(id);
-    
+    //click_2 contains click_3
+    //two options - either we have a simple click or a click with the shift key held down
+    this.click_2 = function(event, index){
+        index = parseInt(index);                                                                          //id is a string and we need to convert it to an integer
         //check if shift key is held down
         if (event.shiftKey) {
             console.log("shift key detected");
             if (this.previous_id != null) {
-                var start = this.previous_id < id ? this.previous_id : id;
-                var end = this.previous_id > id ? this.previous_id : id;
+                var start = this.previous_id < index ? this.previous_id : index;
+                var end = this.previous_id > index ? this.previous_id : index;
                 for (var i = start; i <= end; i++) {
                     var e = document.getElementById(i);
                     this.words_in_play.add(i);        
@@ -98,61 +89,44 @@ var WordSelector = function(element_id, words){
             }
             this.previous_id = null;
         } else {
-            this.click_3(id);
-            this.previous_id = id;
+            this.click_3(index);
+            this.previous_id = index;
         }
-    
-        console.log("currently selected: ", this.words_in_play);
-        
     };
-    
+
+    //a utility function that will allow us to take a list of indices and "click" on them - i.e. highlight them and add the to words in play
     this.set_indices = function(indices){
-        
         this.clear();
         for(var i in indices){
             this.click_3(indices[i]);
         }
-        
     };
     
-    
-    this.get_text = function (is) {
+    //a utility function that will allow us to turn indices into a string
+    this.get_text = function (indices) {
         output = "";
-        for (var i in is) {
-            output += (this.words[is[i]]) + " ";
+        for (var i in indices) {
+            output += (this.words[indices[i]]) + " ";
         }
         return output;
     };
-    
-    
+
+
+    //returns a sorted list of highlighted indices
     this.get_selected_indices = function (){
-        
-        console.log(this.words_in_play);
         var list = [];
-    
         var callback = function (e) {
-            // console.log(e);
             list.push(e);
         };
-    
         this.words_in_play.forEach(callback);
-    
         list.sort();
-        console.log(list);
         return list;
-    
-        
     };
 
 
-    
-
-
-    //todo new functionality below
-    //goal: to be able to click on an open bracket and wordselector only selects/highlights the words contained in the brackets
-
     //argument will be an index (the index of the bracket user has clicked on)
-    //this will return a list of indices
+    //input: single integer, index
+    //output: list of indices
     this.open_bracket_clause = function (i) {
         //todo defensively program against clicking on close bracket ')' or clicking on the final character
         var list = []; 
@@ -203,4 +177,4 @@ var WordSelector = function(element_id, words){
 
 
 
-}
+};
