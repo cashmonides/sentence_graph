@@ -116,13 +116,14 @@ var auto_tagging_map = {
 
 var word_selector = null;
 
-var conjunction_characters = new Set(['(', ')', '[', ']', '{', '}', '/']);
+var conjunction_characters = new Set(['<', '>', '[', ']', '{', '}', '/']);
 
 
 function is_word_char (c){
     // return (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c === '');
-    return /[a-zA-Z',\-]/.test(c);
+    return /[a-zA-Z]/.test(c);
 }
+
 
 function is_conj_char (c){
     return conjunction_characters.has(c);
@@ -140,16 +141,16 @@ function sentence_entered(){
 
 
 //START
-window.onload = function (){
+// window.onload = function (){
     
-    // var x = document.getElementById("box");        //an expensive operation so we assign it to a variable before the for loop
+//     // var x = document.getElementById("box");        //an expensive operation so we assign it to a variable before the for loop
 
-    generate_buttons();
-    generate_tags();
+//     generate_buttons();
+//     generate_tags();
 
-    new_text(default_text);
+//     new_text(default_text);
 
-}
+// }
 
 function new_text(text){
 
@@ -200,55 +201,7 @@ function submit_tag(tag_type){
     
 }
 
-function debug(indices){
-    
 
-    //TODO current problem
-    //regions dont have clause properties
-    //tag_type is a number and we need it to be a string
-
-    //todo checkpoint 1A
-    //so what we've done above is
-    //allow a submitted tag to be associated with a region
-    //thats step 1 mission accomplished
-    //but another functionality we want is:
-    //to change the clause object and give it a .subject property
-    //to accomplish this we will do the following
-    //first we find an easy way to access the clause object
-    //namely we will use the words to clauses
-    //because words to clauses maps indices to clauses so it's an easy way to get it
-    //let's see it in action
-    //for easy handling we assign the variable clause to a clause in our words_to_clauses map
-    //so clause is an object
-    var clause = words_to_clauses[indices[0]].tags[0];
-    console.log("CHECKPOINT 1A clause = ", clause);
-    //now we assign a region to the clause.subject property (e.g.
-    clause[tag_list[tag_type]] = indices;
-    //clause["subject"] = region         this assigns a list of indices to the clause.subject property
-
-    console.log("Subject of clause below (9-7)  = ", word_selector.get_text([clause.subject]));
-    console.log("Object of clause below = ", word_selector.get_text([clause.object]));
-    console.log("Verb of clause below = ", word_selector.get_text([clause.verb]));
-    console.log("Clause = ", word_selector.get_text(clause.get_indices()));
-    console.log("clause type of clause = ", clause.clause_type);
-
-
-    console.log("CHECKPOINT 1A complete");
-
-
-    console.log("WORDS in play after clear", word_selector.highlighted_words.size);
-
-    console.log("REGION + TAGS", JSON.stringify(region));
-    console.log("REGION SUMMARY");
-    // console.log("words = ", indices.map(function (x) {return word_map[x]}).join(' '));
-    console.log("indices = ", JSON.stringify(region.get_indices()));
-    console.log("tags = ", JSON.stringify(region.tags));
-    if (region.clause) {
-        console.log("clause_type = ", JSON.stringify(region.clause.clause_type));
-    }
-
-
-}
 
 
 
@@ -256,36 +209,41 @@ function debug(indices){
 
 
 function parse_words (text) {
-    var start = -1;               //-1 is an out of band value - a number that's not valid but within the range of the data type we're using
-    // var id = 0;
-    var words = [];
-    var word;
+    
+    var words = {start : -1, list : [null]};
+    var non_words = {start : -1, list : []};
 
     for (var pos in text){                                                                                              //todo make text not a global variable
     
-        var c = text[pos];
-        var terminal_is_word = is_word_char(c) && pos == text.length - 1;
-
-        if (terminal_is_word || !is_word_char(c)) {
-            if (start >= 0){
-                word = text.substring(start, terminal_is_word ? pos + 1 : pos);
-                words.push(word);
-                start = -1;
-            }
+        var b = is_word_char(text[pos]);
+        var current = b ? words : non_words;
+        var previous = b ? non_words : words;               //i.e. the inverse of current
+        // console.log(b, text[pos], current, previous);
+        
+        //if our first character is a word we don't want words & non_words to be of different length
+        if (non_words.list.length == 0 && current == words) {
+            non_words.list.push("");
         }
-        
-        if (is_conj_char(c)) {
-            words.push(c);
+        //if a X is in progress we need to end it & push X to X.list & reset X.start to -1
+        if (previous.start > -1) {
+            var sub = text.substring(previous.start, pos);
+            console.log("SUB1 = ", sub);
+            previous.list.push(sub);
+            previous.start = -1;
         } 
-        
-        if (is_word_char(c) && start == -1) {
-            start = pos
-        } 
-
-        
+        if(current.start == -1){
+            current.start = pos;
+        }
+        if (pos == text.length - 1) {
+            var sub = text.substring(current.start, pos + 1);
+            console.log("SUB2 = ", sub);
+            current.list.push(sub);
+        }
     }
-    // sentence = new Sentence(words);
-    return words;
+    if (words.list.length != non_words.list.length) {
+        throw "words != non_words";
+    }
+    return [words.list, non_words.list];
 }
 
 
@@ -301,13 +259,35 @@ function process_bracketed_text (words) {
     //clause_region is the region which we will end up pushing to sentence.regions
     var clause_region;
 
+    // yesterday, ((the dog) whatever)
+    // 0    | 0         | 14  | 18  |  
+    // null | yesterday | the | dog | whatever
+    //      | ,_((      | _   | )_  | )
+
+
+    //get a reference to every initial index
+    //iterate only through those indices
+    //create a function that counts occurences of a  character
+    //be careful that i will be +1 when you hit a (
+
+    
+    //Thurs 12 - 2
+    
 
     for (var i = 0; i < words.length; i++) {
         //console.log("CLAUSE STACK = ", JSON.stringify(clause_stack));
-        if (word_selector.words[i] === '(') {
+        //we cant just equality bc it might be "(   
+        //so we need to see if non_words containsthe metacharacter
+        //we can't check for just occuring in, because we can have ((
+        //solution is st like count opens, and count closes
+        var count  = count('(', non_words[i]);
+        
+        if (count > 0) {
             //a subordinate clause has been detected so we want to add it to the clause stack
             //so we create an empty list [] and push it to the stack
-            clause_stack.push([]);
+            for(  count times  ){
+                clause_stack.push([]);
+            }
         } else {
             
 
@@ -565,3 +545,54 @@ function submit_sentence(){
 //}
 
 
+
+
+function debug(indices){
+    
+
+    //TODO current problem
+    //regions dont have clause properties
+    //tag_type is a number and we need it to be a string
+
+    //todo checkpoint 1A
+    //so what we've done above is
+    //allow a submitted tag to be associated with a region
+    //thats step 1 mission accomplished
+    //but another functionality we want is:
+    //to change the clause object and give it a .subject property
+    //to accomplish this we will do the following
+    //first we find an easy way to access the clause object
+    //namely we will use the words to clauses
+    //because words to clauses maps indices to clauses so it's an easy way to get it
+    //let's see it in action
+    //for easy handling we assign the variable clause to a clause in our words_to_clauses map
+    //so clause is an object
+    var clause = words_to_clauses[indices[0]].tags[0];
+    console.log("CHECKPOINT 1A clause = ", clause);
+    //now we assign a region to the clause.subject property (e.g.
+    clause[tag_list[tag_type]] = indices;
+    //clause["subject"] = region         this assigns a list of indices to the clause.subject property
+
+    console.log("Subject of clause below (9-7)  = ", word_selector.get_text([clause.subject]));
+    console.log("Object of clause below = ", word_selector.get_text([clause.object]));
+    console.log("Verb of clause below = ", word_selector.get_text([clause.verb]));
+    console.log("Clause = ", word_selector.get_text(clause.get_indices()));
+    console.log("clause type of clause = ", clause.clause_type);
+
+
+    console.log("CHECKPOINT 1A complete");
+
+
+    console.log("WORDS in play after clear", word_selector.highlighted_words.size);
+
+    console.log("REGION + TAGS", JSON.stringify(region));
+    console.log("REGION SUMMARY");
+    // console.log("words = ", indices.map(function (x) {return word_map[x]}).join(' '));
+    console.log("indices = ", JSON.stringify(region.get_indices()));
+    console.log("tags = ", JSON.stringify(region.tags));
+    if (region.clause) {
+        console.log("clause_type = ", JSON.stringify(region.clause.clause_type));
+    }
+
+
+}

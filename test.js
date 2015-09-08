@@ -2,7 +2,20 @@ window.onload = test;
 
 function test(){
     
-    load();
+    test2 ();
+    
+}
+
+function test2 () {
+    
+    var text = "The book says: \"{the cat, the dog and the mouse sleep.}\"";
+    var lists = parse_words(text);
+    console.log(lists);
+    
+    var x = "abc ,\"";
+    for(var i = 0; i < x.length; i++){
+        console.log(x[i], is_word_char(x[i]));
+    }
     
 }
 
