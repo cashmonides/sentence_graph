@@ -8,11 +8,15 @@ function test(){
 
 function test2 () {
     
-    var text = "The book says: \"{the cat, the dog and the mouse sleep.}\"";
+    //var text = "The book says: \"{the cat, the dog and the mouse sleep.}\"";
+    var text = "The book says: \"{the cat, the dog and the mouse sleep";
+    //var text = "abc ,\" dog.";
+    //var text = "The cat jumps";
+    //var text = "The cat jumps.";
     var lists = parse_words(text);
     console.log(lists);
     
-    var x = "abc ,\"";
+    var x = "abc ,\" ";
     for(var i = 0; i < x.length; i++){
         console.log(x[i], is_word_char(x[i]));
     }

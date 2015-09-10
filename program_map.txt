@@ -31,3 +31,16 @@ SUBMIT_SENTENCE
 
 
 
+
+
+SOME TERMINOLOGY:
+tags = 1st column
+    e.g. noun, subject, object, etc.
+regions = 2nd column
+    e.g. cat jumps in
+allregions = 3rd column
+    a string that gives "cat = noun, subject"
+subregions = 4th column
+    originally, I think, the idea was 3rd column is cat, click on it and you get all the tags it has (noun, subject, etc.)
+    but then it seemed that clicking on it was extra work, so we just put in an equals sign
+    so now the 4th column is otiose

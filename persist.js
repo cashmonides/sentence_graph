@@ -14,8 +14,9 @@ var fbase = new Firebase('https://sentence-tagging.firebaseio.com/');
 // };
 
 
-function save (sentence) {
 
+
+function save (sentence) {
     console.log("saving to firebase: ", sentence);
     console.log("stringify: ", JSON.stringify(sentence));
     
