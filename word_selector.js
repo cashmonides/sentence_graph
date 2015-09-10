@@ -7,10 +7,11 @@
     
 // }
 
-var WordSelector = function(element_id, words){
+var WordSelector = function(element_id, words, non_words){
     
     this.element_id = element_id;
     this.words = words;
+    this.non_words = non_words;
     this.highlighted_words = new Set();
     this.previous_id = null;
     
@@ -50,8 +51,9 @@ WordSelector.prototype.set_highlighted = function(index, flag){
 };
     
 WordSelector.prototype.clear = function(){
+    var self = this;
     this.highlighted_words.forEach(function(index){
-        this.set_highlighted(index, false);
+        self.set_highlighted(index, false);
     });
     this.highlighted_words = new Set();
 };
@@ -75,14 +77,18 @@ WordSelector.prototype.get_word = function(index){
 
 WordSelector.prototype.setup = function(){
     var e = document.getElementById(this.element_id);
-    e.innerHTML = "";
-    for(var i in this.words){
+    
+    e.innerHTML = this.non_words[0];
+    for(var i = 1; i < this.words.length; i++ ){
+        console.log(this.words[i], this.non_words[i]);
         var s = document.createElement("span");
         s.setAttribute("id", i);
-        s.innerHTML = this.words[i] + " ";
+        s.innerHTML = this.words[i];
         var f = this.create_closure(i);
         s.addEventListener("click", f);
         e.appendChild(s);
+        e.appendChild(document.createTextNode(this.non_words[i]));
+        
     }
 };
     

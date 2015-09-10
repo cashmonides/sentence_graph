@@ -1,10 +1,11 @@
 //var text = "A baryon is a composite subatomic particle made up of three quarks (as distinct from mesons, which are composed of one quark and one antiquark). Baryons and mesons belong to the hadron family of particles, which are the quark-based particles. The name \"baryon\" comes from the Greek word for \"heavy\" (βαρύς, barys), because, at the time of their naming, most known elementary particles had lower masses than the baryons.";
-var default_text = "the cat sings";
-//var default_text = "the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .";
+// var default_text = "The cat sings (while the dog dances).";
+// var default_text = "The cat sings.";
+var default_text = "the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .";
 // var default_text = "the poets utter wise things (which they do not understand).";
 // var text = "a confucius (who lived  in a country (which we now call China) a long time ago (rich in empire and roaring with war )) said  in his book (which is called the Analects) (that revenge is a dish (which tastes best cold)).";
 // var text = "the dog jumps when the bell rings.";
-//var text = "(when you embark on a journey of revenge) dig two graves.";
+// var default_text = "!Confucius said: \"(When you embark on a journey of revenge,) dig two graves.\"";
 //var text = "Silence is a true friend (who never betrays).";
 //var text = "There was an old man (who supposed (that the street door was partially closed)) but some very large rats ate his coat and his hats, (while that futile old gentleman dozed).";
 //var text = "(What we achieve inwardly) will change outer reality.";
@@ -137,16 +138,16 @@ function is_conj_char (c){
 
 //todo uncomment this when done testing parser
 //START
-// window.onload = function (){
+window.onload = function (){
 
-//     // var x = document.getElementById("box");        //an expensive operation so we assign it to a variable before the for loop
+    // var x = document.getElementById("box");        //an expensive operation so we assign it to a variable before the for loop
 
-//     generate_buttons();
-//     generate_tags();
-//we need a default_text to start with for testing, eventually, we'll replace this with an empty inout box
-//     new_text(default_text);
+    generate_buttons();
+    generate_tags();
+    // we need a default_text to start with for testing, eventually, we'll replace this with an empty inout box
+    new_text(default_text);
 
-// }
+}
 
 
 
@@ -177,16 +178,17 @@ function new_text(text){
     //todo is this right?
     var words_and_non_words = parse_words(text);
     var words = words_and_non_words[0];
+    var non_words = words_and_non_words[1];                               //destructuring assignment
     sentence = new Sentence(words);
 
     //DEBUGGING 9-9
-    console.log("DEBUG 9-9 words = ", words);
+    console.log("DEBUG 9-9 words & non-words = ", words_and_non_words);
     
     document.getElementById("box").innerHTML = "";
-    word_selector = new WordSelector("box", words);
+    word_selector = new WordSelector("box", words, non_words);
     word_selector.setup();
     
-    process_bracketed_text(words);
+    process_bracketed_text(words, non_words);
     process_auto_tags(words);
 
     update_region_list();
@@ -207,26 +209,35 @@ function parse_words (text) {
     var words = {start : -1, list : [null]};                    //we make the first value null because if the first character is a non-word, we want the non-word character to have a word to follow
     var non_words = {start : -1, list : []};
 
-    for (var pos in text){
+    for (var pos = 0; pos < text.length; pos ++) {
+        
         var b = is_word_char(text[pos]);                        //b is a boolean: true if word, false if non_word
         var current = b ? words : non_words;                    //current has two values (words or non_words)
         var previous = b ? non_words : words;                   //this makes previous always the inverse of current
-        // console.log(b, text[pos], current, previous);
+        console.log("DEBUG", b, text[pos], current, previous);
 
         //if our first character is a word we don't want words & non_words to be of different length so we push a null string
-        if (non_words.list.length == 0 && current == words) {
+        //so we want to check 3 things 
+        if (non_words.list.length == 0 && non_words.start == -1 && b) {
+            console.log("first character = word detected");
             non_words.list.push("");
         }
+        
         //if a X is in progress we need to end it & push X to X.list & reset X.start to -1
         if (previous.start > -1) {
             var sub = text.substring(previous.start, pos);
-            console.log("SUB1 = ", sub);
+            console.log("SUB", (b ? "non_word" : "word"), previous.list.length, " = ", sub);
             previous.list.push(sub);
             previous.start = -1;
         }
+        
+        
+        //    !Confucius
+        
         //this checks if we haven't started on our current thing (i.e. if we're starting a new type)
         if(current.start == -1){
             current.start = pos;
+            console.log("setting start for: ", b, (b ? "word" : "non_word"), pos);
         }
 
         //this checks if we've hit the terminal character. If so we push to our current.list
@@ -236,14 +247,17 @@ function parse_words (text) {
             console.log("SUB2 = ", sub);
             current.list.push(sub);
         }
+        
     }
-    if (words.list.length != non_words.list.length) {
-        //todo 9-9 uncomment when done testing
-        //throw "words != non_words";
-        console.log("ERROR: words != non_words");
-    }
+    
     console.log("WORDS = ", words.list);
     console.log("NON_WORDS = ", non_words.list);
+    
+    if (words.list.length != non_words.list.length) {
+        //todo 9-9 uncomment when done testing
+        console.log("ERROR: words != non_words");
+        throw "words != non_words";
+    }
     return [words.list, non_words.list];
 }
 
@@ -252,176 +266,191 @@ function parse_words (text) {
 //FUNCTION summary
 //input: words (list of strings)
 //no return, just side effects: creates regions and adds tags to them
-function process_bracketed_text (words) {
+// function process_bracketed_text2 (words) {
+//     //clause_stack is a stack of all the clauses (i.e. their indices) which haven't been processed yet
+//     //type = list of lists of indices
+//     var clause_stack = [[]];
+
+//     //clause_region is the region which we will end up pushing to sentence.regions
+//     var clause_region;
+
+//     // yesterday, ((the dog) whatever)
+//     // 0    | 0         | 14  | 18  |
+//     // null | yesterday | the | dog | whatever
+//     //      | ,_((      | _   | )_  | )
+
+
+//     //get a reference to every initial index
+//     //iterate only through those indices
+//     //create a function that counts occurences of a  character
+//     //be careful that i will be +1 when you hit a (
+
+
+//     for (var i = 0; i < words.length; i++) {
+//         //console.log("CLAUSE STACK = ", JSON.stringify(clause_stack));
+//         //we cant just equality bc it might be "(
+//         //so we need to see if non_words containsthe metacharacter
+//         //we can't check for just occuring in, because we can have ((
+//         //solution is st like count opens, and count closes
+//         var count  = count('(', non_words[i]);
+
+//         if (count > 0) {
+//             //a subordinate clause has been detected so we want to add it to the clause stack
+//             //so we create an empty list [] and push it to the stack
+//             for(  count times  ){
+//                 clause_stack.push([]);
+//             }
+//         } else {
+//             //but we might have hit a closed bracket, meaning a clause has ended
+//             //in which case we want to close a clause
+//             //and we want to remove the clause that just closed from the clause stack
+//             //and we want to make a new region with region.clause = the clause we just removed
+//             //in other words, wehn we hit a close bracket we want to assign the clause region and throw it out of the stack because the stack is for current clauses
+//             if (word_selector.words[i] === ')') {
+//                 var y = clause_stack.pop();                 //this does two things at once, return y and pops
+//                 if (clause_stack.length !== 0) {            //when clause_stack.length == 0 we have a problem because we've ended the main clause with a close bracket
+
+//                     // clause_region = new Region(y);
+//                     // clause_region.make_clause('subordinate clause');
+//                     // y.forEach(function(x) {                         //we iterate over the indices and populate the map of words to clauses
+//                     //     words_to_clauses[x] = clause_region;
+//                     // });
+//                     // sentence.regions.push(clause_region);           //we want our new clause (that just closed) to be in sentence
+
+//                     //TODO CHECKPOINT 2
+//                     //old below
+//                     //sentence.get_region(y).add_tag(new SubordinateClause());
+
+//                     //NEW BELOW
+//                     var new_region = sentence.get_region(y);
+//                     new_region.add_tag(new SubordinateClause());
+
+//                     //quick and dirty check
+//                     // new_region.tags[0].indices = y;
+
+
+
+//                     //we want to update our words_to_clauses
+//                     y.forEach(function(x) {                         //we iterate over the indices and populate the map of words to clauses
+//                         words_to_clauses[x] = new_region;
+//                     });
+//                     //sentence.regions.push(new_region);            //we don't need this because get_region pushes a region
+
+//                     //todo END CHECKPOINT 2
+
+
+//                 } else {                                        //this is a case with too many closing brackets
+//                     throw "bad tagging";
+//                 }
+//             }
+//             else {
+//                 //no subordinate clause has been detected
+//                 //so we want to push our new word (i.e. an index) into the current clause (i.e. the top item of the clause_stack)
+//                 peek(clause_stack).push(i);
+//             }
+//         }
+//     }
+//     if (clause_stack.length !== 1) {                            //this tests for too many open clause
+//         throw 'bad tagging';
+//     }
+//     clause_region = new Region(clause_stack[0]);                //this makes our main clause
+//     //todo check: added clause_stack[0] to arguments of new Clause
+//     clause_region.add_tag(new Clause("main clause", clause_stack[0]));           //this adds a tag (i.e. a Clause object) to our newly made region
+//     clause_stack[0].forEach(function(x) {
+//         words_to_clauses[x] = clause_region;
+//     });
+//     sentence.regions.push(clause_region);
+//     console.log("WORDS TO CLAUSES = ", words_to_clauses);
+//     console.log("SENTENCE.REGIONS = ", sentence.regions);
+
+//     var clean_regions = sentence.regions.map(function(r) {
+//         return r.tags[0].clause_type + '=' + r.get_indices().map(function (z) {return word_selector.words[z]}).join(' ')
+//     }).join('\n');
+
+
+//     console.log("CLEAN OUTPUT = ", clean_regions);
+// }
+
+
+function process_bracketed_text (words, non_words) {
     //clause_stack is a stack of all the clauses (i.e. their indices) which haven't been processed yet
     //type = list of lists of indices
     var clause_stack = [[]];
-
-    //clause_region is the region which we will end up pushing to sentence.regions
-    var clause_region;
-
-    // yesterday, ((the dog) whatever)
-    // 0    | 0         | 14  | 18  |
-    // null | yesterday | the | dog | whatever
-    //      | ,_((      | _   | )_  | )
-
-
-    //get a reference to every initial index
-    //iterate only through those indices
-    //create a function that counts occurences of a  character
-    //be careful that i will be +1 when you hit a (
-
-
-    for (var i = 0; i < words.length; i++) {
-        //console.log("CLAUSE STACK = ", JSON.stringify(clause_stack));
-        //we cant just equality bc it might be "(
-        //so we need to see if non_words containsthe metacharacter
-        //we can't check for just occuring in, because we can have ((
-        //solution is st like count opens, and count closes
-        var count  = count('(', non_words[i]);
-
-        if (count > 0) {
-            //a subordinate clause has been detected so we want to add it to the clause stack
-            //so we create an empty list [] and push it to the stack
-            for(  count times  ){
-                clause_stack.push([]);
-            }
-        } else {
-            //but we might have hit a closed bracket, meaning a clause has ended
-            //in which case we want to close a clause
-            //and we want to remove the clause that just closed from the clause stack
-            //and we want to make a new region with region.clause = the clause we just removed
-            //in other words, wehn we hit a close bracket we want to assign the clause region and throw it out of the stack because the stack is for current clauses
-            if (word_selector.words[i] === ')') {
-                var y = clause_stack.pop();                 //this does two things at once, return y and pops
-                if (clause_stack.length !== 0) {            //when clause_stack.length == 0 we have a problem because we've ended the main clause with a close bracket
-
-                    // clause_region = new Region(y);
-                    // clause_region.make_clause('subordinate clause');
-                    // y.forEach(function(x) {                         //we iterate over the indices and populate the map of words to clauses
-                    //     words_to_clauses[x] = clause_region;
-                    // });
-                    // sentence.regions.push(clause_region);           //we want our new clause (that just closed) to be in sentence
-
-                    //TODO CHECKPOINT 2
-                    //old below
-                    //sentence.get_region(y).add_tag(new SubordinateClause());
-
-                    //NEW BELOW
-                    var new_region = sentence.get_region(y);
-                    new_region.add_tag(new SubordinateClause());
-
-                    //quick and dirty check
-                    // new_region.tags[0].indices = y;
-
-
-
-                    //we want to update our words_to_clauses
-                    y.forEach(function(x) {                         //we iterate over the indices and populate the map of words to clauses
-                        words_to_clauses[x] = new_region;
-                    });
-                    //sentence.regions.push(new_region);            //we don't need this because get_region pushes a region
-
-                    //todo END CHECKPOINT 2
-
-
-                } else {                                        //this is a case with too many closing brackets
-                    throw "bad tagging";
-                }
-            }
-            else {
-                //no subordinate clause has been detected
-                //so we want to push our new word (i.e. an index) into the current clause (i.e. the top item of the clause_stack)
-                peek(clause_stack).push(i);
-            }
-        }
-    }
-    if (clause_stack.length !== 1) {                            //this tests for too many open clause
-        throw 'bad tagging';
-    }
-    clause_region = new Region(clause_stack[0]);                //this makes our main clause
-    //todo check: added clause_stack[0] to arguments of new Clause
-    clause_region.add_tag(new Clause("main clause", clause_stack[0]));           //this adds a tag (i.e. a Clause object) to our newly made region
-    clause_stack[0].forEach(function(x) {
-        words_to_clauses[x] = clause_region;
-    });
-    sentence.regions.push(clause_region);
-    console.log("WORDS TO CLAUSES = ", words_to_clauses);
-    console.log("SENTENCE.REGIONS = ", sentence.regions);
-
-    var clean_regions = sentence.regions.map(function(r) {
-        return r.tags[0].clause_type + '=' + r.get_indices().map(function (z) {return word_selector.words[z]}).join(' ')
-    }).join('\n');
-
-
-    console.log("CLEAN OUTPUT = ", clean_regions);
-}
-
-
-function process_bracketed_text2 (words) {
-    //clause_stack is a stack of all the clauses (i.e. their indices) which haven't been processed yet
-    //type = list of lists of indices
-    var clause_stack = [[]];
-
-    //clause_region is the region which we will end up pushing to sentence.regions
-    var clause_region;
 
     //when open count > close count
+        //
     //when open count < close count
     //when open count = close count
+    
+    
+    //we iterate through non_words list
+    //if non_words[i] has a open bracket, we start to push words[i+1]
+    
     // yesterday, ((the dog) whatever)
     // 0    | 0         | 14  | 18  |
     // null | yesterday | the | dog | whatever
-    //      | ,_((      | _   | )_  | )
+    // 
+    //| ,_((      | _   | )_  | )
 
-    // yesterday, (i saw (the dog) whatever)
+    // yesterday, (i saw (the dog) whatever) (AA())
     // 0    | 0         | 14  | 18  |
     // null | yesterday | the | dog | whatever
     //      | ,_((      | _   | )_  | )
 
+    // (if the dog sleeps) the cat dances
 
+    // 0    | 1  | 2   | 3   | 4      | 5   | 6   | 7
+    // null | if | the | dog | sleeps | the | cat | dances
+    // (    |    |     |     | )      |     |     |
 
     //create a function that counts occurences of a  character
     //be careful that i will be +1 when you hit a (
 
-
-    for (var i = 0; i < words.length; i++) {
         //console.log("CLAUSE STACK = ", JSON.stringify(clause_stack));
         //we cant just equality bc it might be "(
         //so we need to see if non_words containsthe metacharacter
         //we can't check for just occuring in, because we can have ((
         //solution is st like count opens, and count closes
-        var open_count  = count('(', non_words[i]);
-        var close_count = count(')', non_words[i]);
+        // var open_count  = count('(', non_words[i]);
+        // var close_count = count(')', non_words[i]);
 
-        if (open_count > 0 && open_count > close_count) {               //we have a subordinate clause we need to deal with
-            //a subordinate clause has been detected so we want to add it to the clause stack
-            //so we create an empty list [] and push it to the stack
-            for(  count times  ){
-                clause_stack.push([]);
-            }
-        } else {
+        // if (open_count > 0 && open_count > close_count) {               //we have a subordinate clause we need to deal with
+        //     //a subordinate clause has been detected so we want to add it to the clause stack
+        //     //so we create an empty list [] and push it to the stack
+        //     for(  count times  ){
+        //         clause_stack.push([]);
+        //     }
+        // } else {
             //but we might have hit a closed bracket, meaning a clause has ended
             //in which case we want to close a clause
             //and we want to remove the clause that just closed from the clause stack
             //and we want to make a new region with region.clause = the clause we just removed
             //in other words, wehn we hit a close bracket we want to assign the clause region and throw it out of the stack because the stack is for current clauses
-            if (word_selector.words[i] === ')') {
+
+
+    for (var i = 0; i < non_words.length; i++) {
+
+        //push a word is always our first step
+        //but we don't want to count it towards a region
+        if(i != 0){
+            peek(clause_stack).push(i);
+        }
+
+        var non_word = non_words[i];
+
+        for(var ci = 0; ci < non_word.length; ci++){
+            
+            var c = non_word[ci];
+            
+            if(c === '('){
+                
+                clause_stack.push([]);
+                
+            } else if (c === ')') {
+                
                 var y = clause_stack.pop();                 //this does two things at once, return y and pops
                 if (clause_stack.length !== 0) {            //when clause_stack.length == 0 we have a problem because we've ended the main clause with a close bracket
 
-                    // clause_region = new Region(y);
-                    // clause_region.make_clause('subordinate clause');
-                    // y.forEach(function(x) {                         //we iterate over the indices and populate the map of words to clauses
-                    //     words_to_clauses[x] = clause_region;
-                    // });
-                    // sentence.regions.push(clause_region);           //we want our new clause (that just closed) to be in sentence
-
-                    //TODO CHECKPOINT 2
-                    //old below
-                    //sentence.get_region(y).add_tag(new SubordinateClause());
-
-                    //NEW BELOW
                     var new_region = sentence.get_region(y);
                     new_region.add_tag(new SubordinateClause());
 
@@ -442,18 +471,18 @@ function process_bracketed_text2 (words) {
                 } else {                                        //this is a case with too many closing brackets
                     throw "bad tagging";
                 }
-            }
-            else {
-                //no subordinate clause has been detected
-                //so we want to push our new word (i.e. an index) into the current clause (i.e. the top item of the clause_stack)
-                peek(clause_stack).push(i);
-            }
+            } 
+            
         }
+    
     }
+
     if (clause_stack.length !== 1) {                            //this tests for too many open clauses
         throw 'bad tagging';
     }
-    clause_region = new Region(clause_stack[0]);                //this makes our main clause
+    
+    //clause_region is the region which we will end up pushing to sentence.regions
+    var clause_region = new Region(clause_stack[0]);                //this makes our main clause
     //todo check: added clause_stack[0] to arguments of new Clause
     clause_region.add_tag(new Clause("main clause", clause_stack[0]));           //this adds a tag (i.e. a Clause object) to our newly made region
     clause_stack[0].forEach(function(x) {
@@ -594,6 +623,7 @@ function update_subregions(){
     
     // select words in the gui
     var is = region.get_indices();
+    word_selector.clear();
     for(var i in is){
         word_selector.set_highlighted(is[i], true);
     }
