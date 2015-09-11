@@ -12,18 +12,19 @@
     <title></title>
     <style>
         body { font-size: 25px; }
-        .hoverable:hover { background-color: #EEE; }
+        .hoverable:hover { color: #00F; }
     </style>
 </head>
 <body>
     <input type="text" id="sentencebox" width="500" onkeydown="if (event.keyCode == 13) sentence_entered()"><br>
     <div id="box"></div>
     <div id="buttons"></div>
-    <select multiple size = "10" id="tags"></select>
-    <select multiple size = "10" id="regions" ></select>
     <select multiple size = "10" id="allregions"></select>
     <select multiple size = "10" id="subregions"></select>
-    
+    <br>
+    <select multiple size = "10" id="tags"></select>
+    <select multiple size = "10" id="regions" ></select>
+    <br>
     <button onclick="submit_sentence()">submit</button>
     <button onclick="delete_tags()">delete tags</button>
    
