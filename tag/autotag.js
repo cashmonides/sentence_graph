@@ -3,7 +3,7 @@ var auto_tagging_map = {
 
 	"definite article": ["the"],
 	"indefinite article": ["a", "an"],
-	"personal pronoun": ["I", "me", "you", "he", "she", "we", "they", "them"],
+	"personal pronoun": ["i", "me", "you", "he", "she", "we", "they", "them"],
 	"possessive adjective": ["my", "your", "his", "her", "its", "our", "their"],
 	"coordinating conjunction": ["and", "but", "or"],
 

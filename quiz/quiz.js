@@ -68,7 +68,7 @@ function submit_answer() {
     console.log("target type: ", target_tag.get_tag_type());
 
    
-    if (tag_names.indexOf(target_tag.get_tag_type()) != -1) {
+    if (contains(tag_names, target_tag.get_tag_type())) {
         
         // right answer
         console.log("answer matches target");        

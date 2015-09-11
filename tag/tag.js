@@ -129,7 +129,7 @@ function generate_regions() {
 	var rs = [];
     for (var r in sentence.regions) {
     	var cr = sentence.regions[r];
-    	var tag_types = cr.tags.map(function(x){ return x.get_tag_type(); });
+    	var tag_types = cr.get_tag_types();
     	if(contains(tag_types, tag)){
     		rs.push(cr);
     	}
