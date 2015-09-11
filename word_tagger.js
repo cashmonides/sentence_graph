@@ -175,21 +175,25 @@ function sentence_entered(){
     // this auto-processing produces new regions and tags so we also update region list & subregions)
 // called by: window onload & sentence_entered
 function new_text(text){
+
     //todo is this right?
-    var words_and_non_words = parse_words(text);
-    var words = words_and_non_words[0];
-    var non_words = words_and_non_words[1];                               //destructuring assignment
-    sentence = new Sentence(words);
+//    var words_and_non_words = parse_words(text);
+//    var words = words_and_non_words[0];
+//    var non_words = words_and_non_words[1];                               //destructuring assignment
+
+	var t = new Text(text);
+	t.setup();
+    sentence = new Sentence(t.get_words());
 
     //DEBUGGING 9-9
-    console.log("DEBUG 9-9 words & non-words = ", words_and_non_words);
+//    console.log("DEBUG 9-9 words:", words);
     
     document.getElementById("box").innerHTML = "";
-    word_selector = new WordSelector("box", words, non_words);
+    word_selector = new WordSelector("box", t);
     word_selector.setup();
     
-    process_bracketed_text(words, non_words);
-    process_auto_tags(words);
+//    process_bracketed_text(words, non_words);
+//    process_auto_tags(words);
 
     update_region_list();
     document.getElementById("allregions").addEventListener("change", function(x){

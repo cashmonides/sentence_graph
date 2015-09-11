@@ -4,11 +4,16 @@
 	<script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
 	<script src="utils.js"></script>
 	<script src="objects.js"></script>
+    <script src="text.js"></script>
     <script src="word_tagger.js"></script>
     <script src="persist.js"></script>
     <script src="word_selector.js"></script>
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        body { font-size: 25px; }
+        .hoverable:hover { background-color: #EEE; }
+    </style>
 </head>
 <body>
     <input type="text" id="sentencebox" width="500" onkeydown="if (event.keyCode == 13) sentence_entered()"><br>

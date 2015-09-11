@@ -7,11 +7,11 @@
     
 // }
 
-var WordSelector = function(element_id, words, non_words){
+var WordSelector = function(element_id, text_data){
     
     this.element_id = element_id;
-    this.words = words;
-    this.non_words = non_words;
+    this.text_data = text_data;
+    this.words = text_data.get_words();
     this.highlighted_words = new Set();
     this.previous_id = null;
     
@@ -76,25 +76,61 @@ WordSelector.prototype.get_word = function(index){
 // ----------------------------------------------------------------------------------------
 
 WordSelector.prototype.setup = function(){
+
     var e = document.getElementById(this.element_id);
-    
-    e.innerHTML = this.non_words[0];
-    for(var i = 1; i < this.words.length; i++ ){
-        console.log(this.words[i], this.non_words[i]);
-        var s = document.createElement("span");
-        s.setAttribute("id", i);
-        s.innerHTML = this.words[i];
-        var f = this.create_closure(i);
-        s.addEventListener("click", f);
-        e.appendChild(s);
-        e.appendChild(document.createTextNode(this.non_words[i]));
-        
+    e.innerHTML = "";
+
+	var text = this.text_data.get_text();
+    var regions = this.text_data.get_regions();
+    var pos = 0;
+    var word_count = 0;
+    console.log("regions:", regions);
+
+    for(var i = 0; i < regions.length; i++){
+
+    	var r = regions[i];
+
+		if(r[1] > pos){
+			var plain = text.substring(pos, r[1]);
+			pos += plain.length;
+//			console.log("plain:", plain);
+			e.appendChild(document.createTextNode(plain));
+		}
+
+//		console.log(this.words[i]);
+		var s = document.createElement("span");
+		s.setAttribute("class", "hoverable");
+		var plain = text.substring(r[1], r[2] + 1);
+		pos += plain.length;
+		s.innerHTML = plain;
+		if(r[0]){
+//			console.log("word index?", r);
+			var f = this.create_word_closure(word_count);
+			s.addEventListener("click", f);
+		} else {
+			var f = this.create_paren_closure(r[3]);
+			s.addEventListener("click", f);
+		}
+		if(r[0]){
+			s.setAttribute("id", word_count);
+			word_count++;
+		}
+		e.appendChild(s);
+
     }
+
+    e.appendChild(document.createTextNode(text.substring(pos)));
+
 };
     
-WordSelector.prototype.create_closure = function(i){
+WordSelector.prototype.create_word_closure = function(i){
     var self = this;
     return function(event){ self.click_received(event, i); };
+};
+
+WordSelector.prototype.create_paren_closure = function(obj){
+    var self = this;
+    return function(event){ self.text_data.selected(obj); };
 };
 
 //click_2 contains click_3

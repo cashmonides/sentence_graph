@@ -2,8 +2,17 @@ window.onload = test;
 
 function test(){
     
-    test2 ();
+    test3 ();
     
+}
+
+function test3 () {
+
+//	var s = "\"Fuck!\", yelled the cat's friend.";
+	var s = "(hello (how)) (are you)";
+	var t = new Text(s);
+	t.setup();
+
 }
 
 function test2 () {
