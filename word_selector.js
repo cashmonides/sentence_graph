@@ -42,10 +42,10 @@ WordSelector.prototype.set_highlighted = function(index, flag){
 
     if(flag){
         this.highlighted_words.add(index);
-        e.style.background = "red";
+        e.style.color = "red";
     } else {
         this.highlighted_words.delete(index);
-        e.style.background = "white";
+        e.style.color = "black";
     }
 
 };
@@ -99,7 +99,6 @@ WordSelector.prototype.setup = function(){
 
 //		console.log(this.words[i]);
 		var s = document.createElement("span");
-		s.setAttribute("class", "hoverable");
 		var plain = text.substring(r[1], r[2] + 1);
 		pos += plain.length;
 		s.innerHTML = plain;
@@ -115,6 +114,7 @@ WordSelector.prototype.setup = function(){
 			s.setAttribute("id", word_count);
 			word_count++;
 		}
+		s.setAttribute("class", "hoverable");
 		e.appendChild(s);
 
     }
