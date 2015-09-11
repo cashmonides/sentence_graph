@@ -1,6 +1,6 @@
 
 // regions contain:
-// "word" | "(" | "/", pos (start), pos (end), word index (start), word index (end)
+// "word" | "(" | "/", pos (start), pos (end), [word indices]
 
 var Text = function(text){
 	this.text = text;
@@ -14,6 +14,7 @@ Text.prototype.setup = function(){
 	console.log(this.text);
 
 	var stack = [];
+	stack.push(["(", 0, null, []]);
 
 	for(var i = 0; i < this.text.length; i++){
 
@@ -24,7 +25,8 @@ Text.prototype.setup = function(){
 
 //			console.log(i, match);
 			var word = match[0];
-			this.regions.push(["word", i, i + (word.length - 1), this.words.length, this.words.length]);
+			this.regions.push(["word", i, i + (word.length - 1), [this.words.length]]);
+			peek(stack)[3].push(this.words.length);
 			this.words.push(word);
 			i = i + (word.length - 1);
 
@@ -36,13 +38,14 @@ Text.prototype.setup = function(){
 
 			switch(c){
 			case '(':
-				stack.push(["(", i, null, this.words.length, null]);
+				this.close_slash(stack, i - 1);
+				stack.push(["(", i, null, []]);
 				break;
 			case ')':
 				if(stack.length > 0){
+					this.close_slash(stack, i - 1);
 					var region = stack.pop();
 					region[2] = i;
-					region[4] = this.words.length;
 					this.regions.push(region);
 //					console.log("pop", region);
 				} else {
@@ -50,13 +53,25 @@ Text.prototype.setup = function(){
 				}
 				break;
 			case '/':
-				this.regions.push(["/", i, i, this.words.length, this.words.length]);
+				this.close_slash(stack, i - 1);
+				stack.push(["/", i, null, []]);
 				break;
 			}
 
 		}
 
 	}
+
+	this.close_slash(stack, this.text.length - 1);
+	if(stack.length == 1){
+		var region = stack.pop();
+		region[2] = this.text.length - 1;
+//		this.regions.push(region);
+	} else {
+		console.log(stack);
+		throw "bad stack";
+	}
+
 
 	// sort regions by start position
 	this.regions.sort(function(left, right){
@@ -65,13 +80,22 @@ Text.prototype.setup = function(){
 
 	var self = this;
 	this.regions.forEach(function(r){
-		console.log(r[0], r[1], r[2], r[3], r[4], "'" + self.text.substring(r[1], r[2] + 1) + "'");
+		console.log(r[0], r[1], r[2], "[" + r[3].toString() + "]", "[" + self.text.substring(r[1], r[2] + 1) + "]");
 	});
 
-	console.log(stack);
 	console.log(this.get_words());
 
 };
+
+Text.prototype.close_slash = function(stack, i){
+
+	if(peek(stack)[0] == "/"){
+		var region = stack.pop();
+		region[2] = i;
+		this.regions.push(region);
+	}
+
+}
 
 Text.prototype.get_text = function(){
 	return this.text;
@@ -91,7 +115,7 @@ Text.prototype.get_regions = function(){
 		if(x[0] == "word"){
 			regions.push([true, x[1], x[2]]);
 		} else {
-			regions.push([false, x[1], x[1], [x[3], x[4]]]);
+			regions.push([false, x[1], x[1], x[3]]);
 		}
 	});
 
@@ -102,10 +126,10 @@ Text.prototype.get_regions = function(){
 
 Text.prototype.selected = function(range){
 
-	console.log("range:", range);
+//	console.log("range:", range);
 	word_selector.clear();
-	for(var i = range[0]; i < range[1]; i++){
-		word_selector.set_highlighted(i, true);
+	for(var i = 0; i < range.length; i++){
+		word_selector.set_highlighted(range[i], true);
 	}
 
 };
