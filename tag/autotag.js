@@ -5,13 +5,19 @@ var auto_tagging_map = {
 	"indefinite article": ["a", "an"],
 	"personal pronoun": ["I", "me", "you", "he", "she", "we", "they", "them"],
 	"possessive adjective": ["my", "your", "his", "her", "its", "our", "their"],
-	"subordinating conjunction": ["after", "although", "because", "before", "how", "if",
-		"that", "unless", "until", "what", "when", "where", "which", "while", "who", "why"],
 	"coordinating conjunction": ["and", "but", "or"],
-	"preposition": ["above", "about", "across", "against", "along", "amid",
-    	"among", "around", "as", "at", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "by", "concerning",
-    	"despite", "during", "except", "for", "from","in", "inside", "into", "like", "near", "of", "off", "on", "onto",
-    	"opposite", "outside", "over", "past", "to", "toward", "under", "underneath", "unlike", "with", "within", "without"]
+
+	"subordinating conjunction": [
+		"after", "although", "because", "before", "how", "if",
+		"that", "unless", "until", "what", "when", "where", "which", "while", "who", "why"
+	],
+
+	"preposition": [
+		"above", "about", "across", "against", "along", "amid", "among", "around", "as", "at", "behind",
+		"below", "beneath", "beside", "besides", "between", "beyond", "by", "concerning", "despite",
+		"during", "except", "for", "from","in", "inside", "into", "like", "near", "of", "off", "on", "onto",
+    	"opposite", "outside", "over", "past", "to", "toward", "under", "underneath", "unlike", "with", "within", "without"
+    ]
 
 };
 
@@ -24,7 +30,7 @@ function autotag(text_data, sentence) {
 
             var word = text_data.get_word(r[3][0]);
         	for(type in auto_tagging_map){
-				if (contains(auto_tagging_map[type], word)) {
+				if (contains(auto_tagging_map[type], word.toLowerCase())) {
 					var new_region = sentence.get_region(r[3]);
 					new_region.add_tag(new SingleRegionTag(type));
 					break;
@@ -40,6 +46,8 @@ function autotag(text_data, sentence) {
                 var tag = create_tag(r);
                 reg.add_tag(tag);
                 
+            } else {
+            	console.log("WARNING: empty region");
             }
             
         }
