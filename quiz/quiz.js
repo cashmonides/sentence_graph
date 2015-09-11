@@ -49,8 +49,9 @@ function generate_question(sentences){
     document.getElementById("questionbox").innerHTML = "Click on the word that matches " + target_tag.get_tag_type();
    
     document.getElementById("testbox").innerHTML = "";
-    wordSel = new WordSelector("testbox", sentence.words);
-    wordSel.setup();
+//    var text_data = new Text( ??? )
+//    wordSel = new WordSelector("testbox", text_data);
+//    wordSel.setup();
    
 };
 

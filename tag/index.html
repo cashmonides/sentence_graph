@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-	<script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
-	<script src="utils.js"></script>
-	<script src="objects.js"></script>
-    <script src="text.js"></script>
-    <script src="word_tagger.js"></script>
-    <script src="persist.js"></script>
-    <script src="word_selector.js"></script>
+
     <meta charset="UTF-8">
-    <title></title>
-    <style>
-        body { font-size: 25px; }
-        .hoverable:hover { color: #00F; }
-    </style>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+	<script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
+    <script src="../lib/utils.js"></script>
+    <script src="../lib/persist.js"></script>
+    <script src="../lib/objects.js"></script>
+    <script src="../lib/text.js"></script>
+    <script src="../lib/word_selector.js"></script>
+    <script src="tag.js"></script>
+
+    <title>Tag</title>
+
 </head>
 <body>
+
     <input type="text" id="sentencebox" width="500" onkeydown="if (event.keyCode == 13) sentence_entered()"><br>
     <div id="box"></div>
     <div id="buttons"></div>
@@ -27,8 +30,6 @@
     <br>
     <button onclick="submit_sentence()">submit</button>
     <button onclick="delete_tags()">delete tags</button>
-   
-   
 
 </body>
 </html>
