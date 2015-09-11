@@ -29,90 +29,6 @@ var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate
 var words_to_clauses = {};                                          //words_to_clauses will be a dictionary from indices to clause_regions
                                                                      //its goal is to have an easy way of finding out what clause a word is in
 
-var auto_tagging_map = {
-    "the" : "definite article",
-    "a" : "indefinite article",
-    "an" : "indefinite article",
-    "I" : "personal pronoun",
-    "me" : "personal pronoun",
-    "you" : "personal pronoun",
-    "he" : "personal pronoun",
-    "she" : "personal pronoun",
-    "we" : "personal pronoun",
-    "they" : "personal pronoun",
-    "them" : "personal pronoun",
-    "my" : "possessive adjective",
-    "your" : "possessive adjective",
-    "his" : "possessive adjective",
-    "her" : "possessive adjective",
-    "its" : "possessive adjective",
-    "our" : "possessive adjective",
-    "their" : "possessive adjective",
-    "after" : "subordinating conjunction",
-    "although" : "subordinating conjunction",
-    "because" : "subordinating conjunction",
-    "before" : "subordinating conjunction",
-    "how" : "subordinating conjunction",
-    "if" : "subordinating conjunction",
-    "that" : "subordinating conjunction",
-    "unless" : "subordinating conjunction",
-    "until" : "subordinating conjunction",
-    "what" : "subordinating conjunction",
-    "when" : "subordinating conjunction",
-    "where" : "subordinating conjunction",
-    "which" : "subordinating conjunction",
-    "while" : "subordinating conjunction",
-    "who" : "subordinating conjunction",
-    "why" : "subordinating conjunction",
-    "and" : "coordinating conjunction",
-    "but" : "coordinating conjunction",
-    "or" : "coordinating conjunction",
-    "above" : "preposition",
-    "about" : "preposition",
-    "across" : "preposition",
-    "against" : "preposition",
-    "along" : "preposition",
-    "amid" : "preposition",
-    "among" : "preposition",
-    "around" : "preposition",
-    "as" : "preposition",
-    "at" : "preposition",
-    "behind" : "preposition",
-    "below" : "preposition",
-    "beneath" : "preposition",
-    "beside" : "preposition",
-    "besides" : "preposition",
-    "between" : "preposition",
-    "beyond" : "preposition",
-    "by" : "preposition",
-    "concerning" : "preposition",
-    "despite" : "preposition",
-    "during" : "preposition",
-    "except" : "preposition",
-    "for" : "preposition",
-    "from" : "preposition",
-    "in" : "preposition",
-    "inside" : "preposition",
-    "into" : "preposition",
-    "like" : "preposition",
-    "near" : "preposition",
-    "of" : "preposition",
-    "off" : "preposition",
-    "on" : "preposition",
-    "onto" : "preposition",
-    "opposite" : "preposition",
-    "outside" : "preposition",
-    "over" : "preposition",
-    "past" : "preposition",
-    "to" : "preposition",
-    "toward" : "preposition",
-    "under" : "preposition",
-    "underneath" : "preposition",
-    "unlike" : "preposition",
-    "with" : "preposition",
-    "within" : "preposition",
-    "without" : "preposition"
-}
 
 //utility functions
 
@@ -185,6 +101,8 @@ function new_text(text){
 	t.setup();
     sentence = new Sentence(t.get_words());
 
+    autotag(t, sentence);
+
     //DEBUGGING 9-9
 //    console.log("DEBUG 9-9 words:", words);
     
@@ -202,24 +120,6 @@ function new_text(text){
     //M: Master flow logged below
     console.log("M: Sentence after autotagging: ", JSON.stringify(sentence));
 }
-
-//FUNCTION summary
-//input: words (strings)
-//no return, just side effects: creates regions and adds tags to them
-function process_auto_tags(words){
-    for (var i = 0; i < words.length; i++) {
-        var word = words[i];
-        if (word in auto_tagging_map) {
-            var new_region = sentence.get_region([i]);
-            new_region.add_tag(new SingleRegionTag(auto_tagging_map[word]));
-            //console.log("TEST OF AUTO TAGGER START");
-            //console.log("desired index", (i));
-            //console.log("desired word = ", auto_tagging_map[word]);
-        }
-    }
-}
-
-
 
 //called by: generate_buttons() - but where is generate_buttons called?
 function submit_tag(tag_type){
@@ -382,106 +282,4 @@ function delete_tags(){
 //called by: the submit button on the html page
 function submit_sentence(){
     save(sentence);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//OLD VERSION BELOW
-
-//
-//if (is_conj_char(c)) {
-//    if (start == -1) {
-//        start = pos;
-//        var conjunction = c;
-//        words.push(conjunction);
-//        word_map[id] = conjunction;
-//        x.innerHTML += "<span id=\"" + id + "\" onclick=\"click_2(event, "+id+")\">" + conjunction + "</span>";
-//        id += 1;
-//        start = -1;
-//    }
-//} else if (is_word_char(c)) {
-//    if (start == -1) {
-//        start = pos
-//    }
-//} else {
-//    if (start >= 0){
-//        var word = text.substring(start, pos);
-//        words.push(word);
-//        word_map[id] = word;
-//        x.innerHTML += "<span id=\"" + id + "\" onclick=\"click_2(event, "+id+")\">" + word + "</span>";
-//        id += 1;
-//        start = -1;
-//    }
-//    x.innerHTML += c;
-//}
-
-
-
-
-function debug(indices){
-    
-
-    //TODO current problem
-    //regions dont have clause properties
-    //tag_type is a number and we need it to be a string
-
-    //todo checkpoint 1A
-    //so what we've done above is
-    //allow a submitted tag to be associated with a region
-    //thats step 1 mission accomplished
-    //but another functionality we want is:
-    //to change the clause object and give it a .subject property
-    //to accomplish this we will do the following
-    //first we find an easy way to access the clause object
-    //namely we will use the words to clauses
-    //because words to clauses maps indices to clauses so it's an easy way to get it
-    //let's see it in action
-    //for easy handling we assign the variable clause to a clause in our words_to_clauses map
-    //so clause is an object
-    var clause = words_to_clauses[indices[0]].tags[0];
-    console.log("CHECKPOINT 1A clause = ", clause);
-    //now we assign a region to the clause.subject property (e.g.
-    clause[tag_list[tag_type]] = indices;
-    //clause["subject"] = region         this assigns a list of indices to the clause.subject property
-
-    console.log("Subject of clause below (9-7)  = ", word_selector.get_text([clause.subject]));
-    console.log("Object of clause below = ", word_selector.get_text([clause.object]));
-    console.log("Verb of clause below = ", word_selector.get_text([clause.verb]));
-    console.log("Clause = ", word_selector.get_text(clause.get_indices()));
-    console.log("clause type of clause = ", clause.clause_type);
-
-
-    console.log("CHECKPOINT 1A complete");
-
-
-    console.log("WORDS in play after clear", word_selector.highlighted_words.size);
-
-    console.log("REGION + TAGS", JSON.stringify(region));
-    console.log("REGION SUMMARY");
-    // console.log("words = ", indices.map(function (x) {return word_map[x]}).join(' '));
-    console.log("indices = ", JSON.stringify(region.get_indices()));
-    console.log("tags = ", JSON.stringify(region.tags));
-    if (region.clause) {
-        console.log("clause_type = ", JSON.stringify(region.clause.clause_type));
-    }
-
-
 }
