@@ -17,7 +17,6 @@ var test_sentences = [
 ];
 
 //initializing global variables
-var default_text = test_sentences[0];
 var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate clause", "adverb", "preposition", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction", "coordinating conjunction"];
 
 var sentence = null;
@@ -29,7 +28,7 @@ window.onload = function (){
     generate_buttons();
     generate_tags();
     // we need a default_text to start with for testing, eventually, we'll replace this with an empty inout box
-    new_text(default_text);
+    new_text(test_sentences[0]);
 
 }
 
@@ -68,6 +67,7 @@ function new_text(text){
 
     document.getElementById("box").innerHTML = "";
     word_selector = new WordSelector("box", t);
+    t.word_selector = word_selector;
     word_selector.setup();
 
     update_region_list();
