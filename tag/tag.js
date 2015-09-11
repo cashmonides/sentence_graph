@@ -1,62 +1,30 @@
-//var text = "A baryon is a composite subatomic particle made up of three quarks (as distinct from mesons, which are composed of one quark and one antiquark). Baryons and mesons belong to the hadron family of particles, which are the quark-based particles. The name \"baryon\" comes from the Greek word for \"heavy\" (βαρύς, barys), because, at the time of their naming, most known elementary particles had lower masses than the baryons.";
-// var default_text = "The cat sings (while the dog dances).";
-// var default_text = "The cat sings.";
-var default_text = "the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .";
-// var default_text = "the poets utter wise things (which they do not understand).";
-// var text = "a confucius (who lived  in a country (which we now call China) a long time ago (rich in empire and roaring with war )) said  in his book (which is called the Analects) (that revenge is a dish (which tastes best cold)).";
-// var text = "the dog jumps when the bell rings.";
-// var default_text = "!Confucius said: \"(When you embark on a journey of revenge,) dig two graves.\"";
-//var text = "Silence is a true friend (who never betrays).";
-//var text = "There was an old man (who supposed (that the street door was partially closed)) but some very large rats ate his coat and his hats, (while that futile old gentleman dozed).";
-//var text = "(What we achieve inwardly) will change outer reality.";
-// var text = "There was an old woman (who lived in a shoe).";
 
+var test_sentences = [
+
+	"the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .",
+	"A baryon is a composite subatomic particle made up of three quarks (as distinct from mesons, which are composed of one quark and one antiquark). Baryons and mesons belong to the hadron family of particles, which are the quark-based particles. The name \"baryon\" comes from the Greek word for \"heavy\" (βαρύς, barys), because, at the time of their naming, most known elementary particles had lower masses than the baryons.",
+	"The cat sings (while the dog dances).",
+	"The cat sings.",
+	"the poets utter wise things (which they do not understand).",
+	"a confucius (who lived  in a country (which we now call China) a long time ago (rich in empire and roaring with war )) said  in his book (which is called the Analects) (that revenge is a dish (which tastes best cold)).",
+	"the dog jumps when the bell rings.",
+	"!Confucius said: \"(When you embark on a journey of revenge,) dig two graves.\"",
+	"Silence is a true friend (who never betrays).",
+	"There was an old man (who supposed (that the street door was partially closed)) but some very large rats ate his coat and his hats, (while that futile old gentleman dozed).",
+	"(What we achieve inwardly) will change outer reality.",
+	"There was an old woman (who lived in a shoe)."
+
+];
 
 //initializing global variables
-
-var sentence = null;
-
-// var word_map = {};                                                          //a set of unique integer ids for each word
-
-// var words_in_play = new Set();
-
+var default_text = test_sentences[0];
 var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate clause", "adverb", "preposition", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction", "coordinating conjunction"];
 
-// var tag_map = {};
-
-// var previous_id = null;
-
-var words_to_clauses = {};                                          //words_to_clauses will be a dictionary from indices to clause_regions
-                                                                     //its goal is to have an easy way of finding out what clause a word is in
-
-
-//utility functions
-
+var sentence = null;
 var word_selector = null;
 
-var conjunction_characters = new Set(['<', '>', '[', ']', '{', '}', '/']);
-
-
-function is_word_char (c){
-    // return (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c === '');
-    // apostrophe possibilities: s' || 's || 'll || 'nt || 't (ain't) ||
-    return /[a-zA-Z]/.test(c);
-}
-
-
-function is_conj_char (c){
-    return conjunction_characters.has(c);
-}
-
-
-////////////////////////UTILITIES ABOVE////////////
-///////////////////////MASTER FUNCTION BELOW///////////
-
-//todo uncomment this when done testing parser
 //START
 window.onload = function (){
-
-    // var x = document.getElementById("box");        //an expensive operation so we assign it to a variable before the for loop
 
     generate_buttons();
     generate_tags();
@@ -92,26 +60,15 @@ function sentence_entered(){
 // called by: window onload & sentence_entered
 function new_text(text){
 
-    //todo is this right?
-//    var words_and_non_words = parse_words(text);
-//    var words = words_and_non_words[0];
-//    var non_words = words_and_non_words[1];                               //destructuring assignment
-
 	var t = new Text(text);
 	t.setup();
     sentence = new Sentence(t.get_words());
 
     autotag(t, sentence);
 
-    //DEBUGGING 9-9
-//    console.log("DEBUG 9-9 words:", words);
-    
     document.getElementById("box").innerHTML = "";
     word_selector = new WordSelector("box", t);
     word_selector.setup();
-    
-//    process_bracketed_text(words, non_words);
-//    process_auto_tags(words);
 
     update_region_list();
     document.getElementById("allregions").addEventListener("change", function(x){
