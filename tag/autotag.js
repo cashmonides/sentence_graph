@@ -1,88 +1,19 @@
 
 var auto_tagging_map = {
-    "the" : "definite article",
-    "a" : "indefinite article",
-    "an" : "indefinite article",
-    "I" : "personal pronoun",
-    "me" : "personal pronoun",
-    "you" : "personal pronoun",
-    "he" : "personal pronoun",
-    "she" : "personal pronoun",
-    "we" : "personal pronoun",
-    "they" : "personal pronoun",
-    "them" : "personal pronoun",
-    "my" : "possessive adjective",
-    "your" : "possessive adjective",
-    "his" : "possessive adjective",
-    "her" : "possessive adjective",
-    "its" : "possessive adjective",
-    "our" : "possessive adjective",
-    "their" : "possessive adjective",
-    "after" : "subordinating conjunction",
-    "although" : "subordinating conjunction",
-    "because" : "subordinating conjunction",
-    "before" : "subordinating conjunction",
-    "how" : "subordinating conjunction",
-    "if" : "subordinating conjunction",
-    "that" : "subordinating conjunction",
-    "unless" : "subordinating conjunction",
-    "until" : "subordinating conjunction",
-    "what" : "subordinating conjunction",
-    "when" : "subordinating conjunction",
-    "where" : "subordinating conjunction",
-    "which" : "subordinating conjunction",
-    "while" : "subordinating conjunction",
-    "who" : "subordinating conjunction",
-    "why" : "subordinating conjunction",
-    "and" : "coordinating conjunction",
-    "but" : "coordinating conjunction",
-    "or" : "coordinating conjunction",
-    "above" : "preposition",
-    "about" : "preposition",
-    "across" : "preposition",
-    "against" : "preposition",
-    "along" : "preposition",
-    "amid" : "preposition",
-    "among" : "preposition",
-    "around" : "preposition",
-    "as" : "preposition",
-    "at" : "preposition",
-    "behind" : "preposition",
-    "below" : "preposition",
-    "beneath" : "preposition",
-    "beside" : "preposition",
-    "besides" : "preposition",
-    "between" : "preposition",
-    "beyond" : "preposition",
-    "by" : "preposition",
-    "concerning" : "preposition",
-    "despite" : "preposition",
-    "during" : "preposition",
-    "except" : "preposition",
-    "for" : "preposition",
-    "from" : "preposition",
-    "in" : "preposition",
-    "inside" : "preposition",
-    "into" : "preposition",
-    "like" : "preposition",
-    "near" : "preposition",
-    "of" : "preposition",
-    "off" : "preposition",
-    "on" : "preposition",
-    "onto" : "preposition",
-    "opposite" : "preposition",
-    "outside" : "preposition",
-    "over" : "preposition",
-    "past" : "preposition",
-    "to" : "preposition",
-    "toward" : "preposition",
-    "under" : "preposition",
-    "underneath" : "preposition",
-    "unlike" : "preposition",
-    "with" : "preposition",
-    "within" : "preposition",
-    "without" : "preposition"
-}
+
+	"definite article": ["the"],
+	"indefinite article": ["a", "an"],
+	"personal pronoun": ["I", "me", "you", "he", "she", "we", "they", "them"],
+	"possessive adjective": ["my", "your", "his", "her", "its", "our", "their"],
+	"subordinating conjunction": ["after", "although", "because", "before", "how", "if",
+		"that", "unless", "until", "what", "when", "where", "which", "while", "who", "why"],
+	"coordinating conjunction": ["and", "but", "or"],
+	"preposition": ["above", "about", "across", "against", "along", "amid",
+    	"among", "around", "as", "at", "behind", "below", "beneath", "beside", "besides", "between", "beyond", "by", "concerning",
+    	"despite", "during", "except", "for", "from","in", "inside", "into", "like", "near", "of", "off", "on", "onto",
+    	"opposite", "outside", "over", "past", "to", "toward", "under", "underneath", "unlike", "with", "within", "without"]
+
+};
 
 function autotag(text_data, sentence) {
     
@@ -90,12 +21,15 @@ function autotag(text_data, sentence) {
         
         // single word
         if (r[0] === "word" && r[3].length == 1) {
-            console.log("text data:", text_data);
+
             var word = text_data.get_word(r[3][0]);
-            if (word in auto_tagging_map) {
-                var new_region = sentence.get_region(r[3]);
-                new_region.add_tag(new SingleRegionTag(auto_tagging_map[word]));
-            } 
+        	for(type in auto_tagging_map){
+				if (contains(auto_tagging_map[type], word)) {
+					var new_region = sentence.get_region(r[3]);
+					new_region.add_tag(new SingleRegionTag(type));
+					break;
+				}
+            }
             
         // clauses
         } else {
