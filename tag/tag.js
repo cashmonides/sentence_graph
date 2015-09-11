@@ -107,63 +107,45 @@ function submit_tag(tag_type){
 
 //creates the 1st column, a list of tags
 function generate_tags() {
-    var e = document.getElementById("tags");
-    for (var i in tag_list) {
-        var o = document.createElement("option");
-        o.innerHTML = tag_list[i];
-        e.appendChild(o);
-    }
-    e.addEventListener("change", function(x){
-        //console.log(x);
+
+	set_dropdown("tags", tag_list);
+
+    document.getElementById("tags").addEventListener("change", function(x){
         generate_regions();
     });
+
 }
 
 //fills the right hand side of the 2nd column
 function generate_regions() {
-    var e = document.getElementById("regions");
-    e.innerHTML = "";
+
     var dd = document.getElementById("tags");                   //dd = drop-down optios on the left hand side
+    if(dd.selectedIndex < 0){
+    	return;
+    }
     var tag = dd.options[dd.selectedIndex].value;               //tag = clikced tag in right hand box tag will be a string
     console.log("target tag = ", tag);
 
+	var rs = [];
     for (var r in sentence.regions) {
-        var cr = sentence.regions[r];           //cr = current region
-        for (var t in cr.tags) {               //todo these need to be tag objects
-            var ct = cr.tags[t];               //ct is an object, not a string (current tag)
-            console.log(ct);
-            if (ct.get_tag_type() === tag) {
-                var o = document.createElement("option");
-                o.innerHTML = word_selector.get_text(cr.get_indices());
-                e.appendChild(o);
-                console.log("found tag", sentence.regions[r].get_indices());
-            }
-        }
+    	var cr = sentence.regions[r];
+    	var tag_types = cr.tags.map(function(x){ return x.get_tag_type(); });
+    	if(contains(tag_types, tag)){
+    		rs.push(cr);
+    	}
     }
+
+    set_dropdown("regions", rs, function(x){ return word_selector.get_text(x.get_indices()); });
+
 }
 
 
 function update_region_list(){
-    
-    var e = document.getElementById("allregions");
-    e.innerHTML = "";
-    
-    for(var i in sentence.regions){
-        
-        var r = sentence.regions[i];
-        var o = document.createElement("option");
-        o.innerHTML = region_to_text(r);
-        e.appendChild(o);
-        console.log(i, r);
-        
-    }
-    
+	set_dropdown("allregions", sentence.regions, function(x){ return region_to_text(x); });
 }
 
 
 function update_subregions(){
-    var e = document.getElementById("subregions");
-    e.innerHTML = "";
 
     var dd = document.getElementById("allregions");         //dd = drop-down optios on the left hand side
     if (dd.selectedIndex < 0) {
@@ -172,14 +154,10 @@ function update_subregions(){
     var region = sentence.regions[dd.selectedIndex]; 
                      
     console.log(region, sentence);
-    var subregion = sentence.get_sub_regions(region);
-    
-    for(var i in subregion){
-        var o = document.createElement("option");
-        o.innerHTML = region_to_text(subregion[i]);
-        e.appendChild(o);
-    }
-    
+    var subregions = sentence.get_sub_regions(region);
+
+	set_dropdown("subregions", subregions, function(x){ return region_to_text(x); });
+
     // select words in the gui
     var is = region.get_indices();
     word_selector.clear();
