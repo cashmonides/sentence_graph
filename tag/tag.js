@@ -126,14 +126,9 @@ function generate_regions() {
     var tag = dd.options[dd.selectedIndex].value;               //tag = clikced tag in right hand box tag will be a string
     console.log("target tag = ", tag);
 
-	var rs = [];
-    for (var r in sentence.regions) {
-    	var cr = sentence.regions[r];
-    	var tag_types = cr.get_tag_types();
-    	if(contains(tag_types, tag)){
-    		rs.push(cr);
-    	}
-    }
+	var rs = sentence.get_regions().filter(function(r){
+		return contains(r.get_tag_types(), tag);
+	});
 
     set_dropdown("regions", rs, function(x){ return word_selector.get_text(x.get_indices()); });
 
@@ -175,7 +170,7 @@ function update_subregions(){
 //called by: update_subregions (which populates the columns of the explorer)
 function region_to_text(region){
     var text = word_selector.get_text(region.get_indices());
-    var tags = region.tags.map(function(x){ return x.get_tag_type(); }).join(", ");
+    var tags = region.get_tag_types().join(", ");
     return text + " = " + tags;
 }
 
