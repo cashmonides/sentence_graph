@@ -17,7 +17,7 @@ var test_sentences = [
 ];
 
 //initializing global variables
-var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate clause", "adverb", "preposition", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction", "coordinating conjunction"];
+var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate clause", "coordinate clause", "adverb", "preposition", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction", "coordinating conjunction"];
 
 var sentence = null;
 var word_selector = null;
@@ -142,7 +142,7 @@ function update_region_list(){
 
 function update_subregions(){
 
-    var dd = document.getElementById("allregions");         //dd = drop-down optios on the left hand side
+    var dd = document.getElementById("allregions");         //dd = drop-down options on the left hand side
     if (dd.selectedIndex < 0) {
         return;
     }
@@ -205,6 +205,12 @@ function delete_tags(){
     region.clear_tags();
     update_region_list();
     update_subregions();
+}
+
+
+
+function clear_all_highlights() {
+    word_selector.clear();
 }
 
 //FUNCTION summary

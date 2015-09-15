@@ -61,7 +61,7 @@ function create_tag(r){
     
     switch(r[0]){
         case "(": return new SubordinateClause();
-        case "/": return new Clause(TagType.CoordinatingConjunction);
+        case "/": return new Clause(TagType.CoordinateClause);
         case "main": return new Clause(TagType.MainClause);
         default: throw "unknown tag type: " + r[0];
     }

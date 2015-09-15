@@ -1,3 +1,44 @@
+9-15 issues
+- Akiva changes:
+    - added clear highlights button
+    - set up coordinate clause when you hit a /
+
+- seems least cluttered to just have one tagtype for clauses
+    - with a specification of whether it's main or subordinate
+    - and then if it's subordinate it should have a clause type, what kind of
+
+- coordinate clause needs to be set at the same level as its "sibling"
+    - i.e. if its sibling is main, then it's main and if its sibling is subordinate, it's also subordinate
+
+- safari runs totally differently (firefox seems ok)
+
+
+
+9-15 needed functionality smaller
+- delete a single tag (as opposed to delete all tags) (would be useful when correcting a mistake)
+
+
+9-15 needed functionality bigger
+- anything that isn't autotagged could be a specific color
+    - i.e. you load a sentence, everything is grayed out that hasn't been autotagged
+    - gives you a sense of what you need to tag by hand
+- improve the autotagging - possibly via webscraping?
+
+
+
+DOWN THE ROAD
+- useful to have a button that sets the level of the sentence (i.e. if it's a hard sentence it gets a higher level)
+- a box for custom questions - e.g. "Find at least 3 prepositions in the following sentence"
+
+
+
+
+
+
+
+
+
+
 set not implemented in explorer and safari
 so, question 1: is set doable at all?
 question 2: why do a set in the first place if it has to be converted into a list?
