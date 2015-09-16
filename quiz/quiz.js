@@ -33,25 +33,33 @@ function generate_question(sentences){
    
     document.getElementById("scorebox").innerHTML = "Correct: " + count_correct + ", Incorrect: " + count_incorrect;
 
-    var available_tags = [];
+    var available_tags = new Set();
     sentence = random_choice(sentences);
+    
     
     
     for (var i in sentence.regions) {
         var r = sentence.regions[i];
-        console.log("DEBUG 9-3 r.tags = ", r.get_tag_types(), sentence.get_region_text(r));
-        available_tags = available_tags.concat(r.tags); 
+        var tags = r.get_tag_types();
+        console.log("DEBUG 9-3 r.tags = ", tags, sentence.get_region_text(r));
+        for (var i = 0; i < tags.length; i++) {
+            available_tags.add(tags[i]); 
+        }
+        
         console.log("tag concatenated!");
     }
-    target_tag = random_choice(available_tags);
+    target_tag = random_choice(Array.from(available_tags));
     console.log(":target_tag = " + target_tag);
    
-    document.getElementById("questionbox").innerHTML = "Click on the word that matches " + target_tag.get_tag_type();
+    document.getElementById("questionbox").innerHTML = "Click on the word that matches " + target_tag;
    
     document.getElementById("testbox").innerHTML = "";
-//    var text_data = new Text( ??? )
-//    wordSel = new WordSelector("testbox", text_data);
-//    wordSel.setup();
+    console.log(sentence.text);
+    var text_data = new Text(sentence.text);
+    text_data.setup();
+    wordSel = new WordSelector("testbox", text_data);
+    text_data.word_selector = wordSel;
+    wordSel.setup();
    
 };
 
@@ -65,10 +73,10 @@ function submit_answer() {
     var tag_names = answer_region.get_tag_types();
     
     console.log("tag names:", tag_names);
-    console.log("target type: ", target_tag.get_tag_type());
+    console.log("target type: ", target_tag);
 
    
-    if (contains(tag_names, target_tag.get_tag_type())) {
+    if (contains(tag_names, target_tag)) {
         
         // right answer
         console.log("answer matches target");        
@@ -105,10 +113,10 @@ function display_feedback(){
         var r = sentence.get_regions()[ri];
         for(ti in r.get_tags()){
             var t = r.get_tags()[ti];
-            if(t.get_tag_type() == target_tag.get_tag_type()){
+            if(t.get_tag_type() == target_tag) {
                 var text = sentence.get_region_text(r);
                 console.log("this was a solution:", text);
-                fbox.innerHTML += target_tag.get_tag_type() + " = " + text + "<br>";
+                fbox.innerHTML += target_tag + " = " + text + "<br>";
             }
         }
     }

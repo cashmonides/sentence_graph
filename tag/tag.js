@@ -61,7 +61,7 @@ function new_text(text){
 
 	var t = new Text(text);
 	t.setup();
-    sentence = new Sentence(t.get_words());
+    sentence = new Sentence(t.get_words(), text);
 
     autotag(t, sentence);
 
