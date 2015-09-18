@@ -10,3 +10,8 @@ body {
 .hoverable:hover {
 	color: #088;
 }
+
+
+.untagged {
+    color: #e67e22;
+}

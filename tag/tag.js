@@ -69,6 +69,7 @@ function new_text(text){
     word_selector = new WordSelector("box", t);
     t.word_selector = word_selector;
     word_selector.setup();
+    show_untagged_words();
 
     update_region_list();
     document.getElementById("allregions").addEventListener("change", function(x){
@@ -76,6 +77,18 @@ function new_text(text){
     });
     //M: Master flow logged below
     console.log("M: Sentence after autotagging: ", JSON.stringify(sentence));
+}
+
+
+function show_untagged_words() {
+    var words = sentence.words;
+    for (var i = 0; i < words.length; i++){
+        if (sentence.get_region([i]).get_tags().length == 0) {
+            var e = document.getElementById(i);
+            e.className += " untagged";
+            console.log("untagged word", words[i]);
+        }
+    }
 }
 
 //called by: generate_buttons() - but where is generate_buttons called?

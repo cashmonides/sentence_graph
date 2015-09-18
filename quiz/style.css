@@ -10,3 +10,8 @@ body {
 .hoverable:hover {
 	color: #088;
 }
+
+
+.tag_names {
+    color: #9b59b6;
+}

@@ -13,6 +13,8 @@ var sentences = null;
 var sentence = null;
 var count_correct = 0;
 var count_incorrect = 0;
+var incorrect_streak = 0;
+var max_incorrect_streak = 4;
 
 //data_loaded gets passed the data that comes back to us from firebase
 //so we want to deserialize this data
@@ -29,10 +31,15 @@ function data_loaded(data){
 //step 2: pick randomly a target tag and tell the user to match it
 //step 3: user submits the answer in the form of indices
 //step 4: check answer by looking for target tag in tag list for that region
+
+
+function refresh_score() {
+    document.getElementById("scorebox").innerHTML = "Correct: " + count_correct + ", Incorrect: " + count_incorrect;
+}
+
 function generate_question(sentences){
    
-    document.getElementById("scorebox").innerHTML = "Correct: " + count_correct + ", Incorrect: " + count_incorrect;
-
+    refresh_score();
     var available_tags = new Set();
     sentence = random_choice(sentences);
     
@@ -51,7 +58,7 @@ function generate_question(sentences){
     target_tag = random_choice(Array.from(available_tags));
     console.log(":target_tag = " + target_tag);
    
-    document.getElementById("questionbox").innerHTML = "Click on the word that matches " + target_tag;
+    document.getElementById("questionbox").innerHTML = "Click on the word that matches " + wrap_string(target_tag);
    
     document.getElementById("testbox").innerHTML = "";
     console.log(sentence.text);
@@ -74,49 +81,75 @@ function submit_answer() {
     
     console.log("tag names:", tag_names);
     console.log("target type: ", target_tag);
-
-   
-    if (contains(tag_names, target_tag)) {
-        
-        // right answer
-        console.log("answer matches target");        
-        count_correct ++;
-        
+    
+    var is_correct = contains(tag_names, target_tag);
+    
+    if (is_correct) {
+        process_correct_answer();
     } else {
-        
-        // wrong answer
-        count_incorrect ++;
-        
+        process_incorrect_answer(tag_names);
     }
-    
-    display_feedback();
-    generate_question(sentences);
-    
-    //safe version
-    // for (var i in answer_region.tags) {
-    //     if (target_tag.get_tag_type() === answer_region.tags[i].get_tag_type()) {
-
-    //         break;
-    //     } else {
-    //         console.log("no match for ", answer_region.tags[i]);
-    //     }
-    // }
-    
 }
 
-function display_feedback(){
+
+
+function process_correct_answer() {
+    console.log("answer matches target");        
+    incorrect_streak = 0;
+    if (incorrect_streak < max_incorrect_streak) {
+        count_correct ++;
+    }
+    var cell_1 = random_choice(cell_1_feedback_right);
+    var fbox = document.getElementById("feedbackbox");
+    fbox.innerHTML = cell_1;
+    generate_question(sentences);
+}
+
+var cell_1_feedback_right = ["Correct!", "Excellent!"]
+var cell_1_feedback_wrong = ["whoops", "not exactly"]
+var cell_3_feedback_wrong = ["try again", "take another shot"]
+
+function process_incorrect_answer(tag_names) {
+    incorrect_streak ++;
+    count_incorrect ++;
+    refresh_score();
+    wordSel.clear();
     
+    if (incorrect_streak < max_incorrect_streak) {
+        var cell_2;
+        if (tag_names.length == 0) {
+            cell_2 = "That's not a valid region.";
+        } else if (tag_names.length == 1) {
+            cell_2 = "That's a " + wrap_string(tag_names[0]);
+        } else {
+            tag_names = tag_names.map(wrap_string);
+            cell_2 = "That matches the following: " + tag_names.join(", ");
+        }
+        var cell_1 = random_choice(cell_1_feedback_wrong);
+        var cell_3 = random_choice(cell_3_feedback_wrong);
+        var fbox = document.getElementById("feedbackbox");
+        fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
+    } else {
+        give_away_answer();
+    }
+}
+
+function wrap_string(tag) {
+    return "<span class=\"tag_names\">" + tag + "</span>";
+}
+
+function give_away_answer(){
     var fbox = document.getElementById("feedbackbox");
     fbox.innerHTML = "";
     
     for(var ri in sentence.get_regions()){
         var r = sentence.get_regions()[ri];
-        for(ti in r.get_tags()){
+        for(var ti in r.get_tags()){
             var t = r.get_tags()[ti];
             if(t.get_tag_type() == target_tag) {
                 var text = sentence.get_region_text(r);
                 console.log("this was a solution:", text);
-                fbox.innerHTML += target_tag + " = " + text + "<br>";
+                fbox.innerHTML += wrap_string(target_tag) + " = " + text + "<br>";
             }
         }
     }
