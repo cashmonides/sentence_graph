@@ -1,28 +1,37 @@
-9-15 issues
-- Akiva changes:
-    - added clear highlights button
-    - set up coordinate clause when you hit a /
+functionality to add - smaller
+- delete a single tag (as opposed to delete all tags) (would be useful when correcting a mistake)
+- quick mode
+- feedback with 3 cells
+    - whoops. that's a ____. try again. (Question stays up)
+    - correct.   null.   null.               (next question.)
+- anything that isn't autotagged could be a specific color
+    - i.e. gives you a sense of what hasn't been done
+    - i.e. you load a sentence, everything is grayed out that hasn't been autotagged
+    - complication (could do it for only single-region tags)
+- level
+    - autolevel: 1-10
+        - quantify complexity: degree of nesting
+        - quantify vocabulary: "reading level"
+        -
+    - minimum age: x
+    - progress level: 1-5                 (hit)
 
-- seems least cluttered to just have one tagtype for clauses
-    - with a specification of whether it's main or subordinate
-    - and then if it's subordinate it should have a clause type, what kind of
-
+- custom question ("is the following highlighted word an adjective or an adverb")
 - coordinate clause needs to be set at the same level as its "sibling"
     - i.e. if its sibling is main, then it's main and if its sibling is subordinate, it's also subordinate
-
+    - i.e. if it's surrounded by () -> it's subordinate
 - safari runs totally differently (firefox seems ok)
 
 
-
-9-15 needed functionality smaller
-- delete a single tag (as opposed to delete all tags) (would be useful when correcting a mistake)
-
-
-9-15 needed functionality bigger
-- anything that isn't autotagged could be a specific color
-    - i.e. you load a sentence, everything is grayed out that hasn't been autotagged
-    - gives you a sense of what you need to tag by hand
+functionality to add - bigger
 - improve the autotagging - possibly via webscraping?
+
+
+
+
+recoding
+- make all the clauses consistent
+
 
 
 
