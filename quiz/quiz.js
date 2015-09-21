@@ -15,6 +15,7 @@ var count_correct = 0;
 var count_incorrect = 0;
 var incorrect_streak = 0;
 var max_incorrect_streak = 4;
+var quick_mode = true;
 
 //data_loaded gets passed the data that comes back to us from firebase
 //so we want to deserialize this data
@@ -22,7 +23,7 @@ function data_loaded(data){
     
     sentences = deserialize(data);
     console.log("sentences loaded: ", sentences.length);
-    generate_question(sentences);
+    generate_question_ui(sentences);
     
 };
 
@@ -39,7 +40,7 @@ function refresh_score() {
 
 function generate_question(sentences){
    
-    refresh_score();
+    
     var available_tags = new Set();
     sentence = random_choice(sentences);
     
@@ -47,17 +48,23 @@ function generate_question(sentences){
     
     for (var i in sentence.regions) {
         var r = sentence.regions[i];
-        var tags = r.get_tag_types();
-        console.log("DEBUG 9-3 r.tags = ", tags, sentence.get_region_text(r));
-        for (var i = 0; i < tags.length; i++) {
-            available_tags.add(tags[i]); 
+        if (quick_mode && r.get_indices().length == 1 || !quick_mode) {
+            var tags = r.get_tag_types();
+            console.log("DEBUG 9-3 r.tags = ", tags, sentence.get_region_text(r));
+            for (var i = 0; i < tags.length; i++) {
+                available_tags.add(tags[i]); 
+            }
+            console.log("tag concatenated!");
         }
-        
-        console.log("tag concatenated!");
     }
+    
     target_tag = random_choice(Array.from(available_tags));
     console.log(":target_tag = " + target_tag);
-   
+}
+
+function generate_question_ui(sentences) {
+    generate_question(sentences);
+    refresh_score();
     document.getElementById("questionbox").innerHTML = "Click on the word that matches " + wrap_string(target_tag);
    
     document.getElementById("testbox").innerHTML = "";
@@ -67,9 +74,17 @@ function generate_question(sentences){
     wordSel = new WordSelector("testbox", text_data);
     text_data.word_selector = wordSel;
     wordSel.setup();
+    if (quick_mode) {
+        wordSel.click_callback = quick_click;
+    }
    
 };
 
+function quick_click (word_selector, index) {
+    console.log("QUICK CLICK index = ", index);
+    submit_answer();
+    
+}
 
 
 function submit_answer() {
@@ -102,7 +117,7 @@ function process_correct_answer() {
     var cell_1 = random_choice(cell_1_feedback_right);
     var fbox = document.getElementById("feedbackbox");
     fbox.innerHTML = cell_1;
-    generate_question(sentences);
+    generate_question_ui(sentences);
 }
 
 var cell_1_feedback_right = ["Correct!", "Excellent!"]
