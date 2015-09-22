@@ -4,7 +4,58 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 27px;
     color: #666;
+
+    /*added stuff*/
+    text-indent: 10px;
+    border: solid 1px black;
+    padding: 30px;
+    background:lightslategrey;
     
+}
+
+/*why isn't sentence box not getting centered*/
+
+#sentencebox {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+#box {
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 27px;
+    color: #666;
+
+    /*added stuff*/
+    /*text-indent: 10px;*/
+    border: solid 1px black;
+    padding: 10px;
+    background:navajowhite;
+
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+
+
+    cursor:pointer;
+
+}
+
+
+#buttons {
+    /*this doesn't work because you have to be entirely in the button to turn into a pointer*/
+    /*cursor:pointer;*/
+    opacity: 0.7;
+    outline: black solid 5px;
+    background-color: lightslategray;
+    /*padding: 6px 8px;*/
+    /*border-radius seems to have no effect*/
+    /*border-radius: 100px;*/
+    color: black;
+    /*border: none;*/
+    /*margin: 0;*/
 }
 
 .hoverable:hover {

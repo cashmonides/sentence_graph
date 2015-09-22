@@ -1,10 +1,8 @@
-
 body {
-    
     font-family: 'Roboto', sans-serif;
     font-size: 27px;
     color: #666;
-    
+    background:#bdc3c7;
 }
 
 .hoverable:hover {
@@ -17,7 +15,42 @@ body {
 }
 
 
-#testbox {
-    cursor:pointer;
-    
+#scorebox {
+    text-align: center;
+    vertical-align: middle;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+    padding: 10px;
+    background:navajowhite;
 }
+
+
+#feedbackbox {
+    padding: 10px;
+    vertical-align: middle;
+
+}
+
+#questionbox {
+    vertical-align: middle;
+
+}
+
+#testbox {
+    /*text-align: center;*/
+    vertical-align: middle;
+    font-size: 30px;
+    cursor:pointer;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+    padding: 10px;
+    background:navajowhite;
+
+}
+
+
+

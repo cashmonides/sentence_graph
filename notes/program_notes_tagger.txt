@@ -1,3 +1,107 @@
+AGENDA
+- cosmetic
+- persistence of score across sessions (search terms)
+- how to change html formats (quick mode vs. drop-downs e.g. bestiary)
+
+
+
+LOGIC OF NEW QUESTION TYPE
+- the following highlighted word is what part of speech?
+    - a word highlighted in text box
+    - drop down with tag names
+
+
+- set_highlighted for a region (but only of those that have tags)
+- for i in regions
+    if regions.tags.length > 0
+    append region to possible tag set
+- return an index and a tag name
+
+- set_highlighted with that index
+- populate drop down with options
+    - make sure that:
+        - if a given index has multiple tags, only one of those tags is given in the answer choices
+
+
+
+
+
+
+CURRENT BUGS
+- in quick mode, the brackets don't behave properly
+    - they toggle without submitting answer
+- safari doesn't work?
+
+GAMEPLAY FIXES
+- a correct answer sometimes makes it hard to register that there's a new question (especially when the question is identical)
+- maybe something like "Correct, now click.."
+- once a few questions are answered correctly it should graduate to a new sentence
+- needs to only ask questions based on tags they know
+
+
+COSMETIC BUGS
+- feedback box being empty or full is pushing questionbox around
+- this is happening: verb = sings
+                     verb = jumps made rings is lifted
+
+
+GIO QUESTIONS
+- why can't I migrate test sentences to another file?
+
+
+CHORES
+- increase number of tag buttons (relative clause)
+    -
+- put sentences in a different file
+- research unicode
+- make an offline version of quiz that doesn't query firebase
+
+COSMETIC
+- why isn't sentence box centered the same way box is?
+- center score, different font
+- indent question and feedback section
+- put a box around text
+- picture box below with author
+
+
+ADD FUNCTIONALITY
+- new question type: what is the highlighted word? (with options in a drop-down)
+- 2-step tag type (user tags: "relative pronoun" and wizard asks: "what's the antecedent?")
+- unicode characters need to be added to word character regex match (text.js line 23)
+- subject & object tag should imply noun
+- the 1st & 3rd column doesn't seem to display all the tags (e.g. possessive adjective)
+- return a measure of nestedness
+	- max number of subordinate layers
+	- total length
+	- number of subordinate clauses
+- parameterize score into a total (e.g. correct = +3, incorrect streak of 3 = -1, score = correct - incorrect)
+- subject of which clause?
+- coordinate clause read their subordination level during autotagging
+- custom question input
+- input brackets with mouse
+
+WEBSCRAPING
+- find parts of speech
+- deliver a score of vocabulary/reading level
+
+
+
+DOMAIN SPECIFIC FUNCTIONALITY
+- antecedents
+- discontinuous clauses
+
+
+
+DOWN THE ROAD STUFF
+- "collect" authors
+
+
+
+
+
+
+
+
 functionality to add - smaller
 - delete a single tag (as opposed to delete all tags) (would be useful when correcting a mistake)
 - quick mode

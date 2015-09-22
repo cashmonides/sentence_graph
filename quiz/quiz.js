@@ -62,6 +62,11 @@ function generate_question(sentences){
     console.log(":target_tag = " + target_tag);
 }
 
+
+
+
+
+
 function generate_question_ui(sentences) {
     generate_question(sentences);
     refresh_score();
@@ -172,3 +177,56 @@ function give_away_answer(){
 }
 
 
+
+
+
+
+//new stuff below
+function generate_question_word_to_tag(sentences){
+
+    var available_tags = new Set();
+    sentence = random_choice(sentences);
+
+
+    for (var i in sentence.regions) {
+        var r = sentence.regions[i];
+        if (quick_mode && r.get_indices().length == 1 || !quick_mode) {
+            var tags = r.get_tag_types();
+            for (var i = 0; i < tags.length; i++) {
+                available_tags.add(tags[i]);
+            }
+        }
+    }
+    target_tag = random_choice(Array.from(available_tags));
+    //so we have a good tag
+    //we need to mark it as the correct answer
+    //and we need to get its index
+    //amd we need to send that index to set_highlighted
+
+    console.log("target_tag = " + target_tag);
+}
+
+function generate_question_ui_word_to_tag(sentences) {
+    //the logic will change
+    //we no longer want to wrap_string
+    //instead we want to generate a drop down
+    //which implies that we will need to pass as an argument the appropriate data for the drop down
+    generate_question_word_to_tag(sentences);
+    refresh_score();
+    document.getElementById("questionbox").innerHTML = "Classify the highlighted word: ";
+
+    document.getElementById("testbox").innerHTML = "";
+    console.log(sentence.text);
+    var text_data = new Text(sentence.text);
+    text_data.setup();
+    wordSel = new WordSelector("testbox", text_data);
+    text_data.word_selector = wordSel;
+    wordSel.setup();
+    if (quick_mode) {
+        wordSel.click_callback = quick_click;
+    }
+
+};
+
+
+//new stuff above
