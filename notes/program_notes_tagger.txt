@@ -1,28 +1,96 @@
+INTERFACE
+- get_region(indices)
+- region.get_tag_types -> strings of tags "noun" "verb" etc.
+
+
+
+TODO
+- in quiz.js in generate_question_ui we have a new wordselector getting created and that clears the highlighting
+- split up process incorrect answer into two parts
+    - process incorrect answer
+    - give feedback of the type: no that's a _____, try again
+
+GAME OBJECT
+we want a game object
+    - properties
+        - mode
+    - methods
+        - generate targets and dropoptions
+            - should be level sensitive (i.e. only ask about things they've learned - nouns and verbs early etc.)
+            - have to be careful to avoid deformed weightings
+        - set the text of the questions and feedback
+        - populate the html
+            - wordselector object that needs to be either clickable or non-clickable
+        - give away answer
+
+DIFFERENCES BETWEEN MODES
+- testbox
+    - wordselector not clickable in drop mode
+    - highlight can't be cleared in drop mode
+- feedback box
+    - give away answer is different in drop mode (needs to either highlight the answer or display the answer as text)
+- extras
+    - submit button in drop mode but mot in quick mode
+
+
 AGENDA
-- cosmetic
+- create a quiz mode object that has functionality of
+
+    - generate question
+        - returns:
+            - target_tag
+            - target_region
+            - available_tags
+
+    - generate-question ui
+            - populate the HTML
+                - questionbox: question_text (e.g. click on the word that matches...)
+                - testbox: a wordselector object (either clickable or not clickable)
+            - mechanics of game
+                - refresh_score
+                - set_highlighting if necessary (e.g. in drop mode)
+                - process answer
+    - submit_answer
+        - either quick_click or submit button
+        - process correct answer or process incorrect answer
+            - incorrect answer
+
+
+    - process answer
+        - when we're in quick mode we need to pass in the tag_names in order to give away answers
+
+
+    -
+    - give away answer
+
+
+
 - persistence of score across sessions (search terms)
 - how to change html formats (quick mode vs. drop-downs e.g. bestiary)
 
 
-
-LOGIC OF NEW QUESTION TYPE
-- the following highlighted word is what part of speech?
-    - a word highlighted in text box
-    - drop down with tag names
-
-
-- set_highlighted for a region (but only of those that have tags)
-- for i in regions
-    if regions.tags.length > 0
-    append region to possible tag set
-- return an index and a tag name
-
-- set_highlighted with that index
-- populate drop down with options
-    - make sure that:
-        - if a given index has multiple tags, only one of those tags is given in the answer choices
+???s for GIO
+- how does data_loaded get the argument "data"?
+- what exactly does click_callback really do?
+- how does click_callback get its argument "index"?
 
 
+BUGS
+- in drop mode the correct answer is always last in the drop downs
+- quick mode doesn't seem to be working now that drop mode has been added
+
+API FOR QUIZ OBJECT
+- load
+    - basically it's a wrapping of our overall control flow
+    - needs to be a callback because we're communicating with firebase
+- data_loaded
+    -
+- load sentence
+    - needs to be deserialized
+    -
+    - load is a callback in persist.js
+- generate question
+-
 
 
 

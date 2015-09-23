@@ -29,12 +29,19 @@ body {
 
 #feedbackbox {
     padding: 10px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
     vertical-align: middle;
 
 }
 
 #questionbox {
+    text-align: center;
     vertical-align: middle;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
@@ -50,6 +57,15 @@ body {
     padding: 10px;
     background:navajowhite;
 
+}
+
+#answer_choices {
+    font-size: 20px;
+    vertical-align: middle;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 200px;
 }
 
 
