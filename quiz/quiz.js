@@ -3,9 +3,12 @@
         
         sentences: null,
         game: null,
+        word_selector: null,
+        sentence: null,
+        
         count_correct: 0, 
         count_incorrect: 0,
-        word_selector: null,
+        
         correct_streak: 0,
         incorrect_streak: 0,
         max_incorrect_streak: 3
@@ -26,18 +29,28 @@ function data_loaded(data){
     state.sentences = deserialize(data);
     console.log("sentences loaded: ", state.sentences.length);
     
-    state.game = new QuickModeGame();
+    set_mode(new QuickModeGame());
+
+}
+
+function set_mode(game){
+    
+    if(state.game != null){
+        // state.game.detach();
+    }
+    
+    state.game = game;
     state.game.attach();
-    start_game();
+    next_question();
     
 }
 
-function start_game(){
-    state.game.next_question(state.sentences);
+function next_question(){
+    state.game.next_question(state);
 }
 
 function process_answer(){
-    state.game.process_answer();
+    state.game.process_answer(state);
 }
 
 function pick_question_data(sentences, region_filter){
@@ -96,11 +109,28 @@ function set_word_selector(sentence){
     
     document.getElementById("testbox").innerHTML = "";
     console.log(sentence.text);
+    state.sentence = sentence;
     var text_data = new Text(sentence.text);
     text_data.setup();
     state.word_selector = new WordSelector("testbox", text_data);
     text_data.word_selector = state.word_selector;
     state.word_selector.setup();    
+    
+}
+
+function get_selected_region(){
+    
+    var answer_indices = state.word_selector.get_selected_indices();
+    console.log("answer_indices = ", answer_indices);
+    return state.sentence.get_region(answer_indices);
+
+}
+
+function get_regions_with_tag(tag_type){
+
+    return state.sentence.get_regions().filter(function(r){
+        return contains(r.get_tag_types(), tag_type);
+    });
     
 }
 
