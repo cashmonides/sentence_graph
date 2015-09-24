@@ -133,10 +133,13 @@ COSMETIC
 
 
 ADD FUNCTIONALITY
-- new question type: what is the highlighted word? (with options in a drop-down)
 - 2-step tag type (user tags: "relative pronoun" and wizard asks: "what's the antecedent?")
+    - or what part of speech -> noun -> what is the syntax
+    - or relative pronoun -> what is the antecedent
 - unicode characters need to be added to word character regex match (text.js line 23)
 - subject & object tag should imply noun
+- input brackets with mouse
+-
 - the 1st & 3rd column doesn't seem to display all the tags (e.g. possessive adjective)
 - return a measure of nestedness
 	- max number of subordinate layers
@@ -146,7 +149,7 @@ ADD FUNCTIONALITY
 - subject of which clause?
 - coordinate clause read their subordination level during autotagging
 - custom question input
-- input brackets with mouse
+
 
 WEBSCRAPING
 - find parts of speech
