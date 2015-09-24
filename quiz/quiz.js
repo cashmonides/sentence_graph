@@ -91,7 +91,6 @@ function set_word_selector(sentence){
     var text_data = new Text(sentence.text);
     text_data.setup();
     state.word_selector = new WordSelector("testbox", text_data);
-    text_data.word_selector = state.word_selector;
     state.word_selector.setup();    
     
 }

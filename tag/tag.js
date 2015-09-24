@@ -67,7 +67,6 @@ function new_text(text){
 
     document.getElementById("box").innerHTML = "";
     word_selector = new WordSelector("box", t);
-    t.word_selector = word_selector;
     word_selector.setup();
     show_untagged_words();
 
