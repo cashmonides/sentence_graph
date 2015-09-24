@@ -53,42 +53,20 @@ function process_answer(){
     state.game.process_answer(state);
 }
 
-function pick_question_data(sentences, region_filter){
+function pick_question_data(sentence, region_filter){
     
-    var sentence = random_choice(sentences);
-    var available_tags = new Set();
-    var tag_to_region = {};
-
-    for (var i in sentence.regions) {
-        var r = sentence.regions[i];
-        
-        if(region_filter(r)){
-            
-            var tags = r.get_tag_types();
-            console.log("DEBUG 9-3 region/tags = ", sentence.get_region_text(r), tags);
-            
-            for (var i = 0; i < tags.length; i++) {
-                available_tags.add(tags[i]);
-                var rs = tag_to_region[tags[i]];
-                if (rs == null) {
-                    rs = [];
-                    tag_to_region[tags[i]] = rs;
-                }
-                rs.push(r);
-            }
-
-        }
-    }
-
+    var available_tags = sentence.get_all_tag_types(region_filter);
     var target_tag = random_choice(Array.from(available_tags));
+    
+    var tag_to_region = sentence.get_regions_for_tags(region_filter);
     var available_regions = tag_to_region[target_tag];
     var target_region = random_choice(available_regions);
     
     return {
         sentence: sentence,
+        available_tags: available_tags,
         target_tag: target_tag,
-        target_region: target_region,
-        available_tags: available_tags
+        target_region: target_region
     };
     
 }
@@ -126,11 +104,4 @@ function get_selected_region(){
 
 }
 
-function get_regions_with_tag(tag_type){
-
-    return state.sentence.get_regions().filter(function(r){
-        return contains(r.get_tag_types(), tag_type);
-    });
-    
-}
 

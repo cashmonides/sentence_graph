@@ -21,7 +21,8 @@ QuickModeGame.region_filter = function(region){
 
 QuickModeGame.prototype.next_question = function(state){
     
-    var data = pick_question_data(state.sentences, QuickModeGame.region_filter);  
+    var sentence = random_choice(state.sentences);
+    var data = pick_question_data(sentence, QuickModeGame.region_filter);  
     this.target_tag = data.target_tag;
     refresh_score();
     set_question_text("Click on the word that matches " + wrap_string(this.target_tag));
@@ -101,7 +102,7 @@ QuickModeGame.prototype.give_away_answer = function(){
     fbox.innerHTML = "";
     
     var self = this;
-    get_regions_with_tag(this.target_tag).forEach(function(r){
+    state.sentence.get_regions_with_tag(this.target_tag).forEach(function(r){
         var text = state.sentence.get_region_text(r);
         fbox.innerHTML += wrap_string(self.target_tag) + " = " + text + "<br>";
     });
