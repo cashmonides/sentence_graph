@@ -43,25 +43,25 @@ MCModeGame.prototype.next_question = function (){
     this.english_choices = data.english_choices;
     console.log(data.english_choices.length);
     var qbox = document.getElementById('questionbox');
-    var cbox = document.getElementById('answer_choices');
+    // var cbox = document.getElementById('answer_choices');
     qbox.innerHTML = 'Translate the following sentence: ' + data.latin_question;
 
     //clear answer_choices box
-    while (cbox.options.length > 0) {
-        cbox.options.remove(0)
-    }
-    for (var i = 0; i < data.english_choices.length; i++) {
-        var choice = document.createElement('option');
-        choice.innerHTML = data.english_choices[i];
-        choice.is_correct = (data.english_choices[i] === data.english_correct_answer);
-        cbox.add(choice)
-    }
+    // while (cbox.options.length > 0) {
+    //     cbox.options.remove(0)
+    // }
+    // for (var i = 0; i < data.english_choices.length; i++) {
+    //     var choice = document.createElement('option');
+    //     choice.innerHTML = data.english_choices[i];
+    //     choice.is_correct = (data.english_choices[i] === data.english_correct_answer);
+    //     cbox.add(choice)
+    // }
     refresh_score();
     set_question_text("Pick the right translation.");
     set_word_selector(data.latin_question);
     //console.log("DEBUG 9-29 data.latin_question", data.latin_question);
     this.make_drop_down();
-    this.make_submit_button();
+    // this.make_submit_button();
 };
 
 MCModeGame.prototype.make_drop_down = function(){
@@ -69,10 +69,10 @@ MCModeGame.prototype.make_drop_down = function(){
 };
 
 
-MCModeGame.prototype.make_submit_button = function() {
-    var submitbox = document.getElementById("submitbox");
-    submitbox.innerHTML = "<button onclick=\"process_answer()\">submit</button>";
-};
+// MCModeGame.prototype.make_submit_button = function() {
+//     var submitbox = document.getElementById("submitbox");
+//     submitbox.innerHTML = "<button onclick=\"process_answer()\">submit</button>";
+// };
 
 
 MCModeGame.prototype.process_answer= function(){
@@ -95,9 +95,9 @@ MCModeGame.prototype.process_answer= function(){
     }
 };
 
-MCModeGame.prototype.cell_1_feedback_right = ["Correct!", "Excellent!"];
-MCModeGame.prototype.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
-MCModeGame.prototype.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
+MCModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
+MCModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
+MCModeGame.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
 
 MCModeGame.prototype.process_correct_answer = function () {
     console.log("answer matches target");
@@ -105,7 +105,7 @@ MCModeGame.prototype.process_correct_answer = function () {
     if (state.incorrect_streak < state.max_incorrect_streak) {
         state.count_correct ++;
     }
-    var cell_1 = random_choice(DropModeGame.prototype.cell_1_feedback_right);
+    var cell_1 = random_choice(MCModeGame.cell_1_feedback_right);
     var fbox = document.getElementById("feedbackbox");
     fbox.innerHTML = cell_1;
     this.next_question();
@@ -120,8 +120,8 @@ MCModeGame.prototype.process_incorrect_answer= function () {
     state.word_selector.clear();
 
     if (state.incorrect_streak < state.max_incorrect_streak) {
-        var cell_1 = random_choice(DropModeGame.prototype.cell_1_feedback_wrong);
-        var cell_2 = random_choice(DropModeGame.prototype.cell_2_feedback_wrong);
+        var cell_1 = random_choice(MCModeGame.cell_1_feedback_wrong);
+        var cell_2 = random_choice(MCModeGame.cell_2_feedback_wrong);
         var fbox = document.getElementById("feedbackbox");
         fbox.innerHTML = cell_1 + cell_2;
     } else {
@@ -135,7 +135,3 @@ MCModeGame.prototype.give_away_answer = function (){
 }
 
 
-//todo come up with a valid filter
-DropModeGame.region_filter = function(region){
-    return region.get_indices().length == 1;
-};
