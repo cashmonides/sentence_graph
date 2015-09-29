@@ -8,10 +8,11 @@
 //text still clickable
 //available tags not filtered for duplicates
 //region filter still set for length == 1
+// - give away answer needs to be changed
 
 
 var DropModeGame = function(){
-
+    //todo should this really be like thios
     this.data = null;
 
 };
@@ -21,11 +22,7 @@ DropModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
     //(should word_selector.setup bave a flag for clickable or not clickable?
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
-
-
 };
-
-
 
 
 DropModeGame.prototype.next_question = function(sentences){
@@ -44,10 +41,7 @@ DropModeGame.prototype.next_question = function(sentences){
     state.word_selector.set_highlighted(data.target_region.get_indices(), true);
     this.make_drop_down();
     this.make_submit_button();
-    // we want to call make_drop_down
-    // we want to generate a submit button with process answer
-    //this is the html:
-    // <button onclick="process_answer()">submit</button>
+
 };
 
 

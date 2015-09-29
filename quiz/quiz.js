@@ -29,7 +29,7 @@ function data_loaded(data){
     state.sentences = deserialize(data);
     console.log("sentences loaded: ", state.sentences.length);
     
-    set_mode(new DropModeGame());
+    set_mode(new MCModeGame());
 
 }
 
@@ -84,11 +84,18 @@ function wrap_string(tag) {
 }
 
 function set_word_selector(sentence){
-    
+    console.log("DEBUG 9-29 sentence in set_word_selector", sentence);
     document.getElementById("testbox").innerHTML = "";
     console.log(sentence.text);
     state.sentence = sentence;
-    var text_data = new Text(sentence.text);
+    //todo changes here
+    var word_sel_input;
+    if (sentence.text) {
+        word_sel_input = sentence.text;
+    } else {
+        word_sel_input = sentence;
+    }
+    var text_data = new Text(word_sel_input);
     text_data.setup();
     state.word_selector = new WordSelector("testbox", text_data);
     state.word_selector.setup();    
