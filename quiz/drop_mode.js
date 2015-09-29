@@ -22,45 +22,52 @@ DropModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
     //(should word_selector.setup bave a flag for clickable or not clickable?
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
+    // document.getElementById("answer_choices").style.display = 'none';
+    // document.getElementById("submit_button").style.display = 'none';
+    
 };
 
 
 DropModeGame.prototype.next_question = function(sentences){
     var sentence = random_choice(state.sentences);
-    var data = pick_question_data(sentence, DropModeGame.region_filter);
-    this.target_tag = data.target_tag;
+    sentence.debug();
+    this.data = pick_question_data(sentence);
+    
+    // this.target_tag = data.target_tag;
     //todo add a filter onto available tags so that duplicates are eliminated (e.g. for cat we don't want noun & subject to be available tags because it could be both)
-    this.available_tags = data.available_tags;
-    this.target_region = data.target_region;
-    //junk code below
-    this.available_tags_as_list =  Array.from(this.available_tags);
+    // this.available_tags = data.available_tags;
+    // this.target_region = data.target_region;
     refresh_score();
     set_question_text("Classify the highlighted word.");
     //todo does the following need to be parameterized with make not clickable and set highlighted
-    set_word_selector(data.sentence);
-    state.word_selector.set_highlighted(data.target_region.get_indices(), true);
+    set_word_selector(this.data.sentence);
+    
+    state.word_selector.is_clickable = false;
+    
+    var is = this.data.target_region.get_indices();
+    for (var i = 0; i < is.length; i++) {
+        state.word_selector.set_highlighted(is[i], true);
+    }
+    
     this.make_drop_down();
-    this.make_submit_button();
+
 
 };
 
 
 DropModeGame.prototype.make_drop_down = function(){
-    set_dropdown("answer_choices", this.available_tags_as_list);
+    set_dropdown("answer_choices", Array.from(this.data.available_tags));
 };
 
 
-DropModeGame.prototype.make_submit_button = function() {
-    var submitbox = document.getElementById("submitbox");
-    submitbox.innerHTML = "<button onclick=\"process_answer()\">submit</button>";
-};
+
 
 DropModeGame.prototype.process_answer = function() {
     var dd = document.getElementById("answer_choices");
     var selected_answer = dd.options[dd.selectedIndex].value;
     console.log("selected_answer = ", selected_answer);
 
-    var is_correct = contains(this.target_region.get_tag_types(), selected_answer);
+    var is_correct = contains(this.data.target_region.get_tag_types(), selected_answer);
 
     if (is_correct) {
         console.log("correct");
@@ -72,9 +79,9 @@ DropModeGame.prototype.process_answer = function() {
 
 };
 
-DropModeGame.prototype.cell_1_feedback_right = ["Correct!", "Excellent!"];
-DropModeGame.prototype.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
-DropModeGame.prototype.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
+DropModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
+DropModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
+DropModeGame.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
 
 DropModeGame.prototype.process_correct_answer = function() {
     console.log("answer matches target");
@@ -82,7 +89,7 @@ DropModeGame.prototype.process_correct_answer = function() {
     if (state.incorrect_streak < state.max_incorrect_streak) {
         state.count_correct ++;
     }
-    var cell_1 = random_choice(DropModeGame.prototype.cell_1_feedback_right);
+    var cell_1 = random_choice(DropModeGame.cell_1_feedback_right);
     var fbox = document.getElementById("feedbackbox");
     fbox.innerHTML = cell_1;
     this.next_question();
@@ -96,8 +103,8 @@ DropModeGame.prototype.process_incorrect_answer = function() {
     state.word_selector.clear();
 
     if (state.incorrect_streak < state.max_incorrect_streak) {
-        var cell_1 = random_choice(DropModeGame.prototype.cell_1_feedback_wrong);
-        var cell_2 = random_choice(DropModeGame.prototype.cell_2_feedback_wrong);
+        var cell_1 = random_choice(DropModeGame.cell_1_feedback_wrong);
+        var cell_2 = random_choice(DropModeGame.cell_2_feedback_wrong);
         var fbox = document.getElementById("feedbackbox");
         fbox.innerHTML = cell_1 + cell_2;
     } else {
@@ -112,6 +119,6 @@ DropModeGame.prototype.give_away_answer = function(){
 
 
 //todo come up with a valid filter
-DropModeGame.region_filter = function(region){
-    return region.get_indices().length == 1;
-};
+// DropModeGame.region_filter = function(region){
+//     return region.get_indices().length == 1;
+// };

@@ -29,7 +29,7 @@ function data_loaded(data){
     state.sentences = deserialize(data);
     console.log("sentences loaded: ", state.sentences.length);
     
-    set_mode(new MCModeGame());
+    set_mode(new DropModeGame());
 
 }
 
