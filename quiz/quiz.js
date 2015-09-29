@@ -19,9 +19,15 @@
 window.onload = start;
 
 function start(){
+    load_user_data();
     load(data_loaded);
 }
 
+
+function load_user_data(){
+    var uid = get_cookie("quiz_uid");
+    console.log("UID in load user data = ", uid);
+}
 //data_loaded gets passed the data that comes back to us from firebase
 //so we want to deserialize this data
 function data_loaded(data){
