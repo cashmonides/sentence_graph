@@ -1,13 +1,20 @@
 
+    var SCORE_REWARD = 5;
+    var SCORE_PENALTIES = [0, -1, -3];
+
     var state = {
+        
+        uid: null,
         
         sentences: null,
         game: null,
         word_selector: null,
         sentence: null,
         
+        score: 0,
         count_correct: 0, 
         count_incorrect: 0,
+        question_count: 0,
         
         correct_streak: 0,
         incorrect_streak: 0,
@@ -25,9 +32,26 @@ function start(){
 
 
 function load_user_data(){
-    var uid = get_cookie("quiz_uid");
-    console.log("UID in load user data = ", uid);
+    
+    state.uid = get_cookie("quiz_uid");
+    console.log("UID in load user data = ", state.uid);
+    
+    get_user_data("score", function(data){
+        console.log(data.val());
+        state.score = data.val();
+    });
+    
+    get_user_data("question_count", function(data){
+        console.log(data.val());
+        state.question_count = data.val();
+    });
+    
 }
+
+
+
+
+
 //data_loaded gets passed the data that comes back to us from firebase
 //so we want to deserialize this data
 function data_loaded(data){
@@ -35,7 +59,7 @@ function data_loaded(data){
     state.sentences = deserialize(data);
     console.log("sentences loaded: ", state.sentences.length);
     
-    set_mode(new MCModeGame());
+    set_mode(new QuickModeGame());
 
 }
 
@@ -52,6 +76,7 @@ function set_mode(game){
 }
 
 function next_question(){
+    state.question_count++;
     state.game.next_question(state);
 }
 
@@ -77,8 +102,12 @@ function pick_question_data(sentence, region_filter){
     
 }
 
+function set_score(x){
+    state.score = Math.max(0, x);
+}
+
 function refresh_score() {
-    document.getElementById("scorebox").innerHTML = "Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
+    document.getElementById("scorebox").innerHTML = "Question #" + state.question_count + ", Score: " + state.score; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
 }
 
 function set_question_text(question){

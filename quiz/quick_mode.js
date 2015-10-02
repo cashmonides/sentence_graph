@@ -56,13 +56,21 @@ QuickModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 QuickModeGame.prototype.process_correct_answer = function() {
     
     console.log("answer matches target");        
-    state.incorrect_streak = 0;
-    if (state.incorrect_streak < state.max_incorrect_streak) {
-        state.count_correct ++;
+
+    if(state.incorrect_streak == 0){    
+        set_score(state.score + SCORE_REWARD);
     }
+    state.incorrect_streak = 0;
+    
     var cell_1 = random_choice(QuickModeGame.cell_1_feedback_right);
     var fbox = document.getElementById("feedbackbox");
     fbox.innerHTML = cell_1;
+    
+    if(state.question_count % 10 == 0){
+        set_user_data("score", state.score);
+        set_user_data("question_count", state.question_count);
+    }
+    
     next_question();
 
 };
@@ -70,10 +78,13 @@ QuickModeGame.prototype.process_correct_answer = function() {
 QuickModeGame.prototype.process_incorrect_answer = function() {
     
     var tag_names = get_selected_region().get_tag_types();
+    
     state.incorrect_streak ++;
-    state.count_incorrect ++;
-    refresh_score();
-    state.word_selector.clear();
+    
+    if (state.incorrect_streak <= state.max_incorrect_streak) {
+        set_score(state.score + SCORE_PENALTIES[state.incorrect_streak - 1]);
+    }
+
     
     if (state.incorrect_streak < state.max_incorrect_streak) {
         var cell_2;
@@ -92,7 +103,9 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
     } else {
         this.give_away_answer();
     }
-
+    
+    refresh_score();
+    state.word_selector.clear();
     
 };
 
