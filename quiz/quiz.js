@@ -2,6 +2,8 @@
     var SCORE_REWARD = 5;
     var SCORE_PENALTIES = [0, -1, -3];
 
+    
+
     var state = {
         
         uid: null,
@@ -15,10 +17,12 @@
         count_correct: 0, 
         count_incorrect: 0,
         question_count: 0,
+        mode_streak: 0,
         
         correct_streak: 0,
         incorrect_streak: 0,
-        max_incorrect_streak: 3
+        max_incorrect_streak: 3,
+        switch_count: 3
         
     };
 
@@ -75,9 +79,41 @@ function set_mode(game){
     
 }
 
+function change_mode(){
+    var random_number; 
+    var new_mode;
+    do {
+        random_number = Math.floor(Math.random() * 3);
+        new_mode = get_mode(random_number);
+        console.log("string of game = ", state.game.get_mode_name(), new_mode.get_mode_name());// state.game.prototype.toString(), new_mode.prototype.toString());
+    } while (state.game.get_mode_name() == new_mode.get_mode_name());
+    set_mode(new_mode);
+}
+
+function get_mode(mode_number) {
+    switch(mode_number) {
+        case 0 : return new DropModeGame();
+        case 1 : return new MCModeGame();
+        case 2 : return new QuickModeGame();
+        default : throw "no game mode triggered";
+    }
+}
+
+
 function next_question(){
-    state.question_count++;
-    state.game.next_question(state);
+    
+    
+    if(state.mode_streak == state.switch_count){
+        state.mode_streak = 0;
+        set_user_data("score", state.score);
+        set_user_data("question_count", state.question_count);
+        change_mode();
+    } else {
+        state.question_count++;
+        state.mode_streak++;
+        state.game.next_question(state);
+    }
+    
 }
 
 function process_answer(){
@@ -107,7 +143,7 @@ function set_score(x){
 }
 
 function refresh_score() {
-    document.getElementById("scorebox").innerHTML = "Question #" + state.question_count + ", Score: " + state.score; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
+    document.getElementById("scorebox").innerHTML = "Question #" + state.question_count + ", Remaining: " + (state.switch_count - state.mode_streak) + ", Score: " + state.score; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
 }
 
 function set_question_text(question){

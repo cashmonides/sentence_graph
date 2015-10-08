@@ -22,11 +22,15 @@ DropModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
     //(should word_selector.setup bave a flag for clickable or not clickable?
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
-    // document.getElementById("answer_choices").style.display = 'none';
-    // document.getElementById("submit_button").style.display = 'none';
+    document.getElementById("answer_choices").style.display = 'initial';
+    document.getElementById("submit_button").style.display = 'initial';
+    state.switch_count = 2;
     
 };
 
+DropModeGame.prototype.get_mode_name = function() {
+    return "Drop";
+}
 
 DropModeGame.prototype.next_question = function(sentences){
     var sentence = random_choice(state.sentences);
@@ -92,7 +96,13 @@ DropModeGame.prototype.process_correct_answer = function() {
     var cell_1 = random_choice(DropModeGame.cell_1_feedback_right);
     var fbox = document.getElementById("feedbackbox");
     fbox.innerHTML = cell_1;
-    this.next_question();
+    
+    
+    next_question(); 
+    
+    
+    
+    
 };
 
 

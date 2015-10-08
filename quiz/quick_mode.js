@@ -12,8 +12,14 @@ QuickModeGame.prototype.attach = function(){
     // no dropdown or submit button
     document.getElementById("answer_choices").style.display = 'none';
     document.getElementById("submit_button").style.display = 'none';
-    
+    //if we want to change the switch_count
+    state.switch_count = 3;
 };
+
+
+QuickModeGame.prototype.get_mode_name = function() {
+    return "Quick";
+}
 
 QuickModeGame.region_filter = function(region){
     return region.get_indices().length == 1;
@@ -66,12 +72,11 @@ QuickModeGame.prototype.process_correct_answer = function() {
     var fbox = document.getElementById("feedbackbox");
     fbox.innerHTML = cell_1;
     
-    if(state.question_count % 10 == 0){
-        set_user_data("score", state.score);
-        set_user_data("question_count", state.question_count);
-    }
     
-    next_question();
+    next_question(); 
+    
+    
+    
 
 };
 

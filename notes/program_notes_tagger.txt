@@ -1,4 +1,30 @@
 TODO
+- multiple drop downs
+    - subject verb object
+    - last time: subject verb object
+    - this time: flexible
+        - subject verb object
+        - adjective subject verb adjective object
+        - subject verb that subject verb object
+- list of lists
+    - each list headed by string (ELEMENT TYPE)
+    - followed by all the options
+    
+    - issues 
+        - elegant to keep the correct answer separate and append it to the incorrect
+        - then randomize incorrect
+        - then insert correct at a random place
+        - that random place becomes the integer we match when we check answer
+        
+    - one solution:
+        - took the values of all selected drop downs and joined them and compared
+        
+    - issue 
+        - the dogs were attacking
+        - the dog was attacking
+
+- persist skills and animals they have
+
 - run a test of login and score persistence
 - some clever way of making variety in the question types
     - (randomization but also sensitive to proportion)

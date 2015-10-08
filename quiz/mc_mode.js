@@ -30,8 +30,14 @@ MCModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
     //(should word_selector.setup bave a flag for clickable or not clickable?
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
+    document.getElementById("answer_choices").style.display = 'initial';
+    document.getElementById("submit_button").style.display = 'initial';
+    state.switch_count = 1;
 };
 
+MCModeGame.prototype.get_mode_name = function() {
+    return "MC";
+}
 
 MCModeGame.prototype.next_question = function (){
     console.log("DEBUG 9-29 next_question reached");
