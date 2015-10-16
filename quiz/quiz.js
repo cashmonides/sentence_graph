@@ -6,7 +6,11 @@
 
     var state = {
         
-        uid: null,
+        user: {
+            uid: null
+        },
+        
+        anonymous: true,
         
         sentences: null,
         game: null,
@@ -37,19 +41,23 @@ function start(){
 
 function load_user_data(){
     
-    state.uid = get_cookie("quiz_uid");
-    console.log("UID in load user data = ", state.uid);
+    state.user.uid = get_cookie("quiz_uid");
+    console.log("UID in load user data = ", state.user.uid);
+    if (state.user.uid != null) {
+        state.anonymous = false;
+        get_user_data("score", function(data){
+            console.log(data.val());
+            state.score = data.val();
+        });
     
-    get_user_data("score", function(data){
-        console.log(data.val());
-        state.score = data.val();
-    });
-    
-    get_user_data("question_count", function(data){
-        console.log(data.val());
-        state.question_count = data.val();
-    });
-    
+        get_user_data("question_count", function(data){
+            console.log(data.val());
+            state.question_count = data.val();
+        });
+    } else {
+        document.getElementById("anonymous_alert").innerHTML = "In Anonymous Session!";
+    }
+
 }
 
 
@@ -110,8 +118,10 @@ function next_question(){
     
     if(state.mode_streak == state.switch_count){
         state.mode_streak = 0;
-        set_user_data("score", state.score);
-        set_user_data("question_count", state.question_count);
+        if (!state.anonymous) {
+            set_user_data("score", state.score);
+            set_user_data("question_count", state.question_count);
+        }
         change_mode();
     } else {
         state.question_count++;

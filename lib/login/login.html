@@ -15,10 +15,17 @@
     
 <body>
     <div id="container">
+        <input name="user_option" type="radio" onchange="set_create_mode()">CREATE ACCOUNT <br>
+        <input name="user_option" type="radio" onchange="set_login_mode()" checked>LOGIN <br>
         EMAIL <input type="text" id="email"><br>
         PASSWORD <input type="password" id="password"><br>
+        <div id="create_account_fields" style="display:hidden">
+            NAME <input type="text" id="name"><br>
+            CLASS <input type="text" id="class"><br>
+        </div>
         <button type="button" onclick="login()">SUBMIT</button>
     </div>
+    
 </body>    
     
 </html>
