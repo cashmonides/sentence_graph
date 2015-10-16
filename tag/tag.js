@@ -1,6 +1,6 @@
 
 var test_sentences = [
-
+    "( What we wish ), we readily believe, / and ( what we ourselves think ), we imagine ( others think also ).",
 	"the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .",
 	"A baryon is a composite subatomic particle made up of three quarks (as distinct from mesons, which are composed of one quark and one antiquark). Baryons and mesons belong to the hadron family of particles, which are the quark-based particles. The name \"baryon\" comes from the Greek word for \"heavy\" (βαρύς, barys), because, at the time of their naming, most known elementary particles had lower masses than the baryons.",
 	"The cat sings (while the dog dances).",
@@ -17,7 +17,9 @@ var test_sentences = [
 ];
 
 //initializing global variables
-var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate clause", "coordinate clause", "adverb", "preposition", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction", "coordinating conjunction"];
+var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate clause", "coordinate clause", "adverb",
+    "preposition", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction",
+    "coordinating conjunction"];
 
 var sentence = null;
 var word_selector = null;

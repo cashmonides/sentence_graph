@@ -15,15 +15,34 @@
     
 <body>
     <div id="container">
-        <input name="user_option" type="radio" onchange="set_create_mode()">CREATE ACCOUNT <br>
-        <input name="user_option" type="radio" onchange="set_login_mode()" checked>LOGIN <br>
-        EMAIL <input type="text" id="email"><br>
-        PASSWORD <input type="password" id="password"><br>
-        <div id="create_account_fields" style="display:hidden">
-            NAME <input type="text" id="name"><br>
-            CLASS <input type="text" id="class"><br>
+        <input name="user_option" type="radio" onchange="set_create_mode()">I WANT TO CREATE AN ACCOUNT <br>
+        <input name="user_option" type="radio" onchange="set_login_mode()" checked>I ALREADY HAVE AN ACCOUNT <br>
+        <input name="user_option" type="radio" onchange="set_anonymous_mode()" checked>I WANT TO PLAY WITHOUT LOGGING IN <br>
+       <br>
+        <div id="login_fields" style="display:none">
+            EMAIL <input type="text" id="email"><br>
+            PASSWORD <input type="password" id="password"><br>
+            <br>
+            <button type="button" onclick="login()">LOGIN</button>
+            <button type="button" onclick="reset_password()">I FORGOT MY PASSWORD</button>
         </div>
-        <button type="button" onclick="login()">SUBMIT</button>
+        <div id="create_account_fields" style="display:none">
+            ENTER YOUR EMAIL <input type="email" id="email"><br>
+            PICK A PASSWORD <input type="password" id="password"><br>
+            ENTER YOUR NAME <input type="name" id="name"><br>
+            ENTER YOUR CLASS NUMBER <input type="class_number" id="class"><br>
+            <br>
+            <button type="button" onclick="create_account()">CREATE ACCOUNT</button>
+        </div>
+
+        <div id="anonymous_fields">
+            <button type="button" onclick="enter_anonymous_game()">START PLAYING</button>
+        </div>
+        <div id="forgotten_password_fields" style="display:none">
+            <div id="forgotten_password_prompt_box"></div>
+            ENTER YOUR EMAIL <input type="forgotten_password_email" id="email"><br>
+        </div>
+
     </div>
     
 </body>    

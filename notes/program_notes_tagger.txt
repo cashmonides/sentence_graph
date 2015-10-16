@@ -1,14 +1,8 @@
 TODO
-- multiple drop downs
-    - subject verb object
-    - last time: subject verb object
-    - this time: flexible
-        - subject verb object
-        - adjective subject verb adjective object
-        - subject verb that subject verb object
-- list of lists
-    - each list headed by string (ELEMENT TYPE)
-    - followed by all the options
+- add link to login/create account in the anonymous session footer
+- integrate latin
+- punctuation runs over
+- submit button vs. create account
     
     - issues 
         - elegant to keep the correct answer separate and append it to the incorrect
@@ -37,6 +31,20 @@ TODO
 - AKiva:
 
 
+
+
+TODO finish halfway done things
+- check if create account is complete
+- need to complete reset password (what goes "here" where it says "click here for reminder")
+
+
+TODO NEW FUNCTIONALITY
+- confirm password in create account
+- multiple tagging
+    - we should be able to tag something as e.g. both subject and personal pronoun
+- implicational tagging
+    - subject | object -> noun
+- reset password
 
 
 INCORPORATION OF LATIN

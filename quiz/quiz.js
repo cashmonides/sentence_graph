@@ -55,12 +55,14 @@ function load_user_data(){
             state.question_count = data.val();
         });
     } else {
-        document.getElementById("anonymous_alert").innerHTML = "In Anonymous Session!";
+        document.getElementById("anonymous_alert").innerHTML = "In Anonymous Session!" + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
 
 }
 
 
+    //
+    //"../../quiz/index.html"
 
 
 
