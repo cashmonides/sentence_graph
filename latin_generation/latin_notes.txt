@@ -1,0 +1,103 @@
+
+
+
+HACKY
+- in general, the dictionaries might be effectively replaced with an object
+- set_kernel_properties_2 is way hacky
+    - seems to handle gender (which so far isn't handled by cartesian??)
+- in make_output_2 we declare the elements kind of arbitrarily, they really should just be read from states
+    - we should have access to template in make_kernel_new which has
+- the following seems really hacky: output['subject_in_english'] = Array.from(new Set(output.map(function (x) {return x['subject_in_english']})));
+- unify make_kernel and make_kernel_new
+- in pick_lexeme_new we have a bit of hackiness:
+    - part of speech is as follows: var part_of_speech = (element === "verb" ? "verb" : "noun");
+    - but we really want this to handle other parts of speech too
+- currently pick_lexeme_new returns a random_choice of allowed_lexemes
+    - but shouldn't it return the full list and we make the random choice elsewhere
+    - that would be more modular
+    - and we might want to use the full list of allowed lexemes elsewhere
+- return 'should not be made' is kind of hacky
+- language_enum is not implemented well - both inflect english and inflect latin are hard-coded whereas they should be dependent on language_enum
+
+
+
+FIX
+- set_word_setting_new seems to be totally latin based - is there some way to make it language independent?
+
+CONSISTENCY
+- make_form currently seems obsolete, should it be rescued?
+
+
+ADD
+- make word order part of level_to_allowed (right now it's hard coded in make_kernel_new
+
+
+POSSIBLE CHANGES
+
+
+BUGS
+english correct answer is in the wrong order
+when we have multiple other nouns we don't want them all to be the same number so we need to revisit the "number of other nouns" category
+no choices in drop down
+give away answer doesn't move to next question
+text is clickable in latin mcmode
+
+CHANGES BY AKIVA S
+- level removed as an argument from make_kernel_template
+
+
+TODO
+sequence needs to be moved to level_to_allowed
+word_setting_generator is currently probably obsolete and should be incorporated within another file
+replace random choice with actual functions
+start in sentence_tree_generator has to be replaced
+
+//todo language_enum is not implemented well - both inflect english and inflect latin are hard-coded whereas they should be dependent on language_enum
+//todo make_kernel and make_kernel_new should be unified (make_kernel used for random)
+
+
+
+
+Translate the following:
+URSUS SCIT CUR AVIS REGAT
+
+The bear knows _____ the bird ______
+
+give away phrase: "the correct answer is"
+
+feedback box: the correct answer is why rules
+
+
+SENTENCE
+
+QUESTION DISPLAY BOX
+
+FEEDBACK DISPLAY BOX
+
+TEXT DISPLAY BOX
+string
+index for a highlighted word (if necessary)
+
+DROP DOWNS
+# of drop downs
+content of each drop down
+heading
+correct answer choice
+order of answers
+
+
+
+
+type #1
+translate URSUS VIRUM AMAT
+- produced by latin_generator
+
+
+
+type #2
+what part of the speech is the highlighted word?
+URSUS virum amat
+- produced by our tagger
+-
+
+

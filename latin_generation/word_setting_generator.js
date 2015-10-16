@@ -42,73 +42,40 @@ function wsg_visitor(kernel, form) {
 
 
 
-//todo rewrite set_word_setting in the following
+
 // takes kernel, level, element as its arguments
-// return word_setting
-//todo this is mostly noun-centric
+// returns word_settings_map (which is a map for a single element)
+// it also mutates the kernel settings (e.g. kernel.gender) - possibly these should be moved
 function set_word_setting(kernel, level, element, allowed, output_type) {
-    console.log('DEBUG 9-14 in set_word_setting');
+    console.log("DEBUG 10-8 set_word_setting is triggered");
     var word_settings_map = {};
-
     if (element === "verb") {
-        console.log('DEBUG 9-14 in verb case');
         word_settings_map.conjugation = random_choice(allowed.conjugation);
-        //kernel.tense = random_choice(allowed.tense);
-        // kernel.set('tense', allowed.tense);
-        console.log("DEBUG 9-5 word_settings_map.tense = ", word_settings_map.tense);
-        console.log("DEBUG 9-5 allowed.tense = ", allowed.tense);
-        //this will need to be fixed below
+        //todo this will need to be fixed below (moved to level_to_allowed)
         kernel.sequence = random_choice([allowed.sequence]);
-        console.log("DEBUG 9-5 kernel.sequence in set_word_setting = ", kernel.sequence);
-
     } else {
-        console.log('DEBUG 9-14 in noun case');
         //language-independent
         word_settings_map.number = (element === "subject" ? kernel.number : random_choice(allowed.number));
-        //word_settings_map.gender = (element === "subject" ? kernel.gender : random_choice(allowed.gender));
+        var allowed_declensions = allowed.declension;
+        var d = random_choice(allowed_declensions);
+        word_settings_map.declension = d[0];
+        word_settings_map.gender = d[1];
 
-        //todo language-dependent (but is it worth moving)
-        //word_settings_map.gender = random_choice(allowed.gender);
+        //todo?????
         //following prevents a mismatch between
         // word_settings_map.gender of subject & kernel.gender
-        var allowed_declensions = allowed.declension;
         if (element === "subject") {
             allowed_declensions = allowed_declensions.filter(
                 function (x) {return x[1] === kernel.gender});
         }
 
-        var d = random_choice(allowed_declensions);
-        word_settings_map.declension = d[0];
-        word_settings_map.gender = d[1];
-
-
-        //todo form.element should probably just be changed to "function"
         var syntactic_function = element;
-
-
         if (syntactic_function === "subject") {
             word_settings_map.function = "subject";
             kernel.gender = word_settings_map.gender;
         } else if (syntactic_function === "object") {
             word_settings_map.function = "object";
         }
-
-
-        //
-        ////todo below is presumably obsolete because we're setting voice and tense at kernel
-        //word_settings_map.voice = random_choice(allowed.voice);
-        //
-        //
-        ////todo below is presumably language-dependent so needs to be modified
-        //word_settings_map.tense = random_choice(allowed.tense);
-
-
-        //TESTING below_______________________
-        //console.log("TESTING START set_word_settngs");
-        //console.log("word_settings_map", word_settings_map);
-        //console.log("word_settings_map stringified", JSON.stringify(word_settings_map));
-        //console.log("ELEMENT + WORD SETTINGS", form.element + JSON.stringify(word_settings_map));
-        //console.log("TESTING END set_word_settngs");
     }
 
     return word_settings_map;
@@ -118,8 +85,7 @@ function set_word_setting(kernel, level, element, allowed, output_type) {
 
 
 
-//todo this is gonna be mostly language dependent, so move it
-
+//todo below is obsolete and should be eliminated after review
 function set_allowed(kernel, language_enum) {
     var allowed = {};
 

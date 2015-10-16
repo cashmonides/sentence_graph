@@ -91,9 +91,14 @@ function change_mode(){
 }
 
 function get_mode(mode_number) {
+
+    mode_number = random_choice([0, 2]);
+    console.log('dghukj');
     switch(mode_number) {
         case 0 : return new DropModeGame();
-        case 1 : return new MCModeGame();
+        //todo switch back after testing
+        //case 1 : return new MCModeGame();
+        case 1 : return new MCMode2Game();
         case 2 : return new QuickModeGame();
         default : throw "no game mode triggered";
     }

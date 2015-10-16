@@ -16,6 +16,7 @@
     <script src="quick_mode.js"></script>
     <script src="drop_mode.js"></script>
     <script src="mc_mode.js"></script>
+    <script src="mc_mode_2.js"></script>
     <script src="quiz.js"></script>
 
     <!--new imports below-->
@@ -25,7 +26,8 @@
     <script src="../latin_lib/random_functions.js"></script>
     <script src="../latin_generation/cartesian.js"></script>
     <script src="../latin_lib/sentence_tree.js"></script>
-    <script src="../latin_generation/sentence_tree_generator.js"></script>
+    <!--<script src="../latin_generation/sentence_tree_generator.js"></script>-->
+    <script src="../latin_generation/sentence_tree_generator2.js"></script>
     <script src="../latin_generation/word_setting_generator.js"></script>
     <script src="../latin_generation/inflect_english.js"></script>
     <script src="../latin_generation/inflect_latin.js"></script>
@@ -39,12 +41,12 @@
 
 <body>
     
-    <div id="scorebox"></div>
-    <div id="feedbackbox"></div>
-    <div id="questionbox"></div>
+    <div id="scorebox"></div>                   <!--displays score and other counts-->
+    <div id="feedbackbox"></div>                <!--"correct, no that's a verb, etc-->
+    <div id="questionbox"></div>                <!--"translate" or "click onb the verb"-->
     <br>
-    <div id="testbox"></div>
-    <select id="answer_choices"></select>
+    <div id="testbox"></div>                    <!--displays a wordselector object (clickable or not)-->
+    <select id="answer_choices"></select>       <!--drop downs-->
     <!--<div id="submitbox"></div>-->
     <!--old submit button below-->
     <button id="submit_button" onclick="process_answer()">submit</button>

@@ -48,9 +48,6 @@ MCModeGame.prototype.next_question = function (){
     this.english_correct_answer = data.english_correct_answer;
     this.english_choices = data.english_choices;
     console.log(data.english_choices.length);
-    var qbox = document.getElementById('questionbox');
-    // var cbox = document.getElementById('answer_choices');
-    qbox.innerHTML = 'Translate the following sentence: ' + data.latin_question;
 
     //clear answer_choices box
     // while (cbox.options.length > 0) {

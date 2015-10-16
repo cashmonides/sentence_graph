@@ -1,11 +1,6 @@
-//possibly use below
-/*function map_level_to_allowed(parameter, level) {
- var m = level_to_allowed_2[parameter];
- console.log('debug 9-11 1 ' + JSON.stringify(m));
- var s =  Math.max.apply(null, Object.keys(m).filter(function(x) {return x <= level}));
- return m[s]
- }*/
-
+//DESCRIPTION
+//below is complete in the sense that it returns all states properly
+// minimally hacky
 
 
 var level_to_allowed2 = {
@@ -122,26 +117,25 @@ var order = ['clause_type', 'sequence', 'tense', 'implicitness', 'person',
 //input is level (int)
 //returns a list of dictionaries with keys = parameters & values = parameter values (e.g. tense : future)
 master_cartesian = function (level) {
-    console.log("DEBUG 9-14 type of level in master_cartesian = ", typeof level);
-    console.log("DEBUG 9-14 level in make_test = ", level);
-
-    console.log("DEBUGGING NEW VERSION");
+    //initialize a list of dictionaries
     var states = [{}];
+    //we walk through the parameters in order (tense, clause_type, etc.) and set the cartesian property of each
+    //we concat each of these lists to states
     for (var i = 0; i < order.length; i++) {
-        console.log("DEBUG 9-14 in for loop states = ", states);
         states = concat_arrays(states.map(function (state) {return set_cartesian_property(order[i], state, level)}))
     }
-    console.log("DEBUG 9-14 master_cartesian states =", states);
+    console.log("LOG master_cartesian states = ", states);
     return states;
 };
 
 
 
-//returns the cartesian product of a given property (i.e. all the possibilities), constrained by certain properties already fixed in the argument state
+//returns the cartesian product of a single given property (i.e. all the possibilities), constrained by certain properties already fixed in the argument state
 set_cartesian_property = function(property_name, state, level) {
     var property_values_allowed = map_level_to_allowed(level)[property_name];
+    //below will return a list of all allowed values (e.g. ['past', 'present', 'future']
     var list_of_allowed = access_list(state, property_values_allowed);
-    console.log("DEBUG 9-18 list_of_allowed ", list_of_allowed);
+    console.log("LOG list_of_allowed in set_cartesian_property = ", list_of_allowed);
     return cartesian_product(state, property_name, list_of_allowed);
 };
 
@@ -169,7 +163,7 @@ access_list = function(state, dict_to_access_from) {
     }
 };
 
-//takes a state a property name and a list of allowed values for that property
+//takes a state, a property name and a list of allowed values for that property
 //returns a new list with:
 // key: property_name
 // value: whatever add_property returns????
@@ -179,16 +173,16 @@ cartesian_product = function(state, property_name, list) {
 
 //todo is object here just state? should it be renamed state?
 //what this seems to do is:
-// starts with any object state (here it happehs to be a state)
+// starts with any object state (here it happens to be a state)
 //copies the object into a new object and adds a property to the new object
-//can't simply mutate the object in place
+//why all this trouble? because we can't simply mutate the object in place
 // keeps every property of the state except the property_name
 // sets the given property_name to equal value
 add_property = function(object, property_name, value) {
     var new_object = {};
     for (var i in object) {new_object[i] = object[i]}
     new_object[property_name] = value;
-    return new_object
+    return new_object;
 };
 
 
@@ -203,6 +197,18 @@ var values = function(object) {
 
 //a utility function that combines a list of lists into a big list (maybe move to utils eventually)
 concat_arrays = function (list_of_arrays) {
-    console.log("DEBUG 9-14 list of arrays", list_of_arrays);
-    return Array.prototype.concat.apply([], list_of_arrays)
+    //console.log("LOG list of arrays in concat_arrays", list_of_arrays);
+    return Array.prototype.concat.apply([], list_of_arrays);
 };
+
+
+
+
+
+//possibly use below
+/*function map_level_to_allowed(parameter, level) {
+ var m = level_to_allowed_2[parameter];
+ console.log('debug 9-11 1 ' + JSON.stringify(m));
+ var s =  Math.max.apply(null, Object.keys(m).filter(function(x) {return x <= level}));
+ return m[s]
+ }*/
