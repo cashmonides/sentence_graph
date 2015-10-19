@@ -1,42 +1,13 @@
 TODO
-- add link to login/create account in the anonymous session footer
+- link to login (currently on cloud9)
 - integrate latin
 - punctuation runs over
-- submit button vs. create account
-    
-    - issues 
-        - elegant to keep the correct answer separate and append it to the incorrect
-        - then randomize incorrect
-        - then insert correct at a random place
-        - that random place becomes the integer we match when we check answer
-        
-    - one solution:
-        - took the values of all selected drop downs and joined them and compared
-        
-    - issue 
-        - the dogs were attacking
-        - the dog was attacking
-
+- create a generic drop down (JSON)
 - persist skills and animals they have
-
-- run a test of login and score persistence
-- some clever way of making variety in the question types
-    - (randomization but also sensitive to proportion)
-    - e.g.
-    - latin sentences should be 80%
-    - quick mode = 10%
-    - drop mode = 10%
-- scrollable options box???
-- Akiva: make latin less hacky
-- AKiva:
-
-
-
 
 TODO finish halfway done things
 - check if create account is complete
 - need to complete reset password (what goes "here" where it says "click here for reminder")
-
 
 TODO NEW FUNCTIONALITY
 - confirm password in create account
@@ -47,16 +18,35 @@ TODO NEW FUNCTIONALITY
 - reset password
 
 
-INCORPORATION OF LATIN
-- pick_question_data is not appropriate for latin at this point
+
+- run a test of login and score persistence
+- some clever way of making variety in the question types
+    - (randomization but also sensitive to proportion)
+    - e.g.
+    - latin sentences should be 80%
+    - quick mode = 10%
+    - drop mode = 10%
+
+- Akiva: make latin less hacky
+- AKiva:
+
+
+
+TODO cheat sheet
+- different kinds of cheat sheet based on what mode of game they're in
+    - grammar: links to terminology
+    - latin: charts
+
+TODO COSMETIC
+- give more space to the cheat sheet
+    - scorebox on the left
+    - instructions on the right
+    - anonymous alert small and beneath scorebox
 
 
 
 
 
-INTERFACE
-- get_region(indices)
-- region.get_tag_types -> strings of tags "noun" "verb" etc.
 
 
 

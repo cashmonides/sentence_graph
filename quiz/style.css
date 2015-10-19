@@ -19,6 +19,8 @@ body {
 }
 
 
+
+
 #scorebox {
     text-align: center;
     vertical-align: middle;
@@ -65,6 +67,7 @@ body {
 
 }
 
+
 #answer_choices {
     font-size: 20px;
     vertical-align: middle;
@@ -74,7 +77,8 @@ body {
     padding: 200px;
 }
 
-#anonymous_aler {
+#anonymous_alert {
+    font-size: 10px;
     text-align: center;
     vertical-align: middle;
     width: 400px;
@@ -83,5 +87,30 @@ body {
     border: solid 1px black;
     padding: 10px;
     background:navajowhite;
+}
+
+#image_display_box {
+    width: 800px;
+    height: 200px;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    vertical-align: middle;
+    display:none;   /*change this later when we have images to display*/
+    /*max-width:100%;*/
+    /*max-height:100%;*/
+
+
+    /*<div style="height:180px;width:180px;overflow:auto;">*/
+    /*<img src="/pix/samples/11m.jpg" alt="Sample picture for scroll box">*/
+    /*</div>*/
+}
+
+
+
+#cheat_sheet_image {
+    max-width:100%;
+    /*max-height:100%;*/
 }
 

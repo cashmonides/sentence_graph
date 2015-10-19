@@ -72,8 +72,14 @@ function data_loaded(data){
     
     state.sentences = deserialize(data);
     console.log("sentences loaded: ", state.sentences.length);
-    
+
+    //todo uncomment when done testing
     set_mode(new QuickModeGame());
+
+
+
+    //todo test below
+    //set_mode(new GenericDropGame());
 
 }
 
@@ -92,8 +98,9 @@ function set_mode(game){
 function change_mode(){
     var random_number; 
     var new_mode;
+    //todo 3 was changed below to accomodate genericdrop game
     do {
-        random_number = Math.floor(Math.random() * 3);
+        random_number = Math.floor(Math.random() * 4);
         new_mode = get_mode(random_number);
         console.log("string of game = ", state.game.get_mode_name(), new_mode.get_mode_name());// state.game.prototype.toString(), new_mode.prototype.toString());
     } while (state.game.get_mode_name() == new_mode.get_mode_name());
@@ -101,15 +108,18 @@ function change_mode(){
 }
 
 function get_mode(mode_number) {
+    //todo uncomment when done testing genericdrop mode
+    //mode_number = random_choice([0, 2]);
+    mode_number = 3;
+    console.log('generic mode entered');
 
-    mode_number = random_choice([0, 2]);
-    console.log('dghukj');
     switch(mode_number) {
         case 0 : return new DropModeGame();
         //todo switch back after testing
         //case 1 : return new MCModeGame();
         case 1 : return new MCMode2Game();
         case 2 : return new QuickModeGame();
+        case 3 : return new GenericDropGame();
         default : throw "no game mode triggered";
     }
 }
@@ -199,3 +209,16 @@ function get_selected_region(){
 }
 
 
+function toggle_cheat_sheet() {
+    var button = document.getElementById("cheat_sheet_button");
+
+    button.onclick = function() {
+        var div = document.getElementById("image_display_box");
+        if (div.style.display !== 'none') {
+            div.style.display = 'none';
+        }
+        else {
+            div.style.display = 'block';
+        }
+    };
+}
