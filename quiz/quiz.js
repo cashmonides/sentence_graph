@@ -35,12 +35,17 @@ window.onload = start;
 window.onbeforeunload = function () {
     alert("window close triggered");
     delete_cookie("quiz_uid", "/", null);
-}
+};
 
 function start(){
+    //var e = document.createElement("div");
+    //e.innerHTML = "test of lightbox";
+    //$.featherlight(e);
     load_user_data();
     load(data_loaded);
 }
+
+
 
 
 function load_user_data(){

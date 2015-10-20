@@ -1,21 +1,19 @@
 TODO
-- link to login (currently on cloud9)
+- reset password just sends out a temporary password, need to fully reset password
 - integrate latin
 - punctuation runs over
 - create a generic drop down (JSON)
 - persist skills and animals they have
 
-TODO finish halfway done things
-- check if create account is complete
-- need to complete reset password (what goes "here" where it says "click here for reminder")
+
 
 TODO NEW FUNCTIONALITY
-- confirm password in create account
+- confirm password in create account??
 - multiple tagging
     - we should be able to tag something as e.g. both subject and personal pronoun
 - implicational tagging
     - subject | object -> noun
-- reset password
+
 
 
 

@@ -1,19 +1,24 @@
-
-
 //for now we're going to have testlevel, we'll replace it later
 var test_level = 1;
-
 
 
 
 var test_data_old = {
     'question': "TEST QUESTION",
     'sentence': "TEST SENTENCE",
-    'drop_downs': {
+    'drop_downs': [
+        {
+        'type': 'drop',
         'heading': 'test heading',
         'choices': ['choice1', 'choice2', 'choice3'],
         'correct_answer': 'choice2'
-    },
+        },
+        {
+        'type' : 'non_drop',
+        'heading': 'test heading',
+        'choices': ['choice1', 'choice2', 'choice3'],
+        'correct_answer': 'choice2'
+        }],
     'give_away_phrase': "The correct answer was: ",
     'give_away_ending_phrase': ". Now click on the correct answer."
 };
@@ -61,6 +66,8 @@ var GenericDropGame = function(){
     this.data = null;
     this.drop_downs = test_data;
 };
+
+
 
 GenericDropGame.prototype.attach = function(){
     document.getElementById("answer_choices").style.display = 'initial';

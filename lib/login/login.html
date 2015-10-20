@@ -18,6 +18,7 @@
         <input name="user_option" type="radio" onchange="set_login_mode()" checked>I ALREADY HAVE AN ACCOUNT <br>
         <input name="user_option" type="radio" onchange="set_create_mode()">I WANT TO CREATE AN ACCOUNT <br>
         <input name="user_option" type="radio" onchange="enter_anonymous_game()">I WANT TO PLAY WITHOUT LOGGING IN <br>
+        <input name="user_option" type="radio" onchange="set_change_mode()">I WANT TO CHANGE MY PASSWORD <br>
        <br>
         
         
@@ -27,9 +28,12 @@
             <tr><td>PASSWORD</td><td><input type="password" id="password"></td></tr>
             <tr class="create" style="display:none"><td>NAME</td><td><input type="text" id="name"><br></td></tr>
             <tr class="create" style="display:none"><td>CLASS</td><td><input type="text" id="class_number"></td></tr>
+            <tr id="change_password" style="display:none"><td>NEW PASSWORD</td><td><input type="text" id="new_password"></td></tr>
+
             </table>
             <br>
             <button id="login_button" type="button" onclick="login()">LOGIN</button>
+            <button id="change_password_button" type="button" onclick="initiate_change_password()" style="display:none">CHANGE PASSWORD</button>
             <button id="create_button" type="button" onclick="create_account()" style="display:none">CREATE ACCOUNT</button>
             <button id="reset" type="button" onclick="reset_password()">I FORGOT MY PASSWORD</button>
         </div>
