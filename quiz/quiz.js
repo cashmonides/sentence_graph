@@ -32,6 +32,10 @@
 
 
 window.onload = start;
+window.onbeforeunload = function () {
+    alert("window close triggered");
+    delete_cookie("quiz_uid", "/", null);
+}
 
 function start(){
     load_user_data();
