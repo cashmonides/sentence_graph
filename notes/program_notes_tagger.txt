@@ -1,23 +1,89 @@
+TODO PRIORITY FOR WEEKEND
+HIGH PRIORITY
+- back up small laptop
+- test reset password and test everything at interface
+- send Dan a link and have him do a login test
+- research media temple
+- try to put a sidebar in (research templates)
+- research lightbox and try to run a lightbox test online
+- check other browser performance
+- quick test run of integrating latin
+
+LOWER PRIORITY
+- in Latin, convert debugging to logs
+- give a functionality/bug report
+- integrate Latin
+- add categories to tagger
+- try some implicational tagging
+- clean up files / rename / archive all obsolete versions
+
+
+TODO non-programming
+- set up media temple (reorder credit card)
+- research lightbox
+- check performance on other browsers
+- check performance on ipad & iphone & surface table
+
+
+TODO GIO QUESTIONS
+-$
+    - $ is not defined
+    - how is $ handled??? does it need to call an internet library or is it offline
+- should score & question count etc. still be part of state or should it be metadata in user??
+
+TODO LIGHTBOX RESEARCH
+- event listener for closing lightbox
+- random gallery test
+
+TODO HTML CSS RESEARCH
+- how to make radio button hoverable???
+- widen input box for email and password
+- make link hoverable at bottom???
+- how do you set the default for links?
+- randomly populate a div with images
+
+
+
+TODO COSMETIC THINGS TO ADD
+- randomly populate login page with background images (faded out sillhouettes)
+
+
 TODO
-- reset password just sends out a temporary password, need to fully reset password
+- test reset password
+- should score & question count etc. still be part of state or should it be metadata in user??
+- start adding lightbox
 - integrate latin
-- punctuation runs over
+- punctuation runs over in test box
 - create a generic drop down (JSON)
 - persist skills and animals they have
+- sidebar
+    - grammar mode
+    - latin mode
+        - cheat sheets of varying quantity (e.g. at early levels they only have one cheat sheet but at higher levels they have more cheat sheets)
+
+
+TODO LIGHTBOX APPROACH
+- wrap or just include?
+    - next_question() is what transitions from question to question
+    - so do we wrap or just include or trigger next question on event:close lightbox?
+        - wrap next_question()
+            - if session_count <= lightbox_count:
+                - call next question
+            - if session_count = lightbox_count
+                - call lightbox
+                - ???but what goes under the lightbox? Do we call next question
+        - just include featherlight inside of next_question()
+            - if we call $.featherlight(e) will it still call the next function in n
+        - event listener
 
 
 
 TODO NEW FUNCTIONALITY
-- confirm password in create account??
+- automate the obfuscation???
 - multiple tagging
     - we should be able to tag something as e.g. both subject and personal pronoun
 - implicational tagging
     - subject | object -> noun
-
-
-
-
-- run a test of login and score persistence
 - some clever way of making variety in the question types
     - (randomization but also sensitive to proportion)
     - e.g.
@@ -25,8 +91,13 @@ TODO NEW FUNCTIONALITY
     - quick mode = 10%
     - drop mode = 10%
 
-- Akiva: make latin less hacky
-- AKiva:
+
+
+
+TODO ADD??
+- confirm email in create account??
+
+
 
 
 
@@ -35,7 +106,7 @@ TODO cheat sheet
     - grammar: links to terminology
     - latin: charts
 
-TODO COSMETIC
+TODO COSMETIC IN QUIZ
 - give more space to the cheat sheet
     - scorebox on the left
     - instructions on the right

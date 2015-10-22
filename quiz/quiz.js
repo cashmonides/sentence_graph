@@ -26,7 +26,10 @@
         correct_streak: 0,
         incorrect_streak: 0,
         max_incorrect_streak: 3,
-        switch_count: 3
+        switch_count: 3,
+
+
+        lightbox_count: 3
         
     };
 
@@ -135,7 +138,12 @@ function get_mode(mode_number) {
 
 
 function next_question(){
-    
+
+    //if we want to create a lightbox this is the code to do it
+    //var e = document.createElement("div");
+    //e.innerHTML = "test of lightbox";
+    //$.featherlight(e);
+
     
     if(state.mode_streak == state.switch_count){
         state.mode_streak = 0;
