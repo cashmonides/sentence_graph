@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="../featherlight/featherlight.min.css">
+    <link rel="stylesheet" type="text/css" href="../libs/featherlight.min.css">
 
 
 	<script src="https://cdn.firebase.com/js/client/2.0.3/firebase.js"></script>
@@ -20,13 +20,12 @@
     <script src="mc_mode.js"></script>
     <script src="mc_mode_2.js"></script>
     <script src="generic_drop_down.js"></script>
+    
 
     <script src="quiz.js"></script>
 
     <!--new imports below-->
-    <script src="../featherlight/jquery-1.11.3.min.js"></script>
-    <script src="../featherlight/featherlight.min.js"></script>
-    <script src="../featherlight/lightbox.js"></script>
+    
 
 
 
@@ -45,15 +44,88 @@
     <script src="../latin_generation/inflect_latin.js"></script>
 
 
+     <!--jQuery -->
+    
+    <script src="../libs/jquery-1.11.3.min.js"></script>
+    <script src="../libs/featherlight.min.js"></script>
+    <!--<script src="../libs/lightbox.js"></script>-->
+
+     <!--Bootstrap Core JavaScript -->
+    <script src="../libs/bootstrap.min.js"></script>
+
+
+
+
+
+     <!--Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+
     <!--new imports above-->
 
 	<title>Quiz</title>
 
 </head>
 
+<h1>CHEAT SHEET DIV</h1>
+                        
+                        
+                        <p>MAIN BODY OF SIDEBAR</p>
+
+
 <body>
-    
-    <div id="scorebox"></div>                   <!--displays score and other counts-->
+  
+  <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        REVIEW SHEET
+                    </a>
+                </li>
+                <li>
+                    <a href="#">subject</a>
+                </li>
+                <li>
+                    <a href="#">object</a>
+                </li>
+                <li>
+                    <a href="#">verb</a>
+                </li>
+                <li>
+                    <a href="#">subordinate</a>
+                </li>
+                <li>
+                    <a href="#">coordinate</a>
+                </li>
+                <li>
+                    <a href="#">adjective</a>
+                </li>
+                <li>
+                    <a href="#">pronoun</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        
+        <!-- /#page-content-wrapper -->
+
+
+
+<div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="scorebox"></div>                   <!--displays score and other counts-->
     <br>
     <div id="feedbackbox"></div>                <!--"correct, no that's a verb, etc-->
     <br>
@@ -69,10 +141,20 @@
     <div id="image_display_box">
     <img id= "cheat_sheet_image" src="http://drive.google.com/uc?export=view&id=0B3sTgW9drSJITjNHSWFzZTZNNG8">
     </div>
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show review sheets</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  
+  
+  
+    
+    
 
 
-    <!--<a href="#" data-featherlight="#mylightbox">Open element in lightbox</a>-->
-    <!--<div id="mylightbox" class="featherlight">This div will be opened in a lightbox</div>-->
 
     <!--whenever inserting images replace-->
     <!--http://docs.google.com/file/d/FILEID/edit-->
@@ -80,6 +162,16 @@
     <!-- http://drive.google.com/uc?export=view&id=FILEID-->
 
 
+
+
+    
+    <!-- /#wrapper -->
+
+    
+
+
+
+<div id="pop_up_div" class="lightbox">TEST OF LIGHTBOX</div>
 
 
 </body>

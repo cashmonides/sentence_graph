@@ -41,11 +41,11 @@ window.onbeforeunload = function () {
 };
 
 function start(){
-    //var e = document.createElement("div");
-    //e.innerHTML = "test of lightbox";
-    //$.featherlight(e);
-    load_user_data();
-    load(data_loaded);
+    // var e = document.createElement("div");
+    // e.innerHTML = "test of lightbox";
+    $.featherlight($("#div"), {});
+    // load_user_data();
+    // load(data_loaded);
 }
 
 

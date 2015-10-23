@@ -1,3 +1,33 @@
+MEDIATEMPLE
+- maybe get a toplevel domain name
+- the domain name points to the server (hosted by mediatemple)
+- FTP connects me to server (uploads my js files to mediatemple)
+    - can also connect to the command line at the server
+- the server at mediatemple serves js files to kid's computers 
+
+
+
+RESEARCH
+- FTP (filezilla)
+- SSH (putty for windows)
+    - connecting to the command line
+    - maybe do it straight from the mac command
+- CRUD
+    - data-binding
+
+
+
+
+TODO
+- reset password not finishing
+- lightbox 
+    - what is the meaning of content filter?
+    
+
+
+
+
+
 TODO PRIORITY FOR WEEKEND
 HIGH PRIORITY
 - back up small laptop
