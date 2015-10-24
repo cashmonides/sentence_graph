@@ -13,7 +13,7 @@ QuickModeGame.prototype.attach = function(){
     document.getElementById("answer_choices").style.display = 'none';
     document.getElementById("submit_button").style.display = 'none';
     //if we want to change the switch_count
-    state.switch_count = 3;
+    state.switch_count = 10;
 };
 
 

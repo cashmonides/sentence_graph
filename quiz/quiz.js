@@ -28,8 +28,8 @@
         correct_streak: 0,
         incorrect_streak: 0,
         max_incorrect_streak: 3,
-        switch_count: 3,
-
+        switch_count: 10,
+        progress_multiplier: 10,
 
         lightbox_count: 3
         
@@ -43,19 +43,32 @@ window.onbeforeunload = function () {
 };
 
 function start(){
-    // var e = document.createElement("div");
-    // e.innerHTML = "test of lightbox";
-    // $.featherlight($("#div"), {});
+    
+    
+    
+    set_progress_bar();
+    
     load_user_data();
     load(data_loaded);
+    var name_of_player = state.user_data.name;
+    console.log("DEBUG 10-24 NAME OF PLAYER = ", state.name);
+    
+}
+
+function set_progress_bar() {
+    // var x = (state.question_count / state.switch_count) * 100;
+    // var x = random_choice([10,20,30,40,50,60,70,80,90,100]);
+    var x = state.mode_streak * state.progress_multiplier;
+    var e = document.getElementById("progress-bar");
+    e.style.width = x + "%";
+    e.style.color = "red";
+
+    document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
+    e.style.font = "Baskerville";
 }
 
 
-
-
 function load_user_data(){
-    
-    
     
     state.user.uid = get_cookie("quiz_uid");
     console.log("UID in load user data = ", state.user.uid);
@@ -66,6 +79,8 @@ function load_user_data(){
             state.user_data = data.val();
             state.score = state.user_data.score;
             state.question_count = state.user_data.question_count;
+            //todo ????
+            // state.name = state.user_data.name;
         });
         
     } else {
@@ -141,12 +156,22 @@ function get_mode(mode_number) {
 
 function next_question(){
     //todo make a conditional for whether we trigger lightbox
-    fill_div("pop_up_div", state.score);
-    $.featherlight($('#pop_up_div'), {afterClose: next_question_2});
+    
+    set_progress_bar();
+    
+    if (state.mode_streak>=state.switch_count) {
+        fill_lightbox("pop_up_div", state.score);
+        $.featherlight($('#pop_up_div'), {afterClose: next_question_2});
+    } else {
+        next_question_2();
+    }
 }
 
-function fill_div(div, score) {
-    document.getElementById(div).innerHTML = "HELLO";
+function fill_lightbox(div, score) {
+    //todo how to do the following???
+    // var name_of_player = user_data.profile.name;
+    // document.getElementById(div).innerHTML = "CONGRATULATIONS " + name_of_player +"! YOU'RE READY FOR THE NEXT STAGE";
+    document.getElementById(div).innerHTML = "CONGRATULATIONS [YOUR NAME HERE]! YOU'RE READY FOR THE NEXT STAGE";
 }
 
 function next_question_2 () {
