@@ -6,6 +6,8 @@
 
     var state = {
         
+        user_data: null,
+        
         user: {
             uid: null
         },
@@ -43,9 +45,9 @@ window.onbeforeunload = function () {
 function start(){
     // var e = document.createElement("div");
     // e.innerHTML = "test of lightbox";
-    $.featherlight($("#div"), {});
-    // load_user_data();
-    // load(data_loaded);
+    // $.featherlight($("#div"), {});
+    load_user_data();
+    load(data_loaded);
 }
 
 
@@ -53,19 +55,19 @@ function start(){
 
 function load_user_data(){
     
+    
+    
     state.user.uid = get_cookie("quiz_uid");
     console.log("UID in load user data = ", state.user.uid);
     if (state.user.uid != null) {
         state.anonymous = false;
-        get_user_data("score", function(data){
+        get_user_data(null, function(data){
             console.log(data.val());
-            state.score = data.val();
+            state.user_data = data.val();
+            state.score = state.user_data.score;
+            state.question_count = state.user_data.question_count;
         });
-    
-        get_user_data("question_count", function(data){
-            console.log(data.val());
-            state.question_count = data.val();
-        });
+        
     } else {
         document.getElementById("anonymous_alert").innerHTML = "In Anonymous Session!" + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
@@ -138,13 +140,16 @@ function get_mode(mode_number) {
 
 
 function next_question(){
+    //todo make a conditional for whether we trigger lightbox
+    fill_div("pop_up_div", state.score);
+    $.featherlight($('#pop_up_div'), {afterClose: next_question_2});
+}
 
-    //if we want to create a lightbox this is the code to do it
-    //var e = document.createElement("div");
-    //e.innerHTML = "test of lightbox";
-    //$.featherlight(e);
+function fill_div(div, score) {
+    document.getElementById(div).innerHTML = "HELLO";
+}
 
-    
+function next_question_2 () {
     if(state.mode_streak == state.switch_count){
         state.mode_streak = 0;
         if (!state.anonymous) {

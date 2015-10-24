@@ -12,9 +12,9 @@
     <script src="../persist.js"></script>
     <script src="../utils.js"></script>
     <script src="login.js"></script>
-    <script src="../featherlight/jquery-1.11.3.min.js"></script>
-    <script src="../featherlight/featherlight.min.js"></script>
-    <script src="../featherlight/lightbox.js"></script>
+    <script src="../../libs/jquery-1.11.3.min.js"></script>
+    <script src="../../libs/featherlight.min.js"></script>
+    <script src="../../libs/lightbox.js"></script>
 
     <title>Login</title>
 
@@ -45,10 +45,11 @@
         </table>
         <br>
         <button id="login_button" type="button" class="hoverable" style="font-family:baskerville" onclick="login()">login</button>
-        <button id="change_password_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="initiate_change_password()" style="display:none">reset password</button>
         <button id="create_account_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="create_account()" style="display:none">create account</button>
-        <button id="forgot_password_button" type="button" class="hoverable" style="font-family:baskerville" onclick="set_mode(3)">I forgot my password</button>
-        <button id="email_new_password_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="reset_password()">email me a temporary password</button>
+        <button id="forgot_password_button" type="button" class="hoverable" style="font-family:baskerville" onclick="reset_password()">I forgot my password</button>
+        <button id="change_password_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="initiate_change_password()" style="display:none">change password</button>
+        
+        <!--<button id="email_new_password_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="reset_password()">email me a temporary password</button>-->
         <br>
         <div id="reset_password_instructions" style="display:none; font-family:baskerville">enter your email and you will be sent a temporary password, check your email and use your temporary password to reset your password</div>
         <br>

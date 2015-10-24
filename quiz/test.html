@@ -3,38 +3,45 @@
 <head>
 
     <meta charset="UTF-8">
- 
-     <script src="../libs/jquery-1.11.3.min.js"></script>
-     
-    <!--<link rel="stylesheet" type="text/css" href="../libs/featherlight.min.css">-->
-    <!--<script src="../libs/featherlight.min.js"></script>   -->
-    
-    <link href="http://cdn.rawgit.com/noelboss/featherlight/1.2.3/release/featherlight.min.css" type="text/css" rel="stylesheet" title="Featherlight Styles" />
-    <script src="http://cdn.rawgit.com/noelboss/featherlight/1.2.3/release/featherlight.min.js" type="text/javascript" charset="utf-8">//cdn.rawgit.com/noelboss/featherlight/1.2.3/release/featherlight.min.js</script>
-    
-    <style>
-        .lightbox {
-            /*display: none;*/
-        }
+
+    <script src="../libs/jquery-1.11.3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../libs/featherlight.min.css">
+    <script src="../libs/featherlight.min.js"></script>
+
+    <style type="text/css">
+        .lightbox { display: none; }
     </style>
 
     <script>
         window.onload = function(){
-            $.featherlight($("testdiv"), {})
+            console.log("test");
+            $.featherlight($("#testdiv"), {});
+            // $.featherlight($('#mylightbox'), {});
+        }
+        function wtf(){
+            $.featherlight($('#testdiv'), {});
         }
     </script>
+
 
 </head>
 
 
 
 
-<body>  
+<body>
 
-    <div id="testdiv" class="lightbox">
-        HELLO WORLD
-    </div>
-    
+<button type="button" onclick="wtf()">FIRE</button>
+<a href="#" data-featherlight="#testdiv">CLICK ME</a>
+
+<div id="testdiv" class="lightbox">
+    HELLO WORLD<br>
+    1<br>
+    2<br>
+    3
+</div>
+
 </body>
 
 </html>
