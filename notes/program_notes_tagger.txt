@@ -16,6 +16,11 @@ RESEARCH
     - data-binding
 
 
+????
+- path name not working
+    // document.location = "../../profile/profile.html";
+    //todo this is wrong here below - why doesn't above work?
+
 
 
 TODO
