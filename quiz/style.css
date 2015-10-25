@@ -108,6 +108,14 @@ body {
 }
 
 
+#progress-bar {
+    height: 20px;
+    background-color: "red";
+    font-family: "Baskerville";
+    background-image: url("gradientstrip.png");
+}
+
+
 
 #cheat_sheet_image {
     max-width:100%;

@@ -9,6 +9,17 @@
 }
 
 
+.progress_cell {
+    text-align: center;
+    margin: 20px;
+}
+.progress_image {
+   
+   width: 68px; 
+   height: 68px; 
+   border: none;
+}
+
 /*#snake {*/
 /*    width: 100%;*/
 /*    height: 100%;*/

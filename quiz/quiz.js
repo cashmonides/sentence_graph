@@ -61,10 +61,7 @@ function set_progress_bar() {
     var x = state.mode_streak * state.progress_multiplier;
     var e = document.getElementById("progress-bar");
     e.style.width = x + "%";
-    e.style.color = "red";
-
-    document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
-    e.style.font = "Baskerville";
+    // document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
 }
 
 
