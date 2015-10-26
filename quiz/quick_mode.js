@@ -31,6 +31,7 @@ QuickModeGame.prototype.next_question = function(state){
     var data = pick_question_data(sentence, QuickModeGame.region_filter);  
     this.target_tag = data.target_tag;
     refresh_score();
+    refresh_module_score();
     set_question_text("Click on the word that matches " + wrap_string(this.target_tag));
     set_word_selector(data.sentence);
     state.word_selector.click_callback = process_answer;
@@ -63,11 +64,20 @@ QuickModeGame.prototype.process_correct_answer = function() {
     
     console.log("answer matches target");        
 
-    if(state.incorrect_streak == 0){    
-        set_score(state.score + SCORE_REWARD);
-    }
+
+    //todo old code below - only rewards if first answer is correct
+    //if(state.incorrect_streak == 0){
+    //    set_score(state.score + SCORE_REWARD);
+    //    set_module_score(state.current_module_progress + state.current_module_reward);
+    //}
+    //state.incorrect_streak = 0;
+
+
+    //todo new code below, always rewards
+    set_score(state.score + SCORE_REWARD);
+    set_module_score(state.current_module_progress + state.current_module_reward);
     state.incorrect_streak = 0;
-    
+
     var cell_1 = random_choice(QuickModeGame.cell_1_feedback_right);
     var fbox = document.getElementById("feedbackbox");
     fbox.innerHTML = cell_1;
@@ -88,6 +98,8 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
     
     if (state.incorrect_streak <= state.max_incorrect_streak) {
         set_score(state.score + SCORE_PENALTIES[state.incorrect_streak - 1]);
+        //todo make the following more sophisticated like the above line, with programmable penalties
+        set_module_score(state.current_module_progress - state.current_module_penalty);
     }
 
     
@@ -110,6 +122,7 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
     }
     
     refresh_score();
+    refresh_module_score();
     state.word_selector.clear();
     
 };

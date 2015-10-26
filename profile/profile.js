@@ -18,20 +18,19 @@ var prefix = "https://googledrive.com/host/";
 
 var order = ["kangaroo", "crow"];
 
-var caption = "10/10";
 
-
-var john_does_progress = {
-    "kangaroo" : 10/10,
-    "crow": 9/10,
-    "bear": 0/10,
-    "bull": 0/10,
-    "griffin": 0/50
+var test_history = {
+    kangaroo: {
+        completed: true,
+        progress: 10,
+        error_rate: null
+    },
+    crow: {
+        completed: false,
+        progress: 8,
+        error_rate: null
+    }
 };
-
-
-
-
 
 
 
@@ -43,62 +42,27 @@ function enter_game() {
 }
 
 
-function display_profile() {
 
-    var player_name = "PLAYER NAME HERE";
+function display_profile(history) {
+
+    //var player_name = "PLAYER NAME HERE";
+    var cookie = get_cookie("quiz_uid");
+    var player_name = cookie;
     var e1 = document.getElementById("name_box");
     e1.innerHTML = "Welcome " + player_name;
-    
+
     var player_level = "PLAYER LEVEL HERE";
     var e2 = document.getElementById("level_box");
     e2.innerHTML = "your level is: " + player_level;
 
-    build_progress_table();
 
-    
-    // var e3 = document.getElementById("snake");
-    // e3.innerHTML = "<img src=\"https://googledrive.com/host/0B3sTgW9drSJIazRlY1h6UGVwb0k/frog\">"
-    // e3.innerHTML = "<img src=\"https://googledrive.com/host/0B3sTgW9drSJIMFB0VnBHa0dwazQ\" style=\"display:block\" width:100% height:100%>"
-    // e3.innerHTML = "<td background = \"https://googledrive.com/host/0B3sTgW9drSJIMFB0VnBHa0dwazQ>\""
-    
+
+    history = test_history;
+    build_progress_table(history);
 }
 
 
-function build_progress_table() {
-    
-    
-    var e3 = document.getElementById("table");
-    var row = make("tr");
-    var max_columns = 2;
-    
-    
-    for (var i = 0; i < order.length; i++) {
-        var url = urls[order[i]];
-        var cell = make("td", {class:["progress_cell"]});
-        //var img = make("img", {class: ["progress_image"], src: prefix + url});
-        var img = make("img", {class: ["progress_image"], src: url});
-        cell.appendChild(img);
-        cell.appendChild(make("br"));
-        cell.appendChild(document.createTextNode(caption));
-        console.log(cell);
-        if (i > 0 && i % max_columns == 0) {
-           e3.appendChild(row);
-           row = make("tr");
-        }
-        row.appendChild(cell);
-    }
-    //todo TEST 10-26 uncomment when done testing
-    e3.appendChild(row);
-    
-}
-
-
-function display_profile2() {
-    build_progress_table();
-}
-
-
-function build_progress_table2(history) {
+function build_progress_table(history) {
 
 
     var e3 = document.getElementById("table");
@@ -106,24 +70,39 @@ function build_progress_table2(history) {
     var max_columns = 2;
 
 
+
     for (var i = 0; i < order.length; i++) {
         var url = urls[order[i]];
         var cell = make("td", {class:["progress_cell"]});
         //var img = make("img", {class: ["progress_image"], src: prefix + url});
+
+
 
         //todo Akiva's new stuff below - test
-        if (history[order[i]["completed"]] == false) {
+
+        console.log("history[order[i]]", history[order[i]]);
+        //console.log("history[order[i][completed]]", history[order[i][completed]]);
+        console.log("history[order[i]].completed", history[order[i]].completed);
+
+        if (history[order[i]].completed == false) {
+            console.log("incomplete level triggered");
             var img = make("img", {class: ["progress_image", "incomplete"], src: url});
         } else {
+            console.log("incomplete level not triggered");
             var img = make("img", {class: ["progress_image"], src: url});
         }
-
-
-
-
         cell.appendChild(img);
+
+
         cell.appendChild(make("br"));
-        cell.appendChild(document.createTextNode(caption));
+
+
+        var denominator = modules[order[i]].threshold;
+        var progress_numerator = history[order[i]].progress;
+
+
+
+        cell.appendChild(document.createTextNode(progress_numerator + "/" + denominator));
         console.log(cell);
         if (i > 0 && i % max_columns == 0) {
             e3.appendChild(row);
@@ -155,3 +134,58 @@ function build_progress_table2(history) {
 // The URL for each file will be 
 // https://googledrive.com/host/ followed by the folder id followed by the filename. 
 // For example: if you saved style.css in the folder in step #1: https://googledrive.com/host/0B5AR8ct5SZfSTDZTQjNNVXR4RWM/style.css
+
+
+
+
+/////////obsolete functions below//////
+
+
+//function display_profile() {
+//
+//    var player_name = "PLAYER NAME HERE";
+//    var e1 = document.getElementById("name_box");
+//    e1.innerHTML = "Welcome " + player_name;
+//
+//    var player_level = "PLAYER LEVEL HERE";
+//    var e2 = document.getElementById("level_box");
+//    e2.innerHTML = "your level is: " + player_level;
+//
+//    build_progress_table();
+//
+//
+//    // var e3 = document.getElementById("snake");
+//    // e3.innerHTML = "<img src=\"https://googledrive.com/host/0B3sTgW9drSJIazRlY1h6UGVwb0k/frog\">"
+//    // e3.innerHTML = "<img src=\"https://googledrive.com/host/0B3sTgW9drSJIMFB0VnBHa0dwazQ\" style=\"display:block\" width:100% height:100%>"
+//    // e3.innerHTML = "<td background = \"https://googledrive.com/host/0B3sTgW9drSJIMFB0VnBHa0dwazQ>\""
+//
+//}
+//
+//
+//function build_progress_table() {
+//
+//
+//    var e3 = document.getElementById("table");
+//    var row = make("tr");
+//    var max_columns = 2;
+//
+//
+//    for (var i = 0; i < order.length; i++) {
+//        var url = urls[order[i]];
+//        var cell = make("td", {class:["progress_cell"]});
+//        //var img = make("img", {class: ["progress_image"], src: prefix + url});
+//        var img = make("img", {class: ["progress_image"], src: url});
+//        cell.appendChild(img);
+//        cell.appendChild(make("br"));
+//        cell.appendChild(document.createTextNode(caption));
+//        console.log(cell);
+//        if (i > 0 && i % max_columns == 0) {
+//            e3.appendChild(row);
+//            row = make("tr");
+//        }
+//        row.appendChild(cell);
+//    }
+//    //todo TEST 10-26 uncomment when done testing
+//    e3.appendChild(row);
+//
+//}

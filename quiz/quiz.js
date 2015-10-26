@@ -1,38 +1,47 @@
 
-    var SCORE_REWARD = 5;
-    var SCORE_PENALTIES = [0, -1, -3];
+var SCORE_REWARD = 5;
+var SCORE_PENALTIES = [0, -1, -3];
 
-    
 
-    var state = {
-        
+
+var state = {
+
         user_data: null,
-        
+
         user: {
             uid: null
         },
-        
+
         anonymous: true,
-        
+
         sentences: null,
         game: null,
         word_selector: null,
         sentence: null,
-        
+
         score: 0,
-        count_correct: 0, 
+        count_correct: 0,
         count_incorrect: 0,
         question_count: 0,
         mode_streak: 0,
-        
+
         correct_streak: 0,
         incorrect_streak: 0,
         max_incorrect_streak: 3,
-        switch_count: 10,
-        progress_multiplier: 10,
+        switch_count: 10,               //=threshold
+        progress_multiplier: 10,        //(a relic from the first implementation of progress bar)
 
-        lightbox_count: 3
-        
+        lightbox_count: 3,              //a relic, replace with threshold
+
+
+        current_module: "kangaroo",
+        current_module_progress: 0,
+        current_module_reward: 2,
+        current_module_penalty: 1,
+        current_module_threshold: 10
+
+
+
     };
 
 
@@ -43,27 +52,50 @@ window.onbeforeunload = function () {
 };
 
 function start(){
-    
-    
-    
+
     set_progress_bar();
     
     load_user_data();
     load(data_loaded);
-    var name_of_player = state.user_data.name;
-    console.log("DEBUG 10-24 NAME OF PLAYER = ", state.name);
+    //var name_of_player = state.user_data.name;
+    //console.log("DEBUG 10-24 NAME OF PLAYER = ", state.name);
     
 }
 
 function set_progress_bar() {
     // var x = (state.question_count / state.switch_count) * 100;
     // var x = random_choice([10,20,30,40,50,60,70,80,90,100]);
-    var x = state.mode_streak * state.progress_multiplier;
+    //var x = state.mode_streak * state.progress_multiplier;
+
+
+    console.log("DEBUG 10-26 state.mode_streak", state.mode_streak);
+
+    //var x = (state.mode_streak * state.current_module_reward);
+    //x = x / 4;
+    //x = x / state.current_module_threshold;
+    //x = x * 100;
+
+    //var x = state.mode_streak / state.current_module_threshold;             //this one is giving .1%
+    //var x = (state.mode_streak / state.current_module_threshold) * 100;
+
+    var x;
+    if (state.current_module_progress === 0) {
+        x = 0;
+    } else {
+        x = (state.current_module_progress / state.current_module_threshold) * 100;
+    }
+
     var e = document.getElementById("progress-bar");
     e.style.width = x + "%";
-    // document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
+    document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
 }
 
+function reset_progress_bar(){
+    var x = 0;
+    var e = document.getElementById("progress-bar");
+    e.style.width = x + "%";
+    document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
+}
 
 function load_user_data(){
     
@@ -121,8 +153,11 @@ function set_mode(game){
     
 }
 
+
+//todo is this used anymore?
 function change_mode(){
-    var random_number; 
+    reset_progress_bar();
+    var random_number;
     var new_mode;
     //todo 3 was changed below to accomodate genericdrop game
     do {
@@ -134,10 +169,10 @@ function change_mode(){
 }
 
 function get_mode(mode_number) {
-    //todo uncomment when done testing genericdrop mode
-    //mode_number = random_choice([0, 2]);
-    mode_number = 3;
-    console.log('generic mode entered');
+    //todo uncomment when done testing
+    mode_number = random_choice([0, 2]);
+    //mode_number = 2;
+
 
     switch(mode_number) {
         case 0 : return new DropModeGame();
@@ -152,11 +187,11 @@ function get_mode(mode_number) {
 
 
 function next_question(){
-    //todo make a conditional for whether we trigger lightbox
+
     
     set_progress_bar();
     
-    if (state.mode_streak>=state.switch_count) {
+    if (state.mode_streak>=state.current_module_threshold) {
         fill_lightbox("pop_up_div", state.score);
         $.featherlight($('#pop_up_div'), {afterClose: next_question_2});
     } else {
@@ -172,12 +207,32 @@ function fill_lightbox(div, score) {
 }
 
 function next_question_2 () {
-    if(state.mode_streak == state.switch_count){
+
+
+    //todo old code below
+    //if(state.mode_streak == state.current_module_threshold){
+    //    state.mode_streak = 0;
+    //    if (!state.anonymous) {
+    //        set_user_data("score", state.score);
+    //        set_user_data("question_count", state.question_count);
+    //    }
+    //    //todo we really want this to be change module but we will improve later
+    //    change_mode();
+    //} else {
+    //    state.question_count++;
+    //    state.mode_streak++;
+    //    state.game.next_question(state);
+    //}
+
+
+    //todo new code below
+    if(((state.current_module_progress * state.current_module_reward) / state.current_module_threshold) / state.current_module_reward >= 1){
         state.mode_streak = 0;
         if (!state.anonymous) {
             set_user_data("score", state.score);
             set_user_data("question_count", state.question_count);
         }
+        //todo we really want this to be change module but we will improve later
         change_mode();
     } else {
         state.question_count++;
@@ -188,7 +243,9 @@ function next_question_2 () {
 }
 
 function process_answer(){
+
     state.game.process_answer(state);
+    set_progress_bar();
 }
 
 function pick_question_data(sentence, region_filter){
@@ -213,8 +270,18 @@ function set_score(x){
     state.score = Math.max(0, x);
 }
 
+
+function set_module_score(x){
+    state.current_module_progress = Math.max(0, x);
+}
+
 function refresh_score() {
     document.getElementById("scorebox").innerHTML = "Question #" + state.question_count + ", Remaining: " + (state.switch_count - state.mode_streak) + ", Score: " + state.score; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
+}
+
+function refresh_module_score() {
+    document.getElementById("scorebox").innerHTML = "# in module??" + state.question_count + ", Remaining: " + (state.current_module_threshold - state.mode_streak) + ", MODULE Score: " + state.current_module_progress; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
+
 }
 
 function set_question_text(question){
