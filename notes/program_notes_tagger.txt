@@ -1,3 +1,14 @@
+MODULES
+- module object
+    - module id
+    - icon name
+    - icon url
+    - threshold
+    - percentages of each mode
+    - level & data for each mode
+    -
+
+
 MEDIATEMPLE
 - maybe get a toplevel domain name
 - the domain name points to the server (hosted by mediatemple)

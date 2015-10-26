@@ -1,14 +1,22 @@
+//var urls = {
+//    //kangaroo: "0B3sTgW9drSJISUlrT1dQMjhfVE0",
+//    kangaroo:"../resources/kangaroo.jpg",
+//    crow: "0B3sTgW9drSJIYXF4WmZtWm9OazA",
+//    bear: "0B3sTgW9drSJIYS1DMnJwZUtndDQ",
+//    bull: "0B3sTgW9drSJIWnU5eWQxbzQwUm8"
+//}
+
 var urls = {
-    kangaroo: "0B3sTgW9drSJISUlrT1dQMjhfVE0",
-    crow: "0B3sTgW9drSJIYXF4WmZtWm9OazA",
-    bear: "0B3sTgW9drSJIYS1DMnJwZUtndDQ",
-    bull: "0B3sTgW9drSJIWnU5eWQxbzQwUm8" 
-}
+    kangaroo:"../resources/kangaroo.jpg",
+    crow:"../resources/crow.png",
+    bear: "https://googledrive.com/host/0B3sTgW9drSJIYS1DMnJwZUtndDQ",
+    bull: "https://googledrive.com/host/0B3sTgW9drSJIWnU5eWQxbzQwUm8"
+};
 
 
-var prefix = "https://googledrive.com/host/"
+var prefix = "https://googledrive.com/host/";
 
-var order = ["kangaroo", "crow", "bear", "bull"]
+var order = ["kangaroo", "crow"];
 
 var caption = "10/10";
 
@@ -19,7 +27,7 @@ var john_does_progress = {
     "bear": 0/10,
     "bull": 0/10,
     "griffin": 0/50
-}
+};
 
 
 
@@ -29,9 +37,14 @@ var john_does_progress = {
 
 window.onload = display_profile;
 
+
+function enter_game() {
+    document.location = "../quiz/index.html";
+}
+
+
 function display_profile() {
-    
-    
+
     var player_name = "PLAYER NAME HERE";
     var e1 = document.getElementById("name_box");
     e1.innerHTML = "Welcome " + player_name;
@@ -39,10 +52,9 @@ function display_profile() {
     var player_level = "PLAYER LEVEL HERE";
     var e2 = document.getElementById("level_box");
     e2.innerHTML = "your level is: " + player_level;
-    
+
     build_progress_table();
-    
-    
+
     
     // var e3 = document.getElementById("snake");
     // e3.innerHTML = "<img src=\"https://googledrive.com/host/0B3sTgW9drSJIazRlY1h6UGVwb0k/frog\">"
@@ -63,7 +75,8 @@ function build_progress_table() {
     for (var i = 0; i < order.length; i++) {
         var url = urls[order[i]];
         var cell = make("td", {class:["progress_cell"]});
-        var img = make("img", {class: ["progress_image"], src: prefix + url});
+        //var img = make("img", {class: ["progress_image"], src: prefix + url});
+        var img = make("img", {class: ["progress_image"], src: url});
         cell.appendChild(img);
         cell.appendChild(make("br"));
         cell.appendChild(document.createTextNode(caption));
@@ -74,25 +87,67 @@ function build_progress_table() {
         }
         row.appendChild(cell);
     }
- 
+    //todo TEST 10-26 uncomment when done testing
     e3.appendChild(row);
     
 }
 
 
+function display_profile2() {
+    build_progress_table();
+}
+
+
+function build_progress_table2(history) {
+
+
+    var e3 = document.getElementById("table");
+    var row = make("tr");
+    var max_columns = 2;
+
+
+    for (var i = 0; i < order.length; i++) {
+        var url = urls[order[i]];
+        var cell = make("td", {class:["progress_cell"]});
+        //var img = make("img", {class: ["progress_image"], src: prefix + url});
+
+        //todo Akiva's new stuff below - test
+        if (history[order[i]["completed"]] == false) {
+            var img = make("img", {class: ["progress_image", "incomplete"], src: url});
+        } else {
+            var img = make("img", {class: ["progress_image"], src: url});
+        }
 
 
 
-function enter_game() {
-    document.location = "../quiz/index.html";
+
+        cell.appendChild(img);
+        cell.appendChild(make("br"));
+        cell.appendChild(document.createTextNode(caption));
+        console.log(cell);
+        if (i > 0 && i % max_columns == 0) {
+            e3.appendChild(row);
+            row = make("tr");
+        }
+        row.appendChild(cell);
+    }
+    //todo TEST 10-26 uncomment when done testing
+    e3.appendChild(row);
+
 }
 
 
 
 
-var folder_address = "https://drive.google.com/folderview?id=0B3sTgW9drSJIazRlY1h6UGVwb0k&usp=sharing"
 
 
+
+
+
+//
+//var folder_address = "https://drive.google.com/folderview?id=0B3sTgW9drSJIazRlY1h6UGVwb0k&usp=sharing"
+//
+//
 
 
 // For example, the folder ID from this link: 
