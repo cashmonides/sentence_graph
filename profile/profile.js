@@ -6,17 +6,11 @@
 //    bull: "0B3sTgW9drSJIWnU5eWQxbzQwUm8"
 //}
 
-var urls = {
-    kangaroo:"../resources/kangaroo.jpg",
-    crow:"../resources/crow.png",
-    bear: "https://googledrive.com/host/0B3sTgW9drSJIYS1DMnJwZUtndDQ",
-    bull: "https://googledrive.com/host/0B3sTgW9drSJIWnU5eWQxbzQwUm8"
-};
 
 
 var prefix = "https://googledrive.com/host/";
 
-var order = ["kangaroo", "crow"];
+
 
 
 var test_history = {
@@ -33,31 +27,61 @@ var test_history = {
 };
 
 
+//create account -> no initial history
+//load game -> load firebase
+//as he beats each level -> write to firebase his new or updated history
 
-window.onload = display_profile;
+// var user : {
+//     history : {
+//         module_id : {
+//             completed: false,
+//             progress: 8,
+//             error_rate: null
+//         }
+//     },
+// }
+    
+
+
+
+
+
+var user = null;
+
+
+
+window.onload = start();
+
 
 
 function enter_game() {
     document.location = "../quiz/index.html";
 }
 
+function start(){
+    user = new User();
+    user.load(display_profile);
+    console.log("USER in start = ", user);
+}
 
 
-function display_profile(history) {
+function display_profile() {
 
     //var player_name = "PLAYER NAME HERE";
-    var cookie = get_cookie("quiz_uid");
-    var player_name = cookie;
+    var player_name = user.uid;
     var e1 = document.getElementById("name_box");
-    e1.innerHTML = "Welcome " + player_name;
+    e1.innerHTML = "Welcome " + user.data.profile.name;
 
     var player_level = "PLAYER LEVEL HERE";
     var e2 = document.getElementById("level_box");
     e2.innerHTML = "your level is: " + player_level;
+    console.log("FIRST PARTS COMPLETED")
 
 
-
-    history = test_history;
+    // var history = test_history;
+    console.log("user.data = ", user.data);
+    var history = user.data.history;
+    console.log("HISTORY LOADED = ", history);
     build_progress_table(history);
 }
 
@@ -69,10 +93,11 @@ function build_progress_table(history) {
     var row = make("tr");
     var max_columns = 2;
 
-
+    var order = get_module_order();
+    console.log("order = ", order);
 
     for (var i = 0; i < order.length; i++) {
-        var url = urls[order[i]];
+        var url = modules[order[i]].icon_url;
         var cell = make("td", {class:["progress_cell"]});
         //var img = make("img", {class: ["progress_image"], src: prefix + url});
 
@@ -80,9 +105,9 @@ function build_progress_table(history) {
 
         //todo Akiva's new stuff below - test
 
-        console.log("history[order[i]]", history[order[i]]);
+        // console.log("history[order[i]]", history[order[i]]);
         //console.log("history[order[i][completed]]", history[order[i][completed]]);
-        console.log("history[order[i]].completed", history[order[i]].completed);
+        // console.log("history[order[i]].completed", history[order[i]].completed);
 
         if (history[order[i]].completed == false) {
             console.log("incomplete level triggered");
@@ -114,6 +139,16 @@ function build_progress_table(history) {
     e3.appendChild(row);
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
