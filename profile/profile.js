@@ -88,6 +88,8 @@ function display_profile() {
 
 function build_progress_table(history) {
 
+    var test_history = user.data.history;
+    console.log("DEBUG 10/29 test history = ", test_history);
 
     var e3 = document.getElementById("table");
     var row = make("tr");
@@ -96,20 +98,24 @@ function build_progress_table(history) {
     var order = get_module_order();
     console.log("order = ", order);
 
+    console.log("history in build_progress_table = ", history);
+    //console.log("history[order[i].completed", history[order[i].completed);
+
+
+
+
+
     for (var i = 0; i < order.length; i++) {
+
+        var current_item = modules[order[i]].icon_name;
+        console.log("NEW TEST", history[current_item].completed);
         var url = modules[order[i]].icon_url;
+
+
+
         var cell = make("td", {class:["progress_cell"]});
-        //var img = make("img", {class: ["progress_image"], src: prefix + url});
 
-
-
-        //todo Akiva's new stuff below - test
-
-        // console.log("history[order[i]]", history[order[i]]);
-        //console.log("history[order[i][completed]]", history[order[i][completed]]);
-        // console.log("history[order[i]].completed", history[order[i]].completed);
-
-        if (history[order[i]].completed == false) {
+        if (history[current_item].completed == false) {
             console.log("incomplete level triggered");
             var img = make("img", {class: ["progress_image", "incomplete"], src: url});
         } else {
@@ -117,16 +123,11 @@ function build_progress_table(history) {
             var img = make("img", {class: ["progress_image"], src: url});
         }
         cell.appendChild(img);
-
-
         cell.appendChild(make("br"));
 
 
         var denominator = modules[order[i]].threshold;
-        var progress_numerator = history[order[i]].progress;
-
-
-
+        var progress_numerator = history[current_item].progress;
         cell.appendChild(document.createTextNode(progress_numerator + "/" + denominator));
         console.log(cell);
         if (i > 0 && i % max_columns == 0) {
@@ -135,7 +136,7 @@ function build_progress_table(history) {
         }
         row.appendChild(cell);
     }
-    //todo TEST 10-26 uncomment when done testing
+    
     e3.appendChild(row);
 
 }
