@@ -1,12 +1,17 @@
-MODULES
-- module object
-    - module id
-    - icon name
-    - icon url
-    - threshold
-    - percentages of each mode
-    - level & data for each mode
+TODO
+- reporting all scores
+- log out button
+- logging in with google and facebook
+- grey out submit button
     -
+- other browsers:
+    - firefox:
+        - login & profile work
+        - game: dropdown is huge for a second and then goes away / play is a little buggy with red highlighting but basically works
+    - chrome:
+        - login and profile work
+        - [Error] TypeError: undefined is not a function (evaluating 'Array.from(set_of_indices)')
+          	(anonymous function) (firebase.js, line 43)
 
 
 MEDIATEMPLE
@@ -34,10 +39,6 @@ RESEARCH
 
 
 
-TODO
-- reset password not finishing
-- lightbox 
-    - what is the meaning of content filter?
     
 
 
@@ -46,13 +47,11 @@ TODO
 
 TODO PRIORITY FOR WEEKEND
 HIGH PRIORITY
-- back up small laptop
-- test reset password and test everything at interface
+
 - send Dan a link and have him do a login test
 - research media temple
-- try to put a sidebar in (research templates)
-- research lightbox and try to run a lightbox test online
-- check other browser performance
+
+
 - quick test run of integrating latin
 
 LOWER PRIORITY

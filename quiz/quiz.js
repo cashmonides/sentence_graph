@@ -280,9 +280,11 @@ function refresh_score() {
 }
 
 function refresh_module_score() {
-    document.getElementById("scorebox").innerHTML = "# in module??" + state.question_count + ", Remaining: " + (state.current_module_threshold - state.mode_streak) + ", MODULE Score: " + state.current_module_progress; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
+    document.getElementById("scorebox").innerHTML = "# in module" + state.question_count + ", Remaining: " + (state.current_module_threshold - state.mode_streak) + ", MODULE Score: " + state.current_module_progress; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
 
 }
+
+
 
 function set_question_text(question){
     document.getElementById("questionbox").innerHTML = question;

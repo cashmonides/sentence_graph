@@ -136,7 +136,7 @@ function build_progress_table(history) {
         }
         row.appendChild(cell);
     }
-    
+
     e3.appendChild(row);
 
 }
