@@ -1,4 +1,4 @@
-
+console.log("DEBUG 10-29 USER OBJECT TRIGGERED+++++++");
 
 var User = function() {
     this.data = null;
@@ -22,7 +22,7 @@ User.prototype.load = function(callback) {
         return false;
     }
 
-}
+};
 
 User.prototype.user_data_loaded = function(fbase_data, callback){
     
@@ -30,6 +30,12 @@ User.prototype.user_data_loaded = function(fbase_data, callback){
     console.log("user loaded:", this.data);
     callback();
     
-}
+};
+
+
+User.prototype.logout = function () {
+    logout();
+    delete_cookie("quiz_uid", "/", null);
+};
 
 

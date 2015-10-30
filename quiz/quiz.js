@@ -57,8 +57,7 @@ function start(){
     
     load_user_data();
     load(data_loaded);
-    //var name_of_player = state.user_data.name;
-    //console.log("DEBUG 10-24 NAME OF PLAYER = ", state.name);
+    
     
 }
 
@@ -98,21 +97,9 @@ function reset_progress_bar(){
 }
 
 function load_user_data(){
-    
-    state.user.uid = get_cookie("quiz_uid");
-    console.log("UID in load user data = ", state.user.uid);
-    if (state.user.uid != null) {
-        state.anonymous = false;
-        get_user_data(null, function(data){
-            console.log(data.val());
-            state.user_data = data.val();
-            state.score = state.user_data.score;
-            state.question_count = state.user_data.question_count;
-            //todo ????
-            // state.name = state.user_data.name;
-        });
-        
-    } else {
+    state.user_data = new User();
+    //the following line both tests the conditional and actually loads the data
+    if (!state.user_data.load(user_data_loaded)) {
         document.getElementById("anonymous_alert").innerHTML = "In Anonymous Session!" + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
 
@@ -122,10 +109,14 @@ function load_user_data(){
     //
     //"../../quiz/index.html"
 
-
+function user_data_loaded() {
+    state.score = state.user_data.data.score;
+    state.question_count = state.user_data.data.question_count;
+}
 
 //data_loaded gets passed the data that comes back to us from firebase
 //so we want to deserialize this data
+//todo rename to sentence_data_loaded
 function data_loaded(data){
     
     state.sentences = deserialize(data);
@@ -140,6 +131,12 @@ function data_loaded(data){
     //set_mode(new GenericDropGame());
 
 }
+
+function logout_from_quiz() {
+    state.user_data.logout();
+    document.location = "../lib/login/login.html";
+}
+
 
 function set_mode(game){
     

@@ -112,19 +112,23 @@ function build_progress_table(history) {
         var url = modules[order[i]].icon_url;
 
 
-
+        //todo replace all with make2
         var cell = make("td", {class:["progress_cell"]});
+        var cell = make2({class:["progress_cell"], tag:"td"});
+
 
         if (history[current_item].completed == false) {
             console.log("incomplete level triggered");
-            var img = make("img", {class: ["progress_image", "incomplete"], src: url});
+            // var img = make("img", {class: ["progress_image", "incomplete"], src: url});
+            var img = make2({class: ["progress_image", "incomplete"], tag:"img", src: url});
         } else {
             console.log("incomplete level not triggered");
             var img = make("img", {class: ["progress_image"], src: url});
         }
         cell.appendChild(img);
-        cell.appendChild(make("br"));
-
+        //todo below is an example of the rewriting
+        // cell.appendChild(make("br"));
+        make2({tag:"br"}, cell);
 
         var denominator = modules[order[i]].threshold;
         var progress_numerator = history[current_item].progress;
