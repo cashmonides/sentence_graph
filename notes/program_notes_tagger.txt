@@ -1,7 +1,11 @@
 TODO
+- change data loaded to sentence data loaded & generalize load in persist to load_path
 - make progress count
 - get a browser name & set up mediatemple
-- where did the write up of the make2 function go?
+- where did the write up of the make function go?
+- update user data with more recent categories (bar count, module, etc) - where it says set_user_data("score", state.score); in quiz
+- check if we really need anything as complicated as: (state.bar_count * state.current_module_reward) / state.bar_threshold) / state.current_module_reward >= 1
+    - can't we just say bar_count = bar_threshold??
 - make a header with logout, see profile
 - reporting all scores
 - grey out submit button
@@ -14,7 +18,46 @@ TODO
         - login and profile work
         - [Error] TypeError: undefined is not a function (evaluating 'Array.from(set_of_indices)')
           	(anonymous function) (firebase.js, line 43)
+- make an absolute reference to the logout button in header
 
+
+SCORING ARCHITECTURE TODO
+- change mode_streak to progress_count
+
+SCORING ARCHITECTURE
+- bar_count
+- bar_threshold
+
+
+hit progress threshold
+    lightbox: congratulations
+    on close: increment module_count
+    if module_threshold has been reached
+        lightbox: congratulations
+        on close: next module
+        reset progress bar
+    else
+        reset progress bar
+    reset progress bar
+
+- module_count
+- module_threshold
+
+
+- bar_score (variable - based on mode)
+    - bar threshold
+    - set by mode_streak
+- module_score (e.g. 8/10) (denominator based on module)
+    -
+- module (i.e. what module you're in)
+[question: should mode be able to change while still in a single progress bar??]
+
+
+
+
+????
+- should score and question count be used at all???
+    - it might be good for backstage stats and analytics
 
 MEDIATEMPLE
 - maybe get a toplevel domain name

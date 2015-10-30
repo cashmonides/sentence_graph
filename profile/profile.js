@@ -93,7 +93,7 @@ function build_progress_table(history) {
 
     var e3 = document.getElementById("table");
     //var row = make("tr");
-    var row = make2({tag: "tr"});
+    var row = make({tag: "tr"});
     var max_columns = 2;
 
     var order = get_module_order();
@@ -113,24 +113,24 @@ function build_progress_table(history) {
         var url = modules[order[i]].icon_url;
 
 
-        //todo replace all with make2
+        //todo replace all with make
         //var cell = make("td", {class:["progress_cell"]});
-        var cell = make2({class:["progress_cell"], tag:"td"});
+        var cell = make({class:["progress_cell"], tag:"td"});
 
 
         if (history[current_item].completed == false) {
             console.log("incomplete level triggered");
             // var img = make("img", {class: ["progress_image", "incomplete"], src: url});
-            var img = make2({class: ["progress_image", "incomplete"], tag: "img", src: url});
+            var img = make({class: ["progress_image", "incomplete"], tag: "img", src: url});
         } else {
             console.log("incomplete level not triggered");
             //var img = make("img", {class: ["progress_image"], src: url});
-            var img = make2({class: ["progress_image"], tag: "img", src: url});
+            var img = make({class: ["progress_image"], tag: "img", src: url});
         }
         cell.appendChild(img);
         //todo below is an example of the rewriting
         // cell.appendChild(make("br"));
-        make2({tag:"br"}, cell);
+        make({tag:"br"}, cell);
 
         var denominator = modules[order[i]].threshold;
         var progress_numerator = history[current_item].progress;
@@ -139,7 +139,7 @@ function build_progress_table(history) {
         if (i > 0 && i % max_columns == 0) {
             e3.appendChild(row);
             //row = make("tr");
-            row = make2({tag: "tr"});
+            row = make({tag: "tr"});
         }
         row.appendChild(cell);
     }

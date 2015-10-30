@@ -20,9 +20,9 @@ function callback2(data) {
     var users = data.val();
     console.log(users);
     var e = document.getElementById("score_report");
-    // make2({tag:"tr", children: [{tag: "td"}]}, e);
+    // make({tag:"tr", children: [{tag: "td"}]}, e);
     for (var key in users) {
-        make2({
+        make({
             tag:"tr",
             children: [
                 {tag: "td", text: users[key].profile.name},
