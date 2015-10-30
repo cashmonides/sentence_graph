@@ -92,7 +92,8 @@ function build_progress_table(history) {
     console.log("DEBUG 10/29 test history = ", test_history);
 
     var e3 = document.getElementById("table");
-    var row = make("tr");
+    //var row = make("tr");
+    var row = make2({tag: "tr"});
     var max_columns = 2;
 
     var order = get_module_order();
@@ -113,17 +114,18 @@ function build_progress_table(history) {
 
 
         //todo replace all with make2
-        var cell = make("td", {class:["progress_cell"]});
+        //var cell = make("td", {class:["progress_cell"]});
         var cell = make2({class:["progress_cell"], tag:"td"});
 
 
         if (history[current_item].completed == false) {
             console.log("incomplete level triggered");
             // var img = make("img", {class: ["progress_image", "incomplete"], src: url});
-            var img = make2({class: ["progress_image", "incomplete"], tag:"img", src: url});
+            var img = make2({class: ["progress_image", "incomplete"], tag: "img", src: url});
         } else {
             console.log("incomplete level not triggered");
-            var img = make("img", {class: ["progress_image"], src: url});
+            //var img = make("img", {class: ["progress_image"], src: url});
+            var img = make2({class: ["progress_image"], tag: "img", src: url});
         }
         cell.appendChild(img);
         //todo below is an example of the rewriting
@@ -136,7 +138,8 @@ function build_progress_table(history) {
         console.log(cell);
         if (i > 0 && i % max_columns == 0) {
             e3.appendChild(row);
-            row = make("tr");
+            //row = make("tr");
+            row = make2({tag: "tr"});
         }
         row.appendChild(cell);
     }

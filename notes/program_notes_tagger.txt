@@ -1,7 +1,9 @@
 TODO
+- make progress count
+- get a browser name & set up mediatemple
+- where did the write up of the make2 function go?
+- make a header with logout, see profile
 - reporting all scores
-- log out button
-- logging in with google and facebook
 - grey out submit button
     -
 - other browsers:
@@ -148,7 +150,7 @@ TODO ADD??
 
 TODO cheat sheet
 - different kinds of cheat sheet based on what mode of game they're in
-    - grammar: links to terminology
+    - grammar: links to txerminology
     - latin: charts
 
 TODO COSMETIC IN QUIZ
