@@ -1,4 +1,14 @@
+TODO BUGS
+
+
+
+
 TODO
+- alert on close (you will lose all progress)
+- module complete (10/10) should trigger a new lightbox and a new module
+- generalize lightbox creation and new stage
+- isolate all the parameters possible (e.g. reward, penalty
+- mode should be anle to change within a single progress bar
 - change data loaded to sentence data loaded & generalize load in persist to load_path
 - make progress count
 - get a browser name & set up mediatemple
@@ -592,3 +602,31 @@ the fork in the road:
 
 
 
+EXAMPLE OF NEW MAKE FUNCTION
+
+<tr id="row1" class="hoverable">
+    <td>column 1</tr>
+    Some Text
+</tr>
+
+var gui = {
+    tag: "tr",                      //or div, a, img, button, etc.
+    id: "row1",                     //
+    children: [                     //children = whatever ends up inside the tag
+        {tag: "td", text: "column 1", onclick = function(){ }   },   //can have a recursive tag and text inside of it
+        "Some Text"                                         //textNode inside the tag
+    ],
+    text: "hello world"
+    class: "hoverable"                  //gives a className to everything in the tag, in this case tr
+
+};
+
+make2(gui, container)
+
+
+NB: you can't have both children and text. If you want text, just put it in children
+i.e. text is just a shortcut for putting in a single children
+
+{tag: "whatever". text: "hello"}
+
+{tag: "whatever". children: ["hello"], text: "xxx"}

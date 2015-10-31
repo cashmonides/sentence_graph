@@ -170,23 +170,28 @@ function change_mode(){
     state.bar_count = 0;
     reset_progress_bar();
 
-
-    var random_number;
+    //todo test code here comment when done
     var new_mode;
+    new_mode = get_mode(2);
+
+    //todo real code here uncomment when done
+    //var new_mode;
+    //var random_number;
+
     //todo 4 is an arbitrary parameter below (make it into a global variable updated as new modes get added)
     //todo - refactor while statement - we don't always want it to be a new mode (only infrequent)
-    do {
-        random_number = Math.floor(Math.random() * 4);
-        new_mode = get_mode(random_number);
-        console.log("string of game = ", state.game.get_mode_name(), new_mode.get_mode_name());// state.game.prototype.toString(), new_mode.prototype.toString());
-    } while (state.game.get_mode_name() == new_mode.get_mode_name());
+    //do {
+    //    random_number = Math.floor(Math.random() * 4);
+    //    new_mode = get_mode(random_number);
+    //    console.log("string of game = ", state.game.get_mode_name(), new_mode.get_mode_name());// state.game.prototype.toString(), new_mode.prototype.toString());
+    //} while (state.game.get_mode_name() == new_mode.get_mode_name());
     set_mode(new_mode);
 }
 
 function get_mode(mode_number) {
     //todo uncomment when done testing
-    mode_number = random_choice([0, 2]);
-    //mode_number = 2;
+    //mode_number = random_choice([0, 2]);
+    mode_number = 2;
 
     switch(mode_number) {
         case 0 : return new DropModeGame();
@@ -250,6 +255,11 @@ function next_question_2 () {
 }
 
 
+function process_answer(){
+    state.game.process_answer(state);
+    //set_progress_bar(); (this is probably otiose here since it's called in next question)
+}
+
 function fill_lightbox(div, score) {
     //todo how to do the following???
     // var name_of_player = user_data.profile.name;
@@ -257,10 +267,21 @@ function fill_lightbox(div, score) {
     document.getElementById(div).innerHTML = "CONGRATULATIONS [YOUR NAME HERE]! YOU'RE READY FOR THE NEXT STAGE";
 }
 
+function increment_module_count() {
+    state.user.current_module_progress++;
+    //todo write something to firebase here
 
-function process_answer(){
-    state.game.process_answer(state);
-    //set_progress_bar(); (this is probably otiose here since it's called in next question)
+    //we have a function called set_user_dat that takes a path and a value
+    //path will go....uid/history/current_module_name/progress
+    //value = current_module_progress + 1
+    //but I need to make sure to set current_module_progress when starting each session
+
+
+
+    set_user_data()
+    function set_user_data(path, value){
+        fbase.child("users").child(state.user.uid).child(path).set(value);
+    }
 }
 
 function pick_question_data(sentence, region_filter){
