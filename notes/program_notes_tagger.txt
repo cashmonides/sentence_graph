@@ -3,6 +3,16 @@ TODO BUGS
 
 
 
+TODO CLEANUP
+
+- eliminate all global functions
+    - make modules a class
+    - make persist a class
+- get rid of state
+    - make quiz an object
+        - this.question_count
+
+
 TODO
 - alert on close (you will lose all progress)
 - module complete (10/10) should trigger a new lightbox and a new module
@@ -12,7 +22,6 @@ TODO
 - change data loaded to sentence data loaded & generalize load in persist to load_path
 - make progress count
 - get a browser name & set up mediatemple
-- where did the write up of the make function go?
 - update user data with more recent categories (bar count, module, etc) - where it says set_user_data("score", state.score); in quiz
 - check if we really need anything as complicated as: (state.bar_count * state.current_module_reward) / state.bar_threshold) / state.current_module_reward >= 1
     - can't we just say bar_count = bar_threshold??

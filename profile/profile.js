@@ -1,10 +1,4 @@
-//var urls = {
-//    //kangaroo: "0B3sTgW9drSJISUlrT1dQMjhfVE0",
-//    kangaroo:"../resources/kangaroo.jpg",
-//    crow: "0B3sTgW9drSJIYXF4WmZtWm9OazA",
-//    bear: "0B3sTgW9drSJIYS1DMnJwZUtndDQ",
-//    bull: "0B3sTgW9drSJIWnU5eWQxbzQwUm8"
-//}
+
 
 
 
@@ -13,34 +7,24 @@ var prefix = "https://googledrive.com/host/";
 
 
 
-var test_history = {
-    kangaroo: {
-        completed: true,
-        progress: 10,
-        error_rate: null
-    },
-    crow: {
-        completed: false,
-        progress: 8,
-        error_rate: null
-    }
-};
-
-
-//create account -> no initial history
-//load game -> load firebase
-//as he beats each level -> write to firebase his new or updated history
-
-// var user : {
-//     history : {
-//         module_id : {
-//             completed: false,
-//             progress: 8,
-//             error_rate: null
-//         }
+// var test_history = {
+//     kangaroo: {
+//         completed: true,
+//         progress: 3,
+//         error_rate: null
 //     },
-// }
-    
+//     crow: {
+//         completed: false,
+//         progress: 3,
+//         error_rate: null
+//     }
+// };
+
+
+
+
+
+
 
 
 
@@ -78,7 +62,7 @@ function display_profile() {
     console.log("FIRST PARTS COMPLETED")
 
 
-    // var history = test_history;
+    
     console.log("user.data = ", user.data);
     var history = user.data.history;
     console.log("HISTORY LOADED = ", history);
@@ -88,11 +72,10 @@ function display_profile() {
 
 function build_progress_table(history) {
 
-    var test_history = user.data.history;
-    console.log("DEBUG 10/29 test history = ", test_history);
+    // var test_history = user.data.history;
+    // console.log("DEBUG 10/29 test history = ", test_history);
 
     var e3 = document.getElementById("table");
-    //var row = make("tr");
     var row = make({tag: "tr"});
     var max_columns = 2;
 
@@ -108,7 +91,7 @@ function build_progress_table(history) {
 
     for (var i = 0; i < order.length; i++) {
 
-        var current_item = modules[order[i]].icon_name;
+        var current_item = modules[order[i]].id;
         console.log("NEW TEST", history[current_item].completed);
         var url = modules[order[i]].icon_url;
 

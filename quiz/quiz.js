@@ -1,19 +1,13 @@
-
-var SCORE_REWARD = 5;
-var SCORE_PENALTIES = [0, -1, -3];
-
+// var SCORE_REWARD = 5;
+// var SCORE_PENALTIES = [0, -1, -3];
 
 
 var state = {
-
         user_data: null,
-
         user: {
             uid: null
         },
-
         anonymous: true,
-
         sentences: null,
         game: null,
         word_selector: null,
@@ -28,24 +22,17 @@ var state = {
         correct_streak: 0,
         incorrect_streak: 0,
         max_incorrect_streak: 3,
-        switch_count: 10,               //=threshold
-        progress_multiplier: 10,        //(a relic from the first implementation of progress bar)
-
-        lightbox_count: 3,              //a relic, replace with threshold
-
-
-        current_module: "kangaroo",
-        current_module_progress: 0,
+        // switch_count: 10,               //=threshold
+        // progress_multiplier: 10,        //(a relic from the first implementation of progress bar)
+        current_module: null,
+        
         current_module_reward: 2,
         current_module_penalty: 1,
-        current_module_threshold: 10,
+        
+        // current_module_threshold: 10,
 
         bar_count: 0,
         bar_threshold: 10
-
-
-
-
     };
 
 
@@ -56,48 +43,14 @@ window.onbeforeunload = function () {
 };
 
 function start(){
-
     set_progress_bar();
-    
     load_user_data();
     load(data_loaded);
-    
-    
 }
 
-function set_progress_bar_old() {
-    // var x = (state.question_count / state.switch_count) * 100;
-    // var x = random_choice([10,20,30,40,50,60,70,80,90,100]);
-    //var x = state.mode_streak * state.progress_multiplier;
-
-
-    console.log("DEBUG 10-26 state.mode_streak", state.mode_streak);
-
-    //var x = (state.mode_streak * state.current_module_reward);
-    //x = x / 4;
-    //x = x / state.current_module_threshold;
-    //x = x * 100;
-
-    //var x = state.mode_streak / state.current_module_threshold;             //this one is giving .1%
-    //var x = (state.mode_streak / state.current_module_threshold) * 100;
-
-    var x;
-    if (state.current_module_progress === 0) {
-        x = 0;
-    } else {
-        x = (state.current_module_progress / state.current_module_threshold) * 100;
-    }
-
-    var e = document.getElementById("progress-bar");
-    e.style.width = x + "%";
-    document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
-}
 
 
 function set_progress_bar() {
-    //todo make sure mode streak is changed to bar_count
-    console.log("DEBUG 10-26 state.mode_streak", state.mode_streak);
-
     var x;
     if (state.bar_count === 0) {
         x = 0;
@@ -108,7 +61,6 @@ function set_progress_bar() {
     e.style.width = x + "%";
     document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
 }
-
 
 function reset_progress_bar(){
     var x = 0;
@@ -127,8 +79,6 @@ function load_user_data(){
 }
 
 
-
-
 function user_data_loaded() {
     //todo should we also load user id??
     //todo should score and question count be used at all?
@@ -136,6 +86,7 @@ function user_data_loaded() {
     //todo probably eliminate question count
     state.question_count = state.user_data.data.question_count;
 }
+
 
 //data_loaded gets passed the data that comes back to us from firebase
 //so we want to deserialize this data
@@ -170,11 +121,11 @@ function change_mode(){
     state.bar_count = 0;
     reset_progress_bar();
 
-    //todo test code here comment when done
+    //todo forced into quick mode for testing
     var new_mode;
     new_mode = get_mode(2);
 
-    //todo real code here uncomment when done
+    //todo real code below - uncomment when done testing
     //var new_mode;
     //var random_number;
 
@@ -185,6 +136,7 @@ function change_mode(){
     //    new_mode = get_mode(random_number);
     //    console.log("string of game = ", state.game.get_mode_name(), new_mode.get_mode_name());// state.game.prototype.toString(), new_mode.prototype.toString());
     //} while (state.game.get_mode_name() == new_mode.get_mode_name());
+    
     set_mode(new_mode);
 }
 
@@ -215,22 +167,6 @@ function next_question(){
 
 function next_question_2 () {
 
-    //todo old code below
-    //if(((state.current_module_progress * state.current_module_reward) / state.current_module_threshold) / state.current_module_reward >= 1){
-    //    state.mode_streak = 0;
-    //    if (!state.anonymous) {
-    //        set_user_data("score", state.score);
-    //        set_user_data("question_count", state.question_count);
-    //    }
-    //    //todo we really want this to be change module but we will improve later
-    //    change_mode();state.incorrect_streak = 0;
-    //} else {
-    //    state.question_count++;
-    //    state.mode_streak++;
-    //    state.game.next_question(state);
-    //}
-
-
     //todo new code below
     //todo should the following be changed to: if (state.bar_count >= state.bar_threshold)???
     if(((state.bar_count * state.current_module_reward) / state.bar_threshold) / state.current_module_reward >= 1){
@@ -246,9 +182,6 @@ function next_question_2 () {
         //todo we really want this to be change module but we will improve later
         change_mode();
     } else {
-        //// we don't want to increase mode_streak here right? only if they get it right
-        //state.question_count++;  // otiose??
-        //state.mode_streak++;    // otiose??
         state.game.next_question(state);
     }
     
@@ -257,31 +190,17 @@ function next_question_2 () {
 
 function process_answer(){
     state.game.process_answer(state);
-    //set_progress_bar(); (this is probably otiose here since it's called in next question)
 }
 
 function fill_lightbox(div, score) {
-    //todo how to do the following???
-    // var name_of_player = user_data.profile.name;
-    // document.getElementById(div).innerHTML = "CONGRATULATIONS " + name_of_player +"! YOU'RE READY FOR THE NEXT STAGE";
     document.getElementById(div).innerHTML = "CONGRATULATIONS [YOUR NAME HERE]! YOU'RE READY FOR THE NEXT STAGE";
 }
 
 function increment_module_count() {
-    state.user.current_module_progress++;
-    //todo write something to firebase here
-
-    //we have a function called set_user_dat that takes a path and a value
-    //path will go....uid/history/current_module_name/progress
-    //value = current_module_progress + 1
-    //but I need to make sure to set current_module_progress when starting each session
-
-
-
-    set_user_data()
-    function set_user_data(path, value){
-        fbase.child("users").child(state.user.uid).child(path).set(value);
-    }
+    state.current_module_progress++;
+    //something like the following
+    // set_user_data("uid/history/current_module_name/progress", state.current_module_progress)
+ 
 }
 
 function pick_question_data(sentence, region_filter){
@@ -375,3 +294,22 @@ function toggle_cheat_sheet() {
         }
     };
 }
+
+
+
+
+// function set_progress_bar_old() {
+    
+
+   
+//     var x;
+//     if (state.current_module_progress === 0) {
+//         x = 0;
+//     } else {
+//         x = (state.current_module_progress / state.current_module_threshold) * 100;
+//     }
+
+//     var e = document.getElementById("progress-bar");
+//     e.style.width = x + "%";
+//     document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
+// }

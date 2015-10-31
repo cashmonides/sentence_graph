@@ -39,3 +39,7 @@ User.prototype.logout = function () {
 };
 
 
+
+User.prototype.set_module_progress = function (module_name, progress, callback) {
+    set_path(["users", this.uid, "history", module_name, "progress"], progress, callback);
+};
