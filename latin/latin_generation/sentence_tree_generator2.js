@@ -9,7 +9,7 @@
 
 //below is merely for off-line testing separate from the quiz format
 function make_test(level, language_enum, output_type) {
-    console.log("DEBUG 9-14 level in make_test = ", level);
+    //console.log"DEBUG 9-14 level in make_test = ", level);
 
     var kernel_with_output = make_output(level, language_enum, output_type);
     if (output_type === 'display') {
@@ -49,7 +49,7 @@ function make_output2(level, language_enum, output_type) {
         //todo new material below
         elements = [Elements.Subject, Elements.Object, Elements.Verb];
         lexeme_list = state_to_lexeme(states, level, elements);
-        console.log('9-18 in master lexeme list ' + JSON.stringify(lexeme_list));
+        //console.log'9-18 in master lexeme list ' + JSON.stringify(lexeme_list));
         output = [];
         for (i = 0; i < states.length; i++) {
             kernel = make_kernel_new(level, language_enum, states[i], lexeme_list);
@@ -178,7 +178,7 @@ function make_kernel_new (level, language_enum, state, old_lexeme_list) {
 
     var sentence_in_latin_text = sentence_in_order(default_latin_word_order, sentence_in_latin);
 
-    console.log("sentence_in_latin = ", sentence_in_latin_text);
+    //console.log"sentence_in_latin = ", sentence_in_latin_text);
 
     var kernel_with_output = {};
     kernel_with_output['kernel'] = state;
@@ -195,17 +195,17 @@ function make_kernel_new (level, language_enum, state, old_lexeme_list) {
 
 
 function set_word_setting_new(state, lexeme, element, level) {
-    console.log('DEBUG 9-14 in set_word_setting');
+    //console.log'DEBUG 9-14 in set_word_setting');
     var word_settings_map = {};
 
 
     if (element === "verb") {
-        console.log('DEBUG 9-14 in verb case');
+        //console.log'DEBUG 9-14 in verb case');
         word_settings_map.conjugation = lexeme.properties.latin.family;
         //this will need to be fixed below
 
     } else {
-        console.log('DEBUG 9-14 in noun case');
+        //console.log'DEBUG 9-14 in noun case');
         //language-independent
         word_settings_map.number = (element === "subject" ? state.number : state.number_of_other_nouns);
         word_settings_map.declension = lexeme.properties.latin.family;
@@ -297,7 +297,7 @@ function pick_lexeme_new(kernels, level, element, lexemes_used) {
             return lexeme.properties.core.animate === true})
     }
 
-    //console.log("DEBUG 9-18 allowed lexemes = ", JSON.stringify(allowed_lexemes.map(
+    ////console.log"DEBUG 9-18 allowed lexemes = ", JSON.stringify(allowed_lexemes.map(
     //    function (x) {return x.word_id}
     //)));
 
@@ -308,7 +308,7 @@ function pick_lexeme_new(kernels, level, element, lexemes_used) {
             return map_level_to_allowed(level).gender.indexOf(
                     lexeme.properties.latin.gender) !== -1});
 
-        //console.log("DEBUG 9-18 allowed lexemes = ", JSON.stringify(allowed_lexemes.map(
+        ////console.log"DEBUG 9-18 allowed lexemes = ", JSON.stringify(allowed_lexemes.map(
         //    function (x) {return x.word_id}
         //)));
 
@@ -319,7 +319,7 @@ function pick_lexeme_new(kernels, level, element, lexemes_used) {
         allowed_lexemes = allowed_lexemes.filter(function (lexeme) {
             return map_level_to_allowed(level).conjugation.indexOf(
                     lexeme.properties.latin.family) !== -1});
-        console.log("DEBUG 9-18 allowed lexemes = ", JSON.stringify(allowed_lexemes.map(
+        //console.log"DEBUG 9-18 allowed lexemes = ", JSON.stringify(allowed_lexemes.map(
             function (x) {return x.word_id}
         )));
         allowed_lexemes = allowed_lexemes.filter(function (lexeme) {
@@ -368,7 +368,7 @@ function sentence_in_order(word_order, sentence) {
 function make_form (kernel, level, element, allowed, form_list) {
     var word_settings = set_word_setting(kernel, level, element, allowed);
     var lexeme = pick_lexeme(kernel, level, element, word_settings, allowed, form_list);
-    console.log("2) word settings = ", word_settings);
+    //console.log"2) word settings = ", word_settings);
     return new Form(lexeme, word_settings, element);
 }
 
@@ -438,8 +438,8 @@ function pick_lexeme(kernel, level, element, word_settings, allowed, form_list) 
         return lexeme.properties.core.part_of_speech === part_of_speech});
     allowed_lexemes = allowed_lexemes.filter(function (lexeme) {
         return lexemes_used.indexOf(lexeme.word_id) === -1});
-    console.log("lexemes_used = ", JSON.stringify(lexemes_used));
-    console.log("allowed_lexemes = ", JSON.stringify(allowed_lexemes));
+    //console.log"lexemes_used = ", JSON.stringify(lexemes_used));
+    //console.log"allowed_lexemes = ", JSON.stringify(allowed_lexemes));
     if (kernel.voice === "active" && element === "subject") {
         allowed_lexemes = allowed_lexemes.filter(function (lexeme) {
             return lexeme.properties.core.animate === true})
@@ -458,7 +458,7 @@ function pick_lexeme(kernel, level, element, word_settings, allowed, form_list) 
             return lexeme.properties.latin.transitive === kernel.verb_type})
     }
 
-    console.log("allowed lexemes = ", JSON.stringify(allowed_lexemes.map(
+    //console.log"allowed lexemes = ", JSON.stringify(allowed_lexemes.map(
         function (x) {return x.word_id}
     )));
     return random_choice(allowed_lexemes);
@@ -504,7 +504,7 @@ function set_kernel_properties_2 (kernel, level, state) {
         kernel.verb_type = "transitive";
     }
 
-    console.log("DEBUG 9-14 state = ", JSON.stringify(state));
+    //console.log"DEBUG 9-14 state = ", JSON.stringify(state));
 
 
 
@@ -517,7 +517,7 @@ function set_kernel_properties_2 (kernel, level, state) {
     kernel.gender = random_choice(level < 10 ? ["m"] : (
         (level < 100 || kernel.voice === "active")
             ? ['m', 'f']: ['m', 'f', 'n']));
-    console.log("DEBUG 9-7 kernel = ", JSON.stringify(kernel))
+    //console.log"DEBUG 9-7 kernel = ", JSON.stringify(kernel))
 }
 
 
@@ -592,26 +592,26 @@ function set_kernel_properties_2 (kernel, level, state) {
 
 
 
- console.log("TESTING template = ", JSON.stringify(template));
+ //console.log"TESTING template = ", JSON.stringify(template));
 
 
  //FOURTH: turn the template objects (S O V etc.) into forms
  var form_list = [];
  for (var i = 0; i < template.length; i++) {
- console.log('DEBUG 9-14 Successfully entered loop');
+ //console.log'DEBUG 9-14 Successfully entered loop');
  var form = make_form(kernel, level, template[i], allowed, form_list);
  form_list.push(form);
- console.log("TESTING START for loop make_form");
- console.log("new form = ", JSON.stringify(form));
- console.log("TESTING END for loop make_form");
+ //console.log"TESTING START for loop make_form");
+ //console.log"new form = ", JSON.stringify(form));
+ //console.log"TESTING END for loop make_form");
  }
  kernel.form_list = form_list;
 
 
  //TESTING FINAL OUTPUT
- console.log("TESTING START output of make_kernel");
- console.log("full kernel ", JSON.stringify(kernel));
- console.log("TESTING END make_kernel ");
+ //console.log"TESTING START output of make_kernel");
+ //console.log"full kernel ", JSON.stringify(kernel));
+ //console.log"TESTING END make_kernel ");
  //we create a dictionary with only one initial key:value pair
  //string : function
  //later on we're going to add other key:value pairs
@@ -623,7 +623,7 @@ function set_kernel_properties_2 (kernel, level, state) {
 
  for (i = 0; i < kernel.form_list.length; i++) {
  var current_form = kernel.form_list[i];
- console.log("DEBUG.9-10 current form = ", current_form);
+ //console.log"DEBUG.9-10 current form = ", current_form);
  sentences.forEach(function (sentence) {
  sentence[current_form.element] = sentence.inflect(
  kernel, current_form.lexeme, current_form.word_settings)});
@@ -635,8 +635,8 @@ function set_kernel_properties_2 (kernel, level, state) {
  var sentence_in_latin_text = sentence_in_order(default_latin_word_order, sentence_in_latin);
  var sentence_in_english_text = sentence_in_order(['subject', 'verb', 'object'], sentence_in_english);
 
- console.log("sentence_in_latin = ", sentence_in_latin_text);
- console.log("sentence_in_english = ", sentence_in_english_text);
+ //console.log"sentence_in_latin = ", sentence_in_latin_text);
+ //console.log"sentence_in_english = ", sentence_in_english_text);
 
  kernel_with_output['kernel'] = kernel;
  kernel_with_output['sentence_in_latin'] = sentence_in_latin_text;

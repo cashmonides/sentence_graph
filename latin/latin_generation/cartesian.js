@@ -124,7 +124,7 @@ master_cartesian = function (level) {
     for (var i = 0; i < order.length; i++) {
         states = concat_arrays(states.map(function (state) {return set_cartesian_property(order[i], state, level)}))
     }
-    console.log("LOG master_cartesian states = ", states);
+    //console.log"LOG master_cartesian states = ", states);
     return states;
 };
 
@@ -135,7 +135,7 @@ set_cartesian_property = function(property_name, state, level) {
     var property_values_allowed = map_level_to_allowed(level)[property_name];
     //below will return a list of all allowed values (e.g. ['past', 'present', 'future']
     var list_of_allowed = access_list(state, property_values_allowed);
-    console.log("LOG list_of_allowed in set_cartesian_property = ", list_of_allowed);
+    //console.log"LOG list_of_allowed in set_cartesian_property = ", list_of_allowed);
     return cartesian_product(state, property_name, list_of_allowed);
 };
 
@@ -197,7 +197,7 @@ var values = function(object) {
 
 //a utility function that combines a list of lists into a big list (maybe move to utils eventually)
 concat_arrays = function (list_of_arrays) {
-    //console.log("LOG list of arrays in concat_arrays", list_of_arrays);
+    ////console.log"LOG list of arrays in concat_arrays", list_of_arrays);
     return Array.prototype.concat.apply([], list_of_arrays);
 };
 
@@ -208,7 +208,7 @@ concat_arrays = function (list_of_arrays) {
 //possibly use below
 /*function map_level_to_allowed(parameter, level) {
  var m = level_to_allowed_2[parameter];
- console.log('debug 9-11 1 ' + JSON.stringify(m));
+ //console.log'debug 9-11 1 ' + JSON.stringify(m));
  var s =  Math.max.apply(null, Object.keys(m).filter(function(x) {return x <= level}));
  return m[s]
  }*/

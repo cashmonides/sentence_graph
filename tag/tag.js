@@ -42,8 +42,8 @@ window.onload = function (){
 //no return but calls new_text which is our master function that processes inputted text
 //called by: index.html   (if keycode 13 (enter) is pressed, the text in sentence box is sent to sentence entered which processes it as new_text
 function sentence_entered(){
-    var text = document.getElementById("sentencebox").value;
-    console.log("M: input text pasted into box at sentence_entered = ". text);
+    var text = el("sentencebox").value;
+    //console.log"M: input text pasted into box at sentence_entered = ". text);
     new_text(text);
 }
 
@@ -67,17 +67,17 @@ function new_text(text){
 
     autotag(t, sentence);
 
-    document.getElementById("box").innerHTML = "";
+    el("box").innerHTML = "";
     word_selector = new WordSelector("box", t);
     word_selector.setup();
     show_untagged_words();
 
     update_region_list();
-    document.getElementById("allregions").addEventListener("change", function(x){
+    el("allregions").addEventListener("change", function(x){
         update_subregions();
     });
     //M: Master flow logged below
-    console.log("M: Sentence after autotagging: ", JSON.stringify(sentence));
+    //console.log"M: Sentence after autotagging: ", JSON.stringify(sentence));
 }
 
 
@@ -85,9 +85,9 @@ function show_untagged_words() {
     var words = sentence.words;
     for (var i = 0; i < words.length; i++){
         if (sentence.get_region([i]).get_tags().length == 0) {
-            var e = document.getElementById(i);
+            var e = el(i);
             e.className += " untagged";
-            console.log("untagged word", words[i]);
+            //console.log"untagged word", words[i]);
         }
     }
 }
@@ -96,14 +96,14 @@ function show_untagged_words() {
 function submit_tag(tag_type){
     
     var tag = new SingleRegionTag(tag_list[tag_type]);
-    console.log("submit tag triggered here");
-    console.log("TEST OF tag type", tag, word_selector.highlighted_words.size, word_selector.highlighted_words.values());
+    //console.log"submit tag triggered here");
+    //console.log"TEST OF tag type", tag, word_selector.highlighted_words.size, word_selector.highlighted_words.values());
 
     var indices = word_selector.get_selected_indices();                                                                //indices = highlighted words
-    console.log(indices);
+    //console.logindices);
     var region = sentence.get_region(indices);                                                              //make a region to hold the tags
     if (region != undefined && region != null) {
-        console.log("ADDING TAG ", tag);
+        //console.log"ADDING TAG ", tag);
         region.add_tag(tag);
         update_region_list();
         //todo additions below
@@ -111,7 +111,7 @@ function submit_tag(tag_type){
         //    region.make_clause(tag);
         //}
     }
-    console.log(sentence);
+    //console.logsentence);
     word_selector.clear();
     // debug(indices);
     
@@ -124,7 +124,7 @@ function generate_tags() {
 
 	set_dropdown("tags", tag_list);
 
-    document.getElementById("tags").addEventListener("change", function(x){
+    el("tags").addEventListener("change", function(x){
         generate_regions();
     });
 
@@ -133,12 +133,12 @@ function generate_tags() {
 //fills the right hand side of the 2nd column
 function generate_regions() {
 
-    var dd = document.getElementById("tags");                   //dd = drop-down optios on the left hand side
+    var dd = el("tags");                   //dd = drop-down optios on the left hand side
     if(dd.selectedIndex < 0){
     	return;
     }
     var tag = dd.options[dd.selectedIndex].value;               //tag = clikced tag in right hand box tag will be a string
-    console.log("target tag = ", tag);
+    //console.log"target tag = ", tag);
 
 	var rs = sentence.get_regions().filter(function(r){
 		return contains(r.get_tag_types(), tag);
@@ -156,13 +156,13 @@ function update_region_list(){
 
 function update_subregions(){
 
-    var dd = document.getElementById("allregions");         //dd = drop-down options on the left hand side
+    var dd = el("allregions");         //dd = drop-down options on the left hand side
     if (dd.selectedIndex < 0) {
         return;
     }
     var region = sentence.regions[dd.selectedIndex]; 
                      
-    console.log(region, sentence);
+    //console.logregion, sentence);
     var subregions = sentence.get_sub_regions(region);
 
 	set_dropdown("subregions", subregions, function(x){ return region_to_text(x); });
@@ -201,8 +201,8 @@ function region_to_text(region){
 //no return, just side effects: mutates the HTML
 //called by: window onload
 function generate_buttons() {
-    var e = document.getElementById("buttons");
-    console.log("tag_list = ", JSON.stringify(tag_list));
+    var e = el("buttons");
+    //console.log"tag_list = ", JSON.stringify(tag_list));
     for (var i in tag_list) {
         e.innerHTML += "<button onclick=\"submit_tag(" + i + ")\">" + tag_list[i] + "</button>"
     }
@@ -231,5 +231,5 @@ function clear_all_highlights() {
 //no input, calls save which has no return, just side effects: appends a child to firebase
 //called by: the submit button on the html page
 function submit_sentence(){
-    save(sentence);
+    Sentence.save(sentence);
 }

@@ -2,6 +2,12 @@
 // var SCORE_PENALTIES = [0, -1, -3];
 
 
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+
 var state = {
         user_data: null,
         user: {
@@ -45,7 +51,7 @@ window.onbeforeunload = function () {
 function start(){
     set_progress_bar();
     load_user_data();
-    load(data_loaded);
+    Persist.get("sentence", data_loaded);
 }
 
 
@@ -57,23 +63,23 @@ function set_progress_bar() {
     } else {
         x = (state.bar_count / state.bar_threshold) * 100;
     }
-    var e = document.getElementById("progress-bar");
+    var e = el("progress-bar");
     e.style.width = x + "%";
-    document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
+    el("progress-bar").innerHTML = JSON.stringify(x) + "%";
 }
 
 function reset_progress_bar(){
     var x = 0;
-    var e = document.getElementById("progress-bar");
+    var e = el("progress-bar");
     e.style.width = x + "%";
-    document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
+    el("progress-bar").innerHTML = JSON.stringify(x) + "%";
 }
 
 function load_user_data(){
     state.user_data = new User();
     //the following line both tests the conditional and actually loads the data
     if (!state.user_data.load(user_data_loaded)) {
-        document.getElementById("anonymous_alert").innerHTML = "In Anonymous Session!" + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
+        el("anonymous_alert").innerHTML = "In Anonymous Session!" + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
 
 }
@@ -92,8 +98,8 @@ function user_data_loaded() {
 //so we want to deserialize this data
 //todo rename to sentence_data_loaded
 function data_loaded(data){
-    state.sentences = deserialize(data);
-    console.log("sentences loaded: ", state.sentences.length);
+    state.sentences = Sentence.deserialize(data);
+    //console.log"sentences loaded: ", state.sentences.length);
 
     //todo generalize this so it doesn't always load a quickmode game
     set_mode(new QuickModeGame());
@@ -134,7 +140,7 @@ function change_mode(){
     //do {
     //    random_number = Math.floor(Math.random() * 4);
     //    new_mode = get_mode(random_number);
-    //    console.log("string of game = ", state.game.get_mode_name(), new_mode.get_mode_name());// state.game.prototype.toString(), new_mode.prototype.toString());
+    //    //console.log"string of game = ", state.game.get_mode_name(), new_mode.get_mode_name());// state.game.prototype.toString(), new_mode.prototype.toString());
     //} while (state.game.get_mode_name() == new_mode.get_mode_name());
     
     set_mode(new_mode);
@@ -172,8 +178,8 @@ function next_question_2 () {
     if(((state.bar_count * state.current_module_reward) / state.bar_threshold) / state.current_module_reward >= 1){
         //todo akiva commented this out check that it works //state.bar_count = 0;
         if (!state.anonymous) {
-            set_user_data("score", state.score);
-            set_user_data("question_count", state.question_count);
+            Persist.set(["users", this.user_data.uid, "score"], state.score);
+            Persist.set(["users", this.user_data.uid, "question_count"], state.question_count);
             //todo add module progress here to user data
         }
 
@@ -193,13 +199,13 @@ function process_answer(){
 }
 
 function fill_lightbox(div, score) {
-    document.getElementById(div).innerHTML = "CONGRATULATIONS [YOUR NAME HERE]! YOU'RE READY FOR THE NEXT STAGE";
+    el(div).innerHTML = "CONGRATULATIONS [YOUR NAME HERE]! YOU'RE READY FOR THE NEXT STAGE";
 }
 
 function increment_module_count() {
     state.current_module_progress++;
     //something like the following
-    // set_user_data("uid/history/current_module_name/progress", state.current_module_progress)
+    // Persist.set(["users", this.user_data.uid, "history", current_module_name, "progress"], state.current_module_progress);
  
 }
 
@@ -236,17 +242,17 @@ function set_module_score(x){
 }
 
 function refresh_score() {
-    document.getElementById("scorebox").innerHTML = "Question #" + state.question_count + ", Remaining: " + (state.switch_count - state.mode_streak) + ", Score: " + state.score; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
+    el("scorebox").innerHTML = "Question #" + state.question_count + ", Remaining: " + (state.switch_count - state.mode_streak) + ", Score: " + state.score; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
 }
 
 function refresh_module_score() {
-    document.getElementById("scorebox").innerHTML = "BAR score" + state.bar_count + "/" + state.bar_threshold + ", MODULE Score: " + state.current_module_progress + "/" + state.current_module_threshold;
+    el("scorebox").innerHTML = "BAR score" + state.bar_count + "/" + state.bar_threshold + ", MODULE Score: " + state.current_module_progress + "/" + state.current_module_threshold;
 }
 
 
 
 function set_question_text(question){
-    document.getElementById("questionbox").innerHTML = question;
+    el("questionbox").innerHTML = question;
 }
 
 function wrap_string(tag) {
@@ -254,9 +260,9 @@ function wrap_string(tag) {
 }
 
 function set_word_selector(sentence){
-    console.log("DEBUG 9-29 sentence in set_word_selector", sentence);
-    document.getElementById("testbox").innerHTML = "";
-    console.log(sentence.text);
+    //console.log"DEBUG 9-29 sentence in set_word_selector", sentence);
+    el("testbox").innerHTML = "";
+    //console.logsentence.text);
     state.sentence = sentence;
     //todo changes here
     var word_sel_input;
@@ -275,17 +281,17 @@ function set_word_selector(sentence){
 function get_selected_region(){
     
     var answer_indices = state.word_selector.get_selected_indices();
-    console.log("answer_indices = ", answer_indices);
+    //console.log"answer_indices = ", answer_indices);
     return state.sentence.get_region(answer_indices);
 
 }
 
 
 function toggle_cheat_sheet() {
-    var button = document.getElementById("cheat_sheet_button");
+    var button = el("cheat_sheet_button");
 
     button.onclick = function() {
-        var div = document.getElementById("image_display_box");
+        var div = el("image_display_box");
         if (div.style.display !== 'none') {
             div.style.display = 'none';
         }
@@ -309,7 +315,7 @@ function toggle_cheat_sheet() {
 //         x = (state.current_module_progress / state.current_module_threshold) * 100;
 //     }
 
-//     var e = document.getElementById("progress-bar");
+//     var e = el("progress-bar");
 //     e.style.width = x + "%";
-//     document.getElementById("progress-bar").innerHTML = JSON.stringify(x) + "%";
+//     el("progress-bar").innerHTML = JSON.stringify(x) + "%";
 // }

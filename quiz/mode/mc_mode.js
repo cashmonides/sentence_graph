@@ -30,8 +30,8 @@ MCModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
     //(should word_selector.setup bave a flag for clickable or not clickable?
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
-    document.getElementById("answer_choices").style.display = 'initial';
-    document.getElementById("submit_button").style.display = 'initial';
+    el("answer_choices").style.display = 'initial';
+    el("submit_button").style.display = 'initial';
     state.switch_count = 1;
 };
 
@@ -40,14 +40,14 @@ MCModeGame.prototype.get_mode_name = function() {
 }
 
 MCModeGame.prototype.next_question = function (){
-    console.log("DEBUG 9-29 next_question reached");
+    //console.log"DEBUG 9-29 next_question reached");
 
     var data = make_output(test_level, null, 'quiz_english');
     this.latin_question = data.latin_question;
-    console.log("DEBUG 9-29 data.latin_question", data.latin_question);
+    //console.log"DEBUG 9-29 data.latin_question", data.latin_question);
     this.english_correct_answer = data.english_correct_answer;
     this.english_choices = data.english_choices;
-    console.log(data.english_choices.length);
+    //console.logdata.english_choices.length);
 
     //clear answer_choices box
     // while (cbox.options.length > 0) {
@@ -62,7 +62,7 @@ MCModeGame.prototype.next_question = function (){
     refresh_score();
     set_question_text("Pick the right translation.");
     set_word_selector(data.latin_question);
-    //console.log("DEBUG 9-29 data.latin_question", data.latin_question);
+    ////console.log"DEBUG 9-29 data.latin_question", data.latin_question);
     this.make_drop_down();
     // this.make_submit_button();
 };
@@ -73,13 +73,13 @@ MCModeGame.prototype.make_drop_down = function(){
 
 
 // MCModeGame.prototype.make_submit_button = function() {
-//     var submitbox = document.getElementById("submitbox");
+//     var submitbox = el("submitbox");
 //     submitbox.innerHTML = "<button onclick=\"process_answer()\">submit</button>";
 // };
 
 
 MCModeGame.prototype.process_answer= function(){
-    var dd = document.getElementById('answer_choices');
+    var dd = el('answer_choices');
     var selected_answer = dd.options[dd.selectedIndex].value;
     //old code is below, which exploits the .is_correct property
     //var is_correct = option.is_correct;
@@ -103,13 +103,13 @@ MCModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
 MCModeGame.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
 
 MCModeGame.prototype.process_correct_answer = function () {
-    console.log("answer matches target");
+    //console.log"answer matches target");
     state.incorrect_streak = 0;
     if (state.incorrect_streak < state.max_incorrect_streak) {
         state.count_correct ++;
     }
     var cell_1 = random_choice(MCModeGame.cell_1_feedback_right);
-    var fbox = document.getElementById("feedbackbox");
+    var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
     this.next_question();
 }
@@ -125,7 +125,7 @@ MCModeGame.prototype.process_incorrect_answer= function () {
     if (state.incorrect_streak < state.max_incorrect_streak) {
         var cell_1 = random_choice(MCModeGame.cell_1_feedback_wrong);
         var cell_2 = random_choice(MCModeGame.cell_2_feedback_wrong);
-        var fbox = document.getElementById("feedbackbox");
+        var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + cell_2;
     } else {
         this.give_away_answer();
@@ -133,7 +133,7 @@ MCModeGame.prototype.process_incorrect_answer= function () {
 }
 
 MCModeGame.prototype.give_away_answer = function (){
-    var fbox = document.getElementById("feedbackbox");
+    var fbox = el("feedbackbox");
     fbox.innerHTML = "The translation is: " + this.english_correct_answer;
 }
 

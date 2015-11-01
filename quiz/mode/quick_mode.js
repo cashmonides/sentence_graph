@@ -4,8 +4,8 @@ var QuickModeGame = function(){
 
 
 QuickModeGame.prototype.attach = function(){
-    document.getElementById("answer_choices").style.display = 'none';
-    document.getElementById("submit_button").style.display = 'none';
+    el("answer_choices").style.display = 'none';
+    el("submit_button").style.display = 'none';
     state.bar_threshold = 10;
     state.switch_count = 10;
 };
@@ -31,8 +31,8 @@ QuickModeGame.prototype.next_question = function(state){
 
 QuickModeGame.prototype.process_answer = function(state) {
     var tag_names = get_selected_region().get_tag_types();
-    //console.log("tag names:", tag_names);
-    console.log("LOG target tag: ", this.target_tag);
+    ////console.log"tag names:", tag_names);
+    //console.log"LOG target tag: ", this.target_tag);
 
     var is_correct = contains(tag_names, this.target_tag);
     if (is_correct) {
@@ -63,7 +63,7 @@ QuickModeGame.prototype.process_correct_answer = function() {
     state.incorrect_streak = 0;
 
     var cell_1 = random_choice(QuickModeGame.cell_1_feedback_right);
-    var fbox = document.getElementById("feedbackbox");
+    var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
 
     next_question();
@@ -94,7 +94,7 @@ QuickModeGame.prototype.process_correct_answer = function() {
 //        }
 //        var cell_1 = random_choice(QuickModeGame.cell_1_feedback_wrong);
 //        var cell_3 = random_choice(QuickModeGame.cell_3_feedback_wrong);
-//        var fbox = document.getElementById("feedbackbox");
+//        var fbox = el("feedbackbox");
 //        fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
 //    } else {
 //        this.give_away_answer();
@@ -131,7 +131,7 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
         }
         var cell_1 = random_choice(QuickModeGame.cell_1_feedback_wrong);
         var cell_3 = random_choice(QuickModeGame.cell_3_feedback_wrong);
-        var fbox = document.getElementById("feedbackbox");
+        var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
     } else {
         this.give_away_answer();
@@ -143,7 +143,7 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
 };
 
 QuickModeGame.prototype.give_away_answer = function(){
-    var fbox = document.getElementById("feedbackbox");
+    var fbox = el("feedbackbox");
     fbox.innerHTML = "";
     var self = this;
     state.sentence.get_regions_with_tag(this.target_tag).forEach(function(r){

@@ -76,7 +76,7 @@ HTML: <img src=RELATIVE + icon_url>
 */
 
 //i create a dictionary and I map an id I pick to an object which contains the id itself
-var modules = {
+var ALL_MODULES = {
     0: {
         id: 0,
         next: 1
@@ -112,12 +112,12 @@ var modules = {
 
 function get_module_order(){
     var order = [];
-    var m = modules[0]; // start is always 0
+    var m = ALL_MODULES[0]; // start is always 0
     
     while(m.next){
-        m = modules[m.next];
+        m = ALL_MODULES[m.next];
         order.push(m.id);
-        console.log(m.icon_name);
+        //console.logm.icon_name);
     }
     
     return order;

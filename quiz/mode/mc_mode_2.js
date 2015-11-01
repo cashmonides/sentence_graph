@@ -32,9 +32,9 @@ MCMode2Game.prototype.attach = function(){
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
 
     //todo
-    document.getElementById("answer_choices").style.display = 'initial';
+    el("answer_choices").style.display = 'initial';
 
-    document.getElementById("submit_button").style.display = 'initial';
+    el("submit_button").style.display = 'initial';
     state.switch_count = 1;
 };
 
@@ -69,12 +69,12 @@ MCMode2Game.prototype.next_question = function (){
 
 
 
-    console.log("LOG: question = ", this.question);
-    console.log("LOG: sentence = ", this.sentence);
-    console.log("LOG: target_indices = ", this.target_indices);
-    console.log("LOG: drop_downs = ", JSON.stringify(this.drop_downs));
-    console.log("LOG: give_away_phrase = ", this.give_away_phrase);
-    console.log("LOG: correct_answer = ", this.correct_answer);
+    //console.log"LOG: question = ", this.question);
+    //console.log"LOG: sentence = ", this.sentence);
+    //console.log"LOG: target_indices = ", this.target_indices);
+    //console.log"LOG: drop_downs = ", JSON.stringify(this.drop_downs));
+    //console.log"LOG: give_away_phrase = ", this.give_away_phrase);
+    //console.log"LOG: correct_answer = ", this.correct_answer);
 
 
     refresh_score();
@@ -110,13 +110,13 @@ MCMode2Game.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
 MCMode2Game.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
 
 MCMode2Game.prototype.process_correct_answer = function () {
-    console.log("answer matches target");
+    //console.log"answer matches target");
     state.incorrect_streak = 0;
     if (state.incorrect_streak < state.max_incorrect_streak) {
         state.count_correct++;
     }
     var cell_1 = random_choice(MCMode2Game.cell_1_feedback_right);
-    var fbox = document.getElementById("feedbackbox");
+    var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
     this.next_question();
 };
@@ -132,7 +132,7 @@ MCMode2Game.prototype.process_incorrect_answer= function () {
     if (state.incorrect_streak < state.max_incorrect_streak) {
         var cell_1 = random_choice(MCMode2Game.cell_1_feedback_wrong);
         var cell_2 = random_choice(MCMode2Game.cell_2_feedback_wrong);
-        var fbox = document.getElementById("feedbackbox");
+        var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + cell_2;
     } else {
         this.give_away_answer();
@@ -140,6 +140,6 @@ MCMode2Game.prototype.process_incorrect_answer= function () {
 };
 
 MCMode2Game.prototype.give_away_answer = function (){
-    var fbox = document.getElementById("feedbackbox");
+    var fbox = el("feedbackbox");
     fbox.innerHTML = this.give_away_phrase + " " + this.correct_answer;
 };

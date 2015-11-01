@@ -13,7 +13,7 @@
 /*
 function wsg_visitor(kernel, form) {
     if (form.word_setting != null || form.word_setting != undefined) {
-        console.log("ALERT: form.word_setting is already defined");
+        //console.log"ALERT: form.word_setting is already defined");
         return;
     }
     var word_setting;
@@ -24,7 +24,7 @@ function wsg_visitor(kernel, form) {
     }
 
     form.word_settings = word_setting;
-    console.log("wsg vistor exists! word_setting & form = ", word_setting, form);
+    //console.log"wsg vistor exists! word_setting & form = ", word_setting, form);
 }
 */
 
@@ -47,7 +47,7 @@ function wsg_visitor(kernel, form) {
 // returns word_settings_map (which is a map for a single element)
 // it also mutates the kernel settings (e.g. kernel.gender) - possibly these should be moved
 function set_word_setting(kernel, level, element, allowed, output_type) {
-    console.log("DEBUG 10-8 set_word_setting is triggered");
+    //console.log"DEBUG 10-8 set_word_setting is triggered");
     var word_settings_map = {};
     if (element === "verb") {
         word_settings_map.conjugation = random_choice(allowed.conjugation);
@@ -146,10 +146,10 @@ function set_allowed(kernel, language_enum) {
             } else if (kernel.clause_type === "is") {
                 allowed.tense = ["present_infinitive", "perfect_infinitive"];
             } else {
-                console.log("ALERT: no clause type detected");
+                //console.log"ALERT: no clause type detected");
             }
 
-            console.log('DEBUG 9-5 in allowed: Allowed tense = ' + JSON.stringify(allowed.tense));
+            //console.log'DEBUG 9-5 in allowed: Allowed tense = ' + JSON.stringify(allowed.tense));
 
 
 
@@ -179,10 +179,10 @@ function set_allowed(kernel, language_enum) {
                 //}
 
             //TESTING BELOW____________
-            //console.log("TESTING START set_allowed");
-            //console.log("allowed", allowed);
-            //console.log("allowed stringified", JSON.stringify(allowed));
-            //console.log("TESTING END set_allowed");
+            ////console.log"TESTING START set_allowed");
+            ////console.log"allowed", allowed);
+            ////console.log"allowed stringified", JSON.stringify(allowed));
+            ////console.log"TESTING END set_allowed");
             break
     }
     return allowed

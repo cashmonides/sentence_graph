@@ -3,7 +3,7 @@ window.onload = start;
 var user = new User();
 
 function start() {
-    console.log("start triggered");
+    //console.log"start triggered");
     if (!user.load(callback)) {
         alert("Not logged in!");
     } 
@@ -11,15 +11,15 @@ function start() {
 
 
 function callback() {
-    console.log("callback triggered");
-    load_path(["users"], callback2);
+    //console.log"callback triggered");
+    Persist.get(["users"], callback2);
 }
 
 function callback2(data) {
-    console.log("callback2 triggered");
+    //console.log"callback2 triggered");
     var users = data.val();
-    console.log(users);
-    var e = document.getElementById("score_report");
+    //console.logusers);
+    var e = el("score_report");
     // make({tag:"tr", children: [{tag: "td"}]}, e);
     for (var key in users) {
         make({

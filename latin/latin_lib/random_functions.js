@@ -18,7 +18,7 @@ function shuffle(list) {
 }
 
 function shuffle_two_lists(list_1, list_2) {
-    console.log("TEST of list_1 and list_2 in shuffle two lists ", list_1, list_2);
+    //console.log"TEST of list_1 and list_2 in shuffle two lists ", list_1, list_2);
     if (Math.random() < 1 / 2) {
         return list_1.concat(list_2)
     } else {

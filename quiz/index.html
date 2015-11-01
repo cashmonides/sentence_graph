@@ -4,32 +4,31 @@
 <head>
 
     <meta charset="UTF-8">
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+ 	<title>Quiz</title>   
+    
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="../libs/featherlight.min.css">
-
-
-	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+    
+    <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+    <script src="../libs/jquery-1.11.3.min.js"></script>
+    <script src="../libs/featherlight.min.js"></script>
+    <script src="../libs/bootstrap.min.js"></script>
+   
     <script src="../lib/utils.js"></script>
     <script src="../lib/persist.js"></script>
+    <script src="../lib/module.js"></script>
+    <script src="../lib/user.js"></script>
     <script src="../lib/objects.js"></script>
     <script src="../lib/text.js"></script>
     <script src="../lib/word_selector.js"></script>
-    <script src="quick_mode.js"></script>
-    <script src="drop_mode.js"></script>
-    <script src="mc_mode.js"></script>
-    <script src="mc_mode_2.js"></script>
-    <script src="generic_drop_down.js"></script>
-    
-    <script src="../profile/user.js"></script>
-    <script src="quiz.js"></script>
+    <script src="../lib/lightbox.js"></script>
 
-    <!--new imports below-->
-    
-
-
-
-
+    <script src="mode/quick_mode.js"></script>
+    <script src="mode/drop_mode.js"></script>
+    <script src="mode/mc_mode.js"></script>
+    <script src="mode/mc_mode_2.js"></script>
+    <script src="mode/generic_drop_down.js"></script>
 
     <script src="../latin_lib/enums.js"></script>
     <script src="../latin_lib/lexeme.js"></script>
@@ -43,36 +42,8 @@
     <script src="../latin_generation/inflect_english.js"></script>
     <script src="../latin_generation/inflect_latin.js"></script>
 
+    <script src="quiz.js"></script>    
     
-
-    <script src="../modules/modules.js"></script>
-
-
-     <!--jQuery -->
-    
-    <script src="../libs/jquery-1.11.3.min.js"></script>
-    <script src="../libs/featherlight.min.js"></script>
-    <!--<script src="../libs/lightbox.js"></script>-->
-
-     <!--Bootstrap Core JavaScript -->
-    <script src="../libs/bootstrap.min.js"></script>
-
-
-
-
-
-     <!--Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-
-
-    <!--new imports above-->
-
-	<title>Quiz</title>
 
 </head>
 

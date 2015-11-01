@@ -22,8 +22,8 @@ DropModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
     //(should word_selector.setup bave a flag for clickable or not clickable?
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
-    document.getElementById("answer_choices").style.display = 'initial';
-    document.getElementById("submit_button").style.display = 'initial';
+    el("answer_choices").style.display = 'initial';
+    el("submit_button").style.display = 'initial';
     state.switch_count = 2;
     
 };
@@ -67,17 +67,17 @@ DropModeGame.prototype.make_drop_down = function(){
 
 
 DropModeGame.prototype.process_answer = function() {
-    var dd = document.getElementById("answer_choices");
+    var dd = el("answer_choices");
     var selected_answer = dd.options[dd.selectedIndex].value;
-    console.log("selected_answer = ", selected_answer);
+    //console.log"selected_answer = ", selected_answer);
 
     var is_correct = contains(this.data.target_region.get_tag_types(), selected_answer);
 
     if (is_correct) {
-        console.log("correct");
+        //console.log"correct");
         this.process_correct_answer();
     } else {
-        console.log("incorrect");
+        //console.log"incorrect");
         this.process_incorrect_answer();
     }
 
@@ -88,13 +88,13 @@ DropModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
 DropModeGame.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
 
 DropModeGame.prototype.process_correct_answer = function() {
-    console.log("answer matches target");
+    //console.log"answer matches target");
     state.incorrect_streak = 0;
     if (state.incorrect_streak < state.max_incorrect_streak) {
         state.count_correct ++;
     }
     var cell_1 = random_choice(DropModeGame.cell_1_feedback_right);
-    var fbox = document.getElementById("feedbackbox");
+    var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
     
     
@@ -115,7 +115,7 @@ DropModeGame.prototype.process_incorrect_answer = function() {
     if (state.incorrect_streak < state.max_incorrect_streak) {
         var cell_1 = random_choice(DropModeGame.cell_1_feedback_wrong);
         var cell_2 = random_choice(DropModeGame.cell_2_feedback_wrong);
-        var fbox = document.getElementById("feedbackbox");
+        var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + cell_2;
     } else {
         this.give_away_answer();
@@ -123,7 +123,7 @@ DropModeGame.prototype.process_incorrect_answer = function() {
 };
 
 DropModeGame.prototype.give_away_answer = function(){
-    var fbox = document.getElementById("feedbackbox");
+    var fbox = el("feedbackbox");
     fbox.innerHTML = "The highlighted word is: " + this.target_tag;
 };
 

@@ -1,0 +1,150 @@
+div {
+    /*border : solid 1px black;*/
+}
+
+body {
+    font-family: 'Baskerville', sans-serif;
+    font-size: 22px;
+    color: #666;
+    background:#bdc3c7;
+    padding: 10px;
+}
+
+#container {
+    font-family: 'Baskerville', sans-serif;
+    font-size: 22px;
+    color: #666;
+    padding: 10px;
+
+
+
+    vertical-align: middle;
+    max-width:100%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+    background:navajowhite;
+
+    /*max-height:100%;*/
+
+
+
+
+}
+
+
+#title {
+    font-family: 'Baskerville', sans-serif;
+    font-size: 57px;
+    color: #666;
+    background:#bdc3c7;
+    padding: 10px;
+    text-align: center;
+}
+
+.hoverable:hover {
+    color: red;
+
+}
+
+
+/*.tag_names {*/
+    /*color: #9b59b6;*/
+/*}*/
+
+
+
+
+/*#scorebox {*/
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+    /*width: 400px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*border: solid 1px black;*/
+    /*padding: 10px;*/
+    /*background:navajowhite;*/
+/*}*/
+
+
+/*#feedbackbox {*/
+    /*text-align: center;*/
+    /*padding: 10px;*/
+    /*width: 400px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*vertical-align: middle;*/
+
+/*}*/
+
+/*#questionbox {*/
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+    /*padding: 10px;*/
+    /*width: 400px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+
+/*}*/
+
+/*#testbox {*/
+    /*/!*text-align: center;*!/*/
+    /*vertical-align: middle;*/
+    /*font-size: 30px;*/
+    /*cursor:pointer;*/
+    /*width: 700px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*border: solid 1px black;*/
+    /*padding: 10px;*/
+    /*background:navajowhite;*/
+
+/*}*/
+
+
+/*#answer_choices {*/
+    /*font-size: 20px;*/
+    /*vertical-align: middle;*/
+    /*width: 200px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*padding: 200px;*/
+/*}*/
+
+/*#anonymous_alert {*/
+    /*font-size: 10px;*/
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+    /*width: 400px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*border: solid 1px black;*/
+    /*padding: 10px;*/
+    /*background:navajowhite;*/
+/*}*/
+
+/*#image_display_box {*/
+    /*width: 800px;*/
+    /*height: 200px;*/
+    /*overflow: auto;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*padding: 10px;*/
+    /*vertical-align: middle;*/
+    /*display:none;   /!*change this later when we have images to display*!/*/
+    /*/!*max-width:100%;*!/*/
+    /*/!*max-height:100%;*!/*/
+
+
+    /*/!*<div style="height:180px;width:180px;overflow:auto;">*!/*/
+    /*/!*<img src="/pix/samples/11m.jpg" alt="Sample picture for scroll box">*!/*/
+    /*/!*</div>*!/*/
+/*}*/
+
+
+
+/*#cheat_sheet_image {*/
+    /*max-width:100%;*/
+    /*/!*max-height:100%;*!/*/
+/*}*/
+
