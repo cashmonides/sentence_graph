@@ -51,7 +51,7 @@ window.onbeforeunload = function () {
 function start(){
     set_progress_bar();
     load_user_data();
-    Persist.get("sentence", data_loaded);
+    Persist.get(["sentence"], data_loaded);
 }
 
 
