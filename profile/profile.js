@@ -1,60 +1,30 @@
 
+window.onload = function(){
+    ProfilePage.start();
+}
 
+var ProfilePage = {
+    user: null
+}
 
+ProfilePage.IMAGE_PREFIX = "https://googledrive.com/host/";
 
-var prefix = "https://googledrive.com/host/";
-
-
-
-
-// var test_history = {
-//     kangaroo: {
-//         completed: true,
-//         progress: 3,
-//         error_rate: null
-//     },
-//     crow: {
-//         completed: false,
-//         progress: 3,
-//         error_rate: null
-//     }
-// };
-
-
-
-
-
-
-
-
-
-
-
-var user = null;
-
-
-
-window.onload = start();
-
-
-
-function enter_game() {
+ProfilePage.enter_game = function() {
     document.location = "../quiz/index.html";
-}
+};
 
-function start(){
-    user = new User();
-    user.load(display_profile);
+ProfilePage.start = function(){
+    this.user = new User();
+    this.user.load(this.display_profile.bind(this));
     //console.log"USER in start = ", user);
-}
+};
 
-
-function display_profile() {
+ProfilePage.display_profile = function() {
 
     //var player_name = "PLAYER NAME HERE";
-    var player_name = user.uid;
+    var player_name = this.user.uid;
     var e1 = el("name_box");
-    e1.innerHTML = "Welcome " + user.data.profile.name;
+    e1.innerHTML = "Welcome " + this.user.data.profile.name;
 
     var player_level = "PLAYER LEVEL HERE";
     var e2 = el("level_box");
@@ -64,82 +34,42 @@ function display_profile() {
 
     
     //console.log"user.data = ", user.data);
-    var history = user.data.history;
+    var history = this.user.data.history;
     //console.log"HISTORY LOADED = ", history);
-    build_progress_table(history);
-}
+    this.build_progress_table(history);
+};
 
 
-function build_progress_table(history) {
+ProfilePage.build_progress_table = function(history) {
 
-    // var test_history = user.data.history;
-    // //console.log"DEBUG 10/29 test history = ", test_history);
-
-    var e3 = el("table");
-    var row = make({tag: "tr"});
+    var table = el("table");
+    var row = make({tag: "tr"}, table);
     var max_columns = 2;
-
     var order = get_module_order();
-    //console.log"order = ", order);
-
-    //console.log"history in build_progress_table = ", history);
-    ////console.log"history[order[i].completed", history[order[i].completed);
-
-
-
 
 
     for (var i = 0; i < order.length; i++) {
 
-        var current_item = ALL_MODULES[order[i]].id;
-        //console.log"NEW TEST", history[current_item].completed);
-        var url = ALL_MODULES[order[i]].icon_url;
+        var mod = ALL_MODULES[order[i]];
+        var img_class = history[mod.id].completed ? ["progress_image"] : ["progress_image", "incomplete"];
 
+        make({
+            tag: "td", 
+            class: ["progress_cell"], 
+            children: [
+                {tag: "img", class: img_class, src: mod.icon_url},
+                {tag: "br"},
+                history[mod.id].progress + "/" + mod.threshold
+            ]
+        }, row);
 
-        //todo replace all with make
-        //var cell = make("td", {class:["progress_cell"]});
-        var cell = make({class:["progress_cell"], tag:"td"});
-
-
-        if (history[current_item].completed == false) {
-            //console.log"incomplete level triggered");
-            // var img = make("img", {class: ["progress_image", "incomplete"], src: url});
-            var img = make({class: ["progress_image", "incomplete"], tag: "img", src: url});
-        } else {
-            //console.log"incomplete level not triggered");
-            //var img = make("img", {class: ["progress_image"], src: url});
-            var img = make({class: ["progress_image"], tag: "img", src: url});
-        }
-        cell.appendChild(img);
-        //todo below is an example of the rewriting
-        // cell.appendChild(make("br"));
-        make({tag:"br"}, cell);
-
-        var denominator = ALL_MODULES[order[i]].threshold;
-        var progress_numerator = history[current_item].progress;
-        cell.appendChild(document.createTextNode(progress_numerator + "/" + denominator));
-        //console.logcell);
         if (i > 0 && i % max_columns == 0) {
-            e3.appendChild(row);
-            //row = make("tr");
-            row = make({tag: "tr"});
+            row = make({tag: "tr"}, table);
         }
-        row.appendChild(cell);
+
     }
 
-    e3.appendChild(row);
-
-}
-
-
-
-
-
-
-
-
-
-
+};
 
 
 
