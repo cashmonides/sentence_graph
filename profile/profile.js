@@ -10,7 +10,7 @@ var ProfilePage = {
 ProfilePage.IMAGE_PREFIX = "https://googledrive.com/host/";
 
 ProfilePage.enter_game = function() {
-    document.location = "../quiz/index.html";
+    document.location = "../quiz/";
 };
 
 ProfilePage.start = function(){

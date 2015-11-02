@@ -107,7 +107,7 @@ function data_loaded(data){
 
 function logout_from_quiz() {
     state.user_data.logout();
-    document.location = "../lib/login/login.html";
+    document.location = "../login/";
 }
 
 

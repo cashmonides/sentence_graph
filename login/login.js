@@ -40,11 +40,6 @@ function set_mode(mode){
 }
 
 
-
-function enter_profile() {
-    document.location = "../profile/"
-}
-
 function login(){
     var e = el("email").value;
     var p = el("password").value;
@@ -73,8 +68,7 @@ function create_account() {
             //console.log"Error creating user:", error);
         } else {
             //console.log"Successfully created user account with uid:", userData);
-            set_default_history(userData.uid);
-            set_metadata(userData.uid, n, c, function(){
+            set_user_data(userData.uid, n, c, function(){
                 login_user(e, p, success);
                 //console.log"callback successful");
             });
@@ -86,47 +80,38 @@ function create_account() {
 }
 
 
-function set_metadata(uid, name, class_number, callback) {
-    var data_map = {
-        name: name, 
-        class_number: class_number + "test string",
-        level: 0
-    };
-    //console.log"DATA = ", uid, name, class_number);
-
-    //the field "profile" is created here, doesn't need to be initialized, right?
-    Persist.set(["users", uid, "profile"], data_map, callback);
+function set_user_data(uid, name, class_number, callback) {
     
-}
-
-
-function set_default_history(uid) {
-    //console.log"DEBUGGING 10-30 entering set_default_history");
-    var default_history_map = {
-        "1": {
-            id: 1,
-            name: "kangaroo",
-            completed: false,
-            progress: 0,
-            error_rate: null
+    var data = {
+        profile: {
+            name: name, 
+            class_number: class_number + "test string",
+            level: 0
         },
-        "2": {
-            id: 2,
-            name: "crow",
-            completed: false,
-            progress: 0,
-            error_rate: null
+        history: {
+            "1": {
+                id: 1,
+                completed: false,
+                progress: 0,
+                error_rate: null
+            },
+            "2": {
+                id: 2,
+                completed: false,
+                progress: 0,
+                error_rate: null
+            }
         }
     };
 
-    Persist.set(["users", uid, "history"], default_history_map);
+    Persist.set(["users", uid], data, callback);
     
 }
 
 
 function enter_anonymous_game() {
     delete_cookie("quiz_uid", "/", null);
-    document.location = "../../quiz/index.html";
+    document.location = "../quiz/";
 }
 
 
