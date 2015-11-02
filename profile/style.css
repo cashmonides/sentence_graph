@@ -1,6 +1,8 @@
 
 #table {
     padding: 10px;
+    /*width: 200px*/
+    /*height: 100%*/
 }
 
 
@@ -18,6 +20,10 @@
    width: 68px; 
    height: 68px; 
    border: none;
+}
+
+#start_game_button {
+    font-family: Baskerville;
 }
 
 /*#snake {*/

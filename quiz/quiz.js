@@ -52,7 +52,7 @@ function start(){
 
 // window.onbeforeunload = function () {
 //     alert("window close triggered");
-//     delete_cookie("quiz_uid", "/", null);
+//     user_data.logout()
 // };
 
 

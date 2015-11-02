@@ -69,7 +69,7 @@ function login(){
 function success(authData){
     //console.log"Success triggered authData= ", authData);
     //console.log"authData.uid = ", authData.auth.uid);
-    set_cookie("quiz_uid", authData.auth.uid, "/");
+    User.set_cookie(authData.auth.uid);
     document.location = "../profile/";
 }
 
@@ -103,7 +103,7 @@ function set_user_data(uid, name, class_number, callback) {
 
 
 function enter_anonymous_game() {
-    delete_cookie("quiz_uid", "/", null);
+    User.delete_cookie();
     document.location = "../quiz/";
 }
 

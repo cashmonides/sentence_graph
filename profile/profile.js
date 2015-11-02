@@ -1,11 +1,11 @@
 
 window.onload = function(){
     ProfilePage.start();
-}
+};
 
 var ProfilePage = {
     user: null
-}
+};
 
 ProfilePage.IMAGE_PREFIX = "https://googledrive.com/host/";
 
