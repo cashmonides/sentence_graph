@@ -39,6 +39,25 @@ function set_mode(mode){
     }
 }
 
+function create_account() {
+
+    var e = el("email").value;
+    var p = el("password").value;
+    var n = el("name").value;
+    var c = el("class_number").value;
+
+    var callback = function(error, userData) {
+        if (error) {
+            console.log("Error creating user:", error);
+        } else {
+            console.log("Successfully created user account with uid:", userData);
+            set_user_data(userData.uid, n, c, login);
+        }
+    };
+
+    Persist.create_user(e, p, callback);
+
+}
 
 function login(){
     var e = el("email").value;
@@ -53,32 +72,6 @@ function success(authData){
     set_cookie("quiz_uid", authData.auth.uid, "/");
     document.location = "../profile/";
 }
-
-
-
-function create_account() {
-
-    var e = el("email").value;
-    var p = el("password").value;
-    var n = el("name").value;
-    var c = el("class_number").value;
-
-    var callback = function(error, userData) {
-        if (error) {
-            //console.log"Error creating user:", error);
-        } else {
-            //console.log"Successfully created user account with uid:", userData);
-            set_user_data(userData.uid, n, c, function(){
-                login_user(e, p, success);
-                //console.log"callback successful");
-            });
-        }
-    };
-
-    Persist.create_user(e, p, callback);
-
-}
-
 
 function set_user_data(uid, name, class_number, callback) {
     
@@ -119,7 +112,7 @@ function initiate_change_password() {
     var e = el("email").value;
     var op = el("old_password").value;
     var np = el("new_password").value;
-    change_password(e, op, np);
+    Persist.change_password(e, op, np);
 }
 
 function reset_password() {
@@ -134,14 +127,14 @@ function reset_password() {
         if (error) {
             switch (error.code) {
                 case "INVALID_USER":
-                    //console.log"The specified user account does not exist.");
+                    console.log("The specified user account does not exist.");
                     alert("A PASSWORD RESET HAS BEEN SENT TO YOUR EMAIL");
                     break;
                 default:
-                    //console.log"Error resetting password:", error);
+                    console.log("Error resetting password:", error);
             }
         } else {
-            //console.log"Password reset email sent successfully!");
+            console.log("Password reset email sent successfully!");
             alert("A PASSWORD RESET HAS BEEN SENT TO YOUR EMAIL");
         }
     };
