@@ -1,10 +1,25 @@
-TODO BUGS
+TODO questions
+- there must be a better way of setting every default to 0, instead of my hacky for loop
 
+TODO CHORES
+- remove debugging and add LOG statements
+- make a fuller list of tags for sentence
+    -predicate
+    -adjective
+- send some sentences to firebase for testing
+- make a module sequence
+    - order of animals
+    - images of animals in folder
+    - set parameters for each module
 
+TODO IN LATIN
+- separate allowed lexemes from level, make allowed lexemes part of modules
 
+TODO CLEVER
+- come up with a function that takes a span [100, 300] and, as a module progress (1/10-10/10) samples from an appropriate part of that range
 
-TODO CLEANUP
-
+TODO REFACTORING
+- make a control flow of user and persist
 - eliminate all global functions
     - make modules a class
     - make persist a class
@@ -12,8 +27,21 @@ TODO CLEANUP
     - make quiz an object
         - this.question_count
 
+USER
+- change_password (move from persist.js)
+- login_user (move from persist.js)
+- create user
+
+PERSIST
+
+
+
+QUIZ
+
+
 
 TODO
+- set_module score
 - alert on close (you will lose all progress)
 - module complete (10/10) should trigger a new lightbox and a new module
 - generalize lightbox creation and new stage

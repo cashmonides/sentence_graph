@@ -237,6 +237,8 @@ function set_bar_count(x){
     state.bar_count = Math.max(0, x);
 }
 
+
+//todo rename this to something like set_floor_to_score
 function set_module_score(x){
     state.current_module_progress = Math.max(0, x);
 }
