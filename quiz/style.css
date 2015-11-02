@@ -110,9 +110,9 @@ body {
 
 #progress-bar {
     height: 20px;
-    background-color: "red";
+    background-color: red;
     font-family: "Baskerville";
-    background-image: url("gradientstrip.png");
+    background-image: url("../resources/gradientstrip.png");
 }
 
 

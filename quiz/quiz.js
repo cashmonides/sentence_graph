@@ -43,10 +43,6 @@ var state = {
 
 
 window.onload = start;
-window.onbeforeunload = function () {
-    alert("window close triggered");
-    delete_cookie("quiz_uid", "/", null);
-};
 
 function start(){
     set_progress_bar();
@@ -54,6 +50,10 @@ function start(){
     Persist.get(["sentence"], data_loaded);
 }
 
+// window.onbeforeunload = function () {
+//     alert("window close triggered");
+//     delete_cookie("quiz_uid", "/", null);
+// };
 
 
 function set_progress_bar() {
