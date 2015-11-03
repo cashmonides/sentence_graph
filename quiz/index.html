@@ -13,7 +13,7 @@
     <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
     <script src="../libs/jquery-1.11.3.min.js"></script>
     <script src="../libs/featherlight.min.js"></script>
-    <script src="../libs/bootstrap.min.js"></script>
+    <!--<script src="../libs/bootstrap.min.js"></script>-->
    
     <script src="../lib/utils.js"></script>
     <script src="../lib/persist.js"></script>
@@ -48,106 +48,39 @@
 
 </head>
 
-
 <body>
-  
-  <div id="wrapper">
-      <div id="progress-bar-wrapper" class="progress">
-          <div id="progress-bar" class="progress-bar" role="progressbar"
-              aria-valuemin="0" aria-valuemax="100">
-              
-          </div>
-      </div>
 
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        REVIEW SHEET
-                    </a>
-                </li>
-                <li>
-                    <a href="#">subject</a>
-                </li>
-                <li>
-                    <a href="#">object</a>
-                </li>
-                <li>
-                    <a href="#">verb</a>
-                </li>
-                <li>
-                    <a href="#">subordinate</a>
-                </li>
-                <li>
-                    <a href="#">coordinate</a>
-                </li>
-                <li>
-                    <a href="#">adjective</a>
-                </li>
-                <li>
-                    <a href="#">pronoun</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
+<div id="all">
 
-        <!-- Page Content -->
-        
-        <!-- /#page-content-wrapper -->
-
-
-
-<div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div id="scorebox"></div>                   <!--displays score and other counts-->
-    <br>
-    <div id="feedbackbox"></div>                <!--"correct, no that's a verb, etc-->
-    <br>
-    <div id="questionbox"></div>                <!--"translate" or "click onb the verb"-->
-    <br>
-    <div id="testbox"></div>                    <!--displays a wordselector object (clickable or not)-->
-    <select id="answer_choices"></select>       <!--drop downs-->
-    <!--<div id="submitbox"></div>-->
-    <!--old submit button below-->
-    <button id="submit_button" onclick="process_answer()">submit</button>
-    <button id="logout_button" onclick="logout_from_quiz()">logout</button>
-    <button id="cheat_sheet_button" onclick="toggle_cheat_sheet()">cheat sheet</button>
-    <div id="anonymous_alert"></div>
-    <div id="image_display_box">
-    <img id= "cheat_sheet_image" src="https://drive.google.com/uc?export=view&id=0B3sTgW9drSJITjNHSWFzZTZNNG8">
+    <div id="header">
+        <div id="header-left">NAME</div>   
+        <div id="header-right">SIGN OUT</div>    
     </div>
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Show review sheets</a>
-                    </div>
+
+    <div id="inside-row">
+        <div id="inside-cell">
+            <div id="content">
+                <div id="progress-bar-wrapper" class="progress">
+                    <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div id="before">
+                    <div id="scorebox"></div>
+                    <div id="feedbackbox"></div>
+                    <div id="questionbox"></div>  
+                </div>
+                <div id="testbox"></div>
+                <div id="after">
+                    <select id="answer_choices"></select>
+                    <div id="submitbox"></div>
+                    <button id="submit_button" onclick="process_answer()">submit</button>
+                    <button id="logout_button" onclick="logout_from_quiz()">logout</button>
+                    <button id="cheat_sheet_button" onclick="toggle_cheat_sheet()">cheat sheet</button>
                 </div>
             </div>
         </div>
     </div>
-  
-  
-  
-  
     
-    
-
-
-
-    <!--whenever inserting images replace-->
-    <!--http://docs.google.com/file/d/FILEID/edit-->
-    <!--with:-->
-    <!-- http://drive.google.com/uc?export=view&id=FILEID-->
-
-
-
-
-    
-    <!-- /#wrapper -->
-
-    
-    <div id="pop_up_div" class="lightbox">TEST OF LIGHTBOX</div>
-
+</div>
 
 </body>
 

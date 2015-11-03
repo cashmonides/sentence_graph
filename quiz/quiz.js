@@ -74,7 +74,7 @@ Quiz.prototype.user_loaded = function(){
 
 Quiz.prototype.next_module = function () {
     
-    this.submodule.score = {
+    this.submodule = {
         score: 0, 
         count_correct: 0,
         count_incorrect: 0,
@@ -154,6 +154,7 @@ Quiz.prototype.submodule_complete = function () {
 
 Quiz.prototype.set_progress_bar = function () {
     var x = this.submodule.score === 0 ? 0 : (this.submodule.score / this.module.submodule.threshold) * 100;
+    console.log("x:", x, this.submodule.score, this.module.submodule.threshold);
     var e = el("progress-bar");
     
     e.style.width = x + "%";
