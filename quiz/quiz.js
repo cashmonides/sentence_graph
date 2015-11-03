@@ -7,6 +7,11 @@ var quiz = null;
 
 window.onload = start;
 
+// window.onbeforeunload = function () {
+//     alert("window close triggered");
+//     user_data.logout()
+// };
+
 function start(){
     
     // bootstrap sidebar
@@ -21,9 +26,6 @@ function start(){
 }
 
 
-
-
-
 var Quiz = function () {
     
     this.user = null;
@@ -32,14 +34,13 @@ var Quiz = function () {
     this.word_selector = null;
     
     this.sentences = null; // TODO - pull into own object
-    this.sentence = null;
+
+    // a reference to the ALL_MODULES info, not the user history!
+    this.module = null;
     
-    //quiz object
-    this.current_module = null;
     
-    
-    this.sub_module = {
-        score: 0,                   // min(correct*reward - incorrect*penalty, 0) progress towards completing the sub_module (e.g. 75% done with the progress bar)
+    this.submodule = {
+        score: 0,                   // min(correct*reward - incorrect*penalty, 0) progress towards completing the submodule (e.g. 75% done with the progress bar)
         count_correct: 0,
         count_incorrect: 0,
         incorrect_streak: 0
@@ -58,88 +59,52 @@ Quiz.prototype.start = function(){
     var self = this;
     Sentence.get_all_sentences(function(ss){
         self.sentences = ss;
-        this.next_module();
+        self.next_module();
     });
 
 };
 
 Quiz.prototype.user_loaded = function(){
     
-    this.current_module = ALL_MODULES[this.user.get_current_module()];
-    console.log("current module:", this.current_module);
+    this.module = ALL_MODULES[this.user.get_current_module()];
+    console.log("current module:", this.module);
     
 };
 
 
-// window.onbeforeunload = function () {
-//     alert("window close triggered");
-//     user_data.logout()
-// };
-
-Quiz.prototype.set_progress_bar = function () {
-    var x = this.sub_module.score === 0 ? 0 : (this.sub_module.score / this.current_module.sub_module.threshold) * 100;
-    var e = el("progress-bar");
+Quiz.prototype.next_module = function () {
     
-    e.style.width = x + "%";
-    el("progress-bar").innerHTML = JSON.stringify(x) + "%";
-}
-
-function reset_progress_bar(){
-    var x = 0;
-    var e = el("progress-bar");
-    e.style.width = x + "%";
-    el("progress-bar").innerHTML = JSON.stringify(x) + "%";
-}
-
-
-
-
-function logout_from_quiz() {
-    state.user_data.logout();
-    document.location = "../login/";
-}
-
-
-Quiz.prototype.set_mode = function (game) {
+    this.submodule.score = {
+        score: 0, 
+        count_correct: 0,
+        count_incorrect: 0,
+        incorrect_streak: 0
+    };
     
-    //todo what is the point of the following if statement
-    // if(this.game != null){
-    //     // state.game.detach();
-    // }
+    this.next_submodule();
+    
+};
+
+Quiz.prototype.next_submodule = function(){
+    
+    this.next_mode();
+    this.next_question();
+    
+};
+
+Quiz.prototype.next_mode = function(){
+  
+    var allowed = ALL_MODULES[this.module.id].modes_allowed;
+    var mode = random_choice(allowed);
+    var game = Quiz.get_mode(mode);
     
     this.game = game;
+    this.game.quiz = this;
     this.game.attach();
+    
 };
 
-
-//todo is this used anymore?
-function change_mode(){
-    state.bar_count = 0;
-    reset_progress_bar();
-
-    //todo forced into quick mode for testing
-    var new_mode;
-    new_mode = get_mode(2);
-
-    //todo real code below - uncomment when done testing
-    //var new_mode;
-    //var random_number;
-
-    //todo 4 is an arbitrary parameter below (make it into a global variable updated as new modes get added)
-    //todo - refactor while statement - we don't always want it to be a new mode (only infrequent)
-    //do {
-    //    random_number = Math.floor(Math.random() * 4);
-    //    new_mode = get_mode(random_number);
-    //    //console.log"string of game = ", state.game.get_mode_name(), new_mode.get_mode_name());// state.game.prototype.toString(), new_mode.prototype.toString());
-    //} while (state.game.get_mode_name() == new_mode.get_mode_name());
-    
-    set_mode(new_mode);
-}
-
-function get_mode(mode_number) {
-    //todo uncomment when done testing
-    //mode_number = random_choice([0, 2]);
-    // mode_number = 2;
+Quiz.get_mode = function(mode_number) {
 
     switch(mode_number) {
         case 0 : return new DropModeGame();
@@ -148,39 +113,14 @@ function get_mode(mode_number) {
         case 3 : return new GenericDropGame();
         default : throw "no game mode triggered";
     }
-}
-
-
-Quiz.prototype.next_module = function () {
-    
-    this.sub_module.score = 0;                   // min(correct*reward - incorrect*penalty, 0) progress towards completing the sub_module (e.g. 75% done with the progress bar)
-    this.sub_module.count_correct = 0;
-    this.sub_module.count_incorrect = 0;
-    this.sub_module.incorrect_streak = 0;
-    
-    this.next_sub_module();
     
 };
 
-Quiz.prototype.next_sub_module = function(){
-    
-    var game = this.next_mode();
-    this.set_mode(game);
-    this.set_progress_bar();
-    this.next_question();
-    
-};
 
-Quiz.prototype.next_mode = function(){
-  
-    var allowed = ALL_MODULES[this.current_module.id].modes_allowed;
-    var mode = random_choice(allowed);
-    return get_mode(mode);
-    
-};
 
 Quiz.prototype.next_question = function (){
     
+    this.set_progress_bar();
     this.game.next_question(this);
     
 };
@@ -188,38 +128,60 @@ Quiz.prototype.next_question = function (){
 
 Quiz.prototype.question_complete = function(){
     
-    if (this.sub_module.score >= this.current_module.threshold) {
-        this.sub_module_complete();
+    if (this.submodule.score >= this.module.submodule.threshold) {
+        this.submodule_complete();
     } else {
-        next_question();
+        this.next_question();
     }
     
 };
 
-
-Quiz.prototype.sub_module_complete = function () {
-    if (this.user.sub_module_complete(this.current_module.id)) {
-        this.current_module = ALL_MODULES[this.user.get_current_module()];
-        console.log("current module:", this.current_module);
+Quiz.prototype.submodule_complete = function () {
+    if (this.user.submodule_complete(this.module.id)) {
+        this.module = ALL_MODULES[this.user.get_module()];
+        console.log("current module:", this.module);
         
-        this.fill_lightbox("pop_up_div", "GRADUATED");
+        this.fill_lightbox("GRADUATED");
         $.featherlight($('#pop_up_div'), {afterClose: next_module});
         
     } else {
         //todo put following into function (encapsulation and information hiding)
-        this.fill_lightbox("pop_up_div", this.user.data.history[this.current_module.id].progress);
-        $.featherlight($('#pop_up_div'), {afterClose: next_sub_module});
+        this.fill_lightbox(this.user.get_module(this.module.id).progress);
+        $.featherlight($('#pop_up_div'), {afterClose: next_submodule});
     }
 };
+
+
+Quiz.prototype.set_progress_bar = function () {
+    var x = this.submodule.score === 0 ? 0 : (this.submodule.score / this.module.submodule.threshold) * 100;
+    var e = el("progress-bar");
+    
+    e.style.width = x + "%";
+    el("progress-bar").innerHTML = JSON.stringify(x) + "%";
+};
+
+
+Quiz.logout_from_quiz = function() {
+    this.user_data.logout();
+    document.location = "../login/";
+};
+
+Quiz.reset_progress_bar = function(){
+    var x = 0;
+    var e = el("progress-bar");
+    e.style.width = x + "%";
+    el("progress-bar").innerHTML = JSON.stringify(x) + "%";
+};
+
 
 
 Quiz.prototype.process_answer = function(){
     this.game.process_answer(this);
 };
 
-Quiz.prototype.fill_lightbox = function(div, score) {
+Quiz.prototype.fill_lightbox = function(text) {
     var name = this.user.profile.name;
-    el(div).innerHTML = "CONGRATULATIONS" + name + "! YOU'RE READY FOR THE NEXT STAGE";
+    el("pop_up_div").innerHTML = "CONGRATULATIONS " + name + "!<br>" + text;
 };
 
 
@@ -244,64 +206,52 @@ Quiz.pick_question_data = function(sentence, region_filter){
 
 
 
+Quiz.prototype.refresh_score = function() {
+    el("scorebox").innerHTML = "";
+};
 
-function set_bar_count(x){
-    state.bar_count = Math.max(0, x);
-}
-
-
-//todo rename this to something like set_floor_to_score
-function set_module_score(x){
-    state.current_module_progress = Math.max(0, x);
-}
-
-function refresh_score() {
-    el("scorebox").innerHTML = "Question #" + state.question_count + ", Remaining: " + (state.switch_count - state.mode_streak) + ", Score: " + state.score; //"Correct: " + state.count_correct + ", Incorrect: " + state.count_incorrect;
-}
-
-function refresh_module_score() {
-    el("scorebox").innerHTML = "BAR score" + state.bar_count + "/" + state.bar_threshold + ", MODULE Score: " + state.current_module_progress + "/" + state.current_module_threshold;
-}
+Quiz.prototype.refresh_module_score = function() {
+    el("scorebox").innerHTML = 
+        "Submodule Score: " + this.submodule.score + "/" + this.module.submodule.threshold + "<br>" + 
+        "Module Score: " + this.user.get_module(this.module.id).progress + "/" + this.module.threshold;
+};
 
 
-
-function set_question_text(question){
+Quiz.set_question_text = function(question){
     el("questionbox").innerHTML = question;
-}
+};
 
-function wrap_string(tag) {
+Quiz.wrap_string = function(tag) {
     return "<span class=\"tag_names\">" + tag + "</span>";
-}
+};
 
-function set_word_selector(sentence){
+Quiz.prototype.set_word_selector = function(sentence){
+    
     //console.log"DEBUG 9-29 sentence in set_word_selector", sentence);
     el("testbox").innerHTML = "";
     //console.logsentence.text);
-    state.sentence = sentence;
+    this.sentence = sentence;
     //todo changes here
-    var word_sel_input;
-    if (sentence.text) {
-        word_sel_input = sentence.text;
-    } else {
-        word_sel_input = sentence;
-    }
+    
+    var word_sel_input = sentence.text ? sentence.text : sentence;
+
     var text_data = new Text(word_sel_input);
     text_data.setup();
-    state.word_selector = new WordSelector("testbox", text_data);
-    state.word_selector.setup();    
+    this.word_selector = new WordSelector("testbox", text_data);
+    this.word_selector.setup();    
     
-}
+};
 
-function get_selected_region(){
+Quiz.prototype.get_selected_region = function(){
     
-    var answer_indices = state.word_selector.get_selected_indices();
+    var answer_indices = this.word_selector.get_selected_indices();
     //console.log"answer_indices = ", answer_indices);
-    return state.sentence.get_region(answer_indices);
+    return this.sentence.get_region(answer_indices);
 
-}
+};
 
 
-function toggle_cheat_sheet() {
+Quiz.toggle_cheat_sheet = function() {
     var button = el("cheat_sheet_button");
 
     button.onclick = function() {
@@ -313,7 +263,7 @@ function toggle_cheat_sheet() {
             div.style.display = 'block';
         }
     };
-}
+};
 
 
 
