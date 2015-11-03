@@ -13,15 +13,19 @@ ProfilePage.enter_game = function() {
     document.location = "../quiz/";
 };
 
+//global functions can be simply reference but for methods we have to bind the method to "this" 
+// this.user points to the user object
+// this.display_profile - the this = ProfilePage - but for reasons of scope we need to bind it to the "this" of the ProfilePage
+// bind passes in its argument into the argument of display_profile
 ProfilePage.start = function(){
     this.user = new User();
     this.user.load(this.display_profile.bind(this));
+    // equivalent to: this.user.load(function(){ this.display_profile(); });
     //console.log"USER in start = ", user);
 };
 
 ProfilePage.display_profile = function() {
 
-    //var player_name = "PLAYER NAME HERE";
     var player_name = this.user.uid;
     var e1 = el("name_box");
     e1.innerHTML = "Welcome " + this.user.data.profile.name;
@@ -52,15 +56,18 @@ ProfilePage.build_progress_table = function(history) {
     for (var i = 0; i < order.length; i++) {
 
         var mod = ALL_MODULES[order[i]];
-        var img_class = history[mod.id].completed ? ["progress_image"] : ["progress_image", "incomplete"];
-
+        var mod_history = history[mod.id];
+        
+        var img_class = mod_history && mod_history.completed ? ["progress_image"] : ["progress_image", "incomplete"];
+        
+        
         make({
             tag: "td", 
             class: ["progress_cell"], 
             children: [
                 {tag: "img", class: img_class, src: mod.icon_url},
                 {tag: "br"},
-                history[mod.id].progress + "/" + mod.threshold
+                (mod_history ? mod_history.progress : 0) + "/" + mod.threshold
             ]
         }, row);
 

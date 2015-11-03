@@ -66,7 +66,8 @@ QuickModeGame.prototype.process_correct_answer = function() {
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
 
-    next_question();
+    question_complete();
+    next_question_();
 };
 
 
@@ -152,5 +153,6 @@ QuickModeGame.prototype.give_away_answer = function(){
     });
 
     state.incorrect_streak = 0;
+    question_complete();
     next_question();
 };

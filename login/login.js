@@ -73,6 +73,7 @@ function success(authData){
     document.location = "../profile/";
 }
 
+//sets user data
 function set_user_data(uid, name, class_number, callback) {
     
     var data = {
@@ -81,6 +82,7 @@ function set_user_data(uid, name, class_number, callback) {
             class_number: class_number + "test string",
             level: 0
         },
+        //todo make this a blank history for initial setting
         history: {
             "1": {
                 id: 1,
@@ -103,7 +105,7 @@ function set_user_data(uid, name, class_number, callback) {
 
 
 function enter_anonymous_game() {
-    User.delete_cookie();
+    User.remove_cookie();
     document.location = "../quiz/";
 }
 
@@ -112,7 +114,24 @@ function initiate_change_password() {
     var e = el("email").value;
     var op = el("old_password").value;
     var np = el("new_password").value;
-    Persist.change_password(e, op, np);
+    var callback = function(error) {
+        if (error) {
+            switch (error.code) {
+                case "INVALID_PASSWORD":
+                    //console.log"The specified user account password is incorrect.");
+                    break;
+                case "INVALID_USER":
+                    //console.log"The specified user account does not exist.");
+                    break;
+                default:
+                    //console.log"Error changing password:", error);
+            }
+        } else {
+            alert("Congratulations! You've changed your password. Click on \"I already have an account\" and log in.");
+            //console.log"User password changed successfully!");
+        }
+    };
+    Persist.change_password(e, op, np, callback);
 }
 
 function reset_password() {

@@ -1,69 +1,85 @@
-// var SCORE_REWARD = 5;
-// var SCORE_PENALTIES = [0, -1, -3];
 
+//submodule_progress = how close you are to getting from 5/10 to 6/10
+//module_progress = 5/10 in kangaroo
 
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-
-
-var state = {
-        user_data: null,
-        user: {
-            uid: null
-        },
-        anonymous: true,
-        sentences: null,
-        game: null,
-        word_selector: null,
-        sentence: null,
-
-        score: 0,
-        count_correct: 0,
-        count_incorrect: 0,
-        question_count: 0,
-        mode_streak: 0,
-
-        correct_streak: 0,
-        incorrect_streak: 0,
-        max_incorrect_streak: 3,
-        // switch_count: 10,               //=threshold
-        // progress_multiplier: 10,        //(a relic from the first implementation of progress bar)
-        current_module: null,
-        
-        current_module_reward: 2,
-        current_module_penalty: 1,
-        
-        // current_module_threshold: 10,
-
-        bar_count: 0,
-        bar_threshold: 10
-    };
+var quiz = null;
 
 
 window.onload = start;
 
 function start(){
-    set_progress_bar();
-    load_user_data();
-    Persist.get(["sentence"], data_loaded);
+    
+    // bootstrap sidebar
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    
+    quiz = new Quiz();
+    quiz.start();
+
 }
+
+
+
+
+
+var Quiz = function () {
+    
+    this.user = null;
+    
+    this.game = null;
+    this.word_selector = null;
+    
+    this.sentences = null; // TODO - pull into own object
+    this.sentence = null;
+    
+    //quiz object
+    this.current_module = null;
+    
+    
+    this.sub_module = {
+        score: 0,                   // min(correct*reward - incorrect*penalty, 0) progress towards completing the sub_module (e.g. 75% done with the progress bar)
+        count_correct: 0,
+        count_incorrect: 0,
+        incorrect_streak: 0
+    };
+    
+};
+
+Quiz.prototype.start = function(){
+    
+    this.user = new User();
+    //the following line both tests the conditional and actually loads the data
+    if (!this.user.load(this.user_loaded.bind(this))) {
+        el("anonymous_alert").innerHTML = "In Anonymous Session!" + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
+    }
+    
+    var self = this;
+    Sentence.get_all_sentences(function(ss){
+        self.sentences = ss;
+        this.next_module();
+    });
+
+};
+
+Quiz.prototype.user_loaded = function(){
+    
+    this.current_module = ALL_MODULES[this.user.get_current_module()];
+    console.log("current module:", this.current_module);
+    
+};
+
 
 // window.onbeforeunload = function () {
 //     alert("window close triggered");
 //     user_data.logout()
 // };
 
-
-function set_progress_bar() {
-    var x;
-    if (state.bar_count === 0) {
-        x = 0;
-    } else {
-        x = (state.bar_count / state.bar_threshold) * 100;
-    }
+Quiz.prototype.set_progress_bar = function () {
+    var x = this.sub_module.score === 0 ? 0 : (this.sub_module.score / this.current_module.sub_module.threshold) * 100;
     var e = el("progress-bar");
+    
     e.style.width = x + "%";
     el("progress-bar").innerHTML = JSON.stringify(x) + "%";
 }
@@ -75,35 +91,8 @@ function reset_progress_bar(){
     el("progress-bar").innerHTML = JSON.stringify(x) + "%";
 }
 
-function load_user_data(){
-    state.user_data = new User();
-    //the following line both tests the conditional and actually loads the data
-    if (!state.user_data.load(user_data_loaded)) {
-        el("anonymous_alert").innerHTML = "In Anonymous Session!" + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
-    }
-
-}
 
 
-function user_data_loaded() {
-    //todo should we also load user id??
-    //todo should score and question count be used at all?
-    state.score = state.user_data.data.score;
-    //todo probably eliminate question count
-    state.question_count = state.user_data.data.question_count;
-}
-
-
-//data_loaded gets passed the data that comes back to us from firebase
-//so we want to deserialize this data
-//todo rename to sentence_data_loaded
-function data_loaded(data){
-    state.sentences = Sentence.deserialize(data);
-    //console.log"sentences loaded: ", state.sentences.length);
-
-    //todo generalize this so it doesn't always load a quickmode game
-    set_mode(new QuickModeGame());
-}
 
 function logout_from_quiz() {
     state.user_data.logout();
@@ -111,15 +100,16 @@ function logout_from_quiz() {
 }
 
 
-function set_mode(game){
+Quiz.prototype.set_mode = function (game) {
+    
     //todo what is the point of the following if statement
-    if(state.game != null){
-        // state.game.detach();
-    }
-    state.game = game;
-    state.game.attach();
-    next_question();
-}
+    // if(this.game != null){
+    //     // state.game.detach();
+    // }
+    
+    this.game = game;
+    this.game.attach();
+};
 
 
 //todo is this used anymore?
@@ -149,7 +139,7 @@ function change_mode(){
 function get_mode(mode_number) {
     //todo uncomment when done testing
     //mode_number = random_choice([0, 2]);
-    mode_number = 2;
+    // mode_number = 2;
 
     switch(mode_number) {
         case 0 : return new DropModeGame();
@@ -161,55 +151,80 @@ function get_mode(mode_number) {
 }
 
 
-function next_question(){
-    set_progress_bar();
-    if (state.bar_count >= state.bar_threshold) {
-        fill_lightbox("pop_up_div", state.score);
-        $.featherlight($('#pop_up_div'), {afterClose: next_question_2});
+Quiz.prototype.next_module = function () {
+    
+    this.sub_module.score = 0;                   // min(correct*reward - incorrect*penalty, 0) progress towards completing the sub_module (e.g. 75% done with the progress bar)
+    this.sub_module.count_correct = 0;
+    this.sub_module.count_incorrect = 0;
+    this.sub_module.incorrect_streak = 0;
+    
+    this.next_sub_module();
+    
+};
+
+Quiz.prototype.next_sub_module = function(){
+    
+    var game = this.next_mode();
+    this.set_mode(game);
+    this.set_progress_bar();
+    this.next_question();
+    
+};
+
+Quiz.prototype.next_mode = function(){
+  
+    var allowed = ALL_MODULES[this.current_module.id].modes_allowed;
+    var mode = random_choice(allowed);
+    return get_mode(mode);
+    
+};
+
+Quiz.prototype.next_question = function (){
+    
+    this.game.next_question(this);
+    
+};
+
+
+Quiz.prototype.question_complete = function(){
+    
+    if (this.sub_module.score >= this.current_module.threshold) {
+        this.sub_module_complete();
     } else {
-        next_question_2();
-    }
-}
-
-function next_question_2 () {
-
-    //todo new code below
-    //todo should the following be changed to: if (state.bar_count >= state.bar_threshold)???
-    if(((state.bar_count * state.current_module_reward) / state.bar_threshold) / state.current_module_reward >= 1){
-        //todo akiva commented this out check that it works //state.bar_count = 0;
-        if (!state.anonymous) {
-            Persist.set(["users", this.user_data.uid, "score"], state.score);
-            Persist.set(["users", this.user_data.uid, "question_count"], state.question_count);
-            //todo add module progress here to user data
-        }
-
-
-        state.current_module_progress++;
-        //todo we really want this to be change module but we will improve later
-        change_mode();
-    } else {
-        state.game.next_question(state);
+        next_question();
     }
     
-}
+};
 
 
-function process_answer(){
-    state.game.process_answer(state);
-}
+Quiz.prototype.sub_module_complete = function () {
+    if (this.user.sub_module_complete(this.current_module.id)) {
+        this.current_module = ALL_MODULES[this.user.get_current_module()];
+        console.log("current module:", this.current_module);
+        
+        this.fill_lightbox("pop_up_div", "GRADUATED");
+        $.featherlight($('#pop_up_div'), {afterClose: next_module});
+        
+    } else {
+        //todo put following into function (encapsulation and information hiding)
+        this.fill_lightbox("pop_up_div", this.user.data.history[this.current_module.id].progress);
+        $.featherlight($('#pop_up_div'), {afterClose: next_sub_module});
+    }
+};
 
-function fill_lightbox(div, score) {
-    el(div).innerHTML = "CONGRATULATIONS [YOUR NAME HERE]! YOU'RE READY FOR THE NEXT STAGE";
-}
 
-function increment_module_count() {
-    state.current_module_progress++;
-    //something like the following
-    // Persist.set(["users", this.user_data.uid, "history", current_module_name, "progress"], state.current_module_progress);
- 
-}
+Quiz.prototype.process_answer = function(){
+    this.game.process_answer(this);
+};
 
-function pick_question_data(sentence, region_filter){
+Quiz.prototype.fill_lightbox = function(div, score) {
+    var name = this.user.profile.name;
+    el(div).innerHTML = "CONGRATULATIONS" + name + "! YOU'RE READY FOR THE NEXT STAGE";
+};
+
+
+
+Quiz.pick_question_data = function(sentence, region_filter){
     
     var available_tags = sentence.get_all_tag_types(region_filter);
     var target_tag = random_choice(Array.from(available_tags));
@@ -225,12 +240,9 @@ function pick_question_data(sentence, region_filter){
         target_region: target_region
     };
     
-}
+};
 
-//todo rename this to something like set_floor_to_score
-function set_score(x){
-    state.score = Math.max(0, x);
-}
+
 
 
 function set_bar_count(x){
@@ -305,19 +317,3 @@ function toggle_cheat_sheet() {
 
 
 
-
-// function set_progress_bar_old() {
-    
-
-   
-//     var x;
-//     if (state.current_module_progress === 0) {
-//         x = 0;
-//     } else {
-//         x = (state.current_module_progress / state.current_module_threshold) * 100;
-//     }
-
-//     var e = el("progress-bar");
-//     e.style.width = x + "%";
-//     el("progress-bar").innerHTML = JSON.stringify(x) + "%";
-// }
