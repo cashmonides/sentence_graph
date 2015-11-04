@@ -4,14 +4,15 @@
 }
 
 div {
-    border : solid 1px black;
+    /*border : solid 1px black;*/
 }
 
 body {
     margin: 20px;
     padding: 0px;
+    font-family: 'Libre Baskerville', serif;
     /*font-family: 'Roboto', sans-serif;*/
-    /*font-size: 27px;*/
+    font-size: 27px;
     /*color: #666;*/
     /*background:#bdc3c7;*/
 }
@@ -19,7 +20,7 @@ body {
 #all {
     width: 100%;
     height: 100%;
-    border : solid 1px blue;
+    /*border : solid 1px blue;*/
     display: table;
     position: relative;
 }
@@ -45,7 +46,7 @@ body {
     position: relative;
     display: table-row;
     background: pink;
-    border : solid 2px green;
+    /*border : solid 2px green;*/
     height: 100%;
     text-align: center;
     vertical-align: bottom;
@@ -60,13 +61,13 @@ body {
     /*margin: auto;*/
     text-align: center;
     vertical-align: middle;
-    border : solid 3px blue;
+    /*border : solid 3px blue;*/
     
 }
 
 #content {
     background: white;
     display: inline-block;
-    border : solid 3px blue; 
+    /*border : solid 3px blue; */
     
 }

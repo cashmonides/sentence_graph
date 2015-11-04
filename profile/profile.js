@@ -56,7 +56,8 @@ ProfilePage.build_progress_table = function(history) {
     for (var i = 0; i < order.length; i++) {
 
         var mod = ALL_MODULES[order[i]];
-        var mod_history = history[mod.id];
+    
+        var mod_history = mod.id in history ? history[mod.id] : null;
         
         var img_class = mod_history && mod_history.completed ? ["progress_image"] : ["progress_image", "incomplete"];
         

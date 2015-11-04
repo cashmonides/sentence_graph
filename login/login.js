@@ -40,7 +40,6 @@ function set_mode(mode){
 }
 
 function create_account() {
-
     var e = el("email").value;
     var p = el("password").value;
     var n = el("name").value;
@@ -51,12 +50,10 @@ function create_account() {
             console.log("Error creating user:", error);
         } else {
             console.log("Successfully created user account with uid:", userData);
-            set_user_data(userData.uid, n, c, login);
+            User.set_initial_data(userData.uid, n, c, login);
         }
     };
-
     Persist.create_user(e, p, callback);
-
 }
 
 function login(){
@@ -73,35 +70,7 @@ function success(authData){
     document.location = "../profile/";
 }
 
-//sets user data
-function set_user_data(uid, name, class_number, callback) {
-    
-    var data = {
-        profile: {
-            name: name, 
-            class_number: class_number + "test string",
-            level: 0
-        },
-        //todo make this a blank history for initial setting
-        history: {
-            "1": {
-                id: 1,
-                completed: false,
-                progress: 0,
-                error_rate: null
-            },
-            "2": {
-                id: 2,
-                completed: false,
-                progress: 0,
-                error_rate: null
-            }
-        }
-    };
 
-    Persist.set(["users", uid], data, callback);
-    
-}
 
 
 function enter_anonymous_game() {

@@ -22,7 +22,6 @@ function start(){
     
     quiz = new Quiz();
     quiz.start();
-
 }
 
 
@@ -74,22 +73,20 @@ Quiz.prototype.user_loaded = function(){
 
 Quiz.prototype.next_module = function () {
     
-    this.submodule = {
-        score: 0, 
-        count_correct: 0,
-        count_incorrect: 0,
-        incorrect_streak: 0
-    };
     
     this.next_submodule();
     
 };
 
 Quiz.prototype.next_submodule = function(){
-    
+    this.submodule = {
+        score: 0, 
+        count_correct: 0,
+        count_incorrect: 0,
+        incorrect_streak: 0
+    };
     this.next_mode();
     this.next_question();
-    
 };
 
 Quiz.prototype.next_mode = function(){
@@ -119,10 +116,7 @@ Quiz.get_mode = function(mode_number) {
 
 
 Quiz.prototype.next_question = function (){
-    
-    this.set_progress_bar();
     this.game.next_question(this);
-    
 };
 
 
@@ -133,46 +127,46 @@ Quiz.prototype.question_complete = function(){
     } else {
         this.next_question();
     }
-    
 };
 
 Quiz.prototype.submodule_complete = function () {
     if (this.user.submodule_complete(this.module.id)) {
-        this.module = ALL_MODULES[this.user.get_module()];
+        this.module = ALL_MODULES[this.user.get_current_module()];
         console.log("current module:", this.module);
         
         this.fill_lightbox("GRADUATED");
-        $.featherlight($('#pop_up_div'), {afterClose: next_module});
+        $.featherlight($('#pop_up_div'), {afterClose: this.next_module.bind(this)});
         
     } else {
         //todo put following into function (encapsulation and information hiding)
         this.fill_lightbox(this.user.get_module(this.module.id).progress);
-        $.featherlight($('#pop_up_div'), {afterClose: next_submodule});
+        $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
     }
 };
 
 
 Quiz.prototype.set_progress_bar = function () {
     var x = this.submodule.score === 0 ? 0 : (this.submodule.score / this.module.submodule.threshold) * 100;
-    console.log("x:", x, this.submodule.score, this.module.submodule.threshold);
+    // console.log("x:", x, this.submodule.score, this.module.submodule.threshold);
     var e = el("progress-bar");
     
     e.style.width = x + "%";
     el("progress-bar").innerHTML = JSON.stringify(x) + "%";
 };
 
+// Quiz.reset_progress_bar = function(){
+//     var x = 0;
+//     var e = el("progress-bar");
+//     e.style.width = x + "%";
+//     el("progress-bar").innerHTML = JSON.stringify(x) + "%";
+// };
 
 Quiz.logout_from_quiz = function() {
     this.user_data.logout();
     document.location = "../login/";
 };
 
-Quiz.reset_progress_bar = function(){
-    var x = 0;
-    var e = el("progress-bar");
-    e.style.width = x + "%";
-    el("progress-bar").innerHTML = JSON.stringify(x) + "%";
-};
+
 
 
 
@@ -181,8 +175,8 @@ Quiz.prototype.process_answer = function(){
 };
 
 Quiz.prototype.fill_lightbox = function(text) {
-    var name = this.user.profile.name;
-    el("pop_up_div").innerHTML = "CONGRATULATIONS " + name + "!<br>" + text;
+    var name = this.user.data.profile.name;
+    el("pop_up_div").innerHTML = "CONGRATULATIONS " + name + "!<br>" + "Your module score is: " + text;
 };
 
 
@@ -207,11 +201,14 @@ Quiz.pick_question_data = function(sentence, region_filter){
 
 
 
-Quiz.prototype.refresh_score = function() {
-    el("scorebox").innerHTML = "";
-};
+Quiz.prototype.increment_score = function() {
+    this.submodule.score += this.module.submodule.reward;
+}
 
-Quiz.prototype.refresh_module_score = function() {
+
+
+Quiz.prototype.update_display = function() {
+    this.set_progress_bar();
     el("scorebox").innerHTML = 
         "Submodule Score: " + this.submodule.score + "/" + this.module.submodule.threshold + "<br>" + 
         "Module Score: " + this.user.get_module(this.module.id).progress + "/" + this.module.threshold;

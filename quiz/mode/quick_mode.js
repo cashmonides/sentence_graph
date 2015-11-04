@@ -30,7 +30,7 @@ QuickModeGame.prototype.next_question = function(state){
     var data = Quiz.pick_question_data(sentence, QuickModeGame.region_filter);  
     this.target_tag = data.target_tag;
     //refresh_score();
-    this.quiz.refresh_module_score();
+    this.quiz.update_display();
     Quiz.set_question_text("Click on the word that matches " + Quiz.wrap_string(this.target_tag));
     this.quiz.set_word_selector(data.sentence);
     this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
@@ -69,7 +69,11 @@ QuickModeGame.prototype.process_correct_answer = function() {
     //set_module_score(this.quiz.current_module_progress + this.quiz.current_module_reward);
     
     // set_bar_count(this.quiz.bar_count + this.quiz.current_module_reward);
+    
+    
+    
     this.quiz.incorrect_streak = 0;
+    this.quiz.increment_score();
 
     var cell_1 = random_choice(QuickModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
@@ -109,11 +113,11 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
     } else {
         this.give_away_answer();
+        //refresh_score();
     }
-
-    //refresh_score();
-    this.quiz.refresh_module_score();
+    this.quiz.update_display();
     this.quiz.word_selector.clear();
+
 };
 
 QuickModeGame.prototype.give_away_answer = function(){
