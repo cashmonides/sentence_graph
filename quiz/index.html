@@ -54,9 +54,26 @@
 <div id="all">
 
     <div id="header">
-        <div id="header-left">NAME</div>   
-        <div id="header-right">SIGN OUT</div>    
+        <table id="header_table">
+            <tr>
+                <td class="header_cell">
+                    
+                </td>
+                <td class="header_cell">
+                </td>
+                <td class="header_cell">
+                    
+                </td>
+                <td class="header_cell">
+                </td>
+                <td class="header_cell">
+                    <button class="button" id="logout_button" onclick="logout_from_quiz()">logout</button>
+                </td>
+            </tr>
+        </table>
     </div>
+
+
 
     <div id="inside-row">
         <div id="inside-cell">
@@ -64,19 +81,42 @@
                 <div id="progress-bar-wrapper" class="progress">
                     <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
+                
                 <div id="before">
                     <div id="scorebox"></div>
                     <div id="feedbackbox"></div>
                     <div id="questionbox"></div>  
                 </div>
-                <div id="testbox"></div>
+                
+                <div id="test_wrapper">
+                    <div id="testbox"></div>
+                </div>
+                
                 <div id="after">
                     <select id="answer_choices"></select>
-                    <div id="submitbox"></div>
-                    <button id="submit_button" onclick="process_answer()">submit</button>
-                    <button id="logout_button" onclick="logout_from_quiz()">logout</button>
-                    <button id="cheat_sheet_button" onclick="toggle_cheat_sheet()">cheat sheet</button>
+                    <!--<div id="submitbox"></div>-->
+                    <!--<button id="submit_button" onclick="process_answer()">submit</button>-->
+                    <!--<button id="logout_button" onclick="logout_from_quiz()">logout</button>-->
+                    <!--<button id="cheat_sheet_button" onclick="toggle_cheat_sheet()">cheat sheet</button>-->
                 </div>
+            </div>
+            
+            <div id="footer">
+                <table id="footer_table">
+                    <tr>
+                        <td class="footer_cell">
+                            <div id="drop_downs">
+                                add drop downs here when ready
+                            </div>
+                        </td>
+                        <td class="footer_cell">
+                        </td>
+                        <td class="footer_cell">
+                            <button class="button" id="submit_button" onclick="process_answer()">submit</button>
+                            <button class="button" id="cheat_sheet_button" onclick="toggle_cheat_sheet()">cheat sheet</button>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

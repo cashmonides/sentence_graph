@@ -151,7 +151,7 @@ Quiz.prototype.set_progress_bar = function () {
     var e = el("progress-bar");
     
     e.style.width = x + "%";
-    el("progress-bar").innerHTML = JSON.stringify(x) + "%";
+    // el("progress-bar").innerHTML = JSON.stringify(x) + "%";
 };
 
 // Quiz.reset_progress_bar = function(){

@@ -1,73 +1,400 @@
-
-.lightbox {
-    display: none;
-}
-
 div {
     /*border : solid 1px black;*/
 }
 
 body {
-    margin: 20px;
-    padding: 0px;
-    font-family: 'Libre Baskerville', serif;
-    /*font-family: 'Roboto', sans-serif;*/
-    font-size: 27px;
-    /*color: #666;*/
-    /*background:#bdc3c7;*/
+    font-family: 'Baskerville';
+    font-size: 40px;
+    color: #666;
+    background:#bdc3c7;
 }
 
-#all {
-    width: 100%;
-    height: 100%;
-    /*border : solid 1px blue;*/
-    display: table;
-    position: relative;
+.hoverable:hover {
+    color: #088;
+}
+
+
+.tag_names {
+    color: #9b59b6;
+}
+
+.button {
+    font-family: 'Baskerville';
+    background: antiquewhite;
 }
 
 
 #header {
-    display: table-row;
-    background: #888;
-    width: 100%;
-    display: inline-block;
-
-}
-
-#header-left {
-    float: left;
-}
-
-#header-right {
-    float: right;
-}
-
-#inside-row {
-    position: relative;
-    display: table-row;
-    background: pink;
-    /*border : solid 2px green;*/
-    height: 100%;
+    /*padding: 10px;*/
     text-align: center;
-    vertical-align: bottom;
+    vertical-align: middle;
+    width: 100%;
+    height: auto;
+    /*/!*height: 30px;*!/  doesn't seem to work'*/
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Baskerville';
+    font-size: 15px;
+    color: slategrey;
+    background: navajowhite;
 }
 
-#inside-cell {
+.header_cell {
+    /*padding: 10px;*/
+    text-align: center;
+    vertical-align: middle;
+    width: 33%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Baskerville';
+    font-size: 15px;
+    color: slategrey;
+    background: navajowhite;
+}
+
+
+#progress-bar {
+    /*padding: 10px;  bad effect*/
+    /*margin-left: auto; no apparent effect*/
+    /*margin-right: auto; no apparent effect*/
+    height: 15px;
+    background-color: red;
+    font-family: "Baskerville";
+    background-image: url("../resources/gradientstrip.png");
+}
+
+
+
+/*before testbox = feedback box & questionbox*/
+#before {
+    text-align: center;
+    vertical-align: middle;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 0.5px black;
+    padding: 10px;
+    background:#95a5a6;
+    font-size: 20px;
+}
+
+
+#test_wrapper {
+    padding: 20px;
+    /*margin-right: 10px;*/
+}
+#testbox {
+    /*text-align: justify;*/
+
+
+
+    vertical-align: middle;
+    font-size: 25px;
+    cursor:pointer;
+    /*width: 700px;*/
+    /*width: 100%-auto;*/
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+    padding: 10px;
+    background:navajowhite;
+    white-space: wrap;
+}
+
+/*after testbox = answer choices & submitbox*/
+#after {
+
+}
+
+
+
+
+#footer_table {
+    width: 100%;
+    /*width: 800px;    this makes it not resize the foot*/
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#drop_downs {
+    border: solid 1px black;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+
+}
+
+
+#answer_choices {
+    background:beige;
+    font-size: 20px;
+    vertical-align: middle;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 200px;
+}
+
+
+
+
+/*#questionbox {*/
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+    /*padding: 10px;*/
+    /*width: 400px;*/
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+
+/*}*/
+
+
+
+#anonymous_alert {
+    font-size: 10px;
+    text-align: center;
+    vertical-align: middle;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+    padding: 10px;
+    background:navajowhite;
+}
+
+#image_display_box {
+    width: 800px;
+    height: 200px;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    vertical-align: middle;
+    display:none;   /*change this later when we have images to display*/
+    /*max-width:100%;*/
+    /*max-height:100%;*/
+
+
+    /*<div style="height:180px;width:180px;overflow:auto;">*/
+    /*<img src="/pix/samples/11m.jpg" alt="Sample picture for scroll box">*/
+    /*</div>*/
+}
+
+
+
+
+
+
+#cheat_sheet_image {
+    max-width:100%;
+    /*max-height:100%;*/
+}
+
+
+.lightbox {
+    display: none;
+}
+
+
+
+
+
+
+
+/*sidebar below*/
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+
+
+
+
+/*.lightbox {*/
+/*    display: none;*/
+/*}*/
+
+/*div {*/
+    /*border : solid 1px black;*/
+/*}*/
+
+/*body {*/
+/*    margin: 20px;*/
+/*    padding: 0px;*/
+/*    font-family: 'Libre Baskerville', serif;*/
+    /*font-family: 'Roboto', sans-serif;*/
+/*    font-size: 27px;*/
+    /*color: #666;*/
+    /*background:#bdc3c7;*/
+/*}*/
+
+/*#all {*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+    /*border : solid 1px blue;*/
+/*    display: table;*/
+/*    position: relative;*/
+/*}*/
+
+
+/*#header {*/
+/*    display: table-row;*/
+/*    background: #888;*/
+/*    width: 100%;*/
+/*    display: inline-block;*/
+
+/*}*/
+
+/*#header-left {*/
+/*    float: left;*/
+/*}*/
+
+/*#header-right {*/
+/*    float: right;*/
+/*}*/
+
+/*#inside-row {*/
+/*    position: relative;*/
+/*    display: table-row;*/
+/*    background: pink;*/
+    /*border : solid 2px green;*/
+/*    height: 100%;*/
+/*    text-align: center;*/
+/*    vertical-align: bottom;*/
+/*}*/
+
+/*#inside-cell {*/
     /*top: 25%;*/
     /*position: relative;*/
-    display: table-cell;
+/*    display: table-cell;*/
     /*width: 300px;*/
     /*height: 300px;*/
     /*margin: auto;*/
-    text-align: center;
-    vertical-align: middle;
+/*    text-align: center;*/
+/*    vertical-align: middle;*/
     /*border : solid 3px blue;*/
     
-}
+/*}*/
 
-#content {
-    background: white;
-    display: inline-block;
+/*#content {*/
+/*    background: white;*/
+/*    display: inline-block;*/
     /*border : solid 3px blue; */
     
-}
+/*}*/
