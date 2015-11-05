@@ -71,8 +71,9 @@ QuickModeGame.prototype.process_correct_answer = function() {
     // set_bar_count(this.quiz.bar_count + this.quiz.current_module_reward);
     
     
+    this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
     
-    this.quiz.incorrect_streak = 0;
+    this.quiz.submodule.incorrect_streak = 0;
     this.quiz.increment_score();
 
     var cell_1 = random_choice(QuickModeGame.cell_1_feedback_right);
@@ -80,15 +81,19 @@ QuickModeGame.prototype.process_correct_answer = function() {
     fbox.innerHTML = cell_1;
 
     this.quiz.question_complete();
-    this.quiz.next_question();
+    
 };
 
 
 QuickModeGame.prototype.process_incorrect_answer = function() {
     
+    
     var tag_names = this.quiz.get_selected_region().get_tag_types();
 
-    this.quiz.incorrect_streak ++;
+    this.quiz.submodule.incorrect_streak ++;
+    
+    
+    
     // set_bar_count(this.quiz.bar_count - this.quiz.current_module_penalty);
 
     //if (this.quiz.incorrect_streak = this.quiz.max_incorrect_streak) {
@@ -97,14 +102,14 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
     //}
 
 
-    if (this.quiz.incorrect_streak < this.quiz.max_incorrect_streak) {
+    if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
         var cell_2;
         if (tag_names.length == 0) {
             cell_2 = "That's not a valid region.";
         } else if (tag_names.length == 1) {
-            cell_2 = "That's a " + wrap_string(tag_names[0]);
+            cell_2 = "That's a " + Quiz.wrap_string(tag_names[0]);
         } else {
-            tag_names = tag_names.map(wrap_string);
+            tag_names = tag_names.map(Quiz.wrap_string);
             cell_2 = "That matches the following: " + tag_names.join(", ");
         }
         var cell_1 = random_choice(QuickModeGame.cell_1_feedback_wrong);
@@ -112,6 +117,7 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
     } else {
+        this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
         this.give_away_answer();
         //refresh_score();
     }
@@ -129,7 +135,7 @@ QuickModeGame.prototype.give_away_answer = function(){
         fbox.innerHTML += Quiz.wrap_string(self.target_tag) + " = " + text + "<br>";
     });
 
-    this.quiz.incorrect_streak = 0;
+    this.quiz.submodule.incorrect_streak = 0;
     this.quiz.question_complete();
-    this.quiz.next_question();
+    
 };
