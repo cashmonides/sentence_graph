@@ -59,7 +59,22 @@ ProfilePage.build_progress_table = function(history) {
     
         var mod_history = mod.id in history ? history[mod.id] : null;
         
-        var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image"] : ["progress_image", "incomplete"];
+        var numerator;
+        if (mod_history) {
+            if (mod_history.in_progress) {
+                numerator = mod_history.progress;
+            } else {
+                if (mod_history.iteration > 0) {
+                    numerator = mod.threshold;
+                } else {
+                    numerator = 0
+                }
+            }
+        } else {
+            numerator = 0;
+        }
+        
+         var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image"] : ["progress_image", "incomplete"];
         
         
         make({
@@ -68,7 +83,7 @@ ProfilePage.build_progress_table = function(history) {
             children: [
                 {tag: "img", class: img_class, src: mod.icon_url},
                 {tag: "br"},
-                (mod_history ? mod_history.progress : 0) + "/" + mod.threshold
+                numerator + "/" + mod.threshold
             ]
         }, row);
 

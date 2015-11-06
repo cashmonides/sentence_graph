@@ -1,3 +1,65 @@
+TODO loose ends
+- put a border around current module
+- make modules clickable with lightbox/alert for "do you want to improve your accuracy"
+- metadata for sentence (author, date, etc.)
+- anonymous mode
+- in non-anonymous mode - populate header with name and level
+- mode change within submodule
+    - 
+
+- admin page
+- drop mode
+- lightbox
+- set up on media temple
+- obfuscation and general defensiveness
+- tracking data
+    - make sure the tracking of questions and such is robust enough to allow a full statistical analysis
+    - total count of questions
+    - count correct
+        - specified for each sentence
+        - specified for each mode
+    - count incorrect
+    - incorrect streak (pushed to list, maybe, and given an average??)
+        - produces # of times max_incorrect_streak reached
+    - goal:
+        - see the stats for each module (for Akiva to tweak backstage)
+        - see the stats for each kid (so kids and parents can see their progress)
+        - see the stats for a grade level (so Akiva and parents can compare individual progress to collective progress)
+    - where to store individual data
+        - in history (module by module)
+            - count correct
+            - count incorrect
+            - max streak reached
+    - where to store metrics on sentences
+            - in sentence object
+            - fields
+                -count correct
+                - count incorrect
+                - max streak reached
+            - each field has to be initialized upon creation (because firebase doesn't create fields in they don't exist)
+    - operations to aggregate data 
+        - iterate over users to produce an aggregate module metrics
+        
+        
+        
+        - in each individual user
+            - count correct
+            - count incorrect
+            - max streak reached
+        - 
+        - in a separate region
+            - metrics
+                - sentence_id
+                    count correct
+                    count incorrect
+                    max streak reached
+            - each field has to be initialized upon creation (because firebase doesn't create fields in they don't exist)
+- incorporate latin
+
+
+
+
+
 TODO questions
 - there must be a better way of setting every default to 0, instead of my hacky for loop
 
@@ -667,3 +729,55 @@ i.e. text is just a shortcut for putting in a single children
 {tag: "whatever". text: "hello"}
 
 {tag: "whatever". children: ["hello"], text: "xxx"}
+
+
+
+
+
+
+
+
+SOCIAL ENGINEERING:
+competition:
+    - we want to encourage students to compete with each other at two levels simultaneously:
+    	- "advance" highest module
+	    - "improve" repeat module (improve accuracy) 
+focus:
+    - we want students to be focussed, i.e. we don't want students to be able to jump from module to module. I.e. it would be too crazy to be playing too many modules at once
+
+
+
+
+
+OPTION 1: locked in improvement
+	if a student chooses to improve, they're locked in improvement until they finish 
+		- pros: more focused
+		- cons: trapped feeling
+		
+OPTION 2: parallel advance & improve
+	- on any given session, a student can either improve or advance and they can switch back and forth between those two modes
+		- but of course they can only be improving on on one level at a time
+	- e.g. 
+		- Vincent is on level Kraken 7/10
+		- his buddy John is at the same level but his accuracy is higher at lower levels
+		- so Vincent goes home, clicks "improve"
+			- message: "you've chosen to improve your accuracy - pick the module you want to improve"
+			- he picks kangaroo
+				- his user profile changes and locks him in at kangaroo for improving
+				- he starts improving at kangaroo
+				- his profile now looks like this:
+					- kraken has a box around it and is red
+					- kangaroo has a light box around it saying "improving" or something like that
+					- he has two buttons: "improve" and "advance" 
+					- improve takes him to kangaroo
+					- advance takes him to kraken
+		- pros: encourages both modes
+		- cons: harder to program
+
+
+
+
+
+
+
+

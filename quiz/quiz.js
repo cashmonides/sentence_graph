@@ -63,9 +63,22 @@ Quiz.prototype.start = function(){
 
 };
 
-Quiz.prototype.user_loaded = function(){
+Quiz.prototype.get_start_module = function(){
     
-    this.module = ALL_MODULES[this.user.get_current_module()];
+    // if(url_param && is_valid(url_param)){
+        // return url_param
+    // } else {
+        return this.user.get_current_module();
+    // }
+    
+};
+
+Quiz.prototype.user_loaded = function(){
+    //todo var id will change depending on url parameters (given by profile page)
+    var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE)
+    this.module = ALL_MODULES[id];
+    this.user.start_module(id);
+    
     console.log("current module:", this.module);
     
 };
