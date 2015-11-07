@@ -44,6 +44,9 @@ ProfilePage.display_profile = function() {
 };
 
 
+
+
+
 ProfilePage.build_progress_table = function(history) {
 
     var table = el("table");

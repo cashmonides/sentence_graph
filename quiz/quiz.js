@@ -63,6 +63,7 @@ Quiz.prototype.start = function(){
 
 };
 
+//
 Quiz.prototype.get_start_module = function(){
     
     // if(url_param && is_valid(url_param)){
@@ -70,25 +71,27 @@ Quiz.prototype.get_start_module = function(){
     // } else {
         return this.user.get_current_module();
     // }
-    
 };
 
 Quiz.prototype.user_loaded = function(){
+    console.log("DEBUG 11-7 entering user_loaded = ");
     //todo var id will change depending on url parameters (given by profile page)
     var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE)
+    
+    console.log("DEBUG 11-7 id = ", id);
+    
     this.module = ALL_MODULES[id];
+    
+    console.log("DEBUG 11-7 this.module = ", this.module);
+    
     this.user.start_module(id);
     
     console.log("current module:", this.module);
-    
 };
 
 
 Quiz.prototype.next_module = function () {
-    
-    
     this.next_submodule();
-    
 };
 
 Quiz.prototype.next_submodule = function(){
@@ -152,9 +155,37 @@ Quiz.prototype.submodule_complete = function () {
         
     } else {
         //todo put following into function (encapsulation and information hiding)
-        this.fill_lightbox(this.user.get_module(this.module.id).progress);
+        this.fill_lightbox(this.user.get_current_module(this.module.id).progress);
         $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
     }
+};
+
+
+Quiz.prototype.update_display = function() {
+    var mod = this.user.get_current_module();
+    var module_icon = ALL_MODULES[mod].icon_url;
+    var module_name = ALL_MODULES[mod].icon_name;
+    console.log("DEBUG 11-7 mod = ", mod);
+    console.log("DEBUG 11-7 this.user.mod.progress = ", this.user.data.history[mod].progress);
+    
+    
+    this.set_progress_bar();
+    el("name_header").innerHTML = this.user.data.profile.name;
+    el("class_header").innerHTML = this.user.data.profile.class_number;
+    el("level_header").innerHTML = "<img src=" + module_icon + ">";
+    el("fraction_header").innerHTML = module_name + ": " + this.user.data.history[mod].progress + "/" + this.module.threshold;
+    // el("level_header").innerHTML = "submodule: " + this.submodule.score + "/" + this.module.submodule.threshold
+    // + "module: " + "<img src=" + module_icon + ">\"";
+    // el("scorebox").innerHTML = 
+    //     "Submodule Score: " + this.submodule.score + "/" + this.module.submodule.threshold + "<br>" + 
+    //     "Module Score: " + this.user.get_current_module(this.module.id).progress + "/" + this.module.threshold;
+    
+    
+    
+    var table = el("level_header");
+    var row = make({tag: "img"}, table);
+    
+    
 };
 
 
@@ -174,9 +205,20 @@ Quiz.prototype.set_progress_bar = function () {
 //     el("progress-bar").innerHTML = JSON.stringify(x) + "%";
 // };
 
-Quiz.logout_from_quiz = function() {
-    this.user_data.logout();
-    document.location = "../login/";
+
+
+//todo not yet working
+// Quiz.logout_from_quiz = function() {
+//     this.user.logout();
+//     // document.location = "../login/";
+//     // document.location = "../login/login/";
+// };
+
+
+Quiz.return_to_profile = function() {
+    // document.location = "../login/";
+    // document.location = "https://sentence-graph-cashmonides.c9.io/login/"
+    // document.location = "../profile/";
 };
 
 
@@ -220,12 +262,7 @@ Quiz.prototype.increment_score = function() {
 
 
 
-Quiz.prototype.update_display = function() {
-    this.set_progress_bar();
-    el("scorebox").innerHTML = 
-        "Submodule Score: " + this.submodule.score + "/" + this.module.submodule.threshold + "<br>" + 
-        "Module Score: " + this.user.get_module(this.module.id).progress + "/" + this.module.threshold;
-};
+
 
 
 Quiz.set_question_text = function(question){
@@ -278,3 +315,13 @@ Quiz.toggle_cheat_sheet = function() {
 
 
 
+
+//todo wasn't working as Quiz.logout_from_quiz
+
+function logout_from_quiz() {
+    document.location = "../login/";
+}
+
+function return_to_profile() {
+    document.location = "../profile/";
+}

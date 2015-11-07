@@ -44,7 +44,7 @@
     <!--<script src="../latin_generation/inflect_english.js"></script>-->
     <!--<script src="../latin_generation/inflect_latin.js"></script>-->
 
-    <script src="quiz.js"></script>    
+    <script src="quiz.js"></script> 
     
 
 </head>
@@ -56,15 +56,17 @@
     <div id="header">
         <table id="header_table">
             <tr>
-                <td class="header_cell">
+                <td class="header_cell" id="name_header">
                     
                 </td>
-                <td class="header_cell">
+                <td class="header_cell" id="class_header">
+                </td>
+                <td class="header_cell" id="level_header">
+                </td>
+                <td class="header_cell" id="fraction_header">
                 </td>
                 <td class="header_cell">
-                    
-                </td>
-                <td class="header_cell">
+                    <button class="button" id="return_to_profile_button" onclick="return_to_profile()">profile</button>
                 </td>
                 <td class="header_cell">
                     <button class="button" id="logout_button" onclick="logout_from_quiz()">logout</button>

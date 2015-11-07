@@ -1,3 +1,71 @@
+TODO BUGS
+- logout button & return to profile not working except as global functions - where should they be if not global?
+- when a submodule is complete - lightbox says: "Your module score is: undefined"
+- deep design issue: we need some layer of multiple tagging "we" is a personal pronoun and also a subject
+- the give away function should be changed
+    - give away with a lightbox and a next button
+
+
+TODO add functionality
+- if they finish the last module they get a message telling them so
+
+TODO make elegant
+- put all html into the abstract make form
+
+TODO
+persist error messages to firebase
+profile.js needs to send data to quiz.js as to what module to do    
+    - perhaps via url parameters (e.g. ?mod=3)
+- add the improve mode
+    - add but freeze out everything for now
+- finishing module should move the player to profile page
+- test drop mode
+- incorporate latin
+- go through code and comment
+
+
+
+
+
+
+TODO fields
+
+(improvement can be inferred from in_progress = true & iterations > 0)
+how do we determine what their progress is on improvement modu
+the difference between improve and advance is whether iterations > 0
+
+
+history / module_id : {
+    iterations: 2        0-many
+    in_progress: bool
+    progress: 8/10
+    metrics : {
+        iteration : {
+            wrong: {
+                0:
+                1:
+                2:
+                3:
+            }
+            }
+    }
+}
+
+//total questions = wrong[0] / total_count
+
+
+
+
+
+TODO
+- speed of module <-> desire to improve a module
+- low improvement rate -> frustration at improving
+    - so if no exit from improving level, -> john doe will stop improving
+
+
+
+
+
 TODO loose ends
 - put a border around current module
 - make modules clickable with lightbox/alert for "do you want to improve your accuracy"
