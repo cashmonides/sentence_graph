@@ -1,13 +1,36 @@
 TODO BUGS
+- 
 - logout button & return to profile not working except as global functions - where should they be if not global?
 - when a submodule is complete - lightbox says: "Your module score is: undefined"
 - deep design issue: we need some layer of multiple tagging "we" is a personal pronoun and also a subject
 - the give away function should be changed
-    - give away with a lightbox and a next button
+    - give away with a lightbox and a next butto
+- "that's a adverb"
+ - "your module score is undefined"
+- @ quiz.js 169 Uncaught TypeError: Cannot read property 'progress' of undefined
+- when graduating a module 4/5 -> 5/5
+- probably: logging out of a session resets progress bar but doesn't reset the metrics (i.e. question correct)
 
+
+TODO ????
+- aren't next_module and next_submodule redundant?
+- //todo understand the following
+    this.game.quiz = this;
+- submodule_complete is done in both user.js and quiz.js 
 
 TODO add functionality
-- if they finish the last module they get a message telling them so
+- give away answer needs improving:
+    - in question box: keep the question reformulated as: whoops, the _____ is highlighted
+    - in word_selector: the answer gets highlighted
+    - create an element next
+- finishing the game should take us somewhere predictable
+    - lightbox: congratulations you've beaten every level, now work on your accuracy
+    - documet.location is set to profile
+
+- avoid asking the identical question twice in a row
+- want to avoid situation where accuracy is persisted so much that we lose granularity and its hackable
+    - i.e. profile play profile play profile
+- add anonymous alert to header
 
 TODO make elegant
 - put all html into the abstract make form

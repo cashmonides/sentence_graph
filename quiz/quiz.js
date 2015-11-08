@@ -2,6 +2,7 @@
 //submodule_progress = how close you are to getting from 5/10 to 6/10
 //module_progress = 5/10 in kangaroo
 
+
 var quiz = null;
 
 
@@ -13,12 +14,11 @@ window.onload = start;
 // };
 
 function start(){
-    
     // bootstrap sidebar
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
+    // $("#menu-toggle").click(function(e) {
+    //     e.preventDefault();
+    //     $("#wrapper").toggleClass("toggled");
+    // });
     
     quiz = new Quiz();
     quiz.start();
@@ -47,12 +47,18 @@ var Quiz = function () {
     
 };
 
+
+
+//loads user data
+//loads sentences with callback next_module
 Quiz.prototype.start = function(){
-    
     this.user = new User();
+   
+   //todo
     //the following line both tests the conditional and actually loads the data
     if (!this.user.load(this.user_loaded.bind(this))) {
-        el("anonymous_alert").innerHTML = "In Anonymous Session!" + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
+        el("XXXXXXXXXXXX").innerHTML = "In Anonymous Session!";
+        //  + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
     
     var self = this;
@@ -63,7 +69,9 @@ Quiz.prototype.start = function(){
 
 };
 
-//
+
+
+//decides whether we go to current or some other module determined at profile page
 Quiz.prototype.get_start_module = function(){
     
     // if(url_param && is_valid(url_param)){
@@ -74,27 +82,31 @@ Quiz.prototype.get_start_module = function(){
 };
 
 Quiz.prototype.user_loaded = function(){
-    console.log("DEBUG 11-7 entering user_loaded = ");
+    // console.log("DEBUG 11-7 entering user_loaded = ");
     //todo var id will change depending on url parameters (given by profile page)
     var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE)
     
-    console.log("DEBUG 11-7 id = ", id);
+    // console.log("DEBUG 11-7 id = ", id);
     
     this.module = ALL_MODULES[id];
     
-    console.log("DEBUG 11-7 this.module = ", this.module);
+    // console.log("DEBUG 11-7 this.module = ", this.module);
     
     this.user.start_module(id);
     
-    console.log("current module:", this.module);
+    // console.log("current module:", this.module);
 };
 
 
 Quiz.prototype.next_module = function () {
+    //todo bug: if game is over, next module gets called and tries to make a new game
+    
+    
     this.next_submodule();
 };
 
 Quiz.prototype.next_submodule = function(){
+    //initializes a default
     this.submodule = {
         score: 0, 
         count_correct: 0,
@@ -106,12 +118,12 @@ Quiz.prototype.next_submodule = function(){
 };
 
 Quiz.prototype.next_mode = function(){
-  
     var allowed = ALL_MODULES[this.module.id].modes_allowed;
     var mode = random_choice(allowed);
     var game = Quiz.get_mode(mode);
     
     this.game = game;
+    //todo understand the following
     this.game.quiz = this;
     this.game.attach();
     
@@ -146,44 +158,54 @@ Quiz.prototype.question_complete = function(){
 };
 
 Quiz.prototype.submodule_complete = function () {
+    
+    
+    var mod = this.user.get_current_module(this.module.id);  //int
+    var numerator = this.user.data.history[mod].progress;
+    console.log("DEBUG 11-8 mod, numerator = ", mod, numerator);
+    var denominator = ALL_MODULES[mod].threshold;
+        
+    
     if (this.user.submodule_complete(this.module.id)) {
         this.module = ALL_MODULES[this.user.get_current_module()];
-        console.log("current module:", this.module);
+        // console.log("current module:", this.module);
+        //todo check here if we've beaten the game, if so, give them a graduation level
         
-        this.fill_lightbox("GRADUATED");
-        $.featherlight($('#pop_up_div'), {afterClose: this.next_module.bind(this)});
+        if (this.get_current_module() == null) {
+            this.fill_lightbox("You've beaten the game")
+            $.featherlight($('#pop_up_div'));
+        } else {
+            this.fill_lightbox("YOU'VE BEATEN THIS LEVEL");
+            $.featherlight($('#pop_up_div'), {afterClose: this.next_module.bind(this)});
+        }
         
     } else {
+        
         //todo put following into function (encapsulation and information hiding)
-        this.fill_lightbox(this.user.get_current_module(this.module.id).progress);
+        //todo make this less hacky
+        this.fill_lightbox("YOUR PROGRESS IS: " + (numerator + 1) + "/" + denominator);
         $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
     }
 };
 
 
 Quiz.prototype.update_display = function() {
+    //todo in improve mode the following will break
     var mod = this.user.get_current_module();
     var module_icon = ALL_MODULES[mod].icon_url;
     var module_name = ALL_MODULES[mod].icon_name;
-    console.log("DEBUG 11-7 mod = ", mod);
-    console.log("DEBUG 11-7 this.user.mod.progress = ", this.user.data.history[mod].progress);
+    // console.log("DEBUG 11-8 mod = ", mod);
+    // console.log("DEBUG 11-8 this.user.mod.progress = ", this.user.data.history[mod].progress);
     
-    
+
     this.set_progress_bar();
+    
     el("name_header").innerHTML = this.user.data.profile.name;
     el("class_header").innerHTML = this.user.data.profile.class_number;
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
     el("fraction_header").innerHTML = module_name + ": " + this.user.data.history[mod].progress + "/" + this.module.threshold;
-    // el("level_header").innerHTML = "submodule: " + this.submodule.score + "/" + this.module.submodule.threshold
-    // + "module: " + "<img src=" + module_icon + ">\"";
-    // el("scorebox").innerHTML = 
-    //     "Submodule Score: " + this.submodule.score + "/" + this.module.submodule.threshold + "<br>" + 
-    //     "Module Score: " + this.user.get_current_module(this.module.id).progress + "/" + this.module.threshold;
     
     
-    
-    var table = el("level_header");
-    var row = make({tag: "img"}, table);
     
     
 };
@@ -231,7 +253,7 @@ Quiz.prototype.process_answer = function(){
 
 Quiz.prototype.fill_lightbox = function(text) {
     var name = this.user.data.profile.name;
-    el("pop_up_div").innerHTML = "CONGRATULATIONS " + name + "!<br>" + "Your module score is: " + text;
+    el("pop_up_div").innerHTML = "CONGRATULATIONS " + name + "!<br>" + text;
 };
 
 
@@ -258,6 +280,12 @@ Quiz.pick_question_data = function(sentence, region_filter){
 
 Quiz.prototype.increment_score = function() {
     this.submodule.score += this.module.submodule.reward;
+}
+
+
+Quiz.prototype.decrement_score = function() {
+    this.submodule.score -= this.module.submodule.penalty;
+    this.submodule.score = Math.max(0, this.submodule.score);
 }
 
 

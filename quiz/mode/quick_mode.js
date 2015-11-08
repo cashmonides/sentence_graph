@@ -73,8 +73,13 @@ QuickModeGame.prototype.process_correct_answer = function() {
     
     this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
     
+    if (this.quiz.submodule.incorrect_streak == 0) {
+        this.quiz.increment_score();
+    }
+    
     this.quiz.submodule.incorrect_streak = 0;
-    this.quiz.increment_score();
+    
+    
 
     var cell_1 = random_choice(QuickModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
@@ -93,6 +98,14 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
     this.quiz.submodule.incorrect_streak ++;
     
     
+    console.log("Debug 11-8 this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    if (this.quiz.submodule.incorrect_streak === 1) {
+        console.log("Debug 11-8 if triggered");
+        this.quiz.decrement_score();
+    } else {
+        console.log("DEBUG 11-8 if not triggered");
+    }
+
     
     // set_bar_count(this.quiz.bar_count - this.quiz.current_module_penalty);
 
@@ -102,6 +115,7 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
     //}
 
 
+    
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
         var cell_2;
         if (tag_names.length == 0) {
