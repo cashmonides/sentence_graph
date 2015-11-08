@@ -14,10 +14,12 @@
 .progress_cell {
     text-align: center;
     margin: 20px;
+    cursor: pointer;
 }
 
 .progress_cell:hover {
     background: red;
+    border: solid 2px black;
 }
 
 .progress_image {
