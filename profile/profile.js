@@ -77,12 +77,13 @@ ProfilePage.build_progress_table = function(history) {
             numerator = 0;
         }
         
-         var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image"] : ["progress_image", "incomplete"];
+        var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image"] : ["progress_image", "incomplete"];
         
         
         make({
             tag: "td", 
             class: ["progress_cell"], 
+            onclick: ProfilePage.click_handler(mod.id),
             children: [
                 {tag: "img", class: img_class, src: mod.icon_url},
                 {tag: "br"},
@@ -97,5 +98,13 @@ ProfilePage.build_progress_table = function(history) {
 
     }
 
+};
+
+ProfilePage.click_handler = function(mod_id){
+    
+    return function(){
+        document.location = "../quiz/?mod=" + mod_id;
+    };
+    
 };
 

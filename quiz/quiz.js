@@ -74,11 +74,14 @@ Quiz.prototype.start = function(){
 //decides whether we go to current or some other module determined at profile page
 Quiz.prototype.get_start_module = function(){
     
-    // if(url_param && is_valid(url_param)){
-        // return url_param
-    // } else {
+    var ups = get_url_parameters();
+    console.log("quiz url parameters:", ups);
+    
+    if("mod" in ups){
+        return ups["mod"];
+    } else {
         return this.user.get_current_module();
-    // }
+    }
 };
 
 Quiz.prototype.user_loaded = function(){
@@ -99,7 +102,7 @@ Quiz.prototype.user_loaded = function(){
 
 
 Quiz.prototype.next_module = function () {
-    //todo bug: if game is over, next module gets called and tries to make a new game
+    
     
     
     this.next_submodule();
@@ -169,15 +172,9 @@ Quiz.prototype.submodule_complete = function () {
     if (this.user.submodule_complete(this.module.id)) {
         this.module = ALL_MODULES[this.user.get_current_module()];
         // console.log("current module:", this.module);
-        //todo check here if we've beaten the game, if so, give them a graduation level
-        
-        if (this.get_current_module() == null) {
-            this.fill_lightbox("You've beaten the game")
-            $.featherlight($('#pop_up_div'));
-        } else {
-            this.fill_lightbox("YOU'VE BEATEN THIS LEVEL");
-            $.featherlight($('#pop_up_div'), {afterClose: this.next_module.bind(this)});
-        }
+    
+        this.fill_lightbox("YOU'VE BEATEN THIS LEVEL");
+        $.featherlight($('#pop_up_div'), {afterClose: this.next_module.bind(this)});
         
     } else {
         
@@ -191,7 +188,8 @@ Quiz.prototype.submodule_complete = function () {
 
 Quiz.prototype.update_display = function() {
     //todo in improve mode the following will break
-    var mod = this.user.get_current_module();
+    // var mod = this.user.get_current_module();
+    var mod = this.module.id;
     var module_icon = ALL_MODULES[mod].icon_url;
     var module_name = ALL_MODULES[mod].icon_name;
     // console.log("DEBUG 11-8 mod = ", mod);

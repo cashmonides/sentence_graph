@@ -15,6 +15,11 @@
     text-align: center;
     margin: 20px;
 }
+
+.progress_cell:hover {
+    background: red;
+}
+
 .progress_image {
    
    width: 68px; 
