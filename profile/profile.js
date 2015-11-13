@@ -54,7 +54,7 @@ ProfilePage.build_progress_table = function(history) {
     var max_columns = 2;
     var order = get_module_order();
 
-
+    // document.getElementById()
 
     for (var i = 0; i < order.length; i++) {
 
@@ -62,32 +62,18 @@ ProfilePage.build_progress_table = function(history) {
     
         var mod_history = mod.id in history ? history[mod.id] : null;
         
-        var numerator;
-        if (mod_history) {
-            if (mod_history.in_progress) {
-                numerator = mod_history.progress;
-            } else {
-                if (mod_history.iteration > 0) {
-                    numerator = mod.threshold;
-                } else {
-                    numerator = 0
-                }
-            }
-        } else {
-            numerator = 0;
-        }
-        
         var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image"] : ["progress_image", "incomplete"];
         
-        
+        console.log("entering make function");
         make({
             tag: "td", 
             class: ["progress_cell"], 
             onclick: ProfilePage.click_handler(mod.id),
             children: [
-                {tag: "img", class: img_class, src: mod.icon_url},
+                {tag: "img", class: img_class, src: mod.icon_url},                      //UNIVERSAL MODULE
                 {tag: "br"},
-                numerator + "/" + mod.threshold
+                // Should use a function.
+                this.user.get_current_stats(i+1)
             ]
         }, row);
 

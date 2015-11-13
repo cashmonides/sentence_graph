@@ -1,3 +1,35 @@
+??? for GIO
+- in the new mode (with url parameters) we still want no history to be created
+
+
+PROFILE PAGE FUNCTIONALITY
+- all modules displayed with:
+    - completed: accuracy  (hoverable only if no improving has been selected yet, black)
+    - completed, improving: improving x/y old accuracy, new accuracy (hoverable, green)
+    - in progress: x/y (e.g., 5/10), accuracy percentage (hoverable, red)
+    - uncompleted: blank    (not hoverable, grey)
+
+
+
+ADMIN FUNCTIONALITY
+- 
+
+AGENDA
+- show Dan url parameters
+- integrate user.is_valid
+
+
+TODO DATA FUNCTIONALITY
+- a function that returns eenglish sentences:
+    Zeus loves Mars
+    Zeus attacked Mars with a spear
+    the Chimera lives under the stairs
+    
+    
+TODO COSMETIC
+- create optgroup for verbs
+
+
 TODO BUGS
 - 
 - logout button & return to profile not working except as global functions - where should they be if not global?

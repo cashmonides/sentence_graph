@@ -76,9 +76,22 @@ Quiz.prototype.get_start_module = function(){
     
     var ups = get_url_parameters();
     console.log("quiz url parameters:", ups);
+    var selected_mod = ups["mod"];
+    console.log("mod = ",selected_mod);
     
     if("mod" in ups){
-        return ups["mod"];
+        
+        //todo additions below
+        if (this.user.is_valid(selected_mod)) {
+            
+            // console.log("returned Boolean: ", this.user.is_valid(selected_mod));
+            return ups["mod"];
+        }
+        else {
+            alert("INVALID MODULE SELECTED");
+            document.location = document.location = "../profile/";
+            // return this.user.get_current_module();
+        }
     } else {
         return this.user.get_current_module();
     }
