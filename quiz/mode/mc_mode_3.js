@@ -34,13 +34,25 @@ MCMode3Game.prototype.get_mode_name = function() {
 
 
 MCMode3Game.prototype.next_question = function (){
+    console.log("DEBUG 11-14 entering make_output");
+    
+    //todo change this when done testing so it's dynamic
+    var test_level = 1;
+    //sets up our lexicon
+    var list_of_lexeme_strings = return_lexicon_from_module(test_level);
+    var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
+    
+    var data = make_output(test_level, current_lexicon);
+    
     //sets data
-    var data = make_output(test_level, null, 'quiz_english');
+    // var data = make_output(test_level, null, 'quiz_english');
     this.question = data.question;
     //todo is the following otiose?
     this.sentence = data.sentence;              // text displayed in display box
     this.target_indices = data.target_indices;      //highlighted word if necessary
 
+    
+    
     //changes the score, progress bar, etc.
     this.quiz.update_display();
 
@@ -55,29 +67,77 @@ MCMode3Game.prototype.next_question = function (){
     this.drop_downs = data.drop_downs;
     
     this.give_away_phrase = data.give_away_phrase;
-    this.correct_answer = data.drop_downs.map(function (x) {return x.correct_answer}).join(' ');
+    this.give_away_ending_phrase = data.give_away_ending_phrase;
+    this.correct_answer = this.drop_downs.map(function (x) {return x.correct_answer || x.non_drop_text}).join(' ');
+    this.none_display = random_choice(map_level_to_allowed(test_level).none_display);
     
-    
-
-    //todo - do we want any highlighted words at all?
+    //todo how important are these remove children statements? I had to comment them out to make it work
+    // document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));
+    var e = document.createElement('div');
+    e.id = 'answer_wrapper';
+    document.getElementById("answer_choices").appendChild(e);
+    //remove_children(document.getElementById("answer_choices"));
+    //todo why is this capitalized
+    Quiz.set_question_text(this.question);
+    this.quiz.set_word_selector(this.sentence);
+    this.quiz.word_selector.is_clickable = false;
     if (this.target_indices) {
         this.target_indices.forEach(function (x) {state.word_selector.set_highlighted(x, true)});
     }
 
-    this.make_drop_down();
+    // Hacky way to guarantee a drop down.
+    var x = this.make_drop_down();
+    if (x === 0) {this.next_question()}
 
 };
+
+MCMode3Game.prototype.display = function (x) {
+    return x.type === 'non_drop' || x.correct_answer || this.none_display
+};
+
 
 MCMode3Game.prototype.make_drop_down = function(){
-    this.drop_downs.forEach(function (x) {set_multiple_drop_downs(x, "answer_choices", x.choices, x.heading)})
+    var drops = 0;
+    var self = this;
+    var e = document.getElementById("answer_wrapper");
+    this.drop_downs.forEach(function (x) {
+        if (self.display(x)) {
+            switch (x.type) {
+                case 'non_drop':
+                    // todo make sure this fix works
+                    var e1 = document.createTextNode(x.non_drop_text || '');
+                    e.appendChild(e1);
+                    break;
+                case 'drop down':
+                    set_multiple_drop_downs(x, e, x.choices, x.heading, self.none_display);
+                    drops++
+                    break;
+                default:
+                    throw new Error('Drop downs should have a type.')
+            }
+            e.appendChild(document.createTextNode(' '))
+        }
+    });
+    return drops
 };
 
-
-
-
+function process_answer_hack () {
+    var self = this;
+    var is_correct = self.drop_downs.every(function (x) {
+        return (x.type === 'non_drop') || (!self.display(x)) ||
+            (selected_option(x.HTML_element) === strip(x.correct_answer || 'none'))});
+    if (is_correct) {
+        self.process_correct_answer();
+    } else {
+        self.process_incorrect_answer();
+    }
+}
 
 MCMode3Game.prototype.process_answer= function(){
-    var is_correct = data.drop_downs.every(function (x) {return selected_option(x.drop_down) === x.correct_answer});
+    var self = this;
+    var is_correct = this.drop_downs.every(function (x) {
+        return (x.type === 'non_drop') || (!self.display(x)) ||
+            (selected_option(x.HTML_element) === strip(x.correct_answer || 'none'))});
     if (is_correct) {
         this.process_correct_answer();
     } else {
@@ -135,7 +195,7 @@ MCMode3Game.prototype.process_incorrect_answer= function () {
 
 MCMode3Game.prototype.give_away_answer = function (){
     var fbox = el("feedbackbox");
-    fbox.innerHTML = this.give_away_phrase + " " + this.correct_answer;
+    fbox.innerHTML = this.give_away_phrase + this.correct_answer + this.give_away_ending_phrase;
     this.quiz.submodule.incorrect_streak = 0;
     this.quiz.question_complete();
 };

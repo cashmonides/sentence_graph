@@ -364,3 +364,10 @@ function logout_from_quiz() {
 function return_to_profile() {
     document.location = "../profile/";
 }
+
+
+
+//todo some of the global functions below are hacky and need to be integrated
+Quiz.process_answer_hack = function () {
+    MCMode3Game.process_answer();
+}

@@ -5,6 +5,7 @@
 
 //MASTER FUNCTION BELOW to make kernel
 function make_output(level, current_lexicon) {
+    console.log("DEBUG 11-14 inside make output");
     var states;
     var i;
     var full_order = ['clause_type', 'sequence', 'tense', 'implicitness', 'person',
@@ -22,6 +23,10 @@ function make_output(level, current_lexicon) {
     var drop_down_settings = map_level_to_allowed(level)['drop_down_settings'];
     var part_of_speech;
     var things_with_part_of_speech;
+
+
+    console.log("DEBUG 11-14 drop_down_settings", drop_down_settings);
+    console.log("DEBUG 11-14 current_lexicon", current_lexicon);
 
     change_state_to_be_made_initial(state_to_be_made);
 

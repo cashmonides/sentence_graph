@@ -32,15 +32,17 @@
     <script src="mode/mc_mode_3.js"></script>
     <script src="mode/generic_drop_down.js"></script>
 
-    <script src="../latin_lib/enums.js"></script>
-    <script src="../latin_lib/lexeme.js"></script>
-    <script src="../latin_lib/lexicon.js"></script>
-    <script src="../latin_lib/random_functions.js"></script>
-    <script src="../latin_generation/cartesian.js"></script>
-    <script src="../latin_generation/sentence_tree_generator4.js"></script>
-    <script src="../latin_generation/word_setting_generator.js"></script>
-    <script src="../latin_generation/inflect_english.js"></script>
-    <script src="../latin_generation/inflect_latin.js"></script>
+    <script src="../latin/latin_lib/enums.js"></script>
+    <script src="../latin/latin_lib/lexeme.js"></script>
+    <script src="../latin/latin_lib/lexicon.js"></script>
+    <script src="../latin/latin_lib/sorting.js"></script>
+    <script src="../latin/latin_lib/sorting2.js"></script>
+    <script src="../latin/latin_lib/random_functions.js"></script>
+    <script src="../latin/latin_generation/cartesian.js"></script>
+    <script src="../latin/latin_generation/sentence_tree_generator4.js"></script>
+    <script src="../latin/latin_generation/word_setting_generator.js"></script>
+    <script src="../latin/latin_generation/inflect_english.js"></script>
+    <script src="../latin/latin_generation/inflect_latin.js"></script>
 
     <script src="quiz.js"></script> 
     
@@ -93,10 +95,9 @@
                 </div>
                 
                 <div id="after">
-                    <select id="answer_choices"></select>
+                    
                     <!--<div id="submitbox"></div>-->
-                    <!--<button id="submit_button" onclick="process_answer()">submit</button>-->
-                    <!--<button id="logout_button" onclick="logout_from_quiz()">logout</button>-->
+                    <!--<button id="submit_button" onclick="process_answer_hack()">submit</button>-->
                     <!--<button id="cheat_sheet_button" onclick="toggle_cheat_sheet()">cheat sheet</button>-->
                 </div>
             </div>
@@ -106,13 +107,16 @@
                     <tr>
                         <td class="footer_cell">
                             <div id="drop_downs">
-                                add drop downs here when ready
+                                <div id="answer_choices">
+                                    <div id="answer_wrapper"></div>
+                                </div>
                             </div>
                         </td>
                         <td class="footer_cell">
                         </td>
                         <td class="footer_cell">
-                            <button class="button" id="submit_button" onclick="process_answer()">submit</button>
+                            <!--<button class="button" id="submit_button" onclick="process_answer_hack()">submit</button>-->
+                            <button class="button" id="submit_button" onclick="MCMode3Game.process_answer()">submit2</button>
                             <button class="button" id="cheat_sheet_button" onclick="toggle_cheat_sheet()">cheat sheet</button>
                         </td>
                     </tr>
@@ -124,7 +128,7 @@
 </div>
 
 
-<div id="pop_up_div" class="lightbox">TEST OF LIGHTBOX</div>
+<!--<div id="pop_up_div" class="lightbox">TEST OF LIGHTBOX</div>-->
 
 
 </body>
