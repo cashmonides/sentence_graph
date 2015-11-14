@@ -1,6 +1,12 @@
 ??? for GIO
 - in the new mode (with url parameters) we still want no history to be created
 
+TODO CLEANUP, ABSTRACTION AND MODULARITY
+- abstract get accuracy and turn it into a util
+
+TODO BUGS
+- add line breaks to admin page
+
 
 PROFILE PAGE FUNCTIONALITY
 - all modules displayed with:
@@ -12,11 +18,12 @@ PROFILE PAGE FUNCTIONALITY
 
 
 ADMIN FUNCTIONALITY
-- 
+- number of iterations
+- accuracy for each iteration
+- aggregate accuracy
+- nested explorer-type display
 
-AGENDA
-- show Dan url parameters
-- integrate user.is_valid
+
 
 
 TODO DATA FUNCTIONALITY
