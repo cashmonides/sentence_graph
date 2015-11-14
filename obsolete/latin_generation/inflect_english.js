@@ -1,7 +1,8 @@
 function inflect_english (kernel, lexeme, word_settings) {
-    if (!lexeme) {return {}}
+    //console.log"DEBUGGING 3 inflect_english part_of_speech = " + lexeme.properties.core.part_of_speech);
     switch (lexeme.properties.core.part_of_speech) {
         case (Part_of_speech.Noun) :
+            //console.log"debug 9-6 inflect-english-noun triggered");
             return (make_article(word_settings) + ' ' +
             inflect_english_noun (kernel, lexeme, word_settings));
         case (Part_of_speech.Verb) : return inflect_english_verb (kernel, lexeme, word_settings);
@@ -10,17 +11,8 @@ function inflect_english (kernel, lexeme, word_settings) {
     }
 }
 
-
 function make_article(word_settings) {
-    return "the";
-
-
-    //below is an idea but first we have to implement a dictionary called article_number
-    //return ['the', word_settings.number === 'singular' ? 'a': ''][article_number[word_settings.element)];
-
-
-    //below is unworkable when it produces multiple answer choices because it produces inconistencies
-    //return random_choice(['the', word_settings.number === 'singular' ? 'a': '']);
+    return random_choice(['the', word_settings.number === 'singular' ? 'a': '']);
 }
 
 
@@ -43,6 +35,9 @@ function inflect_english_noun (kernel, lexeme, word_settings) {
     var p = lexeme.get_properties(Language_enum.English);
 
     //DEBUGGING below
+    ////console.log"P in english noun = ", p);
+    ////console.log"DEBUG 9-6 word_settings.number = ", word_settings.number);
+    ////console.log"DEBUG 9-6 p[word_settings.number] = ", p[word_settings.number]);
 
 
     return p[word_settings.number];
@@ -56,15 +51,15 @@ function inflect_english_noun (kernel, lexeme, word_settings) {
 
 
 function inflect_english_verb (kernel, lexeme, word_settings) {
+
+    //console.log"ENGLISH lexeme in english verb generation = ", JSON.stringify(lexeme));
+
     var pronoun = inflect_english_pronoun(kernel, word_settings);
     var helping = inflect_english_helping_verb(kernel, lexeme, word_settings);
     var main = inflect_english_main_verb(kernel, lexeme, word_settings);
-    var verb = helping + ' '+ main;
-    if (pronoun !== null) {
-        return {'subject': pronoun, 'verb': strip(verb), 'main_entry': 'verb'}
-    } else {
-        return strip(verb)
-    }
+
+
+    return pronoun + " " + helping + " " + main;
 }
 
 
@@ -177,13 +172,19 @@ function inflect_english_helping_verb(kernel, lexeme, word_settings) {
             return "had been";
         }
     } else {
-        return "is buggy";
+        var error = "\nno tense detected. Tense = " + kernel.tense + "seq = " + kernel.sequence + "lex = " + lexeme + 'end debug\n';
+        ////console.logerror);
+        //throw new Error(error);
+        return error;
     }
 }
 
 
 function inflect_english_main_verb(kernel, lexeme, word_settings) {
+    ////debugging only
+    ////console.log"sequence = ", kernel.sequence);
     var p = lexeme.get_properties(Language_enum.English);
+    //console.log"DEBUG 9-6 in inflect english main verb p = ", JSON.stringify(p));
     if (kernel.tense === "present" || kernel.tense === "present_subjunctive") {
         if (kernel.voice === "active") {
             if (kernel.person === "3s") {
@@ -223,6 +224,7 @@ function inflect_english_main_verb(kernel, lexeme, word_settings) {
             return p.passive;
         }
     } else if (kernel.tense === "present_infinitive" && kernel.sequence === "primary") {
+        //console.log"DEBUG 9-5 INFINITIVE DETECTED");
         if (kernel.voice === "active") {
             if (kernel.person === "3s") {
                 return p.present_3sg;
@@ -233,18 +235,21 @@ function inflect_english_main_verb(kernel, lexeme, word_settings) {
             return p.passive;
         }
     } else if (kernel.tense === "present_infinitive" && kernel.sequence === "secondary") {
+        //console.log"DEBUG 9-5 INFINITIVE DETECTED");
         if (kernel.voice === "active") {
             return p.gerund;
         } else if (kernel.voice === "passive") {
             return p.passive;
         }
     } else if (kernel.tense === "perfect_infinitive" && kernel.sequence === "primary") {
+        //console.log'DEBUG 9-6 primary perfect infinitive');
         if (kernel.voice === "active") {
             return p.past;
         } else if (kernel.voice === "passive") {
             return p.passive
-        }
+        }i
     } else if (kernel.tense === "perfect_infinitive" && kernel.sequence === "secondary") {
+        //console.log'DEBUG 9-6 secondary perfect infinitive');
         return p.passive;
     }
 }
@@ -263,9 +268,6 @@ function inflect_english_pronoun(kernel, word_settings) {
                 pronoun = "she";
             } else if (kernel.subject_gender === "n") {
                 pronoun = "it";
-            } else {
-                // I hope that this act of utter discrimination is rectified by this choice being wrong.
-                pronoun = "he"
             }
         } else if (kernel.person === "1p") {
             pronoun = "we";
@@ -274,18 +276,10 @@ function inflect_english_pronoun(kernel, word_settings) {
         } else if (kernel.person === "3p") {
             pronoun = "they";
         }
-    } else if (kernel.implicitness === 'explicit') {
-        pronoun = null;
+    } else {
+        pronoun = "";
     }
     return pronoun;
 }
 
 
-
-
-function inflect_english_adjective (kernel, lexeme, word_settings) {
-
-    var p = lexeme.get_properties(Language_enum.English);
-
-    return p[word_settings.number];
-}

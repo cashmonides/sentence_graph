@@ -1,49 +1,175 @@
+TODO MINIMUM VIABLE PRODUCT
+- no 3rd decl plurals
+- no intransitive passive
+- level needs to be linked to score
+- parameters for score need to be finalized
+- level to allowed needs to be relatively thorough
+- lexicon needs expansion
+
+
+TODO TESTING OF MINIMUM
+
+
+TODO MEDIUM VIABLE PRODUCT
+- expand mental verb lexicon
+
+TODO ELEGANCE
+quiz data object
+clean up and comment mental wrap
+make homogeneity elegant
+
+TODO THINK ABOUT
+what are optimal parameters for:
+    - correct reward
+    - incorrect penalty
+    - max incorrect streak
+    - switch count (how many questions in mode x before switching to new mode)
+
+
+TODO LOGGING
+remove debugs
+judicously insert true LOG statements (of the form //~`console.log("LOG.function_name output = ", output))
+//~`console.log("LOG.function_name output = ", output)
+    OR
+//~`console.log("LOG.function_name output.stringified = ", JSON.stringify(output))
+
+TODO LEXICON STUFF
+identify some verbs that can be either transitive or intransitive
+create mental verbs
+create subordinating conjunctions
+
+TODO little things
+- double third declension
+- no scramble in is
+- scramble should be a parameter in level_to_allowed
+- can't have pure intransitives be able to be passive
+
+TODO homogoneity issue
+homogeneity of cartesian should be a controllable parameter in level
+
+TODO big picture
+- should we make QUIZ DATA (choices, answer, drop downs) into an object
+
+TODO add indirect statement/question
+- kernel seems roughly functional
+    except: we need to add subject accusative
+        - make sure english subject shows up in subject drop down not in verb drop down
+- we need to wrap kernel in a mental verb
+    - a function
+        signature:
+            input: kernel (of clause type iq or is)
+            output: QuizDataObject
+
+    - try to eloquently create main mental verbs
+    - a lexicon of mental verbs
+    - a lexicon of subordinating conjunctions (cur, quando, utrum)
+    - we need to deal with the "that" situation
+    -
+- mixing text and drop down
+    step 1
+    text text text text text text X text text Y
+    DROP-x DROP-y
+
+    step 2
+    text text text text text text DROP text text DROP
 
 
 
-HACKY
-- in general, the dictionaries might be effectively replaced with an object
-- set_kernel_properties_2 is way hacky
-    - seems to handle gender (which so far isn't handled by cartesian??)
-- in make_output_2 we declare the elements kind of arbitrarily, they really should just be read from states
-    - we should have access to template in make_kernel_new which has
-- the following seems really hacky: output['subject_in_english'] = Array.from(new Set(output.map(function (x) {return x['subject_in_english']})));
-- unify make_kernel and make_kernel_new
-- in pick_lexeme_new we have a bit of hackiness:
-    - part of speech is as follows: var part_of_speech = (element === "verb" ? "verb" : "noun");
-    - but we really want this to handle other parts of speech too
-- currently pick_lexeme_new returns a random_choice of allowed_lexemes
-    - but shouldn't it return the full list and we make the random choice elsewhere
-    - that would be more modular
-    - and we might want to use the full list of allowed lexemes elsewhere
-- return 'should not be made' is kind of hacky
-- language_enum is not implemented well - both inflect english and inflect latin are hard-coded whereas they should be dependent on language_enum
+
+
+GOAL
+drop downs can be displayed as:
+text text text text text text DROP text text DROP
+OR
+DROP DROP DROP
 
 
 
-FIX
-- set_word_setting_new seems to be totally latin based - is there some way to make it language independent?
+OPTION #1 (maximal) (inhomogenous states)
+LEONES AMANTUR    ||       LEONES AMANT MUREM
 
-CONSISTENCY
-- make_form currently seems obsolete, should it be rescued?
-
-
-ADD
-- make word order part of level_to_allowed (right now it's hard coded in make_kernel_new
+SUBJ VERB OBJECT
+lion love  none
 
 
-POSSIBLE CHANGES
+
+OPTION #2 (minimal) (homogenous states)
+LEONES AMANTUR
+
+SUBJ VERB
+lion love
+
+
+
+
+
+states[0]
+
+
+
+
+
+CONVERTING DEBUGGING TO LOG
+make_output done
+state_to_lexeme contains no LOGs
+pick_lexeme done
+
 
 
 BUGS
-english correct answer is in the wrong order
-when we have multiple other nouns we don't want them all to be the same number so we need to revisit the "number of other nouns" category
-no choices in drop down
-give away answer doesn't move to next question
-text is clickable in latin mcmode
+- no english pronoun is being produced because there's no subject in the template
+    - VERB
+- intransitive verbs are produced in the passive ambulatur
+- no cartesian choices in drop down anymore (LEO CADIT -> choices are lion, lions || we want lion, lions, bear, bears)
+- VIR-I URS-OS AM-A-NT -> only subject in drop down
+    - message: Cannot read property 'replace' of undefined
 
-CHANGES BY AKIVA S
-- level removed as an argument from make_kernel_template
+FUNCTIONALITY
+- we want larger vocabulary to be cartesian
+    - (LEO CADIT -> choices are lion, lions || we want lion, lions, bear, bears)
+
+
+
+
+
+BEFORE GIO
+- enter a few sentences
+- come up with some multi-step tagging for the sake of example
+- try to integrate mcmode2 into the online version
+- a precise and encapsulated version of the "insert x into dictionary string"
+
+
+FOR GIO
+- rows of drop downs
+- correct after give away can't give points
+- how do we check on the data to see if it's ok
+-
+
+
+DO ON LATIN
+- add pronoun to english
+- enter more verbs and nouns
+- add more lexemes
+- flesh out level to allowed map
+- clean up //~`console.log
+	- remove debugging
+	- add control flow logs
+
+
+
+
+
+
+NEW MODE:
+Translate the following:
+URSUS SCIT CUR AVIS REGAT
+
+The bear knows _____ the bird ______
+
+give away phrase: "the correct answer is"
+
+feedback box: the correct answer is why rules
+
 
 
 TODO
@@ -101,3 +227,145 @@ URSUS virum amat
 -
 
 
+BIGGEST BUG
+we need all possibilities, not just SVO
+    - template gives us the appropriate information (SVO vs OV or V)
+        - store the template as e.g. a property of the kernel (kernel.template)
+    - iterate over template
+        - create drop downs for each item in template
+
+
+
+???BUG
+sentence_tree_generator needs to live inside of the directory quiz
+
+
+ADD
+give away ending phrase add to other modes
+score shouldn't increase after give away answer
+a vs. the should be a parameter in level to allowed (we need to make sure that our cartesian operations are not pulling both a and the)
+hover needs to be strictly tied to clickable
+SUBJECT OBJECT VERB shouldn't be submittable (i.e. submit button should be non-clickable until all drop downs are selected
+
+
+
+
+outside knowledge
+BUG: latin words can be clicked on and become red
+BUG: bad formatting (drop downs should be in a row below sentence)
+
+
+
+
+PROXIMATE TO DO
+- get English to produce subject pronouns for implicit sentences
+
+
+DISTAL TO DO
+- multiple clauses
+	- start with coordinatng conjunctions
+	- advance to indirect questions
+
+
+
+
+
+
+CHANGE LOG 10-15
+new variable x.transitivity (fixed in make output)
+
+
+
+
+
+
+
+
+ORDER OF PARAMETERS
+clause_type
+transitivity
+(pick lexemes)
+sequence
+tense
+implicitness
+person
+voice
+number_of_other_nouns
+s_o_swap
+
+
+
+QUESTIONS ABOUT ORDER
+should s_o_swap be moved upstream before pick lexemes? (since if we don't swap it changes what kind of lexemes we choose)
+
+
+
+
+we need to fix transitivity
+- that will determine elements
+- and lexeme list
+
+
+
+
+
+
+
+
+assuming states are homogenous
+
+
+
+state.template
+
+
+
+
+template needs only level
+	- thus it consults level to determine transitivity
+
+
+set TRANSITIVITY
+
+
+set CARTESIAN parameters
+	['clause_type', 'sequence', 'tense', 'implicitness', 'person',
+    'voice', 'number_of_other_nouns', 's_o_swap'];
+
+
+make KERNEL
+
+
+
+
+BIGGER QUESTIONS
+- how useful are the enumerations Element.subject etc.?
+
+
+
+
+OVERALL CLEAN UP OF CODE
+- generalize and abstract the fixing of parameters
+	- e.g. order of parameters
+- modularize selection of lexemes and move it way upstream
+- make a utility function that processes the setting of parameter
+	- arguments: parameter, level, language_enum
+	- output:
+
+
+
+
+CHOOSING LEXEMES
+- cartesian parameters should tell us how many choices we have
+- things like transitivity and level tell us what to pick
+- the output is a set of lexemes that have
+- consolidate a single state-like object that contains the appropriate information about e.g. transitivity
+
+
+
+CHORES
+- add more lexemes
+- flesh out level to allowed map
+- clean up //~`console.log
+	- remove debugging
+	- add control flow logs

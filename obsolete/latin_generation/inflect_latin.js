@@ -4,9 +4,10 @@
 
 
 function inflect_latin (kernel, lexeme, word_settings){
+    //console.log'lexeme = ', lexeme);
     switch (lexeme.properties.core.part_of_speech) {
         case (Part_of_speech.Noun) : return inflect_latin_noun (kernel, lexeme, word_settings);    //todo will inflect_latin_verb be a method on a lexeme or on another object, e.g. a latin word
-        case (Part_of_speech.Verb) : return inflect_latin_verb (kernel, lexeme);
+        case (Part_of_speech.Verb) : return inflect_latin_verb (kernel, lexeme, word_settings);
         case (Part_of_speech.Adjective) : return inflect_latin_adjective (kernel, lexeme, word_settings);
         case (Part_of_speech.Co) : return lexeme.display(Language_enum.Latin);
     }
@@ -36,6 +37,9 @@ function inflect_latin_noun (kernel, lexeme, word_settings) {
 
 
     //BELOW PUTS IT INTO EFFECT
+    //console.log'DEBUG 9-21 [family, gender, number, case, function] = ', JSON.stringify(
+    [lexeme.properties.latin.family, lexeme.properties.latin.gender,
+        word_settings.number, word_settings.case, word_settings.function]));
     var noun_ending;
     if (lexeme.properties.latin.family === "1") {
         if (word_settings.number === "singular") {
@@ -147,25 +151,42 @@ function inflect_latin_noun (kernel, lexeme, word_settings) {
     }
 
 
+    // the tedious version below
+    //return lexeme.get_property(Language_enum.Latin, "stem_2") + noun_ending;
+    //the nicer version
     var p = lexeme.get_properties(Language_enum.Latin);
 
-
+    //DEBUGGING below
+    //console.log"P in noun = ", p);
+    ////console.loglexeme.properties.latin);
+    ////console.loglexeme.properties.latin.family);
+    ////console.logword_settings);
+    ////console.logword_settings.number);
+    /*if (lexeme.properties.latin.family === "3" && word_settings.number === "singular" && word_settings.case === "nominative") {
+        return p.stem_1;
+    } else if (lexeme.properties.latin.family === "2" && lexeme.properties.latin.gender === "m" && word_settings.number === "singular" && word_settings.case === "nominative"){
+        return p.stem_1;
+    }*/
     if (p.stem_1[0] === '*' && word_settings.number === "singular" && word_settings.case === "nominative") {
         return p.stem_1
     } else {
-        return p.stem_2 + noun_ending;
+        return p.stem_2 + noun_ending;                  //the this comes along for the ride from the function get_properties
     }
 };
 
 
 function inflect_latin_adjective (kernel, lexeme, word_settings) {
-
+    //todo can I replace lexeme.properties.latin.family with p.family if I declare p early?
     var adj_ending;
-    var p = lexeme.get_properties(Language_enum.Latin);
+
+    //console.log"DEBUGGING gender = ", word_settings.gender);
+    //console.log"DEBUGGING number = ", word_settings.number);
+    //console.log"DEBUGGING case = ", word_settings.case);
+    //console.log"DEBUGGING family of adjective = ", lexeme.properties.latin.family);
 
 
-
-    if (p.family === "2/1/2") {
+    if (lexeme.properties.latin.family === "2/1/2") {
+        //console.log"2/1/2 loop triggered");
         if (word_settings.gender === "f") {
             if (word_settings.number === "singular") {
                 var map_decl_1s = {
@@ -227,7 +248,8 @@ function inflect_latin_adjective (kernel, lexeme, word_settings) {
                 adj_ending = map_decl_2p[word_settings.case];
             }
         }
-    } else if (p.family === "3") {
+    } else if (lexeme.properties.latin.family === "3") {
+        //console.log"3 loop triggered");
         if (word_settings.gender === "m" || word_settings.gender === "f") {
             if (word_settings.number === "singular") {
                 var map_decl_3s = {
@@ -275,20 +297,29 @@ function inflect_latin_adjective (kernel, lexeme, word_settings) {
     }
 
 
-    if (p.family === "3" && word_settings.number === "singular" && word_settings.case === "nominative") {
+    // the tedious version below
+    //return lexeme.get_property(Language_enum.Latin, "stem_2") + noun_ending;
+    //the nicer version
+    var p = lexeme.get_properties(Language_enum.Latin);
+
+
+    if (lexeme.properties.latin.family === "3" && word_settings.number === "singular" && word_settings.case === "nominative") {
         return p.stem_1;
-    } else if (p.family === "2/1/2" && word_settings.gender === "m" && word_settings.number === "singular" && word_settings.case === "nominative"){
+    } else if (lexeme.properties.latin.family === "2/1/2" && word_settings.gender === "m" && word_settings.number === "singular" && word_settings.case === "nominative"){
         return p.stem_1;
     }
     else {
-        return p.stem_2 + adj_ending;
+        return p.stem_2 + adj_ending;                  //the this comes along for the ride from the function get_properties
     }
 }
 
 
-function inflect_latin_verb_beginning (kernel, lexeme) {
+function inflect_latin_verb_beginning (kernel, lexeme, word_settings) {
+    //console.log"2) lexeme in verb generation = ", JSON.stringify(lexeme));
+    //console.log"DEBUG 9-14 kernel.tense = ", kernel.tense);
     var beginning;
     var p = lexeme.get_properties(Language_enum.Latin);
+    //console.log"DEBUG 9-5 inflect lat beginning , kernel tense &voice = ", kernel.tense, kernel.voice);
     if (kernel.tense === "present" || kernel.tense === "imperfect" || kernel.tense === "future"
         || kernel.tense === "present_subjunctive" || kernel.tense === "imperfect_subjunctive"
         || kernel.tense === "present_infinitive") {
@@ -304,12 +335,24 @@ function inflect_latin_verb_beginning (kernel, lexeme) {
     }
 
     if (beginning === undefined) {
-        throw new Error("verb beginning is undefined");
+        throw "verb beginning is undefined";
     }
-    return beginning;
-}
 
-function inflect_latin_verb_middle (kernel, lexeme) {
+    //console.log"BEGINNING = ", beginning);
+    return beginning;
+};
+
+function inflect_latin_verb_middle (kernel, lexeme, word_settings) {
+    //get properties, store them as a dictionary p.conjugation
+    //get used, store it as used.tense   - should this be stored as word_settings?
+    //todo same question as in noun, can I declare p early?
+
+
+    var p = lexeme.get_properties(Language_enum.Latin);
+
+    //console.log"word_settings in middle = ", word_settings);
+    //todo p does not seem to be working either here or in nouns?
+    //console.log"P in middle = ", p);
 
 
     var verb_middle;
@@ -321,7 +364,7 @@ function inflect_latin_verb_middle (kernel, lexeme) {
             present_subjunctive: "-E",
             imperfect_subjunctive: "-ARE",
             present_infinitive: "-ARE",
-            perfect: "-*",
+            perfect: "- -",
             pluperfect: "-ERA",
             future_perfect: "-ERI",
             perfect_subjunctive: "-ERI",
@@ -337,7 +380,7 @@ function inflect_latin_verb_middle (kernel, lexeme) {
             present_subjunctive: "-EA",
             imperfect_subjunctive: "-ERE",
             present_infinitive: "-ERE",
-            perfect: "-*",
+            perfect: "- -",
             pluperfect: "-ERA",
             future_perfect: "-ERI",
             perfect_subjunctive: "-ERI",
@@ -353,7 +396,7 @@ function inflect_latin_verb_middle (kernel, lexeme) {
             present_subjunctive: "-A",
             imperfect_subjunctive: "-ERE",
             present_infinitive: "-ERE",
-            perfect: "-*",
+            perfect: "- -",
             pluperfect: "-ERA",
             future_perfect: "-ERI",
             perfect_subjunctive: "-ERI",
@@ -369,7 +412,7 @@ function inflect_latin_verb_middle (kernel, lexeme) {
             present_subjunctive: "-IA",
             imperfect_subjunctive: "-ERE",
             present_infinitive: "-ERE",
-            perfect: "-*",
+            perfect: "- -",
             pluperfect: "-ERA",
             future_perfect: "-ERI",
             perfect_subjunctive: "-ERI",
@@ -385,7 +428,7 @@ function inflect_latin_verb_middle (kernel, lexeme) {
             present_subjunctive: "-IA",
             imperfect_subjunctive: "-IRE",
             present_infinitive: "-IRE",
-            perfect: "-*",
+            perfect: "- -",
             pluperfect: "-ERA",
             future_perfect: "-ERI",
             perfect_subjunctive: "-ERI",
@@ -408,12 +451,18 @@ function inflect_latin_verb_middle (kernel, lexeme) {
         }
     }
 
+    if (kernel.voice === "passive" && kernel.tense === "perfect_infinitive"){
+        verb_middle = "AGREEMENT";
+    }
+
+    //console.log"MIDDLE = ", verb_middle);
     return verb_middle;
-}
+};
 
-function inflect_latin_verb_end (kernel) {
+
+function inflect_latin_verb_end (kernel, lexeme, word_settings) {
     var ending;
-
+    //console.log'In ending, word settings = ', JSON.stringify(word_settings));
     if (kernel.tense === "perfect" && kernel.voice === "active") {
         if (kernel.person === "1s") {
             ending = "-I"
@@ -432,8 +481,12 @@ function inflect_latin_verb_end (kernel) {
         ending = "";
     } else if (kernel.tense === "perfect_infinitive" && kernel.voice === "active") {
         ending = "";
+    } else if (kernel.tense === "perfect_infinitive" && kernel.voice === "passive") {
+        ending = "AGREEMENT";
     } else {
+        //console.log'else was triggered');
         if (kernel.voice === "active") {
+            //console.log"active");
             if (kernel.person === "1s") {
                 ending = "-O/M"
             } else if (kernel.person === "2s") {
@@ -464,24 +517,32 @@ function inflect_latin_verb_end (kernel) {
         }
     }
     return ending;
-}
+};
 
-function inflect_agreement_marker (kernel) {
+function inflect_agreement_marker (kernel, lexeme, word_settings) {
     var agreement_marker;
+    //console.log"agreement marker before = ", agreement_marker);
+    //console.log"kernel = ", JSON.stringify(kernel));
+    //console.log"kernel properties = ", JSON.stringify(Object.keys(kernel)));
+    //console.log"word_settings.predicate_gender = ", kernel.gender);
+    //console.log"word_settings.predicate_number = ", kernel.number);
     if (kernel.clause_type !== "is") {
-        if (kernel.subject_gender === "m") {
+        if (kernel.gender === "m") {
+            //console.log"if loop 1 triggered");
             if (kernel.number === "singular") {
                 agreement_marker = "-US";
             } else if (kernel.number === "plural") {
                 agreement_marker = "-I";
             }
-        } else if (kernel.subject_gender === "f") {
+        } else if (kernel.gender === "f") {
+            //console.log"if loop 2 triggered");
             if (kernel.number === "singular") {
                 agreement_marker = "-A";
             } else if (kernel.number === "plural") {
                 agreement_marker = "-AE";
             }
-        } else if (kernel.subject_gender === "n") {
+        } else if (kernel.gender === "n") {
+            //console.log"if loop 3 triggered");
             if (kernel.number === "singular") {
                 agreement_marker = "-UM";
             } else if (kernel.number === "plural") {
@@ -489,19 +550,22 @@ function inflect_agreement_marker (kernel) {
             }
         }
     } else if (kernel.clause_type === "is") {
-        if (kernel.subject_gender === "m") {
+        if (kernel.gender === "m") {
+            //console.log"if loop 1 triggered");
             if (kernel.number === "singular") {
                 agreement_marker = "-UM";
             } else if (kernel.number === "plural") {
                 agreement_marker = "-OS";
             }
-        } else if (kernel.subject_gender === "f") {
+        } else if (kernel.gender === "f") {
+            //console.log"if loop 2 triggered");
             if (kernel.number === "singular") {
                 agreement_marker = "-AM";
             } else if (kernel.number === "plural") {
                 agreement_marker = "-AS";
             }
-        } else if (kernel.subject_gender === "n") {
+        } else if (kernel.gender === "n") {
+            //console.log"if loop 3 triggered");
             if (kernel.number === "singular") {
                 agreement_marker = "-UM";
             } else if (kernel.number === "plural") {
@@ -509,6 +573,7 @@ function inflect_agreement_marker (kernel) {
             }
         }
     }
+    //console.log"agreement marker after = ", agreement_marker);
     return agreement_marker;
 }
 
@@ -591,53 +656,28 @@ function inflect_latin_helping_verb (kernel) {
     } else {return null}
 }
 
-function inflect_subject_accusative_pronoun (kernel) {
-    var sap;
-    if (kernel.clause_type == "is" && kernel.implicitness == "implicit") {
-        if (kernel.person === "1s") {
-            sap = "ME "
-        } else if (kernel.person === "2s") {
-            sap = "TE "
-        } else if (kernel.person === "3s") {
-            sap = "EUM "
-        } else if (kernel.person === "1p") {
-            sap = "NOS "
-        } else if (kernel.person === "2p") {
-            sap = "VOS "
-        } else if (kernel.person === "3p") {
-            sap = "EOS "
-        }
-    } else {
-        sap = ""
-    }
-    return sap;
-}
 
+function inflect_latin_verb (kernel, lexeme, word_settings) {
 
-function inflect_latin_verb (kernel, lexeme) {
-    //todo Akiva's additions below
-    var sap = inflect_subject_accusative_pronoun(kernel);
+    //console.log"1) lexeme in verb generation = ", JSON.stringify(lexeme));
 
-    var beginning = inflect_latin_verb_beginning(kernel, lexeme);
-    var middle = inflect_latin_verb_middle(kernel, lexeme);
-    var end = inflect_latin_verb_end(kernel);
-    var agreement_marker = inflect_agreement_marker(kernel);
+    //console.log"CHECK IN 1 ", word_settings);
+
+    var beginning = inflect_latin_verb_beginning(kernel, lexeme, word_settings);
+    var middle = inflect_latin_verb_middle(kernel, lexeme, word_settings);
+    var end = inflect_latin_verb_end(kernel, lexeme, word_settings);
+    var agreement_marker = inflect_agreement_marker(kernel, lexeme, word_settings);
     var helping_verb = inflect_latin_helping_verb(kernel);
+    //console.log"agreement marker in verb = ", agreement_marker);
 
-    if ((kernel.tense === "perfect" || kernel.tense === "pluperfect" || kernel.tense === "future_perfect"
-        || kernel.tense === "perfect_subjunctive" || kernel.tense === "pluperfect_subjunctive"
-        || kernel.tense === "perfect_infinitive") && kernel.voice === "passive") {
-        if (sap === "") {
+    if (kernel.tense === "perfect" || kernel.tense === "pluperfect" || kernel.tense === "future_perfect"
+        || kernel.tense === "perfect_subjunctive" || kernel.tense === "pluperfect_subjunctive" || kernel.tense === "perfect_infinitive") {
+        if (kernel.voice === "passive") {
             return beginning + agreement_marker + ' ' + helping_verb;
         } else {
-            return {'subject': sap, 'verb': beginning + agreement_marker + ' ' + helping_verb,
-                'main_entry': 'verb'};
+            return beginning + middle + end;
         }
     } else {
-        if (sap === "") {
-            return beginning + middle + end;
-        } else {
-            return {'subject': sap, 'verb': beginning + middle + end, 'main_entry': 'verb'};
-        }
+        return beginning + middle + end;
     }
 }

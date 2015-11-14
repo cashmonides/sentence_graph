@@ -30,19 +30,12 @@ MCMode3Game.prototype.get_mode_name = function() {
 
 
 
-QuickModeGame.prototype.next_question = function(state){
-    
-     
-    
-    
-    this.quiz.set_word_selector(data.sentence);
-    this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
-};
+
 
 
 MCMode3Game.prototype.next_question = function (){
     //sets data
-    var data = make_output2(test_level, null, 'quiz_english');
+    var data = make_output(test_level, null, 'quiz_english');
     this.question = data.question;
     //todo is the following otiose?
     this.sentence = data.sentence;              // text displayed in display box

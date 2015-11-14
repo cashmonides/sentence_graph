@@ -1,0 +1,87 @@
+div {
+    border : solid 1px black;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 27px;
+    color: #666;
+    background:#bdc3c7;
+}
+
+.hoverable:hover {
+	color: #088;
+}
+
+
+.tag_names {
+    color: #9b59b6;
+}
+
+
+#scorebox {
+    text-align: center;
+    vertical-align: middle;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+    padding: 10px;
+    background:navajowhite;
+}
+
+
+#feedbackbox {
+    text-align: center;
+    padding: 10px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+
+}
+
+#questionbox {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#testbox {
+    /*text-align: center;*/
+    vertical-align: middle;
+    font-size: 30px;
+    cursor:pointer;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+    padding: 10px;
+    background:navajowhite;
+
+}
+
+#answer_choices {
+    font-size: 20px;
+    vertical-align: middle;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 200px;
+}
+
+
+#answer_wrapper {
+    font-size: 20px;
+    vertical-align: middle;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    /*padding: 100px;*/
+}
+
+

@@ -149,7 +149,7 @@ Quiz.get_mode = function(mode_number) {
 
     switch(mode_number) {
         case 0 : return new DropModeGame();
-        case 1 : return new MCMode2Game();
+        case 1 : return new MCMode3Game();
         case 2 : return new QuickModeGame();
         case 3 : return new GenericDropGame();
         default : throw "no game mode triggered";

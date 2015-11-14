@@ -1,0 +1,56 @@
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <!--<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="../lib/utils.js"></script>
+    <script src="../lib/persist.js"></script>
+    <script src="../lib/objects.js"></script>
+    <script src="../lib/text.js"></script>
+    <script src="../lib/word_selector.js"></script>
+    <script src="quick_mode.js"></script>
+    <script src="drop_mode.js"></script>
+    <script src="../obsolete/mc_mode.js"></script>
+    <script src="mc_mode_2.js"></script>
+    <script src="quiz.js"></script>
+
+    <!--new imports below-->
+    <script src="../latin_lib/enums.js"></script>
+    <script src="../latin_lib/lexeme.js"></script>
+    <script src="../latin_lib/lexicon.js"></script>
+    <script src="../latin_lib/random_functions.js"></script>
+    <script src="../latin_generation/cartesian.js"></script>
+    <script src="../latin_lib/sentence_tree.js"></script>
+
+    <!--new import of sorting file-->
+    <script src="sorting.js"></script>
+
+    <script src="sentence_tree_generator3.js"></script>
+    <script src="../latin_generation/word_setting_generator.js"></script>
+    <script src="../latin_generation/inflect_english.js"></script>
+    <script src="../latin_generation/inflect_latin.js"></script>
+
+
+    <!--new imports above-->
+
+	<title>Quiz</title>
+
+</head>
+
+<body>
+    
+    <div id="scorebox"></div>                   <!--displays score and other counts-->
+    <div id="feedbackbox"></div>                <!--"correct, no that's a verb, etc-->
+    <div id="questionbox"></div>                <!--"translate" or "click onb the verb"-->
+    <br>
+    <div id="testbox"></div>                 <!--displays a wordselector object (clickable or not)-->
+    <div style="display: inline-block" id="answer_choices">
+        <div id="answer_wrapper"></div>
+    </div>
+    <button id="submit_button" onclick="process_answer()">submit</button>
+</body>
+
+</html>
