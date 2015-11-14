@@ -121,17 +121,7 @@ MCMode3Game.prototype.make_drop_down = function(){
     return drops
 };
 
-function process_answer_hack () {
-    var self = this;
-    var is_correct = self.drop_downs.every(function (x) {
-        return (x.type === 'non_drop') || (!self.display(x)) ||
-            (selected_option(x.HTML_element) === strip(x.correct_answer || 'none'))});
-    if (is_correct) {
-        self.process_correct_answer();
-    } else {
-        self.process_incorrect_answer();
-    }
-}
+
 
 MCMode3Game.prototype.process_answer= function(){
     var self = this;

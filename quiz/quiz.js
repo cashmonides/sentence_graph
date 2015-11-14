@@ -337,7 +337,7 @@ Quiz.prototype.get_selected_region = function(){
 
 };
 
-
+//todo probably won't work because it's scoped by Quiz not by the web page
 Quiz.toggle_cheat_sheet = function() {
     var button = el("cheat_sheet_button");
 
@@ -368,6 +368,18 @@ function return_to_profile() {
 
 
 //todo some of the global functions below are hacky and need to be integrated
-Quiz.process_answer_hack = function () {
-    MCMode3Game.process_answer();
+
+
+
+
+
+function process_answer_hack () {
+    // alert("process_answer_hack triggered");
+    // alert(Quiz.process_answer) = undefined
+    // alert(Quiz.game); = undefined
+    // alert(Quiz) = function with default properties (null)
+    alert(MCMode3game.process_answer) 
+    
 }
+
+
