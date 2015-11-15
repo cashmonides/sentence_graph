@@ -259,6 +259,7 @@ Quiz.return_to_profile = function() {
 
 
 Quiz.prototype.process_answer = function(){
+    console.log("quiz.process_answer triggered");
     this.game.process_answer(this);
 };
 
@@ -378,7 +379,9 @@ function process_answer_hack () {
     // alert(Quiz.process_answer) = undefined
     // alert(Quiz.game); = undefined
     // alert(Quiz) = function with default properties (null)
-    alert(MCMode3game.process_answer) 
+    // alert(MCMode3game.process_answer)  = MCMode3game is not defined
+    alert(this);
+    console.log(this);
     
 }
 

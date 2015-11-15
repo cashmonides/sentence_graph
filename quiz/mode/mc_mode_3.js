@@ -4,7 +4,6 @@ var test_level = 1;
 
 
 
-
 var MCMode3Game = function(){
     this.data = null;
     this.quiz = null;
@@ -19,7 +18,11 @@ MCMode3Game.prototype.attach = function(){
     el("answer_choices").style.display = 'initial';
 
     el("submit_button").style.display = 'initial';
-    // state.switch_count = 1;
+    // state.switch_count = 1
+    
+    //this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
+    
+    //make_element( <button .....onclick = this.process_answer()>  )
 };
 
 
@@ -58,6 +61,8 @@ MCMode3Game.prototype.next_question = function (){
 
     Quiz.set_question_text("Translate the following sentence:");
     this.quiz.set_word_selector(data.sentence);
+    //todo check if this works
+    
     //drop_downs is a list of dictionaries
         //each dictionary has 3 properties:
         //heading
@@ -80,7 +85,9 @@ MCMode3Game.prototype.next_question = function (){
     //todo why is this capitalized
     Quiz.set_question_text(this.question);
     this.quiz.set_word_selector(this.sentence);
-    this.quiz.word_selector.is_clickable = false;
+    //todo change to false after testing
+    this.quiz.word_selector.is_clickable = true;
+    this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
     if (this.target_indices) {
         this.target_indices.forEach(function (x) {state.word_selector.set_highlighted(x, true)});
     }
@@ -123,7 +130,7 @@ MCMode3Game.prototype.make_drop_down = function(){
 
 
 
-MCMode3Game.prototype.process_answer= function(){
+MCMode3Game.prototype.process_answer = function(){
     var self = this;
     var is_correct = this.drop_downs.every(function (x) {
         return (x.type === 'non_drop') || (!self.display(x)) ||
