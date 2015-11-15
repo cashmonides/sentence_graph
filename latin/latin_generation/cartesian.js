@@ -1,62 +1,16 @@
 var level_to_allowed2 = {
-    666 : {
-        // declension : ["2"],
-        // conjugation : ["1", "2", "3", "4"],
-        // transitivity: ["transitive", "intransitive"],                          //changes the lexicon
-        // gender : ["m"],
-        drop_non_drop_map: {'subject_drop': .5, 'verb_drop': .5, 'object_drop': .5, 'conjunction_drop': .5,
-            min: 1, max: 3},
-
-        //clause_type : ["main"],
-        clause_type : ["main", "iq", "is"],
-        sequence: {
-            main: ['none'],
-            is: ['primary', 'secondary'],
-            iq: ['primary', 'secondary']
-        },
-        tense : {
-            main: ["present", "imperfect", "future"],
-            is :["present_infinitive", 'perfect_infinitive'],
-            iq : {
-                primary: ["present_subjunctive", "perfect_subjunctive"],
-                secondary: ["imperfect_subjunctive", "pluperfect_subjunctive"]
-            }
-        },
-
-        implicitness : ["implicit"],
-        person : {
-            explicit : ["3s", "3p"],
-            implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
-        },
-
-        voice: ["active", "passive"],
-        number_of_other_nouns : ["singular", "plural"],
-        none_display: [true]
-
-    },
     //this will be our testing level for now
     1 : {
-        // declension : ["2"],
-        // declension : ["1", "2", "3"],
-        // declension : ["3"],
-        // conjugation : ["1", "2", "3", "3i", "4"],
-        // conjugation : ["1"],
-        // Decoupling successful!
-        // transitivity: '',
-        // gender : ["m"],
-        drop_non_drop_map: {'subject_drop': .1, 'verb_drop': .1, 'object_drop': .1, 'conjunction_drop': .1,
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .0001, 'object_drop': .3, 'conjunction_drop': .3,
             min: 1, max: 1},
 
-        //clause_type : ["main"],
-        clause_type : ["main", "iq", "is"],
-        //clause_type : ["main", "iq", "is"],
+        clause_type : ["main"],
         sequence: {
             main: ['none'],
             is: ['primary', 'secondary'],
             iq: ['primary', 'secondary']
         },
         tense : {
-            //main: ["present", "imperfect", "future"],
             main: ["present"],
             is :["present_infinitive", 'perfect_infinitive'],
             iq : {
@@ -64,17 +18,56 @@ var level_to_allowed2 = {
                 secondary: ["imperfect_subjunctive", "pluperfect_subjunctive"]
             }
         },
-
-        implicitness : ["implicit", "explicit"],
-        //implicitness : ["explicit"],
+        implicitness : ["explicit"],
         person : {
-            explicit : ["3s", "3p"],
-            //explicit : ["3p"],
+            explicit : ["3s"],
             implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
         },
 
-        //voice: ["active"],
-        voice: ["active", "passive"],
+        voice: ["active"],
+        // voice: ["active", "passive"],
+        //voice: ["passive"],
+        number_of_other_nouns : ["singular"],
+        //number_of_other_nouns : ["plural"],
+
+        drop_down_settings: {
+            noun: {
+                extra_options: 1,
+                swap: true
+            },
+            verb: {
+                extra_options: 1
+            }
+        },
+        none_display: [false],
+        shuffle: [true, false]
+    },
+    2 : {
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': .3,
+            min: 1, max: 2},
+
+        clause_type : ["main"],
+        sequence: {
+            main: ['none'],
+            is: ['primary', 'secondary'],
+            iq: ['primary', 'secondary']
+        },
+        tense : {
+            main: ["present"],
+            is :["present_infinitive", 'perfect_infinitive'],
+            iq : {
+                primary: ["present_subjunctive", "perfect_subjunctive"],
+                secondary: ["imperfect_subjunctive", "pluperfect_subjunctive"]
+            }
+        },
+        implicitness : ["explicit"],
+        person : {
+            explicit : ["3s", "3p"],
+            implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
+        },
+
+        voice: ["active"],
+        // voice: ["active", "passive"],
         //voice: ["passive"],
         number_of_other_nouns : ["singular", "plural"],
         //number_of_other_nouns : ["plural"],
@@ -88,7 +81,132 @@ var level_to_allowed2 = {
                 extra_options: 1
             }
         },
+        none_display: [false],
+        shuffle: [true, false]
+    },
+    3 : {
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': .3,
+            min: 1, max: 2},
 
+        clause_type : ["main"],
+        sequence: {
+            main: ['none'],
+            is: ['primary', 'secondary'],
+            iq: ['primary', 'secondary']
+        },
+        tense : {
+            main: ["present"],
+            is :["present_infinitive", 'perfect_infinitive'],
+            iq : {
+                primary: ["present_subjunctive", "perfect_subjunctive"],
+                secondary: ["imperfect_subjunctive", "pluperfect_subjunctive"]
+            }
+        },
+        implicitness : ["explicit"],
+        person : {
+            explicit : ["3s", "3p"],
+            implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
+        },
+
+        voice: ["active"],
+        // voice: ["active", "passive"],
+        //voice: ["passive"],
+        number_of_other_nouns : ["singular", "plural"],
+        //number_of_other_nouns : ["plural"],
+
+        drop_down_settings: {
+            noun: {
+                extra_options: 1,
+                swap: true
+            },
+            verb: {
+                extra_options: 1
+            }
+        },
+        none_display: [false],
+        shuffle: [true, false]
+    },
+    4 : {
+        drop_non_drop_map: {'subject_drop': .1, 'verb_drop': .8, 'object_drop': .1, 'conjunction_drop': .3,
+            min: 1, max: 3},
+
+        clause_type : ["main"],
+        sequence: {
+            main: ['none'],
+            is: ['primary', 'secondary'],
+            iq: ['primary', 'secondary']
+        },
+        tense : {
+            main: ["present", "imperfect", "future"],
+            is :["present_infinitive", 'perfect_infinitive'],
+            iq : {
+                primary: ["present_subjunctive", "perfect_subjunctive"],
+                secondary: ["imperfect_subjunctive", "pluperfect_subjunctive"]
+            }
+        },
+        implicitness : ["explicit"],
+        person : {
+            explicit : ["3s", "3p"],
+            implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
+        },
+
+        voice: ["active"],
+        // voice: ["active", "passive"],
+        //voice: ["passive"],
+        number_of_other_nouns : ["singular", "plural"],
+        //number_of_other_nouns : ["plural"],
+
+        drop_down_settings: {
+            noun: {
+                extra_options: 1,
+                swap: true
+            },
+            verb: {
+                extra_options: 1
+            }
+        },
+        none_display: [false],
+        shuffle: [true, false]
+    },
+    5 : {
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': .3,
+            min: 2, max: 3},
+
+        clause_type : ["main"],
+        sequence: {
+            main: ['none'],
+            is: ['primary', 'secondary'],
+            iq: ['primary', 'secondary']
+        },
+        tense : {
+            main: ["present", "imperfect", "future"],
+            is :["present_infinitive", 'perfect_infinitive'],
+            iq : {
+                primary: ["present_subjunctive", "perfect_subjunctive"],
+                secondary: ["imperfect_subjunctive", "pluperfect_subjunctive"]
+            }
+        },
+        implicitness : ["explicit"],
+        person : {
+            explicit : ["3s", "3p"],
+            implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
+        },
+
+        voice: ["active"],
+        // voice: ["active", "passive"],
+        //voice: ["passive"],
+        number_of_other_nouns : ["singular", "plural"],
+        //number_of_other_nouns : ["plural"],
+
+        drop_down_settings: {
+            noun: {
+                extra_options: 1,
+                swap: true
+            },
+            verb: {
+                extra_options: 1
+            }
+        },
         none_display: [false],
         shuffle: [true, false]
     },

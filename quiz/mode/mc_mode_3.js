@@ -4,10 +4,15 @@ var test_level = 1;
 
 
 
+
 var MCMode3Game = function(){
     this.data = null;
     this.quiz = null;
 };
+
+MCMode3Game.cell_1_feedback_right = ["Correct!", "Excellent!"];
+MCMode3Game.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
+MCMode3Game.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
 MCMode3Game.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
@@ -74,20 +79,28 @@ MCMode3Game.prototype.next_question = function (){
     this.give_away_phrase = data.give_away_phrase;
     this.give_away_ending_phrase = data.give_away_ending_phrase;
     this.correct_answer = this.drop_downs.map(function (x) {return x.correct_answer || x.non_drop_text}).join(' ');
+    
+    
+    console.log("DEBUG entering 1st random_choice");
     this.none_display = random_choice(map_level_to_allowed(test_level).none_display);
     
     //todo how important are these remove children statements? I had to comment them out to make it work
-    // document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));
+    document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));
+    
     var e = document.createElement('div');
     e.id = 'answer_wrapper';
     document.getElementById("answer_choices").appendChild(e);
-    //remove_children(document.getElementById("answer_choices"));
+    
+    // remove_children(document.getElementById("answer_choices"));
     //todo why is this capitalized
     Quiz.set_question_text(this.question);
     this.quiz.set_word_selector(this.sentence);
-    //todo change to false after testing
+    
+    //todo change to false after testing (a hacky way of making a submit button)
     this.quiz.word_selector.is_clickable = true;
     this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
+    
+    
     if (this.target_indices) {
         this.target_indices.forEach(function (x) {state.word_selector.set_highlighted(x, true)});
     }
@@ -142,9 +155,6 @@ MCMode3Game.prototype.process_answer = function(){
     }
 };
 
-MCMode3Game.cell_1_feedback_right = ["Correct!", "Excellent!"];
-MCMode3Game.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
-MCMode3Game.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
 
 
 
@@ -160,6 +170,7 @@ MCMode3Game.prototype.process_correct_answer = function () {
     }
     this.quiz.submodule.incorrect_streak = 0;
     
+    console.log("DEBUG entering 2nd random_choice");
     var cell_1 = random_choice(MCMode3Game.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
@@ -178,10 +189,17 @@ MCMode3Game.prototype.process_incorrect_answer= function () {
     }
     
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
+        console.log("DEBUG entering 3rd random_choice");
+        
         var cell_1 = random_choice(MCMode3Game.cell_1_feedback_wrong);
         var cell_3 = random_choice(MCMode3Game.cell_3_feedback_wrong);
+        
+        
+        
+        console.log("DEBUG leaving 3rd random_choice");
+        
         var fbox = el("feedbackbox");
-        fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
+        fbox.innerHTML = cell_1 + " " + cell_3;
     } else {
         this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
         this.give_away_answer();

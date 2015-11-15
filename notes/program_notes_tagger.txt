@@ -1,5 +1,19 @@
+SUNDAY MORNING TEST
+finished kangaroo:
+    -   DEBUG 11-8 entering rollover mod.progress =  1
+        quiz.js:268 Uncaught TypeError: Cannot set property 'innerHTML' of null
+
+
+
+TODO IMPORTANT
+- ligthboxes aren't getting triggered
+- tie level into module
+- tie lexicon into module
+
+
+
 AKIVA AGENDA
-- 
+- add something that randomly changes mode during a progress bar
 
 
 ??? for GIO
@@ -10,6 +24,7 @@ TODO CLEANUP, ABSTRACTION AND MODULARITY
 
 TODO BUGS
 - add line breaks to admin page
+- english sentences in box are getting created multiple times
 
 
 PROFILE PAGE FUNCTIONALITY
