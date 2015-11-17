@@ -19,7 +19,8 @@ NEW FUNCTIONALITY
 - improve button
     - improve -> module with iteration > 0 & in_progress = true
     - if no module description - alert: click on the module you want to improve
-
+- add logout button for profile page
+- macrons
 
 
 ??? for GIO

@@ -13,7 +13,7 @@ var lexicon = [
         "queen",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("queen", "queen", "queens", true, true, false, false, null),
-            latin : new Latin_word_properties("REGINA", "REGIN", "REGIN", null, "1", "f", true, true, false, false, null)
+            latin : new Latin_word_properties("REGĪNA", "REGĪN", "REGĪN", null, "1", "f", true, true, false, false, null)
         }),
     new Lexeme(
         "frog",

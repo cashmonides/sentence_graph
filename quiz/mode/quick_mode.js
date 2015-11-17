@@ -16,6 +16,11 @@ QuickModeGame.prototype.attach = function(){
 
 };
 
+
+QuickModeGame.prototype.set_level = function () {
+    //todo
+}
+
 QuickModeGame.prototype.get_mode_name = function() {
     return "Quick";
 };
