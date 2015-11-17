@@ -14,7 +14,7 @@ TEST
 - can we switch between advance and improve
 
 NEW FUNCTIONALITY
-- add something that randomly changes mode during a progress bar
+- add something that randomly changes mode during a progress bar??
 - support for range-sampling e.g. level: [1,5]
 - improve button
     - improve -> module with iteration > 0 & in_progress = true
