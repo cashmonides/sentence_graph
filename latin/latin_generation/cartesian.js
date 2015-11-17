@@ -1,7 +1,7 @@
 var level_to_allowed2 = {
     //this will be our testing level for now
     1 : {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .0001, 'object_drop': .3, 'conjunction_drop': .3,
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .1, 'object_drop': .3, 'conjunction_drop': .3,
             min: 1, max: 1},
 
         clause_type : ["main"],
@@ -44,7 +44,7 @@ var level_to_allowed2 = {
     },
     2 : {
         drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': .3,
-            min: 1, max: 2},
+            min: 2, max: 2},
 
         clause_type : ["main"],
         sequence: {

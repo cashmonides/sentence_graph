@@ -1,23 +1,30 @@
-SUNDAY MORNING TEST
-finished kangaroo:
-    -   DEBUG 11-8 entering rollover mod.progress =  1
-        quiz.js:268 Uncaught TypeError: Cannot set property 'innerHTML' of null
 
 
 
-TODO IMPORTANT
-- ligthboxes aren't getting triggered
-- tie level into module
-- tie lexicon into module
+BUGS
+- advance -> improve -> profile
+    Uncaught ReferenceError: get_percentage is not defined
+- lightboxes aren't getting triggered
+- create some scope for the window page???
+- anonymous mode in banner
+    - anonymous warning in banner is displayed but id is undefined
+        Uncaught TypeError: Cannot read property 'id' of null
 
+TEST
+- can we switch between advance and improve
 
-
-AKIVA AGENDA
+NEW FUNCTIONALITY
 - add something that randomly changes mode during a progress bar
+- support for range-sampling e.g. level: [1,5]
+- improve button
+    - improve -> module with iteration > 0 & in_progress = true
+    - if no module description - alert: click on the module you want to improve
+
 
 
 ??? for GIO
 - in the new mode (with url parameters) we still want no history to be created
+- binding in window
 
 TODO CLEANUP, ABSTRACTION AND MODULARITY
 - abstract get accuracy and turn it into a util

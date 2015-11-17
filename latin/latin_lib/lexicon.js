@@ -289,6 +289,6 @@ var generate_current_lexicon = function (list_of_lexeme_strings) {
 };
 
 var return_lexicon_from_module = function (test_level) {
-    //return ['see', 'mouse', 'lion', 'carry'];
-    return ['frog', 'queen', 'see', 'mouse', 'lion', 'carry', 'eat', 'fall', 'sit', 'speak']
+    console.log('DEBUG 11-16 lexicon = ', ALL_MODULES[test_level].lexicon)
+    return ALL_MODULES[test_level].lexicon;
 };

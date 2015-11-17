@@ -1,13 +1,8 @@
-//for now we're going to have testlevel, we'll replace it later
-var test_level = 1;
-
-
-
-
-
 var MCMode3Game = function(){
     this.data = null;
     this.quiz = null;
+    // todo we here assume that 1 is the initial level
+    this.level = 1;
 };
 
 MCMode3Game.cell_1_feedback_right = ["Correct!", "Excellent!"];
@@ -41,19 +36,19 @@ MCMode3Game.prototype.get_mode_name = function() {
 
 
 
-MCMode3Game.prototype.next_question = function (){
+MCMode3Game.prototype.next_question = function () {
     console.log("DEBUG 11-14 entering make_output");
+    console.log("DEBUG 11-16 this.level = ", this.level)
     
-    //todo change this when done testing so it's dynamic
-    var test_level = 1;
     //sets up our lexicon
-    var list_of_lexeme_strings = return_lexicon_from_module(test_level);
+    var list_of_lexeme_strings = return_lexicon_from_module(this.level);
+    console.log('DEBUG 11-16 lexicon = ', list_of_lexeme_strings)
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
     
-    var data = make_output(test_level, current_lexicon);
+    var data = make_output(this.level, current_lexicon);
     
     //sets data
-    // var data = make_output(test_level, null, 'quiz_english');
+    // var data = make_output(this.level, null, 'quiz_english');
     this.question = data.question;
     //todo is the following otiose?
     this.sentence = data.sentence;              // text displayed in display box
@@ -82,21 +77,22 @@ MCMode3Game.prototype.next_question = function (){
     
     
     console.log("DEBUG entering 1st random_choice");
-    this.none_display = random_choice(map_level_to_allowed(test_level).none_display);
+    this.none_display = random_choice(map_level_to_allowed(this.level).none_display);
     
-    //todo how important are these remove children statements? I had to comment them out to make it work
+    
     document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));
     
     var e = document.createElement('div');
     e.id = 'answer_wrapper';
     document.getElementById("answer_choices").appendChild(e);
     
+    //todo - I found this in the code - what is the point of it?
     // remove_children(document.getElementById("answer_choices"));
     //todo why is this capitalized
     Quiz.set_question_text(this.question);
     this.quiz.set_word_selector(this.sentence);
     
-    //todo change to false after testing (a hacky way of making a submit button)
+    //todo change to false after testing (this is just a hacky way of making a submit button)
     this.quiz.word_selector.is_clickable = true;
     this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
     
@@ -110,6 +106,13 @@ MCMode3Game.prototype.next_question = function (){
     if (x === 0) {this.next_question()}
 
 };
+
+MCMode3Game.prototype.set_level = function (new_level) {
+    console.log("DEBUG 11-16 new_level = ", new_level)
+    this.level = new_level;
+    // console.log("DEBUG 11-16 this.level = ", this.level)
+    // console.log("DEBUG 11-16 this.level = ", this.quiz.game.level)
+}
 
 MCMode3Game.prototype.display = function (x) {
     return x.type === 'non_drop' || x.correct_answer || this.none_display

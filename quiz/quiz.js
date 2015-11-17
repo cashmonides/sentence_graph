@@ -1,4 +1,3 @@
-
 //submodule_progress = how close you are to getting from 5/10 to 6/10
 //module_progress = 5/10 in kangaroo
 
@@ -57,7 +56,7 @@ Quiz.prototype.start = function(){
    //todo
     //the following line both tests the conditional and actually loads the data
     if (!this.user.load(this.user_loaded.bind(this))) {
-        el("XXXXXXXXXXXX").innerHTML = "In Anonymous Session!";
+        el("header").innerHTML = "In Anonymous Session!";
         //  + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
     
@@ -77,7 +76,7 @@ Quiz.prototype.get_start_module = function(){
     var ups = get_url_parameters();
     console.log("quiz url parameters:", ups);
     var selected_mod = ups["mod"];
-    console.log("mod = ",selected_mod);
+    console.log("mod = ", selected_mod);
     
     if("mod" in ups){
         
@@ -86,8 +85,7 @@ Quiz.prototype.get_start_module = function(){
             
             // console.log("returned Boolean: ", this.user.is_valid(selected_mod));
             return ups["mod"];
-        }
-        else {
+        } else {
             alert("INVALID MODULE SELECTED");
             document.location = document.location = "../profile/";
             // return this.user.get_current_module();
@@ -115,9 +113,7 @@ Quiz.prototype.user_loaded = function(){
 
 
 Quiz.prototype.next_module = function () {
-    
-    
-    
+    console.log("DEBUG 11-15 next_module entered");
     this.next_submodule();
 };
 
@@ -130,6 +126,12 @@ Quiz.prototype.next_submodule = function(){
         incorrect_streak: 0
     };
     this.next_mode();
+    // todo new begins here
+    console.log("current module:", this.module);
+    console.log("current level:", this.module.level);
+    this.game.set_level(this.module.level);
+    console.log('this.game.level = ', this.game.level)
+    // todo new ends here
     this.next_question();
 };
 
@@ -175,22 +177,25 @@ Quiz.prototype.question_complete = function(){
 
 Quiz.prototype.submodule_complete = function () {
     
-    
+    console.log("DEBUG 11-16 quiz.submodule_complete entered");
     var mod = this.user.get_current_module(this.module.id);  //int
+    
     var numerator = this.user.data.history[mod].progress;
-    console.log("DEBUG 11-8 mod, numerator = ", mod, numerator);
+    
     var denominator = ALL_MODULES[mod].threshold;
+    console.log("DEBUG 11-16 mod = ", mod);
+    console.log("DEBUG 11-16 numerator = ", numerator);
+    console.log("DEBUG 11-16 threshold = ", denominator);
         
     
+    //
     if (this.user.submodule_complete(this.module.id)) {
+        console.log("DEBUG 11-16 user.submodule_complete is true");
         this.module = ALL_MODULES[this.user.get_current_module()];
-        // console.log("current module:", this.module);
-    
         this.fill_lightbox("YOU'VE BEATEN THIS LEVEL");
         $.featherlight($('#pop_up_div'), {afterClose: this.next_module.bind(this)});
-        
     } else {
-        
+        console.log("DEBUG 11-16 user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
         //todo make this less hacky
         this.fill_lightbox("YOUR PROGRESS IS: " + (numerator + 1) + "/" + denominator);
@@ -200,8 +205,12 @@ Quiz.prototype.submodule_complete = function () {
 
 
 Quiz.prototype.update_display = function() {
+    
+    console.log("DEBUG 11-15 update_display entered");
+    
     //todo in improve mode the following will break
     // var mod = this.user.get_current_module();
+    
     var mod = this.module.id;
     var module_icon = ALL_MODULES[mod].icon_url;
     var module_name = ALL_MODULES[mod].icon_name;
@@ -263,9 +272,10 @@ Quiz.prototype.process_answer = function(){
     this.game.process_answer(this);
 };
 
-Quiz.prototype.fill_lightbox = function(text) {
-    var name = this.user.data.profile.name;
-    el("pop_up_div").innerHTML = "CONGRATULATIONS " + name + "!<br>" + text;
+Quiz.prototype.fill_lightbox = function(text, lightbox) {
+    // todo fill_lightbox has been re-disenabled
+    // var name = this.user.data.profile.name;
+    // el('pop_up_div').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text;
 };
 
 
@@ -374,15 +384,15 @@ function return_to_profile() {
 
 
 
-function process_answer_hack () {
-    // alert("process_answer_hack triggered");
-    // alert(Quiz.process_answer) = undefined
-    // alert(Quiz.game); = undefined
-    // alert(Quiz) = function with default properties (null)
-    // alert(MCMode3game.process_answer)  = MCMode3game is not defined
-    alert(this);
-    console.log(this);
+// function process_answer_hack () {
+//     // alert("process_answer_hack triggered");
+//     // alert(Quiz.process_answer) = undefined
+//     // alert(Quiz.game); = undefined
+//     // alert(Quiz) = function with default properties (null)
+//     // alert(MCMode3game.process_answer)  = MCMode3game is not defined
+//     alert(this);
+//     console.log(this);
     
-}
+// }
 
 
