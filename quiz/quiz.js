@@ -137,7 +137,6 @@ Quiz.prototype.next_submodule = function(){
 
 Quiz.prototype.next_mode = function(){
     var allowed = ALL_MODULES[this.module.id].modes_allowed;
-    console.log("DEBUG 11-16 allowed modes = ", allowed);
     var mode = random_choice(allowed);
     var game = Quiz.get_mode(mode);
     

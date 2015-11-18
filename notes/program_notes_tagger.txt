@@ -1,4 +1,18 @@
+MORE AMBITIOUS
+- clickable charts
 
+DEEPER ISSUES
+- macrons make a word separation, might not be an issue yet
+
+BEFORE GIO
+- make admin page more ambitious
+- add logout button for profile page
+
+GIO
+- creating a scope for the buttons and binding that scope to other scopes
+- logging error messages
+- make mediatemple account and start hosting
+- going backwards brings a person to password and its visible and can be clicked forward
 
 
 BUGS
