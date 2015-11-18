@@ -28,7 +28,7 @@ DropModeGame.prototype.attach = function(){
 };
 
 DropModeGame.prototype.set_level = function () {
-    //todo
+    //todo (this will require assigning a level of some sort to grammatical concepts, parts of speech, etc. - distinct from latin level)
 }
 
 DropModeGame.prototype.get_mode_name = function() {
@@ -68,6 +68,16 @@ DropModeGame.prototype.next_question = function(sentences){
         this.quiz.word_selector.set_highlighted(is[i], true);
     }
     
+    //remove all html elements in drop down
+    if (document.getElementById("answer_choices")) {
+        if (document.getElementById("answer_wrapper")) {
+            document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));
+            console.log("DEBUG 11-18 remove html elements triggered");
+        }
+        
+    }
+    
+    //make html elements
     this.make_drop_down();
 
 
@@ -75,13 +85,29 @@ DropModeGame.prototype.next_question = function(sentences){
 
 
 DropModeGame.prototype.make_drop_down = function(){
+    //html elements created here
+    var ac = document.createElement("div");
+    ac.id = "answer_choices";
+    console.log("ac = ", ac);
+    document.getElementById("pre_footer").appendChild(ac);
     
-    var aw = document.createElement("answer_wrapper");
+    var aw = document.createElement("div");
+    aw.id = "answer_wrapper";
+    console.log("aw = ", aw);
     document.getElementById("answer_choices").appendChild(aw);
     
     var e = document.createElement("select");
     e.id = "select_element";
+    console.log("e = ", e);
+    
+    
+    console.log("DEBUG 11-18 doc.get.el.aw", document.getElementById("answer_wrapper"));
+    console.log("DEBUG 11-18 doc.get.el.ac", document.getElementById("answer_choices"));
+    
     document.getElementById("answer_wrapper").appendChild(e);
+    console.log("DEBUG 11-18 final append reached");
+    
+    console.log("DEBUG 11-18 dropdown data inserted = ", Array.from(this.data.available_tags));
     set_dropdown("select_element", Array.from(this.data.available_tags));
 };
 
