@@ -1,3 +1,7 @@
+SMALL FIXES
+- remove - now click on the correct answer
+
+
 MORE AMBITIOUS
 - clickable charts
 
@@ -7,6 +11,8 @@ DEEPER ISSUES
 BEFORE GIO
 - make admin page more ambitious
 - add logout button for profile page
+- rework the improve/advance functionality
+- add cheat sheet toggle
 
 GIO
 - creating a scope for the buttons and binding that scope to other scopes
