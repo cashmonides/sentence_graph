@@ -188,16 +188,20 @@ Quiz.prototype.submodule_complete = function () {
     console.log("DEBUG 11-16 threshold = ", denominator);
         
     
-    //
+    console.log("DEBUGGING entering problem lightbox area 11-19");
     if (this.user.submodule_complete(this.module.id)) {
         console.log("DEBUG 11-16 user.submodule_complete is true");
         this.module = ALL_MODULES[this.user.get_current_module()];
+        
+        
+        console.log("DEBUGGING LIGHTBOX: you've beeaten this level");
         this.fill_lightbox("YOU'VE BEATEN THIS LEVEL");
         $.featherlight($('#pop_up_div'), {afterClose: this.next_module.bind(this)});
     } else {
         console.log("DEBUG 11-16 user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
         //todo make this less hacky
+        console.log("DEBUGGING LIGHTBOX: YOUR PROGRESS IS:", (numerator + 1) + "/" + denominator);
         this.fill_lightbox("YOUR PROGRESS IS: " + (numerator + 1) + "/" + denominator);
         $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
     }
@@ -273,9 +277,8 @@ Quiz.prototype.process_answer = function(){
 };
 
 Quiz.prototype.fill_lightbox = function(text, lightbox) {
-    // todo fill_lightbox has been re-disenabled
-    // var name = this.user.data.profile.name;
-    // el('pop_up_div').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text;
+    var name = this.user.data.profile.name;
+    el('pop_up_div').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text;
 };
 
 

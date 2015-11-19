@@ -51,7 +51,7 @@ ProfilePage.build_progress_table = function(history) {
 
     var table = el("table");
     var row = make({tag: "tr"}, table);
-    var max_columns = 2;
+    var max_columns = 4;
     var order = get_module_order();
 
     // document.getElementById()
