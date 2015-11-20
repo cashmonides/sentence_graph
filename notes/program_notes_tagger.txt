@@ -1,5 +1,6 @@
 SMALL FIXES
 - remove - now click on the correct answer
+- give away answer should include the latin phrase
 
 
 MORE AMBITIOUS
@@ -21,14 +22,20 @@ GIO
 - going backwards brings a person to password and its visible and can be clicked forward
 
 
+GIO ???
+- for anonymous mode: is the general move to say if(!user.uid) {//some code} else {our current code}
+    - 
+
 BUGS
 - advance -> improve -> profile
     Uncaught ReferenceError: get_percentage is not defined
-- lightboxes aren't getting triggered
+- lightboxes aren't getting filled with text
 - create some scope for the window page???
 - anonymous mode in banner
     - anonymous warning in banner is displayed but id is undefined
         Uncaught TypeError: Cannot read property 'id' of null
+
+
 
 TEST
 - can we switch between advance and improve

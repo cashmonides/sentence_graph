@@ -147,6 +147,9 @@ MCMode3Game.prototype.make_drop_down = function(){
 
 
 MCMode3Game.prototype.process_answer = function(){
+    
+    
+    
     var self = this;
     var is_correct = this.drop_downs.every(function (x) {
         return (x.type === 'non_drop') || (!self.display(x)) ||

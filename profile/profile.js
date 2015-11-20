@@ -72,8 +72,7 @@ ProfilePage.build_progress_table = function(history) {
             children: [
                 {tag: "img", class: img_class, src: mod.icon_url},                      //UNIVERSAL MODULE
                 {tag: "br"},
-                // Should use a function.
-                this.user.get_current_stats(i+1)
+                this.get_display_caption(this.user, order[i])
             ]
         }, row);
 
@@ -85,6 +84,44 @@ ProfilePage.build_progress_table = function(history) {
     }
 
 };
+
+
+
+ProfilePage.get_display_caption = function (user, module_id) {
+    // finished "accuracy = x%""     (max accuracy)
+    // "improving previous accuracy = x% , current accuracy = y%"  x = max accuracy
+    //in progress "0/5"
+    // not done  
+    
+    console.log("DEBUG 11-20 in get_display_caption user argument = ", user);
+    console.log("DEBUG 11-20 in get_display_caption module_id argument = ", module_id);
+    var order = get_module_order();
+    var threshold = ALL_MODULES[order[module_id]].threshold;
+    console.log("DEBUG 11-20 threshold = ", threshold);
+    
+    
+    // console.log("DEBUG 11-20 in_progress = ", user.data.history[module_id].progress);
+   
+    
+    
+    console.log("DEBUG 11-20 get_display_caption entered");
+    var classification = user.classify_module(module_id);
+    console.log("DEBUG 11-20 classification = ", classification);
+    switch (classification) {
+        case "completed" : return user.get_max_accuracy(module_id) + "%";
+        case "frontier" : return user.data.history[module_id].progress + "/" + threshold; 
+        case "improving" : return user.get_max_accuracy(module_id) + "%"
+        case "uncompleted" : return "";
+        default : throw "no caption detected";
+    }
+}
+
+
+//todo in user make get_accuracy return a list of accuracies
+// sample the final one
+// max of all previous
+// 
+
 
 ProfilePage.click_handler = function(mod_id){
     
