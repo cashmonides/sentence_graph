@@ -1,3 +1,41 @@
+
+CONTROL FLOW OF PROFILE STATS
+- get percentage accuracy 75%   (black) (max accuracy)
+- - improving accuracy = 79% best previous accuracy = 25%  2/6  (red)
+- get a progress   2/8 (green)
+- get nothing       (grey)
+
+
+
+- get_accuracy on a specific iteration
+- get max accuracy
+- get max accuracy, ignoring current attempt 
+- get progress
+
+
+issue: their history is false for all modules so we need to make sure we're not throwing errors
+
+
+GAMEIFICATION
+- how do they quit improving? do we want them to quit improving? will they get discouraged if they don't improve
+
+
+AGENDA
+- fix profile page
+- anonymous message
+- admin page
+- range-sampler
+- logout button on profile page
+- rework the improve/advance functionality
+- add cheat sheet toggle
+- test none display and potential no object drop
+
+
+
+BUGS
+- at higher levels in mcmode english answer choices occur outside of desired box 
+- no object in latin sentence -> no drop down in object (might be because of none mode)
+- turn off clickbale word selector
 SMALL FIXES
 - remove - now click on the correct answer
 - give away answer should include the latin phrase
@@ -48,6 +86,7 @@ NEW FUNCTIONALITY
     - if no module description - alert: click on the module you want to improve
 - add logout button for profile page
 - macrons
+- avoid identical question?
 
 
 ??? for GIO

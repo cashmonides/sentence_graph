@@ -53,11 +53,13 @@ ProfilePage.build_progress_table = function(history) {
     var row = make({tag: "tr"}, table);
     var max_columns = 4;
     var order = get_module_order();
+    
+    console.log("DEBUG 11-20 order = ", order);
 
     // document.getElementById()
 
     for (var i = 0; i < order.length; i++) {
-
+        console.log("DEBUG 11-20 i, order[i]", i, order[i]);
         var mod = ALL_MODULES[order[i]];
     
         var mod_history = mod.id in history ? history[mod.id] : null;
@@ -92,25 +94,28 @@ ProfilePage.get_display_caption = function (user, module_id) {
     // "improving previous accuracy = x% , current accuracy = y%"  x = max accuracy
     //in progress "0/5"
     // not done  
-    
+    console.log("DEBUG 11-20 get_display_caption entered");
     console.log("DEBUG 11-20 in get_display_caption user argument = ", user);
     console.log("DEBUG 11-20 in get_display_caption module_id argument = ", module_id);
-    var order = get_module_order();
-    var threshold = ALL_MODULES[order[module_id]].threshold;
-    console.log("DEBUG 11-20 threshold = ", threshold);
+    // var order = get_module_order();
+    // var threshold = ALL_MODULES[module_id].threshold;
+    // console.log("DEBUG 11-20 threshold = ", threshold);
     
     
     // console.log("DEBUG 11-20 in_progress = ", user.data.history[module_id].progress);
    
     
     
-    console.log("DEBUG 11-20 get_display_caption entered");
     var classification = user.classify_module(module_id);
     console.log("DEBUG 11-20 classification = ", classification);
     switch (classification) {
         case "completed" : return user.get_max_accuracy(module_id) + "%";
-        case "frontier" : return user.data.history[module_id].progress + "/" + threshold; 
-        case "improving" : return user.get_max_accuracy(module_id) + "%"
+        case "frontier" : return user.get_progress(module_id).join("/");
+        //old code below
+        // case "frontier" : return user.data.history[module_id].progress + "/" + threshold; 
+        case "improving" : return "current: " + user.get_max_accuracy(module_id)
+        + "% best previous: " + user.get_previous_max_accuracy(module_id) +
+        '% current progress: ' + user.get_progress(module_id).join("/");
         case "uncompleted" : return "";
         default : throw "no caption detected";
     }
