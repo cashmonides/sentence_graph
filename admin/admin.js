@@ -89,12 +89,12 @@ function get_current_stats2 (user, module_id) {
     
     
     
-    var get_accuracy = function (iteration) {
-        return Math.floor(100 * mod.metrics[iteration][0]
-        / Object.keys(mod.metrics[iteration]).
-        map(function (x) {return mod.metrics[iteration][x]}).
-        reduce(function (a, b) {return a + b}))
-    }
+    // var get_accuracy = function (iteration) {
+    //     return Math.floor(100 * mod.metrics[iteration][0]
+    //     / Object.keys(mod.metrics[iteration]).
+    //     map(function (x) {return mod.metrics[iteration][x]}).
+    //     reduce(function (a, b) {return a + b}))
+    // }
 
 
 
