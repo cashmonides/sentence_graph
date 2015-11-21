@@ -5,7 +5,9 @@ LITTLE THINGS
 - word selector should only have hovering behavior in quick mode
 
 SUNDAY
+- make onclick only activated for improving and advancing
 - debug improve mode
+- debug lightbox  3/8 when threshold is 5
 - debug anonymous mode
     - add login button to header
     - create a property of quiz called anonymous.level or something & check for anonymous mode at the beginning of every quiz function
@@ -23,7 +25,7 @@ AGENDA
 - admin page
 - make only improving and advancing hoverable
 - add cheat sheet toggle
-- turn off clickable word selector
+- turn off hoverable word selector
 
 
 

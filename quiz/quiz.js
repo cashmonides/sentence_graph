@@ -363,19 +363,52 @@ Quiz.prototype.get_selected_region = function(){
 
 };
 
-//todo probably won't work because it's scoped by Quiz not by the web page
-Quiz.toggle_cheat_sheet = function() {
-    var button = el("cheat_sheet_button");
 
+Quiz.prototype.get_cheat_sheet = function(mod_id) {
+    var cheat_sheet = ALL_MODULES[mod_id].cheat_sheet;
+    return cheat_sheet;
+}
+
+Quiz.prototype.toggle_cheat_sheet = function() {
+    var button = el("cheat_sheet_button");
+    var mod = this.user.get_current_module();
+    var image_source = this.get_cheat_sheet(mod);
+    // // var wrapper = el("cheat_sheet_wrapper");
+    // // wrapper.src = "../resources/cheat_h.jpg";
+    // document.createElement("div");
+    // document.getElementById("cheat_sheet_wrapper").setAttribute("src", "../resources/cheat_h.jpg");
+    
+    // var box = el("image_display_box");
+    // document.getElementById("image_display_box").appendChild("cheat_sheet_wrapper");
+    
+    
+
+    
     button.onclick = function() {
         var div = el("image_display_box");
         if (div.style.display !== 'none') {
             div.style.display = 'none';
         }
         else {
+            // var img_class = "cheat_sheet";
+            // console.log("entering make function");
+            // make({
+            //     tag: "cheat_sheet_tag", 
+            //     class: ["cheat_sheet"], 
+            //     children: [
+            //         {tag: "img", class: img_class, src: "../resources/cheat_h.jpg"},                      //UNIVERSAL MODULE
+            //         {tag: "br"}
+            //     ]
+            // });
+            
+            
+            // div.appendChild(cheat_sheet); 
+            div.innerHTML += '<img src="'+ image_source +'" />'; 
             div.style.display = 'block';
         }
     };
+    
+    
 };
 
 
