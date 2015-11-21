@@ -73,38 +73,49 @@ Quiz.prototype.start = function(){
 //decides whether we go to current or some other module determined at profile page
 Quiz.prototype.get_start_module = function(){
     
+    //todo
+    //if (improving)
     var ups = get_url_parameters();
     console.log("quiz url parameters:", ups);
     var selected_mod = ups["mod"];
     console.log("mod = ", selected_mod);
     
     if("mod" in ups){
-        
-        //todo additions below
-        if (this.user.is_valid(selected_mod)) {
-            
-            // console.log("returned Boolean: ", this.user.is_valid(selected_mod));
-            return ups["mod"];
-        } else {
-            alert("INVALID MODULE SELECTED");
-            document.location = document.location = "../profile/";
-            // return this.user.get_current_module();
-        }
+        return ups["mod"];
     } else {
         return this.user.get_current_module();
     }
+    
+    
+    
+    //todo old code below
+    // if("mod" in ups){
+    //     //todo additions below
+    //     if (this.user.is_valid(selected_mod)) {
+            
+    //         // console.log("returned Boolean: ", this.user.is_valid(selected_mod));
+    //         return ups["mod"];
+    //     } else {
+    //         alert("INVALID MODULE SELECTED");
+    //         document.location = document.location = "../profile/";
+    //         // return this.user.get_current_module();
+    //     }
+    // } else {
+    //     return this.user.get_current_module();
+    // }
+    
 };
 
 Quiz.prototype.user_loaded = function(){
     // console.log("DEBUG 11-7 entering user_loaded = ");
     //todo var id will change depending on url parameters (given by profile page)
-    var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE)
+    var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE) or improving via url paramaters
     
-    // console.log("DEBUG 11-7 id = ", id);
+    console.log("DEBUG 11-20 user_loaded id = ", id);
     
     this.module = ALL_MODULES[id];
     
-    // console.log("DEBUG 11-7 this.module = ", this.module);
+    console.log("DEBUG 11-20 user_loaded this.module = ", this.module);
     
     this.user.start_module(id);
     
@@ -217,6 +228,7 @@ Quiz.prototype.update_display = function() {
     
     var mod = this.module.id;
     var module_icon = ALL_MODULES[mod].icon_url;
+    //todo uncomment when testing
     var module_name = ALL_MODULES[mod].icon_name;
     // console.log("DEBUG 11-8 mod = ", mod);
     // console.log("DEBUG 11-8 this.user.mod.progress = ", this.user.data.history[mod].progress);

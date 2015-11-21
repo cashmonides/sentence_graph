@@ -33,6 +33,12 @@ AGENDA
 
 
 BUGS
+- make past frontier items non-hoverable
+- lightbox message is wrong (3/8)
+- improve is wrong
+    - completion sends to frontier (should go to profile)
+    - it should be initiated by improve button, thereafter only one should be improvable
+    - previous, improving accuracies are missing
 - at higher levels in mcmode english answer choices occur outside of desired box 
 - no object in latin sentence -> no drop down in object (might be because of none mode)
 - turn off clickbale word selector

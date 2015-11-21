@@ -81,7 +81,7 @@ var level_to_allowed2 = {
                 extra_options: 1
             }
         },
-        none_display: [false],
+        none_display: [true],
         shuffle: [true, false]
     },
     3 : {
@@ -123,7 +123,7 @@ var level_to_allowed2 = {
                 extra_options: 1
             }
         },
-        none_display: [false],
+        none_display: [true],
         shuffle: [true, false]
     },
     4 : {
@@ -158,14 +158,14 @@ var level_to_allowed2 = {
 
         drop_down_settings: {
             noun: {
-                extra_options: 1,
+                extra_options: 2,
                 swap: true
             },
             verb: {
-                extra_options: 1
+                extra_options: 2
             }
         },
-        none_display: [false],
+        none_display: [true],
         shuffle: [true, false]
     },
     5 : {
@@ -192,7 +192,7 @@ var level_to_allowed2 = {
             implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
         },
 
-        voice: ["active"],
+        voice: ["active", "passive"],
         // voice: ["active", "passive"],
         //voice: ["passive"],
         number_of_other_nouns : ["singular", "plural"],
@@ -200,14 +200,14 @@ var level_to_allowed2 = {
 
         drop_down_settings: {
             noun: {
-                extra_options: 1,
+                extra_options: 3,
                 swap: true
             },
             verb: {
-                extra_options: 1
+                extra_options: 3
             }
         },
-        none_display: [false],
+        none_display: [true],
         shuffle: [true, false]
     },
     // adds passive
@@ -215,7 +215,7 @@ var level_to_allowed2 = {
         drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': .3,
             min: 2, max: 3},
 
-        clause_type : ["main"],
+        clause_type : ["iq", "is"],
         sequence: {
             main: ['none'],
             is: ['primary', 'secondary'],
@@ -243,14 +243,14 @@ var level_to_allowed2 = {
 
         drop_down_settings: {
             noun: {
-                extra_options: 1,
+                extra_options: 4,
                 swap: true
             },
             verb: {
-                extra_options: 1
+                extra_options: 4
             }
         },
-        none_display: [false],
+        none_display: [true],
         shuffle: [true, false]
     },
     // adds implicit
@@ -258,7 +258,7 @@ var level_to_allowed2 = {
         drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': .3,
             min: 2, max: 3},
 
-        clause_type : ["main"],
+        clause_type : ["main", "iq", "is"],
         sequence: {
             main: ['none'],
             is: ['primary', 'secondary'],
@@ -286,14 +286,14 @@ var level_to_allowed2 = {
 
         drop_down_settings: {
             noun: {
-                extra_options: 1,
+                extra_options: 3,
                 swap: true
             },
             verb: {
-                extra_options: 1
+                extra_options: 3
             }
         },
-        none_display: [false],
+        none_display: [true],
         shuffle: [true, false]
     },
     

@@ -9,9 +9,19 @@ var ProfilePage = {
 
 ProfilePage.IMAGE_PREFIX = "https://googledrive.com/host/";
 
-ProfilePage.enter_game = function() {
+
+
+ProfilePage.enter_advance = function() {
     document.location = "../quiz/";
 };
+
+ProfilePage.enter_improve = function () {
+    var mod_id = this.user.get_improving_module();
+    document.location = "../quiz/?mod=" + mod_id;
+};
+// ProfilePage.enter_game = function() {
+//     document.location = "../quiz/";
+// };
 
 //global functions can be simply reference but for methods we have to bind the method to "this" 
 // this.user points to the user object
@@ -70,7 +80,7 @@ ProfilePage.build_progress_table = function(history) {
         make({
             tag: "td", 
             class: ["progress_cell"], 
-            onclick: ProfilePage.click_handler(mod.id),
+            onclick: ProfilePage.select_improvement_module(mod.id),
             children: [
                 {tag: "img", class: img_class, src: mod.icon_url},                      //UNIVERSAL MODULE
                 {tag: "br"},
@@ -127,12 +137,106 @@ ProfilePage.get_display_caption = function (user, module_id) {
 // max of all previous
 // 
 
+//todo disabling click handler for now
+//later we'll enable it in an intelligent way
+// ProfilePage.click_handler = function(mod_id){
+    
+//     return function(){
+//         document.location = "../quiz/?mod=" + mod_id;
+//     };
+    
+// };
 
-ProfilePage.click_handler = function(mod_id){
+
+ProfilePage.select_improvement_module = function(mod_id){
+    // three cases
+    // 1 no improving module at all
+        // alert: would you like to improve your accuracy at this level? yes/no
+        // yes
+            // enter improvement at that module
+        // no 
+            // -> profile
+    // 2 module clicked on is improving
+        // alert: would you like to continue improve your accuracy at this level? yes/no
+        // yes
+            // enter improvement at that module
+        // no 
+            // -> profile
+    // 3 module clicked on is not improving but improving exists
+        // alert: click improve or advance to get started
+    // 4 module clicked on is frontier
+        // alert: would you like to advance in this level?
+        //yes : 
+            //enter mod_id
+        //no: 
+            // -> profile
+    var self = this;
+    return function () {
+        
+        var improving_mod = self.user.get_improving_module();
+        //todo uncomment when done testing
+        // var improving_mod_name = ALL_MODULES[improving_mod].icon_name;
+        console.log("DEBUG 11-20 improving_mod", improving_mod);
+        
+        // console.log("DEBUG 11-20 improving_mod_name", improving_mod_name);
+        
+        var status;
+        if (mod_id === self.user.get_current_module()) {
+            status = 4;
+        } else if (improving_mod === null) {
+            status = 1;
+        } else if (improving_mod === mod_id) {
+            status = 2;
+        } else if (improving_mod !== mod_id) {
+            status = 3
+        } else {
+            throw new Error("no improvement status detected");
+        }
+        
+        
+        
+        
+        switch (status) {
+            case 1 : if (confirm("would you like to improve your accuracy at this level?")) {
+                            // alert("you would be entering the improvement level now");
+                            document.location = "../quiz/?mod=" + mod_id;
+                            break;
+                        } else {
+                          return null;  
+                        }
+            case 2 : if (confirm("would you like to continue improving your accuracy at this level?")) {
+                            // alert("you would be entering the improvement level now");
+                            document.location = "../quiz/?mod=" + mod_id;
+                            break;
+                        } else {
+                          return null;  
+                        }
+            case 3 : alert("Click advance or improve to play the game. You are currently improving at level: " + "improving_mod_name"); 
+                    return null;
+            case 4 : if (confirm("would you like to continue advancing at this level?")) {
+                            // alert("you would be entering the advance level now");
+                            document.location = "../quiz/?mod=" + mod_id;
+                            break;
+                        } else {
+                          return null;  
+                        }
+        }
+        
+        
+        // switch (status) {
+        //     case 1 : alert("would you like to improve your accuracy at this level?");
+        //             return null;
+        //     case 2 : alert("would you like to continue improving your accuracy at this level?");
+        //             return null;
+        //     case 3 : alert("Click advance or improve to play the game. You are currently improving at level: " + improving_mod_name); 
+        //             return null;
+        // }
     
-    return function(){
-        document.location = "../quiz/?mod=" + mod_id;
-    };
     
+    // if (mod_id !== this.user.)
+    // return function(){
+    //     document.location = "../quiz/?mod=" + mod_id;
+    // };
+    }
 };
 
