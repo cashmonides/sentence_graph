@@ -7,6 +7,8 @@ LITTLE THINGS
 SUNDAY
 - debug improve mode
 - debug anonymous mode
+    - add login button to header
+    - create a property of quiz called anonymous.level or something & check for anonymous mode at the beginning of every quiz function
 - debug icon name
 - add etymology
 - add etymology material to lightboxes
@@ -19,7 +21,7 @@ AGENDA
 - fix icon name bug
 - anonymous message
 - admin page
-- change hovering behavior
+- make only improving and advancing hoverable
 - add cheat sheet toggle
 - turn off clickable word selector
 

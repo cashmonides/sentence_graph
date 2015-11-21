@@ -5,6 +5,11 @@
     /*height: 100%*/
 }
 
+.complete:hover {
+    background: red;
+    border: solid 2px black;
+}
+
 
 .incomplete {
     opacity: 0.4;
@@ -17,17 +22,42 @@
     cursor: pointer;
 }
 
-.progress_cell:hover {
-    background: red;
-    border: solid 2px black;
-}
-
 .progress_image {
-   
    width: 68px; 
    height: 68px; 
    border: none;
 }
+
+/* akiva disabled below for testing
+/*.progress_cell:hover {*/
+/*    background: red;*/
+/*    border: solid 2px black;*/
+/*}*/
+/*.progress_image {*/
+   
+/*   width: 68px; */
+/*   height: 68px; */
+/*   border: none;*/
+/*}*/
+/*.progress_cell:hover {*/
+/*    background: red;*/
+/*    border: solid 2px black;*/
+/*}*/
+
+
+
+/*.progress_image_complete:hover {*/
+/*    background: red;*/
+/*    border: solid 2px black;*/
+/*}*/
+
+
+/*.progress_image_incomplete {*/
+/*   width: 68px; */
+/*   height: 68px; */
+/*   border: solid 10px black;*/
+/*}*/
+
 
 #start_game_button {
     font-family: Baskerville;
