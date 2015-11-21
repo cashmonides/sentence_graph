@@ -92,8 +92,8 @@ MCMode3Game.prototype.next_question = function () {
     Quiz.set_question_text(this.question);
     this.quiz.set_word_selector(this.sentence);
     
-    //todo change to false after testing (this is just a hacky way of making a submit button)
-    this.quiz.word_selector.is_clickable = true;
+   
+    this.quiz.word_selector.is_clickable = false;
     this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
     
     

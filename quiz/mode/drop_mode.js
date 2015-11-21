@@ -60,7 +60,7 @@ DropModeGame.prototype.next_question = function(sentences){
     //todo does the following need to be parameterized with make not clickable and set highlighted
     this.quiz.set_word_selector(this.data.sentence);
     
-    this.quiz.word_selector.is_clickable = true;
+    this.quiz.word_selector.is_clickable = false;
     this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
 
     var is = this.data.target_region.get_indices();

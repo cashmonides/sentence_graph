@@ -1,47 +1,46 @@
-
-CONTROL FLOW OF PROFILE STATS
-- get percentage accuracy 75%   (black) (max accuracy)
-- - improving accuracy = 79% best previous accuracy = 25%  2/6  (red)
-- get a progress   2/8 (green)
-- get nothing       (grey)
-
-
-
-- get_accuracy on a specific iteration
-- get max accuracy
-- get max accuracy, ignoring current attempt 
-- get progress
-
-
-issue: their history is false for all modules so we need to make sure we're not throwing errors
-
-
 GAMEIFICATION
 - how do they quit improving? do we want them to quit improving? will they get discouraged if they don't improve
 
+LITTLE THINGS
+- word selector should only have hovering behavior in quick mode
+
+SUNDAY
+- debug improve mode
+- debug anonymous mode
+- debug icon name
+- add etymology
+- add etymology material to lightboxes
+- add grammatical level to module and incorporate into quick mode and drop mode
+- 
 
 AGENDA
-- fix profile page
+- run a full test
+- lightbox bug is still there
+- fix icon name bug
 - anonymous message
 - admin page
-- range-sampler
-- logout button on profile page
-- rework the improve/advance functionality
+- change hovering behavior
 - add cheat sheet toggle
+- turn off clickable word selector
+
+
+
+- range-sampler
 - test none display and potential no object drop
 
-
+ADD FUNCTIONALITY
+- make past frontier items non-hoverable
+- customize alert boxes
+- accuracy is small but when you hover it gets bigger
+- every end of module should bring you to the profile page
 
 BUGS
-- make past frontier items non-hoverable
+- in profile, when you hit improve and you have no current improving, it shows "Uncaught TypeError: Cannot read property 'id' of undefined"
 - lightbox message is wrong (3/8)
-- improve is wrong
-    - completion sends to frontier (should go to profile)
-    - it should be initiated by improve button, thereafter only one should be improvable
-    - previous, improving accuracies are missing
 - at higher levels in mcmode english answer choices occur outside of desired box 
 - no object in latin sentence -> no drop down in object (might be because of none mode)
-- turn off clickbale word selector
+
+
 SMALL FIXES
 - remove - now click on the correct answer
 - give away answer should include the latin phrase

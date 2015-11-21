@@ -30,14 +30,35 @@
     <div id="level_box"></div>
     <div id="image_box"></div>
     <div id="game_entry">
-         <button id="start_game_button" type="button" class="hoverable" onclick="ProfilePage.enter_advance()">advance</button>
-        <button id="improve_button" type="button" class="hoverable" onclick="ProfilePage.enter_improve()">improve</button>
-  
+         <button class="button" id="start_game_button" type="button" class="hoverable" onclick="ProfilePage.enter_advance()">advance</button>
+        <button class="button" id="improve_button" type="button" class="hoverable" onclick="ProfilePage.enter_improve()">improve</button>
+        <button class="button" id="logout_button" onclick="ProfilePage.logout()">logout</button>
     </div>
     <table id="table"></table>
     
     
     <!--table { background: url("http://www.plus2net.com/images/top2.jpg") no-repeat; }-->
+    
+    <!--new material below for custom confirm box-->
+    <!--<div id="dialogoverlay"></div>-->
+    <!--<div id="dialogbox">-->
+    <!--    <div>-->
+    <!--        <div id="dialogboxhead"></div>-->
+    <!--        <div id="dialogboxbody"></div>-->
+    <!--        <div id="dialogboxfoot"></div>-->
+    <!--    </div>-->
+    <!--</div>-->
+    <!--<p id="post_1">-->
+    <!--  Today is a lovely day ...-->
+    <!--  <button onclick="Confirm.render('Delete Post?','delete_post','post_1')">Delete</button>-->
+    <!--</p>-->
+    <!--<p id="post_2">-->
+    <!--  I like pickles ... -->
+    <!--  <button onclick="Confirm.render('Delete Post?','delete_post','post_2')">Delete</button>-->
+    <!--</p>-->
+    <!--<button onclick="Alert.render('Hello World')">Custom Alert</button>-->
+    
+    <!--end of new material-->
     
 </body>
 
