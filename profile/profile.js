@@ -7,24 +7,24 @@ var ProfilePage = {
     user: null
 };
 
-// ProfilePage.IMAGE_PREFIX = "https://googledrive.com/host/";
-
-
 ProfilePage.logout = function () {
     document.location = "../login/";
 }
 
+
+//todo bottleneck passes parameter that sets mode to improve or advance
 ProfilePage.enter_advance = function() {
+    //todo call bottleneck here
     document.location = "../quiz/";
 };
 
 ProfilePage.enter_improve = function () {
+    //todo call bottleneck here
     var mod_id = this.user.get_improving_module();
     document.location = "../quiz/?mod=" + mod_id;
 };
-// ProfilePage.enter_game = function() {
-//     document.location = "../quiz/";
-// };
+
+
 
 //global functions can be simply reference but for methods we have to bind the method to "this" 
 // this.user points to the user object
@@ -34,11 +34,9 @@ ProfilePage.start = function(){
     this.user = new User();
     this.user.load(this.display_profile.bind(this));
     // equivalent to: this.user.load(function(){ this.display_profile(); });
-    //console.log"USER in start = ", user);
 };
 
 ProfilePage.display_profile = function() {
-
     var player_name = this.user.uid;
     var e1 = el("name_box");
     e1.innerHTML = "Welcome " + this.user.data.profile.name;
@@ -46,18 +44,10 @@ ProfilePage.display_profile = function() {
     var player_level = "PLAYER LEVEL HERE";
     var e2 = el("level_box");
     e2.innerHTML = "your level is: " + player_level;
-    //console.log"FIRST PARTS COMPLETED")
-
-
     
-    //console.log"user.data = ", user.data);
     var history = this.user.data.history;
-    //console.log"HISTORY LOADED = ", history);
     this.build_progress_table(history);
 };
-
-
-
 
 
 ProfilePage.build_progress_table = function(history) {
@@ -66,21 +56,15 @@ ProfilePage.build_progress_table = function(history) {
     var row = make({tag: "tr"}, table);
     var max_columns = 4;
     var order = get_module_order();
-    
-    console.log("DEBUG 11-20 order = ", order);
-
-    // document.getElementById()
 
     for (var i = 0; i < order.length; i++) {
-        console.log("DEBUG 11-20 i, order[i]", i, order[i]);
         var mod = ALL_MODULES[order[i]];
     
         var mod_history = mod.id in history ? history[mod.id] : null;
-        
-        // var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image"] : ["progress_image", "incomplete"];
+                        
         var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image", "complete"] : ["progress_image", "incomplete"];
         
-        console.log("entering make function");
+        
         make({
             tag: "td", 
             class: ["progress_cell"], 
@@ -96,32 +80,15 @@ ProfilePage.build_progress_table = function(history) {
         if (i > 0 && i % max_columns == 0) {
             row = make({tag: "tr"}, table);
         }
-
     }
-
 };
 
 
 
 ProfilePage.get_display_caption = function (user, module_id) {
-    // finished "accuracy = x%""     (max accuracy)
-    // "improving previous accuracy = x% , current accuracy = y%"  x = max accuracy
-    //in progress "0/5"
-    // not done  
-    console.log("DEBUG 11-20 get_display_caption entered");
-    console.log("DEBUG 11-20 in get_display_caption user argument = ", user);
-    console.log("DEBUG 11-20 in get_display_caption module_id argument = ", module_id);
-    // var order = get_module_order();
-    // var threshold = ALL_MODULES[module_id].threshold;
-    // console.log("DEBUG 11-20 threshold = ", threshold);
-    
-    
-    // console.log("DEBUG 11-20 in_progress = ", user.data.history[module_id].progress);
-   
-    
     
     var classification = user.classify_module(module_id);
-    console.log("DEBUG 11-20 classification = ", classification);
+    // console.log("DEBUG 11-20 classification = ", classification);
     switch (classification) {
         case "completed" : return user.get_max_accuracy(module_id) + "%";
         case "frontier" : return user.get_progress(module_id).join("/");
@@ -136,22 +103,9 @@ ProfilePage.get_display_caption = function (user, module_id) {
 }
 
 
-//todo in user make get_accuracy return a list of accuracies
-// sample the final one
-// max of all previous
-// 
-
-//todo disabling click handler for now
-//later we'll enable it in an intelligent way
-// ProfilePage.click_handler = function(mod_id){
-    
-//     return function(){
-//         document.location = "../quiz/?mod=" + mod_id;
-//     };
-    
-// };
 
 
+//todo call bottleneck here
 ProfilePage.select_improvement_module = function(mod_id){
     // three cases
     // 1 no improving module at all
@@ -178,14 +132,18 @@ ProfilePage.select_improvement_module = function(mod_id){
     return function () {
         
         var improving_mod = self.user.get_improving_module();
+        var frontier_mod = self.user.get_current_module()
         //todo uncomment when done testing
         // var improving_mod_name = ALL_MODULES[improving_mod].icon_name;
         console.log("DEBUG 11-20 improving_mod", improving_mod);
+        console.log("DEBUG 11-20 frontier_mod", frontier_mod);
         
         // console.log("DEBUG 11-20 improving_mod_name", improving_mod_name);
         
         var status;
-        if (mod_id === self.user.get_current_module()) {
+        if (mod_id > frontier_mod) {
+            status = 3;
+        } else if (mod_id === frontier_mod) {
             status = 4;
         } else if (improving_mod === null) {
             status = 1;
@@ -196,9 +154,6 @@ ProfilePage.select_improvement_module = function(mod_id){
         } else {
             throw new Error("no improvement status detected");
         }
-        
-        
-        
         
         switch (status) {
             case 1 : if (confirm("would you like to improve your accuracy at this level?")) {
@@ -225,22 +180,6 @@ ProfilePage.select_improvement_module = function(mod_id){
                           return null;  
                         }
         }
-        
-        
-        // switch (status) {
-        //     case 1 : alert("would you like to improve your accuracy at this level?");
-        //             return null;
-        //     case 2 : alert("would you like to continue improving your accuracy at this level?");
-        //             return null;
-        //     case 3 : alert("Click advance or improve to play the game. You are currently improving at level: " + improving_mod_name); 
-        //             return null;
-        // }
-    
-    
-    // if (mod_id !== this.user.)
-    // return function(){
-    //     document.location = "../quiz/?mod=" + mod_id;
-    // };
     }
 };
 
@@ -314,3 +253,22 @@ function CustomConfirm(){
 	}
 }
 var Confirm = new CustomConfirm();
+
+
+
+
+
+//todo in user make get_accuracy return a list of accuracies
+// sample the final one
+// max of all previous
+// 
+
+//todo disabling click handler for now
+//later we'll enable it in an intelligent way
+// ProfilePage.click_handler = function(mod_id){
+    
+//     return function(){
+//         document.location = "../quiz/?mod=" + mod_id;
+//     };
+    
+// };

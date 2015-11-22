@@ -1,3 +1,35 @@
+ETYMOLOGY LEVELS
+- HOW MANY LEVELS?  
+    - 2 parameters
+        - parameter 1: never see it unless they reach this grade  
+            - suicide (5th)
+        - parameter 2: minimum count
+            - mesoamerica
+                - level 1-50 see definition
+                - 50 and after, don't see definition
+            - responsive
+                - after 10 correct answers, definition disappears
+                - after 1 incorrect answer, definition reappears
+
+- persist statement that writes metrics:
+    mesoaamerica:
+        count: 0
+    (reset counter to 0 when they get it wrong)
+
+
+STEPS TO ETYMOLOGY
+- translate to javascript
+- add one fields to each word
+    - minimum count before definition disappears
+    - set our default at 5
+- block out persist statements
+- word history initialized as false when user get's created
+
+
+
+- (also have to initialize a part of speech history when user get's created)
+
+
 GAMEIFICATION
 - how do they quit improving? do we want them to quit improving? will they get discouraged if they don't improve
 
@@ -5,6 +37,7 @@ LITTLE THINGS
 - word selector should only have hovering behavior in quick mode
 
 SUNDAY
+- current module needs to be sensitiive to advancing or improving
 - make onclick only activated for improving and advancing
 - debug improve mode
 - debug lightbox  3/8 when threshold is 5
@@ -26,7 +59,8 @@ AGENDA
 - make only improving and advancing hoverable
 - add cheat sheet toggle
 - turn off hoverable word selector
-
+- add player level to profile page
+- add aggregrate accuracy to profile page
 
 
 - range-sampler
@@ -39,6 +73,7 @@ ADD FUNCTIONALITY
 - every end of module should bring you to the profile page
 
 BUGS
+- cheat sheet image is tiled three times at one of the early levels
 - in profile, when you hit improve and you have no current improving, it shows "Uncaught TypeError: Cannot read property 'id' of undefined"
 - lightbox message is wrong (3/8)
 - at higher levels in mcmode english answer choices occur outside of desired box 
@@ -49,6 +84,9 @@ SMALL FIXES
 - remove - now click on the correct answer
 - give away answer should include the latin phrase
 
+EXIT STRATEGY
+- latin strings clickable at every points
+- GUI for customized questions
 
 MORE AMBITIOUS
 - clickable charts

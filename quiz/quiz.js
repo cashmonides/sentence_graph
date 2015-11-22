@@ -35,7 +35,8 @@ var Quiz = function () {
 
     // a reference to the ALL_MODULES info, not the user history!
     this.module = null;
-    
+    //todo implement this as a bottleneck in profile
+    this.advance_improve_status = null;
     
     this.submodule = {
         score: 0,                   // min(correct*reward - incorrect*penalty, 0) progress towards completing the submodule (e.g. 75% done with the progress bar)
@@ -72,7 +73,7 @@ Quiz.prototype.start = function(){
 
 //decides whether we go to current or some other module determined at profile page
 Quiz.prototype.get_start_module = function(){
-    
+    console.log("DEBUG 11-22 get_start_module entered");
     //todo
     //if (improving)
     var ups = get_url_parameters();
@@ -81,8 +82,12 @@ Quiz.prototype.get_start_module = function(){
     console.log("mod = ", selected_mod);
     
     if("mod" in ups){
+        this.advance_improve_status = "improve";
+        console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         return ups["mod"];
     } else {
+        this.advance_improve_status = "advance";
+        console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         return this.user.get_current_module();
     }
     
