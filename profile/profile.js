@@ -86,9 +86,9 @@ ProfilePage.build_progress_table = function(history) {
 
 
 ProfilePage.get_display_caption = function (user, module_id) {
-    
+    console.log("DEBUG 11-22 entering get_display_caption");
     var classification = user.classify_module(module_id);
-    // console.log("DEBUG 11-20 classification = ", classification);
+    console.log("DEBUG 11-22 classification = ", classification);
     switch (classification) {
         case "completed" : return user.get_max_accuracy(module_id) + "%";
         case "frontier" : return user.get_progress(module_id).join("/");
