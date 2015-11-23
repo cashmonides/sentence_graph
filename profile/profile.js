@@ -20,8 +20,20 @@ ProfilePage.enter_advance = function() {
 
 ProfilePage.enter_improve = function () {
     //todo call bottleneck here
+    
     var mod_id = this.user.get_improving_module();
-    document.location = "../quiz/?mod=" + mod_id;
+    if (!mod_id) {
+        if (this.user.data.history[1].iteration == 0) {
+            console.log("LOG no improving module detected");
+            alert("you don't have any completed modules to improve. Complete some modules and then improve  your accuracy.");
+        } else {
+            alert("click on a completed module to improve your accuracy");
+        }
+            
+            
+    } else {
+        document.location = "../quiz/?mod=" + mod_id;
+    }
 };
 
 
