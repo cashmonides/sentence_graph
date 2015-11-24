@@ -79,14 +79,21 @@ Quiz.prototype.get_start_module = function(){
     var ups = get_url_parameters();
     console.log("quiz url parameters:", ups);
     var selected_mod = ups["mod"];
-    console.log("mod = ", selected_mod);
+    console.log("DEBUG 11-23 mod = ", selected_mod);
+    console.log("DEBUG 11-23 current module = ", this.user.get_current_module());
     
     if("mod" in ups){
-        this.advance_improve_status = "improve";
+        if (selected_mod == this.user.get_current_module()) {
+            console.log("DEBUG 11-23 clicked mod = current mod");
+            this.advance_improve_status = "advancing";
+        } else {
+            console.log("DEBUG 11-23 clicked mod != current mod");
+            this.advance_improve_status = "improving";
+        }
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         return ups["mod"];
     } else {
-        this.advance_improve_status = "advance";
+        this.advance_improve_status = "advancing";
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         return this.user.get_current_module();
     }
@@ -376,8 +383,21 @@ Quiz.prototype.get_cheat_sheet = function(mod_id) {
 
 Quiz.prototype.toggle_cheat_sheet = function() {
     var button = el("cheat_sheet_button");
-    var mod = this.user.get_current_module();
+    
+    
+    
+    var mod;
+    
+    if (this.advance_improve_status === "advancing") {
+        mod = this.user.get_current_module();
+    } else if (this.advance_improve_status === "improving") {
+        mod = this.user.get_improving_module();
+    }
+    
+    console.log("DEBUG 11-23 advance/improve status = ", this.advance_improve_status);
+    console.log("DEBUG 11-23 mod = ", mod);
     var image_source = this.get_cheat_sheet(mod);
+    console.log("DEBUG 11-23 mod = ", image_source);
     // // var wrapper = el("cheat_sheet_wrapper");
     // // wrapper.src = "../resources/cheat_h.jpg";
     // document.createElement("div");
@@ -387,28 +407,26 @@ Quiz.prototype.toggle_cheat_sheet = function() {
     // document.getElementById("image_display_box").appendChild("cheat_sheet_wrapper");
     
     
-
+    // button.onclick = function() {
+    //     var div = el("image_display_box");
+    //     console.log("cheat sheet button clicked");
+    //     if (div.style.display == 'none') {
+    //         div.innerHTML = '<img src="'+ image_source +'" />'; 
+    //         div.style.display = 'block';
+    //     }
+    //     else {
+    //         div.style.display = 'none';
+    //     }
+    // };
     
     button.onclick = function() {
         var div = el("image_display_box");
+        console.log("cheat sheet button clicked");
         if (div.style.display !== 'none') {
             div.style.display = 'none';
         }
         else {
-            // var img_class = "cheat_sheet";
-            // console.log("entering make function");
-            // make({
-            //     tag: "cheat_sheet_tag", 
-            //     class: ["cheat_sheet"], 
-            //     children: [
-            //         {tag: "img", class: img_class, src: "../resources/cheat_h.jpg"},                      //UNIVERSAL MODULE
-            //         {tag: "br"}
-            //     ]
-            // });
-            
-            
-            // div.appendChild(cheat_sheet); 
-            div.innerHTML += '<img src="'+ image_source +'" />'; 
+            div.innerHTML = '<img src="'+ image_source +'" />'; 
             div.style.display = 'block';
         }
     };

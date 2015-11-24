@@ -1,20 +1,14 @@
-ETYMOLOGY LEVELS
-- HOW MANY LEVELS?  
-    - 2 parameters
-        - parameter 1: never see it unless they reach this grade  
-            - suicide (5th)
-        - parameter 2: minimum count
-            - mesoamerica
-                - level 1-50 see definition
-                - 50 and after, don't see definition
-            - responsive
-                - after 10 correct answers, definition disappears
-                - after 1 incorrect answer, definition reappears
+MONDAY
+- cross-browser bugs
+- persist errors to firebase?
+- anonymous mode
+- look at metrics
 
-- persist statement that writes metrics:
-    mesoaamerica:
-        count: 0
-    (reset counter to 0 when they get it wrong)
+
+EXIT STRATEGY
+
+- make latin words more sophisticated objects, so they can be hoverable and clickable
+
 
 
 STEPS TO ETYMOLOGY
@@ -24,9 +18,6 @@ STEPS TO ETYMOLOGY
     - set our default at 5
 - block out persist statements
 - word history initialized as false when user get's created
-
-
-
 - (also have to initialize a part of speech history when user get's created)
 
 
@@ -72,9 +63,33 @@ ADD FUNCTIONALITY
 - accuracy is small but when you hover it gets bigger
 - every end of module should bring you to the profile page
 
+
+CROSS-BROWSER BUGS
+---Safari
+    - basically functional
+    - if you click improve before starting, you get the error:
+    TypeError: undefined is not an object (evaluating 'this.user.data.history[1].iteration') profile.js 26
+    profile.js 26 reads: if (this.user.data.history[1].iteration == 0)
+    
+    - if you click cheat sheet button you get:
+    [Error] TypeError: undefined is not an object (evaluating 'ALL_MODULES[mod_id].cheat_sheet')
+	quiz.js 373 says: var cheat_sheet = ALL_MODULES[mod_id].cheat_sheet;
+	
+	- in grammar modes:
+    TypeError: undefined is not a function (evaluating 'Array.from(set_of_indices)')
+
+	
+--FIREFOX   
+    - same trivial bug as firefox (click on improve at very beginning)
+    - if you click cheat sheet button you get:
+    TypeError: ALL_MODULES[mod_id] is undefined
+    quiz.js 373 says: var cheat_sheet = ALL_MODULES[mod_id].cheat_sheet;
+    
 BUGS
-- cheat sheet image is tiled three times at one of the early levels
-- in profile, when you hit improve and you have no current improving, it shows "Uncaught TypeError: Cannot read property 'id' of undefined"
+- toggle cheat sheet doesn't seem to work on a single click
+- the ups hack is not working if you click on the level you are advancing on you still get mod parameters and that sets it as status= improving
+
+- in profile, when you hit improve and you have no current improving, it shows Uncaught TypeError: Cannot read property 'iteration' of undefined
 - lightbox message is wrong (3/8)
 - at higher levels in mcmode english answer choices occur outside of desired box 
 - no object in latin sentence -> no drop down in object (might be because of none mode)
