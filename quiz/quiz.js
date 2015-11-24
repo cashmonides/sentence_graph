@@ -57,7 +57,7 @@ Quiz.prototype.start = function(){
    //todo
     //the following line both tests the conditional and actually loads the data
     if (!this.user.load(this.user_loaded.bind(this))) {
-        el("header").innerHTML = "In Anonymous Session!";
+        el("header").appendChild(document.createTextNode("In Anonymous Session!"));
         this.user_loaded();
         //  + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
@@ -70,7 +70,21 @@ Quiz.prototype.start = function(){
 
 };
 
-
+Quiz.prototype.user_loaded = function(){
+    // console.log("DEBUG 11-7 entering user_loaded = ");
+    //todo var id will change depending on url parameters (given by profile page)
+    var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE) or improving via url paramaters
+    
+    console.log("DEBUG 11-20 user_loaded id = ", id);
+    
+    this.module = ALL_MODULES[id];
+    
+    console.log("DEBUG 11-20 user_loaded this.module = ", this.module);
+    
+    this.user.start_module(id);
+    
+    // console.log("current module:", this.module);
+};
 
 //decides whether we go to current or some other module determined at profile page
 Quiz.prototype.get_start_module = function(){
@@ -121,21 +135,7 @@ Quiz.prototype.get_start_module = function(){
     
 };
 
-Quiz.prototype.user_loaded = function(){
-    // console.log("DEBUG 11-7 entering user_loaded = ");
-    //todo var id will change depending on url parameters (given by profile page)
-    var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE) or improving via url paramaters
-    
-    console.log("DEBUG 11-20 user_loaded id = ", id);
-    
-    this.module = ALL_MODULES[id];
-    
-    console.log("DEBUG 11-20 user_loaded this.module = ", this.module);
-    
-    this.user.start_module(id);
-    
-    // console.log("current module:", this.module);
-};
+
 
 
 Quiz.prototype.next_module = function () {
@@ -158,6 +158,7 @@ Quiz.prototype.next_submodule = function(){
     this.game.set_level(this.module.level);
     console.log('this.game.level = ', this.game.level)
     // todo new ends here
+    this.clear_cheat_sheet();
     this.next_question();
 };
 
@@ -238,7 +239,9 @@ Quiz.prototype.submodule_complete = function () {
 Quiz.prototype.update_display = function() {
     
     console.log("DEBUG 11-15 update_display entered");
-    
+    console.log("DEBUG 11-24 this.user.data.profile.name = ", this.user.data.profile.name);
+    console.log("DEBUG 11-24 this.user.data.profile.class_number = ", this.user.data.profile.class_number);
+    console.log("DEBUG 11-24 this.module.id = ", this.module.id);
     //todo in improve mode the following will break
     // var mod = this.user.get_current_module();
     
@@ -249,15 +252,21 @@ Quiz.prototype.update_display = function() {
     // console.log("DEBUG 11-8 mod = ", mod);
     // console.log("DEBUG 11-8 this.user.mod.progress = ", this.user.get_module(mod).progress);
     
-
+    console.log("Still ok before progress bar");
     this.set_progress_bar();
+    console.log("Still ok after progress bar");
     
+    console.log("Still ok before innerhtml");
+    console.log(el("name_header") === null);
+    console.log(el("class_header") === null);
+    console.log(el("level_header") === null);
+    console.log(el("fraction_header") === null);
     el("name_header").innerHTML = this.user.data.profile.name;
     el("class_header").innerHTML = this.user.data.profile.class_number;
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
     el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     
-    
+    console.log("Still ok after innerhtml");
     
     
 };
@@ -385,11 +394,7 @@ Quiz.prototype.get_cheat_sheet = function(mod_id) {
     return cheat_sheet;
 }
 
-Quiz.prototype.toggle_cheat_sheet = function() {
-    var button = el("cheat_sheet_button");
-    
-    
-    
+Quiz.prototype.get_cheat_sheet_image = function () {
     var mod;
     
     if (this.advance_improve_status === "advancing") {
@@ -400,8 +405,19 @@ Quiz.prototype.toggle_cheat_sheet = function() {
     
     console.log("DEBUG 11-23 advance/improve status = ", this.advance_improve_status);
     console.log("DEBUG 11-23 mod = ", mod);
-    var image_source = this.get_cheat_sheet(mod);
-    console.log("DEBUG 11-23 mod = ", image_source);
+    image = this.get_cheat_sheet(mod);
+    return image
+}
+
+Quiz.prototype.clear_cheat_sheet = function () {
+    var div = el("image_display_box");
+    console.log("cheat sheet cleared");
+    div.style.display = 'none';
+}
+
+Quiz.prototype.toggle_cheat_sheet = function() {
+    // var button = el("cheat_sheet_button");
+    var image_source = this.get_cheat_sheet_image()
     // // var wrapper = el("cheat_sheet_wrapper");
     // // wrapper.src = "../resources/cheat_h.jpg";
     // document.createElement("div");
@@ -423,17 +439,17 @@ Quiz.prototype.toggle_cheat_sheet = function() {
     //     }
     // };
     
-    button.onclick = function() {
-        var div = el("image_display_box");
-        console.log("cheat sheet button clicked");
-        if (div.style.display !== 'none') {
-            div.style.display = 'none';
-        }
-        else {
-            div.innerHTML = '<img src="'+ image_source +'" />'; 
-            div.style.display = 'block';
-        }
-    };
+    //button.onclick = function() {
+    var div = el("image_display_box");
+    console.log("cheat sheet button clicked");
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.innerHTML = '<img src="' + image_source +'" />'; 
+        div.style.display = 'block';
+    }
+    //};
     
     
 };

@@ -1,0 +1,148 @@
+NECESSARY STEPS
+this.data.history gets changed from false to {}
+
+
+ISSUES
+next_module is buried in get_all_sentences which is mode specific
+- do anonymous users really need a uid????
+- move  this.user = new User(); somewhere else
+- why do we need this.user = new User() in profile? Can't we just get it from uid?
+
+
+NEEDS TO BE DONE
+initial data needs to be set for anonymous
+var data = {
+        profile: {
+            name: name, 
+            class_number: class_number
+        },
+        history: false
+    };
+
+
+in login
+
+
+ONYMOUS
+	create_account (global)
+
+		Persist.create_user (callback = the following)
+			User.set_initial_data (callback=login)
+				data gets initialized
+					var data = {
+				        profile: {
+				            name: name, 
+				            class_number: class_number
+				        },
+				        history: false
+				    };
+				login (callback)
+					Persist.login_user(callback=success)
+						success (global callback)
+							User.set_cookie(authData.auth.uid);
+					    	document.location = "../profile/";
+
+
+ANONYMOUS
+
+enter_anonymous_game
+	user.remove_cookie
+	document.location = quiz....
+
+
+
+DOCUMENT.LOCATION -----> PROFILE  (onymous)
+	profilepage.start
+		user.load  (changes data)
+	
+
+DOCUMENT.LOCATION ----> QUIZ (anonymous)
+
+
+
+
+
+in quiz
+start 
+	this.start
+
+quiz.start 
+	this.user.load   (somehow gets called by if !this.user.load)
+	this.user_loaded
+		onymous
+		anonymous
+
+
+	this.user_data_loaded
+		changes this.data.history from false to {}  //we want to do this for both regular and anonymous
+
+
+	self.next_module();
+
+
+
+quiz.user_loaded
+	this.get_start_module      [returns mod_id]     //should this be in user?
+	mod_id passed to:
+	this.user.start_module (mod_id)
+
+
+
+quiz.get_start_module
+	[gets mod_id either from url parameters or from get_current module]
+
+	get_current_module
+		//anonymous user gets first i.d. in order
+	OR
+	get_improving_module   
+		//won't ever get triggered with anonymous
+
+
+
+user.start module
+	
+	//an anonymous user should have a history that's false
+	if (!(id in this.data.history)) {
+        this.create_module(id);
+    }
+
+
+    this.data.history[id].in_progress = true;
+	
+
+
+user.create_module
+	//sets local data for history
+
+	this.data.history[mod_id] = {
+        id: mod_id,
+        iteration: 0,   //count
+        in_progress: false,
+        progress: 0,
+        metrics: false    //dictionary
+    };
+
+
+
+
+
+
+quiz.next_module
+	quiz.next_submodule
+
+
+quiz.next_submodule
+	//initializes an empty set of submodule parameters
+	this.submodule = {
+        score: 0, 
+        count_correct: 0,
+        count_incorrect: 0,
+        incorrect_streak: 0
+    };
+    
+    //sets the mode
+    this.next_mode();
+
+
+
+
