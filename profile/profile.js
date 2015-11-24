@@ -21,9 +21,10 @@ ProfilePage.enter_advance = function() {
 ProfilePage.enter_improve = function () {
     //todo call bottleneck here
     
+    //todo make the following less hacky with something like a get first module function in utils
     var mod_id = this.user.get_improving_module();
     if (!mod_id) {
-        if (this.user.data.history[1].iteration == 0) {
+        if (this.user.get_module(1).iteration == 0) {
             console.log("LOG no improving module detected");
             alert("you don't have any completed modules to improve. Complete some modules and then improve  your accuracy.");
         } else {
@@ -57,12 +58,11 @@ ProfilePage.display_profile = function() {
     var e2 = el("level_box");
     e2.innerHTML = "your level is: " + player_level;
     
-    var history = this.user.data.history;
-    this.build_progress_table(history);
+    this.build_progress_table(this.user);
 };
 
 
-ProfilePage.build_progress_table = function(history) {
+ProfilePage.build_progress_table = function(user) {
 
     var table = el("table");
     var row = make({tag: "tr"}, table);
@@ -72,7 +72,7 @@ ProfilePage.build_progress_table = function(history) {
     for (var i = 0; i < order.length; i++) {
         var mod = ALL_MODULES[order[i]];
     
-        var mod_history = mod.id in history ? history[mod.id] : null;
+        var mod_history = mod.id in user.data.history ? user.get_module(mod.id) : null;
                         
         var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image", "complete"] : ["progress_image", "incomplete"];
         
@@ -96,7 +96,7 @@ ProfilePage.build_progress_table = function(history) {
 };
 
 
-
+//todo make get_display_caption produce an html element
 ProfilePage.get_display_caption = function (user, module_id) {
     console.log("DEBUG 11-22 entering get_display_caption");
     var classification = user.classify_module(module_id);
@@ -105,14 +105,21 @@ ProfilePage.get_display_caption = function (user, module_id) {
         case "completed" : return user.get_max_accuracy(module_id) + "%";
         case "frontier" : return user.get_progress(module_id).join("/");
         //old code below
-        // case "frontier" : return user.data.history[module_id].progress + "/" + threshold; 
-        case "improving" : return "current: " + user.get_max_accuracy(module_id)
-        + "% best previous: " + user.get_previous_max_accuracy(module_id) +
-        '% current progress: ' + user.get_progress(module_id).join("/");
+        // case "frontier" : return user.get_module(module_id).progress + "/" + threshold; 
+        case "improving" : return {
+            tag : "span",
+            children : [
+                "current: " + user.get_max_accuracy(module_id) + "%",
+                {tag : "br"}, 
+                "best previous: " + user.get_previous_max_accuracy(module_id) + "%",
+                {tag : "br"}, 
+                "current progress: " + user.get_progress(module_id).join("/")
+                ]
+        };
         case "uncompleted" : return "";
         default : throw "no caption detected";
     }
-}
+};
 
 
 
@@ -172,25 +179,18 @@ ProfilePage.select_improvement_module = function(mod_id){
                             // alert("you would be entering the improvement level now");
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
-                        } else {
-                          return null;  
-                        }
+                        } 
             case 2 : if (confirm("would you like to continue improving your accuracy at this level?")) {
                             // alert("you would be entering the improvement level now");
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
-                        } else {
-                          return null;  
-                        }
-            case 3 : alert("Click advance or improve to play the game. You are currently improving at level: " + "improving_mod_name"); 
-                    return null;
+                        } 
+            case 3 : return;
             case 4 : if (confirm("would you like to continue advancing at this level?")) {
                             // alert("you would be entering the advance level now");
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
-                        } else {
-                          return null;  
-                        }
+                        } 
         }
     }
 };

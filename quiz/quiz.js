@@ -58,6 +58,7 @@ Quiz.prototype.start = function(){
     //the following line both tests the conditional and actually loads the data
     if (!this.user.load(this.user_loaded.bind(this))) {
         el("header").innerHTML = "In Anonymous Session!";
+        this.user_loaded();
         //  + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
     
@@ -78,11 +79,13 @@ Quiz.prototype.get_start_module = function(){
     //if (improving)
     var ups = get_url_parameters();
     console.log("quiz url parameters:", ups);
-    var selected_mod = ups["mod"];
-    console.log("DEBUG 11-23 mod = ", selected_mod);
+    
+    
     console.log("DEBUG 11-23 current module = ", this.user.get_current_module());
     
     if("mod" in ups){
+        var selected_mod = ups["mod"];
+        console.log("DEBUG 11-23 selected mod = ", selected_mod);
         if (selected_mod == this.user.get_current_module()) {
             console.log("DEBUG 11-23 clicked mod = current mod");
             this.advance_improve_status = "advancing";
@@ -203,7 +206,8 @@ Quiz.prototype.submodule_complete = function () {
     console.log("DEBUG 11-16 quiz.submodule_complete entered");
     var mod = this.user.get_current_module(this.module.id);  //int
     
-    var numerator = this.user.data.history[mod].progress;
+   
+    var numerator = this.user.get_module(mod).progress;
     
     var denominator = ALL_MODULES[mod].threshold;
     console.log("DEBUG 11-16 mod = ", mod);
@@ -243,7 +247,7 @@ Quiz.prototype.update_display = function() {
     //todo uncomment when testing
     var module_name = ALL_MODULES[mod].icon_name;
     // console.log("DEBUG 11-8 mod = ", mod);
-    // console.log("DEBUG 11-8 this.user.mod.progress = ", this.user.data.history[mod].progress);
+    // console.log("DEBUG 11-8 this.user.mod.progress = ", this.user.get_module(mod).progress);
     
 
     this.set_progress_bar();
@@ -251,7 +255,7 @@ Quiz.prototype.update_display = function() {
     el("name_header").innerHTML = this.user.data.profile.name;
     el("class_header").innerHTML = this.user.data.profile.class_number;
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
-    el("fraction_header").innerHTML = module_name + ": " + this.user.data.history[mod].progress + "/" + this.module.threshold;
+    el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     
     
     

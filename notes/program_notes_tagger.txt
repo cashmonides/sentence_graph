@@ -1,14 +1,27 @@
 MONDAY
-- cross-browser bugs
+- cross-browser bugs  (safari handles arrays differently)
 - persist errors to firebase?
+    - call graph
+        - statically a tree
+        - but at runtime it's a graph
 - anonymous mode
 - look at metrics
 
 
+
+
+
 EXIT STRATEGY
-
 - make latin words more sophisticated objects, so they can be hoverable and clickable
+- jquery
+- webscraping
+- customizable questions
 
+
+
+TODO
+- encapsualte user.get_profile()
+    - i.e. everywhere it says user.data.profile
 
 
 STEPS TO ETYMOLOGY
