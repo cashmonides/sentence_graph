@@ -1,3 +1,17 @@
+THE ANONYMOUS PROFILE DILEMMA
+- how can you remain anonymous while preserving your identity
+    - write a temporary anonymous user to firebase
+        - gets deleted at end of session   
+    - create an object that can be passed to profile???
+    - cookies
+         - 4kb limit
+     - html5 local storage
+        - 5mb limit
+- is it worth it?
+    - easy fix: no profile 
+    
+
+
 MONDAY
 - cross-browser bugs  (safari handles arrays differently)
 - persist errors to firebase?
@@ -71,6 +85,7 @@ AGENDA
 - test none display and potential no object drop
 
 ADD FUNCTIONALITY
+- profile page for anonymous user
 - make past frontier items non-hoverable
 - customize alert boxes
 - accuracy is small but when you hover it gets bigger
@@ -99,6 +114,7 @@ CROSS-BROWSER BUGS
     quiz.js 373 says: var cheat_sheet = ALL_MODULES[mod_id].cheat_sheet;
     
 BUGS
+- latin appearing outside of box???
 - toggle cheat sheet doesn't seem to work on a single click
 - the ups hack is not working if you click on the level you are advancing on you still get mod parameters and that sets it as status= improving
 
@@ -154,6 +170,8 @@ TEST
 - can we switch between advance and improve
 
 NEW FUNCTIONALITY
+- vocabulary cheat sheet button
+    - 
 - add something that randomly changes mode during a progress bar??
 - support for range-sampling e.g. level: [1,5]
 - improve button

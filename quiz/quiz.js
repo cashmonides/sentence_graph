@@ -58,6 +58,8 @@ Quiz.prototype.start = function(){
     //the following line both tests the conditional and actually loads the data
     if (!this.user.load(this.user_loaded.bind(this))) {
         el("header").appendChild(document.createTextNode("In Anonymous Session!"));
+        el("return_to_profile_button").parentNode.removeChild(el("return_to_profile_button"));
+        el("logout_button").innerHTML = "login";
         this.user_loaded();
         //  + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
@@ -415,6 +417,22 @@ Quiz.prototype.clear_cheat_sheet = function () {
     div.style.display = 'none';
 }
 
+Quiz.prototype.get_vocab_cheat_sheet_map = function () {
+    var map = {};
+    
+    //todo uncomment when done testing
+    map["noun"] = {
+        "CUCULLUS" : "cuckoo",
+        "DRACO" : "dragon"
+    };
+    map["verb"] = {
+        "VOR" : "love",
+        "PORT" : "carry"
+    };
+    
+    return map;
+}
+    
 Quiz.prototype.toggle_cheat_sheet = function() {
     // var button = el("cheat_sheet_button");
     var image_source = this.get_cheat_sheet_image()
@@ -455,6 +473,45 @@ Quiz.prototype.toggle_cheat_sheet = function() {
 };
 
 
+Quiz.prototype.toggle_vocab_cheat_sheet = function() {
+    // var button = el("cheat_sheet_button");
+    var vocab_cheat_sheet_map = this.get_vocab_cheat_sheet_map()
+    var vocab_cheat_sheet_string = JSON.stringify(vocab_cheat_sheet_map);
+    // // var wrapper = el("cheat_sheet_wrapper");
+    // // wrapper.src = "../resources/cheat_h.jpg";
+    // document.createElement("div");
+    // document.getElementById("cheat_sheet_wrapper").setAttribute("src", "../resources/cheat_h.jpg");
+    
+    // var box = el("image_display_box");
+    // document.getElementById("image_display_box").appendChild("cheat_sheet_wrapper");
+    
+    
+    // button.onclick = function() {
+    //     var div = el("image_display_box");
+    //     console.log("cheat sheet button clicked");
+    //     if (div.style.display == 'none') {
+    //         div.innerHTML = '<img src="'+ image_source +'" />'; 
+    //         div.style.display = 'block';
+    //     }
+    //     else {
+    //         div.style.display = 'none';
+    //     }
+    // };
+    
+    //button.onclick = function() {
+    var div = el("image_display_box");
+    console.log("cheat sheet button clicked");
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.innerHTML = vocab_cheat_sheet_string; 
+        div.style.display = 'block';
+    }
+    //};
+    
+    
+};
 
 
 //todo wasn't working as Quiz.logout_from_quiz

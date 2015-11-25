@@ -1,0 +1,63 @@
+owl bubo
+shark squalus
+whale balaena/balena
+dolphinus delphinus
+cetus sea-monster
+papilio, papilionis  N  M     3 1  M   [XXXCX]  
+butterfly, moth;
+
+
+basiliscus, basilisci  N  M     2 1  M   [XAXDO]  
+basilisk, cockatrice; kind of snake/lizard;
+
+
+beaver, castor, castoris
+
+
+vespertilio, vespertilionis  N  M     3 1  M   [XAXEO]  
+bat; (night flying mammal);
+
+colubra, colubrae  N  F     1 1  F   [XAXCO]  
+serpent, snake; (forming hair of mythical monsters); Furies; (head of) Hydra;
+
+coluber, colubri  N  M     2 3  M   [XAXCO]  
+hair of medua
+
+
+serpens, serpentis  N  C     3 3  C   [XXXAX]  
+dont use
+
+anguis, anguis  N  C     3 3  C   [XAXAO]  
+snake, 
+
+
+Draco, draconis
+dragon
+
+echidna
+mother of Cerberus (also a type of animal)
+
+
+hydra, hydrae  N  F     1 1  F   [XXXCX]  
+HYDRA monster
+
+
+
+
+
+cicada, cicadae  N  F     1 1  F   [XAXCO]  
+cicada, tree-cricket
+
+
+gryllus - grasshopper
+
+ophiomachus - locust (fighting with serpents)
+
+cuculus, cuculi  N  M     2 1  M   [XAXBO]  
+cuckoo (bird); fool, ninny; cuckold; bastard;
+
+
+
+
+
+

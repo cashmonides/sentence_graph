@@ -45,15 +45,18 @@ ProfilePage.enter_improve = function () {
 // bind passes in its argument into the argument of display_profile
 ProfilePage.start = function(){
     this.user = new User();
-    this.user.load(this.display_profile.bind(this));
+    if(!this.user.load(this.display_profile.bind(this))) {
+        this.display_profile();
+    };
     // equivalent to: this.user.load(function(){ this.display_profile(); });
 };
 
 ProfilePage.display_profile = function() {
-    var player_name = this.user.uid;
+    var player_name = this.user.data.profile_name;
     var e1 = el("name_box");
-    e1.innerHTML = "Welcome " + this.user.data.profile.name;
+    e1.innerHTML = "Welcome " + player_name;
 
+    //todo fix dummy value here
     var player_level = "PLAYER LEVEL HERE";
     var e2 = el("level_box");
     e2.innerHTML = "your level is: " + player_level;
