@@ -118,11 +118,19 @@ MCMode3Game.prototype.display = function (x) {
     return x.type === 'non_drop' || x.correct_answer || this.none_display
 };
 
-
+//master function makes all the drops and non-drops
 MCMode3Game.prototype.make_drop_down = function(){
+    //initialize a count of how many drop down menus we'll have
+    // if it remains 0 we start all over again
     var drops = 0;
     var self = this;
     var e = document.getElementById("answer_wrapper");
+    
+    //this.drop_downs is a list of drops and non-drops
+    //each item in the list is a dictionary and has a type
+    // type = drop or non-drop
+    // dictionary for drop = heading, choices
+    // dictionary for non-drop = non-drop text
     this.drop_downs.forEach(function (x) {
         if (self.display(x)) {
             switch (x.type) {
@@ -132,6 +140,11 @@ MCMode3Game.prototype.make_drop_down = function(){
                     e.appendChild(e1);
                     break;
                 case 'drop down':
+                    // e = element we're appending to
+                    // x = dictionary with the following properties
+                    //x.choices = ['bear', 'bears']
+                    //x.heading = "subject"
+                    //self.none_display = bool
                     set_multiple_drop_downs(x, e, x.choices, x.heading, self.none_display);
                     drops++
                     break;

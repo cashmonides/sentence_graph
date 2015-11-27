@@ -42,7 +42,7 @@ var lexicon = [
     new Lexeme(
         "millipede",
         {   core: {part_of_speech: "noun", animate: true},
-            english : new English_word_properties("millipede", "millipede", "millipede", true, true, false, false, null),
+            english : new English_word_properties("millipede", "millipede", "millipedes", true, true, false, false, null),
             latin : new Latin_word_properties("MILLEPEDA", "MILLEPED", "MILLEPED", null, "1", "f", true, true, false, false, null)
         }),
     //2nd declension nouns
@@ -140,7 +140,7 @@ var lexicon = [
     new Lexeme(
         "centipede",
         {   core: {part_of_speech: "noun", animate: true},
-            english : new English_word_properties("centipede", "centipede", "centipede", true, true, false, false, null),
+            english : new English_word_properties("centipede", "centipede", "centipedes", true, true, false, false, null),
             latin : new Latin_word_properties("CENTIPĒS", "*CENTIPĒS*", "CENTIPED", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(

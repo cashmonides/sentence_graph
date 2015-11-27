@@ -33,10 +33,12 @@ var level_to_allowed2 = {
         drop_down_settings: {
             noun: {
                 extra_options: 1,
+                lexicon_dummies: 1,
                 swap: true
             },
             verb: {
-                extra_options: 1
+                extra_options: 1,
+                lexicon_dummies: 2
             }
         },
         none_display: [false],
@@ -66,8 +68,8 @@ var level_to_allowed2 = {
             implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
         },
 
-        voice: ["active"],
-        // voice: ["active", "passive"],
+        // voice: ["active"],
+        voice: ["active", "passive"],
         //voice: ["passive"],
         number_of_other_nouns : ["singular", "plural"],
         //number_of_other_nouns : ["plural"],
@@ -75,13 +77,15 @@ var level_to_allowed2 = {
         drop_down_settings: {
             noun: {
                 extra_options: 1,
+                lexicon_dummies: 1,
                 swap: true
             },
             verb: {
-                extra_options: 1
+                extra_options: 1,
+                lexicon_dummies: 2
             }
         },
-        none_display: [true],
+        none_display: [false],
         shuffle: [true, false]
     },
     3 : {
@@ -108,8 +112,8 @@ var level_to_allowed2 = {
             implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
         },
 
-        voice: ["active"],
-        // voice: ["active", "passive"],
+        // voice: ["active"],
+        voice: ["active", "passive"],
         //voice: ["passive"],
         number_of_other_nouns : ["singular", "plural"],
         //number_of_other_nouns : ["plural"],
@@ -117,13 +121,16 @@ var level_to_allowed2 = {
         drop_down_settings: {
             noun: {
                 extra_options: 1,
+                lexicon_dummies: 1,
                 swap: true
             },
             verb: {
-                extra_options: 1
+                extra_options: 1,
+                lexicon_dummies: 2
+                
             }
         },
-        none_display: [true],
+        none_display: [false],
         shuffle: [true, false]
     },
     4 : {
@@ -159,10 +166,12 @@ var level_to_allowed2 = {
         drop_down_settings: {
             noun: {
                 extra_options: 2,
+                lexicon_dummies: 1,
                 swap: true
             },
             verb: {
-                extra_options: 2
+                extra_options: 2,
+                lexicon_dummies: 2
             }
         },
         none_display: [true],
@@ -201,10 +210,12 @@ var level_to_allowed2 = {
         drop_down_settings: {
             noun: {
                 extra_options: 3,
+                lexicon_dummies: 1,
                 swap: true
             },
             verb: {
-                extra_options: 3
+                extra_options: 3,
+                lexicon_dummies: 2
             }
         },
         none_display: [true],
@@ -244,10 +255,12 @@ var level_to_allowed2 = {
         drop_down_settings: {
             noun: {
                 extra_options: 4,
+                lexicon_dummies: 1,
                 swap: true
             },
             verb: {
-                extra_options: 4
+                extra_options: 4,
+                lexicon_dummies: 2
             }
         },
         none_display: [true],
@@ -287,10 +300,12 @@ var level_to_allowed2 = {
         drop_down_settings: {
             noun: {
                 extra_options: 3,
+                lexicon_dummies: 1,
                 swap: true
             },
             verb: {
-                extra_options: 3
+                extra_options: 3,
+                lexicon_dummies: 2
             }
         },
         none_display: [true],
