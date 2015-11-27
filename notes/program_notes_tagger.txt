@@ -1,3 +1,63 @@
+
+DAN
+- refactor drop downs and sorted drop downs to allow for optgroup headings
+    - e.g.  see {sees, see, saw, will see} fear {fears, fear, feared, will fear}
+    
+- refactor lexeme list so that it can create a vocabulary list 
+    - using the value -   drop_down_settings: {noun: {lexicon_dummies: int} }
+            
+
+
+
+
+LEXEME LIST REFACTORING
+
+We need a double-duumy lexeme list.
+Question: Should we put all our lexeme lists in some master lexeme list?
+master_lexeme_list is an object??? No.
+Organization of master lexeme list:
+lexemes property: all lexemes
+Some lexeme_list_name: types_of_lexeme_used pairs.
+get_lexemes: takes list name, returns lexeme dict.
+var master_object = {
+    lexemes:   {subject: dog, 
+                verb: eat, 
+                object: cuckoo,
+                dummy_noun_0: dragon,
+                dummy_noun_1: snake,
+                    double_dummy_noun_0: fish,
+                    double_dummy_noun_1: cat
+    },
+    all_lexemes: [subject, verb, object, dummy_noun_0, dummy_noun_1, double_dummy_noun_0, double_dummy_noun_1],
+    dummy_lexemes: [subject, verb, object, dummy_noun_0, dummy_noun_1],
+    lexemes_used: [subject, verb, object],
+    get_lexemes: function() {/*
+         examples:
+         get_lexemes('all_lexemes') = [dog, eat, cuckoo, dragon, snake, fish, cat]   //used + dummy + double dummy
+         get_lexemes('dummy_lexemes') = [dog, eat, cuckoo, dragon, snake]     //used + dummy
+         get_lexemes('lexemes_used') = [dog, eat, cuckoo]
+         should be able to use this to refer to master_object
+    */}
+}
+
+
+Cartesian
+
+1 : {
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 THE ANONYMOUS PROFILE DILEMMA
 - how can you remain anonymous while preserving your identity
     - write a temporary anonymous user to firebase

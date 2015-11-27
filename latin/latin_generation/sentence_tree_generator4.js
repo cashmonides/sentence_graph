@@ -16,26 +16,7 @@ function make_output(level, current_lexicon) {
     var state_to_be_made = master_cartesian(level, full_order, 'random');
     var words_to_make = [['noun', ['subject', 'object']], ['verb', ['verb']]];
     /*
-    We need a double-duumy lexeme list.
-    Question: Should we put all our lexeme lists in some master lexeme list?
-    master_lexeme_list is an object??? No.
-    Organization of master lexeme list:
-    lexemes property: all lexemes
-    Some lexeme_list_name: types_of_lexeme_used pairs.
-    get_lexemes: takes list name, returns lexeme dict.
-    var master_object = {
-        lexemes:   {subject: dog, 
-                    verb: eat, 
-                    object: cuckoo,
-                    dummy_noun_0: dragon,
-                    dummy_noun_1: snake,
-                    double_dummy_noun_0: fish,
-                    double_dummy_noun_1: cat
-        },
-        all_lexemes: [subject, verb, object, dummy_noun_0, dummy_noun_1, double_dummy_noun_0, double_dummy_noun_1],
-        dummy_lexemes: [subject, verb, object, dummy_noun_0, dummy_noun_1],
-        lexemes_used: [subject, verb, object]
-    }
+    
     Here begin the changes.
     */
     var lexeme_list_with_dummies = {};

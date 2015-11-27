@@ -157,7 +157,8 @@ Quiz.prototype.next_submodule = function(){
     // todo new begins here
     console.log("current module:", this.module);
     console.log("current level:", this.module.level);
-    this.game.set_level(this.module.level);
+    //todo below is old, make sure new version works (in next_question)
+    // this.game.set_level(this.module.level);
     console.log('this.game.level = ', this.game.level)
     // todo new ends here
     this.clear_cheat_sheet();
@@ -191,6 +192,10 @@ Quiz.get_mode = function(mode_number) {
 
 
 Quiz.prototype.next_question = function (){
+    //todo new version below 11-27
+    
+    var post_sampling_level = range_sampler(this.module.id);
+    this.game.set_level(post_sampling_level);
     this.game.next_question(this);
 };
 
