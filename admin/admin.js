@@ -18,31 +18,29 @@ function callback() {
 function callback2(data) {
     //console.log"callback2 triggered");
     var users = data.val();
-    //console.logusers);
+    
     var e = el("score_report");
     // make({tag:"tr", children: [{tag: "td"}]}, e);
     for (var key in users) {
         make({
             tag:"tr",
             children: [
-                {tag: "td", text: users[key].profile.name},
-                {tag: "td", text: max_module(users[key])},
-                {tag: "td", text: report_accuracy(users[key])}
+                {tag: "td", text: "name = " + users[key].profile.name},
+                {tag: "td", text: "max module = " + max_module(users[key])},
+                {tag: "td", text: "accuracy = " + report_accuracy(users[key])}
             ]
         }, e)
     }
 }
 
 function report_accuracy(user) {
-   
     var stats_map = {};
     for (var key in user.history) {
         // console.log("DEBUG key = ", key);
         // console.log("DEBUG output = ", get_current_stats2(user, key));
-        stats_map[key] = get_current_stats2(user,key) + "\n";
+        stats_map[key] = get_current_stats2(user,key);
     }
     
-    // return stats_list;
     return JSON.stringify(stats_map);
     
     
@@ -60,10 +58,13 @@ function max_module(user) {
     }
     //spread operator
     c = Math.max(...c);
+    console.log("LOG: max_module = ", JSON.stringify(c));
     return JSON.stringify(c);
 }
 
 
+    
+    
 function get_current_stats2 (user, module_id) {
     console.log("entering get_current_stats2");
     console.log("DEBUG module_id = ", module_id);
@@ -72,7 +73,7 @@ function get_current_stats2 (user, module_id) {
     //universal module
     var order = get_module_order();
     console.log("DEBUG order = ", order);
-    var UNIVERSAL_MODULE = ALL_MODULES[order[module_id]];
+    var UNIVERSAL_MODULE = ALL_MODULES[module_id];
     console.log("DEBUG UNIVERSAL_MODULE", UNIVERSAL_MODULE);
     
     //personal module
@@ -87,26 +88,27 @@ function get_current_stats2 (user, module_id) {
     console.log("mod.in_progress", mod.in_progress);
     
     
+    var get_accuracy = function (iteration) {
+        return Math.floor(100 * mod.metrics[iteration][0]
+        / Object.keys(mod.metrics[iteration]).
+        map(function (x) {return mod.metrics[iteration][x]}).
+        reduce(function (a, b) {return a + b}))
+    }
     
     
-    // var get_accuracy = function (iteration) {
-    //     return Math.floor(100 * mod.metrics[iteration][0]
-    //     / Object.keys(mod.metrics[iteration]).
-    //     map(function (x) {return mod.metrics[iteration][x]}).
-    //     reduce(function (a, b) {return a + b}))
-    // }
 
 
 
     var linebreak = document.createElement("br");
-    
+    var threshold = UNIVERSAL_MODULE.threshold;
+    console.log("DEBUG threshold = ", threshold);
     
     if (mod.in_progress == true && mod.iteration == 0) {
         // advance
-        return mod.progress + '/ THRESHOLD HERE';// + UNIVERSAL_MODULE.threshold
+        return mod.progress + '/' + threshold;// + UNIVERSAL_MODULE.threshold
     } else if (mod.in_progress == true && mod.iteration > 0) {
         // improve
-        return "advancing";
+        return "module: " + mod.id + "status = improving";
         // return 'advancing ' + get_accuracy(mod.iteration) + '% previous best ' +
         // Math.max.apply(null, Object.keys(mod.metrics).filter(
         // function (x) {return x != mod.iteration}).map(get_percentage))
