@@ -6,9 +6,27 @@ DAN
 - refactor lexeme list so that it can create a vocabulary list 
     - using the value -   drop_down_settings: {noun: {lexicon_dummies: int} }
             
+AKIVA
+- add dash and star removers
+make mode change within module
+make modes percentage dependent (80% latin 20% english)
+- add sentences in english
+- tweak levels and modules so there are a lot
 
 
 
+SMALL THINGS
+fix placeholders
+fix “now click on the correct answer”
+correct answer should overlap with the question: incorrect: LATIN and english togetherr
+non-improving completed modules shouldn’t turn red when hovered
+
+UNKNOWN BUGS
+- wrong denominator
+    when improving: CONGRATULATIONS test friday 3:30!
+    YOUR PROGRESS IS: 2/12 (on a level that’s 1/6)
+- eyes peeled for: no highlighted
+- eyes peeled for: outside the box
 
 LEXEME LIST REFACTORING
 

@@ -3,6 +3,19 @@
 
 
 
+//todo akiva's changes below
+//uncomment and change to inflect_latin to inflect_latin_pre when ready to implement
+// function inflect_latin (kernel, lexeme, word_settings, dashes) {
+//     if (dashes) {
+//         return inflect_latin_pre (kernel, lexeme, word_settings);
+//     } else if (!dashes) {
+//         var input = inflect_latin_pre(kernel, lexeme, word_settings);
+//         return remove_dashes(input);
+//     } else {
+//         console.log("Error caught at dash removal stage");
+//     }
+// }
+
 function inflect_latin (kernel, lexeme, word_settings){
     switch (lexeme.properties.core.part_of_speech) {
         case (Part_of_speech.Noun) : return inflect_latin_noun (kernel, lexeme, word_settings);    //todo will inflect_latin_verb be a method on a lexeme or on another object, e.g. a latin word
