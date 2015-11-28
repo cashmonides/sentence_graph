@@ -23,22 +23,25 @@ function callback2(data) {
     // make({tag:"tr", children: [{tag: "td"}]}, e);
     for (var key in users) {
         make({
-            tag:"tr",
+            tag:"ul",
             children: [
-                {tag: "td", text: "name = " + users[key].profile.name},
-                {tag: "td", text: "max module = " + max_module(users[key])},
-                {tag: "td", text: "accuracy = " + report_accuracy(users[key])}
+                {tag: "li", text: "name = " + users[key].profile.name},
+                {tag: "li", text: "max module = " + max_module(users[key])},
+                {tag: "li", text: report_accuracy(users[key])}
             ]
         }, e)
     }
 }
 
+
+//todo rename to report all accuracy
 function report_accuracy(user) {
     var stats_map = {};
     for (var key in user.history) {
         // console.log("DEBUG key = ", key);
         // console.log("DEBUG output = ", get_current_stats2(user, key));
         stats_map[key] = get_current_stats2(user,key);
+        stats_map.push["blank key"] = "blank value";
     }
     
     return JSON.stringify(stats_map);
@@ -88,6 +91,8 @@ function get_current_stats2 (user, module_id) {
     console.log("mod.in_progress", mod.in_progress);
     
     
+    
+    //todo rename something like get_max_accuracy
     var get_accuracy = function (iteration) {
         return Math.floor(100 * mod.metrics[iteration][0]
         / Object.keys(mod.metrics[iteration]).

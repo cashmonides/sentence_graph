@@ -8,21 +8,21 @@ DAN
             
 SUNDAY
 - finish dash and star removers
-make modes percentage dependent (e.g. 80% latin 20% english)
-    - add field to module 
+- make modes percentage dependent (e.g. 80% latin 20% english)
+    - add mode_ratio field to module 
         latin: .8 drop .1 quick .1
     - change new_mode to read this new field
-
+- add aggregate accuracy to admin page
+- clean up line breaks in admin page
 
 AKIVA
-- add mode percentages to module
 - map out what a taxonomy module would look like
 - tweak levels and modules so there are a lot more
 - put modules in units of 10
 
 DATA
 - add sentences in english
-- add words to 
+- add words and roots
 
 ADD FUNCTIONALITY
 - change drop mode to quick mode
