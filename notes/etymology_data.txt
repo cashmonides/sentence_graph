@@ -6168,6 +6168,16 @@ words = {
         "type": "none",
         "word": "megastructure"
     },
+    "megaton": {
+        "grade": 12,
+        "meaning": "a unit of explosive power chiefly used for nuclear weapons, equivalent to one million tons of TNT.",
+        "part of speech": "noun",
+        "roots": [
+            "MEGA"
+        ],
+        "type": "none",
+        "word": "megaton"
+    },
     "melancholy": {
         "grade": 12,
         "meaning": "a state of dark emotions",

@@ -153,21 +153,26 @@ Quiz.prototype.next_submodule = function(){
         count_incorrect: 0,
         incorrect_streak: 0
     };
-    this.next_mode();
+    //todo the following was moved by akiva to next_question
+    // this.next_mode();
     // todo new begins here
     console.log("current module:", this.module);
     console.log("current level:", this.module.level);
     //todo below is old, make sure new version works (in next_question)
     // this.game.set_level(this.module.level);
-    console.log('this.game.level = ', this.game.level)
+    //todo important - I commented this out, not sure if it breaks anything - it seems to not do anything
+    // console.log('this.game.level = ', this.game.level)
     // todo new ends here
     this.clear_cheat_sheet();
     this.next_question();
 };
 
 Quiz.prototype.next_mode = function(){
+    console.log("DEBUG 11-28 entering next_mode");
     var allowed = ALL_MODULES[this.module.id].modes_allowed;
+    console.log("DEBUG 11-28 allowed = ", allowed);
     var mode = random_choice(allowed);
+    console.log("DEBUG 11-28 mode = ", mode);
     var game = Quiz.get_mode(mode);
     
     this.game = game;
@@ -193,9 +198,18 @@ Quiz.get_mode = function(mode_number) {
 
 Quiz.prototype.next_question = function (){
     //todo new version below 11-27
-    
+    console.log("DEBUG about to hit range_sampler");
     var post_sampling_level = range_sampler(this.module.id);
+    console.log("DEBUG 11-28 post_sampling_level", post_sampling_level);
+    
+    
+    //todo newly moved to here by akiva 11-28
+    this.next_mode();
+    
+    //next_mode sets up the game and attaches and everything
     this.game.set_level(post_sampling_level);
+    
+    
     this.game.next_question(this);
 };
 
