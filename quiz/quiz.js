@@ -169,11 +169,11 @@ Quiz.prototype.next_submodule = function(){
 
 Quiz.prototype.next_mode = function(){
     console.log("DEBUG 11-28 entering next_mode");
-    var allowed = ALL_MODULES[this.module.id].modes_allowed;
-    console.log("DEBUG 11-28 allowed = ", allowed);
-    var mode = random_choice(allowed);
-    console.log("DEBUG 11-28 mode = ", mode);
-    var game = Quiz.get_mode(mode);
+    var allowed = ALL_MODULES[this.module.id].mode_ratio;
+    
+    var mode = weighted(allowed);
+    
+    var game = Quiz.get_mode(game_mode_map[mode]);
     
     this.game = game;
     //todo understand the following

@@ -28,10 +28,23 @@ function callback2(data) {
                 {tag: "li", text: "name = " + users[key].profile.name},
                 {tag: "li", text: "max module = " + max_module(users[key])},
                 {tag: "li", text: report_accuracy(users[key])},
-                {tag: "li", text: "aggregate accuracy = " +  "PLACEHOLDER"}
+                {tag: "li", text: "aggregate accuracy = " +
+                get_aggregate_accuracy(users[key])}
             ]
         }, e)
     }
+    
+    get_module_order().map(function (x) {return ALL_MODULES[x]}).forEach(
+        function (mod) {
+        make({
+            tag:"ul",
+            children: [
+                {tag: "li", text: "name = " + mod.icon_name},
+                {tag: "li", text: "average initial accuracy = "
+                + get_avg_initial_accuracy(mod, users)}
+            ]
+        }, e)
+    })
 }
 
 
@@ -43,7 +56,7 @@ function report_accuracy(user) {
     for (var key in user.history) {
         // console.log("DEBUG key = ", key);
         // console.log("DEBUG output = ", get_current_stats2(user, key));
-        stats_map[key] = get_current_stats2(user,key);
+        stats_map[key] = get_current_stats2(user, key);
     }
     
     
@@ -55,7 +68,6 @@ function report_accuracy(user) {
     // var breakline = "\n";
     var breakline = "________";
     // var map_with_breaks = map.split(",").join("<br />");
-    
     // var map_with_breaks = map.replace(/(?:\r\n|\r|\n)/g, '<br />');
     
     var map_with_breaks = map.replace(/(,)+/g, '\'<br />\'');
@@ -145,7 +157,7 @@ function get_current_stats2 (user, module_id) {
         return mod.progress + '/' + threshold;// + UNIVERSAL_MODULE.threshold
     } else if (mod.in_progress == true && mod.iteration > 0) {
         // improve
-        return "module: " + mod.id + "status = improving";
+        return mod.id + "= improving";
         // return 'advancing ' + get_accuracy(mod.iteration) + '% previous best ' +
         // Math.max.apply(null, Object.keys(mod.metrics).filter(
         // function (x) {return x != mod.iteration}).map(get_percentage))
@@ -157,18 +169,9 @@ function get_current_stats2 (user, module_id) {
         
         aggregate_accuracy_list.push(accuracy);
         
-        
-         function add(a, b) {
-            return a + b;
-        }
-        
         var aggregate_accuracy = aggregate_accuracy_list.reduce(add, 0);
 
-       
-        
-        
-        
-        var output = "accuracy = " + accuracy + "%" + "aggregare_accuracy_list" + aggregate_accuracy_list + "aggregate_accuracy = " + aggregate_accuracy + "%" ;
+        var output = accuracy + "%";
         return JSON.stringify(output);
     } else if (mod.in_progress == false && mod.iteration == 0) {
         return ""
@@ -180,78 +183,71 @@ function get_current_stats2 (user, module_id) {
     // }
 }
 
+function add(a, b) {return a + b}
+
+function get_all_accuracies(user, mod) {
+    return Object.keys(mod.metrics).map(
+        function (iteration) {
+            var correct = mod.metrics[iteration][0];
+       
+            var total = Object.keys(mod.metrics[iteration]).
+            map(function (x) {return mod.metrics[iteration][x]}).
+            reduce(add);
+            return Number.isFinite(correct / total) ? (correct / total): 0;
+    });
+    
+    /*var get_accuracy = function (iteration) {
+        return Math.floor(100 * mod.metrics[iteration][0]
+        / Object.keys(mod.metrics[iteration]).
+        map(function (x) {return mod.metrics[iteration][x]}).
+        reduce(function (a, b) {return a + b}))
+    }*/
+    
+    // Otherwise the user has never played.
+}
+
+function get_best_accuracy(user, mod) {
+    return Math.max(...get_all_accuracies(user, mod))
+}
+
+function get_first_accuracy(user, mod) {
+    return get_all_accuracies(user, mod)[0]
+}
 
 function get_aggregate_accuracy (user) {
+    var aggregate_accuracy_list = []
     
-    for (key in user.history) {
+    for (var key in user.history) {
     
         //something here...
-        
-        var get_accuracy = function (iteration) {
-            return Math.floor(100 * mod.metrics[iteration][0]
-            / Object.keys(mod.metrics[iteration]).
-            map(function (x) {return mod.metrics[iteration][x]}).
-            reduce(function (a, b) {return a + b}))
-        }
-    
-   aggregate_accuracy_list.push(accuracy);
-        
-    }
-    
-    function add(a, b) {
-        return a + b;
+        var order = get_module_order();
+        var mod = user.history[key];
+        if (!mod) {continue}
+        var accuracy = get_best_accuracy(user, mod)
+        if (accuracy !== -Infinity) {aggregate_accuracy_list.push(accuracy)};
     }
     
     var aggregate_accuracy = aggregate_accuracy_list.reduce(add, 0);
     
-    return aggregate_accuracy;
+    if (aggregate_accuracy_list.length === 0) {return 'has never played'}
+    
+    return Math.floor(aggregate_accuracy * 100 / aggregate_accuracy_list.length);
+}
 
+var get_avg_initial_accuracy = function (mod, users) {
+    var accuracy_list = [];
     
-    
-    
-    
-    
-    
-    
-    
-
-
-
-    var linebreak = document.createElement("br");
-    var threshold = UNIVERSAL_MODULE.threshold;
-    console.log("DEBUG threshold = ", threshold);
-    var aggregate_accuracy_list = [];
-    
-    
-    if (mod.in_progress == true && mod.iteration == 0) {
-        // advance
-        return mod.progress + '/' + threshold;// + UNIVERSAL_MODULE.threshold
-    } else if (mod.in_progress == true && mod.iteration > 0) {
-        // improve
-        return "module: " + mod.id + "status = improving";
-        // return 'advancing ' + get_accuracy(mod.iteration) + '% previous best ' +
-        // Math.max.apply(null, Object.keys(mod.metrics).filter(
-        // function (x) {return x != mod.iteration}).map(get_percentage))
-    } else if (mod.in_progress == false && mod.iteration > 0) {
-        // completed, not in progress
-        //return highest accuracy
-        var accuracy = Math.max.apply(null,
-        Object.keys(mod.metrics).map(get_accuracy));
-        
-        
-
-       
-        
-        
-        
-        var output = "accuracy = " + accuracy + "%" + "aggregare_accuracy_list" + aggregate_accuracy_list + "aggregate_accuracy = " + aggregate_accuracy + "%" ;
-        return JSON.stringify(output);
-    } else if (mod.in_progress == false && mod.iteration == 0) {
-        return ""
-    } else {
-        throw new Error('No case successfully caught.')
+    for (var key in users) {
+        if (users[key].history && mod.id in users[key].history) {
+            var accuracy = get_first_accuracy(
+                users[key], users[key].history[mod.id])
+            if (accuracy !== undefined) {accuracy_list.push(accuracy)};
+        }
     }
-    // else if (mod.in_progress == "false" && mod.iteration == 0) {
-    //     return ""
-    // }
+    
+    var average_accuracy = accuracy_list.reduce(add, 0);
+    
+    if (accuracy_list.length === 0) {return 'has never been played'}
+    
+    return Math.floor(average_accuracy * 100 / accuracy_list.length);
 }

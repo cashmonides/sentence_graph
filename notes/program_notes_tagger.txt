@@ -53,14 +53,9 @@ SUNDAY ALSO CRUCIAL
 - test optgroup
 - test vocabulary list
 - finish dash and star removers
-- make modes percentage dependent (e.g. 80% latin 20% english)
-    - add mode_ratio field to module 
-        latin: .8 drop .1 quick .1
-    - change new_mode to read this new field
-- add aggregate accuracy to admin page
 - clean up line breaks in admin page
 - correct answer should overlap with the question: incorrect: LATIN and english togetherr
-- filter parts of speech based on module
+
 
 
 

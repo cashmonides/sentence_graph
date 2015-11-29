@@ -365,7 +365,8 @@ function make_kernel_new (level, state, lexeme_list) {
     //we create a dictionary with only one initial key:value pair
     //string : function
     //later on we're going to add other key:value pairs
-    var sentence_in_latin = {'inflect': inflect_latin};
+    var sentence_in_latin = {'inflect': function (x, y, z) 
+    {return remove_dashes(inflect_latin(x, y, z))}};
     var sentence_in_english = {'inflect': inflect_english};
     var sentences = [sentence_in_latin, sentence_in_english];
 
