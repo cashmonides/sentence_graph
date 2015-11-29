@@ -41,12 +41,26 @@ function report_accuracy(user) {
         // console.log("DEBUG key = ", key);
         // console.log("DEBUG output = ", get_current_stats2(user, key));
         stats_map[key] = get_current_stats2(user,key);
-        stats_map.push["blank key"] = "blank value";
+        stats_map["blank key"] = "blank value";
     }
     
-    return JSON.stringify(stats_map);
     
     
+    
+    var map = JSON.stringify(stats_map);
+    
+    // var breakline = "<br />";
+    // var breakline = "\n";
+    var breakline = "________";
+    // var map_with_breaks = map.split(",").join("<br />");
+    
+    // var map_with_breaks = map.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    
+    var map_with_breaks = map.replace(/(,)+/g, '\'<br />\'');
+    var map_with_breaks = map.replace(/(,)+/g, breakline);
+    
+    
+    return map_with_breaks;
 }
 
 
