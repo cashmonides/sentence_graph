@@ -40,6 +40,7 @@ QuickModeGame.tag_filter = function (tag) {
 
 QuickModeGame.prototype.next_question = function(state){
     
+    
     var sentence = random_choice(this.quiz.sentences);
     var data = Quiz.pick_question_data(sentence, QuickModeGame.region_filter,
     QuickModeGame.tag_filter);  
