@@ -1,0 +1,32 @@
+birds
+    ratites
+    fowl
+    neoaves
+    
+    
+mammals
+    monotremes
+        echidna
+        platypus
+    marsupials
+        oppossums
+        numbats etc.
+        bandicoots, etc.
+        kangaroos, koalas, wombats, etc.
+    placentals
+        primates, ungulates etc. (boroeutheria) (splits into laurasiatheria & euarchontoglires)
+        anteaters, sloths, etc.  (xenarthra)
+        elephants, etc. (afrotheria)
+
+reptiles
+    lizards and snakes
+    tortoises and turtles
+    crocodilians
+    tuatara
+    
+    
+amphibians
+    frogs and toads
+    salamanders and newts 
+    caecilians
+    

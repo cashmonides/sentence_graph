@@ -39,11 +39,21 @@ DropModeGame.region_filter = function(region){
     return region.get_indices().length == 1;
 };
 
+DropModeGame.tag_filter = function (tag) {
+    // var dummy_part_of_speech_filter = ['subject', 'verb', 'object'];
+    var filter = this.quiz.module.parts_of_speech_filter;
+    return filter.indexOf(tag) !== -1;
+}
+
+
 DropModeGame.prototype.next_question = function(sentences){
+    
+    
+    
     var sentence = random_choice(this.quiz.sentences);
     // sentence.debug();
     //todo below seems hacky
-    this.data = Quiz.pick_question_data(sentence, DropModeGame.region_filter);
+    this.data = Quiz.pick_question_data(sentence, DropModeGame.region_filter, DropModeGame.tag_filter);
     
     this.target_tag = this.data.target_tag;
     //todo add a filter onto available tags so that duplicates are eliminated (e.g. for cat we don't want noun & subject to be available tags because it could be both)
@@ -79,7 +89,9 @@ DropModeGame.prototype.next_question = function(sentences){
     
     //make html elements
     this.make_drop_down();
-
+    
+    //todo new code 11-29 the following avoids drop-downs with only one answer
+    if (el("select_element").children.length === 1) {this.next_question()}
 
 };
 

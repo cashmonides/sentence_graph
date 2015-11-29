@@ -26,13 +26,23 @@ QuickModeGame.prototype.get_mode_name = function() {
 };
 
 QuickModeGame.region_filter = function(region){
+    //todo filter based on part of speech filter
     return region.get_indices().length == 1;
 };
+
+//todo make sure this is dupiclated in drop mode
+QuickModeGame.tag_filter = function (tag) {
+    // var dummy_part_of_speech_filter = ['subject', 'verb', 'object'];
+    // var dummy_part_of_speech_filter = ['subject'];
+    var filter = this.quiz.module.parts_of_speech_filter;
+    return filter.indexOf(tag) !== -1;
+}
 
 QuickModeGame.prototype.next_question = function(state){
     
     var sentence = random_choice(this.quiz.sentences);
-    var data = Quiz.pick_question_data(sentence, QuickModeGame.region_filter);  
+    var data = Quiz.pick_question_data(sentence, QuickModeGame.region_filter,
+    QuickModeGame.tag_filter);  
     this.target_tag = data.target_tag;
     //refresh_score();
     this.quiz.update_display();

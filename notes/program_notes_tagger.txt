@@ -13,8 +13,17 @@ GIO
 - improve login
     - alert user on all errors
     - check your email to confirm (to prevent maliciously creating many users)
+- word selector such that it can support underneath translations
+
+
+
+
+
     
-    
+AGENDA
+- research non-clickable header in dropdown
+- get existing taxonomical data from dan
+
 
 
 DAN
@@ -35,9 +44,11 @@ SUNDAY CRUCIAL
 - tagging a sentence as being in latin or english etc.
 - overlapping tags in tagger
 - implicational tags in tagger  
-- 
+- get existing taxonomical data from dan
             
 SUNDAY ALSO CRUCIAL
+- fix the outside the box bug   
+    - either move latin from pre-footer footer or just always have it above the submit button
 - test etymology mode
 - test optgroup
 - test vocabulary list
@@ -69,6 +80,9 @@ ADD FUNCTIONALITY
 - change drop mode to quick mode
 - experiment with converting latin to quick mode (a la duolingo)
 
+
+DOWN THE ROAD FUNCTIONALITY
+- taxonomical nested drop down for nouns (navigate taxonomy to animal)
 
 
 SMALL THINGS
