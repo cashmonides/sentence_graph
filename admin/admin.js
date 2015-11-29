@@ -34,9 +34,7 @@ function callback2(data) {
     }
 }
 
-function get_aggregate_accuracy(user) {
-    
-}
+
 
 
 //todo rename to report all accuracy
@@ -84,7 +82,7 @@ function max_module(user) {
 }
 
 
-//todo make this a general function
+//todo make this a general function (i.e. abstract it from get_current_stats)
 function get_max_accuracy (user, module_id, iteration) {
    var order = get_module_order();
    var UNIVERSAL_MODULE = ALL_MODULES[module_id];
@@ -183,10 +181,12 @@ function get_current_stats2 (user, module_id) {
 }
 
 
-function get_aggregate_accuray2 (user) {
+function get_aggregate_accuracy (user) {
     
     for (key in user.history) {
     
+        //something here...
+        
         var get_accuracy = function (iteration) {
             return Math.floor(100 * mod.metrics[iteration][0]
             / Object.keys(mod.metrics[iteration]).

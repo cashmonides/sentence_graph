@@ -1,3 +1,21 @@
+GIO
+- alert error messages
+    - variable error not appearing in either incorrrect password or user already exists
+- persist error messages
+- track stats
+- exporting stats as excel manipulable things
+- tutorial pages
+- some work around for students without email address??
+- overlapping tags in tagger
+- targeted/customizable tags in tagger  
+    - something like: delete all autotags, tag one thing, give it a property (custom tagged)
+- enable "disk persistence"? (https://www.firebase.com/docs/ios/guide/offline-capabilities.html)
+- improve login
+    - alert user on all errors
+    - check your email to confirm (to prevent maliciously creating many users)
+    
+    
+
 
 DAN
 - refactor drop downs and sorted drop downs to allow for optgroup headings
@@ -5,8 +23,24 @@ DAN
     
 - refactor lexeme list so that it can create a vocabulary list 
     - using the value -   drop_down_settings: {noun: {lexicon_dummies: int} }
+  
+  
+  
+SUNDAY CRUCIAL
+- strategize entry of new words and roots into etymology
+- improve tagger
+    - the dashes problem
+    - the macron problem
+- automatic entry of latin
+- tagging a sentence as being in latin or english etc.
+- overlapping tags in tagger
+- implicational tags in tagger  
+- 
             
-SUNDAY
+SUNDAY ALSO CRUCIAL
+- test etymology mode
+- test optgroup
+- test vocabulary list
 - finish dash and star removers
 - make modes percentage dependent (e.g. 80% latin 20% english)
     - add mode_ratio field to module 
@@ -14,11 +48,18 @@ SUNDAY
     - change new_mode to read this new field
 - add aggregate accuracy to admin page
 - clean up line breaks in admin page
+- correct answer should overlap with the question: incorrect: LATIN and english togetherr
+- filter parts of speech based on module
+
+
+
 
 AKIVA
 - map out what a taxonomy module would look like
 - tweak levels and modules so there are a lot more
 - put modules in units of 10
+- add buttons to admin page
+- comment tagger
 
 DATA
 - add sentences in english
@@ -28,11 +69,13 @@ ADD FUNCTIONALITY
 - change drop mode to quick mode
 - experiment with converting latin to quick mode (a la duolingo)
 
+
+
 SMALL THINGS
 fix placeholders
 fix “now click on the correct answer”
-correct answer should overlap with the question: incorrect: LATIN and english togetherr
 non-improving completed modules shouldn’t turn red when hovered
+
 
 UNKNOWN BUGS
 - wrong denominator
@@ -41,42 +84,11 @@ UNKNOWN BUGS
 - eyes peeled for: no highlighted
 - eyes peeled for: outside the box
 
-LEXEME LIST REFACTORING
-
-We need a double-duumy lexeme list.
-Question: Should we put all our lexeme lists in some master lexeme list?
-master_lexeme_list is an object??? No.
-Organization of master lexeme list:
-lexemes property: all lexemes
-Some lexeme_list_name: types_of_lexeme_used pairs.
-get_lexemes: takes list name, returns lexeme dict.
-var master_object = {
-    lexemes:   {subject: dog, 
-                verb: eat, 
-                object: cuckoo,
-                dummy_noun_0: dragon,
-                dummy_noun_1: snake,
-                    double_dummy_noun_0: fish,
-                    double_dummy_noun_1: cat
-    },
-    all_lexemes: [subject, verb, object, dummy_noun_0, dummy_noun_1, double_dummy_noun_0, double_dummy_noun_1],
-    dummy_lexemes: [subject, verb, object, dummy_noun_0, dummy_noun_1],
-    lexemes_used: [subject, verb, object],
-    get_lexemes: function() {/*
-         examples:
-         get_lexemes('all_lexemes') = [dog, eat, cuckoo, dragon, snake, fish, cat]   //used + dummy + double dummy
-         get_lexemes('dummy_lexemes') = [dog, eat, cuckoo, dragon, snake]     //used + dummy
-         get_lexemes('lexemes_used') = [dog, eat, cuckoo]
-         should be able to use this to refer to master_object
-    */}
-}
 
 
-Cartesian
 
-1 : {
-    
-}
+
+
 
 
 
@@ -1188,3 +1200,39 @@ OPTION 2: parallel advance & improve
 
 
 
+LEXEME LIST REFACTORING
+
+We need a double-duumy lexeme list.
+Question: Should we put all our lexeme lists in some master lexeme list?
+master_lexeme_list is an object??? No.
+Organization of master lexeme list:
+lexemes property: all lexemes
+Some lexeme_list_name: types_of_lexeme_used pairs.
+get_lexemes: takes list name, returns lexeme dict.
+var master_object = {
+    lexemes:   {subject: dog, 
+                verb: eat, 
+                object: cuckoo,
+                dummy_noun_0: dragon,
+                dummy_noun_1: snake,
+                    double_dummy_noun_0: fish,
+                    double_dummy_noun_1: cat
+    },
+    all_lexemes: [subject, verb, object, dummy_noun_0, dummy_noun_1, double_dummy_noun_0, double_dummy_noun_1],
+    dummy_lexemes: [subject, verb, object, dummy_noun_0, dummy_noun_1],
+    lexemes_used: [subject, verb, object],
+    get_lexemes: function() {/*
+         examples:
+         get_lexemes('all_lexemes') = [dog, eat, cuckoo, dragon, snake, fish, cat]   //used + dummy + double dummy
+         get_lexemes('dummy_lexemes') = [dog, eat, cuckoo, dragon, snake]     //used + dummy
+         get_lexemes('lexemes_used') = [dog, eat, cuckoo]
+         should be able to use this to refer to master_object
+    */}
+}
+
+
+Cartesian
+
+1 : {
+    
+}

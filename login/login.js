@@ -48,6 +48,7 @@ function create_account() {
     var callback = function(error, userData) {
         if (error) {
             console.log("Error creating user:", error);
+            alert("Error: ", error);
         } else {
             console.log("Successfully created user account with uid:", userData);
             User.set_initial_data(userData.uid, n, c, login);
@@ -87,10 +88,12 @@ function initiate_change_password() {
         if (error) {
             switch (error.code) {
                 case "INVALID_PASSWORD":
-                    //console.log"The specified user account password is incorrect.");
+                    console.log("The specified user account password is incorrect.");
+                    alert("Password is incorrect.");
                     break;
                 case "INVALID_USER":
-                    //console.log"The specified user account does not exist.");
+                    console.log("The specified user account does not exist.");
+                    alert("Account does not exist.");
                     break;
                 default:
                     //console.log"Error changing password:", error);
