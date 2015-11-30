@@ -19,6 +19,8 @@ GIO
 
 NEW FUNCTIONALITY
 - text input mode
+    - spell check
+    - strip all punctuation
 
     
 AGENDA
