@@ -33,9 +33,6 @@ MCMode3Game.prototype.get_mode_name = function() {
 
 
 
-
-
-
 MCMode3Game.prototype.next_question = function () {
     console.log("DEBUG 11-14 entering make_output");
     console.log("DEBUG 11-16 this.level = ", this.level)

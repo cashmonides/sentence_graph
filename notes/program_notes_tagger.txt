@@ -23,6 +23,20 @@ NEW FUNCTIONALITY
 - text input mode
     - spell check
     - strip all punctuation
+    
+    var test_correct_string = "the bear loves the horse"
+    
+    <input type="text" id="answer_input_box">
+    var answer_input = el("answer_input_box").value;
+    var answer_input_2 = answer_input.replace(/[.,!]/g,"");
+    var answer_input_3 = answer_input_2.replace(/\s{2,}/g," ");
+    var answer_input_4 = answer_input_3.toLowerCase();
+    
+    if (answer_input_4 === test_correct_string) {
+    console.log("correct)
+    } else {
+    console.log("incorrect! The correct answer is: ", test_correct_string);
+    }
 
     
 AGENDA
