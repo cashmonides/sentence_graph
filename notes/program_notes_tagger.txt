@@ -14,7 +14,9 @@ GIO
     - alert user on all errors
     - check your email to confirm (to prevent maliciously creating many users)
 - word selector such that it can support underneath translations
-
+- non-clickable header in dropdown
+- hiding admin from malicious children
+- just hide spread operator
 
 
 NEW FUNCTIONALITY
@@ -24,10 +26,20 @@ NEW FUNCTIONALITY
 
     
 AGENDA
-- research non-clickable header in dropdown
 - get existing taxonomical data from dan
+- research non-clickable header in dropdown
 
+AKIVA
+- remove all users except the good ones from firebase
+- add dash and star parameters to modules
+- add metacharacters to latin
+- move latin to pre-footer
+- rework the give away answer in latin mode
+- remove dashes from the regex list of strip 
+- add macrons to the word-selector 
 
+DAN
+- can we do our range sampling on true and false?
 
 DAN
 - refactor drop downs and sorted drop downs to allow for optgroup headings
@@ -54,7 +66,7 @@ SUNDAY ALSO CRUCIAL
     - either move latin from pre-footer footer or just always have it above the submit button
 - test etymology mode
 - test optgroup
-- test vocabulary list
+- test vocabulary cheat sheet
 - finish dash and star removers
 - clean up line breaks in admin page
 - correct answer should overlap with the question: incorrect: LATIN and english togetherr

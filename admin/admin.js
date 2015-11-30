@@ -87,8 +87,13 @@ function max_module(user) {
             c.push(key);
         }
     }
+    //alternative to spread operator
+    c = Math.max.apply(null, c);
+    
     //spread operator
-    c = Math.max(...c);
+    // c = Math.max(...c);
+    
+    
     console.log("LOG: max_module = ", JSON.stringify(c));
     return JSON.stringify(c);
 }
@@ -207,7 +212,14 @@ function get_all_accuracies(user, mod) {
 }
 
 function get_best_accuracy(user, mod) {
-    return Math.max(...get_all_accuracies(user, mod))
+    
+    // c = Math.max.apply(null, c);
+    
+    //alternative to spread operator
+    return Math.max.apply(null, get_all_accuracies(user, mod));
+    
+    //spread operator
+    // return Math.max(...get_all_accuracies(user, mod))
 }
 
 function get_first_accuracy(user, mod) {
@@ -219,7 +231,7 @@ function get_aggregate_accuracy (user) {
     
     for (var key in user.history) {
     
-        //something here...
+        
         var order = get_module_order();
         var mod = user.history[key];
         if (!mod) {continue}
