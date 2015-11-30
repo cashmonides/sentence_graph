@@ -17,7 +17,8 @@ GIO
 
 
 
-
+NEW FUNCTIONALITY
+- text input mode
 
     
 AGENDA
