@@ -66,35 +66,38 @@ ProfilePage.display_profile = function() {
 
 
 ProfilePage.build_progress_table = function(user) {
-
-    var table = el("table");
-    var row = make({tag: "tr"}, table);
-    var max_columns = 4;
-    var order = get_module_order();
-
-    for (var i = 0; i < order.length; i++) {
-        var mod = ALL_MODULES[order[i]];
+    try {
+        var table = el("table");
+        var row = make({tag: "tr"}, table);
+        var max_columns = 4;
+        var order = get_module_order();
     
-        var mod_history = mod.id in user.data.history ? user.get_module(mod.id) : null;
-                        
-        var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image", "complete"] : ["progress_image", "incomplete"];
+        for (var i = 0; i < order.length; i++) {
+            var mod = ALL_MODULES[order[i]];
         
-        
-        make({
-            tag: "td", 
-            class: ["progress_cell"], 
-            onclick: ProfilePage.select_improvement_module(mod.id),
-            children: [
-                {tag: "img", class: img_class, src: mod.icon_url},                      //UNIVERSAL MODULE
-                {tag: "br"},
-                this.get_display_caption(this.user, order[i])
-            ]
-        }, row);
-
-
-        if (i > 0 && i % max_columns == 0) {
-            row = make({tag: "tr"}, table);
+            var mod_history = mod.id in user.data.history ? user.get_module(mod.id) : null;
+                            
+            var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image", "complete"] : ["progress_image", "incomplete"];
+            
+            
+            make({
+                tag: "td", 
+                class: ["progress_cell"], 
+                onclick: ProfilePage.select_improvement_module(mod.id),
+                children: [
+                    {tag: "img", class: img_class, src: mod.icon_url},                      //UNIVERSAL MODULE
+                    {tag: "br"},
+                    this.get_display_caption(this.user, order[i])
+                ]
+            }, row);
+    
+    
+            if (i > 0 && i % max_columns == 0) {
+                row = make({tag: "tr"}, table);
+            }
         }
+    } catch (e) {
+        log_error(e, {"function" : "build_progress_table"});
     }
 };
 

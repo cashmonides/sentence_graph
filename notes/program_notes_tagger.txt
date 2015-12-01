@@ -1,22 +1,90 @@
 GIO
 - alert error messages
     - variable error not appearing in either incorrrect password or user already exists
-- persist error messages
-- track stats
-- exporting stats as excel manipulable things
-- tutorial pages
+- persist error messages in firebase
+- track stats in admin
+- exporting stats as CSV/JSON
+    - maybe a python program that runs on server and this python creates the csv dynamically
+    - another option: download JSON directly from firebase, write a python program that converts to CSV
 - some work around for students without email address??
+    - the meredith@213.tag approach
+        - put a check so she can never reset password (if ends in .tag)
+        - password could be a hash code (deterministic - always same value)
+- prevent infinite creation of accounts
+- cross
+
+
+
+
+PERSISTING ERROR MESSAGES
+- error message: str
+- date: str               //javascript gives local time/convert to utc time/convert to firebase formats
+                            //year/month/day
+- user: str
+
+- context that generated the error
+    - JSON object 
+        - function:...
+        - module
+        - mode
+
+
+try
+catch {
+    persist.set....
+}
+
+
+ADD
+tutorial pages
+lightbox should feel like a reward
+cheat sheet on a new tab
+make quick mode more minimal
+
+
+
+
 - overlapping tags in tagger
 - targeted/customizable tags in tagger  
     - something like: delete all autotags, tag one thing, give it a property (custom tagged)
 - enable "disk persistence"? (https://www.firebase.com/docs/ios/guide/offline-capabilities.html)
 - improve login
-    - alert user on all errors
+    - alert user on all errors (fix bug)
     - check your email to confirm (to prevent maliciously creating many users)
 - word selector such that it can support underneath translations
 - non-clickable header in dropdown
 - hiding admin from malicious children
-- just hide spread operator
+- just hide spread operator??
+- fill in the blanks skeleton version
+
+
+
+MEDIATEMPLE
+- DNS server
+    - converts url into an ip address (internet protocol)
+    - will get pointed to ip address that's hosted by media temple
+    - media temple "serves" a package of javascript and html to a client
+    - perhaps need a top level domain name??
+- prerequisites
+    - obfuscation
+    - hiding the admin page
+    - ftp client
+        - transfers my data to media temple
+        - e.g. filezilla
+        - navigation
+            - name of domain    
+                - http (top level/root)
+                - I need to move my top level (e.g. login) to http
+
+
+
+- feature complete
+- AGILE methodology
+    - quick iteration
+    - user stories
+    - sprint
+
+
 
 
 NEW FUNCTIONALITY

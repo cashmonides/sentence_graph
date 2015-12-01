@@ -1,6 +1,6 @@
 var test_correct_string = "the bear loves the horse";
     
-
+var target;
 
 var test_list = ["the bear", "loves", "the horse"];
   
@@ -8,7 +8,7 @@ var test_list = ["the bear", "loves", "the horse"];
 
 window.onload = function () {
     console.log("Window onload entered");
-    var target = pick_blank_target(test_list);
+    target = pick_blank_target(test_list);
     // var target_index = get_target_index(test_list, target);
     // make_blank_fill(test_list, target);
     
@@ -68,7 +68,7 @@ var make_blank_fill2 = function (list) {
     // input_field.setAttribute("id", "blank_answer_input_box");
     
     
-    for (var i=0; list.length; i++) {
+    for (var i=0; i < list.length; i++) {
         if (list[i] === "xyz") {
             var input_field = document.createElement("input");
             input_field.type = "text";
@@ -79,6 +79,8 @@ var make_blank_fill2 = function (list) {
             container.appendChild(text);
         }
     }
+    
+    return;
     
     
     
@@ -125,7 +127,7 @@ var process_input_blank = function () {
     var answer_input_3 = answer_input_2.replace(/\s{2,}/g," ");
     var answer_input_4 = answer_input_3.toLowerCase();
         
-    if (answer_input_4 === test_list[1]) {
+    if (answer_input_4 === target) {
         console.log("correct");
     } else {
         console.log("incorrect! The correct answer is: ", test_correct_string);
