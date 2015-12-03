@@ -11,6 +11,9 @@ QuickModeGame.prototype.attach = function(){
     
     el("answer_choices").style.display = 'none';
     el("submit_button").style.display = 'none';
+    el("vocab_cheat_button").style.display = 'none';
+    el("cheat_sheet_button").style.display = 'none';
+    
     // this.quiz.bar_threshold = 10;
     // this.quiz.switch_count = 10;
 

@@ -25,6 +25,8 @@ DropModeGame.prototype.attach = function(){
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
     el("answer_choices").style.display = 'initial';
     el("submit_button").style.display = 'initial';
+    el("vocab_cheat_button").style.display = 'none';
+    el("cheat_sheet_button").style.display = 'none';
 };
 
 DropModeGame.prototype.set_level = function () {
