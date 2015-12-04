@@ -5,10 +5,7 @@ process_tutorial_click
 */
 
 var TutorialModeGame = function(){
-
-    
     this.quiz = null;
-    
 };
 
 
@@ -65,31 +62,7 @@ TutorialModeGame.prototype.process_correct_answer = function() {
 };
 
 
-QuickModeGame.prototype.process_incorrect_answer = function() {
-    
-    
-    var tag_names = this.quiz.get_selected_region().get_tag_types();
-
-    this.quiz.submodule.incorrect_streak ++;
-    
-    
-    console.log("Debug 11-8 this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    if (this.quiz.submodule.incorrect_streak === 1) {
-        console.log("Debug 11-8 if triggered");
-        this.quiz.decrement_score();
-    } else {
-        console.log("DEBUG 11-8 if not triggered");
-    }
-
-    
-    // set_bar_count(this.quiz.bar_count - this.quiz.current_module_penalty);
-
-    //if (this.quiz.incorrect_streak = this.quiz.max_incorrect_streak) {
-    //    //set_score(this.quiz.score + SCORE_PENALTIES[this.quiz.incorrect_streak - 1]);
-    //    //set_module_score(this.quiz.current_module_progress - this.quiz.current_module_penalty);
-    //}
-
-
+TutorialModeGame.prototype.process_incorrect_answer = function() {
     
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
         var cell_2;
@@ -111,20 +84,19 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
         //refresh_score();
     }
     this.quiz.update_display();
+    
     this.quiz.word_selector.clear();
 
 };
 
-QuickModeGame.prototype.give_away_answer = function(){
-    var fbox = el("feedbackbox");
-    fbox.innerHTML = "";
-    var self = this;
-    this.quiz.sentence.get_regions_with_tag(this.target_tag).forEach(function(r){
-        var text = this.quiz.sentence.get_region_text(r);
-        fbox.innerHTML += Quiz.wrap_string(self.target_tag) + " = " + text + "<br>";
-    });
 
-    this.quiz.submodule.incorrect_streak = 0;
-    this.quiz.question_complete();
+TutorialModeGame.prototype.load_tutorial_page = function () {
     
-};
+}
+
+
+
+
+// TutorialModeGame.prototype.give_away_answer = function(){
+//     //probably never gonna use
+// };

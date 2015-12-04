@@ -223,6 +223,9 @@ Quiz.prototype.question_complete = function(){
     }
 };
 
+
+
+
 Quiz.prototype.submodule_complete = function () {
     
     console.log("DEBUG 11-16 quiz.submodule_complete entered");
@@ -334,9 +337,32 @@ Quiz.prototype.process_answer = function(){
     this.game.process_answer(this);
 };
 
+
+Quiz.prototype.get_lightbox_image = function(mod_id) {
+    var image_list = ALL_MODULES[mod_id].lightbox_images;
+    console.log("DEBUG 12-3 image_list = ", image_list);
+    console.log("DEBUG 12-3 entering random_choice");
+    var image = random_choice(image_list);
+    return image;
+}
+
+
+Quiz.prototype.process_lightbox_image = function () {
+    var mod = this.user.get_current_module();
+    console.log("DEBUG 12-3 mod = ", mod);
+  
+    var image = this.get_lightbox_image(mod);
+
+    
+    return '<img src="' + image +'" />'; 
+}
+
 Quiz.prototype.fill_lightbox = function(text, lightbox) {
     var name = this.user.data.profile.name;
-    el('pop_up_div').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text;
+    
+    var image = this.process_lightbox_image();
+    
+    el('pop_up_div').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text + image + "end of new lightbox test";
 };
 
 
@@ -427,7 +453,7 @@ Quiz.prototype.get_cheat_sheet_image = function () {
     console.log("DEBUG 11-23 advance/improve status = ", this.advance_improve_status);
     console.log("DEBUG 11-23 mod = ", mod);
     image = this.get_cheat_sheet(mod);
-    return image
+    return image;
 }
 
 Quiz.prototype.clear_cheat_sheet = function () {

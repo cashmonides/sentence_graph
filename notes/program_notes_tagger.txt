@@ -1,6 +1,11 @@
 GIO
+- mediatemple
+- go through 
 - alert error messages
     - variable error not appearing in either incorrrect password or user already exists
+
+
+
 - persist error messages in firebase
 - track stats in admin
 - exporting stats as CSV/JSON
