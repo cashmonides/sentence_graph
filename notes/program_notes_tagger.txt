@@ -1,8 +1,26 @@
+THE TERMINAL APPROACH TO UPDATING MEDIA TEMPLE
+- go to terminal
+- run this: ssh s211804.gridserver.com@s211804.gridserver.com
+- cd (/home/211804/users/.home/) domains/s211804.gridserver.com/html
+- git pull origin master
+
+
+
+
 GIO
 - mediatemple
 - go through 
 - alert error messages
     - variable error not appearing in either incorrrect password or user already exists
+
+
+
+
+
+
+
+
+
 
 
 

@@ -61,7 +61,6 @@ Quiz.prototype.start = function(){
         el("return_to_profile_button").parentNode.removeChild(el("return_to_profile_button"));
         el("logout_button").innerHTML = "login";
         this.user_loaded();
-        //  + " Click " + "<a href=\"https://sentence-graph-cashmonides.c9.io/lib/login/login.html\">here</a>" + " to login or create an account";
     }
     
     var self = this;
@@ -314,19 +313,9 @@ Quiz.prototype.set_progress_bar = function () {
 
 
 
-//todo not yet working
-// Quiz.logout_from_quiz = function() {
-//     this.user.logout();
-//     // document.location = "../login/";
-//     // document.location = "../login/login/";
-// };
 
 
-Quiz.return_to_profile = function() {
-    // document.location = "../login/";
-    // document.location = "https://sentence-graph-cashmonides.c9.io/login/"
-    // document.location = "../profile/";
-};
+
 
 
 
@@ -342,6 +331,7 @@ Quiz.prototype.get_lightbox_image = function(mod_id) {
     var image_list = ALL_MODULES[mod_id].lightbox_images;
     console.log("DEBUG 12-3 image_list = ", image_list);
     console.log("DEBUG 12-3 entering random_choice");
+    
     var image = random_choice(image_list);
     return image;
 }
@@ -562,7 +552,7 @@ Quiz.prototype.toggle_vocab_cheat_sheet = function() {
 //todo wasn't working as Quiz.logout_from_quiz
 
 function logout_from_quiz() {
-    document.location = "../login/";
+    document.location = "..";
 }
 
 function return_to_profile() {

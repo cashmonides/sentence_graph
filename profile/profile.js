@@ -8,7 +8,7 @@ var ProfilePage = {
 };
 
 ProfilePage.logout = function () {
-    document.location = "../login/";
+    document.location = "..";
 }
 
 
