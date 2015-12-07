@@ -1,21 +1,49 @@
-#1
-WELCOME TO THE SUBORDINATING CONJUNCTION
 
 
-A subordinating conjunction is a word  
-            (usually a short one like "if", "when", "that", "why")
-that opens up a subordinate clause.
-
-Click on a subordinating conjunction in the following sentence:
 
 
-@
-The cat takes a nap (%when% the mice are eating).
 
-(%If% the dog barks) the rooster gets angry.
 
-The bird knows (that all the mice are sleeping.)
-@
+{ pages : [
+    {
+    page : 1,
+    header: "WELCOME TO THE SUBORDINATING CONJUNCTION",
+    
+    text :
+    "A subordinating conjunction is a word \n 
+    (usually a short one like \"if\", \"when\", \"that\", \"why\")
+    \n
+    that opens up a subordinate clause.",
+    
+    question: "Click on any subordinating conjunction in the following sentences:",
+    
+    
+    answers: [ "The cat takes a nap (%when% the mice are eating).",
+    "(%If% the dog barks) the rooster gets angry.",
+    "The bird knows (%that% all the mice are sleeping.)"]
+    
+    },
+
+
+
+HTML version (with nice formatting and italics)
+
+{
+page : 3,
+header: "",
+
+text : null,
+
+question: null,
+
+
+answers: null,
+
+html: "sample1.html"
+}
+
+
+
 
 
 
@@ -246,6 +274,30 @@ The bird doesn't know (%that% all the fish have left.)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+JSON approach:
+
+
+object = {
+    
+
+
+
+
+}
 
 
 

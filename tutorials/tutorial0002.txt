@@ -24,7 +24,7 @@ The bird is awake %but% the worms are asleep.
 
 
 
-#2
+page #2
 
 Sometimes we will get a hint that a coordinating conjunction is lurking,
 because a slash will break up one sentence from another:
@@ -48,7 +48,7 @@ The bird takes the bread %or% the mice take the bread.
 
 
 
-#3
+page #3
 
 Practice with a few more sentences. These ones all have slash-marks as hints. 
 
@@ -65,7 +65,7 @@ The bird takes the bread %or% the mice take the bread.
 @
 
 
-#4
+page #4
 Now practice on some without the slash-marks as hints.
 
 Remember, there's only three coordinating conjunctions: "and" "or" & "but".
@@ -82,7 +82,7 @@ The bird takes the bread %or% the mice take the bread.
 @
 
 
-#5
+page #5
 It looks you're starting to get it. To play the game click ~begin~.
 
 If you'd like more practice before playing the game click %more practice%.
