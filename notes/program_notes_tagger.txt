@@ -1,3 +1,41 @@
+TEST current state
+
+
+
+CROSS BROWSER 
+alternative to Array.from
+spread
+all sets
+
+
+PIICTURES
+fix size
+make a sequence not a random choice
+
+
+ADD TRY/CATCH IN CRUCIAL SPOTS IN THE CONTROL FLOW
+
+
+ADD TIME STAMP OF ANSWERS
+record event (i.e. records a correct/incorrect answer and a time stamp inter alia)
+
+FIREBASE RULES and security
+
+ADD VOCAB CHEAT SHEET
+test vocab cheat sheet
+
+
+ETYMOLOGY MODE
+
+DROP MODE
+
+
+
+
+
+
+
+
 
 
 
