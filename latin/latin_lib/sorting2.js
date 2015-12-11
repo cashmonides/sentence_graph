@@ -1,5 +1,6 @@
 function sorted_choices(output, key_for_word) {
-    return unique_items(map_by_text(quick_sort(output[key_for_word], custom_sort)))
+    return map_by_text(separate_by_lexeme(quick_sort(output[key_for_word], custom_sort))).map(
+        function (x) {return {'subheading': x.subheading, 'choices': unique_items(x.choices)}});
 }
 
 function quick_sort(list, f) {
@@ -8,6 +9,21 @@ function quick_sort(list, f) {
     var before = list.slice(1).filter(function (x) {return f(x, pivot)});
     var after = list.slice(1).filter(function (x) {return f(pivot, x)});
     return quick_sort(before, f).concat(pivot, quick_sort(after, f))
+}
+
+function separate_by_lexeme(l) {
+    var r = [];
+    var current_root = null;
+    l.forEach(function (x) {
+        var xl = x.lexeme === 'not the right lexeme' ? 'other' : x.lexeme.properties.english.root;
+        if (xl !== current_root) {
+            current_root = xl;
+            r.push({'subheading': xl, 'choices': [x]})
+        } else {
+            peek(r).choices.push(x)
+        }
+    });
+    return r
 }
 
 function custom_sort(x, y) {
@@ -43,9 +59,9 @@ function sort_which_is_first (order, x, y) {
             var x_value = sort_get_property(x, sort_by);
             var y_value = sort_get_property(y, sort_by);
             if (x_value === null && y_value !== null) {
-                return true
-            } else if (x_value !== null && y_value === null) {
                 return false
+            } else if (x_value !== null && y_value === null) {
+                return true
             } else if (x_value !== y_value) {
                 return x_value < y_value
             }
@@ -72,5 +88,8 @@ function sort_get_property(object, list) {
 }
 
 function map_by_text(x) {
-    return x.map(function (y) {return y.text})
+    x.forEach(function (part) {
+        part.choices = part.choices.map(function (y) {return y.text})
+    });
+    return x
 }
