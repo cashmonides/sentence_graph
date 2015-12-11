@@ -348,7 +348,9 @@ Quiz.prototype.get_lightbox_image = function(mod_id) {
     console.log("DEBUG 12-3 image_list = ", image_list);
     console.log("DEBUG 12-3 entering random_choice");
     
-    var image = random_choice(image_list);
+    
+    var image = image_list[
+        (this.user.data.history[mod_id].progress - 1) % image_list.length];
     return image;
 }
 
@@ -376,7 +378,7 @@ Quiz.prototype.fill_lightbox = function(text, lightbox) {
 Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
     
     var available_tags = sentence.get_all_tag_types(region_filter, tag_filter);
-    var target_tag = random_choice(Array.from(available_tags));
+    var target_tag = random_choice(array_from(available_tags));
     
     var tag_to_region = sentence.get_regions_for_tags(region_filter);
     var available_regions = tag_to_region[target_tag];

@@ -121,8 +121,8 @@ DropModeGame.prototype.make_drop_down = function(){
     document.getElementById("answer_wrapper").appendChild(e);
     console.log("DEBUG 11-18 final append reached");
     
-    console.log("DEBUG 11-18 dropdown data inserted = ", Array.from(this.data.available_tags));
-    set_dropdown("select_element", Array.from(this.data.available_tags));
+    console.log("DEBUG 11-18 dropdown data inserted = ", array_from(this.data.available_tags));
+    set_dropdown("select_element", array_from(this.data.available_tags));
 };
 
 

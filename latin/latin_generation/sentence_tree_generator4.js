@@ -181,7 +181,8 @@ function english_mental_wrap(choice, drop_downs, level) {
         var main_clause = {'type': 'non_drop', 'non_drop_text': 'the bird ' +
         (choice.kernel.sequence === 'primary' ? 'knows ': 'knew ') + ' ('};
         var conjunction_drop_or_not =
-            (Math.random() < map_level_to_allowed(level)['drop_non_drop_map']['conjunction_drop']);
+            (Math.random() < map_level_to_allowed(level)['drop_non_drop_map']['conjunction_drop'])
+            && (is_sub_list(map_level_to_allowed(level)['clause_type'], ['iq', 'is']));
         var conjunction_drop = {'type': 'drop down', choices: ['that', 'why'],
             heading: 'conjunction', correct_answer: conjunction};
         return [main_clause].concat(

@@ -1,4 +1,8 @@
-TEST current state
+BUG
+
+- improve button got broken somewhere
+    - if you improve without ever having started, you get this in the console log:
+        Uncaught TypeError: Cannot read property 'iteration' of undefined
 
 
 

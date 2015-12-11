@@ -2,16 +2,16 @@ function inflect_english (kernel, lexeme, word_settings) {
     if (!lexeme) {return {}}
     switch (lexeme.properties.core.part_of_speech) {
         case (Part_of_speech.Noun) :
-            return (make_article(word_settings) + ' ' +
+            return (make_article() + ' ' +
             inflect_english_noun (kernel, lexeme, word_settings));
-        case (Part_of_speech.Verb) : return inflect_english_verb (kernel, lexeme, word_settings);
+        case (Part_of_speech.Verb) : return inflect_english_verb (kernel, lexeme);
         case (Part_of_speech.Adjective) : return inflect_english_adjective (kernel, lexeme, word_settings);
         case (Part_of_speech.Co) : return lexeme.display(Language_enum.English);
     }
 }
 
 
-function make_article(word_settings) {
+function make_article() {
     return "the";
 
 
@@ -19,7 +19,7 @@ function make_article(word_settings) {
     //return ['the', word_settings.number === 'singular' ? 'a': ''][article_number[word_settings.element)];
 
 
-    //below is unworkable when it produces multiple answer choices because it produces inconistencies
+    //below is unworkable when it produces multiple answer choices because it produces inconsistencies
     //return random_choice(['the', word_settings.number === 'singular' ? 'a': '']);
 }
 
@@ -55,10 +55,10 @@ function inflect_english_noun (kernel, lexeme, word_settings) {
 }
 
 
-function inflect_english_verb (kernel, lexeme, word_settings) {
-    var pronoun = inflect_english_pronoun(kernel, word_settings);
-    var helping = inflect_english_helping_verb(kernel, lexeme, word_settings);
-    var main = inflect_english_main_verb(kernel, lexeme, word_settings);
+function inflect_english_verb (kernel, lexeme) {
+    var pronoun = inflect_english_pronoun(kernel);
+    var helping = inflect_english_helping_verb(kernel);
+    var main = inflect_english_main_verb(kernel, lexeme);
     var verb = helping + ' '+ main;
     if (pronoun !== null) {
         return {'subject': pronoun, 'verb': strip(verb), 'main_entry': 'verb'}
@@ -68,9 +68,9 @@ function inflect_english_verb (kernel, lexeme, word_settings) {
 }
 
 
-function inflect_english_helping_verb(kernel, lexeme, word_settings) {
+function inflect_english_helping_verb(kernel) {
 
-    if (kernel.tense === "present" || kernel.tense === "present_subjunctive") {
+    if (kernel.tense === "present") {
         if (kernel.voice === "active") {
             return "";
         } else if (kernel.voice === "passive") {
@@ -82,7 +82,7 @@ function inflect_english_helping_verb(kernel, lexeme, word_settings) {
                 return "are";
             }
         }
-    } else if (kernel.tense === "imperfect" || kernel.tense === "perfect_subjunctive") {
+    } else if (kernel.tense === "imperfect") {
         if (kernel.voice === "active") {
             return "";
         } else if (kernel.voice === "passive") {
@@ -108,7 +108,7 @@ function inflect_english_helping_verb(kernel, lexeme, word_settings) {
                 return "were";
             }
         }
-    } else if (kernel.tense === "pluperfect" || kernel.tense === "pluperfect_subjunctive") {
+    } else if (kernel.tense === "pluperfect") {
         if (kernel.voice === "active") {
             return "had";
         } else if (kernel.voice === "passive") {
@@ -120,61 +120,109 @@ function inflect_english_helping_verb(kernel, lexeme, word_settings) {
         } else if (kernel.voice === "passive") {
             return "will have been";
         }
-    } else if (kernel.tense === "imperfect_subjunctive") {
-        if (kernel.voice === "active") {
-            if (kernel.person === "1s" || kernel.person === "3s") {
-                return "was";
-            } else {
-                return "were";
+    } else if (kernel.sequence === "primary") {
+        if (kernel.tense === "present_infinitive" || kernel.tense === "present_subjunctive") {
+            if (kernel.voice === "active") {
+                return "";
+            } else if (kernel.voice === "passive") {
+                if (kernel.person === "1s") {
+                    return "am";
+                } else if (kernel.person === "3s") {
+                    return "is";
+                } else {
+                    return "are";
+                }
             }
-        } else if (kernel.voice === "passive") {
-            if (kernel.person === "1s" || kernel.person === "3s") {
-                return "was being";
-            } else {
-                return "were being";
-            }
-        }
-    } else if (kernel.tense === "present_infinitive" && kernel.sequence === "primary") {
-        if (kernel.voice === "active") {
-            return "";
-        } else if (kernel.voice === "passive") {
-            if (kernel.person === "1s") {
-                return "am";
-            } else if (kernel.person === "3s") {
-                return "is";
-            }else {
-                return "are";
+        } else if (kernel.tense === "perfect_infinitive" || kernel.tense === "perfect_subjunctive") {
+            if (kernel.voice === "active") {
+                return "";
+            } else if (kernel.voice === "passive") {
+                if (kernel.person === "1s" || kernel.person === "3s") {
+                    return "was";
+                } else {
+                    return "were";
+                }
             }
         }
-    } else if (kernel.tense === "present_infinitive" && kernel.sequence === "secondary") {
-        if (kernel.voice === "active") {
-            if (kernel.person === "1s" || kernel.person === "3s") {
-                return "was";
-            } else {
-                return "were";
+        /*
+        if (kernel.tense === "imperfect_subjunctive") {
+            if (kernel.voice === "active") {
+                if (kernel.person === "1s" || kernel.person === "3s") {
+                    return "was";
+                } else {
+                    return "were";
+                }
+            } else if (kernel.voice === "passive") {
+                if (kernel.person === "1s" || kernel.person === "3s") {
+                    return "was being";
+                } else {
+                    return "were being";
+                }
             }
-        } else if (kernel.voice === "passive") {
-            if (kernel.person === "1s" || kernel.person === "3s") {
-                return "was being";
-            } else {
-                return "were being";
+        } else if (kernel.tense === "present_infinitive" && kernel.sequence === "primary") {
+            if (kernel.voice === "active") {
+                return "";
+            } else if (kernel.voice === "passive") {
+                if (kernel.person === "1s") {
+                    return "am";
+                } else if (kernel.person === "3s") {
+                    return "is";
+                }else {
+                    return "are";
+                }
             }
-        }
-    } else if (kernel.tense === "perfect_infinitive" && kernel.sequence === "primary") {
-        if (kernel.voice === "active") {
-            return "";
-        } else if (kernel.voice === "passive") {
-            if (kernel.person === "1s" || kernel.person === "3s") {
-                return "was";
-            } else {
-                return "were";
+        } else if (kernel.tense === "present_infinitive" && kernel.sequence === "secondary") {
+            if (kernel.voice === "active") {
+                if (kernel.person === "1s" || kernel.person === "3s") {
+                    return "was";
+                } else {
+                    return "were";
+                }
+            } else if (kernel.voice === "passive") {
+                if (kernel.person === "1s" || kernel.person === "3s") {
+                    return "was being";
+                } else {
+                    return "were being";
+                }
             }
-        }
-    } else if (kernel.tense === "perfect_infinitive" && kernel.sequence === "secondary") {
-        if (kernel.voice === "active") {
-            return "had";
-        } else if (kernel.voice === "passive") {
-            return "had been";
+        } else if (kernel.tense === "perfect_infinitive" && kernel.sequence === "primary") {
+            if (kernel.voice === "active") {
+                return "";
+            } else if (kernel.voice === "passive") {
+                if (kernel.person === "1s" || kernel.person === "3s") {
+                    return "was";
+                } else {
+                    return "were";
+                }
+            }
+        } else if (kernel.tense === "perfect_infinitive" && kernel.sequence === "secondary") {
+            if (kernel.voice === "active") {
+                return "had";
+            } else if (kernel.voice === "passive") {
+                return "had been";
+            }
+        }*/
+    } else if (kernel.sequence === "secondary") {
+        if (kernel.tense === "present_infinitive" || kernel.tense === "imperfect_subjunctive") {
+            if (kernel.voice === "active") {
+                if (kernel.person === "1s" || kernel.person === "3s") {
+                    return "was";
+                } else {
+                    return "were";
+                }
+            } else if (kernel.voice === "passive") {
+                if (kernel.person === "1s" || kernel.person === "3s") {
+                    return "was being";
+                } else {
+                    return "were being";
+                }
+            }
+        } else if (kernel.tense === "perfect_infinitive" || kernel.tense === "pluperfect_subjunctive") {
+            if (kernel.voice === "active") {
+                return "had";
+            } else if (kernel.voice === "passive") {
+                return "had been";
+            }
         }
     } else {
         return "is buggy";
@@ -182,7 +230,7 @@ function inflect_english_helping_verb(kernel, lexeme, word_settings) {
 }
 
 
-function inflect_english_main_verb(kernel, lexeme, word_settings) {
+function inflect_english_main_verb(kernel, lexeme) {
     var p = lexeme.get_properties(Language_enum.English);
     if (kernel.tense === "present" || kernel.tense === "present_subjunctive") {
         if (kernel.voice === "active") {
@@ -249,7 +297,7 @@ function inflect_english_main_verb(kernel, lexeme, word_settings) {
     }
 }
 
-function inflect_english_pronoun(kernel, word_settings) {
+function inflect_english_pronoun(kernel) {
     var pronoun;
     if (kernel.implicitness === "implicit") {
         if (kernel.person === "1s") {

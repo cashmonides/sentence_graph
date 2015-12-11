@@ -144,7 +144,7 @@ MCMode3Game.prototype.make_drop_down = function(){
                     //x.choices = ['bear', 'bears']
                     //x.heading = "subject"
                     //self.none_display = bool
-                    set_multiple_drop_downs(x, e, x.choices, x.heading, self.none_display);
+                    set_multiple_drop_downs(x, e, self.none_display);
                     drops++
                     break;
                 default:
