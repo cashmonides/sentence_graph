@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 THE TERMINAL APPROACH TO UPDATING MEDIA TEMPLE
 - go to terminal
 - run this: ssh s211804.gridserver.com@s211804.gridserver.com

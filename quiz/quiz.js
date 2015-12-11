@@ -152,6 +152,19 @@ Quiz.prototype.next_submodule = function(){
         count_incorrect: 0,
         incorrect_streak: 0
     };
+    this.began = new Date();
+    this.progress_bar = new ProgressBar(this.module.submodule.threshold, [], el('progress-bar'));
+    // Progress bar currently disabled (i.e., does not show up).
+    this.old_progress_bars = [];
+    /*this.old_progress_bars = (this.user.data.history[this.module.id].
+        progress_bars[this.user.data.history[this.module.id].progress] || []).map(
+        function (x) {
+            var o = document.createElement('div');
+            o.innerHTML = '<div id="progress-bar" class="progress-bar" role="progressbar" ' +
+            'aria-valuemin="0" aria-valuemax="100"></div>';
+            var e = o.firstChild;
+            el('progress-bar-wrapper').appendChild(e);
+            return new ProgressBar(self.module.submodule.threshold, x, e)});*/
     //todo the following was moved by akiva to next_question
     // this.next_mode();
     // todo new begins here
@@ -228,6 +241,8 @@ Quiz.prototype.question_complete = function(){
 Quiz.prototype.submodule_complete = function () {
     
     console.log("DEBUG 11-16 quiz.submodule_complete entered");
+    this.old_progress_bars.forEach(function (x) {remove_element(x.progress_bar)});
+    this.user.add_progress_bar(this.progress_bar.past_events, this.module.id);
     var mod = this.user.get_current_module(this.module.id);  //int
     
    
@@ -274,10 +289,10 @@ Quiz.prototype.update_display = function() {
     var module_name = ALL_MODULES[mod].icon_name;
     // console.log("DEBUG 11-8 mod = ", mod);
     // console.log("DEBUG 11-8 this.user.mod.progress = ", this.user.get_module(mod).progress);
-    
+    /*Progress bar is reset somewhere else.
     console.log("Still ok before progress bar");
     this.set_progress_bar();
-    console.log("Still ok after progress bar");
+    console.log("Still ok after progress bar");*/
     
     console.log("Still ok before innerhtml");
     console.log(el("name_header") === null);
@@ -295,6 +310,7 @@ Quiz.prototype.update_display = function() {
 };
 
 
+/*This is now the progress bar's job.
 Quiz.prototype.set_progress_bar = function () {
     var x = this.submodule.score === 0 ? 0 : (this.submodule.score / this.module.submodule.threshold) * 100;
     // console.log("x:", x, this.submodule.score, this.module.submodule.threshold);
@@ -302,7 +318,7 @@ Quiz.prototype.set_progress_bar = function () {
     
     e.style.width = x + "%";
     // el("progress-bar").innerHTML = JSON.stringify(x) + "%";
-};
+};*/
 
 // Quiz.reset_progress_bar = function(){
 //     var x = 0;
@@ -378,14 +394,20 @@ Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
 
 
 Quiz.prototype.increment_score = function() {
+    this.progress_bar.change_number_correct(
+        {'change_value': this.module.submodule.reward,
+            'time_from_start': new Date() - this.began});
     this.submodule.score += this.module.submodule.reward;
-}
+};
 
 
 Quiz.prototype.decrement_score = function() {
+    this.progress_bar.change_number_correct(
+        {'change_value': -this.module.submodule.penalty,
+            'time_from_start': new Date() - this.began});
     this.submodule.score -= this.module.submodule.penalty;
     this.submodule.score = Math.max(0, this.submodule.score);
-}
+};
 
 
 
