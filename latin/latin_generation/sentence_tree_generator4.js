@@ -4,22 +4,28 @@
 // output: kernel with kernel.properties
 
 //MASTER FUNCTION BELOW to make kernel
-function make_output(level, current_lexicon) {
+function make_output(level, current_lexicon, none_display) {
     var states;
     var i;
     var full_order = ['clause_type', 'sequence', 'tense', 'implicitness', 'person',
         'voice', 'number_of_other_nouns', 'shuffle'];
-    var order = {'subject': ['implicitness', 'person'],
+    var order = {'subject': ['implicitness!explicit', 'person'],
         'object': ['number_of_other_nouns'],
         'noun': ['number_of_other_nouns'],
         'verb': ['clause_type', 'sequence', 'tense', 'implicitness', 'person', 'voice']};
     var state_to_be_made = master_cartesian(level, full_order, 'random');
+
     var words_to_make = [['noun', ['subject', 'object']], ['verb', ['verb']]];
     /*
     
     Here begin the changes.
     */
-    var lexeme_list_with_dummies = {};
+    var master_lexeme_list = {
+        get_lexemes: function (name) {
+            return convert_keys_to_dict(this[name], this)
+        }
+    };
+    master_lexeme_list.dummies_and_used = [];
     var drop_down_settings = map_level_to_allowed(level)['drop_down_settings'];
     var part_of_speech;
     var things_with_part_of_speech;
@@ -29,23 +35,25 @@ function make_output(level, current_lexicon) {
     for (i = 0; i < words_to_make.length; i++) {
         part_of_speech = words_to_make[i][0];
         things_with_part_of_speech = words_to_make[i][1];
-        add_to_lexeme_list(lexeme_list_with_dummies, state_to_be_made, part_of_speech, things_with_part_of_speech,
+        add_to_lexeme_list(master_lexeme_list, 'dummies_and_used',
+            state_to_be_made, part_of_speech, things_with_part_of_speech,
             drop_down_settings[part_of_speech], current_lexicon);
     }
 
-    change_state_to_be_made_final(state_to_be_made, lexeme_list_with_dummies);
+    change_state_to_be_made_final(state_to_be_made, master_lexeme_list.get_lexemes('dummies_and_used'));
     // We make a template.
     state_to_be_made.template = make_kernel_template(state_to_be_made);
 
-    var lexeme_list = remove_dummies(lexeme_list_with_dummies);
-    remove_lexemes(lexeme_list, state_to_be_made.template);
+    // This is hacky (to a certain extent) and possibly incorrect.
+    master_lexeme_list.used_only = none_display ? ['subject', 'object', 'verb'] : state_to_be_made.template;
     // Here end the changes.
 
-    var correct = make_kernel_new(level, state_to_be_made, lexeme_list);
+    var correct = make_kernel_new(level, state_to_be_made,
+        master_lexeme_list.get_lexemes('used_only'));
 
     states = {};
     var what_to_vary;
-    for (i in lexeme_list_with_dummies) {
+    for (i in master_lexeme_list.get_lexemes('dummies_and_used')) {
         if (i in order) {
             what_to_vary = order[i];
         } else {
@@ -75,10 +83,10 @@ function make_output(level, current_lexicon) {
         }
     }
 
-    for (i in lexeme_list_with_dummies) {
-        var lexeme = lexeme_list_with_dummies[i];
+    for (i in master_lexeme_list.get_lexemes('dummies_and_used')) {
+        var lexeme = master_lexeme_list[i];
         add_forms(i, states, level, lexeme, output_places[i], output,
-            things_that_we_have, lexeme_list_with_dummies);
+            things_that_we_have, master_lexeme_list.get_lexemes('dummies_and_used'));
     }
 
 
@@ -240,7 +248,7 @@ function create_drop_down_object(x, output, choice, language_enum) {
     var key_for_word = x + '_in_' + language_enum;
     return {
         'type': 'drop down',
-        'choices': sorted_choices(output, key_for_word),
+        'parts': sorted_choices(output, key_for_word),
         'heading': x,
         'correct_answer': choice[key_for_word]
     }
@@ -255,7 +263,7 @@ function create_non_drop_object(x, output, choice, language_enum) {
 
 
 function add_to_lexeme_list (
-    lexeme_list, state, part_of_speech,
+    master_lexeme_list, name, state, part_of_speech,
     things_with_part_of_speech, drop_down_dict, current_lexicon) {
     var element;
     var i;
@@ -267,10 +275,14 @@ function add_to_lexeme_list (
         } else {
             element = 'dummy_' + part_of_speech + '_' + (i - things_with_part_of_speech.length)
         }
-        lexeme_list[element] = pick_lexeme_new(state, element, part_of_speech, current_lexicon, lexeme_list)
+
+        master_lexeme_list[element] = pick_lexeme_new(state, element,
+            part_of_speech, current_lexicon, master_lexeme_list);
+        master_lexeme_list[name].push(element)
     }
 }
 
+/*
 function remove_lexemes (lexeme_list, elements) {
     for (var i in lexeme_list) {
         if (elements.indexOf(i) === -1 && i.indexOf('dummy') === -1) {
@@ -278,6 +290,7 @@ function remove_lexemes (lexeme_list, elements) {
         }
     }
 }
+
 
 function remove_dummies (lexeme_list_with_dummies) {
     var lexeme_list = {};
@@ -288,6 +301,7 @@ function remove_dummies (lexeme_list_with_dummies) {
     }
     return lexeme_list;
 }
+*/
 
 /*
 Note: This function is old.
@@ -365,8 +379,7 @@ function make_kernel_new (level, state, lexeme_list) {
     //we create a dictionary with only one initial key:value pair
     //string : function
     //later on we're going to add other key:value pairs
-    var sentence_in_latin = {'inflect': function (x, y, z) 
-    {return remove_dashes(inflect_latin(x, y, z))}};
+    var sentence_in_latin = {'inflect': inflect_latin};
     var sentence_in_english = {'inflect': inflect_english};
     var sentences = [sentence_in_latin, sentence_in_english];
 
