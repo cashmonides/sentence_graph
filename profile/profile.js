@@ -24,9 +24,13 @@ ProfilePage.enter_improve = function () {
     //todo make the following less hacky with something like a get first module function in utils
     var mod_id = this.user.get_improving_module();
     if (!mod_id) {
-        if (this.user.get_module(1).iteration == 0) {
+        if (!this.user.get_module(1)) {
+            // The user hasn't even began module 1.
+            alert("You haven't started the game yet. Complete some modules and then improve your accuracy.")
+        } else if (this.user.get_module(1).iteration === 0) {
+            // The user hasn't finished module 1.
             console.log("LOG no improving module detected");
-            alert("you don't have any completed modules to improve. Complete some modules and then improve  your accuracy.");
+            alert("You don't have any completed modules to improve. Complete some modules and then improve your accuracy.");
         } else {
             alert("click on a completed module to improve your accuracy");
         }
@@ -52,17 +56,31 @@ ProfilePage.start = function(){
 };
 
 ProfilePage.display_profile = function() {
-    var player_name = this.user.data.profile_name;
+    var player_name = this.user.data.profile.name;
     var e1 = el("name_box");
     e1.innerHTML = "Welcome " + player_name;
 
     //todo fix dummy value here
-    var player_level = "PLAYER LEVEL HERE";
+    var current_module_id = this.user.get_current_module();
+    var current_universal_module = ALL_MODULES[current_module_id];
+    var current_universal_module_name = current_universal_module.icon_name;
     var e2 = el("level_box");
-    e2.innerHTML = "your level is: " + player_level;
+    e2.innerHTML = "your level is: " + current_universal_module_name;
     
     this.build_progress_table(this.user);
 };
+
+
+
+// return: int which is number of levels from current_module
+ProfilePage.get_module_distance = function (user, module_id) {
+    var current_module_id = user.get_current_module();
+    console.log("DEBUG blur mode, current_module_id=", current_module_id);
+    var distance = module_id - current_module_id;
+    console.log("DEBUG blur mode: distance = ", distance);
+    console.log("DEBUG blur mode module_id - current_mod = distance", module_id + " - " + current_module_id + " = " + distance);
+    return distance;
+}
 
 
 ProfilePage.build_progress_table = function(user) {
@@ -79,6 +97,20 @@ ProfilePage.build_progress_table = function(user) {
                             
             var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image", "complete"] : ["progress_image", "incomplete"];
             
+            
+            // in progress
+            var distance = this.get_module_distance(user, mod.id);
+            var decimal_distance = Math.min(1, Math.max(1.1 - (distance/10), 0));
+            
+            var el2 = document.getElementById("progress_image");
+            // var els = document.getElementsByClassName("incomplete");
+            console.log("DECIMAL DISTANCE TO STRING = ", decimal_distance.toString());
+            
+            //todo figure out how to adjust opacity and blur
+           
+            el2.style.opacity = decimal_distance.toString();
+            
+
             
             make({
                 tag: "td", 

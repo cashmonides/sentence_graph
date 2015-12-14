@@ -26,6 +26,7 @@ function make_output(level, current_lexicon, none_display) {
         }
     };
     master_lexeme_list.dummies_and_used = [];
+    master_lexeme_list.all_lexemes = [];
     var drop_down_settings = map_level_to_allowed(level)['drop_down_settings'];
     var part_of_speech;
     var things_with_part_of_speech;
@@ -35,12 +36,12 @@ function make_output(level, current_lexicon, none_display) {
     for (i = 0; i < words_to_make.length; i++) {
         part_of_speech = words_to_make[i][0];
         things_with_part_of_speech = words_to_make[i][1];
-        add_to_lexeme_list(master_lexeme_list, 'dummies_and_used',
-            state_to_be_made, part_of_speech, things_with_part_of_speech,
-            drop_down_settings[part_of_speech], current_lexicon);
+        add_to_lexeme_list(master_lexeme_list, state_to_be_made,
+        part_of_speech, things_with_part_of_speech,
+        drop_down_settings[part_of_speech], current_lexicon);
     }
 
-    change_state_to_be_made_final(state_to_be_made, master_lexeme_list.get_lexemes('dummies_and_used'));
+    change_state_to_be_made_final(state_to_be_made, master_lexeme_list);
     // We make a template.
     state_to_be_made.template = make_kernel_template(state_to_be_made);
 
@@ -109,8 +110,15 @@ function make_output(level, current_lexicon, none_display) {
         'drop_downs': english_mental_wrap(correct, manage_drop_downs(
             correct, output, english_template, Language_enum.English, drop_non_drop_map), level),
         'give_away_phrase': "The correct answer was: ",
-        'give_away_ending_phrase': ". Now click on the correct answer."
+        'give_away_ending_phrase': ". Now click on the correct answer.",
+        'cheat_sheet': cheat_sheet(master_lexeme_list.get_lexemes('all_lexemes'))
     };
+}
+
+function cheat_sheet(master_lexeme_list) {
+    return dict_from_list_of_pairs(
+        values(master_lexeme_list).map(function (x) {
+            return [x.properties.latin.root, x.properties.english.root]}))
 }
 
 function add_forms (i, states, level, lexeme, output_places, output,
@@ -264,22 +272,29 @@ function create_non_drop_object(x, output, choice, language_enum) {
 
 
 function add_to_lexeme_list (
-    master_lexeme_list, name, state, part_of_speech,
+    master_lexeme_list, state, part_of_speech,
     things_with_part_of_speech, drop_down_dict, current_lexicon) {
     var element;
     var i;
+    // lexicon dummies = items that only show up in the cheat sheet.
     var drop_down_number = things_with_part_of_speech.length + drop_down_dict.extra_options;
+    var total_number = drop_down_number + drop_down_dict.lexicon_dummies
     // Note: it shouldn't matter what order these tasks are done in.
-    for (i = 0; i < drop_down_number; i++) {
+    for (i = 0; i < total_number; i++) {
         if (i < things_with_part_of_speech.length) {
             element = things_with_part_of_speech[i]
-        } else {
+        } else if (i < drop_down_number) {
             element = 'dummy_' + part_of_speech + '_' + (i - things_with_part_of_speech.length)
+        } else {
+            element = 'double_dummy_' + part_of_speech + '_' + (i - drop_down_number)
         }
 
         master_lexeme_list[element] = pick_lexeme_new(state, element,
             part_of_speech, current_lexicon, master_lexeme_list);
-        master_lexeme_list[name].push(element)
+        if (element.slice(0, 6) !== 'double') {
+            master_lexeme_list.dummies_and_used.push(element)
+        }
+        master_lexeme_list.all_lexemes.push(element)
     }
 }
 

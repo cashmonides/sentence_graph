@@ -477,7 +477,7 @@ Quiz.prototype.clear_cheat_sheet = function () {
 }
 
 Quiz.prototype.get_vocab_cheat_sheet_map = function () {
-    var map = {};
+    /*var map = {};
     
     //todo uncomment when done testing
     map["noun"] = {
@@ -488,8 +488,9 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
         "VOR" : "love",
         "PORT" : "carry"
     };
+    return map*/
     
-    return map;
+    return this.game.cheat_sheet || 'no cheat sheet for this mode';
 }
     
 Quiz.prototype.toggle_cheat_sheet = function() {

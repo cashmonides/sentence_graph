@@ -1,44 +1,39 @@
-BUG
-
-- improve button got broken somewhere
-    - if you improve without ever having started, you get this in the console log:
-        Uncaught TypeError: Cannot read property 'iteration' of undefined
-
+FINISH VOCAB CHEAT SHEET
+- sort alphabetically
+- sort into nouns and verbs
+- convert JSON into a table and make font smaller
 
 
-CROSS BROWSER 
-alternative to Array.from
-spread
-all sets
-
-
-PIICTURES
-fix size
-make a sequence not a random choice
+FREEZE CHANGE PASSWORD FOR NON-EMAIL USERS
 
 
 ADD TRY/CATCH IN CRUCIAL SPOTS IN THE CONTROL FLOW
 
-
 ADD TIME STAMP OF ANSWERS
 record event (i.e. records a correct/incorrect answer and a time stamp inter alia)
 
+
+BLUR AND DIM FUTURE ANIMALS
+
+
+PICTURES
+fix size
+
+
+
 FIREBASE RULES and security
-
-ADD VOCAB CHEAT SHEET
-test vocab cheat sheet
-
 
 ETYMOLOGY MODE
 
-DROP MODE
+FILL IN THE BLANK MODE
 
 
 
 
 
 
-
+CROSS BROWSER 
+all sets
 
 
 

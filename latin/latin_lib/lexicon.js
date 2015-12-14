@@ -237,13 +237,13 @@ var lexicon = [
         "see",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("see", "see", "see", "see", "sees", "saw", "seen", "seeing"),
-            latin : new Latin_word_properties("VID", "VID", "VID", "VIS", "2", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("VIDERE", "VID", "VID", "VIS", "2", null, null, null, null, null, "transitive")
         }),
     new Lexeme(
         "scare",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("scare", "scare", "scare", "scare", "scares", "scared", "scared", "scaring"),
-            latin : new Latin_word_properties("TERR", "TERR", "TERRU", "TERRIT", "2", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("TERRERE", "TERR", "TERRU", "TERRIT", "2", null, null, null, null, null, "transitive")
         }),
    
     //3rd conjugation
