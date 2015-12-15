@@ -84,6 +84,10 @@ function initiate_change_password() {
     var e = el("email").value;
     var op = el("old_password").value;
     var np = el("new_password").value;
+    if (e.endsWith(".tag") || e.endsWith(".lls")) {
+        alert("you are using a special account, see Akiva in class to change your password");
+        return;
+    }
     var callback = function(error) {
         if (error) {
             switch (error.code) {
@@ -113,6 +117,11 @@ function reset_password() {
         alert("PLEASE ENTER A VALID EMAIL");
         return;
     } 
+    
+    if (email.endsWith(".tag") || email.endsWith(".lls")) {
+        alert("you are using a special account, see Akiva in class to change your password");
+        return;
+    }
 
     var callback = function(error) {
         if (error) {

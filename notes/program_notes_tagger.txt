@@ -4,10 +4,27 @@ FINISH VOCAB CHEAT SHEET
 - convert JSON into a table and make font smaller
 
 
-FREEZE CHANGE PASSWORD FOR NON-EMAIL USERS
+
+PROTOCOL FOR 2ND GRADER WITHOUT EMAIL
+- clicks on special log in
+-enters name "john"
+- append @lls.com
+
+
+
+CHANGE LOGIN SO THAT IT HAS A LITTLE SIGN UP BUTTON AT THE BOTTOM
+
+
+
+
+TEST NON-EMAIL USERS
+john@312.tag
 
 
 ADD TRY/CATCH IN CRUCIAL SPOTS IN THE CONTROL FLOW
+
+
+
 
 ADD TIME STAMP OF ANSWERS
 record event (i.e. records a correct/incorrect answer and a time stamp inter alia)
@@ -22,6 +39,20 @@ fix size
 
 
 FIREBASE RULES and security
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ETYMOLOGY MODE
 
@@ -1411,3 +1442,29 @@ Cartesian
 1 : {
     
 }
+
+
+
+FIREBASE RULES THAT DON'T SEEM TO WORK
+
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid"
+      }
+    },
+    "log": {
+      ".read": "auth != null && auth.uid == '8f01a98f-4575-4e83-aeea-1c3b042f5c4e' ",
+      ".write": "auth != null && auth.uid == '8f01a98f-4575-4e83-aeea-1c3b042f5c4e' "
+    },
+    "sentence": {
+      ".write": "auth != null && auth.uid == '8f01a98f-4575-4e83-aeea-1c3b042f5c4e' "
+    }
+  }
+}
+
+
+
+

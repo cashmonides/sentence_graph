@@ -13,8 +13,8 @@
 
 .incomplete {
     opacity: 0.4;
-    -webkit-filter: blur(5px);
-    filter: blur(5px);
+    /*-webkit-filter: blur(5px);*/
+    /*filter: blur(5px);*/
 }
 
 

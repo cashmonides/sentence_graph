@@ -90,6 +90,8 @@ ProfilePage.build_progress_table = function(user) {
         var max_columns = 4;
         var order = get_module_order();
     
+        
+        
         for (var i = 0; i < order.length; i++) {
             var mod = ALL_MODULES[order[i]];
         
@@ -105,10 +107,9 @@ ProfilePage.build_progress_table = function(user) {
             var el2 = document.getElementById("progress_image");
             // var els = document.getElementsByClassName("incomplete");
             console.log("DECIMAL DISTANCE TO STRING = ", decimal_distance.toString());
+            //turn a measure like 0.1 to an int between 1 and 100
+            var blur_amount = decimal_distance.toString();
             
-            //todo figure out how to adjust opacity and blur
-           
-            el2.style.opacity = decimal_distance.toString();
             
 
             
@@ -117,7 +118,12 @@ ProfilePage.build_progress_table = function(user) {
                 class: ["progress_cell"], 
                 onclick: ProfilePage.select_improvement_module(mod.id),
                 children: [
-                    {tag: "img", class: img_class, src: mod.icon_url},                      //UNIVERSAL MODULE
+                    {tag: "img", class: img_class, src: mod.icon_url, style : {
+                        background: "red",
+                        // "-webkit-filter": "blur(" + blur_amount + "px)",
+                        // filter: "blur(" + blur_amount + "px)"
+                        }
+                    },                      //UNIVERSAL MODULE
                     {tag: "br"},
                     this.get_display_caption(this.user, order[i])
                 ]
