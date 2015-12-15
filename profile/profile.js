@@ -102,13 +102,19 @@ ProfilePage.build_progress_table = function(user) {
             
             // in progress
             var distance = this.get_module_distance(user, mod.id);
-            var decimal_distance = Math.min(1, Math.max(1.1 - (distance/10), 0));
+            var blur_amount;
+            if (distance > 4) {
+                blur_amount = Math.floor(distance/2);
+            } else {
+                blur_amount = 0;
+            }
             
-            var el2 = document.getElementById("progress_image");
-            // var els = document.getElementsByClassName("incomplete");
-            console.log("DECIMAL DISTANCE TO STRING = ", decimal_distance.toString());
-            //turn a measure like 0.1 to an int between 1 and 100
-            var blur_amount = decimal_distance.toString();
+            
+            
+            
+            
+            
+            
             
             
 
@@ -120,8 +126,8 @@ ProfilePage.build_progress_table = function(user) {
                 children: [
                     {tag: "img", class: img_class, src: mod.icon_url, style : {
                         background: "red",
-                        // "-webkit-filter": "blur(" + blur_amount + "px)",
-                        // filter: "blur(" + blur_amount + "px)"
+                        "-webkit-filter": "blur(" + blur_amount + "px)",
+                        filter: "blur(" + blur_amount + "px)"
                         }
                     },                      //UNIVERSAL MODULE
                     {tag: "br"},
