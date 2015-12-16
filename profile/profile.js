@@ -109,14 +109,6 @@ ProfilePage.build_progress_table = function(user) {
                 blur_amount = 0;
             }
             
-            
-            
-            
-            
-            
-            
-            
-            
 
             
             make({

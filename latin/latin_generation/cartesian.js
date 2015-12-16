@@ -456,10 +456,10 @@
 var level_to_allowed2 = {
     //this will be our testing level for now
     1 : {
-        drop_non_drop_map: {'subject_drop': 0, 'verb_drop': .9, 'object_drop': 0, 'conjunction_drop': 0,
-            min: 1, max: 1},
+        drop_non_drop_map: {'subject_drop': 0.9, 'verb_drop': 0.9, 'object_drop': 0.9, 'conjunction_drop': 0.9,
+            min: 1, max: 3},
 
-        clause_type : ["is", "iq"],
+        clause_type : ["main", "is", "iq"],
         sequence: {
             main: ['none'],
             is: ['primary', 'secondary'],
@@ -475,7 +475,7 @@ var level_to_allowed2 = {
         },
         implicitness : ["explicit"],
         person : {
-            explicit : ["3s"],
+            explicit : ["3s", "3p"],
             implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
         },
 
@@ -500,10 +500,10 @@ var level_to_allowed2 = {
         shuffle: [true, false]
     },
     2 : {
-        drop_non_drop_map: {'subject_drop': 0, 'verb_drop': .9, 'object_drop': 0, 'conjunction_drop': 0,
-            min: 1, max: 1},
+        drop_non_drop_map: {'subject_drop': 0.9, 'verb_drop': 0.9, 'object_drop': 0.9, 'conjunction_drop': 0.9,
+            min: 1, max: 2},
 
-        clause_type : ["is", "iq"],
+        clause_type : ["main", "is", "iq"],
         sequence: {
             main: ['none'],
             is: ['primary', 'secondary'],
@@ -544,10 +544,10 @@ var level_to_allowed2 = {
         shuffle: [true, false]
     },
     3 : {
-        drop_non_drop_map: {'subject_drop': 0, 'verb_drop': .9, 'object_drop': 0, 'conjunction_drop': 0,
-            min: 1, max: 1},
+        drop_non_drop_map: {'subject_drop': 0.9, 'verb_drop': 0.9, 'object_drop': 0.9, 'conjunction_drop': 0.9,
+            min: 1, max: 2},
 
-        clause_type : ["is", "iq"],
+        clause_type : ["main", "is", "iq"],
         sequence: {
             main: ['none'],
             is: ['primary', 'secondary'],
@@ -567,7 +567,7 @@ var level_to_allowed2 = {
             implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
         },
 
-        voice: ["active"],
+        voice: ["active", "passive"],
         // voice: ["active", "passive"],
         //voice: ["passive"],
         number_of_other_nouns : ["singular", "plural"],
@@ -589,9 +589,8 @@ var level_to_allowed2 = {
         shuffle: [true, false]
     },
     4 : {
-        drop_non_drop_map: {'subject_drop': 0, 'verb_drop': .9, 'object_drop': 0, 'conjunction_drop': 0,
-            min: 1, max: 1},
-
+        drop_non_drop_map: {'subject_drop': 0.9, 'verb_drop': 0.9, 'object_drop': 0.9, 'conjunction_drop': 0.9,
+            min: 2, max: 3},
         clause_type : ["is", "iq"],
         sequence: {
             main: ['none'],
@@ -612,7 +611,7 @@ var level_to_allowed2 = {
             implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
         },
 
-        voice: ["active"],
+        voice: ["active", "passive"],
         // voice: ["active", "passive"],
         //voice: ["passive"],
         number_of_other_nouns : ["singular", "plural"],
@@ -633,10 +632,10 @@ var level_to_allowed2 = {
         shuffle: [true, false]
     },
     5 : {
-        drop_non_drop_map: {'subject_drop': 0, 'verb_drop': .9, 'object_drop': 0, 'conjunction_drop': 0,
-            min: 1, max: 1},
+        drop_non_drop_map: {'subject_drop': 0.9, 'verb_drop': 0.9, 'object_drop': 0.9, 'conjunction_drop': 0.9,
+            min: 2, max: 3},
 
-        clause_type : ["is"],
+        clause_type : ["main", "is", "iq"],
         sequence: {
             main: ['none'],
             is: ['primary', 'secondary'],
@@ -678,10 +677,10 @@ var level_to_allowed2 = {
     },
     // adds passive
     6 : {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': .3,
+        drop_non_drop_map: {'subject_drop': 0.9, 'verb_drop': 0.9, 'object_drop': 0.9, 'conjunction_drop': 0.9,
             min: 2, max: 3},
 
-        clause_type : ["iq", "is"],
+        clause_type : ["main", "is", "iq"],
         sequence: {
             main: ['none'],
             is: ['primary', 'secondary'],
@@ -695,7 +694,7 @@ var level_to_allowed2 = {
                 secondary: ["imperfect_subjunctive", "pluperfect_subjunctive"]
             }
         },
-        implicitness : ["explicit"],
+        implicitness : ["explicit", "implicit"],
         person : {
             explicit : ["3s", "3p"],
             implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
@@ -723,8 +722,8 @@ var level_to_allowed2 = {
     },
     // adds implicit
     7 : {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': .3,
-            min: 2, max: 3},
+        drop_non_drop_map: {'subject_drop': 0.9, 'verb_drop': 0.9, 'object_drop': 0.9, 'conjunction_drop': 0.9,
+            min: 3, max: 3},
 
         clause_type : ["main", "iq", "is"],
         sequence: {
