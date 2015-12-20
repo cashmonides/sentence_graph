@@ -61,3 +61,248 @@ cuckoo (bird); fool, ninny; cuckold; bastard;
 
 
 
+
+
+
+
+
+
+start with:
+
+wolf
+conj 1 & decl 2 & singular only
+
+horse, crow
+add plurals
+
+bear, bull, lizard
+add 3 tenses
+
+frog, eagle, chicken, spider
+add decl 1
+
+fly, snail, millipede, kangaroo
+add conj 2-4
+
+
+
+
+
+
+lion, mouse, bird, dog, cerberus
+add decl 3
+
+rabbit, cow, centipede, scorpion, bee, fish
+add adjectives
+
+
+pig, crocodile, scorpion, octopus
+add iq & is no adjectives
+
+unicorn, rhinocerus, giraffe, crab, elephant
+iq & is with adjectives
+
+
+
+jellyfish, ram, sheep, donkey, monkey
+add passive iq & is
+
+
+deer, camel, shark, lobster
+add passive 3s only (with no "by" or "with")
+
+
+whale
+vulture
+ant
+porcupine
+(try to add "by the wolf" as a dummy without any drops)
+
+
+worm (save until annelid)
+wasp
+sparrow
+narwhal  (possibly use Mŏnŏdūs, ontos,)
+manatee 
+add 3p as well
+
+
+
+
+
+
+
+
+
+
+
+
+hippopotamus
+leopard
+mole
+wombat
+add implicit active only, main only
+
+penguin
+nightingale
+wolverine
+hamster
+extend implicit to iq and is
+
+
+ferret
+pigeon
+oyster
+hedgehog
+add dative, main only
+
+
+opossum
+yak
+hummingbird
+cheetah
+cobra
+extend dative to iq and is
+
+
+cockroach
+coyote
+hawk
+beetle
+add ablative, main only
+
+
+otter
+aardvark (tubulidentatus/um??)
+albatross
+baboon
+extend ablative to iq and is
+
+
+
+filius, filia, pater, mater, etc.
+add genitive but only with 1 drop
+
+
+
+
+
+
+
+
+
+
+
+
+raw list below, not processed
+
+wolf - img 
+horse -img 
+crow img
+bear img
+bull img
+lizard img
+
+
+
+frog img
+chicken img
+eagle img
+spider img
+fly* img
+snail img
+millipede img
+kangaroo img
+
+
+
+lion
+mouse
+bird
+dog
+cerberus
+cow
+centipede
+sorpion
+bee
+fish
+rabbit
+pig
+(mix in some more 1st & 2nd)
+crocodile,*
+scorpion* 
+zebra (whitaker =zebra but zebra not in ls)
+octopus*
+unicorn mŏnŏcĕros, ōtis,
+rhinocerus rhīnŏcĕros, ōtis,
+chicken*
+pig* (sus not porcus)
+snail*
+kangaroo*
+millipede * (also cutio)
+centipede (centipes)*
+bee*
+
+
+
+
+
+
+
+
+
+
+giraffe
+crab
+elephant
+jellyfish
+ram
+sheep
+donkey (asinine, canine, leonine, bovine)
+monkey
+deer (save until ablative for ungulate and by means of its hoof)
+camel
+shark
+lobster
+whale
+vulture
+ant
+porcupine
+worm (save until annelid)
+wasp
+sparrow
+narwhal  (possibly use Mŏnŏdūs, ontos,)
+manatee 
+hippopotamus
+leopard
+mole
+wombat
+penguin
+nightingale
+wolverine
+hamster
+ferret
+pigeon
+oyster
+hedgehog
+opossum
+yak
+hummingbird
+cheetah
+cobra
+cockroach
+coyote
+hawk
+beetle
+otter
+aardvark (tubulidentatus/um??)
+albatross
+baboon
+
+
+
+
+
+
+
+

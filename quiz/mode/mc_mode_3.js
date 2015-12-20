@@ -45,8 +45,7 @@ MCMode3Game.prototype.next_question = function () {
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
     
     var data = make_output(this.level, current_lexicon);
-    this.cheat_sheet = data.cheat_sheet
-    
+    this.cheat_sheet = data.cheat_sheet;
     //sets data
     // var data = make_output(this.level, null, 'quiz_english');
     this.question = data.question;

@@ -1,7 +1,107 @@
+DAN & AKIVA ARE CODING!!
+
+GIT PROTOCOL
+- small changes commit, email akiva afterward
+- big changes, build on webstorm and email before committing, get confirmation before commiting
+- avoiding near simukltaneous commits
+    - when Akiva is coding I'm just going to email Dan a warning that I'm coding
+    - at top of program niotes, write "___ is coding"
+
+GOALS FOR BREAK
+- format vocab cheat sheet - 1
+    - run through the make function 
+    - understand it thoroughly
+    - test our understanding by plugging the vocab cheat sheet into the make function-
+    - see if make function can be improved
+- tutorials - 2
+    - try and make a test run of the tutorial
+    - JSON object with fields like text, question, right answer
+- a complete run of modules - 7
+    - do a test once we have new modules
+- error logging and error handling - 3
+    - record mode
+    - record level
+    - record sentence  
+        - maybe: ever mode has a method called "spew info"
+            - spews sentence
+    - whether it terminated the game 
+- error handler - 4
+    - escape route where it doesn't freeze up
+        - escape route type 1 - stay in mode
+            - if error, pick a new question- 
+            - if error in lexicon: pick 
+                - if a lexicon wants ten lexicon items for drops and dummy drops etc.
+                - but for bug-based reasons there's only six available, 
+                - then 
+                    - just use 6
+                    - log the error in a special place where we can see it
+        - escape route type 2 - escape from mode
+            - if error, then pick new mode that's not this mode
+- etymology mode - 6
+- refactor our metrics to record timestamp of start and stop - 5
+    - needs to be both initiated at beginning of submodule and uodated at end of submodule
+    - because ifiut gets a time stamp at opening but not at close, it can be logged as abandoned
+    - after all, we want to track abandoned submodules because they might be too difficult or buggy
+- more ambitious metrics: - 6
+    - record "progress bar animation" at close of submodule
+- fix cartesian singular/plural bug - done (it only occured once)
+
+
+
+ASPIRATIONAL
+- SQL database for metrics
+- clickable charts
+- fill in the blank mode
+
+
+ETYMOLOGY
+- modeled after quick mode
+- list of answers as clickable wordSelector object
+
+TODO CHORES
+- erase all users******
+- write up a bunch of tutorials
+- enter animals
+- make modules
+
+TODO WEB RESEARCH
+- putting spans and onclicks into the make function
+- clickable charts
+
+TODO HARD
+
+
+TODO MEDIUM
+- put vocabulary cheat sheet into a table
+
+TODO MILD
+- error log should record mode and module and level
+- add try, catch, throw stuff
+
+
+
+
+TODO SKETCH OUT
+- make tutorial function
+    - takes a tutorial JSON object
+    - uses make function to make html
+- error handler
+    - if can't make a question, change mode
+    - record the error in a different log
+- strictly additive aspects etymological
+    - all previous plus x,y, z
+    - or
+    - only x, y, z
+
+
+
+
 FINISH VOCAB CHEAT SHEET
 - sort alphabetically
 - sort into nouns and verbs
 - convert JSON into a table and make font smaller
+
+
 
 
 

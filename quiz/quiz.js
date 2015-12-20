@@ -175,7 +175,7 @@ Quiz.prototype.next_submodule = function(){
     //todo important - I commented this out, not sure if it breaks anything - it seems to not do anything
     // console.log('this.game.level = ', this.game.level)
     // todo new ends here
-    this.clear_cheat_sheet();
+    // this.clear_cheat_sheet();
     this.next_question();
 };
 
@@ -493,9 +493,8 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
     return this.game.cheat_sheet || 'no cheat sheet for this mode';
 }
     
-Quiz.prototype.toggle_cheat_sheet = function() {
+Quiz.prototype.initialize_cheat_sheet = function() {
     // var button = el("cheat_sheet_button");
-    var image_source = this.get_cheat_sheet_image()
     // // var wrapper = el("cheat_sheet_wrapper");
     // // wrapper.src = "../resources/cheat_h.jpg";
     // document.createElement("div");
@@ -518,25 +517,35 @@ Quiz.prototype.toggle_cheat_sheet = function() {
     // };
     
     //button.onclick = function() {
-    var div = el("image_display_box");
-    console.log("cheat sheet button clicked");
-    if (div.style.display !== 'none') {
-        div.style.display = 'none';
-    }
-    else {
-        div.innerHTML = '<img src="' + image_source +'" />'; 
-        div.style.display = 'block';
-    }
+    var image_source = this.get_cheat_sheet_image();
+    var div = make({'tag': 'div', 'id': 'image_cheat_sheet',
+    'style': {'display': 'block'}}, el("image_display_box"));
+    div.innerHTML = '<img src="'+ image_source +'" />';
+    // console.log("cheat sheet button clicked");
+    el('cheat_sheet_button').onclick = function () {quiz.toggle_element('image_cheat_sheet')};
     //};
-    
     
 };
 
+Quiz.prototype.initialize_vocab_cheat_sheet = function () {
+    var vocab_cheat_sheet_map = this.get_vocab_cheat_sheet_map();
+    var outer_div = el("image_display_box");
+    make({'tag': 'table', 'id': 'vocab_cheat_sheet', 'style': {'display': 'block'}}, outer_div);
+    var e = el('vocab_cheat_sheet');
+    var vocabulary_items = Object.keys(vocab_cheat_sheet_map);
+    
+    for (var i = 0; i < vocabulary_items.length; i++) {
+        var latin_word = vocabulary_items[i];
+        var english_word = vocab_cheat_sheet_map[latin_word];
+        var row = make({'tag': 'tr'}, e);
+        make({'tag': 'td', 'class': 'latin_cheat_sheet_item', 'text': latin_word}, row);
+        make({'tag': 'td', 'class': 'english_cheat_sheet_item', 'text': english_word}, row);
+    };
+    el('vocab_cheat_button').onclick = function () {quiz.toggle_element('vocab_cheat_sheet')};
+}
 
-Quiz.prototype.toggle_vocab_cheat_sheet = function() {
+Quiz.prototype.toggle_element = function(id) {
     // var button = el("cheat_sheet_button");
-    var vocab_cheat_sheet_map = this.get_vocab_cheat_sheet_map()
-    var vocab_cheat_sheet_string = JSON.stringify(vocab_cheat_sheet_map);
     // // var wrapper = el("cheat_sheet_wrapper");
     // // wrapper.src = "../resources/cheat_h.jpg";
     // document.createElement("div");
@@ -559,18 +568,16 @@ Quiz.prototype.toggle_vocab_cheat_sheet = function() {
     // };
     
     //button.onclick = function() {
-    var div = el("image_display_box");
+    console.log('image display box = ', el("image_display_box"));
+    
+    var element = el(id);
     console.log("cheat sheet button clicked");
-    if (div.style.display !== 'none') {
-        div.style.display = 'none';
-    }
-    else {
-        div.innerHTML = vocab_cheat_sheet_string; 
-        div.style.display = 'block';
+    if (element.style.display !== 'none') {
+        element.style.display = 'none';
+    } else {
+        element.style.display = 'block';
     }
     //};
-    
-    
 };
 
 

@@ -482,7 +482,7 @@ var level_to_allowed2 = {
         voice: ["active"],
         // voice: ["active", "passive"],
         //voice: ["passive"],
-        number_of_other_nouns : ["singular"],
+        number_of_other_nouns : ["singular", "plural"],
         //number_of_other_nouns : ["plural"],
 
         drop_down_settings: {

@@ -118,8 +118,8 @@
                         </td>
                         <td class="footer_cell">
                             <button class="button" id="submit_button" onclick="quiz.process_answer()">submit</button>
-                            <button class="button" id="cheat_sheet_button" onclick="quiz.toggle_cheat_sheet()">cheat sheet</button>
-                            <button class="button" id="vocab_cheat_button" onclick="quiz.toggle_vocab_cheat_sheet()">vocabulary cheat sheet</button>
+                            <button class="button" id="cheat_sheet_button" onclick="quiz.initialize_cheat_sheet()">cheat sheet</button>
+                            <button class="button" id="vocab_cheat_button" onclick="quiz.initialize_vocab_cheat_sheet()">vocabulary cheat sheet</button>
                         </td>
                     </tr>
                 </table>
@@ -132,11 +132,11 @@
 
 <div id="pop_up_div" class="lightbox"></div>
 
-<div id="image_display_box" style="display:none">
+<div id="image_display_box" style="display:block">
 
-    <div id="cheat_sheet_wrapper">
+    <!--<div id="cheat_sheet_wrapper">
         
-    </div>
+    </div>-->
 </div>
 
 
