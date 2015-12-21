@@ -117,7 +117,6 @@ ProfilePage.build_progress_table = function(user) {
                 onclick: ProfilePage.select_improvement_module(mod.id),
                 children: [
                     {tag: "img", class: img_class, src: mod.icon_url, style : {
-                        background: "red",
                         "-webkit-filter": "blur(" + blur_amount + "px)",
                         filter: "blur(" + blur_amount + "px)"
                         }

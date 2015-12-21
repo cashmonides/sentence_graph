@@ -1,4 +1,4 @@
-DAN & AKIVA ARE CODING!!
+AKIVA IS LIGHTLY CODING
 
 GIT PROTOCOL
 - small changes commit, email akiva afterward
@@ -7,12 +7,15 @@ GIT PROTOCOL
     - when Akiva is coding I'm just going to email Dan a warning that I'm coding
     - at top of program niotes, write "___ is coding"
 
+
+TODO 
+- make vocabulary cheat sheet display with dashes and smaller font for suffix
+
+
 GOALS FOR BREAK
-- format vocab cheat sheet - 1
-    - run through the make function 
-    - understand it thoroughly
-    - test our understanding by plugging the vocab cheat sheet into the make function-
-    - see if make function can be improved
+- vocab cheat sheet
+    - organize lexical items by part of speech and alphabetically (ideally by latin) - 5
+    - display should match handouts with the right font size and dashes
 - tutorials - 2
     - try and make a test run of the tutorial
     - JSON object with fields like text, question, right answer
@@ -47,6 +50,17 @@ GOALS FOR BREAK
 - fix cartesian singular/plural bug - done (it only occured once)
 
 
+DO NOW
+- error handler
+- time stamp of metrics
+
+DO WITH GIO
+- how to remove resources from git
+- error handler
+- go through the time stamp of metrics
+- admin tasks like:
+    - who's playing right now?
+- 
 
 ASPIRATIONAL
 - SQL database for metrics
@@ -63,6 +77,12 @@ TODO CHORES
 - write up a bunch of tutorials
 - enter animals
 - make modules
+- get all animal sillhouettes******
+- refactor animal images into folders
+
+
+sillhouettes needed
+
 
 TODO WEB RESEARCH
 - putting spans and onclicks into the make function
