@@ -1,11 +1,6 @@
-AKIVA IS LIGHTLY CODING
+AKIVA CODING
+- 
 
-GIT PROTOCOL
-- small changes commit, email akiva afterward
-- big changes, build on webstorm and email before committing, get confirmation before commiting
-- avoiding near simukltaneous commits
-    - when Akiva is coding I'm just going to email Dan a warning that I'm coding
-    - at top of program niotes, write "___ is coding"
 
 
 TODO 
@@ -13,14 +8,18 @@ TODO
 
 
 GOALS FOR BREAK
+- read/write permissions
 - vocab cheat sheet
     - organize lexical items by part of speech and alphabetically (ideally by latin) - 5
     - display should match handouts with the right font size and dashes
+
 - tutorials - 2
     - try and make a test run of the tutorial
     - JSON object with fields like text, question, right answer
+
 - a complete run of modules - 7
     - do a test once we have new modules
+
 - error logging and error handling - 3
     - record mode
     - record level
@@ -28,9 +27,17 @@ GOALS FOR BREAK
         - maybe: ever mode has a method called "spew info"
             - spews sentence
     - whether it terminated the game 
+
 - error handler - 4
     - escape route where it doesn't freeze up
-        - escape route type 1 - stay in mode
+        
+        - escape route type 1 - stay in mode (wraps random choices in Latin)
+            - in latin mode: there are many random choices
+                - e..g from lexicon
+                - e.g. from tense
+                - sometimes there's a contradiction because of badly laid parameters
+                    -e.g. a level may demand 3 nouns of feminine gender but there's only 2 such nouns in the lexicon
+            - (instead: refactor so it doe
             - if error, pick a new question- 
             - if error in lexicon: pick 
                 - if a lexicon wants ten lexicon items for drops and dummy drops etc.
@@ -38,16 +45,25 @@ GOALS FOR BREAK
                 - then 
                     - just use 6
                     - log the error in a special place where we can see it
-        - escape route type 2 - escape from mode
+        
+        - escape route type 2 - 1 location (pick mode) escape from mode
             - if error, then pick new mode that's not this mode
+
+
 - etymology mode - 6
+
 - refactor our metrics to record timestamp of start and stop - 5
+    - a frustration metric
+        - every submodule that opens, send a time stamp to firebase
+        - if the submodule ends, we send the difference in time to firebase
+        - if a submodule only has a start time - it shows they quit
+        - "in class quit" vs "out of class quit"
+        - always use absolute time
     - needs to be both initiated at beginning of submodule and uodated at end of submodule
     - because ifiut gets a time stamp at opening but not at close, it can be logged as abandoned
     - after all, we want to track abandoned submodules because they might be too difficult or buggy
 - more ambitious metrics: - 6
     - record "progress bar animation" at close of submodule
-- fix cartesian singular/plural bug - done (it only occured once)
 
 
 DO NOW
@@ -55,8 +71,10 @@ DO NOW
 - time stamp of metrics
 
 DO WITH GIO
+- show vocab cheat sheet
 - how to remove resources from git
 - error handler
+    - is it a good idea?
 - go through the time stamp of metrics
 - admin tasks like:
     - who's playing right now?

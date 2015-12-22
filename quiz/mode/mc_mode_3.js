@@ -36,8 +36,8 @@ MCMode3Game.prototype.get_mode_name = function() {
 
 
 MCMode3Game.prototype.next_question = function () {
-    console.log("DEBUG 11-14 entering make_output");
-    console.log("DEBUG 11-16 this.level = ", this.level)
+    var post_sampling_level = range_sampler(this.quiz.module.id);
+    this.set_level(post_sampling_level);
     
     //sets up our lexicon
     var list_of_lexeme_strings = return_lexicon_from_module(this.level);

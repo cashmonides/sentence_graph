@@ -45,6 +45,9 @@ var Quiz = function () {
         incorrect_streak: 0
     };
     
+    //todo research internet explorer compatibility with set
+    this.sick_modes = new Set();
+    
 };
 
 
@@ -183,15 +186,27 @@ Quiz.prototype.next_mode = function(){
     console.log("DEBUG 11-28 entering next_mode");
     var allowed = ALL_MODULES[this.module.id].mode_ratio;
     
+    for (var i in this.sick_modes) {
+        delete allowed[i];
+    }
+    
+    if (allowed.length <= 0) {
+        log_error("all modes are sick", "quiz.next_mode");
+        throw "modes exhausted";
+    }
+    
+    
     var mode = weighted(allowed);
     
+    
     var game = Quiz.get_mode(game_mode_map[mode]);
+    
+    
     
     this.game = game;
     //todo understand the following
     this.game.quiz = this;
     this.game.attach();
-    
 };
 
 Quiz.get_mode = function(mode_number) {
@@ -209,20 +224,16 @@ Quiz.get_mode = function(mode_number) {
 
 
 Quiz.prototype.next_question = function (){
-    //todo new version below 11-27
-    console.log("DEBUG about to hit range_sampler");
-    var post_sampling_level = range_sampler(this.module.id);
-    console.log("DEBUG 11-28 post_sampling_level", post_sampling_level);
-    
-    
-    //todo newly moved to here by akiva 11-28
-    this.next_mode();
-    
-    //next_mode sets up the game and attaches and everything
-    this.game.set_level(post_sampling_level);
-    
-    
-    this.game.next_question(this);
+    try {
+        this.next_mode();
+        this.game.next_question(this);
+    } catch (e) {
+        this.sick_modes.add(this.game.get_mode_name());
+        log_error(e, "quiz.next_question");
+        if (e != "modes exhausted") {
+            this.next_question();
+        }
+    }
 };
 
 
