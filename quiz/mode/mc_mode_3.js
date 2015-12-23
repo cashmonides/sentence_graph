@@ -30,7 +30,7 @@ MCMode3Game.prototype.attach = function(){
 
 
 MCMode3Game.prototype.get_mode_name = function() {
-    return "MC3";
+    return "latin";
 };
 
 

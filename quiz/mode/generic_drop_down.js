@@ -78,7 +78,7 @@ GenericDropGame.prototype.attach = function(){
 
 
 GenericDropGame.prototype.get_mode_name = function() {
-    return "generic_drop_down";
+    return "genericdrop";
 };
 
 GenericDropGame.prototype.next_question = function (){

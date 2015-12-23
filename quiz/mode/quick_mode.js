@@ -25,7 +25,7 @@ QuickModeGame.prototype.set_level = function () {
 }
 
 QuickModeGame.prototype.get_mode_name = function() {
-    return "Quick";
+    return "quick";
 };
 
 QuickModeGame.region_filter = function(region){

@@ -34,7 +34,7 @@ DropModeGame.prototype.set_level = function () {
 }
 
 DropModeGame.prototype.get_mode_name = function() {
-    return "Drop";
+    return "drop";
 }
 
 DropModeGame.region_filter = function(region){

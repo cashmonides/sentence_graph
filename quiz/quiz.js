@@ -46,7 +46,10 @@ var Quiz = function () {
     };
     
     //todo research internet explorer compatibility with set
-    this.sick_modes = new Set();
+    //is it a bad idea to have set since we can't iterate over it
+    //old code:
+    //this.sick_modes = new Set();
+    this.sick_modes = [];
     
 };
 
@@ -186,12 +189,26 @@ Quiz.prototype.next_mode = function(){
     console.log("DEBUG 11-28 entering next_mode");
     var allowed = ALL_MODULES[this.module.id].mode_ratio;
     
+    console.log("DEBUG 12-23 allowed before = ", allowed);
+    
+    /*
+    originally:
     for (var i in this.sick_modes) {
         delete allowed[i];
     }
+    */
+    for (var i = 0; i < this.sick_modes.length; i++) {
+        console.log('sick mode being added = ', this.sick_modes[i])
+        delete allowed[this.sick_modes[i]];
+        console.log("DEBUG 12-23 sick mode added");
+        console.log("DEBUG 12-23 allowed after = ", allowed);
+    }
     
-    if (allowed.length <= 0) {
-        log_error("all modes are sick", "quiz.next_mode");
+    
+    
+    if (Object.keys(allowed).length <= 0) {
+        console.log("DEBUG 12-23 all modes are sick");
+        log_urgent_error("all modes are sick", "quiz.next_mode");
         throw "modes exhausted";
     }
     
@@ -224,13 +241,28 @@ Quiz.get_mode = function(mode_number) {
 
 
 Quiz.prototype.next_question = function (){
+    console.log('DEBUG 12-23 entering next_question')
+    //previously:
+    // this.next_mode();
+    // this.game.next_question(this);
+    
     try {
+        console.log('DEBUG 12-23 entering try block')
         this.next_mode();
         this.game.next_question(this);
+        console.log('DEBUG 12-23 no error, everything is fine')
     } catch (e) {
-        this.sick_modes.add(this.game.get_mode_name());
-        log_error(e, "quiz.next_question");
+        console.log("DEBUG 12-23 entering catch block error caught");
+        // Originally: add not push
+        var sick_mode = this.game.get_mode_name();
+        //only push if it's not in our list already
+        if (this.sick_modes.indexOf(sick_mode) === -1) {this.sick_modes.push(sick_mode)};
+        log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode 
+        + " module = " + this.module.id + " progress = " +
+        this.user.get_module(this.module.id).progress + "/" +
+        this.module.threshold + " level = " + this.game.level);
         if (e != "modes exhausted") {
+            console.log("DEBUG 12-23 error handler initiated");
             this.next_question();
         }
     }
