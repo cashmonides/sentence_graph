@@ -459,8 +459,8 @@ var level_to_allowed2 = {
         drop_non_drop_map: {'subject_drop': 0.9, 'verb_drop': 0.9, 'object_drop': 0.9, 'conjunction_drop': 0.9,
             min: 1, max: 3},
 
-        clause_type : [],
-        //clause_type : ["main", "iq", "is"],
+        
+        clause_type : ["main", "iq", "is"],
         sequence: {
             main: ['none'],
             is: ['primary', 'secondary'],

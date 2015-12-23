@@ -580,9 +580,13 @@ Quiz.prototype.initialize_vocab_cheat_sheet = function () {
     for (var i = 0; i < vocabulary_items.length; i++) {
         var latin_word = vocabulary_items[i];
         var english_word = vocab_cheat_sheet_map[latin_word];
+        var stem = latin_word.split('-')[0];
+        var ending = latin_word.split('-')[1] ? '-' + latin_word.split('-')[1] : '';
         var row = make({'tag': 'tr'}, e);
-        make({'tag': 'td', 'class': 'latin_cheat_sheet_item', 'text': latin_word}, row);
-        make({'tag': 'td', 'class': 'english_cheat_sheet_item', 'text': english_word}, row);
+        var latin_word_el = make({'tag': 'td', 'class': 'latin_cheat_sheet_item'}, row);
+        make({'tag': 'b', 'text': stem, 'style' : {'font-weight': 'bold'}}, latin_word_el)
+        make({'tag': 'b', 'text': ending, 'style' : {'font-size': '50%'}}, latin_word_el)
+        make({'tag': 'td', 'class': 'english_cheat_sheet_item', 'style': {'font-style': 'italic'}, 'text': english_word}, row);
     };
     el('vocab_cheat_button').onclick = function () {quiz.toggle_element('vocab_cheat_sheet')};
 }

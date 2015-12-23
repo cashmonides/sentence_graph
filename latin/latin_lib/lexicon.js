@@ -13,141 +13,141 @@ var lexicon = [
         "queen",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("queen", "queen", "queens", true, true, false, false, null),
-            latin : new Latin_word_properties("REGĪNA", "REGĪN", "REGĪN", null, "1", "f", true, true, false, false, null)
+            latin : new Latin_word_properties("REGĪN-A", "REGĪN", "REGĪN", null, "1", "f", true, true, false, false, null)
         }),
     new Lexeme(
         "fly",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("fly", "fly", "flies", true, true, false, false, null),
-            latin : new Latin_word_properties("MUSCA", "MUSC", "MUSC", null, "1", "f", true, true, false, false, null)
+            latin : new Latin_word_properties("MUSC-A", "MUSC", "MUSC", null, "1", "f", true, true, false, false, null)
         }),
     new Lexeme(
         "frog",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("frog", "frog", "frogs", true, true, false, false, null),
-            latin : new Latin_word_properties("RANA", "RAN", "RAN", null, "1", "f", true, true, false, false, null)
+            latin : new Latin_word_properties("RAN-A", "RAN", "RAN", null, "1", "f", true, true, false, false, null)
         }),
     new Lexeme(
         "eagle",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("eagle", "eagle", "eagles", true, true, false, false, null),
-            latin : new Latin_word_properties("AQUILA", "AQUIL", "AQUIL", null, "1", "f", true, true, false, false, null)
+            latin : new Latin_word_properties("AQUIL-A", "AQUIL", "AQUIL", null, "1", "f", true, true, false, false, null)
         }),
     new Lexeme(
         "snail",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("snail", "snail", "snails", true, true, false, false, null),
-            latin : new Latin_word_properties("CŌCHLEA", "CŌCHLE", "CŌCHLE", null, "1", "f", true, true, false, false, null)
+            latin : new Latin_word_properties("CŌCHLE-A", "CŌCHLE", "CŌCHLE", null, "1", "f", true, true, false, false, null)
         }),
     new Lexeme(
         "millipede",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("millipede", "millipede", "millipedes", true, true, false, false, null),
-            latin : new Latin_word_properties("MILLEPEDA", "MILLEPED", "MILLEPED", null, "1", "f", true, true, false, false, null)
+            latin : new Latin_word_properties("MILLEPED-A", "MILLEPED", "MILLEPED", null, "1", "f", true, true, false, false, null)
         }),
     //2nd declension nouns
     new Lexeme(
         "war",
         {   core: {part_of_speech: "noun", animate: false},
             english : new English_word_properties("war", "war", "wars", true, true, false, false, null),
-            latin : new Latin_word_properties("BELLUM", "BELL", "BELL", null, "2", "n", true, true, false, false, null)
+            latin : new Latin_word_properties("BELL-UM", "BELL", "BELL", null, "2", "n", true, true, false, false, null)
         }),
     new Lexeme(
         "man",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("man", "man", "men", true, true, false, false, null),
-            latin : new Latin_word_properties("VIR", "*VIR*", "VIR", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*VIR*", "*VIR*", "VIR", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "bear",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("bear", "bear", "bears", true, true, false, false, null),
-            latin : new Latin_word_properties("URSUS", "URS", "URS", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("URS-US", "URS", "URS", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "spider",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("spider", "spider", "spiders", true, true, false, false, null),
-            latin : new Latin_word_properties("ARĀNEUS", "ARĀNE", "ARĀNE", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("ARĀNE-US", "ARĀNE", "ARĀNE", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "chicken",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("chicken", "chicken", "chickens", true, true, false, false, null),
-            latin : new Latin_word_properties("PULLUS", "PULL", "PULL", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("PULL-US", "PULL", "PULL", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "kangaroo",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("kangaroo", "kangaroo", "kangaroos", true, true, false, false, null),
-            latin : new Latin_word_properties("MACROPUS", "MACROP", "MACROP", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("MACROP-US", "MACROP", "MACROP", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "octopus",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("octopus", "octopus", "octopuses", true, true, false, false, null),
-            latin : new Latin_word_properties("PŌLYPUS", "PŌLYP", "PŌLYP", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("PŌLYP-US", "PŌLYP", "PŌLYP", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "crocodile",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("crocodile", "crocodile", "crocodiles", true, true, false, false, null),
-            latin : new Latin_word_properties("CROCODĪLUS", "CROCODĪL", "CROCODĪL", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("CROCODĪL-US", "CROCODĪL", "CROCODĪL", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "wolf",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("wolf", "wolf", "wolves", true, true, false, false, null),
-            latin : new Latin_word_properties("LUPUS", "LUP", "LUP", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("LUP-US", "LUP", "LUP", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "bull",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("bull", "bull", "bulls", true, true, false, false, null),
-            latin : new Latin_word_properties("TAURUS", "TAUR", "TAUR", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("TAUR-US", "TAUR", "TAUR", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "crow",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("crow", "crow", "crows", true, true, false, false, null),
-            latin : new Latin_word_properties("CORVUS", "CORV", "CORV", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("CORV-US", "CORV", "CORV", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "horse",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("horse", "horse", "horses", true, true, false, false, null),
-            latin : new Latin_word_properties("EQUUS", "EQU", "EQU", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("EQU-US", "EQU", "EQU", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "lizard",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("lizard", "lizard", "lizards", true, true, false, false, null),
-            latin : new Latin_word_properties("LACERTUS", "LACERT", "LACERT", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("LACERT-US", "LACERT", "LACERT", null, "2", "m", true, true, false, false, null)
         }),
     //3rd declension nouns
     new Lexeme(
         "scorpion",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("scorpion", "scorpion", "scorpions", true, true, false, false, null),
-            latin : new Latin_word_properties("SCORPIO", "*SCORPIO*", "SCORPIŌN", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*SCORPIO*", "*SCORPIO*", "SCORPIŌN", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "lion",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("lion", "lion", "lions", true, true, false, false, null),
-            latin : new Latin_word_properties("LEO", "*LEO*", "LEON", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*LEO*", "*LEO*", "LEON", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "centipede",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("centipede", "centipede", "centipedes", true, true, false, false, null),
-            latin : new Latin_word_properties("CENTIPĒS", "*CENTIPĒS*", "CENTIPED", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*CENTIPĒS*", "*CENTIPĒS*", "CENTIPED", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "cow",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("cow", "cow", "cows", true, true, false, false, null),
-            latin : new Latin_word_properties("BOS", "*BOS*", "BOV", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*BOS*", "*BOS*", "BOV", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "dog",
