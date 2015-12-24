@@ -7,6 +7,7 @@
 function make_output(level, current_lexicon, none_display) {
     var states;
     var i;
+    var item;
     var full_order = ['clause_type', 'sequence', 'tense', 'implicitness', 'person',
         'voice', 'number_of_other_nouns', 'shuffle'];
     var order = {'subject': ['implicitness!explicit', 'person'],
@@ -43,7 +44,7 @@ function make_output(level, current_lexicon, none_display) {
         drop_down_settings[part_of_speech], current_lexicon);
         creation_by_part_of_speech.push({'part of speech': part_of_speech,
         'sources': new_lexemes.filter(function (x) {
-        return x.slice(0, 6) !== 'double'}), 'results': things_with_part_of_speech})
+        return x.slice(0, 6) !== 'double'}), 'results': things_with_part_of_speech});
     }
 
     change_state_to_be_made_final(state_to_be_made, master_lexeme_list);
@@ -54,26 +55,30 @@ function make_output(level, current_lexicon, none_display) {
     master_lexeme_list.used_only = none_display ? ['subject', 'object', 'verb'] : state_to_be_made.template;
 
     creation_by_part_of_speech.forEach(function (x) {x.results = x.results.filter(
-    function (y) {master_lexeme_list.used_only.indexOf(y) !== -1})});
-    // Here end the changes.
+    function (y) {return master_lexeme_list.used_only.indexOf(y) !== -1})});
+    
+    console.log('DEBUG 12-23 creation_by_part_of_speech = ', creation_by_part_of_speech);
 
     var correct = make_kernel_new(level, state_to_be_made,
         master_lexeme_list.get_lexemes('used_only'));
 
     states = {};
     var what_to_vary;
-    for (i in master_lexeme_list.used_only) {
-        states[i] = master_cartesian(level, order[i]);
+    for (i = 0; i < master_lexeme_list.used_only.length; i++) {
+        item = master_lexeme_list.used_only[i];
+        states[item] = master_cartesian(level, order[item]);
     }
 
     var output = {};
 
     for (i = 0; i < creation_by_part_of_speech.length; i++) {
-        var item = creation_by_part_of_speech[i];
+        item = creation_by_part_of_speech[i];
+        console.log('DEBUG 12-23 item = ', item);
         for (var j = 0; j < item.sources.length; j++) {
             for (var k = 0; k < item.results.length; k++) {
                 add_to_output(output, item.sources[j],
-                item.result[k], k, master_lexeme_list, states[k], level);
+                item.results[k], states[item.results[k]],
+                master_lexeme_list, level);
             }
         }
     }
@@ -89,42 +94,55 @@ function make_output(level, current_lexicon, none_display) {
     }
 
     // todo english_template should no longer be needed
+    var english_template = list_intersection(["subject", "verb", "object"], Object.keys(output));
+    
+    console.log('DEBUG 12-23 output = ', output);
+    console.log('DEBUG 12-23 english_template = ', english_template);
+    
     var drop_non_drop_map = drop_non_drop_creation(
-        map_level_to_allowed(level)['drop_non_drop_map'], output);
+        map_level_to_allowed(level)['drop_non_drop_map'], english_template);
 
-    return {
+    var r = {
         'question': "Translate the following sentence:",
         'sentence': latin_mental_wrap(correct, correct['sentence_in_latin']),
         'drop_downs': english_mental_wrap(correct, manage_drop_downs(
-            correct, output, output, Language_enum.English, drop_non_drop_map), level),
+            correct, output, english_template, Language_enum.English, drop_non_drop_map), level),
         'give_away_phrase': "The correct answer was: ",
         'give_away_ending_phrase': ". Now click on the correct answer.",
         'cheat_sheet': cheat_sheet(master_lexeme_list.get_lexemes('all_lexemes'))
     };
+    console.log('DEBUG 12-23 make_output result = ', r);
+    return r
 }
 
-function add_to_output(output, source, result, result_role,
+function add_to_output(output, source, result_role,
 states_allowed, master_lexeme_list, level) {
-    var result;
+    var start_length = ((result_role in output) ? output[result_role].length : 0);
+    var fn_result;
     var kernel;
     
     if (!(result_role in output)) {output[result_role] = []};
+    console.log('states_allowed =', states_allowed)
     for (var i = 0; i < states_allowed.length; i++) {
         kernel = make_minimal_form_english(level, states_allowed[i],
-        master_lexeme_list[source], result);
+        master_lexeme_list[source], result_role);
         if (kernel === "should not be made") {continue}
         if (typeof kernel.form === "string") {
             output[result_role].push(kernel)
         } else {
             for (var j in kernel.form) {
-                result = kernel;
-                result.lexeme = ((j === result_role) ?
+                fn_result = kernel;
+                fn_result.lexeme = ((j === result_role) ?
                 master_lexeme_list[source] : "not the right lexeme");
-                result.form = kernel.form.j;
+                fn_result.form = kernel.form.j;
                 if (!(j in output)) {output[j] === []};
-                output[j].push(result);
+                output[j].push(fn_result);
             }
         }
+    }
+    var end_length = ((result_role in output) ? output[result_role].length : 0);
+    if (start_length === end_length) {
+        throw new Error("No new entries added.")
     }
 }
 
@@ -207,9 +225,11 @@ function drop_non_drop_creation (drop_non_drop_allowed, template) {
                 //eg. intersection of SVO & SV -> SV
                 //eg intersection of SVO & VOS -> SVO
 function manage_drop_downs(choice, output, english_template, language_enum, drop_non_drop_map) {
-    return english_template.map(function (x) {return (drop_non_drop_map[x] === 'drop' ?
+    var r = english_template.map(function (x) {return (drop_non_drop_map[x] === 'drop' ?
             create_drop_down_object : create_non_drop_object)
         (x, output, choice, language_enum)});
+    console.log('DEBUG 12-23 manage_drop_downs result = ', r);
+    return r
 }
 
 function list_intersection(l1, l2) {

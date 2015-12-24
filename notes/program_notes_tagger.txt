@@ -1,8 +1,13 @@
-DAN AND AKIVA CODING
+- Dan not coding
+- If Akiva is coding, he should say that here
+
+perhaps we should have progress notes here so we can see what the other person did
+- Dan: finished latin question generation (has earlier functionality)
 
 
 BUGS
 - latin shouldn't be hoverable
+- vocab cheat sheet should disappear at next question
 
 USEFUL TO ADD
 - get_level method 
