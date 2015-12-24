@@ -248,6 +248,7 @@ Quiz.prototype.next_question = function (){
     
     try {
         console.log('DEBUG 12-23 entering try block')
+        this.clean_up();
         this.next_mode();
         this.game.next_question(this);
         console.log('DEBUG 12-23 no error, everything is fine')
@@ -491,6 +492,15 @@ Quiz.prototype.get_selected_region = function(){
     return this.sentence.get_region(answer_indices);
 
 };
+
+
+Quiz.prototype.clean_up = function() {
+    // This is a functiom so that we can add more cleaning-up stuff if needed.
+    // This line removes all cheat sheets.
+    remove_children(el('image_display_box'));
+    el('cheat_sheet_button').onclick = this.initialize_cheat_sheet.bind(this);
+    el('vocab_cheat_button').onclick = this.initialize_vocab_cheat_sheet.bind(this);
+}
 
 
 Quiz.prototype.get_cheat_sheet = function(mod_id) {
