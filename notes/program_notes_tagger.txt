@@ -10,6 +10,39 @@ perhaps we should have progress notes here so we can see what the other person d
 BUGS
 - latin shouldn't be hoverable
 
+FUNCTIONALITY
+- the top item in drop down (e.g. noun, verb) should appear in the drop-down menu as a default (and of course it shouldn't be selectable)
+- drop down menu is overdoing for drop mode 
+    - where there are only 3-10 items (such as subject, object, verb) the drop menu just slows down the user experience
+    - refactor it and change it to a version of quick mode (where the options are just listed as clicakble)
+    - of course would need to call it something else eventually    
+
+
+NON-LATIN LEVELS
+- create levels for the non-latin sides
+    - etymlevel
+        - what roots they know
+    - gramlevel 
+        - what parts of speech they know 
+            - (since they can't be told "incorrect, that's a subordinating conjunction when they're still in the early stages and don't know that term)
+        - what parts of speech they should be tested on 
+            - (since we don't want easy stuff tested at every level)
+            - (and since we want to control how often they're tested on certain things
+            - e.g. we want to test subject a lot when we're focusing on the passive but not very often when we're learning about conjunctions
+    - taxlevel
+        - what categories they know
+            - quadruped is relatively early
+            - exothermic is relatively late
+        - nuance: the meaning of categories change as they progress
+            - e.g. at an early stage we have ped: [quadruped, biped] 
+            - but at a later stage we have ped: [quadruped, biped (originally quadrupedal]
+        - another nuance: the certain categories are too advanced for certain animals at an early stage
+            - e.g. when they hit whale early on, they shouldn't be asked about its PED property, since it's not apparent
+            - but later, when they learn about vestigial limbs they should be tested on it
+            - so at an advanced stage we would have:
+                - ped: [quadruped, vestigial quadruped, biped (originally quadrupedal)]
+
+
 USEFUL TO ADD
 - get_level method 
 
@@ -107,10 +140,7 @@ AGENDA IN DETAIL
 
 
 DO WITH GIO
-- show vocab cheat sheet
 - how to remove resources from git
-- error handler
-    - is it a good idea?
 - go through the time stamp of metrics
 - admin tasks like:
     - who's playing right now?
@@ -120,6 +150,7 @@ ASPIRATIONAL
 - SQL database for metrics
 - clickable charts
 - fill in the blank mode
+
 
 
 ETYMOLOGY
@@ -139,7 +170,6 @@ sillhouettes needed
 
 
 TODO WEB RESEARCH
-- putting spans and onclicks into the make function
 - clickable charts
 
 TODO HARD
@@ -149,8 +179,6 @@ TODO MEDIUM
 - put vocabulary cheat sheet into a table
 
 TODO MILD
-- error log should record mode and module and level
-- add try, catch, throw stuff
 
 
 
