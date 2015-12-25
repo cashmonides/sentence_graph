@@ -4,6 +4,7 @@
 perhaps we should have progress notes here so we can see what the other person did
 - Dan: finished latin question generation (has earlier functionality)
 - Dan: got cheat sheets working correctly again (they now disappear)
+- Dan: vocab cheat sheet now sorted
 
 
 BUGS

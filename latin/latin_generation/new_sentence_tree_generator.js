@@ -25,7 +25,11 @@ function make_output(level, current_lexicon, none_display) {
     var master_lexeme_list = {
         get_lexemes: function (name) {
             return convert_keys_to_dict(this[name], this)
-        }
+        },
+        get_lexemes_as_list: function (name) {
+            var self = this;
+            return this[name].map(function (x) {return self[x]});
+        },
     };
     master_lexeme_list.dummies_and_used = [];
     master_lexeme_list.all_lexemes = [];
@@ -108,8 +112,7 @@ function make_output(level, current_lexicon, none_display) {
         'drop_downs': english_mental_wrap(correct, manage_drop_downs(
             correct, output, english_template, Language_enum.English, drop_non_drop_map), level),
         'give_away_phrase': "The correct answer was: ",
-        'give_away_ending_phrase': ". Now click on the correct answer.",
-        'cheat_sheet': cheat_sheet(master_lexeme_list.get_lexemes('all_lexemes'))
+        'cheat_sheet': cheat_sheet(master_lexeme_list.get_lexemes_as_list('all_lexemes'))
     };
     console.log('DEBUG 12-23 make_output result = ', r);
     return r
@@ -148,7 +151,7 @@ states_allowed, master_lexeme_list, level) {
 
 function cheat_sheet(master_lexeme_list) {
     return dict_from_list_of_pairs(
-        values(master_lexeme_list).map(function (x) {
+        quick_sort(master_lexeme_list, cheat_sheet_sort).map(function (x) {
             return [x.properties.latin.root, x.properties.english.root]}))
 }
 

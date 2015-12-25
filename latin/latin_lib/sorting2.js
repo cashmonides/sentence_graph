@@ -5,9 +5,13 @@ function sorted_choices(output, key_for_word) {
 
 function quick_sort(list, f) {
     if (list.length === 0) {return []}
-    var pivot = list[0];
-    var before = list.slice(1).filter(function (x) {return f(x, pivot)});
-    var after = list.slice(1).filter(function (x) {return f(pivot, x)});
+    // We sort from random index (original data may be somewhat sorted).
+    // Perhaps we should switch to merge sort.
+    var n = rand_int(list.length);
+    var pivot = list[n];
+    var rest = remove(list, n);
+    var before = rest.filter(function (x) {return f(x, pivot)});
+    var after = rest.filter(function (x) {return f(pivot, x)});
     return quick_sort(before, f).concat(pivot, quick_sort(after, f))
 }
 
@@ -48,6 +52,13 @@ function custom_sort(x, y) {
     }
 }
 
+function cheat_sheet_sort(x, y) {
+    // Here x and y are rows of the cheat sheet.
+    return sort_which_is_first(
+        [['properties_core_part`of`speech', ['noun', 'verb']],
+        ['properties_latin_root', remove_long_vowels]], x, y)
+}
+
 function sort_which_is_first (order, x, y) {
     for (var i = 0; i < order.length; i++) {
         var sort_by = order[i][0];
@@ -58,6 +69,16 @@ function sort_which_is_first (order, x, y) {
         if (possibilities === 'natural') {
             var x_value = sort_get_property(x, sort_by);
             var y_value = sort_get_property(y, sort_by);
+            if (x_value === null && y_value !== null) {
+                return false
+            } else if (x_value !== null && y_value === null) {
+                return true
+            } else if (x_value !== y_value) {
+                return x_value < y_value
+            }
+        } else if (typeof possibilities === "function") {
+            var x_value = possibilities(sort_get_property(x, sort_by));
+            var y_value = possibilities(sort_get_property(y, sort_by));
             if (x_value === null && y_value !== null) {
                 return false
             } else if (x_value !== null && y_value === null) {
@@ -92,4 +113,14 @@ function map_by_text(x) {
         part.choices = part.choices.map(function (y) {return y.text})
     });
     return x
+}
+
+// Latin sorting functions.
+// Move this?
+function remove_long_vowels(s) {
+    var long_to_short = {'Ā': 'A', 'Ē': 'E', 'Ī': 'I', 'Ō': 'O', 'Ū': 'U'};
+    for (var i in long_to_short) {
+        s = s.replace(i, long_to_short[i])
+    }
+    return s
 }

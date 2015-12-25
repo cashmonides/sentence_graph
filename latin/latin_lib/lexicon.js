@@ -153,37 +153,37 @@ var lexicon = [
         "dog",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("dog", "dog", "dogs", true, true, false, false, null),
-            latin : new Latin_word_properties("CANIS", "*CANIS*", "CAN", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*CANIS*", "*CANIS*", "CAN", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "bee",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("bee", "bee", "bees", true, true, false, false, null),
-            latin : new Latin_word_properties("APIS", "*APIS*", "AP", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*APIS*", "*APIS*", "AP", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "mouse",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("mouse", "mouse", "mice", true, true, false, false, null),
-            latin : new Latin_word_properties("MUS", "*MUS*", "MUR", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*MUS*", "*MUS*", "MUR", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "fish",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("fish", "fish", "fish", true, true, false, false, null),
-            latin : new Latin_word_properties("PISCIS", "*PISCIS*", "PISC", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*PISCIS*", "*PISCIS*", "PISC", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "rabbit",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("rabbit", "rabbit", "rabbits", true, true, false, false, null),
-            latin : new Latin_word_properties("LEPUS", "*LEPUS*", "LEPOR", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*LEPUS*", "*LEPUS*", "LEPOR", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "pig",
         {   core: {part_of_speech: "noun", animate: true},
             english : new English_word_properties("pig", "pig", "pigs", true, true, false, false, null),
-            latin : new Latin_word_properties("SŪS", "*SŪS*", "SU", null, "3", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*SŪS*", "*SŪS*", "SU", null, "3", "m", true, true, false, false, null)
         }),
     //ADJECTIVES ///////////
 
@@ -191,13 +191,13 @@ var lexicon = [
         "big",
         {   core: {part_of_speech: "adjective", animate: null},
             english : new English_word_properties("big", "big", "big", true, true, false, false, null),
-            latin : new Latin_word_properties("MAGNUS", "MAGN", "MAGN", null, "2/1/2", null, true, true, false, false, null)
+            latin : new Latin_word_properties("MAGN-US", "MAGN", "MAGN", null, "2/1/2", null, true, true, false, false, null)
         }),
     new Lexeme(
         "sad",
         {   core: {part_of_speech: "adjective", animate: null},
             english : new English_word_properties("sad", "sad", "sad", true, true, false, false, null),
-            latin : new Latin_word_properties("TRISTIS", "*TRISTIS*", "TRIST", null, "3", null, true, true, false, false, null)
+            latin : new Latin_word_properties("TRIST-IS", "*TRISTIS*", "TRIST", null, "3", null, true, true, false, false, null)
         }),
 
     //TRANSITIVE VERBS//////////////
@@ -206,44 +206,44 @@ var lexicon = [
         "love",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("love", "love", "love", "love", "loves", "loved", "loved", "loving"),
-            latin : new Latin_word_properties("AMĀRE", "AM", "AMĀV", "AMĀT", "1", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("AM-ĀRE", "AM", "AMĀV", "AMĀT", "1", null, null, null, null, null, "transitive")
         }),
     new Lexeme(
         "attack",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("attack", "attack", "attack", "attack", "attacks", "attacked", "attacked", "attacking"),
-            latin : new Latin_word_properties("OPPUGNARE", "OPPUGN", "OPPUGNAV", "OPPUGNAT", "1", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("OPPUGN-ARE", "OPPUGN", "OPPUGNAV", "OPPUGNAT", "1", null, null, null, null, null, "transitive")
         }),
     new Lexeme(
         "carry",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("carry", "carry", "carry", "carry", "carries", "carried", "carried", "carrying"),
-            latin : new Latin_word_properties("PORTARE", "PORT", "PORTAV", "PORTAT", "1", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("PORT-ARE", "PORT", "PORTAV", "PORTAT", "1", null, null, null, null, null, "transitive")
         }),
     new Lexeme(
         "eat",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("eat", "eat", "eat", "eat", "eats", "ate", "eaten", "eating"),
-            latin : new Latin_word_properties("VORARE", "VOR", "VORAV", "VORAT", "1", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("VOR-ARE", "VOR", "VORAV", "VORAT", "1", null, null, null, null, null, "transitive")
         }),
     //2nd conjugation
     new Lexeme(
         "fear",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("fear", "fear", "fear", "fear", "fears", "feared", "feared", "fearing"),
-            latin : new Latin_word_properties("TIMERE", "TIM", "TIMU", "TIMIT", "2", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("TIM-ERE", "TIM", "TIMU", "TIMIT", "2", null, null, null, null, null, "transitive")
         }),
     new Lexeme(
         "see",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("see", "see", "see", "see", "sees", "saw", "seen", "seeing"),
-            latin : new Latin_word_properties("VIDERE", "VID", "VID", "VIS", "2", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("VID-ERE", "VID", "VID", "VIS", "2", null, null, null, null, null, "transitive")
         }),
     new Lexeme(
         "scare",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("scare", "scare", "scare", "scare", "scares", "scared", "scared", "scaring"),
-            latin : new Latin_word_properties("TERRERE", "TERR", "TERRU", "TERRIT", "2", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("TERR-ERE", "TERR", "TERRU", "TERRIT", "2", null, null, null, null, null, "transitive")
         }),
    
     //3rd conjugation
@@ -251,39 +251,39 @@ var lexicon = [
         "push",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("push", "push", "push", "push", "pushes", "pushed", "pushed", "pushing"),
-            latin : new Latin_word_properties("PELLERE", "PELL", "PEPUL", "PULS", "3", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("PELL-ERE", "PELL", "PEPUL", "PULS", "3", null, null, null, null, null, "transitive")
         }),
     new Lexeme(
         "rule",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("rule", "rule", "rule", "rule", "rules", "ruled", "ruled", "ruling"),
-            latin : new Latin_word_properties("REGERE", "REG", "REG", "RECT", "3", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("REG-ERE", "REG", "REG", "RECT", "3", null, null, null, null, null, "transitive")
         }),
     new Lexeme(
         "speak",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("speak", "speak", "speak", "speak", "speaks", "spoke", "spoken", "speaking"),
-            latin : new Latin_word_properties("DICERE", "DIC", "DIX", "DICT", "3", null, null, null, null, null, "intransitive")
+            latin : new Latin_word_properties("DIC-ERE", "DIC", "DIX", "DICT", "3", null, null, null, null, null, "intransitive")
         }),
     //3i conjugation
     new Lexeme(
         "grab",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("grab", "grab", "grab", "grab", "grabs", "grabbed", "grabbed", "grabbing"),
-            latin : new Latin_word_properties("CAPERE", "CAP", "CEP", "CAPT", "3i", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("CAP-ERE", "CAP", "CEP", "CAPT", "3i", null, null, null, null, null, "transitive")
         }),
     //4 conjugation
     new Lexeme(
         "hear",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("hear", "hear", "hear", "hear", "hears", "heard", "heard", "hearing"),
-            latin : new Latin_word_properties("AUDIRE", "AUD", "AUDIV", "AUDIT", "4", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("AUD-IRE", "AUD", "AUDIV", "AUDIT", "4", null, null, null, null, null, "transitive")
         }),
     new Lexeme(
         "find",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("find", "find", "find", "find", "finds", "found", "found", "finding"),
-            latin : new Latin_word_properties("INVENIRE", "INVEN", "INVEN", "INVENT", "4", null, null, null, null, null, "transitive")
+            latin : new Latin_word_properties("INVEN-IRE", "INVEN", "INVEN", "INVENT", "4", null, null, null, null, null, "transitive")
         }),
 
     //INTRANSITIVE VERBS
@@ -292,40 +292,40 @@ var lexicon = [
         "walk",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("walk", "walk", "walk", "walk", "walks", "walked", "walked", "walking"),
-            latin : new Latin_word_properties("AMBULARE", "AMBUL", "AMBULAV", "AMBULAT", "1", null, null, null, null, null, "intransitive")
+            latin : new Latin_word_properties("AMBUL-ARE", "AMBUL", "AMBULAV", "AMBULAT", "1", null, null, null, null, null, "intransitive")
         }),
     new Lexeme(
         "shout",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("shout", "shout", "shout", "shout", "shouts", "shouted", "shouted", "shouting"),
-            latin : new Latin_word_properties("CLAMARE", "CLAM", "CLAMAV", "CLAMAT", "1", null, null, null, null, null, "intransitive")
+            latin : new Latin_word_properties("CLAM-ARE", "CLAM", "CLAMAV", "CLAMAT", "1", null, null, null, null, null, "intransitive")
         }),
     //2nd conjugation
     new Lexeme(
         "sit",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("sit", "sit", "sit", "sit", "sits", "sat", "sat", "sitting"),
-            latin : new Latin_word_properties("SEDERE", "SED", "SED", "SESS", "2", null, null, null, null, null, "intransitive")
+            latin : new Latin_word_properties("SED-ERE", "SED", "SED", "SESS", "2", null, null, null, null, null, "intransitive")
         }),
     //3rd conjugation
     new Lexeme(
         "fall",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("fall", "fall", "fall", "fall", "falls", "fell", "fallen", "falling"),
-            latin : new Latin_word_properties("CADERE", "CAD", "CECID", "CESS", "3", null, null, null, null, null, "intransitive")
+            latin : new Latin_word_properties("CAD-ERE", "CAD", "CECID", "CESS", "3", null, null, null, null, null, "intransitive")
         }),
     new Lexeme(
         "flee",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("flee", "flee", "flee", "flee", "flees", "fled", "fled", "fleeing"),
-            latin : new Latin_word_properties("FUGERE", "FUG", "FUG", "FUGIT", "3i", null, null, null, null, null, "intransitive")
+            latin : new Latin_word_properties("FUG-ERE", "FUG", "FUG", "FUGIT", "3i", null, null, null, null, null, "intransitive")
         }),
     //4th conjugation
     new Lexeme(
         "sleep",
         {   core: {part_of_speech: "verb", animate: null},
             english : new English_word_properties("sleep", "sleep", "sleep", "sleep", "sleeps", "slept", "slept", "sleeping"),
-            latin : new Latin_word_properties("DORMIRE", "DORM", "DORMIV", "DORMIT", "4", null, null, null, null, null, "intransitive")
+            latin : new Latin_word_properties("DORM-IRE", "DORM", "DORMIV", "DORMIT", "4", null, null, null, null, null, "intransitive")
         }),
 
     //CONJUNCTIONS
