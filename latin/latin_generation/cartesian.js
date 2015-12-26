@@ -1007,21 +1007,6 @@ add_property = function(object, property_name, value) {
 
 
 
-//returns the values of an object (maybe move to utils eventually)
-var values = function(object) {
-    var new_array = [];
-    for (var i in object) {new_array.push(object[i])}
-    return new_array
-};
-
-
-//a utility function that combines a list of lists into a big list (maybe move to utils eventually)
-concat_arrays = function (list_of_arrays) {
-    return Array.prototype.concat.apply([], list_of_arrays);
-};
-
-
-
 
 
 //possibly use below

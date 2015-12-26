@@ -27,6 +27,11 @@ MCMode3Game.prototype.attach = function(){
     //make_element( <button .....onclick = this.process_answer()>  )
 };
 
+// set_level now moved up
+MCMode3Game.prototype.set_level = function (new_level) {
+    console.log("DEBUG 11-16 MCMode3Game new_level = ", new_level);
+    this.level = new_level;
+}
 
 
 MCMode3Game.prototype.get_mode_name = function() {
@@ -105,13 +110,6 @@ MCMode3Game.prototype.next_question = function () {
     if (x === 0) {this.next_question()}
 
 };
-
-MCMode3Game.prototype.set_level = function (new_level) {
-    console.log("DEBUG 11-16 new_level = ", new_level)
-    this.level = new_level;
-    // console.log("DEBUG 11-16 this.level = ", this.level)
-    // console.log("DEBUG 11-16 this.level = ", this.quiz.game.level)
-}
 
 MCMode3Game.prototype.display = function (x) {
     return x.type === 'non_drop' || x.correct_answer || this.none_display
@@ -198,7 +196,7 @@ MCMode3Game.prototype.process_correct_answer = function () {
 
 
 
-MCMode3Game.prototype.process_incorrect_answer= function () {
+MCMode3Game.prototype.process_incorrect_answer = function () {
     this.quiz.submodule.incorrect_streak ++;
     if (this.quiz.submodule.incorrect_streak === 1) {
         this.quiz.decrement_score();

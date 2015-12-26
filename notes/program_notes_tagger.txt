@@ -5,6 +5,16 @@ perhaps we should have progress notes here so we can see what the other person d
 - Dan: finished latin question generation (has earlier functionality)
 - Dan: got cheat sheets working correctly again (they now disappear)
 - Dan: vocab cheat sheet now sorted
+- Dan: about halfway through etymology
+
+On etymology:
+- add definitions
+    - store data in firebase so that we know how many times a word was seen
+- remove word selector from its box when there is an etymology question
+    - put word in box instead?
+- add grade level
+    - carnal, necrophilia, etc
+- better formatting
 
 
 BUGS

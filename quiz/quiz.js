@@ -215,7 +215,6 @@ Quiz.prototype.next_mode = function(){
     
     var mode = weighted(allowed);
     
-    
     var game = Quiz.get_mode(game_mode_map[mode]);
     
     
@@ -227,12 +226,12 @@ Quiz.prototype.next_mode = function(){
 };
 
 Quiz.get_mode = function(mode_number) {
-
     switch(mode_number) {
         case 0 : return new DropModeGame();
         case 1 : return new MCMode3Game();
         case 2 : return new QuickModeGame();
         case 3 : return new GenericDropGame();
+        case 4 : return new EtymologyModeGame();
         default : throw "no game mode triggered";
     }
     
@@ -245,7 +244,6 @@ Quiz.prototype.next_question = function (){
     //previously:
     // this.next_mode();
     // this.game.next_question(this);
-    
     try {
         console.log('DEBUG 12-23 entering try block')
         this.clean_up();

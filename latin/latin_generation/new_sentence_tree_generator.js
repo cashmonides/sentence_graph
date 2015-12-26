@@ -125,7 +125,6 @@ states_allowed, master_lexeme_list, level) {
     var kernel;
     
     if (!(result_role in output)) {output[result_role] = []};
-    console.log('states_allowed =', states_allowed)
     for (var i = 0; i < states_allowed.length; i++) {
         kernel = make_minimal_form_english(level, states_allowed[i],
         master_lexeme_list[source], result_role);

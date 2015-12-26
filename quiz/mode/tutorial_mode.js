@@ -74,8 +74,8 @@ TutorialModeGame.prototype.process_incorrect_answer = function() {
             tag_names = tag_names.map(Quiz.wrap_string);
             cell_2 = "That matches the following: " + tag_names.join(", ");
         }
-        var cell_1 = random_choice(QuickModeGame.cell_1_feedback_wrong);
-        var cell_3 = random_choice(QuickModeGame.cell_3_feedback_wrong);
+        var cell_1 = random_choice(TutorialModeGame.cell_1_feedback_wrong);
+        var cell_3 = random_choice(TutorialModeGame.cell_3_feedback_wrong);
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
     } else {

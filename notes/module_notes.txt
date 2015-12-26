@@ -1,4 +1,4 @@
-//i create a dictionary and I map an id I pick to an object which contains the id itself
+// I create a dictionary and I map an id I pick to an object which contains the id itself
 // 1 wolf, 2 bull, 3 crow, 4 horse, 5 frog, 6 bear, 7 lizard, 8 aquila, 9 lion, 10 cow, 11 dog, 12 mouse, 13 fish,  14 rabbit, 15 bird
 //technical parameters:
 // number of drops
@@ -21,7 +21,7 @@ function get_module_order(){
 
 
 var modules = {
-//i create a dictionary and I map an id I pick to an object which contains the id itself
+//I create a dictionary and I map an id I pick to an object which contains the id itself
 var ALL_MODULES = {
     0: {
         id: 0,
