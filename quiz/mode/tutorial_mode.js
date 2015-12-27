@@ -4,8 +4,9 @@ get & set tutorial level
 process_tutorial_click
 */
 
-var TutorialModeGame = function(){
+var TutorialModeGame = function(tutorial_id){
     this.quiz = null;
+    this.tutorial_page = ALL_TUTORIALS[tutorial_id][0]; // Is next needed?
 };
 
 
@@ -22,31 +23,31 @@ TutorialModeGame.prototype.set_level = function () {
 }
 
 TutorialModeGame.prototype.get_mode_name = function() {
-    return "Tutorial";
+    return "tutorial";
 };
 
 
 
 
-TutorialModeGame.prototype.next_tutorial_page = function(state){
+TutorialModeGame.prototype.next_tutorial_page = function(){
     //something like: var level = get_level();
     
     //something like: var text = Quiz.set_tutorial_text(level);
-     
+    this.tutorial_page = this.tutorial_page.next; // ???
+    var text = this.tutorial_page.sentence;
     this.quiz.set_word_selector(text);
     
     this.quiz.word_selector.click_callback = this.quiz.process_tutorial_click.bind(this.quiz);
 };
 
-TutorialModeGame.prototype.process_tutorial_click = function(state) {
-    
-    // var is_correct = contains(tag_names, this.target_tag);
-    // if (is_correct) {
-    //     this.process_correct_answer();
-    // } else {
-    //     this.process_incorrect_answer();
-    // }
-
+TutorialModeGame.prototype.process_tutorial_click = function() {
+    var is_correct = region_to_text(this.quiz.get_selected_region()).
+    split(' = ')[0] === this.tutorial_page.correct_answer;
+    if (is_correct) {
+         this.process_correct_answer();
+    } else {
+        this.process_incorrect_answer();
+    }
 };
 
 TutorialModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];

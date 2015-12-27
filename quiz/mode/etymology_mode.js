@@ -5,6 +5,7 @@ var EtymologyModeGame = function(){
     this.data = null;
     this.quiz = null;
     this.level = 0;
+    this.words_and_roots = {};
 };
 
 
@@ -30,7 +31,13 @@ EtymologyModeGame.prototype.get_mode_name = function() {
 
 EtymologyModeGame.prototype.next_question = function(){
     this.quiz.update_display();
-    var question = create_etymology_question(this.level);
+    
+    if (!(this.quiz.module.id in this.words_and_roots)) {
+        this.words_and_roots[this.quiz.module.id] = get_words_and_roots(this.quiz.module.roots);
+    }
+    
+    var question = create_etymology_question(
+        this.level, this.words_and_roots[this.quiz.module.id]);
     this.word_choices = question.word_choices;
     this.correct = question.correct;
     

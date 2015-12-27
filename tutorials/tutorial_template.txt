@@ -1,7 +1,80 @@
+ALL_TUTORIALS = {
+//Number, or maybe string ("coordinating_conjunctions_3")
+tutorial_id: {
+
+// A string that describes the tutorial
 heading: ,
+//A string describing the path to the image
 image: ,
+// The text of the tutorial
 body: ,
+// The question asked at the end of the tutorial (page)
+// (sometimes a default "none" value)
 question: ,
-answer_choice: ,
-correct_answer: ,
-back: 
+// The list of answer choice (strings)
+// (sometimes a default "none" value)
+answer_choices: ,
+
+// The correct answer choice (a string)
+// (sometimes a default "none" value)
+// mutually exclusive with advance_button
+correct_answer: ,               
+
+
+//optional
+back_button: ,                     
+
+//advance_button is a button that advances to the next page
+//sometimes empty because only correct answer advances
+advance_button:                       
+
+//pointer to previous tutorial page
+previous: ,
+
+
+//integer or file name as string that points to the next tutorial page
+//or it's something like "finish" if it leads to the quiz
+next:
+}
+}
+
+///
+main thing: we feed this into a make function
+
+
+
+///////
+important methods and functions:
+- get_tutorial_order    //by analogy with get_module_order
+    - not like modules
+    - rather: gets order of tutorial pages for that tutorial
+- keep ALL_TUTORIALS as all-caps since it's a constant (that's a js best practice)
+- decide whether we store them as strings or integers
+- pages are numbered within each tutorial
+- 0 page (starter page, doesn't actually have content but is a good practice)
+
+
+
+
+ALL_TUTORIALS: {
+    tutorial_id1 : {
+        meta_data: {
+            topic: "subject, object, verb",
+        },
+        tutorial_page_id1: {
+            //tutorial object
+            
+        },
+        tutorial_page_id2: {}
+    },
+    tutorial_id2 : {
+        meta_data: {
+            topic: "coordinating conjunctions",
+        },
+        tutorial_page_id1: {
+            //tutorial object
+            
+        },
+        tutorial_page_id2: {}
+    }
+}

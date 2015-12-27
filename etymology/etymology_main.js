@@ -2,22 +2,13 @@ var score = 0;
 
 var n_of_choices = 4;
 
-var limited_lexemes = {
-    0: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR'],
-    30: ['CARN', 'DE', 'HERBI', 'OMNI', 'SCI', 'VOR/VOUR'],
-    80: ['ANN/ENN', 'CARN', 'DE', 'HERBI', 'OMNI', 'PSEUD/PSEUDO',
-        'SCI', 'SEMI', 'VOR/VOUR']
-};
-
-//initialize a map from level to lists/dictionaries of allowed words
-//limited in the sense of allowed
-var limited_lexicons = {};
-
+/*
 //gets the level that has an associated lexicon that is at or closest beneath the argument (int)
 var get_level = function (n) {
     return math_max(Object.keys(limited_lexemes).filter(
         function (x) {return x <= n}))
 };
+*/
 
 //it = word (i.e. item) that is a wrong answer
 //r = root
@@ -104,7 +95,8 @@ var definition = function (word) {
 };
 */
 
-//sets allowed lexicons
+
+/*//sets allowed lexicons
 var change_lexemes_and_lexicon = function (g) {
     if (Array.isArray(limited_lexemes[g])) {
         limited_lexemes[g] =
@@ -116,22 +108,33 @@ var change_lexemes_and_lexicon = function (g) {
                 words[x]['roots'])}), words)
     }
 };
+*/
+
+var get_words_and_roots = function (root_list) {
+    return {'roots': convert_keys_to_dict(root_list, roots),
+    'words': convert_keys_to_dict(Object.keys(words).filter(function (x) {
+            return is_sub_list(root_list, words[x]['roots'])}), words)
+    }
+};
 
 //selects the most difficult of n attempts at selecting question
 // n presumably higher at higher levels
-var create_etymology_question = function (score) {
+var create_etymology_question = function (score, words_and_roots) {
     var j;
     var d = [];
-    var g = get_level(score);
-    change_lexemes_and_lexicon(g);
-    console.log('words, roots =', limited_lexicons[g], limited_lexemes[g])
-    for (j = 0; j < 10; j++) {d.push(single_try(limited_lexicons[g], limited_lexemes[g]))}
+    var words_allowed = words_and_roots.words;
+    var roots_allowed = words_and_roots.roots;
+    // var g = get_level(score);
+    // change_lexemes_and_lexicon(g);
+    for (j = 0; j < 10; j++) {d.push(single_try(words_allowed, roots_allowed))}
     var best = {'difficulties': [-1]};
-    for (j = 0; j < 10; j++) {if (math_max(values(d[j]['difficulties'])) >
-        math_max(values(best['difficulties']))) {best = d[j]}}
+    for (j = 0; j < 10; j++) {
+        if (math_max(values(d[j]['difficulties'])) >
+        math_max(values(best['difficulties']))) {best = d[j]}
+    }
     var l = shuffle(Object.keys(best['difficulties']).sort(function (x, y) {
         return best['difficulties'][x] > best['difficulties'][y] ? 1 : -1}).
         slice(-n_of_choices + 1).concat(best['w']));
-    return {'meaning_asked_about': roots[best['r']]['meaning'], 'word_choices': l,
-        'correct': best['w']};
+    return {'meaning_asked_about': roots_allowed[best['r']]['meaning'],
+    'word_choices': l, 'correct': best['w']};
 };
