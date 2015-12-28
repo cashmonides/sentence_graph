@@ -6,12 +6,19 @@ perhaps we should have progress notes here so we can see what the other person d
 - Dan: got cheat sheets working correctly again (they now disappear)
 - Dan: vocab cheat sheet now sorted
 - Dan: about halfway through etymology
+- Akiva: added start and stop time stamp to module
+    - still a little buggy: doesn't create a new start-time if they quit and start over, need to push to a list or something like that instead of rewriting a map
+    - needs to be done for submodules as well (since modules might take quite a long time to finish and in such a case, quitting halfway through a module won't be a reliable metric of anything - we really want to measure frustration "the rage quit")
+
 
 On etymology:
-- bug   
+- bugs   
     - word selector isn't cleared (e.g. equus portat corvos in etymology mode)
         - remove box altogether?
+    - wrong answer feedback is "excellent"
+    - are incorrect answers deducting too many points? (it seems to go down)
 - needed functionality
+    - dummy answer needs to be completed
     - etymology level needs to be stored
     - add definitions
     - store data in firebase so that we know how many times a word was seen
@@ -30,6 +37,14 @@ On etymology:
 
 BUGS
 - latin shouldn't be hoverable
+- mod.iteration seems to be 0 - can we live with that?
+- lightbox image seems to be problematic at some points 
+    - for frog:
+    - only three images in frog
+    - the following threw a error of "Uncaught TypeError: Cannot read property 'length' of undefined"
+    - (this.user.data.history[mod_id].progress - 1) % image_list.length];
+
+
 
 FUNCTIONALITY
 - the top item in drop down (e.g. noun, verb) should appear in the drop-down menu as a default (and of course it shouldn't be selectable)
@@ -37,7 +52,9 @@ FUNCTIONALITY
     - where there are only 3-10 items (such as subject, object, verb) the drop menu just slows down the user experience
     - refactor it and change it to a version of quick mode (where the options are just listed as clicakble)
     - of course would need to call it something else eventually
-
+- finishing an advacning level should take the user back to improving
+- lightbox images take too long to load
+- each mode should log percentage right and wrong in the metrics, so we know which modes are too hard or too easy
 
 NON-LATIN LEVELS
 - create levels for the non-latin sides
@@ -69,18 +86,6 @@ USEFUL TO ADD
 - get_level method
 
 
-
-
-TUTORIALS
-- JSON object with properties: 
-heading: ,
-image: ,
-body: ,
-question: ,
-answer_choice: ,
-correct_answer: ,
-back:
-next:
 
 
 

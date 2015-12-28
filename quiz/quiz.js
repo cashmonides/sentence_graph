@@ -283,11 +283,19 @@ Quiz.prototype.question_complete = function(){
 Quiz.prototype.submodule_complete = function () {
     
     console.log("DEBUG 11-16 quiz.submodule_complete entered");
+    console.log("DEBUG 12-27 this.user.get_module(mod) = ", this.user.get_module(mod));
     this.old_progress_bars.forEach(function (x) {remove_element(x.progress_bar)});
     this.user.add_progress_bar(this.progress_bar.past_events, this.module.id);
-    var mod = this.user.get_current_module(this.module.id);  //int
     
-   
+    console.log("DEBUG 12-27 checkpoint zzz reached");
+    
+    console.log("DEBUG-zzz 12-27 this.module.id = ", this.module.id);
+    var mod = this.user.get_current_module(this.module.id);  //int
+    console.log("DEBUG-zzz 12-27 mod = ", mod);
+    
+    console.log("DEBUG-zzz 12-27 this.user.get_module(mod) = ", this.user.get_module(mod));
+    
+    
     var numerator = this.user.get_module(mod).progress;
     
     var denominator = ALL_MODULES[mod].threshold;
