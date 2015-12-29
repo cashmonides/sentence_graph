@@ -158,6 +158,23 @@ Quiz.prototype.next_submodule = function(){
         count_incorrect: 0,
         incorrect_streak: 0
     };
+    
+    //logging start time
+    console.log("DEBUG 12-28 log start time entered");
+    
+    //the module_id (int) - a variable used a lot below by a number of functions
+    var mod = this.user.get_current_module(this.module.id);
+    
+    
+    
+    console.log("DEBUG 12-28 module_id =", this.user.get_current_module(this.module.id));
+    console.log("DEBUG 12-28 submodule_number =", this.user.get_module(mod).progress);
+    this.user.log_submodule_start_time(this.user.get_current_module(this.module.id), this.user.get_module(mod).progress);
+    console.log("DEBUG 12-28 log start time passed");
+    
+    
+    
+    //progress bars below
     this.began = new Date();
     this.progress_bar = new ProgressBar(this.module.submodule.threshold, [], el('progress-bar'));
     // Progress bar currently disabled (i.e., does not show up).
@@ -282,19 +299,26 @@ Quiz.prototype.question_complete = function(){
 
 Quiz.prototype.submodule_complete = function () {
     
+    //the module_id (int) - a variable used a lot below by a number of functions
+    var mod = this.user.get_current_module(this.module.id);
+    var submodule_number = this.user.get_module(mod).progress;
+    
+    //logging the stop time
+    console.log("DEBUG 12-28 submodule_complete, about to call log_submodule_stop_time");
+    console.log("DEBUG 12-28 module_id =", mod);
+    console.log("DEBUG 12-28 submodule_number =", submodule_number);
+    this.user.log_submodule_stop_time(mod, submodule_number);
+    console.log("DEBUG 12-28 log stop time passed");
+    
+    //progress bar
     console.log("DEBUG 11-16 quiz.submodule_complete entered");
     console.log("DEBUG 12-27 this.user.get_module(mod) = ", this.user.get_module(mod));
     this.old_progress_bars.forEach(function (x) {remove_element(x.progress_bar)});
     this.user.add_progress_bar(this.progress_bar.past_events, this.module.id);
     
-    console.log("DEBUG 12-27 checkpoint zzz reached");
     
-    console.log("DEBUG-zzz 12-27 this.module.id = ", this.module.id);
-    var mod = this.user.get_current_module(this.module.id);  //int
-    console.log("DEBUG-zzz 12-27 mod = ", mod);
     
-    console.log("DEBUG-zzz 12-27 this.user.get_module(mod) = ", this.user.get_module(mod));
-    
+    //setting up lightbox
     
     var numerator = this.user.get_module(mod).progress;
     

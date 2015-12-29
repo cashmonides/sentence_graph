@@ -8,7 +8,32 @@ perhaps we should have progress notes here so we can see what the other person d
 - Dan: about halfway through etymology
 - Akiva: added start and stop time stamp to module
     - still a little buggy: doesn't create a new start-time if they quit and start over, need to push to a list or something like that instead of rewriting a map
-    - needs to be done for submodules as well (since modules might take quite a long time to finish and in such a case, quitting halfway through a module won't be a reliable metric of anything - we really want to measure frustration "the rage quit")
+- Akiva: added start and stop time stamp to module
+   - has the same problem as module, needs to preserve old start times that were abandoned
+   - need to add iteration, right now it just records submodule number
+
+BUGS IN TIME STAMP
+- start time of submodule and module aren't the same
+    undefined
+     start_time: 
+    1451368989265
+     time_metrics
+     0
+     start_time: 
+    1451368981526
+    - in one case I logged a difference of -341 seconds! (-341857 milliseconds)
+
+
+BUGS IN LIGHTBOX
+- some images are too big
+
+BUGS IN FIREBASE
+- are we hitting the wall with number of records in firebase?
+        - or is it just a matter of hand-cranked mexican wifi?
+        - the error in firebase is:
+            "Due to the number of records being displayed at this location, the data viewer is in read-only/non-realtime mode to increase browser performance. Click on a key with fewer records to see a realtime view.
+
+
 
 
 On etymology:
@@ -29,7 +54,7 @@ On etymology:
     - better formatting
         - drop downs should be changed to clickable words
         - box
-
+    - 3rd party authentification in firebase (google, facebook, etc.)
 
 
 
