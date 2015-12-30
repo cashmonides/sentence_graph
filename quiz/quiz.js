@@ -163,13 +163,13 @@ Quiz.prototype.next_submodule = function(){
     console.log("DEBUG 12-28 log start time entered");
     
     //the module_id (int) - a variable used a lot below by a number of functions
-    var mod = this.user.get_current_module(this.module.id);
+    var mod = this.get_start_module();
     
     
     
-    console.log("DEBUG 12-28 module_id =", this.user.get_current_module(this.module.id));
+    console.log("DEBUG 12-28 mod, module_id =", mod, this.user.get_current_module(this.module.id));
     console.log("DEBUG 12-28 submodule_number =", this.user.get_module(mod).progress);
-    this.user.log_submodule_start_time(this.user.get_current_module(this.module.id), this.user.get_module(mod).progress);
+    this.user.log_submodule_start_time(mod, this.user.get_module(mod).progress);
     console.log("DEBUG 12-28 log start time passed");
     
     

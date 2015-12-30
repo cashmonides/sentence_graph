@@ -1,7 +1,7 @@
-- Dan not coding
-- Akiva not coding
+- Dan coding
+- Akiva coding
 
-perhaps we should have progress notes here so we can see what the other person did
+Progress notes
 - Dan: finished latin question generation (has earlier functionality)
 - Dan: got cheat sheets working correctly again (they now disappear)
 - Dan: vocab cheat sheet now sorted
@@ -11,6 +11,72 @@ perhaps we should have progress notes here so we can see what the other person d
 - Akiva: added start and stop time stamp to module
    - has the same problem as module, needs to preserve old start times that were abandoned
    - need to add iteration, right now it just records submodule number
+
+AGENDA IN GENERAL
+- time stamp of start and stop of sub-module
+- tutorials
+- debug etymology mode
+- converting short & simple drop downs into word selectors (to resemble quick mode)
+- add fill in the blank mode
+- refine vocab cheat sheet (header with part of speech)
+- look at / clean up the make output flow with a view towards adding adjectives, ablatives, genitive
+- taxonomy
+    - write it as we've been doing using JSON and javascript
+    - write it in SQL
+- read/write permissions
+
+
+
+TIMING
+gap between was 4 sec/ 50 sec
+horse start time 1451437464816
+
+
+
+OLD CROW
+submodule_time_metrics
+ 0
+ 0
+ 0: 
+1451437413849
+ 1: 
+1451437450574
+ 1
+ 0
+ 0: 
+1451437455540
+ 1: 
+1451437461245
+
+
+
+ITERATIONS
+1
+    - release a version to the kids in january
+    - looking at firebase data carefully, especially urgent logs and basic stats (what's hard, what's easy)
+
+
+2
+    - fix what's wrong with 1
+    - cosmetically improving things (e.g. drop downs with backbone & jquery)
+    
+3/4 or 5 (depending)
+    - rebuild from scratch (possibly with angular)
+        - phase A:
+            - rebuild html stuff
+        - phase B:
+            - rebuild things that don't effect html (e.g. latin production)
+    - modular 
+    - include other languages    
+
+
+
+UNORDERED AGENDA
+- fix time stamps
+- creating multiple choice as word selectors
+- look at errors in firebase urgent errors log
+- tutorials
+
 
 BUGS IN TIME STAMP
 - start time of submodule and module aren't the same
@@ -109,23 +175,6 @@ NON-LATIN LEVELS
 
 USEFUL TO ADD
 - get_level method
-
-
-
-
-
-AGENDA IN GENERAL
-- tutorials
-- time stamp of start and stop of sub-module
-- debug etymology mode
-- SQL and metrics
-- add fill in the blank mode
-- refine vocab cheat sheet
-- look at / clean up the make output flow with a view towards adding adjectives, ablatives, genitive
-- taxonomy
-    - write it as we've been doing using JSON and javascript
-    - write it in SQL
-- read/write permissions
 
 
 
