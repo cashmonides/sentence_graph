@@ -1,5 +1,5 @@
 - Dan not coding
-- Akiva not coding 
+- Akiva coding 
 
 Progress notes
 - Dan: finished latin question generation (has earlier functionality)
@@ -14,6 +14,8 @@ Progress notes
 
 AGENDA IN GENERAL
 - time stamp of start and stop of sub-module
+    - kick it down the road until gio can help, seems to involve multiple callbacks
+    - maybe model it on the get statements in admin
 - tutorials
 - debug etymology mode
 - converting short & simple drop downs into word selectors (to resemble quick mode)
@@ -25,6 +27,21 @@ AGENDA IN GENERAL
     - write it in SQL
 - read/write permissions
 
+
+
+ERROR LOGdata
+ context
+ custom_message: 
+"sick mode = latin module = 4 progress = 1/2 lev..."
+ date: 
+"Thu, 31 Dec 2015 01:06:32 GMT"
+ error: 
+"TypeError: Cannot read property 'push' of undef..."
+ user: 
+"f2f2e1e7-1249-4678-aea1-6d15563fe87a"
+
+?????
+log_error initiated TypeError: b.replace is not a function(…)
 
 
 TIMING
