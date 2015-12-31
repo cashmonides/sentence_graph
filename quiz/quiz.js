@@ -166,11 +166,13 @@ Quiz.prototype.next_submodule = function(){
     var mod = this.get_start_module();
     
     
-    
-    console.log("DEBUG 12-28 mod, module_id =", mod, this.user.get_current_module(this.module.id));
-    console.log("DEBUG 12-28 submodule_number =", this.user.get_module(mod).progress);
+    console.log("DEBUG 12-30 log start time entered");
+    console.log("DEBUG 12-30 mod, module_id =", mod);
+    console.log("DEBUG 12-30 mod, get start module =", this.get_start_module());
+    console.log("DEBUG 12-30 get current module = ", this.user.get_current_module());
+    console.log("DEBUG 12-30 submodule_number via .progress =", this.user.get_module(mod).progress);
     this.user.log_submodule_start_time(mod, this.user.get_module(mod).progress);
-    console.log("DEBUG 12-28 log start time passed");
+    console.log("DEBUG 12-30 log start time passed");
     
     
     
@@ -257,6 +259,12 @@ Quiz.get_mode = function(mode_number) {
 
 
 Quiz.prototype.next_question = function (){
+    //todo make sure to uncomment this except when necessary (nuclear option)
+    // Persist.clear_node(["urgent_log"]);
+    
+    
+    
+    
     console.log('DEBUG 12-23 entering next_question')
     //previously:
     // this.next_mode();
@@ -307,7 +315,8 @@ Quiz.prototype.submodule_complete = function () {
     console.log("DEBUG 12-28 submodule_complete, about to call log_submodule_stop_time");
     console.log("DEBUG 12-28 module_id =", mod);
     console.log("DEBUG 12-28 submodule_number =", submodule_number);
-    this.user.log_submodule_stop_time(mod, submodule_number);
+    //todo 12-30 akiva moved this to a method in user
+    // this.user.log_submodule_stop_time(mod, submodule_number);
     console.log("DEBUG 12-28 log stop time passed");
     
     //progress bar
