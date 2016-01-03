@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <script src="auto_dictionary.js"></script>
+    <script src="objects.js"></script>
+    <script src="word_selector.js"></script>
+    <script src="submit_tag.js"></script>
+    <script src="process_brackets_recursive.js"></script>
+    <script src="load_sentence_1.js"></script>
+    <script src="generation_functions.js"></script>
+    <script src="all_and_sub_regions.js"></script>
+    <script src="word_tagger_2.js"></script>
+    <script src="new_sentence.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <!--The following box style prevents the default behavior of shift-click,
+    in which the text suddenly is turned blue in addition to red.-->
+    <div id="box" style="
+    user-select: none;
+   -moz-user-select: none;
+   "></div>
+    <div id="buttons"></div>
+    <p id="info"></p>
+    <label for="tags">Tags</label>
+    <select multiple size = "10" id="tags"></select>
+    <label for="regions">Regions</label>
+    <select multiple size = "10" id="regions"></select>
+    <label for="all_regions">Box of all regions</label>
+    <select multiple size = "10" id="all_regions"></select>
+    <label for="sub_regions">Box of sub regions</label>
+    <select multiple size = "10" id="sub_regions"></select>
+    <button id="new_sentence">New Sentence</button>
+    <button id="delete_tags">Delete Tags</button>
+</body>
+</html>

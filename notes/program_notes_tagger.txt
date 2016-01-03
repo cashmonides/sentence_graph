@@ -1,5 +1,5 @@
 - Dan not coding
-- Akiva coding 
+- Akiva not coding 
 
 Progress notes
 - Dan: finished latin question generation (has earlier functionality)
