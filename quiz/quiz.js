@@ -171,7 +171,7 @@ Quiz.prototype.next_submodule = function(){
     console.log("DEBUG 12-30 mod, get start module =", this.get_start_module());
     console.log("DEBUG 12-30 get current module = ", this.user.get_current_module());
     console.log("DEBUG 12-30 submodule_number via .progress =", this.user.get_module(mod).progress);
-    this.user.log_submodule_start_time(mod, this.user.get_module(mod).progress);
+    // this.user.log_submodule_start_time(mod, this.user.get_module(mod).progress);
     console.log("DEBUG 12-30 log start time passed");
     
     

@@ -21,6 +21,29 @@ var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate
     "preposition", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction",
     "coordinating conjunction"];
 
+var implied_tags = {
+    "subject": "noun",
+    "object": "noun",
+    "personal pronoun": "pronoun",
+    "relative pronoun": "pronoun",
+    "definite article": "article",
+    "indefinite article": "article"
+};
+
+var non_contradictory_tags = {
+    "subject": ["noun", "pronoun", "adjective", "personal pronoun", "relative pronoun"],
+    "object": ["noun", "pronoun", "adjective", "personal pronoun", "relative pronoun"],
+    "predicate": ["noun", "pronoun", "adjective", "personal pronoun", "relative pronoun"],
+    "noun": ["pronoun", "personal pronoun", "relative pronoun", "subject", "object", "predicate"],
+    "adjective": ["subject", "object", "predicate"],
+    "personal pronoun": ["subject", "object", "predicate", "noun", "pronoun"],
+    "relative pronoun": ["subject", "object", "predicate", "noun", "pronoun"],
+    "pronoun": ["subject", "object", "predicate", "noun", "personal pronoun", "relative pronoun"],
+    "definite article": ["article"],
+    "indefinite article": ["article"],
+    "article": ["definite article", "indefinite article"],
+}
+
 var sentence = null;
 var word_selector = null;
 
@@ -77,34 +100,56 @@ function new_text(text){
         update_subregions();
     });
     //M: Master flow logged below
-    //console.log"M: Sentence after autotagging: ", JSON.stringify(sentence));
+    //console.log("M: Sentence after autotagging: ", JSON.stringify(sentence));
 }
 
 
+//argument: string ('latin' 'english')
+//returns: a side effect
+function set_sentence_language(language_of_sentence) {
+    sentence.language_of_sentence = language_of_sentence;
+}
+
+// arguments: none
+// returns: a side effect (adds "untagged" to the class name of untagged words)
 function show_untagged_words() {
     var words = sentence.words;
     for (var i = 0; i < words.length; i++){
         if (sentence.get_region([i]).get_tags().length == 0) {
             var e = el(i);
             e.className += " untagged";
-            //console.log"untagged word", words[i]);
+            //console.log("untagged word", words[i]);
         }
     }
 }
 
-//called by: generate_buttons() - but where is generate_buttons called?
+// called by: generate_buttons()
+// argument is an integer (i.e. an index in the tag list)
 function submit_tag(tag_type){
-    
-    var tag = new SingleRegionTag(tag_list[tag_type]);
-    //console.log"submit tag triggered here");
-    //console.log"TEST OF tag type", tag, word_selector.highlighted_words.size, word_selector.highlighted_words.values());
+    var tag_type_as_string = tag_list[tag_type];
+    var tag = new SingleRegionTag(tag_type_as_string);
+    //console.log("submit tag triggered here");
+    //console.log("TEST OF tag type", tag, word_selector.highlighted_words.size, word_selector.highlighted_words.values());
 
     var indices = word_selector.get_selected_indices();                                                                //indices = highlighted words
-    //console.logindices);
+    //console.log(indices);
     var region = sentence.get_region(indices);                                                              //make a region to hold the tags
     if (region != undefined && region != null) {
+        
+        //checking for contradictory tags
+        var tag_types_to_keep = non_contradictory_tags[tag_type_as_string] || [];
+        console.log('tag_types_to_keep =', tag_types_to_keep);
+        region.remove_tags_not_in_list(tag_types_to_keep);
         //console.log"ADDING TAG ", tag);
         region.add_tag(tag);
+        
+        //checking for implied tags (a subject tag implies a noun tag)
+        if (tag_type_as_string in implied_tags) {
+            var implied_tag = new SingleRegionTag(implied_tags[tag_type_as_string]);
+            region.add_tag(implied_tag);
+        }
+        region.remove_duplicate_tags();
+        
         update_region_list();
         //todo additions below
         //if (tag.indexOf("clause") !== -1) {
@@ -203,7 +248,7 @@ function region_to_text(region){
 function generate_buttons() {
     var e = el("buttons");
     //console.log"tag_list = ", JSON.stringify(tag_list));
-    for (var i in tag_list) {
+    for (var i = 0; i < tag_list.length; i++) {
         e.innerHTML += "<button onclick=\"submit_tag(" + i + ")\">" + tag_list[i] + "</button>"
     }
 }
@@ -221,8 +266,6 @@ function delete_tags(){
     update_subregions();
 }
 
-
-
 function clear_all_highlights() {
     word_selector.clear();
 }
@@ -231,5 +274,10 @@ function clear_all_highlights() {
 //no input, calls save which has no return, just side effects: appends a child to firebase
 //called by: the submit button on the html page
 function submit_sentence(){
-    Sentence.save(sentence);
+    if (sentence.language_of_sentence == null) {
+        alert("no language specified");
+    } else {
+        console.log('language specified =', sentence.language_of_sentence);
+        Sentence.save(sentence);
+    }
 }

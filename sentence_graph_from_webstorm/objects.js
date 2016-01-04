@@ -160,6 +160,11 @@ Region.prototype.make_clause = function (clause_type) {
             this.set('antecedent', [])
         }
     }
+    // No matter what, we add the clause type as a tag
+    // and also log that we're doing so.
+    console.log('adding ' + clause_type + ' as a tag');
+    var tag = new SingleRegionTag(clause_type);
+    this.add_tag(tag);
 };
 
 // A clause takes a clause type and a list of included indices

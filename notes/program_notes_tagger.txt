@@ -1,5 +1,5 @@
 - Dan not coding
-- Akiva not coding 
+- Akiva not coding
 
 Progress notes
 - Dan: finished latin question generation (has earlier functionality)
@@ -13,6 +13,8 @@ Progress notes
    - need to add iteration, right now it just records submodule number
 
 AGENDA IN GENERAL
+- make sure nothing gets persisted for anonymous users
+- drop downs should show everything that they know (everything in part of speech filter), not just choices that are in the sentence
 - time stamp of start and stop of sub-module
     - kick it down the road until gio can help, seems to involve multiple callbacks
     - maybe model it on the get statements in admin
@@ -26,6 +28,53 @@ AGENDA IN GENERAL
     - write it as we've been doing using JSON and javascript
     - write it in SQL
 - read/write permissions
+
+LEVELS
+- latin grammatical level
+- etymological level
+- taxonomical level
+- grammar level (parts of speech filter)
+- tagged latin sentence level
+    - (i.e. what sentences they have to answer in latin)
+
+TAGGING - needed functionality
+- how do we deal with levels?
+    - goes in metadata 
+    - but how do we keep track of how hard it is
+    - options: M&F chapter number
+    - ????
+- add to module whether we want latin or english sentences or both
+- associate some metadata with the sentence
+    - e.g. if it's from Moreland & Fleischer and which chapter etc.
+- clause-assocation: there  are properties of each clause called subject, object, predicate (they're currently null)
+  we want these to be filled with the appropriate thing
+    - "\"subject\":null,\"object\":null,\"verb\":null,\"predicate\":null,\"clause_type\":\"main\""
+    - if the tag is of the category subject (or object predicate verb)
+    - then find the clause region it's in
+        - do we need a "detect clause we're in" function?
+        - is there a problem with overlapping clauses
+        - should we write a function that looks for overlapping clauses
+            - magister mihi librum donavit quem dixit legendum esse
+    = write the indices to the subject property of that clause
+- tag-removal:
+    - we want to be able to remove all tags
+    - if problematic at the clause level, we should at least be able to change it to unspecified
+    - a tag should replace previous tags (except where not contradictory)
+        - e.g. if "we" is autotagged as a personal pronoun and it's tagged manually as a subject
+        - e.g. if "first" is tagged as an adjective and it's tagged as an adverb
+    - non-contradictory list    
+        - pronoun || personal pronoun : subject, object, predicate, noun
+        - definite article : article
+- contradiction-testing
+    - some automatic way of testing for contradictory tags
+    
+
+
+
+
+
+TAGGING - bugs
+
 
 
 

@@ -30,7 +30,7 @@ var submit_tag = function (tag_type, sentence, indices, word_selector) {
             // We remove tags until there are none left.
             // (We specifically allow "subordinate clause: unspecified".)
             while (region.tags.some(function (x) {
-                return x.get_tag_type() !== "subordinate clause: unspecified"})) {
+                return x.get_tag_type() !== "unspecified clause"})) {
                 // We find the tag type of our tag.
                 var tag_checked = region.tags[0].get_tag_type();
                 if (tag_checked === "antecedent") {
@@ -54,7 +54,7 @@ var submit_tag = function (tag_type, sentence, indices, word_selector) {
                     // Note that we could probably get away with also cleaning up
                     // here, but there's no need, because it will be done
                     // later anyway.
-                    submit_tag("subordinate clause: unspecified", sentence, word_selector)
+                    submit_tag("unspecified clause", sentence, indices, word_selector)
                 } else {
                     // We remove the tag.
                     region.remove_tag(region.tags[0].get_tag_type())
@@ -103,6 +103,8 @@ var submit_tag = function (tag_type, sentence, indices, word_selector) {
                     region.add_tag(new SingleRegionTag("antecedent"));
                     // We make our word an antecedent of our clause.
                     g[d].clause.push_to("antecedent", sentence.get_region([indices[0]]));
+                    // We log our clause's antecedents.
+                    console.log('the antecedents are', g[d].clause['antecedent']());
                     sentence.antecdents_to_relative_clause_regions[indices[0]] = g[d];
                     // Push the first of the indices out.
                     indices.shift();
