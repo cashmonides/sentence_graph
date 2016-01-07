@@ -117,16 +117,22 @@ DropModeGame.prototype.make_drop_down = function(){
     
     console.log("DEBUG 11-18 doc.get.el.aw", document.getElementById("answer_wrapper"));
     console.log("DEBUG 11-18 doc.get.el.ac", document.getElementById("answer_choices"));
-    
     document.getElementById("answer_wrapper").appendChild(e);
     console.log("DEBUG 11-18 final append reached");
-    
-    console.log("DEBUG 11-18 dropdown data inserted = ", array_from(this.data.available_tags));
-    set_dropdown("select_element", array_from(this.data.available_tags));
+    // Originally, this.get_answer_choices() was effectively
+    // array_from(this.data.available_tags), but a current bugfix
+    // makes it seem more prudent to have a new method.
+    var answer_choices = this.get_answer_choices();
+    alert('OK 2');
+    console.log("DEBUG 11-18 dropdown data inserted = ", answer_choices);
+    alert('OK 3');
+    set_dropdown("select_element", answer_choices);
+    alert('OK 4');
 };
 
-
-
+DropModeGame.prototype.get_answer_choices = function () {
+    return this.quiz.module.parts_of_speech_filter;
+} 
 
 DropModeGame.prototype.process_answer = function() {
     var dd = el("select_element");
@@ -136,7 +142,7 @@ DropModeGame.prototype.process_answer = function() {
     var is_correct = contains(this.data.target_region.get_tag_types(), selected_answer);
 
     if (is_correct) {
-        //console.log"correct");
+        //console.log("correct");
         this.process_correct_answer();
     } else {
         //console.log"incorrect");
