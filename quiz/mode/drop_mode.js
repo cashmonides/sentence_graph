@@ -123,11 +123,8 @@ DropModeGame.prototype.make_drop_down = function(){
     // array_from(this.data.available_tags), but a current bugfix
     // makes it seem more prudent to have a new method.
     var answer_choices = this.get_answer_choices();
-    alert('OK 2');
     console.log("DEBUG 11-18 dropdown data inserted = ", answer_choices);
-    alert('OK 3');
     set_dropdown("select_element", answer_choices);
-    alert('OK 4');
 };
 
 DropModeGame.prototype.get_answer_choices = function () {

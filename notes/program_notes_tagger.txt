@@ -11,10 +11,11 @@ Progress notes
 - Akiva: added start and stop time stamp to module
    - has the same problem as module, needs to preserve old start times that were abandoned
    - need to add iteration, right now it just records submodule number
+- Dan: fixed drop downs to show everything in part of speech filter
+   - previously only choices in the sentence were showing
 
 AGENDA IN GENERAL
 - make sure nothing gets persisted for anonymous users
-- drop downs should show everything that they know (everything in part of speech filter), not just choices that are in the sentence
 - time stamp of start and stop of sub-module
     - kick it down the road until gio can help, seems to involve multiple callbacks
     - maybe model it on the get statements in admin
