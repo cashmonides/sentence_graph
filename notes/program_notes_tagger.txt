@@ -38,6 +38,45 @@ LEVELS
 - tagged latin sentence level
     - (i.e. what sentences they have to answer in latin)
 
+
+THREADS
+- from thread of execution
+- basically the set of mechanisms that run procedures in sequence
+    - get name of user
+    - look up phone number
+    - display phone number on screen
+- in the old days computers would do something called "context switching" - switching between tasks so quickly that no one notices, but never doing two things at the same time
+- an AJAX request and a response are going to use different threads
+- since they're on different threads, the control flow cant simply continue on the request thread
+- a callback does this:
+    - it has no relation to the calling thread
+    - it starts a new thread of execution
+    - callback tells the new thread what it's first thing to do is
+
+CALLBACK
+
+
+THE SQL APPROACH
+- javascript program sends the python program an AJAX request
+- python program responds by writing to a SQL database that is hosted on Media Temple
+
+- python program lives on media temple in part of the server on media temple
+
+- python mysql
+- python cgi (common gateway interface - how programming languages interact with a web server such as cgi)
+
+- mediatemple mysql
+    - look up database in mediatemple
+    - upload a schema
+    - make sure database account is set up in mediatemple
+    
+- library vs framework
+- old dbeaver stuff
+- install dbeaver
+
+
+
+
 TAGGING - needed functionality
 - how do we deal with levels?
     - goes in metadata 
