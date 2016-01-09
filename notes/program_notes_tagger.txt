@@ -8,17 +8,24 @@ Progress notes
 - Dan: about halfway through etymology
 - Akiva: added start and stop time stamp to module
     - still a little buggy: doesn't create a new start-time if they quit and start over, need to push to a list or something like that instead of rewriting a map
-- Akiva: added start and stop time stamp to module
+- Akiva: added start and stop time stamp to submodule
    - has the same problem as module, needs to preserve old start times that were abandoned
    - need to add iteration, right now it just records submodule number
 - Dan: fixed drop downs to show everything in part of speech filter
    - previously only choices in the sentence were showing
+- Akiva: finished all latin levels up to most advanced level we have, not fully proofread yet
+- Akiva: made etymology level up to level 7
 
 AGENDA IN GENERAL
+- refactor so we call latin_level and etym_level separately from module
+- isolate latin_display parameters into their own dictionary
+    - drop
+    - swap
+    - none
+    - dummy items
+    - etc.
+- try persist.push method for module and submodule
 - make sure nothing gets persisted for anonymous users
-- time stamp of start and stop of sub-module
-    - kick it down the road until gio can help, seems to involve multiple callbacks
-    - maybe model it on the get statements in admin
 - tutorials
 - debug etymology mode
 - converting short & simple drop downs into word selectors (to resemble quick mode)
@@ -29,6 +36,41 @@ AGENDA IN GENERAL
     - write it as we've been doing using JSON and javascript
     - write it in SQL
 - read/write permissions
+- remind akiva what shuffle: [true, false] means
+- test whether e.g. max 3 dropdown still works when we have only subject and object with non-zero values
+- isolate all issues of display from latin grammatical info, put it in a different kind of entity called something like "latin display level"
+    - drop
+    - none option
+    - dummy items
+- we need to make sure we have independence between:
+    - A - what parts of speech options they see to choose from
+        - they can't be given a choice like coordinating conjunction if they haven't learned it yet
+    - has to be independent of
+    - B - what parts of speech they are commonly tested on
+        - since we don't want to test easy parts of speech as often at advanced levels
+- likewise, we need independence between:
+    - A - what roots they are given choices of 
+    - B - what roots we ask about a lot
+- make a semi-final choice about what lives where
+    - should live in its own file
+        - latin_level
+        - etym_level
+    - might be simple enough to live inside of module
+        - part of speech filter
+    - lexicon can get very verbose so maybe it should live in its own file but it's nice to see it in each module
+- add synonyms to etymology mode and a type of question that asks about synonyms
+
+
+NON-PROGRAMMING
+- proofread modules for mistakes and consistency
+- proofread levels for mistakes and consistency
+- make all levels
+- add modules for all animals we have sillhouettes for
+- find/make sillhouettes for missing animals
+- make some taxonomy data
+    - as JSON
+    - as SQL??
+
 
 LEVELS
 - latin grammatical level

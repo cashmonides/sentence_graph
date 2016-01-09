@@ -1,0 +1,113 @@
+
+//first step is create the main table of students
+
+CREATE TABLE students (
+    student_id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    class TEXT,
+    yob  
+);
+
+
+
+//then make a table for each student with their performance
+
+
+CREATE TABLE history (
+    submodule_id INTEGER PRIMARY KEY,             //the submodule attempt
+    module INTEGER,
+    list_of_start_times LIST,
+    
+);
+
+
+//then make a table that shows the relationship between the tables (i.e. a relational table)
+//note that it has no primary key
+//each id in the relational table is the primary key in the tables it relates
+CREATE TABLE person_submodule (
+    student_id INTEGER,
+    submodule_id INTEGER
+);
+
+
+
+
+
+//every time a user account is created we write an insert statement
+
+INSERT INTO students (student_id, first_name, last_name, class, grade)
+VALUES (a, b, c, d, e);
+
+//every time a submodule is started
+INSERT INTO person_submodule (student_id, submodule_id)
+VALUES (a, b);
+
+//every time a metric is logged
+
+INSERT INTO history (submodule_id, module, list_of_start_times)
+VALUES (a, b, c);
+
+
+
+
+//here's an example of a select operation where we grab the stop_time of a player for a certain submodule
+//imagine we want "john johnson"'s stop ti e
+
+SELECT students.first_name, students.last_name, history.submodule_id, history.stop_time
+    FROM submodule, student_submodule, student
+    WHERE
+    history.submodule_id = student_submodule.submodule_id AND
+    students.student_id = student_submodule.student_id AND
+    person.last_name = "johnson";
+    
+    
+    
+//here's an example of a user we want to remove
+
+
+DELETE FROM students
+WHERE id = 1312321231321231;
+
+
+
+//once we delete a student, we also want to delete his history
+
+
+DELETE FROM history WHERE submodule_id IN (
+    SELECT history.submodule_id
+    FROM history, student_submodule, students
+    WHERE
+    students.student_id = student_submodule.student_id AND
+    history.submodule_id = student_submodule.submodule_id AND
+    students.last_name = "johnson"
+);
+
+
+DELETE FROM student_submodule
+    WHERE submodule_id NOT IN (
+        SELECT subodule_id FROM history
+    );
+
+
+
+
+//example - a user entered the wrong name and needs to change it
+
+UPDATE students SET last_name = "johnson"
+    WHERE last_name = "jonson";
+
+
+
+// example - we want to change a property of submodule in history, say we want to change the level
+
+
+
+UPDATE history SET level = "123" WHERE submodule_id IN (
+    SELECT submodule.submodule_id
+    FROM history, student_submodule, students
+    WHERE
+    students.student_id = student_submodule.student_id AND
+    history.submodule_id = student_submodule.submodule_id AND
+    students.last_name = "johnson"
+);
