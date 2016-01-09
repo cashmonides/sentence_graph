@@ -16,6 +16,37 @@ Progress notes
 - Akiva: finished all latin levels up to most advanced level we have, not fully proofread yet
 - Akiva: made etymology level up to level 7
 
+
+ITERATIONS
+- iteration 1.0: debugged with etymology mode adding definitions and possibly synonyms
+- iteration 2.0: adding genitives, datives, ablatives and conditionals, logging metrics into a simple SQL database, using jquery to improve dropdowns and other cosmetics
+- iteration 3.0: ??? 
+
+
+SUNDAY AGENDA
+1) flesh out all modules and levels (I'm about halfway done with this)
+
+2) make levels more modular. I.e. refactor so that latin_level and grammatical_level are accessed in their own files, not all lumped into one place
+- latin_level holds all grammatical information
+- latin_display_level holds all issues of how that's displayed (none, dummies, drop rations, etc.)
+- etym_level holds all roots and which one's they're to be tested on
+- parts_ of speech_filter can stay where it is since it's pretty simple
+
+3) find a few judiciously chosen places to put urgent error logs
+
+
+4) clean up cosmetics as best we can (different sized font, drop down headers)
+
+4) thoroughly test (maybe by cycling through all the levels)
+
+
+5) release to the students and monitor the urgent error log
+
+
+
+
+
+
 AGENDA IN GENERAL
 - refactor so we call latin_level and etym_level separately from module
 - isolate latin_display parameters into their own dictionary
@@ -45,7 +76,7 @@ AGENDA IN GENERAL
 - we need to make sure we have independence between:
     - A - what parts of speech options they see to choose from
         - they can't be given a choice like coordinating conjunction if they haven't learned it yet
-    - has to be independent of
+    has to be independent of
     - B - what parts of speech they are commonly tested on
         - since we don't want to test easy parts of speech as often at advanced levels
 - likewise, we need independence between:
@@ -59,7 +90,14 @@ AGENDA IN GENERAL
         - part of speech filter
     - lexicon can get very verbose so maybe it should live in its own file but it's nice to see it in each module
 - add synonyms to etymology mode and a type of question that asks about synonyms
-
+    - web-scraping for synonyms on thesaurus.com:
+        - each synonym string is preceded by the string "thesaurus.com/browse..."
+        - synonyms are the child of child of a div called: id="synonyms-0"
+        - but unfortunately so are antonyms, so we want to look for:
+            - div called id="synonyms-0"
+            - child of that div called: id="filters-0"
+            - the string preceded by thesaurus.com/browse and ending with "
+        
 
 NON-PROGRAMMING
 - proofread modules for mistakes and consistency
@@ -79,6 +117,21 @@ LEVELS
 - grammar level (parts of speech filter)
 - tagged latin sentence level
     - (i.e. what sentences they have to answer in latin)
+
+
+JQUERY GOALS
+- hover over a word and get a sillhouette or vocab help (sillhouette should flash and then fade out)
+- nested drop down
+    - love/eat/carry
+        - active/passive
+            - loves / loved/ will love / had loved etc.
+
+
+- some issues around fading background images
+    - from stack overflow: "You can fade background colors but not background images. The way to work around this is to have your images as <img> tags and hide them by default display:none;. Give your images position:absolute and z-index:-1 so they act like backgrounds and are behind everything else.
+
+
+
 
 
 THREADS

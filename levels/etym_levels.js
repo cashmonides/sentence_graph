@@ -23,5 +23,10 @@ var etym_levels = {
     70 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI', 'QUADR', 'PED', 'ARTHR', 
         'IN', 'VERTEBR', 'GASTR', 'MACR', 'MICR', 'MULTI', 'UNI', 'CELL']
+    },
+    80 : {
+        roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI', 'QUADR', 'TRI', 'PED', 'ARTHR', 
+        'IN', 'VERTEBR', 'GASTR', 'MACR', 'MICR', 'MULTI', 'UNI', 'CELL', 'MONO', 
+        'POLY', 'GON', 'METR', 'PENTA', 'HEX', 'OCT', 'DEC']
     }
 }
