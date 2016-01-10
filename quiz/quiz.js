@@ -312,12 +312,12 @@ Quiz.prototype.submodule_complete = function () {
     var submodule_number = this.user.get_module(mod).progress;
     
     //logging the stop time
-    console.log("DEBUG 12-28 submodule_complete, about to call log_submodule_stop_time");
-    console.log("DEBUG 12-28 module_id =", mod);
-    console.log("DEBUG 12-28 submodule_number =", submodule_number);
-    //todo 12-30 akiva moved this to a method in user
-    // this.user.log_submodule_stop_time(mod, submodule_number);
-    console.log("DEBUG 12-28 log stop time passed");
+    // console.log("DEBUG 12-28 submodule_complete, about to call log_submodule_stop_time");
+    // console.log("DEBUG 12-28 module_id =", mod);
+    // console.log("DEBUG 12-28 submodule_number =", submodule_number);
+    // //todo 12-30 akiva moved this to a method in user
+    // // this.user.log_submodule_stop_time(mod, submodule_number);
+    // console.log("DEBUG 12-28 log stop time passed");
     
     //progress bar
     console.log("DEBUG 11-16 quiz.submodule_complete entered");
@@ -428,12 +428,12 @@ Quiz.prototype.process_answer = function(){
 
 Quiz.prototype.get_lightbox_image = function(mod_id) {
     var image_list = ALL_MODULES[mod_id].lightbox_images;
-    console.log("DEBUG 12-3 image_list = ", image_list);
-    console.log("DEBUG 12-3 entering random_choice");
+    console.log("DEBUG 1-10 image_list = ", image_list);
+    console.log("DEBUG 1-10 entering image picking");
     
-    
-    var image = image_list[
-        (this.user.data.history[mod_id].progress - 1) % image_list.length];
+    var index = this.user.data.history[mod_id].progress % image_list.length;
+    var image = image_list[index];
+    console.log('index, image =', index, image)
     return image;
 }
 

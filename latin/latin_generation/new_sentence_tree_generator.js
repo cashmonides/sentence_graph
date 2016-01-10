@@ -33,7 +33,7 @@ function make_output(level, current_lexicon, none_display) {
     };
     master_lexeme_list.dummies_and_used = [];
     master_lexeme_list.all_lexemes = [];
-    var drop_down_settings = map_level_to_allowed(level)['drop_down_settings'];
+    var drop_down_settings = map_level_to_allowed(level, latin_extra_levels)['drop_down_settings'];
     var part_of_speech;
     var things_with_part_of_speech;
     var new_lexemes;
@@ -104,7 +104,7 @@ function make_output(level, current_lexicon, none_display) {
     console.log('DEBUG 12-23 english_template = ', english_template);
     
     var drop_non_drop_map = drop_non_drop_creation(
-        map_level_to_allowed(level)['drop_non_drop_map'], english_template);
+        map_level_to_allowed(level, latin_drop_levels)['drop_non_drop_map'], english_template);
 
     var r = {
         'question': "Translate the following sentence:",
@@ -173,8 +173,8 @@ function english_mental_wrap(choice, drop_downs, level) {
         var main_clause = {'type': 'non_drop', 'non_drop_text': 'the bird ' +
         (choice.kernel.sequence === 'primary' ? 'knows ': 'knew ') + ' ('};
         var conjunction_drop_or_not =
-            (Math.random() < map_level_to_allowed(level)['drop_non_drop_map']['conjunction_drop'])
-            && (is_sub_list(map_level_to_allowed(level)['clause_type'], ['iq', 'is']));
+            (Math.random() < map_level_to_allowed(level, latin_drop_levels)['drop_non_drop_map']['conjunction_drop'])
+            && (is_sub_list(map_level_to_allowed(level, latin_levels)['clause_type'], ['iq', 'is']));
         var conjunction_drop = {'type': 'drop down', choices: ['that', 'why'],
             heading: 'conjunction', correct_answer: conjunction};
         return [main_clause].concat(
@@ -194,6 +194,7 @@ function latin_mental_wrap(choice, sentence) {
 }
 
 function drop_non_drop_creation (drop_non_drop_allowed, template) {
+    console.log('important info;', drop_non_drop_allowed, template, template.length);
     var i = 0;
     while (i < 1000) {
         var drop_non_drop_map = {};

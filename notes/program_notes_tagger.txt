@@ -1,5 +1,5 @@
 - Dan not coding
-- Akiva not coding
+- Akiva coding
 
 Progress notes
 - Dan: finished latin question generation (has earlier functionality)
@@ -23,14 +23,26 @@ ITERATIONS
 - iteration 3.0: ??? 
 
 
+MAJOR BUGS
+- some pictures are too big (like horse)
+- improve mode jumps to frontier at completion, whereas it should go back to profile
+- latin sentence stays when switching from latin to etymology
+- lose highlighting sometimes but still asks what is the meaning of the highlighted word
+- completion of module n gives picture from module n +1
+
+
 SUNDAY AGENDA
 1) flesh out all modules and levels (I'm about halfway done with this)
 
+1.5) Debug 
+    - remove all the timestamps
+    - comb through and remove any persistence of anonymous user
+
 2) make levels more modular. I.e. refactor so that latin_level and grammatical_level are accessed in their own files, not all lumped into one place
-- latin_level holds all grammatical information
 - latin_display_level holds all issues of how that's displayed (none, dummies, drop rations, etc.)
 - etym_level holds all roots and which one's they're to be tested on
 - parts_ of speech_filter can stay where it is since it's pretty simple
+- import latin_levels.js script
 
 3) find a few judiciously chosen places to put urgent error logs
 

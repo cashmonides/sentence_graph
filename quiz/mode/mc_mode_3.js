@@ -81,7 +81,7 @@ MCMode3Game.prototype.next_question = function () {
     
     
     console.log("DEBUG entering 1st random_choice");
-    this.none_display = random_choice(map_level_to_allowed(this.level).none_display);
+    this.none_display = random_choice(map_level_to_allowed(this.level, latin_extra_levels).none_display);
     
     
     document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));

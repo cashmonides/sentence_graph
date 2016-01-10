@@ -30,12 +30,21 @@ var implied_tags = {
     "indefinite article": "article"
 };
 
+
+//todo down the road, when substantives are learned
+//if word or answer is substantive:
+//adjective : subject, object, predicate, substantive
+//substantive: subject, object, predicate, adjective
+//etc/
+
+//another option: create a distinct tag for substantive-subject, etc.
+
 var non_contradictory_tags = {
-    "subject": ["noun", "pronoun", "adjective", "personal pronoun", "relative pronoun"],
-    "object": ["noun", "pronoun", "adjective", "personal pronoun", "relative pronoun"],
+    "subject": ["noun", "pronoun", "personal pronoun", "relative pronoun"],
+    "object": ["noun", "pronoun", "personal pronoun", "relative pronoun"],
     "predicate": ["noun", "pronoun", "adjective", "personal pronoun", "relative pronoun"],
     "noun": ["pronoun", "personal pronoun", "relative pronoun", "subject", "object", "predicate"],
-    "adjective": ["subject", "object", "predicate"],
+    "adjective": ["predicate"],
     "personal pronoun": ["subject", "object", "predicate", "noun", "pronoun"],
     "relative pronoun": ["subject", "object", "predicate", "noun", "pronoun"],
     "pronoun": ["subject", "object", "predicate", "noun", "personal pronoun", "relative pronoun"],

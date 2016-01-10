@@ -362,6 +362,7 @@ var generate_current_lexicon = function (list_of_lexeme_strings) {
 };
 
 var return_lexicon_from_module = function (test_level) {
+    console.log('ALL_MODULES[test_level] = ', test_level, ALL_MODULES[test_level])
     console.log('DEBUG 11-16 lexicon = ', ALL_MODULES[test_level].lexicon)
     return ALL_MODULES[test_level].lexicon;
 };

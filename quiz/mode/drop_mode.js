@@ -150,7 +150,7 @@ DropModeGame.prototype.process_answer = function() {
 
 DropModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
 DropModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
-DropModeGame.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
+DropModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
 DropModeGame.prototype.process_correct_answer = function() {
     //console.log"answer matches target");
