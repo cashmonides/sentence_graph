@@ -1,7 +1,3 @@
-
-
-
-
 //extra items in lexicon and drop
 //none option
 var latin_extra_levels = {

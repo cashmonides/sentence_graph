@@ -15,16 +15,20 @@ Progress notes
    - previously only choices in the sentence were showing
 - Akiva: finished all latin levels up to most advanced level we have, not fully proofread yet
 - Akiva: made etymology level up to level 7
-
+- Akiva: fixed the problem of images that are too big
+- Akiva: fixed the off by one error by simply changing index to index -1
 
 ITERATIONS
 - iteration 1.0: debugged with etymology mode adding definitions and possibly synonyms
 - iteration 2.0: adding genitives, datives, ablatives and conditionals, logging metrics into a simple SQL database, using jquery to improve dropdowns and other cosmetics
 - iteration 3.0: ??? 
 
+PICTURE BUGS
+- if we have too few images do we get bugs?
+- wolf_04 broken
+
 
 MAJOR BUGS
-- some pictures are too big (like horse)
 - improve mode jumps to frontier at completion, whereas it should go back to profile
 - latin sentence stays when switching from latin to etymology
 - lose highlighting sometimes but still asks what is the meaning of the highlighted word
@@ -617,7 +621,21 @@ THE TERMINAL APPROACH TO UPDATING MEDIA TEMPLE
 - git pull origin master
 
 
+USING SSH TO CONNECT TO MYSQL ON MEDIA TEMPLE
+//connect to mediatemple via ssh
+ssh s211804.gridserver.com@s211804.gridserver.com
 
+//start the python shell (it will be version 2 not 3)
+python
+
+//we test whether we have the mysql library by running this and hopefully the import doesn't fail
+import _mysql
+
+//exit out of python shell
+exit()
+
+//exit out of ssh
+exit
 
 GIO
 - mediatemple

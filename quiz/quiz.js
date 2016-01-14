@@ -332,12 +332,13 @@ Quiz.prototype.submodule_complete = function () {
     var numerator = this.user.get_module(mod).progress;
     
     var denominator = ALL_MODULES[mod].threshold;
-    console.log("DEBUG 11-16 mod = ", mod);
-    console.log("DEBUG 11-16 numerator = ", numerator);
-    console.log("DEBUG 11-16 threshold = ", denominator);
+    // console.log("DEBUG 11-16 mod = ", mod);
+    // console.log("DEBUG 11-16 numerator = ", numerator);
+    // console.log("DEBUG 11-16 threshold = ", denominator);
         
     
-    console.log("DEBUGGING entering problem lightbox area 11-19");
+    // console.log("DEBUGGING entering problem lightbox area 11-19");
+    
     if (this.user.submodule_complete(this.module.id)) {
         console.log("DEBUG 11-16 user.submodule_complete is true");
         this.module = ALL_MODULES[this.user.get_current_module()];
@@ -350,7 +351,7 @@ Quiz.prototype.submodule_complete = function () {
         console.log("DEBUG 11-16 user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
         //todo make this less hacky
-        console.log("DEBUGGING LIGHTBOX: YOUR PROGRESS IS:", (numerator + 1) + "/" + denominator);
+        //console.log("DEBUGGING LIGHTBOX: YOUR PROGRESS IS:", (numerator + 1) + "/" + denominator);
         this.fill_lightbox("YOUR PROGRESS IS: " + (numerator + 1) + "/" + denominator);
         $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
     }
@@ -428,12 +429,17 @@ Quiz.prototype.process_answer = function(){
 
 Quiz.prototype.get_lightbox_image = function(mod_id) {
     var image_list = ALL_MODULES[mod_id].lightbox_images;
-    console.log("DEBUG 1-10 image_list = ", image_list);
-    console.log("DEBUG 1-10 entering image picking");
+    console.log("DEBUG 1-13 image_list = ", image_list);
+    console.log("DEBUG 1-13 entering image picking");
+    
+    console.log("DEBUG 11-13 progress = ", this.user.data.history[mod_id].progress);
+    
     
     var index = this.user.data.history[mod_id].progress % image_list.length;
-    var image = image_list[index];
-    console.log('index, image =', index, image)
+    
+    console.log("DEBUG 1-13 index = ", index);
+    var image = image_list[index-1];
+    console.log('image =', image);
     return image;
 }
 
@@ -445,7 +451,7 @@ Quiz.prototype.process_lightbox_image = function () {
     var image = this.get_lightbox_image(mod);
 
     
-    return '<img src="' + image +'" />'; 
+    return '<img style="max-height: 100%; max-width: 100%" src="' + image +'" />'; 
 }
 
 Quiz.prototype.fill_lightbox = function(text, lightbox) {
@@ -453,7 +459,7 @@ Quiz.prototype.fill_lightbox = function(text, lightbox) {
     
     var image = this.process_lightbox_image();
     
-    el('pop_up_div').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text + image + "end of new lightbox test";
+    el('pop_up_div').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text + image;
 };
 
 
