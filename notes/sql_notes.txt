@@ -2,11 +2,7 @@
 //first step is create the main table of students
 
 CREATE TABLE students (
-    student_id INTEGER PRIMARY KEY,
-    first_name TEXT,
-    last_name TEXT,
-    class TEXT,
-    yob  
+    student_id INTEGER PRIMARY KEY
 );
 
 
@@ -14,12 +10,14 @@ CREATE TABLE students (
 //then make a table for each student with their performance
 
 
-CREATE TABLE history (
-    submodule_id INTEGER PRIMARY KEY,             //the submodule attempt
+CREATE TABLE time_log (
+    submodule_id INTEGER,             //the submodule attempt
     module INTEGER,
-    list_of_start_times LIST,
-    
+    student_id INT PRIMARY KEY,
+    start_times INT,        //each row is a start time
 );
+
+
 
 
 //then make a table that shows the relationship between the tables (i.e. a relational table)
