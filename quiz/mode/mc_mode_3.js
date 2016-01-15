@@ -29,7 +29,6 @@ MCMode3Game.prototype.attach = function(){
 
 // set_level now moved up
 MCMode3Game.prototype.set_level = function (new_level) {
-    console.log("DEBUG 11-16 MCMode3Game new_level = ", new_level);
     this.level = new_level;
 }
 
@@ -41,11 +40,13 @@ MCMode3Game.prototype.get_mode_name = function() {
 
 
 MCMode3Game.prototype.next_question = function () {
-    var post_sampling_level = range_sampler(this.quiz.module.id);
+    var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_level'];
+    var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
     
     //sets up our lexicon
-    var list_of_lexeme_strings = return_lexicon_from_module(this.level);
+    console.log("DEBUG 1/15 this.quiz.module.id =", this.quiz, this.quiz.module, this.quiz.module.id)
+    var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
     console.log('DEBUG 11-16 lexicon = ', list_of_lexeme_strings)
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
     
@@ -77,14 +78,17 @@ MCMode3Game.prototype.next_question = function () {
     
     this.give_away_phrase = data.give_away_phrase;
     this.give_away_ending_phrase = data.give_away_ending_phrase;
-    this.correct_answer = this.drop_downs.map(function (x) {return x.correct_answer || x.non_drop_text}).join(' ');
+    this.correct_answer = this.drop_downs.map(function (x) {
+        return x.correct_answer || x.non_drop_text}).join(' ');
     
     
     console.log("DEBUG entering 1st random_choice");
-    this.none_display = random_choice(map_level_to_allowed(this.level, latin_extra_levels).none_display);
+    this.none_display = random_choice(map_level_to_allowed(
+        this.level.latin_extra_level, latin_extra_levels).none_display);
     
     
-    document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));
+    document.getElementById("answer_choices").removeChild(
+        document.getElementById('answer_wrapper'));
     
     var e = document.createElement('div');
     e.id = 'answer_wrapper';

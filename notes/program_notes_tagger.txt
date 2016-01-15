@@ -18,6 +18,8 @@ Progress notes
 - Akiva: fixed the problem of images that are too big
 - Akiva: fixed the off by one error by simply changing index to index -1
 
+
+
 ITERATIONS
 - iteration 1.0: debugged with etymology mode adding definitions and possibly synonyms
 - iteration 2.0: adding genitives, datives, ablatives and conditionals, logging metrics into a simple SQL database, using jquery to improve dropdowns and other cosmetics
@@ -25,28 +27,70 @@ ITERATIONS
 
 PICTURE BUGS
 - if we have too few images do we get bugs?
-- wolf_04 broken
+
+
+
+non-working images:
+
 
 
 MAJOR BUGS
-- improve mode jumps to frontier at completion, whereas it should go back to profile
-- latin sentence stays when switching from latin to etymology
-- lose highlighting sometimes but still asks what is the meaning of the highlighted word
-- completion of module n gives picture from module n +1
+- FIXED: HOMEBASE BUG improve mode jumps to frontier at completion, whereas it should go back to profile (HOMEBASE)
+    - quiz.advance_improve_status should do the trick
+    namely in user.js submodule_complete:
+    if (this.quiz.advance_improve_status === "improving") {
+            console.log("DEBUG 1-15 return to homebase triggered");
+            document.location = "../profile/";
+    } else {
+        this.start_module(module_id + 1);
+    }
+    
+    BUT:
+    this.quiz.advance_improve_status is undefined
+    it must be that this.quiz is an obsolete piece of data
+    so we need some way for user to access quiz.advance_improve_status
+    
+- FIXED (i think): latin sentence stays when switching from latin to etymology (OVERLAP)
+- (is this still showing up??): lose highlighting sometimes but still asks what is the meaning of the highlighted word (HIGHLIGHTING)
+- at end of module image is of next module
+- if improving, we get images from advancing module
+- if user name exists, they just get alert error with no info - add info to alert
+
+UNKNOWN BUGS
+- at end of horse (end of 9/10) Uncaught TypeError: Cannot read property 'lightbox_images' of undefined
+- after a latin sentence
+The correct answer was: the bull fears the bearundefined
+Classify the highlighted word.
 
 
-SUNDAY AGENDA
-1) flesh out all modules and levels (I'm about halfway done with this)
 
-1.5) Debug 
-    - remove all the timestamps
-    - comb through and remove any persistence of anonymous user
+URGENT LUXURIES
+- turn off opt groups for nouns (only useful for verbs)
+- to improve clarity: first item in latin drop downs should be subject, verb, object (even if they're clickable - we'll fix it in iteration 2)
 
-2) make levels more modular. I.e. refactor so that latin_level and grammatical_level are accessed in their own files, not all lumped into one place
-- latin_display_level holds all issues of how that's displayed (none, dummies, drop rations, etc.)
-- etym_level holds all roots and which one's they're to be tested on
-- parts_ of speech_filter can stay where it is since it's pretty simple
-- import latin_levels.js script
+
+LESS URGENT LUXURIES
+- definition and synonyms in etymology mode
+- sentences should have a difficulty level
+- in profile: alert statements should make more sense
+    - currently it says "continue advancing" even when it's their first time
+    
+    
+    
+
+FRIDAY AGENDA
+- tie the new levels we created to a parameter in modules
+    etym_level
+    grammar_level
+    latin_drop_level
+    latin_extra_level
+    latin_level
+- fix homebase bug
+- bug fix: broken images
+
+
+
+
 
 3) find a few judiciously chosen places to put urgent error logs
 

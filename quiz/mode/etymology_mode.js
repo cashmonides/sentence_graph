@@ -30,10 +30,14 @@ EtymologyModeGame.prototype.get_mode_name = function() {
 
 
 EtymologyModeGame.prototype.next_question = function(){
-    this.quiz.update_display();
+    var types_of_level = ['etym_level'];
+    var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
+    this.set_level(post_sampling_level);
     
+    this.quiz.update_display();
     if (!(this.quiz.module.id in this.words_and_roots)) {
-        this.words_and_roots[this.quiz.module.id] = get_words_and_roots(this.quiz.module.roots);
+        this.words_and_roots[this.quiz.module.id] = get_words_and_roots(
+            map_level_to_allowed(this.level.etym_level, etym_levels).roots);
     }
     
     var question = create_etymology_question(
@@ -44,6 +48,16 @@ EtymologyModeGame.prototype.next_question = function(){
     
     Quiz.set_question_text('Which of the answer choices has a root meaning "'
     + question.meaning_asked_about + '"?');
+    
+    
+    //todo
+    //etymology mode is the only mode without a word selector
+    //that leads to a problem: the previous word selector remains on the page
+    //the following a hacky solution that can probably be improved on
+    
+    var empty_word_selector = "";
+    this.quiz.set_word_selector(empty_word_selector);
+    
     
     //remove all html elements in drop down
     if (document.getElementById("answer_choices")) {

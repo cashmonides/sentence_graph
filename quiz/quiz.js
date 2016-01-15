@@ -69,6 +69,9 @@ Quiz.prototype.start = function(){
         this.user_loaded();
     }
     
+    // This is new, and seems a little hacky.
+    this.user.quiz = this;
+    
     var self = this;
     Sentence.get_all_sentences(function(ss){
         self.sentences = ss;
@@ -437,8 +440,12 @@ Quiz.prototype.get_lightbox_image = function(mod_id) {
     
     var index = this.user.data.history[mod_id].progress % image_list.length;
     
+    if (index != 0) {
+        index = index - 1;
+    }
+    
     console.log("DEBUG 1-13 index = ", index);
-    var image = image_list[index-1];
+    var image = image_list[index];
     console.log('image =', image);
     return image;
 }
@@ -465,8 +472,8 @@ Quiz.prototype.fill_lightbox = function(text, lightbox) {
 
 
 Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
-    
     var available_tags = sentence.get_all_tag_types(region_filter, tag_filter);
+    
     var target_tag = random_choice(array_from(available_tags));
     
     var tag_to_region = sentence.get_regions_for_tags(region_filter);

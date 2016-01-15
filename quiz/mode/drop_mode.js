@@ -29,8 +29,8 @@ DropModeGame.prototype.attach = function(){
     el("cheat_sheet_button").style.display = 'none';
 };
 
-DropModeGame.prototype.set_level = function () {
-    //todo (this will require assigning a level of some sort to grammatical concepts, parts of speech, etc. - distinct from latin level)
+DropModeGame.prototype.set_level = function (new_level) {
+    this.level = new_level;
 }
 
 DropModeGame.prototype.get_mode_name = function() {
@@ -41,21 +41,30 @@ DropModeGame.region_filter = function(region){
     return region.get_indices().length == 1;
 };
 
-DropModeGame.tag_filter = function (tag) {
-    // var dummy_part_of_speech_filter = ['subject', 'verb', 'object'];
-    var filter = this.quiz.module.parts_of_speech_filter;
-    return filter.indexOf(tag) !== -1;
+DropModeGame.tag_filter = function (filter) {
+    console.log('filter =', filter);
+    return function (tag) {
+        // var dummy_part_of_speech_filter = ['subject', 'verb', 'object'];
+        // var dummy_part_of_speech_filter = ['subject'];
+        return filter.indexOf(tag) !== -1;
+    }
 }
 
 
 DropModeGame.prototype.next_question = function(sentences){
-    
+    var types_of_level = ['grammar_level'];
+    var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
+    this.set_level(post_sampling_level);
     
     
     var sentence = random_choice(this.quiz.sentences);
     // sentence.debug();
     //todo below seems hacky
-    this.data = Quiz.pick_question_data(sentence, DropModeGame.region_filter, DropModeGame.tag_filter);
+    var filter = map_level_to_allowed(this.level.grammar_level, grammar_levels);
+    console.log('filter = ', filter);
+    this.data = Quiz.pick_question_data(sentence, DropModeGame.region_filter,
+    DropModeGame.tag_filter(filter));
+    console.log('this.data =', this.data);
     
     this.target_tag = this.data.target_tag;
     //todo add a filter onto available tags so that duplicates are eliminated (e.g. for cat we don't want noun & subject to be available tags because it could be both)
@@ -128,7 +137,7 @@ DropModeGame.prototype.make_drop_down = function(){
 };
 
 DropModeGame.prototype.get_answer_choices = function () {
-    return this.quiz.module.parts_of_speech_filter;
+    return map_level_to_allowed(this.level.grammar_level, grammar_levels);
 } 
 
 DropModeGame.prototype.process_answer = function() {

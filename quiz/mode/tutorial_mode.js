@@ -18,8 +18,8 @@ TutorialModeGame.prototype.attach = function(){
 };
 
 
-TutorialModeGame.prototype.set_level = function () {
-    //todo
+TutorialModeGame.prototype.set_level = function (new_level) {
+    this.level = new_level;
 }
 
 TutorialModeGame.prototype.get_mode_name = function() {
