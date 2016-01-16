@@ -210,10 +210,12 @@ DropModeGame.prototype.process_incorrect_answer = function() {
     } else {
         this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
         this.give_away_answer();
+        // this.give_away_answer also creates a new question
         //refresh_score();
     }
     this.quiz.update_display();
-    this.quiz.word_selector.clear();
+    // January 16th: Dan thinks this line looks suspicious here.
+    // this.quiz.word_selector.clear();
 };
 
 DropModeGame.prototype.give_away_answer = function(){

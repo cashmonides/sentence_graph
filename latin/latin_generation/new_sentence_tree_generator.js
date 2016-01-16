@@ -112,6 +112,7 @@ function make_output(level, current_lexicon, none_display) {
         'drop_downs': english_mental_wrap(correct, manage_drop_downs(
             correct, output, english_template, Language_enum.English, drop_non_drop_map), level),
         'give_away_phrase': "The correct answer was: ",
+        'give_away_ending_phrase': ".",
         'cheat_sheet': cheat_sheet(master_lexeme_list.get_lexemes_as_list('all_lexemes'))
     };
     console.log('DEBUG 12-23 make_output result = ', r);

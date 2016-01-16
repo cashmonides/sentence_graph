@@ -17,6 +17,7 @@ Progress notes
 - Akiva: made etymology level up to level 7
 - Akiva: fixed the problem of images that are too big
 - Akiva: fixed the off by one error by simply changing index to index -1
+- Dan: fixed the 'undefined' latin bug and the highlighting bug
 
 
 
@@ -61,6 +62,8 @@ UNKNOWN BUGS
 - after a latin sentence
 The correct answer was: the bull fears the bearundefined
 Classify the highlighted word.
+    - as of January 16th, the "undefined" is fixed
+    - highlighting also seems fixed (we were clearing the word selector)
 
 
 
