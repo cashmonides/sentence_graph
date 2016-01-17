@@ -1,5 +1,5 @@
 - Dan not coding
-- Akiva coding
+- Akiva not coding
 
 Progress notes
 - Dan: finished latin question generation (has earlier functionality)
@@ -26,70 +26,126 @@ ITERATIONS
 - iteration 2.0: adding genitives, datives, ablatives and conditionals, logging metrics into a simple SQL database, using jquery to improve dropdowns and other cosmetics
 - iteration 3.0: ??? 
 
-PICTURE BUGS
-- if we have too few images do we get bugs?
 
 
-
-non-working images:
-
+CHORE
+- add more animals
 
 
 MAJOR BUGS
-- FIXED: HOMEBASE BUG improve mode jumps to frontier at completion, whereas it should go back to profile (HOMEBASE)
-    - quiz.advance_improve_status should do the trick
-    namely in user.js submodule_complete:
-    if (this.quiz.advance_improve_status === "improving") {
-            console.log("DEBUG 1-15 return to homebase triggered");
-            document.location = "../profile/";
-    } else {
-        this.start_module(module_id + 1);
-    }
-    
-    BUT:
-    this.quiz.advance_improve_status is undefined
-    it must be that this.quiz is an obsolete piece of data
-    so we need some way for user to access quiz.advance_improve_status
-    
-- FIXED (i think): latin sentence stays when switching from latin to etymology (OVERLAP)
-- (is this still showing up??): lose highlighting sometimes but still asks what is the meaning of the highlighted word (HIGHLIGHTING)
-- at end of module image is of next module
-- if improving, we get images from advancing module
-- if user name exists, they just get alert error with no info - add info to alert
+- DAN DONE: at end of module image is of next module
+- AKIVA DONE: if improving, we get images from advancing module
+- AKIVA DONE: if user name exists, they just get alert error with no info - add info to alert
+- DAN DONE: noun and subject overlap
 
-UNKNOWN BUGS
-- at end of horse (end of 9/10) Uncaught TypeError: Cannot read property 'lightbox_images' of undefined
-- after a latin sentence
-The correct answer was: the bull fears the bearundefined
-Classify the highlighted word.
-    - as of January 16th, the "undefined" is fixed
-    - highlighting also seems fixed (we were clearing the word selector)
+- no control flow with wrong answers in etymology (i.e. no "wrong answer feedback")
+- probably clearing word selector in etymology mode? or something that produces no highlights
+- cancel on confirm gives another confirm
+- when having answered no questions in improve mode:
+    - current says what should go in previous
+    current: 66%    //it's not registering any questions answered so current is not giving what we want
+    best previous: 0%    //we want 66% already
+    current progress: 0/3	
+    0/3
+
+
+UNKNOWN BUGS???
+- Akiva, when playing, was at horse level but the lightbox images were of wolf - what happened? he was improving at wolf. Is this bug gone?
+
+
+- if we have too few images do we get bugs?
+
+
+- as of 1-17 this is the console log when a person creates an account - is the error at the end a problem?
+DEBUG 11-23 user uid: 643c6b50-873b-4b2f-b07c-a76c842b6989
+user.js:59 LOG user data: Object {history: Object, profile: Object}
+user.js:786 DEBUG 11-22 frontier triggered because history is empty
+user.js:872 entering get_progress
+user.js:873 DEBUG 11-22 this.data.history[module_id] undefined
+user.js:880 DEBUG 11-22 undefined mod progress detected
+user.js:887 DEBUG 11-20 numerator =  0
+user.js:890 DEBUG 11-20 denominator =  2
+user.js:792 DEBUG 11-22 mod =  undefined
+user.js:795 DEBUG 11-20 !mod triggered, therefore incomplete
+user.js:792 DEBUG 11-22 mod =  undefined
+user.js:795 DEBUG 11-20 !mod triggered, therefore incomplete
+utils.js:486 log_error initiated TypeError: Cannot read property 'id' of undefined(…)
+
+
+- as of 1-17 this came up:
+current level: undefined
+quiz.js:271 DEBUG 12-23 entering next_question
+quiz.js:276 DEBUG 12-23 entering try block
+quiz.js:211 DEBUG 11-28 entering next_mode
+quiz.js:214 DEBUG 12-23 allowed before =  Object {latin: 0.1, drop: 0.9, quick: 0.9, etymology: 0.9}
+quiz.js:282 DEBUG 12-23 entering catch block error caught
+firebase.js:36 FIREBASE WARNING: Exception was thrown by user callback. TypeError: Cannot read property 'get_mode_name' of null
+    at Quiz.next_question (https://sentence-graph-cashmonides.c9.io/quiz/quiz.js:284:34)
+    at Quiz.next_submodule (https://sentence-graph-cashmonides.c9.io/quiz/quiz.js:207:10)
+    at Quiz.next_module (https://sentence-graph-cashmonides.c9.io/quiz/quiz.js:153:10)
+    at https://sentence-graph-cashmonides.c9.io/quiz/quiz.js:78:14
+    at wrapped_callback (https://sentence-graph-cashmonides.c9.io/lib/sentence.js:208:9)
+    at https://sentence-graph-cashmonides.c9.io/lib/persist.js:34:9
+    at c (https://cdn.firebase.com/js/client/2.3.1/firebase.js:232:55)
+    at https://cdn.firebase.com/js/client/2.3.1/firebase.js:46:642
+    at Db (https://cdn.firebase.com/js/client/2.3.1/firebase.js:43:165)
+    at zb (https://cdn.firebase.com/js/client/2.3.1/firebase.js:22:216) 
+firebase.js:43 Uncaught TypeError: Cannot read property 'get_mode_name' of null
+
+
 
 
 
 URGENT LUXURIES
+- change hover behavior
+    - for levels that aren't clickable:
+        - cursor should just be normal (arrow)
+        - no red
+    - for levels that are clickable:
+        - cursor should be hand
+        - red
+    - clickable levels:
+        - frontier
+        - improving (if an improving module is already set)
+        - all pre-frontier levels (if no improving module is already set)
 - turn off opt groups for nouns (only useful for verbs)
 - to improve clarity: first item in latin drop downs should be subject, verb, object (even if they're clickable - we'll fix it in iteration 2)
+- check to make sure this is fully operational: users with special email addresses (2nd graders who don't have their own email witll be given dummy account with tag.bestiary & lls.bestiary)
+    - these users must not be able to click on the reset password box
+- when children enter password it should be hidden
 
 
 LESS URGENT LUXURIES
 - definition and synonyms in etymology mode
 - sentences should have a difficulty level
-- in profile: alert statements should make more sense
-    - currently it says "continue advancing" even when it's their first time
+- custom alert/confirm box (some raw code for this in profile.js)
+- a more sophisticated version of the overlapping tags with a level-sensitive list
+    - at an early stage (before substantives are introduced): adjective and subject can coexists
+    - at a later stage (after substantives are introduced and a substantive is the answer): adjective and subject cannot coexist
+- etymology mode should lose the testbox
+- cleanup: make sure the information we migrated to their own levels (etymlevel, grammar level etc.) doesn't live anywhere else    
+- give away answer should occur on the same page as question, so they can compare the question with the right answer. As is, they need to remember what the question was from previously. And it overlaps with the current question which is just confusing.
+ 
     
-    
-    
+NOT AT ALL URGENT LUXURIES
+- the following code seems wrong in login.js so Akiva changed it but check if it's ok when more time(if user is invalid they shouldn't be told a password reset has been sent to your email right?!)
+var callback = function(error) {
+        if (error) {
+            switch (error.code) {
+                case "INVALID_USER":
+                    console.log("The specified user account does not exist.");
+                    alert("A PASSWORD RESET HAS BEEN SENT TO YOUR EMAIL");
+                    break;
+                default:
+                    console.log("Error resetting password:", error);
+            }
+        } else {
+            console.log("Password reset email sent successfully!");
+            alert("A PASSWORD RESET HAS BEEN SENT TO YOUR EMAIL");
+        }
+    };
+- transitional lightbox image (i.e. you beat wolf and move to horse) should be special and fun and instill a sense of adventure
 
-FRIDAY AGENDA
-- tie the new levels we created to a parameter in modules
-    etym_level
-    grammar_level
-    latin_drop_level
-    latin_extra_level
-    latin_level
-- fix homebase bug
-- bug fix: broken images
 
 
 

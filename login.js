@@ -48,7 +48,8 @@ function create_account() {
     var callback = function(error, userData) {
         if (error) {
             console.log("Error creating user:", error);
-            alert("Error: ", error);
+            //todo should an urgent error log go here???
+            alert(error);
         } else {
             console.log("Successfully created user account with uid:", userData);
             User.set_initial_data(userData.uid, n, c, login);
@@ -128,7 +129,7 @@ function reset_password() {
             switch (error.code) {
                 case "INVALID_USER":
                     console.log("The specified user account does not exist.");
-                    alert("A PASSWORD RESET HAS BEEN SENT TO YOUR EMAIL");
+                    alert("The specified user account does not exist");
                     break;
                 default:
                     console.log("Error resetting password:", error);

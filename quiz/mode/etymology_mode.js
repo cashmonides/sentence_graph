@@ -126,7 +126,7 @@ EtymologyModeGame.prototype.process_answer = function() {
 
 EtymologyModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
 EtymologyModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
-EtymologyModeGame.cell_2_feedback_wrong = ["Try again!", "Take another shot."];
+EtymologyModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
 EtymologyModeGame.prototype.process_correct_answer = function() {
     //console.log"answer matches target");
@@ -168,7 +168,7 @@ EtymologyModeGame.prototype.process_incorrect_answer = function() {
     
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
         var cell_2;
-        cell_2 = "DUMMY WRONG FEEDBACK";
+        cell_2 = "";
     
         var cell_1 = random_choice(EtymologyModeGame.cell_1_feedback_wrong);
         var cell_3 = random_choice(EtymologyModeGame.cell_3_feedback_wrong);
@@ -185,7 +185,7 @@ EtymologyModeGame.prototype.process_incorrect_answer = function() {
 
 EtymologyModeGame.prototype.give_away_answer = function(){
     var fbox = el("feedbackbox");
-    fbox.innerHTML = "DUMMY GIVE AWAY ANSWER";
+    fbox.innerHTML = "The correct answer was \"" + this.correct + '"';
     
     // var self = this;
     // this.quiz.sentence.get_regions_with_tag(this.target_tag).forEach(function(r){

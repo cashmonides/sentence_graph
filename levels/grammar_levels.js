@@ -23,7 +23,9 @@ var grammar_levels = {
 var overlapping_tag_map = {
     "subject" : ['noun'],
     "object" : ['noun'],
-    "predicate" : ['noun', 'adjective']
+    "predicate" : ['noun', 'adjective'],
+    "noun": ['subject', 'object', 'predicate'],
+    "adjective": ['predicate']
 }
 
 /*

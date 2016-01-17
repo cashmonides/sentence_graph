@@ -15,13 +15,21 @@ var DropModeGame = function(){
     //todo should this really be like this
     this.data = null;
     this.quiz = null;
-
+    // This is useful when non_contradictory_tag_map changes
+    // and makes it clear that it's a property of the game.
+    // For example, adjective and subject shouldn't overlap
+    // until they have a sentence with a substantive, or at least
+    // know about it. But this is not built in yet.
+    console.log('testing nctm');
+    console.log('testing nctm', 'non_contradictory_tag_map' in window)
+    console.log(non_contradictory_tag_map);
+    this.non_contradictory_tag_map = non_contradictory_tag_map;
 };
 
 
 DropModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
-    //(should word_selector.setup bave a flag for clickable or not clickable?
+    //(should word_selector.setup have a flag for clickable or not clickable?
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
     el("answer_choices").style.display = 'initial';
     el("submit_button").style.display = 'initial';
@@ -80,10 +88,8 @@ DropModeGame.prototype.next_question = function(sentences){
     Quiz.set_question_text("Classify the highlighted word.");
     //todo does the following need to be parameterized with make not clickable and set highlighted
     this.quiz.set_word_selector(this.data.sentence);
-    
     this.quiz.word_selector.is_clickable = false;
     this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
-
     var is = this.data.target_region.get_indices();
     for (var i = 0; i < is.length; i++) {
         this.quiz.word_selector.set_highlighted(is[i], true);
@@ -95,9 +101,7 @@ DropModeGame.prototype.next_question = function(sentences){
             document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));
             console.log("DEBUG 11-18 remove html elements triggered");
         }
-        
     }
-    
     //make html elements
     this.make_drop_down();
     
@@ -137,7 +141,21 @@ DropModeGame.prototype.make_drop_down = function(){
 };
 
 DropModeGame.prototype.get_answer_choices = function () {
-    return map_level_to_allowed(this.level.grammar_level, grammar_levels);
+    var target_tag = this.target_tag;
+    var original_attempt = map_level_to_allowed(this.level.grammar_level, grammar_levels);
+    var order = shuffle(original_attempt.slice(0)).filter(
+        function (x) {return x !== target_tag});
+    order.unshift(target_tag);
+    var conflicting_tags;
+    for (var i = 0; i < order.length; i++) {
+        if (original_attempt.indexOf(order[i]) !== -1) {
+            conflicting_tags = this.non_contradictory_tag_map[order[i]] || [];
+            original_attempt = original_attempt.filter(function (x) {
+                return conflicting_tags.indexOf(x) === -1;
+            })
+        }
+    }
+    return original_attempt;
 } 
 
 DropModeGame.prototype.process_answer = function() {
@@ -201,7 +219,7 @@ DropModeGame.prototype.process_incorrect_answer = function() {
     
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
         var cell_2;
-        cell_2 = "DUMMY WRONG FEEDBACK";
+        cell_2 = "";
     
         var cell_1 = random_choice(DropModeGame.cell_1_feedback_wrong);
         var cell_3 = random_choice(DropModeGame.cell_3_feedback_wrong);
@@ -220,7 +238,8 @@ DropModeGame.prototype.process_incorrect_answer = function() {
 
 DropModeGame.prototype.give_away_answer = function(){
     var fbox = el("feedbackbox");
-    fbox.innerHTML = "DUMMY GIVE AWAY ANSWER";
+    //todo add a give away answer when we come up with a good way of generating it
+    fbox.innerHTML = "";
     
     // var self = this;
     // this.quiz.sentence.get_regions_with_tag(this.target_tag).forEach(function(r){

@@ -197,7 +197,8 @@ Quiz.prototype.next_submodule = function(){
     // this.next_mode();
     // todo new begins here
     console.log("current module:", this.module);
-    console.log("current level:", this.module.level);
+    // This isn't really helpful
+    // console.log("current level:", this.module.level);
     //todo below is old, make sure new version works (in next_question)
     // this.game.set_level(this.module.level);
     //todo important - I commented this out, not sure if it breaks anything - it seems to not do anything
@@ -236,11 +237,7 @@ Quiz.prototype.next_mode = function(){
     
     
     var mode = weighted(allowed);
-    
     var game = Quiz.get_mode(game_mode_map[mode]);
-    
-    
-    
     this.game = game;
     //todo understand the following
     this.game.quiz = this;
@@ -311,7 +308,12 @@ Quiz.prototype.question_complete = function(){
 Quiz.prototype.submodule_complete = function () {
     
     //the module_id (int) - a variable used a lot below by a number of functions
-    var mod = this.user.get_current_module(this.module.id);
+    if (this.advance_improve_status === 'advancing') {
+        var mod = this.user.get_current_module(this.module.id);
+    } else {
+        var mod = this.user.get_improving_module(this.module.id);
+    }
+    
     var submodule_number = this.user.get_module(mod).progress;
     
     //logging the stop time
@@ -347,8 +349,8 @@ Quiz.prototype.submodule_complete = function () {
         this.module = ALL_MODULES[this.user.get_current_module()];
         
         
-        console.log("DEBUGGING LIGHTBOX: you've beeaten this level");
-        this.fill_lightbox("YOU'VE BEATEN THIS LEVEL");
+        console.log("DEBUGGING LIGHTBOX: you've beaten this level");
+        this.fill_lightbox("YOU'VE BEATEN THIS LEVEL! EXCELSIOR!! GET READY TO CONQUER:");
         $.featherlight($('#pop_up_div'), {afterClose: this.next_module.bind(this)});
     } else {
         console.log("DEBUG 11-16 user.submodule_complete is false");
@@ -452,8 +454,17 @@ Quiz.prototype.get_lightbox_image = function(mod_id) {
 
 
 Quiz.prototype.process_lightbox_image = function () {
-    var mod = this.user.get_current_module();
-    console.log("DEBUG 12-3 mod = ", mod);
+    //todo 1-17 following is Akiva's additions, check if OK
+    var mod;
+    if (this.advance_improve_status === "advancing") {
+        mod = this.user.get_current_module();
+        console.log("DEBUG 1-17 advancing status triggered, mod = ", mod);
+    } else if (this.advance_improve_status === "improving") {
+        mod = this.user.get_improving_module();
+        console.log("DEBUG 1-17 improving status triggered, mod = ", mod);
+    }
+    
+    
   
     var image = this.get_lightbox_image(mod);
 

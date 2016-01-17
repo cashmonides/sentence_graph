@@ -39,7 +39,7 @@ var implied_tags = {
 
 //another option: create a distinct tag for substantive-subject, etc.
 
-var non_contradictory_tags = {
+var non_contradictory_tag_map = {
     "subject": ["noun", "pronoun", "personal pronoun", "relative pronoun"],
     "object": ["noun", "pronoun", "personal pronoun", "relative pronoun"],
     "predicate": ["noun", "pronoun", "adjective", "personal pronoun", "relative pronoun"],
@@ -146,7 +146,7 @@ function submit_tag(tag_type){
     if (region != undefined && region != null) {
         
         //checking for contradictory tags
-        var tag_types_to_keep = non_contradictory_tags[tag_type_as_string] || [];
+        var tag_types_to_keep = non_contradictory_tag_map[tag_type_as_string] || [];
         console.log('tag_types_to_keep =', tag_types_to_keep);
         region.remove_tags_not_in_list(tag_types_to_keep);
         //console.log"ADDING TAG ", tag);

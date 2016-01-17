@@ -26,13 +26,13 @@ ProfilePage.enter_improve = function () {
     if (!mod_id) {
         if (!this.user.get_module(1)) {
             // The user hasn't even began module 1.
-            alert("You haven't started the game yet. Complete some modules and then improve your accuracy.")
+            alert("You haven't started the game yet. Complete some modules and then you can improve your accuracy on them.")
         } else if (this.user.get_module(1).iteration === 0) {
             // The user hasn't finished module 1.
             console.log("LOG no improving module detected");
             alert("You don't have any completed modules to improve. Complete some modules and then improve your accuracy.");
         } else {
-            alert("click on a completed module to improve your accuracy");
+            alert("Click on a completed module to improve your accuracy.");
         }
             
             
@@ -60,25 +60,28 @@ ProfilePage.display_profile = function() {
     var e1 = el("name_box");
     e1.innerHTML = "Welcome " + player_name;
 
-    //todo fix dummy value here
+    
     var current_module_id = this.user.get_current_module();
     var current_universal_module = ALL_MODULES[current_module_id];
     var current_universal_module_name = current_universal_module.icon_name;
     var e2 = el("level_box");
-    e2.innerHTML = "your level is: " + current_universal_module_name;
+    e2.innerHTML = "Your level is: " + current_universal_module_name;
     
     this.build_progress_table(this.user);
 };
 
+
+
+//todo archive for later (this was testing persist)
 //dummy function for testing
 //proof of concept - how to persist.get something simple like user name
-ProfilePage.alert_name = function () {
-    Persist.get([path], display_name);
-}
+// ProfilePage.alert_name = function () {
+//     Persist.get([path], display_name);
+// }
 
-function display_name(data) {
-    console.log("name = ", data);
-}
+// function display_name(data) {
+//     console.log("name = ", data);
+// }
 
 
 // //path terminates in a node with a time stamp
@@ -98,10 +101,10 @@ function display_name(data) {
 // return: int which is number of levels from current_module
 ProfilePage.get_module_distance = function (user, module_id) {
     var current_module_id = user.get_current_module();
-    console.log("DEBUG blur mode, current_module_id=", current_module_id);
+    // console.log("DEBUG blur mode, current_module_id=", current_module_id);
     var distance = module_id - current_module_id;
-    console.log("DEBUG blur mode: distance = ", distance);
-    console.log("DEBUG blur mode module_id - current_mod = distance", module_id + " - " + current_module_id + " = " + distance);
+    // console.log("DEBUG blur mode: distance = ", distance);
+    // console.log("DEBUG blur mode module_id - current_mod = distance", module_id + " - " + current_module_id + " = " + distance);
     return distance;
 }
 
@@ -112,8 +115,6 @@ ProfilePage.build_progress_table = function(user) {
         var row = make({tag: "tr"}, table);
         var max_columns = 4;
         var order = get_module_order();
-    
-        
         
         for (var i = 0; i < order.length; i++) {
             var mod = ALL_MODULES[order[i]];
@@ -162,9 +163,9 @@ ProfilePage.build_progress_table = function(user) {
 
 //todo make get_display_caption produce an html element
 ProfilePage.get_display_caption = function (user, module_id) {
-    console.log("DEBUG 11-22 entering get_display_caption");
+    
     var classification = user.classify_module(module_id);
-    console.log("DEBUG 11-22 classification = ", classification);
+    
     switch (classification) {
         case "completed" : return user.get_max_accuracy(module_id) + "%";
         case "frontier" : return user.get_progress(module_id).join("/");
@@ -173,7 +174,7 @@ ProfilePage.get_display_caption = function (user, module_id) {
         case "improving" : return {
             tag : "span",
             children : [
-                "current: " + user.get_max_accuracy(module_id) + "%",
+                "current: " + user.get_current_accuracy(module_id) + "%",
                 {tag : "br"}, 
                 "best previous: " + user.get_previous_max_accuracy(module_id) + "%",
                 {tag : "br"}, 
@@ -239,18 +240,18 @@ ProfilePage.select_improvement_module = function(mod_id){
         }
         
         switch (status) {
-            case 1 : if (confirm("would you like to improve your accuracy at this level?")) {
+            case 1 : if (confirm("Would you like to improve your accuracy at this level?")) {
                             // alert("you would be entering the improvement level now");
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
                         } 
-            case 2 : if (confirm("would you like to continue improving your accuracy at this level?")) {
+            case 2 : if (confirm("Would you like to continue improving your accuracy at this level?")) {
                             // alert("you would be entering the improvement level now");
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
                         } 
             case 3 : return;
-            case 4 : if (confirm("would you like to continue advancing at this level?")) {
+            case 4 : if (confirm("Would you like to advance at this level?")) {
                             // alert("you would be entering the advance level now");
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
