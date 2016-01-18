@@ -51,6 +51,8 @@ var Quiz = function () {
     //this.sick_modes = new Set();
     this.sick_modes = [];
     
+    // This will show images from future levels.
+    this.urge_users_to_continue = true;
 };
 
 
@@ -334,7 +336,6 @@ Quiz.prototype.submodule_complete = function () {
     
     
     //setting up lightbox
-    
     var numerator = this.user.get_module(mod).progress;
     
     var denominator = ALL_MODULES[mod].threshold;
@@ -346,12 +347,20 @@ Quiz.prototype.submodule_complete = function () {
     // console.log("DEBUGGING entering problem lightbox area 11-19");
     var callback = this.user.submodule_complete(this.module.id);
     if (callback) {
-        console.log("DEBUG 11-16 user.submodule_complete is true");
-        this.module = ALL_MODULES[this.user.get_current_module()];
-        
-        console.log("DEBUGGING LIGHTBOX: you've beaten this level");
-        this.fill_lightbox("YOU'VE BEATEN THIS LEVEL! EXCELSIOR!! GET READY TO CONQUER:");
-        $.featherlight($('#pop_up_div'), {afterClose: callback});
+        if (this.advance_improve_status === 'improving') {
+            callback();
+        } else {
+            console.log("DEBUG 11-16 user.submodule_complete is true");
+            this.module = ALL_MODULES[this.user.get_current_module()];
+            
+            console.log("DEBUGGING LIGHTBOX: you've beaten this level");
+            if (this.urge_users_to_continue) {
+                this.fill_lightbox("YOU'VE BEATEN THIS LEVEL! EXCELSIOR!! GET READY TO CONQUER:", 1, 0);
+            } else {
+                this.fill_lightbox("YOU'VE BEATEN THIS LEVEL! EXCELSIOR!!");
+            }
+            $.featherlight($('#pop_up_div'), {afterClose: callback});
+        }
     } else {
         console.log("DEBUG 11-16 user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
@@ -361,6 +370,8 @@ Quiz.prototype.submodule_complete = function () {
         $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
     }
 };
+
+
 
 
 Quiz.prototype.update_display = function() {
@@ -432,15 +443,23 @@ Quiz.prototype.process_answer = function(){
 };
 
 
-Quiz.prototype.get_lightbox_image = function(mod_id) {
+Quiz.prototype.get_lightbox_image = function(mod_id, progress) {
     var image_list = ALL_MODULES[mod_id].lightbox_images;
     if (image_list) {
         console.log("DEBUG 1-13 image_list = ", image_list);
         console.log("DEBUG 1-13 entering image picking");
-        var progress = (mod_id in this.user.data.history) ?
-        this.user.data.history[mod_id].progress : 0;
+        var true_progress;
+        if (mod_id in this.user.data.history) {
+            if (progress === undefined) {
+                true_progress = this.user.data.history[mod_id].progress;
+            } else {
+                true_progress = progress;
+            }
+        } else {
+            true_progress = 0;
+        }
         
-        var index = (progress - 1) % image_list.length;
+        var index = (true_progress - 1) % image_list.length;
         
         if (index === -1) {index++};
         
@@ -455,7 +474,7 @@ Quiz.prototype.get_lightbox_image = function(mod_id) {
 }
 
 
-Quiz.prototype.process_lightbox_image = function () {
+Quiz.prototype.process_lightbox_image = function (offset, progress) {
     //todo 1-17 following is Akiva's additions, check if OK
     var mod;
     if (this.advance_improve_status === "advancing") {
@@ -466,17 +485,17 @@ Quiz.prototype.process_lightbox_image = function () {
         console.log("DEBUG 1-17 improving status triggered, mod = ", mod);
     }
     
-    
+    if (offset !== undefined) {mod += offset}
   
-    var image = this.get_lightbox_image(mod);
+    var image = this.get_lightbox_image(mod, progress);
     
     return image ? ('<img style="max-height: 100%; max-width: 100%" src="' + image +'" />') : ''; 
 }
 
-Quiz.prototype.fill_lightbox = function(text, lightbox) {
+Quiz.prototype.fill_lightbox = function(text, offset, progress) {
     var name = this.user.data.profile.name;
     
-    var image = this.process_lightbox_image();
+    var image = this.process_lightbox_image(offset, progress);
     
     el('pop_up_div').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text + image;
 };

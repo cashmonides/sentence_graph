@@ -25,6 +25,7 @@ Progress notes
 - Dan: it seems that the last of the bugs is dead
    - let us rejoice
    - a default value of 0 for nothing answered yet is used
+- Dan: fixed all bugs; added a parameter in quiz for whether lightboxes would urge user to continue
 
 
 
