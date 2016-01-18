@@ -1,5 +1,5 @@
 var etym_levels = {
-    10 : {
+    1 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR']
     },
     20 : {

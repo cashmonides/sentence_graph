@@ -39,8 +39,12 @@ CHORE
 - add more animals
 
 
+TASKS
+- comment out roots and parts of speech filter and test
+
 MAJOR BUGS
-None known
+
+
 
 UNKNOWN BUGS???
 - Akiva, when playing, was at horse level but the lightbox images were of wolf - what happened? he was improving at wolf. Is this bug gone?
@@ -103,7 +107,7 @@ LESS URGENT LUXURIES
 - etymology mode should lose the testbox
 - cleanup: make sure the information we migrated to their own levels (etymlevel, grammar level etc.) doesn't live anywhere else    
 - give away answer should occur on the same page as question, so they can compare the question with the right answer. As is, they need to remember what the question was from previously. And it overlaps with the current question which is just confusing.
- 
+- cheat sheet for etymology
     
 NOT AT ALL URGENT LUXURIES
 - the following code seems wrong in login.js so Akiva changed it but check if it's ok when more time(if user is invalid they shouldn't be told a password reset has been sent to your email right?!)

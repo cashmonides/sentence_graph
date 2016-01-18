@@ -165,7 +165,6 @@ ProfilePage.build_progress_table = function(user) {
 ProfilePage.get_display_caption = function (user, module_id) {
     
     var classification = user.classify_module(module_id);
-    
     switch (classification) {
         case "completed" : return user.get_max_accuracy(module_id) + "%";
         case "frontier" : return user.get_progress(module_id).join("/");
@@ -179,10 +178,10 @@ ProfilePage.get_display_caption = function (user, module_id) {
                 "best previous: " + user.get_previous_max_accuracy(module_id) + "%",
                 {tag : "br"}, 
                 "current progress: " + user.get_progress(module_id).join("/"),
-                {tag : "br"},
-                "number of times played",
+                {tag : "br"}
+                /*"number of times played",
                 {tag : "br"}, 
-                "(not counting this one): " + user.get_iteration(module_id)
+                "(not counting this one): " + user.get_iteration(module_id)*/
                 ]
         };
         case "uncompleted" : return "";

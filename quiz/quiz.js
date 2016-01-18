@@ -120,6 +120,7 @@ Quiz.prototype.get_start_module = function(){
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         return ups["mod"];
     } else {
+        console.log('DEBUG 1-18 mod not in parameters');
         this.advance_improve_status = "advancing";
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         return this.user.get_current_module();
@@ -306,7 +307,7 @@ Quiz.prototype.question_complete = function(){
 
 
 Quiz.prototype.submodule_complete = function () {
-    
+    console.log('this.advance_improve_status =', this.advance_improve_status);
     //the module_id (int) - a variable used a lot below by a number of functions
     if (this.advance_improve_status === 'advancing') {
         var mod = this.user.get_current_module(this.module.id);
@@ -343,15 +344,14 @@ Quiz.prototype.submodule_complete = function () {
         
     
     // console.log("DEBUGGING entering problem lightbox area 11-19");
-    
-    if (this.user.submodule_complete(this.module.id)) {
+    var callback = this.user.submodule_complete(this.module.id);
+    if (callback) {
         console.log("DEBUG 11-16 user.submodule_complete is true");
         this.module = ALL_MODULES[this.user.get_current_module()];
         
-        
         console.log("DEBUGGING LIGHTBOX: you've beaten this level");
         this.fill_lightbox("YOU'VE BEATEN THIS LEVEL! EXCELSIOR!! GET READY TO CONQUER:");
-        $.featherlight($('#pop_up_div'), {afterClose: this.next_module.bind(this)});
+        $.featherlight($('#pop_up_div'), {afterClose: callback});
     } else {
         console.log("DEBUG 11-16 user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
@@ -434,20 +434,22 @@ Quiz.prototype.process_answer = function(){
 
 Quiz.prototype.get_lightbox_image = function(mod_id) {
     var image_list = ALL_MODULES[mod_id].lightbox_images;
-    console.log("DEBUG 1-13 image_list = ", image_list);
-    console.log("DEBUG 1-13 entering image picking");
-    
-    console.log("DEBUG 11-13 progress = ", this.user.data.history[mod_id].progress);
-    
-    
-    var index = this.user.data.history[mod_id].progress % image_list.length;
-    
-    if (index != 0) {
-        index = index - 1;
+    if (image_list) {
+        console.log("DEBUG 1-13 image_list = ", image_list);
+        console.log("DEBUG 1-13 entering image picking");
+        var progress = (mod_id in this.user.data.history) ?
+        this.user.data.history[mod_id].progress : 0;
+        
+        var index = (progress - 1) % image_list.length;
+        
+        if (index === -1) {index++};
+        
+        console.log("DEBUG 1-13 index = ", index);
+        var image = image_list[index];
+    } else {
+        console.log('image list does not exist');
+        var image = null;
     }
-    
-    console.log("DEBUG 1-13 index = ", index);
-    var image = image_list[index];
     console.log('image =', image);
     return image;
 }
@@ -467,9 +469,8 @@ Quiz.prototype.process_lightbox_image = function () {
     
   
     var image = this.get_lightbox_image(mod);
-
     
-    return '<img style="max-height: 100%; max-width: 100%" src="' + image +'" />'; 
+    return image ? ('<img style="max-height: 100%; max-width: 100%" src="' + image +'" />') : ''; 
 }
 
 Quiz.prototype.fill_lightbox = function(text, lightbox) {

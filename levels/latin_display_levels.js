@@ -420,7 +420,7 @@ var latin_drop_levels = {
     //equal distribution of s, v  and o
     //only one drop
     //no extras
-    10: {
+    1: {
         drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0,
             min: 1, max: 1}
     },
@@ -454,41 +454,77 @@ var latin_drop_levels = {
     },
     
     
+    
+    //noun dominant
+    //only one drop
+    //no extras
+    110: {
+        drop_non_drop_map: {'subject_drop': .8, 'verb_drop': .3, 'object_drop': .8, 'conjunction_drop': 0,
+            min: 1, max: 1}
+    },
+    //noun dominant
+    //drops 1-2
+    //no extras
+    120: {
+        drop_non_drop_map: {'subject_drop': .8, 'verb_drop': .3, 'object_drop': .8, 'conjunction_drop': 0,
+            min: 1, max: 2}
+    },
+    //noun dominant
+    //drops 1-3
+    //no extras
+    130: {
+        drop_non_drop_map: {'subject_drop': .8, 'verb_drop': .3, 'object_drop': .8, 'conjunction_drop': 0,
+            min: 1, max: 3}
+    },
+    //noun dominant
+    //drops 2-3
+    140: {
+        drop_non_drop_map: {'subject_drop': .8, 'verb_drop': .3, 'object_drop': .8, 'conjunction_drop': 0,
+            min: 2, max: 3}
+    },
+    //noun dominant
+    //drops 3
+    150: {
+        drop_non_drop_map: {'subject_drop': .8, 'verb_drop': .3, 'object_drop': .8, 'conjunction_drop': 0,
+            min: 3, max: 3}
+    },
+    
+    
     //////////////////////////////////
     
     
     //verb only
     //1 drop
     //no extras
-    110: {
+    210: {
         drop_non_drop_map: {'subject_drop': 0, 'verb_drop': 1, 'object_drop': 0, 'conjunction_drop': 0,
             min: 1, max: 1}
     },
     //verb dominant 1 vs. .3
     //1-2 drops
     //no extras
-    120: {
+    220: {
         drop_non_drop_map: {'subject_drop': 0.3, 'verb_drop': .9, 'object_drop': 0.3, 'conjunction_drop': 0,
             min: 1, max: 2}
     },
     //verb dominant 1 vs. .3
     //1-3 drops
     //no extras
-    130: {
+    230: {
         drop_non_drop_map: {'subject_drop': 0.3, 'verb_drop': .9, 'object_drop': 0.3, 'conjunction_drop': 0,
             min: 1, max: 3}
     },
     //verb dominant 1 vs. .3
     //2-3 drops
     //no extras
-    140: {
+    240: {
         drop_non_drop_map: {'subject_drop': 0.3, 'verb_drop': .9, 'object_drop': 0.3, 'conjunction_drop': 0,
             min: 2, max: 3}
     },
     //verb dominant 1 vs. .3
     //3 drops
     //no extras
-    150: {
+    250: {
         drop_non_drop_map: {'subject_drop': 0.3, 'verb_drop': .9, 'object_drop': 0.3, 'conjunction_drop': 0,
             min: 3, max: 3}
     },
@@ -498,28 +534,28 @@ var latin_drop_levels = {
     //verb dominant 1 vs. .7
     //1-2 drops
     //no extras
-    160: {
+    260: {
         drop_non_drop_map: {'subject_drop': 0.7, 'verb_drop': .9, 'object_drop': 0.7, 'conjunction_drop': 0,
             min: 1, max: 2}
     },
     //verb dominant 1 vs. .7
     //1-3 drops
     //no extras
-    170: {
+    270: {
         drop_non_drop_map: {'subject_drop': 0.7, 'verb_drop': .9, 'object_drop': 0.7, 'conjunction_drop': 0,
             min: 1, max: 3}
     },
     //verb dominant 1 vs. .7
     //2-3 drops
     //no extras
-    180: {
+    280: {
         drop_non_drop_map: {'subject_drop': 0.7, 'verb_drop': .9, 'object_drop': 0.7, 'conjunction_drop': 0,
             min: 2, max: 3}
     },
     //verb dominant 1 vs. .7
     //3 drops
     //no extras
-    190: {
+    290: {
         drop_non_drop_map: {'subject_drop': 0.7, 'verb_drop': .9, 'object_drop': 0.7, 'conjunction_drop': 0,
             min: 3, max: 3}
     },
