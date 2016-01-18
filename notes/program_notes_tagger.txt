@@ -18,6 +18,13 @@ Progress notes
 - Akiva: fixed the problem of images that are too big
 - Akiva: fixed the off by one error by simply changing index to index -1
 - Dan: fixed the 'undefined' latin bug and the highlighting bug
+- Dan: fixed the word selector highlighting bug
+    - (word selector cleared in quick mode after next question is created)
+- Dan: fixed the double confirm bug
+    - break in 'if', not outside
+- Dan: it seems that the last of the bugs is dead
+   - let us rejoice
+   - a default value of 0 for nothing answered yet is used
 
 
 
@@ -33,66 +40,37 @@ CHORE
 
 
 MAJOR BUGS
-- DAN DONE: at end of module image is of next module
-- AKIVA DONE: if improving, we get images from advancing module
-- AKIVA DONE: if user name exists, they just get alert error with no info - add info to alert
-- DAN DONE: noun and subject overlap
+None known
 
-- no control flow with wrong answers in etymology (i.e. no "wrong answer feedback")
-- probably clearing word selector in etymology mode? or something that produces no highlights
-- cancel on confirm gives another confirm
+UNKNOWN BUGS???
+- Akiva, when playing, was at horse level but the lightbox images were of wolf - what happened? he was improving at wolf. Is this bug gone?
+
+- -- This is the last bug, and it shall __die__.
 - when having answered no questions in improve mode:
     - current says what should go in previous
     current: 66%    //it's not registering any questions answered so current is not giving what we want
     best previous: 0%    //we want 66% already
     current progress: 0/3	
     0/3
-
-
-UNKNOWN BUGS???
-- Akiva, when playing, was at horse level but the lightbox images were of wolf - what happened? he was improving at wolf. Is this bug gone?
-
+- current: NaN%
+- believed to be dead, but not quite sure
 
 - if we have too few images do we get bugs?
 
+- profile throws error
+log_error initiated
+TypeError: undefined is not an object (evaluating 'mod.id')
+column: 34
+line: 122
+message: "undefined is not an object (evaluating 'mod.id')"
+sourceURL: "http://sentence-graph-cashmonides.c9.io/profile/profile.js"
+stack: [very long so deleted]
+TypeError Prototype
+No actual problems were noted.
 
-- as of 1-17 this is the console log when a person creates an account - is the error at the end a problem?
-DEBUG 11-23 user uid: 643c6b50-873b-4b2f-b07c-a76c842b6989
-user.js:59 LOG user data: Object {history: Object, profile: Object}
-user.js:786 DEBUG 11-22 frontier triggered because history is empty
-user.js:872 entering get_progress
-user.js:873 DEBUG 11-22 this.data.history[module_id] undefined
-user.js:880 DEBUG 11-22 undefined mod progress detected
-user.js:887 DEBUG 11-20 numerator =  0
-user.js:890 DEBUG 11-20 denominator =  2
-user.js:792 DEBUG 11-22 mod =  undefined
-user.js:795 DEBUG 11-20 !mod triggered, therefore incomplete
-user.js:792 DEBUG 11-22 mod =  undefined
-user.js:795 DEBUG 11-20 !mod triggered, therefore incomplete
-utils.js:486 log_error initiated TypeError: Cannot read property 'id' of undefined(…)
-
-
-- as of 1-17 this came up:
-current level: undefined
-quiz.js:271 DEBUG 12-23 entering next_question
-quiz.js:276 DEBUG 12-23 entering try block
-quiz.js:211 DEBUG 11-28 entering next_mode
-quiz.js:214 DEBUG 12-23 allowed before =  Object {latin: 0.1, drop: 0.9, quick: 0.9, etymology: 0.9}
-quiz.js:282 DEBUG 12-23 entering catch block error caught
-firebase.js:36 FIREBASE WARNING: Exception was thrown by user callback. TypeError: Cannot read property 'get_mode_name' of null
-    at Quiz.next_question (https://sentence-graph-cashmonides.c9.io/quiz/quiz.js:284:34)
-    at Quiz.next_submodule (https://sentence-graph-cashmonides.c9.io/quiz/quiz.js:207:10)
-    at Quiz.next_module (https://sentence-graph-cashmonides.c9.io/quiz/quiz.js:153:10)
-    at https://sentence-graph-cashmonides.c9.io/quiz/quiz.js:78:14
-    at wrapped_callback (https://sentence-graph-cashmonides.c9.io/lib/sentence.js:208:9)
-    at https://sentence-graph-cashmonides.c9.io/lib/persist.js:34:9
-    at c (https://cdn.firebase.com/js/client/2.3.1/firebase.js:232:55)
-    at https://cdn.firebase.com/js/client/2.3.1/firebase.js:46:642
-    at Db (https://cdn.firebase.com/js/client/2.3.1/firebase.js:43:165)
-    at zb (https://cdn.firebase.com/js/client/2.3.1/firebase.js:22:216) 
-firebase.js:43 Uncaught TypeError: Cannot read property 'get_mode_name' of null
-
-
+TODO 
+- test getting wrong answers
+- test logging/logging in/ creating duplicate accounts/forgetting passowrd
 
 
 

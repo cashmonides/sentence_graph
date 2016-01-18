@@ -178,7 +178,11 @@ ProfilePage.get_display_caption = function (user, module_id) {
                 {tag : "br"}, 
                 "best previous: " + user.get_previous_max_accuracy(module_id) + "%",
                 {tag : "br"}, 
-                "current progress: " + user.get_progress(module_id).join("/")
+                "current progress: " + user.get_progress(module_id).join("/"),
+                {tag : "br"},
+                "number of times played",
+                {tag : "br"}, 
+                "(not counting this one): " + user.get_iteration(module_id)
                 ]
         };
         case "uncompleted" : return "";

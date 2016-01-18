@@ -225,7 +225,8 @@ MCMode3Game.prototype.process_incorrect_answer = function () {
         this.give_away_answer();
     }
     this.quiz.update_display();
-    this.quiz.word_selector.clear();
+    // MCMode3 has no real word selector
+    // this.quiz.word_selector.clear();
 };
 
 MCMode3Game.prototype.give_away_answer = function (){

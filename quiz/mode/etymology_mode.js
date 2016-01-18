@@ -180,7 +180,8 @@ EtymologyModeGame.prototype.process_incorrect_answer = function() {
         //refresh_score();
     }
     this.quiz.update_display();
-    this.quiz.word_selector.clear();
+    // Etymology hasd no word selector
+    // this.quiz.word_selector.clear();
 };
 
 EtymologyModeGame.prototype.give_away_answer = function(){

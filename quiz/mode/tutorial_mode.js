@@ -79,15 +79,13 @@ TutorialModeGame.prototype.process_incorrect_answer = function() {
         var cell_3 = random_choice(TutorialModeGame.cell_3_feedback_wrong);
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
+        this.quiz.word_selector.clear();
     } else {
         this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
         this.give_away_answer();
         //refresh_score();
     }
     this.quiz.update_display();
-    
-    this.quiz.word_selector.clear();
-
 };
 
 

@@ -166,6 +166,7 @@ function submit_tag(tag_type){
         //}
     }
     //console.logsentence);
+    console.log('I, 1, am responcible.')
     word_selector.clear();
     // debug(indices);
     
@@ -223,6 +224,7 @@ function update_subregions(){
 
     // select words in the gui
     var is = region.get_indices();
+    console.log('I, 2, am responcible.')
     word_selector.clear();
     for(var i in is){
         word_selector.set_highlighted(is[i], true);
@@ -276,6 +278,7 @@ function delete_tags(){
 }
 
 function clear_all_highlights() {
+    console.log('I, 3, am responcible.')
     word_selector.clear();
 }
 
