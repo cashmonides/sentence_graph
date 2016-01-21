@@ -116,12 +116,17 @@ ProfilePage.build_progress_table = function(user) {
         var max_columns = 4;
         var order = get_module_order();
         
+        var hoverable_types = ['improving', 'frontier',
+        'completed_no_improving'];
+        
         for (var i = 0; i < order.length; i++) {
             var mod = ALL_MODULES[order[i]];
         
             var mod_history = mod.id in user.data.history ? user.get_module(mod.id) : null;
-                            
-            var img_class = mod_history && mod_history.iteration > 0 ? ["progress_image", "complete"] : ["progress_image", "incomplete"];
+            
+            var hoverability = hoverable_types.indexOf(user.classify_module_plus(mod.id)) !== -1;
+            
+            var img_class = ["progress_image", hoverability ? 'hoverable_mod': 'non_hoverable_mod'];
             
             
             // in progress
@@ -132,23 +137,26 @@ ProfilePage.build_progress_table = function(user) {
             } else {
                 blur_amount = 0;
             }
-            
-
-            
-            make({
-                tag: "td", 
-                class: ["progress_cell"], 
-                onclick: ProfilePage.select_improvement_module(mod.id),
-                children: [
-                    {tag: "img", class: img_class, src: mod.icon_url, style : {
+            var m = {
+                'tag': "td", 
+                'class': ["progress_cell"],
+                'children': [
+                    {'tag': "img", 'class': img_class, 'src': mod.icon_url, 'style' : {
                         "-webkit-filter": "blur(" + blur_amount + "px)",
-                        filter: "blur(" + blur_amount + "px)"
+                        'filter': "blur(" + blur_amount + "px)"
                         }
                     },                      //UNIVERSAL MODULE
-                    {tag: "br"},
+                    {'tag': "br"},
                     this.get_display_caption(this.user, order[i])
                 ]
-            }, row);
+            }
+            
+            if (hoverability) {
+                m.onclick = ProfilePage.select_improvement_module(mod.id);
+                m.class.push('clickable')
+            }
+            
+            make(m, row);
     
     
             if (i > 0 && i % max_columns == 0) {

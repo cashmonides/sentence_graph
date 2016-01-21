@@ -26,6 +26,8 @@ Progress notes
    - let us rejoice
    - a default value of 0 for nothing answered yet is used
 - Dan: fixed all bugs; added a parameter in quiz for whether lightboxes would urge user to continue
+- Dan: fixed hover behavior (almost; it seems that to make background color
+change with images that are not png is difficult)
 
 
 
@@ -72,6 +74,8 @@ sourceURL: "http://sentence-graph-cashmonides.c9.io/profile/profile.js"
 stack: [very long so deleted]
 TypeError Prototype
 No actual problems were noted.
+  - This was a bug symptom and is believed to be gone,
+  as discovered on January 18th (but not noted here until the 19th)
 
 TODO 
 - test getting wrong answers
@@ -91,6 +95,7 @@ URGENT LUXURIES
         - frontier
         - improving (if an improving module is already set)
         - all pre-frontier levels (if no improving module is already set)
+    - give levels clickable property? function? ???
 - turn off opt groups for nouns (only useful for verbs)
 - to improve clarity: first item in latin drop downs should be subject, verb, object (even if they're clickable - we'll fix it in iteration 2)
 - check to make sure this is fully operational: users with special email addresses (2nd graders who don't have their own email witll be given dummy account with tag.bestiary & lls.bestiary)
@@ -128,6 +133,7 @@ var callback = function(error) {
         }
     };
 - transitional lightbox image (i.e. you beat wolf and move to horse) should be special and fun and instill a sense of adventure
+- there shouldn't be 5 images on the first row (only 4)
 
 
 

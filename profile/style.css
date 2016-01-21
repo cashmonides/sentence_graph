@@ -5,11 +5,10 @@
     /*height: 100%*/
 }
 
-.complete:hover {
+.hoverable_mod:hover {
     background: red;
     border: solid 2px black;
 }
-
 
 .incomplete {
     opacity: 0.4;
@@ -17,10 +16,12 @@
     /*filter: blur(5px);*/
 }
 
-
 .progress_cell {
     text-align: center;
     margin: 20px;
+}
+
+.clickable {
     cursor: pointer;
 }
 
