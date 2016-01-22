@@ -87,7 +87,7 @@ def insert_row(ups):
     # logging.debug("db connected")
     c = db.cursor()
     # c = db.cursor (MySQLdb.cursors.DictCursor)
-    c.execute("INSERT INTO TIME_METRICS VALUES (" + row[0] + ", " + row[1] + \
+    c.execute("INSERT INTO time_metrics VALUES (" + row[0] + ", " + row[1] + \
         ", " + row[2] + ", \"" + row[3] + "\", " + row[4] + " )"  )
     # logging.debug("db execute")
     # rows = c.fetchall()

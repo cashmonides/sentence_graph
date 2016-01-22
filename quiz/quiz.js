@@ -168,16 +168,12 @@ Quiz.prototype.next_submodule = function(){
         incorrect_streak: 0
     };
     
-    //logging start time
-    console.log("DEBUG 12-28 log start time entered");
+
     
     
     
     
     
-    console.log("DEBUG 1-21 mod, module_id =", mod);
-    console.log("DEBUG 1-21 mod, get start module =", this.get_start_module());
-    console.log("DEBUG 12-30 submodule_number via .progress =", this.user.get_module(mod).progress);
     
     /*
     
