@@ -1,6 +1,8 @@
 function sorted_choices(output, key_for_word) {
     return map_by_text(separate_by_lexeme(quick_sort(output[key_for_word], custom_sort))).map(
-        function (x) {return {'subheading': x.subheading, 'choices': unique_items(x.choices)}});
+        function (x) {return {'subheading': x.subheading,
+        'choices': unique_items(x.choices), 'opt_groups':
+        key_for_word.split('_')[0] === 'verb'}});
 }
 
 function quick_sort(list, f) {

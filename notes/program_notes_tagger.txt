@@ -31,17 +31,45 @@ change with images that are not png is difficult)
 
 
 
+LO-PROIORITY BUGS
+- anonymous user doesn't get progress updated on profile page (one solution: disable the return to profile for anonymous users)
+
 ITERATIONS
-- iteration 1.0: debugged with etymology mode adding definitions and possibly synonyms
-- iteration 2.0: adding genitives, datives, ablatives and conditionals, logging metrics into a simple SQL database, using jquery to improve dropdowns and other cosmetics
-- iteration 3.0: ??? 
+ITERATION 1.0 
+- add etymology question types
+    - word to word_definition   "What is the meaning of the word QUADRUPED?"
+    - root to root_meaning   "What is the meaning of the root PED?"
+    - root_meaning to root  "which of the following roots means "foot"?
+    - root to word    "Which word has a root meaning "all"?
+    - word to root    "Select the root of the word QUADRUPED"
+- etymology cheat sheet
+- get rid of naughty words
+    - change them to grade 13  (letter A-D done)
+- post sql time data
+- size of text with drop downs
+- add root: VERTEBR & words: vertebrate, invertebrate, vertebra & make sure to add to etym levels
+- add root: CELL and words: cellular, multicellular, unicellular, cellulitis, celluloid, cellulose
+- add new words which Akiva gathered (webscrape for definitions and check)
+- test user logged in on 2 separate computers
+- test compatibility on different browsers
+- revisit admin page, check that it's working
+    - add number of ioterations poer module
 
 
-
-
-
-
-
+ITERATION 2.0
+- jquery dropdowns
+- add genitives
+- add datives
+- add ablatives
+- specify in lexicon what words can take the dative and ablatives and genitives
+- drop-down headings (subject, verb, object
+- reduce image file size  (e.g. there's a bear that loads slow)
+- disable prompt "do you want google chrome to rememeber your password" 
+- minify certain files???
+- final image is currently "get ready to conquer + image of next animal" it should be the current animal
+- clean out / possibly remove log from firebase (looks like it's a weak duplicate of urgent error log)
+- clean out all console.log
+- log accuracy attached to mode
 
 
 
@@ -51,25 +79,16 @@ CHORE
 - add more animals
 
 
-TASKS
-- comment out roots and parts of speech filter and test
+
 
 MAJOR BUGS
 
 
 
 UNKNOWN BUGS???
-- Akiva, when playing, was at horse level but the lightbox images were of wolf - what happened? he was improving at wolf. Is this bug gone?
 
-- -- This is the last bug, and it shall __die__.
-- when having answered no questions in improve mode:
-    - current says what should go in previous
-    current: 66%    //it's not registering any questions answered so current is not giving what we want
-    best previous: 0%    //we want 66% already
-    current progress: 0/3	
-    0/3
-- current: NaN%
-- believed to be dead, but not quite sure
+
+
 
 - if we have too few images do we get bugs?
 

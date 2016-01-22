@@ -49,12 +49,13 @@ def get_url_parameters():
 
 # a map of the parameters to connect to the database
 dbs = {
-    "user": "",
-    "passwd": "",
-    "db": "",
+    "user": "db211804_dummy2",
+    "passwd": "Dummy@12345",
+    "db": "db211804_bestiary_database",
     "port": 3306,
-    "host": "internal-db..gridserver.com"
+    "host": "internal-db.s211804.gridserver.com"
 }
+
 
 # the main meat of the function
 #
@@ -87,8 +88,14 @@ def insert_row(ups):
     # logging.debug("db connected")
     c = db.cursor()
     # c = db.cursor (MySQLdb.cursors.DictCursor)
+    
+    #shouldn't it be str(row[0])? Or is row[0] given as str?
+    # In python, "INSERT INTO time_metrics VALUES (" + 6 gives an error.
     c.execute("INSERT INTO time_metrics VALUES (" + row[0] + ", " + row[1] + \
-        ", " + row[2] + ", \"" + row[3] + "\", " + row[4] + " )"  )
+        ", " + row[2] + ", \"" + row[3] + "\", \"" + row[4] + "\")")
+    # Makes sure everything (even None) becomes a string.
+    # c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
+    # ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
     # logging.debug("db execute")
     # rows = c.fetchall()
     # logging.debug("db fetched all")
@@ -131,6 +138,7 @@ def request():
         logging.debug("error")
         logging.debug(sys.exc_info())
         # print sys.exc_info()
+
 
 # we always expect name to equal main
 if __name__ == "__main__":

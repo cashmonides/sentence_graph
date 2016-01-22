@@ -202,7 +202,6 @@ Quiz.prototype.next_submodule = function(){
     
     
     
-    console.log("DEBUG 12-30 log start time passed");
     
     
     
@@ -233,18 +232,35 @@ Quiz.prototype.next_submodule = function(){
     // todo new ends here
     // this.clear_cheat_sheet();
     
+    console.log("DEBUG 1-22 entering log start time");
     
-    
-    var start_time =  "test_string_for_date"; //new Date();
+    var start_time =  "test_string_for_start_time"; //new Date();
     
     
     var submodule_id = this.user.get_module(this.module.id).progress;
     
+    console.log("DEBUG 1-22 user_id = ", this.user.uid);
+    console.log("DEBUG 1-22 module_id = ", this.module.id);
+    console.log("DEBUG 1-22 submodule_id = ", submodule_id);
+    console.log("DEBUG 1-22 start_time = ", start_time);
+    
+    
+    
     this.time_data = [this.user.uid, this.module.id, submodule_id, start_time, null];
     
-    //todo uncomment when done testing
-    // post({data: this.time_data, type: "insert_time_data"});
     
+    console.log("DEBUG 1-22 this.time_data = ", this.time_data);
+    
+    
+    console.log("DEBUG 1-22 entering post");
+    
+    
+    post({data: this.time_data, type: "insert_time_data"});
+    
+    
+    console.log("DEBUG 1-22 exiting post");
+    
+    console.log("DEBUG 1-22 log start time passed");
     
     
     
@@ -306,6 +322,8 @@ Quiz.get_mode = function(mode_number) {
 Quiz.prototype.next_question = function (){
     //todo make sure to uncomment this except when necessary (nuclear option)
     // Persist.clear_node(["urgent_log"]);
+    
+    // Persist.clear_node(["users"]);
     
     
     

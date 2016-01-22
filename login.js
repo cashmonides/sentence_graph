@@ -15,6 +15,7 @@ var mode_map = {
     "new_password_row": [[4], "table-row"],
     "name_row": [[2], "table-row"],
     "class_row": [[2], "table-row"],
+    "access_code_row": [[2], "table-row"],
 
     "login_button": [[1], "inline"],
     "create_account_button": [[2], "inline"],
@@ -44,6 +45,14 @@ function create_account() {
     var p = el("password").value;
     var n = el("name").value;
     var c = el("class_number").value;
+    var ac = el("access_code").value;
+    
+    
+    if (!is_correct_access_code(ac)) {
+        alert("Talk to Akiva in class about how to log in.");
+        return;
+    }
+    
 
     var callback = function(error, userData) {
         if (error) {

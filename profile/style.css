@@ -6,7 +6,7 @@
 }
 
 .hoverable_mod:hover {
-    background: red;
+    /*background: red;*/
     border: solid 2px black;
 }
 

@@ -2,6 +2,7 @@ window.onload = start;
 
 var user = new User();
 
+
 function start() {
     //console.log"start triggered");
     if (!user.load(callback)) {
