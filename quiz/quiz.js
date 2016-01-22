@@ -242,7 +242,8 @@ Quiz.prototype.next_submodule = function(){
     
     this.time_data = [this.user.uid, this.module.id, submodule_id, start_time, null];
     
-    post({data: this.time_data, type: "insert_time_data"});
+    //todo uncomment when done testing
+    // post({data: this.time_data, type: "insert_time_data"});
     
     
     
