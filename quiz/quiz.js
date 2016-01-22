@@ -45,6 +45,9 @@ var Quiz = function () {
         incorrect_streak: 0
     };
     
+    this.time_data = null;
+    
+    
     //todo research internet explorer compatibility with set
     //is it a bad idea to have set since we can't iterate over it
     //old code:
@@ -168,16 +171,41 @@ Quiz.prototype.next_submodule = function(){
     //logging start time
     console.log("DEBUG 12-28 log start time entered");
     
-    //the module_id (int) - a variable used a lot below by a number of functions
-    var mod = this.get_start_module();
     
     
-    console.log("DEBUG 12-30 log start time entered");
-    console.log("DEBUG 12-30 mod, module_id =", mod);
-    console.log("DEBUG 12-30 mod, get start module =", this.get_start_module());
-    console.log("DEBUG 12-30 get current module = ", this.user.get_current_module());
+    
+    
+    console.log("DEBUG 1-21 mod, module_id =", mod);
+    console.log("DEBUG 1-21 mod, get start module =", this.get_start_module());
     console.log("DEBUG 12-30 submodule_number via .progress =", this.user.get_module(mod).progress);
-    // this.user.log_submodule_start_time(mod, this.user.get_module(mod).progress);
+    
+    /*
+    
+    
+    every time a submodule is started:
+    
+    
+    step 1)
+    create a row:
+    user_id, module_id, submodule_id, start_time, stop_time
+    (with stop_time as null)
+    
+    step 2)
+    save data as a state: quiz.time_data [user_id, module_id, submodule_id, start_time]
+    
+    
+    
+    every time a submodule is completed:
+    step 1)
+    update stop_time in the following row:
+    user_id, module_id, submodule_id, quiz.start_time, null
+    step 2)
+    clear quiz.start_time
+    
+    */
+    
+    
+    
     console.log("DEBUG 12-30 log start time passed");
     
     
@@ -208,6 +236,23 @@ Quiz.prototype.next_submodule = function(){
     // console.log('this.game.level = ', this.game.level)
     // todo new ends here
     // this.clear_cheat_sheet();
+    
+    
+    
+    var start_time =  "test_string_for_date"; //new Date();
+    
+    
+    var submodule_id = this.user.get_module(this.module.id).progress;
+    
+    this.time_data = [this.user.uid, this.module.id, submodule_id, start_time, null];
+    
+    post({data: this.time_data, type: "insert_time_data"});
+    
+    
+    
+    
+    
+    
     this.next_question();
 };
 
@@ -223,13 +268,13 @@ Quiz.prototype.next_mode = function(){
         delete allowed[i];
     }
     */
+    
     for (var i = 0; i < this.sick_modes.length; i++) {
         console.log('sick mode being added = ', this.sick_modes[i])
         delete allowed[this.sick_modes[i]];
         console.log("DEBUG 12-23 sick mode added");
         console.log("DEBUG 12-23 allowed after = ", allowed);
     }
-    
     
     
     if (Object.keys(allowed).length <= 0) {

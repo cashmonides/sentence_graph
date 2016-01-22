@@ -1,5 +1,5 @@
 - Dan not coding
-- Akiva not coding
+- Akiva coding
 
 Progress notes
 - Dan: finished latin question generation (has earlier functionality)
@@ -35,6 +35,15 @@ ITERATIONS
 - iteration 1.0: debugged with etymology mode adding definitions and possibly synonyms
 - iteration 2.0: adding genitives, datives, ablatives and conditionals, logging metrics into a simple SQL database, using jquery to improve dropdowns and other cosmetics
 - iteration 3.0: ??? 
+
+
+
+
+
+
+
+
+
 
 
 
@@ -707,10 +716,18 @@ all sets
 
 
 THE TERMINAL APPROACH TO UPDATING MEDIA TEMPLE
+- make sure your local git repository is up to date
+
+
 - go to terminal
 - run this: ssh s211804.gridserver.com@s211804.gridserver.com
 - cd (/home/211804/users/.home/) domains/s211804.gridserver.com/html
 - git pull origin master
+
+
+
+
+
 
 
 USING SSH TO CONNECT TO MYSQL ON MEDIA TEMPLE
@@ -2111,5 +2128,10 @@ FIREBASE RULES THAT DON'T SEEM TO WORK
 }
 
 
+
+
+
+
+the update
 
 

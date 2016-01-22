@@ -80,7 +80,27 @@ def read_table(ups):
         # data["rows"].append(row)
     return data
 
-
+def insert_row(ups):
+    row = ups["data"]
+    # double asterisk gets all the keys of the map as the argument
+    db = MySQLdb.connect(**dbs)
+    # logging.debug("db connected")
+    c = db.cursor()
+    # c = db.cursor (MySQLdb.cursors.DictCursor)
+    c.execute("INSERT INTO TIME_METRICS VALUES (" + row[0] + ", " + row[1] + \
+        ", " + row[2] + ", \"" + row[3] + "\", " + row[4] + " )"  )
+    # logging.debug("db execute")
+    # rows = c.fetchall()
+    # logging.debug("db fetched all")
+    # print 'Total Row(s):' + str(c.rowcount)
+    data = {
+        "success": True
+    }
+    # for row in rows:
+        # print row
+        #print type(row), row # tuple
+        # data["rows"].append(row)
+    return data
 
 # content-type needs to be established at the
 def json_response(data):
@@ -92,7 +112,8 @@ def json_response(data):
 # a map to specify the method we use for each operation
 # eventually this will will have such things as create, read, update, delete, etc.
 HANDLERS = {
-    "get": read_table
+    "get": read_table,
+    "insert_time_data": insert_row
 }
 
 def handle(ups):
