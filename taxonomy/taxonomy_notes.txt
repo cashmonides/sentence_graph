@@ -1,0 +1,127 @@
+QUESTION TYPES
+- given an animal and a distinction between 2,3,4,n categories - pick the category
+    - wolf - is it quadruped, biped or arthropod?
+- given a classification of length n, pick the animal that matches
+    - "pick the carnivorous biped"
+- (stealing from etymology) given a taxonomic term, classify it etymologically
+    - carnivorous is composed of which roots? [plant, all, eat, four]
+    - which of the following words contains the root meaning "large" [arthropod, macropod, biped, quadruped][
+
+IMPORTANT ISSUES
+- the questions are level sensitive in a few ways:
+    - what distinctions they know
+        - ped, vor at early levels
+        - ped, vor, gastr, therm at higher levels
+    - how many terms in that category they know
+        - at early levels: ped: [biped, quadruped]
+        - at later levels: ped: [biped, quadruped, arthropod, macropod]
+    - degree of sophistication:
+        - at early levels: a bird is a biped
+        - at later levels a bird is "bipedal, originally quadrupedal"
+        - (likewise at early levels a whale is "not applicable" for ped but at later levels it is "vestigially quadrupedal")
+
+
+CONTROL FLOW OF GAME
+- find list of available_distinctions from taxonomy_level.js (taxonomy_level as an argument)
+find a list of available_animals from taxonomy_level.js (animal_level as an argument)
+- randomly choose a distinction (or possibly weighted)
+- 
+
+
+OR ANOTHER OPTION
+1) - generate a level-sensitive map with taxonomy_level as argument
+- e.g. at a low level:
+    {
+    PED: ["biped", "quadruped"],
+    VOR: ["herbivore", "carnivore", "omnivore"]
+    }
+    
+  at a higher level:
+    {
+    PED: ["biped", "quadruped", "arthropod", "macropod"],
+    VOR: ["herbivore", "carnivore", "omnivore", "insectivore", "detrivore"]
+    }
+    
+    
+2) generate a list of available animals
+
+3) pick an animal at random
+
+4) pick a key of the taxonomy_map at random
+
+- generate a JSON object:
+    question_text: "Classify this animal."     //we can probably skip the text of the question - it will be clear enough if there's just a picture and a list of options or drop downs
+    animal: "wolf",
+    image: "../resources/wolf01.jpg",        //a sillhouette image of the animal at the
+    image_or_name: "image",
+    choices: ["biped", "quadruped"],
+    correct_answer: "quadruped"
+    wrong_feedback:
+    right_feedback:
+    cheat_sheet_objects:
+
+
+
+CHEAT SHEET FOR TAXONOMY
+- two options:
+    - OPTION 1 (harder): just the roots (OV = egg, PAR = give birth)   //if so we need to classify the roots of each term (i.e. we need to make sure every taxonomic term is in our etymology file and that taxonomy can access it)
+    - OPTION 2 (easier): definition (OVIPAROUS = giving birth to eggs)
+
+
+
+DOWN THE ROAD FUNCTIONALITY
+- maybe at advanced levels, they should be able to select multiple things in a drop-down and submit
+- it would be nice:
+    - if a student entered three classifications: wolf is quadruped, carnivore, invertebrate 
+    - the feedback shows which one is wrong (maybe the wrong one is red or crossed out with the right answer beneath it)
+
+
+ISSUES
+- certain distinctions have a non-applicable issue (placental - marsupial)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+birds
+    ratites
+    fowl
+    neoaves
+    
+    
+mammals
+    monotremes
+        echidna
+        platypus
+    marsupials
+        oppossums
+        numbats etc.
+        bandicoots, etc.
+        kangaroos, koalas, wombats, etc.
+    placentals
+        primates, ungulates etc. (boroeutheria) (splits into laurasiatheria & euarchontoglires)
+        anteaters, sloths, etc.  (xenarthra)
+        elephants, etc. (afrotheria)
+
+reptiles
+    lizards and snakes
+    tortoises and turtles
+    crocodilians
+    tuatara
+    
+    
+amphibians
+    frogs and toads
+    salamanders and newts 
+    caecilians
+    

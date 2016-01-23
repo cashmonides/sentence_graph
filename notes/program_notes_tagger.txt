@@ -1,33 +1,10 @@
 - Dan not coding
 - Akiva not coding
 
-Progress notes
-- Dan: finished latin question generation (has earlier functionality)
-- Dan: got cheat sheets working correctly again (they now disappear)
-- Dan: vocab cheat sheet now sorted
-- Dan: about halfway through etymology
-- Akiva: added start and stop time stamp to module
-    - still a little buggy: doesn't create a new start-time if they quit and start over, need to push to a list or something like that instead of rewriting a map
-- Akiva: added start and stop time stamp to submodule
-   - has the same problem as module, needs to preserve old start times that were abandoned
-   - need to add iteration, right now it just records submodule number
-- Dan: fixed drop downs to show everything in part of speech filter
-   - previously only choices in the sentence were showing
-- Akiva: finished all latin levels up to most advanced level we have, not fully proofread yet
-- Akiva: made etymology level up to level 7
-- Akiva: fixed the problem of images that are too big
-- Akiva: fixed the off by one error by simply changing index to index -1
-- Dan: fixed the 'undefined' latin bug and the highlighting bug
-- Dan: fixed the word selector highlighting bug
-    - (word selector cleared in quick mode after next question is created)
-- Dan: fixed the double confirm bug
-    - break in 'if', not outside
-- Dan: it seems that the last of the bugs is dead
-   - let us rejoice
-   - a default value of 0 for nothing answered yet is used
-- Dan: fixed all bugs; added a parameter in quiz for whether lightboxes would urge user to continue
-- Dan: fixed hover behavior (almost; it seems that to make background color
-change with images that are not png is difficult)
+Progress notes iteration 1.0     (old progress notes archived at end of program_notes)
+- Akiva: added a file called taxonomy.js and taxonomy_notes.txt
+    - taxonomy_notes.txt is a rough draft of the program design for the taxonomy unit
+    - taxonomy.js has a map of taxonomic classifications for wolf-eagle
 
 
 
@@ -53,11 +30,16 @@ ITERATION 1.0
 - test user logged in on 2 separate computers
 - test compatibility on different browsers
 - revisit admin page, check that it's working
-    - add number of ioterations poer module
+    - add number of iterations per module
+- urgent: make cheat sheet open in a new window or have the proper size
+- urgent: update cheat sheets
+- urgent: the feedback is sometimes not very clear. It says "the right answer is..." while the question has been replaced 
 
 
 ITERATION 2.0
+- add tutorials
 - jquery dropdowns
+- clean up, simplify, modularize and comment latin generation before adding gen/dat/abl/conditional
 - add genitives
 - add datives
 - add ablatives
@@ -65,7 +47,7 @@ ITERATION 2.0
 - drop-down headings (subject, verb, object
 - reduce image file size  (e.g. there's a bear that loads slow)
 - disable prompt "do you want google chrome to rememeber your password" 
-- minify certain files???
+- minify certain files for security reasons???
 - final image is currently "get ready to conquer + image of next animal" it should be the current animal
 - clean out / possibly remove log from firebase (looks like it's a weak duplicate of urgent error log)
 - clean out all console.log
@@ -2150,7 +2132,34 @@ FIREBASE RULES THAT DON'T SEEM TO WORK
 
 
 
+ARCHIVED PROGRESS NOTES
+- Dan: finished latin question generation (has earlier functionality)
+- Dan: got cheat sheets working correctly again (they now disappear)
+- Dan: vocab cheat sheet now sorted
+- Dan: about halfway through etymology
+- Akiva: added start and stop time stamp to module
+    - still a little buggy: doesn't create a new start-time if they quit and start over, need to push to a list or something like that instead of rewriting a map
+- Akiva: added start and stop time stamp to submodule
+   - has the same problem as module, needs to preserve old start times that were abandoned
+   - need to add iteration, right now it just records submodule number
+- Dan: fixed drop downs to show everything in part of speech filter
+   - previously only choices in the sentence were showing
+- Akiva: finished all latin levels up to most advanced level we have, not fully proofread yet
+- Akiva: made etymology level up to level 7
+- Akiva: fixed the problem of images that are too big
+- Akiva: fixed the off by one error by simply changing index to index -1
+- Dan: fixed the 'undefined' latin bug and the highlighting bug
+- Dan: fixed the word selector highlighting bug
+    - (word selector cleared in quick mode after next question is created)
+- Dan: fixed the double confirm bug
+    - break in 'if', not outside
+- Dan: it seems that the last of the bugs is dead
+   - let us rejoice
+   - a default value of 0 for nothing answered yet is used
+- Dan: fixed all bugs; added a parameter in quiz for whether lightboxes would urge user to continue
+- Dan: fixed hover behavior (almost; it seems that to make background color
+change with images that are not png is difficult)
 
-the update
+
 
 
