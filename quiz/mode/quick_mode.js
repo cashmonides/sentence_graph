@@ -1,4 +1,3 @@
-
 var QuickModeGame = function(){
 
     this.target_tag = null;

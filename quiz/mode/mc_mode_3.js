@@ -1,3 +1,4 @@
+
 var MCMode3Game = function(){
     this.data = null;
     this.quiz = null;

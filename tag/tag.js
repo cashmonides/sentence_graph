@@ -282,6 +282,14 @@ function clear_all_highlights() {
     word_selector.clear();
 }
 
+
+
+function set_sentence_difficulty_level (level) {
+    sentence.difficulty_level = level;
+    
+    
+}
+
 //FUNCTION summary
 //no input, calls save which has no return, just side effects: appends a child to firebase
 //called by: the submit button on the html page
@@ -289,7 +297,9 @@ function submit_sentence(){
     if (sentence.language_of_sentence == null) {
         alert("no language specified");
     } else {
-        console.log('language specified =', sentence.language_of_sentence);
+        console.log("sentence submitted");
+        console.log('sentence.language_of_sentence =', sentence.language_of_sentence);
+        console.log("sentence.difficulty_level = ", sentence.difficulty_level);
         Sentence.save(sentence);
     }
 }

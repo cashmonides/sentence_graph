@@ -1,15 +1,27 @@
 - Dan not coding
 - Akiva not coding
 
-Progress notes iteration 1.0     (old progress notes archived at end of program_notes)
+PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_notes)
 - Akiva: added a file called taxonomy.js and taxonomy_notes.txt
     - taxonomy_notes.txt is a rough draft of the program design for the taxonomy unit
     - taxonomy.js has a map of taxonomic classifications for wolf-eagle
+- Akiva: added sentence.difficulty_level to tag.js (i.e. Shakespeare gets a 10, mother goose gets a 1)
+- Akiva: cleared sentences and started tagging new ones (but tagging is now buggy)
 
 
+HI-PRIORITY BUGS
+- drop & quick mode are being logged as sick "cannot read property length of undefined"
+    - somewhere after around user.js 296
+    - tag doesn't seem to be actually tagging anything
+    - i.e. no subject or object gets tagged
+    - a console log says "I, 1, am responcible."
+    - probably a bug in the new contradictory tag map business
 
-LO-PROIORITY BUGS
+
+LO-PRIORITY BUGS
 - anonymous user doesn't get progress updated on profile page (one solution: disable the return to profile for anonymous users)
+
+
 
 ITERATIONS
 ITERATION 1.0 
@@ -20,6 +32,7 @@ ITERATION 1.0
     - root to word    "Which word has a root meaning "all"?
     - word to root    "Select the root of the word QUADRUPED"
 - etymology cheat sheet
+- add definitions to etymology (so they see definitions early but not later on)
 - get rid of naughty words
     - change them to grade 13  (letter A-D done)
 - post sql time data
@@ -31,9 +44,13 @@ ITERATION 1.0
 - test compatibility on different browsers
 - revisit admin page, check that it's working
     - add number of iterations per module
-- urgent: make cheat sheet open in a new window or have the proper size
+- urgent: make cheat sheet open in a new window or make it the proper size
 - urgent: update cheat sheets
 - urgent: the feedback is sometimes not very clear. It says "the right answer is..." while the question has been replaced 
+- filter quick and drop mode by sentence.difficulty_level
+- input lots of new sentences
+- add some urgent error logs at some judiciously chosen critical spots in the control flow
+
 
 
 ITERATION 2.0
@@ -52,6 +69,8 @@ ITERATION 2.0
 - clean out / possibly remove log from firebase (looks like it's a weak duplicate of urgent error log)
 - clean out all console.log
 - log accuracy attached to mode
+- third party log-in (facebook or google?)
+- etymology synonyms and antonyms
 
 
 

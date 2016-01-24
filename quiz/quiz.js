@@ -255,7 +255,7 @@ Quiz.prototype.next_submodule = function(){
     console.log("DEBUG 1-22 entering post");
     
     
-    post({data: this.time_data, type: "insert_time_data"});
+    // post({data: this.time_data, type: "insert_time_data"});
     
     
     console.log("DEBUG 1-22 exiting post");
@@ -348,6 +348,9 @@ Quiz.prototype.next_question = function (){
         + " module = " + this.module.id + " progress = " +
         this.user.get_module(this.module.id).progress + "/" +
         this.module.threshold + " level = " + this.game.level);
+        
+        console.log("URGENT error logged");
+        
         if (e != "modes exhausted") {
             console.log("DEBUG 12-23 error handler initiated");
             this.next_question();

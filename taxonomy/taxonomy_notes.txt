@@ -1,35 +1,34 @@
 QUESTION TYPES
-- given an animal and a distinction between 2,3,4,n categories - pick the category
+- "CLASSIFY" given an animal and a distinction between 2,3,4,n categories - pick the category
     - wolf - is it quadruped, biped or arthropod?
-- given a classification of length n, pick the animal that matches
+- "PICK" given a classification of length n, pick the animal that matches
     - "pick the carnivorous biped"
-- (stealing from etymology) given a taxonomic term, classify it etymologically
+- "ANALYZE WORD" (stealing from etymology) given a taxonomic term, classify it etymologically
     - carnivorous is composed of which roots? [plant, all, eat, four]
     - which of the following words contains the root meaning "large" [arthropod, macropod, biped, quadruped][
 
 IMPORTANT ISSUES
 - the questions are level sensitive in a few ways:
-    - what distinctions they know
+    - what categories they know
         - ped, vor at early levels
         - ped, vor, gastr, therm at higher levels
-    - how many terms in that category they know
+    - how many distinctions in that category they know
         - at early levels: ped: [biped, quadruped]
         - at later levels: ped: [biped, quadruped, arthropod, macropod]
     - degree of sophistication:
         - at early levels: a bird is a biped
         - at later levels a bird is "bipedal, originally quadrupedal"
         - (likewise at early levels a whale is "not applicable" for ped but at later levels it is "vestigially quadrupedal")
+    
 
 
-CONTROL FLOW OF GAME
-- find list of available_distinctions from taxonomy_level.js (taxonomy_level as an argument)
-find a list of available_animals from taxonomy_level.js (animal_level as an argument)
-- randomly choose a distinction (or possibly weighted)
-- 
+
+PROCESS OF GENERATING QUESTIONS
+
+0) get taxonomy_level from module
 
 
-OR ANOTHER OPTION
-1) - generate a level-sensitive map with taxonomy_level as argument
+1) - generate a taxonomy_map (level-sensitive with taxonomy_level as argument)
 - e.g. at a low level:
     {
     PED: ["biped", "quadruped"],
@@ -43,9 +42,11 @@ OR ANOTHER OPTION
     }
     
     
-2) generate a list of available animals
+2) generate a list of available animals from animal_level
+- e.g. at a low level they have wolf, bear, crow, etc.
+- at a higher level they have platypus and whale and cerebus
 
-3) pick an animal at random
+3) pick an animal from that list at random
 
 4) pick a key of the taxonomy_map at random
 
@@ -59,6 +60,10 @@ OR ANOTHER OPTION
     wrong_feedback:
     right_feedback:
     cheat_sheet_objects:
+    available_dummy_animals:
+    
+    
+5) pick a question type at random from allowed question types ["classify", "pick", "analyze_word"]
 
 
 
