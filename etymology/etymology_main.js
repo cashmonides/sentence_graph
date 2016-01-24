@@ -113,7 +113,7 @@ var change_lexemes_and_lexicon = function (g) {
 var get_words_and_roots = function (root_list) {
     return {'roots': convert_keys_to_dict(root_list, roots),
     'words': convert_keys_to_dict(Object.keys(words).filter(function (x) {
-            return is_sub_list(root_list, words[x]['roots'])
+            return something_in_common(root_list, words[x]['roots'])
             && words[x]['grade'] < 13}), words)
     }
 };

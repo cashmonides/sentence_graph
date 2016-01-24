@@ -567,11 +567,19 @@ Quiz.prototype.fill_lightbox = function(text, offset, progress) {
 
 Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
     var available_tags = sentence.get_all_tag_types(region_filter, tag_filter);
-    
-    var target_tag = random_choice(array_from(available_tags));
+    var a = array_from(available_tags);
+    if (a.length === 0) {
+        throw new Error("no tags are available!");
+    } else {
+        console.log('All is fine, and the number of available tags is', a.length);
+    }
+    console.log('available_tags, a =', available_tags, a);
+    var target_tag = random_choice(a);
     
     var tag_to_region = sentence.get_regions_for_tags(region_filter);
     var available_regions = tag_to_region[target_tag];
+    console.log('target_tag, available_regions =',
+    target_tag, available_regions);
     var target_region = random_choice(available_regions);
     
     return {

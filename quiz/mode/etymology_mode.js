@@ -1,5 +1,126 @@
 // If something doesn't make sense, it's probably from DropMode.
 
+/*
+
+- add etymology question types
+    - word to word_definition   "What is the meaning of the word QUADRUPED?"
+    - word_definition to word "What is a word meaning "dwelling on land""
+    - root to root_meaning   "What is the meaning of the root PED?"
+    - root_meaning to root  "which of the following roots means "foot"?
+    - root to word    "Which word has a root meaning "all"?
+    - word to root    "Select the root of the word QUADRUPED?"
+    - word to synonym  "What is a synonym of QUADRUPED?"
+    - word to antonym
+    - alternate root "What is an alternate root of AQU?"
+    - origin language "Is HYDR greek or latin?"
+    - type in answer 
+    - (one option, perhaps too easy to be used is latin root to word)
+    
+Iteration 1.0
+- already have: root to word
+- word to root
+- word to word_definition
+- word_definition to word
+- root to root_definition
+- root_definition to root
+
+Iteration 2.0
+- what language the root is in (english, latin or both)
+- exclude synonyms (i.e. the coincidence factor)
+- word to synonym  "What is a synonym of QUADRUPED?"
+- word to antonym
+
+Further away
+- alternate root "What is an alternate root of AQU?"
+- origin language "Is HYDR greek or latin?"
+
+
+
+DESIGN ISSUE
+- two words may be quite close in meaning and by coincidence both words or both definitions
+    - once synonyms are loaded and ready, we could exclude synonyms
+
+*/
+// var etymology_question_types = {
+//     root_to_word: 0,
+//     word_to_root: 1,
+//     word_to_word_definition: 2,
+//     word_definition_to_word: 3,
+//     root_to_root_definition: 4,
+//     root_definition_to_root: 5
+// }
+
+
+/*
+ISSUE 1 - what data do we pull from module
+- option a: pull only roots and we select words that either have all known roots or just 1 known root
+- option b: pull roots and known words from module (maybe useful in early stages)
+
+example of data we pull from module:
+(a list of usable roots)
+(do we have a list of usable words?)
+
+currently have in module:
+['BI', 'QUADR', 'PED']
+
+do we want it to look like this in module:
+{
+    'BI' : [biped, bicycle, binoculaurs],
+    'QUADR' : [quadruped, quadrilateral, quadratic],
+    'PED' : "all"
+}
+
+ISSUE 2: common interface for all etymolgy question types
+
+example of JSON object:
+question_type:                              //word to root                          //random choice from allowed
+question_template:                          //"What is the root of" + x + "?""      //determined 
+what_gets_inserted_into_template:           //QUADRUPED                             //random choice from allowed
+choices:                                    //['BI', 'QUADR', 'TERR']               //random choice from allowed
+correct_answer:                             //'QUADR'                               //determined
+
+
+
+PHILOSOPHICAL CHOICE
+- choose root first or word first?
+    - if we choose root first, we avoid the biased weighting of the sample with many words that end in -logy
+    
+
+STEPS
+- deterministic parts
+    - map of question_type to the deterministic parts of the JSON object
+
+- random choice from allowed 
+    (function we probably already have)
+    argument based on root_first or word_first
+    all we need to do is get the arguments
+
+
+function: master function
+argument 2: available question types (from level)
+argument 3: available roots (from level)
+argument 4: available words 
+    (default should be a utility extracting all words from available roots)
+    (but we should be able to filter words if we want toi)
+
+returns JSON object
+
+
+function: filter allowed
+
+
+
+
+
+
+ISSUE 3 - what does etym level look like
+- available roots
+- available question types
+- available words??
+
+*/
+
+
 var EtymologyModeGame = function(){
     //todo should this really be like this
     this.data = null;

@@ -6,6 +6,7 @@ QUESTION TYPES
 - "ANALYZE WORD" (stealing from etymology) given a taxonomic term, classify it etymologically
     - carnivorous is composed of which roots? [plant, all, eat, four]
     - which of the following words contains the root meaning "large" [arthropod, macropod, biped, quadruped][
+    - (this is just the usual etymology exercise, but limited to taxonomical words and roots)
 
 IMPORTANT ISSUES
 - the questions are level sensitive in a few ways:
