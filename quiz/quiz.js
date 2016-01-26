@@ -340,16 +340,20 @@ Quiz.prototype.next_question = function (){
         console.log('DEBUG 12-23 no error, everything is fine')
     } catch (e) {
         console.log("DEBUG 12-23 entering catch block error caught");
+        
+        //todo out of desperation, commented this out
+        
         // Originally: add not push
-        var sick_mode = this.game.get_mode_name();
+        // var sick_mode = this.game.get_mode_name();
         //only push if it's not in our list already
-        if (this.sick_modes.indexOf(sick_mode) === -1) {this.sick_modes.push(sick_mode)};
-        log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode 
-        + " module = " + this.module.id + " progress = " +
-        this.user.get_module(this.module.id).progress + "/" +
-        this.module.threshold + " level = " + this.game.level);
+        // if (this.sick_modes.indexOf(sick_mode) === -1) {this.sick_modes.push(sick_mode)};
+        // log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode 
+        // + " module = " + this.module.id + " progress = " +
+        // this.user.get_module(this.module.id).progress + "/" +
+        // this.module.threshold + " level = " + this.game.level);
         
         console.log("URGENT error logged");
+        console.log("desperate move triggered");
         
         if (e != "modes exhausted") {
             console.log("DEBUG 12-23 error handler initiated");
