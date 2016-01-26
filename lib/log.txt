@@ -1,0 +1,22 @@
+06:58:44: DEBUG: POST
+06:58:44: DEBUG: FieldStorage(None, None, '{"data":["84094bc2-8966-42a0-8f23-2e3d7e3f1d1d",1,0,"test_string_for_start_time",null],"type":"insert_time_data"}')
+06:58:44: DEBUG: J={"data":["84094bc2-8966-42a0-8f23-2e3d7e3f1d1d",1,0,"test_string_for_start_time",null],"type":"insert_time_data"} <type 'str'>
+06:58:44: DEBUG: {u'type': u'insert_time_data', u'data': [u'84094bc2-8966-42a0-8f23-2e3d7e3f1d1d', 1, 0, u'test_string_for_start_time', None]}
+06:58:44: DEBUG: coercing to Unicode: need string or buffer, int found
+07:04:01: DEBUG: POST
+07:04:01: DEBUG: FieldStorage(None, None, '{"data":["84094bc2-8966-42a0-8f23-2e3d7e3f1d1d",1,0,"test_string_for_start_time",null],"type":"insert_time_data"}')
+07:04:01: DEBUG: J={"data":["84094bc2-8966-42a0-8f23-2e3d7e3f1d1d",1,0,"test_string_for_start_time",null],"type":"insert_time_data"} <type 'str'>
+07:04:01: DEBUG: {u'type': u'insert_time_data', u'data': [u'84094bc2-8966-42a0-8f23-2e3d7e3f1d1d', 1, 0, u'test_string_for_start_time', None]}
+07:04:01: DEBUG: not all arguments converted during string formatting
+07:07:12: DEBUG: POST
+07:07:12: DEBUG: FieldStorage(None, None, '{"data":["84094bc2-8966-42a0-8f23-2e3d7e3f1d1d",1,0,"test_string_for_start_time",null],"type":"insert_time_data"}')
+07:07:12: DEBUG: J={"data":["84094bc2-8966-42a0-8f23-2e3d7e3f1d1d",1,0,"test_string_for_start_time",null],"type":"insert_time_data"} <type 'str'>
+07:07:12: DEBUG: {u'type': u'insert_time_data', u'data': [u'84094bc2-8966-42a0-8f23-2e3d7e3f1d1d', 1, 0, u'test_string_for_start_time', None]}
+07:07:12: DEBUG: row=[u'84094bc2-8966-42a0-8f23-2e3d7e3f1d1d', 1, 0, u'test_string_for_start_time', None]
+07:07:12: DEBUG: not all arguments converted during string formatting
+07:10:12: DEBUG: POST
+07:10:12: DEBUG: FieldStorage(None, None, '{"data":["84094bc2-8966-42a0-8f23-2e3d7e3f1d1d",1,0,"test_string_for_start_time",null],"type":"insert_time_data"}')
+07:10:12: DEBUG: J={"data":["84094bc2-8966-42a0-8f23-2e3d7e3f1d1d",1,0,"test_string_for_start_time",null],"type":"insert_time_data"} <type 'str'>
+07:10:12: DEBUG: {u'type': u'insert_time_data', u'data': [u'84094bc2-8966-42a0-8f23-2e3d7e3f1d1d', 1, 0, u'test_string_for_start_time', None]}
+07:10:12: DEBUG: row=[u'84094bc2-8966-42a0-8f23-2e3d7e3f1d1d', 1, 0, u'test_string_for_start_time', None]
+07:10:12: DEBUG: not all arguments converted during string formatting
