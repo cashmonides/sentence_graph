@@ -81,34 +81,45 @@ def read_table(ups):
         # data["rows"].append(row)
     return data
 
+#todo add a try catch statement at c.execute
 def insert_row(ups):
-    row = ups["data"]
-    # double asterisk gets all the keys of the map as the argument
-    db = MySQLdb.connect(**dbs)
-    # logging.debug("db connected")
-    c = db.cursor()
-    # c = db.cursor (MySQLdb.cursors.DictCursor)
-    
-    #shouldn't it be str(row[0])? Or is row[0] given as str?
-    # In python, "INSERT INTO time_metrics VALUES (" + 6 gives an error.
-    c.execute("INSERT INTO time_metrics VALUES (" + row[0] + ", " + row[1] + \
-        ", " + row[2] + ", \"" + row[3] + "\", \"" + row[4] + "\")")
-    # Makes sure everything (even None) becomes a string.
-    # c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
-    # ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-    # logging.debug("db execute")
-    # rows = c.fetchall()
-    # logging.debug("db fetched all")
-    # print 'Total Row(s):' + str(c.rowcount)
-    data = {
-        "success": True
-    }
-    # for row in rows:
-        # print row
-        #print type(row), row # tuple
-        # data["rows"].append(row)
-    return data
-
+    try:
+        row = ups["data"]
+        # double asterisk gets all the keys of the map as the argument
+        db = MySQLdb.connect(**dbs)
+        # logging.debug("db connected")
+        c = db.cursor()
+        # c = db.cursor (MySQLdb.cursors.DictCursor)
+        
+        #shouldn't it be str(row[0])? Or is row[0] given as str?
+        # In python, "INSERT INTO time_metrics VALUES (" + 6 gives an error.
+        c.execute("INSERT INTO time_metrics VALUES (" + row[0] + ", " + row[1] + \
+            ", " + row[2] + ", \"" + row[3] + "\", \"" + row[4] + "\")")
+        # Makes sure everything (even None) becomes a string.
+        # c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
+        # ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
+        # logging.debug("db execute")
+        # rows = c.fetchall()
+        # logging.debug("db fetched all")
+        # print 'Total Row(s):' + str(c.rowcount)
+        data = {
+            "success": True
+        }
+        # for row in rows:
+            # print row
+            #print type(row), row # tuple
+            # data["rows"].append(row)
+        return data
+    except Exception as e:
+        logging.debug(str(e))
+        data = {
+            "success": False
+        }
+        
+        return data
+        
+        
+        
 # content-type needs to be established at the
 def json_response(data):
     print "Content-Type: application/json"

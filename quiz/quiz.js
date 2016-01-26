@@ -254,9 +254,9 @@ Quiz.prototype.next_submodule = function(){
     
     console.log("DEBUG 1-22 entering post");
     
-    
-    // post({data: this.time_data, type: "insert_time_data"});
-    
+    //no callback because we don't need one
+    post({data: this.time_data, type: "insert_time_data"});
+    //todo maybe a good idea later to add an urgent error log
     
     console.log("DEBUG 1-22 exiting post");
     
