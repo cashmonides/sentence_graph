@@ -102,7 +102,7 @@ def insert_row(ups):
         # Makes sure everything (even None) becomes a string.
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-        c.execute("INSERT INTO time_metrics VALUES (?,?,?,?,null)", (row[0], row[1],str(row[2]), str(row[3]) ))
+        c.execute("INSERT INTO time_metrics VALUES (%s, %s, %s, %s, null)", (row[0], row[1],str(row[2]), str(row[3]) ))
 	# logging.debug("db execute")
         # rows = c.fetchall()
         # logging.debug("db fetched all")
