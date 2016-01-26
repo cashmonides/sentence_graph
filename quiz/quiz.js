@@ -344,13 +344,13 @@ Quiz.prototype.next_question = function (){
         //todo out of desperation, commented this out
         
         // Originally: add not push
-        // var sick_mode = this.game.get_mode_name();
+        var sick_mode = this.game.get_mode_name();
         //only push if it's not in our list already
-        // if (this.sick_modes.indexOf(sick_mode) === -1) {this.sick_modes.push(sick_mode)};
-        // log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode 
-        // + " module = " + this.module.id + " progress = " +
-        // this.user.get_module(this.module.id).progress + "/" +
-        // this.module.threshold + " level = " + this.game.level);
+        if (this.sick_modes.indexOf(sick_mode) === -1) {this.sick_modes.push(sick_mode)};
+        log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode 
+        + " module = " + this.module.id + " progress = " +
+        this.user.get_module(this.module.id).progress + "/" +
+        this.module.threshold + " level = " + this.game.level);
         
         console.log("URGENT error logged");
         console.log("desperate move triggered");
