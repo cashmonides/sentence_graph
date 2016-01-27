@@ -115,6 +115,10 @@ Quiz.prototype.get_start_module = function(){
     if("mod" in ups){
         var selected_mod = ups["mod"];
         console.log("DEBUG 11-23 selected mod = ", selected_mod);
+        if (selected_mod > this.user.get_current_module()) {
+            console.log("DEBUG 1-27 excessive mod entered as url query");
+            alert("Go back to profile and start again");
+        }
         if (selected_mod == this.user.get_current_module()) {
             console.log("DEBUG 11-23 clicked mod = current mod");
             this.advance_improve_status = "advancing";
