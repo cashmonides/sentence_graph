@@ -118,6 +118,7 @@ Quiz.prototype.get_start_module = function(){
         if (selected_mod > this.user.get_current_module()) {
             console.log("DEBUG 1-27 excessive mod entered as url query");
             return_to_profile();
+            return;
             // alert("Go back to profile and start again");
         }
         if (selected_mod == this.user.get_current_module()) {
