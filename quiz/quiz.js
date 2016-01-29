@@ -181,30 +181,7 @@ Quiz.prototype.next_submodule = function(){
     
     
     
-    /*
-    
-    
-    every time a submodule is started:
-    
-    
-    step 1)
-    create a row:
-    user_id, module_id, submodule_id, start_time, stop_time
-    (with stop_time as null)
-    
-    step 2)
-    save data as a state: quiz.time_data [user_id, module_id, submodule_id, start_time]
-    
-    
-    
-    every time a submodule is completed:
-    step 1)
-    update stop_time in the following row:
-    user_id, module_id, submodule_id, quiz.start_time, null
-    step 2)
-    clear quiz.start_time
-    
-    */
+   
     
     
     
@@ -250,7 +227,30 @@ Quiz.prototype.next_submodule = function(){
     console.log("DEBUG 1-22 submodule_id = ", submodule_id);
     console.log("DEBUG 1-22 start_time = ", start_time);
     
+     /*
     
+    
+    every time a submodule is started:
+    
+    
+    step 1)
+    create a row:
+    user_id, module_id, submodule_id, start_time, stop_time
+    (with stop_time as null)
+    
+    step 2)
+    save data as a state: quiz.time_data [user_id, module_id, submodule_id, start_time]
+    
+    
+    
+    every time a submodule is completed:
+    step 1)
+    update stop_time in the following row:
+    user_id, module_id, submodule_id, quiz.start_time, null
+    step 2)
+    clear quiz.start_time
+    
+    */
     
     this.time_data = [this.user.uid, this.module.id, submodule_id, start_time, null];
     
@@ -262,7 +262,7 @@ Quiz.prototype.next_submodule = function(){
     
     //no callback because we don't need one
     post({data: this.time_data, type: "insert_time_data"});
-    //todo maybe a good idea later to add an urgent error log
+    //todo maybe a good idea later to add an urgent error log here
     
     console.log("DEBUG 1-22 exiting post");
     
@@ -383,14 +383,15 @@ Quiz.prototype.question_complete = function(){
 
 Quiz.prototype.submodule_complete = function () {
     console.log('this.advance_improve_status =', this.advance_improve_status);
-    //the module_id (int) - a variable used a lot below by a number of functions
+    
+    
     if (this.advance_improve_status === 'advancing') {
         var mod = this.user.get_current_module(this.module.id);
     } else {
         var mod = this.user.get_improving_module(this.module.id);
     }
     
-    var submodule_number = this.user.get_module(mod).progress;
+    var submodule_id = this.user.get_module(mod).progress;
     
     //logging the stop time
     // console.log("DEBUG 12-28 submodule_complete, about to call log_submodule_stop_time");
@@ -434,6 +435,25 @@ Quiz.prototype.submodule_complete = function () {
             }
             $.featherlight($('#pop_up_div'), {afterClose: callback});
         }
+        
+        
+        //todo 1-28 should the post go here or in user?
+        this.time_data = [this.user.uid, this.module.id, submodule_id, start_time, null];
+    
+    
+        console.log("DEBUG 1-22 this.time_data = ", this.time_data);
+    
+    
+        console.log("DEBUG 1-22 entering post");
+    
+        //no callback because we don't need one
+        post({data: this.time_data, type: "insert_time_data"});
+        //todo maybe a good idea later to add an urgent error log here
+    
+        console.log("DEBUG 1-28 exiting post");
+    
+        console.log("DEBUG 1-28 log stop time passed");
+        
     } else {
         console.log("DEBUG 11-16 user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
