@@ -149,8 +149,8 @@ ProfilePage.build_progress_table = function(user) {
                     {'tag': "br"},
                     this.get_display_caption(this.user, order[i])
                 ]
-            }
-            alert('module, hoverability', module, hoverability);
+            };
+            
             if (hoverability) {
                 m.onclick = ProfilePage.select_improvement_module(mod.id);
                 m.class.push('clickable')
