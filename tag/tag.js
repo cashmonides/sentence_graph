@@ -58,7 +58,6 @@ var word_selector = null;
 
 //START
 window.onload = function (){
-
     generate_buttons();
     generate_tags();
     // we need a default_text to start with for testing, eventually, we'll replace this with an empty inout box
@@ -151,7 +150,6 @@ function submit_tag(tag_type){
         region.remove_tags_not_in_list(tag_types_to_keep);
         //console.log"ADDING TAG ", tag);
         region.add_tag(tag);
-        
         //checking for implied tags (a subject tag implies a noun tag)
         if (tag_type_as_string in implied_tags) {
             var implied_tag = new SingleRegionTag(implied_tags[tag_type_as_string]);
@@ -160,6 +158,9 @@ function submit_tag(tag_type){
         region.remove_duplicate_tags();
         
         update_region_list();
+        
+        console.log('final region', region,
+        region.tags, region.tags.length);
         //todo additions below
         //if (tag.indexOf("clause") !== -1) {
         //    region.make_clause(tag);

@@ -13,13 +13,7 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 - Akiva: changed persist so progress would be persisted; this may impact rollover 
 
 
-HI-PRIORITY BUGS
-- drop & quick mode are being logged as sick "cannot read property length of undefined"
-    - somewhere after around user.js 296
-    - tag doesn't seem to be actually tagging anything
-    - i.e. no subject or object gets tagged
-    - a console log says "I, 1, am responcible."
-    - probably a bug in the new contradictory tag map business
+HIGH-PRIORITY BUGS
 
 
 LO-PRIORITY BUGS
@@ -29,7 +23,10 @@ LO-PRIORITY BUGS
 
 
 ITERATIONS
-ITERATION 1.0 
+ITERATION 1.0
+- input lots of new sentences
+- filter sentences by difficulty and languge
+- make difficulty and sentence_language properties of module
 - add etymology question types
     - word to word_definition   "What is the meaning of the word QUADRUPED?"
     - root to root_meaning   "What is the meaning of the root PED?"
@@ -37,10 +34,10 @@ ITERATION 1.0
     - root to word    "Which word has a root meaning "all"?
     - word to root    "Select the root of the word QUADRUPED"
 - etymology cheat sheet
+- add password to tagger
 - add definitions to etymology (so they see definitions early but not later on)
 - get rid of naughty words
     - change them to grade 13  (letter A-D done)
-- post sql time data
 - size of text with drop downs
 - add root: VERTEBR & words: vertebrate, invertebrate, vertebra & make sure to add to etym levels
 - add root: CELL and words: cellular, multicellular, unicellular, cellulitis, celluloid, cellulose
@@ -53,7 +50,7 @@ ITERATION 1.0
 - urgent: update cheat sheets
 - urgent: the feedback is sometimes not very clear. It says "the right answer is..." while the question has been replaced 
 - filter quick and drop mode by sentence.difficulty_level
-- input lots of new sentences
+
 - add some urgent error logs at some judiciously chosen critical spots in the control flow
 
 
