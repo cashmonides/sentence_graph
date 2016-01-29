@@ -389,6 +389,7 @@ Quiz.prototype.question_complete = function(){
 Quiz.prototype.submodule_complete = function () {
     console.log('this.advance_improve_status =', this.advance_improve_status);
     
+	post({data: this.time_data_id, type: "update_time_data"});
     
     if (this.advance_improve_status === 'advancing') {
         var mod = this.user.get_current_module(this.module.id);
@@ -452,7 +453,7 @@ Quiz.prototype.submodule_complete = function () {
     
         //no callback needed because we don't care about the information coming back
         //though it would be good practice to check the data coming back to check that success is true
-        post({data: this.time_data_id, type: "update_time_data"});
+        //post({data: this.time_data_id, type: "update_time_data"});
         
         
         //todo maybe a good idea later to add an urgent error log here
