@@ -9,6 +9,8 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
     - taxonomy.js has a map of taxonomic classifications for wolf-eagle
 - Akiva: added sentence.difficulty_level to tag.js (i.e. Shakespeare gets a 10, mother goose gets a 1)
 - Akiva: cleared sentences and started tagging new ones (but tagging is now buggy)
+- Akiva: got sql to work
+- Akiva: changed persist so progress would be persisted; this may impact rollover 
 
 
 HI-PRIORITY BUGS
@@ -22,7 +24,8 @@ HI-PRIORITY BUGS
 
 LO-PRIORITY BUGS
 - anonymous user doesn't get progress updated on profile page (one solution: disable the return to profile for anonymous users)
-
+- 5 users on first row 
+- hoverable latin
 
 
 ITERATIONS

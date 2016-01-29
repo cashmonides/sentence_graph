@@ -184,10 +184,6 @@ Quiz.prototype.next_submodule = function(){
    
     
     
-    
-    
-    
-    
     //progress bars below
     this.began = new Date();
     this.progress_bar = new ProgressBar(this.module.submodule.threshold, [], el('progress-bar'));
@@ -410,8 +406,8 @@ Quiz.prototype.submodule_complete = function () {
     //progress bar
     console.log("DEBUG 11-16 quiz.submodule_complete entered");
     console.log("DEBUG 12-27 this.user.get_module(mod) = ", this.user.get_module(mod));
-    this.old_progress_bars.forEach(function (x) {remove_element(x.progress_bar)});
-    this.user.add_progress_bar(this.progress_bar.past_events, this.module.id);
+    // this.old_progress_bars.forEach(function (x) {remove_element(x.progress_bar)});
+    // this.user.add_progress_bar(this.progress_bar.past_events, this.module.id);
     
     
     
@@ -425,15 +421,23 @@ Quiz.prototype.submodule_complete = function () {
         
     
     // console.log("DEBUGGING entering problem lightbox area 11-19");
+    
+    //callback is null when submodule is not yet complete
     var callback = this.user.submodule_complete(this.module.id);
-    if (callback) {
+    
+    //if submodule complete
+    if (callback !== null) {
         if (this.advance_improve_status === 'improving') {
+            //we do everything what we normally do, increment progress, persist
             callback();
         } else {
             console.log("DEBUG 11-16 user.submodule_complete is true");
-            this.module = ALL_MODULES[this.user.get_current_module()];
+            // console.log("DEBUG 1-29 this.module before change  = ", this.module);
+            //todo might not be necessary so we comment it out
+            // this.module = ALL_MODULES[this.user.get_current_module()];
+            // console.log("DEBUG 1-29 this.module after change  = ", this.module);
             
-            console.log("DEBUGGING LIGHTBOX: you've beaten this level");
+            // console.log("DEBUGGING LIGHTBOX: you've beaten this level");
             if (this.urge_users_to_continue) {
                 this.fill_lightbox("YOU'VE BEATEN THIS LEVEL! EXCELSIOR!! GET READY TO CONQUER:", 1, 0);
             } else {
@@ -441,32 +445,12 @@ Quiz.prototype.submodule_complete = function () {
             }
             $.featherlight($('#pop_up_div'), {afterClose: callback});
         }
-        
-        
-        
-        
-    
-   
-    
-    
-        console.log("DEBUG 1-22 entering post");
-    
-        //no callback needed because we don't care about the information coming back
-        //though it would be good practice to check the data coming back to check that success is true
-        //post({data: this.time_data_id, type: "update_time_data"});
-        
-        
-        //todo maybe a good idea later to add an urgent error log here
-    
-        console.log("DEBUG 1-28 exiting post");
-    
-        console.log("DEBUG 1-28 log stop time passed");
-        
-    } else {
+    } 
+    //else if submodule is not complete
+    else {
         console.log("DEBUG 11-16 user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
         //todo make this less hacky
-        //console.log("DEBUGGING LIGHTBOX: YOUR PROGRESS IS:", (numerator + 1) + "/" + denominator);
         this.fill_lightbox("YOUR PROGRESS IS: " + (numerator + 1) + "/" + denominator);
         $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
     }
