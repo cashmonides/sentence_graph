@@ -45,7 +45,7 @@ var Quiz = function () {
         incorrect_streak: 0
     };
     
-    this.time_data = null;
+    this.time_data_id = null;
     
     
     //todo research internet explorer compatibility with set
@@ -252,16 +252,21 @@ Quiz.prototype.next_submodule = function(){
     
     */
     
-    this.time_data = [this.user.uid, this.module.id, submodule_id, start_time, null];
+    var time_data = [this.user.uid, this.module.id, submodule_id];
     
     
-    console.log("DEBUG 1-22 this.time_data = ", this.time_data);
+    console.log("DEBUG 1-22 this.time_data = ", time_data);
     
     
     console.log("DEBUG 1-22 entering post");
     
-    //no callback because we don't need one
-    post({data: this.time_data, type: "insert_time_data"});
+    //used to be: no callback because we don't need one
+    //now we need a callback because we're getting a piece of data coming back to us
+    var self = this;
+    post({data: time_data, type: "insert_time_data"}, function (data) {
+        console.log("DEBUG 1-28 data = ", data);
+        self.time_data_id = data.id;
+    });
     //todo maybe a good idea later to add an urgent error log here
     
     console.log("DEBUG 1-22 exiting post");
@@ -437,17 +442,19 @@ Quiz.prototype.submodule_complete = function () {
         }
         
         
-        //todo 1-28 should the post go here or in user?
-        this.time_data = [this.user.uid, this.module.id, submodule_id, start_time, null];
+        
+        
     
-    
-        console.log("DEBUG 1-22 this.time_data = ", this.time_data);
+   
     
     
         console.log("DEBUG 1-22 entering post");
     
-        //no callback because we don't need one
-        post({data: this.time_data, type: "insert_time_data"});
+        //no callback needed because we don't care about the information coming back
+        //though it would be good practice to check the data coming back to check that success is true
+        post({data: this.time_data_id, type: "update_time_data"});
+        
+        
         //todo maybe a good idea later to add an urgent error log here
     
         console.log("DEBUG 1-28 exiting post");
