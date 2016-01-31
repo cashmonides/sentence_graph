@@ -1,0 +1,655 @@
+IMPORTANT BACKSTAGE STUFF
+- maybe no penalty for wrong answers in purgatory
+- floor at 0 in fact and display
+- guided section +3, -1    
+- purgatory +3, -0        
+- can we test each question?
+
+
+PURGATORY BEHAVIOR
+- +3, -1
+- random questions
+- seems to be missing asterisk functionality for some unknown reason
+
+
+TEMPLATE FOR MANUAL ENTRY
+TYPES OF QUESTION
+- single answer
+- non-max
+- max
+- multiple parts with different non-maxes
+
+
+
+RULES FOR MANUAL INPUT (guided non purgatory)
+- try for 120
+- in guided, numbered, non-purgatory
+- <a1> etc.
+-  acceptable genres: single answer, non-max, max, multi-part non max
+- 1.1  right ->  2.1
+- 1.1 wrong -> 1.2
+- no long dashes
+
+
+
+RULES FOR PURGATORY INPUT
+- tag it with <purg>
+- end message (for those who've reached the bottom in purgatory, i.e. the last question) : your score is still beneath 100, start from the beginning and try again!
+- try to make 30 questions or more in purgatory
+- no long dashes
+
+
+
+
+
+
+INPUT FOR MANUAL (non-random) 
+''', '''		''', '''	separation between different questions (i.e. questions about different quotations)
+
+~				~			wraps an individual question (possible part of a sequence of questions)
+
+@							correct answer
+^							incorrect answer
+#		#					wraps a correct multi-word answer (be careful to have no ^ in a # passage)
+
++   			+			wraps a quotation or answer choices, treating every word that is not marked as correct (i.e. no @ or #  # ) as incorrect 
+
+
+*          *				wraps the linked text in a multi-part question, specifically as follows
+*      %    				the question (e.g. find the X(s))
+%		%					response to the correct choice (e.g. good, find another X)
+%      *					response to the incorrect choice (whoops, try again)
+
+`      `                    makes a text green but not linked (i.e. use this when the text is not surrounded by +   +)
+
+
+
+<a1> is invisible to the program but perhaps useful for the user
+BUT Dan needs to know how many questions are in each level (e.g. a : 1-9, b : 1-8, c : 1-9)
+potential problems:
+- will it be a problem for different levels to have different number of questions?
+- will high numbers (7,8,9) be problematic? (prob. not if we floor the points at zero in both fact and display)
+
+
+
+INPUT BELOW
+
+'''
+
+<a1>
+~
+Click on the nouns in the sentence below:
++The cow@ jumped over the moon@.+
+~
+
+''', '''
+
+
+<a2>
+~
+Click on the nouns in the sentence below:
++The cook@ ran away with the spoon@.+
+~
+
+''', '''
+
+<a3>
+~
+Click on the nouns in the sentence below:
++If wishes@ were horses@, beggars@ would ride.+
+~
+
+''', '''
+
+
+
+<b1>
+~
+Click on the verb in the sentence below:
++The cow jumped@ over the moon.+
+~
+''', '''
+
+
+<b2>
+~
+Click on the nouns in the sentence below:
++The dish #ran away# with the spoon.+
+~
+
+''', '''
+
+
+<b3>
+~
+Click on the verbs in the sentence below:
++If wishes were@ horses, beggars #would ride#.+
+~
+
+''', '''
+
+
+<c1>
+~
+Click on the preposition in the sentence below:
++The cow jumped over@ the moon.+
+~
+
+''', '''
+
+<d1>
+~
+Click on the prepositional phrase in the sentence below:
+
+
+
+
+
+'''
+
+
+
+
+
+
+
+
+
+EXAMPLE OF MULTI-PART, DIFFERENT NON MAX
+MAKE SURE TO TEST
+
+
+
+''', '''   [assuming it's not first]     
+<g1>
+~
+<m>2<m>
+*Find at least 2 adjectives in the following sentence.%
+%Correct. That's an adjective. Can you find another?%
+%Whoops, that's not an adjective. Try again!*
++The quick@ brown@ fox jumped over the lazy@ dog who was dreaming of black@ fleas jumping on a silver@ moon.+
+~
+~
+<m>2<m>
+*Find at least 2 prepositions in the following sentence.%
+%Correct. That's a preposition. Can you find another?%
+%Whoops, that's not a preposition. Try again!*
++The quick brown fox jumped over@ the lazy dog who was dreaming of@ black fleas jumping on@ a silver moon.+
+~
+''', '''   [assuming it's not last]
+
+
+
+
+
+SOME GOOD EARLY SENTENCES
+
+SUBJECT
+
+~
++The road@ of excess leads to the palace of wisdom.+ (William Blake, Proverbs of Hell)
+
+Click on the subject.
+~
+
+
+PREDICATE
+we are such stuff as dreams 
+parting is such sweet sorrow (non-max)
+silence is a true friend
+Loss is nothing else but change, and change is Nature's delight. (Marcus Aurelius)
+
+
+
+
+SUBORD AND COORD
+more things than are dreamt of 
+when I love thee not chaos is come again
+silence is a true fried
+The best revenge is to be unlike him who performed the injury.
+Reject your sense of injury and the injury itself disappears. (Marcus Aurelius)
+
+
+ASYNDETON
+Tomorrow is nothing, today is too late; the good lived yesterday.(AURELIUS)
+
+
+
+
+''', '''
+~+I am prepared to meet my Maker. Whether my Maker is prepared for the great ordeal of meeting me is@ another matter.+
+
+There are two instances of the verb "is" in the above sentence. Click on the "is" that functions as a main verb.
+~
+
+
+~+I am prepared to meet my Maker. Whether my Maker is@ prepared for the great ordeal of meeting me is another matter.+
+
+There are two instances of the verb "is" in the above sentence. Click on the "is" that functions as a subordinate verb.
+~
+
+~+I am prepared to meet my Maker. Whether@ my Maker is prepared for the great ordeal of meeting me is another matter.+
+
+Correct. Now find the subordinating conjunction that subordinates "is".
+~
+''', '''
+
+
+TRANSITIVE INTRANSITIVE
+
+~The road of excess _leads_ to the palace of wisdom. (William Blake, Proverbs of Hell)
+
+Is the underlined verb ("leads"):
+- transitive^
+- intransitive@
+~
+
+FILE LATER
+We choose our joys and sorrows long before we experience them.
+Read more at http://www.brainyquote.com/quotes/authors/k/khalil_gibran.html#UXKbj4H75QSSPCro.99
+
+
+before you embark on a journey of revenge, dig two graves (confucius)
+
+
+FILE LATER
+''', '''
+
+~+Death is@ a release from the impressions of the senses, and from desires that make@ us their puppets, and from the vagaries of the mind, and from the hard service of the flesh.+
+
+Click on the verbs. You should be able to find 2.
+~
+
+
+
+~+Death is a release from the impressions of the senses, and from desires that make@ us their puppets, and from the vagaries of the mind, and from the hard service of the flesh.+
+
+Correct. Now click on the subordinate verb.
+~
+
+
+~+Death is a release from the impressions of the senses, and from desires that@ make us their puppets, and from the vagaries of the mind, and from the hard service of the flesh.+
+
+Correct. Now click on the subordinating conjunction.
+~
+''', '''
+
+
+
+
+
+~What we wish, we readily believe, and what we ourselves think, we imagine others think also.
+
+How many verbs occur in this passage?
++- 1
+- 2
+- 3
+- 4
+- 5@
+- 6
+- 7
+- 8+
+~
+
+
+~What we __wish__, we readily __believe__,@ and what we ourselves __think__, we __imagine__@ others __think__ also.
+
+Click on the main verb(s).
+~
+
+
+
+
+Dictatorship naturally arises out of democracy, and the most aggravated form of tyranny and slavery out of the most extreme liberty. (Plato)
+
+
+There will be no end to the troubles of states, or of humanity itself, until philosophers become kings in this world, or until those we now call kings and rulers really and truly become philosophers, and political power and philosophy thus come into the same hands. (Plato)
+
+
+
+
+~
++There #will be# no end to the troubles of states, or of humanity itself, until philosophers become@ kings in this world, or until those we now call@ kings and rulers really and truly become@ philosophers, and political power and philosophy thus come@ into the same hands.+ (Plato)
+
+Click on the verbs. You should be able to find 4.
+~
+
+~
++There #will be# no end to the troubles of states, or of humanity itself, until philosophers become kings in this world, or until those we now call kings and rulers really and truly become philosophers, and political power and philosophy thus come into the same hands.+ (Plato)
+
+Good. Now click on the main verb.
+~
+
+
+~
++There will be no end to the troubles of states, or of humanity itself, until philosophers become@ kings in this world, or until those we now call kings and rulers really and truly become@ philosophers, and political power and philosophy thus come@ into the same hands.+ (Plato)
+
+Correct. Now click on the subordinate verbs. You should be able to find 3.
+~
+
+~
++There will be no end to the troubles of states, or of humanity itself, until@ philosophers become kings in this world, or until@ those we now call kings and rulers really and truly become philosophers, and political power and philosophy thus come into the same hands.+ (Plato)
+
+Correct. Now click on the subordinating conjunctions.
+~
+
+~
++There will be no end to the troubles of states, or of humanity itself, until philosophers become kings in this world, or@ until those we now call kings and rulers really and truly become philosophers, and@ political power and philosophy thus come into the same hands.+ (Plato)
+
+Good. There are two coordinating conjunctions. Click on them.
+~
+
+
+
+
+~
+Astronomy compels the soul to look upwards _and_ leads us from this world to another. (Plato)
+
+Classify the underlined word ("and").
+- coordinating conjunction@
+- subordinating conjunction^
+
+~
+
+
+
+~
+Democracy... is a charming form of government, full of variety and disorder; and dispensing a sort of equality to equals and unequals alike. (Plato)
+~
+
+
+
+~
+The god of love lives in the state of need. (Plato)
+~
+
+
+~
+Knowledge which is acquired under compulsion obtains no hold on the mind. (Plato)
+~
+
+
+~
++This feeling of wonder shows@ that you are@ a philosopher, since wonder is@ the only beginning of philosophy.+ (Plato, Theaetetus)
+
+Click on the verb(s).
+~
+
+~
++This feeling of wonder shows@ that you are a philosopher, since wonder is the only beginning of philosophy.+ (Plato, Theaetetus)
+
+Click on the main verb(s).
+~
+
+~
++This feeling of wonder shows that you are@ a philosopher, since wonder is@ the only beginning of philosophy.+ (Plato, Theaetetus)
+
+Click on the subordinate verb(s).
+~
+
+~
++This feeling of wonder shows that@ you are a philosopher, since@ wonder is the only beginning of philosophy.+ (Plato, Theaetetus)
+
+Click on the subordinating conjunction(s).
+~
+
+
+~
+We do not learn and that which we call learning is only a process of remembering. (Plato)
+
+How many main verb(s) are there in the above sentence?
+- 1^
+- 2@
+- 3^
+- 4^
+- 5^
+- 6^
+~
+
+
+
+~
++We do not learn and@ that which we call learning is only a process of remembering.+ (Plato)
+
+Correct. Click on the coordinating conjunction.
+~
+
+
+
+~
++We do not learn and@ that which@ we call learning is only a process of remembering.+ (Plato)
+
+Good. Click on the subordinate verb.
+~
+
+
+
+~
++The punishment which the wise suffer who refuse to take part in the government, is@ to live under the government of worse men.+ (Plato)
+
+Click on the main verb(s).
+~
+
+
+~
++The punishment which the wise suffer@ who refuse@ to take part in the government, is to live under the government of worse men.+ (Plato)
+
+Click on the subordinate verb(s).
+~
+
+
+
+~
+Poets utter great and wise things which@ they do not themselves understand. (Plato)
+
+Click on the subordinating conjunction(s).
+~
+
+
+
+~
++The punishment which@ the wise suffer who refuse@ to take part in the government, is to live under the government of worse men.+ (Plato)
+
+Good. There are two subordinate verbs. Now click on the subordinating conjunctions. You should be able to find 2.
+~
+
+
+
+~
++The eyes of the soul of the multitudes are unable@ to endure the vision of the divine.+ (Plato)
+
+Click on the predicate.
+~
+
+
+~
+The eyes _of_ the soul of the multitudes are unable to endure the vision of the divine. (Plato)
+
+What part of speech is the word underlined above ("of"?)
++- noun
+- verb
+- adjective
+- adverb
+- preposition@
+- article
+- coordinating conjunction
+- subordinating conjunction+
+~
+
+~
+Whoever fights monsters should see to it that in the process he does not become a monster. And if you gaze long enough into an abyss, the abyss will gaze back into you. (Nietzsche)
+~
+
+
+~
+Hope in reality is the worst of all evils because it prolongs the torments of man. (Nietzsche)
+~
+
+
+~
++Of all that is written, I love@ only what a person has written with his own blood.+ (Nietzsche)
+
+Click on the main verb.
+~
+
+
+~
+Of all that@ is written, I love only what@ a person has written with his own blood. (Nietzsche)
+
+The subordinate verbs are underlined, click on the subordinating conjunction(s).
+~
+
+
+~
++A great value of antiquity lies in the fact that its writings are@ the only ones that modern men still read@ with exactness.+ (Nietzsche)
+
+Click on the subordinate verb(s).
+~
+
+
+~
++A great value of antiquity lies in the fact that@ its writings are the only ones that@ modern men still read with exactness.+ (Nietzsche)
+
+Good. Now click on the subordinating conjunction(s).
+~
+
+
+~
++A subject for@ a great poet would be God's boredom after@ the seventh day of@ creation.+ (Nietzsche)
+
+Click on the preposition(s).
+~
+
+
+
+~
++The best revenge is to be unlike him who performed@ the injury.+ (Marcus Aurelius)
+
+Click on the subordinate verb.
+~
+
+
+~
++The best revenge is to be unlike him who@ performed the injury.+ (Marcus Aurelius)
+
+Correct. Now click on the subordinating conjunction.
+~
+
+
+~
+I #have often wondered# how it is that every man loves himself more than all the rest of men, but yet sets@ less value on his own opinions of himself than on the opinions of others. (Marcus Aurelius)
+
+There are two main verbs in the above sentence. Click on them.
+~
+
+
+~
+I have often wondered how it is that every man loves himself more than all the rest of men, #but yet# sets less value on his own opinions of himself than on the opinions of others. (Marcus Aurelius)
+
+Correct. Now click on the coordinating conjunction that coordinates the two main verbs.
+~
+
+
+~
++I have often wondered how it is@ that every man loves@ himself more than all the rest of men, but yet sets less value on his own opinions of himself than on the opinions of others.+ (Marcus Aurelius)
+
+Good. Now click on the subordinate verbs. You should be able to find two.
+~
+
+
+
+~
++I have often wondered how@ it is that@ every man loves himself more than all the rest of men, but yet sets less value on his own opinions of himself than on the opinions of others.+ (Marcus Aurelius)
+
+Good. Two subordinate verbs are probably going to need two subordinating conjunctions. Click on the subordinating conjunctions.
+~
+
+~
+To the wise, life is a _problem_; to the fool, a solution. (Marcus Aurelius)
+
+What is the function of the word underlined ("problem")?
+- subject
+- object
+- predicate
+
+~
+
+
+
+
+
+~
+I would join Sisyphus in Hades and gladly push my boulder up the slope if only, each time it rolled back down, I were given a line of Aeschylus. (Stoppard)
+
+~
+
+
+
+~
+The Romans were foreigners writing for foreigners two milleniums ago; and for people whose gods we find quaint, whose savagery we abominate, but whose idea of what is exquisite is, we flatter ourselves, mysteriously identical to ours. (Tom Stoppard)
+
+From this passage we can extract:
++The Romans' idea of what is exquisite is@ mysteriously identical to ours.+
+
+Click on the main verb.
+~
+
+~
+The Romans were foreigners writing for foreigners two milleniums ago; and for people whose gods we find quaint, whose savagery we abominate, but whose idea of what is exquisite is, we flatter ourselves, mysteriously identical to ours. (Tom Stoppard)
+
+From this passage we can extract:
++The Romans' idea of what is@ exquisite is mysteriously identical to ours.+
+
+Click on the subordinate verb.
+~
+
+~
+The Romans were foreigners writing for foreigners two milleniums ago; and for people whose gods we find quaint, whose savagery we abominate, but whose idea of what is exquisite is, we flatter ourselves, mysteriously identical to ours. (Tom Stoppard)
+
+From this passage we can extract:
++The Romans' idea of what@ is exquisite is mysteriously identical to ours.+
+
+Click on the subordinating conjunction.
+~
+
+
+~
+Taste is not knowledge. A scholar's business is to add to what is known. That is all. But it is capable of giving the very greatest satisfaction, because knoweldge is good. It does not have to look good or sound good or even do good. It is good just by being knowledge. And the only thing that makes it knowledge is that it is true. You can't have too much of it and there is no little too little to be worth having. THere is truth and falsehood in a comma. (Tom Stoppard)
+
+~
+
+
+~
++Taste is not knowledge.@ A scholar's business is #to add# to what is known. That is all.@ But it is capable@ of giving the very greatest satisfaction, because knoweldge is good.@ It does not have to look good or sound good or even do good. It is good@ just by being knowledge. And the only thing that makes it knowledge is #that it is true.# You can't have too much of it and there is #no little too little# to be #worth having.# There is truth and falsehood in a comma.+ (Tom Stoppard)
+
+Click on at least five predicates.
+~
+
+
+
+~
+Posterity has a brisk way with manuscripts: scholarship is a small redress against the vast unreason of what is taken from us... (Tom Stoppard)
+
+~
+
+
+
+~
+The grave is a fine and private place
+_but_ none, I think, do there embrace (Andrew Marvell)
+
+Classify the underlined word ("but"):
+- noun^
+- verb^
+- adjective^
+- adverb^
+- preposition^
+- article^
+- coordinating conjunction@
+- subordinating conjunction^
+
+~
+
+
+
+

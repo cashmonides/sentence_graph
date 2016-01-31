@@ -1,24 +1,76 @@
+
+LEVEL 1
+simple sentences
+subject verbs and objects but few prepositions or oblique cases
+
 The cow jumped over the moon.
 The dish ran away with the spoon.
 Silence is a true friend (who never betrays).
+
+
+The quick brown fox jumped over the lazy dog.
+
+
+LEVEL 2
+simple content
+compound sentences
+prepositions, oblique cases
+
 There was an old man ( who supposed ( that the street door was partially closed ) );
 / but some very large rats ate his coat and his hats,( while that futile old gentleman dozed ).
-The fox knows many things / but the hedgehog only knows one big thing.
-( What we achieve inwardly ) will change outer reality.
 There was an old woman ( who lived in a shoe ).
-The quick brown fox jumped over the lazy dog.
 Beware the wolf in sheep's clothing.
-There is no easy way from the earth to the stars.
-There are no rules of architecture for a castle in the clouds.
+
+The fox knows many things / but the hedgehog only knows one big thing.
+
 Familiarity breeds contempt.
 Fortune favors the bold
+
+There was an old man who supposed
+that the street door was partially closed;
+but some very large rats ate his coat and his hats, while that futile old gentleman dozed.
+
+( What we achieve inwardly ) will change outer reality.
+
+There was an old woman who lived in a shoe.
+
+
+LEVEL 3
+simple predicates
+There is no easy way from the earth to the stars.
+
+
+LEVEL 4 
+more complicated predicates
+
+
+Bigotry is the sacred disease.
+Silence is a true friend who never betrays.
+
+
+
+LEVEL 5
+
+
+( Before you embark on a journey of revenge ), dig two graves.
+
+
+Beware the wolf in sheep's clothing.
+
+No one is free who is not master of himself.
+The mob is the mother of tyrants.
+
+
+There is no easy way from the earth to the stars.
+There are no rules of architecture for a castle in the clouds.
+
 No one is free ( who is not master of himself ).
 Conversation enriches the understanding, / but solitude is the school of genius.
 The sun, too, shines into cesspools / and is not polluted.
 The mob is the mother of tyrants.
 A dreamer is one ( who can only find his way by moonlight, ) / and his punishment is ( that he sees the dawn before the rest of the world ).
 Nero fiddled ( while Rome burned ).
-( Before you embark on a journey of revenge ), dig two graves.
+
 Conversation enriches the understanding, / but solitude is the school of genius.
 There are more things in heaven and earth, Horatio, ( than are dreamt of in your philosophy ).
 Parting is such sweet sorrow, ( that I shall say good night ( till it be morrow ) ).

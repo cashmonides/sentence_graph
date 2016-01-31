@@ -1,4 +1,3 @@
-
 var test_sentences = [
     "( What we wish ), we readily believe, / and ( what we ourselves think ), we imagine ( others think also ).",
 	"the cat sings / and the dog jumps (when the bell (which my father made) rings / and the flag is lifted ) .",

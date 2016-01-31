@@ -15,7 +15,12 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 
 HIGH-PRIORITY BUGS
 - dashes get interpreted as word breaks in latin
-- unexpected token # still happens even after chmod 775 sql.py has been done
+- unexpected token # still happens even after the following steps:
+    - .htaccess file is in the same folder as sql.py and reads:
+        Options +ExecCGI
+        AddHandler cgi-script .py
+    - chmod 775 sql.py has been typed in the command line
+    - in command line ./sql.py gives a new command line which is indicative of success (i.e. sql.py is executable
 
 LO-PRIORITY BUGS
 - anonymous user doesn't get progress updated on profile page (one solution: disable the return to profile for anonymous users)
@@ -23,6 +28,8 @@ LO-PRIORITY BUGS
 - hoverable latin
 - firefox is not responding to our small image solution
 - answers that are two regions (i.e. two words like 'many things') don't seem to be selectable as answers
+- auto-tagger seems to have main and subordinate clauses as undefined
+    - undefined = subordinate clause is what the auto-tagger returns
 
 ???QUESTIONS????
 - do asterisks work in the tagger?
@@ -70,6 +77,10 @@ ITERATION 1.0
     - cases (implies noun)
     - tenses (implies verb)
 
+ITERATION 1.5
+- post accuracy for each mode (drop, quick, etymology, latin, etc.)
+- post accuracy to the time metrics table if possible (if not possible, then post it to another table)
+
 
 ITERATION 2.0
 - add tutorials
@@ -82,7 +93,7 @@ ITERATION 2.0
     - certain words can only have inanimate objects
 - drop-down headings (subject, verb, object) that aren't clickable and have a different font, in small caps and half opacity
 - reduce image file size  (e.g. there's a bear that loads slow)
-- disable prompt "do you want google chrome to rememeber your password" 
+- disable prompt "do you want google chrome to remember your password" 
 - minify certain files for security reasons???
 - final image is currently "get ready to conquer + image of next animal" it should be the current animal
 - clean out / possibly remove log from firebase (looks like it's a weak duplicate of urgent error log)
@@ -92,6 +103,10 @@ ITERATION 2.0
 - etymology synonyms and antonyms
 
 
+
+GIO QUESTIONS
+- is it better to have a single table that shows time of completion and accuracy or is better to di ide them up into separate tables 
+    - (i.e. is modularity a virtue in sql tables or is it better to keep things all together so there's less danger of getting out of sync)?
 
 
 

@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
-
 	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
-    <script src="../lib/utils.js"></script>
+	<script src="../lib/utils.js"></script>
     <script src="../lib/persist.js"></script>
     <script src="../lib/objects.js"></script>
     <script src="../lib/text.js"></script>
@@ -47,17 +46,13 @@
     <button onclick="set_sentence_difficulty_level(9)">level 9</button>
     <button onclick="set_sentence_difficulty_level(10)">level 10</button>
     <script>
-        while (true) {
             var password = prompt('Type in the password.')
-            if (hash(password) === 1942621097) {
+            if (password && (hash(password) === 1942621097)) {
                 break;
             } else {
                 alert('Try again!');
             }
         }
     </script>
-
-
-
 </body>
 </html>
