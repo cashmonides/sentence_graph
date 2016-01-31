@@ -73,13 +73,18 @@ Quiz.prototype.start = function(){
         el("logout_button").innerHTML = "login";
         this.user_loaded();
     }
-    
+    // this.module = ALL_MODULES[this.get_start_module()];
     // This is new, and seems a little hacky.
     this.user.quiz = this;
     
     var self = this;
-    Sentence.get_all_sentences(function(ss){
-        self.sentences = ss;
+    Sentence.get_all_sentences(function (ss) {
+        self.sentences = ss.filter(function (sentence) {
+            var language = sentence.language_of_sentence;
+            var sentence_levels = self.module.sentence_levels;
+            return language in sentence_levels &&
+            sentence.difficulty_level <= sentence_levels[language];
+        });
         self.next_module();
     });
 
@@ -591,7 +596,8 @@ Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
     var available_tags = sentence.get_all_tag_types(region_filter, tag_filter);
     var a = array_from(available_tags);
     if (a.length === 0) {
-        throw new Error("no tags are available!");
+        throw new Error("no tags are available in the sentence "
+        + sentence.text + "!");
     } else {
         console.log('All is fine, and the number of available tags is', a.length);
     }

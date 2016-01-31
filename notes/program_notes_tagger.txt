@@ -14,19 +14,27 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 
 
 HIGH-PRIORITY BUGS
-
+- dashes get interpreted as word breaks in latin
+- unexpected token # still happens even after chmod 775 sql.py has been done
 
 LO-PRIORITY BUGS
 - anonymous user doesn't get progress updated on profile page (one solution: disable the return to profile for anonymous users)
 - 5 users on first row 
 - hoverable latin
+- firefox is not responding to our small image solution
+- answers that are two regions (i.e. two words like 'many things') don't seem to be selectable as answers
+
+???QUESTIONS????
+- do asterisks work in the tagger?
 
 
 ITERATIONS
 ITERATION 1.0
+- 
 - input lots of new sentences
 - filter sentences by difficulty and languge
 - make difficulty and sentence_language properties of module
+- add password to tagger (change the name to something bizarre enough so no-one guess)
 - add etymology question types
     - word to word_definition   "What is the meaning of the word QUADRUPED?"
     - root to root_meaning   "What is the meaning of the root PED?"
@@ -34,10 +42,15 @@ ITERATION 1.0
     - root to word    "Which word has a root meaning "all"?
     - word to root    "Select the root of the word QUADRUPED"
 - etymology cheat sheet
-- add password to tagger
+
+- LUP-US = noun, object, noun (small but possibly important bug)
 - add definitions to etymology (so they see definitions early but not later on)
 - get rid of naughty words
     - change them to grade 13  (letter A-D done)
+- add predicate and adjective to tagger
+- dashes don't seperate words in latin
+- auto-recognition should be turned off or different for latin mode 
+    - maybe a button called "delete_all_auto_tags"
 - size of text with drop downs
 - add root: VERTEBR & words: vertebrate, invertebrate, vertebra & make sure to add to etym levels
 - add root: CELL and words: cellular, multicellular, unicellular, cellulitis, celluloid, cellulose
@@ -46,13 +59,16 @@ ITERATION 1.0
 - test compatibility on different browsers
 - revisit admin page, check that it's working
     - add number of iterations per module
+    - ultimately we'll do all this with sql but for now the admin page does something that sql can't do which is measure accuracy
 - urgent: make cheat sheet open in a new window or make it the proper size
 - urgent: update cheat sheets
 - urgent: the feedback is sometimes not very clear. It says "the right answer is..." while the question has been replaced 
 - filter quick and drop mode by sentence.difficulty_level
-
+- enter fields into profile (grade number, school, first and last name 
 - add some urgent error logs at some judiciously chosen critical spots in the control flow
-
+- add M&F syntax categories in latin
+    - cases (implies noun)
+    - tenses (implies verb)
 
 
 ITERATION 2.0
@@ -63,7 +79,8 @@ ITERATION 2.0
 - add datives
 - add ablatives
 - specify in lexicon what words can take the dative and ablatives and genitives
-- drop-down headings (subject, verb, object
+    - certain words can only have inanimate objects
+- drop-down headings (subject, verb, object) that aren't clickable and have a different font, in small caps and half opacity
 - reduce image file size  (e.g. there's a bear that loads slow)
 - disable prompt "do you want google chrome to rememeber your password" 
 - minify certain files for security reasons???
