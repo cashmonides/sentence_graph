@@ -1,0 +1,371 @@
+BACK BROWSER ISSUE
+
+- basic problem 
+    - back browser button can lead user to secure content (possibly another user's profile page)
+    
+- basic solution
+    - reset cookie??
+    - reset cache?
+    - keep redirtecting to another location?
+
+
+- techniques
+    - something called "web content interceptor"
+    - something called "spring security"
+
+
+POSSIBLY INTERESTING SOLUTION
+ust for fun I thought I'd try something similar using nothing more than a snippet of Javascript/jQuery and a hidden field in the layout.
+
+This seems to work quite well. The logic being that the input will retain it's value when the back button is pressed, but will reset when the page loads.
+    <input id="auth" type="hidden" value="" />
+    <script>
+        $(document).ready(function() {
+            $('body').hide();
+            if ($('#auth').val().length == 0)
+            {
+                $('#auth').val('yes');
+                $('body').show();
+            }
+            else
+            {
+                location.reload();
+            }
+        });
+    </script>
+ mood_bad
+sitesense
+sitesense — 11 months ago
+
+Ok, I had another thought about this last night. Just given it a try and it seems to work and it's server side - no javascript involved so more secure.
+
+If when you logout - you are then redirected to the previous page, if the previous page was protected then the auth middleware will kick in and direct you back to the login page again. Seems effective at preventing the back button from displaying the previous secure page.
+
+Just need to add this to Http/Controllers/Auth/AuthController.php:
+
+    public function getLogout()
+    {
+        $this->auth->logout();
+
+        return redirect(\URL::previous());
+    }
+
+
+
+
+
+ANOTHER POSSIBLE SOLUTION
+I have had a lot of people ask, "How to I ‘disable’ the back button?" or, "How do I prevent a user from clicking the back button and going back to the previous screen?" In fact, this is one of the most commonly asked questions on the ASPMessageboard and, sadly, the answer is quite simple: You CANNOT disable the back button of the browser.
+
+- continued -
+
+
+Initially I could not figure why anyone would want or need to do that. Then it struck me as to why so many people would want to disable the back button. (Not the forward button mind you only the back button.) When a user submits an application and then goes back "using the back button" to make a change instead of clicking on "Edit," a new record will be inserted – we don’t want that, now do we? Again if the user finished a page and then went back to that page and continued to make changes and saved them we would not want that either.
+
+So I decided to figure a way or ways to prevent this scenario. I started doing a bit of research all over the Net going into various sites so basically this article will have a lot of stuff you might have already read if you looked on the Net. I am just trying to put it all in one place and find the "best" way of doing it!
+
+One of the many suggestions I got was to prevent the page from being cached. This can be done with server-side script:
+
+<%
+  Response.Buffer = True
+  Response.ExpiresAbsolute = Now() - 1
+  Response.Expires = 0
+  Response.CacheControl = "no-cache"
+%>
+
+This method works great! It forces the browser to go to the server to get the page instead of from its cache. What you will want to do is create a Session-level variable that determines whether or not a user can still "view" the page that you do not want to let the user navigate back to. Since the page is not being cached on the browser, the page will be reloaded when the user hits the back button, and you can check for that session-level variable to see if the user can view this page or not.
+
+For example, we could create a form like so:
+
+<%
+  Response.Buffer = True
+  Response.ExpiresAbsolute = Now() - 1
+  Response.Expires = 0
+  Response.CacheControl = "no-cache"
+
+  If Len(Session("FirstTimeToPage")) > 0 then
+    'The user has come back to this page after having visited
+    'it... wipe out the session variable and redirect them back
+    'to the login page
+    Session("FirstTimeToPage") = ""
+    Response.Redirect "/Bar.asp"
+    Response.End
+  End If
+
+  'If we reach here, the user can view the page, create the form
+%>
+
+<form method=post action="SomePage.asp">
+  <input type=submit>
+</form>
+
+Note that we are using a Session variable (FirstTimeToPage) to check to see if this is the users first visit to this particular page. If it isn't (that is, if Session("FirstTimeToPage") contains any value), then we clear out the session variable and redirect the user back to some starting page. Now, when the form is submitted (and SomePage.asp is loaded), we must set the session variable FirstTimeToPage to some value. So... in SomePage.asp we'd need code like:
+
+Session("FirstTimeToPage") = "NO"
+
+Then, if the user, on SomePage.asp, hits the back button, the browser will requery the Web server, see that Session("FirstTimeToPage") contains some value, clear Session("FirstTimeToPage"), and redirect the user to some page. All of this hinges, of course, on the fact that the user has cookies enabled, else session variables won't work! (For more information on this subject, be sure to check out the FAQ: For session variables to work, must the Web visitor have cookies enabled?)
+
+You can also use client-side code to force the user's browser to not cache a Web page.
+
+<html>
+<head>
+  <meta http-equiv="Expires" CONTENT="0">
+  <meta http-equiv="Cache-Control" CONTENT="no-cache">
+  <meta http-equiv="Pragma" CONTENT="no-cache">
+</head>
+
+There are a couple things to keep in mind when using the above method to force a browser to not cache a Web page:
+
+Pragma: no-cache prevents caching only when used over a secure connection. A Pragma: no-cache META tag is treated identically to Expires: -1 if used in a non-secure page. The page will be cached but marked as immediately expired. 
+Cache-Control META HTTP-EQUIV tags are ignored and have no effect in Internet Explorer versions 4 or 5.
+You can use both in your code. I tried this but this was not the solution because it did not work in all the browsers so I guess if one had an intranet environment where there was some control in place then they could use this method.
+
+For More Information...
+For more information on disabling caching, check out Phil Paxton's great article: Cache No More.
+
+
+In Part 1 we examined a few potential ways to disable the back button, a commonly asked question on the ASPMessageboard. In this part we'll continue our examination of various techniques for preventing the user to return to the previous page!
+
+- continued -
+
+
+My next area of research focused on the various rewiring the back button suggestions. An article by TJ Sylvester, Rewiring the Back Button, makes interesting reading but I noticed that when one clicks back it does not indeed take you to the page you entered the data but if I clicked back twice it does and we would not want that too. Basically a determined user could always figure out a way to circumvent the preventative measures.
+
+Another way to "disable the back button" is to use client-side JavaScript code to open a new window that doesn't have the toolbar. (This makes it harder (not impossible) for the user to go back to the previous page.) Another, more failsafe approach (although quite annoying) is, when a form is submitted, to open a new window and close the window that the form existed in. I didn't give this method serious thought because I would not like my site opening up a new window everytime a user submitted a form.
+
+Next I examined the possibility of adding client-side JavaScript code on the page that we do not want to let the user return to. Such JavaScript code could be used to have the effect of hitting the forward button, which would counter any action by a user clicking the back button. The JavaScript code to accomplish this can be seen below:
+
+<script language="JavaScript">
+<!--
+  javascript:window.history.forward(1);
+//-->
+</script>
+
+Again this is workable but it is far from the best way. I was then given the suggestion to use location.replace to navigate form one page to another. What this does is it replaces the current history entry with the new page so only one page will be maintained in the history and the back button will never get enabled. This is, I guess, what a lot of people are looking for, but again this would not be the best answer in all cases.
+
+For one thing you will have to use client side script for this. For an anchor tag this will be easy by just using:
+
+<A HREF="PageName.htm" onclick="javascript:location.replace(this.href); event.returnValue=false; ">No back button when you do this.</A>
+[Try out the above link!]
+
+The above technique has its disadvantages: simply using Response.Redirect will not work, since, each time a user jumps from one page to another, you need to clear out the location.history field through client-side code. Also, keep in mind that this will just remove the last history entry, not all of them. Go ahead and click the above hyperlink, you will be taken to a simple HTML page. Try clicking the back button and you will notice you will be taken to the page you were visiting before you came to this page! (Assuming, of course, you have client-side JavaScript code enabled in your browser.)
+
+After my exhaustive search I found that there is still no way of truly disabling the back button for all cases. All the methods I discussed in this article will, with varying degrees of success, prevent the user from viewing the previous page, but they, of course, all have their limitations. The best solution involves a mixture of both client-side and server-side script; regardless, there is no way to completely disable the back button... sorry!
+
+
+TUTORIAL ON SPRING INTERCEPTOR
+below is an excerpt (full tutorial here: http://www.mkyong.com/spring-mvc/spring-mvc-handler-interceptors-example/)
+
+Spring MVC handler interceptors example
+
+Spring MVC allow you to intercept web request through handler interceptors. The handler interceptor have to implement the HandlerInterceptor interface, which contains three methods :
+
+preHandle() – Called before the handler execution, returns a boolean value, “true” : continue the handler execution chain; “false”, stop the execution chain and return it.
+postHandle() – Called after the handler execution, allow manipulate the ModelAndView object before render it to view page.
+afterCompletion() – Called after the complete request has finished. Seldom use, cant find any use case.
+In this tutorial, you will create two handler interceptors to show the use of the HandlerInterceptor.
+
+ExecuteTimeInterceptor – Intercept the web request, and log the controller execution time.
+MaintenanceInterceptor – Intercept the web request, check if the current time is in between the maintenance time, if yes then redirect it to maintenance page.
+
+
+
+RANDOM DATA FROM STACK OVERFLOW AND THE LIKE
+	
+There is no such option. You can use an interceptor:
+
+<mvc:annotation-driven/>
+<mvc:interceptors>
+    <bean id="webContentInterceptor" 
+          class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+        <property name="cacheSeconds" value="0"/>
+        <property name="useExpiresHeader" value="true"/>
+        <property name="useCacheControlHeader" value="true"/>
+        <property name="useCacheControlNoStore" value="true"/>
+    </bean>
+</mvc:interceptors>
+(taken from here)
+
+On one hand it is logical not to have such annotation. Annotations on spring-mvc methods are primarily to let the container decide which method to invoke (limiting it by a request header, request url, or method). Controlling the response does not fall into this category.
+
+On the other hand - yes, it will be handy to have these, because when controllers are unit-tested it is not relevant to test http header stuff (or is it?).
+
+
+
+one solution from stack overflow (didn't necessarily work and it's PHP-based but maybe has some ideas)
+<?php
+    // 1. Find the session 
+    session_start();
+
+    // 2. Unset all the session variables
+    $_SESSION = array();
+
+    // 3. Destroy the session cookie
+    if(isset($_COOKIE[session_name()])) {
+        setcookie(session_name(), '', time()-42000, '/');
+    }
+
+    // 4. Destroy the session
+    session_destroy();
+
+    redirect_to('index.php?logout=1');
+?>
+
+
+SOME OTHER RANDOM DATA
+How do you definitively detect whether or not the user has pressed the back button in the browser?
+
+How do you enforce the use of an in-page back button inside a single page web application using a #URL system?
+
+Why on earth don't browser back buttons fire their own events!?
+
+javascript cross-browser single-page-application back
+shareimprove this question
+asked Sep 12 '14 at 10:50
+
+Xarus
+6711517
+add a comment
+2 Answers
+active oldest votes
+up vote
+31
+down vote
+accepted
+(Note: As per Sharky's feedback, I've included code to detect backspaces)
+
+So, I've seen these questions frequently on SO, and have recently run into the issue of controlling back button functionality myself. After a few days of searching for the best solution for my application (Single-Page with Hash Navigation), I've come up with a simple, cross-browser, library-less system for detecting the back button.
+
+Most people recommend using:
+
+window.onhashchange = function() {
+ //blah blah blah
+}
+However, this function will also be called when a user uses on in-page element that changes the location hash. Not the best user experience when your user clicks and the page goes backwards or forwards.
+
+To give you a general outline of my system, I'm filling up an array with previous hashes as my user moves through the interface. It looks something like this:
+
+function updateHistory(curr) {
+    window.location.lasthash.push(window.location.hash);
+    window.location.hash = curr;
+}
+Pretty straight forward. I do this to ensure cross-browser support, as well as support for older browsers. Simply pass the new hash to the function, and it'll store it for you and then change the hash (which is then put into the browser's history).
+
+I also utilise an in-page back button that moves the user between pages using the lasthash array. It looks like this:
+
+function goBack() {
+    window.location.hash = window.location.lasthash[window.location.lasthash.length-1];
+    //blah blah blah
+    window.location.lasthash.pop();
+}
+So this will move the user back to the last hash, and remove that last hash from the array (I have no forward button right now).
+
+So. How do I detect whether or not a user has used my in-page back button, or the browser button?
+
+At first I looked at window.onbeforeunload, but to no avail - that is only called if the user is going to change pages. This does not happen in a single-page-application using hash navigation.
+
+So, after some more digging, I saw recommendations for trying to set a flag variable. The issue with this in my case, is that I would try to set it, but as everything is asynchronous, it wouldn't always be set in time for the if statement in the hash change. .onMouseDown wasn't always called in click, and adding it to an onclick wouldn't ever trigger it fast enough.
+
+This is when I started to look at the difference between document, and window. My final solution was to set the flag using document.onmouseover, and disable it using document.onmouseleave.
+
+What happens is that while the user's mouse is inside the document area (read: the rendered page, but excluding the browser frame), my boolean is set to true. As soon as the mouse leaves the document area, the boolean flips to false.
+
+This way, I can change my window.onhashchange to:
+
+window.onhashchange = function() {
+    if (window.innerDocClick) {
+        window.innerDocClick = false;
+    } else {
+        if (window.location.hash != '#undefined') {
+            goBack();
+        } else {
+            history.pushState("", document.title, window.location.pathname);
+            location.reload();
+        }
+    }
+}
+You'll note the check for #undefined. This is because if there is no history available in my array, it returns undefined. I use this to ask the user if they want to leave using a window.onbeforeunload event.
+
+So, in short, and for people that aren't necessarily using an in-page back button or an array to store the history:
+
+document.onmouseover = function() {
+    //User's mouse is inside the page.
+    window.innerDocClick = true;
+}
+
+document.onmouseleave = function() {
+    //User's mouse has left the page.
+    window.innerDocClick = false;
+}
+
+window.onhashchange = function() {
+    if (window.innerDocClick) {
+        //Your own in-page mechanism triggered the hash change
+    } else {
+        //Browser back button was clicked
+    }
+}
+And there you have it. a simple, three-part way to detect back button usage vs in-page elements with regards to hash navigation.
+
+EDIT:
+
+To ensure that the user doesn't use backspace to trigger the back event, you can also include the following (Thanks to @thetoolman on this Question):
+
+    $(function(){
+    /*
+     * this swallows backspace keys on any non-input element.
+     * stops backspace -> back
+     */
+    var rx = /INPUT|SELECT|TEXTAREA/i;
+
+    $(document).bind("keydown keypress", function(e){
+        if( e.which == 8 ){ // 8 == backspace
+            if(!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly ){
+                e.preventDefault();
+            }
+        }
+    });
+});
+shareimprove this answer
+edited Sep 12 '14 at 11:06
+answered Sep 12 '14 at 10:50
+
+Xarus
+6711517
+3	 	
++1 nice idea, but i think this will fail if user uses whatever keyboard shortcut is for "back" (backspace key on firefox) whilst his mouse is inside browser window – Sharky Sep 12 '14 at 10:56 
+1	 	
+you should implement this too, its a pity to leave it like this :D – Sharky Sep 12 '14 at 11:01
+1	 	
+Will do - I'm in the office right now anyways :) (EDIT: Done now) – Xarus Sep 12 '14 at 11:02 
+2	 	
+What about mobile (e.g. ipad) – basarat Jan 27 '15 at 3:40
+1	 	
+What about swipe events from trackpad in MAC. Could that be captured as well? – Sriganesh Navaneethakrishnan Jul 16 '15 at 22:53
+show 3 more comments
+
+up vote
+1
+down vote
+The document.mouseover does not work for IE and FireFox. However I have tried this :
+
+$(document).ready(function () {
+  setInterval(function () {
+    var $sample = $("body");
+    if ($sample.is(":hover")) {
+      window.innerDocClick = true;
+    } else {
+      window.innerDocClick = false;
+    }
+  });
+
+});
+
+window.onhashchange = function () {
+  if (window.innerDocClick) {
+    //Your own in-page mechanism triggered the hash change
+  } else {
+    //Browser back or forward button was pressed
+  }
+};
+This works for Chrome and IE and not FireFox. Still working to get FireFox right. Any easy way on detecting Browser back/forward button click are welcome, not particularly in JQuery but also AngularJS or plain Javascript.

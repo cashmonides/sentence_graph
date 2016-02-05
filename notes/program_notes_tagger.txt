@@ -15,12 +15,18 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 
 HIGH-PRIORITY BUGS
 - dashes get interpreted as word breaks in latin
-- unexpected token # still happens even after the following steps:
+- (this might be fixed) unexpected token # still happens even after the following steps:
     - .htaccess file is in the same folder as sql.py and reads:
         Options +ExecCGI
         AddHandler cgi-script .py
     - chmod 775 sql.py has been typed in the command line
     - in command line ./sql.py gives a new command line which is indicative of success (i.e. sql.py is executable
+- back button leads to previous users profile (should just log them out and not expose secure content)
+    - info on this is now logged in a new notes text called security.txt (a gathering place for all info about security)
+- remove reliance on sets entirely
+- old chrome browser do not seem to work at all (utils 109???)
+    - dan thinks he fixed this by decreasing reliance on sets
+        - more testing is needed
 
 LO-PRIORITY BUGS
 - anonymous user doesn't get progress updated on profile page (one solution: disable the return to profile for anonymous users)
@@ -35,13 +41,24 @@ LO-PRIORITY BUGS
 - do asterisks work in the tagger?
 
 
+CHORE
+- input lots of new sentences
+- comb through and look for sets
+- add modules up to 25
+
+AGENDA
+- etymology cheat sheet
+- etymology question types
+
+
 ITERATIONS
 ITERATION 1.0
 - 
 - input lots of new sentences
-- filter sentences by difficulty and languge
-- make difficulty and sentence_language properties of module
-- add password to tagger (change the name to something bizarre enough so no-one guess)
+- *needs thorough testing but done* filter sentences by difficulty and languge
+- *done* make difficulty and sentence_language properties of module
+
+- *done* add password to tagger (change the name to something bizarre enough so no-one guess)
 - add etymology question types
     - word to word_definition   "What is the meaning of the word QUADRUPED?"
     - root to root_meaning   "What is the meaning of the root PED?"
@@ -49,19 +66,15 @@ ITERATION 1.0
     - root to word    "Which word has a root meaning "all"?
     - word to root    "Select the root of the word QUADRUPED"
 - etymology cheat sheet
-
-- LUP-US = noun, object, noun (small but possibly important bug)
 - add definitions to etymology (so they see definitions early but not later on)
-- get rid of naughty words
-    - change them to grade 13  (letter A-D done)
-- add predicate and adjective to tagger
-- dashes don't seperate words in latin
+- duplicate tags are not getting removed
+    - e.g. LUP-US = noun, object, noun (small but possibly important bug)
+
+- *done* get rid of naughty words
+- *done* add predicate and adjective to tagger
 - auto-recognition should be turned off or different for latin mode 
     - maybe a button called "delete_all_auto_tags"
 - size of text with drop downs
-- add root: VERTEBR & words: vertebrate, invertebrate, vertebra & make sure to add to etym levels
-- add root: CELL and words: cellular, multicellular, unicellular, cellulitis, celluloid, cellulose
-- add new words which Akiva gathered (webscrape for definitions and check)
 - test user logged in on 2 separate computers
 - test compatibility on different browsers
 - revisit admin page, check that it's working
@@ -70,19 +83,37 @@ ITERATION 1.0
 - urgent: make cheat sheet open in a new window or make it the proper size
 - urgent: update cheat sheets
 - urgent: the feedback is sometimes not very clear. It says "the right answer is..." while the question has been replaced 
-- filter quick and drop mode by sentence.difficulty_level
-- enter fields into profile (grade number, school, first and last name 
+- *done* enter fields into profile (grade number, school, first and last name 
 - add some urgent error logs at some judiciously chosen critical spots in the control flow
 - add M&F syntax categories in latin
     - cases (implies noun)
     - tenses (implies verb)
+- password protection on tagger is working but very small problem: someone without the password gets trapped on the page - should be a quit button that closes the tab
+- *done* email should be stored in firebase profile info
+
+
 
 ITERATION 1.5
 - post accuracy for each mode (drop, quick, etymology, latin, etc.)
 - post accuracy to the time metrics table if possible (if not possible, then post it to another table)
 
+- add root: VERTEBR & words: vertebrate, invertebrate, vertebra & make sure to add to etym levels
+- add root: CELL and words: cellular, multicellular, unicellular, cellulitis, celluloid, cellulose
+- add new words which Akiva gathered (webscrape for definitions and check)
+- add "gigantism" to etymology
 
 ITERATION 2.0
+- some way of checking the tagging on sentences
+- is there any way to prevent/punish/alert "off site activity" during a session
+    - timeout button (more than 60 seconds)
+    - low activity button (less than one button click per 30 seconds)
+    - detect a new tab
+- live in class monitoring of activity
+    - one example:
+        - a vector associated with each student
+        - length corresponding to rate of input
+        - slope corresponding to accuracy
+    - color as a form of visualization
 - add tutorials
 - jquery dropdowns
 - clean up, simplify, modularize and comment latin generation before adding gen/dat/abl/conditional
@@ -101,6 +132,7 @@ ITERATION 2.0
 - log accuracy attached to mode
 - third party log-in (facebook or google?)
 - etymology synonyms and antonyms
+- instant access by admin to punish off-site activity during class
 
 
 

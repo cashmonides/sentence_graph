@@ -46,13 +46,14 @@
     <button onclick="set_sentence_difficulty_level(9)">level 9</button>
     <button onclick="set_sentence_difficulty_level(10)">level 10</button>
     <script>
-            var password = prompt('Type in the password.')
-            if (password && (hash(password) === 1942621097)) {
-                break;
-            } else {
-                alert('Try again!');
-            }
+    while (true) {
+        var password = prompt('Type in the password.');
+        if (password && (hash(password) === 1942621097)) {
+            break;
+        } else {
+            alert('Try again!');
         }
+    }
     </script>
 </body>
 </html>

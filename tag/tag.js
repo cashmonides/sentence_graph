@@ -16,13 +16,15 @@ var test_sentences = [
 ];
 
 //initializing global variables
-var tag_list = ["noun", "verb", "subject", "object", "main clause", "subordinate clause", "coordinate clause", "adverb",
-    "preposition", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction",
+var tag_list = ["noun", "verb", "subject", "object", "predicate", "adjective", "adverb", 
+    "preposition", "main clause", "subordinate clause", "coordinate clause",
+    "definite article", "indefinite article", "personal pronoun", "subordinating conjunction",
     "coordinating conjunction"];
 
 var implied_tags = {
     "subject": "noun",
     "object": "noun",
+    "predicate": "noun",
     "personal pronoun": "pronoun",
     "relative pronoun": "pronoun",
     "definite article": "article",
@@ -288,8 +290,6 @@ function clear_all_highlights() {
 
 function set_sentence_difficulty_level (level) {
     sentence.difficulty_level = level;
-    
-    
 }
 
 //FUNCTION summary

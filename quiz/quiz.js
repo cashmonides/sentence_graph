@@ -594,15 +594,15 @@ Quiz.prototype.fill_lightbox = function(text, offset, progress) {
 
 Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
     var available_tags = sentence.get_all_tag_types(region_filter, tag_filter);
-    var a = array_from(available_tags);
-    if (a.length === 0) {
+    if (available_tags.length === 0) {
         throw new Error("no tags are available in the sentence "
         + sentence.text + "!");
     } else {
-        console.log('All is fine, and the number of available tags is', a.length);
+        console.log('All is fine, and the number of available tags is',
+        available_tags.length);
     }
-    console.log('available_tags, a =', available_tags, a);
-    var target_tag = random_choice(a);
+    console.log('available_tags, a =', available_tags, available_tags);
+    var target_tag = random_choice(available_tags);
     
     var tag_to_region = sentence.get_regions_for_tags(region_filter);
     var available_regions = tag_to_region[target_tag];

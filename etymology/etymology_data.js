@@ -4334,7 +4334,7 @@ var words = {
         "word": "gynecoid"
     },
     "gynecology": {
-        "grade": 12,
+        "grade": 13,
         "meaning": "the science of female reproductive health",
         "part of speech": "noun",
         "roots": [
@@ -4512,7 +4512,7 @@ var words = {
         "word": "hemorrhage"
     },
     "hemorrhoids": {
-        "grade": 12,
+        "grade": 13,
         "meaning": "swelling of the blood vessels",
         "part of speech": "noun",
         "roots": [
@@ -4693,7 +4693,7 @@ var words = {
         "word": "histology"
     },
     "holocaust": {
-        "grade": 12,
+        "grade": 13,
         "meaning": "total devastation, especially by fire",
         "part of speech": "noun",
         "roots": [
@@ -5642,7 +5642,7 @@ var words = {
         "word": "laborious"
     },
     "lactate": {
-        "grade": 12,
+        "grade": 13,
         "meaning": "to give milk, nurse",
         "part of speech": "verb",
         "roots": [
@@ -7493,7 +7493,7 @@ var words = {
     },
     "pantheism": {
         "grade": 12,
-        "meaning": "the worship of all gods",
+        "meaning": "the belief that all the universe is god",
         "part of speech": "noun",
         "roots": [
             "PAN"
@@ -9301,7 +9301,7 @@ var words = {
         "type": "none",
         "word": "sexagenarian"
     },
-    "sextet or sextette": {
+    "sextet": {
         "grade": 12,
         "meaning": "a composition or group of six",
         "part of speech": "noun",
@@ -9473,7 +9473,7 @@ var words = {
         "type": "none",
         "word": "submarine"
     },
-    "submerge or submerse": {
+    "submerge": {
         "grade": 12,
         "meaning": "to put completely underwater",
         "part of speech": "verb",
@@ -9790,7 +9790,7 @@ var words = {
     },
     "tetrapod": {
         "grade": 12,
-        "meaning": "a type of animal, almost always with four legs",
+        "meaning": "a type of animal with four legs",
         "part of speech": "noun",
         "roots": [
             "TETRA",
@@ -9988,16 +9988,6 @@ var words = {
         ],
         "type": "none",
         "word": "tripod"
-    },
-    "ultrahigh": {
-        "grade": 12,
-        "meaning": "extremely high",
-        "part of speech": "adjective",
-        "roots": [
-            "ULTRA"
-        ],
-        "type": "none",
-        "word": "ultrahigh"
     },
     "ultramodern": {
         "grade": 12,

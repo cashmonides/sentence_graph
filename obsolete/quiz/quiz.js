@@ -127,7 +127,7 @@ function process_answer(){
 function pick_question_data(sentence, region_filter){
     
     var available_tags = sentence.get_all_tag_types(region_filter);
-    var target_tag = random_choice(Array.from(available_tags));
+    var target_tag = random_choice(available_tags);
     
     var tag_to_region = sentence.get_regions_for_tags(region_filter);
     var available_regions = tag_to_region[target_tag];

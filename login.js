@@ -14,6 +14,8 @@ var mode_map = {
     "old_password_row": [[4], "table-row"],
     "new_password_row": [[4], "table-row"],
     "name_row": [[2], "table-row"],
+    "school_row": [[2], "table-row"],
+    "grade_row": [[2], "table-row"],
     "class_row": [[2], "table-row"],
     "access_code_row": [[2], "table-row"],
 
@@ -44,6 +46,8 @@ function create_account() {
     var e = el("email").value;
     var p = el("password").value;
     var n = el("name").value;
+    var s = el("school").value;
+    var g = el("grade").value;
     var c = el("class_number").value;
     var ac = el("access_code").value;
     
@@ -61,7 +65,7 @@ function create_account() {
             alert(error);
         } else {
             console.log("Successfully created user account with uid:", userData);
-            User.set_initial_data(userData.uid, n, c, login);
+            User.set_initial_data(userData.uid, n, s, g, c, e, login);
         }
     };
     Persist.create_user(e, p, callback);

@@ -1023,7 +1023,7 @@ var order = ['clause_type', 'sequence', 'tense', 'implicitness', 'person',
 
 //input is level (int)
 //returns a list of dictionaries with keys = parameters & values = parameter values (e.g. tense : future)
-master_cartesian = function (level) {
+var master_cartesian = function (level) {
     //initialize a list of dictionaries
     var states = [{}];
     //we walk through the parameters in order (tense, clause_type, etc.) and set the cartesian property of each
@@ -1038,7 +1038,7 @@ master_cartesian = function (level) {
 
 
 //returns the cartesian product of a single given property (i.e. all the possibilities), constrained by certain properties already fixed in the argument state
-set_cartesian_property = function(property_name, state, level) {
+var set_cartesian_property = function(property_name, state, level) {
     var property_values_allowed = map_level_to_allowed(level)[property_name];
     //below will return a list of all allowed values (e.g. ['past', 'present', 'future']
     var list_of_allowed = access_list(state, property_values_allowed);
