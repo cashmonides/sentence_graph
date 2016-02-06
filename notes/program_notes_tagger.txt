@@ -60,6 +60,9 @@ NOTES ON ETYMOLOGY CHEAT SHEETS
         - word to word definition
 - some questions are very easy and should be included with caution
     - e.g. what is the root of the word carnivorous [carn, omni, herb]
+- 'word_to_latin_root', 'word_to_english_root', 'word_to_translated_root',
+- 'english_root_to_word', 'word_to_word_definition', 'word_definition_to_word',
+- 'root_to_root_definition', 'root_definition_to_root'
 
 
 
@@ -134,18 +137,22 @@ ITERATION 1.5
 - add new words which Akiva gathered (webscrape for definitions and check)
 - add "gigantism" to etymology
 
+
+
 ITERATION 2.0
 - new mode: "id"
     - example: 
         - classify the highlighted word:
         - LUP-US CORV-UM VOR-A-T   
-        - choices: subject singular, object singular, subject plural, object plural
+        - choices: subject singular, object singular, subject plural, object plural (at a low level)
+        - choices: nom. sg. acc. sg. (at a higher level)
     - generate a latin sentence
     - generate a dictionary:
         - highlighted index
         - correct answer
         - answer choices
 - some way of checking the tagging on sentences
+    - perhaps a utility that vacuums all the data from firebase and displays it with tags directly above the words in the sentence
 - is there any way to prevent/punish/alert "off site activity" during a session
     - timeout button (more than 60 seconds)
     - low activity button (less than one button click per 30 seconds)

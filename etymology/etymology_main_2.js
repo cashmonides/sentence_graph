@@ -1,11 +1,21 @@
 var question_template_dict = {
-    'word_to_latin_root': 'Pick the root of the word ',                           //clue = english, choices = QUADR || four
-    'word_to_english_root': 'Pick the english meaning of the root of the word ',
+    // clue = quadruped, corrrect = QUADR, very easy
+    'word_to_latin_root': 'Pick the root of the word ',
+    // clue = quadruped, choices = QUADR - four, very easy
     'word_to_translated_root': 'Pick the translated root of the word ',
-    'english_root_to_word': 'Pick the word with a root that means ',                   //clue = english, choices = english
+    // clue = quadruped, correct = "an animal with four legs",
+    // hard (with cheat sheet easy-ish)
     'word_to_word_definition': 'Pick the definition of the word ',
+    // clue = quadruped, correct = four, hard (with cheat sheet medium)
+    'word_to_english_root': 'Pick the english meaning of the root of the word ',
+    // clue = four, correct = quadruped, hard (with cheat sheet medium)
+    'english_root_to_word': 'Pick the word with a root that means ',
+    // clue = "an animal with four legs", correct = quadruped,
+    // hard (with cheat sheet medium)
     'word_definition_to_word': 'Pick the word that means ',
+    // clue = QUADR, correct = four, hard (with cheat sheet medium)
     'root_to_root_definition': 'Pick the definition of the root ',
+    // clue = four, corect = QUADR, hard (with cheat sheet medium)
     'root_definition_to_root': 'Pick the root that means '
 };
 
@@ -354,6 +364,7 @@ number_of_dummies, number_of_mandatory) {
     }
 }
 
+/*
 // comment this out when done testing
 window.onload = function () {
     legal_question_types.forEach(function (i) {
@@ -365,10 +376,9 @@ window.onload = function () {
     });
     /*document.body.appendChild(document.createTextNode(
         JSON.stringify(cheat_sheet_x_to_y('word', 'latin_root', [],
-        3, function () {return true}))));*/
+        3, function () {return true}))));
 }
 
-/*
 var x_to_y = function (x, y, clue, choices, dummies) {
     
 }
@@ -458,5 +468,20 @@ display_x_to_y (output_of_x_to_y, display_type)
 
 }
 
+{"question_data":{"question_type":"word_to_latin_root","question_template":"Pick the root of the word ","clue":"herbal","correct_answer":"HERBI","choices":["HERBI","OMNI","CARN","VOR/VOUR"]},"cheat_sheet":{"HERBI":"grass, plant","OMNI":"all","CARN":"flesh, meat","VOR/VOUR":"eat"}}
+
+{"question_data":{"question_type":"word_to_english_root","question_template":"Pick the english meaning of the root of the word ","clue":"carnivorous","correct_answer":"flesh, meat","choices":["flesh, meat","grass, plant","all"]},"cheat_sheet":{"carnivorous":"meat-eating"}}
+
+{"question_data":{"question_type":"word_to_translated_root","question_template":"Pick the translated root of the word ","clue":"voracious","correct_answer":"VOR/VOUR - eat","choices":["VOR/VOUR - eat","HERBI - grass, plant","OMNI - all","CARN - flesh, meat"]},"cheat_sheet":{"voracious":"desiring of eating food in great quantities"}}
+
+{"question_data":{"question_type":"english_root_to_word","question_template":"Pick the word with a root that means ","clue":"flesh, meat","correct_answer":"incarnate","choices":["incarnate","voracious","herbivorous","devour"]},"cheat_sheet":{"incarnate":"given bodily form","voracious":"desiring of eating food in great quantities","herbivorous":"plant-eating","devour":"to eat quickly, to swallow down"}}
+
+{"question_data":{"question_type":"word_to_word_definition","question_template":"Pick the definition of the word ","clue":"herbal","correct_answer":"relating to plants","choices":["relating to plants","everywhere at once","meat-eating","desiring of eating food in great quantities"]},"cheat_sheet":{"HERBI":"grass, plant"}}
+
+{"question_data":{"question_type":"word_definition_to_word","question_template":"Pick the word that means ","clue":"any chemical used to kill unwanted plants, etc.","correct_answer":"herbicide","choices":["herbicide","voracious","omnivorous","omniscient"]},"cheat_sheet":{"HERBI":"grass, plant","CIDE/CISE":"cut, kill","VOR/VOUR":"eat","OMNI":"all","SCI":"know"}}
+
+{"question_data":{"question_type":"root_to_root_definition","question_template":"Pick the definition of the root ","clue":"VOR/VOUR","correct_answer":"eat","choices":["eat","flesh, meat","all","grass, plant"]},"cheat_sheet":{"voracious":"desiring of eating food in great quantities","devour":"to eat quickly, to swallow down","carnivorous":"meat-eating","omnivorous":"eating all foods"}}
+
+{"question_data":{"question_type":"root_definition_to_root","question_template":"Pick the root that means ","clue":"grass, plant","correct_answer":"HERBI","choices":["HERBI","VOR/VOUR","CARN","OMNI"]},"cheat_sheet":{"herbicide":"any chemical used to kill unwanted plants, etc.","carnivorous":"meat-eating","voracious":"desiring of eating food in great quantities","omnivorous":"eating all foods"}}
 
 */

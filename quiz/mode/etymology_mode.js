@@ -126,7 +126,7 @@ var EtymologyModeGame = function(){
     this.data = null;
     this.quiz = null;
     this.level = 0;
-    this.words_and_roots = {};
+    // this.words_and_roots = {};
 };
 
 
@@ -156,19 +156,27 @@ EtymologyModeGame.prototype.next_question = function(){
     this.set_level(post_sampling_level);
     
     this.quiz.update_display();
+    /*
     if (!(this.quiz.module.id in this.words_and_roots)) {
         this.words_and_roots[this.quiz.module.id] = get_words_and_roots(
             map_level_to_allowed(this.level.etym_level, etym_levels).roots);
     }
     
-    var question = create_etymology_question(
-        this.level, this.words_and_roots[this.quiz.module.id]);
-    this.word_choices = question.word_choices;
-    this.correct = question.correct;
+    
+    var make_etymology_question_with_cheat_sheet = function (
+    etym_level, question_type, number_of_answer_choices,
+    number_of_dummies, number_of_mandatory)
+    */
+    
+    var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+        this.level.etym_level, random_choice(legal_question_types), 4, 4, 4);
+    console.log(question_with_cheat_sheet['question_data']);
+    var question = question_with_cheat_sheet['question_data'];
+    this.choices = shuffle(question.choices);
+    this.correct = question.correct_answer;
     
     
-    Quiz.set_question_text('Which of the answer choices has a root meaning "'
-    + question.meaning_asked_about + '"?');
+    Quiz.set_question_text(question.question_template + '"' + question.clue + '".');
     
     
     //todo
@@ -221,8 +229,8 @@ EtymologyModeGame.prototype.make_drop_down = function(){
     document.getElementById("answer_wrapper").appendChild(e);
     console.log("DEBUG 11-18 final append reached");
     
-    console.log("DEBUG 11-18 dropdown data inserted = ", this.word_choices);
-    set_dropdown("select_element", this.word_choices);
+    console.log("DEBUG 11-18 dropdown data inserted = ", this.choices);
+    set_dropdown("select_element", this.choices);
 };
 
 
