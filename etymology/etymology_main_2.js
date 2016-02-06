@@ -1,7 +1,7 @@
 var question_template_dict = {
     'word_to_latin_root': 'Pick the root of the word ',                           //clue = english, choices = QUADR || four
-    'word_to_english_root': 'Pick the root of the word ',
-    'word_to_translated_root': 'Pick the root of the word ',
+    'word_to_english_root': 'Pick the english meaning of the root of the word ',
+    'word_to_translated_root': 'Pick the translated root of the word ',
     'english_root_to_word': 'Pick the word with a root that means ',                   //clue = english, choices = english
     'word_to_word_definition': 'Pick the definition of the word ',
     'word_definition_to_word': 'Pick the word that means ',
@@ -16,14 +16,48 @@ var legal_question_types = [
 ];
 
 var cheat_sheet_map = {
-    'word_to_latin_root': 'root_to_root_definition', // (clue + choices + dummies)
-    'word_to_english_root': 'word_to_word_definition', // (clue) // no dummies (how do we implement this)
-    'word_to_translated_root': 'word_to_word_definition', // (clue)
-    'english_root_to_word': 'word_to_word_definition',  // (choices + dummies)
-    'word_to_word_definition': 'root_to_root_definition', // (clue + choices + dummies)
-    'word_definition_to_word': 'root_to_root_definition', // (clue + choices + dummies)
-    'root_to_root_definition': 'word_containing_root_to_word definition', //'root_to_word', (clue)
-    'root_definition_to_root': 'word_containing_root_to_word definition' // (clue + choices + dummies)
+    'word_to_latin_root': {
+        'type': 'root_to_root_definition', // (clue + choices + dummies)
+        'mandatory': 'choices',
+        'dummies': true
+    },
+    'word_to_english_root': {
+        'type': 'word_to_word_definition', // (clue) // no dummies (how do we implement this)
+        'mandatory': 'clue',
+        'dummies': false
+    },
+    'word_to_translated_root': {
+        'type': 'word_to_word_definition', // (clue) // no dummies (how do we implement this)
+        'mandatory': 'clue',
+        'dummies': false
+    },
+    'english_root_to_word': {
+        'type': 'word_to_word_definition',
+        'mandatory': 'choices',
+        'dummies': true
+    },
+    'word_to_word_definition': {
+        'type': 'root_to_root_definition', // (clue + choices + dummies)
+        'mandatory': 'roots_in_clue',
+        'dummies': true
+    },
+    'word_definition_to_word': {
+        'type': 'root_to_root_definition', // (clue + choices + dummies)
+        'mandatory': 'roots_in_choices',
+        'dummies': true
+    },
+    'root_to_root_definition': {
+        'type': 'word_to_word_definition',
+        'mandatory': 'words_which_contain_root',
+        // This does not give us all of them.
+        'dummies': true
+    },
+    'root_definition_to_root': {
+        'type': 'word_to_word_definition',
+        'mandatory': 'words_which_contain_root',
+        // This does not give us all of them.
+        'dummies': true
+    }
 }
 
 var select_available_roots = function (etym_level) {
@@ -63,14 +97,18 @@ available_words, available_roots, number_of_answer_choices) {
             clue = random_choice(words_with_root);
             var roots_of_clue = words[clue].roots;
             choices = push_random_n_satisfying_constraint(
-                [root], available_roots, function (x) {return true},
+                [root], available_roots, function (x) {
+                    return roots_of_clue.indexOf(x) === -1},
                 number_of_answer_choices - 1);
             if (question_type == 'word_to_latin_root') {
                 correct_answer = root;
             } else if (question_type == 'word_to_english_root') {
                 correct_answer = roots[root].meaning;
+                choices = choices.map(function (x) {return roots[x].meaning});
             } else if (question_type == 'word_to_translated_root') {
                 correct_answer = root + ' - ' + roots[root].meaning;
+                choices = choices.map(function (x) {return x + 
+                ' - ' + roots[x].meaning});
             };
             break;
         case 'english_root_to_word':
@@ -87,41 +125,40 @@ available_words, available_roots, number_of_answer_choices) {
         case 'word_definition_to_word':
             var word = random_choice(available_words);
             var meaning = words[word].meaning;
-            var wrong_words = push_random_n_satisfying_constraint(
-                [], available_words, function (x) {return x !== clue},
+            var word_choices = push_random_n_satisfying_constraint(
+                [word], available_words, function (x) {return x !== clue},
             number_of_answer_choices - 1);
-            var wrong_meanings = wrong_words.map(function (x) {
-                return word[x].meaning;
+            var word_meaning_choices = word_choices.map(function (x) {
+                return words[x].meaning;
             })
             if (question_type === 'word_to_word_definition') {
                 clue = word;
                 correct_answer = meaning;
-                choices = wrong_meanings;
+                choices = word_meaning_choices;
             } else if (question_type === 'word_definition_to_word') {
                 clue = meaning;
                 correct_answer = word;
-                choices = wrong_words;
+                choices = word_choices;
             }
             break;
         case 'root_to_root_definition':
         case 'root_definition_to_root':
             var root = random_choice(available_roots);
             var meaning = roots[root].meaning;
-            var wrong_roots = push_random_n_satisfying_constraint(
-                [], available_roots, function (x) {return x !== clue},
+            var root_choices = push_random_n_satisfying_constraint(
+                [root], available_roots, function (x) {return x !== clue},
             number_of_answer_choices - 1);
-            var wrong_meanings = wrong_words
-            var wrong_meanings = wrong_roots.map(function (x) {
-                return root[x].meaning
+            var root_meaning_choices = root_choices.map(function (x) {
+                return roots[x].meaning;
             })
             if (question_type === 'root_to_root_definition') {
                 clue = root;
                 correct_answer = meaning;
-                choices = wrong_meanings;
+                choices = root_meaning_choices;
             } else if (question_type === 'root_definition_to_root') {
                 clue = meaning;
                 correct_answer = root;
-                choices = wrong_roots;
+                choices = root_choices;
             }
     };
     return {
@@ -199,6 +236,9 @@ var x_to_y = {
 
 var cheat_sheet_x_to_y = function (x, y, mandatory, number_of_extras,
 constraint) {
+    if (!constraint) {
+        constraint = function () {return true};
+    };
     // a is a list of all items of type x
     var a = all_of[x];
     // xs is the list of x's to use
@@ -219,23 +259,95 @@ number_of_answer_choices) {
     available_roots, number_of_answer_choices);
 }
 
+
+// Add more entries as needed.
+var get_constraint = {
+    'contain_root': function (question_data) {
+        var my_roots;
+        var question_type = question_data['question_type'];
+        if (begins_with(question_type, 'root_to')) {
+            my_roots = [question_data['clue']];
+        } else if (ends_with(question_type, 'to_root')) {
+            my_roots = question_data['choices'];
+        } else {
+            throw new Error('There is no root in this question,' +
+            'but yet some answers must contain the root.');
+        }
+        return function (word) {
+            return something_in_common(words[word].roots, my_roots);
+        }
+    }
+}
+
+var get_mandatory = function (mandatory_type,
+question_data, number_of_mandatory) {
+    var new_mandatory_type;
+    if (mandatory_type === 'clue') {
+        return [question_data['clue']]
+    } else if (mandatory_type === 'choices') {
+        return question_data['choices']
+    } else if (mandatory_type === 'choices') {
+        return question_data['choices']
+    } else if (begins_with(mandatory_type, 'roots_in_')) {
+        new_mandatory_type = cut_off(mandatory_type, 'roots_in_');
+        var my_words = get_mandatory(new_mandatory_type,
+            question_data, number_of_mandatory);
+        // my_roots is a list of lists.
+        var my_roots = my_words.map(function (x) {return words[x].roots});
+        return unique_items(concat_arrays(my_roots));
+    } else if (mandatory_type.indexOf('s_which_')) {
+        new_mandatory_type = mandatory_type.split('s_which_')[0];
+        // This is only a string.
+        var constraint = mandatory_type.split('s_which_')[1];
+        // This is an actual function.
+        var real_constraint = get_constraint[constraint](question_data);
+        return random_n(all_of[new_mandatory_type].filter(real_constraint),
+            number_of_mandatory);
+    }
+}
+
+var etym_standardize = function(term) {
+    if (term === 'root') {
+        return 'latin_root';
+    } else if (term === 'root_definition') {
+        return 'english_root';
+    } else {
+        return term;
+    }
+}
+
+var get_number_of_dummies = function (number_of_dummies,
+dummy_cheat_sheet_type) {
+    if (dummy_cheat_sheet_type === true) {
+        // We're fine; number_of_dummies doesn't need to change.
+        return number_of_dummies;
+    } else if (dummy_cheat_sheet_type === false) {
+        return 0; // We don't want dummies.
+    } else {
+        throw new Error('dummies not in cheat_sheet_type, ' +
+        'or set to an illegal value.');
+    }
+}
+
 var make_etymology_question_with_cheat_sheet = function (
 etym_level, question_type, number_of_answer_choices,
-number_of_cheat_sheet_extras) {
+number_of_dummies, number_of_mandatory) {
     var question_data = make_etymology_question(
         etym_level, question_type, number_of_answer_choices);
     var cheat_sheet_type = cheat_sheet_map[question_type];
-    var x = cheat_sheet_type.split('_to_')[0];
-    var y = cheat_sheet_type.split('_to_')[1];
-    var constraint = function () {return true};
-    if (x === 'word_containing_root') {
-        x = 'word';
-        constraint = function (x) {
-            return words[x].roots.indexOf(question_data['clue']) !== -1;
-        }
-    }
-    var cheat_sheet = cheat_sheet_x_to_y(x, y, [], number_of_cheat_sheet_extras,
-    constraint);
+    var x = cheat_sheet_type['type'].split('_to_')[0];
+    var y = cheat_sheet_type['type'].split('_to_')[1];
+    x = etym_standardize(x);
+    y = etym_standardize(y);
+    var mandatory = [];
+    var mandatory_types = cheat_sheet_type['mandatory'].split(' + ');
+    for (var i = 0; i < mandatory_types.length; i++) {
+        mandatory = mandatory.concat(get_mandatory(
+            mandatory_types[i], question_data, number_of_mandatory));
+    };
+    number_of_dummies = get_number_of_dummies(
+        number_of_dummies, cheat_sheet_type['dummies']);
+    var cheat_sheet = cheat_sheet_x_to_y(x, y, mandatory, number_of_dummies);
     return {
         'question_data': question_data,
         'cheat_sheet': cheat_sheet
@@ -243,13 +355,17 @@ number_of_cheat_sheet_extras) {
 }
 
 // comment this out when done testing
-window.onload= function () {
-    document.body.appendChild(document.createTextNode(
-        JSON.stringify(make_etymology_question_with_cheat_sheet
-        (5, 'word_to_latin_root', 4, 4))));
-    document.body.appendChild(document.createTextNode(
+window.onload = function () {
+    legal_question_types.forEach(function (i) {
+        document.body.appendChild(document.createTextNode(
+            JSON.stringify(make_etymology_question_with_cheat_sheet
+            (5, i, 4, 0, 4))));
+        document.body.appendChild(document.createElement('br'));
+        document.body.appendChild(document.createElement('br'));
+    });
+    /*document.body.appendChild(document.createTextNode(
         JSON.stringify(cheat_sheet_x_to_y('word', 'latin_root', [],
-        3, function () {return true}))));
+        3, function () {return true}))));*/
 }
 
 /*

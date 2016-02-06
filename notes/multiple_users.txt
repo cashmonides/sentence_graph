@@ -1,0 +1,78 @@
+PROBLEM
+
+multiple log ins from different computers will create inconsistent player experience and overlapping logs
+
+
+ISSUE
+- it might be a virtue to allow a user to log in at school and NOT log them out at home
+
+
+FROM STACK OVERFLOW
+up vote
+7
+down vote
+accepted
+The problem with all these solutions based on IP address is that if a user is behind a proxy server that routes their request via multiple IP addresses, this may fail in a way that means the user cannot remain logged in.
+
+What you can do instead is just, when any user logs in, give them a new session token and expire all previous session tokens belonging to the same user.
+
+This would require you keeping a table of all valid session tokens and which user they're associated with. Note that the built-in session handling of PHP is unlikely to be able to do this without much modification.
+
+shareimprove this answer
+edited Aug 13 '10 at 4:59
+answered Aug 13 '10 at 4:51
+
+thomasrutter
+59.3k1396131
+  	 	
++1 This sounds like a better solution. You could also use JavaScript to poll the client, and if no polls within 15 minutes, expire session. To combat non JavaScript users, extend the expiry on every page load. – alex Aug 13 '10 at 4:55 
+  	 	
+Yes, though I'd personally go the non-Javascript route, extending the expiry on every page load of an existing session - for that. – thomasrutter Aug 13 '10 at 5:00
+
+
+
+ANOTHER STACK OVERFLOW ANSWERS
+4
+down vote
+accepted
+Set a key in your session that you store in the database in the user table:
+
+Table User
+
+user_id
+username
+password
+token
+On Login:
+
+create random token
+UPDATE user SET token='MyRandomToken' WHERE username='username' and password='password';
+$_SESSION['login_token'] = 'MyRandomToken';
+On every page:
+
+SELECT user_id, username, token FROM user WHERE token='$_SESSION['login_token']';
+If not found then the logiin token is no longer valid.
+This makes sure that a login expires automatically if there is a newer login. There can be only one logged in user per account at any time.
+
+UPDATE
+
+Just saw your comment to the Question. My answer does not work for you as it doesn't disallow a second login but instead invalidates any previous login.
+
+If you want to prevent a second login then using a timestamp that you update on every page is the best solution:
+
+On login:
+
+(Assuming MySQL:)
+
+SELECT user_id
+FROM user
+WHERE username='username'
+AND password='password'
+AND last_access < DATE_SUB(NOW(), INTERVAL 10 MINUTE);
+If a row was found then the account exists and the login is not blocked by another login. You might want to split that into two queries (first check login, then check last access) to give a better error message for failed logins, otherwise it's either "account does not exist" or "blocked".
+
+On every page:
+
+UPDATE user
+SET last_access=NOW()
+WHERE user_id='CurrentUserId';

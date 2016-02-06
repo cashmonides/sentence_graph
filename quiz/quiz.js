@@ -101,6 +101,7 @@ Quiz.prototype.user_loaded = function(){
     
     console.log("DEBUG 11-20 user_loaded this.module = ", this.module);
     
+    
     this.user.start_module(id);
     
     // console.log("current module:", this.module);
@@ -680,6 +681,8 @@ Quiz.prototype.clean_up = function() {
     // This is a functiom so that we can add more cleaning-up stuff if needed.
     // This line removes all cheat sheets.
     remove_children(el('image_display_box'));
+    remove_children(el('vocab_cheat_sheet_div'));
+    // remove_children(el('image_display_box1'));
     el('cheat_sheet_button').onclick = this.initialize_cheat_sheet.bind(this);
     el('vocab_cheat_button').onclick = this.initialize_vocab_cheat_sheet.bind(this);
 }
@@ -706,9 +709,18 @@ Quiz.prototype.get_cheat_sheet_image = function () {
 }
 
 Quiz.prototype.clear_cheat_sheet = function () {
+    //quick hacky solution for the time being, we want vocabulary cheat sheet to be above any image based cheat sheet, so we'll throw it in the div "image_display_box1"
+    // var div1 = el("image_display_box1");
+    // div1.style.display = 'none';
+    
+    
+    //image-cheat sheet is here
     var div = el("image_display_box");
-    console.log("cheat sheet cleared");
     div.style.display = 'none';
+    
+    console.log("cheat sheet cleared");
+    
+    
 }
 
 Quiz.prototype.get_vocab_cheat_sheet_map = function () {
@@ -755,7 +767,7 @@ Quiz.prototype.initialize_cheat_sheet = function() {
     var image_source = this.get_cheat_sheet_image();
     var div = make({'tag': 'div', 'id': 'image_cheat_sheet',
     'style': {'display': 'block'}}, el("image_display_box"));
-    div.innerHTML = '<img src="'+ image_source +'" />';
+    div.innerHTML = '<img src="'+ image_source +'" width=\'100%\' />';
     // console.log("cheat sheet button clicked");
     el('cheat_sheet_button').onclick = function () {quiz.toggle_element('image_cheat_sheet')};
     //};
@@ -764,7 +776,8 @@ Quiz.prototype.initialize_cheat_sheet = function() {
 
 Quiz.prototype.initialize_vocab_cheat_sheet = function () {
     var vocab_cheat_sheet_map = this.get_vocab_cheat_sheet_map();
-    var outer_div = el("image_display_box");
+    // var outer_div = el("image_display_box");
+    var outer_div = el("vocab_cheat_sheet_div");
     make({'tag': 'table', 'id': 'vocab_cheat_sheet', 'style': {'display': 'block'}}, outer_div);
     var e = el('vocab_cheat_sheet');
     var vocabulary_items = Object.keys(vocab_cheat_sheet_map);
@@ -809,6 +822,7 @@ Quiz.prototype.toggle_element = function(id) {
     //button.onclick = function() {
     console.log('image display box = ', el("image_display_box"));
     
+    console.log("DEBUG 2-6 ID in toggle_element = ", id);
     var element = el(id);
     console.log("cheat sheet button clicked");
     if (element.style.display !== 'none') {

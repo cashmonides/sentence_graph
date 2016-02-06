@@ -48,7 +48,8 @@ function make_output(level, current_lexicon, none_display) {
         drop_down_settings[part_of_speech], current_lexicon);
         creation_by_part_of_speech.push({'part of speech': part_of_speech,
         'sources': new_lexemes.filter(function (x) {
-        return x.slice(0, 6) !== 'double'}), 'results': things_with_part_of_speech});
+        return !(begins_with(x, 'double'))}), 'results': things_with_part_of_speech});
+        // Originally return x.slice(0, 6) !== 'double'}), was here.
     }
 
     change_state_to_be_made_final(state_to_be_made, master_lexeme_list);
@@ -282,7 +283,8 @@ function add_to_lexeme_list (
 
         master_lexeme_list[element] = pick_lexeme_new(state, element,
             part_of_speech, current_lexicon, master_lexeme_list);
-        if (element.slice(0, 6) !== 'double') {
+        if (!(begins_with(element, 'double'))) {
+            // Originally (element.slice(0, 6) !== 'double')
             master_lexeme_list.dummies_and_used.push(element)
         }
         master_lexeme_list.all_lexemes.push(element);
