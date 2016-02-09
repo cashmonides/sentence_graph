@@ -415,8 +415,34 @@ var latin_extra_levels = {
     },
 }
 
-//drop ratios
+//drop ratios for testing only
 var latin_drop_levels = {
+    //main levels
+    1: {
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0.001,
+            min: 1, max: 2}
+    },
+    100: {
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0.001,
+            min: 2, max:3}
+    },
+    //iq and is levels
+    200: {
+        drop_non_drop_map: {'subject_drop': .001, 'verb_drop': .9, 'object_drop': .001, 'conjunction_drop': 0.9,
+            min: 1, max:3}
+    },
+    300: {
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .9, 'object_drop': .3, 'conjunction_drop': 0.9,
+            min: 2, max:3}
+    },
+    400: {
+        drop_non_drop_map: {'subject_drop': .1, 'verb_drop': .9, 'object_drop': .1, 'conjunction_drop': 0.9,
+            min: 2, max:3}
+    }
+}
+
+//return to functionality when done testing
+var latin_drop_levels2 = {
     //equal distribution of s, v  and o
     //only one drop
     //no extras
@@ -559,6 +585,20 @@ var latin_drop_levels = {
         drop_non_drop_map: {'subject_drop': 0.7, 'verb_drop': .9, 'object_drop': 0.7, 'conjunction_drop': 0,
             min: 3, max: 3}
     },
+    
+    //level for testing iq and is
+    400: {
+        drop_non_drop_map: {'subject_drop': 0, 'verb_drop': .9, 'object_drop': 0, 'conjunction_drop': 0.9,
+            min: 2, max: 2}
+    },
+    500: {
+        drop_non_drop_map: {'subject_drop': 0.5, 'verb_drop': .9, 'object_drop': 0.5, 'conjunction_drop': 0.9,
+            min: 2, max: 3}
+    },
+    600: {
+        drop_non_drop_map: {'subject_drop': 0.5, 'verb_drop': .9, 'object_drop': 0.5, 'conjunction_drop': 0.9,
+            min: 2, max: 4}
+    }
     
 }
 

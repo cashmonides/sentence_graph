@@ -78,16 +78,23 @@ ITERATION 1.0
 - *done* enter fields into profile (grade number, school, first and last name 
 - *done* email should be stored in firebase profile info
 - *done* vocab cheat sheets should live above image cheat sheet
-
-
-- fix anonymous users
-    - when they conmplete a module, instead of document.location going back to profile it should go to the next module
-- add etymology question types
+- * done but needs some more testing* - add etymology question types
     - word to word_definition   "What is the meaning of the word QUADRUPED?"
     - root to root_meaning   "What is the meaning of the root PED?"
     - root_meaning to root  "which of the following roots means "foot"?
     - root to word    "Which word has a root meaning "all"?
     - word to root    "Select the root of the word QUADRUPED"
+
+
+
+- score increments should be tweaked
+    - (psychologically: there should never be a point where the player cannot win any points = encourages defeatism)
+    - correct on first response  = +4 points
+    - incorrect first response = -3
+    - incorrect second response = 0
+    - incorrect third response = 0
+    - correct second response = +2
+    - correct third response = +1
 - etymology cheat sheet
 - add definitions to etymology (so they see definitions early but not later on)
 - duplicate tags are not getting removed
@@ -111,14 +118,9 @@ ITERATION 1.0
     - cases (implies noun)
     - tenses (implies verb)
 - password protection on tagger is working but very small problem: someone without the password gets trapped on the page - should be a quit button that closes the tab
-- score increments should be tweaked
-    - (psychologically: there should never be a point where the player cannot win any points = encourages defeatism)
-    - correct on first response  = +4 points
-    - incorrect first response = -3
-    - incorrect second response = 0
-    - incorrect third response = 0
-    - correct second response = +1
-    - correct third response = +1
+- fix anonymous users
+    - when they conmplete a module, instead of document.location going back to profile it should go to the next module
+
 
 
 ITERATION 1.5
