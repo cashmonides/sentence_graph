@@ -11,7 +11,7 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 - Akiva: cleared sentences and started tagging new ones (but tagging is now buggy)
 - Akiva: got sql to work
 - Akiva: changed persist so progress would be persisted; this may impact rollover
-- Dan: modularized cheat sheet creation; etymology sheet sheets not yet started
+- Dan: modularized cheat sheet creation; etymology cheat sheets not yet started
 
 
 HIGH-PRIORITY BUGS
