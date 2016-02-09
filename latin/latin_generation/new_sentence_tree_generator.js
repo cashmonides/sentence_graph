@@ -151,9 +151,8 @@ states_allowed, master_lexeme_list, level) {
 }
 
 function cheat_sheet(master_lexeme_list) {
-    return dict_from_list_of_pairs(
-        quick_sort(master_lexeme_list, cheat_sheet_sort).map(function (x) {
-            return [x.properties.latin.root, x.properties.english.root]}))
+    return quick_sort(master_lexeme_list, cheat_sheet_sort).map(function (x) {
+        return [x.properties.latin.root, x.properties.english.root]});
 }
 
 function change_state_to_be_made_initial (state) {

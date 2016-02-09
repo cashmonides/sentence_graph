@@ -775,16 +775,19 @@ Quiz.prototype.initialize_cheat_sheet = function() {
 };
 
 Quiz.prototype.initialize_vocab_cheat_sheet = function () {
-    var vocab_cheat_sheet_map = this.get_vocab_cheat_sheet_map();
+    var vocabulary_items = this.get_vocab_cheat_sheet_map();
     // var outer_div = el("image_display_box");
     var outer_div = el("vocab_cheat_sheet_div");
+    var e = el('vocab_cheat_sheet');
+    create_cheat_sheet_table(outer_div, 'vocab_cheat_sheet', 'latin_cheat_sheet_item',
+    'english_cheat_sheet_item', latin_cheat_sheet_display, function (x) {
+        return [[x, {'font-style': 'italic'}]]}, vocabulary_items);
+    /*
     make({'tag': 'table', 'id': 'vocab_cheat_sheet', 'style': {'display': 'block'}}, outer_div);
     var e = el('vocab_cheat_sheet');
-    var vocabulary_items = Object.keys(vocab_cheat_sheet_map);
-    
     for (var i = 0; i < vocabulary_items.length; i++) {
-        var latin_word = vocabulary_items[i];
-        var english_word = vocab_cheat_sheet_map[latin_word];
+        var latin_word = vocabulary_items[i][0];
+        var english_word = vocabulary_items[i][1];
         var stem = latin_word.split('-')[0];
         var ending = latin_word.split('-')[1] ? '-' + latin_word.split('-')[1] : '';
         var row = make({'tag': 'tr'}, e);
@@ -793,6 +796,7 @@ Quiz.prototype.initialize_vocab_cheat_sheet = function () {
         make({'tag': 'b', 'text': ending, 'style' : {'font-size': '50%'}}, latin_word_el)
         make({'tag': 'td', 'class': 'english_cheat_sheet_item', 'style': {'font-style': 'italic'}, 'text': english_word}, row);
     };
+    */
     el('vocab_cheat_button').onclick = function () {quiz.toggle_element('vocab_cheat_sheet')};
 }
 
