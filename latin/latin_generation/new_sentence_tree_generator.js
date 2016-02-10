@@ -150,8 +150,18 @@ states_allowed, master_lexeme_list, level) {
     }
 }
 
-function cheat_sheet(master_lexeme_list) {
-    return quick_sort(master_lexeme_list, cheat_sheet_sort).map(function (x) {
+var cheat_sheet = function (master_lexeme_list) {
+    // We put our lexemes in groups corresponding to their part of speech.
+    var lexemes_by_part_of_speech = separate_and_sort_by(
+        master_lexeme_list, function (x) {
+            return x.properties.core.part_of_speech});
+    // We sort each group.
+    var lexemes_sorted_by_root = lexemes_by_part_of_speech.map(
+        function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
+    // We push the part of speach to each item (as a header).
+    lexemes_sorted_by_root.forEach(function (x) {
+        x.unshift(x[0].properties.core.part_of_speech)});
+    return concat_arrays(lexemes_sorted_by_root).map(function (x) {
         return [x.properties.latin.root, x.properties.english.root]});
 }
 

@@ -42,12 +42,15 @@ function custom_sort(x, y) {
     }
 }
 
+/*
+Now unused due to new cheat sheet functionality.
 function cheat_sheet_sort(x, y) {
     // Here x and y are rows of the cheat sheet.
     return sort_which_is_first(
         [['properties_core_part`of`speech', ['noun', 'verb']],
         ['properties_latin_root', remove_long_vowels]], x, y)
 }
+*/
 
 function sort_which_is_first (order, x, y) {
     for (var i = 0; i < order.length; i++) {
@@ -103,14 +106,4 @@ function map_by_text(x) {
         part.choices = part.choices.map(function (y) {return y.text})
     });
     return x
-}
-
-// Latin sorting functions.
-// Move this?
-function remove_long_vowels(s) {
-    var long_to_short = {'Ā': 'A', 'Ē': 'E', 'Ī': 'I', 'Ō': 'O', 'Ū': 'U'};
-    for (var i in long_to_short) {
-        s = s.replace(i, long_to_short[i])
-    }
-    return s
 }

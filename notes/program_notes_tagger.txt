@@ -13,10 +13,13 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 - Akiva: changed persist so progress would be persisted; this may impact rollover
 - Dan: modularized cheat sheet creation; etymology cheat sheets not yet started
 - Dan: added primitive etymology cheat sheets
+- Dan: made asterisks word characters
+- Dan: cheat sheets were getting rather long and complicated so they were put into their own file
 
 
 HIGH-PRIORITY BUGS
 - dashes get interpreted as word breaks in latin
+     - Dan: I'm not sure what this means. They work well in tag.
 - (this might be fixed) unexpected token # still happens even after the following steps:
     - .htaccess file is in the same folder as sql.py and reads:
         Options +ExecCGI
@@ -32,7 +35,7 @@ HIGH-PRIORITY BUGS
 
 LO-PRIORITY BUGS
 - anonymous user doesn't get progress updated on profile page (one solution: disable the return to profile for anonymous users)
-- 5 users on first row 
+- 5 modules on first row 
 - hoverable latin
 - firefox is not responding to our small image solution
 - answers that are two regions (i.e. two words like 'many things') don't seem to be selectable as answers
@@ -42,6 +45,7 @@ LO-PRIORITY BUGS
 
 ???QUESTIONS????
 - do asterisks work in the tagger?
+    - dan tested and they do now
 
 
 CHORE
@@ -66,7 +70,14 @@ NOTES ON ETYMOLOGY CHEAT SHEETS
 - 'english_root_to_word', 'word_to_word_definition', 'word_definition_to_word',
 - 'root_to_root_definition', 'root_definition_to_root'
 
-
+NOTES ON CHEAT SHEETS
+- progress needed
+// In the future, we will add headers,
+// change the map function to include declension or conjugation.
+// and add different rules to cheat sheets to allow them to have
+// any number of columns.
+- iteration 1.2 perhaps?
+// Etymology cheat sheets should not simply be randomized.
 
 ITERATIONS
 ITERATION 1.0

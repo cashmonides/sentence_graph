@@ -781,9 +781,10 @@ Quiz.prototype.initialize_vocab_cheat_sheet = function () {
     // var outer_div = el("image_display_box");
     var outer_div = el("vocab_cheat_sheet_div");
     // var e = el('vocab_cheat_sheet');
-    create_cheat_sheet_table(outer_div, 'vocab_cheat_sheet', 'latin_cheat_sheet_item',
-    'english_cheat_sheet_item', latin_cheat_sheet_display, function (x) {
-        return [[x, {'font-style': 'italic'}]]}, vocabulary_items);
+    create_cheat_sheet_table(outer_div, 'vocab_cheat_sheet',
+    ['latin_cheat_sheet_item', 'english_cheat_sheet_item'],
+    [latin_cheat_sheet_display, function (x) {
+        return [[x, {'font-style': 'italic'}]]}], vocabulary_items, 2);
     /*
     make({'tag': 'table', 'id': 'vocab_cheat_sheet', 'style': {'display': 'block'}}, outer_div);
     var e = el('vocab_cheat_sheet');
@@ -803,12 +804,11 @@ Quiz.prototype.initialize_vocab_cheat_sheet = function () {
 }
 
 Quiz.prototype.initialize_etym_cheat_sheet = function () {
-    var vocabulary_items = this.game.etymology_cheat_sheet;
+    var etym_cheat = this.game.etymology_cheat_sheet;
     // var outer_div = el("image_display_box");
     var outer_div = el("etym_cheat_sheet_div");
-    create_cheat_sheet_table(outer_div, 'etym_cheat_sheet', null,
-    null, create_normal_cell, create_normal_cell,
-    vocabulary_items);
+    create_cheat_sheet_table(outer_div, 'etym_cheat_sheet',
+    null, null, etym_cheat, 2);
     el('etym_cheat_button').onclick = function () {quiz.toggle_element('etym_cheat_sheet')};
 }
 
