@@ -13,8 +13,9 @@ var TutorialModeGame = function(tutorial_id){
 TutorialModeGame.prototype.attach = function(){
     el("answer_choices").style.display = 'none';
     el("submit_button").style.display = 'none';
-    el("vocab_cheat_button").style.display = 'none';
     el("cheat_sheet_button").style.display = 'none';
+    el("vocab_cheat_button").style.display = 'none';
+    el("etym_cheat_button").style.display = 'none';
 };
 
 

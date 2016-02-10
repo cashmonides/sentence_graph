@@ -5,18 +5,6 @@ function sorted_choices(output, key_for_word) {
         key_for_word.split('_')[0] === 'verb'}});
 }
 
-function quick_sort(list, f) {
-    if (list.length === 0) {return []}
-    // We sort from random index (original data may be somewhat sorted).
-    // Perhaps we should switch to merge sort.
-    var n = rand_int(list.length);
-    var pivot = list[n];
-    var rest = remove(list, n);
-    var before = rest.filter(function (x) {return f(x, pivot)});
-    var after = rest.filter(function (x) {return f(pivot, x)});
-    return quick_sort(before, f).concat(pivot, quick_sort(after, f))
-}
-
 function separate_by_lexeme(l) {
     var r = [];
     var current_root = null;

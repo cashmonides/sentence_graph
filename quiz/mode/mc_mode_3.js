@@ -17,10 +17,10 @@ MCMode3Game.prototype.attach = function(){
 
     //todo
     el("answer_choices").style.display = 'initial';
-
     el("submit_button").style.display = 'initial';
-    el("vocab_cheat_button").style.display = 'initial';
     el("cheat_sheet_button").style.display = 'initial';
+    el("vocab_cheat_button").style.display = 'initial';
+    el("etym_cheat_button").style.display = 'none';
     // state.switch_count = 1
     
     //this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);

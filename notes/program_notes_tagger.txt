@@ -12,6 +12,7 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 - Akiva: got sql to work
 - Akiva: changed persist so progress would be persisted; this may impact rollover
 - Dan: modularized cheat sheet creation; etymology cheat sheets not yet started
+- Dan: added primitive etymology cheat sheets
 
 
 HIGH-PRIORITY BUGS

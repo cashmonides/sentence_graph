@@ -136,8 +136,9 @@ EtymologyModeGame.prototype.attach = function(){
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
     el("answer_choices").style.display = 'initial';
     el("submit_button").style.display = 'initial';
-    el("vocab_cheat_button").style.display = 'none';
     el("cheat_sheet_button").style.display = 'none';
+    el("vocab_cheat_button").style.display = 'none';
+    el("etym_cheat_button").style.display = 'initial';
 };
 
 EtymologyModeGame.prototype.set_level = function (new_level) {
@@ -172,6 +173,8 @@ EtymologyModeGame.prototype.next_question = function(){
         this.level.etym_level, random_choice(legal_question_types), 4, 4, 4);
     console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
+    this.etymology_cheat_sheet = alphabetize_dict(
+        question_with_cheat_sheet['cheat_sheet']);
     this.choices = shuffle(question.choices);
     this.correct = question.correct_answer;
     
@@ -202,7 +205,6 @@ EtymologyModeGame.prototype.next_question = function(){
     
     //todo new code 11-29 the following avoids drop-downs with only one answer
     if (el("select_element").children.length === 1) {this.next_question()}
-
 };
 
 
