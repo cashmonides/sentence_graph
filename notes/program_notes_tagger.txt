@@ -15,6 +15,7 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 - Dan: added primitive etymology cheat sheets
 - Dan: made asterisks word characters
 - Dan: cheat sheets were getting rather long and complicated so they were put into their own file
+- Dan: make also now in its own file
 
 
 HIGH-PRIORITY BUGS

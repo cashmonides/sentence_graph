@@ -160,9 +160,14 @@ var cheat_sheet = function (master_lexeme_list) {
         function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
     // We push the part of speach to each item (as a header).
     lexemes_sorted_by_root.forEach(function (x) {
-        x.unshift(x[0].properties.core.part_of_speech)});
+        x.unshift(x[0].properties.core.part_of_speech + 's')});
     return concat_arrays(lexemes_sorted_by_root).map(function (x) {
-        return [x.properties.latin.root, x.properties.english.root]});
+        if (typeof x === 'object') {
+            return [x.properties.latin.root, x.properties.english.root]
+        } else {
+            return x
+        }
+    });
 }
 
 function change_state_to_be_made_initial (state) {
