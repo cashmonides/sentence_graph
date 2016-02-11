@@ -114,7 +114,8 @@ ProfilePage.build_progress_table = function(user) {
         var table = el("table");
         console.log("DEBUG 2-11 entering first make in profile");
         console.log("DEBUG 2-11 user = ", user);
-        var row = make({tag: "tr"}, table);
+        console.log("DEBUG 2-11 table = ", table);
+        var row = make({"tag": "tr"}, table);
         console.log("DEBUG 2-11 leaving first make");
         var max_columns = 4;
         var order = get_module_order();
@@ -166,7 +167,8 @@ ProfilePage.build_progress_table = function(user) {
     
     
             if (i > 0 && i % max_columns == 0) {
-                row = make({tag: "tr"}, table);
+                console.log("DEBUG 2-11 entering 3rd make in profile");
+                row = make({'tag': "tr"}, table);
             }
         }
     } catch (e) {
