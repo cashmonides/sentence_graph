@@ -112,7 +112,10 @@ ProfilePage.get_module_distance = function (user, module_id) {
 ProfilePage.build_progress_table = function(user) {
     try {
         var table = el("table");
+        console.log("DEBUG 2-11 entering first make in profile");
+        console.log("DEBUG 2-11 user = ", user);
         var row = make({tag: "tr"}, table);
+        console.log("DEBUG 2-11 leaving first make");
         var max_columns = 4;
         var order = get_module_order();
         
@@ -156,6 +159,9 @@ ProfilePage.build_progress_table = function(user) {
                 m.class.push('clickable')
             }
             
+            console.log("DEBUG 2-11 entering 2nd make in profile");
+            console.log("DEBUG 2-11 m = ", m);
+            console.log("DEBUG 2-11 row = ", row);
             make(m, row);
     
     

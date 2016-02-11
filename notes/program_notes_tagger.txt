@@ -42,6 +42,9 @@ LO-PRIORITY BUGS
 - answers that are two regions (i.e. two words like 'many things') don't seem to be selectable as answers
 - auto-tagger seems to have main and subordinate clauses as undefined
     - undefined = subordinate clause is what the auto-tagger returns
+- certain types of etymology questions are too easy
+    - in the short term, we should disable them
+    - down the road (or perhaps now) we should add a method of weighting question types to module
 
 
 ???QUESTIONS????
@@ -79,6 +82,8 @@ NOTES ON CHEAT SHEETS
 // any number of columns.
 - iteration 1.2 perhaps?
 // Etymology cheat sheets should not simply be randomized.
+// Etymology answer choices should also be sorted.
+// Both these changes should be easy.
 
 ITERATIONS
 ITERATION 1.0
