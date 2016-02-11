@@ -260,19 +260,21 @@ Quiz.prototype.next_submodule = function(){
     console.log("DEBUG 2-11 this.time_data = ", time_data);
     
     
-    console.log("DEBUG 2-11 entering post #1");
-    console.log("DEBUG 2-11 this.time_data = ", time_data);
+    // console.log("DEBUG 2-11 entering post #1");
+    // console.log("DEBUG 2-11 this.time_data = ", time_data);
+    
+    //todo very important - comment back in when fixed
     
     //used to be: no callback because we don't need one
     //now we need a callback because we're getting a piece of data coming back to us
-    var self = this;
-    post({data: time_data, type: "insert_time_data"}, function (data) {
-        console.log("DEBUG 2-11 data = ", data);
-        self.time_data_id = data.id;
-    });
+    // var self = this;
+    // post({data: time_data, type: "insert_time_data"}, function (data) {
+    //     console.log("DEBUG 2-11 data = ", data);
+    //     self.time_data_id = data.id;
+    // });
     //todo maybe a good idea later to add an urgent error log here
     
-    console.log("DEBUG 2-11 exiting post #1");
+    // console.log("DEBUG 2-11 exiting post #1");
     
     
     this.next_question();
@@ -387,10 +389,10 @@ Quiz.prototype.question_complete = function(){
 Quiz.prototype.submodule_complete = function () {
     console.log('this.advance_improve_status =', this.advance_improve_status);
     
-    console.log("DEBUG 2-11 entering post #2");
-    console.log("DEBUG 2-11 this.time_data = ", this.time_data);
-	post({data: this.time_data_id, type: "update_time_data"});
-    console.log("DEBUG 2-11 exiting post #2");
+//     console.log("DEBUG 2-11 entering post #2");
+//     console.log("DEBUG 2-11 this.time_data = ", this.time_data);
+// 	post({data: this.time_data_id, type: "update_time_data"});
+//     console.log("DEBUG 2-11 exiting post #2");
     
     if (this.advance_improve_status === 'advancing') {
         var mod = this.user.get_current_module(this.module.id);
