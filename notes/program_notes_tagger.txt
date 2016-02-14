@@ -16,6 +16,7 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 - Dan: made asterisks word characters
 - Dan: cheat sheets were getting rather long and complicated so they were put into their own file
 - Dan: make also now in its own file
+- Dan: font sizes corrected
 
 
 HIGH-PRIORITY BUGS
@@ -84,6 +85,12 @@ NOTES ON CHEAT SHEETS
 // Etymology cheat sheets should not simply be randomized.
 // Etymology answer choices should also be sorted.
 // Both these changes should be easy.
+
+It is believed that everything pertaining to the Mystic Dualogical Paradox
+(MDP) has been successfully cleaned up by the shadowy Debuggers,
+with no remnants that it ever existed. This had the side effect of
+restoring font sizes, which gift they deigned to give
+to our Type .7 civilization.
 
 ITERATIONS
 ITERATION 1.0

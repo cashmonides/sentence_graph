@@ -11,11 +11,12 @@ var TutorialModeGame = function(tutorial_id){
 
 
 TutorialModeGame.prototype.attach = function(){
-    el("answer_choices").style.display = 'none';
-    el("submit_button").style.display = 'none';
-    el("cheat_sheet_button").style.display = 'none';
-    el("vocab_cheat_button").style.display = 'none';
-    el("etym_cheat_button").style.display = 'none';
+    set_display("latin_answer_choices", 'none');
+    set_display("drop_answer_choices", 'none');
+    set_display("submit_button", 'none');
+    set_display("cheat_sheet_button", 'none');
+    set_display("vocab_cheat_button", 'none');
+    set_display("etym_cheat_button", 'none');
 };
 
 

@@ -31,11 +31,12 @@ DropModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
     //(should word_selector.setup have a flag for clickable or not clickable?
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
-    el("answer_choices").style.display = 'initial';
-    el("submit_button").style.display = 'initial';
-    el("cheat_sheet_button").style.display = 'none';
-    el("vocab_cheat_button").style.display = 'none';
-    el("etym_cheat_button").style.display = 'none';
+    set_display("latin_answer_choices", 'none');
+    set_display("drop_answer_choices", 'initial');
+    set_display("submit_button", 'initial');
+    set_display("cheat_sheet_button", 'none');
+    set_display("vocab_cheat_button", 'none');
+    set_display("etym_cheat_button", 'none');
 };
 
 DropModeGame.prototype.set_level = function (new_level) {
@@ -97,48 +98,12 @@ DropModeGame.prototype.next_question = function(sentences){
     }
     
     //remove all html elements in drop down
-    if (document.getElementById("answer_choices")) {
-        if (document.getElementById("answer_wrapper")) {
-            document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));
-            console.log("DEBUG 11-18 remove html elements triggered");
-        }
-    }
+    remove_element_by_id("drop_answer_choices");
     //make html elements
-    this.make_drop_down();
+    make_drop_down_html(this.get_answer_choices());
     
     //todo new code 11-29 the following avoids drop-downs with only one answer
     if (el("select_element").children.length === 1) {this.next_question()}
-
-};
-
-
-DropModeGame.prototype.make_drop_down = function(){
-    //html elements created here
-    var ac = document.createElement("div");
-    ac.id = "answer_choices";
-    console.log("ac = ", ac);
-    document.getElementById("pre_footer").appendChild(ac);
-    
-    var aw = document.createElement("div");
-    aw.id = "answer_wrapper";
-    console.log("aw = ", aw);
-    document.getElementById("answer_choices").appendChild(aw);
-    
-    var e = document.createElement("select");
-    e.id = "select_element";
-    console.log("e = ", e);
-    
-    
-    console.log("DEBUG 11-18 doc.get.el.aw", document.getElementById("answer_wrapper"));
-    console.log("DEBUG 11-18 doc.get.el.ac", document.getElementById("answer_choices"));
-    document.getElementById("answer_wrapper").appendChild(e);
-    console.log("DEBUG 11-18 final append reached");
-    // Originally, this.get_answer_choices() was effectively
-    // array_from(this.data.available_tags), but a current bugfix
-    // makes it seem more prudent to have a new method.
-    var answer_choices = this.get_answer_choices();
-    console.log("DEBUG 11-18 dropdown data inserted = ", answer_choices);
-    set_dropdown("select_element", answer_choices);
 };
 
 DropModeGame.prototype.get_answer_choices = function () {

@@ -134,11 +134,12 @@ EtymologyModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
     //(should word_selector.setup bave a flag for clickable or not clickable?
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
-    el("answer_choices").style.display = 'initial';
-    el("submit_button").style.display = 'initial';
-    el("cheat_sheet_button").style.display = 'none';
-    el("vocab_cheat_button").style.display = 'none';
-    el("etym_cheat_button").style.display = 'initial';
+    set_display("latin_answer_choices", 'none');
+    set_display("drop_answer_choices", 'initial');
+    set_display("submit_button", 'initial');
+    set_display("cheat_sheet_button", 'none');
+    set_display("vocab_cheat_button", 'none');
+    set_display("etym_cheat_button", 'initial');
 };
 
 EtymologyModeGame.prototype.set_level = function (new_level) {
@@ -168,16 +169,18 @@ EtymologyModeGame.prototype.next_question = function(){
     etym_level, question_type, number_of_answer_choices,
     number_of_dummies, number_of_mandatory)
     */
-    
+    this.legal_question_types = map_level_to_allowed(
+        this.level.etym_level, etym_levels).question_types;
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, random_choice(legal_question_types), 4, 4, 4);
+        this.level.etym_level, weighted(this.legal_question_types), 4, 4, 4);
     console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
     this.etymology_cheat_sheet = alphabetize_dict(
         question_with_cheat_sheet['cheat_sheet']);
-    this.choices = shuffle(question.choices);
+    this.choices = alphabetize_list(question.choices);
     this.correct = question.correct_answer;
     
+    console.log('OK in etymology, now only HTML remains')
     
     Quiz.set_question_text(question.question_template + '"' + question.clue + '".');
     
@@ -192,49 +195,14 @@ EtymologyModeGame.prototype.next_question = function(){
     
     
     //remove all html elements in drop down
-    if (document.getElementById("answer_choices")) {
-        if (document.getElementById("answer_wrapper")) {
-            document.getElementById("answer_choices").removeChild(document.getElementById('answer_wrapper'));
-            console.log("DEBUG 11-18 remove html elements triggered");
-        }
-        
-    }
+    remove_element_by_id("drop_answer_choices");
     
     //make html elements
-    this.make_drop_down();
+    make_drop_down_html(this.choices);
     
     //todo new code 11-29 the following avoids drop-downs with only one answer
     if (el("select_element").children.length === 1) {this.next_question()}
 };
-
-
-EtymologyModeGame.prototype.make_drop_down = function(){
-    //html elements created here
-    var ac = document.createElement("div");
-    ac.id = "answer_choices";
-    console.log("ac = ", ac);
-    document.getElementById("pre_footer").appendChild(ac);
-    
-    var aw = document.createElement("div");
-    aw.id = "answer_wrapper";
-    console.log("aw = ", aw);
-    document.getElementById("answer_choices").appendChild(aw);
-    
-    var e = document.createElement("select");
-    e.id = "select_element";
-    console.log("e = ", e);
-    
-    
-    console.log("DEBUG 11-18 doc.get.el.aw", document.getElementById("answer_wrapper"));
-    console.log("DEBUG 11-18 doc.get.el.ac", document.getElementById("answer_choices"));
-    
-    document.getElementById("answer_wrapper").appendChild(e);
-    console.log("DEBUG 11-18 final append reached");
-    
-    console.log("DEBUG 11-18 dropdown data inserted = ", this.choices);
-    set_dropdown("select_element", this.choices);
-};
-
 
 
 

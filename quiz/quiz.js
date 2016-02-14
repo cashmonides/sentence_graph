@@ -321,7 +321,8 @@ Quiz.get_mode = function(mode_number) {
         case 0 : return new DropModeGame();
         case 1 : return new MCMode3Game();
         case 2 : return new QuickModeGame();
-        case 3 : return new GenericDropGame();
+        // Programming Tip: The number "3" is cursed. Avoid it.
+        // case 3 : return new GenericDropGame();
         case 4 : return new EtymologyModeGame();
         default : throw "no game mode triggered";
     }
@@ -347,6 +348,7 @@ Quiz.prototype.next_question = function (){
         console.log('DEBUG 12-23 entering try block')
         this.clean_up();
         this.next_mode();
+        console.log('still OK, about to call next_question');
         this.game.next_question(this);
         console.log('DEBUG 12-23 no error, everything is fine')
     } catch (e) {

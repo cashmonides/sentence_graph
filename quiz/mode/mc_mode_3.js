@@ -16,11 +16,12 @@ MCMode3Game.prototype.attach = function(){
     //maybe something like in setup, if clickable is false then it just sets r[0] to false
 
     //todo
-    el("answer_choices").style.display = 'initial';
-    el("submit_button").style.display = 'initial';
-    el("cheat_sheet_button").style.display = 'initial';
-    el("vocab_cheat_button").style.display = 'initial';
-    el("etym_cheat_button").style.display = 'none';
+    set_display("latin_answer_choices", 'initial');
+    set_display("drop_answer_choices", 'none');
+    set_display("submit_button", 'initial');
+    set_display("cheat_sheet_button", 'initial');
+    set_display("vocab_cheat_button", 'initial');
+    set_display("etym_cheat_button", 'none');
     // state.switch_count = 1
     
     //this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
@@ -87,13 +88,24 @@ MCMode3Game.prototype.next_question = function () {
     this.none_display = random_choice(map_level_to_allowed(
         this.level.latin_extra_level, latin_extra_levels).none_display);
     
+    // We now use this to guarantee that our answer choices end up in the right place.
+    // remove_element(el("answer_choices"));
+    remove_element_by_id("latin_answer_choices");
     
+    var new_answer_choices = document.createElement('div');
+    
+    new_answer_choices.id = "latin_answer_choices";
+    
+    el('drop_downs').appendChild(new_answer_choices);
+    
+    /*
     document.getElementById("answer_choices").removeChild(
         document.getElementById('answer_wrapper'));
+    */
     
     var e = document.createElement('div');
-    e.id = 'answer_wrapper';
-    document.getElementById("answer_choices").appendChild(e);
+    e.id = 'latin_answer_wrapper';
+    new_answer_choices.appendChild(e);
     
     //todo - I found this in the code - what is the point of it?
     // remove_children(document.getElementById("answer_choices"));
@@ -111,7 +123,7 @@ MCMode3Game.prototype.next_question = function () {
     }
 
     // Hacky way to guarantee a drop down.
-    var x = this.make_drop_down();
+    var x = this.make_drop_down(e);
     if (x === 0) {this.next_question()}
 
 };
@@ -121,12 +133,11 @@ MCMode3Game.prototype.display = function (x) {
 };
 
 //master function makes all the drops and non-drops
-MCMode3Game.prototype.make_drop_down = function(){
+MCMode3Game.prototype.make_drop_down = function (e) {
     //initialize a count of how many drop down menus we'll have
     // if it remains 0 we start all over again
     var drops = 0;
     var self = this;
-    var e = document.getElementById("answer_wrapper");
     
     //this.drop_downs is a list of drops and non-drops
     //each item in the list is a dictionary and has a type
