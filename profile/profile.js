@@ -8,6 +8,7 @@ var ProfilePage = {
 };
 
 ProfilePage.logout = function () {
+    this.user.logout();
     document.location = "..";
 }
 

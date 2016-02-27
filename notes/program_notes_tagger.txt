@@ -176,34 +176,40 @@ ITERATION 1.5
         - solution: when they play frog, they get a message, you've been playing... and go to profile and be on lion
     - encourage:
 
-- potential call sites
-- functions for solution
-    - generate string DONE
-\
-    - check for string DONE
-    - persist string to player profile in firebase DONE
-    - alert two computers
-    - return to profile
-    - alert logged out
-    - return to login
+    - potential call sites
+    - functions for solution
+        - generate string DONE
+        - check for string DONE
+        - persist string to player profile in firebase DONE
+        - alert two computers
+        - return to profile
+        - alert logged out
+        - return to login
 
 - close window event should trigger logout
 
+- our grade 13 filter doesn't seem to be working
+- permanently remove carnal and necrophilia just in case
 
 - team names as a field
 
 - SQL post error
+    - remove comments from post statement
+    - check log.txt
+        - some of the fields seem to be wrong   
 
 - make urgent log max out if it starts producing a lot of logs
 
 
 - improve scrolling behavior on cheat sheet
+    - seems DONE but needs testing on computers with different size screens
     - ideally: cheat sheet window will scroll but question text at top will never disappear (i.e. body will not scroll)
     - the following is a potential solution from stack overflow:
         - url = http://stackoverflow.com/questions/9280258/prevent-body-scrolling-but-allow-overlay-scrolling
         - Looking at current implementation of the pinterest site (it might change in the future), when you open the overlay a noscroll class is applied to the body element and overflow: hidden is set, thus body is no longer scrollable.The overlay (created on-the-fly or already inside the page and made visible via display: block, it makes no difference) has position : fixed and overflow-y: scroll, with top, left, right and bottom properties set to 0: this style makes the overlay fill the whole viewport.The div inside the overlay is instead just in position: static then the vertical scrollbar you see is related to that element. As a result the content is scrollable but overlay remains fixed.When you close the zoom you hide the overlay (via display: none) and then you could also entirely remove it via javascript (or just the content inside, it's up to you how to inject it).As a final step you have to also remove the noscroll class to the body (so the overflow property returns to its initial value)
         
         
+- vocabulary cheat sheet should include declension and conjugation of verbs and nouns      
         
 
 

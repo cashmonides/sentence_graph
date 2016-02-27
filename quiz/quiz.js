@@ -63,8 +63,13 @@ var Quiz = function () {
 //loads user data
 //loads sentences with callback next_module
 Quiz.prototype.start = function(){
+    self = this;
     this.user = new User();
-   
+    
+    el('logout_button').onclick = function (x) {
+        self.user.logout();
+        setTimeout(return_to_login, 10000);
+    }
    //todo
     //the following line both tests the conditional and actually loads the data
     if (!this.user.load(this.user_loaded.bind(this))) {
