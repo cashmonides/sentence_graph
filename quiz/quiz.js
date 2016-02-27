@@ -63,7 +63,7 @@ var Quiz = function () {
 //loads user data
 //loads sentences with callback next_module
 Quiz.prototype.start = function(){
-    self = this;
+    var self = this;
     this.user = new User();
     
     el('logout_button').onclick = function (x) {
@@ -82,7 +82,6 @@ Quiz.prototype.start = function(){
     // This is new, and seems a little hacky.
     this.user.quiz = this;
     
-    var self = this;
     Sentence.get_all_sentences(function (ss) {
         self.sentences = ss.filter(function (sentence) {
             var language = sentence.language_of_sentence;
