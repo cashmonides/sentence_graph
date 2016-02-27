@@ -1,3 +1,50 @@
+SECURITY ISSUES
+two problems with (possibly) one solution
+- problem 1: 
+    - back button on browser or history can lead malicious user to another person's profile page
+    - we don't really care if the malicious user sees the person's page
+    - but it would be a disaster if they were able to persist data to their account
+- problem 2: 
+    - a user logs in at computer A at home, never logs out, is on level 1
+    - user goes to computer B at home, logs in, beats level 1 and 2
+    - user goes back home, is still on level 1, persists bad data and is stuck in the wrong level
+    
+- possible solution:
+    - at login: 
+        - generate 16-character-string, store as user.login_status
+            - null value for this field represents being logged out
+        - check firebase.profile.login_status
+            - if firebase profile is null
+                - persist 16-character-string as firebase.profile.login_status
+            - if firebase.profile is not null 
+                - we've detected logins from multiple computers
+                - so we alert "you're playing on two computers"
+                - and force them to go back to profile
+                    - (their profile should be at their furthest level)
+            
+    - at logout
+        - set firebase.profile.login_status as null
+        - ??? set user.login_status as null???
+        
+    - at submodule_complete (and anywhere that SQL posts are made
+        - check if firebase.profile.login_status = null
+        - if so
+            - alert "you've already logged out, go back and log in again"
+            - document.location = login
+        - if not:
+            - check if user.login_status = firebase.profile.login_status
+                - if not:
+                    - alert "you've already logged out, go back and log in again"
+                    - document.location = login
+                - if so:
+                    - fine, continue
+  
+
+
+
+
+
+
 BACK BROWSER ISSUE
 
 - basic problem 

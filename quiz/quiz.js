@@ -770,9 +770,9 @@ Quiz.prototype.initialize_cheat_sheet = function() {
     
     //button.onclick = function() {
     var image_source = this.get_cheat_sheet_image();
-    var div = make({'tag': 'div', 'id': 'image_cheat_sheet',
+    var div = make({'tag': 'div', 'id': 'cheat_sheet_image',
     'style': {'display': 'block'}}, el("image_display_box"));
-    div.innerHTML = '<img src="'+ image_source +'" width=\'100%\' />';
+    div.innerHTML = '<img src="'+ image_source +'" id=\'image_of_cheat_sheet\'/>';
     // console.log("cheat sheet button clicked");
     el('cheat_sheet_button').onclick = function () {quiz.toggle_element('image_cheat_sheet')};
     //};
@@ -855,11 +855,11 @@ Quiz.prototype.toggle_element = function(id) {
 
 //todo wasn't working as Quiz.logout_from_quiz
 
-function logout_from_quiz() {
+var return_to_login = function () {
     document.location = "..";
 }
 
-function return_to_profile() {
+var return_to_profile = function () {
     document.location = "../profile/";
 }
 

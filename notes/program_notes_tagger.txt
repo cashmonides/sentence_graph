@@ -113,15 +113,8 @@ ITERATION 1.0
 
 
 
-- score increments should be tweaked
-    - (psychologically: there should never be a point where the player cannot win any points = encourages defeatism)
-    - correct on first response  = +4 points
-    - incorrect first response = -3
-    - incorrect second response = 0
-    - incorrect third response = 0
-    - correct second response = +2
-    - correct third response = +1
-- etymology cheat sheet
+
+
 - add definitions to etymology (so they see definitions early but not later on)
 - duplicate tags are not getting removed
     - e.g. LUP-US = noun, object, noun (small but possibly important bug)
@@ -150,15 +143,101 @@ ITERATION 1.0
 
 
 ITERATION 1.5
-- post accuracy for each mode (drop, quick, etymology, latin, etc.)
-- post accuracy to the time metrics table if possible (if not possible, then post it to another table)
-- make urgent log max out if it starts producing a lot of logs
+
+- grammar cheat sheet (iq and is, verb and noun endings etc.) should be a scrollable window
+    - stack overflow ideas here: 
+    http://stackoverflow.com/questions/7504918/how-to-create-a-div-with-vertical-scrollable-contents-and-fixed-footer-which-is
+    - another link here
+    http://www.quackit.com/html/codes/html_scroll_box.cfm
+
+- prevent back button from accessing previous user's account
+    - very important but might be too hard to solve without an expert
+    - a difficult problem
+    - gio had no ready solution
+    - potential solution:
+        - create a field in the firebase profile of each student
+        - call it "logged_in" = true || false
+        - this bool is set when they log in or out
+        - every time they initiate an action, this field is checked
+        - if it's false they are given an alert ("you have been logged out of this account - please log in")
+        - and redirected to the login page
+        - the question is:
+            - at what point should this boolean be checked?
+            - ideally it would be checked every time an answer is submitted - but will that be too computationally expensive?
+    - notes are in the file security.txt
 
 - defense against being logged in on multiple computers simultaneously and multiple windows
     - maybe: create a field in firebase: logged in [true/false]
     - if you login again (from a new computer or window) it logs you out of the old one
+    - prevent:
+        - user plays at home, is up to frog
+        - goes to school, beats 6 levels and is at level lion
+        - goes home and plays frog again
+        - solution: when they play frog, they get a message, you've been playing... and go to profile and be on lion
+    - encourage:
 
-- get rid of that annoying red flash during refresh
+- potential call sites
+- functions for solution
+    - generate string DONE
+\
+    - check for string DONE
+    - persist string to player profile in firebase DONE
+    - alert two computers
+    - return to profile
+    - alert logged out
+    - return to login
+
+- close window event should trigger logout
+
+
+- team names as a field
+
+- SQL post error
+
+- make urgent log max out if it starts producing a lot of logs
+
+
+- improve scrolling behavior on cheat sheet
+    - ideally: cheat sheet window will scroll but question text at top will never disappear (i.e. body will not scroll)
+    - the following is a potential solution from stack overflow:
+        - url = http://stackoverflow.com/questions/9280258/prevent-body-scrolling-but-allow-overlay-scrolling
+        - Looking at current implementation of the pinterest site (it might change in the future), when you open the overlay a noscroll class is applied to the body element and overflow: hidden is set, thus body is no longer scrollable.The overlay (created on-the-fly or already inside the page and made visible via display: block, it makes no difference) has position : fixed and overflow-y: scroll, with top, left, right and bottom properties set to 0: this style makes the overlay fill the whole viewport.The div inside the overlay is instead just in position: static then the vertical scrollbar you see is related to that element. As a result the content is scrollable but overlay remains fixed.When you close the zoom you hide the overlay (via display: none) and then you could also entirely remove it via javascript (or just the content inside, it's up to you how to inject it).As a final step you have to also remove the noscroll class to the body (so the overflow property returns to its initial value)
+        
+        
+        
+
+
+- get rid of that annoying red flash during refresh (and also the flash of buttons between questions)
+
+
+- score increments should be tweaked
+    - (psychologically: there should never be a point where the player cannot win any points = encourages defeatism)
+    - correct on first response  = +4 points
+    - incorrect first response = -3
+    - incorrect second response = 0
+    - incorrect third response = 0
+    - correct second response = +2
+    - correct third response = +1
+
+- CARN might have a long/short vowel conflict
+
+
+- live in class monitoring of activity
+    - one example:
+        - a vector associated with each student
+        - length corresponding to rate of input (# of answers per minute for last few minutes)
+        - slope corresponding to accuracy
+    - color as a form of visualization
+        - turns red as they have less activity
+
+
+
+
+- make SQL posts more sophisticated
+    - post accuracy for each mode (drop, quick, etymology, latin, etc.)
+    - post accuracy to the time metrics table if possible (if not possible, then post it to another table)
+
+
 
 - add root: VERTEBR & words: vertebrate, invertebrate, vertebra & make sure to add to etym levels
 - add root: CELL and words: cellular, multicellular, unicellular, cellulitis, celluloid, cellulose
@@ -181,16 +260,7 @@ ITERATION 2.0
         - answer choices
 - some way of checking the tagging on sentences
     - perhaps a utility that vacuums all the data from firebase and displays it with tags directly above the words in the sentence
-- is there any way to prevent/punish/alert "off site activity" during a session
-    - timeout button (more than 60 seconds)
-    - low activity button (less than one button click per 30 seconds)
-    - detect a new tab
-- live in class monitoring of activity
-    - one example:
-        - a vector associated with each student
-        - length corresponding to rate of input
-        - slope corresponding to accuracy
-    - color as a form of visualization
+
 - add tutorials
 - jquery dropdowns
 - clean up, simplify, modularize and comment latin generation before adding gen/dat/abl/conditional
@@ -211,6 +281,10 @@ ITERATION 2.0
 - etymology synonyms and antonyms
 - instant access by admin to punish off-site activity during class
 
+- is there any way to prevent/punish/alert "off site activity" during a session
+    - timeout button (more than 60 seconds)
+    - low activity button (less than one button click per 30 seconds)
+    - detect a new tab
 
 
 GIO QUESTIONS
