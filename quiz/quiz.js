@@ -68,7 +68,8 @@ Quiz.prototype.start = function(){
     
     el('logout_button').onclick = function (x) {
         self.user.logout();
-        setTimeout(return_to_login, 10000);
+        return_to_login();
+        // setTimeout(return_to_login, 10000);
     }
    //todo
     //the following line both tests the conditional and actually loads the data
