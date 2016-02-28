@@ -858,17 +858,6 @@ Quiz.prototype.toggle_element = function(id) {
 };
 
 
-//todo wasn't working as Quiz.logout_from_quiz
-
-var return_to_login = function () {
-    document.location = "..";
-}
-
-var return_to_profile = function () {
-    document.location = "../profile/";
-}
-
-
 
 //todo some of the global functions below are hacky and need to be integrated
 

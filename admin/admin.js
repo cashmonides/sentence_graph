@@ -1,6 +1,6 @@
 window.onload = start;
 
-var user = new User();
+var user = new User(false); // Not anonomous.
 
 
 function start() {
