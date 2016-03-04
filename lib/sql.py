@@ -190,7 +190,7 @@ def update_accuracy(ups):
         for i in range(4):
             c.execute(
                 "UPDATE time_metrics SET accuracy_" + str(i) +
-                " = %s WHERE id = %s", [accuracy_dictionary[i], row])
+                " = %s WHERE id = %s", [accuracy_dictionary[str(i)], row])
 	db.commit()
 	# logging.debug("db execute")
         # rows = c.fetchall()
