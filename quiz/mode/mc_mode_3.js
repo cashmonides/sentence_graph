@@ -196,11 +196,10 @@ MCMode3Game.prototype.process_answer = function(){
 
 
 MCMode3Game.prototype.process_correct_answer = function () {
-    this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
+    
     if (this.quiz.submodule.incorrect_streak == 0) {
         this.quiz.increment_score();
     }
-    this.quiz.submodule.incorrect_streak = 0;
     
     console.log("DEBUG entering 2nd random_choice");
     var cell_1 = random_choice(MCMode3Game.cell_1_feedback_right);
@@ -233,7 +232,6 @@ MCMode3Game.prototype.process_incorrect_answer = function () {
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_3;
     } else {
-        this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
         this.give_away_answer();
     }
     this.quiz.update_display();
@@ -244,7 +242,6 @@ MCMode3Game.prototype.process_incorrect_answer = function () {
 MCMode3Game.prototype.give_away_answer = function (){
     var fbox = el("feedbackbox");
     fbox.innerHTML = this.give_away_phrase + this.correct_answer + this.give_away_ending_phrase;
-    this.quiz.submodule.incorrect_streak = 0;
     this.quiz.question_complete();
 };
 

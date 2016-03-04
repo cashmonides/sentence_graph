@@ -230,14 +230,10 @@ EtymologyModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 EtymologyModeGame.prototype.process_correct_answer = function() {
     //console.log"answer matches target");
     
-    this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
-    
     
     if (this.quiz.submodule.incorrect_streak == 0) {
         this.quiz.increment_score();
     }
-    
-    this.quiz.submodule.incorrect_streak = 0;
     
     
     var cell_1 = random_choice(EtymologyModeGame.cell_1_feedback_right);
@@ -274,12 +270,11 @@ EtymologyModeGame.prototype.process_incorrect_answer = function() {
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
     } else {
-        this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
         this.give_away_answer();
         //refresh_score();
     }
     this.quiz.update_display();
-    // Etymology hasd no word selector
+    // Etymology has no word selector
     // this.quiz.word_selector.clear();
 };
 
@@ -292,7 +287,5 @@ EtymologyModeGame.prototype.give_away_answer = function(){
     //     var text = this.quiz.sentence.get_region_text(r);
     //     fbox.innerHTML += Quiz.wrap_string(self.target_tag) + " = " + text + "<br>";
     // });
-
-    this.quiz.submodule.incorrect_streak = 0;
     this.quiz.question_complete();
 };

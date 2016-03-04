@@ -83,7 +83,7 @@ TutorialModeGame.prototype.process_incorrect_answer = function() {
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
         this.quiz.word_selector.clear();
     } else {
-        this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
+        // this.quiz.update_accuracy();
         this.give_away_answer();
         //refresh_score();
     }

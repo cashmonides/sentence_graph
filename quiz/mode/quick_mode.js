@@ -98,14 +98,9 @@ QuickModeGame.prototype.process_correct_answer = function() {
     
     // set_bar_count(this.quiz.bar_count + this.quiz.current_module_reward);
     
-    
-    this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
-    
     if (this.quiz.submodule.incorrect_streak == 0) {
         this.quiz.increment_score();
     }
-    
-    this.quiz.submodule.incorrect_streak = 0;
     
     
 
@@ -160,7 +155,6 @@ QuickModeGame.prototype.process_incorrect_answer = function() {
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
         this.quiz.word_selector.clear();
     } else {
-        this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
         this.give_away_answer();
         //refresh_score();
     }
@@ -176,8 +170,6 @@ QuickModeGame.prototype.give_away_answer = function(){
         var text = this.quiz.sentence.get_region_text(r);
         fbox.innerHTML += Quiz.wrap_string(self.target_tag) + " = " + text + "<br>";
     });
-
-    this.quiz.submodule.incorrect_streak = 0;
-    this.quiz.question_complete();
     
+    this.quiz.question_complete();
 };

@@ -148,14 +148,9 @@ DropModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 DropModeGame.prototype.process_correct_answer = function() {
     //console.log"answer matches target");
     
-    this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
-    
-    
     if (this.quiz.submodule.incorrect_streak == 0) {
         this.quiz.increment_score();
     }
-    
-    this.quiz.submodule.incorrect_streak = 0;
     
     
     var cell_1 = random_choice(DropModeGame.cell_1_feedback_right);
@@ -192,7 +187,6 @@ DropModeGame.prototype.process_incorrect_answer = function() {
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
     } else {
-        this.quiz.user.update_question_metrics(this.quiz.submodule.incorrect_streak, this.quiz.module.id);
         this.give_away_answer();
         // this.give_away_answer also creates a new question
         //refresh_score();
@@ -213,7 +207,6 @@ DropModeGame.prototype.give_away_answer = function(){
     //     fbox.innerHTML += Quiz.wrap_string(self.target_tag) + " = " + text + "<br>";
     // });
 
-    this.quiz.submodule.incorrect_streak = 0;
     this.quiz.question_complete();
 };
 

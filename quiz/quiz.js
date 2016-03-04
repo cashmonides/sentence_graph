@@ -56,6 +56,8 @@ var Quiz = function () {
     
     // This will show images from future levels.
     this.urge_users_to_continue = true;
+    
+    this.accuracy_dictionary = {};
 };
 
 
@@ -185,16 +187,6 @@ Quiz.prototype.next_submodule = function(){
         incorrect_streak: 0
     };
     
-
-    
-    
-    
-    
-    
-    
-   
-    
-    
     //progress bars below
     this.began = new Date();
     this.progress_bar = new ProgressBar(this.module.submodule.threshold, [], el('progress-bar'));
@@ -242,18 +234,27 @@ Quiz.prototype.next_submodule = function(){
     
     step 1)
     create a row:
-    user_id, module_id, submodule_id, start_time, stop_time
+    user_id, module_id, submodule_id, start_time, stop_time   (& 0123)
     (with stop_time as null)
     
     step 2)
     save data as a state: quiz.time_data [user_id, module_id, submodule_id, start_time]
     
     
+    every question modifies a dictionary
+    0:
+    1:
+    2;
+    3:
+    
     
     every time a submodule is completed:
     step 1)
     update stop_time in the following row:
     user_id, module_id, submodule_id, quiz.start_time, null
+    
+    write new accuracy dictionary to post statement
+    
     step 2)
     clear quiz.start_time
     
@@ -387,7 +388,10 @@ Quiz.prototype.next_question = function (){
 
 
 Quiz.prototype.question_complete = function(){
-    
+    this.update_accuracy();
+    this.submodule.incorrect_streak = 0;
+    // We reset the incorrect streak
+    // due to the fact that there is a new question.
     if (this.submodule.score >= this.module.submodule.threshold) {
         this.submodule_complete();
     } else {
@@ -396,14 +400,36 @@ Quiz.prototype.question_complete = function(){
 };
 
 
+Quiz.prototype.update_accuracy = function () {
+    this.user.update_question_metrics(this.submodule.incorrect_streak, this.module.id);
+    this.update_accuracy_dict();
+}
+
+Quiz.prototype.update_accuracy_dict = function () {
+    var incorrect_streak = this.submodule.incorrect_streak;
+    if (incorrect_streak in this.accuracy_dictionary) {
+        this.accuracy_dictionary[incorrect_streak]++;
+    } else {
+        this.accuracy_dictionary[incorrect_streak] = 1;
+    }
+    // console.log('accuracy dict', incorrect_streak, this.accuracy_dictionary);
+}
 
 
 Quiz.prototype.submodule_complete = function () {
     console.log('this.advance_improve_status =', this.advance_improve_status);
     if (this.user.uid !== null) {
+        /*
+        var accuracy_list = [];
+        for (var i = 0; i <= 3; i++) {
+            accuracy_list.push(this.accuracy_dictionary[i]);
+        }
+        */
         console.log("DEBUG 2-11 entering post #2");
         console.log("DEBUG 2-11 this.time_data = ", this.time_data);
         post({data: this.time_data_id, type: "update_time_data"});
+        post({data: this.time_data_id, accuracy_dictionary: accuracy_dictionary,
+        type: "update_accuracy"});
         console.log("DEBUG 2-11 exiting post #2");
     } else {
         // The user was anonymous for the first post, so if this second post continued,
