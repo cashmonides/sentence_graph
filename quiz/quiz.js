@@ -428,7 +428,7 @@ Quiz.prototype.submodule_complete = function () {
         console.log("DEBUG 2-11 entering post #2");
         console.log("DEBUG 2-11 this.time_data = ", this.time_data);
         post({data: this.time_data_id, type: "update_time_data"});
-        post({data: this.time_data_id, accuracy_dictionary: accuracy_dictionary,
+        post({data: this.time_data_id, accuracy_dictionary: this.accuracy_dictionary,
         type: "update_accuracy"});
         console.log("DEBUG 2-11 exiting post #2");
     } else {
