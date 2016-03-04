@@ -51,8 +51,8 @@ function create_account() {
     var c = el("class_number").value;
     var ac = el("access_code").value;
     
-    
-    if (!is_correct_access_code(ac)) {
+    var correct_hash = 1327021340; // The correct hash value.
+    if (hash(ac) !== correct_hash) {
         alert("Talk to Akiva in class about how to log in.");
         return;
     }
