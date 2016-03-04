@@ -58,6 +58,9 @@ var Quiz = function () {
     this.urge_users_to_continue = true;
     
     this.accuracy_dictionary = {};
+    for (var i = 0; i < 4; i++) {
+        this.accuracy_dictionary[i] = 0;
+    }
 };
 
 
@@ -407,11 +410,7 @@ Quiz.prototype.update_accuracy = function () {
 
 Quiz.prototype.update_accuracy_dict = function () {
     var incorrect_streak = this.submodule.incorrect_streak;
-    if (incorrect_streak in this.accuracy_dictionary) {
-        this.accuracy_dictionary[incorrect_streak]++;
-    } else {
-        this.accuracy_dictionary[incorrect_streak] = 1;
-    }
+    this.accuracy_dictionary[incorrect_streak]++;
     // console.log('accuracy dict', incorrect_streak, this.accuracy_dictionary);
 }
 
@@ -426,10 +425,13 @@ Quiz.prototype.submodule_complete = function () {
         }
         */
         console.log("DEBUG 2-11 entering post #2");
+        console.log("DEBUG 3-4 accuracy dictionary = ", this.accuracy_dictionary);
         console.log("DEBUG 2-11 this.time_data = ", this.time_data);
         post({data: this.time_data_id, type: "update_time_data"});
+        console.log("DEBUG 3-4 just finished update_time_data");
         post({data: this.time_data_id, accuracy_dictionary: this.accuracy_dictionary,
         type: "update_accuracy"});
+        console.log("DEBUG 3-4 just finished update_accuracy");
         console.log("DEBUG 2-11 exiting post #2");
     } else {
         // The user was anonymous for the first post, so if this second post continued,
