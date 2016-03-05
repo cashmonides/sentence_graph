@@ -216,7 +216,18 @@ ITERATION 1.5
 
 - small: make post a quiz method and have it automatically check for user.id = null
 
+
+- question: is this an obsolete error from log.txt? Does it ever occur again? Is it just caused by an anonymous user?
+12:15:27: DEBUG: error
+12:15:27: DEBUG: (<type 'exceptions.KeyError'>, KeyError('REQUEST_METHOD',), <traceback object at 0x7ffb633d43b0>)
+
 - comment and understand new code (security stuff)
+
+
+- check if module 9 has something sick. The following was logged in urgent error log:
+    custom_message: ""sick mode = latin module = 9 progress = 0/10 level = [object Object]""
+    date: "Mon, 29 Feb 2016 18:36:50 GMT"
+    error: "Error: There are no allowed lexemes!"
 
 
 - close window event should trigger logout
@@ -254,6 +265,11 @@ ITERATION 1.75
 - make SQL posts more sophisticated
     - post accuracy for each mode (drop, quick, etymology, latin, etc.)
     - post accuracy to the time metrics table if possible (if not possible, then post it to another table)
+
+
+
+
+
 
 
 

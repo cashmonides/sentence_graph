@@ -56,12 +56,20 @@ var Quiz = function () {
     
     // This will show images from future levels.
     this.urge_users_to_continue = true;
-    
-    this.accuracy_dictionary = {};
-    for (var i = 0; i < 4; i++) {
-        this.accuracy_dictionary[i] = 0;
-    }
 };
+
+
+Quiz.prototype.initialize_accuracy_dictionary = function () {
+    this.accuracy_dictionary = {};
+    var mode;
+    for (var i = 0; i < game_mode_list.length; i++) {
+        mode = game_mode_list[i];
+        this.accuracy_dictionary[mode] = {};
+        for (var j = 0; j < 4; j++) {
+            this.accuracy_dictionary[mode][j] = 0;
+        }
+    }
+}
 
 
 
@@ -189,6 +197,8 @@ Quiz.prototype.next_submodule = function(){
         count_incorrect: 0,
         incorrect_streak: 0
     };
+    
+    this.initialize_accuracy_dictionary();
     
     //progress bars below
     this.began = new Date();
@@ -382,7 +392,7 @@ Quiz.prototype.next_question = function (){
         console.log("URGENT error logged");
         console.log("desperate move triggered");
         
-        if (e != "modes exhausted") {
+        if (e !== "modes exhausted") {
             console.log("DEBUG 12-23 error handler initiated");
             this.next_question();
         }
@@ -390,7 +400,7 @@ Quiz.prototype.next_question = function (){
 };
 
 
-Quiz.prototype.question_complete = function(){
+Quiz.prototype.question_complete = function () {
     this.update_accuracy();
     this.submodule.incorrect_streak = 0;
     // We reset the incorrect streak
@@ -409,9 +419,24 @@ Quiz.prototype.update_accuracy = function () {
 }
 
 Quiz.prototype.update_accuracy_dict = function () {
+    var mode_name = this.game.get_mode_name();
     var incorrect_streak = this.submodule.incorrect_streak;
-    this.accuracy_dictionary[incorrect_streak]++;
-    // console.log('accuracy dict', incorrect_streak, this.accuracy_dictionary);
+    this.accuracy_dictionary[mode_name][incorrect_streak]++;
+    console.log('accuracy dict', incorrect_streak, this.accuracy_dictionary,
+    this.convert_accuracy_dict());
+}
+
+Quiz.prototype.convert_accuracy_dict = function () {
+    var csv_list;
+    var result = {};
+    for (var i in this.accuracy_dictionary) {
+        csv_list = [];
+        for (var j = 0; j < 4; j++) {
+            csv_list.push(this.accuracy_dictionary[i][j]);
+        }
+        result[i] = csv_list.join('-');
+    };
+    return result;
 }
 
 
@@ -429,7 +454,7 @@ Quiz.prototype.submodule_complete = function () {
         console.log("DEBUG 2-11 this.time_data = ", this.time_data);
         post({data: this.time_data_id, type: "update_time_data"});
         console.log("DEBUG 3-4 just finished update_time_data");
-        post({data: this.time_data_id, accuracy_dictionary: this.accuracy_dictionary,
+        post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict(),
         type: "update_accuracy"});
         console.log("DEBUG 3-4 just finished update_accuracy");
         console.log("DEBUG 2-11 exiting post #2");

@@ -88,7 +88,7 @@ def read_table(ups):
 def insert_time_data(ups):
     try:
         row = ups["data"]
-	logging.debug("row={0}".format(row))
+        logging.debug("row={0}".format(row))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
@@ -103,10 +103,10 @@ def insert_time_data(ups):
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
         c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, now(), null, null, null, null, null)", row)   # slice = (row[0], row[1], row[2], row[3])
-	#returns the unique id of the row just inserted
-	time_data_id = c.lastrowid
-	db.commit()
-	# logging.debug("db execute")
+        #returns the unique id of the row just inserted
+        time_data_id = c.lastrowid
+        db.commit()
+        # logging.debug("db execute")
         # rows = c.fetchall()
         # logging.debug("db fetched all")
         # print 'Total Row(s):' + str(c.rowcount)
@@ -130,7 +130,7 @@ def insert_time_data(ups):
 def update_time_data(ups):
     try:
         row = ups["data"]
-	logging.debug("row={0}".format(row))
+        logging.debug("row={0}".format(row))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
@@ -145,8 +145,8 @@ def update_time_data(ups):
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
         c.execute("UPDATE time_metrics SET stop_time = now() WHERE id = %s", [row])
-	db.commit()
-	# logging.debug("db execute")
+        db.commit()
+        # logging.debug("db execute")
         # rows = c.fetchall()
         # logging.debug("db fetched all")
         # print 'Total Row(s):' + str(c.rowcount)
@@ -173,7 +173,7 @@ def update_accuracy(ups):
     try:
         row = ups["data"]
         accuracy_dictionary = ups["accuracy_dictionary"]
-	logging.debug("row={0}".format(row))
+        logging.debug("row={0}".format(row))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
@@ -187,12 +187,14 @@ def update_accuracy(ups):
         # Makes sure everything (even None) becomes a string.
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-        for i in range(4):
+        # logging.debug("accuracy_dictionary={0}".format(accuracy_dictionary))
+        for i in accuracy_dictionary:
+            csv = accuracy_dictionary[i]
             c.execute(
-                "UPDATE time_metrics SET accuracy_" + str(i) +
-                " = %s WHERE id = %s", [accuracy_dictionary[str(i)], row])
-	db.commit()
-	# logging.debug("db execute")
+                "UPDATE time_metrics SET accuracy_" + i + "_mode" +
+                " = %s WHERE id = %s", [csv, row])
+        db.commit()
+        # logging.debug("db execute")
         # rows = c.fetchall()
         # logging.debug("db fetched all")
         # print 'Total Row(s):' + str(c.rowcount)
