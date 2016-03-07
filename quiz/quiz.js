@@ -289,7 +289,9 @@ Quiz.prototype.next_submodule = function(){
     if (this.user.uid !== null) {
         console.log('DEBUG 3/4/2016 this.user.uid !== null; about to post');
         var self = this;
-        post({data: time_data, type: "insert_time_data"}, function (data) {
+        // 17 because we need 17 nulls.
+        post({data: time_data, type: "insert_time_data",
+        null_string: list_of_repetitions("null", 17).join(', ')}, function (data) {
             console.log("DEBUG 2-11 data = ", data);
             self.time_data_id = data.id;
         });
@@ -426,6 +428,8 @@ Quiz.prototype.update_accuracy_dict = function () {
     this.convert_accuracy_dict());
 }
 
+/*
+Obsolete now.
 Quiz.prototype.convert_accuracy_dict = function () {
     var csv_list;
     var result = {};
@@ -435,6 +439,19 @@ Quiz.prototype.convert_accuracy_dict = function () {
             csv_list.push(this.accuracy_dictionary[i][j]);
         }
         result[i] = csv_list.join('-');
+    };
+    return result;
+}
+*/
+
+
+Quiz.prototype.convert_accuracy_dict = function () {
+    var result = {};
+    for (var i in this.accuracy_dictionary) {
+        for (var j = 0; j < 4; j++) {
+            // i.e., accuracy_drop_mode_3
+            result["accuracy_" + i + "_mode_" + j] = this.accuracy_dictionary[i][j];
+        }
     };
     return result;
 }

@@ -256,9 +256,15 @@ constraint) {
     // we do this loop number_of_extras times
     // each time we add another entry to xs
     push_random_n_satisfying_constraint(xs, a, constraint, number_of_extras);
-    // we use our util keys mapped by function to return a dict
+    // we return a dict by mapping our keys by the appropriate function (x_to_y[x][y])
     // where x_to_y[x][y] is a function mapping type x to type y (x -> y)
-    return keys_mapped_by_function(xs, x_to_y[x][y]);
+    var mapping_function = x_to_y[x][y];
+    var result = {};
+    for (var i = 0; i < xs.length; i++) {
+        result[xs[i]] = mapping_function(xs[i]);
+    }
+    return result;
+    // return keys_mapped_by_function(xs, x_to_y[x][y]);
 }
 
 var make_etymology_question = function (etym_level, question_type,

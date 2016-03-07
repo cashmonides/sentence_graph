@@ -102,7 +102,7 @@ def insert_time_data(ups):
         # Makes sure everything (even None) becomes a string.
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-        c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, now(), null, null, null, null, null)", row)   # slice = (row[0], row[1], row[2], row[3])
+        c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, now(), " + ups["null_string"] + ")", row)   # slice = (row[0], row[1], row[2], row[3])
         #returns the unique id of the row just inserted
         time_data_id = c.lastrowid
         db.commit()
@@ -188,11 +188,10 @@ def update_accuracy(ups):
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
         # logging.debug("accuracy_dictionary={0}".format(accuracy_dictionary))
+        # This should work.
         for i in accuracy_dictionary:
             csv = accuracy_dictionary[i]
-            c.execute(
-                "UPDATE time_metrics SET accuracy_" + i + "_mode" +
-                " = %s WHERE id = %s", [csv, row])
+            c.execute("UPDATE time_metrics SET %s = %s WHERE id = %s", [i, csv, row])
         db.commit()
         # logging.debug("db execute")
         # rows = c.fetchall()

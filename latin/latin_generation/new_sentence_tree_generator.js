@@ -24,7 +24,14 @@ function make_output(level, current_lexicon, none_display) {
     */
     var master_lexeme_list = {
         get_lexemes: function (name) {
-            return convert_keys_to_dict(this[name], this)
+            var result = {};
+            var item;
+            for (var i = 0; i < this[name].length; i++) {
+                item = this[name][i]
+                result[item] = this[item]
+            };
+            return result;
+            // return convert_keys_to_dict(this[name], this)
         },
         get_lexemes_as_list: function (name) {
             var self = this;

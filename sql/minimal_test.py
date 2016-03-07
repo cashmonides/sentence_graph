@@ -18,7 +18,7 @@ logging.basicConfig(
 
 dbs = {
     "user": "db211804_dummy2",
-    "passwd": "Dummy@12345",
+    "passwd": "Dummy2@12345",
     "db": "db211804_bestiary_database",
     "port": 3306,
     "host": "internal-db.s211804.gridserver.com"

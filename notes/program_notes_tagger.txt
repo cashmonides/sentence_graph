@@ -63,6 +63,8 @@ AGENDA
 - etymology cheat sheet
 - etymology question types
 
+NOTES ON SQL
+going from "accuracy_" + i + "_mode" to just i (but it will be accuracy_drop_mode_3)
 
 NOTES ON ETYMOLOGY CHEAT SHEETS
 - there might be multiple types of cheat sheet for any given question, some of which are better than others
