@@ -173,7 +173,7 @@ def update_accuracy(ups):
     try:
         row = ups["data"]
         accuracy_dictionary = ups["accuracy_dictionary"]
-        logging.debug("row={0}".format(row))
+        logging.debug("row, accuracy_dictionary={0}, {1}".format(row, accuracy_dictionary))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
@@ -191,7 +191,8 @@ def update_accuracy(ups):
         # This should work.
         for i in accuracy_dictionary:
             csv = accuracy_dictionary[i]
-            c.execute("UPDATE time_metrics SET %s = %s WHERE id = %s", [i, csv, row])
+            c.execute("UPDATE time_metrics SET " + str(i) + " = " + str(csv) +
+            " WHERE id =" + str(row), [])
         db.commit()
         # logging.debug("db execute")
         # rows = c.fetchall()
