@@ -98,9 +98,7 @@ QuickModeGame.prototype.process_correct_answer = function() {
     
     // set_bar_count(this.quiz.bar_count + this.quiz.current_module_reward);
     
-    if (this.quiz.submodule.incorrect_streak == 0) {
-        this.quiz.increment_score();
-    }
+    this.quiz.increment_score();
     
     
 

@@ -230,10 +230,7 @@ EtymologyModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 EtymologyModeGame.prototype.process_correct_answer = function() {
     //console.log"answer matches target");
     
-    
-    if (this.quiz.submodule.incorrect_streak == 0) {
-        this.quiz.increment_score();
-    }
+    this.quiz.increment_score();
     
     
     var cell_1 = random_choice(EtymologyModeGame.cell_1_feedback_right);

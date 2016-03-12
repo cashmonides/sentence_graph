@@ -10,7 +10,6 @@
 //region filter still set for length == 1
 // - give away answer needs to be changed
 
-
 var DropModeGame = function(){
     //todo should this really be like this
     this.data = null;
@@ -106,6 +105,7 @@ DropModeGame.prototype.next_question = function(sentences){
     if (el("select_element").children.length === 1) {this.next_question()}
 };
 
+
 DropModeGame.prototype.get_answer_choices = function () {
     var target_tag = this.target_tag;
     var original_attempt = map_level_to_allowed(this.level.grammar_level, grammar_levels);
@@ -148,9 +148,7 @@ DropModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 DropModeGame.prototype.process_correct_answer = function() {
     //console.log"answer matches target");
     
-    if (this.quiz.submodule.incorrect_streak == 0) {
-        this.quiz.increment_score();
-    }
+    this.quiz.increment_score();
     
     
     var cell_1 = random_choice(DropModeGame.cell_1_feedback_right);

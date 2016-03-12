@@ -170,7 +170,7 @@ var cheat_sheet = function (master_lexeme_list) {
         x.unshift(x[0].properties.core.part_of_speech + 's')});
     return concat_arrays(lexemes_sorted_by_root).map(function (x) {
         if (typeof x === 'object') {
-            return [x.properties.latin.root, x.properties.english.root]
+            return [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root]
         } else {
             return x
         }

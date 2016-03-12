@@ -40,7 +40,6 @@ MCMode3Game.prototype.get_mode_name = function() {
 };
 
 
-
 MCMode3Game.prototype.next_question = function () {
     var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
@@ -98,10 +97,8 @@ MCMode3Game.prototype.next_question = function () {
     
     el('drop_downs').appendChild(new_answer_choices);
     
-    /*
-    document.getElementById("answer_choices").removeChild(
-        document.getElementById('answer_wrapper'));
-    */
+    // document.getElementById("answer_choices").removeChild(
+    //    document.getElementById('answer_wrapper'));
     
     var e = document.createElement('div');
     e.id = 'latin_answer_wrapper';
@@ -196,10 +193,7 @@ MCMode3Game.prototype.process_answer = function(){
 
 
 MCMode3Game.prototype.process_correct_answer = function () {
-    
-    if (this.quiz.submodule.incorrect_streak == 0) {
-        this.quiz.increment_score();
-    }
+    this.quiz.increment_score();
     
     console.log("DEBUG entering 2nd random_choice");
     var cell_1 = random_choice(MCMode3Game.cell_1_feedback_right);

@@ -189,35 +189,46 @@ ITERATION 1.5
         - return to login
 
 
-*****current progress*****
 
 
-- SQL post error
+
+- FIXED: SQL post error
     - remove comments from post statement
     - check log.txt
         - some of the fields seem to be wrong   
 
 
-- score increments should be tweaked
+
+- DONE: score increments should be tweaked
     - (psychologically: there should never be a point where the player cannot win any points = encourages defeatism)
-    - correct on first response  = +4 points
-    - incorrect first response = -3
+    - correct on first response  = +4 points      x
+    - incorrect first response = -2             -(x-1)
     - incorrect second response = 0
     - incorrect third response = 0
-    - correct second response = +2
-    - correct third response = +1
+    - correct second response = +2               +x/2
+    - correct third response = +1                +x/4
 
 
-- make urgent log max out if it starts producing a lot of logs
+- DONE: make urgent log max out if it starts producing a lot of logs
 
 
 - vocabulary cheat sheet should include declension and conjugation of verbs and nouns      
-        
-- fix anonymous mode
+    - DONE: hi-priority: declension and conjugation number
+        AM-ARE (1)  love
+        TAUR-US (2) bull
+        - numbers not in bold
+    - DONE: lo-priority: 2 side by side tables
+
+*****current progress*****
+
 
 
 - small: make post a quiz method and have it automatically check for user.id = null
 
+
+- bug: cheat sheet button doesn't make it disappear
+
+- update github issue wiki
 
 - question: is this an obsolete error from log.txt? Does it ever occur again? Is it just caused by an anonymous user?
 12:15:27: DEBUG: error
@@ -226,13 +237,16 @@ ITERATION 1.5
 - comment and understand new code (security stuff)
 
 
-- check if module 9 has something sick. The following was logged in urgent error log:
-    custom_message: ""sick mode = latin module = 9 progress = 0/10 level = [object Object]""
-    date: "Mon, 29 Feb 2016 18:36:50 GMT"
-    error: "Error: There are no allowed lexemes!"
 
 
 - close window event should trigger logout
+    
+    - two possibilities perhaps?
+        - window.onload
+        - window.onbeforeunload
+        window.onbeforeunload = function(e) {
+            return 'Dialog text here.';
+        };
 
 - alert message if back button leads to another person's account (currently goes to anonymous)
 
@@ -243,12 +257,25 @@ ITERATION 1.5
 
 - team names as a field
 
+- cheat sheet doesn't scroll all the way to the bottom
+    - prob. because scroll is locked on the page
+        - this was done to keep the question always at the top
+
 
 - get rid of that annoying red flash during refresh (and also the flash of buttons between questions)
 
 
 - CARN might have a long/short vowel conflict
 
+
+- chore: play through all levels in all browsers
+    - look for broken chicken in internet explorer
+    - - check if module 9 has something sick. The following was logged in urgent error log:
+    custom_message: ""sick mode = latin module = 9 progress = 0/10 level = [object Object]""
+    date: "Mon, 29 Feb 2016 18:36:50 GMT"
+    error: "Error: There are no allowed lexemes!"
+    
+- fix anonymous mode
 
 ITERATION 1.75
 
@@ -264,13 +291,9 @@ ITERATION 1.75
 
 
 
-- make SQL posts more sophisticated
-    - post accuracy for each mode (drop, quick, etymology, latin, etc.)
-    - post accuracy to the time metrics table if possible (if not possible, then post it to another table)
-
-
-
-
+- make a maximum number of urgent error logs for every uid 
+    - currently refresh will keep adding
+    - BUT: we want to get urgent error logs for users who play long sessions
 
 
 

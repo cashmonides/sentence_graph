@@ -56,6 +56,9 @@ var Quiz = function () {
     
     // This will show images from future levels.
     this.urge_users_to_continue = true;
+    
+    // This counts the number of urgent errors encountered so far.
+    this.urgent_error_count = 0;
 };
 
 
@@ -329,7 +332,10 @@ Quiz.prototype.next_mode = function(){
     
     if (Object.keys(allowed).length <= 0) {
         console.log("DEBUG 12-23 all modes are sick");
-        log_urgent_error("all modes are sick", "quiz.next_mode");
+        if (this.urgent_error_count < 5) {
+             log_urgent_error("all modes are sick", "quiz.next_mode");
+             this.urgent_error_count++;
+        }
         throw "modes exhausted";
     }
     
@@ -358,7 +364,7 @@ Quiz.get_mode = function(mode_number) {
 
 
 Quiz.prototype.next_question = function (){
-    //todo make sure to uncomment this except when necessary (nuclear option)
+    // todo make sure to uncomment this except when necessary (nuclear option)
     // Persist.clear_node(["urgent_log"]);
     
     // Persist.clear_node(["users"]);
@@ -386,10 +392,13 @@ Quiz.prototype.next_question = function (){
         var sick_mode = this.game.get_mode_name();
         //only push if it's not in our list already
         if (this.sick_modes.indexOf(sick_mode) === -1) {this.sick_modes.push(sick_mode)};
-        log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode 
-        + " module = " + this.module.id + " progress = " +
-        this.user.get_module(this.module.id).progress + "/" +
-        this.module.threshold + " level = " + this.game.level);
+        if (this.urgent_error_count < 5) {
+            log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode 
+            + " module = " + this.module.id + " progress = " +
+            this.user.get_module(this.module.id).progress + "/" +
+            this.module.threshold + " level = " + this.game.level);
+            this.urgent_error_count++;
+        }
         
         console.log("URGENT error logged");
         console.log("desperate move triggered");
@@ -709,12 +718,22 @@ Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
 };
 
 
+Quiz.prototype.get_number_of_tries = function () {
+    return this.submodule.incorrect_streak + 1;
+}
+
+
+Quiz.prototype.get_reward = function () {
+    return this.module.submodule['reward' + this.get_number_of_tries()];
+}
+
+
 
 Quiz.prototype.increment_score = function() {
     this.progress_bar.change_number_correct(
-        {'change_value': this.module.submodule.reward,
+        {'change_value': this.get_reward(),
             'time_from_start': new Date() - this.began});
-    this.submodule.score += this.module.submodule.reward;
+    this.submodule.score += this.get_reward();
 };
 
 
