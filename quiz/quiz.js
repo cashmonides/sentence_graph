@@ -873,22 +873,24 @@ Quiz.prototype.initialize_cheat_sheet = function() {
     // };
     
     //button.onclick = function() {
+    var name = 'cheat_sheet_image';
     var image_source = this.get_cheat_sheet_image();
-    var div = make({'tag': 'div', 'id': 'cheat_sheet_image',
+    var div = make({'tag': 'div', 'id': name,
     'style': {'display': 'block'}}, el("image_display_box"));
     div.innerHTML = '<img src="'+ image_source +'" id=\'image_of_cheat_sheet\'/>';
     // console.log("cheat sheet button clicked");
-    el('cheat_sheet_button').onclick = function () {quiz.toggle_element('image_cheat_sheet')};
+    el('cheat_sheet_button').onclick = function () {quiz.toggle_element(name)};
     //};
     
 };
 
 Quiz.prototype.initialize_vocab_cheat_sheet = function () {
+    var name = "vocab_cheat_sheet"
     var vocabulary_items = this.get_vocab_cheat_sheet_map();
     // var outer_div = el("image_display_box");
-    var outer_div = el("vocab_cheat_sheet_div");
+    var outer_div = el(name + "_div");
     // var e = el('vocab_cheat_sheet');
-    create_cheat_sheet_table(outer_div, 'vocab_cheat_sheet',
+    create_cheat_sheet_table(outer_div, name,
     ['latin_cheat_sheet_item', 'english_cheat_sheet_item'],
     [latin_cheat_sheet_display, function (x) {
         return [[x, {'font-style': 'italic'}]]}], vocabulary_items, 2);
@@ -907,16 +909,17 @@ Quiz.prototype.initialize_vocab_cheat_sheet = function () {
         make({'tag': 'td', 'class': 'english_cheat_sheet_item', 'style': {'font-style': 'italic'}, 'text': english_word}, row);
     };
     */
-    el('vocab_cheat_button').onclick = function () {quiz.toggle_element('vocab_cheat_sheet')};
+    el('vocab_cheat_button').onclick = function () {quiz.toggle_element(name)};
 }
 
 Quiz.prototype.initialize_etym_cheat_sheet = function () {
+    var name = "etym_cheat_sheet"
     var etym_cheat = this.game.etymology_cheat_sheet;
     // var outer_div = el("image_display_box");
-    var outer_div = el("etym_cheat_sheet_div");
-    create_cheat_sheet_table(outer_div, 'etym_cheat_sheet',
+    var outer_div = el(name + "_div");
+    create_cheat_sheet_table(outer_div, name,
     null, null, etym_cheat, 2);
-    el('etym_cheat_button').onclick = function () {quiz.toggle_element('etym_cheat_sheet')};
+    el('etym_cheat_button').onclick = function () {quiz.toggle_element(name)};
 }
 
 Quiz.prototype.toggle_element = function(id) {
@@ -947,6 +950,9 @@ Quiz.prototype.toggle_element = function(id) {
     
     console.log("DEBUG 2-6 ID in toggle_element = ", id);
     var element = el(id);
+    if (!element) {
+        throw "no cheat sheet with name " + id;
+    }
     console.log("cheat sheet button clicked");
     if (element.style.display !== 'none') {
         element.style.display = 'none';

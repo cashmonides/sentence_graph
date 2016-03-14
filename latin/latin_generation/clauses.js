@@ -1,9 +1,37 @@
-//DESCRIPTION
-//this module should be the first step, producing a kernel with language independent properties
-// input: level (problem: level might be language dependent)
-// output: kernel with kernel.properties
+// Possible results of Clause.get_text('english'):
+// the bird eats the fish
+// (who destroys the city)
+// (that the cat will kill the mouse)
+// (if you were eating)
+// they would be fishing
+// and they spoke
+// the cat proclaims
 
-//MASTER FUNCTION BELOW to make kernel
+var Clause = function (level, current_lexicon) {
+    
+}
+
+var SubordinateClause = function (level, current_lexicon) {
+    
+}
+
+var CoordinateClause = function (level, current_lexicon) {
+    
+}
+
+Clause.prototype.initialize = function () {
+    
+}
+
+Clause.prototype.get_text = function (language) {
+    
+}
+
+// Sentence generation below (soon to become clause generation)
+
+// Notes: none_display doesn't feel like a sentence thing.
+
+/*
 function make_output(level, current_lexicon, none_display) {
     var states;
     var i;
@@ -18,10 +46,6 @@ function make_output(level, current_lexicon, none_display) {
     var words_to_make = [['noun', ['subject', 'object']], ['verb', ['verb']]];
 
     var creation_by_part_of_speech = [];
-    /*
-    
-    Here begin the changes.
-    */
     var master_lexeme_list = {
         get_lexemes: function (name) {
             var result = {};
@@ -509,3 +533,4 @@ function make_kernel_template (kernel) {
     }
     return template_list;
 }
+*/

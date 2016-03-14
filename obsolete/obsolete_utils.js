@@ -1,5 +1,5 @@
 // Some moderately confusing and otherwise bad utils, which are generally not that useful.
-
+/*
 // todo akiva look at this
 // takes a list (elements in the keys of the dictionary) and a dictionary
 // returns a dictionary with just those keys and their values
@@ -26,6 +26,7 @@ var keys_mapped_by_function = function (x, f) {
     x.forEach(function (y) {r[y] = f(y)});
     return r
 };
+*/
 
 // Now not used.
 function array_from (s) {
@@ -50,5 +51,20 @@ Replaced by a simple equality test, with a variable correct_hash;
 the name was somewhat misleading because this hash is only for login.
 var is_correct_access_code = function(access_code) {
     return hash(access_code) === 1327021340;
+}
+*/
+
+/* Some unused and likely obsolete latin utils.
+
+//____________________________________________________
+//utility functions below
+
+function get_property (level_map, level) {
+    return random_choice(level_map[level]);
+}
+
+function generate_random_level(){
+    //Math.random = random real number between 0 & 1
+    return Math.floor(Math.random() * 300) + 1;
 }
 */

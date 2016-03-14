@@ -222,6 +222,26 @@ ITERATION 1.5
 *****current progress*****
 
 
+WEDNESDAY AGENDA:
+- the current priority is to make the game harder at the latin level
+    - the students are so advanced that is and iq are too easy
+    - begin to tackle conditionals
+    - add a simple version of genitives
+        - (vocabulary will have to be supplemented with father, mother, son, daughter, etc.)
+        - genitives seem easiest to start with because they don't require verbal constraints
+            - ablative and dative have verbal and nominal constraints
+                - ablative of means: 
+                    - verbal constraints, - has to be verbs like oppugn "attack with a sword"
+                    - nominal constraints - has to be nouns like sword and spear
+                - dative: 
+                    - verbal constraints: has to be verbs like give, speak
+                    - nominal constraints: the noun in the dative has to be animate
+- t
+
+
+
+
+
 
 - small: make post a quiz method and have it automatically check for user.id = null
 
