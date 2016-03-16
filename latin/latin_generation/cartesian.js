@@ -12,7 +12,7 @@
 
 //input is level (int)
 //returns a list of dictionaries with keys = parameters & values = parameter values (e.g. tense : future)
-master_cartesian = function (level, order, type) {
+var master_cartesian = function (level, order, type) {
     //initialize a list of dictionaries
     var i;
     if (type === 'random') {

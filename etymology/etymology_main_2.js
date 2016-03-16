@@ -76,16 +76,48 @@ var select_available_roots = function (etym_level) {
 
 var get_words_from_roots = function (allowed_roots) {
     return Object.keys(words).filter(function (x) {
-        return something_in_common(words[x].roots, allowed_roots);
+        return something_in_common(get_roots(x), allowed_roots);
     });
 }
 
 
 var get_words_with_root = function (root, available_words) {
     return available_words.filter(function (x) {
-        return words[x].roots.indexOf(root) !== -1;
+        return get_roots(x).indexOf(root) !== -1;
     })
 };
+
+var get_word_meaning = function (word) {
+    if (word in words) {
+        return words[word].meaning;
+    } else {
+        throw "word not found in words: " + word;
+    }
+}
+
+var get_roots = function (word) {
+    if (word in words) {
+        return words[word].roots;
+    } else {
+        throw "word not found in words: " + word;
+    }
+}
+
+var get_root_meaning = function (root) {
+    if (root in roots) {
+        return roots[root].meaning;
+    } else {
+        throw "root not found in roots: " + root;
+    }
+}
+
+var get_translated_root = function (root) {
+    if (root in roots) {
+        return root + ' - ' + roots[root].meaning;
+    } else {
+        throw "root not found in roots: " + root;
+    }
+}
 
 var make_question_data = function (question_type,
 available_words, available_roots, number_of_answer_choices) {
@@ -105,7 +137,7 @@ available_words, available_roots, number_of_answer_choices) {
             var root = random_choice(available_roots);
             var words_with_root = get_words_with_root(root, available_words);
             clue = random_choice(words_with_root);
-            var roots_of_clue = words[clue].roots;
+            var roots_of_clue = get_roots(clue);
             choices = push_random_n_satisfying_constraint(
                 [root], available_roots, function (x) {
                     return roots_of_clue.indexOf(x) === -1},
@@ -113,17 +145,16 @@ available_words, available_roots, number_of_answer_choices) {
             if (question_type == 'word_to_latin_root') {
                 correct_answer = root;
             } else if (question_type == 'word_to_english_root') {
-                correct_answer = roots[root].meaning;
-                choices = choices.map(function (x) {return roots[x].meaning});
+                correct_answer = get_root_meaning(root);
+                choices = choices.map(get_root_meaning);
             } else if (question_type == 'word_to_translated_root') {
-                correct_answer = root + ' - ' + roots[root].meaning;
-                choices = choices.map(function (x) {return x + 
-                ' - ' + roots[x].meaning});
+                correct_answer = get_translated_root(root);
+                choices = choices.map(get_translated_root);
             };
             break;
         case 'english_root_to_word':
             var root = random_choice(available_roots);
-            clue = roots[root].meaning;
+            clue = get_root_meaning(root);
             var words_with_root = get_words_with_root(root, available_words)
             correct_answer = random_choice(words_with_root);
             choices = push_random_n_satisfying_constraint(
@@ -134,13 +165,11 @@ available_words, available_roots, number_of_answer_choices) {
         case 'word_to_word_definition':
         case 'word_definition_to_word':
             var word = random_choice(available_words);
-            var meaning = words[word].meaning;
+            var meaning = get_word_meaning(word);
             var word_choices = push_random_n_satisfying_constraint(
                 [word], available_words, function (x) {return x !== clue},
             number_of_answer_choices - 1);
-            var word_meaning_choices = word_choices.map(function (x) {
-                return words[x].meaning;
-            })
+            var word_meaning_choices = word_choices.map(get_word_meaning);
             if (question_type === 'word_to_word_definition') {
                 clue = word;
                 correct_answer = meaning;
@@ -154,13 +183,11 @@ available_words, available_roots, number_of_answer_choices) {
         case 'root_to_root_definition':
         case 'root_definition_to_root':
             var root = random_choice(available_roots);
-            var meaning = roots[root].meaning;
+            var meaning = get_root_meaning(root);
             var root_choices = push_random_n_satisfying_constraint(
                 [root], available_roots, function (x) {return x !== clue},
             number_of_answer_choices - 1);
-            var root_meaning_choices = root_choices.map(function (x) {
-                return roots[x].meaning;
-            })
+            var root_meaning_choices = root_choices.map(get_root_meaning);
             if (question_type === 'root_to_root_definition') {
                 clue = root;
                 correct_answer = meaning;
@@ -219,27 +246,24 @@ constraint = function (x -> bool)
 // This is done (I think).
 var all_of = {
     'word': Object.keys(words),
-    'word_definition': Object.keys(words).map(function (x) {
-        return words[x].meaning}),
+    'word_definition': Object.keys(words).map(get_word_meaning),
     'latin_root': Object.keys(roots),
-    'english_root': Object.keys(roots).map(function (x) {
-        return roots[x].meaning}),
-    'translated_root': Object.keys(roots).map(function (x) {
-        return x + ' - ' + roots[x].meaning})
+    'english_root': Object.keys(roots).map(get_root_meaning),
+    'translated_root': Object.keys(roots).map(get_translated_root)
 };
 
 // x_to_y[x][y] is a function mapping type x to type y (x -> y).
 // This only exists for some types; we can add more if we need to.
 var x_to_y = {
     'word': {
-        'word_definition': function (x) {return words[x].meaning},
+        'word_definition': get_word_meaning,
         /*'latin_root': {
             function (x) {return random_choice(words[x].roots)}
         },*/
-        'latin_root': function (x) {return words[x].roots}
+        'latin_root': get_roots
     },
     'latin_root': {
-        'english_root': function (x) {return roots[x].meaning},
+        'english_root': get_root_meaning,
         'word': function (x) {return get_words_with_root(x, words)}
     }
 };
@@ -290,7 +314,7 @@ var get_constraint = {
             'but yet some answers must contain the root.');
         }
         return function (word) {
-            return something_in_common(words[word].roots, my_roots);
+            return something_in_common(get_roots(word), my_roots);
         }
     }
 }
@@ -309,7 +333,7 @@ question_data, number_of_mandatory) {
         var my_words = get_mandatory(new_mandatory_type,
             question_data, number_of_mandatory);
         // my_roots is a list of lists.
-        var my_roots = my_words.map(function (x) {return words[x].roots});
+        var my_roots = my_words.map(get_roots);
         return unique_items(concat_arrays(my_roots));
     } else if (mandatory_type.indexOf('s_which_')) {
         new_mandatory_type = mandatory_type.split('s_which_')[0];

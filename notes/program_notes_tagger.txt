@@ -223,6 +223,82 @@ ITERATION 1.5
 
 
 WEDNESDAY AGENDA:
+
+
+- BUGS from urgent error log
+    - DONE: purge sets
+    - MADE BUT NOT TESTED: cannot read property meaning of undefined (etymlogy module 4 & 14)
+    - no allowed lexemes in latin mode module 11 & 14  
+        - one possible short-term fix:
+            - add a bunch of lexemes to the higher level
+        - medium-term fix
+            - revert to lower module and log urgent error
+        - DONE: long-term fix
+            - make the N parameter a max, not a requirement (e.g. N = number of extra nouns)
+
+- BUGS from observation
+    - etymology cheat sheet seems to contain a list of words without the target root
+        - e.g. "what is the the root that means "two"" & none of the choices contain BI
+
+- cosmetics of etymology cheat sheets improved
+    - bigger space, different font
+    - underline the left hand column
+
+
+- review Dan's code
+
+
+
+- chore: play on explorer and look for urgent errors
+
+- chore: play all the levels and see if chicken has errors
+
+
+- chore: update modules
+
+
+
+- write an error logging parser
+    - quantity of each type of error
+    - like this:
+        - type: {
+            quantity:  (int),
+            most recent date:       (str)
+            date: [3-12, 3-17]     (list of str)
+            example:    (1 json formatted example)
+            context:         (basically a set - a non duplicating list of contexts - e.g. "quiz.next_question)
+            }
+    - if all contexts are identical, return context as well
+        - e.g. if all contexts are next question
+
+
+
+- write an error cleansing function
+    - delete every error  (with a certain property - e.g. older than a certain date)
+   
+   
+- the scrolling on grammar cheat sheets is not great
+    - a zoom button would be nice
+        - -moz-transform: scale(2);
+        - Zoom and transform scale are not the same thing. They are applied at different times. Zoom is applied before the rendering happens, transform - after. The result of this is if you take a div with width/height = 100% nested inside of another div, with fixed size, if you apply zoom, everything inside your inner zoom will shrink, or grow, but if you apply transform your entire inner div will shrink (even though width/height is set to 100%, they are not going to be 100% after transformation).
+    
+    
+- acccounts ending in tag.test must be playable only in class
+    - when tag.test is detected an additional page/password box is generated
+
+
+- defensive programming against "no allowed lexemes"
+    - currently it seems like it does this:
+        - the program asks for n lexemes
+        - if the constraints can't produce n lexemes it throws an error and shuts down latin mode
+    - what should happen:
+        - the program asks for n lexemes
+        - if parameters can't produce n lexemes, it still tries to make a sentence at a lower module's parameters
+        
+- defensive programmings against not having enough items to fill the extras
+    - if it can't produce n extras, it produces n-1, if it can't produce n-1, it produces n-2
+
+
 - the current priority is to make the game harder at the latin level
     - the students are so advanced that is and iq are too easy
     - begin to tackle conditionals
@@ -236,7 +312,18 @@ WEDNESDAY AGENDA:
                 - dative: 
                     - verbal constraints: has to be verbs like give, speak
                     - nominal constraints: the noun in the dative has to be animate
-- t
+
+
+
+- create lexical properties that allow for dative and ablative and genitive sensitivity
+    - abl. of means: oppugn
+    = dat.: give, speak,
+    - genitive: 
+        - + anything: father, mother, son, daughter, brother, sister 
+        - + places: king, queen, god, goddesss
+
+
+
 
 
 
