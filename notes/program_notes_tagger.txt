@@ -241,7 +241,7 @@ WEDNESDAY AGENDA:
         - e.g. "what is the the root that means "two"" & none of the choices contain BI
 
 
-- BUG: metrics not getting recorded properly in firebase
+- BUG??: metrics perhaps not getting recorded properly in firebase
     - not sure how frequent this is 
     - but: metrics was not recorded for module 2 for Muna (5th student in firebase)
     - quick fix:
@@ -251,9 +251,61 @@ WEDNESDAY AGENDA:
     
     
 - BUG: admin page is buggy
-    - DONE: sensitive to bad data (some quick fixes installed if mod.metrics doesn't exist)
+    - sensitive to bad data (some quick fixes installed if mod.metrics doesn't exist)
     - currently it lists a lot of scores (not sure if it's complete) 
     - but: Uncaught TypeError: Cannot read property '0' of undefined
+
+
+- genitive agenda 
+    - make a parameter in module - 
+        - genitive_quantity (range of min & max)
+        - genitive_number: ["singular", "plural"]
+        - genitive_scramble: (bool)
+    - get the program to produce two words, one of which is genitive
+    - get the program to translate the words into english
+    - put all that in one drop down
+    - test with nonsense genitives (the frog of the bear loves the dog of the cow)
+    - add nonsense filters
+        - the head noun of the genitive pair should be king, queen, father, etc.
+        - add parameter to lexicon: 
+            - genitive_head: bool 
+            - genitive_tail: bool
+            - e.g. king....gen_head: true, gen_tail: true   
+            - e.g. sword...gen_head: true, gen_tail: false    (no father of the sword)
+    - put in two drop-downs
+ 
+- create lexical properties that allow for dative and ablative and genitive sensitivity
+    - abl. of means: oppugn, any passive
+    - dat.: give, speak, show
+    - genitive: 
+        - + anything: father, mother, son, daughter, brother, sister 
+        - + places: king, queen, god, goddesss
+        - + animal: king, queen, god, godesses
+
+- refactor the SQL posting
+    - Gio's suggestion:
+        - having 16 columns is unwieldy and also will make querying less flexible
+        - an alternative: 
+        - make another table, call it the accuracy table
+            like this:
+            attempt_id		0	1	2	3	mode_enumeration	
+            7641            6   1	0	0	“drop”  
+            7641            6   2 	0	0	“quick”
+            7641            3   3 	3 	8 	“latin”	
+            
+            attempt_id is the unique id (primary key id) of the time_metrics
+            e.g. in the above example, 7641 is the 7641st row in the time_metrics table
+            
+        - one advantage: if in the future we institute other modes (e.g. id or labyrinth)
+          we won't need to multiply columns endlessly, we'll just add new mode_enumerations
+        
+    - whenever you have two tables that relate to each other, you have to be careful that they line up
+        - so very important: when we create the new post to the new table
+            we need to make sure we don't stop doing the old post (accuracy_drop_mode_0 etc.)
+        - that way, we'll be able to compare them and see if they line up
+        - when we've tested it thoroughly and are sure the two tables line up, then we'll remove the old columns (accuracy_drop_mode_0)
+
+
  
  
  
@@ -265,6 +317,8 @@ WEDNESDAY AGENDA:
 
 - review Dan's code
 
+
+- possible bug??? - login status seems to be recorded for only a very small number of users - is that a bug or is that the behavior we should expect - i.e. at any given moment most people are logged out so their login status gets erased)?
 
 
 - chore: play on explorer and look for urgent errors
@@ -340,37 +394,6 @@ WEDNESDAY AGENDA:
     - step 5: add dative
     - step 6: add ablative
 
-
-- create lexical properties that allow for dative and ablative and genitive sensitivity
-    - abl. of means: oppugn, any passive
-    = dat.: give, speak,
-    - genitive: 
-        - + anything: father, mother, son, daughter, brother, sister 
-        - + places: king, queen, god, goddesss
-
-
-- refactor the SQL posting
-    - Gio's suggestion:
-        - having 16 columns is unwieldy and also will make querying less flexible
-        - an alternative: 
-        - make another table, call it the accuracy table
-            like this:
-            attempt_id		0	1	2	3	mode_enumeration	
-            7641            6   1	0	0	“drop”  
-            7641            6   2 	0	0	“quick”
-            7641            3   3 	3 	8 	“latin”	
-            
-            attempt_id is the unique id (primary key id) of the time_metrics
-            e.g. in the above example, 7641 is the 7641st row in the time_metrics table
-            
-        - one advantage: if in the future we institute other modes (e.g. id or labyrinth)
-          we won't need to multiply columns endlessly, we'll just add new mode_enumerations
-        
-    - whenever you have two tables that relate to each other, you have to be careful that they line up
-        - so very important: when we create the new post to the new table
-            we need to make sure we don't stop doing the old post (accuracy_drop_mode_0 etc.)
-        - that way, we'll be able to compare them and see if they line up
-        - when we've tested it thoroughly and are sure the two tables line up, then we'll remove the old columns (accuracy_drop_mode_0)
 
 
 

@@ -2,7 +2,7 @@ function inflect_english (kernel, lexeme, word_settings) {
     if (!lexeme) {return {}}
     switch (lexeme.properties.core.part_of_speech) {
         case (Part_of_speech.Noun) :
-            return (make_article() + ' ' +
+            return (make_preposition(word_settings) + make_article() + ' ' +
             inflect_english_noun (kernel, lexeme, word_settings));
         case (Part_of_speech.Verb) : return inflect_english_verb (kernel, lexeme);
         case (Part_of_speech.Adjective) : return inflect_english_adjective (kernel, lexeme, word_settings);
@@ -11,7 +11,7 @@ function inflect_english (kernel, lexeme, word_settings) {
 }
 
 
-function make_article() {
+var make_article = function () {
     return "the";
 
 
@@ -21,6 +21,11 @@ function make_article() {
 
     //below is unworkable when it produces multiple answer choices because it produces inconsistencies
     //return random_choice(['the', word_settings.number === 'singular' ? 'a': '']);
+}
+
+var make_preposition = function (word_settings) {
+    // todo expand in future for dative, ablative, etc.
+    return (word_settings.function === "genitive") ? "of " : ""
 }
 
 
@@ -34,11 +39,13 @@ function inflect_english_noun (kernel, lexeme, word_settings) {
 
 
     //down the road we're going to need function & case in order to deal with he vs. him
+    /*
     if (word_settings.function === "subject") {
         word_settings.case = "nominative";
     } else if (word_settings.function === "object") {
         word_settings.case = "accusative";
     }
+    */
 
     var p = lexeme.get_properties(Language_enum.English);
 

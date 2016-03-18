@@ -23,7 +23,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 1],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     
@@ -52,7 +55,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 1],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     //adding plural subjects and objects
@@ -79,7 +85,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 1],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     //adding all three tenses and verb drop
@@ -106,7 +115,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 1],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     
@@ -134,7 +146,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 1],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     

@@ -29,7 +29,7 @@ function make_output(level, current_lexicon, none_display) {
     for each part of speech we need to loop through functions that that part of speech can fill
     */
     //todo maybe turn the following into something easier to read, such as a map
-    var words_to_make = [['noun', ['subject', 'object']], ['verb', ['verb']]];
+    var words_to_make = {'noun': ['subject', 'object'], 'verb': ['verb']};
 
     
     
@@ -59,7 +59,7 @@ function make_output(level, current_lexicon, none_display) {
     var drop_down_settings = map_level_to_allowed(level.latin_extra_level, latin_extra_levels)['drop_down_settings'];
     
     
-    //we randomly pick a state to be made out of all possiblr states
+    //we randomly pick a state to be made out of all possible states
     var state_to_be_made = master_cartesian(level.latin_level, full_order, 'random');
 
     
@@ -146,9 +146,8 @@ function make_output(level, current_lexicon, none_display) {
     //with the goal of initializing 2 things:
     //creation_by_part_of_speech
     //master_lexeme_list
-    for (i = 0; i < words_to_make.length; i++) {
-        part_of_speech = words_to_make[i][0];
-        things_with_part_of_speech = words_to_make[i][1];
+    for (part_of_speech in words_to_make) {
+        things_with_part_of_speech = words_to_make[part_of_speech];
         
         //adds lexeme of appropriate part of speech to the lexeme list and returns the functions of those lexemes
         new_lexemes = add_to_lexeme_list(master_lexeme_list, state_to_be_made,
@@ -220,10 +219,10 @@ function make_output(level, current_lexicon, none_display) {
         master_lexeme_list.get_lexemes('used_only'));
 
 
-
-
+    /*
     //todo what_to_vary seems obsolete
     var what_to_vary;
+    */
 
     //////////end of producing correct kernel
     //now we need to produce all the incorrect options that will end up in the drop downs
@@ -497,16 +496,40 @@ function create_non_drop_object(x, output, choice, language_enum) {
 function add_to_lexeme_list (
     master_lexeme_list, state, part_of_speech,
     things_with_part_of_speech, drop_down_dict, current_lexicon) {
+    var still_making_used_words = function() {
+        return i < things_with_part_of_speech.length;
+    }
+    
+    var add_word = function (element, pick_result) {
+        master_lexeme_list[element] = pick_result;
+        if (!(begins_with(element, 'double'))) {
+            // Originally (element.slice(0, 6) !== 'double')
+            master_lexeme_list.dummies_and_used.push(element)
+        }
+        master_lexeme_list.all_lexemes.push(element);
+        new_lexemes.push(element)
+    }
+    
+    var trigger_more_words = function (element, pick_result) {
+        return [];
+    }
+    
+    
     var element;
     var i;
     var new_lexemes = [];
     var pick_result;
+    
     // lexicon dummies = items that only show up in the cheat sheet.
     var drop_down_number = things_with_part_of_speech.length + drop_down_dict.extra_options;
-    var total_number = drop_down_number + drop_down_dict.lexicon_dummies
+    var total_number = drop_down_number + drop_down_dict.lexicon_dummies;
+    
+    // Words that are triggered by adding another word (such as genitives).
+    var triggered_words;
+    
     // Note: it shouldn't matter what order these tasks are done in.
     for (i = 0; i < total_number; i++) {
-        if (i < things_with_part_of_speech.length) {
+        if (still_making_used_words()) {
             element = things_with_part_of_speech[i]
         } else if (i < drop_down_number) {
             element = 'dummy_' + part_of_speech + '_' + (i - things_with_part_of_speech.length)
@@ -518,15 +541,15 @@ function add_to_lexeme_list (
             part_of_speech, current_lexicon, master_lexeme_list);
         if (pick_result === null) {
             continue;
-        } else {
-            master_lexeme_list[element] = pick_result;
         }
-        if (!(begins_with(element, 'double'))) {
-            // Originally (element.slice(0, 6) !== 'double')
-            master_lexeme_list.dummies_and_used.push(element)
+        if (still_making_used_words()) {
+            triggered_words = trigger_more_words(element, pick_result);
+            for (var j = 0; j < triggered_words.length; j++) {
+                add_word(triggered_words[j].role, triggered_words[j].lexeme)
+            }
         }
-        master_lexeme_list.all_lexemes.push(element);
-        new_lexemes.push(element)
+        
+        add_word(element, pick_result)
     }
     return new_lexemes
 }
@@ -656,7 +679,7 @@ function make_minimal_form_english (level, state, lexeme, lexeme_type) {
     if (lexeme.properties.latin.transitive === 'intransitive' && state.voice === 'passive') {
         return 'should not be made'}
 
-    var word_setting = set_word_setting_new(state, lexeme, lexeme_type);
+    var word_setting = set_word_setting_drop_down(state, lexeme, lexeme_type);
     var form = new Form(lexeme, word_setting, lexeme_type);
     state.form = form;
 
@@ -680,8 +703,10 @@ function set_word_setting_new(state, lexeme, element) {
     } else {
         if (element === "subject") {
             word_settings_map.number = state.number
-        } else {
+        } else if (element === "object") {
             word_settings_map.number = state.number_of_other_nouns
+        } else {
+            word_settings_map.number = random_choice(["singular", "plural"])
         }
         if (lexeme) {
             // This does not occur if there is no appropriate lexeme, i.e., implicit subject.
@@ -690,13 +715,54 @@ function set_word_setting_new(state, lexeme, element) {
         }
 
         //todo form.element should probably just be changed to "function"
+        /*
+        //todo probably delete this repetitive code
         var syntactic_function = element;
 
         if (syntactic_function === "subject") {
             word_settings_map.function = "subject";
         } else if (syntactic_function === "object") {
             word_settings_map.function = "object";
+        } else if (syntactic_function === "genitive") {
+            word_settings_map.function = "genitive"
         }
+        */
+        // todo hope that the code gods do not strike us down
+        word_settings_map.function = element;
+    }
+
+    return word_settings_map;
+}
+
+function set_word_setting_drop_down(state, lexeme, element) {
+    var word_settings_map = {};
+    if (element === "verb") {
+        word_settings_map.conjugation = lexeme.properties.latin.family;
+        // This will need to be fixed below.
+    } else {
+        word_settings_map.number = state.number || state.number_of_other_nouns;
+        
+        if (lexeme) {
+            // This does not occur if there is no appropriate lexeme, i.e., implicit subject.
+            word_settings_map.declension = lexeme.properties.latin.family;
+            word_settings_map.gender = lexeme.properties.latin.gender;
+        }
+
+        //todo form.element should probably just be changed to "function"
+        /*
+        //todo porbably delete this repetitive code
+        var syntactic_function = element;
+
+        if (syntactic_function === "subject") {
+            word_settings_map.function = "subject";
+        } else if (syntactic_function === "object") {
+            word_settings_map.function = "object";
+        } else if (syntactic_function === "genitive") {
+            word_settings_map.function = "genitive"
+        }
+        */
+        // todo hope that the code gods do not strike us down
+        word_settings_map.function = element;
     }
 
     return word_settings_map;
