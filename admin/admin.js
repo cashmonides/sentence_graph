@@ -22,7 +22,15 @@ function callback2(data) {
     
     var e = el("score_report");
     // make({tag:"tr", children: [{tag: "td"}]}, e);
+    
+    
+    
     for (var key in users) {
+        console.log("DEBUG 3-16 logging begin");
+        console.log("NAME users[key].profile.name", users[key].profile.name);
+        console.log("MAX MODULE max_module(users[key])", max_module(users[key]));
+        console.log("REPORT ACCURACY?? report_accuracy(users[key])", max_module(users[key]));
+        console.log("DEBUG 3-16 logging end");
         make({
             tag:"ul",
             children: [
@@ -192,13 +200,39 @@ function get_current_stats2 (user, module_id) {
 function add(a, b) {return a + b}
 
 function get_all_accuracies(user, mod) {
-    return Object.keys(mod.metrics).map(
+    
+    
+    if (mod.metrics == null) {
+        console.log("DEBUG 3-16 mod.metrics doesn't exist - return triggered");
+        return;
+    }
+    
+    console.log("DEBUG 3-16 user = ", user);
+    console.log("DEBUG 3-16 mod = ", mod);
+    
+    
+    var output = Object.keys(mod.metrics).map(
         function (iteration) {
             var correct = mod.metrics[iteration][0];
-       
+            console.log("DEBUG 3-16 correct = ", correct);
             var total = Object.keys(mod.metrics[iteration]).
             map(function (x) {return mod.metrics[iteration][x]}).
             reduce(add);
+            console.log("DEBUG 3-16 total = ", total);
+            return Number.isFinite(correct / total) ? (correct / total): 0;
+    })
+    
+    console.log("DEBUG 3-16 output = ", output);
+    
+    
+    return Object.keys(mod.metrics).map(
+        function (iteration) {
+            var correct = mod.metrics[iteration][0];
+            console.log("DEBUG 3-16 correct = ", correct);
+            var total = Object.keys(mod.metrics[iteration]).
+            map(function (x) {return mod.metrics[iteration][x]}).
+            reduce(add);
+            console.log("DEBUG 3-16 total = ", total);
             return Number.isFinite(correct / total) ? (correct / total): 0;
     });
     
@@ -217,6 +251,7 @@ function get_best_accuracy(user, mod) {
     // c = Math.max.apply(null, c);
     
     //alternative to spread operator
+    console.log("DEBUG 3-16 GET ALL ACCURACIES = ", get_all_accuracies(user, mod));
     return Math.max.apply(null, get_all_accuracies(user, mod));
     
     //spread operator
@@ -224,7 +259,8 @@ function get_best_accuracy(user, mod) {
 }
 
 function get_first_accuracy(user, mod) {
-    return get_all_accuracies(user, mod)[0]
+    console.log("DEBUG 3-16 GET FIRST ACCURACY = ", get_all_accuracies(user, mod)[0]);
+    return get_all_accuracies(user, mod)[0];
 }
 
 function get_aggregate_accuracy (user) {

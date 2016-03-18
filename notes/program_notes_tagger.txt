@@ -240,7 +240,25 @@ WEDNESDAY AGENDA:
     - etymology cheat sheet seems to contain a list of words without the target root
         - e.g. "what is the the root that means "two"" & none of the choices contain BI
 
-- cosmetics of etymology cheat sheets improved
+
+- BUG: metrics not getting recorded properly in firebase
+    - not sure how frequent this is 
+    - but: metrics was not recorded for module 2 for Muna (5th student in firebase)
+    - quick fix:
+        escape loop written in (if mod.metrics == null return)
+    - need to figure out how to not write a module without metrics
+    - check in with muna's account after she plays some more
+    
+    
+- BUG: admin page is buggy
+    - DONE: sensitive to bad data (some quick fixes installed if mod.metrics doesn't exist)
+    - currently it lists a lot of scores (not sure if it's complete) 
+    - but: Uncaught TypeError: Cannot read property '0' of undefined
+ 
+ 
+ 
+    
+- cosmetics of etymology cheat sheets should be improved
     - bigger space, different font
     - underline the left hand column
 
@@ -295,14 +313,15 @@ WEDNESDAY AGENDA:
         - the program asks for n lexemes
         - if parameters can't produce n lexemes, it still tries to make a sentence at a lower module's parameters
         
-- defensive programmings against not having enough items to fill the extras
+- (is this done?) defensive programmings against not having enough items to fill the extras
     - if it can't produce n extras, it produces n-1, if it can't produce n-1, it produces n-2
 
 
 - the current priority is to make the game harder at the latin level
     - the students are so advanced that is and iq are too easy
-    - begin to tackle conditionals
-    - add a simple version of genitives
+    - step 1: begin to tackle conditionals
+    - step 2: add adjectives
+    - step 3: add a simple version of genitives
         - (vocabulary will have to be supplemented with father, mother, son, daughter, etc.)
         - genitives seem easiest to start with because they don't require verbal constraints
             - ablative and dative have verbal and nominal constraints
@@ -312,18 +331,46 @@ WEDNESDAY AGENDA:
                 - dative: 
                     - verbal constraints: has to be verbs like give, speak
                     - nominal constraints: the noun in the dative has to be animate
-
+            - genitives only have nominal constraints
+                - nominal constraints: 
+                - x + anything: father, mother, son, daughter, brother, sister 
+                - x + places: king, queen, god, goddesss
+                - (NB: we don't want the father of the mother, so we should prevent these kinship terms from being in the genitive)
+    - step 4: build in lexical constraints for ablative and dative
+    - step 5: add dative
+    - step 6: add ablative
 
 
 - create lexical properties that allow for dative and ablative and genitive sensitivity
-    - abl. of means: oppugn
+    - abl. of means: oppugn, any passive
     = dat.: give, speak,
     - genitive: 
         - + anything: father, mother, son, daughter, brother, sister 
         - + places: king, queen, god, goddesss
 
 
-
+- refactor the SQL posting
+    - Gio's suggestion:
+        - having 16 columns is unwieldy and also will make querying less flexible
+        - an alternative: 
+        - make another table, call it the accuracy table
+            like this:
+            attempt_id		0	1	2	3	mode_enumeration	
+            7641            6   1	0	0	“drop”  
+            7641            6   2 	0	0	“quick”
+            7641            3   3 	3 	8 	“latin”	
+            
+            attempt_id is the unique id (primary key id) of the time_metrics
+            e.g. in the above example, 7641 is the 7641st row in the time_metrics table
+            
+        - one advantage: if in the future we institute other modes (e.g. id or labyrinth)
+          we won't need to multiply columns endlessly, we'll just add new mode_enumerations
+        
+    - whenever you have two tables that relate to each other, you have to be careful that they line up
+        - so very important: when we create the new post to the new table
+            we need to make sure we don't stop doing the old post (accuracy_drop_mode_0 etc.)
+        - that way, we'll be able to compare them and see if they line up
+        - when we've tested it thoroughly and are sure the two tables line up, then we'll remove the old columns (accuracy_drop_mode_0)
 
 
 
@@ -333,7 +380,7 @@ WEDNESDAY AGENDA:
 - small: make post a quiz method and have it automatically check for user.id = null
 
 
-- bug: cheat sheet button doesn't make it disappear
+- DONE: bug: cheat sheet button doesn't make it disappear
 
 - update github issue wiki
 
