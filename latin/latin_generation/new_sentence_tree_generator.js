@@ -138,9 +138,13 @@ function make_output(level, current_lexicon, none_display) {
     //sets the states number based on the state's person
     //and all associated changes
     change_state_to_be_made_initial(state_to_be_made);
-
-
-
+    
+    // These are some miscellaneous lexeme_list settings.
+    // So far, it's only presence of genitives, but in the future it could
+    // include adjectives, datives, etc.
+    var lexeme_list_settings = {
+        genitives: get_genitive_settings(level, words_to_make.noun.length)
+    }
     
     //we iterate through words_to_make
     //with the goal of initializing 2 things:
@@ -151,7 +155,7 @@ function make_output(level, current_lexicon, none_display) {
         
         //adds lexeme of appropriate part of speech to the lexeme list and returns the functions of those lexemes
         new_lexemes = add_to_lexeme_list(master_lexeme_list, state_to_be_made,
-        part_of_speech, things_with_part_of_speech,
+        part_of_speech, lexeme_list_settings, things_with_part_of_speech,
         drop_down_settings[part_of_speech], current_lexicon);
         
         //we need to push objects to the list creation_by_part_of_speech
@@ -429,7 +433,7 @@ function latin_mental_wrap(choice, sentence) {
 }
 
 function drop_non_drop_creation (drop_non_drop_allowed, template) {
-    console.log('important info;', drop_non_drop_allowed, template, template.length);
+    // console.log('important info;', drop_non_drop_allowed, template, template.length);
     var i = 0;
     while (i < 1000) {
         var drop_non_drop_map = {};
@@ -494,11 +498,9 @@ function create_non_drop_object(x, output, choice, language_enum) {
 
 
 function add_to_lexeme_list (
-    master_lexeme_list, state, part_of_speech,
+    master_lexeme_list, state, part_of_speech, settings,
     things_with_part_of_speech, drop_down_dict, current_lexicon) {
-    var still_making_used_words = function() {
-        return i < things_with_part_of_speech.length;
-    }
+    var number_of_pos = things_with_part_of_speech.length;
     
     var add_word = function (element, pick_result) {
         master_lexeme_list[element] = pick_result;
@@ -510,7 +512,13 @@ function add_to_lexeme_list (
         new_lexemes.push(element)
     }
     
-    var trigger_more_words = function (element, pick_result) {
+    var trigger_more_words = function (i, element, pick_result) {
+        if ((part_of_speech === 'noun') && (settings.genitives[i] === true)) {
+            var role = element + '_genitive';
+            var pick_result = pick_lexeme_new(state, element + '_genitive',
+            'noun', current_lexicon, master_lexeme_list);
+            return [{role: role, lexeme: pick_result}]
+        };
         return [];
     }
     
@@ -521,7 +529,7 @@ function add_to_lexeme_list (
     var pick_result;
     
     // lexicon dummies = items that only show up in the cheat sheet.
-    var drop_down_number = things_with_part_of_speech.length + drop_down_dict.extra_options;
+    var drop_down_number = number_of_pos + drop_down_dict.extra_options;
     var total_number = drop_down_number + drop_down_dict.lexicon_dummies;
     
     // Words that are triggered by adding another word (such as genitives).
@@ -529,10 +537,10 @@ function add_to_lexeme_list (
     
     // Note: it shouldn't matter what order these tasks are done in.
     for (i = 0; i < total_number; i++) {
-        if (still_making_used_words()) {
+        if (i < number_of_pos) {
             element = things_with_part_of_speech[i]
         } else if (i < drop_down_number) {
-            element = 'dummy_' + part_of_speech + '_' + (i - things_with_part_of_speech.length)
+            element = 'dummy_' + part_of_speech + '_' + (i - number_of_pos)
         } else {
             element = 'double_dummy_' + part_of_speech + '_' + (i - drop_down_number)
         }
@@ -542,8 +550,8 @@ function add_to_lexeme_list (
         if (pick_result === null) {
             continue;
         }
-        if (still_making_used_words()) {
-            triggered_words = trigger_more_words(element, pick_result);
+        if (i < number_of_pos) {
+            triggered_words = trigger_more_words(i, element, pick_result);
             for (var j = 0; j < triggered_words.length; j++) {
                 add_word(triggered_words[j].role, triggered_words[j].lexeme)
             }
@@ -552,6 +560,13 @@ function add_to_lexeme_list (
         add_word(element, pick_result)
     }
     return new_lexemes
+}
+
+var get_genitive_settings = function (level, number_of_pos) {
+    var min_and_max = map_level_to_allowed(level.latin_level,
+        latin_levels)['genitive_quantity'];
+    return between_min_and_max(
+        min_and_max[0], min_and_max[1], number_of_pos);
 }
 
 function pick_lexeme_new(kernel, element, part_of_speech, current_lexicon, lexeme_list) {

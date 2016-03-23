@@ -28,12 +28,14 @@ var keys_mapped_by_function = function (x, f) {
 };
 */
 
+/*
 // Now not used.
 function array_from (s) {
 	var r = [];
 	for (var i of s) {r.push(i)}
 	return r;
 }
+*/
 
 /*
 // If we ever need these...
@@ -66,5 +68,16 @@ function get_property (level_map, level) {
 function generate_random_level(){
     //Math.random = random real number between 0 & 1
     return Math.floor(Math.random() * 300) + 1;
+}
+*/
+
+// Another ex-util.
+/*
+var range = function (start, end) {
+	var ns = [];
+	for(var i = start; i <= end; i++){
+		ns.push(i);
+	}
+	return ns;
 }
 */
