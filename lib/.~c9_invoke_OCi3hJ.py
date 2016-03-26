@@ -104,11 +104,12 @@ def insert_time_data(ups):
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
         c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, now(), " + ups["null_string"] + ")", row)   # slice = (row[0], row[1], row[2], row[3])
-        time_data_id = c.lastrowid
+        primary_key = c.execute("IDENT_CURRENT(time_metrics)")
         for i in modes:
-            c.execute("INSERT INTO accuracy_id VALUES (" + str(time_data_id)
+            c.execute("INSERT INTO accuracy_id VALUES (" + str(primary_key)
             + ", null, null, null, null, \"" + i + "\")", [])
         #returns the unique id of the row just inserted
+    
         db.commit()
         # logging.debug("db execute")
         # rows = c.fetchall()
@@ -201,7 +202,7 @@ def update_accuracy(ups):
         for j in accuracy_dict2:
             for k in accuracy_dict2[j]:
                 csv = accuracy_dict2[j][k]
-                c.execute("UPDATE accuracy_table SET attempt" + str(k) + " = " + str(csv) +
+                " WHERE id = " + str(row) + "AND mode_enumeration = \"" + j, [])
                 " WHERE id = " + str(row) + "AND mode_enumeration = \"" + j + "\"", [])
         db.commit()
         # logging.debug("db execute")
