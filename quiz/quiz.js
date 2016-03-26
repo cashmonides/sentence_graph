@@ -191,7 +191,7 @@ Quiz.prototype.next_module = function () {
     this.next_submodule();
 };
 
-Quiz.prototype.next_submodule = function(){
+Quiz.prototype.next_submodule = function() {
     //initializes a default
     this.submodule = {
         score: 0, 
@@ -274,13 +274,18 @@ Quiz.prototype.next_submodule = function(){
     clear quiz.start_time
     
     */
+    this.time_data = list_of_repetitions(null, 8);
+    this.time_data[0] = this.user.uid;
+    this.time_data[6] = this.module.id;
+    this.time_data[7] = submodule_id;
+    this.user.get_personal_data(this);
     
-    var time_data = [this.user.uid, this.module.id, submodule_id];
     
-    
-    
-    
-    
+    this.next_question();
+};
+
+Quiz.prototype.initialize_time_metrics = function () {
+    var time_data = this.time_data;
     console.log("DEBUG 2-11 entering post #1");
     console.log("DEBUG 2-11 this.time_data = ", time_data);
     
@@ -296,6 +301,10 @@ Quiz.prototype.next_submodule = function(){
         null_string: list_of_repetitions("null", 17).join(', ')}, function (data) {
             console.log("DEBUG 2-11 data = ", data);
             self.time_data_id = data.id;
+            post({data: time_data, type: "insert_accuracy_data", modes: this.}, function (data) {
+                 console.log("DEBUG 2-11 data = ", data);
+                 self.time_data_id = data.id;
+        });
         });
     } else {
         console.log('DEBUG 3/4/2016 this.user.uid === null; post refused');
@@ -303,10 +312,11 @@ Quiz.prototype.next_submodule = function(){
     // todo maybe a good idea later to add an urgent error log here
     
     console.log("DEBUG 2-11 exiting post #1");
-    
-    
-    this.next_question();
-};
+}
+
+Quiz.prototype.get_modes = function () {
+    return Object.keys(ALL_MODULES[this.module.id].mode_ratio);
+}
 
 Quiz.prototype.next_mode = function(){
     console.log("DEBUG 11-28 entering next_mode");
@@ -456,6 +466,21 @@ Quiz.prototype.convert_accuracy_dict = function () {
 Quiz.prototype.convert_accuracy_dict = function () {
     var result = {};
     for (var i in this.accuracy_dictionary) {
+        var value = this.accuracy_dictionary[i];
+        for (var j in value) {
+            if (value[j] !== 0) {
+                result[i] = this.accuracy_dictionary[i];
+                break;
+            }
+        }
+    };
+    return result;
+    return result;
+}
+
+Quiz.prototype.convert_accuracy_dict2 = function () {
+    var result = {};
+    for (var i in this.accuracy_dictionary) {
         for (var j = 0; j < 4; j++) {
             // i.e., accuracy_drop_mode_3
             result["accuracy_" + i + "_mode_" + j] = this.accuracy_dictionary[i][j];
@@ -480,7 +505,9 @@ Quiz.prototype.submodule_complete = function () {
         post({data: this.time_data_id, type: "update_time_data"});
         console.log("DEBUG 3-4 just finished update_time_data");
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict(),
-        accuracy_dict2: this.accuracy_dict, type: "update_accuracy"});
+        type: "update_accuracy_old"});
+        post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict2(),
+        type: "update_accuracy_new"});
         console.log("DEBUG 3-4 just finished update_accuracy");
         console.log("DEBUG 2-11 exiting post #2");
     } else {

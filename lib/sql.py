@@ -88,7 +88,7 @@ def read_table(ups):
 def insert_time_data(ups):
     try:
         row = ups["data"]
-        modes = ups["modes"]
+        # modes = ups["modes"]
         logging.debug("row={0}".format(row))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
@@ -103,11 +103,11 @@ def insert_time_data(ups):
         # Makes sure everything (even None) becomes a string.
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-        c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, now(), " + ups["null_string"] + ")", row)   # slice = (row[0], row[1], row[2], row[3])
+        c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, %s, %s, %s, %s, %s, now(), " + ups["null_string"] + ")", row)   # slice = (row[0], row[1], row[2], row[3])
         time_data_id = c.lastrowid
-        for i in modes:
-            c.execute("INSERT INTO accuracy_id VALUES (" + str(time_data_id)
-            + ", null, null, null, null, \"" + i + "\")", [])
+        # for i in modes:
+        #     c.execute("INSERT INTO accuracy_id VALUES (" + str(time_data_id)
+        #     + ", null, null, null, null, \"" + i + "\")", [])
         #returns the unique id of the row just inserted
         db.commit()
         # logging.debug("db execute")
@@ -126,7 +126,11 @@ def insert_time_data(ups):
     except Exception as e:
         logging.debug(str(e))
         data = {
-            "success": False
+            "success": False,
+            "error": str(e),
+            "error_type": type(e),
+            "row": row,
+            "modes": modes
         }
         
         return data
@@ -165,20 +169,119 @@ def update_time_data(ups):
     except Exception as e:
         logging.debug(str(e))
         data = {
-            "success": False
+            "success": False,
+            "error": str(e),
+            "error_type": type(e),
+            "row": row
         }
         
         return data
-        
-        
 
 
-def update_accuracy(ups):
+'''
+#todo add a try catch statement at c.execute
+def insert_accuracy_data(ups):
+    try:
+        row = ups["data"]
+        modes = ups["modes"]
+        logging.debug("row={0}".format(row))
+        # double asterisk gets all the keys of the map as the argument
+        db = MySQLdb.connect(**dbs)
+        # logging.debug("db connected")
+        c = db.cursor()
+        # c = db.cursor (MySQLdb.cursors.DictCursor)
+        
+        #shouldn't it be str(row[0])? Or is row[0] given as str?
+        # In python, "INSERT INTO time_metrics VALUES (" + 6 gives an error.
+        #c.execute("INSERT INTO time_metrics VALUES (" + row[0] + ", " + row[1] + \
+        #    ", " + row[2] + ", \"" + row[3] + "\", \"" + row[4] + "\")")
+        # Makes sure everything (even None) becomes a string.
+        #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
+        #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
+        # c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, %s, %s, %s, %s, %s, now(), " + ups["null_string"] + ")", row)   # slice = (row[0], row[1], row[2], row[3])
+        time_data_id = row["last_id"]
+        for i in modes:
+            c.execute("INSERT INTO accuracy_id VALUES (" + str(time_data_id)
+            + ", null, null, null, null, \"" + i + "\")", [])
+        #returns the unique id of the row just inserted
+        db.commit()
+        # logging.debug("db execute")
+        # rows = c.fetchall()
+        # logging.debug("db fetched all")
+        # print 'Total Row(s):' + str(c.rowcount)
+        data = {
+            "success": True,
+            "id": time_data_id
+        }
+        # for row in rows:
+            # print row
+            #print type(row), row # tuple
+            # data["rows"].append(row)
+        return data
+    except Exception as e:
+        logging.debug(str(e))
+        data = {
+            "success": False,
+            "error": str(e),
+            "error_type": type(e),
+            "row": row,
+            "modes": modes
+        }
+        
+        return data
+
+
+
+def update_accuracy_data(ups):
+    try:
+        row = ups["data"]
+        logging.debug("row={0}".format(row))
+        # double asterisk gets all the keys of the map as the argument
+        db = MySQLdb.connect(**dbs)
+        # logging.debug("db connected")
+        c = db.cursor()
+        # c = db.cursor (MySQLdb.cursors.DictCursor)
+        
+        #shouldn't it be str(row[0])? Or is row[0] given as str?
+        # In python, "INSERT INTO time_metrics VALUES (" + 6 gives an error.
+        #c.execute("INSERT INTO time_metrics VALUES (" + row[0] + ", " + row[1] + \
+        #    ", " + row[2] + ", \"" + row[3] + "\", \"" + row[4] + "\")")
+        # Makes sure everything (even None) becomes a string.
+        #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
+        #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
+        c.execute("UPDATE time_metrics SET stop_time = now() WHERE id = %s", [row])
+        db.commit()
+        # logging.debug("db execute")
+        # rows = c.fetchall()
+        # logging.debug("db fetched all")
+        # print 'Total Row(s):' + str(c.rowcount)
+        data = {
+            "success": True
+        }
+        # for row in rows:
+            # print row
+            #print type(row), row # tuple
+            # data["rows"].append(row)
+        return data
+    except Exception as e:
+        logging.debug(str(e))
+        data = {
+            "success": False,
+            "error": str(e),
+            "error_type": type(e),
+            "row": row
+        }
+        
+        return data
+'''
+
+
+def update_accuracy_old(ups):
     try:
         row = ups["data"]
         accuracy_dictionary = ups["accuracy_dictionary"]
         accuracy_dict2 = ups["accuracy_dict2"]
-        logging.debug("row, accuracy_dictionary, accuracy_dict2={0}, {1}".format(row, accuracy_dictionary, accuracy_dict2))
+        logging.debug("row, accuracy_dictionary = {0}, {1}".format(row, accuracy_dictionary))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
@@ -198,11 +301,6 @@ def update_accuracy(ups):
             csv = accuracy_dictionary[i]
             c.execute("UPDATE time_metrics SET " + str(i) + " = " + str(csv) +
             " WHERE id =" + str(row), [])
-        for j in accuracy_dict2:
-            for k in accuracy_dict2[j]:
-                csv = accuracy_dict2[j][k]
-                c.execute("UPDATE accuracy_table SET attempt" + str(k) + " = " + str(csv) +
-                " WHERE id = " + str(row) + "AND mode_enumeration = \"" + j + "\"", [])
         db.commit()
         # logging.debug("db execute")
         # rows = c.fetchall()
@@ -219,7 +317,61 @@ def update_accuracy(ups):
     except Exception as e:
         logging.debug(str(e))
         data = {
-            "success": False
+            "success": False,
+            "error": str(e),
+            "error_type": type(e),
+            "accuracy_dictionary": accuracy_dictionary
+        }
+        
+        return data
+
+
+def update_accuracy_new(ups):
+    try:
+        row = ups["data"]
+        accuracy_dictionary = ups["accuracy_dictionary"]
+        logging.debug("row, accuracy_dictionary = {0}, {1}".format(row, accuracy_dictionary))
+        # double asterisk gets all the keys of the map as the argument
+        db = MySQLdb.connect(**dbs)
+        # logging.debug("db connected")
+        c = db.cursor()
+        # c = db.cursor (MySQLdb.cursors.DictCursor)
+        
+        #shouldn't it be str(row[0])? Or is row[0] given as str?
+        # In python, "INSERT INTO time_metrics VALUES (" + 6 gives an error.
+        #c.execute("INSERT INTO time_metrics VALUES (" + row[0] + ", " + row[1] + \
+        #    ", " + row[2] + ", \"" + row[3] + "\", \"" + row[4] + "\")")
+        # Makes sure everything (even None) becomes a string.
+        #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
+        #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
+        # logging.debug("accuracy_dictionary={0}".format(accuracy_dictionary))
+        # This should work.
+        for j in accuracy_dictionary:
+            l = []
+            for k in accuracy_dictionary[j]:
+                l.push(str(accuracy_dictionary[j][k]))
+            c.execute("INSERT INTO accuracy_table VALUES (" + str(row) + ", " + ", ".join(l) +
+            ", \"" + j + "\"", [])
+        db.commit()
+        # logging.debug("db execute")
+        # rows = c.fetchall()
+        # logging.debug("db fetched all")
+        # print 'Total Row(s):' + str(c.rowcount)
+        data = {
+            "success": True
+        }
+        # for row in rows:
+            # print row
+            #print type(row), row # tuple
+            # data["rows"].append(row)
+        return data
+    except Exception as e:
+        logging.debug(str(e))
+        data = {
+            "success": False,
+            "error": str(e),
+            "error_type": type(e),
+            "accuracy_dictionary": accuracy_dictionary
         }
         
         return data

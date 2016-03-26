@@ -1,7 +1,341 @@
 - Dan not coding
 - Akiva not coding
 
-NOTE: This is from the most recent commit with program_notes_tagger not empty.
+BUGS
+- unknown bug: infinite run and running out of memory space
+    - recently, running things on cloud 9 triggers a message of insufficient disk space
+    - also the red box appears where the green arrow is and stays red, suggesting getting lost in an infinite loop
+    
+- BUG: admin page is buggy
+    - sensitive to bad data (some quick fixes installed if mod.metrics doesn't exist)
+    - currently it lists a lot of scores (not sure if it's complete) 
+    - but: Uncaught TypeError: Cannot read property '0' of undefined
+
+
+    
+AGENDA ITERATION 1.5
+
+
+- refactor SQL post
+    - create an accuracy for each mode enumeration
+    - add name and email and grade to time metrics
+    - add some sort of aggregate accuracy to time metrics
+
+- add genitives
+    - genitive agenda: 
+    - make a parameter in module - 
+        - genitive_quantity (range of min & max)
+        - genitive_number: ["singular", "plural"]
+        - genitive_scramble: (bool)
+    - get the program to produce two words, one of which is genitive
+    - get the program to translate the words into english
+    - put all that in one drop down
+    - test with nonsense genitives (the frog of the bear loves the dog of the cow)
+    - add nonsense filters
+        - the head noun of the genitive pair should be king, queen, father, etc.
+        - add parameter to lexicon: 
+            - genitive_head: bool 
+            - genitive_tail: bool
+            - e.g. king....gen_head: true, gen_tail: true   
+            - e.g. sword...gen_head: true, gen_tail: false    (no father of the sword)
+    - put in two drop-downs
+ 
+- create lexical properties that allow for dative and ablative and genitive sensitivity
+    - abl. of means: oppugn, any passive
+    - dat.: give, speak, show
+    - genitive: 
+        - + anything: father, mother, son, daughter, brother, sister 
+        - + places: king, queen, god, goddesss
+        - + animal: king, queen, god, godesses
+
+- cosmetics of etymology cheat sheets should be improved
+    - bigger space, different font
+    - underline the left hand column
+    
+ 
+- write an error logging parser
+    - quantity of each type of error
+    - like this:
+        - type: {
+            quantity:  (int),
+            most recent date:       (str)
+            date: [3-12, 3-17]     (list of str)
+            example:    (1 json formatted example)
+            context:         (basically a set - a non duplicating list of contexts - e.g. "quiz.next_question)
+            }
+    - if all contexts are identical, return context as well
+        - e.g. if all contexts are next question
+
+
+
+- write an error cleansing function
+    - delete every error  (with a certain property - e.g. older than a certain date)
+   
+   
+- the scrolling on grammar cheat sheets is not great
+    - a zoom button would be nice
+        - -moz-transform: scale(2);
+        - Zoom and transform scale are not the same thing. They are applied at different times. Zoom is applied before the rendering happens, transform - after. The result of this is if you take a div with width/height = 100% nested inside of another div, with fixed size, if you apply zoom, everything inside your inner zoom will shrink, or grow, but if you apply transform your entire inner div will shrink (even though width/height is set to 100%, they are not going to be 100% after transformation).
+    
+    
+
+
+- defensive programming against "no allowed lexemes"
+    - currently it seems like it does this:
+        - the program asks for n lexemes
+        - if the constraints can't produce n lexemes it throws an error and shuts down latin mode
+    - what should happen:
+        - the program asks for n lexemes
+        - if parameters can't produce n lexemes, it still tries to make a sentence at a lower module's parameters
+        
+- (is this done?) defensive programmings against not having enough items to fill the extras
+    - if it can't produce n extras, it produces n-1, if it can't produce n-1, it produces n-2
+
+
+- make the game harder at the latin level
+    - the students are so advanced that is and iq are too easy
+    - step 1: begin to tackle conditionals
+    - step 2: add adjectives
+    - step 3: add a simple version of genitives
+        - (vocabulary will have to be supplemented with father, mother, son, daughter, etc.)
+        - genitives seem easiest to start with because they don't require verbal constraints
+            - ablative and dative have verbal and nominal constraints
+                - ablative of means: 
+                    - verbal constraints, - has to be verbs like oppugn "attack with a sword"
+                    - nominal constraints - has to be nouns like sword and spear
+                - dative: 
+                    - verbal constraints: has to be verbs like give, speak
+                    - nominal constraints: the noun in the dative has to be animate
+            - genitives only have nominal constraints
+                - nominal constraints: 
+                - x + anything: father, mother, son, daughter, brother, sister 
+                - x + places: king, queen, god, goddesss
+                - (NB: we don't want the father of the mother, so we should prevent these kinship terms from being in the genitive)
+    - step 4: build in lexical constraints for ablative and dative
+    - step 5: add dative
+    - step 6: add ablative
+
+  
+  
+  
+    
+
+CHORES - BIG
+add more animal modules
+add more sentences
+add more etym levels
+reduce image file size  (e.g. there's a bear that loads slow)
+
+CHORES - LITTLE
+delete test users
+- chore: play on explorer and look for urgent errors
+
+- chore: play all the levels and see if chicken has errors
+
+
+- chore: update modules
+
+
+- BUGS from urgent error log
+    - DONE: purge sets
+    - MADE BUT NOT TESTED: cannot read property meaning of undefined (etymlogy module 4 & 14)
+    - DONE: no allowed lexemes in latin mode module 11 & 14  
+        - one possible short-term fix:
+            - add a bunch of lexemes to the higher level
+        - medium-term fix
+            - revert to lower module and log urgent error
+        - DONE: long-term fix
+            - make the N parameter a max, not a requirement (e.g. N = number of extra nouns)
+
+- (possibly fixed) BUGS from observation
+    - etymology cheat sheet seems to contain a list of words without the target root
+        - e.g. "what is the the root that means "two"" & none of the choices contain BI
+    - 
+
+- BUG??: metrics perhaps not getting recorded properly in firebase
+    - not sure how frequent this is 
+    - but: metrics was not recorded for module 2 for Muna (5th student in firebase)
+    - quick fix:
+        escape loop written in (if mod.metrics == null return)
+    - need to figure out how to not write a module without metrics
+    - check in with muna's account after she plays some more
+    
+    
+
+
+
+- refactor the SQL posting
+    - Gio's suggestion:
+        - having 16 columns is unwieldy and also will make querying less flexible
+        - an alternative: 
+        - make another table, call it the accuracy table
+            like this:
+            attempt_id		0	1	2	3	mode_enumeration	
+            7641            6   1	0	0	“drop”  
+            7641            6   2 	0	0	“quick”
+            7641            3   3 	3 	8 	“latin”	
+            
+            attempt_id is the unique id (primary key id) of the time_metrics
+            e.g. in the above example, 7641 is the 7641st row in the time_metrics table
+            
+        - one advantage: if in the future we institute other modes (e.g. id or labyrinth)
+          we won't need to multiply columns endlessly, we'll just add new mode_enumerations
+        
+    - whenever you have two tables that relate to each other, you have to be careful that they line up
+        - so very important: when we create the new post to the new table
+            we need to make sure we don't stop doing the old post (accuracy_drop_mode_0 etc.)
+        - that way, we'll be able to compare them and see if they line up
+        - when we've tested it thoroughly and are sure the two tables line up, then we'll remove the old columns (accuracy_drop_mode_0)
+
+
+ 
+ 
+ 
+
+
+
+
+
+- small: make post a quiz method and have it automatically check for user.id = null
+
+
+- DONE: bug: cheat sheet button doesn't make it disappear
+
+- update github issue wiki
+
+- question: is this an obsolete error from log.txt? Does it ever occur again? Is it just caused by an anonymous user?
+12:15:27: DEBUG: error
+12:15:27: DEBUG: (<type 'exceptions.KeyError'>, KeyError('REQUEST_METHOD',), <traceback object at 0x7ffb633d43b0>)
+
+- comment and understand new code (security stuff)
+
+
+
+
+- close window event should trigger logout
+    
+    - two possibilities perhaps?
+        - window.onload
+        - window.onbeforeunload
+        window.onbeforeunload = function(e) {
+            return 'Dialog text here.';
+        };
+
+- alert message if back button leads to another person's account (currently goes to anonymous)
+
+
+- our grade 13 filter doesn't seem to be working
+
+- permanently remove carnal and necrophilia just in case
+
+- team names as a field
+
+- cheat sheet doesn't scroll all the way to the bottom
+    - prob. because scroll is locked on the page
+        - this was done to keep the question always at the top
+
+
+- get rid of that annoying red flash during refresh (and also the flash of buttons between questions)
+
+
+- CARN might have a long/short vowel conflict
+
+
+- chore: play through all levels in all browsers
+    - look for broken chicken in internet explorer
+    - - check if module 9 has something sick. The following was logged in urgent error log:
+    custom_message: ""sick mode = latin module = 9 progress = 0/10 level = [object Object]""
+    date: "Mon, 29 Feb 2016 18:36:50 GMT"
+    error: "Error: There are no allowed lexemes!"
+    
+- fix anonymous mode
+
+
+
+
+ITERATION 1.75
+
+
+- live in class monitoring of activity
+    - one example:
+        - a vector associated with each student
+        - length corresponding to rate of input (# of answers per minute for last few minutes)
+        - slope corresponding to accuracy
+    - color as a form of visualization
+        - turns red as they have less activity
+
+
+
+
+- make a maximum number of urgent error logs for every uid 
+    - currently refresh will keep adding
+    - BUT: we want to get urgent error logs for users who play long sessions
+
+
+
+
+- add root: VERTEBR & words: vertebrate, invertebrate, vertebra & make sure to add to etym levels
+- add root: CELL and words: cellular, multicellular, unicellular, cellulitis, celluloid, cellulose
+- add new words which Akiva gathered (webscrape for definitions and check)
+- add "gigantism" to etymology
+
+
+
+ITERATION 2.0
+- new mode: "id"
+    - example: 
+        - classify the highlighted word:
+        - LUP-US CORV-UM VOR-A-T   
+        - choices: subject singular, object singular, subject plural, object plural (at a low level)
+        - choices: nom. sg. acc. sg. (at a higher level)
+    - generate a latin sentence
+    - generate a dictionary:
+        - highlighted index
+        - correct answer
+        - answer choices
+- some way of checking the tagging on sentences
+    - perhaps a utility that vacuums all the data from firebase and displays it with tags directly above the words in the sentence
+
+- add tutorials
+- jquery dropdowns
+- clean up, simplify, modularize and comment latin generation before adding gen/dat/abl/conditional
+- add genitives
+- add datives
+- add ablatives
+- specify in lexicon what words can take the dative and ablatives and genitives
+    - certain words can only have inanimate objects
+- drop-down headings (subject, verb, object) that aren't clickable and have a different font, in small caps and half opacity
+- disable prompt "do you want google chrome to remember your password" 
+- minify certain files for security reasons???
+- final image is currently "get ready to conquer + image of next animal" it should be the current animal
+- clean out / possibly remove log from firebase (looks like it's a weak duplicate of urgent error log)
+- clean out all console.log
+- log accuracy attached to mode
+- third party log-in (facebook or google?)
+- etymology synonyms and antonyms
+- instant access by admin to punish off-site activity during class
+
+- is there any way to prevent/punish/alert "off site activity" during a session
+    - timeout button (more than 60 seconds)
+    - low activity button (less than one button click per 30 seconds)
+    - detect a new tab
+
+
+
+- acccounts ending in tag.team must be playable only in class
+    - when tag.test is detected an additional page/password box is generated
+    - accounts ending in tag.solo will be playable anytime
+
+- create a function that allows us to write a new user with an arbitrary level
+    - e.g. if we want to test level 27 and not play all the way up to that level
+    - we write a function that takes the argument of 27 and writes to firebase a user with completed modules up to 26
+    
+
+
+
+OLD ITERATIONS BELOW
+
+
 
 PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_notes)
 - Akiva: added a file called taxonomy.js and taxonomy_notes.txt
@@ -224,303 +558,6 @@ ITERATION 1.5
 
 WEDNESDAY AGENDA:
 
-
-- BUGS from urgent error log
-    - DONE: purge sets
-    - MADE BUT NOT TESTED: cannot read property meaning of undefined (etymlogy module 4 & 14)
-    - no allowed lexemes in latin mode module 11 & 14  
-        - one possible short-term fix:
-            - add a bunch of lexemes to the higher level
-        - medium-term fix
-            - revert to lower module and log urgent error
-        - DONE: long-term fix
-            - make the N parameter a max, not a requirement (e.g. N = number of extra nouns)
-
-- BUGS from observation
-    - etymology cheat sheet seems to contain a list of words without the target root
-        - e.g. "what is the the root that means "two"" & none of the choices contain BI
-
-
-- BUG??: metrics perhaps not getting recorded properly in firebase
-    - not sure how frequent this is 
-    - but: metrics was not recorded for module 2 for Muna (5th student in firebase)
-    - quick fix:
-        escape loop written in (if mod.metrics == null return)
-    - need to figure out how to not write a module without metrics
-    - check in with muna's account after she plays some more
-    
-    
-- BUG: admin page is buggy
-    - sensitive to bad data (some quick fixes installed if mod.metrics doesn't exist)
-    - currently it lists a lot of scores (not sure if it's complete) 
-    - but: Uncaught TypeError: Cannot read property '0' of undefined
-
-
-- genitive agenda 
-    - make a parameter in module - 
-        - genitive_quantity (range of min & max)
-        - genitive_number: ["singular", "plural"]
-        - genitive_scramble: (bool)
-    - get the program to produce two words, one of which is genitive
-    - get the program to translate the words into english
-    - put all that in one drop down
-    - test with nonsense genitives (the frog of the bear loves the dog of the cow)
-    - add nonsense filters
-        - the head noun of the genitive pair should be king, queen, father, etc.
-        - add parameter to lexicon: 
-            - genitive_head: bool 
-            - genitive_tail: bool
-            - e.g. king....gen_head: true, gen_tail: true   
-            - e.g. sword...gen_head: true, gen_tail: false    (no father of the sword)
-    - put in two drop-downs
- 
-- create lexical properties that allow for dative and ablative and genitive sensitivity
-    - abl. of means: oppugn, any passive
-    - dat.: give, speak, show
-    - genitive: 
-        - + anything: father, mother, son, daughter, brother, sister 
-        - + places: king, queen, god, goddesss
-        - + animal: king, queen, god, godesses
-
-- refactor the SQL posting
-    - Gio's suggestion:
-        - having 16 columns is unwieldy and also will make querying less flexible
-        - an alternative: 
-        - make another table, call it the accuracy table
-            like this:
-            attempt_id		0	1	2	3	mode_enumeration	
-            7641            6   1	0	0	“drop”  
-            7641            6   2 	0	0	“quick”
-            7641            3   3 	3 	8 	“latin”	
-            
-            attempt_id is the unique id (primary key id) of the time_metrics
-            e.g. in the above example, 7641 is the 7641st row in the time_metrics table
-            
-        - one advantage: if in the future we institute other modes (e.g. id or labyrinth)
-          we won't need to multiply columns endlessly, we'll just add new mode_enumerations
-        
-    - whenever you have two tables that relate to each other, you have to be careful that they line up
-        - so very important: when we create the new post to the new table
-            we need to make sure we don't stop doing the old post (accuracy_drop_mode_0 etc.)
-        - that way, we'll be able to compare them and see if they line up
-        - when we've tested it thoroughly and are sure the two tables line up, then we'll remove the old columns (accuracy_drop_mode_0)
-
-
- 
- 
- 
-    
-- cosmetics of etymology cheat sheets should be improved
-    - bigger space, different font
-    - underline the left hand column
-
-
-- review Dan's code
-
-
-- possible bug??? - login status seems to be recorded for only a very small number of users - is that a bug or is that the behavior we should expect - i.e. at any given moment most people are logged out so their login status gets erased)?
-
-
-- chore: play on explorer and look for urgent errors
-
-- chore: play all the levels and see if chicken has errors
-
-
-- chore: update modules
-
-
-
-- write an error logging parser
-    - quantity of each type of error
-    - like this:
-        - type: {
-            quantity:  (int),
-            most recent date:       (str)
-            date: [3-12, 3-17]     (list of str)
-            example:    (1 json formatted example)
-            context:         (basically a set - a non duplicating list of contexts - e.g. "quiz.next_question)
-            }
-    - if all contexts are identical, return context as well
-        - e.g. if all contexts are next question
-
-
-
-- write an error cleansing function
-    - delete every error  (with a certain property - e.g. older than a certain date)
-   
-   
-- the scrolling on grammar cheat sheets is not great
-    - a zoom button would be nice
-        - -moz-transform: scale(2);
-        - Zoom and transform scale are not the same thing. They are applied at different times. Zoom is applied before the rendering happens, transform - after. The result of this is if you take a div with width/height = 100% nested inside of another div, with fixed size, if you apply zoom, everything inside your inner zoom will shrink, or grow, but if you apply transform your entire inner div will shrink (even though width/height is set to 100%, they are not going to be 100% after transformation).
-    
-    
-- acccounts ending in tag.test must be playable only in class
-    - when tag.test is detected an additional page/password box is generated
-
-
-- defensive programming against "no allowed lexemes"
-    - currently it seems like it does this:
-        - the program asks for n lexemes
-        - if the constraints can't produce n lexemes it throws an error and shuts down latin mode
-    - what should happen:
-        - the program asks for n lexemes
-        - if parameters can't produce n lexemes, it still tries to make a sentence at a lower module's parameters
-        
-- (is this done?) defensive programmings against not having enough items to fill the extras
-    - if it can't produce n extras, it produces n-1, if it can't produce n-1, it produces n-2
-
-
-- the current priority is to make the game harder at the latin level
-    - the students are so advanced that is and iq are too easy
-    - step 1: begin to tackle conditionals
-    - step 2: add adjectives
-    - step 3: add a simple version of genitives
-        - (vocabulary will have to be supplemented with father, mother, son, daughter, etc.)
-        - genitives seem easiest to start with because they don't require verbal constraints
-            - ablative and dative have verbal and nominal constraints
-                - ablative of means: 
-                    - verbal constraints, - has to be verbs like oppugn "attack with a sword"
-                    - nominal constraints - has to be nouns like sword and spear
-                - dative: 
-                    - verbal constraints: has to be verbs like give, speak
-                    - nominal constraints: the noun in the dative has to be animate
-            - genitives only have nominal constraints
-                - nominal constraints: 
-                - x + anything: father, mother, son, daughter, brother, sister 
-                - x + places: king, queen, god, goddesss
-                - (NB: we don't want the father of the mother, so we should prevent these kinship terms from being in the genitive)
-    - step 4: build in lexical constraints for ablative and dative
-    - step 5: add dative
-    - step 6: add ablative
-
-
-
-
-
-
-
-- small: make post a quiz method and have it automatically check for user.id = null
-
-
-- DONE: bug: cheat sheet button doesn't make it disappear
-
-- update github issue wiki
-
-- question: is this an obsolete error from log.txt? Does it ever occur again? Is it just caused by an anonymous user?
-12:15:27: DEBUG: error
-12:15:27: DEBUG: (<type 'exceptions.KeyError'>, KeyError('REQUEST_METHOD',), <traceback object at 0x7ffb633d43b0>)
-
-- comment and understand new code (security stuff)
-
-
-
-
-- close window event should trigger logout
-    
-    - two possibilities perhaps?
-        - window.onload
-        - window.onbeforeunload
-        window.onbeforeunload = function(e) {
-            return 'Dialog text here.';
-        };
-
-- alert message if back button leads to another person's account (currently goes to anonymous)
-
-
-- our grade 13 filter doesn't seem to be working
-
-- permanently remove carnal and necrophilia just in case
-
-- team names as a field
-
-- cheat sheet doesn't scroll all the way to the bottom
-    - prob. because scroll is locked on the page
-        - this was done to keep the question always at the top
-
-
-- get rid of that annoying red flash during refresh (and also the flash of buttons between questions)
-
-
-- CARN might have a long/short vowel conflict
-
-
-- chore: play through all levels in all browsers
-    - look for broken chicken in internet explorer
-    - - check if module 9 has something sick. The following was logged in urgent error log:
-    custom_message: ""sick mode = latin module = 9 progress = 0/10 level = [object Object]""
-    date: "Mon, 29 Feb 2016 18:36:50 GMT"
-    error: "Error: There are no allowed lexemes!"
-    
-- fix anonymous mode
-
-ITERATION 1.75
-
-
-- live in class monitoring of activity
-    - one example:
-        - a vector associated with each student
-        - length corresponding to rate of input (# of answers per minute for last few minutes)
-        - slope corresponding to accuracy
-    - color as a form of visualization
-        - turns red as they have less activity
-
-
-
-
-- make a maximum number of urgent error logs for every uid 
-    - currently refresh will keep adding
-    - BUT: we want to get urgent error logs for users who play long sessions
-
-
-
-
-- add root: VERTEBR & words: vertebrate, invertebrate, vertebra & make sure to add to etym levels
-- add root: CELL and words: cellular, multicellular, unicellular, cellulitis, celluloid, cellulose
-- add new words which Akiva gathered (webscrape for definitions and check)
-- add "gigantism" to etymology
-
-
-
-ITERATION 2.0
-- new mode: "id"
-    - example: 
-        - classify the highlighted word:
-        - LUP-US CORV-UM VOR-A-T   
-        - choices: subject singular, object singular, subject plural, object plural (at a low level)
-        - choices: nom. sg. acc. sg. (at a higher level)
-    - generate a latin sentence
-    - generate a dictionary:
-        - highlighted index
-        - correct answer
-        - answer choices
-- some way of checking the tagging on sentences
-    - perhaps a utility that vacuums all the data from firebase and displays it with tags directly above the words in the sentence
-
-- add tutorials
-- jquery dropdowns
-- clean up, simplify, modularize and comment latin generation before adding gen/dat/abl/conditional
-- add genitives
-- add datives
-- add ablatives
-- specify in lexicon what words can take the dative and ablatives and genitives
-    - certain words can only have inanimate objects
-- drop-down headings (subject, verb, object) that aren't clickable and have a different font, in small caps and half opacity
-- reduce image file size  (e.g. there's a bear that loads slow)
-- disable prompt "do you want google chrome to remember your password" 
-- minify certain files for security reasons???
-- final image is currently "get ready to conquer + image of next animal" it should be the current animal
-- clean out / possibly remove log from firebase (looks like it's a weak duplicate of urgent error log)
-- clean out all console.log
-- log accuracy attached to mode
-- third party log-in (facebook or google?)
-- etymology synonyms and antonyms
-- instant access by admin to punish off-site activity during class
-
-- is there any way to prevent/punish/alert "off site activity" during a session
-    - timeout button (more than 60 seconds)
-    - low activity button (less than one button click per 30 seconds)
-    - detect a new tab
 
 
 GIO QUESTIONS
