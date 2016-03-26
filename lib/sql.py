@@ -88,6 +88,7 @@ def read_table(ups):
 def insert_time_data(ups):
     try:
         row = ups["data"]
+        modes = ups["modes"]
         logging.debug("row={0}".format(row))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
@@ -103,6 +104,10 @@ def insert_time_data(ups):
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
         c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, now(), " + ups["null_string"] + ")", row)   # slice = (row[0], row[1], row[2], row[3])
+        primary_key = c.execute("IDENT_CURRENT(time_metrics)")
+        for i in modes:
+            c.execute("INSERT INTO accuracy_id VALUES (" + str(primary_key)
+            + ", null, null, null, null, \"" + i + "\")", [])
         #returns the unique id of the row just inserted
         time_data_id = c.lastrowid
         db.commit()
@@ -173,7 +178,8 @@ def update_accuracy(ups):
     try:
         row = ups["data"]
         accuracy_dictionary = ups["accuracy_dictionary"]
-        logging.debug("row, accuracy_dictionary={0}, {1}".format(row, accuracy_dictionary))
+        accuracy_dict2 = ups["accuracy_dict2"]
+        logging.debug("row, accuracy_dictionary, accuracy_dict2={0}, {1}".format(row, accuracy_dictionary, accuracy_dict2))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
@@ -193,6 +199,11 @@ def update_accuracy(ups):
             csv = accuracy_dictionary[i]
             c.execute("UPDATE time_metrics SET " + str(i) + " = " + str(csv) +
             " WHERE id =" + str(row), [])
+        for j in accuracy_dict2:
+            for k in accuracy_dict2[j]:
+                csv = accuracy_dict2[j][k]
+                c.execute("UPDATE accuracy_table SET attempt" + str(k) + " = " + str(csv) +
+                " WHERE id = " + str(row) + "AND mode_enumeration = \"" + j + "\"", [])
         db.commit()
         # logging.debug("db execute")
         # rows = c.fetchall()

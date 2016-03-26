@@ -75,7 +75,6 @@ Quiz.prototype.initialize_accuracy_dictionary = function () {
 }
 
 
-
 //loads user data
 //loads sentences with callback next_module
 Quiz.prototype.start = function(){
@@ -481,7 +480,7 @@ Quiz.prototype.submodule_complete = function () {
         post({data: this.time_data_id, type: "update_time_data"});
         console.log("DEBUG 3-4 just finished update_time_data");
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict(),
-        type: "update_accuracy"});
+        accuracy_dict2: this.accuracy_dict, type: "update_accuracy"});
         console.log("DEBUG 3-4 just finished update_accuracy");
         console.log("DEBUG 2-11 exiting post #2");
     } else {
