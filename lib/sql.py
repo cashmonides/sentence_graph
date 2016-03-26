@@ -89,7 +89,7 @@ def insert_time_data(ups):
     try:
         row = ups["data"]
         # modes = ups["modes"]
-        logging.debug("row={0}".format(row))
+        logging.debug("in insert time data row={0}".format(row))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
@@ -129,8 +129,7 @@ def insert_time_data(ups):
             "success": False,
             "error": str(e),
             "error_type": type(e),
-            "row": row,
-            "modes": modes
+            "row": row
         }
         
         return data
@@ -138,7 +137,7 @@ def insert_time_data(ups):
 def update_time_data(ups):
     try:
         row = ups["data"]
-        logging.debug("row={0}".format(row))
+        logging.debug("in update time data row={0}".format(row))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
