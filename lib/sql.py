@@ -389,7 +389,8 @@ HANDLERS = {
     "get": read_table,
     "insert_time_data": insert_time_data,
     "update_time_data": update_time_data,
-    "update_accuracy": update_accuracy
+    "update_accuracy_old": update_accuracy_old,
+    "update_accuracy_new": update_accuracy_new
 }
 
 def handle(ups):
