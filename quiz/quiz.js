@@ -301,10 +301,6 @@ Quiz.prototype.initialize_time_metrics = function () {
         null_string: list_of_repetitions("null", 17).join(', ')}, function (data) {
             console.log("DEBUG 2-11 data = ", data);
             self.time_data_id = data.id;
-            post({data: time_data, type: "insert_accuracy_data", modes: this.}, function (data) {
-                 console.log("DEBUG 2-11 data = ", data);
-                 self.time_data_id = data.id;
-        });
         });
     } else {
         console.log('DEBUG 3/4/2016 this.user.uid === null; post refused');
