@@ -498,7 +498,7 @@ Quiz.prototype.submodule_complete = function () {
         }
         */
         console.log("DEBUG 2-11 entering post #2");
-        console.log("DEBUG 3-4 accuracy dictionary original (raw) = ", this.accuracy_dictionary
+        console.log("DEBUG 3-4 accuracy dictionary original (raw) = ", this.accuracy_dictionary);
         console.log("DEBUG 3-26 accuracy dictionary converted 1 (old) = ", this.convert_accuracy_dict());
         console.log("DEBUG 3-26 accuracy dictionary converted 2 (new) = ", this.convert_accuracy_dict2());
         console.log("DEBUG 2-11 this.time_data = ", this.time_data);
