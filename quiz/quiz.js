@@ -274,10 +274,13 @@ Quiz.prototype.next_submodule = function() {
     clear quiz.start_time
     
     */
+    /*
     this.time_data = list_of_repetitions(null, 8);
     this.time_data[0] = this.user.uid;
     this.time_data[6] = this.module.id;
     this.time_data[7] = submodule_id;
+    */
+    this.time_data = [this.user.uid, this.module.id, submodule_id];
     this.user.get_personal_data(this);
     
     
