@@ -357,7 +357,7 @@ def update_accuracy_new(ups):
         for j in accuracy_dictionary:
             l = []
             for k in accuracy_dictionary[j]:
-                l.push(str(accuracy_dictionary[j][k]))
+                l.append(str(accuracy_dictionary[j][k]))
             c.execute("INSERT INTO accuracy_table VALUES (" + str(row) + ", " + ", ".join(l) +
             ", \"" + j + "\"", [])
         db.commit()
