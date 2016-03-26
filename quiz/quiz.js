@@ -465,24 +465,23 @@ Quiz.prototype.convert_accuracy_dict = function () {
 Quiz.prototype.convert_accuracy_dict = function () {
     var result = {};
     for (var i in this.accuracy_dictionary) {
-        var value = this.accuracy_dictionary[i];
-        for (var j in value) {
-            if (value[j] !== 0) {
-                result[i] = this.accuracy_dictionary[i];
-                break;
-            }
+        for (var j = 0; j < 4; j++) {
+            // i.e., accuracy_drop_mode_3
+            result["accuracy_" + i + "_mode_" + j] = this.accuracy_dictionary[i][j];
         }
     };
-    return result;
     return result;
 }
 
 Quiz.prototype.convert_accuracy_dict2 = function () {
     var result = {};
     for (var i in this.accuracy_dictionary) {
-        for (var j = 0; j < 4; j++) {
-            // i.e., accuracy_drop_mode_3
-            result["accuracy_" + i + "_mode_" + j] = this.accuracy_dictionary[i][j];
+        var value = this.accuracy_dictionary[i];
+        for (var j in value) {
+            if (value[j] !== 0) {
+                result[i] = value;
+                break;
+            }
         }
     };
     return result;
@@ -499,14 +498,18 @@ Quiz.prototype.submodule_complete = function () {
         }
         */
         console.log("DEBUG 2-11 entering post #2");
-        console.log("DEBUG 3-4 accuracy dictionary = ", this.accuracy_dictionary);
+        console.log("DEBUG 3-4 accuracy dictionary original (raw) = ", this.accuracy_dictionary
+        console.log("DEBUG 3-26 accuracy dictionary converted 1 (old) = ", this.convert_accuracy_dict());
+        console.log("DEBUG 3-26 accuracy dictionary converted 2 (new) = ", this.convert_accuracy_dict2());
         console.log("DEBUG 2-11 this.time_data = ", this.time_data);
         post({data: this.time_data_id, type: "update_time_data"});
         console.log("DEBUG 3-4 just finished update_time_data");
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict(),
         type: "update_accuracy_old"});
+        /*
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict2(),
         type: "update_accuracy_new"});
+        */
         console.log("DEBUG 3-4 just finished update_accuracy");
         console.log("DEBUG 2-11 exiting post #2");
     } else {

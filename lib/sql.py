@@ -286,8 +286,9 @@ def update_accuracy_old(ups):
     try:
         row = ups["data"]
         accuracy_dictionary = ups["accuracy_dictionary"]
-        accuracy_dict2 = ups["accuracy_dict2"]
-        logging.debug("row, accuracy_dictionary = {0}, {1}".format(row, accuracy_dictionary))
+        # accuracy_dict2 = ups["accuracy_dict2"]
+        logging.debug("in update accuracy old row, accuracy_dictionary = {0}, {1}".
+        format(row, accuracy_dictionary))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
@@ -336,7 +337,8 @@ def update_accuracy_new(ups):
     try:
         row = ups["data"]
         accuracy_dictionary = ups["accuracy_dictionary"]
-        logging.debug("row, accuracy_dictionary = {0}, {1}".format(row, accuracy_dictionary))
+        logging.debug("in update accuracy new row, accuracy_dictionary = {0}, {1}".
+        format(row, accuracy_dictionary))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
