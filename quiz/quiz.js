@@ -506,8 +506,10 @@ Quiz.prototype.submodule_complete = function () {
         console.log("DEBUG 3-4 just finished update_time_data");
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict(),
         type: "update_accuracy_old"});
+        /*
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict2(),
         type: "update_accuracy_new"});
+        */
         console.log("DEBUG 3-4 just finished update_accuracy");
         console.log("DEBUG 2-11 exiting post #2");
     } else {
