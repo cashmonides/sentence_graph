@@ -281,9 +281,17 @@ Quiz.prototype.next_submodule = function() {
     
     // Hopefully not needed.
     // this.time_data = [this.user.uid, this.module.id, submodule_id];
+
+    var user_data = this.user.get_personal_data();
     
-    this.user.get_personal_data(this);
+    for (var i = 0; i < user_data.length; i++) {    
+        this.time_data[i + 1] = user_data[i];
+    }
     
+    console.log(this.time_data);
+    
+    
+    this.initialize_time_metrics();
     
     this.next_question();
 };

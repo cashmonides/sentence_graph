@@ -31,6 +31,10 @@ BUGS
 
 - BUG: accuracy metrics is buggy
 
+
+- BUG: etymology mode is sick in module 8
+    - "root not found in roots: VERTEBR"
+
     
 AGENDA ITERATION 1.5
 
@@ -89,7 +93,7 @@ AGENDA ITERATION 1.5
 
 - write an error cleansing function
     - delete every error  (with a certain property - e.g. older than a certain date)
-   
+   - store those errors in a text file or a log somewhere (cold storage, not taking up space in firebase)
    
 - the scrolling on grammar cheat sheets is not great
     - a zoom button would be nice
