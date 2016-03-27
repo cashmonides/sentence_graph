@@ -1,6 +1,15 @@
 - Dan not coding
 - Akiva not coding
 
+
+DAILY AGENDA
+- fix accuracy metrics bug
+- genitives
+- error logging parser
+- test multiple computers causing an ajax / latin sick mode / multiple modules in progress simultaneously
+
+
+
 BUGS
 - unknown bug: infinite run and running out of memory space
     - recently, running things on cloud 9 triggers a message of insufficient disk space
@@ -11,6 +20,8 @@ BUGS
     - currently it lists a lot of scores (not sure if it's complete) 
     - but: Uncaught TypeError: Cannot read property '0' of undefined
 
+
+- BUG: accuracy metrics is buggy
 
     
 AGENDA ITERATION 1.5

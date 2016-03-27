@@ -15,6 +15,7 @@ logging.basicConfig(
     filename='log.txt'
 )
 
+
 def get_url_parameters():
 
     # for key in os.environ:
@@ -356,7 +357,7 @@ def update_accuracy_new(ups):
         # This should work.
         for j in accuracy_dictionary:
             l = []
-            for k in accuracy_dictionary[j]:
+            for k in range(0, 4):
                 l.append(str(accuracy_dictionary[j][k]))
             c.execute("INSERT INTO accuracy_metrics VALUES (null, " + str(row) + ", " + ", ".join(l) +
             ", \"" + j + "\")", [])
