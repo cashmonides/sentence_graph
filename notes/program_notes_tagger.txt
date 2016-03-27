@@ -4,8 +4,9 @@
 
 DAILY AGENDA
 - DONE: fix accuracy metrics bug
-- add email,name,class,etc.
-- comment out old accuracy dictionary and remove from table
+- DONE: add email,name,class,etc.
+- DONE: grade 13 words deleted
+- DONE: comment out old accuracy dictionary and remove from table (leave it in but just commented out for now)
 - genitives
 - error logging parser
 - test multiple computers causing an ajax / latin sick mode / multiple modules in progress simultaneously

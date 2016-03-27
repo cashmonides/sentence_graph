@@ -24,7 +24,7 @@ var latin_levels = {
         voice: ["active"],
         number_of_other_nouns : ["singular"],
         shuffle: [true, false],
-        genitive_quantity: [0, 1],
+        genitive_quantity: [0, 0],
         genitive_number: ["singular", "plural"],
         genitive_scramble: false
     },
@@ -56,7 +56,7 @@ var latin_levels = {
         voice: ["active"],
         number_of_other_nouns : ["singular"],
         shuffle: [true, false],
-        genitive_quantity: [0, 1],
+        genitive_quantity: [0, 0],
         genitive_number: ["singular", "plural"],
         genitive_scramble: false
     },
@@ -86,7 +86,7 @@ var latin_levels = {
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
         shuffle: [true, false],
-        genitive_quantity: [0, 1],
+        genitive_quantity: [0, 0],
         genitive_number: ["singular", "plural"],
         genitive_scramble: false
     },
@@ -116,7 +116,7 @@ var latin_levels = {
         voice: ["active"],
         number_of_other_nouns : ["singular"],
         shuffle: [true, false],
-        genitive_quantity: [0, 1],
+        genitive_quantity: [0, 0],
         genitive_number: ["singular", "plural"],
         genitive_scramble: false
     },
@@ -147,7 +147,7 @@ var latin_levels = {
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
         shuffle: [true, false],
-        genitive_quantity: [0, 1],
+        genitive_quantity: [0, 0],
         genitive_number: ["singular", "plural"],
         genitive_scramble: false
     },
@@ -182,7 +182,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     //moving to iq and is (no main)
@@ -210,7 +213,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     
@@ -238,7 +244,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     
@@ -265,7 +274,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     //adding some review of main clauses as well
@@ -291,7 +303,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     
@@ -320,7 +335,10 @@ var latin_levels = {
         },
         voice: ["active", "passive"],
         number_of_other_nouns : ["singular"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     //only iq and is
@@ -348,7 +366,10 @@ var latin_levels = {
         },
         voice: ["active", "passive"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     //a controversial stage?
@@ -377,7 +398,10 @@ var latin_levels = {
         },
         voice: ["active", "passive"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     
@@ -412,7 +436,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     //expanding to all tenses
@@ -440,7 +467,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     //expanding to iq and is
@@ -469,7 +499,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     
@@ -499,7 +532,10 @@ var latin_levels = {
         },
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     //still expanding to iq and is
@@ -528,7 +564,10 @@ var latin_levels = {
         },
         voice: ["active", "passive"],
         number_of_other_nouns : ["singular", "plural"],
-        shuffle: [true, false]
+        shuffle: [true, false],
+        genitive_quantity: [0, 0],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
     },
     
     ///////////////////////////

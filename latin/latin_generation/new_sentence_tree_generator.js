@@ -565,8 +565,12 @@ function add_to_lexeme_list (
 var get_genitive_settings = function (level, number_of_pos) {
     var min_and_max = map_level_to_allowed(level.latin_level,
         latin_levels)['genitive_quantity'];
-    return between_min_and_max(
-        min_and_max[0], min_and_max[1], number_of_pos);
+    if (min_and_max) {
+        return between_min_and_max(
+            min_and_max[0], min_and_max[1], number_of_pos);
+    } else {
+        return list_of_repetitions(false, number_of_pos);
+    }
 }
 
 function pick_lexeme_new(kernel, element, part_of_speech, current_lexicon, lexeme_list) {
