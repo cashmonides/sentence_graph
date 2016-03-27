@@ -110,15 +110,18 @@ function make_output(level, current_lexicon, none_display) {
             var result = {};
             var item;
             for (var i = 0; i < this[name].length; i++) {
-                item = this[name][i]
-                result[item] = this[item]
+                item = this[name][i];
+                if (item in this) {
+                    result[item] = this[item];
+                };
             };
             return result;
             // return convert_keys_to_dict(this[name], this)
         },
         get_lexemes_as_list: function (name) {
             var self = this;
-            return this[name].map(function (x) {return self[x]});
+            return this[name].map(function (x) {return self[x]})
+            .filter(function (x) {return x});
         },
     };
     master_lexeme_list.dummies_and_used = [];
@@ -191,13 +194,13 @@ function make_output(level, current_lexicon, none_display) {
     
     
     // so we make a template
-    state_to_be_made.template = make_kernel_template(state_to_be_made);
+    state_to_be_made.template = make_kernel_template(state_to_be_made, master_lexeme_list);
 
 
     //we need to set what functions will be made into drop downs (our drop down headers, subject, object, verb, etc.)    
     //todo try and make this less hacky, flexible to add things like conjunctions, genitives etc.
     // This is hacky (to a certain extent) and possibly incorrect.
-    master_lexeme_list.used_only = none_display ? ['subject', 'object', 'verb'] : state_to_be_made.template;
+    master_lexeme_list.used_only = none_display ? get_maximal_template() : state_to_be_made.template;
 
 
     //we've arrived at a final equilibrium of drop-down-template (i.e. what's displayed on the drop down)
@@ -207,7 +210,8 @@ function make_output(level, current_lexicon, none_display) {
     function (y) {return master_lexeme_list.used_only.indexOf(y) !== -1})});
     
     
-    console.log('DEBUG 12-23 creation_by_part_of_speech = ', creation_by_part_of_speech);
+    console.log('DEBUG 12-23 master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make = ',
+    master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make);
 
 
     ////////////////new equilibrium
@@ -250,10 +254,10 @@ function make_output(level, current_lexicon, none_display) {
     //e.g. when we hit subject:
     //initialize states["subject"] = the result of master_cartesian     (e.g. "implicit", "declension")
     
-    
+    // todo allow for extra __verbs__
     for (i = 0; i < master_lexeme_list.used_only.length; i++) {
         item = master_lexeme_list.used_only[i];
-        states[item] = master_cartesian(level.latin_level, order[item]);
+        states[item] = master_cartesian(level.latin_level, order[item] || ['number_of_other_nouns']);
     }
 
 
@@ -320,13 +324,18 @@ function make_output(level, current_lexicon, none_display) {
     }
 
     // todo english_template should no longer be needed
-    var english_template = list_intersection(["subject", "verb", "object"], Object.keys(output));
+    var english_template = list_intersection([
+        "subject", "subject_genitive", "verb", "object", "object_genetive"], Object.keys(output));
     
     console.log('DEBUG 12-23 output = ', output);
     console.log('DEBUG 12-23 english_template = ', english_template);
     
     var drop_non_drop_map = drop_non_drop_creation(
         map_level_to_allowed(level.latin_drop_level, latin_drop_levels)['drop_non_drop_map'], english_template);
+        
+    console.log('DELETE THIS LOG drop_non_drop_map = ', drop_non_drop_map);
+
+
 
     var r = {
         'question': "Translate the following sentence:",
@@ -474,10 +483,6 @@ function manage_drop_downs(choice, output, english_template, language_enum, drop
     return r
 }
 
-function list_intersection(l1, l2) {
-  return l1.filter(function (x) {return l2.indexOf(x) !== -1})
-}
-
 
 function create_drop_down_object(x, output, choice, language_enum) {
     var key_for_word = x + '_in_' + language_enum;
@@ -513,10 +518,13 @@ function add_to_lexeme_list (
     }
     
     var trigger_more_words = function (i, element, pick_result) {
+        console.log('trigger_more_words running', i, settings);
         if ((part_of_speech === 'noun') && (settings.genitives[i] === true)) {
+            console.log('genitive triggered');
             var role = element + '_genitive';
             var pick_result = pick_lexeme_new(state, element + '_genitive',
             'noun', current_lexicon, master_lexeme_list);
+            things_with_part_of_speech.push(role);
             return [{role: role, lexeme: pick_result}]
         };
         return [];
@@ -570,6 +578,17 @@ var get_genitive_settings = function (level, number_of_pos) {
             min_and_max[0], min_and_max[1], number_of_pos);
     } else {
         return list_of_repetitions(false, number_of_pos);
+    }
+}
+
+// still hacky
+// todo find some acceptable fix
+var get_maximal_template = function (level) {
+    if (list_equals(map_level_to_allowed(
+        level.latin_level, latin_levels)['genitive_quantity']), [0, 0]) {
+        return ["subject", "object", "verb"];
+    } else {
+        return ["subject", "subject_genitive", "object", "object_genitive", "verb"];
     }
 }
 
@@ -795,19 +814,30 @@ function sentence_in_order(word_order, sentence) {
     return word_order.map(function (x) {return sentence[x]}).join(' ').replace(/ +/g, ' ').replace(/^ | $/g, '');                       //   / = beginning of the regex  += any number of occurrences  /g = applied globally, i.e. repeatedly, until there are no more left
 }
 
-function make_kernel_template (kernel) {
+function make_kernel_template (kernel, lexeme_list) {
     var s = Elements.Subject;
     var o = Elements.Object;
     var v = Elements.Verb;
-    var template_list = [v];
+    var template_list = [];
+    
     // transitive kernels get objects & kernels whose transitivity has not yet been decided
     // (i.e., undefined) get objects
     // btw: another line of code will deal with kernels whose transitivity gets determined later
     if (kernel.transitivity !== "intransitive" && kernel.voice === "active") {
+        if ('subject_genitive' in lexeme_list) {
+            template_list = ['object_genitive'].concat(template_list)
+        }
         template_list = [o].concat(template_list)
     }
+    
+    template_list = [v].concat(template_list);
+    
     if (kernel.implicitness === "explicit")   {
+        if ('subject_genitive' in lexeme_list) {
+            template_list = ['subject_genitive'].concat(template_list)
+        }
         template_list = [s].concat(template_list)
     }
+    
     return template_list;
 }

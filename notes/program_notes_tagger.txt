@@ -68,10 +68,43 @@ AGENDA ITERATION 1.5
     - abl. of means: oppugn, any passive
     - dat.: give, speak, show
     - genitive: 
-        - + anything: father, mother, son, daughter, brother, sister 
-        - + places: king, queen, god, goddesss
-        - + animal: king, queen, god, godesses
-
+        - x + anything that's animate: father, mother, son, daughter, brother, sister, sword (& other inanimates) 
+            - if kinship === true, then gen_head + animate
+            - if animate == true, then gen_head + animate
+        - x + places: king, queen, god, goddesss
+            - - if rulership == true gen_head + place
+        - x + animal: king, queen, god, godesses
+            - if rulership == true gen_head + animal
+        - model A
+            - lexical property is:
+            - gen_head: [bool, y]    //where y is the acceptable class of tails
+                - false
+                - true, 'place'
+            - another lexical property:
+                - word_type:
+                        - place, animal, respect
+        - nonsense to avoid:
+            - anything + inanimate: the father of the sword, the frog of the sword
+            - animal + animal: the frog of the lion
+            - certain things + animal: the sailor of the lion
+            - inanimate + inanimate: the sword of the spear
+        - improprieties to avoid
+            - humans eating animals
+            - anything eating or killing gods
+        - lexical categories that can be bools:
+            - animate  
+            - inanimate  
+            - place 
+            - animal
+            - human
+            - rulership (king, queen, god, goddess)
+            - kinship (father, mother, brother)
+            - respect (god, father, mother, etc.
+        - example with queen
+            - core: {part_of_speech: "noun", animate: true, place: false, animal: false, human: true, rulership: true, kinship: false, respect: false},
+            OR
+            - core: ... gen_head: [true, [place, animal]
+        - function that makes genitives
 - cosmetics of etymology cheat sheets should be improved
     - bigger space, different font
     - underline the left hand column

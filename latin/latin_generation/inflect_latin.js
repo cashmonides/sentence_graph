@@ -45,6 +45,8 @@ function inflect_latin_noun (kernel, lexeme, word_settings) {
         }
     } else if (word_settings.function === "object"){
         word_settings.case = "accusative";
+    } else if (word_settings.function.indexOf('genitive') !== -1) {
+        word_settings.case = "genitive";
     }
 
 
