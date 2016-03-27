@@ -104,8 +104,8 @@ def insert_time_data(ups):
         # Makes sure everything (even None) becomes a string.
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-        # c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, %s, %s, %s, %s, %s, now(), " + ups["null_string"] + ")", row)   # slice = (row[0], row[1], row[2], row[3])
-        c.execute("INSERT INTO time_metrics VALUES (null, %s, null, null, null, null, null, %s, %s, now(), " + ups["null_string"] + ")", row)
+        c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, %s, %s, %s, %s, %s, now(), " + ups["null_string"] + ")", row)   # slice = (row[0], row[1], row[2], row[3])
+        # c.execute("INSERT INTO time_metrics VALUES (null, %s, null, null, null, null, null, %s, %s, now(), " + ups["null_string"] + ")", row)
         
         
         

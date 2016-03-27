@@ -3,10 +3,17 @@
 
 
 DAILY AGENDA
-- fix accuracy metrics bug
+- DONE: fix accuracy metrics bug
+- add email,name,class,etc.
+- comment out old accuracy dictionary and remove from table
 - genitives
 - error logging parser
 - test multiple computers causing an ajax / latin sick mode / multiple modules in progress simultaneously
+- replace old accuracy table with an aggregate accuracy in time_metrics
+    - e.g. start_time stop_time aggregate accuracy
+    - (this info is technically reproducible by the other table and so is redundant but for ease of reference without writing sql queries, this provides a good hourly report format)
+
+GIO
 
 
 
@@ -14,6 +21,7 @@ BUGS
 - unknown bug: infinite run and running out of memory space
     - recently, running things on cloud 9 triggers a message of insufficient disk space
     - also the red box appears where the green arrow is and stays red, suggesting getting lost in an infinite loop
+    - there are presumably temporary files in our git (start with ~    lib/.~c9_invoke..
     
 - BUG: admin page is buggy
     - sensitive to bad data (some quick fixes installed if mod.metrics doesn't exist)
