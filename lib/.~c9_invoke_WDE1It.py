@@ -356,7 +356,7 @@ def update_accuracy_new(ups):
         # logging.debug("accuracy_dictionary={0}".format(accuracy_dictionary))
         # This should work.
         for j in accuracy_dictionary:
-            l = []
+            for k in range(:
             for k in range(0, 4):
                 l.append(str(accuracy_dictionary[j][str(k)]))
             c.execute("INSERT INTO accuracy_metrics VALUES (null, " + str(row) + ", " + ", ".join(l) +

@@ -15,7 +15,7 @@ logging.basicConfig(
     filename='log.txt'
 )
 
-
+mag
 def get_url_parameters():
 
     # for key in os.environ:
