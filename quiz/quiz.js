@@ -305,12 +305,11 @@ Quiz.prototype.initialize_time_metrics = function () {
     
     // used to be: no callback because we don't need one
     // now we need a callback because we're getting a piece of data coming back to us
+    // also: 3/27 deleted null_string: list_of_repetitions("null", 17).join(', ')
     if (this.user.uid !== null) {
         console.log('DEBUG 3/4/2016 this.user.uid !== null; about to post');
         var self = this;
-        // 17 because we need 17 nulls.
-        post({data: time_data, type: "insert_time_data",
-        null_string: list_of_repetitions("null", 17).join(', ')}, function (data) {
+        post({data: time_data, type: "insert_time_data"}, function (data) {
             console.log("DEBUG 2-11 data = ", data);
             self.time_data_id = data.id;
         });
@@ -508,14 +507,16 @@ Quiz.prototype.submodule_complete = function () {
         */
         console.log("DEBUG 2-11 entering post #2");
         console.log("DEBUG 3-4 accuracy dictionary original (raw) = ", this.accuracy_dictionary);
-        console.log("DEBUG 3-26 accuracy dictionary converted 1 (old) = ", this.convert_accuracy_dict());
-        console.log("DEBUG 3-26 accuracy dictionary converted 2 (new) = ", this.convert_accuracy_dict2());
+        // console.log("DEBUG 3-26 accuracy dictionary converted 1 (old) = ", this.convert_accuracy_dict());
+        console.log("DEBUG 3-26 accuracy dictionary converted new = ", this.convert_accuracy_dict2());
         console.log("DEBUG 2-11 this.time_data = ", this.time_data);
         post({data: this.time_data_id, type: "update_time_data"});
         console.log("DEBUG 3-4 just finished update_time_data");
+        /*
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict(),
         type: "update_accuracy_old"});
         console.log("DEBUG 3-2 just finished update_accuracy_old");
+        */
         console.log("DEBUG 3-26 about to enter update_accuracy_new");
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict2(),
         type: "update_accuracy_new"});

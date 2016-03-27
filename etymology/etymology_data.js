@@ -939,7 +939,7 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "ARTHR",
-            "POD"
+            "PED/POD"
         ],
         "type": "none",
         "word": "arthropod"
@@ -1442,7 +1442,7 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "BI/BIN",
-            "PED"
+            "PED/POD"
         ],
         "type": "none",
         "word": "biped"
@@ -1529,16 +1529,6 @@ var words = {
         ],
         "type": "none",
         "word": "cardiologist"
-    },
-    "carnal": {
-        "grade": 13,
-        "meaning": "pertaining to the body or flesh",
-        "part of speech": "adjective",
-        "roots": [
-            "CARN"
-        ],
-        "type": "none",
-        "word": "carnal"
     },
     "carnivorous": {
         "grade": 12,
@@ -1682,7 +1672,7 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "CEPHAL",
-            "POD"
+            "PED/POD"
         ],
         "type": "none",
         "word": "cephalopod"
@@ -4333,17 +4323,6 @@ var words = {
         "type": "none",
         "word": "gynecoid"
     },
-    "gynecology": {
-        "grade": 13,
-        "meaning": "the science of female reproductive health",
-        "part of speech": "noun",
-        "roots": [
-            "GYN",
-            "LOG"
-        ],
-        "type": "none",
-        "word": "gynecology"
-    },
     "gynephobia": {
         "grade": 12,
         "meaning": "fear of women",
@@ -4511,16 +4490,6 @@ var words = {
         "type": "none",
         "word": "hemorrhage"
     },
-    "hemorrhoids": {
-        "grade": 13,
-        "meaning": "swelling of the blood vessels",
-        "part of speech": "noun",
-        "roots": [
-            "HEM/HEMO"
-        ],
-        "type": "none",
-        "word": "hemorrhoids"
-    },
     "hepatitis": {
         "grade": 12,
         "meaning": "inflammation of the liver",
@@ -4666,7 +4635,7 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "HEX/HEXA",
-            "POD"
+            "PED/POD"
         ],
         "type": "none",
         "word": "hexapod"
@@ -4691,16 +4660,6 @@ var words = {
         ],
         "type": "none",
         "word": "histology"
-    },
-    "holocaust": {
-        "grade": 13,
-        "meaning": "total devastation, especially by fire",
-        "part of speech": "noun",
-        "roots": [
-            "CAUST/CAUT"
-        ],
-        "type": "none",
-        "word": "holocaust"
     },
     "homeopath": {
         "grade": 12,
@@ -5435,11 +5394,23 @@ var words = {
         "type": "none",
         "word": "introvert"
     },
+    "invertebrate": {
+        "grade": 12,
+        "meaning": "an animal without a backbone",
+        "part of speech": "noun",
+        "roots": [
+            "IG/IL/IM/IN/IR root 2",
+            "VERTEBR"
+        ],
+        "type": "none",
+        "word": "invertebrate"
+    },
     "invincible": {
         "grade": 12,
         "meaning": "not able to be conquered",
         "part of speech": "adjective",
         "roots": [
+            "IG/IL/IM/IN/IR root 2",
             "VINCE/VIC"
         ],
         "type": "none",
@@ -5640,16 +5611,6 @@ var words = {
         ],
         "type": "none",
         "word": "laborious"
-    },
-    "lactate": {
-        "grade": 13,
-        "meaning": "to give milk, nurse",
-        "part of speech": "verb",
-        "roots": [
-            "LACT"
-        ],
-        "type": "none",
-        "word": "lactate"
     },
     "lactose": {
         "grade": 12,
@@ -6839,17 +6800,6 @@ var words = {
         "type": "none",
         "word": "necrology"
     },
-    "necrophile": {
-        "grade": 13,
-        "meaning": "someone who wants to have sex with the dead",
-        "part of speech": "noun",
-        "roots": [
-            "NECR/NECRO",
-            "PHIL"
-        ],
-        "type": "none",
-        "word": "necrophile"
-    },
     "necropolis": {
         "grade": 12,
         "meaning": "a large cemetery (that is, a city of the dead)",
@@ -7590,7 +7540,7 @@ var words = {
         "meaning": "a lever pushed by the foot",
         "part of speech": "noun",
         "roots": [
-            "PED"
+            "PED/POD"
         ],
         "type": "none",
         "word": "pedal"
@@ -7600,7 +7550,7 @@ var words = {
         "meaning": "one who walks",
         "part of speech": "noun",
         "roots": [
-            "PED"
+            "PED/POD"
         ],
         "type": "none",
         "word": "pedestrian"
@@ -7610,6 +7560,7 @@ var words = {
         "meaning": "a doctor who treats children",
         "part of speech": "noun",
         "roots": [
+            "PED/POD",
             "IATR"
         ],
         "type": "none",
@@ -7620,7 +7571,7 @@ var words = {
         "meaning": "cosmetic treatment of feet and toes",
         "part of speech": "noun",
         "roots": [
-            "PED"
+            "PED/POD"
         ],
         "type": "none",
         "word": "pedicure"
@@ -7987,7 +7938,7 @@ var words = {
         "meaning": "a doctor for the feet",
         "part of speech": "noun",
         "roots": [
-            "POD",
+            "PED/POD",
             "IATR"
         ],
         "type": "none",
@@ -7998,7 +7949,7 @@ var words = {
         "meaning": "medical care for feet",
         "part of speech": "noun",
         "roots": [
-            "POD",
+            "PED/POD",
             "IATR"
         ],
         "type": "none",
@@ -8009,7 +7960,7 @@ var words = {
         "meaning": "a small platform to stand on",
         "part of speech": "noun",
         "roots": [
-            "POD"
+            "PED/POD"
         ],
         "type": "none",
         "word": "podium"
@@ -8372,16 +8323,6 @@ var words = {
         "type": "none",
         "word": "pseudonym"
     },
-    "pseudopregnancy": {
-        "grade": 13,
-        "meaning": "a false pregnancy",
-        "part of speech": "noun",
-        "roots": [
-            "PSEUD/PSEUDO"
-        ],
-        "type": "none",
-        "word": "pseudopregnancy"
-    },
     "pseudoscience": {
         "grade": 12,
         "meaning": "theories presumed without proof of a scientific nature",
@@ -8535,7 +8476,7 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "QUAD/QUADR",
-            "PED"
+            "PED/POD"
         ],
         "type": "none",
         "word": "quadruped"
@@ -9794,7 +9735,7 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "TETRA",
-            "POD"
+            "PED/POD"
         ],
         "type": "none",
         "word": "tetrapod"
@@ -9984,7 +9925,7 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "TRI",
-            "POD"
+            "PED/POD"
         ],
         "type": "none",
         "word": "tripod"
@@ -10173,6 +10114,16 @@ var words = {
         ],
         "type": "none",
         "word": "version"
+    },
+    "vertebrate": {
+        "grade": 12,
+        "meaning": "an animal with a backbone",
+        "part of speech": "noun",
+        "roots": [
+            "VERTEBR"
+        ],
+        "type": "none",
+        "word": "vertebrate"
     },
     "victory": {
         "grade": 12,
@@ -11343,9 +11294,9 @@ var roots = {
         "meaning": "feeling, emotion, therapy",
         "root": "PATH"
     },
-    "PED": {
-        "meaning": "foot, feet",
-        "root": "PED"
+    "PED/POD": {
+        "meaning": "foot, leg",
+        "root": "PED/POD"
     },
     "PEL": {
         "meaning": "drive, force",
@@ -11406,10 +11357,6 @@ var roots = {
     "PNE/PNEUM": {
         "meaning": "breathing, lung, air, spirit",
         "root": "PNE/PNEUM"
-    },
-    "POD": {
-        "meaning": "foot",
-        "root": "POD"
     },
     "POLI": {
         "meaning": "city",
@@ -11746,6 +11693,10 @@ var roots = {
     "VERS/VERT": {
         "meaning": "turn",
         "root": "VERS/VERT"
+    },
+    "VERTEBR": {
+        "meaning": "backbone",
+        "root": "VERTEBR"
     },
     "VID/VIS": {
         "meaning": "see",
