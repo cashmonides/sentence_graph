@@ -322,18 +322,17 @@ function make_output(level, current_lexicon, none_display) {
                 'lexeme': y.lexeme, 'part_of_speech': x}
             })
     }
+    
+    console.log('output =', output);
 
     // todo english_template should no longer be needed
-    var english_template = list_intersection([
-        "subject", "subject_genitive", "verb", "object", "object_genetive"], Object.keys(output));
+    var english_template = list_intersection(get_full_english_template(), Object.keys(output));
     
     console.log('DEBUG 12-23 output = ', output);
     console.log('DEBUG 12-23 english_template = ', english_template);
     
     var drop_non_drop_map = drop_non_drop_creation(
         map_level_to_allowed(level.latin_drop_level, latin_drop_levels)['drop_non_drop_map'], english_template);
-        
-    console.log('DELETE THIS LOG drop_non_drop_map = ', drop_non_drop_map);
 
 
 
@@ -462,45 +461,6 @@ function drop_non_drop_creation (drop_non_drop_allowed, template) {
     throw new Error('Either there is a mistake in level_to_allowed or you have very bad luck.')
 }
 
-//argument:
-    //template: we need template (latin) so we know what english things to include
-    //choice: correct answer
-    //output: all options
-//returns:
-    //map of an intersection of 2 lists
-        //map
-            //create drop or non-drop for each item in our list intersection
-        //2 lists
-            //list 1: english word order (an always fixed order SVO)
-            //list 2: template (variable, SV SOV VOS..)
-                //eg. intersection of SVO & SV -> SV
-                //eg intersection of SVO & VOS -> SVO
-function manage_drop_downs(choice, output, english_template, language_enum, drop_non_drop_map) {
-    var r = english_template.map(function (x) {return (drop_non_drop_map[x] === 'drop' ?
-            create_drop_down_object : create_non_drop_object)
-        (x, output, choice, language_enum)});
-    console.log('DEBUG 12-23 manage_drop_downs result = ', r);
-    return r
-}
-
-
-function create_drop_down_object(x, output, choice, language_enum) {
-    var key_for_word = x + '_in_' + language_enum;
-    return {
-        'type': 'drop down',
-        'parts': sorted_choices(output, key_for_word),
-        'heading': x,
-        'correct_answer': choice[key_for_word]
-    }
-}
-
-function create_non_drop_object(x, output, choice, language_enum) {
-    return {
-        'type': 'non_drop',
-        'non_drop_text': choice[x + '_in_' + language_enum]
-    }
-}
-
 
 function add_to_lexeme_list (
     master_lexeme_list, state, part_of_speech, settings,
@@ -558,16 +518,18 @@ function add_to_lexeme_list (
         if (pick_result === null) {
             continue;
         }
+        add_word(element, pick_result);
+        
         if (i < number_of_pos) {
             triggered_words = trigger_more_words(i, element, pick_result);
             for (var j = 0; j < triggered_words.length; j++) {
                 add_word(triggered_words[j].role, triggered_words[j].lexeme)
             }
         }
-        
-        add_word(element, pick_result)
     }
-    return new_lexemes
+    
+    console.log('new_lexemes, master_lexeme_list =', new_lexemes, master_lexeme_list);
+    return new_lexemes;
 }
 
 var get_genitive_settings = function (level, number_of_pos) {
@@ -684,11 +646,19 @@ function make_kernel_new (level, state, lexeme_list) {
     }
 
     //todo make word order part of level_to_allowed
-    var default_latin_word_order = ['subject', 'object', 'verb'];
-    var default_english_word_order = ['subject', 'verb', 'object'];
-    if (state.shuffle && state.clause_type !== "is") {default_latin_word_order = shuffle(default_latin_word_order)}
+    //todo abolish evil subject-object-verb
+    //hegemonic and discriminatory framework
+    var default_latin_word_order = get_default_latin_word_order(template);
+    var default_english_word_order = get_default_english_word_order(template);
+    if (state.shuffle && state.clause_type !== "is") {
+           var part_order = shuffle(['subject', 'object', 'verb']);
+           default_latin_word_order = order_by(default_latin_word_order, part_order,
+           function (x) {return x.split('_')[0]});
+    }
 
     var sentence_in_latin_text = sentence_in_order(default_latin_word_order, sentence_in_latin);
+    
+    console.log('sentence_in_latin_text, part_order, default_latin_word_order =', sentence_in_latin_text, part_order, default_latin_word_order);
 
     var kernel_with_output = {};
     kernel_with_output['kernel'] = state;
@@ -840,4 +810,21 @@ function make_kernel_template (kernel, lexeme_list) {
     }
     
     return template_list;
+}
+
+var get_full_latin_template = function () {
+    return ['subject', 'subject_genitive', 'object', 'object_genitive', 'verb'];
+}
+
+var get_full_english_template = function () {
+    return ['subject', 'subject_genitive', 'verb', 'object', 'object_genitive'];
+}
+
+
+var get_default_latin_word_order = function (template) {
+    return list_intersection(get_full_latin_template(), template);
+}
+
+var get_default_english_word_order = function (template) {
+    return list_intersection(get_full_english_template(), template);
 }

@@ -7,14 +7,28 @@ DAILY AGENDA
 - DONE: add email,name,class,etc.
 - DONE: grade 13 words deleted
 - DONE: comment out old accuracy dictionary and remove from table (leave it in but just commented out for now)
+- debug new etymology levels (470)
+- vocabulary cheat sheets need 3rd declension genitives
+    - right now it's *AVIS* (3) bird
+    - it should be: *AVIS* AV- (3) bird
+- change default order of iq to verb-final
+    - (it has pedagogical value by increasing the minimal-pair contrast with is, which is verb final)
 - genitives
 - error logging parser
 - test multiple computers causing an ajax / latin sick mode / multiple modules in progress simultaneously
 - replace old accuracy table with an aggregate accuracy in time_metrics
     - e.g. start_time stop_time aggregate accuracy
     - (this info is technically reproducible by the other table and so is redundant but for ease of reference without writing sql queries, this provides a good hourly report format)
+- start to remove dashes at the higher levels
+    - each module will have a property with a boolean value (noun_dashes, verb_dashes, stars)
+    - 
+- shrink images (images are too big in the lightbox at the end of the level)
+    - causes slow loading and in some browsers the "x" that closes the lightbox is moved off the screen (which is pretty disastrous since it stops all progress)
+    
 
-GIO
+
+
+GIO questions
 
 
 
@@ -107,7 +121,7 @@ AGENDA ITERATION 1.5
         - function that makes genitives
 - cosmetics of etymology cheat sheets should be improved
     - bigger space, different font
-    - underline the left hand column
+    - underline the left hand column (whether it's a root or a word)
     
  
 - write an error logging parser
@@ -149,31 +163,15 @@ AGENDA ITERATION 1.5
     - if it can't produce n extras, it produces n-1, if it can't produce n-1, it produces n-2
 
 
-- make the game harder at the latin level
-    - the students are so advanced that is and iq are too easy
-    - step 1: begin to tackle conditionals
-    - step 2: add adjectives
-    - step 3: add a simple version of genitives
-        - (vocabulary will have to be supplemented with father, mother, son, daughter, etc.)
-        - genitives seem easiest to start with because they don't require verbal constraints
-            - ablative and dative have verbal and nominal constraints
-                - ablative of means: 
-                    - verbal constraints, - has to be verbs like oppugn "attack with a sword"
-                    - nominal constraints - has to be nouns like sword and spear
-                - dative: 
-                    - verbal constraints: has to be verbs like give, speak
-                    - nominal constraints: the noun in the dative has to be animate
-            - genitives only have nominal constraints
-                - nominal constraints: 
-                - x + anything: father, mother, son, daughter, brother, sister 
-                - x + places: king, queen, god, goddesss
-                - (NB: we don't want the father of the mother, so we should prevent these kinship terms from being in the genitive)
-    - step 4: build in lexical constraints for ablative and dative
-    - step 5: add dative
-    - step 6: add ablative
 
-  
-  
+
+- for ease of reading, make a "word padder"
+    - padding around units makes them easier to read and reinforces the structural segmentation
+    - REX INSULAE   GLADIOS LEONIS   LUPO   DONABAT
+        is a lot easier to read than
+      REX INSULAE GLADIOS LEONIS LUPO DONABAT
+    - each module will have a property   "padding" : INT
+    - padding: 3 would be 3 spaces between each grammatical unitunit
   
     
 
