@@ -19,14 +19,36 @@ function manage_drop_downs(choice, output, english_template, language_enum, drop
     return r
 }
 
-
 function create_drop_down_object(x, output, choice, language_enum) {
     var key_for_word = x + '_in_' + language_enum;
     var r = [{
         'type': 'drop down',
         'parts': sorted_choices(output, key_for_word),
-        'heading': x,
-        'correct_answer': choice[key_for_word]
+        'heading': heading(x),
+        'correct_answer': choice[key_for_word],
+        'no_none_display_override': is_none(heading(x))
+    }];
+    
+    final_drop_down_things(x, r);
+    return r;
+}
+
+function is_none (h) {
+    return h[0] === '-';
+}
+
+function heading (x) {
+    if (['subject', 'object', 'verb'].indexOf(x) !== -1) {
+        return x;
+    } else {
+        return '------';
+    }
+}
+
+function create_non_drop_object(x, output, choice, language_enum) {
+    var r = [{
+        'type': 'non_drop',
+        'non_drop_text': choice[x + '_in_' + language_enum]
     }];
     
     final_drop_down_things(x, r);
@@ -58,14 +80,4 @@ var final_drop_down_things = function (x, r) {
     for (var i = 0; i < things_to_do_to_output.length; i++) {
         things_to_do_to_output[i](x, r);
     }
-}
-
-function create_non_drop_object(x, output, choice, language_enum) {
-    var r = [{
-        'type': 'non_drop',
-        'non_drop_text': choice[x + '_in_' + language_enum]
-    }];
-    
-    final_drop_down_things(x, r);
-    return r;
 }

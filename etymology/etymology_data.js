@@ -6503,7 +6503,7 @@ var words = {
         "meaning": "a king or queen (that is, someone who rules alone)",
         "part of speech": "noun",
         "roots": [
-            "MON",
+            "MON/MONO",
             "ARCH root 1"
         ],
         "type": "none",
@@ -6514,7 +6514,7 @@ var words = {
         "meaning": "having one color",
         "part of speech": "adjective",
         "roots": [
-            "MON",
+            "MON/MONO",
             "CHROM/CHROMAT/CHROS"
         ],
         "type": "none",
@@ -6525,7 +6525,7 @@ var words = {
         "meaning": "a device looked through with one eye; relating to one eye",
         "part of speech": "adjective",
         "roots": [
-            "MON",
+            "MON/MONO",
             "OCUL"
         ],
         "type": "none",
@@ -6536,7 +6536,7 @@ var words = {
         "meaning": "a remarkable, unique stone",
         "part of speech": "noun",
         "roots": [
-            "MON",
+            "MON/MONO",
             "LITE/ITE/LITH"
         ],
         "type": "none",
@@ -6547,7 +6547,7 @@ var words = {
         "meaning": "a speech spoken by one person",
         "part of speech": "noun",
         "roots": [
-            "MON",
+            "MON/MONO",
             "LOG"
         ],
         "type": "none",
@@ -6558,7 +6558,7 @@ var words = {
         "meaning": "belief in one god",
         "part of speech": "noun",
         "roots": [
-            "MON",
+            "MON/MONO",
             "THE"
         ],
         "type": "none",
@@ -11150,9 +11150,9 @@ var roots = {
         "meaning": "move",
         "root": "MOB/MOT/MOV"
     },
-    "MON": {
+    "MON/MONO": {
         "meaning": "one, single, alone",
-        "root": "MON"
+        "root": "MON/MONO"
     },
     "MORPH": {
         "meaning": "form",

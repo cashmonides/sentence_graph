@@ -2,29 +2,32 @@
 - Akiva not coding
 
 
-DAILY AGENDA
+SHORT MESSAGE SPACE
+
+
+
+BRIEF AGENDA
 - DONE: fix accuracy metrics bug
 - DONE: add email,name,class,etc.
 - DONE: grade 13 words deleted
 - DONE: comment out old accuracy dictionary and remove from table (leave it in but just commented out for now)
+- genitives
+- error logging parser
 - debug new etymology levels (470)
 - vocabulary cheat sheets need 3rd declension genitives
     - right now it's *AVIS* (3) bird
     - it should be: *AVIS* AV- (3) bird
 - change default order of iq to verb-final
     - (it has pedagogical value by increasing the minimal-pair contrast with is, which is verb final)
-- genitives
-- error logging parser
 - test multiple computers causing an ajax / latin sick mode / multiple modules in progress simultaneously
 - replace old accuracy table with an aggregate accuracy in time_metrics
     - e.g. start_time stop_time aggregate accuracy
     - (this info is technically reproducible by the other table and so is redundant but for ease of reference without writing sql queries, this provides a good hourly report format)
 - start to remove dashes at the higher levels
     - each module will have a property with a boolean value (noun_dashes, verb_dashes, stars)
-    - 
 - shrink images (images are too big in the lightbox at the end of the level)
     - causes slow loading and in some browsers the "x" that closes the lightbox is moved off the screen (which is pretty disastrous since it stops all progress)
-    
+- cheat sheet buttons don't work on surface tablets running explorer
 
 
 
@@ -51,13 +54,9 @@ BUGS
     - "root not found in roots: VERTEBR"
 
     
-AGENDA ITERATION 1.5
+DETAILED AGENDA ITERATION 1.5
 
 
-- refactor SQL post
-    - create an accuracy for each mode enumeration
-    - add name and email and grade to time metrics
-    - add some sort of aggregate accuracy to time metrics
 
 - add genitives
     - genitive agenda: 
@@ -159,7 +158,7 @@ AGENDA ITERATION 1.5
         - the program asks for n lexemes
         - if parameters can't produce n lexemes, it still tries to make a sentence at a lower module's parameters
         
-- (is this done?) defensive programmings against not having enough items to fill the extras
+- DONE: defensive programmings against not having enough items to fill the extras
     - if it can't produce n extras, it produces n-1, if it can't produce n-1, it produces n-2
 
 
@@ -172,6 +171,8 @@ AGENDA ITERATION 1.5
       REX INSULAE GLADIOS LEONIS LUPO DONABAT
     - each module will have a property   "padding" : INT
     - padding: 3 would be 3 spaces between each grammatical unitunit
+    - the amount of padding GRADUALLY reduces
+    - 
   
     
 
@@ -219,33 +220,6 @@ delete test users
 
 
 
-- refactor the SQL posting
-    - Gio's suggestion:
-        - having 16 columns is unwieldy and also will make querying less flexible
-        - an alternative: 
-        - make another table, call it the accuracy table
-            like this:
-            attempt_id		0	1	2	3	mode_enumeration	
-            7641            6   1	0	0	“drop”  
-            7641            6   2 	0	0	“quick”
-            7641            3   3 	3 	8 	“latin”	
-            
-            attempt_id is the unique id (primary key id) of the time_metrics
-            e.g. in the above example, 7641 is the 7641st row in the time_metrics table
-            
-        - one advantage: if in the future we institute other modes (e.g. id or labyrinth)
-          we won't need to multiply columns endlessly, we'll just add new mode_enumerations
-        
-    - whenever you have two tables that relate to each other, you have to be careful that they line up
-        - so very important: when we create the new post to the new table
-            we need to make sure we don't stop doing the old post (accuracy_drop_mode_0 etc.)
-        - that way, we'll be able to compare them and see if they line up
-        - when we've tested it thoroughly and are sure the two tables line up, then we'll remove the old columns (accuracy_drop_mode_0)
-
-
- 
- 
- 
 
 
 
@@ -407,6 +381,37 @@ PROGRESS NOTES iteration 1.0     (old progress notes archived at end of program_
 - Dan: make also now in its own file
 - Dan: font sizes corrected
 
+
+
+
+- DONE: 
+- refactor the SQL posting
+    - Gio's suggestion:
+        - having 16 columns is unwieldy and also will make querying less flexible
+        - an alternative: 
+        - make another table, call it the accuracy table
+            like this:
+            attempt_id		0	1	2	3	mode_enumeration	
+            7641            6   1	0	0	“drop”  
+            7641            6   2 	0	0	“quick”
+            7641            3   3 	3 	8 	“latin”	
+            
+            attempt_id is the unique id (primary key id) of the time_metrics
+            e.g. in the above example, 7641 is the 7641st row in the time_metrics table
+            
+        - one advantage: if in the future we institute other modes (e.g. id or labyrinth)
+          we won't need to multiply columns endlessly, we'll just add new mode_enumerations
+        
+    - whenever you have two tables that relate to each other, you have to be careful that they line up
+        - so very important: when we create the new post to the new table
+            we need to make sure we don't stop doing the old post (accuracy_drop_mode_0 etc.)
+        - that way, we'll be able to compare them and see if they line up
+        - when we've tested it thoroughly and are sure the two tables line up, then we'll remove the old columns (accuracy_drop_mode_0)
+
+
+ 
+ 
+ 
 
 HIGH-PRIORITY BUGS
 - dashes get interpreted as word breaks in latin

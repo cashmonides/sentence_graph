@@ -70,7 +70,7 @@ MCMode2Game.prototype.next_question = function (){
 };
 
 MCMode2Game.prototype.display = function (x) {
-    return x.type === 'non_drop' || x.correct_answer || this.none_display
+    return (x.type === 'non_drop') || x.correct_answer || this.none_display;
 };
 
 MCMode2Game.prototype.make_drop_down = function(){

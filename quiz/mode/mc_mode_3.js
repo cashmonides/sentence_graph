@@ -126,7 +126,7 @@ MCMode3Game.prototype.next_question = function () {
 };
 
 MCMode3Game.prototype.display = function (x) {
-    return x.type === 'non_drop' || x.correct_answer || this.none_display
+    return x.type === 'non_drop' || x.correct_answer || this.none_display;
 };
 
 //master function makes all the drops and non-drops
