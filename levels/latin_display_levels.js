@@ -418,9 +418,60 @@ var latin_extra_levels = {
 //drop ratios for testing only
 var latin_drop_levels = {
     //main levels
+    //equal distribution of s, v  and o
+    //only one drop
+    //no extras
     1: {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0.001,
-            min: 1, max: 2}
+         drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': 0,
+            'object_genitive_drop': 0,
+            'min': 1, 'max': 1
+        }
+    },
+    //equal distribution of s, v  and o
+    //drops 1-2
+    //no extras
+    20: {
+         drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': 0,
+            'object_genitive_drop': 0,
+            'min': 1, 'max': 2
+        }
+    },
+    //equal distribution of s, v  and o
+    //drops 1-3
+    //no extras
+    30: {
+        drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': 0,
+            'object_genitive_drop': 0,
+            'min': 1, 'max': 3
+        }
+    },
+    //equal distribution of s, v  and o
+    //drops 2-3
+    //no extras
+    40: {
+        drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': 0,
+            'object_genitive_drop': 0,
+            'min': 2, 'max': 3
+        }
+    },
+    //equal distribution of s, v  and o
+    //drops 3
+    //no extras
+    50: {
+        drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': 0,
+            'object_genitive_drop': 0,
+            'min': 3, 'max': 3
+        }
     },
     100: {
         drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0.001,
@@ -441,42 +492,63 @@ var latin_drop_levels = {
     }
 }
 
+/*
 //return to functionality when done testing
 var latin_drop_levels2 = {
     //equal distribution of s, v  and o
     //only one drop
     //no extras
     1: {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0,
-            min: 1, max: 1}
+         drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': 0,
+            'object_genitive_drop': 0,
+            'min': 1, 'max': 1
+        }
     },
     //equal distribution of s, v  and o
     //drops 1-2
     //no extras
     20: {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0,
-            min: 1, max: 2}
+         drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': 0,
+            'object_genitive_drop': 0,
+            'min': 1, 'max': 2
+        }
     },
     //equal distribution of s, v  and o
     //drops 1-3
     //no extras
     30: {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0,
-            min: 1, max: 3}
+        drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': .3,
+            'object_genitive_drop': .3,
+            'min': 1, 'max': 3
+        }
     },
     //equal distribution of s, v  and o
     //drops 2-3
     //no extras
     40: {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0,
-            min: 2, max: 3}
+        drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': 0,
+            'object_genitive_drop': 0,
+            'min': 2, 'max': 3
+        }
     },
     //equal distribution of s, v  and o
     //drops 3
     //no extras
     50: {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0,
-            min: 3, max: 3}
+        drop_non_drop_map: {
+            'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3,
+            'conjunction_drop': 0, 'subject_genitive_drop': 0,
+            'object_genitive_drop': 0,
+            'min': 3, 'max': 3
+        }
     },
     
     
@@ -602,7 +674,7 @@ var latin_drop_levels2 = {
     
 }
 
-
+*/
 
 
 

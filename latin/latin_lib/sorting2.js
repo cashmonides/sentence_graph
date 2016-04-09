@@ -36,6 +36,8 @@ function custom_sort(x, y) {
                     'perfect', 'pluperfect', 'future_perfect', 'present_infinitive', 'perfect_infinitive']],
                 ['kernel_person', ['1s', '2s', '3s', '1p', '2p', '3p']]], x, y);
         case 'object':
+        case 'subject_genitive':
+        case 'object_genitive':
             return sort_which_is_first([[lpe + '_root', 'natural'],
                     ['kernel_number`of`other`nouns', ['singular', 'plural']],
                         ['kernel_number', ['singular', 'plural']]], x, y);

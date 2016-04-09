@@ -116,7 +116,7 @@ var latin_levels = {
         voice: ["active"],
         number_of_other_nouns : ["singular"],
         shuffle: [true, false],
-        genitive_quantity: [2, 2],
+        genitive_quantity: [0, 0],
         genitive_number: ["singular", "plural"],
         genitive_scramble: false
     },
@@ -147,7 +147,7 @@ var latin_levels = {
         voice: ["active"],
         number_of_other_nouns : ["singular", "plural"],
         shuffle: [true, false],
-        genitive_quantity: [2, 2],
+        genitive_quantity: [0, 0],
         genitive_number: ["singular", "plural"],
         genitive_scramble: false
     },

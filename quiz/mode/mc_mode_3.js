@@ -22,6 +22,7 @@ MCMode3Game.prototype.attach = function(){
     set_display("cheat_sheet_button", 'initial');
     set_display("vocab_cheat_button", 'initial');
     set_display("etym_cheat_button", 'none');
+    set_display("input_box", 'none');
     // state.switch_count = 1
     
     //this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
@@ -82,6 +83,7 @@ MCMode3Game.prototype.next_question = function () {
     this.correct_answer = this.drop_downs.map(function (x) {
         return x.correct_answer || x.non_drop_text}).join(' ');
     
+    console.log("DEBUG this.correct_answer = ", this.correct_answer);
     
     console.log("DEBUG entering 1st random_choice");
     this.none_display = random_choice(map_level_to_allowed(
@@ -176,7 +178,7 @@ MCMode3Game.prototype.process_answer = function(){
     var self = this;
     var is_correct = this.drop_downs.every(function (x) {
         return (x.type === 'non_drop') || (!self.display(x)) ||
-            (selected_option(x.HTML_element) === strip(x.correct_answer || 'none'))});
+            (selected_option(x.HTML_element) === strip(x.correct_answer || x.none_option || 'none'))});
     if (is_correct) {
         this.process_correct_answer();
     } else {

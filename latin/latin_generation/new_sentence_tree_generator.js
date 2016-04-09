@@ -210,7 +210,7 @@ function make_output(level, current_lexicon, none_display) {
     function (y) {return master_lexeme_list.used_only.indexOf(y) !== -1})});
     
     
-    console.log('DEBUG 12-23 master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make = ',
+    // console.log('DEBUG 12-23 master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make = ',
     master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make);
 
 
@@ -259,6 +259,8 @@ function make_output(level, current_lexicon, none_display) {
         item = master_lexeme_list.used_only[i];
         states[item] = master_cartesian(level.latin_level, order[item] || ['number_of_other_nouns']);
     }
+    
+    // console.log('states', states, state_to_be_made);
 
 
     ////////finished creating all posssible states
@@ -297,7 +299,7 @@ function make_output(level, current_lexicon, none_display) {
     //
     for (i = 0; i < creation_by_part_of_speech.length; i++) {
         item = creation_by_part_of_speech[i];
-        console.log('DEBUG 12-23 item = ', item);
+        // console.log('DEBUG 12-23 item = ', item);
         for (var j = 0; j < item.sources.length; j++) {
             for (var k = 0; k < item.results.length; k++) {
                 add_to_output(output, item.sources[j],
@@ -323,14 +325,15 @@ function make_output(level, current_lexicon, none_display) {
             })
     }
     
-    console.log('output =', output);
+    // console.log('output =', output);
 
     // todo english_template should no longer be needed
     var english_template = list_intersection(get_full_english_template(), Object.keys(output));
-    
+    /*
     console.log('DEBUG 12-23 output = ', output);
     console.log('DEBUG 12-23 english_template = ', english_template);
-    
+    console.log(level.latin_drop_level);
+    */
     var drop_non_drop_map = drop_non_drop_creation(
         map_level_to_allowed(level.latin_drop_level, latin_drop_levels)['drop_non_drop_map'], english_template);
 
@@ -345,7 +348,7 @@ function make_output(level, current_lexicon, none_display) {
         'give_away_ending_phrase': ".",
         'cheat_sheet': cheat_sheet(master_lexeme_list.get_lexemes_as_list('all_lexemes'))
     };
-    console.log('DEBUG 12-23 make_output result = ', r);
+    // console.log('DEBUG 12-23 make_output result = ', r);
     return r
 }
 
@@ -446,15 +449,18 @@ function drop_non_drop_creation (drop_non_drop_allowed, template) {
     while (i < 1000) {
         var drop_non_drop_map = {};
         var drops = 0;
-        template.forEach(function (x) {if (Math.random() < drop_non_drop_allowed[x + '_drop']) {
-            drop_non_drop_map[x] = 'drop';
-            drops++
+        template.forEach(function (x) {
+            // console.log('drop testing', x, drop_non_drop_allowed[x + '_drop']);
+            if (Math.random() < drop_non_drop_allowed[x + '_drop']) {
+                drop_non_drop_map[x] = 'drop';
+                drops++
             } else {
-            drop_non_drop_map[x] = 'non_drop'
+                drop_non_drop_map[x] = 'non_drop'
         }});
         if (drops >= Math.min(drop_non_drop_allowed.min, template.length) &&
-            drops <= Math.max(drop_non_drop_allowed.max, 0)) {
-            return drop_non_drop_map
+        drops <= Math.max(drop_non_drop_allowed.max, 0)) {
+            // console.log('drop_non_drop_map', drop_non_drop_map);
+            return drop_non_drop_map;
         }
         i++
     }
@@ -478,9 +484,9 @@ function add_to_lexeme_list (
     }
     
     var trigger_more_words = function (i, element, pick_result) {
-        console.log('trigger_more_words running', i, settings);
+        // console.log('trigger_more_words running', i, settings);
         if ((part_of_speech === 'noun') && (settings.genitives[i] === true)) {
-            console.log('genitive triggered');
+            // console.log('genitive triggered');
             var role = element + '_genitive';
             var pick_result = pick_lexeme_new(state, element + '_genitive',
             'noun', current_lexicon, master_lexeme_list);
@@ -528,7 +534,7 @@ function add_to_lexeme_list (
         }
     }
     
-    console.log('new_lexemes, master_lexeme_list =', new_lexemes, master_lexeme_list);
+    // console.log('new_lexemes, master_lexeme_list =', new_lexemes, master_lexeme_list);
     return new_lexemes;
 }
 
@@ -600,7 +606,7 @@ function make_kernel_new (level, state, lexeme_list) {
 
     var form_dict = {};
     for (var i = 0; i < template.length; i++) {
-        var word_setting = set_word_setting_new(state, lexeme_list[template[i]], template[i]);
+        var word_setting = set_word_setting_new(state, lexeme_list[template[i]], template[i], level);
         form_dict[template[i]] = new Form(lexeme_list[template[i]], word_setting, template[i]);
     }
     state.form_dict = form_dict;
@@ -658,7 +664,7 @@ function make_kernel_new (level, state, lexeme_list) {
 
     var sentence_in_latin_text = sentence_in_order(default_latin_word_order, sentence_in_latin);
     
-    console.log('sentence_in_latin_text, part_order, default_latin_word_order =', sentence_in_latin_text, part_order, default_latin_word_order);
+    // console.log('sentence_in_latin_text, part_order, default_latin_word_order =', sentence_in_latin_text, part_order, default_latin_word_order);
 
     var kernel_with_output = {};
     kernel_with_output['kernel'] = state;
@@ -703,7 +709,9 @@ function make_minimal_form_english (level, state, lexeme, lexeme_type) {
     return kernel_with_output;
 }
 
-function set_word_setting_new(state, lexeme, element) {
+function set_word_setting_new(state, lexeme, element, level) {
+    var other_noun_numbers =  map_level_to_allowed(level.latin_level, latin_levels)['number_of_other_nouns'];
+    
     var word_settings_map = {};
     if (element === "verb") {
         word_settings_map.conjugation = lexeme.properties.latin.family;
@@ -714,7 +722,9 @@ function set_word_setting_new(state, lexeme, element) {
         } else if (element === "object") {
             word_settings_map.number = state.number_of_other_nouns
         } else {
-            word_settings_map.number = random_choice(["singular", "plural"])
+            // Good idea in theory, confusing in practice.
+            // (It took 15 minutes to track down.)
+            word_settings_map.number = random_choice(other_noun_numbers);
         }
         if (lexeme) {
             // This does not occur if there is no appropriate lexeme, i.e., implicit subject.

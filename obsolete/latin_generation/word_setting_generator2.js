@@ -56,6 +56,7 @@ function set_word_setting(kernel, level, element, allowed, output_type) {
     } else {
         //language-independent
         word_settings_map.number = (element === "subject" ? kernel.number : random_choice(allowed.number));
+        
         var allowed_declensions = allowed.declension;
         var d = random_choice(allowed_declensions);
         word_settings_map.declension = d[0];
@@ -150,13 +151,7 @@ function set_allowed(kernel, language_enum) {
             }
 
             //~`console.log('DEBUG 9-5 in allowed: Allowed tense = ' + JSON.stringify(allowed.tense));
-
-
-
-
-
-
-
+            
             //todo
             //number and person need to be able to interact
             //if number can only be singular we have to update allowed.person
@@ -187,6 +182,3 @@ function set_allowed(kernel, language_enum) {
     }
     return allowed
 }
-
-
-

@@ -65,7 +65,7 @@ function map_level_to_allowed(level, level_to_allowed) {
 //in such a case we need to drop down into the dictionary until we encounter a single list
 //(so far we only have one layer but in the future we may have multiple layers so the following function is recursive)
 //returns a list e.g. ['present', 'future']
-access_list = function(state, dict_to_access_from) {
+var access_list = function(state, dict_to_access_from) {
     if (Array.isArray(dict_to_access_from)) {return dict_to_access_from}
     for (var i = 0; i < values(state).length; i++) {
         if (values(state)[i] in dict_to_access_from) {
@@ -79,7 +79,7 @@ access_list = function(state, dict_to_access_from) {
 //returns a new list with:
 // key: property_name
 // value: whatever add_property returns????
-cartesian_product = function(state, property_name, list) {
+var cartesian_product = function(state, property_name, list) {
     return list.map(function (x) {return add_property(state, property_name, x)})
 };
 
@@ -90,7 +90,7 @@ cartesian_product = function(state, property_name, list) {
 //why all this trouble? because we can't simply mutate the object in place
 // keeps every property of the state except the property_name
 // sets the given property_name to equal value
-add_property = function(object, property_name, value) {
+var add_property = function(object, property_name, value) {
     var new_object = {};
     for (var i in object) {new_object[i] = object[i]}
     new_object[property_name] = value;

@@ -1,10 +1,48 @@
-- Dan not coding
-- Akiva not coding
+- Dan coding (manage_drop_down, adding a util, some new_sentence_tree)
+- Akiva coding (working in quiz.js and modules.js and a new mode called input_mode.js)
 
 
 SHORT MESSAGE SPACE
+Dan: made some progress on genitives, needs to be checked more and verified by Akiva
 
 
+DISCUSSION
+
+the "input" attack
+- recycle previous modes with input as the mode
+- advantage: quick doubling of difficulty
+- issue: we need to make sure that punctuation and capitalization do not render a correct answer wrong
+- disadvantage: no new material covered
+- design needs
+    - Akiva: modify an existing mode into input mode
+    - write a string cleaning program that cleans out punctuation and capitalization and spacing and long vowels
+        - spaces: the lion  ate the crow
+        - the/a: for now we should probably require "the" but down the road we should accept "a"
+        
+
+
+
+the "nonsense genitive" attack
+- just make (illogical but grammatical) genitives
+- disadvantage: might be harder to understand and be annoying
+- issue: might take longer
+- current problems that need to be solved in genitives
+    - nonsense filter not implemented or tested (not as important)
+    - drop_non_drop_map seems to not have genitives
+    - need a warning/notification/or the like + a cheat sheet that fully tells them the endings
+        (relatively small problem)
+        (do the advanced students know about genitives?)
+        - they do but it's not on the current cheat sheets
+        - also the cheat sheets just aren't really easy to read 
+            - they're big pdfs that have to be scrolled through
+            - would be better as a table, like the vocab cheat sheet
+
+
+
+possible general thing needed
+- notification box
+- saying, i.e., the game is under construction
+- this level has genitives and the genitive cheat sheet isn't here
 
 BRIEF AGENDA
 - DONE: fix accuracy metrics bug

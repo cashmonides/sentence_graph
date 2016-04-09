@@ -13,6 +13,7 @@ QuickModeGame.prototype.attach = function(){
     set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'none');
     set_display("etym_cheat_button", 'none');
+    set_display("input_box", 'none');
     
     // this.quiz.bar_threshold = 10;
     // this.quiz.switch_count = 10;
