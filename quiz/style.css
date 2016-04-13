@@ -162,6 +162,11 @@ body {
 }
 
 
+#input_box
+{
+    font-size:16pt;
+}
+
 /*#answer_choices {*/
 /*    background:red;*/
 /*    font-size: 20px;*/

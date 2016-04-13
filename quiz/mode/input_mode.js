@@ -18,7 +18,8 @@ even though they're on to the next question
     - that would be a pretty cool, advanced feature
     - not necessary for first iteration but very cool
     - it sort of reads their mind like AI
-    - 
+- similarly, at one point I typed "frightened" instead of "scared"
+- it would be nice to be able to handle that
     
 - I was just stopping here to try to find something in MC mode relating to drop downs.
 - I'm going to continue my search
@@ -46,6 +47,10 @@ var InputModeGame = function(){
     this.quiz = null;
 };
 
+InputModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
+InputModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
+InputModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
+
 
 InputModeGame.prototype.attach = function(){
     set_display("latin_answer_choices", 'none');
@@ -55,6 +60,7 @@ InputModeGame.prototype.attach = function(){
     set_display("vocab_cheat_button", 'initial');
     set_display("etym_cheat_button", 'none');
     set_display("input_box", 'initial');
+    
 };
 
 InputModeGame.prototype.set_level = function (new_level) {
@@ -74,8 +80,15 @@ InputModeGame.prototype.get_mode_name = function() {
 
 InputModeGame.prototype.next_question = function () {
     
-    //since we're not doing drops we don't need drop_level or extra_level
-    var types_of_level = ['latin_level'];
+    
+    
+    console.log("DEBUG 4-9 starting next_question in input mode");
+    
+    
+    clear_input_box("input_box");
+    
+    //todo since we're not doing drops we don't need drop_level or extra_level
+    var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
     
@@ -96,28 +109,28 @@ InputModeGame.prototype.next_question = function () {
     this.sentence = data.sentence;              // text displayed in display box
     this.target_indices = data.target_indices;      //highlighted word if necessary
 
-    
+    // console.log("DEBUG 4-9 data.sentence = ", data.sentence);
     
     //changes the score, progress bar, etc.
     this.quiz.update_display();
 
     Quiz.set_question_text("Translate the following sentence:");
     this.quiz.set_word_selector(data.sentence);
-    
+    this.drop_downs = data.drop_downs;
     
     this.give_away_phrase = data.give_away_phrase;
     this.give_away_ending_phrase = data.give_away_ending_phrase;
+    // console.log("DEBUG INPUT 4-9 about to make correct answer");
     this.correct_answer = this.drop_downs.map(function (x) {
         return x.correct_answer || x.non_drop_text}).join(' ');
-    console.log("DEBUG INPUT 4-9 this.correct_answer = ", this.correct_answer);
+    // console.log("DEBUG INPUT 4-9 this.correct_answer = ", this.correct_answer);
     
-    console.log("DEBUG entering 1st random_choice");
+    // console.log("DEBUG entering 1st random_choice");
     this.none_display = random_choice(map_level_to_allowed(
         this.level.latin_extra_level, latin_extra_levels).none_display);
     
     //////////
     //todo all of below was commented out because it seemed to do strictly with drop downs which we wont use in input mode
-    
     
     // We now use this to guarantee that our answer choices end up in the right place.
     // remove_element(el("answer_choices"));
@@ -130,7 +143,7 @@ InputModeGame.prototype.next_question = function () {
     // el('drop_downs').appendChild(new_answer_choices);
     
     // document.getElementById("answer_choices").removeChild(
-    //    document.getElementById('answer_wrapper'));
+    //     document.getElementById('answer_wrapper'));
     
     // var e = document.createElement('div');
     // e.id = 'latin_answer_wrapper';
@@ -151,9 +164,9 @@ InputModeGame.prototype.next_question = function () {
 
     //todo Akiva has no idea what to do with this below
     // Hacky way to guarantee a drop down.
-    var x = this.make_drop_down(e);
-    if (x === 0) {this.next_question()}
-
+    // var x = this.make_drop_down(e);
+    // if (x === 0) {this.next_question()}
+    
 };
 
 
@@ -165,14 +178,15 @@ InputModeGame.prototype.process_answer = function(){
     console.log("DEBUG INPUT 4-9 raw input string = ", raw_input_string);
     
     var processed_input_string = clean_input_string(raw_input_string);
-    console.log("DEBUG INPUT 4-9 process input string = ", process_input_string);
+    console.log("DEBUG INPUT 4-9 process input string = ", processed_input_string);
     
     
     //todo we need the correct english answer - should be stored as a variable somewhere in this.next_question
     var correct_english_translation;
     
     //it might already be stored as this.correct_answer, in which case, we just do this
-    var correct_english_translation = this.correct_answer;
+    correct_english_translation = clean_input_string(this.correct_answer);
+    
     
     if (processed_input_string === correct_english_translation) {
         this.process_correct_answer();
@@ -187,11 +201,18 @@ InputModeGame.prototype.process_correct_answer = function () {
     this.quiz.increment_score();
     
     console.log("DEBUG entering 2nd random_choice");
-    var cell_1 = random_choice(MCMode3Game.cell_1_feedback_right);
+    var cell_1 = random_choice(InputModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
-
+    
+    
+    clear_input_box("input_box");
+    
+    
+    console.log("DEBUG 4-9 entering question_complete");
     this.quiz.question_complete();
+    
+    
 };
 
 
@@ -207,8 +228,8 @@ InputModeGame.prototype.process_incorrect_answer = function () {
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
         console.log("DEBUG entering 3rd random_choice");
         
-        var cell_1 = random_choice(MCMode3Game.cell_1_feedback_wrong);
-        var cell_3 = random_choice(MCMode3Game.cell_3_feedback_wrong);
+        var cell_1 = random_choice(InputModeGame.cell_1_feedback_wrong);
+        var cell_3 = random_choice(InputModeGame.cell_3_feedback_wrong);
         
         
         
@@ -217,11 +238,20 @@ InputModeGame.prototype.process_incorrect_answer = function () {
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_3;
     } else {
+        console.log("DEBUG 4-9 give away answer about to be triggered");
         this.give_away_answer();
+        clear_input_box("input_box");
     }
     this.quiz.update_display();
-    // MCMode3 has no real word selector
+    
+    
+    
+    
+    // akiva tried uncommenting the following as an experiment (but that didn't work) (the following isn't used in mcmode)
     // this.quiz.word_selector.clear();
+    
+    
+    
 };
 
 InputModeGame.prototype.give_away_answer = function (){

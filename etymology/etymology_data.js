@@ -6533,7 +6533,7 @@ var words = {
     },
     "monolith": {
         "grade": 12,
-        "meaning": "a remarkable, unique stone",
+        "meaning": "a structure made out of one large stone",
         "part of speech": "noun",
         "roots": [
             "MON/MONO",
@@ -11833,4 +11833,21 @@ possible new roots:
 "ANIM"
 "AMBI/AMPHI"
 
+
+ones used at 470 below:
+'CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
+        'SUB', 'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCRIB/SCRIPT', 'SCOP/SCOPE', 
+        'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY', , 
+        'PHOT/PHOTO', 'PHON', 'PHOB', 'PENT/PENTA', 'PATER/PATR/PATRI', 'PAN', 'PALE/PALEO', 'OCUL', , 
+        'NOV', 'NEG', 'MULTI', 'MORPH', 'MILLI', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
+        , ' 'MAL', 'MAGN', 'MACRO', 'LUN/LUNA', 'KINE/KINEMAT/CINE', 'HYPER', 'HYDR', 
+        'CHRON', 'CEPHAL', 'CENT', 'BIO', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'
+
+
+problematic roots hex
+
+root not found in roots: CELL
 */

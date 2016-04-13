@@ -174,7 +174,7 @@ EtymologyModeGame.prototype.next_question = function(){
         this.level.etym_level, etym_levels).question_types;
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
         this.level.etym_level, weighted(this.legal_question_types), 4, 4, 4);
-    console.log(question_with_cheat_sheet['question_data']);
+    // console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
     this.etymology_cheat_sheet = alphabetize_dict(
         question_with_cheat_sheet['cheat_sheet']);

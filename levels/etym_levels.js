@@ -82,7 +82,7 @@ var etym_levels = {
     },
     70 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI'],
         question_types: {
             'word_to_latin_root': .2,
             'word_to_english_root': .2,
@@ -96,8 +96,8 @@ var etym_levels = {
     },
     80 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -115,7 +115,7 @@ var etym_levels = {
     
     90 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -129,7 +129,7 @@ var etym_levels = {
     },
     100 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
         'POLY', 'METER/METR'],
         question_types: {
             'word_to_latin_root': .4,
@@ -144,8 +144,8 @@ var etym_levels = {
     },
     110 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -159,8 +159,8 @@ var etym_levels = {
     },
     120 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'VID/VIS'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'VID/VIS'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -174,8 +174,8 @@ var etym_levels = {
     },
     130 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS'],
         question_types: {
             'word_to_latin_root': .4,
@@ -190,8 +190,8 @@ var etym_levels = {
     },
     140 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'SCOP/SCOPE', 'QUIN/QUINT'],
         question_types: {
             'word_to_latin_root': .4,
@@ -206,8 +206,8 @@ var etym_levels = {
     },
     150 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT'],
         question_types: {
             'word_to_latin_root': .4,
@@ -222,8 +222,8 @@ var etym_levels = {
     },
     160 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT'],
         question_types: {
             'word_to_latin_root': .4,
@@ -238,8 +238,8 @@ var etym_levels = {
     },
     170 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'MICRO', 'METER/METR'],
         question_types: {
@@ -255,8 +255,8 @@ var etym_levels = {
     },
     180 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'MICRO', 'METER/METR'],
         question_types: {
@@ -272,8 +272,8 @@ var etym_levels = {
     },
     190 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
         'MACRO'],
@@ -290,8 +290,8 @@ var etym_levels = {
     },
     200 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
         'MACRO', 'HEX/HEXA', 'GASTR'],
@@ -308,8 +308,8 @@ var etym_levels = {
     },
     210 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
         'MACRO', 'HEX/HEXA', 'GASTR', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
@@ -326,8 +326,8 @@ var etym_levels = {
     },
     220 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
         'MACRO', 'HEX/HEXA', 'GASTR', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
@@ -344,8 +344,8 @@ var etym_levels = {
     },
     230 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
         'MACRO', 'HEX/HEXA', 'GASTR', 'DU',  'CEPHAL', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
@@ -362,8 +362,8 @@ var etym_levels = {
     },
     240 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
         'MACRO', 'HEX/HEXA', 'GASTR', 'DU',  'CHRON', 'CEPHAL', 'BIO', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
@@ -380,8 +380,8 @@ var etym_levels = {
     },
     250 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
         'MACRO', 'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU',  'CHRON', 'CEPHAL', 'BIO', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
@@ -398,8 +398,8 @@ var etym_levels = {
     },
     260 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'POLY',
         'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 'MACRO', 'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU',  
@@ -417,8 +417,8 @@ var etym_levels = {
     },
     270 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'POLY',
         'PHOT/PHOTO', 'PENT/PENTA', 'OCT/OCTA/OCTO', 
@@ -437,8 +437,8 @@ var etym_levels = {
     },
     280 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'POLY',
         'PHOT/PHOTO', 'PENT/PENTA', 'PATER/PATR/PATRI', 'OCT/OCTA/OCTO', 
@@ -458,8 +458,8 @@ var etym_levels = {
     },
     290 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'POLY',
         'PHOT/PHOTO', 'PENT/PENTA', 'PATER/PATR/PATRI', 'OCT/OCTA/OCTO', 
@@ -479,8 +479,8 @@ var etym_levels = {
     },
     300 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 
         'SOL', 'SEPT', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'POLY',
@@ -502,8 +502,8 @@ var etym_levels = {
     },
     310 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 
         'SOL', 'SEPT', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PORT', 'POLY',
@@ -525,8 +525,8 @@ var etym_levels = {
     },
     320 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 
         'SPEC/SPECT/SPIC', 'SOL', 'SEPT', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PORT', 'POLY',
@@ -548,8 +548,8 @@ var etym_levels = {
     },
     330 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 
         'SPEC/SPECT/SPIC', 'SOL', 'SEPT', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PORT', 'POLY',
@@ -571,8 +571,8 @@ var etym_levels = {
     },
     340 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 
         'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PORT', 'POLY',
@@ -594,8 +594,8 @@ var etym_levels = {
     },
     350 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 
         'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -617,8 +617,8 @@ var etym_levels = {
     },
     360 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 
         'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -640,8 +640,8 @@ var etym_levels = {
     },
     370 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -663,8 +663,8 @@ var etym_levels = {
     },
     380 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -686,8 +686,8 @@ var etym_levels = {
     },
     390 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -709,8 +709,8 @@ var etym_levels = {
     },
     400 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -732,8 +732,8 @@ var etym_levels = {
     },
     410 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -755,8 +755,8 @@ var etym_levels = {
     },
     420 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -778,8 +778,8 @@ var etym_levels = {
     },
     430 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SUB', 'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -801,8 +801,8 @@ var etym_levels = {
     },
     440 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SUB', 'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY',
@@ -824,8 +824,8 @@ var etym_levels = {
     },
     450 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SUB', 'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY', 'PNE/PNEUM', 
@@ -847,8 +847,8 @@ var etym_levels = {
     },
     460 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SUB', 'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY', 'PNE/PNEUM', 
@@ -870,8 +870,8 @@ var etym_levels = {
     },
     470 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SUB', 'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCRIB/SCRIPT', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY', 'PNE/PNEUM', 
@@ -893,8 +893,8 @@ var etym_levels = {
     },
     480 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CELL', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEX', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VIV/VIT', 'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'TEL/TELE', 
         'SUB', 'SPEC/SPECT/SPIC', 'SOMN/SOMNI', 'SOL', 'SEPT', 'SEMI', 'SCRIB/SCRIPT', 'SCOP/SCOPE', 
         'QUIN/QUINT', 'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'PRE', 'PORT', 'POLY', 'PNE/PNEUM', 

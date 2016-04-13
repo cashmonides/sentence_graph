@@ -83,7 +83,7 @@ MCMode3Game.prototype.next_question = function () {
     this.correct_answer = this.drop_downs.map(function (x) {
         return x.correct_answer || x.non_drop_text}).join(' ');
     
-    console.log("DEBUG this.correct_answer = ", this.correct_answer);
+    // console.log("DEBUG this.correct_answer = ", this.correct_answer);
     
     console.log("DEBUG entering 1st random_choice");
     this.none_display = random_choice(map_level_to_allowed(

@@ -211,7 +211,7 @@ function make_output(level, current_lexicon, none_display) {
     
     
     // console.log('DEBUG 12-23 master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make = ',
-    master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make);
+    // master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make;
 
 
     ////////////////new equilibrium

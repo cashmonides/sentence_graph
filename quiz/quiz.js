@@ -372,6 +372,7 @@ Quiz.get_mode = function(mode_number) {
         // Programming Tip: The number "3" is cursed. Avoid it.
         // case 3 : return new GenericDropGame();
         case 4 : return new EtymologyModeGame();
+        case 5 : return new InputModeGame();
         default : throw "no game mode triggered";
     }
     
@@ -381,9 +382,9 @@ Quiz.get_mode = function(mode_number) {
 
 Quiz.prototype.next_question = function (){
     // todo make sure to uncomment this except when necessary (nuclear option)
-    // Persist.clear_node(["urgent_log"]);
+    // Persist.clear_node(["xxx"]);     put urgent_log  where it says xxx
     
-    // Persist.clear_node(["users"]);
+    // Persist.clear_node(["xxx"]);   put users where it says xxx
     
     
     
@@ -428,6 +429,7 @@ Quiz.prototype.next_question = function (){
 
 
 Quiz.prototype.question_complete = function () {
+    //todo comment this back in when done testing
     this.update_accuracy();
     this.submodule.incorrect_streak = 0;
     // We reset the incorrect streak
@@ -435,6 +437,7 @@ Quiz.prototype.question_complete = function () {
     if (this.submodule.score >= this.module.submodule.threshold) {
         this.submodule_complete();
     } else {
+        console.log("DEBUG 4-9 quiz.next_question triggered");
         this.next_question();
     }
 };
@@ -447,7 +450,9 @@ Quiz.prototype.update_accuracy = function () {
 
 Quiz.prototype.update_accuracy_dict = function () {
     var mode_name = this.game.get_mode_name();
+    console.log("DEBUG 4-9 mode_name = ", mode_name);
     var incorrect_streak = this.submodule.incorrect_streak;
+    console.log("DEBUG 4-9 incorrect_streak = ", incorrect_streak);
     this.accuracy_dictionary[mode_name][incorrect_streak]++;
     console.log('accuracy dict', incorrect_streak, this.accuracy_dictionary,
     this.convert_accuracy_dict());

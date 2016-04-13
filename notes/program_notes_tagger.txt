@@ -4,7 +4,26 @@
 
 SHORT MESSAGE SPACE
 Dan: made some progress on genitives, needs to be checked more and verified by Akiva
+- specifically
+    - everything but nonsense and scrambling should be good
+    - but not really tested
+Akiva: input is debugged and working, font size of input box increased and looking good
 
+- little bug: one/single/alone is a duplicate root of one/single
+
+- when main, iq and is are all options, the drop downs get huge
+    - this is fitting in a iq or is sentence
+    - but especially with a simple main clause, you get all these irrelevant options (had feared, was fearing)
+    - would be best if in a main sentence, the options were filtered to only possible answers
+
+- need to:
+    - DONE: lexicon needs to be whittled down for early levels
+    - DONE: remove passives from early levels (they don't have the proper cheat sheet)
+    - add link to cheat sheet for passives
+    - DONE: console log needs to be scrubbed so no correct answers are given away
+
+- weird!:
+    a team called the rainbowfishes were playing module 8 and then skipped to module 16 (attempt #3585)
 
 DISCUSSION
 
