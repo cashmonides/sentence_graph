@@ -430,6 +430,8 @@ Quiz.prototype.next_question = function (){
 
 Quiz.prototype.question_complete = function () {
     //todo comment this back in when done testing
+    // clear_input_feedback_box("feedback_for_input");
+    set_display("feedback_for_input", 'none');
     this.update_accuracy();
     this.submodule.incorrect_streak = 0;
     // We reset the incorrect streak

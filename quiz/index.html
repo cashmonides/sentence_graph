@@ -128,6 +128,7 @@
                 <div id="input_box_wrapper">
                     <input type="text" id="input_box" size="99">
                 </div> 
+                <div id="feedback_for_input"></div>
             </div>
             <div id="footer">
                 
@@ -144,6 +145,7 @@
                         <td class="footer_cell">
                         </td>
                         <td class="footer_cell">
+                            <button class="button" id="next_button" onclick="quiz.question_complete()">next</button>
                             <button class="button" id="submit_button" onclick="quiz.process_answer()">submit</button>
                             <button class="button" id="cheat_sheet_button" onclick="quiz.initialize_cheat_sheet()">cheat sheet</button>
                             <button class="button" id="vocab_cheat_button" onclick="quiz.initialize_vocab_cheat_sheet()">vocabulary cheat sheet</button>

@@ -141,6 +141,7 @@ EtymologyModeGame.prototype.attach = function(){
     set_display("vocab_cheat_button", 'none');
     set_display("etym_cheat_button", 'initial');
     set_display("input_box", 'none');
+    set_display("next_button", 'none');
 };
 
 EtymologyModeGame.prototype.set_level = function (new_level) {

@@ -23,6 +23,7 @@ MCMode3Game.prototype.attach = function(){
     set_display("vocab_cheat_button", 'initial');
     set_display("etym_cheat_button", 'none');
     set_display("input_box", 'none');
+    set_display("next_button", 'none');
     // state.switch_count = 1
     
     //this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);

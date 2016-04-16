@@ -31,7 +31,7 @@ even though they're on to the next question
 /*
 - another issue
       - input box needs to be wide enough to match the length of the string
-      - we could just make it really wide as defaukt
+      - my current temporary solution is to make it really wide as default
           e.g. size="99" will give 99 character width
          the angry lion knows that the stupid king of the bears attacked the queen of the frogs with the sword of zeus
         = 109 characters including spaces
@@ -60,6 +60,10 @@ InputModeGame.prototype.attach = function(){
     set_display("vocab_cheat_button", 'initial');
     set_display("etym_cheat_button", 'none');
     set_display("input_box", 'initial');
+    set_display("next_button", 'none');
+    // set_display("feedback_for_input", 'none');
+    
+    
     
 };
 
@@ -240,7 +244,7 @@ InputModeGame.prototype.process_incorrect_answer = function () {
     } else {
         console.log("DEBUG 4-9 give away answer about to be triggered");
         this.give_away_answer();
-        clear_input_box("input_box");
+        // clear_input_box("input_box");
     }
     this.quiz.update_display();
     
@@ -255,9 +259,14 @@ InputModeGame.prototype.process_incorrect_answer = function () {
 };
 
 InputModeGame.prototype.give_away_answer = function (){
-    var fbox = el("feedbackbox");
-    fbox.innerHTML = this.give_away_phrase + this.correct_answer + this.give_away_ending_phrase;
-    this.quiz.question_complete();
+    set_display("next_button", 'initial');
+    set_display("feedback_for_input", 'initial');
+    set_display("submit_button", 'none');
+    set_display("cheat_sheet_button", 'none');
+    set_display("vocab_cheat_button", 'none');
+    var fbox_for_input = el("feedback_for_input");
+    fbox_for_input.innerHTML = this.give_away_phrase + "<br\/>" + this.correct_answer + this.give_away_ending_phrase;
+    // this.quiz.question_complete();
 };
 
 

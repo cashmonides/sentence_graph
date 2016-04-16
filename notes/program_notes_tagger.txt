@@ -1,5 +1,5 @@
-- Dan coding (manage_drop_down, adding a util, some new_sentence_tree)
-- Akiva coding (working in quiz.js and modules.js and a new mode called input_mode.js)
+- Dan not coding (manage_drop_down, adding a util, some new_sentence_tree)
+- Akiva not coding (working in quiz.js and modules.js and a new mode called input_mode.js)
 
 
 SHORT MESSAGE SPACE
@@ -7,7 +7,17 @@ Dan: made some progress on genitives, needs to be checked more and verified by A
 - specifically
     - everything but nonsense and scrambling should be good
     - but not really tested
+
 Akiva: input is debugged and working, font size of input box increased and looking good
+
+- added functionality: give away answer and wrong answer now occur on the same screen
+    - still a little buggy
+        - says "whoops try again" when new sentence is given
+        - could be better formatted so the give away answer is on its own line
+    - future functionality:
+        - strip give away answer of all parentheses
+        - highlight wrong answer in red where it differs from give away answer
+
 
 - little bug: one/single/alone is a duplicate root of one/single
 
