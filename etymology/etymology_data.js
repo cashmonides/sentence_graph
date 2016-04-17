@@ -5022,7 +5022,7 @@ var words = {
         "part of speech": "adjective",
         "roots": [
             "IG/IL/IM/IN/IR root 2",
-            "PoS/POT root 2"
+            "POS/POT root 2"
         ],
         "type": "none",
         "word": "impossible"

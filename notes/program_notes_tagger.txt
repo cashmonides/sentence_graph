@@ -1,4 +1,4 @@
-- Dan not coding (manage_drop_down, adding a util, some new_sentence_tree)
+- Dan not coding
 - Akiva not coding (working in quiz.js and modules.js and a new mode called input_mode.js)
 
 
@@ -10,6 +10,8 @@ Dan: made some progress on genitives, needs to be checked more and verified by A
 
 Akiva: input is debugged and working, font size of input box increased and looking good
 
+Dan: fixed some etymology and added some utils; nothing major
+
 - added functionality: give away answer and wrong answer now occur on the same screen
     - still a little buggy
         - says "whoops try again" when new sentence is given
@@ -20,6 +22,13 @@ Akiva: input is debugged and working, font size of input box increased and looki
 
 
 - little bug: one/single/alone is a duplicate root of one/single
+    - this is where life gets difficult. these roots are indeed different (MONO/UNI).
+    - so the change has to be to the code
+    - proposed fix in implementation:
+         - two roots
+              - with a common word in their descriptions
+              - the word being at least four letters long
+        - can never be co-answer choices
 
 - when main, iq and is are all options, the drop downs get huge
     - this is fitting in a iq or is sentence

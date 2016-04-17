@@ -119,6 +119,10 @@ var get_translated_root = function (root) {
     }
 }
 
+var similar_enough = function (x, y) {
+    return common_word(get_root_meaning(x), get_root_meaning(y), 4);
+}
+
 var make_question_data = function (question_type,
 available_words, available_roots, number_of_answer_choices) {
     // available_words and available_roots are lists.
@@ -138,9 +142,9 @@ available_words, available_roots, number_of_answer_choices) {
             var words_with_root = get_words_with_root(root, available_words);
             clue = random_choice(words_with_root);
             var roots_of_clue = get_roots(clue);
-            choices = push_random_n_satisfying_constraint(
-                [root], available_roots, function (x) {
-                    return roots_of_clue.indexOf(x) === -1},
+            choices = push_random_disjoint(
+                [root], available_roots, similar_enough,
+                function (x) {return roots_of_clue.indexOf(x) === -1},
                 number_of_answer_choices - 1);
             if (question_type == 'word_to_latin_root') {
                 correct_answer = root;
@@ -155,7 +159,7 @@ available_words, available_roots, number_of_answer_choices) {
         case 'english_root_to_word':
             var root = random_choice(available_roots);
             clue = get_root_meaning(root);
-            var words_with_root = get_words_with_root(root, available_words)
+            var words_with_root = get_words_with_root(root, available_words);
             correct_answer = random_choice(words_with_root);
             choices = push_random_n_satisfying_constraint(
                 [correct_answer], available_words, function (x) {
@@ -184,9 +188,13 @@ available_words, available_roots, number_of_answer_choices) {
         case 'root_definition_to_root':
             var root = random_choice(available_roots);
             var meaning = get_root_meaning(root);
-            var root_choices = push_random_n_satisfying_constraint(
-                [root], available_roots, function (x) {return x !== clue},
-            number_of_answer_choices - 1);
+            // Some changes occured here.
+            // The "push random disjoint" function takes a custom equality tester.
+            // Here, the equality test tests whether there is a common word
+            // in the root's descriptions of length at least 4.
+            var root_choices = push_random_disjoint(
+                [root], available_roots, similar_enough,
+                    constant(true), number_of_answer_choices - 1);
             var root_meaning_choices = root_choices.map(get_root_meaning);
             if (question_type === 'root_to_root_definition') {
                 clue = root;
