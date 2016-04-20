@@ -1,4 +1,4 @@
-- Dan not coding
+- Dan coding (trying to make a clean way to remove certain answer choices)
 - Akiva not coding (working in quiz.js and modules.js and a new mode called input_mode.js)
 
 
@@ -34,6 +34,9 @@ Dan: fixed some etymology and added some utils; nothing major
     - this is fitting in a iq or is sentence
     - but especially with a simple main clause, you get all these irrelevant options (had feared, was fearing)
     - would be best if in a main sentence, the options were filtered to only possible answers
+- fixed
+    - there is now a function which detects and fixes this kind of thing
+    - it is extendible for similar issues
 
 - need to:
     - DONE: lexicon needs to be whittled down for early levels
@@ -43,6 +46,8 @@ Dan: fixed some etymology and added some utils; nothing major
 
 - weird!:
     a team called the rainbowfishes were playing module 8 and then skipped to module 16 (attempt #3585)
+    test555 also advanced a few modules
+       this is likely a high priority issue
 
 DISCUSSION
 

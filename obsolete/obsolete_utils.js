@@ -81,3 +81,30 @@ var range = function (start, end) {
 	return ns;
 }
 */
+
+// We apparently actually used this weird util a few months ago.
+/*
+function maximal(l) {
+    ////~`console.log('LOG.maximal all template options = ' + JSON.stringify(l));
+    var result = [];
+    l.forEach(function (x) {
+        var index = -1;
+        x.forEach(function (y) {
+            // Find y's index.
+            var proposed_index = result.indexOf(y);
+            // If y does not occur.
+            if (proposed_index === -1) {
+                // Increase index.
+                index++;
+                // Insert y at new index.
+                result = result.slice(0, index).concat(y, result.slice(index));
+            } else {
+                // Make index y's index.
+                index = proposed_index
+            }
+        })
+    });
+    ////~`console.log('LOG.maximal maximal template = ' + JSON.stringify(result));
+    return result
+}
+*/

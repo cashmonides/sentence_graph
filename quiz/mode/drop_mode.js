@@ -111,7 +111,7 @@ DropModeGame.prototype.next_question = function(sentences){
 DropModeGame.prototype.get_answer_choices = function () {
     var target_tag = this.target_tag;
     var original_attempt = map_level_to_allowed(this.level.grammar_level, grammar_levels);
-    var order = shuffle(original_attempt.slice(0)).filter(
+    var order = shuffle(copy(original_attempt)).filter(
         function (x) {return x !== target_tag});
     order.unshift(target_tag);
     var conflicting_tags;

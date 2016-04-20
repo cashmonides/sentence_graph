@@ -256,8 +256,18 @@ function make_output(level, current_lexicon, none_display) {
     
     // todo allow for extra __verbs__
     for (i = 0; i < master_lexeme_list.used_only.length; i++) {
+        // item is of course a part of speech
         item = master_lexeme_list.used_only[i];
-        states[item] = master_cartesian(level.latin_level, order[item] || ['number_of_other_nouns']);
+        
+        // Sometimes we want to limit our answer choices.
+        // i.e., not give iq and is options in main clauses.
+        // This function lets us do that.
+        var order_var = get_order_var(order, item, state_to_be_made);
+        
+        // this is clear: set the states based on all possibilities
+        // for the variant of the order.
+        // However, there is a hitch, explained in get_order_var.
+        states[item] = master_cartesian(level.latin_level, order_var);
     }
     
     // console.log('states', states, state_to_be_made);
@@ -786,12 +796,23 @@ function set_word_setting_drop_down(state, lexeme, element) {
     return word_settings_map;
 }
 
+var get_order_var = function(order, item, state) {
+    var r = copy(order[item] || ['number_of_other_nouns']);
+    
+    // How we get only main answer choices.
+    if (item === 'verb' && state.clause_type === 'main') {
+        r[0] += '!main'
+    }
+    
+    return r;
+}
+
 function sentence_in_order_list (word_order, sentence) {
     return word_order.map(function (x) {return {'element': x, 'word': sentence[x]}})
 }
 
 function sentence_in_order(word_order, sentence) {
-    return word_order.map(function (x) {return sentence[x]}).join(' ').replace(/ +/g, ' ').replace(/^ | $/g, '');                       //   / = beginning of the regex  += any number of occurrences  /g = applied globally, i.e. repeatedly, until there are no more left
+    return strip(word_order.map(function (x) {return sentence[x]}).join(' '));
 }
 
 function make_kernel_template (kernel, lexeme_list) {
