@@ -360,7 +360,7 @@ function make_form (kernel, level, element, allowed, form_list) {
 
 
 
-function pick_lexeme_new(kernels, level, element, lexemes_used) {
+function pick_lexeme_new(kernels, level, element, lexemes_used, info) {
     var kernel = kernels[0];
    //we want our lexeme to be the right part of speech
     var part_of_speech = (element === "verb" ? "verb" : "noun");
@@ -416,6 +416,10 @@ function pick_lexeme_new(kernels, level, element, lexemes_used) {
     //console.log"DEBUG 9-18 allowed lexemes = ", JSON.stringify(allowed_lexemes.map(
         function (x) {return x.word_id}
     )));
+    
+    if (info) {
+        allowed_lexemes = allowed_lexemes.filter(special_handlerinfo['type'](info['from'])
+    }
     return random_choice(allowed_lexemes);
 }
 

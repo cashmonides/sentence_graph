@@ -1,4 +1,4 @@
-- Dan coding (trying to make a clean way to remove certain answer choices)
+- Dan not coding
 - Akiva not coding (working in quiz.js and modules.js and a new mode called input_mode.js)
 
 
@@ -11,6 +11,8 @@ Dan: made some progress on genitives, needs to be checked more and verified by A
 Akiva: input is debugged and working, font size of input box increased and looking good
 
 Dan: fixed some etymology and added some utils; nothing major
+
+Dan: set up nonsense filters with a domain-specific language
 
 - added functionality: give away answer and wrong answer now occur on the same screen
     - still a little buggy
@@ -61,6 +63,8 @@ the "input" attack
     - write a string cleaning program that cleans out punctuation and capitalization and spacing and long vowels
         - spaces: the lion  ate the crow
         - the/a: for now we should probably require "the" but down the road we should accept "a"
+             - Dan: if it makes any difference, this is a one-minute fix
+             - Dan: it would also allow us to add other pairs of replacements at will
         
 
 

@@ -12,7 +12,7 @@ function make_output(level, current_lexicon, none_display) {
     var i;        //a looping variable
     var item;     // another looping variable
     /*
-    an order is is required because we need to set certain parameters before others
+    an order is required because we need to set certain parameters before others
     full order = sentence-level parameters
     order = parameters for each role
     implicitness!explicit = (maybe makes all subjects explicit) ????
@@ -30,16 +30,15 @@ function make_output(level, current_lexicon, none_display) {
     */
     //todo maybe turn the following into something easier to read, such as a map
     var words_to_make = {'noun': ['subject', 'object'], 'verb': ['verb']};
-
-    
     
     //we initialize all our parameters that will be determined
     var part_of_speech;
     var things_with_part_of_speech;
     var new_lexemes;
     
-
-
+    // in latin we need to set up our dsl.
+    init_dsl();
+    
     /*
     c_b_p_o_s = info to create drop downs based on part of speech
     an empty list which will be filled by objects with parameters:
@@ -499,7 +498,8 @@ function add_to_lexeme_list (
             // console.log('genitive triggered');
             var role = element + '_genitive';
             var pick_result = pick_lexeme_new(state, element + '_genitive',
-            'noun', current_lexicon, master_lexeme_list);
+            'noun', current_lexicon, master_lexeme_list,
+            {role: 'genitive', source_lexeme: pick_result});
             things_with_part_of_speech.push(role);
             return [{role: role, lexeme: pick_result}]
         };
@@ -539,6 +539,7 @@ function add_to_lexeme_list (
         if (i < number_of_pos) {
             triggered_words = trigger_more_words(i, element, pick_result);
             for (var j = 0; j < triggered_words.length; j++) {
+                if (triggered_words[j].lexeme === null) {continue};
                 add_word(triggered_words[j].role, triggered_words[j].lexeme)
             }
         }
@@ -570,9 +571,9 @@ var get_maximal_template = function (level) {
     }
 }
 
-function pick_lexeme_new(kernel, element, part_of_speech, current_lexicon, lexeme_list) {
-    var lexemes_already_used = Object.keys(lexeme_list).map(
-        function (x) {return lexeme_list[x].word_id});
+function pick_lexeme_new(kernel, element, part_of_speech, current_lexicon, lexeme_list, info) {
+    var lexemes_already_used = values(lexeme_list).map(
+        function (x) {return x.word_id}).filter(function (x) {return x !== undefined});
     //we want our lexeme to be the right part of speech
     var allowed_lexemes = current_lexicon.filter(function (lexeme) {
         return lexeme.properties.core.part_of_speech === part_of_speech});
@@ -601,6 +602,10 @@ function pick_lexeme_new(kernel, element, part_of_speech, current_lexicon, lexem
         kernel.clause_type !== 'is') {
         allowed_lexemes = allowed_lexemes.filter(function (lexeme) {
             return lexeme.properties.latin.family !== '3'});
+    }
+    
+    if (info) {
+        allowed_lexemes = allowed_lexemes.filter(lexeme_criteria[info.role](info.source_lexeme));
     }
 
     if (allowed_lexemes.length === 0) {return null}

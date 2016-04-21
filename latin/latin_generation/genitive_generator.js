@@ -130,3 +130,15 @@ function make_lexical_restrictions_for_genitive (input_lexeme) {
         };
     }
 };
+
+
+// We use our dsl to do the above in ten lines (including this comment).
+// This does not count the necessary definitions, however.
+
+var genitive_lexical_restictions = {
+    '_animal': '_place or _human',
+    '_human and (not _ruler)': '_ruler',
+    '_ruler or _kin': '_animal or _plain_human',
+    '_ruler': '_place',
+    'not _animate': '_animate'
+}
