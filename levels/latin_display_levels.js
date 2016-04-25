@@ -1018,7 +1018,7 @@ var latin_display_levels_new = {
     //drops 2-3
     //no extras
     40: {
-        drop_non_drop_map: {'subject_drop': 1, 'verb_drop': 1, 'object_drop': 1, 'conjunction_drop': 0,
+        drop_non_drop_map: {'subject_drop': .1, 'verb_drop': .1, 'object_drop': .1, 'conjunction_drop': 0, 'genitive_drop': .9,
             min: 2, max: 3},
         drop_down_settings: {
             noun: {

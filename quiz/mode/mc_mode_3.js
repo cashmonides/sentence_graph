@@ -53,8 +53,13 @@ MCMode3Game.prototype.next_question = function () {
     var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
     console.log('DEBUG 11-16 lexicon = ', list_of_lexeme_strings)
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
+    console.log("DEBUG 4-25 checkpoint 1, current_Lexicon produced, about to make output");
+    console.log("DEBUG 4-25 about to make output with this.level = ", this.level);
+    console.log("DEBUG 4-25 about to make output with current_lexicon = ", current_lexicon);
     var data = make_output(this.level, current_lexicon);
+    console.log("DEBUG 4-25 exited make_output with data = ", data);
     this.cheat_sheet = data.cheat_sheet;
+    console.log("DEBUG 4-25 data.cheat_sheet = ", data.cheat_sheet);
     //sets data
     // var data = make_output(this.level, null, 'quiz_english');
     this.question = data.question;

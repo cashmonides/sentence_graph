@@ -12,7 +12,7 @@ var lexicon = [
     new Lexeme(
         "goddess",
         {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: false, god: true},
-            english : new English_word_properties("goddess", "goddesses", "goddesses", true, true, false, false, null),
+            english : new English_word_properties("goddess", "goddess", "goddesses", true, true, false, false, null),
             latin : new Latin_word_properties("DE-A", "DE", "DE", null, "1", "f", true, true, false, false, null)
         }),
     new Lexeme(

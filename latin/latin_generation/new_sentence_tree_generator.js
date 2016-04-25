@@ -7,7 +7,7 @@
 function make_output(level, current_lexicon, none_display) {
     
     
-    
+    console.log("DEBUG 4-25 checkpoint 2 in make_output");
     
     var i;        //a looping variable
     var item;     // another looping variable
@@ -30,6 +30,9 @@ function make_output(level, current_lexicon, none_display) {
     */
     //todo maybe turn the following into something easier to read, such as a map
     var words_to_make = {'noun': ['subject', 'object'], 'verb': ['verb']};
+    
+    
+    console.log("DEBUG 4-25 checkpoint 3 in make_output");
     
     //we initialize all our parameters that will be determined
     var part_of_speech;
@@ -57,12 +60,13 @@ function make_output(level, current_lexicon, none_display) {
     //we set our drop_down_settings    
     var drop_down_settings = map_level_to_allowed(level.latin_extra_level, latin_extra_levels)['drop_down_settings'];
     
+    console.log("DEBUG 4-25 checkpoint 4 in make_output");
     
     //we randomly pick a state to be made out of all possible states
     var state_to_be_made = master_cartesian(level.latin_level, full_order, 'random');
 
     
-
+    console.log("DEBUG 4-25 checkpoint 5 in make_output");
     
     /*
     
@@ -128,7 +132,7 @@ function make_output(level, current_lexicon, none_display) {
     
     
     
-    
+    console.log("DEBUG 4-25 checkpoint 6 in make_output");
     
     /////////step 1 - trigger some initial change of state (number, based on person which is picked randomly from allowed)
     
@@ -147,6 +151,8 @@ function make_output(level, current_lexicon, none_display) {
     var lexeme_list_settings = {
         genitives: get_genitive_settings(level, words_to_make.noun.length)
     }
+    
+    console.log("DEBUG 4-25 checkpoint 7 in make_output");
     
     //we iterate through words_to_make
     //with the goal of initializing 2 things:
@@ -173,6 +179,7 @@ function make_output(level, current_lexicon, none_display) {
 
 
 
+    console.log("DEBUG 4-25 checkpoint 8 in make_output");
 
 
 
@@ -185,7 +192,7 @@ function make_output(level, current_lexicon, none_display) {
     //we've reached a new equilibrium
     //person, number, transitivity, gender of subject & all lexemes & other stuff that was set randomly etc.etc.etc.
     
-    
+    console.log("DEBUG 4-25 checkpoint 9 in make_output");
     
     //we're still lacking information about what is actually going to be used
     //e.g. we might not use an object
@@ -201,6 +208,7 @@ function make_output(level, current_lexicon, none_display) {
     // This is hacky (to a certain extent) and possibly incorrect.
     master_lexeme_list.used_only = none_display ? get_maximal_template() : state_to_be_made.template;
 
+    console.log("DEBUG 4-25 checkpoint 10 in make_output");
 
     //we've arrived at a final equilibrium of drop-down-template (i.e. what's displayed on the drop down)
 
@@ -208,6 +216,7 @@ function make_output(level, current_lexicon, none_display) {
     creation_by_part_of_speech.forEach(function (x) {x.results = x.results.filter(
     function (y) {return master_lexeme_list.used_only.indexOf(y) !== -1})});
     
+    console.log("DEBUG 4-25 checkpoint 11 in make_output");
     
     // console.log('DEBUG 12-23 master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make = ',
     // master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make;
@@ -221,10 +230,15 @@ function make_output(level, current_lexicon, none_display) {
     ////////end of establishing equilibrium
     /////////begin generating kernels
 
+    console.log("DEBUG 4-25 level = ", level);
+    console.log("DEBUG 4-25 state_to_be_made = ", state_to_be_made);
+    console.log("DEBUG 4-25 master_lexeme_list = ", master_lexeme_list);
+
     //now that equilibrium is established, we need to produce a target sentence (here called "correct")
     var correct = make_kernel_new(level, state_to_be_made,
         master_lexeme_list.get_lexemes('used_only'));
 
+    console.log("DEBUG 4-25 checkpoint 12 in make_output");
 
     /*
     //todo what_to_vary seems obsolete
@@ -246,6 +260,7 @@ function make_output(level, current_lexicon, none_display) {
     */
     var states = {};
     
+    console.log("DEBUG 4-25 checkpoint 13 in make_output");
     
    
     //now we need to populate states
@@ -271,6 +286,7 @@ function make_output(level, current_lexicon, none_display) {
     
     // console.log('states', states, state_to_be_made);
 
+    console.log("DEBUG 4-25 checkpoint 14 in make_output");
 
     ////////finished creating all posssible states
 
@@ -318,6 +334,7 @@ function make_output(level, current_lexicon, none_display) {
         }
     }
 
+    console.log("DEBUG 4-25 checkpoint 15 in make_output");
 
     /////we've arrived at middle point of output
     
@@ -334,6 +351,8 @@ function make_output(level, current_lexicon, none_display) {
             })
     }
     
+    console.log("DEBUG 4-25 checkpoint 16 in make_output");
+    
     // console.log('output =', output);
 
     // todo english_template should no longer be needed
@@ -343,10 +362,14 @@ function make_output(level, current_lexicon, none_display) {
     console.log('DEBUG 12-23 english_template = ', english_template);
     console.log(level.latin_drop_level);
     */
+    
+    console.log("DEBUG 4-25 checkpoint 17 in make_output");
+    
     var drop_non_drop_map = drop_non_drop_creation(
         map_level_to_allowed(level.latin_drop_level, latin_drop_levels)['drop_non_drop_map'], english_template);
 
 
+    console.log("DEBUG 4-25 checkpoint 18 in make_output");
 
     var r = {
         'question': "Translate the following sentence:",
@@ -357,6 +380,8 @@ function make_output(level, current_lexicon, none_display) {
         'give_away_ending_phrase': ".",
         'cheat_sheet': cheat_sheet(master_lexeme_list.get_lexemes_as_list('all_lexemes'))
     };
+    
+    console.log("DEBUG 4-25 checkpoint 19 in make_output");
     // console.log('DEBUG 12-23 make_output result = ', r);
     return r
 }
@@ -619,6 +644,7 @@ function pick_lexeme_new(kernel, element, part_of_speech, current_lexicon, lexem
 function make_kernel_new (level, state, lexeme_list) {
     var template = state.template;
 
+    console.log("DEBUG 4-25 checkpoint 1 in make_kernel_new");
     var form_dict = {};
     for (var i = 0; i < template.length; i++) {
         var word_setting = set_word_setting_new(state, lexeme_list[template[i]], template[i], level);
@@ -626,7 +652,7 @@ function make_kernel_new (level, state, lexeme_list) {
     }
     state.form_dict = form_dict;
 
-
+    console.log("DEBUG 4-25 checkpoint 2 in make_kernel_new");
     //we create a dictionary with only one initial key:value pair
     //string : function
     //later on we're going to add other key:value pairs
@@ -634,13 +660,21 @@ function make_kernel_new (level, state, lexeme_list) {
     var sentence_in_english = {'inflect': inflect_english};
     var sentences = [sentence_in_latin, sentence_in_english];
 
-
+    console.log("DEBUG 4-25 checkpoint 3 in make_kernel_new");
     //we iterate through form list and inflect each form
     //within this iteration we iterate through the sentences (here latin and english)
     for (i in form_dict) {
         var current_form = form_dict[i];
+        console.log("DEBUG 4-25 current_form = ", current_form);
+        // console.log("DEBUG 4-25 current_form.lexeme = ", current_form.lexeme);
+        // console.log("DEBUG 4-25 current_form.word_settings = ", current_form.word_settings);
+        
         for (var j = 0; j < sentences.length; j++) {
             var sentence = sentences[j];
+            
+            console.log("DEBUG 4-25 current_form.lexeme = ", current_form.lexeme);
+            console.log("DEBUG 4-25 current_form.word_settings = ", current_form.word_settings);
+            
             // if sentence is implicit and we are dealing with a subject do not do anything else this loop
             if (i === 'subject' && state.implicitness === "implicit") {continue}
             var word = sentence.inflect(state, current_form.lexeme, current_form.word_settings);
@@ -648,6 +682,8 @@ function make_kernel_new (level, state, lexeme_list) {
             //todo should helping verbs in english also be treated the same way?
             //first condition is if the return is an object (i.e. a dictionary)
 
+            console.log("DEBUG 4-25 word = ", word);
+            
             if (typeof word === 'object') {
                 //in which case we iterate through the dictionary
                 for (var k in word) {
@@ -666,6 +702,7 @@ function make_kernel_new (level, state, lexeme_list) {
         }
     }
 
+    console.log("DEBUG 4-25 checkpoint 4 in make_kernel_new");
     //todo make word order part of level_to_allowed
     //todo abolish evil subject-object-verb
     //hegemonic and discriminatory framework
@@ -681,6 +718,7 @@ function make_kernel_new (level, state, lexeme_list) {
     
     // console.log('sentence_in_latin_text, part_order, default_latin_word_order =', sentence_in_latin_text, part_order, default_latin_word_order);
 
+    console.log("DEBUG 4-25 checkpoint 5 in make_kernel_new");
     var kernel_with_output = {};
     kernel_with_output['kernel'] = state;
     kernel_with_output['sentence_in_latin'] = sentence_in_latin_text;
@@ -688,12 +726,14 @@ function make_kernel_new (level, state, lexeme_list) {
 
     kernel_with_output['template'] = template;
 
+    console.log("DEBUG 4-25 checkpoint 6 in make_kernel_new");
     var sentence_in_english_text = sentence_in_order_list(default_english_word_order, sentence_in_english);
     for (i = 0; i < sentence_in_english_text.length; i++) {
         kernel_with_output[sentence_in_english_text[i].element + '_in_english'] =
             sentence_in_english_text[i].word;
     }
 
+    console.log("DEBUG 4-25 checkpoint 7 in make_kernel_new");
     kernel_with_output.english_word_order = default_english_word_order;
 
     return kernel_with_output;

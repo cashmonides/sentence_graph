@@ -598,7 +598,7 @@ var latin_levels = {
         voice: ["active"],
         number_of_other_nouns : ["singular"],
         shuffle: [true, false],
-        genitive_quantity: [0, 1],
+        genitive_quantity: [1, 2],
         genitive_number: ["singular", "plural"],
         genitive_scramble: false
     }
@@ -619,6 +619,6 @@ var latin_levels = {
     //add dative
     
     
-    //add genitive
+   
     
 };
