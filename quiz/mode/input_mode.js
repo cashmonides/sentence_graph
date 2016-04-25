@@ -103,7 +103,6 @@ InputModeGame.prototype.next_question = function () {
     var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
     console.log('DEBUG 11-16 lexicon = ', list_of_lexeme_strings)
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
-    console.log("are we ok:", 'make_output' in window);
     var data = make_output(this.level, current_lexicon);
     this.cheat_sheet = data.cheat_sheet;
     //sets data
@@ -192,7 +191,7 @@ InputModeGame.prototype.process_answer = function(){
     correct_english_translation = clean_input_string(this.correct_answer);
     
     
-    if (processed_input_string === correct_english_translation) {
+    if (object_equals(processed_input_string, correct_english_translation)) {
         this.process_correct_answer();
     } else {
         this.process_incorrect_answer();

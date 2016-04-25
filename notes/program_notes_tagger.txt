@@ -1,6 +1,22 @@
-- Dan not coding
+- Dan coding (in mf mode)
 - Akiva not coding (working in quiz.js and modules.js and a new mode called input_mode.js)
 
+Hi Akiva! I was here.
+I created an mf mode file.
+I might be in that if I'm not here.
+If you're here, it's likely that I'm still with my mom on a walk.
+
+Not fully examined.
+
+Current issues and questions (from mf mode):
+// MF Issue 0: What needs to be changed outside of mf_mode?
+// MF Issue 1: Different things (drop downs, clickability)
+// will be displayed at different times.
+// MF Question 1: Is there a better name than mf for this mode,
+// like moreland-fleicher?
+// MF Issue 2: Does an MF game need other types of levels?
+// MF Issue 3: What do we need to do (in terms of getting data)
+// beyond calling make_output?
 
 SHORT MESSAGE SPACE
 Dan: made some progress on genitives, needs to be checked more and verified by Akiva

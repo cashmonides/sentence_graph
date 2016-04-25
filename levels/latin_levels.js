@@ -570,6 +570,40 @@ var latin_levels = {
         genitive_scramble: false
     },
     
+    
+    ///////////
+    
+    //add genitives
+    
+    1000 : {
+        clause_type : ["main"],
+        sequence: {
+            main: ['none'],
+            is: ['primary', 'secondary'],
+            iq: ['primary', 'secondary']
+        },
+        tense : {
+            main: ["present"],
+            is :["present_infinitive", 'perfect_infinitive'],
+            iq : {
+                primary: ["present_subjunctive", "perfect_subjunctive"],
+                secondary: ["imperfect_subjunctive", "pluperfect_subjunctive"]
+            }
+        },
+        implicitness : ["explicit"],
+        person : {
+            explicit : ["3s"],
+            implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]
+        },
+        voice: ["active"],
+        number_of_other_nouns : ["singular"],
+        shuffle: [true, false],
+        genitive_quantity: [0, 1],
+        genitive_number: ["singular", "plural"],
+        genitive_scramble: false
+    }
+    
+    
     ///////////////////////////
     
     //add adjectives

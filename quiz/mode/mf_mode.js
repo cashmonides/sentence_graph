@@ -1,22 +1,20 @@
-// MC mode.
+// This is the mf mode file.
 
-var MCMode3Game = function(){
+
+var MFModeGame = function() {
     this.data = null;
     this.quiz = null;
     // todo we here assume that 1 is the initial level
     this.level = 1;
 };
 
-MCMode3Game.cell_1_feedback_right = ["Correct!", "Excellent!"];
-MCMode3Game.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
-MCMode3Game.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
+MFModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
+MFModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
+MFModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
-MCMode3Game.prototype.attach = function(){
-    // make word selector nonclickable (somewhere in set word selector)
-    //(should word_selector.setup bave a flag for clickable or not clickable?
-    //maybe something like in setup, if clickable is false then it just sets r[0] to false
-
-    //todo
+MFModeGame.prototype.attach = function(){
+    // MF Issue 1: different things will be displayed at different times.
+    // let's consider ways to handle this
     set_display("latin_answer_choices", 'initial');
     set_display("drop_answer_choices", 'none');
     set_display("submit_button", 'initial');
@@ -33,17 +31,19 @@ MCMode3Game.prototype.attach = function(){
 };
 
 // set_level now moved up
-MCMode3Game.prototype.set_level = function (new_level) {
+MFModeGame.prototype.set_level = function (new_level) {
     this.level = new_level;
 }
 
 
-MCMode3Game.prototype.get_mode_name = function() {
-    return "latin";
+MFModeGame.prototype.get_mode_name = function() {
+    // MF Question 1: Is there a better name, like moreland-fleicher?
+    return "mf";
 };
 
 
-MCMode3Game.prototype.next_question = function () {
+MFModeGame.prototype.next_question = function () {
+    // MF Issue 2: Does an MF game need other types of levels?
     var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
@@ -53,6 +53,7 @@ MCMode3Game.prototype.next_question = function () {
     var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
     console.log('DEBUG 11-16 lexicon = ', list_of_lexeme_strings)
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
+    // MF Issue 3: What do we need to do beyond calling make_output?
     var data = make_output(this.level, current_lexicon);
     this.cheat_sheet = data.cheat_sheet;
     //sets data
@@ -241,5 +242,3 @@ MCMode3Game.prototype.give_away_answer = function (){
     fbox.innerHTML = this.give_away_phrase + this.correct_answer + this.give_away_ending_phrase;
     this.quiz.question_complete();
 };
-
-
