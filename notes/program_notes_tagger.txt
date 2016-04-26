@@ -14,11 +14,18 @@ Current issues and questions (from mf mode):
 // will be displayed at different times.
 // MF Question 1: Is there a better name than mf for this mode,
 // like moreland-fleicher?
+//AKiva: MF seems fine
 // MF Issue 2: Does an MF game need other types of levels?
+//Akiva: for now just levels 1-18 to correspond to the chapters
 // MF Issue 3: What do we need to do (in terms of getting data)
 // beyond calling make_output?
+//Akiva: I'm not sure. Seems like we have input mode (string matching) and drop mode (answering syntax questions)
 
 SHORT MESSAGE SPACE
+
+Akiva: Hi Dan. I checked out MF mode. Good progress!!! See my emails for genitive issues. 
+And see my emails for my attempt at creating model translations. We're making great progress!!
+
 Dan: made some progress on genitives, needs to be checked more and verified by Akiva
 - specifically
     - everything but nonsense and scrambling should be good
