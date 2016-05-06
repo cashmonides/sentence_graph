@@ -355,10 +355,15 @@ Quiz.prototype.next_mode = function(){
         throw "modes exhausted";
     }
     
-    
+    console.log("DEBUG 5-6 checkpoint 1");
     var mode = weighted(allowed);
+    console.log("DEBUG 5-6 checkpoint 2 mode = ", mode);
+    console.log("DEBUG 5-6 game_mode_map[mode] = ", game_mode_map[mode]);
     var game = Quiz.get_mode(game_mode_map[mode]);
+    console.log("DEBUG 5-6 checkpoint 3 game = ", game);
     this.game = game;
+    console.log("DEBUG 5-6 checkpoint 4 this.game = ", this.game);
+    
     //todo understand the following
     this.game.quiz = this;
     this.game.attach();
@@ -373,6 +378,7 @@ Quiz.get_mode = function(mode_number) {
         // case 3 : return new GenericDropGame();
         case 4 : return new EtymologyModeGame();
         case 5 : return new InputModeGame();
+        case 6 : return new MFModeGame();
         default : throw "no game mode triggered";
     }
     
@@ -405,6 +411,7 @@ Quiz.prototype.next_question = function (){
         
         //todo out of desperation, commented this out
         
+        console.log("DEBUG 5-6 this.game = ", this.game);
         // Originally: add not push
         var sick_mode = this.game.get_mode_name();
         //only push if it's not in our list already
@@ -448,6 +455,17 @@ Quiz.prototype.question_complete = function () {
 Quiz.prototype.update_accuracy = function () {
     this.user.update_question_metrics(this.submodule.incorrect_streak, this.module.id);
     this.update_accuracy_dict();
+}
+
+Quiz.prototype.update_sentence_log = function (question, chapter, status) {
+    this.user.log_sentences(question, chapter, status);
+}
+
+
+Quiz.prototype.log_skipped_question = function () {
+    var current_question = this.game.get_current_question();
+    var current_chapter = this.game.get_current_chapter();
+    this.update_sentence_log(current_chapter, current_question, "skipped");
 }
 
 Quiz.prototype.update_accuracy_dict = function () {
@@ -769,7 +787,11 @@ Quiz.prototype.get_number_of_tries = function () {
 
 
 Quiz.prototype.get_reward = function () {
-    return this.module.submodule['reward' + this.get_number_of_tries()];
+    if ('reward' in this.module.submodule) {
+        return this.module.submodule['reward'];
+    } else {
+        return this.module.submodule['reward' + this.get_number_of_tries()];
+    }
 }
 
 

@@ -21,6 +21,47 @@ Current issues and questions (from mf mode):
 // beyond calling make_output?
 //Akiva: I'm not sure. Seems like we have input mode (string matching) and drop mode (answering syntax questions)
 
+
+AGENDA FRIDAY
+
+MUST DO:
+firebase function that tags what sentence they are up to
+install a skip sentence button
+store the skipped sentences firebase
+       
+       
+       
+        
+
+
+DAN
+make matching function
+make a function that iterates through a list like 2.2, 2.3, 2.7 in order
+    input is 
+
+AKIVA
+adapting mf mode
+import all the deterministic material
+make progress bar reflective of how many sentences they've done
+
+
+STEP 2 in MF MODE
+- make something that displays the percentage of the match (e.g. 66.6 percent match)
+
+STEP 3 in MF MODE (beyond input)
+- highlight the words in their answer that are a problem
+- adapt tagger so it can tag verbs with 5 parameters (tense, mood, constructon...)
+- adapt drop mode so it has 5 drops for the parameters
+- make mf mode a hybrid of drop mode and input mode (drop for syntax, input for translation)
+
+
+STEP 4 in MF MODE
+- make the matching function more sophisticated so it weights by the length of match
+
+
+
+
+
 SHORT MESSAGE SPACE
 
 Akiva: Hi Dan. I checked out MF mode. Good progress!!! See my emails for genitive issues. 
@@ -230,6 +271,11 @@ DETAILED AGENDA ITERATION 1.5
     - bigger space, different font
     - underline the left hand column (whether it's a root or a word)
     
+- make an alert for emails ending in:
+    - tagscholars.com : forgotten passwords are disabled due to tags firewall
+    - tag.test: talk to akiva in class about forgotten passwords
+    - tag.solo: talk to akiva in class about forgotten passwords
+
  
 - write an error logging parser
     - quantity of each type of error

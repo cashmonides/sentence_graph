@@ -263,6 +263,7 @@ InputModeGame.prototype.give_away_answer = function (){
     set_display("submit_button", 'none');
     set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'none');
+    set_display("skip_button", 'none');
     var fbox_for_input = el("feedback_for_input");
     fbox_for_input.innerHTML = this.give_away_phrase + "<br\/>" + this.correct_answer + this.give_away_ending_phrase;
     // this.quiz.question_complete();

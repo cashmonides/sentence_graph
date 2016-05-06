@@ -25,7 +25,7 @@ var mode_map = {
     "change_password_button": [[4], "inline"],
 
 
-    "reset_password_instructions": [[3], 'inline']          //something like "enter your email and you'll be sent a temporary password to change your account with
+    // "reset_password_instructions": [[3], 'inline']          //something like "enter your email and you'll be sent a temporary password to change your account with
 };
 
 
