@@ -30,13 +30,13 @@ var mf_sentences = {
 
 	1.10: ["Taedās in viā vidēre timēbō.", "I-will-{be-afraid||fear}-to-see the torches-in-the-road."],
 
-	1.11: ["Taedamne in īnsulā vidētis?", "Do-you-see (plural) the torch-in/on-the-island?"],
+	1.11: ["Taedamne in īnsulā vidētis?", "Do-you-(plural)-see the torch-in/on-the-island?"],
 
 	1.12: ["Turbamne fēminārum in īnsulā vidēs?", "Do-you-see the crowd-of-women on/in-the-island?"],
 
 	1.13: ["Cum poētā ē portīs in viam ambulō", "I-walk with-the-poet  out-of-the-gates into/onto-the-street."],
 
-	1.14: ["Poētae et poenam et fāmam timent.", "The poets fear both-money-and-fame/glory."],
+	1.14: ["Poētae et poenam et fāmam timent.", "The poets fear both-penalty/punishment-and-fame/glory."],
 
 	1.15: ["Viās turbā implēbunt.", "They-will-fill the roads with-a-crowd/uproar."],
 
@@ -177,7 +177,7 @@ MFModeGame.prototype.next_question = function () {
     
     
     
-    this.give_away_phrase = "If you'd like to skip this question and move on, click NEXT If you'd like to keep trying, click SUBMIT.";
+    this.give_away_phrase = 'If you\'d like to skip this question and move on, click "NEXT". If you\'d like to keep trying, click "SUBMIT".';
     //this.give_away_ending_phrase = "dummy give away ending phrase";
     
     
@@ -318,12 +318,12 @@ MFModeGame.prototype.process_incorrect_answer = function () {
 // we want the feedback box to remain operational
 // so we change some if statements
 MFModeGame.prototype.give_away_answer = function (){
-    set_display("next_button", 'none');
+    set_display("next_button", 'initial');
     set_display("feedback_for_input", 'initial');
     set_display("submit_button", 'initial');
     set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'none');
-    set_display("skip_button", 'initial');
+    set_display("skip_button", 'none');
     var fbox_for_input = el("feedback_for_input");
     fbox_for_input.innerHTML = this.give_away_phrase;
     // var fbox = el("feedbackbox");
