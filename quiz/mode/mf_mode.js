@@ -18,7 +18,7 @@ var mf_sentences = {
 
 	1.4: ["Poētīsne rēgīna pecūniam dabit?", "Will-the-queen-give the money to-the-poets?"],
 
-	1.5: ["Rēgīnam īnsulae cum turbā nautārum vidēre optābāmus.", "We-wanted/chose-to-see the queen-of-the-island with-the-crowd-of-the-sailors."],
+	1.5: ["Rēgīnam īnsulae cum turbā nautārum vidēre optābāmus.", "We {were-wanting||wanted||were-choosing||chose} to-see the queen-of-the-island with-the-crowd-of-the-sailors."],
 
 	1.6: ["Fēminae enim poētās corōnīs corōnābunt.", "Indeed the women will-crown the poets with-crowns."],
 
@@ -34,13 +34,13 @@ var mf_sentences = {
 
 	1.12: ["Turbamne fēminārum in īnsulā vidēs?", "Do-you-see the crowd-of-women on/in-the-island?"],
 
-	1.13: ["Cum poētā ē portīs in viam ambulō", "I-walk with-the-poet  out-of-the-gates into/onto-the-street."],
+	1.13: ["Cum poētā ē portīs in viam ambulō", "I-walk with-the-poet out-of-the-gates into/onto-the-street."],
 
 	1.14: ["Poētae et poenam et fāmam timent.", "The poets fear both-penalty/punishment-and-fame/glory."],
 
 	1.15: ["Viās turbā implēbunt.", "They-will-fill the roads with-a-crowd/uproar."],
 
-	1.16: ["Nautae fēminās taedīs terrēbant", "The sailors were-terrifying the women with-torches."],
+	1.16: ["Nautae fēminās taedīs terrēbant", "The sailors were-terrifying/frightening the women with-torches."],
 
 	
 	1.17: ["Et pecūniā et corōnīs poētās dōnābis.", "You-will-present/reward the poets with-both-money-and-crowns."],
@@ -68,8 +68,12 @@ var mf_sentences = {
 }
 
 MFModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
-MFModeGame.cell_1_feedback_wrong = ["That doesn't match the model translation.", "That doesn't match the model translation."];
-MFModeGame.cell_3_feedback_wrong = ["That doesn't match the model translation.", "That doesn't match the model translation."];
+// Originally values here were lists with the same item repeated.
+// I made them strings because I thought that would be clearer.
+// But then it turned out that they weren't ever used.
+// So I commented them out.
+// MFModeGame.cell_1_feedback_wrong = "That doesn't match the model translation.";
+// MFModeGame.cell_3_feedback_wrong = "That doesn't match the model translation.";
 
 
 MFModeGame.prototype.attach = function(){

@@ -22,6 +22,12 @@ Current issues and questions (from mf mode):
 //Akiva: I'm not sure. Seems like we have input mode (string matching) and drop mode (answering syntax questions)
 
 
+AGENDA THURSDAY
+- persistence of progress bar between sessions
+- store skipped questions
+- highlight wrong answer
+
+
 AGENDA FRIDAY
 
 MUST DO:

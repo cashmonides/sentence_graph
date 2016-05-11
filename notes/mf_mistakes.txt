@@ -1,0 +1,71 @@
+Not having read M&F in a while, and having lowered my Latin through
+not studying, I sometimes am unable to answer an MF mode question.
+Here are reasons and potential fixes:
+
+---------------
+
+Cum poētā ē portīs in viam ambulō
+attempt: with the poet I walk in the road from the gates
+issue: from vs. out of
+comments: This is a synonym issue. As with any synonym issue,
+there are three solutions:
+The do-nothing approach:
+1: leave as is, because the words under consideration aren't actually synonyms,
+i.e., may answer wasn't actually correct.
+The obvious approach:
+2: replace everywhere (here this sentence is the only occurance of
+from|out-of confusion, but in the future or other occasions there might be more)
+The automatic (but still manual) approach:
+3: replace built in. i.e, way to replace text before processing.
+general cons:
+has to be written in a way that won't mess with model or displayed
+this type of thing is notorious for letting you shoot yourself in the foot
+  3a: from and out-of both map to {from|out-of}
+  (i.e, replace both elements of synonym)
+     con: requires replacement of all current from|out-of
+     con: slightly more likely to backfire, i.e., we want fromage -> cheese too
+     and get in a mess with conflicting replacement
+  3b: FOF maps to {from|out-of} (i.e., create new abbreviation)
+     con: requires same change as before and makes things less readable
+  3c: something more sophisticated
+     con: hard to implement
+
+----------------
+
+Viās turbā implēbunt. (note inconsistancy about using period)
+attempt: we will fill the roads with a crowd
+issue: they vs we!!! Exactly the type of thing we want to catch!!!
+comments: My first though was that I should use "by means of" instead of "with".
+Would that have been acceptable? I don't think it's allowed right now.
+Another synonym issue?
+
+----------------
+
+Īnsulam esse patriam habēbat.
+attempt: he considers the island to be his homeland
+issue: considers vs. was considering!!! Good!!! (in the future, just +)
+comments: I tried "native land" and it was not allowed.
+Same type of issue as above. I'll call this "p not q," where
+p and q are the relevant phrases (p correct, q not).
+
+Issues like this are synonym issues. It indeed seems that most 
+issues are like this.
+
+----------------
+
+Taedās in viā vidēre timēbō.
+attempt: i will fear the torches in the road
+issue: 2 issues
+1: "to see" missing +
+2: "be afraid" not "fear"
+comnments: I was allowed to proceed after fixing issue 1 alone (75%)
+
+----------------
+
+Fēminās in viīs vidēbātis, sed dē fōrmā nōn clāmābātis. Poenās dabitis.
+attempt: you were seeing the women in the road, but you were not
+screaming about their beauty. You will pay the penalty.
+issues:
+"roads" vs. "road" +
+"shouting" not "screaming"??? (this could very well be OK)
+comments: "beauty" not "appearance"
