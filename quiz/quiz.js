@@ -392,7 +392,8 @@ Quiz.prototype.next_question = function (){
     
     // Persist.clear_node(["xxx"]);   put users where it says xxx
     
-    
+    //todo xxx hack this was a hack, remove 
+    el('image_display_box').innerHTML = '';
     
     
     console.log('DEBUG 12-23 entering next_question')
@@ -588,14 +589,24 @@ Quiz.prototype.submodule_complete = function () {
     
     // console.log("DEBUGGING entering problem lightbox area 11-19");
     
+    
+    console.log("DEBUG 5-12 about to make callback - should be null until submodule is complete");
     //callback is null when submodule is not yet complete
     var callback = this.user.submodule_complete(this.module.id);
+    console.log("DEBUG 5-12 callback = ", callback);
     
+    var new_callback = debug_via_log(callback, 'callback');
+    
+    new_callback = do_all(function () {
+        el('next_level_button').display = 'none';
+        el('image_display_box').innerHTML = '';
+    }, new_callback);
     //if submodule complete
     if (callback !== null) {
         if (this.advance_improve_status === 'improving') {
             //we do everything what we normally do, increment progress, persist
-            callback();
+            new_callback();
+            return; // in case this somehow stays in scope.
         } else {
             console.log("DEBUG 11-16 user.submodule_complete is true");
             // console.log("DEBUG 1-29 this.module before change  = ", this.module);
@@ -605,11 +616,11 @@ Quiz.prototype.submodule_complete = function () {
             
             // console.log("DEBUGGING LIGHTBOX: you've beaten this level");
             if (this.urge_users_to_continue) {
-                this.fill_lightbox("YOU'VE BEATEN THIS LEVEL! EXCELSIOR!! GET READY TO CONQUER:", 1, 0);
+                this.fill_lightbox("YOU'VE BEATEN THIS LEVEL! EXCELSIOR!!\nGET READY TO CONQUER:", 1, 0);
             } else {
                 this.fill_lightbox("YOU'VE BEATEN THIS LEVEL! EXCELSIOR!!");
             }
-            $.featherlight($('#pop_up_div'), {afterClose: callback});
+            // $.featherlight($('#pop_up_div'), {afterClose: callback});
         }
     } 
     //else if submodule is not complete
@@ -618,8 +629,12 @@ Quiz.prototype.submodule_complete = function () {
         //todo put following into function (encapsulation and information hiding)
         //todo make this less hacky
         this.fill_lightbox("YOUR PROGRESS IS: " + (numerator + 1) + "/" + denominator);
-        $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
+        new_callback = this.next_submodule.bind(this);
+        //el('next_level_button').onclick = this.next_submodule.bind(this);
+        // $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
     }
+    set_display("next_level_button", 'initial');
+    el('next_level_button').onclick = new_callback;
 };
 
 
@@ -697,8 +712,8 @@ Quiz.prototype.process_answer = function(){
 Quiz.prototype.get_lightbox_image = function(mod_id, progress) {
     var image_list = ALL_MODULES[mod_id].lightbox_images;
     if (image_list) {
-        console.log("DEBUG 1-13 image_list = ", image_list);
-        console.log("DEBUG 1-13 entering image picking");
+        console.log("DEBUG 5-12 image_list = ", image_list);
+        console.log("DEBUG 5-12 entering image picking");
         var true_progress;
         if (mod_id in this.user.data.history) {
             if (progress === undefined) {
@@ -714,13 +729,14 @@ Quiz.prototype.get_lightbox_image = function(mod_id, progress) {
         
         if (index === -1) {index++};
         
-        console.log("DEBUG 1-13 index = ", index);
+        console.log("DEBUG 5-12 index = ", index);
         var image = image_list[index];
     } else {
         console.log('image list does not exist');
         var image = null;
     }
-    console.log('image =', image);
+    console.log('DEBUG 5-12 ')
+    console.log('DEBUG 5-12 image =', image);
     return image;
 }
 
@@ -748,7 +764,7 @@ Quiz.prototype.fill_lightbox = function(text, offset, progress) {
     
     var image = this.process_lightbox_image(offset, progress);
     
-    el('pop_up_div').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text + image;
+    el('image_display_box').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text + image;
 };
 
 

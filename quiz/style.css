@@ -218,7 +218,13 @@ body {
     display:none;   /*change this later when we have images to display*/
     /*max-width:100%;*/
     /*max-height:100%;*/
-
+    
+    /*hacky way of making the pseudo-lightbox remove when lightbox is operational*/
+    overflow-x:scroll;
+    overflow-y:scroll;
+    max-width:100%;
+    max-height:65%;
+    /*end of desparate hack*/
 
     /*<div style="height:180px;width:180px;overflow:auto;">*/
     /*<img src="/pix/samples/11m.jpg" alt="Sample picture for scroll box">*/

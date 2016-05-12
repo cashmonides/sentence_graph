@@ -26,6 +26,7 @@ MCMode3Game.prototype.attach = function(){
     set_display("input_box", 'none');
     set_display("next_button", 'none');
     set_display("skip_button", 'none');
+    set_display("next_level_button", 'none');
     // state.switch_count = 1
     
     //this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);

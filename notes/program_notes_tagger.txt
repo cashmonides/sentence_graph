@@ -26,6 +26,8 @@ AGENDA THURSDAY
 - persistence of progress bar between sessions
 - store skipped questions
 - highlight wrong answer
+- improve cosmetics of feedback
+- add skip button to first iteration of question?
 
 
 AGENDA FRIDAY

@@ -117,3 +117,56 @@ User.prototype.get_current_stats = function (module_id) {
 
 //quiz has this.submodule.score which will be our submodule_number
 // 
+
+
+// stuff which kept creating bogus search results
+// var empty_callback2 = function () {
+//     return;
+// }
+
+//this is modeled on the get in user data loaded
+// var test_output = this.request_data(["users", this.uid, "profile", "name"], empty_callback3);
+
+
+
+//below didn't seem to work without a callback (said invalid path)
+// var test_output = Persist.get(["users", this.uid, "profile", "name"]);
+
+//below (adding an empty callback) doesn't give an error but doesn't seem to work either
+// var empty_callback2 = function () {
+//     return;
+// }
+// var test_output = Persist.get(["users", this.uid, "profile", "name"], empty_callback2);
+
+//the radical move of imitating the get procedure in admin doesn't work either
+//error = Uncaught TypeError: b.replace is not a function
+// var test_output = this.get_data(["users", this.uid, "profile", "name"]);
+
+// console.log("DEBUG 12-30 test_output = ", test_output);
+
+
+
+
+
+
+// if (!mod.time_metrics) {
+//     mod.time_metrics = {};    
+// }
+
+// //just did 1st question on a new iteration of the module
+// if (!(mod.iteration in mod.time_metrics)) {
+//     mod.time_metrics[mod.iteration] = {};            //creates key (int) and value (empty map)
+// } 
+
+// var map = mod.time_metrics[mod.iteration];
+
+
+
+// if (!map['start_time']) {
+//     map['start_time'] = [];
+// }
+// map['start_time'].push(start_time);
+
+// map['start_time'] = start_time;
+
+// this.persist(["history", module_id, "time_metrics"], mod.time_metrics);

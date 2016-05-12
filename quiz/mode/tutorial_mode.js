@@ -18,6 +18,7 @@ TutorialModeGame.prototype.attach = function(){
     set_display("vocab_cheat_button", 'none');
     set_display("etym_cheat_button", 'none');
     set_display("input_box", 'none');
+    set_display("next_level_button", 'none');
 };
 
 
