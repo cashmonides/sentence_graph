@@ -764,6 +764,11 @@ Quiz.prototype.fill_lightbox = function(text, offset, progress) {
     
     var image = this.process_lightbox_image(offset, progress);
     
+    set_display("submit_button", 'none');
+    set_display("cheat_sheet_button", 'none');
+    set_display("vocab_cheat_button", 'none');
+    set_display("etym_cheat_button", 'none');
+    
     el('image_display_box').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text + image;
 };
 
