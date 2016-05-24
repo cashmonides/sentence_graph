@@ -71,7 +71,7 @@ function create_account() {
     Persist.create_user(e, p, callback);
 }
 
-function login(){
+function login() {
     var e = el("email").value;
     var p = el("password").value;
     //console.log"logging in: ", e, p);
@@ -82,6 +82,9 @@ function success(authData){
     //console.log"Success triggered authData= ", authData);
     //console.log"authData.uid = ", authData.auth.uid);
     User.set_cookie(authData.auth.uid);
+    
+
+    
     document.location = "../profile/";
 }
 
@@ -132,7 +135,7 @@ function reset_password() {
         return;
     } 
     
-    if (email.endsWith(".tag") || email.endsWith(".lls")) {
+    if (email.endsWith(".test") || email.endsWith(".solo")) {
         alert("you are using a special account, see Akiva in class to change your password");
         return;
     }

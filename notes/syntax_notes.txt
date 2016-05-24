@@ -1,0 +1,124 @@
+components:
+    input data
+        - as created by the tagger
+        - in the form of a map:
+            {
+            full text of sentence: "Nauta oravit ut taceamus.",
+            index: "3",     //i.e. what tagged word it is, 4th word taceamus
+            tense: "present", 
+            mood: "subjunctive", 
+            construction: "indirect command", 
+            sequence: "primary", 
+            relative time: "subsequent"
+            }
+    module by module filter
+        - so they only see options which they know (earlier chapters have fewer options)
+        - in the form of a map:
+            {
+            tense: ["present", "imperfect"], 
+            mood: ["indicative", "subjunctive"], 
+            construction: ["purpose clause", "indirect command"], 
+            sequence: ["primary", "secondary"], 
+            relative time: ["prior", "simultaneous, "subsequent"]
+            }
+    bundle all this into a set of data
+            {
+            sentence: "Nauta oravit ut taceamus.",
+            question: "Give the syntax of the highlighted word."
+            target_indices: "3",     //i.e. what tagged word to highlight
+            drop_downs: [
+                                {
+                                choices: ["present", "imperfect"],
+                                correct_answer: "present",
+                                heading: "tense"
+                                },
+                                {
+                                choices: ["indicative", "subjunctive"],
+                                correct_answer: "subjunctive",
+                                heading: "mood"
+                                },
+                                etc.
+                                
+                            ]
+    
+    example drop downs:
+    {type: "drop down", parts: Array, heading: "subject", correct_answer: "the dogs", no_none_display_override: false, …}
+    {type: "drop down", parts: Array, heading: "verb", correct_answer: "love", no_none_display_override: false, …}
+    {type: "drop down", parts: Array, heading: "object", correct_answer: "the crow", no_none_display_override: false, …}
+    
+    {subheading: "crow", choices: ["the crow", "the crows"], opt_groups: false}
+    {subheading: "dog", choices: ["the dog", "the dogs"], opt_groups: false}
+    {subheading: "frog", choices: ["the frog", "the frogs"], opt_groups: false}
+    {subheading: "horse", choices: ["the horse", "the horses"], opt_groups: false}
+    {subheading: "wolf", choices: ["the wolf", "the wolves"], opt_groups: false}
+
+    
+    send all this to the quiz generator in a modified drop mode
+        - display text of sentence 
+        - highlight word at the proper index
+        - send drop_down_data to the set_multiple_drop_downs function
+        - none_display should be set to false
+       
+       
+       
+   2nd grade drop mode needs to be tweaked so it can take multiple drop downs
+        
+    details of the set_multiple_drop_downs function:
+
+
+our current set_multiple_drop_downs looks like this:
+argument 1: 
+an object called drop_down with the properties:
+    drop_down.choices
+    drop_down.parts           //what's this?
+    drop_down.no_none_display
+    drop_down.heading
+    drop_down.HTML_element
+
+
+argument 2:
+e   // an element that we want to append the drop downs to
+
+
+argument 3:
+none_display   // a boolean - whether we want none to be an option
+
+
+argument 4:
+to_string   //not sure????
+
+
+function set_multiple_drop_downs(drop_down, e, none_display, to_string) {
+    //adds none to the list without mutating it
+    var list = 'choices' in drop_down ? drop_down.choices : drop_down.parts;
+    if (none_display && (drop_down.no_none_display !== true)) {
+        list = list.concat('none');
+    }
+    var e1 = document.createElement('select');
+    var h = create_element('option', drop_down.heading, e1);
+    list.forEach(function (x) {
+        if (typeof x === 'object') {
+            if (x.opt_groups) {
+                // if (!x) {return} // Just to be safe if we change our approach again.
+                // old code below didn't seem to work (or just got wiped by sort)
+                // if (!x) {if (none_display) {x = 'none'} else {return}}
+                // Note that strip is in utils because it is (intrinsically)
+                // only string manipulation.
+                var o = create_element("optgroup", strip(
+                    to_string ? to_string(x.subheading) : x.subheading), e1, 'label');
+                x.choices.forEach(function (y) {
+                    create_element("option", strip(to_string ? to_string(y) : y), o);
+                });
+            } else {
+                x.choices.forEach(function (y) {
+                    create_element("option", strip(to_string ? to_string(y) : y), e1);
+                });
+            }
+        } else {
+            create_element("option", strip(to_string ? to_string(x) : x), e1);
+        }
+    });
+    // drop_down (x) now has an html element
+    drop_down.HTML_element = e1;
+    e.appendChild(e1);
+}

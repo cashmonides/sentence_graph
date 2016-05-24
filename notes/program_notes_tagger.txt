@@ -1,12 +1,6 @@
 - Dan coding (in mf mode)
 - Akiva not coding (working in quiz.js and modules.js and a new mode called input_mode.js)
 
-Hi Akiva! I was here.
-I created an mf mode file.
-I might be in that if I'm not here.
-If you're here, it's likely that I'm still with my mom on a walk.
-
-Not fully examined.
 
 Current issues and questions (from mf mode):
 // MF Issue 0: What needs to be changed outside of mf_mode?
@@ -21,21 +15,48 @@ Current issues and questions (from mf mode):
 // beyond calling make_output?
 //Akiva: I'm not sure. Seems like we have input mode (string matching) and drop mode (answering syntax questions)
 
+SUMMER AGENDA (non-detailed)
+- mf mode
+- glosser
+- weekend syntax review
+- morphology training
 
-AGENDA THURSDAY
-- persistence of progress bar between sessions
-- store skipped questions
+
+
+AGENDA MONDAY
+- mftagger: make it possible to highlight words after they've been highlighted once
+- mftagger: make it possible to add multiple tags to a word
+- mfideally: make the tagger into a drop down
+
+mf mode:
+- disable the block that keeps people from doing uncompleted modules if they are mf mode players (i.e. email ends in mf.test)
+- DONE: store skipped questions
+- going to next chapter
+- progress bar bugs
+    - why isn't progress bar moving as fast as it should?
+    - BUG: progress bar did not go ahead when a question was skipped
+    - BUG: progress bar started from nothing when returning from profile
+    - persistence of progress bar between sessions (so they start where they left off)
+- DONE: skip question doesn't disappear
+- DONE: gaps not dealt with properly
+
 - highlight wrong answer
 - improve cosmetics of feedback
-- add skip button to first iteration of question?
+- add skip button to first iteration of question
+- HALF-DONE: display skipped sentences on profile page
+    - we need a function in user that gets skipped sentences
+    - display skipped questions function should return a list of skipped questions in the alert box or something like that
 
 
-AGENDA FRIDAY
 
-MUST DO:
-firebase function that tags what sentence they are up to
-install a skip sentence button
-store the skipped sentences firebase
+- add levels 1-18
+- continue translating sentences (short ones only)
+
+
+
+DOWN THE ROAD
+- highlight the part of the sentence that's wrong
+
        
        
        

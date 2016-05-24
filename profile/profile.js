@@ -63,7 +63,9 @@ ProfilePage.display_profile = function() {
 
     
     var current_module_id = this.user.get_current_module();
+    console.log("DEBUG 5-18 current_module_id = ", current_module_id);
     var current_universal_module = ALL_MODULES[current_module_id];
+    console.log("DEBUG 5-18 current_universal_module = ", current_universal_module);
     var current_universal_module_name = current_universal_module.icon_name;
     var e2 = el("level_box");
     e2.innerHTML = "Your level is: " + current_universal_module_name;
@@ -280,6 +282,11 @@ ProfilePage.select_improvement_module = function(mod_id){
     }
 };
 
+
+ProfilePage.display_skipped_sentences = function() {
+    var skipped_sentence_list = this.user.get_skipped_sentences();
+    alert(skipped_sentence_list);  
+};
 
 
 ////////////////////////////

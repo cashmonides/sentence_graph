@@ -86,17 +86,26 @@ Quiz.prototype.start = function(){
         return_to_login();
         // setTimeout(return_to_login, 10000);
     }
-   //todo
-    //the following line both tests the conditional and actually loads the data
-    if (!this.user.load(this.user_loaded.bind(this))) {
+    
+    // This stuff seems to depend on the user being loaded.
+    var callback = function () {
+        // the next line actually loads the data
+        // todo should it go before or after the anonymous stuff?
+        self.user_loaded();
+        
+        // this.module = ALL_MODULES[this.get_start_module()];
+        // This is new, and seems a little hacky.
+        self.user.quiz = self;
+    }
+    
+    
+    //the following line tests the conditional
+    if (!this.user.load(callback)) {
         el("header").appendChild(document.createTextNode("In Anonymous Session!"));
         el("return_to_profile_button").parentNode.removeChild(el("return_to_profile_button"));
         el("logout_button").innerHTML = "login";
         this.user_loaded();
     }
-    // this.module = ALL_MODULES[this.get_start_module()];
-    // This is new, and seems a little hacky.
-    this.user.quiz = this;
     
     Sentence.get_all_sentences(function (ss) {
         self.sentences = ss.filter(function (sentence) {
@@ -110,7 +119,8 @@ Quiz.prototype.start = function(){
 
 };
 
-Quiz.prototype.user_loaded = function(){
+// This should quite possibly be done second.
+Quiz.prototype.user_loaded = function() {
     // console.log("DEBUG 11-7 entering user_loaded = ");
     //todo var id will change depending on url parameters (given by profile page)
     var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE) or improving via url paramaters
@@ -141,6 +151,20 @@ Quiz.prototype.get_start_module = function(){
     if("mod" in ups){
         var selected_mod = ups["mod"];
         console.log("DEBUG 11-23 selected mod = ", selected_mod);
+        // Logically, exactly one of these things must happen,
+        // so we cound remove the final if in the second else if.
+        // But this seems cleaner.
+        if (!this.is_allowed_module(parseInt(selected_mod, 10))) {
+            return_to_profile();
+        } else if (selected_mod == this.user.get_current_module()) {
+            console.log("DEBUG 11-23 clicked mod = current mod");
+            this.advance_improve_status = "advancing";
+        } else if (selected_mod == this.user.get_improving_module()) {
+            console.log("DEBUG 11-23 clicked mod != current mod");
+            this.advance_improve_status = "improving";
+        }
+        return ups["mod"];
+        /*
         if (selected_mod > this.user.get_current_module()) {
             console.log("DEBUG 1-27 excessive mod entered as url query");
             return_to_profile();
@@ -155,7 +179,7 @@ Quiz.prototype.get_start_module = function(){
             this.advance_improve_status = "improving";
         }
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
-        return ups["mod"];
+        */
     } else {
         console.log('DEBUG 1-18 mod not in parameters');
         this.advance_improve_status = "advancing";
@@ -355,6 +379,15 @@ Quiz.prototype.next_mode = function(){
         throw "modes exhausted";
     }
     
+    // Issue: previously a new game was created every question.
+    // This is not a good idea in all cases.
+    // Solution: commit the hack of putting in each module a setting
+    // of one_game or switch. Assume no setting is switch.
+    // We do this via an early return.
+    if (this.game && ALL_MODULES[this.module.id].game_change_method === 'one_game') {
+        return;
+    }
+    
     console.log("DEBUG 5-6 checkpoint 1");
     var mode = weighted(allowed);
     console.log("DEBUG 5-6 checkpoint 2 mode = ", mode);
@@ -365,7 +398,18 @@ Quiz.prototype.next_mode = function(){
     console.log("DEBUG 5-6 checkpoint 4 this.game = ", this.game);
     
     //todo understand the following
+    
+    // This gives the game a reference to the quiz.
     this.game.quiz = this;
+    
+    // Is there anything the game needs to do now that it has access
+    // to the quiz (and indirectly the user)?
+    // Note: this property currently only exists in mf mode.
+    if (this.game.do_with_quiz_attachment) {
+        // If so, do it.
+        this.game.do_with_quiz_attachment();
+    }
+    
     this.game.attach();
 };
 
@@ -437,6 +481,19 @@ Quiz.prototype.next_question = function (){
 
 
 Quiz.prototype.question_complete = function () {
+    set_display("skip_button", 'none');
+    
+    // A bit of a hack.
+    if (this.game instanceof MFModeGame) {
+        // Increment the question.
+        var internal_chapter = this.game.current_chapter;
+        this.game.increment_question();
+        console.log('about to test', this.game.current_chapter, internal_chapter);
+        if (this.game.current_chapter !== internal_chapter) {
+            console.log('return to profile triggered');
+            return_to_profile();
+        }
+    }
     //todo comment this back in when done testing
     // clear_input_feedback_box("feedback_for_input");
     set_display("feedback_for_input", 'none');
@@ -458,15 +515,24 @@ Quiz.prototype.update_accuracy = function () {
     this.update_accuracy_dict();
 }
 
-Quiz.prototype.update_sentence_log = function (question, chapter, status) {
-    this.user.log_sentences(question, chapter, status);
+Quiz.prototype.update_sentence_log = function (
+    sentence_finder, next_sentence, status) {
+    console.log('DEBUG 5/23 checkpoint 6 completed before',
+    sentence_finder);
+    this.user.log_sentences(sentence_finder, next_sentence, status);
+    console.log('DEBUG 5/23 checkpoint 7 completed after',
+    sentence_finder);
 }
 
 
 Quiz.prototype.log_skipped_question = function () {
-    var current_question = this.game.get_current_question();
-    var current_chapter = this.game.get_current_chapter();
-    this.update_sentence_log(current_chapter, current_question, "skipped");
+    var sentence_finder = this.game.sentence_finder();
+    var next_sentence = this.game.get_next_sentence();
+    console.log('DEBUG 5/23 checkpoint 4 skipped before',
+    sentence_finder);
+    this.update_sentence_log(sentence_finder, next_sentence, "skipped");
+    console.log('DEBUG 5/23 checkpoint 5 skipped after',
+    sentence_finder);
 }
 
 Quiz.prototype.update_accuracy_dict = function () {
@@ -637,6 +703,10 @@ Quiz.prototype.submodule_complete = function () {
     el('next_level_button').onclick = new_callback;
 };
 
+Quiz.prototype.is_allowed_module = function (mod) {
+    return mod === this.user.get_improving_module()
+    || mod === this.user.get_current_module();
+}
 
 
 
@@ -710,7 +780,7 @@ Quiz.prototype.process_answer = function(){
 
 
 Quiz.prototype.get_lightbox_image = function(mod_id, progress) {
-    var image_list = ALL_MODULES[mod_id].lightbox_images;
+    var image_list = safe_lookup(ALL_MODULES, mod_id, 'lightbox_images');
     if (image_list) {
         console.log("DEBUG 5-12 image_list = ", image_list);
         console.log("DEBUG 5-12 entering image picking");
@@ -750,6 +820,12 @@ Quiz.prototype.process_lightbox_image = function (offset, progress) {
     } else if (this.advance_improve_status === "improving") {
         mod = this.user.get_improving_module();
         console.log("DEBUG 1-17 improving status triggered, mod = ", mod);
+    } else {
+        console.log("DEBUG 5-13 weird status triggered, namely ",
+        this.advance_improve_status);
+        if (this.advance_improve_status === null) {
+            console.log('the status is null!!!');
+        }
     }
     
     if (offset !== undefined) {mod += offset}

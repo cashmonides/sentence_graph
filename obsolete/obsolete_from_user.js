@@ -170,3 +170,187 @@ User.prototype.get_current_stats = function (module_id) {
 // map['start_time'] = start_time;
 
 // this.persist(["history", module_id, "time_metrics"], mod.time_metrics);
+
+
+
+/*
+User.prototype.start_module = function (id) {
+    this.important_event_check_string();
+    console.log("DEBUG 11-7 entering user.start_module");
+    console.log("DEBUG 11-16 argument id = ", id);
+    
+    
+    
+    console.log("DEBUG 2-6 entering problem area");
+    // todo 2-6 the following is a failed attempt to give anonymous users a rollover, try to make it work - the point is to just roll the anonymous user to the next module
+    // if (this.uid === null) {
+    //     console.log("DEBUG 2-6 this.uid == null triggered");
+    //     if (!(id in this.data.history)) {
+    //         console.log("DEBUG 2-6 anonymous mode: creating module with id = ", id);
+    //         this.create_module(id);
+    //     }
+    //     this.data.history[id].in_progress = true;
+    //     return;
+    // }
+    
+    //the module may not exist in their history, so we create it if so
+    console.log("DEBUG 11-16 user.submodule_complete is true");
+    if (!(id in this.data.history)) {
+        console.log("DEBUG 11-16 creating module with id = ", id);
+        this.create_module(id);
+    }
+    
+    console.log("DEBUG 11-16 this.data.history[id] = ", this.data.history[id]);
+    
+    //we need to set our in_progress
+    this.data.history[id].in_progress = true;
+    
+    //todo Dan's addition
+    //we initiate our metrics
+    console.log('mod =', this.data.history[id]);
+    this.init_metrics(this.data.history[id]);
+    
+    
+    
+    
+    
+    //we need to set our level
+    // this.quiz.game.set_level(ALL_MODULES[id].level)
+    
+    //we need to update history with a few crucial facts
+        //in_progress is true
+        //it exists
+    this.persist(["history", id], this.data.history[id]);
+};
+*/
+
+/*
+// This stuff from use ris currently unused and seemed very long.
+User.prototype.log_module_start_time = function (module_id) {
+    var mod = this.data.history[module_id];
+    
+    var start_time = current_time();
+    
+    
+    var empty_callback4 = function(error) {
+        console.log("empty_callback4 triggered");
+        if (error != null) {
+            console.log("error in empty_callback4", error);
+        }
+    };
+    
+    var map = {'start_time' : start_time};
+    
+    Persist.push(["users", this.uid, "history", module_id], map, empty_callback4);
+    
+    
+    
+    THE LIST OF LISTS APPROACH
+    get current list
+    if it's a start time you push a start time 
+    if it's a stop time you 
+    time_metrics: [[1232123132321], [123232132132132213], [13231231312321, 12312312312321]]
+    */
+    
+    
+    /*
+    PUSHING TO A DICTIONARY APPROACH
+    push a map 
+    {
+    start: 112432123312312,
+    stop: null
+    }
+    or if they do stop
+    {stop: 12312312132231}
+    
+    0:
+    {
+        start: 112432123312312,
+    }
+    1 {
+        start: 112432123312312,
+    }
+    2:
+        start: 1124321233121331,
+        stop: 112432123312312,
+    }
+    
+    
+    
+    
+    */
+    
+    
+    
+    /*
+    THE GET AND SET APPROACH
+    var old_list = persist.get(list_of_start_time)    //list_of_start_time = a single integer 0909809809
+    var new_list = old_list.push(new_start_time)      //new_list = 
+    
+    
+}
+
+
+User.prototype.log_module_stop_time = function (module_id) {
+    var mod = this.data.history[module_id];
+    
+    // we presumably don't need any of this because if any of these if-conditions are met there has been a terrible erro
+    // if (!mod.time_metrics) {
+    //     console.log("DEBUG 12-27 shouldn't be triggered!!!!");
+    //     mod.time_metrics = {};    
+    // }
+    
+    // //just did 1st question on a new iteration of the module
+    // if (!(mod.iteration in mod.time_metrics)) {
+    //     console.log("DEBUG 12-27 shouldn't be triggered!!!!");
+    //     mod.time_metrics[mod.iteration] = {};            //creates key and value
+    // } 
+    
+    
+    
+    
+    
+    var stop_time; 
+    
+    if (!Date.now) {
+        stop_time = function now() {
+        return new Date().getTime();
+        } 
+    } else {
+        stop_time = Date.now();
+    };
+
+
+    var map;
+    
+    map['stop_time'] = stop_time;
+    
+    Persist.push(["users", this.uid, "history", module_id], map, empty_callback4);
+    
+    
+
+}
+*/
+
+/*
+We basically know about callbacks now.
+// General rule: Callback data cannot be returned.
+// That makes this function impossible.
+User.prototype.get_sentence_logs = function () {
+    // temporary
+    return {};
+}
+
+// obsolete
+//makes a local copy of whatever is on firebase and persists it to firebse
+// User.set_initial_data = function (uid, name, class_number, callback) {
+//     var data = {
+//         profile: {
+//             name: name, 
+//             class_number: class_number
+//         },
+//         history: false
+//     };
+//     Persist.set(["users", uid], data, callback);
+// };
+*/
