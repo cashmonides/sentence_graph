@@ -47,7 +47,8 @@ QuickModeGame.tag_filter = function (filter) {
     }
 }
 
-QuickModeGame.prototype.next_question = function(state){
+QuickModeGame.prototype.next_question = function() {
+    // No actual usage of state.
     var types_of_level = ['grammar_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     console.log('post_sampling_level =', post_sampling_level);
@@ -69,7 +70,8 @@ QuickModeGame.prototype.next_question = function(state){
 
 };
 
-QuickModeGame.prototype.process_answer = function(state) {
+QuickModeGame.prototype.process_answer = function() {
+    var state = this.quiz;
     var tag_names = this.quiz.get_selected_region().get_tag_types();
     ////console.log"tag names:", tag_names);
     //console.log"LOG target tag: ", this.target_tag);

@@ -447,10 +447,13 @@ MFModeGame.prototype.next_question = function () {
     this.quiz.word_selector.is_clickable = false;
     this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
     
-    //todo Akiva is confused on this (what is the point of it? do we need it in input mode?)
+    // Akiva is confused on this (what is the point of it? do we need it in input mode?)
+    // Dan: It highlights some words. Seems completely dead to me.
+    /*
     if (this.target_indices) {
         this.target_indices.forEach(function (x) {state.word_selector.set_highlighted(x, true)});
     }
+    */
 
     //todo Akiva has no idea what to do with this below
     // Hacky way to guarantee a drop down.

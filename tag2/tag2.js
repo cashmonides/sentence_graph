@@ -76,7 +76,7 @@ var tag_list = [
 
 "m=indicative", "m=subjunctive", "m=infinitive",
 
-"c=protasis/apodosis future more vivid conditional sentence", 
+"c=protasis/apodosis of a future more vivid conditional sentence", 
 "c=protasis/apodosis of a future more vivid conditional sentence with emphatic protasis", 
 "c=protasis/apodosis of a future less vivid conditional sentence", 
 "c=protasis/apodosis of a present contrary to fact conditional sentence",
@@ -446,6 +446,6 @@ function global_submit_sentence(){
         sentence.number = sentence_number;
         console.log("sentence submitted");
         console.log('sentence.language_of_sentence =', sentence.language_of_sentence);
-        Sentence.save(sentence);
+        Persist.push(["sentence_mf"], JSON.stringify(sentence), function () {});
     }
 }

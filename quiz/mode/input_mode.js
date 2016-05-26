@@ -161,9 +161,11 @@ InputModeGame.prototype.next_question = function () {
     this.quiz.word_selector.is_clickable = false;
     this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
     
-    //todo Akiva is confused on this (what is the point of it? do we need it in input mode?)
+    // todo Akiva is confused on this (what is the point of it? do we need it in input mode?)
+    // Dan: Might be dead, might not be. But it won't work even if it is dead.
     if (this.target_indices) {
-        this.target_indices.forEach(function (x) {state.word_selector.set_highlighted(x, true)});
+        // this.target_indices.forEach(function (x) {state.word_selector.set_highlighted(x, true)});
+        throw 'Input mode can\'t highlight words. This should __not__ be happening.';
     }
 
     //todo Akiva has no idea what to do with this below

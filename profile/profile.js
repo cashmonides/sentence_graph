@@ -114,64 +114,127 @@ ProfilePage.get_module_distance = function (user, module_id) {
 
 ProfilePage.build_progress_table = function(user) {
     try {
-        var table = el("table");
-        console.log("DEBUG 2-11 entering first make in profile");
-        console.log("DEBUG 2-11 user = ", user);
-        console.log("DEBUG 2-11 table = ", table);
-        var row = make({"tag": "tr"}, table);
-        console.log("DEBUG 2-11 leaving first make");
-        var max_columns = 4;
-        var order = get_module_order();
+        if (this.user.data.profile.email.endsWith('.mf')) {
+            var table = el("table");
+            console.log("DEBUG 2-11 entering first make in profile");
+            console.log("DEBUG 2-11 user = ", user);
+            console.log("DEBUG 2-11 table = ", table);
+            var row = make({"tag": "tr"}, table);
+            console.log("DEBUG 2-11 leaving first make");
+            var max_columns = 4;
+            var order = get_module_order();
+            
+            var hoverable_types = ['improving', 'frontier',
+            'completed_no_improving'];
+            
+            for (var i = 0; i < order.length; i++) {
+                var mod = ALL_MODULES[order[i]];
+            
+                var mod_history = mod.id in user.data.history ? user.get_module(mod.id) : null;
+                
+                var hoverability = hoverable_types.indexOf(user.classify_module_plus(mod.id)) !== -1;
+                
+                var img_class = ["progress_image", hoverability ? 'hoverable_mod': 'non_hoverable_mod'];
+                
+                
+                // in progress
+                var distance = this.get_module_distance(user, mod.id);
+                var blur_amount;
+                if (distance > 4) {
+                    blur_amount = Math.floor(distance/2);
+                } else {
+                    blur_amount = 0;
+                }
+                var m = {
+                    'tag': "td", 
+                    'class': ["progress_cell"],
+                    'children': [
+                        {'tag': "img", 'class': img_class, 'src': mod.icon_url, 'style' : {
+                            "-webkit-filter": "blur(" + blur_amount + "px)",
+                            'filter': "blur(" + blur_amount + "px)"
+                            }
+                        },                      //UNIVERSAL MODULE
+                        {'tag': "br"},
+                        this.get_display_caption(this.user, order[i])
+                    ]
+                };
+                
+                if (hoverability) {
+                    m.onclick = ProfilePage.select_improvement_module(mod.id);
+                    m.class.push('clickable')
+                }
+                
+                console.log("DEBUG 2-11 entering 2nd make in profile");
+                console.log("DEBUG 2-11 m = ", m);
+                console.log("DEBUG 2-11 row = ", row);
+                make(m, row);
         
-        var hoverable_types = ['improving', 'frontier',
-        'completed_no_improving'];
         
-        for (var i = 0; i < order.length; i++) {
-            var mod = ALL_MODULES[order[i]];
-        
-            var mod_history = mod.id in user.data.history ? user.get_module(mod.id) : null;
-            
-            var hoverability = hoverable_types.indexOf(user.classify_module_plus(mod.id)) !== -1;
-            
-            var img_class = ["progress_image", hoverability ? 'hoverable_mod': 'non_hoverable_mod'];
-            
-            
-            // in progress
-            var distance = this.get_module_distance(user, mod.id);
-            var blur_amount;
-            if (distance > 4) {
-                blur_amount = Math.floor(distance/2);
-            } else {
-                blur_amount = 0;
+                if (i > 0 && i % max_columns == 0) {
+                    console.log("DEBUG 2-11 entering 3rd make in profile");
+                    row = make({'tag': "tr"}, table);
+                }
             }
-            var m = {
-                'tag': "td", 
-                'class': ["progress_cell"],
-                'children': [
-                    {'tag': "img", 'class': img_class, 'src': mod.icon_url, 'style' : {
-                        "-webkit-filter": "blur(" + blur_amount + "px)",
-                        'filter': "blur(" + blur_amount + "px)"
-                        }
-                    },                      //UNIVERSAL MODULE
-                    {'tag': "br"},
-                    this.get_display_caption(this.user, order[i])
-                ]
-            };
+        } else {
+            var table = el("table");
+            console.log("DEBUG 2-11 entering first make in profile");
+            console.log("DEBUG 2-11 user = ", user);
+            console.log("DEBUG 2-11 table = ", table);
+            var row = make({"tag": "tr"}, table);
+            console.log("DEBUG 2-11 leaving first make");
+            var max_columns = 4;
+            var order = get_module_order();
             
-            if (hoverability) {
-                m.onclick = ProfilePage.select_improvement_module(mod.id);
-                m.class.push('clickable')
-            }
+            var hoverable_types = ['improving', 'frontier',
+            'completed_no_improving'];
             
-            console.log("DEBUG 2-11 entering 2nd make in profile");
-            console.log("DEBUG 2-11 m = ", m);
-            console.log("DEBUG 2-11 row = ", row);
-            make(m, row);
-    
-    
-            if (i > 0 && i % max_columns == 0) {
-                console.log("DEBUG 2-11 entering 3rd make in profile");
-                row = make({'tag': "tr"}, table);
+            for (var i = 0; i < order.length; i++) {
+                var mod = ALL_MODULES[order[i]];
+            
+                var mod_history = mod.id in user.data.history ? user.get_module(mod.id) : null;
+                
+                var hoverability = hoverable_types.indexOf(user.classify_module_plus(mod.id)) !== -1;
+                
+                var img_class = ["progress_image", hoverability ? 'hoverable_mod': 'non_hoverable_mod'];
+                
+                
+                // in progress
+                var distance = this.get_module_distance(user, mod.id);
+                var blur_amount;
+                if (distance > 4) {
+                    blur_amount = Math.floor(distance/2);
+                } else {
+                    blur_amount = 0;
+                }
+                var m = {
+                    'tag': "td", 
+                    'class': ["progress_cell"],
+                    'children': [
+                        {'tag': "img", 'class': img_class, 'src': mod.icon_url, 'style' : {
+                            "-webkit-filter": "blur(" + blur_amount + "px)",
+                            'filter': "blur(" + blur_amount + "px)"
+                            }
+                        },                      //UNIVERSAL MODULE
+                        {'tag': "br"},
+                        this.get_display_caption(this.user, order[i])
+                    ]
+                };
+                
+                if (hoverability) {
+                    m.onclick = ProfilePage.select_improvement_module(mod.id);
+                    m.class.push('clickable')
+                }
+                
+                console.log("DEBUG 2-11 entering 2nd make in profile");
+                console.log("DEBUG 2-11 m = ", m);
+                console.log("DEBUG 2-11 row = ", row);
+                make(m, row);
+        
+        
+                if (i > 0 && i % max_columns == 0) {
+                    console.log("DEBUG 2-11 entering 3rd make in profile");
+                    row = make({'tag': "tr"}, table);
+                }
             }
         }
     } catch (e) {

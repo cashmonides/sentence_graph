@@ -134,7 +134,7 @@ var syntax_module_filter = {
 }
 
 var syntax_mode_test_sentences = [
-    "{\"class_id\":1,\"words\":[\"Nisi\",\"fēminae\",\"nautās\",\"sententiārum\",\"dē\",\"incolīs\",\"dāmnābunt\",\"incolae\",\"in\",\"prōvinciā\",\"nōn\",\"labōrābunt\"],\"regions\":[{\"class_id\":2,\"indices\":[0],\"tags\":[]},{\"class_id\":2,\"indices\":[1],\"tags\":[]},{\"class_id\":2,\"indices\":[2],\"tags\":[]},{\"class_id\":2,\"indices\":[3],\"tags\":[]},{\"class_id\":2,\"indices\":[4],\"tags\":[]},{\"class_id\":2,\"indices\":[5],\"tags\":[]},{\"class_id\":2,\"indices\":[6],\"tags\":[{\"class_id\":3,\"type\":\"t=future\"},{\"class_id\":3,\"type\":\"m=indicative\"},{\"class_id\":3,\"type\":\"c=protasis/apodosis future more vivid conditional sentence\"},{\"class_id\":3,\"type\":\"s=not applicable\"},{\"class_id\":3,\"type\":\"r=not applicable\"}]},{\"class_id\":2,\"indices\":[7],\"tags\":[]},{\"class_id\":2,\"indices\":[8],\"tags\":[]},{\"class_id\":2,\"indices\":[9],\"tags\":[]},{\"class_id\":2,\"indices\":[10],\"tags\":[]},{\"class_id\":2,\"indices\":[11],\"tags\":[{\"class_id\":3,\"type\":\"t=future\"},{\"class_id\":3,\"type\":\"m=indicative\"},{\"class_id\":3,\"type\":\"c=protasis/apodosis future more vivid conditional sentence\"},{\"class_id\":3,\"type\":\"s=not applicable\"},{\"class_id\":3,\"type\":\"r=not applicable\"}]}],\"text\":\"Nisi fēminae nautās sententiārum dē incolīs dāmnābunt, incolae in prōvinciā nōn labōrābunt.\",\"language_of_sentence\":\"mf\",\"chapter\":2,\"number\":13}",
+    "{\"class_id\":1,\"words\":[\"Nisi\",\"fēminae\",\"nautās\",\"sententiārum\",\"dē\",\"incolīs\",\"dāmnābunt\",\"incolae\",\"in\",\"prōvinciā\",\"nōn\",\"labōrābunt\"],\"regions\":[{\"class_id\":2,\"indices\":[0],\"tags\":[]},{\"class_id\":2,\"indices\":[1],\"tags\":[]},{\"class_id\":2,\"indices\":[2],\"tags\":[]},{\"class_id\":2,\"indices\":[3],\"tags\":[]},{\"class_id\":2,\"indices\":[4],\"tags\":[]},{\"class_id\":2,\"indices\":[5],\"tags\":[]},{\"class_id\":2,\"indices\":[6],\"tags\":[{\"class_id\":3,\"type\":\"t=future\"},{\"class_id\":3,\"type\":\"m=indicative\"},{\"class_id\":3,\"type\":\"c=protasis/apodosis of a future more vivid conditional sentence\"},{\"class_id\":3,\"type\":\"s=not applicable\"},{\"class_id\":3,\"type\":\"r=not applicable\"}]},{\"class_id\":2,\"indices\":[7],\"tags\":[]},{\"class_id\":2,\"indices\":[8],\"tags\":[]},{\"class_id\":2,\"indices\":[9],\"tags\":[]},{\"class_id\":2,\"indices\":[10],\"tags\":[]},{\"class_id\":2,\"indices\":[11],\"tags\":[{\"class_id\":3,\"type\":\"t=future\"},{\"class_id\":3,\"type\":\"m=indicative\"},{\"class_id\":3,\"type\":\"c=protasis/apodosis future more vivid conditional sentence\"},{\"class_id\":3,\"type\":\"s=not applicable\"},{\"class_id\":3,\"type\":\"r=not applicable\"}]}],\"text\":\"Nisi fēminae nautās sententiārum dē incolīs dāmnābunt, incolae in prōvinciā nōn labōrābunt.\",\"language_of_sentence\":\"mf\",\"chapter\":2,\"number\":13}",
     "{\"class_id\":1,\"words\":[\"Nisī\",\"tacuisset\",\"miserum\",\"monuissem\",\"ut\",\"lacrimās\",\"cēlāret\"],\"regions\":[{\"class_id\":2,\"indices\":[0],\"tags\":[]},{\"class_id\":2,\"indices\":[1],\"tags\":[{\"class_id\":3,\"type\":\"t=pluperfect\"},{\"class_id\":3,\"type\":\"m=subjunctive\"},{\"class_id\":3,\"type\":\"c=protasis/apodosis of a past contrary to fact conditional sentence\"},{\"class_id\":3,\"type\":\"s=not applicable\"},{\"class_id\":3,\"type\":\"r=not applicable\"}]},{\"class_id\":2,\"indices\":[2],\"tags\":[]},{\"class_id\":2,\"indices\":[3],\"tags\":[{\"class_id\":3,\"type\":\"t=pluperfect\"},{\"class_id\":3,\"type\":\"m=subjunctive\"},{\"class_id\":3,\"type\":\"c=protasis/apodosis of a past contrary to fact conditional sentence\"},{\"class_id\":3,\"type\":\"s=not applicable\"},{\"class_id\":3,\"type\":\"r=not applicable\"}]},{\"class_id\":2,\"indices\":[4],\"tags\":[]},{\"class_id\":2,\"indices\":[5],\"tags\":[]},{\"class_id\":2,\"indices\":[6],\"tags\":[{\"class_id\":3,\"type\":\"t=imperfect\"},{\"class_id\":3,\"type\":\"m=subjunctive\"},{\"class_id\":3,\"type\":\"c=indirect command\"},{\"class_id\":3,\"type\":\"s=secondary\"},{\"class_id\":3,\"type\":\"r=subsequent time\"}]}],\"text\":\"Nisī tacuisset, miserum monuissem ut lacrimās cēlāret.\",\"language_of_sentence\":\"mf\",\"chapter\":3,\"number\":15}"
 ].map(JSON.parse);
 
@@ -191,6 +191,7 @@ var allowed_options_repository = function () {
         var r = Object.keys(d).filter(function (x) {
             return d[x] <= chapter;
         });
+        r.push('not applicable');
         known[chapter + '/' + type] = r;
         return r;
     }
@@ -210,9 +211,7 @@ var convert_syntax_data_to_drop_down_data = function (data) {
                 'choices': get_allowed_options(x.chapter, y),
                 'correct_answer': x[y]
             }
-        }).filter(function (x) {
-            return has_choices(x) && x.correct_answer !== 'not applicable'
-        });
+        }).filter(has_choices);
         return {
             'sentence': x.text,
             'question': "Give the syntax of the highlighted word.",
@@ -236,14 +235,41 @@ var convert_syntax_data_to_drop_down_data = function (data) {
     })
 }
 
-var get_sentence_from_firebase = function (chapter_n, question_n) {
-    return random_choice(syntax_mode_test_sentences);
+var get_sentence_from_firebase = function (chapter_n, question_n, fn) {
+    Persist.get(['sentence_mf'], function (x) {
+        var v = x.val();
+        var sentences = [];
+        Object.keys(v).forEach(function (y) {
+            var j = JSON.parse(v[y].data);
+            if (j.language_of_sentence === 'mf' && j.chapter === chapter_n
+            && j.number === question_n) {
+                sentences.push(j);
+            }
+        });
+        if (sentences.length === 0) {
+            throw 'No sentences!!! chapter_number = ' + chapter_n +
+            ' question_number = ' + question_n;
+        }
+        fn(sentences[0]);
+    });
 }
 
-var make_syntax_question = function (chapter_n, question_n) {
-    return convert_syntax_data_to_drop_down_data(
-        parse_firebase_syntax_data(
-            get_sentence_from_firebase(chapter_n, question_n)));
+var get_all_sentence_numbers = function (fn) {
+    Persist.get(['sentence_mf'], function (x) {
+        var v = x.val();
+        var sentence_numbers = [];
+        Object.keys(v).forEach(function (y) {
+            var j = JSON.parse(v[y].data);
+            sentence_numbers.push([j.chapter, j.number])
+        });
+        fn(sentence_numbers);
+    });
+}
+
+var make_syntax_question = function (chapter_n, question_n, fn) {
+    return get_sentence_from_firebase(chapter_n, question_n, function (x) {
+        fn(convert_syntax_data_to_drop_down_data(parse_firebase_syntax_data(x)));
+    });
 }
 
 var SyntaxModeGame = function(){
@@ -252,7 +278,7 @@ var SyntaxModeGame = function(){
     // todo we here assume that 1 is the initial level
     this.level = 1;    //we might replace this with this.current_chapter & this.current_question
     this.current_chapter = 1;
-    this.current_question = 1;
+    this.current_question = 0;
 };
 
 SyntaxModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
@@ -298,14 +324,25 @@ SyntaxModeGame.prototype.on_last_region = function () {
 
 SyntaxModeGame.prototype.next_question = function () {
     if (!(this.data) || this.on_last_region()) {
+        if (this.data && this.on_last_region()) {
+            return_to_profile();
+        }
         this.current_question++;
         this.region_number = 0;
-        this.data = make_syntax_question(this.current_chapter, this.current_question);
+        make_syntax_question(
+            this.current_chapter, this.current_question,
+            this.real_next_question.bind(this));
     } else {
         this.region_number++;
+        this.real_next_question(this.data);
     }
+}
+
+SyntaxModeGame.prototype.real_next_question = function (data) {
     
-    var data = this.data[this.region_number];
+    this.data = data;
+    
+    data = data[this.region_number];
     
     this.question = data.question;
     this.sentence = data.sentence;                 // text displayed in display box
@@ -340,7 +377,6 @@ SyntaxModeGame.prototype.next_question = function () {
     console.log("DEBUG entering 1st random_choice");
     this.none_display = true;
     
-    
     remove_element_by_id("latin_answer_choices");
     
     var new_answer_choices = document.createElement('div');
@@ -348,12 +384,6 @@ SyntaxModeGame.prototype.next_question = function () {
     new_answer_choices.id = "latin_answer_choices";
     
     el('drop_downs').appendChild(new_answer_choices);
-    
-    
-    
-    var e = document.createElement('div');
-    e.id = 'latin_answer_wrapper';
-    new_answer_choices.appendChild(e);
     
     //todo - I found this in the code - what is the point of it?
     // remove_children(document.getElementById("answer_choices"));
@@ -365,69 +395,55 @@ SyntaxModeGame.prototype.next_question = function () {
     this.quiz.word_selector.is_clickable = false;
     this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
     
+    // state state state. If you see state in your code, come here.
+    // State appears to have died everywhere but quick mode.
+    // But since there are target indices, there is an issue.
+    // Best thing to do: set state, or take it as an argument.
+    // And in reality, it's just the quiz. this.quiz is my far preferred name.
+    // State may have been completely hunted down. Then again,
+    // it may just be lying in wait for the next coder.
+    this.highlight_indices();
     
-    if (this.target_indices) {
-        this.target_indices.forEach(function (x) {state.word_selector.set_highlighted(x, true)});
-    }
-
-    // Hacky way to guarantee a drop down.
-    var x = this.make_drop_down(e);
-    if (x === 0) {this.next_question()}
-
+    // We don't need to guarantee a drop down.
+    this.make_drop_downs();
 };
+
+SyntaxModeGame.prototype.highlight_indices = function () {
+    if (this.target_indices) {
+        this.target_indices.forEach(function (x) {
+            this.quiz.word_selector.set_highlighted(x, true);
+        });
+    }
+}
 
 SyntaxModeGame.prototype.display = function (x) {
     return x.type === 'non_drop' || x.correct_answer || this.none_display;
 };
 
-//master function makes all the drops and non-drops
-SyntaxModeGame.prototype.make_drop_down = function (e) {
-    //initialize a count of how many drop down menus we'll have
-    // if it remains 0 we start all over again
-    var drops = 0;
+SyntaxModeGame.prototype.drop_down_location = "pre_footer";
+
+//master function makes all the drops
+SyntaxModeGame.prototype.make_drop_downs = function () {
     var self = this;
-    
-    //this.drop_downs is a list of drops and non-drops
-    //each item in the list is a dictionary and has a type
-    // type = drop or non-drop
-    // dictionary for drop = heading, choices
-    // dictionary for non-drop = non-drop text
-    this.drop_downs.forEach(function (x) {
-        if (self.display(x)) {
-            switch (x.type) {
-                case 'non_drop':
-                    // todo make sure this fix works
-                    var e1 = document.createTextNode(x.non_drop_text || '');
-                    e.appendChild(e1);
-                    break;
-                case 'drop down':
-                    // e = element we're appending to
-                    // x = dictionary with the following properties
-                    //x.choices = ['bear', 'bears']
-                    //x.heading = "subject"
-                    //self.none_display = bool
-                    set_multiple_drop_downs(x, e, self.none_display);
-                    drops++
-                    break;
-                default:
-                    throw new Error('Drop downs should have a type.')
-            }
-            e.appendChild(document.createTextNode(' '))
-        }
+    this.drop_downs.forEach(function (x, index) {
+        x.e = self.add_single_drop_down(x, index);
     });
-    return drops
 };
 
+SyntaxModeGame.prototype.is_correct = function (given, correct) {
+    return correct === 'not applicable' || correct === given;
+}
 
+SyntaxModeGame.prototype.add_single_drop_down = function (x, index) {
+    console.log('making a drop down with', x, index);
+    return make_drop_down_html(x.choices, this.drop_down_location, index);
+}
 
-SyntaxModeGame.prototype.process_answer = function(){
-    
-    
-    
+SyntaxModeGame.prototype.process_answer = function() {
     var self = this;
     var is_correct = this.drop_downs.every(function (x) {
-        return (x.type === 'non_drop') || (!self.display(x)) ||
-            (selected_option(x.HTML_element) === strip(x.correct_answer || x.none_option || 'none'))});
+        return self.is_correct(selected_option(x.e), x.correct_answer);
+    });
     if (is_correct) {
         this.process_correct_answer();
     } else {
@@ -435,7 +451,9 @@ SyntaxModeGame.prototype.process_answer = function(){
     }
 };
 
-
+SyntaxModeGame.prototype.remove_drop_downs = function () {
+    remove_children(el(this.drop_down_location));
+}
 
 
 
@@ -446,6 +464,8 @@ SyntaxModeGame.prototype.process_correct_answer = function () {
     var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
+    
+    this.remove_drop_downs();
 
     this.quiz.question_complete();
 };
@@ -478,10 +498,12 @@ SyntaxModeGame.prototype.process_incorrect_answer = function () {
     this.quiz.update_display();
     
     //todo check if this is the right place to clear the word selector
-    this.quiz.word_selector.clear();
+    //this.quiz.word_selector.clear();
 };
 
-SyntaxModeGame.prototype.give_away_answer = function (){
+SyntaxModeGame.prototype.give_away_answer = function () {
+    set_display("skip_button", 'initial');
+    this.remove_drop_downs();
     var fbox = el("feedbackbox");
     fbox.innerHTML = this.give_away_phrase + this.correct_answer + this.give_away_ending_phrase;
     this.quiz.question_complete();
