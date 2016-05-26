@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+	<!-- utils in html here -->
+    <script src="../lib/utils.js"></script>
+    <script src="../lib/list_utils.js"></script>
+    <script src="../lib/string_utils.js"></script>
+    <script src="../lib/random_utils.js"></script>
+	<script src="../lib/html_utils.js"></script>
+	<script src="../lib/error_logging.js"></script>
+    <script src="../lib/persist.js"></script>
+    <script src="../lib/objects.js"></script>
+    <script src="../lib/text.js"></script>
+    <script src="../lib/word_selector.js"></script>
+    <script src="../lib/sentence.js"></script>
+    <script src="../lib/autotag.js"></script>
+    <script src="tag2.js"></script>
+
+    <title>Tag</title>
+
+</head>
+<body>
+    <!--keycode13 = enter-->
+    <input type="text" id="sentencebox" width="500" onkeydown="if (event.keyCode == 13) sentence_entered()"><br>
+    <div id="box"></div>
+    <input type="text" id="chapter_number_box" width="100">CHAPTER<br>
+    <input type="text" id="sentence_number_box" width="100">SENTENCE<br>
+    <div id="tagger_drop_downs"></div>
+    <div id="buttons"></div>
+    <select multiple size = "10" id="allregions"></select>
+    <select multiple size = "10" id="subregions"></select>
+    <br>
+    <select multiple size = "10" id="tags"></select>
+    <select multiple size = "10" id="regions" ></select>
+    <br>
+    
+    
+    <button onclick="set_sentence_language('mf')">Morelad & Fleischer</button>
+    <button onclick="set_sentence_language('other')">Other</button>
+    <button onclick="local_submit_sentence()">local submit</button>
+    <button onclick="global_submit_sentence()">global submit</button>
+    <button onclick="delete_tags()">delete tags</button>
+    <button onclick="clear_all_highlights()">clear highlights</button>
+    
+    <script>
+    while (true) {
+        var password = prompt('Type in the password.');
+        var correct_hash = 1942621097; // The correct value for the hash.
+        if (password && (hash(password) === correct_hash)) {
+            break;
+        } else {
+            alert('Try again!');
+        }
+    }
+    </script>
+</body>
+</html>

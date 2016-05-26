@@ -1,0 +1,451 @@
+var test_sentences = [
+    "Rex iubeat ut nauta reginam timeat."
+];
+
+//initializing global variables
+// var tag_list_real = ["noun", "verb", "subject", "object", "predicate", "adjective", "adverb", 
+//     "preposition", "main clause", "subordinate clause", "coordinate clause",
+//     "definite article", "indefinite article", "personal pronoun", "subordinating conjunction",
+//     "coordinating conjunction",
+    
+//     ];
+
+//a test list with new variables
+var tag_list = [
+// "noun", "verb", "subject", "object", "predicate", "adjective", "adverb", "preposition", "main clause", "subordinate clause", "coordinate clause", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction", "coordinating conjunction", 
+// "n=subject nominative", 
+// "n=predicate nominative", 
+// "n=genitive of the charge", 
+// "n=genitive of the penalty", 
+// "n=partitive genitive", 
+// "n=genitive of description", 
+// "n=subjective genitive", 
+// "n=objective genitive", 
+// "n=genitive of characteristic", 
+// "n=genitive of the source of the feeling with an impersonal verb of emotional distress", 
+// "n=genitive of the person concerned with interest/rēfert", 
+// "n=genitive with causā to express purpose", 
+// "n=genitive of indefinite value", 
+// "n=genitive with expression of memory", 
+// "n=dative of possessor", 
+// "n=dative of agent with passive periphrastic", 
+// "n=predicate dative", 
+// "n=dative of reference with a predicate dative", 
+// "n=dative with certain intransitive verbs", 
+// "n=dative with compound verbs", 
+// "n=dative of reference with an impersonal verb", 
+// "n=accusative direct object", 
+// "n=predicate accusative", 
+// "n=subject accusative of an indirect statement", 
+// "n=accusative of place to which", 
+// "n=accusative of duration of time", 
+// "n=accusative of extent of space", 
+// "n=accusative of exclamation", 
+// "n=subject accusative of an infinitive not in indirect statement", 
+// "n=accusative of the gerund to express purpose with a verb of motion", 
+// "n=accusative of the feeler of the feeling with an impersonal verb of emotional distress", 
+// "n=accusative of the [gerund/gerundive] with ad to show purpose", 
+// "n=accusative of the supine to express purpose", 
+// "n=adverbial accusative", 
+// "n=accusative direct object of a verb in the middle voice", 
+// "n=accusative of respect", 
+// "n=ablative of means", 
+// "n=ablative of manner", 
+// "n=ablative of personal agent", 
+// "n=ablative of separation", 
+// "n=ablative of origin", 
+// "n=ablative of place from which", 
+// "n=ablative of accompaniment", 
+// "n=ablative of time when", 
+// "n=ablative of time within which", 
+// "n=ablative of respect", 
+// "n=ablative of comparison", 
+// "n=ablative of degree of difference", 
+// "n=ablative subject in an ablative absolute", 
+// "n=ablative predicate in an ablative absolute", 
+// "n=ablative of description", 
+// "n=ablative of cause", 
+// "n=ablative of possessive adjective agreeing with ellipsed rē with interest by analogy with rēfert", 
+// "n=ablative of the supine to express respect", 
+// "n=ablative of price", 
+// "n=subject infinitive", 
+// "n=object infinitive", 
+// "n=complementary infinitive", 
+
+"t=present", "t=imperfect", "t=future", "t=perfect", "t=pluperfect",
+
+"m=indicative", "m=subjunctive", "m=infinitive",
+
+"c=protasis/apodosis future more vivid conditional sentence", 
+"c=protasis/apodosis of a future more vivid conditional sentence with emphatic protasis", 
+"c=protasis/apodosis of a future less vivid conditional sentence", 
+"c=protasis/apodosis of a present contrary to fact conditional sentence",
+"c=protasis/apodosis of a past contrary to fact conditional sentence", 
+"c=protasis/apodosis of a mixed contrary to fact conditional sentence", 
+"c=jussive", 
+"c=present deliberative", 
+"c=past deliberative", 
+"c=present potential", 
+"c=past potential", 
+"c=hortatory", 
+"c=present optative - wish capable of fulfillment", 
+"c=present optative - wish incapable of fulfillment", 
+"c=past optative - wish incapable of fulfillment", 
+"c=purpose clause", 
+"c=indirect command", 
+"c=subordinate clause in indirect statement", 
+"c=indirect question", 
+"c=result clause", 
+"c=substantive ut clause", 
+"c=relative clause of characteristic", 
+"c=relative clause of result", 
+"c=relative clause of purpose", 
+"c=relative clause of purpose introduced by a relative adverb", 
+"c=purpose clause introduced by quō + comparative", 
+"c=cum circumstantial clause", 
+"c=cum concessive clause",
+"c=cum causal clause", 
+"c=proviso clause", 
+"c=fear clause", 
+"c=doubting clause", 
+"c=prevention clause", 
+"c=by attraction", 
+"c=fore ut clause", 
+"c=indirect statement",
+
+
+"s=primary", 
+"s=secondary",
+"s=not applicable",
+
+"r=simultaneous time", 
+"r=prior time", 
+"r=subsequent time", 
+"r=breaking sequence to emphasize actuality of result",
+"r=not applicable"
+];
+
+
+
+var implied_tags = {
+    "subject": "noun",
+    "object": "noun",
+    "predicate": "noun",
+    "personal pronoun": "pronoun",
+    "relative pronoun": "pronoun",
+    "definite article": "article",
+    "indefinite article": "article"
+};
+
+
+//todo down the road, when substantives are learned
+//if word or answer is substantive:
+//adjective : subject, object, predicate, substantive
+//substantive: subject, object, predicate, adjective
+//etc/
+
+//another option: create a distinct tag for substantive-subject, etc.
+
+// var non_contradictory_tag_map = {
+//     "subject": ["noun", "pronoun", "personal pronoun", "relative pronoun"],
+//     "object": ["noun", "pronoun", "personal pronoun", "relative pronoun"],
+//     "predicate": ["noun", "pronoun", "adjective", "personal pronoun", "relative pronoun"],
+//     "noun": ["pronoun", "personal pronoun", "relative pronoun", "subject", "object", "predicate"],
+//     "adjective": ["predicate"],
+//     "personal pronoun": ["subject", "object", "predicate", "noun", "pronoun"],
+//     "relative pronoun": ["subject", "object", "predicate", "noun", "pronoun"],
+//     "pronoun": ["subject", "object", "predicate", "noun", "personal pronoun", "relative pronoun"],
+//     "definite article": ["article"],
+//     "indefinite article": ["article"],
+//     "article": ["definite article", "indefinite article"],
+// }
+
+var sentence = null;
+var word_selector = null;
+
+//START
+window.onload = function (){
+    //generate_buttons();
+    init_drop_downs();
+    generate_tags();
+    // we need a default_text to start with for testing, eventually, we'll replace this with an empty inout box
+    new_text(test_sentences[0]);
+
+}
+
+
+
+
+//FUNCTION summary
+//no argument but it does have an input: entered by user into the box
+//no return but calls new_text which is our master function that processes inputted text
+//called by: index.html   (if keycode 13 (enter) is pressed, the text in sentence box is sent to sentence entered which processes it as new_text
+function sentence_entered(){
+    var text = el("sentencebox").value;
+    //console.log"M: input text pasted into box at sentence_entered = ". text);
+    new_text(text);
+}
+
+
+
+
+//FUNCTION summary
+//new_text receives and auto-tags new text that gets entered (in various ways: default text or pasted into the text box)
+//no return, has side-effects:
+    // parses the words in the text
+    // creates a new sentence with the argument text
+    // setups a wordselector object with the argument text (i.e. displays the words and makes them clickable)
+    // processes the text inasmuch as its able (brackets and auto-tags)
+    // this auto-processing produces new regions and tags so we also update region list & subregions)
+// called by: window onload & sentence_entered
+function new_text(text){
+
+	var t = new Text(text);
+	t.setup();
+    sentence = new Sentence(t.get_words(), text);
+
+    // autotag(t, sentence);
+
+    el("box").innerHTML = "";
+    word_selector = new WordSelector("box", t);
+    word_selector.setup();
+    show_untagged_words();
+
+    update_region_list();
+    el("allregions").addEventListener("change", function(x){
+        update_subregions();
+    });
+    //M: Master flow logged below
+    //console.log("M: Sentence after autotagging: ", JSON.stringify(sentence));
+}
+
+var drop_down_types = ['tense', 'mood', 'construction', 'sequence', 'relative time'];
+
+
+//argument: string ('latin' 'english')
+//returns: a side effect
+function set_sentence_language(language_of_sentence) {
+    console.log('language set to ' + language_of_sentence);
+    sentence.language_of_sentence = language_of_sentence;
+}
+
+function options_for (x) {
+    return tag_list.filter(function (y) {return y[0] === x[0]}).
+    map(function (y) {return y.slice(2)});
+}
+
+function init_drop_downs () {
+    for (var i = 0; i < drop_down_types.length; i++) {
+        create_html_drop_down(drop_down_types[i],
+        options_for(drop_down_types[i]));
+    }
+}
+
+function create_html_drop_down (header, options) {
+    var where_to_add = 'tagger_drop_downs';
+    var number = drop_down_types.indexOf(header);
+    make_drop_down_html(options, where_to_add, number);
+    el('select_element' + number).role = header;
+}
+
+// arguments: none
+// returns: a side effect (adds "untagged" to the class name of untagged words)
+function show_untagged_words() {
+    var words = sentence.words;
+    for (var i = 0; i < words.length; i++){
+        if (sentence.get_region([i]).get_tags().length == 0) {
+            var e = el(i);
+            e.className += " untagged";
+            //console.log("untagged word", words[i]);
+        }
+    }
+}
+
+// called by: generate_buttons()
+// argument is an integer (i.e. an index in the tag list)
+function submit_tag (tag_type) {
+    var tag_type_as_string = tag_type;
+    var tag = new SingleRegionTag(tag_type_as_string);
+    //console.log("submit tag triggered here");
+    //console.log("TEST OF tag type", tag, word_selector.highlighted_words.size, word_selector.highlighted_words.values());
+
+    var indices = word_selector.get_selected_indices();                                                                //indices = highlighted words
+    //console.log(indices);
+    var region = sentence.get_region(indices);                                                              //make a region to hold the tags
+    if (region != undefined && region != null) {
+        
+        //checking for contradictory tags
+        // var tag_types_to_keep = non_contradictory_tag_map[tag_type_as_string] || [];
+        // console.log('tag_types_to_keep =', tag_types_to_keep);
+        // region.remove_tags_not_in_list(tag_types_to_keep);
+        //console.log"ADDING TAG ", tag);
+        region.add_tag(tag);
+        //checking for implied tags (a subject tag implies a noun tag)
+        // if (tag_type_as_string in implied_tags) {
+        //    var implied_tag = new SingleRegionTag(implied_tags[tag_type_as_string]);
+        //    region.add_tag(implied_tag);
+        //}
+        region.remove_duplicate_tags();
+        
+        update_region_list();
+        
+        console.log('final region', region,
+        region.tags, region.tags.length);
+        //todo additions below
+        //if (tag.indexOf("clause") !== -1) {
+        //    region.make_clause(tag);
+        //}
+    }
+    //console.logsentence);
+    // console.log('I, 1, am responcible.')
+    console.log('submit_tag has been called');
+    console.log('word selector is', word_selector);
+    //word_selector.clear();
+    // debug(indices);
+    
+}
+
+
+
+//creates the 1st column, a list of tags
+function generate_tags() {
+
+	set_dropdown("tags", tag_list);
+
+    el("tags").addEventListener("change", function(x){
+        generate_regions();
+    });
+
+}
+
+//fills the right hand side of the 2nd column
+function generate_regions() {
+
+    var dd = el("tags");                   //dd = drop-down optios on the left hand side
+    if(dd.selectedIndex < 0){
+    	return;
+    }
+    var tag = dd.options[dd.selectedIndex].value;               //tag = clikced tag in right hand box tag will be a string
+    //console.log"target tag = ", tag);
+
+	var rs = sentence.get_regions().filter(function(r){
+		return contains(r.get_tag_types(), tag);
+	});
+
+    set_dropdown("regions", rs, function(x){ return word_selector.get_text(x.get_indices()); });
+
+}
+
+
+function update_region_list(){
+	set_dropdown("allregions", sentence.regions, function(x){ return region_to_text(x); });
+}
+
+
+function update_subregions(){
+
+    var dd = el("allregions");         //dd = drop-down options on the left hand side
+    if (dd.selectedIndex < 0) {
+        return;
+    }
+    var region = sentence.regions[dd.selectedIndex]; 
+                     
+    //console.logregion, sentence);
+    var subregions = sentence.get_sub_regions(region);
+
+	set_dropdown("subregions", subregions, function(x){ return region_to_text(x); });
+
+    // select words in the gui
+    var is = region.get_indices();
+    // console.log('I, 2, am responcible.')
+    word_selector.clear();
+    for(var i in is){
+        word_selector.set_highlighted(is[i], true);
+    }
+    
+}
+
+
+//todo 9-9 below is rather specific, should be made more general (should it be made a method in the Region object?)
+//FUNCTION summary
+//input = region
+//return = string ("text = tags")
+//called by: update_subregions (which populates the columns of the explorer)
+function region_to_text(region){
+    var text = word_selector.get_text(region.get_indices());
+    var tags = region.get_tag_types().join(", ");
+    return text + " = " + tags;
+}
+
+
+
+
+
+////////////////////
+//maybe move these below functions somewhere else, like a .js file that just deals with gui functionality
+
+//FUNCTION summary
+// strictly HTML setup & possibly obsolete (not called anywhere)
+// no input
+//no return, just side effects: mutates the HTML
+//called by: window onload
+function generate_buttons() {
+    var e = el("buttons");
+    //console.log"tag_list = ", JSON.stringify(tag_list));
+    for (var i = 0; i < tag_list.length; i++) {
+        e.innerHTML += "<button onclick=\"submit_tag(" + i + ")\">" + tag_list[i] + "</button>"
+    }
+}
+
+
+
+//FUNCTION summary
+//no input, no return, just side effects: clears all tags on the highlighted word
+//called by: the delete tag button on the html page
+function delete_tags(){
+    var indices = word_selector.get_selected_indices();
+    var region = sentence.get_region(indices);
+    region.clear_tags();
+    update_region_list();
+    update_subregions();
+}
+
+function clear_all_highlights() {
+    // console.log('I, 3, am responcible.')
+    word_selector.clear();
+}
+
+function local_submit_sentence(){
+    console.log("local sentence submitted");
+    var choice;
+    var text;
+    for (var i = 0; i < drop_down_types.length; i++) {
+        choice = selected_option(el('select_element' + i));
+        text = drop_down_types[i][0] + '=' + choice;
+        console.log('choice, text =', choice, text);
+        submit_tag(text);
+    }
+    word_selector.clear();
+    console.log('word selector cleared: word selector =', word_selector);
+}
+
+//FUNCTION summary
+//no input, calls save which has no return, just side effects: appends a child to firebase
+//called by: the submit button on the html page
+function global_submit_sentence(){
+    var sentence_chapter = Number(el("chapter_number_box").value);
+    var sentence_number = Number(el("sentence_number_box").value);
+    if (sentence.language_of_sentence == null) {
+        alert("no language specified");
+    } else if (isNaN(sentence_chapter) || sentence_chapter === 0) {
+        alert("no chapter specified");
+    } else if (isNaN(sentence_number) || sentence_number === 0) {
+        alert('no sentence number specified');
+    } else {
+        sentence.chapter = sentence_chapter;
+        sentence.number = sentence_number;
+        console.log("sentence submitted");
+        console.log('sentence.language_of_sentence =', sentence.language_of_sentence);
+        Sentence.save(sentence);
+    }
+}

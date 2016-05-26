@@ -316,7 +316,6 @@ Quiz.prototype.next_submodule = function() {
     
     
     this.initialize_time_metrics();
-    
     this.next_question();
 };
 
@@ -349,7 +348,7 @@ Quiz.prototype.get_modes = function () {
     return Object.keys(ALL_MODULES[this.module.id].mode_ratio);
 }
 
-Quiz.prototype.next_mode = function(){
+Quiz.prototype.next_mode = function (error) {
     console.log("DEBUG 11-28 entering next_mode");
     var allowed = ALL_MODULES[this.module.id].mode_ratio;
     
@@ -384,7 +383,9 @@ Quiz.prototype.next_mode = function(){
     // Solution: commit the hack of putting in each module a setting
     // of one_game or switch. Assume no setting is switch.
     // We do this via an early return.
-    if (this.game && ALL_MODULES[this.module.id].game_change_method === 'one_game') {
+    // error is a parameter which is true if next_mode was called due to an error.
+    
+    if (!error && this.game && ALL_MODULES[this.module.id].game_change_method === 'one_game') {
         return;
     }
     
@@ -423,6 +424,7 @@ Quiz.get_mode = function(mode_number) {
         case 4 : return new EtymologyModeGame();
         case 5 : return new InputModeGame();
         case 6 : return new MFModeGame();
+        case 7 : return new SyntaxModeGame();
         default : throw "no game mode triggered";
     }
     
@@ -430,7 +432,7 @@ Quiz.get_mode = function(mode_number) {
 
 
 
-Quiz.prototype.next_question = function (){
+Quiz.prototype.next_question = function (error) {
     // todo make sure to uncomment this except when necessary (nuclear option)
     // Persist.clear_node(["xxx"]);     put urgent_log  where it says xxx
     
@@ -438,8 +440,6 @@ Quiz.prototype.next_question = function (){
     
     //todo xxx hack this was a hack, remove 
     el('image_display_box').innerHTML = '';
-    
-    
     console.log('DEBUG 12-23 entering next_question')
     //previously:
     // this.next_mode();
@@ -447,14 +447,12 @@ Quiz.prototype.next_question = function (){
     try {
         console.log('DEBUG 12-23 entering try block')
         this.clean_up();
-        this.next_mode();
+        this.next_mode(error);
         console.log('still OK, about to call next_question');
         this.game.next_question(this);
         console.log('DEBUG 12-23 no error, everything is fine')
     } catch (e) {
         console.log("DEBUG 12-23 entering catch block error caught");
-        
-        //todo out of desperation, commented this out
         
         console.log("DEBUG 5-6 this.game = ", this.game);
         // Originally: add not push
@@ -474,7 +472,7 @@ Quiz.prototype.next_question = function (){
         
         if (e !== "modes exhausted") {
             console.log("DEBUG 12-23 error handler initiated");
-            this.next_question();
+            this.next_question(true);
         }
     }
 };
