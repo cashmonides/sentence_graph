@@ -46,7 +46,8 @@ ProfilePage.enter_improve = function () {
 
 //global functions can be simply reference but for methods we have to bind the method to "this" 
 // this.user points to the user object
-// this.display_profile - the this = ProfilePage - but for reasons of scope we need to bind it to the "this" of the ProfilePage
+// this.display_profile - the this = ProfilePage -
+// but for reasons of scope we need to bind it to the "this" of the ProfilePage
 // bind passes in its argument into the argument of display_profile
 ProfilePage.start = function(){
     this.user = new User();
@@ -107,7 +108,8 @@ ProfilePage.get_module_distance = function (user, module_id) {
     // console.log("DEBUG blur mode, current_module_id=", current_module_id);
     var distance = module_id - current_module_id;
     // console.log("DEBUG blur mode: distance = ", distance);
-    // console.log("DEBUG blur mode module_id - current_mod = distance", module_id + " - " + current_module_id + " = " + distance);
+    // console.log("DEBUG blur mode module_id - current_mod = distance",
+    // module_id + " - " + current_module_id + " = " + distance);
     return distance;
 }
 
@@ -132,37 +134,23 @@ ProfilePage.build_progress_table = function(user) {
             
                 var mod_history = mod.id in user.data.history ? user.get_module(mod.id) : null;
                 
-                var hoverability = hoverable_types.indexOf(user.classify_module_plus(mod.id)) !== -1;
-                
                 var img_class = ["progress_image", hoverability ? 'hoverable_mod': 'non_hoverable_mod'];
                 
                 
-                // in progress
-                var distance = this.get_module_distance(user, mod.id);
-                var blur_amount;
-                if (distance > 4) {
-                    blur_amount = Math.floor(distance/2);
-                } else {
-                    blur_amount = 0;
-                }
+                // Blurring probably isnt
                 var m = {
                     'tag': "td", 
                     'class': ["progress_cell"],
                     'children': [
-                        {'tag': "img", 'class': img_class, 'src': mod.icon_url, 'style' : {
-                            "-webkit-filter": "blur(" + blur_amount + "px)",
-                            'filter': "blur(" + blur_amount + "px)"
-                            }
-                        },                      //UNIVERSAL MODULE
+                        {'tag': "img", 'class': img_class, 'src': mod.icon_url},
                         {'tag': "br"},
                         this.get_display_caption(this.user, order[i])
                     ]
                 };
                 
-                if (hoverability) {
-                    m.onclick = ProfilePage.select_improvement_module(mod.id);
-                    m.class.push('clickable')
-                }
+                // All modules are hoverable.
+                m.onclick = ProfilePage.select_improvement_module(mod.id);
+                m.class.push('clickable')
                 
                 console.log("DEBUG 2-11 entering 2nd make in profile");
                 console.log("DEBUG 2-11 m = ", m);
@@ -170,7 +158,7 @@ ProfilePage.build_progress_table = function(user) {
                 make(m, row);
         
         
-                if (i > 0 && i % max_columns == 0) {
+                if (i > 0 && i % max_columns === max_columns - 1) {
                     console.log("DEBUG 2-11 entering 3rd make in profile");
                     row = make({'tag': "tr"}, table);
                 }
@@ -231,7 +219,7 @@ ProfilePage.build_progress_table = function(user) {
                 make(m, row);
         
         
-                if (i > 0 && i % max_columns == 0) {
+                if (i > 0 && i % max_columns === max_columns - 1) {
                     console.log("DEBUG 2-11 entering 3rd make in profile");
                     row = make({'tag': "tr"}, table);
                 }
@@ -402,7 +390,8 @@ function CustomConfirm(){
 		
 		document.getElementById('dialogboxhead').innerHTML = "Confirm that action";
 	    document.getElementById('dialogboxbody').innerHTML = dialog;
-		document.getElementById('dialogboxfoot').innerHTML = '<button onclick="Confirm.yes(\''+op+'\',\''+id+'\')">Yes</button> <button onclick="Confirm.no()">No</button>';
+		document.getElementById('dialogboxfoot').innerHTML = '<button onclick="Confirm.yes(\'' + op +
+		'\',\'' + id + '\')">Yes</button> <button onclick="Confirm.no()">No</button>';
 	}
 	this.no = function(){
 		document.getElementById('dialogbox').style.display = "none";
