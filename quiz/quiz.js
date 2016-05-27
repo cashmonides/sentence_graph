@@ -12,7 +12,7 @@ window.onload = start;
 //     user_data.logout()
 // };
 
-function start(){
+var start = function () {
     // bootstrap sidebar
     // $("#menu-toggle").click(function(e) {
     //     e.preventDefault();
@@ -138,7 +138,7 @@ Quiz.prototype.user_loaded = function() {
 };
 
 //decides whether we go to current or some other module determined at profile page
-Quiz.prototype.get_start_module = function(){
+Quiz.prototype.get_start_module = function() {
     console.log("DEBUG 11-22 get_start_module entered");
     //todo
     //if (improving)
@@ -152,18 +152,24 @@ Quiz.prototype.get_start_module = function(){
         var selected_mod = ups["mod"];
         console.log("DEBUG 11-23 selected mod = ", selected_mod);
         // Logically, exactly one of these things must happen,
-        // so we cound remove the final if in the second else if.
+        // (unless the user is an mf user, which overrides everything else),
+        // so we could remove the final if in the second else if.
         // But this seems cleaner.
-        if (!this.is_allowed_module(parseInt(selected_mod, 10))) {
-            return_to_profile();
-        } else if (selected_mod == this.user.get_current_module()) {
-            console.log("DEBUG 11-23 clicked mod = current mod");
-            this.advance_improve_status = "advancing";
-        } else if (selected_mod == this.user.get_improving_module()) {
-            console.log("DEBUG 11-23 clicked mod != current mod");
-            this.advance_improve_status = "improving";
+        if (this.user.is_mf()) {
+            // todo add to this later.
+            this.advance_improve_status = "mf";
+        } else {
+            if (!this.is_allowed_module(parseInt(selected_mod, 10))) {
+                return_to_profile();
+            } else if (selected_mod == this.user.get_current_module()) {
+                console.log("DEBUG 11-23 clicked mod = current mod");
+                this.advance_improve_status = "advancing";
+            } else if (selected_mod == this.user.get_improving_module()) {
+                console.log("DEBUG 11-23 clicked mod != current mod");
+                this.advance_improve_status = "improving";
+            }
         }
-        return ups["mod"];
+        return selected_mod;
         /*
         if (selected_mod > this.user.get_current_module()) {
             console.log("DEBUG 1-27 excessive mod entered as url query");
@@ -618,13 +624,14 @@ Quiz.prototype.submodule_complete = function () {
         console.log("DEBUG 3/4/2016AD refusing post #2");
     }
     
-    if (this.advance_improve_status === 'advancing') {
-        var mod = this.user.get_current_module(this.module.id);
-    } else {
-        var mod = this.user.get_improving_module(this.module.id);
-    }
+    var mod = this.user.get_module_being_played();
     
-    var submodule_id = this.user.get_module(mod).progress;
+    var gotten_module = this.user.get_module(mod);
+    
+    var submodule_id = gotten_module.progress;
+    
+    console.log("DEBUG 11-16 quiz.submodule_complete entered");
+    console.log("DEBUG 12-27 this.user.get_module(mod) = ", gotten_module);
     
     //logging the stop time
     // console.log("DEBUG 12-28 submodule_complete, about to call log_submodule_stop_time");
@@ -635,8 +642,6 @@ Quiz.prototype.submodule_complete = function () {
     // console.log("DEBUG 12-28 log stop time passed");
     
     //progress bar
-    console.log("DEBUG 11-16 quiz.submodule_complete entered");
-    console.log("DEBUG 12-27 this.user.get_module(mod) = ", this.user.get_module(mod));
     // this.old_progress_bars.forEach(function (x) {remove_element(x.progress_bar)});
     // this.user.add_progress_bar(this.progress_bar.past_events, this.module.id);
     
@@ -811,6 +816,8 @@ Quiz.prototype.get_lightbox_image = function(mod_id, progress) {
 
 Quiz.prototype.process_lightbox_image = function (offset, progress) {
     //todo 1-17 following is Akiva's additions, check if OK
+    // This line is Dan's addition.
+    this.user.check_not_mf();
     var mod;
     if (this.advance_improve_status === "advancing") {
         mod = this.user.get_current_module();
@@ -965,13 +972,7 @@ Quiz.prototype.get_cheat_sheet = function(mod_id) {
 }
 
 Quiz.prototype.get_cheat_sheet_image = function () {
-    var mod;
-    
-    if (this.advance_improve_status === "advancing") {
-        mod = this.user.get_current_module();
-    } else if (this.advance_improve_status === "improving") {
-        mod = this.user.get_improving_module();
-    }
+    var mod = this.user.get_module_being_played();
     
     console.log("DEBUG 11-23 advance/improve status = ", this.advance_improve_status);
     console.log("DEBUG 11-23 mod = ", mod);

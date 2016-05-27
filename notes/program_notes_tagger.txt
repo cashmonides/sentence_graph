@@ -23,7 +23,36 @@ SUMMER AGENDA (non-detailed)
 
 
 
+AGENDA FRIDAY
+- rewrite tagger to send to mf_sentences (change submit in persist) (done)
+- rewrite syntax mode to only read from mf_sentences (done)
+- when autogenerating the profile page, we populate it only with sentences from firebase
+    - (function that pulls from firebase all sentence numbers and writes it as a variable) (done)
+    - (rewrite the module reader from regular mode to read that variable when in mf/syntax mode)
+- adjust the url parameters (non-invasively) to allow for student to pick their question
+    - remove the defence against clicking anything (no defence)
+    - url parameter tells you current chapter/current question
+    - test blocks? combining images?
+    - not done vs. skipped vs done should be visible (ideally)
+- mode choice
+    - for now only syntax
+    - later????
+- other things
+    - opacity changes when done successfully (gray vs. black) (ideally)
+    - we find a use for progress bar / remove it (more likely) (ideally)
+- check
+    - in syntax mode, the answer given is correct if and only if
+    the correct answer is not applicable or
+    the correct answer is the answer given
+
+
+
+
 AGENDA MONDAY
+
+
+
+
 - mftagger: make it possible to highlight words after they've been highlighted once
 - mftagger: make it possible to add multiple tags to a word
 - mfideally: make the tagger into a drop down

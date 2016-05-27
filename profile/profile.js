@@ -116,7 +116,9 @@ ProfilePage.get_module_distance = function (user, module_id) {
 
 ProfilePage.build_progress_table = function(user) {
     try {
-        if (this.user.data.profile.email.endsWith('.mf')) {
+        if (user.is_mf()) {
+            remove_element_by_id('start_game_button');
+            remove_element_by_id('improve_button');
             var table = el("table");
             console.log("DEBUG 2-11 entering first make in profile");
             console.log("DEBUG 2-11 user = ", user);
@@ -137,7 +139,7 @@ ProfilePage.build_progress_table = function(user) {
                 var img_class = ["progress_image", hoverability ? 'hoverable_mod': 'non_hoverable_mod'];
                 
                 
-                // Blurring probably isnt
+                // Blurring probably isn't needed.
                 var m = {
                     'tag': "td", 
                     'class': ["progress_cell"],
@@ -149,7 +151,7 @@ ProfilePage.build_progress_table = function(user) {
                 };
                 
                 // All modules are hoverable.
-                m.onclick = ProfilePage.select_improvement_module(mod.id);
+                m.onclick = ProfilePage.go_straight_to(mod.id);
                 m.class.push('clickable')
                 
                 console.log("DEBUG 2-11 entering 2nd make in profile");
@@ -333,20 +335,27 @@ ProfilePage.select_improvement_module = function(mod_id){
     }
 };
 
+ProfilePage.go_straight_to = function (mod_id) {
+    return function () {
+        document.location = "../quiz/?mod=" + mod_id;
+    }
+};
 
 ProfilePage.display_skipped_sentences = function() {
     var skipped_sentence_list = this.user.get_skipped_sentences();
     alert(skipped_sentence_list);  
 };
 
-
+/*
+// All code below seems dead. It also seems like a good idea.
+// It should perhaps be put back in.
 ////////////////////////////
 //new material below for custom confirm box
 
 //I guess the way it will be used is: 
 
 //we define a CustomAlert object
-function CustomAlert(){
+function CustomAlert() {
 	this.render = function(dialog){
 		var winW = window.innerWidth;
 	    var winH = window.innerHeight;
@@ -368,6 +377,7 @@ function CustomAlert(){
 }
 
 var Alert2 = new CustomAlert();
+
 
 //looks like this won't get used
 function deletePost(id){
@@ -428,3 +438,4 @@ var Confirm = new CustomConfirm();
 //     };
     
 // };
+*/
