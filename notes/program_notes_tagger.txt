@@ -1,6 +1,12 @@
 - Dan coding (in mf mode)
 - Akiva not coding (working in quiz.js and modules.js and a new mode called input_mode.js)
 
+don't leave this lying around as a global object
+
+    // Persist.clear_node(["xxx"]);     put urgent_log  where it says xxx
+    
+    // Persist.clear_node(["xxx"]);   put users where it says xxx
+
 
 Current issues and questions (from mf mode):
 // MF Issue 0: What needs to be changed outside of mf_mode?
@@ -22,6 +28,31 @@ SUMMER AGENDA (non-detailed)
 - morphology training
 
 
+AGENDA SUNDAY MAY 29th
+- red grey and black for profile page (nearly done with  mysterious bug perhaps in safari)
+- get rid of dummy phrases (Akiva thinks is done but not sure)
+- font size of feedback should be smaller (DONE)
+- Akiva: remove the weird testing modules from regular non-mf modules (DONE)
+- header on drops should say in all caps TENSE MOOD CONSTRUCTION SEQUENCE RELATIVE TIME (DONE)
+- cosmetic:in feedback box when it says "excellent" and tells them the right answer it should look like this (DONE)
+    TENSE: present
+    MOOD: subjunctive
+    CONSTRUCTION: purpose
+    SEQUENCE: secondary
+    RELATIVE TIME: subsequent
+- super important: remove all correct answers and other clues from console.log (DONE)
+- cosmetic but important: the profile page should have two columns (DONE)
+- small: in syntax and mf mode when they get it right, the button shouldn't say "back" but "back to profile" (DONE)
+- - if they skip any single question in a multi-question syntax mode it should log the sentence as incomplete and turn it red (DONE)
+- in a multi-part syntax question there is some room for confusion (DONE)
+    repeat question word in feedback box
+   
+
+- test: are we sure if they skip a game and then complete it later, firebase will rewrite the status as complete? SEEMS to be done but not tested)
+
+
+
+
 
 AGENDA FRIDAY
 - rewrite tagger to send to mf_sentences (change submit in persist) (done)
@@ -30,13 +61,14 @@ AGENDA FRIDAY
     - (function that pulls from firebase all sentence numbers and writes it as a variable) (done)
     - (rewrite the module reader from regular mode to read that variable when in mf/syntax mode)
 - adjust the url parameters (non-invasively) to allow for student to pick their question
-    - remove the defence against clicking anything (no defence)
-    - url parameter tells you current chapter/current question
+    - remove the defence against clicking anything (no defence) (done)
+    - url parameter tells you current chapter/current question (done)
     - test blocks? combining images?
+         (Text of small size, likely easy to change. Not really done but workable.)
     - not done vs. skipped vs done should be visible (ideally)
 - mode choice
     - for now only syntax
-    - later????
+    - later???? (mode choice already sort of works)
 - other things
     - opacity changes when done successfully (gray vs. black) (ideally)
     - we find a use for progress bar / remove it (more likely) (ideally)

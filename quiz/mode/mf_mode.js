@@ -1,18 +1,20 @@
-var MFModeGame = function(){
+var MFModeGame = function (chapter, question) {
     this.data = null;
     this.quiz = null;
     this.match_fraction = null;
     this.student_answer = null;
     // this.current_chapter = null;
     // this.current_question = null;
-    this.current_chapter = "1";
+    this.current_chapter = chapter;
     // We have to start here since we increment first.
-    this.current_question = "0";
+    // Not anymore.
+    this.current_question = question;
+    this.all_right = true;
 };
 
 
-
-var mf_sentences_original = {
+//below is obsolete and has all been migrated to a separate file called mf.js
+var mf_sentences_old = {
 	"1.1" : ["Nauta in patriā poenās rēgīnae timet.", "The sailor in-the-country/homeland fears the penalties/punishments of-the-queen."],
 
 	"1.2" : ["Poēta pecūniam fāmamque nōn optat.", "The poet does-not-want/choose money-and-fame."],
@@ -72,7 +74,7 @@ var mf_sentences_original = {
 
 
 //below is an abbreviated version for testing
-var mf_sentences = {
+var mf_sentences_abbreviated = {
 	"1.1" : ["Nauta in patriā poenās rēgīnae timet.", "The sailor in-the-country/homeland fears the penalties/punishments of-the-queen."],
 
 	"1.2": ["Poēta pecūniam fāmamque nōn optat.", "The poet does-not-want/choose money-and-fame."],
@@ -127,6 +129,10 @@ var mf_sentences_super_abbreviated = {
  	2.3: ["6", "6"]
 }
 
+var get_mf_questions = function (fn) {
+    fn(mf_sentences);
+}
+
 MFModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
 // Originally values here were lists with the same item repeated.
 // I made them strings because I thought that would be clearer.
@@ -167,6 +173,8 @@ MFModeGame.prototype.do_with_quiz_attachment = function () {
 }
 
 MFModeGame.prototype.chapter_and_sentence_init = function () {
+    // This is being temporarily disabled.
+    /*
     console.log('WARNING: chapter and sentence initialized ' +
     '(perhaps re-initialized)');
     var sl = this.quiz.user.data.history.sentence_logs;
@@ -177,6 +185,7 @@ MFModeGame.prototype.chapter_and_sentence_init = function () {
     // this.current_chapter = 1;
     // this.current_question = 0;
     console.log('this =', this);
+    */
 }
 
 MFModeGame.prototype.set_question = function () {
@@ -380,11 +389,11 @@ MFModeGame.prototype.next_question = function () {
     // var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
     // console.log('DEBUG 11-16 lexicon = ', list_of_lexeme_strings)
     // var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
-    console.log('this =', this);
-    var data = this.get_current_sentence()
+    // console.log('this =', this);
+    var data = this.get_current_sentence();
     
-    console.log('data, search, mf_sentences =', data,
-    this.current_chapter + '.' + this.current_question, mf_sentences);
+    // console.log('data, search, mf_sentences =', data,
+    // this.current_chapter + '.' + this.current_question, mf_sentences);
     
     
     //this.question = data.question;
@@ -392,14 +401,18 @@ MFModeGame.prototype.next_question = function () {
     this.sentence = data[0];
     this.model_translation = data[1];
     
-    console.log(data, this.sentence, this.model_translation);
+    // console.log(data, this.sentence, this.model_translation);
     
     // this.target_indices = data.target_indices;      //highlighted word if necessary
 
     // console.log("DEBUG 4-9 data.sentence = ", data.sentence);
     
-    //changes the score, progress bar, etc.
-    this.quiz.update_display();
+    
+    
+    //todo very important: why is chrome throwing errors at update display in mf & syntax mode while safari doesn't???!!!
+    if (!this.quiz.user.is_mf()) {
+        this.quiz.update_display();
+    };
 
     Quiz.set_question_text("Translate the following sentence:");
     this.quiz.set_word_selector(data[0]);
@@ -499,8 +512,8 @@ MFModeGame.prototype.process_answer = function(){
 MFModeGame.prototype.process_correct_answer = function () {
     
     console.log("DEBUG 5/23 checkpoint 1");
-    this.quiz.update_sentence_log(
-        this.sentence_finder(), this.get_next_sentence(), "completed");
+    // currently being removed
+    // this.quiz.update_sentence_log(this.sentence_finder(), "completed");
     console.log("this.current_chapter = ", this.current_chapter);
     console.log("this.current_question = ", this.current_question);
     console.log("DEBUG 5/23 checkpoint 2");
@@ -514,11 +527,12 @@ MFModeGame.prototype.process_correct_answer = function () {
     
     
     var cell_1 = "Excellent, your match score was: " + this.match_fraction + "%" + "<br\/>" 
-    + "The sentence was: " + this.sentence + "<br\/>" 
-    + "The model translation is: " + display_model_translation(this.correct_answer) + "<br\/>"
-    + "Your answer was: " + this.student_answer;
+    + "SENTENCE: " + this.sentence + "<br\/>" 
+    + "MODEL TRANSLATION: " + display_model_translation(this.correct_answer) + "<br\/>"
+    + "YOUR TRANSLATION: " + this.student_answer  + "<br\/>";
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
+    el('questionbox').innerHTML = '';
     
     clear_input_box("input_box");
     
@@ -540,7 +554,11 @@ MFModeGame.prototype.process_incorrect_answer = function () {
         this.give_away_answer();
         // clear_input_box("input_box");
     }
-    this.quiz.update_display();
+    
+    //todo very important: why is chrome throwing errors at update display in mf & syntax mode while safari doesn't???!!!
+    if (!this.quiz.user.is_mf()) {
+        this.quiz.update_display();
+    };
     
     
     
@@ -562,8 +580,20 @@ MFModeGame.prototype.give_away_answer = function (){
     set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'none');
     set_display("skip_button", 'initial');
+    
+    var skip_button = el("skip_button");
+    var skip_onclick = skip_button.onclick.bind(skip_button);
+    var self = this;
+    skip_button.onclick = function () {
+        self.all_right = false;
+        skip_onclick();
+    }
+    
     var fbox_for_input = el("feedback_for_input");
     fbox_for_input.innerHTML = this.give_away_phrase;
+    
+    //todo hacky quick fix, make more elegant later
+    document.getElementById("feedback_for_input").style.fontSize = "medium";
     // var fbox = el("feedbackbox");
     // fbox.innerHTML = "";
     //todo very important: write to firebase that they skipped this question

@@ -1,11 +1,7 @@
 //submodule_progress = how close you are to getting from 5/10 to 6/10
 //module_progress = 5/10 in kangaroo
 
-
 var quiz = null;
-
-
-window.onload = start;
 
 // window.onbeforeunload = function () {
 //     alert("window close triggered");
@@ -18,10 +14,11 @@ var start = function () {
     //     e.preventDefault();
     //     $("#wrapper").toggleClass("toggled");
     // });
-    
     quiz = new Quiz();
     quiz.start();
 }
+
+window.onload = start;
 
 
 var Quiz = function () {
@@ -77,7 +74,7 @@ Quiz.prototype.initialize_accuracy_dictionary = function () {
 
 //loads user data
 //loads sentences with callback next_module
-Quiz.prototype.start = function(){
+Quiz.prototype.start = function() {
     var self = this;
     this.user = new User();
     
@@ -89,13 +86,11 @@ Quiz.prototype.start = function(){
     
     // This stuff seems to depend on the user being loaded.
     var callback = function () {
+        // This is new, and seems a little hacky.
+        self.user.quiz = self;
         // the next line actually loads the data
         // todo should it go before or after the anonymous stuff?
         self.user_loaded();
-        
-        // this.module = ALL_MODULES[this.get_start_module()];
-        // This is new, and seems a little hacky.
-        self.user.quiz = self;
     }
     
     
@@ -127,7 +122,16 @@ Quiz.prototype.user_loaded = function() {
     
     console.log("DEBUG 11-20 user_loaded id = ", id);
     
-    this.module = ALL_MODULES[id];
+    this.id = id;
+    
+    if (this.user.is_mf()) {
+        // this.module = MF_MODULES[id.chapter];
+        this.module = MF_MODULES[1];
+        // and do this while we're at it
+        remove_element_by_id('progress-bar-wrapper');
+    } else {
+        this.module = ALL_MODULES[id];
+    }
     
     console.log("DEBUG 11-20 user_loaded this.module = ", this.module);
     
@@ -186,6 +190,9 @@ Quiz.prototype.get_start_module = function() {
         }
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         */
+    } else if ('chapter' in ups) {
+        this.advance_improve_status = "mf";
+        return ups;
     } else {
         console.log('DEBUG 1-18 mod not in parameters');
         this.advance_improve_status = "advancing";
@@ -232,96 +239,98 @@ Quiz.prototype.next_submodule = function() {
     
     this.initialize_accuracy_dictionary();
     
-    //progress bars below
-    this.began = new Date();
-    this.progress_bar = new ProgressBar(this.module.submodule.threshold, [], el('progress-bar'));
-    // Progress bar currently disabled (i.e., does not show up).
-    this.old_progress_bars = [];
-    /*this.old_progress_bars = (this.user.data.history[this.module.id].
-        progress_bars[this.user.data.history[this.module.id].progress] || []).map(
-        function (x) {
-            var o = document.createElement('div');
-            o.innerHTML = '<div id="progress-bar" class="progress-bar" role="progressbar" ' +
-            'aria-valuemin="0" aria-valuemax="100"></div>';
-            var e = o.firstChild;
-            el('progress-bar-wrapper').appendChild(e);
-            return new ProgressBar(self.module.submodule.threshold, x, e)});*/
-    //todo the following was moved by akiva to next_question
-    // this.next_mode();
-    // todo new begins here
-    console.log("current module:", this.module);
-    // This isn't really helpful
-    // console.log("current level:", this.module.level);
-    //todo below is old, make sure new version works (in next_question)
-    // this.game.set_level(this.module.level);
-    //todo important - I commented this out, not sure if it breaks anything - it seems to not do anything
-    // console.log('this.game.level = ', this.game.level)
-    // todo new ends here
-    // this.clear_cheat_sheet();
+    if (!this.user.is_mf()) {
+        //progress bars below
+        this.began = new Date();
+        this.progress_bar = new ProgressBar(this.module.submodule.threshold, [], el('progress-bar'));
+        // Progress bar currently disabled (i.e., does not show up).
+        this.old_progress_bars = [];
+        /*this.old_progress_bars = (this.user.data.history[this.module.id].
+            progress_bars[this.user.data.history[this.module.id].progress] || []).map(
+            function (x) {
+                var o = document.createElement('div');
+                o.innerHTML = '<div id="progress-bar" class="progress-bar" role="progressbar" ' +
+                'aria-valuemin="0" aria-valuemax="100"></div>';
+                var e = o.firstChild;
+                el('progress-bar-wrapper').appendChild(e);
+                return new ProgressBar(self.module.submodule.threshold, x, e)});*/
+        //todo the following was moved by akiva to next_question
+        // this.next_mode();
+        // todo new begins here
+        // console.log("current module:", this.module);
+        // This isn't really helpful
+        // console.log("current level:", this.module.level);
+        //todo below is old, make sure new version works (in next_question)
+        // this.game.set_level(this.module.level);
+        //todo important - I commented this out, not sure if it breaks anything - it seems to not do anything
+        // console.log('this.game.level = ', this.game.level)
+        // todo new ends here
+        // this.clear_cheat_sheet();
     
-    console.log("DEBUG 1-22 entering log start time");
+        console.log("DEBUG 1-22 entering log start time");
+        
+        var start_time =  "test_string_for_start_time"; //new Date();
+        
+        
+        var submodule_id = this.user.get_module(this.module.id).progress;
+        
+        console.log("DEBUG 1-22 user_id = ", this.user.uid);
+        console.log("DEBUG 1-22 module_id = ", this.module.id);
+        console.log("DEBUG 1-22 submodule_id = ", submodule_id);
+        console.log("DEBUG 1-22 start_time = ", start_time);
+        
+         /*
+        
+        
+        every time a submodule is started:
+        
+        
+        step 1)
+        create a row:
+        user_id, module_id, submodule_id, start_time, stop_time   (& 0123)
+        (with stop_time as null)
+        
+        step 2)
+        save data as a state: quiz.time_data [user_id, module_id, submodule_id, start_time]
+        
+        
+        every question modifies a dictionary
+        0:
+        1:
+        2;
+        3:
+        
+        
+        every time a submodule is completed:
+        step 1)
+        update stop_time in the following row:
+        user_id, module_id, submodule_id, quiz.start_time, null
+        
+        write new accuracy dictionary to post statement
+        
+        step 2)
+        clear quiz.start_time
+        
+        */
+        this.time_data = list_of_repetitions(null, 8);
+        this.time_data[0] = this.user.uid;
+        this.time_data[6] = this.module.id;
+        this.time_data[7] = submodule_id;
+        
+        // Hopefully not needed.
+        // this.time_data = [this.user.uid, this.module.id, submodule_id];
     
-    var start_time =  "test_string_for_start_time"; //new Date();
-    
-    
-    var submodule_id = this.user.get_module(this.module.id).progress;
-    
-    console.log("DEBUG 1-22 user_id = ", this.user.uid);
-    console.log("DEBUG 1-22 module_id = ", this.module.id);
-    console.log("DEBUG 1-22 submodule_id = ", submodule_id);
-    console.log("DEBUG 1-22 start_time = ", start_time);
-    
-     /*
-    
-    
-    every time a submodule is started:
-    
-    
-    step 1)
-    create a row:
-    user_id, module_id, submodule_id, start_time, stop_time   (& 0123)
-    (with stop_time as null)
-    
-    step 2)
-    save data as a state: quiz.time_data [user_id, module_id, submodule_id, start_time]
-    
-    
-    every question modifies a dictionary
-    0:
-    1:
-    2;
-    3:
-    
-    
-    every time a submodule is completed:
-    step 1)
-    update stop_time in the following row:
-    user_id, module_id, submodule_id, quiz.start_time, null
-    
-    write new accuracy dictionary to post statement
-    
-    step 2)
-    clear quiz.start_time
-    
-    */
-    this.time_data = list_of_repetitions(null, 8);
-    this.time_data[0] = this.user.uid;
-    this.time_data[6] = this.module.id;
-    this.time_data[7] = submodule_id;
-    
-    // Hopefully not needed.
-    // this.time_data = [this.user.uid, this.module.id, submodule_id];
-
-    var user_data = this.user.get_personal_data();
-    
-    for (var i = 0; i < user_data.length; i++) {    
-        this.time_data[i + 1] = user_data[i];
+        var user_data = this.user.get_personal_data();
+        
+        for (var i = 0; i < user_data.length; i++) {    
+            this.time_data[i + 1] = user_data[i];
+        }
+        
+        console.log(this.time_data);
+        
+        
+        this.initialize_time_metrics();
     }
-    
-    console.log(this.time_data);
-    
-    
-    this.initialize_time_metrics();
     this.next_question();
 };
 
@@ -355,8 +364,13 @@ Quiz.prototype.get_modes = function () {
 }
 
 Quiz.prototype.next_mode = function (error) {
+    var allowed;
     console.log("DEBUG 11-28 entering next_mode");
-    var allowed = ALL_MODULES[this.module.id].mode_ratio;
+    if (this.user.is_mf()) {
+        allowed = {'mf': .5, 'syntax': .5}
+    } else {
+        allowed = ALL_MODULES[this.module.id].mode_ratio;
+    }
     
     console.log("DEBUG 12-23 allowed before = ", allowed);
     
@@ -391,7 +405,7 @@ Quiz.prototype.next_mode = function (error) {
     // We do this via an early return.
     // error is a parameter which is true if next_mode was called due to an error.
     
-    if (!error && this.game && ALL_MODULES[this.module.id].game_change_method === 'one_game') {
+    if (!error && this.game && this.module.game_change_method === 'one_game') {
         return;
     }
     
@@ -399,10 +413,21 @@ Quiz.prototype.next_mode = function (error) {
     var mode = weighted(allowed);
     console.log("DEBUG 5-6 checkpoint 2 mode = ", mode);
     console.log("DEBUG 5-6 game_mode_map[mode] = ", game_mode_map[mode]);
-    var game = Quiz.get_mode(game_mode_map[mode]);
-    console.log("DEBUG 5-6 checkpoint 3 game = ", game);
+    var game;
+    if (this.user.is_mf()) {
+        var modes_map = {
+            'translate': MFModeGame,
+            'syntax': SyntaxModeGame
+        }
+        var current_mode = modes_map[this.id.mode];
+        console.log('current mode =', current_mode);
+        game = new current_mode(this.id.chapter, this.id.question);
+    } else {
+        game = Quiz.get_mode(game_mode_map[mode]);
+    }
+    // console.log("DEBUG 5-6 checkpoint 3 game = ", game);
     this.game = game;
-    console.log("DEBUG 5-6 checkpoint 4 this.game = ", this.game);
+    // console.log("DEBUG 5-6 checkpoint 4 this.game = ", this.game);
     
     //todo understand the following
     
@@ -439,10 +464,6 @@ Quiz.get_mode = function(mode_number) {
 
 
 Quiz.prototype.next_question = function (error) {
-    // todo make sure to uncomment this except when necessary (nuclear option)
-    // Persist.clear_node(["xxx"]);     put urgent_log  where it says xxx
-    
-    // Persist.clear_node(["xxx"]);   put users where it says xxx
     
     //todo xxx hack this was a hack, remove 
     el('image_display_box').innerHTML = '';
@@ -462,17 +483,22 @@ Quiz.prototype.next_question = function (error) {
         
         console.log("DEBUG 5-6 this.game = ", this.game);
         // Originally: add not push
-        var sick_mode = this.game.get_mode_name();
+        var sick_mode = (this.game || {'get_mode_name': function () {
+           return 'no_game';
+        }}).get_mode_name();
         //only push if it's not in our list already
         if (this.sick_modes.indexOf(sick_mode) === -1) {this.sick_modes.push(sick_mode)};
         if (this.urgent_error_count < 5) {
-            log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode 
-            + " module = " + this.module.id + " progress = " +
-            this.user.get_module(this.module.id).progress + "/" +
-            this.module.threshold + " level = " + this.game.level);
+            if (!this.user.is_mf()) {
+                log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode 
+                + " module = " + this.module.id + " progress = " +
+                this.user.get_module(this.module.id).progress + "/" +
+                this.module.threshold + " level = " + this.game.level);
+            } else {
+                log_urgent_error(e.toString(), "quiz.next_question", "sick mode = " + sick_mode);
+            }
             this.urgent_error_count++;
         }
-        
         console.log("URGENT error logged");
         console.log("desperate move triggered");
         
@@ -484,9 +510,11 @@ Quiz.prototype.next_question = function (error) {
 };
 
 
-Quiz.prototype.question_complete = function () {
+Quiz.prototype.question_complete = function (button_name) {
     set_display("skip_button", 'none');
     
+    /*
+    // Not currently needed, put back in later.
     // A bit of a hack.
     if (this.game instanceof MFModeGame) {
         // Increment the question.
@@ -498,10 +526,13 @@ Quiz.prototype.question_complete = function () {
             return_to_profile();
         }
     }
+    */
     //todo comment this back in when done testing
     // clear_input_feedback_box("feedback_for_input");
+    console.log("DEBUG 5-29 checkpoint 3");
     set_display("feedback_for_input", 'none');
     this.update_accuracy();
+    console.log("DEBUG 5-29 checkpoint 4");
     this.submodule.incorrect_streak = 0;
     // We reset the incorrect streak
     // due to the fact that there is a new question.
@@ -509,32 +540,41 @@ Quiz.prototype.question_complete = function () {
         this.submodule_complete();
     } else {
         console.log("DEBUG 4-9 quiz.next_question triggered");
-        this.next_question();
+        if (this.game.get_mode_name() === 'mf' ||
+        (this.game.get_mode_name() === 'syntax' && this.game.on_last_region())) {
+            this.log_sentence();
+            if (button_name === "skip_button") {
+                return_to_profile();
+            }
+            el('submit_button').innerHTML = 'back to profile';
+            el('submit_button').onclick = return_to_profile;
+        } else {
+            this.next_question();
+        }
     }
 };
 
 
 Quiz.prototype.update_accuracy = function () {
-    this.user.update_question_metrics(this.submodule.incorrect_streak, this.module.id);
-    this.update_accuracy_dict();
+    
+    //todo merge - below is a hacky way to stop bugs in week 1-2 of institute
+    if (!this.user.is_mf()) {
+        this.user.update_question_metrics(this.submodule.incorrect_streak, this.module.id);
+        this.update_accuracy_dict();
+    };
 }
 
-Quiz.prototype.update_sentence_log = function (
-    sentence_finder, next_sentence, status) {
-    console.log('DEBUG 5/23 checkpoint 6 completed before',
-    sentence_finder);
-    this.user.log_sentences(sentence_finder, next_sentence, status);
-    console.log('DEBUG 5/23 checkpoint 7 completed after',
-    sentence_finder);
-}
-
-
-Quiz.prototype.log_skipped_question = function () {
+Quiz.prototype.log_sentence = function () {
     var sentence_finder = this.game.sentence_finder();
-    var next_sentence = this.game.get_next_sentence();
+    var status;
+    if (this.game.all_right) {
+        status = 'completed';
+    } else {
+        status = 'skipped';
+    }
     console.log('DEBUG 5/23 checkpoint 4 skipped before',
     sentence_finder);
-    this.update_sentence_log(sentence_finder, next_sentence, "skipped");
+    this.user.log_sentences(sentence_finder, status, this.game.get_mode_name());
     console.log('DEBUG 5/23 checkpoint 5 skipped after',
     sentence_finder);
 }
@@ -899,19 +939,23 @@ Quiz.prototype.get_reward = function () {
 
 
 Quiz.prototype.increment_score = function() {
-    this.progress_bar.change_number_correct(
-        {'change_value': this.get_reward(),
-            'time_from_start': new Date() - this.began});
-    this.submodule.score += this.get_reward();
+    if (!this.user.is_mf()) {
+        this.progress_bar.change_number_correct(
+            {'change_value': this.get_reward(),
+                'time_from_start': new Date() - this.began});
+        this.submodule.score += this.get_reward();
+    }
 };
 
 
 Quiz.prototype.decrement_score = function() {
-    this.progress_bar.change_number_correct(
-        {'change_value': -this.module.submodule.penalty,
-            'time_from_start': new Date() - this.began});
-    this.submodule.score -= this.module.submodule.penalty;
-    this.submodule.score = Math.max(0, this.submodule.score);
+    if (!this.user.is_mf()) {
+        this.progress_bar.change_number_correct(
+            {'change_value': -this.module.submodule.penalty,
+                'time_from_start': new Date() - this.began});
+        this.submodule.score -= this.module.submodule.penalty;
+        this.submodule.score = Math.max(0, this.submodule.score);
+    }
 };
 
 

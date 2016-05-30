@@ -98,9 +98,9 @@ body {
 
 /*before testbox = feedback box & questionbox*/
 #before {
-    text-align: center;
+    text-align: left;
     vertical-align: middle;
-    width: 400px;
+    width: 800px;
     margin-left: auto;
     margin-right: auto;
     border: solid 0.5px black;

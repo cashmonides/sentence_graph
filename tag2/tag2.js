@@ -72,7 +72,7 @@ var tag_list = [
 // "n=object infinitive", 
 // "n=complementary infinitive", 
 
-"t=present", "t=imperfect", "t=future", "t=perfect", "t=pluperfect",
+"t=present", "t=imperfect", "t=future", "t=perfect", "t=pluperfect", "t=future_perfect",
 
 "m=indicative", "m=subjunctive", "m=infinitive",
 

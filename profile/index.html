@@ -21,6 +21,11 @@
 	<script src="../lib/error_logging.js"></script>
     <script src="../lib/persist.js"></script>
     <script src="../lib/module.js"></script>
+    <script src="../mf/mf.js"></script>
+    
+    <!-- todo this is dirty research cleaner way -->
+    <script src="../quiz/mode/mf_mode.js"></script>
+    <script src="../quiz/mode/syntax_mode.js"></script>
     
     <script src="../lib/user.js"></script>
     <script src="../lib/user_login_status.js"></script>
@@ -42,7 +47,7 @@
          <button class="button" id="start_game_button" type="button" class="hoverable" onclick="ProfilePage.enter_advance()">advance</button>
         <button class="button" id="improve_button" type="button" class="hoverable" onclick="ProfilePage.enter_improve()">improve</button>
         <button class="button" id="logout_button" onclick="ProfilePage.logout()">logout</button>
-        <button class="button" id="display_skipped_sentences_button" onclick="ProfilePage.display_skipped_sentences()">display skipped sentences</button>
+        <!--<button class="button" id="display_skipped_sentences_button" onclick="ProfilePage.display_skipped_sentences()">display skipped sentences</button>-->
     </div>
     <table id="table"></table>
     

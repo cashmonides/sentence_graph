@@ -61,15 +61,18 @@ ProfilePage.display_profile = function() {
     var player_name = this.user.data.profile.name;
     var e1 = el("name_box");
     e1.innerHTML = "Welcome " + player_name;
-
     
-    var current_module_id = this.user.get_current_module();
-    console.log("DEBUG 5-18 current_module_id = ", current_module_id);
-    var current_universal_module = ALL_MODULES[current_module_id];
-    console.log("DEBUG 5-18 current_universal_module = ", current_universal_module);
-    var current_universal_module_name = current_universal_module.icon_name;
-    var e2 = el("level_box");
-    e2.innerHTML = "Your level is: " + current_universal_module_name;
+    // This is currently disabled for mf users because the whole idea
+    // of a level doesn't make complete sense.
+    if (!(this.user.is_mf())) {
+        var current_module_id = this.user.get_current_module();
+        console.log("DEBUG 5-18 current_module_id = ", current_module_id);
+        var current_universal_module = ALL_MODULES[current_module_id];
+        console.log("DEBUG 5-18 current_universal_module = ", current_universal_module);
+        var current_universal_module_name = current_universal_module.icon_name;
+        var e2 = el("level_box");
+        e2.innerHTML = "Your level is: " + current_universal_module_name;
+    }
     
     this.build_progress_table(this.user);
 };
@@ -113,10 +116,36 @@ ProfilePage.get_module_distance = function (user, module_id) {
     return distance;
 }
 
+var get_mf_and_syntax_sentences = function (fn) {
+    var sentences = {};
+    var returned_callbacks = 0;
+    var total_callbacks = 2;
+    var callback = function (name) {
+        return function (x) {
+            for (var i in x) {
+                if (!(i in sentences)) {
+                    sentences[i] = {};
+                }
+                sentences[i][name] = true;
+            }
+            returned_callbacks++;
+            if (returned_callbacks === total_callbacks) {
+                fn(sentences);
+            }
+        }
+    }
+    get_mf_questions(callback('mf'));
+    get_syntax_questions(callback('syntax'));
+}
+
 
 ProfilePage.build_progress_table = function(user) {
     try {
         if (user.is_mf()) {
+            var mode_names = {
+                'mf': 'translate',
+                'syntax': 'syntax'
+            }
             remove_element_by_id('start_game_button');
             remove_element_by_id('improve_button');
             var table = el("table");
@@ -126,45 +155,93 @@ ProfilePage.build_progress_table = function(user) {
             var row = make({"tag": "tr"}, table);
             console.log("DEBUG 2-11 leaving first make");
             var max_columns = 4;
-            var order = get_module_order();
-            
-            var hoverable_types = ['improving', 'frontier',
-            'completed_no_improving'];
-            
-            for (var i = 0; i < order.length; i++) {
-                var mod = ALL_MODULES[order[i]];
-            
-                var mod_history = mod.id in user.data.history ? user.get_module(mod.id) : null;
+            get_mf_and_syntax_sentences(function (order) {
+                var i;
+                var j;
+                var k;
                 
-                var img_class = ["progress_image", hoverability ? 'hoverable_mod': 'non_hoverable_mod'];
-                
-                
-                // Blurring probably isn't needed.
-                var m = {
-                    'tag': "td", 
-                    'class': ["progress_cell"],
-                    'children': [
-                        {'tag': "img", 'class': img_class, 'src': mod.icon_url},
-                        {'tag': "br"},
-                        this.get_display_caption(this.user, order[i])
-                    ]
-                };
-                
-                // All modules are hoverable.
-                m.onclick = ProfilePage.go_straight_to(mod.id);
-                m.class.push('clickable')
-                
-                console.log("DEBUG 2-11 entering 2nd make in profile");
-                console.log("DEBUG 2-11 m = ", m);
-                console.log("DEBUG 2-11 row = ", row);
-                make(m, row);
-        
-        
-                if (i > 0 && i % max_columns === max_columns - 1) {
-                    console.log("DEBUG 2-11 entering 3rd make in profile");
+                var new_order = {};
+                for (i in order) {
+                    j = i.replace(/\//, '.');
+                    if (!(j in new_order)) {
+                        new_order[j] = {};
+                    }
+                    for (var k in order[i]) {
+                        new_order[j][k] = order[i][k];
+                    }
+                }
+                var order = new_order;
+                var sorted_order_as_list = Object.keys(order).sort(function (x, y) {
+                    var x_s = x.split(/\D/g);
+                    var y_s = y.split(/\D/g);
+                    var x_i_as_number;
+                    var y_i_as_number;
+                    for (var i = 0; i < x_s.length; i++) {
+                        x_i_as_number = to_number(x_s[i]);
+                        y_i_as_number = to_number(y_s[i]);
+                        if (x_i_as_number < y_i_as_number) {
+                            return -1;
+                        } else if (x_i_as_number > y_i_as_number) {
+                            return 1;
+                        }
+                    }
+                    return 0;
+                });
+                var mode_name;
+                var chapter_and_question;
+                var img_class = ["progress_image", 'hoverable_mod'];
+                console.log(sorted_order_as_list);
+                for (var index = 0; index < sorted_order_as_list.length; index++) {
+                    i = sorted_order_as_list[index];
+                    chapter_and_question = i.split(/\D/g);
+                    for (var index2 = 0; index2 < 2; index2++) {
+                        j = ['mf', 'syntax'][index2];
+                        mode_name = mode_names[j];
+                        
+                        // Blurring probably isn't needed.
+                        var m = {
+                            'tag': "td", 
+                            'class': ["progress_cell"]
+                        };
+                        
+                        var text = function (x) {
+                            return chapter_and_question.join(x) + ' ' + mode_name;
+                        }
+                        
+                        if (j in order[i]) {
+                            m.children = [{
+                                'id': text('-'),
+                                'tag': 'font',
+                                'style': {
+                                    'color': 'black'
+                                },
+                                'text': text('.')
+                            }];
+                            
+                            // All modules are hoverable.
+                            m.onclick = ProfilePage.go_straight_to([
+                                ['chapter', chapter_and_question[0]],
+                                ['question', chapter_and_question[1]],
+                                ['mode', mode_name]
+                            ]);
+                            m.class.push('clickable');
+                        }
+                        
+                        make(m, row);
+                    };
+                    console.log(index, i, 'new row')
                     row = make({'tag': "tr"}, table);
                 }
-            }
+                getting(["history", "sentence_logs"], function (x) {
+                    console.log(x);
+                    for (var i in x) {
+                        el(i.replace(/\bmf$/, 'translate')).style.color = {
+                            'completed': 'green',
+                            'skipped': 'red'
+                        }[x[i]] || 'black';
+                    }
+                }, function() {return user})();
+            });
         } else {
             var table = el("table");
             console.log("DEBUG 2-11 entering first make in profile");
@@ -336,8 +413,13 @@ ProfilePage.select_improvement_module = function(mod_id){
 };
 
 ProfilePage.go_straight_to = function (mod_id) {
+    if (typeof mod_id === 'string') {
+        mod_id = 'mod=' + mod_id;
+    } else {
+        mod_id = mod_id.map(function (x) {return x.join('=')}).join('&');
+    }
     return function () {
-        document.location = "../quiz/?mod=" + mod_id;
+        document.location = "../quiz/?" + mod_id;
     }
 };
 

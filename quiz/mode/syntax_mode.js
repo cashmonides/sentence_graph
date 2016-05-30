@@ -75,7 +75,8 @@ var syntax_module_filter = {
         	"imperfect": 2,
         	"future": 2,
         	"perfect": 2,
-        	"pluperfect": 2
+        	"pluperfect": 2,
+        	"future_perfect": 2
         },
 		"mood": {
         	"indicative": 2,
@@ -83,7 +84,7 @@ var syntax_module_filter = {
         	"infinitive": 2
 		},
 		"construction": {
-		    "indirect statement": 5,
+		    "indirect statement": 6,
 			"purpose clause": 3,
 			"indirect command": 3,
 			"subordinate clause in indirect statement": 7,
@@ -163,12 +164,13 @@ var has_tags = function (x) {
 }
 
 var parse_firebase_syntax_data = function (sentence_data) {
-    console.log(sentence_data);
+    // console.log(sentence_data);
     var sentence_text = sentence_data.words;
     var regions_with_tags = sentence_data.regions.map(with_tags).filter(has_tags);
     return regions_with_tags.map(function (x) {
         var r = {
             'text': sentence_data.text,
+            'words': sentence_data.words,
             'chapter': sentence_data.chapter,
             'number': sentence_data.number,
             'indices': x.indices
@@ -188,10 +190,12 @@ var allowed_options_repository = function () {
         }
         chapter = Number(chapter);
         var d = syntax_module_filter.verb_syntax[type];
-        var r = Object.keys(d).filter(function (x) {
+        var r = [type.toUpperCase()].concat(Object.keys(d).filter(function (x) {
             return d[x] <= chapter;
-        });
-        r.push('not applicable');
+        }));
+        if (should_have_non_applicable(type)) {
+           r.push('not applicable');
+        };
         known[chapter + '/' + type] = r;
         return r;
     }
@@ -213,6 +217,7 @@ var convert_syntax_data_to_drop_down_data = function (data) {
             }
         }).filter(has_choices);
         return {
+            'words': x.words,
             'sentence': x.text,
             'question': "Give the syntax of the highlighted word.",
             'target_indices': x.indices,
@@ -241,8 +246,8 @@ var get_sentence_from_firebase = function (chapter_n, question_n, fn) {
         var sentences = [];
         Object.keys(v).forEach(function (y) {
             var j = JSON.parse(v[y].data);
-            if (j.language_of_sentence === 'mf' && j.chapter === chapter_n
-            && j.number === question_n) {
+            if (j.language_of_sentence === 'mf' && j.chapter === Number(chapter_n)
+            && j.number === Number(question_n)) {
                 sentences.push(j);
             }
         });
@@ -254,16 +259,25 @@ var get_sentence_from_firebase = function (chapter_n, question_n, fn) {
     });
 }
 
-var get_all_sentence_numbers = function (fn) {
+var get_syntax_questions = function (fn) {
     Persist.get(['sentence_mf'], function (x) {
         var v = x.val();
-        var sentence_numbers = [];
+        var sentences = {};
         Object.keys(v).forEach(function (y) {
             var j = JSON.parse(v[y].data);
-            sentence_numbers.push([j.chapter, j.number])
+            sentences[j.chapter + '/' + j.number] = j;
         });
-        fn(sentence_numbers);
+        fn(sentences);
     });
+}
+
+var should_have_non_applicable = function (x) {
+    return x === 'sequence' || x === 'relative time';
+}
+
+// This function may never be used.
+var get_syntax_question_ns = function (fn) {
+    get_syntax_questions(function (x) {fn(Object.keys(x))});
 }
 
 var make_syntax_question = function (chapter_n, question_n, fn) {
@@ -272,13 +286,14 @@ var make_syntax_question = function (chapter_n, question_n, fn) {
     });
 }
 
-var SyntaxModeGame = function(){
+var SyntaxModeGame = function (chapter, question) {
     this.data = null;
     this.quiz = null;
     // todo we here assume that 1 is the initial level
     this.level = 1;    //we might replace this with this.current_chapter & this.current_question
-    this.current_chapter = 1;
-    this.current_question = 0;
+    this.current_chapter = chapter;
+    this.current_question = question;
+    this.all_right = true;
 };
 
 SyntaxModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
@@ -318,11 +333,28 @@ SyntaxModeGame.prototype.get_mode_name = function() {
     return "syntax";
 };
 
+SyntaxModeGame.prototype.sentence_finder = function () {
+    return new SentenceFinder(this.current_chapter, this.current_question);
+}
+
 SyntaxModeGame.prototype.on_last_region = function () {
     return this.data.length - 1 === this.region_number;
 }
 
 SyntaxModeGame.prototype.next_question = function () {
+    if (this.data && this.on_last_region()) {
+        return_to_profile();
+    }
+    if (!this.data) {
+        this.region_number = 0;
+        make_syntax_question(
+            this.current_chapter, this.current_question,
+            this.real_next_question.bind(this));
+    } else {
+       this.region_number++;
+       this.real_next_question(this.data);
+    }
+    /*
     if (!(this.data) || this.on_last_region()) {
         if (this.data && this.on_last_region()) {
             return_to_profile();
@@ -332,10 +364,10 @@ SyntaxModeGame.prototype.next_question = function () {
         make_syntax_question(
             this.current_chapter, this.current_question,
             this.real_next_question.bind(this));
-    } else {
-        this.region_number++;
-        this.real_next_question(this.data);
-    }
+    } else {*/
+    // this.region_number++;
+    // this.real_next_question(this.data);
+    /*}*/
 }
 
 SyntaxModeGame.prototype.real_next_question = function (data) {
@@ -351,10 +383,15 @@ SyntaxModeGame.prototype.real_next_question = function (data) {
     
     
     //changes the score, progress bar, etc.
-    this.quiz.update_display();
     
-    // todo Dan commented this line out, maybe it should stay.
-    // Quiz.set_question_text("DUMMY QUESTION, e.g. give the syntax of the highlighted word:");
+    
+    //todo very important: why is chrome throwing errors at update display in mf & syntax mode while safari doesn't???!!!
+    if (!this.quiz.user.is_mf()) {
+        this.quiz.update_display();
+    };
+    
+    
+    
     
     // We should probably set the question type to the question asked.
     Quiz.set_question_text(this.question);
@@ -369,12 +406,12 @@ SyntaxModeGame.prototype.real_next_question = function (data) {
     //is the following formulation otiose? should we just do data.drop_downs?
     this.drop_downs = data.drop_downs;
     
-    this.give_away_phrase = "DUMMY GIVE AWAY PHRASE - HIT SKIP IF YOU WANT TO SKIP";
-    this.give_away_ending_phrase = "DUMMY GIVE AWAY ENDING PHRASE - BETTER LUCK NEXT TIME";
+    this.give_away_phrase = 'If you\'d like to skip this question and move on, click "SKIP". If you\'d like to keep trying, click "SUBMIT".';
+    this.give_away_ending_phrase = "";
     this.correct_answer = this.drop_downs.map(function (x) {
         return x.correct_answer || x.non_drop_text}).join(' ');
     
-    console.log("DEBUG entering 1st random_choice");
+    // console.log("DEBUG entering 1st random_choice");
     this.none_display = true;
     
     remove_element_by_id("latin_answer_choices");
@@ -435,7 +472,7 @@ SyntaxModeGame.prototype.is_correct = function (given, correct) {
 }
 
 SyntaxModeGame.prototype.add_single_drop_down = function (x, index) {
-    console.log('making a drop down with', x, index);
+    // console.log('making a drop down with', x, index);
     return make_drop_down_html(x.choices, this.drop_down_location, index);
 }
 
@@ -452,7 +489,14 @@ SyntaxModeGame.prototype.process_answer = function() {
 };
 
 SyntaxModeGame.prototype.remove_drop_downs = function () {
-    remove_children(el(this.drop_down_location));
+    var e;
+    for (var i = 0;;i++) {
+        e = el('drop_answer_choices' + i);
+        if (e === null) {
+            break;
+        }
+        remove_element(e);
+    }
 }
 
 
@@ -460,20 +504,36 @@ SyntaxModeGame.prototype.remove_drop_downs = function () {
 SyntaxModeGame.prototype.process_correct_answer = function () {
     this.quiz.increment_score();
     
-    console.log("DEBUG entering 2nd random_choice");
-    var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_right);
+    // Only update when question is finished.
+    // this.quiz.update_sentence_log(this.sentence_finder(), "completed");
+    
+    // console.log("DEBUG entering 2nd random_choice");
+    var relevant_data = this.data[this.region_number];
+    
+    var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_right) + '<br><br>' +
+    'The syntax of <em>' + relevant_data.target_indices.map(function (index) {
+        return relevant_data.words[index];
+    }).join(' ') + '</em> is:<br>' +
+    this.drop_downs.map(function (x) {
+        return x.type.toUpperCase() + ': ' + x.correct_answer || x.non_drop_text;
+    }).join('<br>');
     var fbox = el("feedbackbox");
+    el('questionbox').innerHTML = '';
     fbox.innerHTML = cell_1;
+    
+    
+    // console.log("DEBUG 5-29 checkpoint 1");
     
     this.remove_drop_downs();
 
+    // console.log("DEBUG 5-29 checkpoint 2");
     this.quiz.question_complete();
 };
 
 
 
 SyntaxModeGame.prototype.process_incorrect_answer = function () {
-    this.quiz.submodule.incorrect_streak ++;
+    this.quiz.submodule.incorrect_streak++;
     if (this.quiz.submodule.incorrect_streak === 1) {
         this.quiz.decrement_score();
     } else {
@@ -495,12 +555,46 @@ SyntaxModeGame.prototype.process_incorrect_answer = function () {
     } else {
         this.give_away_answer();
     }
-    this.quiz.update_display();
+    //todo very important: why is chrome throwing errors at update display in mf & syntax mode while safari doesn't???!!!
+    if (!this.quiz.user.is_mf()) {
+        this.quiz.update_display();
+    };
     
     //todo check if this is the right place to clear the word selector
     //this.quiz.word_selector.clear();
 };
 
+SyntaxModeGame.prototype.give_away_answer = function () {
+    set_display("next_button", 'none');
+    set_display("feedback_for_input", 'initial');
+    set_display("submit_button", 'initial');
+    set_display("cheat_sheet_button", 'none');
+    set_display("vocab_cheat_button", 'none');
+    set_display("skip_button", 'initial');
+    var skip_button = el("skip_button");
+    var skip_onclick = skip_button.onclick.bind(skip_button);
+    var self = this;
+    skip_button.onclick = function () {
+        self.all_right = false;
+        self.remove_drop_downs();
+        skip_onclick();
+    }
+    var fbox_for_input = el("feedback_for_input");
+    fbox_for_input.innerHTML = this.give_away_phrase;
+    
+    
+    //todo hacky quick fix, make more elegant later
+    document.getElementById("feedback_for_input").style.fontSize = "medium";
+    
+    // var fbox = el("feedbackbox");
+    // fbox.innerHTML = "";
+    
+    
+    
+    console.log("DEBUG 5/23 checkpoint #3 - give away answer triggered");
+};
+
+/*
 SyntaxModeGame.prototype.give_away_answer = function () {
     set_display("skip_button", 'initial');
     this.remove_drop_downs();
@@ -508,5 +602,6 @@ SyntaxModeGame.prototype.give_away_answer = function () {
     fbox.innerHTML = this.give_away_phrase + this.correct_answer + this.give_away_ending_phrase;
     this.quiz.question_complete();
 };
+*/
 
 
