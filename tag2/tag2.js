@@ -13,64 +13,66 @@ var test_sentences = [
 //a test list with new variables
 var tag_list = [
 // "noun", "verb", "subject", "object", "predicate", "adjective", "adverb", "preposition", "main clause", "subordinate clause", "coordinate clause", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction", "coordinating conjunction", 
-// "n=subject nominative", 
-// "n=predicate nominative", 
-// "n=genitive of the charge", 
-// "n=genitive of the penalty", 
-// "n=partitive genitive", 
-// "n=genitive of description", 
-// "n=subjective genitive", 
-// "n=objective genitive", 
-// "n=genitive of characteristic", 
-// "n=genitive of the source of the feeling with an impersonal verb of emotional distress", 
-// "n=genitive of the person concerned with interest/rēfert", 
-// "n=genitive with causā to express purpose", 
-// "n=genitive of indefinite value", 
-// "n=genitive with expression of memory", 
-// "n=dative of possessor", 
-// "n=dative of agent with passive periphrastic", 
-// "n=predicate dative", 
-// "n=dative of reference with a predicate dative", 
-// "n=dative with certain intransitive verbs", 
-// "n=dative with compound verbs", 
-// "n=dative of reference with an impersonal verb", 
-// "n=accusative direct object", 
-// "n=predicate accusative", 
-// "n=subject accusative of an indirect statement", 
-// "n=accusative of place to which", 
-// "n=accusative of duration of time", 
-// "n=accusative of extent of space", 
-// "n=accusative of exclamation", 
-// "n=subject accusative of an infinitive not in indirect statement", 
-// "n=accusative of the gerund to express purpose with a verb of motion", 
-// "n=accusative of the feeler of the feeling with an impersonal verb of emotional distress", 
-// "n=accusative of the [gerund/gerundive] with ad to show purpose", 
-// "n=accusative of the supine to express purpose", 
-// "n=adverbial accusative", 
-// "n=accusative direct object of a verb in the middle voice", 
-// "n=accusative of respect", 
-// "n=ablative of means", 
-// "n=ablative of manner", 
-// "n=ablative of personal agent", 
-// "n=ablative of separation", 
-// "n=ablative of origin", 
-// "n=ablative of place from which", 
-// "n=ablative of accompaniment", 
-// "n=ablative of time when", 
-// "n=ablative of time within which", 
-// "n=ablative of respect", 
-// "n=ablative of comparison", 
-// "n=ablative of degree of difference", 
-// "n=ablative subject in an ablative absolute", 
-// "n=ablative predicate in an ablative absolute", 
-// "n=ablative of description", 
-// "n=ablative of cause", 
-// "n=ablative of possessive adjective agreeing with ellipsed rē with interest by analogy with rēfert", 
-// "n=ablative of the supine to express respect", 
-// "n=ablative of price", 
-// "n=subject infinitive", 
-// "n=object infinitive", 
-// "n=complementary infinitive", 
+"n=subject nominative", 
+"n=predicate nominative", 
+"n=genitive of the charge", 
+"n=genitive of the penalty", 
+"n=partitive genitive", 
+"n=genitive of description", 
+"n=subjective genitive", 
+"n=objective genitive", 
+"n=genitive of characteristic (aka predicate)", 
+"n=genitive of the source of the feeling with an impersonal verb of emotional distress", 
+"n=genitive of the person concerned with interest/rēfert", 
+"n=genitive with causā to express purpose", 
+"n=genitive of indefinite value", 
+"n=genitive with expression of memory", 
+"n=dative of possessor", 
+"n=dative of agent with passive periphrastic", 
+"n=predicate dative", 
+"n=dative of reference with a predicate dative", 
+"n=dative with certain intransitive verbs", 
+"n=dative with compound verbs", 
+"n=dative of reference with an impersonal verb", 
+"n=accusative direct object", 
+"n=predicate accusative", 
+"n=subject accusative of an indirect statement", 
+"n=accusative of place to which", 
+"n=accusative of duration of time", 
+"n=accusative of extent of space", 
+"n=accusative of exclamation", 
+"n=subject accusative of an infinitive not in indirect statement", 
+"n=accusative of the gerund to express purpose with a verb of motion", 
+"n=accusative of the feeler of the feeling with an impersonal verb of emotional distress", 
+"n=accusative of the [gerund/gerundive] with ad to show purpose", 
+"n=accusative of the supine to express purpose", 
+"n=adverbial accusative", 
+"n=accusative direct object of a verb in the middle voice", 
+"n=accusative of respect", 
+"n=ablative of means", 
+"n=ablative of manner", 
+"n=ablative of personal agent", 
+"n=ablative of separation", 
+"n=ablative of origin", 
+"n=ablative of place from which", 
+"n=ablative of accompaniment", 
+"n=ablative of time when", 
+"n=ablative of time within which", 
+"n=ablative of respect", 
+"n=ablative of comparison", 
+"n=ablative of degree of difference", 
+"n=ablative subject in an ablative absolute", 
+"n=ablative predicate in an ablative absolute", 
+"n=ablative of description", 
+"n=ablative of cause",
+"n=ablative of possessive adjective agreeing with rē in rēfert",
+"n=ablative of possessive adjective agreeing with ellipsed rē with interest by analogy with rēfert", 
+"n=ablative of the supine to express respect", 
+"n=ablative of price",
+
+"n=subject infinitive", 
+"n=object infinitive", 
+"n=complementary infinitive", 
 
 "t=present", "t=imperfect", "t=future", "t=perfect", "t=pluperfect", "t=future_perfect",
 
@@ -170,7 +172,6 @@ window.onload = function (){
     generate_tags();
     // we need a default_text to start with for testing, eventually, we'll replace this with an empty inout box
     new_text(test_sentences[0]);
-
 }
 
 
@@ -219,7 +220,10 @@ function new_text(text){
     //console.log("M: Sentence after autotagging: ", JSON.stringify(sentence));
 }
 
-var drop_down_types = ['tense', 'mood', 'construction', 'sequence', 'relative time'];
+var verb_drop_down_types = ['tense', 'mood', 'construction', 'sequence', 'relative time'];
+
+var noun_drop_down_types = ['nominative', 'genitive', 'dative',
+'accusative', 'ablative', 'infinitive'];
 
 
 //argument: string ('latin' 'english')
@@ -229,21 +233,47 @@ function set_sentence_language(language_of_sentence) {
     sentence.language_of_sentence = language_of_sentence;
 }
 
+var is_a = function (x) {
+    if (noun_drop_down_types.indexOf(x) !== -1) {
+        return function (y) {
+            return y.slice(2) in syntax_module_filter.noun_syntax[x];
+        }
+    } else {
+        return function (y) {
+            return x[0] === y[0];
+        }
+    }
+}
+
 function options_for (x) {
-    return tag_list.filter(function (y) {return y[0] === x[0]}).
-    map(function (y) {return y.slice(2)});
+    return tag_list.filter(is_a(x)).map(function (y) {return y.slice(2)});
 }
 
 function init_drop_downs () {
-    for (var i = 0; i < drop_down_types.length; i++) {
-        create_html_drop_down(drop_down_types[i],
-        options_for(drop_down_types[i]));
+    var d = get_all_drop_down_types();
+    for (var i = 0; i < d.length; i++) {
+        create_html_drop_down(d[i], [d[i].toUpperCase()].concat(options_for(d[i])));
     }
+}
+
+function reset_drop_downs () {
+    var d = get_all_drop_down_types();
+    for (var i = 0; i < d.length; i++) {
+        el('select_element' + i).selectedIndex = 0;
+    }
+}
+
+function get_all_drop_down_types () {
+    return verb_drop_down_types.concat(noun_drop_down_types);
+}
+
+function get_drop_down_index_of (x) {
+    return get_all_drop_down_types().indexOf(x);
 }
 
 function create_html_drop_down (header, options) {
     var where_to_add = 'tagger_drop_downs';
-    var number = drop_down_types.indexOf(header);
+    var number = get_drop_down_index_of(header);
     make_drop_down_html(options, where_to_add, number);
     el('select_element' + number).role = header;
 }
@@ -300,7 +330,7 @@ function submit_tag (tag_type) {
     // console.log('I, 1, am responcible.')
     console.log('submit_tag has been called');
     console.log('word selector is', word_selector);
-    //word_selector.clear();
+    // word_selector.clear();
     // debug(indices);
     
 }
@@ -415,24 +445,76 @@ function clear_all_highlights() {
     word_selector.clear();
 }
 
+function reset_all () {
+    word_selector.clear();
+    reset_drop_downs();
+}
+
+function submit_verb_tags () {
+    submit_tag('verb');
+    for (var i = 0; i < verb_drop_down_types.length; i++) {
+        choice = selected_option(el('select_element' + i));
+        if (choice === verb_drop_down_types[i].toUpperCase()) {
+            continue;
+        }
+        text = verb_drop_down_types[i][0] + '=' + choice;
+        submit_tag(text);
+    }
+}
+
+function submit_noun_tags () {
+    submit_tag('noun');
+    for (var i = 0; i < noun_drop_down_types.length; i++) {
+        choice = selected_option(el('select_element' + (
+            verb_drop_down_types.length + i)));
+        if (choice === noun_drop_down_types[i].toUpperCase()) {
+            continue;
+        }
+        submit_tag(choice);
+    }
+}
+
 function local_submit_sentence(){
     console.log("local sentence submitted");
     var choice;
     var text;
-    for (var i = 0; i < drop_down_types.length; i++) {
-        choice = selected_option(el('select_element' + i));
-        text = drop_down_types[i][0] + '=' + choice;
-        console.log('choice, text =', choice, text);
-        submit_tag(text);
+    var verb_drops_on = 0;
+    for (var i = 0; i < verb_drop_down_types.length; i++) {
+        if (el('select_element' + i).selectedIndex !== 0) {
+            verb_drops_on++;
+        }
     }
-    word_selector.clear();
-    console.log('word selector cleared: word selector =', word_selector);
+    
+    var noun_drops_on = 0;
+    for (var i = 0; i < noun_drop_down_types.length; i++) {
+        if (el('select_element' + (verb_drop_down_types.length + i)).
+        selectedIndex !== 0) {
+            noun_drops_on++;
+        }
+    }
+    if (verb_drops_on && noun_drops_on) {
+        alert('It looks like you\'ve selected options for ' +
+        'a verb and a noun at the same time.');
+    } else if (verb_drops_on) {
+        submit_verb_tags();
+        reset_all();
+    } else if (noun_drops_on) {
+        if (noun_drops_on !== 1) {
+            alert('It looks like you selected more than one option for a noun.');
+        } else {
+            submit_noun_tags();
+            reset_all();
+        }
+    } else {
+        alert('It looks like you didn\'t select anything.');
+    }
 }
 
 //FUNCTION summary
 //no input, calls save which has no return, just side effects: appends a child to firebase
 //called by: the submit button on the html page
 function global_submit_sentence(){
+    console.log('sentence =', sentence);
     var sentence_chapter = Number(el("chapter_number_box").value);
     var sentence_number = Number(el("sentence_number_box").value);
     if (sentence.language_of_sentence == null) {
@@ -441,11 +523,32 @@ function global_submit_sentence(){
         alert("no chapter specified");
     } else if (isNaN(sentence_number) || sentence_number === 0) {
         alert('no sentence number specified');
+    } else if (sentence.has_region([])) {
+        alert('empty region detected, please do sentence again');
     } else {
         sentence.chapter = sentence_chapter;
         sentence.number = sentence_number;
         console.log("sentence submitted");
+        console.log('sentence =', sentence);
         console.log('sentence.language_of_sentence =', sentence.language_of_sentence);
         Persist.push(["sentence_mf"], JSON.stringify(sentence), function () {});
     }
+}
+
+var generate_report_for_sentence = function (sentence_id, sentence) {
+    return {
+        'sentence': sentence_id.replace(/\D/g, '.'),
+        'text': sentence.text,
+        '': ''
+    }
+}
+
+var generate_syntax_report = function () {
+    get_syntax_questions(function (x) {
+        var d = Object.keys(x).map(function (i) {
+            return generate_report_for_sentence(i, x[i]);
+        });
+        var text = JSON.stringify(d, null, 4);
+        el('syntax_report').innerHTML = text;
+    });
 }

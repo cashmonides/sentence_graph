@@ -1,138 +1,6 @@
 // syntax mode.
 
-var syntax_module_filter = {
-	"noun_syntax" : {
-		"nominative": {
-			"subject nominative": 1, 
-			"predicate nominative": 1,
-		},
-    	"genitive": {
-    		"genitive of the charge": 2, 
-    		"genitive of the penalty": 2, 
-    		"partitive genitive": 9, 
-    		"genitive of description": 10, 
-    		"subjective genitive": 11, 
-    		"objective genitive": 11, 
-    		"genitive of characteristic (aka predicate)": 11, 
-    		"genitive of the source of the feeling with an impersonal verb of emotional distress": 16, 
-    		"genitive of the person concerned with interest/rēfert": 16, 
-    		"genitive with causā to express purpose": 17, 
-    		"genitive of indefinite value": 18, 
-    		"genitive with expression of memory": 18
-    	},
-    
-    	"dative": {
-    		"dative of possessor": 5,
-    		"dative of agent with passive periphrastic": 5, 
-    		"predicate dative": 8, 
-    		"dative of reference with a predicate dative": 8, 
-    		"dative with certain intransitive verbs": 13,
-    		"dative with compound verbs": 13, 
-    		"dative of reference with an impersonal verb": 16
-    	},
-    	"accusative": {
-    		"accusative direct object": 1, 
-    		"predicate accusative": 6, 
-    		"subject accusative of an indirect statement": 6,
-    		"accusative of place to which": 6,  
-    		"accusative of duration of time": 7,
-    		"accusative of extent of space": 7,
-    		"accusative of exclamation": 15,
-    		"subject accusative of an infinitive not in indirect statement": 15, 
-    		"accusative of the gerund to express purpose with a verb of motion": 16, 
-    		"accusative of the feeler of the feeling with an impersonal verb of emotional distress": 16, 
-    		"accusative of the [gerund/gerundive] with ad to show purpose": 16, 
-    		"accusative of the supine to express purpose": 17, 
-    		"adverbial accusative": 18,
-    		"accusative direct object of a verb in the middle voice": 18,
-    		"accusative of respect": 18
-    	},
-    	"ablative": {
-    		"ablative of means": 3, 
-    		"ablative of manner": 3, 
-    		"ablative of personal agent": 4, 
-    		"ablative of separation": 6, 
-    		"ablative of origin": 6, 
-    		"ablative of place from which": 6, 
-    		"ablative of accompaniment": 7,
-    		"ablative of time when": 7,
-    		"ablative of time within which": 7,
-    		"ablative of respect": 8, 
-    		"ablative of comparison": 9,
-    		"ablative of degree of difference": 9, 
-    		"ablative subject in an ablative absolute": 10, 
-    		"ablative predicate in an ablative absolute": 10, 
-    		"ablative of description": 10,
-    		"ablative of cause": 10,  
-    		"ablative of possessive adjective agreeing with ellipsed rē with interest by analogy with rēfert": 16, 
-    		"ablative of the supine to express respect": 17, 
-    		"ablative of price": 18
-    	}
-	},
-	"verb_syntax" : {
-		"tense": {
-        	"present": 2,
-        	"imperfect": 2,
-        	"future": 2,
-        	"perfect": 2,
-        	"pluperfect": 2,
-        	"future_perfect": 2
-        },
-		"mood": {
-        	"indicative": 2,
-        	"subjunctive": 2,
-        	"infinitive": 2
-		},
-		"construction": {
-		    "indirect statement": 6,
-			"purpose clause": 3,
-			"indirect command": 3,
-			"subordinate clause in indirect statement": 7,
-			"indirect question": 12,
-			"result clause": 14,
-			"substantive ut clause": 14,
-			"relative clause of characteristic": 14,
-			"relative clause of result": 14,
-			"relative clause of purpose": 14,
-			"relative clause of purpose introduced by a relative adverb": 14,
-			"purpose clause introduced by quō + comparative": 14,
-			"cum circumstantial clause": 15,
-			"cum concessive clause": 15,
-			"cum causal clause": 15,
-			"proviso clause": 15,
-			"fear clause": 17,
-			"doubting clause": 17,
-			"prevention clause": 17,
-			"by attraction": 18,
-			"fore ut clause": 18,
-			"protasis/apodosis of a future more vivid conditional sentence": 2,
-			"protasis/apodosis of a future more vivid conditional sentence with emphatic protasis": 2,
-			"protasis/apodosis of a future less vivid conditional sentence": 2,
-			"protasis/apodosis of a present contrary to fact conditional sentence": 2,
-			"protasis/apodosis of a past contrary to fact conditional sentence": 2,
-			"protasis/apodosis of a mixed contrary to fact conditional sentence": 2,
-			"jussive": 12,
-			"present deliberative": 12,
-			"past deliberative": 12,
-			"present potential": 12,
-			"past potential": 12,
-			"hortatory": 12,
-			"present optative - wish capable of fulfillment": 12,
-			"present optative - wish incapable of fulfillment": 12,
-			"past optative - wish incapable of fulfillment": 12
-			},
-        "sequence": {
-            	"primary": 2,
-            	"secondary": 2
-            },
-        "relative time" : {
-            	"simultaneous time": 2,
-            	"prior time": 2, 
-            	"subsequent time": 2, 
-            	"breaking sequence to emphasize actuality of result": 14
-            }
-    }
-}
+
 
 var syntax_mode_test_sentences = [
     "{\"class_id\":1,\"words\":[\"Nisi\",\"fēminae\",\"nautās\",\"sententiārum\",\"dē\",\"incolīs\",\"dāmnābunt\",\"incolae\",\"in\",\"prōvinciā\",\"nōn\",\"labōrābunt\"],\"regions\":[{\"class_id\":2,\"indices\":[0],\"tags\":[]},{\"class_id\":2,\"indices\":[1],\"tags\":[]},{\"class_id\":2,\"indices\":[2],\"tags\":[]},{\"class_id\":2,\"indices\":[3],\"tags\":[]},{\"class_id\":2,\"indices\":[4],\"tags\":[]},{\"class_id\":2,\"indices\":[5],\"tags\":[]},{\"class_id\":2,\"indices\":[6],\"tags\":[{\"class_id\":3,\"type\":\"t=future\"},{\"class_id\":3,\"type\":\"m=indicative\"},{\"class_id\":3,\"type\":\"c=protasis/apodosis of a future more vivid conditional sentence\"},{\"class_id\":3,\"type\":\"s=not applicable\"},{\"class_id\":3,\"type\":\"r=not applicable\"}]},{\"class_id\":2,\"indices\":[7],\"tags\":[]},{\"class_id\":2,\"indices\":[8],\"tags\":[]},{\"class_id\":2,\"indices\":[9],\"tags\":[]},{\"class_id\":2,\"indices\":[10],\"tags\":[]},{\"class_id\":2,\"indices\":[11],\"tags\":[{\"class_id\":3,\"type\":\"t=future\"},{\"class_id\":3,\"type\":\"m=indicative\"},{\"class_id\":3,\"type\":\"c=protasis/apodosis future more vivid conditional sentence\"},{\"class_id\":3,\"type\":\"s=not applicable\"},{\"class_id\":3,\"type\":\"r=not applicable\"}]}],\"text\":\"Nisi fēminae nautās sententiārum dē incolīs dāmnābunt, incolae in prōvinciā nōn labōrābunt.\",\"language_of_sentence\":\"mf\",\"chapter\":2,\"number\":13}",
@@ -148,7 +16,10 @@ var tag_first_to_type = {
     'r': 'relative time'
 }
 
-var drop_down_types = ['tense', 'mood', 'construction', 'sequence', 'relative time'];
+var verb_drop_down_types = ['tense', 'mood', 'construction', 'sequence', 'relative time'];
+
+var noun_drop_down_types = ['nominative', 'genitive', 'dative',
+'accusative', 'ablative', 'infinitive'];
 
 var is_tag_we_care_about = function (tag) {
     return tag.class_id === 3;
@@ -159,44 +30,108 @@ var with_tags = function (region) {
         is_tag_we_care_about)}
 }
 
+var get_tags_status = function (x) {
+    var tag_error = function () {
+        alert('This sentence has an internal issue. Please tell your ' +
+        'instructor that there is a software issue: a sentence without ' +
+        'proper tags has not been deleted.');
+        return_to_profile();
+    }
+    var status = 'none';
+    for (var i = 0; i < x.tags.length; i++) {
+        if (!is_proper_tag(x.tags[i].type)) {
+            if (!is_proper_tag(status)) {
+                tag_error();
+            }
+            status = x.tags[i].type;
+        }
+    }
+    if (is_proper_tag(status)) {
+        tag_error();
+    }
+    return status;
+}
+
 var has_tags = function (x) {
     return x.tags.length > 0;
+}
+
+var is_proper_tag = function (x) {
+    return x !== 'verb' && x !== 'noun';
+}
+
+var get_proper_tags = function (x) {
+    return x.tags.map(function (x) {return x.type}).filter(is_proper_tag);
+}
+
+var find_noun_tag_case = function (x) {
+    var ns = syntax_module_filter.noun_syntax;
+    for (var i in ns) {
+        if (x in ns[i])  {
+            return i;
+        }
+    }
+    alert('Noun tag type "' + x + '" not found! If you are a student, report this!');
+    return_to_profile();
+}
+
+var process_region_from_firebase = function (sentence_data) {
+    return function (x) {
+        var tags_status = get_tags_status(x);
+        var proper_tags = get_proper_tags(x);
+        var r = {
+            'pos': tags_status,
+            'text': sentence_data.text,
+            'words': sentence_data.words,
+            'chapter': sentence_data.chapter,
+            'number': sentence_data.number,
+            'indices': x.indices,
+            'tags': {}
+        };
+        if (tags_status === 'verb') {
+            for (var i = 0; i < proper_tags.length; i++) {
+               r.tags[tag_first_to_type[proper_tags[i][0]]] = proper_tags[i].slice(2);
+            }
+        } else if (tags_status === 'noun') {
+            for (var i = 0; i < proper_tags.length; i++) {
+               r.tags[find_noun_tag_case(proper_tags[i])] = proper_tags[i];
+            }
+        }
+        return r;
+    }
 }
 
 var parse_firebase_syntax_data = function (sentence_data) {
     // console.log(sentence_data);
     var sentence_text = sentence_data.words;
     var regions_with_tags = sentence_data.regions.map(with_tags).filter(has_tags);
-    return regions_with_tags.map(function (x) {
-        var r = {
-            'text': sentence_data.text,
-            'words': sentence_data.words,
-            'chapter': sentence_data.chapter,
-            'number': sentence_data.number,
-            'indices': x.indices
-        };
-        for (var i = 0; i < x.tags.length; i++) {
-            r[tag_first_to_type[x.tags[i].type[0]]] = x.tags[i].type.slice(2);
-        }
-        return r;
-    });
+    return regions_with_tags.map(process_region_from_firebase(sentence_data));
 }
 
 var allowed_options_repository = function () {
     var known = {};
-    return function (chapter, type) {
-        if (chapter + '/' + type in known) {
-            return known[chapter + '/' + type];
+    return function (chapter, type, pos) {
+        /*
+        if (chapter === undefined || chapter === null ||
+        type === undefined || type === null ||
+        pos === undefined || pos === null) {
+            alert('There\'s something weird about this sentence, tell your instructor.');
+            return_to_profile();
+        }
+        */
+        var key = [chapter, type, pos].join('/');
+        if (key in known) {
+            return known[key];
         }
         chapter = Number(chapter);
-        var d = syntax_module_filter.verb_syntax[type];
+        var d = syntax_module_filter[pos + '_syntax'][type];
         var r = [type.toUpperCase()].concat(Object.keys(d).filter(function (x) {
             return d[x] <= chapter;
         }));
         if (should_have_non_applicable(type)) {
            r.push('not applicable');
         };
-        known[chapter + '/' + type] = r;
+        known[key] = r;
         return r;
     }
 }
@@ -209,14 +144,21 @@ var has_choices = function (x) {
 
 var convert_syntax_data_to_drop_down_data = function (data) {
     var r = data.map(function (x) {
+        var drop_down_types;
+        if (x.pos === 'verb') {
+            drop_down_types = verb_drop_down_types;
+        } else if (x.pos === 'noun') {
+            drop_down_types = noun_drop_down_types;
+        }
         var drop_downs = drop_down_types.map(function (y) {
             return {
                 'type': y,
-                'choices': get_allowed_options(x.chapter, y),
-                'correct_answer': x[y]
+                'choices': get_allowed_options(x.chapter, y, x.pos),
+                'correct_answer': x.tags[y] || 'not applicable'
             }
         }).filter(has_choices);
         return {
+            'pos': x.pos,
             'words': x.words,
             'sentence': x.text,
             'question': "Give the syntax of the highlighted word.",
@@ -226,6 +168,11 @@ var convert_syntax_data_to_drop_down_data = function (data) {
     });
     
     return r.sort(function (x, y) {
+        if (x.pos === 'verb' && y.pos === 'noun') {
+            return -1
+        } else if (x.pos === 'noun' && y.pos === 'verb') {
+            return 1;
+        };
         var a = x.target_indices[0];
         var b = y.target_indices[0];
         if (a < b) {
@@ -237,7 +184,7 @@ var convert_syntax_data_to_drop_down_data = function (data) {
         } else {
             throw 'Impossible ordering!'
         }
-    })
+    });
 }
 
 var get_sentence_from_firebase = function (chapter_n, question_n, fn) {
@@ -476,15 +423,46 @@ SyntaxModeGame.prototype.add_single_drop_down = function (x, index) {
     return make_drop_down_html(x.choices, this.drop_down_location, index);
 }
 
-SyntaxModeGame.prototype.process_answer = function() {
-    var self = this;
-    var is_correct = this.drop_downs.every(function (x) {
-        return self.is_correct(selected_option(x.e), x.correct_answer);
+SyntaxModeGame.prototype.current_pos = function () {
+    return this.data[this.region_number].pos;
+}
+
+SyntaxModeGame.prototype.relevant_drop_downs = function () {
+    return this.drop_downs.filter(function (x) {
+        return x.correct_answer !== 'not applicable';
     });
-    if (is_correct) {
+}
+
+SyntaxModeGame.prototype.check_correctness = function (drop_downs) {
+    var self = this;
+    if (this.current_pos() === 'verb') {
+        return this.drop_downs.every(function (x) {
+            return self.is_correct(selected_option(x.e), x.correct_answer);
+        });
+    } else if (this.current_pos() === 'noun') {
+        var num_selected = this.drop_downs.filter(function (x) {
+            return x.e.selectedIndex !== 0;
+        }).length;
+        if (num_selected === 0) {
+            return {'message': 'You didn\'t seem to select any answer choices!'}
+        } else if (num_selected > 1) {
+            return {'message': 'You seemed to select more than one answer choice!'}
+        } else {
+            var relevant_drop_down = this.relevant_drop_downs()[0];
+            return selected_option(relevant_drop_down.e) ===
+            relevant_drop_down.correct_answer;
+        }
+    }
+}
+
+SyntaxModeGame.prototype.process_answer = function() {
+    var is_correct = this.check_correctness();
+    if (is_correct === true) {
         this.process_correct_answer();
-    } else {
+    } else if (is_correct === false) {
         this.process_incorrect_answer();
+    } else {
+        alert(is_correct.message);
     }
 };
 
@@ -510,13 +488,20 @@ SyntaxModeGame.prototype.process_correct_answer = function () {
     // console.log("DEBUG entering 2nd random_choice");
     var relevant_data = this.data[this.region_number];
     
+    var syntax_info;
+    
+    if (this.current_pos() === 'verb') {
+        syntax_info = this.drop_downs.map(function (x) {
+            return x.type.toUpperCase() + ': ' + x.correct_answer || x.non_drop_text;
+        }).join('<br>')
+    } else if (this.current_pos() === 'noun') {
+        syntax_info = this.relevant_drop_downs()[0].correct_answer;
+    }
+    
     var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_right) + '<br><br>' +
     'The syntax of <em>' + relevant_data.target_indices.map(function (index) {
         return relevant_data.words[index];
-    }).join(' ') + '</em> is:<br>' +
-    this.drop_downs.map(function (x) {
-        return x.type.toUpperCase() + ': ' + x.correct_answer || x.non_drop_text;
-    }).join('<br>');
+    }).join(' ') + '</em> is:<br>' + syntax_info;
     var fbox = el("feedbackbox");
     el('questionbox').innerHTML = '';
     fbox.innerHTML = cell_1;

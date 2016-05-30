@@ -8,6 +8,8 @@ don't leave this lying around as a global object
     // Persist.clear_node(["xxx"]);   put users where it says xxx
 
 
+
+
 Current issues and questions (from mf mode):
 // MF Issue 0: What needs to be changed outside of mf_mode?
 // MF Issue 1: Different things (drop downs, clickability)
@@ -28,7 +30,20 @@ SUMMER AGENDA (non-detailed)
 - morphology training
 
 
+
+MF/SYNTAX MODE FUNCTIONALITY NEEDED
+- slightly annioying bug in tagger: if an admin accidentally highlights a word, tries to unhighlight it and highlight another word, bith end upo getting highlighted when it reaches quiz
+- we need an admin function that can pull all the data from firebase - sentence_mf and render it in easily readable form (e.g. if we have someone tagging and we want to proofread their tagging)
+    - {
+        sentence: 2.1
+        text: nauta reginam timet
+        tag_map: {
+                nauta: noun, nominative subject
+                timet: verb, present subju.... 
+    }
+
 AGENDA SUNDAY MAY 29th
+- BEGINNING of ALL DONE section
 - red grey and black for profile page (nearly done with  mysterious bug perhaps in safari)
 - get rid of dummy phrases (Akiva thinks is done but not sure)
 - font size of feedback should be smaller (DONE)
@@ -46,12 +61,23 @@ AGENDA SUNDAY MAY 29th
 - - if they skip any single question in a multi-question syntax mode it should log the sentence as incomplete and turn it red (DONE)
 - in a multi-part syntax question there is some room for confusion (DONE)
     repeat question word in feedback box
-   
-
 - test: are we sure if they skip a game and then complete it later, firebase will rewrite the status as complete? SEEMS to be done but not tested)
 
 
-
+- in tag2 make noun syntax drop down    
+    - add 6 drop downs (nom, gen, etc. + infinitive) to the existing 5 drop downs
+    - correct choices
+    - word getting tagged
+    - the two submit buttons both work as before
+       - "minor" submit
+       - "major" submit
+- in syntax mode: make noun syntax part of the mode
+    - if the word has a noun syntax answer, show noun drop downs not verb drop downs
+        - drop downs have all caps header - NOMINATIVE (clickable is fine)
+        - module filter is written, needs to be run when making drop downs
+    - ideally: verb syntax is asked first and then noun syntax
+    - but for now if we just go in order of occurence (i.e. index) then that's fine
+- END of ALL DONE section
 
 
 AGENDA FRIDAY

@@ -156,6 +156,8 @@ ProfilePage.build_progress_table = function(user) {
             console.log("DEBUG 2-11 leaving first make");
             var max_columns = 4;
             get_mf_and_syntax_sentences(function (order) {
+                var e;
+                
                 var i;
                 var j;
                 var k;
@@ -235,11 +237,18 @@ ProfilePage.build_progress_table = function(user) {
                 getting(["history", "sentence_logs"], function (x) {
                     console.log(x);
                     for (var i in x) {
-                        el(i.replace(/\bmf$/, 'translate')).style.color = {
-                            'completed': 'green',
-                            'skipped': 'red'
-                        }[x[i]] || 'black';
+                        e = el(i.replace(/\bmf$/, 'translate'));
+                        if (e === null) {
+                            delete x[i];
+                        } else {
+                            e.style.color = {
+                                'completed': 'green',
+                                'skipped': 'red'
+                            }[x[i]] || 'black';
+                        }
                     }
+                    console.log(x);
+                    user.persist(['history', 'sentence_logs'], x);
                 }, function() {return user})();
             });
         } else {

@@ -132,16 +132,16 @@ var mf_sentences = {
 	"4.4": ["Liber ā poēta cum dīligentia scrīptus est ut magnum perīculum bonīs mōnstrārētur.", "The-book was-written by-the-poet {with-diligence||diligently} in-order-that the-great-danger might be-shown to-the-good-men."],
 	"4.5": ["Sī litterae ā rēgīnā pulchrā ad honestōs missae essent, monitī essent ut bellum gererent, et oppidum ab amīcīs malōrum nōn superātum esset.", "If the letter/letters had-been-sent by-the-beautiful-queen to/toward-the-honorable/honest-men, they-would-have-been-warned that they wage-war and the town would-not-have-been-overcome by-the-friends of-the-evil-(men)."],
 	"4.6": ["Urna pulchra in mēnsā ā fēminīs rēgīnae pōnētur ut cibō aquāque impleātur.", "The-beautiful-urn will-be-placed on/onto-the-table by-the-women of-the-queen in-order-that it might-be-filled with-food-and (with) water."],
-	"4.10": ["Magna cum dīligentiā bellum gestum est nē ab incolīs prōvinciae Rōmānae malīs rēgnum superārētur.", ""], 
-	"4.11": ["Sī verba vēra magnō studiō ā virīs bonīs honestīsque legentur et intellegentur, perīculum bellī dēlēbitur.", ""],
+	// "4.10": ["Magna cum dīligentiā bellum gestum est nē ab incolīs prōvinciae Rōmānae malīs rēgnum superārētur.", ""], 
+	"4.11": ["Sī verba vēra magnō studiō ā virīs bonīs honestīsque legentur et intellegentur, perīculum bellī dēlēbitur.", "If the-true-words are read and understood {with-great-zeal/enthusiasm||very-zealously/enthusiastically} by-the-good-men, the-danger of-war will be destroyed."],
 
 
-	"4.15": ["Fīlia rēgīnae bonae ad āram ā nautīs Rōmānīs ducta est ut honesta dīs agerentur.", ""],
-	"4.16": ["Perīculum rēgnō magnum fīliīs līberōrum vidētur.", ""], 
-	"4.17": ["Circum oppidum dūcēbāris ut ā bonīs malīsque vidērēre.", ""],
-	"4.20": ["Sī litterae fīliō honestō mittantur, respondeatne?", ""],
-	"4.21": ["Ōrābimus ut urnae aquā ā puellā impleantur.", ""],
-	"4.22": ["Sī magna bella ab incolīs gerentur, rēgnum vērē dēlēbitur.", ""],
+	// "4.15": ["Fīlia rēgīnae bonae ad āram ā nautīs Rōmānīs ducta est ut honesta dīs agerentur.", ""],
+	// "4.16": ["Perīculum rēgnō magnum fīliīs līberōrum vidētur.", ""], 
+	// "4.17": ["Circum oppidum dūcēbāris ut ā bonīs malīsque vidērēre.", ""],
+	// "4.20": ["Sī litterae fīliō honestō mittantur, respondeatne?", ""],
+	// "4.21": ["Ōrābimus ut urnae aquā ā puellā impleantur.", ""],
+	// "4.22": ["Sī magna bella ab incolīs gerentur, rēgnum vērē dēlēbitur.", ""],
 
 	"4.24": ["Multa vērō pecūnia in mēnsā pōnitur ut honestī pecūniam capiant et magnum tēctum fīliīs faciant.", "Truly/indeed, much-money is-placed on-the-table in-order-that honorable/honest-(men) may take the-money and make a-great-house/home/roof for-their-sons."],
 

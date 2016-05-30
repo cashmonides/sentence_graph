@@ -6,6 +6,8 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+	<script src="../mf/syntax.js"></script>
+	
 	<!-- utils in html here -->
     <script src="../lib/utils.js"></script>
     <script src="../lib/list_utils.js"></script>
@@ -19,6 +21,9 @@
     <script src="../lib/word_selector.js"></script>
     <script src="../lib/sentence.js"></script>
     <script src="../lib/autotag.js"></script>
+    
+    <script src="../quiz/mode/syntax_mode.js"></script>
+    
     <script src="tag2.js"></script>
 
     <title>Tag</title>
@@ -30,6 +35,13 @@
     <div id="box"></div>
     <input type="text" id="chapter_number_box" width="100">CHAPTER<br>
     <input type="text" id="sentence_number_box" width="100">SENTENCE<br>
+    <button onclick="set_sentence_language('mf')">Morelad & Fleischer</button>
+    <button onclick="set_sentence_language('other')">Other</button>
+    <button onclick="local_submit_sentence()">local submit</button>
+    <button onclick="global_submit_sentence()">global submit</button>
+    <button onclick="delete_tags()">delete tags</button>
+    <button onclick="clear_all_highlights()">clear highlights</button>
+    <button onclick="generate_syntax_report()">generate syntax report</button>
     <div id="tagger_drop_downs"></div>
     <div id="buttons"></div>
     <select multiple size = "10" id="allregions"></select>
@@ -38,14 +50,8 @@
     <select multiple size = "10" id="tags"></select>
     <select multiple size = "10" id="regions" ></select>
     <br>
-    
-    
-    <button onclick="set_sentence_language('mf')">Morelad & Fleischer</button>
-    <button onclick="set_sentence_language('other')">Other</button>
-    <button onclick="local_submit_sentence()">local submit</button>
-    <button onclick="global_submit_sentence()">global submit</button>
-    <button onclick="delete_tags()">delete tags</button>
-    <button onclick="clear_all_highlights()">clear highlights</button>
+    <textarea id='syntax_report' style="height: 600px; width: 600px;"></textarea>
+    <br>
     
     <script>
     while (true) {
