@@ -476,7 +476,7 @@ MFModeGame.prototype.give_away_answer = function () {
     var skip_onclick = skip_button.onclick.bind(skip_button);
     var self = this;
     skip_button.onclick = function () {
-        this.metrics.skipped++;
+        self.metrics.skipped++;
         skip_onclick();
     }
     
