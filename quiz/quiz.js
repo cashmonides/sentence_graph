@@ -536,7 +536,7 @@ Quiz.prototype.next_question = function (error) {
     }
 };
 
-Quiz.prototype.mf_sql_completed_log = function () {
+Quiz.prototype.mf_sql_completed_log = function (ajax_callback) {
     var total = this.game.metrics.completed + this.game.metrics.skipped;
     var data = [
         'completed: ' + this.game.metrics.completed + ' of ' + total,
@@ -545,7 +545,7 @@ Quiz.prototype.mf_sql_completed_log = function () {
         this.time_data_id
     ];
     console.log('about to update mf', data);
-    post({data: data, type: "update_mf_metrics"});
+    post({data: data, type: "update_mf_metrics"}, ajax_callback);
 }
 
 
@@ -582,12 +582,15 @@ Quiz.prototype.question_complete = function (button_name) {
         if (this.game.get_mode_name() === 'mf' ||
         (this.game.get_mode_name() === 'syntax' && this.game.on_last_region())) {
             this.log_sentence();
-            this.mf_sql_completed_log();
+            var ajax_callback;
             if (button_name === "skip_button") {
-                return_to_profile();
+                ajax_callback = function () {return_to_profile()};
+            } else {
+                ajax_callback = function () {};
+                el('submit_button').innerHTML = 'back to profile';
+                el('submit_button').onclick = return_to_profile;
             }
-            el('submit_button').innerHTML = 'back to profile';
-            el('submit_button').onclick = return_to_profile;
+            this.mf_sql_completed_log(ajax_callback);
         } else {
             this.next_question();
         }
