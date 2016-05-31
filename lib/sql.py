@@ -204,7 +204,7 @@ def insert_mf_metrics(ups):
         # Makes sure everything (even None) becomes a string.
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-        c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, %s, %s, %s, %s, %s, now(), null, %s, null, null, null)", row)   # slice = (row[0], row[1], row[2], row[3])
+        c.execute("INSERT INTO mf1_metrics VALUES (null, %s, %s, %s, %s, %s, %s, %s, %s, now(), null, %s, null, null, null)", row)   # slice = (row[0], row[1], row[2], row[3])
         # c.execute("INSERT INTO time_metrics VALUES (null, %s, null, null, null, null, null, %s, %s, now(), " + ups["null_string"] + ")", row)
         
         
@@ -259,7 +259,7 @@ def update_mf_metrics(ups):
         # Makes sure everything (even None) becomes a string.
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-        c.execute("UPDATE time_metrics SET completed_ratio = %s, skipped_ratio = %s, " +
+        c.execute("UPDATE mf1_metrics SET completed_ratio = %s, skipped_ratio = %s, " +
         "status = %s, stop_time = now() WHERE id = %s", row)
         db.commit()
         # logging.debug("db execute")
