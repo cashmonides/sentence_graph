@@ -104,7 +104,7 @@ def insert_time_data(ups):
         # Makes sure everything (even None) becomes a string.
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-        c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, %s, %s, %s, %s, %s, now(), null)", row)   # slice = (row[0], row[1], row[2], row[3])
+        c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, %s,  now(), null,)", row)   # slice = (row[0], row[1], row[2], row[3])
         # c.execute("INSERT INTO time_metrics VALUES (null, %s, null, null, null, null, null, %s, %s, now(), " + ups["null_string"] + ")", row)
         
         
@@ -185,12 +185,11 @@ def update_time_data(ups):
         return data
 
 
-#todo add a try catch statement at c.execute
 def insert_mf_metrics(ups):
     try:
         row = ups["data"]
         # modes = ups["modes"]
-        logging.debug("in insert time data row={0}".format(row))
+        logging.debug("in insert mf metrics row={0}".format(row))
         # double asterisk gets all the keys of the map as the argument
         db = MySQLdb.connect(**dbs)
         # logging.debug("db connected")
@@ -204,7 +203,7 @@ def insert_mf_metrics(ups):
         # Makes sure everything (even None) becomes a string.
         #c.execute("INSERT INTO time_metrics VALUES (" + str(row[0])+ ", " + str(row[1]) + \
         #  ", " + str(row[2]) + ", \"" + str(row[3]) + "\", \"" + str(row[4]) + "\")")
-        c.execute("INSERT INTO time_metrics VALUES (null, %s, %s, %s, %s, %s, %s, %s, %s, now(), null, %s, null, null, null)", row)   # slice = (row[0], row[1], row[2], row[3])
+        c.execute("INSERT INTO mf1_metrics VALUES (null, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, now(), null)", row)   # slice = (row[0], row[1], row[2], row[3])
         # c.execute("INSERT INTO time_metrics VALUES (null, %s, null, null, null, null, null, %s, %s, now(), " + ups["null_string"] + ")", row)
         
         
@@ -212,7 +211,7 @@ def insert_mf_metrics(ups):
         # c.execute("INSERT INTO time_metrics VALUES (null, %s, null, null, null, null, null, %s, %s, now(), " + ups["null_string"] + ")", row)
         
         
-        time_data_id = c.lastrowid
+        mf_metrics_id = c.lastrowid
         # for i in modes:
         #     c.execute("INSERT INTO accuracy_id VALUES (" + str(time_data_id)
         #     + ", null, null, null, null, \"" + i + "\")", [])
@@ -224,7 +223,7 @@ def insert_mf_metrics(ups):
         # print 'Total Row(s):' + str(c.rowcount)
         data = {
             "success": True,
-            "id": time_data_id
+            "id": mf_metrics_id
         }
         # for row in rows:
             # print row
@@ -241,7 +240,8 @@ def insert_mf_metrics(ups):
         }
         
         return data
-        
+
+
 def update_mf_metrics(ups):
     try:
         row = ups["data"]
@@ -284,6 +284,7 @@ def update_mf_metrics(ups):
         }
         
         return data
+
 
 '''
 #todo add a try catch statement at c.execute
@@ -336,6 +337,9 @@ def insert_accuracy_data(ups):
         }
         
         return data
+
+
+
 def update_accuracy_data(ups):
     try:
         row = ups["data"]

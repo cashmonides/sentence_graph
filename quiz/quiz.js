@@ -240,101 +240,105 @@ Quiz.prototype.next_submodule = function() {
     this.initialize_accuracy_dictionary();
     
     if (!this.user.is_mf()) {
-        //progress bars below
-        this.began = new Date();
-        this.progress_bar = new ProgressBar(this.module.submodule.threshold, [], el('progress-bar'));
-        // Progress bar currently disabled (i.e., does not show up).
-        this.old_progress_bars = [];
-        /*this.old_progress_bars = (this.user.data.history[this.module.id].
-            progress_bars[this.user.data.history[this.module.id].progress] || []).map(
-            function (x) {
-                var o = document.createElement('div');
-                o.innerHTML = '<div id="progress-bar" class="progress-bar" role="progressbar" ' +
-                'aria-valuemin="0" aria-valuemax="100"></div>';
-                var e = o.firstChild;
-                el('progress-bar-wrapper').appendChild(e);
-                return new ProgressBar(self.module.submodule.threshold, x, e)});*/
-        //todo the following was moved by akiva to next_question
-        // this.next_mode();
-        // todo new begins here
-        // console.log("current module:", this.module);
-        // This isn't really helpful
-        // console.log("current level:", this.module.level);
-        //todo below is old, make sure new version works (in next_question)
-        // this.game.set_level(this.module.level);
-        //todo important - I commented this out, not sure if it breaks anything - it seems to not do anything
-        // console.log('this.game.level = ', this.game.level)
-        // todo new ends here
-        // this.clear_cheat_sheet();
-    
-        console.log("DEBUG 1-22 entering log start time");
-        
-        var start_time =  "test_string_for_start_time"; //new Date();
-        
-        
-        var submodule_id = this.user.get_module(this.module.id).progress;
-        
-        console.log("DEBUG 1-22 user_id = ", this.user.uid);
-        console.log("DEBUG 1-22 module_id = ", this.module.id);
-        console.log("DEBUG 1-22 submodule_id = ", submodule_id);
-        console.log("DEBUG 1-22 start_time = ", start_time);
-        
-         /*
-        
-        
-        every time a submodule is started:
-        
-        
-        step 1)
-        create a row:
-        user_id, module_id, submodule_id, start_time, stop_time   (& 0123)
-        (with stop_time as null)
-        
-        step 2)
-        save data as a state: quiz.time_data [user_id, module_id, submodule_id, start_time]
-        
-        
-        every question modifies a dictionary
-        0:
-        1:
-        2;
-        3:
-        
-        
-        every time a submodule is completed:
-        step 1)
-        update stop_time in the following row:
-        user_id, module_id, submodule_id, quiz.start_time, null
-        
-        write new accuracy dictionary to post statement
-        
-        step 2)
-        clear quiz.start_time
-        
-        */
-        this.time_data = list_of_repetitions(null, 8);
-        this.time_data[0] = this.user.uid;
-        this.time_data[6] = this.module.id;
-        this.time_data[7] = submodule_id;
-        
-        // Hopefully not needed.
-        // this.time_data = [this.user.uid, this.module.id, submodule_id];
-    
-        var user_data = this.user.get_personal_data();
-        
-        for (var i = 0; i < user_data.length; i++) {    
-            this.time_data[i + 1] = user_data[i];
-        }
-        
-        console.log(this.time_data);
-        
-        
-        this.initialize_time_metrics();
+        this.next_submodule_not_mf();
+    } else {
+        this.next_submodule_mf();
     }
     this.next_question();
 };
 
-Quiz.prototype.initialize_time_metrics = function () {
+Quiz.prototype.next_submodule_not_mf = function () {
+    //progress bars below
+    this.began = new Date();
+    this.progress_bar = new ProgressBar(this.module.submodule.threshold, [], el('progress-bar'));
+    // Progress bar currently disabled (i.e., does not show up).
+    this.old_progress_bars = [];
+    /*this.old_progress_bars = (this.user.data.history[this.module.id].
+        progress_bars[this.user.data.history[this.module.id].progress] || []).map(
+        function (x) {
+            var o = document.createElement('div');
+            o.innerHTML = '<div id="progress-bar" class="progress-bar" role="progressbar" ' +
+            'aria-valuemin="0" aria-valuemax="100"></div>';
+            var e = o.firstChild;
+            el('progress-bar-wrapper').appendChild(e);
+            return new ProgressBar(self.module.submodule.threshold, x, e)});*/
+    //todo the following was moved by akiva to next_question
+    // this.next_mode();
+    // todo new begins here
+    // console.log("current module:", this.module);
+    // This isn't really helpful
+    // console.log("current level:", this.module.level);
+    //todo below is old, make sure new version works (in next_question)
+    // this.game.set_level(this.module.level);
+    //todo important - I commented this out, not sure if it breaks anything - it seems to not do anything
+    // console.log('this.game.level = ', this.game.level)
+    // todo new ends here
+    // this.clear_cheat_sheet();
+
+    console.log("DEBUG 1-22 entering log start time");
+    
+    
+    var submodule_id = this.user.get_module(this.module.id).progress;
+    
+    console.log("DEBUG 1-22 user_id = ", this.user.uid);
+    console.log("DEBUG 1-22 module_id = ", this.module.id);
+    console.log("DEBUG 1-22 submodule_id = ", submodule_id);
+    
+    /*
+    
+    
+    every time a submodule is started:
+    
+    
+    step 1)
+    create a row:
+    user_id, module_id, submodule_id, start_time, stop_time   (& 0123)
+    (with stop_time as null)
+    
+    step 2)
+    save data as a state: quiz.time_data [user_id, module_id, submodule_id, start_time]
+    
+    
+    every question modifies a dictionary
+    0:
+    1:
+    2;
+    3:
+    
+    
+    every time a submodule is completed:
+    step 1)
+    update stop_time in the following row:
+    user_id, module_id, submodule_id, quiz.start_time, null
+    
+    write new accuracy dictionary to post statement
+    
+    step 2)
+    clear quiz.start_time
+    
+    */
+    this.time_data = list_of_repetitions(null, 8);
+    this.time_data[0] = this.user.uid;
+    this.time_data[6] = this.module.id;
+    this.time_data[7] = submodule_id;
+    
+    // Hopefully not needed.
+    // this.time_data = [this.user.uid, this.module.id, submodule_id];
+
+    var user_data = this.user.get_personal_data();
+    
+    for (var i = 0; i < user_data.length; i++) {    
+        this.time_data[i + 1] = user_data[i];
+    }
+    
+    console.log(this.time_data);
+    
+    
+    this.initialize_time_metrics('insert_time_data');
+}
+
+
+Quiz.prototype.initialize_time_metrics = function (s) {
     var time_data = this.time_data;
     console.log("DEBUG 2-11 entering post #1");
     console.log("DEBUG 2-11 this.time_data = ", time_data);
@@ -347,7 +351,7 @@ Quiz.prototype.initialize_time_metrics = function () {
     if (this.user.uid !== null) {
         console.log('DEBUG 3/4/2016 this.user.uid !== null; about to post');
         var self = this;
-        post({data: time_data, type: "insert_time_data"}, function (data) {
+        post({data: time_data, type: s}, function (data) {
             console.log("DEBUG 2-11 data = ", data);
             self.time_data_id = data.id;
         });
@@ -357,6 +361,29 @@ Quiz.prototype.initialize_time_metrics = function () {
     // todo maybe a good idea later to add an urgent error log here
     
     console.log("DEBUG 2-11 exiting post #1");
+}
+
+Quiz.prototype.next_submodule_mf = function () {
+    console.log("DEBUG 1-22 entering log start time");
+    
+    console.log("DEBUG 1-22 user_id = ", this.user.uid);
+    console.log("DEBUG 1-22 module_id = ", this.module.id);
+    
+    this.time_data = list_of_repetitions(null, 9);
+    // check that we have established a link to the game
+    this.time_data[0] = this.user.uid;
+    this.time_data[6] = this.id.chapter;
+    this.time_data[7] = this.id.question;
+    this.time_data[8] = this.id.mode;
+
+    var user_data = this.user.get_personal_data();
+    
+    for (var i = 0; i < user_data.length; i++) {    
+        this.time_data[i + 1] = user_data[i];
+    }
+    
+    console.log('about to insert mf', this.time_data);
+    this.initialize_time_metrics('insert_mf_metrics');
 }
 
 Quiz.prototype.get_modes = function () {
@@ -509,6 +536,18 @@ Quiz.prototype.next_question = function (error) {
     }
 };
 
+Quiz.prototype.mf_sql_completed_log = function () {
+    var total = this.game.metrics.completed + this.game.metrics.skipped;
+    var data = [
+        'completed: ' + this.game.metrics.completed + ' of ' + total,
+        'skipped: ' + this.game.metrics.skipped + ' of ' + total,
+        this.get_mf_game_status(),
+        this.time_data_id
+    ];
+    console.log('about to update mf', data);
+    post({data: data, type: "update_mf_metrics"});
+}
+
 
 Quiz.prototype.question_complete = function (button_name) {
     set_display("skip_button", 'none');
@@ -543,6 +582,7 @@ Quiz.prototype.question_complete = function (button_name) {
         if (this.game.get_mode_name() === 'mf' ||
         (this.game.get_mode_name() === 'syntax' && this.game.on_last_region())) {
             this.log_sentence();
+            this.mf_sql_completed_log();
             if (button_name === "skip_button") {
                 return_to_profile();
             }
@@ -564,14 +604,17 @@ Quiz.prototype.update_accuracy = function () {
     };
 }
 
+Quiz.prototype.get_mf_game_status = function () {
+    if (this.game.metrics.skipped === 0) {
+        return 'completed';
+    } else {
+        return 'skipped';
+    }
+}
+
 Quiz.prototype.log_sentence = function () {
     var sentence_finder = this.game.sentence_finder();
-    var status;
-    if (this.game.all_right) {
-        status = 'completed';
-    } else {
-        status = 'skipped';
-    }
+    var status = this.get_mf_game_status();
     console.log('DEBUG 5/23 checkpoint 4 skipped before',
     sentence_finder);
     this.user.log_sentences(sentence_finder, status, this.game.get_mode_name());
@@ -648,11 +691,7 @@ Quiz.prototype.submodule_complete = function () {
         console.log("DEBUG 2-11 this.time_data = ", this.time_data);
         post({data: this.time_data_id, type: "update_time_data"});
         console.log("DEBUG 3-4 just finished update_time_data");
-        /*
-        post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict(),
-        type: "update_accuracy_old"});
-        console.log("DEBUG 3-2 just finished update_accuracy_old");
-        */
+        
         console.log("DEBUG 3-26 about to enter update_accuracy_new");
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict2(),
         type: "update_accuracy_new"});

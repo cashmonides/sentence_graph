@@ -354,3 +354,66 @@ User.prototype.get_sentence_logs = function () {
 //     Persist.set(["users", uid], data, callback);
 // };
 */
+
+/*
+User.prototype.get_personal_data = function (quiz) {
+    var types_of_data = ["school", "grade", "class_number", "name", "email"];
+    var found = 0;
+    for (var i = 0; i < types_of_data.length; i++) {
+        var x = types_of_data[i];
+        var path = ["users", this.uid, 'profile', x];
+        console.log(i, path);
+        Persist.get(path, (function (i) {
+            return function (data) {
+                var real_data = data.val();
+                console.log(i, real_data, quiz.time_data);
+                quiz.time_data[i + 1] = real_data;
+                found++;
+                if (found === types_of_data.length) {
+                    quiz.initialize_time_metrics();
+                }
+            }
+        })(i));
+    };
+}
+*/
+
+
+//below doesn't work (error: Uncaught TypeError: b.replace is not a function)
+// User.prototype.get_data = function (path) {
+    
+//     function callback_new() {
+//         console.log("DEBUG 12-30 callback_new triggered");
+//         Persist.get([path], callback_new2);
+//     }
+    
+//     function callback_new2(data) {
+//         console.log("DEBUG 12-30 callback_new2 triggered");
+//         var x = data.val();
+//         console.log("DEBUG 12-30 target_data = ", x);
+//         return x;
+//     }
+ 
+//     console.log("DEBUG 12-30 about to invoke double callback");
+//     callback_new();
+// }
+
+/*
+User.prototype.persist_general = function (path, value, action, callback) {
+    if (this.uid != null) {
+        console.log(action);
+        console.log(action in Persist)
+        Persist[action](["users", this.uid].concat(path), value, callback); 
+    } else {
+        console.log('this.uid == null!!!')
+    }
+};
+*/
+
+/*
+subsumed
+if (Object.keys(this.data.history).length === 0 && mod_id == 1) {
+    console.log("DEBUG 11-22 frontier triggered because history is empty");
+    return "frontier";
+}
+*/

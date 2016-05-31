@@ -545,7 +545,7 @@ var generate_report_for_sentence = function (sentence_id, sentence) {
 
 var generate_syntax_report = function () {
     get_syntax_questions(function (x) {
-        var d = Object.keys(x).map(function (i) {
+        var d = Object.keys(x).sort(sentence_sort).map(function (i) {
             return generate_report_for_sentence(i, x[i]);
         });
         var text = JSON.stringify(d, null, 4);

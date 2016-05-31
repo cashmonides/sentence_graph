@@ -184,3 +184,9 @@ function get_selected_region(){
     return state.sentence.get_region(answer_indices);
 
 }
+
+/*
+post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict(),
+type: "update_accuracy_old"});
+console.log("DEBUG 3-2 just finished update_accuracy_old");
+*/

@@ -237,10 +237,15 @@ var SyntaxModeGame = function (chapter, question) {
     this.data = null;
     this.quiz = null;
     // todo we here assume that 1 is the initial level
-    this.level = 1;    //we might replace this with this.current_chapter & this.current_question
+    this.level = 1;
+    // we might replace this (this.level??? This comment was initially on the above line.)
+    // with this.current_chapter & this.current_question
     this.current_chapter = chapter;
     this.current_question = question;
-    this.all_right = true;
+    this.metrics = {
+        'completed': 0,
+        'skipped': 0
+    }
 };
 
 SyntaxModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
@@ -253,8 +258,8 @@ SyntaxModeGame.prototype.get_mode_name = function () {
 
 SyntaxModeGame.prototype.attach = function(){
     // make word selector nonclickable (somewhere in set word selector)
-    //(should word_selector.setup bave a flag for clickable or not clickable?
-    //maybe something like in setup, if clickable is false then it just sets r[0] to false
+    // (should word_selector.setup bave a flag for clickable or not clickable?
+    // maybe something like in setup, if clickable is false then it just sets r[0] to false
 
     //todo
     set_display("latin_answer_choices", 'initial');  //we'll just use this part for syntax answer choices, should work the same
@@ -480,6 +485,7 @@ SyntaxModeGame.prototype.remove_drop_downs = function () {
 
 
 SyntaxModeGame.prototype.process_correct_answer = function () {
+    this.metrics.completed++;
     this.quiz.increment_score();
     
     // Only update when question is finished.
@@ -560,7 +566,7 @@ SyntaxModeGame.prototype.give_away_answer = function () {
     var skip_onclick = skip_button.onclick.bind(skip_button);
     var self = this;
     skip_button.onclick = function () {
-        self.all_right = false;
+        self.metrics.skipped++;
         self.remove_drop_downs();
         skip_onclick();
     }

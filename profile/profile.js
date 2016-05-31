@@ -78,33 +78,6 @@ ProfilePage.display_profile = function() {
 };
 
 
-
-//todo archive for later (this was testing persist)
-//dummy function for testing
-//proof of concept - how to persist.get something simple like user name
-// ProfilePage.alert_name = function () {
-//     Persist.get([path], display_name);
-// }
-
-// function display_name(data) {
-//     console.log("name = ", data);
-// }
-
-
-// //path terminates in a node with a time stamp
-// ProfilePage.get_time_metrics = function () {
-//     Persist.get([path], update_time_metrics);
-// }
-
-// //
-// function update_time_metrics(data) {
-//     var new_start_time = Date.now();
-//     var new_list = data.push(new_start_time);
-//     //persist statement, setting 
-// }
-
-
-
 // return: int which is number of levels from current_module
 ProfilePage.get_module_distance = function (user, module_id) {
     var current_module_id = user.get_current_module();
@@ -173,22 +146,7 @@ ProfilePage.build_progress_table = function(user) {
                     }
                 }
                 var order = new_order;
-                var sorted_order_as_list = Object.keys(order).sort(function (x, y) {
-                    var x_s = x.split(/\D/g);
-                    var y_s = y.split(/\D/g);
-                    var x_i_as_number;
-                    var y_i_as_number;
-                    for (var i = 0; i < x_s.length; i++) {
-                        x_i_as_number = to_number(x_s[i]);
-                        y_i_as_number = to_number(y_s[i]);
-                        if (x_i_as_number < y_i_as_number) {
-                            return -1;
-                        } else if (x_i_as_number > y_i_as_number) {
-                            return 1;
-                        }
-                    }
-                    return 0;
-                });
+                var sorted_order_as_list = Object.keys(order).sort(sentence_sort);
                 var mode_name;
                 var chapter_and_question;
                 var img_class = ["progress_image", 'hoverable_mod'];
