@@ -373,7 +373,7 @@ MFModeGame.prototype.log_data_to_firebase = function () {
         // 'target': this.correct_answer,
         'target': display_model_translation(this.correct_answer),
         'given': this.student_answer,
-        // 'score': this.match_fraction + '%'
+        'score': this.match_fraction
     };
     
     getting(['mf_translation_logs', this.quiz.user.get_personal_data('name'),
@@ -390,7 +390,7 @@ MFModeGame.prototype.log_data_to_firebase = function () {
             x.attempts = [];
         }
         
-        x.attempts.push(data_to_log.given);
+        x.attempts.push(data_to_log.score + ', ' + data_to_log.given);
         
         return x;
     }, {'global': true, 'vivify': true,
