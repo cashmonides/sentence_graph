@@ -3,6 +3,8 @@
 
 var quiz = null;
 
+var IN_PRODUCTION_SWITCH = true;
+
 // window.onbeforeunload = function () {
 //     alert("window close triggered");
 //     user_data.logout()
@@ -444,7 +446,7 @@ Quiz.prototype.next_mode = function (error) {
     if (this.user.is_mf()) {
         var modes_map = {
             'translate': MFModeGame,
-            'syntax': SyntaxModeGame
+            'analysis': SyntaxModeGame
         }
         var current_mode = modes_map[this.id.mode];
         console.log('current mode =', current_mode);
@@ -581,16 +583,31 @@ Quiz.prototype.question_complete = function (button_name) {
         console.log("DEBUG 4-9 quiz.next_question triggered");
         if (this.game.get_mode_name() === 'mf' ||
         (this.game.get_mode_name() === 'syntax' && this.game.on_last_region())) {
-            this.log_sentence();
-            var ajax_callback;
+            var general_callback;
             if (button_name === "skip_button") {
-                ajax_callback = function () {return_to_profile()};
+                general_callback = function () {return_to_profile()};
             } else {
-                ajax_callback = function () {};
+                general_callback = function () {};
                 el('submit_button').innerHTML = 'back to profile';
                 el('submit_button').onclick = return_to_profile;
             }
-            this.mf_sql_completed_log(ajax_callback);
+            var self = this;
+            var count = 0;
+            var callbacks_created = 0;
+            var working_callback = function () {
+                count++;
+                if (count === callbacks_created) {
+                    general_callback();
+                }
+            }
+            var make_callback = function (method) {
+                callbacks_created++;
+                self[method](working_callback);
+            }
+            make_callback('log_sentence');
+            if (IN_PRODUCTION_SWITCH) {
+                make_callback('mf_sql_completed_log');
+            }
         } else {
             this.next_question();
         }
@@ -615,12 +632,12 @@ Quiz.prototype.get_mf_game_status = function () {
     }
 }
 
-Quiz.prototype.log_sentence = function () {
+Quiz.prototype.log_sentence = function (callback) {
     var sentence_finder = this.game.sentence_finder();
     var status = this.get_mf_game_status();
     console.log('DEBUG 5/23 checkpoint 4 skipped before',
     sentence_finder);
-    this.user.log_sentences(sentence_finder, status, this.game.get_mode_name());
+    this.user.log_sentences(sentence_finder, status, this.game.get_mode_name(), callback);
     console.log('DEBUG 5/23 checkpoint 5 skipped after',
     sentence_finder);
 }

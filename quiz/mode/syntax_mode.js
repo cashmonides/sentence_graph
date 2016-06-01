@@ -167,24 +167,7 @@ var convert_syntax_data_to_drop_down_data = function (data) {
         }
     });
     
-    return r.sort(function (x, y) {
-        if (x.pos === 'verb' && y.pos === 'noun') {
-            return -1
-        } else if (x.pos === 'noun' && y.pos === 'verb') {
-            return 1;
-        };
-        var a = x.target_indices[0];
-        var b = y.target_indices[0];
-        if (a < b) {
-            return -1;
-        } else if (a > b) {
-            return 1;
-        } else if (a === b) {
-            return 0;
-        } else {
-            throw 'Impossible ordering!'
-        }
-    });
+    return r.sort(region_sort);
 }
 
 var get_sentence_from_firebase = function (chapter_n, question_n, fn) {
@@ -507,13 +490,16 @@ SyntaxModeGame.prototype.process_correct_answer = function () {
     var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_right) + '<br><br>' +
     'The syntax of <em>' + relevant_data.target_indices.map(function (index) {
         return relevant_data.words[index];
-    }).join(' ') + '</em> is:<br>' + syntax_info;
+    }).join(' ') + '</em> is:<br>' + syntax_info + '<br>&nbsp;';
     var fbox = el("feedbackbox");
     el('questionbox').innerHTML = '';
     fbox.innerHTML = cell_1;
     
     
     // console.log("DEBUG 5-29 checkpoint 1");
+    if (this.on_last_region()) {
+        this.quiz.word_selector.clear();
+    }
     
     this.remove_drop_downs();
 

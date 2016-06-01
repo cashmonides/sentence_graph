@@ -363,6 +363,42 @@ MFModeGame.prototype.next_question = function () {
     
 };
 
+MFModeGame.prototype.log_data_to_firebase = function () {
+    var data_to_log = {
+        // 'chapter': this.current_chapter,
+        // 'question': this.current_question,
+        // 'username': this.quiz.user.get_personal_data('name'),
+        // 'email': this.quiz.user.get_personal_data('email'),
+        'latin': this.sentence,
+        // 'target': this.correct_answer,
+        'target': display_model_translation(this.correct_answer),
+        'given': this.student_answer,
+        // 'score': this.match_fraction + '%'
+    };
+    
+    getting(['mf_translation_logs', this.quiz.user.get_personal_data('name'),
+    this.current_chapter + '-' + this.current_question], function (x) {
+        if (!('latin' in x)) {
+            x.latin = data_to_log.latin;
+        }
+        
+        if (!('target' in x)) {
+            x.target = data_to_log.target;
+        }
+        
+        if (!('attempts' in x)) {
+            x.attempts = [];
+        }
+        
+        x.attempts.push(data_to_log.given);
+        
+        return x;
+    }, {'global': true, 'vivify': true,
+    'save_result': true, 'transform_null': true})();
+    
+    console.log('data_to_log =', data_to_log);
+}
+
 
 //todo below is our string cleanup and matcher
 
@@ -383,7 +419,9 @@ MFModeGame.prototype.process_answer = function(){
    
    
    
-   
+    // No matter what, we want to log this data to firebase.
+    this.log_data_to_firebase();
+    
     if (this.match_fraction >= 75) {
         this.process_correct_answer();
     } else {

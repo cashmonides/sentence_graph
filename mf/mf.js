@@ -281,7 +281,7 @@ var mf_sentences = {
 	"18.11": ["Sī carmina illīus poētae audīsset, ea magnī habuisset.", "If he/she-had-heard the-songs/poems of-that-poet, he/she-would-have-considered {them||those-things} of-great-(value)."],
 	"18.12": ["Pollicitus est sē Rōmam properātūrum esse; aliōs illūc iam properāsse.", "He-promised that he would-hasten to-Rome, (that) others already had hastened {to-there||to-that-place}."],
 	"18.13": ["Carmina Paulus emit, recitat sua carmina Paulus. Nam quod emās possīs iūre vocāre tuum. (Martial 2.20)", "Paulus buys poems/songs, Paulus recites his-own poems/songs. For what you-buy you might be-able to call your-own {by-right||rightfully}."],
-	"18.14": ["Quis autem eum magnī dūcat quem multum metuat vel a quō sē metuī putet?", "Who, moreover, considers of great (value) that man whom he fears {much||a-lot} or by whom he thinks that he (himself) is-feared."],
+	"18.14": ["Quis autem eum magnī dūcat quem multum metuat vel a quō sē metuī putet?", "Who, however/moreover, considers of great (value) that man whom he fears {much||a-lot} or by whom he thinks that he (himself) is-feared."],
 	"18.16": ["Mors tam mihi grāta est ut, quō propius ad eam accēdam, quasi terram vidēre videar post longum in nāve iter.", "Death is so pleasing to me {with-the-result-that||that} the-closer I approach to/toward {that-thing-(death)||it}, I-seem/appear as-if to-see land/earth after a-long-journey in-a-ship/boat."]
     
 }

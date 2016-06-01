@@ -535,13 +535,46 @@ function global_submit_sentence(){
     }
 }
 
+var generate_tag_report = function (tag) {
+    tag = tag.type;
+    if (tag.indexOf('=') === -1) {
+        return tag;
+    } else {
+        return tag_first_to_type[tag.split('=')[0]] + '=' + tag.split('=')[1];
+    };
+}
+
+var generate_region_report = function (x, sentence_words) {
+    console.log(x);
+    return x.indices.map(function (i) {return sentence_words[i]}).join(' ')
+    + ': ' + x.tags.map(generate_tag_report).join(', ');
+}
+
+var generate_all_regions_report = function (sentence_regions, sentence_words) {
+    return sentence_regions.sort(raw_region_sort).map(with_tags).
+    filter(has_tags).map(function (x) {
+        return generate_region_report(x, sentence_words);
+    });
+}
+
 var generate_report_for_sentence = function (sentence_id, sentence) {
     return {
         'sentence': sentence_id.replace(/\D/g, '.'),
         'text': sentence.text,
-        '': ''
+        'tag_map': generate_all_regions_report(sentence.regions, sentence.words)
     }
 }
+
+/*
+Syntax report form, from program notes.
+{
+    sentence: 2.1
+    text: nauta reginam timet
+    tag_map: {
+        nauta: noun, nominative subject
+        timet: verb, present subju.... 
+}
+*/
 
 var generate_syntax_report = function () {
     get_syntax_questions(function (x) {

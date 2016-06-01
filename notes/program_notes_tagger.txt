@@ -29,9 +29,27 @@ SUMMER AGENDA (non-detailed)
 - weekend syntax review
 - morphology training
 
+AGENDA TOMORROW
+- test
+- bugfix
+- sentence checker
+    - puts sentences in own folder in firebase (translation_logs)
+      - chapter    1
+      - question   1
+      - username   John Doe
+      - email      johndoe@gmail.com
+      - latin      Nauta reginam amat.
+      - target     The sailor loves the queen.
+      - given      This game is dumb.
+      - score      0%
+- generate syntax report
+- look for bad data
+    - look for translation sentences that throw an error!!! (if any exist)
 
 
 MF/SYNTAX MODE FUNCTIONALITY NEEDED
+- cosmetics: remove highlights when giving final feedback "excellent, the syntax of x is...." (highlight is just distracting)
+- in tag2: give an alert any time two regions are simultaneously tagged, to prevent human error
 - slightly annioying bug in tagger: if an admin accidentally highlights a word, tries to unhighlight it and highlight another word, bith end upo getting highlighted when it reaches quiz
 - we need an admin function that can pull all the data from firebase - sentence_mf and render it in easily readable form (e.g. if we have someone tagging and we want to proofread their tagging)
     - {
@@ -78,6 +96,8 @@ AGENDA SUNDAY MAY 29th
     - ideally: verb syntax is asked first and then noun syntax
     - but for now if we just go in order of occurence (i.e. index) then that's fine
 - END of ALL DONE section
+
+issue - some sentences seem not to end in a period
 
 
 AGENDA FRIDAY

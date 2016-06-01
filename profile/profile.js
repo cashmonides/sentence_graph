@@ -117,7 +117,7 @@ ProfilePage.build_progress_table = function(user) {
         if (user.is_mf()) {
             var mode_names = {
                 'mf': 'translate',
-                'syntax': 'syntax'
+                'syntax': 'analysis'
             }
             remove_element_by_id('start_game_button');
             remove_element_by_id('improve_button');
@@ -195,7 +195,7 @@ ProfilePage.build_progress_table = function(user) {
                 getting(["history", "sentence_logs"], function (x) {
                     console.log(x);
                     for (var i in x) {
-                        e = el(i.replace(/\bmf$/, 'translate'));
+                        e = el(i.replace(/\bmf$/, 'translate').replace(/\bsyntax$/, 'analysis'));
                         if (e === null) {
                             delete x[i];
                         } else {
@@ -207,7 +207,7 @@ ProfilePage.build_progress_table = function(user) {
                     }
                     console.log(x);
                     user.persist(['history', 'sentence_logs'], x);
-                }, function() {return user})();
+                }, {'get_user': function() {return user}})();
             });
         } else {
             var table = el("table");
