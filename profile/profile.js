@@ -95,6 +95,7 @@ var get_mf_and_syntax_sentences = function (fn) {
     var total_callbacks = 2;
     var callback = function (name) {
         return function (x) {
+            // Note: this only cares about the keys.
             for (var i in x) {
                 if (!(i in sentences)) {
                     sentences[i] = {};

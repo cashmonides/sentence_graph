@@ -195,6 +195,10 @@ SyntaxModeGame.prototype.drop_down_for = function (x) {
     throw 'No ' + x + ' drop down found!';
 };
 
+SyntaxModeGame.prototype.correct_answer_for = function (x) {
+    return this.drop_down_for(x).correct_answer;
+}
+
 var ALL_CONVENTIONS = {
     'relative time': {
         'construction': [
@@ -216,7 +220,7 @@ SyntaxModeGame.prototype.is_against_convention = function (type) {
         if (!(Array.isArray(arbitrary))) {
             arbitrary = [arbitrary];
         }
-        if (arbitrary.indexOf(this.drop_down_for(i).correct_answer) !== -1) {
+        if (arbitrary.indexOf(this.correct_answer_for(i)) !== -1) {
             return true;
         }
     }
@@ -298,9 +302,9 @@ SyntaxModeGame.prototype.process_answer = function() {
         this.process_incorrect_answer();
     } else if (answer_type.is_type('convention')) {
         // Extend this?
-        alert('The convention for purpose clauses, indirect commands, ' +
-        'fear clauses, and prevention clauses is that the verb has ' +
-        'subsequent relative time.');
+        alert('Correct! But remember that the (somewhat arbitrary) convention ' +
+        'for relative time is SUBSEQUENT in ' +
+        this.drop_down_for('construction').correct_answer + 's.');
         this.process_correct_answer();
     } else if (answer_type.is_type('message')) {
         alert(answer_type.get('message'));

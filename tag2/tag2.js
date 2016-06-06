@@ -557,11 +557,12 @@ var generate_all_regions_report = function (sentence_regions, sentence_words) {
     });
 }
 
-var generate_report_for_sentence = function (sentence_id, sentence) {
+var generate_report_for_sentence = function (sentence_id, sentence, id) {
     return {
         'sentence': sentence_id.replace(/\D/g, '.'),
         'text': sentence.text,
-        'tag_map': generate_all_regions_report(sentence.regions, sentence.words)
+        'tag_map': generate_all_regions_report(sentence.regions, sentence.words),
+        'id': id
     }
 }
 
@@ -579,7 +580,7 @@ Syntax report form, from program notes.
 var generate_syntax_report = function () {
     get_syntax_questions(function (x) {
         var d = Object.keys(x).sort(sentence_sort).map(function (i) {
-            return generate_report_for_sentence(i, x[i]);
+            return generate_report_for_sentence(i, x[i].data, x[i].id);
         });
         var text = JSON.stringify(d, null, 4);
         el('syntax_report').innerHTML = text;

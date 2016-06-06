@@ -191,7 +191,7 @@ var get_syntax_questions = function (fn) {
         var sentences = {};
         Object.keys(v).forEach(function (y) {
             var j = JSON.parse(v[y].data);
-            sentences[j.chapter + '/' + j.number] = j;
+            sentences[j.chapter + '/' + j.number] = {'data': j, 'id': y};
         });
         fn(sentences);
     });

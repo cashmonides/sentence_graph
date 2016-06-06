@@ -59,9 +59,9 @@ var mf_sentences = {
 
  	"2.3": ["Nisi fēminae nautās sententiārum dē incolīs dāmnābunt, incolae in prōvinciā nōn labōrābunt.", "{If-the-women-do-not-condemn||unless-the-women-condemn} the-sailors for-their-opinions, the-inhabitants will-not-labor in-the-province."],
 
- 	"2.4": ["Incolae sī fēminās īnsulae dāmnārent, nautae ad terram venīre nōn dubitārent.", "If-the-inhabitants-were-condemning the-women of-the-island, the-sailors would-not-be-hesitating-to-come to/towards/toward-the-land."],
+ 	"2.4": ["Incolae sī fēminās īnsulae dāmnārent, nautae ad terram venīre nōn dubitārent.", "If-the-inhabitants were-condemning the-women of-the-island, the-sailors would-not-be-hesitating to-come to/towards/toward-the-land."],
 
- 	"2.5": ["Incolae sī īnsulae fēminās dāmnāvissent, nautae ad terram venīre nōn dubitāvissent.", "{If-the-inhabitants-of-the-island-had-condemned-the-women||if-the-inhabitants-had-condemned-the-women-of-the-island}, the-sailors-would-not-have-hesitated-to-come to-the-island."],
+ 	"2.5": ["Incolae sī īnsulae fēminās dāmnāvissent, nautae ad terram venīre nōn dubitāvissent.", "If-the-inhabitants had-condemned the-women of-the-island, the-sailors would-not-have-hesitated to-come to-the-land."],
 
  	"2.6": ["Incolae sī īnsulae fēminās īnsidiārum dāmnent, nautae ad prōvinciam venīre nōn dubitent.", "{If-the-inhabitants-of-the-island-should-condemn-the-women||if-the-inhabitants-should-condemn-the-women-of-the-island} (on-a-charge-of) of/for-treachery/treacheries, the-sailors-would-not-hesitate-to-come to/towards-the-province."],
 
@@ -90,8 +90,9 @@ var mf_sentences = {
  	"2.24": ["Sub lūnā labōrāverāmus.", "We-had-labored under-the-moon."], 
 
  	"2.27": ["Vīta rēgīnae nihil dedit nisī glōriam fāmamque.", "Life-gave-nothing to-the-queen {except||if-not} glory and fame."],
-
- 	"2.28": ["Puellāsne dē morā nautārum monuistī? Puellās monui, sed nīl timent.", "{Did-you-warn||you-warned} the-girls concerning/about-the-delay of-the-inhabitants."],
+ 	
+ 	// Bad data.
+ 	// "2.28": ["Puellāsne dē morā nautārum monuistī? Puellās monui, sed nīl timent.", "{Did-you-warn||you-warned} the-girls concerning/about-the-delay of-the-inhabitants."],
 
     "3.1": ["Nautae validī magnā cum cūrā pūgnābant ut incolās īnsulae superārent.", "The-strong-sailors {with-great-care||very-carefully} were-fighting in-order-that-they-might-conquer/overcome the-inhabitants-of-the-island."],
 	

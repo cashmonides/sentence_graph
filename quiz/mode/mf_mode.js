@@ -415,7 +415,11 @@ MFModeGame.prototype.process_answer = function(){
     var processed_model_translation = clean_mf_model_string(this.correct_answer)
     */
     
-    this.match_fraction = percentage(get_match_fraction(this.correct_answer, raw_input_string), 1);
+    var match_fraction = get_match_fraction(this.correct_answer, raw_input_string);
+    
+    this.match_fraction = percentage(match_fraction.score, 1);
+    
+    this.incorrect_indices = match_fraction.incorrect;
    
    
    
@@ -430,7 +434,19 @@ MFModeGame.prototype.process_answer = function(){
 };
 
 
-
+var display_student_answer = function (text, red_indices) {
+    var l = [];
+    var item;
+    for (var i = 0; i < text.length; i++) {
+        if (i in red_indices) {
+            item = '<span style="color:red">' + text[i] + '</span>';
+        } else {
+            item = text[i];
+        }
+        l.push(item);
+    }
+    return l.join('');
+}
 
 
 //todo below is uncomplicated, just like every other mode
@@ -456,7 +472,8 @@ MFModeGame.prototype.process_correct_answer = function () {
     var cell_1 = "Excellent, your match score was: " + this.match_fraction + "%" + "<br\/>" 
     + "SENTENCE: " + this.sentence + "<br\/>" 
     + "MODEL TRANSLATION: " + display_model_translation(this.correct_answer) + "<br\/>"
-    + "YOUR TRANSLATION: " + this.student_answer  + "<br\/>";
+    + "YOUR TRANSLATION: " + display_student_answer(
+        this.student_answer, this.incorrect_indices)  + "<br\/>";
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
     el('questionbox').innerHTML = '';
@@ -473,7 +490,17 @@ MFModeGame.prototype.process_incorrect_answer = function () {
     
     this.quiz.submodule.incorrect_streak++;
     
-    var cell_1 = "Not exactly. Your match fraction is: " + this.match_fraction + "%";
+    var helpful_message;
+    
+    if (Object.keys(this.incorrect_indices).length === 0) {
+        helpful_message = ' [Looking good but you seem to have some words missing. Try agin.]';
+    } else {
+        helpful_message = '';
+    }
+    
+    var cell_1 = "Not exactly. Your match fraction is: " + this.match_fraction + "%<br\/>" +
+    "Your translation was: " + display_student_answer(
+        this.student_answer, this.incorrect_indices)  + helpful_message + "<br\/>";
     var cell_3 = "Try to get above 75%.";
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1 + " " + cell_3;

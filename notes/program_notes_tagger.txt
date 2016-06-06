@@ -29,6 +29,61 @@ SUMMER AGENDA (non-detailed)
 - weekend syntax review
 - morphology training
 
+AGENDA SUNDAY
+- talk
+    - students???
+    - game usage
+        - brief look at databases
+
+- actions for monday morning
+    - what will the students be doing???
+    - should dan introduce himself to them???
+
+- test
+
+- issues students are having
+- how much students are playing
+
+- highlight bad parts of translation
+- old tranlations???
+   - go through them
+   - reform them
+- notation???
+   - leave it until later???
+- down-the-road translation issues
+   - clauses
+   - nested constituents
+
+- other conventions
+- easy to add convention???
+
+
+DOWN THE ROAD:
+- some clauses should be given very specific exceptions
+    - num est periculum ne quis putet
+    - could be both fear clause & substantive ut
+    - convention is : fear clause
+    - 
+    - perhaps solve this in tagger with something like a "supplemental submit" button
+
+
+DONE
+- generate syntax report should also give the unique id by which the firebase record is stored (e.g. KJCxxWV3LLod8bPov07)
+    - motivation: if we are reading a syntax log report, and we find a bad record, it's nearly 
+                impossible to find it in firebase without knowing its unique id
+    - we want something like this:
+    
+       {
+        "sentence": "17.27",
+        "firebase_id": KJCxxWV3LLod8bPov07
+        "text": "Veritus est nē vēnārī nōn posset.",
+        "tag_map": [
+            "posset: verb, tense=imperfect, mood=subjunctive, construction=fear clause, sequence=secondary, relative time=simultaneous time"
+        ]
+    }
+
+
+
 AGENDA TOMORROW
 - test
 - bugfix
