@@ -124,16 +124,16 @@ var syntax_module_filter = {
 			"present optative - wish capable of fulfillment": 12,
 			"present optative - wish incapable of fulfillment": 12,
 			"past optative - wish incapable of fulfillment": 12
-			},
+	    },
         "sequence": {
-            	"primary": 2,
-            	"secondary": 2
-            },
+        	"primary": 2,
+        	"secondary": 2
+        },
         "relative time" : {
-            	"simultaneous time": 2,
-            	"prior time": 2, 
-            	"subsequent time": 2, 
-            	"breaking sequence to emphasize actuality of result": 14
-            }
+        	"simultaneous time": 2,
+        	"prior time": 2, 
+        	"subsequent time": 2, 
+        	"breaking sequence to emphasize actuality of result": 14
+         }
     }
 }

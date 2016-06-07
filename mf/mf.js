@@ -13,7 +13,7 @@ var mf_sentences = {
 
 	"1.7" : ["Fēminās in viīs vidēbātis, sed dē fōrmā nōn clāmābātis. Poenās dabitis.", "You-(plural)-were-seeing the women in/on-the-roads but concerning/about-their-beauty you-(plural)-were-not-shouting. You-(plural)-will-pay-the-penalty."],
 
-	"1.8" : ["Poētae rēgīnam patriae ē turbā fēminārum optant.", "The poets do-not-want/choose a queen-of/for-the-country/homeland {from||out-of}-the-crowd-of-women."],
+	"1.8" : ["Poētae rēgīnam patriae ē turbā fēminārum optant.", "The poets want/choose a queen-of/for-the-country/homeland {from||out-of}-the-crowd-of-women."],
 
 	"1.9" : ["Est cūra dē poenā poētae.", "There-is-anxiety/concern about/concerning-the-penalty-of-the-poet."],
 
@@ -75,7 +75,7 @@ var mf_sentences = {
 
  	"2.12": ["Sī nautae noxās ā puellīs pepulissent, et glōriam et fāmam cēpissent.", "If-the-sailors-had-pushed the-injuries {from/away-from} the-girls, they-would-have-seized/captured both-glory-and-fame."],
 
- 	"2.13": ["Dē nātūrā animae nec cum poēta sēnseram nec sententiam mūtāre optāveram.", "Concerning the-nature-of-the-soul, I-had-wanted/chosen neither to-agree-with-the-poet nor (had-I-wanted) to-change-my/his-opinion"],
+ 	"2.13": ["Dē nātūrā animae nec cum poētā sēnseram nec sententiam mūtāre optāveram.", "Concerning the-nature-of-the-soul, I-had-wanted/chosen neither to-agree-with-the-poet nor (had-I-wanted) to-change-my/his-opinion"],
 
  	"2.14": ["Terram sī poētae incoluissent, nautās ē prōvinciā expulissent et nātūram patriae mūtāvissent.", "{If-the-poets-had-inhabited-the-earth/land||If-they-had-inhabited-the-land/earth-of-the-poet}, they-would-have-expelled the-sailors {out-of||from}-the-province."],
 

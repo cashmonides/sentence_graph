@@ -60,6 +60,10 @@ SyntaxModeGame.prototype.on_last_region = function () {
     return this.data.length - 1 === this.region_number;
 }
 
+SyntaxModeGame.prototype.chapter_and_question = function () {
+    return this.current_chapter + '.' + this.current_question;
+}
+
 SyntaxModeGame.prototype.next_question = function () {
     if (this.data && this.on_last_region()) {
         return_to_profile();
@@ -187,6 +191,9 @@ SyntaxModeGame.prototype.make_drop_downs = function () {
 };
 
 SyntaxModeGame.prototype.drop_down_for = function (x) {
+    if (x === undefined || x === null) {
+        throw 'Cannot try to find drop down with header "' + x + '".';
+    }
     for (var i = 0; i < this.drop_downs.length; i++) {
         if (this.drop_downs[i].type === x) {
             return this.drop_downs[i];
@@ -199,32 +206,30 @@ SyntaxModeGame.prototype.correct_answer_for = function (x) {
     return this.drop_down_for(x).correct_answer;
 }
 
-var ALL_CONVENTIONS = {
-    'relative time': {
-        'construction': [
-            'purpose clause',
-            'indirect command',
-            'fear clause',
-            'prevention clause'
-        ]
-    },
+SyntaxModeGame.prototype.selected_answer_for = function (x) {
+    return selected_option(this.drop_down_for(x).e);
+}
+
+SyntaxModeGame.prototype.get_convention_info = function (type) {
+    return {
+        'type': type,
+        'correct': this.correct_answer_for(type),
+        'given': this.selected_answer_for(type),
+        'get_drop_down_correct': this.correct_answer_for.bind(this),
+        'sentence': this.chapter_and_question()
+    }
 }
 
 SyntaxModeGame.prototype.is_against_convention = function (type) {
-    if (!(type in ALL_CONVENTIONS)) {
+    var info = this.get_convention_info(type);
+    var result = conventions_matched(info);
+    
+    if (result.length > 0) {
+        this.conventions_broken[type] = result;
+        return true;
+    } else {
         return false;
     }
-    var conventions = ALL_CONVENTIONS[type];
-    for (var i in conventions) {
-        var arbitrary = conventions[i];
-        if (!(Array.isArray(arbitrary))) {
-            arbitrary = [arbitrary];
-        }
-        if (arbitrary.indexOf(this.correct_answer_for(i)) !== -1) {
-            return true;
-        }
-    }
-    return false;
 }
 
 SyntaxModeGame.prototype.correct_type = function (given, correct, type) {
@@ -294,17 +299,50 @@ SyntaxModeGame.prototype.check_correctness = function () {
     }
 }
 
+SyntaxModeGame.prototype.pre_process_answer = function () {
+    this.conventions_broken = {};
+}
+
+SyntaxModeGame.prototype.alert_convention_broken = function (name, times) {
+    var convention = ALL_CONVENTIONS[name];
+    var init_string;
+    if (times === 0) {
+        init_string = 'Correct! But ';
+    } else {
+        init_string = 'Also, '
+    }
+    var self = this;
+    var message = init_string + convention.message.split(/\b/g).map(function (x) {
+        if (verb_drop_down_types.indexOf(x) !== -1) {
+            return self.correct_answer_for(x);
+        } else {
+            return x;
+        }
+    }).join('').replace(/[@~]/g, '');
+    alert(message);
+}
+
+SyntaxModeGame.prototype.display_broken_convention_alerts = function () {
+    var times_alerted = 0;
+    var type;
+    for (var i = 0; i < verb_drop_down_types.length; i++) {
+        type = verb_drop_down_types[i];
+        if (type in this.conventions_broken) {
+            this.alert_convention_broken(this.conventions_broken[type], times_alerted);
+            times_alerted++;
+        }
+    }
+}
+
 SyntaxModeGame.prototype.process_answer = function() {
+    this.pre_process_answer();
     var answer_type = this.check_correctness();
     if (answer_type.is_type('correct')) {
         this.process_correct_answer();
     } else if (answer_type.is_type('incorrect')) {
         this.process_incorrect_answer();
     } else if (answer_type.is_type('convention')) {
-        // Extend this?
-        alert('Correct! But remember that the (somewhat arbitrary) convention ' +
-        'for relative time is SUBSEQUENT in ' +
-        this.drop_down_for('construction').correct_answer + 's.');
+        this.display_broken_convention_alerts();
         this.process_correct_answer();
     } else if (answer_type.is_type('message')) {
         alert(answer_type.get('message'));

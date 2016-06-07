@@ -466,10 +466,24 @@ MFModeGame.prototype.process_correct_answer = function () {
     
     this.quiz.increment_score();
     
+    var helpful_message;
+    
+    if (this.match_fraction === 100) {
+        if (Object.keys(this.incorrect_indices).length === 0) {
+            helpful_message = '<br\/>';
+        } else {
+            helpful_message = '<br\/>[But part of your answer isn\'t in the correct translation!]<br\/>';
+        }
+    } else {
+       if (Object.keys(this.incorrect_indices).length === 0) {
+            helpful_message = '<br\/>[There are still some missing words, though.]<br\/>';
+        } else {
+            helpful_message = '<br\/>[But some of your translation is incorrect!]<br\/>';
+        }
+    }
     
     
-    
-    var cell_1 = "Excellent, your match score was: " + this.match_fraction + "%" + "<br\/>" 
+    var cell_1 = "Excellent, your match score was: " + this.match_fraction + "%" + helpful_message
     + "SENTENCE: " + this.sentence + "<br\/>" 
     + "MODEL TRANSLATION: " + display_model_translation(this.correct_answer) + "<br\/>"
     + "YOUR TRANSLATION: " + display_student_answer(
@@ -493,7 +507,7 @@ MFModeGame.prototype.process_incorrect_answer = function () {
     var helpful_message;
     
     if (Object.keys(this.incorrect_indices).length === 0) {
-        helpful_message = ' [Looking good but you seem to have some words missing. Try agin.]';
+        helpful_message = ' [Looking good but you seem to have some words missing. Try again.]';
     } else {
         helpful_message = '';
     }
