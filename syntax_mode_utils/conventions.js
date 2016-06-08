@@ -21,7 +21,33 @@ var ALL_CONVENTIONS = {
         'applicable': ['17.26'],
         'message': 'although this clause could be considered ' +
         'a substantive ut clause, we arbitrarily consider it a fear clause.'
-    }
+    },
+    'independent subjunctive convention - jussive': {
+        'construction': [
+            'jussive',
+            'present potential',
+            'present deliberative',
+            'present optative - wish capable of fulfillment'
+        ],
+        'correct': 'jussive',
+        'arbitrarily incorrect': ['present potential', 'present deliberative', 'present optative - wish capable of fulfillment'],
+        'applicable': ['12.1'],
+        'message': 'Yes that seems to work but although $construction is a possible solution, it also works nicely as a @construction.' 
+    },
+    'independent subjunctive convention - potential': {
+        'construction': [
+            'present optative - wish capable of fulfillment',
+            'present potential',
+            'jussive',
+            // 'present potential',
+            'present deliberative',
+            // 'present optative - wish capable of fulfillment'
+        ],
+        'correct': 'present optative - wish capable of fulfillment',
+        'arbitrarily incorrect': ['jussive', 'present deliberative', 'present potential'],
+        'applicable': ['12.4'],
+        'message': 'Yes, that is technically possibly but it works better as a @construction.' 
+    },
 }
 
 var get_type_of_convention = function (convention, name) {

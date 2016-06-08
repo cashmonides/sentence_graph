@@ -324,20 +324,18 @@ SyntaxModeGame.prototype.pre_process_answer = function () {
 
 SyntaxModeGame.prototype.alert_convention_broken = function (name, times) {
     var convention = ALL_CONVENTIONS[name];
+    /*
     var init_string;
     if (times === 0) {
         init_string = 'Correct! But ';
     } else {
         init_string = 'Also, '
     }
+    */
     var self = this;
-    var message = init_string + convention.message.split(/\b/g).map(function (x) {
-        if (verb_drop_down_types.indexOf(x) !== -1) {
-            return self.correct_answer_for(x);
-        } else {
-            return x;
-        }
-    }).join('').replace(/[@~]/g, '');
+    var message = convention.message.replace(
+        /@(\w+)/g, function (x) {return self.correct_answer_for(x.slice(1))}).replace(
+        /\$(\w+)/g, function (x) {return self.selected_answer_for(x.slice(1))}).replace(/~/g, '');
     alert(message);
 }
 
