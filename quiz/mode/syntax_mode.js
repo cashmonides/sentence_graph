@@ -194,6 +194,9 @@ SyntaxModeGame.prototype.drop_down_for = function (x) {
     if (x === undefined || x === null) {
         throw 'Cannot try to find drop down with header "' + x + '".';
     }
+    if (typeof x === 'object') {
+        throw 'Cannot find drop down with a type that is an object.';
+    }
     for (var i = 0; i < this.drop_downs.length; i++) {
         if (this.drop_downs[i].type === x) {
             return this.drop_downs[i];
@@ -263,6 +266,22 @@ SyntaxModeGame.prototype.check_verb_correctness = function () {
         return self.correct_type(selected_option(x.e), x.correct_answer, x.type);
     }));
 }
+
+/*
+SyntaxModeGame.prototype.turn_dropdown_red = function (name) {
+    var d = this.drop_down_for(name).e;
+    
+    console.log(d);
+    
+    var v = d.options[d.selectedIndex];
+    
+    v.style.color = 'red';
+    
+    if (v.indexOf('<') === -1) {
+        d.options[d.selectedIndex].innerHTML = redden(v);
+    }
+}
+*/
 
 SyntaxModeGame.prototype.check_noun_dropdowns = function () {
     var num_selected = this.drop_downs.filter(function (x) {
@@ -374,9 +393,11 @@ SyntaxModeGame.prototype.process_correct_answer = function () {
     
     var syntax_info;
     
+    var self = this;
+    
     if (this.current_pos() === 'verb') {
         syntax_info = this.drop_downs.map(function (x) {
-            return x.type.toUpperCase() + ': ' + x.correct_answer || x.non_drop_text;
+            return x.type + ': ' + self.correct_answer_for(x.type);
         }).join('<br>')
     } else if (this.current_pos() === 'noun') {
         syntax_info = this.relevant_drop_downs()[0].correct_answer;
@@ -412,18 +433,44 @@ SyntaxModeGame.prototype.process_incorrect_answer = function () {
         console.log("DEBUG if not triggered");
     }
     
+    var self = this;
+    
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
         console.log("DEBUG entering 3rd random_choice");
         
         var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_wrong);
         var cell_3 = random_choice(SyntaxModeGame.cell_3_feedback_wrong);
         
-        
+        var syntax_info;
+        var pre_text;
+    
+        if (this.current_pos() === 'verb') {
+            pre_text = 'Your answers:';
+            syntax_info = this.drop_downs.map(function (x) {
+                var text =  x.type.toUpperCase() + ': ' + selected_option(x.e);
+                
+                if (self.correct_type(selected_option(x.e), x.correct_answer, x.type).is_type('correct')) {
+                    return text;
+                } else {
+                    return redden(text);
+                }
+            }).join('<br>')
+        } else if (this.current_pos() === 'noun') {
+            pre_text = 'Your answer:';
+            syntax_info = redden(this.drop_downs.map(function (x) {
+                if (x.e.selectedIndex === 0) {
+                    return '';
+                } else {
+                    return selected_option(x.e);
+                }
+            }).join(''));
+        }
         
         console.log("DEBUG leaving 3rd random_choice");
         
         var fbox = el("feedbackbox");
-        fbox.innerHTML = cell_1 + " " + cell_3;
+        fbox.innerHTML = cell_1 + ' ' + cell_3 + '</br\/></br\/>' + pre_text + '</br\/>'
+        + syntax_info + '</br\/>';
     } else {
         this.give_away_answer();
     }

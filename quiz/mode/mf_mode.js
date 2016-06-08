@@ -439,7 +439,7 @@ var display_student_answer = function (text, red_indices) {
     var item;
     for (var i = 0; i < text.length; i++) {
         if (i in red_indices) {
-            item = '<span style="color:red">' + text[i] + '</span>';
+            item = redden(text[i]);
         } else {
             item = text[i];
         }
