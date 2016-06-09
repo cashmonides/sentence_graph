@@ -101,7 +101,8 @@ SyntaxModeGame.prototype.real_next_question = function (data) {
     
     this.question = data.question;
     this.sentence = data.sentence;                 // text displayed in display box
-    this.target_indices = data.target_indices;      // highlighted word if necessary
+    // We get rid of this to make sure we always get current target indices.
+    // this.target_indices = data.target_indices;      // highlighted word if necessary
 
     
     
@@ -168,12 +169,28 @@ SyntaxModeGame.prototype.real_next_question = function (data) {
     this.make_drop_downs();
 };
 
+SyntaxModeGame.prototype.relevant_data = function () {
+    return this.data[this.region_number];
+}
+
+SyntaxModeGame.prototype.target_indices = function () {
+    return this.relevant_data().target_indices;
+}
+
+SyntaxModeGame.prototype.get_sentence_words = function () {
+    return this.relevant_data().sentence.split(' ');
+}
+
+SyntaxModeGame.prototype.get_asked_words = function () {
+    var words = this.get_sentence_words();
+    return this.target_indices().map(function (x) {return words[x]})
+}
+
 SyntaxModeGame.prototype.highlight_indices = function () {
-    if (this.target_indices) {
-        this.target_indices.forEach(function (x) {
-            this.quiz.word_selector.set_highlighted(x, true);
-        });
-    }
+    var self = this;
+    this.target_indices().forEach(function (x) {
+        self.quiz.word_selector.set_highlighted(x, true);
+    });
 }
 
 SyntaxModeGame.prototype.display = function (x) {
@@ -351,9 +368,64 @@ SyntaxModeGame.prototype.display_broken_convention_alerts = function () {
     }
 }
 
+SyntaxModeGame.prototype.get_attempt_data = function (answer_type) {
+    var r = {
+        'status': answer_type
+    }
+    var t;
+    for (var i = 0; i < this.drop_downs.length; i++) {
+        t = this.drop_downs[i].type;
+        r[t] = {
+            'given': this.selected_answer_for(t),
+            'correct': this.correct_answer_for(t)
+        }
+    }
+    return r;
+}
+
+SyntaxModeGame.prototype.log_data_to_firebase = function (answer_type) {
+    var self = this;
+    
+    var data_to_log = {
+        // 'chapter': this.current_chapter,
+        // 'question': this.current_question,
+        // 'username': this.quiz.user.get_personal_data('name'),
+        // 'email': this.quiz.user.get_personal_data('email'),
+        'text': this.sentence,
+        // 'target': this.correct_answer,
+        'words': this.get_asked_words(),
+        'attempt': this.get_attempt_data(answer_type)
+    };
+    
+    getting(['syntax_logs', this.quiz.user.get_personal_data('name'),
+    this.current_chapter + '-' + this.current_question], function (x) {
+        if (!('text' in x)) {
+            x.text = data_to_log.text;
+        }
+        
+        if (!('words' in x)) {
+            x.words = data_to_log.words;
+        }
+        
+        if (!('attempts' in x)) {
+            x.attempts = [];
+        }
+        
+        x.attempts.push(data_to_log.attempt);
+        
+        return x;
+    }, {'global': true, 'save_result': true, 'transform_null': true})();
+    
+    console.log('data_to_log =', data_to_log);
+}
+
 SyntaxModeGame.prototype.process_answer = function() {
     this.pre_process_answer();
     var answer_type = this.check_correctness();
+    
+    // As in mf mode, we want to log data to firebase.
+    this.log_data_to_firebase(answer_type.text);
+    
     if (answer_type.is_type('correct')) {
         this.process_correct_answer();
     } else if (answer_type.is_type('incorrect')) {
@@ -402,9 +474,10 @@ SyntaxModeGame.prototype.process_correct_answer = function () {
     }
     
     var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_right) + '<br><br>' +
-    'The syntax of <em>' + relevant_data.target_indices.map(function (index) {
-        return relevant_data.words[index];
-    }).join(' ') + '</em> is:<br>' + syntax_info + '<br>&nbsp;';
+    
+    'The syntax of <em>' + this.get_asked_words().join(' ').
+    replace(/[^a-zA-ZāēīōūĀĒĪŌŪ ]/g, '') + '</em> is:<br>' +
+    syntax_info + '<br>&nbsp;';
     var fbox = el("feedbackbox");
     el('questionbox').innerHTML = '';
     fbox.innerHTML = cell_1;
@@ -420,8 +493,6 @@ SyntaxModeGame.prototype.process_correct_answer = function () {
     // console.log("DEBUG 5-29 checkpoint 2");
     this.quiz.question_complete();
 };
-
-
 
 SyntaxModeGame.prototype.process_incorrect_answer = function () {
     this.quiz.submodule.incorrect_streak++;

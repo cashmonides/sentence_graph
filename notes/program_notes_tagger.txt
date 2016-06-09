@@ -29,6 +29,12 @@ SUMMER AGENDA (non-detailed)
 - weekend syntax review
 - morphology training
 
+
+DO RIGHT AWAY
+- change width of input box
+- make return in the input box = hitting submit
+
+
 NOTE
 - allow students to continue after 75%
 

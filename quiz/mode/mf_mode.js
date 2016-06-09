@@ -393,8 +393,7 @@ MFModeGame.prototype.log_data_to_firebase = function () {
         x.attempts.push(data_to_log.score + ', ' + data_to_log.given);
         
         return x;
-    }, {'global': true, 'vivify': true,
-    'save_result': true, 'transform_null': true})();
+    }, {'global': true, 'save_result': true, 'transform_null': true})();
     
     console.log('data_to_log =', data_to_log);
 }

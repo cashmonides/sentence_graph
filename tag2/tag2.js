@@ -586,3 +586,12 @@ var generate_syntax_report = function () {
         el('syntax_report').innerHTML = text;
     });
 }
+
+var generate_syntax_answers_report = function () {
+    getting(['syntax_logs'], function (x) {
+        // More sophisticated in the future.
+        var d = x;
+        var text = JSON.stringify(d, null, 4);
+        el('syntax_report').innerHTML = text;
+    }, {'global': true})();
+}

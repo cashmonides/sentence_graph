@@ -53,7 +53,6 @@ LegalAnswerType.prototype.to_goodness = function () {
 }
 
 var combine_answer_types = function (answer_types) {
-    console.log(answer_types);
     return answer_types.reduce(function (a, b) {
         if (a.to_goodness() < b.to_goodness()) {
             return a;
