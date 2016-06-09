@@ -154,7 +154,7 @@ ProfilePage.build_progress_table = function(user) {
                 console.log(sorted_order_as_list);
                 for (var index = 0; index < sorted_order_as_list.length; index++) {
                     i = sorted_order_as_list[index];
-                    chapter_and_question = i.split(/\D/g);
+                    chapter_and_question = i.split(/[\.\-\/]/g);
                     for (var index2 = 0; index2 < 2; index2++) {
                         j = ['mf', 'syntax'][index2];
                         mode_name = mode_names[j];

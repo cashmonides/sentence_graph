@@ -172,8 +172,10 @@ var get_sentence_from_firebase = function (chapter_n, question_n, fn) {
         var sentences = [];
         Object.keys(v).forEach(function (y) {
             var j = JSON.parse(v[y].data);
-            if (j.language_of_sentence === 'mf' && j.chapter === Number(chapter_n)
-            && j.number === Number(question_n)) {
+            // old code
+            // if (j.language_of_sentence === 'mf' &&)
+            if (j.chapter.toString() === chapter_n.toString()
+            && j.number.toString() === question_n.toString()) {
                 sentences.push(j);
             }
         });

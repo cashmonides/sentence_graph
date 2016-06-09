@@ -515,13 +515,20 @@ function local_submit_sentence(){
 //called by: the submit button on the html page
 function global_submit_sentence(){
     console.log('sentence =', sentence);
-    var sentence_chapter = Number(el("chapter_number_box").value);
-    var sentence_number = Number(el("sentence_number_box").value);
+    var sentence_chapter = el("chapter_number_box").value;
+    var sentence_number = el("sentence_number_box").value;
     if (sentence.language_of_sentence == null) {
         alert("no language specified");
+    /*
     } else if (isNaN(sentence_chapter) || sentence_chapter === 0) {
         alert("no chapter specified");
     } else if (isNaN(sentence_number) || sentence_number === 0) {
+        alert('no sentence number specified');
+    }
+    */
+    } else if (/[\.\-\/]/g.exec(sentence_chapter)) {
+        alert("chapter specified contains dash, period, or slash");
+    } else if (/[\.\-\/]/g.exec(sentence_number)) {
         alert('no sentence number specified');
     } else if (sentence.has_region([])) {
         alert('empty region detected, please do sentence again');
@@ -559,7 +566,7 @@ var generate_all_regions_report = function (sentence_regions, sentence_words) {
 
 var generate_report_for_sentence = function (sentence_id, sentence, id) {
     return {
-        'sentence': sentence_id.replace(/\D/g, '.'),
+        'sentence': sentence_id.replace(/[\.\-\/]/g, '.'),
         'text': sentence.text,
         'tag_map': generate_all_regions_report(sentence.regions, sentence.words),
         'id': id
@@ -587,10 +594,71 @@ var generate_syntax_report = function () {
     });
 }
 
+var get_noun_answer_report = function (x, t) {
+    if (x.given === t.toUpperCase()) {
+        // Now it's presumably just an issue of not selecting anything.
+        if (x.correct === 'not applicable') {
+            return [];
+        } else {
+            return 'correct: ' + x.correct;
+        }
+    } else {
+        if (x.correct === 'not applicable') {
+            return 'given: ' + x.given;
+        } else if (x.correct === x.given) {
+            return 'match: ' + x.correct;
+        } else {
+            return ['correct: ' + x.correct, 'given: ' + x.given];
+        }
+    }
+}
+
+var get_verb_answer_report = function (x) {
+    if (x.given === x.correct) {
+        return 'match: ' + x.correct;
+    } else {
+        return ['correct: ' + x.correct, 'given: ' + x.given];
+    }
+}
+
+var generate_attempt_report = function (x) {
+    var v;
+    if ('tense' in x) {
+        v = verb_drop_down_types.map(function (t) {
+            return get_verb_answer_report(x[t]);
+        });
+    } else if ('nominative' in x) {
+        v = noun_drop_down_types.map(function (t) {
+            return get_noun_answer_report(x[t], t);
+        });
+    } else {
+        v = [];
+    }
+    return ['status: ' + x.status].concat([].concat.apply([], v))
+}
+
+var generate_answer_report_for_one_sentence = function (x, j) {
+    return [
+        'sentence: ' + j,
+        'text: ' + x.text,
+        'words: ' + x.words.join(' '),
+        x.attempts.map(generate_attempt_report)
+    ]
+}
+
 var generate_syntax_answers_report = function () {
     getting(['syntax_logs'], function (x) {
         // More sophisticated in the future.
-        var d = x;
+        var d = {};
+        for (var i in x) {
+            d[i] = [];
+            for (var j in x[i]) {
+                d[i].push(generate_answer_report_for_one_sentence(x[i][j], j))
+            }
+            d[i].sort(function (x, y) {
+                return sentence_sort(x[0].split(' ')[1], y[0].split(' ')[1]);
+            });
+        }
         var text = JSON.stringify(d, null, 4);
         el('syntax_report').innerHTML = text;
     }, {'global': true})();

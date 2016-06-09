@@ -2,7 +2,8 @@ var syntax_module_filter = {
 	"noun_syntax" : {
 		"nominative": {
 			"subject nominative": 1, 
-			"predicate nominative": 1,
+			"predicate nominative": 1
+			// "TESTING NOMINATIVE TESTING": "Caligula"
 		},
     	"genitive": {
     		"genitive of the charge": 2, 
@@ -17,6 +18,7 @@ var syntax_module_filter = {
     		"genitive with causā to express purpose": 17, 
     		"genitive of indefinite value": 18, 
     		"genitive with expression of memory": 18
+    		// "TESTING GENITIVE TESTING": "Caligula"
     	},
     
     	"dative": {
@@ -27,6 +29,7 @@ var syntax_module_filter = {
     		"dative with certain intransitive verbs": 13,
     		"dative with compound verbs": 13, 
     		"dative of reference with an impersonal verb": 16
+    		// "TESTING DATIVE TESTING": "Caligula"
     	},
     	"accusative": {
     		"accusative direct object": 1, 
@@ -43,7 +46,8 @@ var syntax_module_filter = {
     		"accusative of the supine to express purpose": 17, 
     		"adverbial accusative": 18,
     		"accusative direct object of a verb in the middle voice": 18,
-    		"accusative of respect": 18
+    		"accusative of respect": 18,
+    		// "TESTING ACCUSATIVE TESTING": "Caligula"
     	},
     	"ablative": {
     		"ablative of means": 1, 
@@ -66,11 +70,13 @@ var syntax_module_filter = {
     		"ablative of possessive adjective agreeing with ellipsed rē with interest by analogy with rēfert": 16, 
     		"ablative of the supine to express respect": 17, 
     		"ablative of price": 18
+    		// "TESTING ABLATIVE TESTING": "Caligula"
     	},
     	"infinitive": {
     	    "subject infinitive": 1,
     	    "object infinitive": 1,
     	    "complementary infinitive": 2
+    	    // "TESTING INFINITIVE TESTING": "Caligula"
     	}
 	},
 	"verb_syntax" : {
@@ -81,11 +87,13 @@ var syntax_module_filter = {
         	"perfect": 2,
         	"pluperfect": 2,
         	"future_perfect": 2
+        	// "TESTING TENSE TESTING": "Caligula"
         },
 		"mood": {
         	"indicative": 2,
         	"subjunctive": 2,
         	"infinitive": 2
+        	// "TESTING MOOD TESTING": "Caligula"
 		},
 		"construction": {
 		    "indirect statement": 6,
@@ -124,16 +132,19 @@ var syntax_module_filter = {
 			"present optative - wish capable of fulfillment": 12,
 			"present optative - wish incapable of fulfillment": 12,
 			"past optative - wish incapable of fulfillment": 12
+			// "TESTING CONSTRUCTION TESTING": "Caligula"
 	    },
         "sequence": {
         	"primary": 2,
         	"secondary": 2
+        	// "TESTING SEQUENCE TESTING": "Caligula"
         },
         "relative time" : {
         	"simultaneous time": 2,
         	"prior time": 2, 
         	"subsequent time": 2, 
         	"breaking sequence to emphasize actuality of result": 14
+        	// "TESTING RELATIVE TIME TESTING": "Caligula"
          }
     }
 }
