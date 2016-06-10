@@ -2,8 +2,9 @@ var syntax_module_filter = {
 	"noun_syntax" : {
 		"nominative": {
 			"subject nominative": 1, 
-			"predicate nominative": 1
-			// "TESTING NOMINATIVE TESTING": "Caligula"
+			"predicate nominative": 1,
+			"apposition to a subject": "Caligula",
+			"apposition to a predicate": "Caligula",
 		},
     	"genitive": {
     		"genitive of the charge": 2, 
@@ -17,8 +18,8 @@ var syntax_module_filter = {
     		"genitive of the person concerned with interest/rēfert": 16, 
     		"genitive with causā to express purpose": 17, 
     		"genitive of indefinite value": 18, 
-    		"genitive with expression of memory": 18
-    		// "TESTING GENITIVE TESTING": "Caligula"
+    		"genitive with expression of memory": 18,
+    		"epexegetical genitive": "Caligula"
     	},
     
     	"dative": {
@@ -28,8 +29,11 @@ var syntax_module_filter = {
     		"dative of reference with a predicate dative": 8, 
     		"dative with certain intransitive verbs": 13,
     		"dative with compound verbs": 13, 
-    		"dative of reference with an impersonal verb": 16
-    		// "TESTING DATIVE TESTING": "Caligula"
+    		"dative of reference with an impersonal verb": 16,
+    		"dative of possessor of the body part in question": "Caligula",
+    		"dative of purpose not used as a predicate": "Caligula",
+    		"dative of advantage/disadvantage/separation": "Caligula",
+    		"dative of agent in the perfect passive system": "Caligula"
     	},
     	"accusative": {
     		"accusative direct object": 1, 
@@ -47,7 +51,7 @@ var syntax_module_filter = {
     		"adverbial accusative": 18,
     		"accusative direct object of a verb in the middle voice": 18,
     		"accusative of respect": 18,
-    		// "TESTING ACCUSATIVE TESTING": "Caligula"
+    		"predicate accusative of an infinite not in indirect statement": "Caligula"
     	},
     	"ablative": {
     		"ablative of means": 1, 
@@ -69,14 +73,13 @@ var syntax_module_filter = {
     		"ablative of possessive adjective agreeing with rē in rēfert": 16, 
     		"ablative of possessive adjective agreeing with ellipsed rē with interest by analogy with rēfert": 16, 
     		"ablative of the supine to express respect": 17, 
-    		"ablative of price": 18
-    		// "TESTING ABLATIVE TESTING": "Caligula"
+    		"ablative of price": 18,
+    		"ablative of attendant circumstances": "Caligula"
     	},
     	"infinitive": {
     	    "subject infinitive": 1,
     	    "object infinitive": 1,
     	    "complementary infinitive": 2
-    	    // "TESTING INFINITIVE TESTING": "Caligula"
     	}
 	},
 	"verb_syntax" : {
@@ -87,13 +90,11 @@ var syntax_module_filter = {
         	"perfect": 2,
         	"pluperfect": 2,
         	"future_perfect": 2
-        	// "TESTING TENSE TESTING": "Caligula"
         },
 		"mood": {
         	"indicative": 2,
         	"subjunctive": 2,
         	"infinitive": 2
-        	// "TESTING MOOD TESTING": "Caligula"
 		},
 		"construction": {
 		    "indirect statement": 6,
@@ -131,20 +132,21 @@ var syntax_module_filter = {
 			"hortatory": 12,
 			"present optative - wish capable of fulfillment": 12,
 			"present optative - wish incapable of fulfillment": 12,
-			"past optative - wish incapable of fulfillment": 12
-			// "TESTING CONSTRUCTION TESTING": "Caligula"
+			"past optative - wish incapable of fulfillment": 12,
+		    "frequentative subjunctive": "Caligula", // ***"
+			"subordinate clause in virtual indirect statement": "Caligula", // ***"
+			"anticipatory (priusquam/antequam/dum) clause without anticipation due to subjunctivitis": "Caligula"
 	    },
         "sequence": {
         	"primary": 2,
-        	"secondary": 2
-        	// "TESTING SEQUENCE TESTING": "Caligula"
+        	"secondary": 2,
+        	"breaking sequence for repraesentatio": "Caligula"
         },
         "relative time" : {
         	"simultaneous time": 2,
-        	"prior time": 2, 
+        	"prior time": 2,
         	"subsequent time": 2, 
         	"breaking sequence to emphasize actuality of result": 14
-        	// "TESTING RELATIVE TIME TESTING": "Caligula"
          }
     }
 }

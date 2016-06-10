@@ -195,6 +195,7 @@ ProfilePage.build_progress_table = function(user) {
                 }
                 getting(["history", "sentence_logs"], function (x) {
                     console.log(x);
+                    console.log(JSON.stringify(x));
                     for (var i in x) {
                         e = el(i.replace(/\bmf$/, 'translate').replace(/\bsyntax$/, 'analysis'));
                         if (e === null) {

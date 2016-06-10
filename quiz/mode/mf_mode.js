@@ -94,7 +94,13 @@ MFModeGame.prototype.set_chapter = function () {
 // The internals are rather simple. The arguments are converted
 // to numbers so we can easily add to them.
 var SentenceFinder = function (chapter_n, question_n) {
-    this.chapter_n = Number(chapter_n);
+    if (isNaN(chapter_n)) {
+        this.chapter_type = 'string';
+        this.chapter_n = chapter_n;
+    } else {
+        this.chapter_type = 'number';
+        this.chapter_n = Number(chapter_n);
+    }
     this.question_n = Number(question_n);
 }
 
@@ -395,7 +401,7 @@ MFModeGame.prototype.log_data_to_firebase = function () {
         return x;
     }, {'global': true, 'save_result': true, 'transform_null': true})();
     
-    console.log('data_to_log =', data_to_log);
+    // console.log('data_to_log =', data_to_log);
 }
 
 

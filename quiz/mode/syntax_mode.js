@@ -416,7 +416,7 @@ SyntaxModeGame.prototype.log_data_to_firebase = function (answer_type) {
         return x;
     }, {'global': true, 'save_result': true, 'transform_null': true})();
     
-    console.log('data_to_log =', data_to_log);
+    // console.log('data_to_log =', data_to_log);
 }
 
 SyntaxModeGame.prototype.process_answer = function() {
@@ -494,6 +494,10 @@ SyntaxModeGame.prototype.process_correct_answer = function () {
     this.quiz.question_complete();
 };
 
+SyntaxModeGame.prototype.get_give_away_potential = function () {
+    return this.quiz.submodule.incorrect_streak >= this.quiz.module.submodule.max_incorrect_streak;
+}
+
 SyntaxModeGame.prototype.process_incorrect_answer = function () {
     this.quiz.submodule.incorrect_streak++;
     if (this.quiz.submodule.incorrect_streak === 1) {
@@ -504,7 +508,11 @@ SyntaxModeGame.prototype.process_incorrect_answer = function () {
     
     var self = this;
     
-    if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
+    var give_away_potential = this.get_give_away_potential();
+    
+    var refresh_feedback = true;
+    
+    if (refresh_feedback) {
         console.log("DEBUG entering 3rd random_choice");
         
         var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_wrong);
@@ -540,7 +548,9 @@ SyntaxModeGame.prototype.process_incorrect_answer = function () {
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + ' ' + cell_3 + '</br\/></br\/>' + pre_text + '</br\/>'
         + syntax_info + '</br\/>';
-    } else {
+    }
+    
+    if (give_away_potential) {
         this.give_away_answer();
     }
     //todo very important: why is chrome throwing errors at update display in mf & syntax mode while safari doesn't???!!!

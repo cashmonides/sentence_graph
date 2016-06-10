@@ -10,6 +10,39 @@ var test_sentences = [
     
 //     ];
 
+var get_tag_list_maker = function () {
+    var tag_list = null;
+    return function () {
+        if (tag_list === null) {
+            tag_list = [];
+            var s;
+            var item;
+            for (var i = 0; i < noun_drop_down_types.length; i++) {
+                item = noun_drop_down_types[i];
+                s = syntax_module_filter.noun_syntax[item];
+                for (var j in s) {
+                    tag_list.push('n=' + j);
+                }
+            }
+            for (var i = 0; i < verb_drop_down_types.length; i++) {
+                item = verb_drop_down_types[i]
+                s = syntax_module_filter.verb_syntax[item]
+                for (var j in s) {
+                    tag_list.push(item[0] + '=' + j);
+                }
+                if (should_have_non_applicable(item)) {
+                    tag_list.push(item[0] + '=' + 'not applicable');
+                }
+            }
+        }
+        
+        return tag_list;
+    }
+}
+
+var get_tag_list = get_tag_list_maker();
+
+/*
 //a test list with new variables
 var tag_list = [
 // "noun", "verb", "subject", "object", "predicate", "adjective", "adverb", "preposition", "main clause", "subordinate clause", "coordinate clause", "definite article", "indefinite article", "personal pronoun", "subordinating conjunction", "coordinating conjunction", 
@@ -127,6 +160,8 @@ var tag_list = [
 "r=not applicable"
 ];
 
+*/
+
 
 
 var implied_tags = {
@@ -169,7 +204,7 @@ var word_selector = null;
 window.onload = function (){
     //generate_buttons();
     init_drop_downs();
-    generate_tags();
+    // generate_tags();
     // we need a default_text to start with for testing, eventually, we'll replace this with an empty inout box
     new_text(test_sentences[0]);
 }
@@ -246,7 +281,7 @@ var is_a = function (x) {
 }
 
 function options_for (x) {
-    return tag_list.filter(is_a(x)).map(function (y) {return y.slice(2)});
+    return get_tag_list().filter(is_a(x)).map(function (y) {return y.slice(2)});
 }
 
 function init_drop_downs () {
@@ -336,17 +371,19 @@ function submit_tag (tag_type) {
 }
 
 
-
+/*
+// This code seems to be broken or unused. Either way we can comment it.
 //creates the 1st column, a list of tags
 function generate_tags() {
 
-	set_dropdown("tags", tag_list);
+	set_dropdown("tags", get_tag_list());
 
     el("tags").addEventListener("change", function(x){
         generate_regions();
     });
 
 }
+*/
 
 //fills the right hand side of the 2nd column
 function generate_regions() {
@@ -422,6 +459,7 @@ function region_to_text(region){
 function generate_buttons() {
     var e = el("buttons");
     //console.log"tag_list = ", JSON.stringify(tag_list));
+    var tag_list = get_tag_list();
     for (var i = 0; i < tag_list.length; i++) {
         e.innerHTML += "<button onclick=\"submit_tag(" + i + ")\">" + tag_list[i] + "</button>"
     }
@@ -658,6 +696,28 @@ var generate_syntax_answers_report = function () {
             d[i].sort(function (x, y) {
                 return sentence_sort(x[0].split(' ')[1], y[0].split(' ')[1]);
             });
+        }
+        var text = JSON.stringify(d, null, 4);
+        el('syntax_report').innerHTML = text;
+    }, {'global': true})();
+}
+
+var generate_mf_answers_report = function () {
+    getting(['mf_translation_logs'], function (x) {
+        // More sophisticated in the future.
+        var d = {};
+        for (var i in x) {
+            d[i] = [];
+            for (var j in x[i]) {
+                var x_i_j = x[i][j];
+                x_i_j.sentence = j;
+                d[i].push(x_i_j)
+            }
+            /*
+            d[i].sort(function (x, y) {
+                return sentence_sort(x[0].split(' ')[1], y[0].split(' ')[1]);
+            });
+            */
         }
         var text = JSON.stringify(d, null, 4);
         el('syntax_report').innerHTML = text;

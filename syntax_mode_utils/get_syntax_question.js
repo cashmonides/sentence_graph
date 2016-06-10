@@ -119,10 +119,20 @@ var allowed_options_repository = function () {
         if (key in known) {
             return known[key];
         }
-        chapter = Number(chapter);
+        var chapter_type;
+        if (isNaN(chapter)) {
+            chapter_type = 'string';
+        } else {
+            chapter = Number(chapter);
+            chapter_type = 'number';
+        }
         var d = syntax_module_filter[pos + '_syntax'][type];
         var r = [type.toUpperCase()].concat(Object.keys(d).filter(function (x) {
-            return d[x] <= chapter;
+            if (chapter_type === 'number') {
+                return typeof d[x] === 'number' && d[x] <= chapter;
+            } else if (chapter_type === 'string') {
+                return typeof d[x] === 'number' || !is_earlier_author(chapter.split(' ')[0], d[x]);
+            }
         }));
         if (should_have_non_applicable(type)) {
            r.push('not applicable');
@@ -196,6 +206,45 @@ var get_syntax_questions = function (fn) {
             sentences[j.chapter + '/' + j.number] = {'data': j, 'id': y};
         });
         fn(sentences);
+    });
+}
+
+var delete_sentence_from_firebase = function (chapter, number) {
+    Persist.get(['sentence_mf'], function (x) {
+        var v = x.val();
+        var z = null;
+        for (var i in v) {
+            var j = JSON.parse(v[i].data);
+            if (j.chapter === chapter && j.number === number) {
+                z = v[i];
+                delete v[i];
+            }
+        }
+        
+        if (z === null) {
+            throw 'Trying to delete a nonexistant sentence!';
+        }
+        
+        // In case someone malicious finds this function and uses it
+        // but can't figure out how to delete stuff otherwise,
+        // we save the sentences somewhere else.
+        Persist.get(['obsolete_mf'], function (y) {
+            console.log(y, i, z);
+            
+            var w = y.val();
+            
+            if (w === null) {
+                w = {};
+            }
+            
+            w[i] = z;
+            
+            Persist.set(['obsolete_mf'], w);
+        });
+        
+        console.log(v);
+        
+        Persist.set(['sentence_mf'], v);
     });
 }
 
