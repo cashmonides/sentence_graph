@@ -104,6 +104,10 @@ var parse_firebase_syntax_data = function (sentence_data) {
     return regions_with_tags.map(process_region_from_firebase(sentence_data));
 }
 
+var get_author_name = function (x) {
+    return x.split(' ')[0];
+}
+
 var allowed_options_repository = function () {
     var known = {};
     return function (chapter, type, pos) {
@@ -131,7 +135,8 @@ var allowed_options_repository = function () {
             if (chapter_type === 'number') {
                 return typeof d[x] === 'number' && d[x] <= chapter;
             } else if (chapter_type === 'string') {
-                return typeof d[x] === 'number' || !is_earlier_author(chapter.split(' ')[0], d[x]);
+                return typeof d[x] === 'number' ||
+                !is_earlier_author(get_author_name(chapter), get_author_name(d[x]));
             }
         }));
         if (should_have_non_applicable(type)) {

@@ -96,12 +96,22 @@ function enter_anonymous_game() {
     document.location = "../quiz/";
 }
 
+var is_special = function (email) {
+    var email_parts = email.split(/\./)
+    var last_part = peek(email_parts);
+    return last_part in {
+        'test': true,
+        'solo': true,
+        'tag': true,
+        'lls': true
+    }
+}
 
 function initiate_change_password() {
     var e = el("email").value;
     var op = el("old_password").value;
     var np = el("new_password").value;
-    if (e.endsWith(".tag") || e.endsWith(".lls")) {
+    if (is_special(e)) {
         alert("you are using a special account, see Akiva in class to change your password");
         return;
     }
@@ -135,7 +145,7 @@ function reset_password() {
         return;
     } 
     
-    if (email.endsWith(".test") || email.endsWith(".solo")) {
+    if (is_special(email)) {
         alert("you are using a special account, see Akiva in class to change your password");
         return;
     }
@@ -157,10 +167,4 @@ function reset_password() {
     };
 
     Persist.reset_password(email, callback);
-
 }
-
-
-
-
-

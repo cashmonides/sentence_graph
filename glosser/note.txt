@@ -1,0 +1,25 @@
+our method before asking Gio
+    - build a gloss page in sentence graph
+    - connect it to Nicky's python stuff
+    - create a mini database
+    - update website
+    - try to query the mini database
+
+questions to gio
+    - tackling any bugs with the "build glosser as an admin page"
+    - is this a good idea?
+    - can we host it on mediatemple and is that a good idea?
+    -
+
+first step: run it as an admin page in our sentence_graph project?
+    - i.e. just like tag2
+    - what do we need to do differently
+    
+
+
+
+    
+    
+for down the road, what do we need to do to set it up on a different page?
+    - can mediatemple host an entirely different page?
+    - or does it have to be under the same umbrella (bestiary.info)

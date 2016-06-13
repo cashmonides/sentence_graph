@@ -173,7 +173,7 @@ function make_output(level, current_lexicon, none_display) {
         //drop downs that are going to be filled by results     (list of str, e.g. ["subject", "object"])
         creation_by_part_of_speech.push({'part of speech': part_of_speech,
         'sources': new_lexemes.filter(function (x) {
-        return !(begins_with(x, 'double'))}), 'results': things_with_part_of_speech});
+        return !(starts_with(x, 'double'))}), 'results': things_with_part_of_speech});
         // Originally return x.slice(0, 6) !== 'double'}), was here.
     }
 
@@ -509,7 +509,7 @@ function add_to_lexeme_list (
     
     var add_word = function (element, pick_result) {
         master_lexeme_list[element] = pick_result;
-        if (!(begins_with(element, 'double'))) {
+        if (!(starts_with(element, 'double'))) {
             // Originally (element.slice(0, 6) !== 'double')
             master_lexeme_list.dummies_and_used.push(element)
         }

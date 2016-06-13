@@ -313,7 +313,7 @@ var get_constraint = {
     'contain_root': function (question_data) {
         var my_roots;
         var question_type = question_data['question_type'];
-        if (begins_with(question_type, 'root_to')) {
+        if (starts_with(question_type, 'root_to')) {
             my_roots = [question_data['clue']];
         } else if (ends_with(question_type, 'to_root')) {
             my_roots = question_data['choices'];
@@ -336,7 +336,7 @@ question_data, number_of_mandatory) {
         return question_data['choices']
     } else if (mandatory_type === 'choices') {
         return question_data['choices']
-    } else if (begins_with(mandatory_type, 'roots_in_')) {
+    } else if (starts_with(mandatory_type, 'roots_in_')) {
         new_mandatory_type = cut_off(mandatory_type, 'roots_in_');
         var my_words = get_mandatory(new_mandatory_type,
             question_data, number_of_mandatory);

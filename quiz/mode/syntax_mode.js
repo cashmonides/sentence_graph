@@ -370,7 +370,8 @@ SyntaxModeGame.prototype.display_broken_convention_alerts = function () {
 
 SyntaxModeGame.prototype.get_attempt_data = function (answer_type) {
     var r = {
-        'status': answer_type
+        'status': answer_type,
+        'regions_number': this.region_number
     }
     var t;
     for (var i = 0; i < this.drop_downs.length; i++) {

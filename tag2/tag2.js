@@ -659,6 +659,20 @@ var get_verb_answer_report = function (x) {
     }
 }
 
+var get_typical_attempt = function (x) {
+    return x.attempts[0];
+}
+
+var get_drop_down_types = function (x) {
+    if ('tense' in x) {
+        return verb_drop_down_types;
+    } else if ('nominative' in x) {
+        return noun_drop_down_types;
+    } else {
+        return null
+    }
+}
+
 var generate_attempt_report = function (x) {
     var v;
     if ('tense' in x) {
@@ -684,21 +698,46 @@ var generate_answer_report_for_one_sentence = function (x, j) {
     ]
 }
 
+var correct_syntax_report = function (x) {
+    var attempt = get_typical_attempt(x);
+    var g = get_drop_down_types(attempt);
+    if (g !== null) {
+        return g.map(function (x) {
+            if (attempt[x].correct === 'not applicable') {
+                return null
+            } else {
+                return x + ': ' + attempt[x].correct;
+            }
+        }).filter(function (x) {return x !== null}).join(', ');
+    } else {
+        return '';
+    }
+}
+
 var generate_syntax_answers_report = function () {
-    getting(['syntax_logs'], function (x) {
+    /*
+    getting('syntax_logs & sentence_mf', function (x, y) {
         // More sophisticated in the future.
         var d = {};
         for (var i in x) {
-            d[i] = [];
             for (var j in x[i]) {
-                d[i].push(generate_answer_report_for_one_sentence(x[i][j], j))
+                if (!(j in d)) {
+                    d[j] = [];
+                    d[j].push('text: ' + x[i][j].text);
+                    d[j].push('correct: ' + correct_syntax_report(x[i][j]));
+                }
+                d[j].push(generate_answer_report_for_one_sentence(x[i][j], j));
             }
-            d[i].sort(function (x, y) {
-                return sentence_sort(x[0].split(' ')[1], y[0].split(' ')[1]);
-            });
+            // d[i].sort(function (x, y) {
+            //    return sentence_sort(x[0].split(' ')[1], y[0].split(' ')[1]);
+            // });
         }
         var text = JSON.stringify(d, null, 4);
         el('syntax_report').innerHTML = text;
+    }, {'global': true})();
+    */
+    getting('syntax_logs & sentence_mf', function (x, y) {
+        el('syntax_report').innerHTML = JSON.stringify(x, null, 4);
     }, {'global': true})();
 }
 

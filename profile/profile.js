@@ -193,7 +193,7 @@ ProfilePage.build_progress_table = function(user) {
                     console.log(index, i, 'new row')
                     row = make({'tag': "tr"}, table);
                 }
-                getting(["history", "sentence_logs"], function (x) {
+                getting("history|sentence_logs", function (x) {
                     console.log(x);
                     console.log(JSON.stringify(x));
                     for (var i in x) {

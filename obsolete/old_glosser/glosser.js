@@ -136,7 +136,13 @@ var match_text_against_words = function (stem_objects) {
                         start_or_end = value;
                     }
                     start_or_end = convert_for_matching(start_or_end)
-                    if (converted_word[mode + 'sWith'](start_or_end)) {
+                    var fn;
+                    if (mode === 'start') {
+                        fn = starts_with;
+                    } else {
+                        fn = ends_with;
+                    }
+                    if (fn(converted_word, start_or_end)) {
                         best_for_word_and_stem.push({
                             'root': value,
                             'score': word.length - start_or_end.length
