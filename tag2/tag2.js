@@ -632,6 +632,7 @@ var generate_syntax_report = function () {
     });
 }
 
+/*
 var get_noun_answer_report = function (x, t) {
     if (x.given === t.toUpperCase()) {
         // Now it's presumably just an issue of not selecting anything.
@@ -713,6 +714,103 @@ var correct_syntax_report = function (x) {
         return '';
     }
 }
+*/
+
+var get_syntax_attempts = function (answers) {
+    return [].concat.apply([], answers.map(function (x) {
+        return x.attempts.map(function (y) {
+            y.student = x.student;
+            return y;
+        }).filter(function (y) {
+            return y.version === SYNTAX_LOG_VERSION;
+        });
+    }));
+}
+
+var identify_syntax_type = function (x) {
+    if ('tense' in x) {
+        return 'verb';
+    } else if ('nominative' in x) {
+        return 'noun';
+    } else {
+        throw 'Weird drop down type!';
+    }
+}
+
+var log_syntax_attempt_data = function (x) {
+    console.log(x);
+    var s_type = identify_syntax_type(x);
+    var drop_downs;
+    if (s_type === 'verb') {
+        drop_downs = verb_drop_down_types;
+    } else if (s_type === 'noun') {
+        drop_downs = noun_drop_down_types;
+    }
+    var mismatch = [];
+    for (var i = 0; i < drop_downs.length; i++) {
+        var name = drop_downs[i];
+        var item = x[name];
+        if (item.correct !== item.given &&
+        (item.correct !== 'not applicable' ||
+        (item.given.toUpperCase() !== item.given && item.given !== 'not applicable'))) {
+            mismatch.push('given ' + name + ': ' + item.given);
+            mismatch.push('correct '  + name + ': ' + item.correct);
+        }
+    }
+    return ['status: ' + x.status].concat(mismatch);
+}
+
+var log_syntax_student_attempts_data = function (x) {
+    var initial_report = 'student: ' + x.student;
+    var main_report = x.attempts.map(function (x) {
+        return log_syntax_attempt_data(x);
+    });
+    main_report.unshift(initial_report);
+    return main_report;
+}
+
+var separate_by_student = function (attempts) {
+    var d = {};
+    var attempt;
+    for (var i = 0; i < attempts.length; i++) {
+        attempt = attempts[i];
+        if (!(attempt.student in d)) {
+            d[attempt.student] = [];
+        }
+        d[attempt.student].push(attempt);
+    }
+    return Object.keys(d).map(function (x) {
+        return {
+            'student': x,
+            'attempts': d[x]
+        }
+    })
+}
+
+var generate_syntax_part_reports = function (data, attempts) {
+    var initial_report = 'part: ' + data.target_indices.map(function (i) {return data.words[i]}).join(' ');
+    var main_report = separate_by_student(attempts).map(function (x) {
+        return log_syntax_student_attempts_data(x);
+    });
+    main_report.unshift(initial_report);
+    return main_report;
+}
+
+var generate_syntax_sentence_report = function (loc, answers) {
+    var attempts = get_syntax_attempts(answers);
+    if (attempts.length === 0) {
+        return null;
+    }
+    console.log(answers, answers[0].data);
+    return [
+        'chapter and number: ' + loc,
+        'sentence: ' + answers[0].data[0].sentence,
+        'parts:', answers[0].data.map(function (data, i) {
+            return generate_syntax_part_reports(data,
+            attempts.filter(function (x) {return x.region_number === i}));
+        })
+    ];
+}
 
 var generate_syntax_answers_report = function () {
     /*
@@ -736,8 +834,42 @@ var generate_syntax_answers_report = function () {
         el('syntax_report').innerHTML = text;
     }, {'global': true})();
     */
-    getting('syntax_logs & sentence_mf', function (x, y) {
-        el('syntax_report').innerHTML = JSON.stringify(x, null, 4);
+    getting('syntax_logs', function (x) {
+        /*
+        var safer_y = {};
+        
+        var item;
+        
+        for (var i in y) {
+            if (!('data' in y[i] && typeof y[i].data === 'string')) {
+                console.log('issue:', i, y[i]);
+                continue;
+            }
+            item = JSON.parse(y[i].data);
+            item.id = i;
+            safer_y[item.chapter + '-' + item.number] = item;
+        };
+        */
+        
+        var by_sentence = {};
+        for (var i in x) {
+            for (var sentence in x[i]) {
+                if (!(sentence in by_sentence)) {
+                    by_sentence[sentence] = [];
+                }
+                x[i][sentence].student = i;
+                by_sentence[sentence].push(x[i][sentence]);
+            }
+        }
+        
+        console.log(by_sentence);
+        
+        var o = Object.keys(by_sentence).sort(sentence_sort);
+        var d = o.map(function (key) {
+            return generate_syntax_sentence_report(key, by_sentence[key]);
+        }).filter(function (x) {return x !== null});
+        var s = JSON.stringify(d, null, 4);
+        el('syntax_report').innerHTML = s;
     }, {'global': true})();
 }
 

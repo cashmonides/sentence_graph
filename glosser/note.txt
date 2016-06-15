@@ -5,6 +5,20 @@ our method before asking Gio
     - update website
     - try to query the mini database
 
+
+bugs when using this method
+    - still cannot run python file from website
+         - we get it as text which we try to read as JSON
+    - we run chmod 775 glosser/word_db.py
+    - then we type glosser/word_db.py
+    - we get this meesage in terminal:
+            bestiary.info@n11:~/domains/bestiary.info/html$ chmod 755 glosser/word_db.py
+            bestiary.info@n11:~/domains/bestiary.info/html$ glosser/word_db.py
+            Traceback (most recent call last):
+            File "glosser/word_db.py", line 9, in <module>
+            from cltk.stem.lemma import LemmaReplacer
+            ImportError: No module named cltk.stem.lemma
+
 questions to gio
     - tackling any bugs with the "build glosser as an admin page"
     - is this a good idea?
@@ -23,3 +37,272 @@ first step: run it as an admin page in our sentence_graph project?
 for down the road, what do we need to do to set it up on a different page?
     - can mediatemple host an entirely different page?
     - or does it have to be under the same umbrella (bestiary.info)
+
+
+FORMULATED QUESTION (via rubber-duck method)
+Main issue:
+1)
+in the past, we were able to get a python file running (namely sql.py)
+and we were able to get it intpereted as python and not JSON
+
+2) 
+we've seemingly duplicated all the same steps
+but the python file doesn't seem to be run
+
+we get unwanted behavior:
+    - the response to the JSON request is the .py file itself instead of a JSON dictionary
+
+
+and we get an error:
+    - syntax error: JSON parse error: Unrecognized token '#'
+    
+diagnosis of error:
+    - we want the .py file to be run but the program is trying to read the .py file as a JSON file using JSON.parse
+        (JSON.parse is a predefined method in Javascript: e.g. JSON.parse(req.responseText);)
+    - if the .py file is run as a program, it should work
+
+
+what are the differences between successful and unsuccessful?
+    
+    
+    
+    
+CONTROL FLOW
+
+have an index.html in our glosser folder
+on index.html we have a "gloss" button
+and two text boxes (input and output)
+we want a user to be able to:
+- enter a text into input
+- hit "gloss" button
+- query a MYSQL database with a .py file
+- see the results in our output box
+
+more specifically:
+- text gets entered into input box
+- "gloss" button gets clicked
+    - stringifies input box text
+    - send ajax request
+    - callback puts output into output boc
+
+the details of the AJAX request:
+- post function called
+- post function builds XMLHttpRequest (presumably the same as the ajax request)
+- the request's path is the python file's path
+- post function stringifies text and sends the json to the request (thus activating the request)
+
+- request runs python file???
+(presumably the desired but not actual behavior)
+(hypothesis: this is the first step that does not happen)
+
+- python file gets run
+- python queries database with words in input
+- python gets responses
+- python returns response (based on responses from database)
+
+- the AJAX request gets a reply from the python file
+(hypothesis: the reply is actually the text of the python file in our case)
+
+- the ajax request parses the reply
+(hypothesis: this step throws an error)
+
+- the callback takes the parsed reply and puts it in the output box
+
+CLUES
+- there's no console log of response text on bestiary
+- probably because it was commented out in ajax
+
+
+
+RELEVANT CODE
+
+var response_text = req.responseText; // This seems to be the python file.
+// The next four lines just catch the error early.
+// response_text and PYTHON_ERROR are strings.
+if (response_text.slice(0, 6) === '#!/usr') {
+	console.log(response_text);
+	alert(PYTHON_ERROR);
+	throw PYTHON_ERROR;
+}
+// This is where we try to use JSON.parse on the python file.
+var json = JSON.parse(response_text);
+
+
+
+
+what exactly happens?
+we make an ajax request using a file that should have the same effect as ajax
+(ajax_glosser)
+
+
+PROBABLY IRRELEVANT COMMENT #1
+Note this somewhat suspicious line:
+req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+It was in the original, but...
+can we ask for python rather than JSON?
+http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html says:
+server decides what can be returned (but how)???
+end comment
+
+
+
+
+
+ajax request does request a python file
+instead of "../lib/sql.py", "word_db.py"
+since it's in the same folder
+
+what we've tried
+putting the glosser in with the rest of the project
+chmod 775 (with our file)
+.htaccess (in our file's folder)
+- copied and pasted exactly (is this an issue?)
+- actually, I think that if it referenced a file name we changed it
+
+??? python file may have produced an error (not a syntax error) when run normally ???
+- not very relevant because we get the file as a response
+- or is it?
+
+??? is there a path issue ???
+
+potential issue
+we had an old glosser which wasn't doing anything
+but then we removed it
+- actually, we put it in the obsolete folder
+
+exactly what is the case?
+req is defined thus:
+var req = new XMLHttpRequest();
+req.responseText is the python file (or at least very similar)
+
+stackoverflow research
+
+http://stackoverflow.com/questions/20631311/xmlhttprequest-to-python-script-network-error
+situation seems similar
+no answers but two comments (one not very relevant)
+relevant-seeming comment:
+- Also, why are you running your python script as CGI and not using mod_wsgi
+- (or at least mod_python even though using mod_wsgi and a microframework is cleaner)
+what does this mean?
+
+begin comment
+research
+http://stackoverflow.com/questions/3319545/mod-wsgi-mod-python-or-just-cgi
+
+CGI
+- common gateway interface
+- is it related to reading input and printing output? (as in the example given?)
+mod_wsgi
+- compliant with wsgi
+mod_python
+- embed python interpreter in server
+- dead??
+microframework
+- flask
+- just a small framework
+- try flask for our project???
+end comment
+
+http://stackoverflow.com/questions/6056357/python-webkitgtk-xmlhttprequest-file-protocol
+Set the enable-file-access-from-file-uris property on WebView
+but we're not using WebView
+
+a question about authentication (not relevant)
+
+we aren't using cgi (at least explicitly)?
+
+http://stackoverflow.com/questions/13175510/call-python-function-from-javascript-code
+All you need is to make an ajax request to your pythoncode.
+You can do this with jquery http://api.jquery.com/jQuery.ajax/, or use just javascript
+
+$.ajax({
+  type: "POST",
+  url: "~/pythoncode.py",
+  data: { param: text}
+}).done(function( o ) {
+   // do something
+});
+
+$.getJSON('http://example.com/your/webservice?param1=x&param2=y', 
+    function(data, textStatus, jqXHR) {
+        alert(data);
+    }
+)
+You will need to implement a python webservice on the server side.
+
+begin comment
+also said:
+You can run IronPython (kind of Python.Net) in the browser with silverlight,
+but I don't know if NLTK is available for IronPython.
+
+I managed to run NLTK under IronPython 2.02. 
+Here are the steps you need to take (all inlcuding adding missing Python moduled to IronPython):
+subprocess 
+http://www.ironpython.info/index.php/The_subprocess_module 
+(copy to lib folder of IronPython) 
+2.zlib 
+http://bitbucket.org/jdhardy/ironpythonzlib/downloads/ 
+(create "Dlls" and then copy to folder of IronPython) 
+3.gzip 
+http://www.defuze.org/oss/ipextra/gzip.txt 
+(rename to gzip.py , add line : READ, WRITE = 1, 2 and copy to
+lib folder of IronPython + download sharZiplib and copy to "Dlls" folder of IronPython)
+4.Expact 
+http://code.google.com/p/robotframework/issues/detail?id=154
+
+Microsoft Silverlight is a deprecated application framework
+for writing and running rich Internet applications, similar to Adobe Flash.
+
+So there goes that.
+end comment
+
+Better version:
+Main issue:
+our python file is interpreted as JSON
+
+what exactly happens?
+we make an ajax request using a file that should have the same effect as ajax
+(ajax_glosser)
+
+ajax request does request a python file
+instead of "../lib/sql.py", "word_db.py"
+since it's in the same folder
+
+what we've tried
+putting the glosser in with the rest of the project
+chmod 775 (with our file)
+.htaccess (in our file's folder)
+- copied and pasted exactly (is this an issue?)
+- actually, I think that if it referenced a file name we changed it
+
+potential issue
+we had an old glosser which wasn't doing anything
+but then we removed it
+- actually, we put it in the obsolete folder
+
+exactly what is the case?
+req is defined thus:
+var req = new XMLHttpRequest();
+req.responseText is the python file (or at least very similar)
+
+stackoverflow research
+stackkoverflow.com/questions/13175510/call-python-function-from-javascript-code
+All you need is to make an ajax request to your pythoncode.
+You can do this with jquery http://api.jquery.com/jQuery.ajax/, or use just javascript
+
+We haven't tried this yet.
+$.ajax({
+  type: "POST",
+  url: "~/pythoncode.py",
+  data: { param: text}
+}).done(function( o ) {
+   // do something
+});
+
+$.getJSON('http://example.com/your/webservice?param1=x&param2=y', 
+    function(data, textStatus, jqXHR) {
+        alert(data);
+    }
+)
+You will need to implement a python webservice on the server side.
+end comment

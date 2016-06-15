@@ -368,10 +368,13 @@ SyntaxModeGame.prototype.display_broken_convention_alerts = function () {
     }
 }
 
+var SYNTAX_LOG_VERSION = 0.0001;
+
 SyntaxModeGame.prototype.get_attempt_data = function (answer_type) {
     var r = {
         'status': answer_type,
-        'regions_number': this.region_number
+        'region_number': this.region_number,
+        'version': SYNTAX_LOG_VERSION
     }
     var t;
     for (var i = 0; i < this.drop_downs.length; i++) {
@@ -394,8 +397,8 @@ SyntaxModeGame.prototype.log_data_to_firebase = function (answer_type) {
         // 'email': this.quiz.user.get_personal_data('email'),
         'text': this.sentence,
         // 'target': this.correct_answer,
-        'words': this.get_asked_words(),
-        'attempt': this.get_attempt_data(answer_type)
+        'attempt': this.get_attempt_data(answer_type),
+        'data': this.data
     };
     
     getting(['syntax_logs', this.quiz.user.get_personal_data('name'),
@@ -404,8 +407,8 @@ SyntaxModeGame.prototype.log_data_to_firebase = function (answer_type) {
             x.text = data_to_log.text;
         }
         
-        if (!('words' in x)) {
-            x.words = data_to_log.words;
+        if (!('data' in x)) {
+            x.data = data_to_log.data;
         }
         
         if (!('attempts' in x)) {
