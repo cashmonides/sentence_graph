@@ -8,7 +8,9 @@ body {
     color: #666;
     /*background:red;*/
     background:#bdc3c7;
-    overflow: hidden;
+    /*previously overflow:hidden*/
+    /*That didn't seem to allow scrolling.*/ 
+    overflow: scroll;
 }
 
 .hoverable:hover {
@@ -220,6 +222,8 @@ body {
     /*max-height:100%;*/
     
     /*hacky way of making the pseudo-lightbox remove when lightbox is operational*/
+    /*Dan removed this, that removal may break lightboxes.*/
+    /*Dan put scrolling back in since it didn't seem to change the behavior.*/
     overflow-x:scroll;
     overflow-y:scroll;
     max-width:100%;
@@ -242,6 +246,8 @@ body {
     max-height:65%;
     /*max-width:200px;*/
     /*max-height:200px;*/
+    /*Dan commented out scrolling in hopes it would allow users to scroll.*/
+    /*Dan put scrolling back in since it didn't seem to change the behavior.*/
     overflow-x:scroll;
     overflow-y:scroll;
     /*max-height:100%;*/
@@ -279,7 +285,8 @@ body {
     width: 0;
     height: 100%;
     margin-left: -250px;
-    overflow-y: auto;
+    /*Dan changed this to scroll from auto in hopes it would fix bug.*/
+    overflow-y: scroll;
     background: #000;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;

@@ -130,6 +130,7 @@ ProfilePage.build_progress_table = function(user) {
             console.log("DEBUG 2-11 leaving first make");
             var max_columns = 4;
             get_mf_and_syntax_sentences(function (order) {
+                console.log('order =', order);
                 var e;
                 
                 var i;
@@ -138,7 +139,7 @@ ProfilePage.build_progress_table = function(user) {
                 
                 var new_order = {};
                 for (i in order) {
-                    j = i.replace(/\//, '.');
+                    j = i.replace(/\//g, '.');
                     if (!(j in new_order)) {
                         new_order[j] = {};
                     }
@@ -146,7 +147,7 @@ ProfilePage.build_progress_table = function(user) {
                         new_order[j][k] = order[i][k];
                     }
                 }
-                var order = new_order;
+                order = new_order;
                 var sorted_order_as_list = Object.keys(order).sort(sentence_sort);
                 var mode_name;
                 var chapter_and_question;
@@ -154,7 +155,7 @@ ProfilePage.build_progress_table = function(user) {
                 console.log(sorted_order_as_list);
                 for (var index = 0; index < sorted_order_as_list.length; index++) {
                     i = sorted_order_as_list[index];
-                    chapter_and_question = i.split(/[\.\-\/]/g);
+                    chapter_and_question = i.split(/[\.\/]/g);
                     for (var index2 = 0; index2 < 2; index2++) {
                         j = ['mf', 'syntax'][index2];
                         mode_name = mode_names[j];
@@ -166,6 +167,10 @@ ProfilePage.build_progress_table = function(user) {
                         };
                         
                         var text = function (x) {
+                            if (typeof x === 'function') {
+                                x = x(chapter_and_question[0], chapter_and_question[1]);
+                            }
+                            console.log(x, chapter_and_question);
                             return chapter_and_question.join(x) + ' ' + mode_name;
                         }
                         
@@ -176,7 +181,13 @@ ProfilePage.build_progress_table = function(user) {
                                 'style': {
                                     'color': 'black'
                                 },
-                                'text': text('.')
+                                'text': text(function (x, y) {
+                                    if (isNaN(x) && x.indexOf(' ') === -1) {
+                                        return ' ';
+                                    } else {
+                                        return '.';
+                                    }
+                                })
                             }];
                             
                             // All modules are hoverable.

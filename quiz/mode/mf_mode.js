@@ -101,7 +101,13 @@ var SentenceFinder = function (chapter_n, question_n) {
         this.chapter_type = 'number';
         this.chapter_n = Number(chapter_n);
     }
-    this.question_n = Number(question_n);
+    if (isNaN(question_n)) {
+        this.question_type = 'string';
+        this.question_n = question_n;
+    } else {
+        this.question_type = 'number';
+        this.question_n = Number(question_n);
+    }
 }
 
 // Simply goes to the next sentence, without consideration

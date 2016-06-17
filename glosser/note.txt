@@ -11,6 +11,7 @@ bugs when using this method
          - we get it as text which we try to read as JSON
     - we run chmod 775 glosser/word_db.py
     - then we type glosser/word_db.py
+    - we expect to get nothing (which means the .py file rane)
     - we get this meesage in terminal:
             bestiary.info@n11:~/domains/bestiary.info/html$ chmod 755 glosser/word_db.py
             bestiary.info@n11:~/domains/bestiary.info/html$ glosser/word_db.py

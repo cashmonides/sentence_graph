@@ -102,7 +102,7 @@ Just need to add this to Http/Controllers/Auth/AuthController.php:
 
 
 ANOTHER POSSIBLE SOLUTION
-I have had a lot of people ask, "How to I ‘disable’ the back button?" or, "How do I prevent a user from clicking the back button and going back to the previous screen?" In fact, this is one of the most commonly asked questions on the ASPMessageboard and, sadly, the answer is quite simple: You CANNOT disable the back button of the browser.
+I have had a lot of people ask, "How do I ‘disable’ the back button?" or, "How do I prevent a user from clicking the back button and going back to the previous screen?" In fact, this is one of the most commonly asked questions on the ASPMessageboard and, sadly, the answer is quite simple: You CANNOT disable the back button of the browser.
 
 - continued -
 

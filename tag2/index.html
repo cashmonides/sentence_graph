@@ -37,7 +37,9 @@
 </head>
 <body>
     <!--keycode13 = enter-->
-    <input type="text" id="sentencebox" width="500" onkeydown="if (event.keyCode == 13) sentence_entered()"><br>
+    <textarea id="sentencebox" width="500"></textarea>
+    <button onclick="sentence_entered()">Start tagging</button>
+    <br/>
     <div id="box"></div>
     <input type="text" id="chapter_number_box" width="100">CHAPTER<br>
     <input type="text" id="sentence_number_box" width="100">SENTENCE<br>

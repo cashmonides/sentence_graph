@@ -239,8 +239,11 @@ function new_text(text){
 	var t = new Text(text);
 	t.setup();
     sentence = new Sentence(t.get_words(), text);
-
+    
+    
     // autotag(t, sentence);
+
+    
 
     el("box").innerHTML = "";
     word_selector = new WordSelector("box", t);
@@ -564,10 +567,12 @@ function global_submit_sentence(){
         alert('no sentence number specified');
     }
     */
+    /*
     } else if (/[\.\-\/]/g.exec(sentence_chapter)) {
         alert("chapter specified contains dash, period, or slash");
     } else if (/[\.\-\/]/g.exec(sentence_number)) {
         alert('no sentence number specified');
+    }*/
     } else if (sentence.has_region([])) {
         alert('empty region detected, please do sentence again');
     } else {
@@ -737,7 +742,14 @@ var identify_syntax_type = function (x) {
     }
 }
 
+var is_syntax_default = function (x) {
+    return x.toUpperCase() === x || x == 'not applicable';
+}
+
 var log_syntax_attempt_data = function (x) {
+    if (x.status === 'message') {
+        return null;
+    }
     console.log(x);
     var s_type = identify_syntax_type(x);
     var drop_downs;
@@ -751,20 +763,35 @@ var log_syntax_attempt_data = function (x) {
         var name = drop_downs[i];
         var item = x[name];
         if (item.correct !== item.given &&
-        (item.correct !== 'not applicable' ||
-        (item.given.toUpperCase() !== item.given && item.given !== 'not applicable'))) {
-            mismatch.push('given ' + name + ': ' + item.given);
-            mismatch.push('correct '  + name + ': ' + item.correct);
+        (!is_syntax_default(item.correct) || !is_syntax_default(item.given))) {
+            if (s_type === 'verb') {
+                mismatch.push('non-matched ' + name + ': ' + item.given);
+            } else if (s_type === 'noun') {
+                if (!is_syntax_default(item.given)) {
+                    mismatch.push('non-matched: ' + item.given);
+                }
+            }
         }
     }
-    return ['status: ' + x.status].concat(mismatch);
+    var initial_report = ['status: ' + x.status];
+    if (x.status === 'convention') {
+        if ('messages' in x) {
+            initial_report.push('messages:');
+            for (var i = 0; i < x.messages.length; i++) {
+                initial_report.push(x.messages[i]);
+            }
+        } else {
+            initial_report.push('messages: ???');
+        }
+    }
+    return initial_report.concat(mismatch);
 }
 
 var log_syntax_student_attempts_data = function (x) {
     var initial_report = 'student: ' + x.student;
     var main_report = x.attempts.map(function (x) {
         return log_syntax_attempt_data(x);
-    });
+    }).filter(function (x) {return x !== null});
     main_report.unshift(initial_report);
     return main_report;
 }
@@ -787,13 +814,52 @@ var separate_by_student = function (attempts) {
     })
 }
 
+var get_correct_report = function (drops) {
+    console.log(drops);
+    var s_type;
+    if (drops[0].choices[0] === 'NOMINATIVE') {
+        s_type = 'noun';
+    } else {
+        s_type = 'verb';
+    }
+    if (s_type === 'noun') {
+        return drops.filter(function (x) {return !(is_syntax_default(x.correct_answer))}).
+        map(function (x) {return 'correct: ' + x.correct_answer});
+    } else {
+        return drops.map(function (x) {
+            return 'correct ' + x.choices[0].toLowerCase() + ': ' + x.correct_answer;
+        });
+    }
+}
+
 var generate_syntax_part_reports = function (data, attempts) {
+    var correct_report = get_correct_report(data.drop_downs);
     var initial_report = 'part: ' + data.target_indices.map(function (i) {return data.words[i]}).join(' ');
     var main_report = separate_by_student(attempts).map(function (x) {
         return log_syntax_student_attempts_data(x);
     });
+    main_report = correct_report.concat(main_report);
     main_report.unshift(initial_report);
     return main_report;
+}
+
+var get_from_data = function (answers, key, in_data) {
+    var get_part = function (x) {
+        if (in_data) {
+            return x.data[0];
+        } else {
+            return x;
+        }
+    }
+    
+    var with_key = answers.filter(function (x) {
+        return 'data' in x && key in get_part(x);
+    });
+    if (with_key.length === 0) {
+        return '???';
+    } else {
+        return get_part(with_key[0])[key]
+    }
 }
 
 var generate_syntax_sentence_report = function (loc, answers) {
@@ -801,11 +867,15 @@ var generate_syntax_sentence_report = function (loc, answers) {
     if (attempts.length === 0) {
         return null;
     }
-    console.log(answers, answers[0].data);
+    var all_data = answers.filter(function (x) {
+        return 'data' in x;
+    })[0].data;
+    
     return [
         'chapter and number: ' + loc,
-        'sentence: ' + answers[0].data[0].sentence,
-        'parts:', answers[0].data.map(function (data, i) {
+        'id: ' + get_from_data(answers, 'sentence_id', false),
+        'sentence: ' + get_from_data(answers, 'sentence', true),
+        'parts:', all_data.map(function (data, i) {
             return generate_syntax_part_reports(data,
             attempts.filter(function (x) {return x.region_number === i}));
         })

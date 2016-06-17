@@ -48,6 +48,13 @@ var ALL_CONVENTIONS = {
         'applicable': ['12.4'],
         'message': 'Yes, that is technically possibly but it works better as a @construction.' 
     },
+    'testing convention': {
+        'correct': 'imperfect',
+        'arbitrarily incorrect': ['present', 'imperfect', 'future'],
+        'applicable': 'Caligula 37.5',
+        'message': '(This is a testing message! Only @tense is actually correct!) ' +
+        'Yes, $tense is (probably not) possible but it works better as a @tense.' 
+    }
 }
 
 var get_type_of_convention = function (convention, name) {

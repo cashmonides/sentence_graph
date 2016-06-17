@@ -94,6 +94,15 @@ SyntaxModeGame.prototype.next_question = function () {
 }
 
 SyntaxModeGame.prototype.real_next_question = function (data) {
+    console.log('data =', data);
+    
+    if ('id' in data) {
+        this.sentence_id = data.id;
+        
+        // We forget about the id.
+        
+        data = data.main;
+    }
     
     this.data = data;
     
@@ -150,6 +159,7 @@ SyntaxModeGame.prototype.real_next_question = function (data) {
     // remove_children(document.getElementById("answer_choices"));
     //todo why is this capitalized
     Quiz.set_question_text(this.question);
+    
     this.quiz.set_word_selector(this.sentence);
     
    
@@ -335,8 +345,10 @@ SyntaxModeGame.prototype.check_correctness = function () {
     }
 }
 
+// Do these things before processing the answer.
 SyntaxModeGame.prototype.pre_process_answer = function () {
     this.conventions_broken = {};
+    this.messages = [];
 }
 
 SyntaxModeGame.prototype.alert_convention_broken = function (name, times) {
@@ -353,6 +365,7 @@ SyntaxModeGame.prototype.alert_convention_broken = function (name, times) {
     var message = convention.message.replace(
         /@(\w+)/g, function (x) {return self.correct_answer_for(x.slice(1))}).replace(
         /\$(\w+)/g, function (x) {return self.selected_answer_for(x.slice(1))}).replace(/~/g, '');
+    this.messages.push(message);
     alert(message);
 }
 
@@ -371,11 +384,7 @@ SyntaxModeGame.prototype.display_broken_convention_alerts = function () {
 var SYNTAX_LOG_VERSION = 0.0001;
 
 SyntaxModeGame.prototype.get_attempt_data = function (answer_type) {
-    var r = {
-        'status': answer_type,
-        'region_number': this.region_number,
-        'version': SYNTAX_LOG_VERSION
-    }
+    var r = {};
     var t;
     for (var i = 0; i < this.drop_downs.length; i++) {
         t = this.drop_downs[i].type;
@@ -388,27 +397,53 @@ SyntaxModeGame.prototype.get_attempt_data = function (answer_type) {
 }
 
 SyntaxModeGame.prototype.log_data_to_firebase = function (answer_type) {
+    
     var self = this;
+    
+    /*
+    Add more data, e.g, sentence id and message.
+    Important issue with message:
+    There is no one message, only a list of messages.
+    Plausable solution:
+    Make the list empty when there are no messages.
+    
+    Done!
+    */
     
     var data_to_log = {
         // 'chapter': this.current_chapter,
         // 'question': this.current_question,
         // 'username': this.quiz.user.get_personal_data('name'),
         // 'email': this.quiz.user.get_personal_data('email'),
-        'text': this.sentence,
+        '$text': this.sentence,
         // 'target': this.correct_answer,
+        '$data': this.data,
+        '$sentence_id': this.sentence_id,
         'attempt': this.get_attempt_data(answer_type),
-        'data': this.data
+        'messages': this.messages,
+        'status': answer_type,
+        'region_number': this.region_number,
+        'version': SYNTAX_LOG_VERSION
     };
+    
+    for (var i in data_to_log) {
+        if (i === 'attempt') {
+            continue;
+        }
+        if (i[0] !== '$') {
+            data_to_log.attempt[i] = data_to_log[i];
+        } else {
+            data_to_log[i.slice(1)] = data_to_log[i];
+        }
+        delete data_to_log[i];
+    }
     
     getting(['syntax_logs', this.quiz.user.get_personal_data('name'),
     this.current_chapter + '-' + this.current_question], function (x) {
-        if (!('text' in x)) {
-            x.text = data_to_log.text;
-        }
-        
-        if (!('data' in x)) {
-            x.data = data_to_log.data;
+        for (var i in data_to_log) {
+            if (i !== 'attempt' && !(i in x)) {
+                x[i] = data_to_log[i];
+            }
         }
         
         if (!('attempts' in x)) {
