@@ -1,0 +1,622 @@
+[ACT II]
+ATREVS – SATELLES 
+ATREVS: [in soliloquy] 
+Ignave, iners, enervis et, quod@sa maximum
+probrum@pa tyranno rebus in summis reor,
+inulte; post tot scelera, post fratris dolos
+fasque omne ruptum questibus vanis agis 
+iratus Atreus? fremere iam totus tuis 180
+debebat armis orbis@s et geminum mare@o
+utrimque classes agere, iam flammis agros
+lucere et urbes decuit ac strictum undique
+micare ferrum. 
+
+quod = subj acc
+probrum = pred acc
+orbis = subj nom
+mare = acc do
+agros = fungus accusativus
+
+***********************
+
+
+					tota sub nostro sonet 
+Argolica tellus equite; non silvae tegant	185
+hostem nec altis montium structae iugis
+arces; relictis bellicum totus canat
+populus Mycenis; quisquis invisum caput
+tegit ac tuetur, clade funesta occidat. 
+
+
+iugis = abl with ellipsed spatial prepositon
+bellicum = acc do (maybe add internal accusative)
+
+***********************
+
+haec ipsa pollens incliti Pelopis domus     190
+ruat vel in me, dummodo in fratrem ruat.
+
+ruat (the one in dummodo) = pres subj proviso simul time
+
+***********************
+
+age, anime, fac quod nulla posteritas probet,
+sed nulla taceat. aliquod audendum est nefas
+atrox, cruentum, tale quod frater meus 
+suum esse mallet. scelera non ulcisceris,	195
+nisi vincis. et quid esse tam saevum potest
+quod superet illum? 
+
+probet = rel cl of characteristic
+quod = acc do
+suum = pred acc
+quid = nom subj
+saevum = pred nom
+superet = rel cl of characteristic
+
+
+***********************
+
+					numquid abiectus iacet?
+numquid secundis patitur in rebus modum,
+fessis quietem? novi ego ingenium viri 
+indocile; flecti non potest – frangi potest.                 	200
+proinde antequam se firmat aut vires parat,
+petatur ultro, ne quiescentem petat.
+aut perdet aut peribit; in medio est scelus
+positum occupanti. 
+
+petat = purpose clause
+
+
+***********************
+SATELLES: 
+			Fama te populi nihil 
+adversa terret? 
+
+ATREVS: 
+	           Maximum hoc regni bonum est,	205
+quod facta domini cogitur populus sui
+tam ferre quam laudare. 
+
+nihil = adverbial accusative
+hoc = subj nom
+bonum = pred nom
+***********************
+
+SATELLES: 
+			    Quos cogit metus
+laudare, eosdem reddit inimicos metus;
+at qui favoris gloriam veri petit, 
+animo magis quam voce laudari volet.                    	210
+
+inimicos = pred acc
+animo = abl of means
+***********************
+
+ATREVS: 
+Laus vera et humili saepe contingit viro,
+non nisi potenti falsa. quod nolunt velint.
+
+velint = pres subj juss
+quod = acc do
+viro = dat with a comopount
+
+***********************
+
+SATELLES: 
+Rex velit honesta; nemo non eadem volet.
+
+ATREVS: 
+Ubicumque tantum honesta dominanti licent, 
+precario regnatur. 
+
+honesta = subj nom
+
+***********************
+
+SATELLES: 
+			Ubi non est pudor	215
+nec cura iuris sanctitas pietas fides,
+instabile regnum est. 
+
+ATREVS: 
+			Sanctitas pietas fides
+privata bona sunt; qua iuvat reges eant.
+
+SATELLES: 
+Nefas nocere vel malo fratri puta. 
+
+
+eant = pres subj jussive
+Nefas = pred acc
+bona = pred nom
+pietas = subj nom
+regnum = subj nom
+instabile = pred nom
+cura = subj nom
+
+***********************
+
+ATREVS: 
+Fas est in illo quidquid in fratre est nefas.     220
+quid enim reliquit crimine intactum aut ubi
+sceleri pepercit? coniugem stupro abstulit
+regnumque furto; specimen antiquum imperi
+fraude est adeptus, fraude turbavit domum. 
+
+
+quidquid = subj nom
+Fas = pred nom
+nefas = pred nom
+quid = acc do
+
+***********************
+
+
+est Pelopis altis nobile in stabulis pecus,		225
+arcanus aries, ductor opulenti gregis.
+huius per omne corpus effuso coma
+dependet auro, cuius e tergo noui
+aurata reges sceptra Tantalici gerunt; 
+possessor huius regnat, hunc tantae domus       230
+fortuna sequitur. tuta seposita sacer
+in parte carpit prata, quae cludit lapis
+fatale saxeo pascuum muro tegens.
+
+lapis = subj nom
+quae = acc do
+muro = abl means
+
+
+***********************
+
+
+hunc facinus ingens ausus assumpta in scelus 
+consorte nostri perfidus thalami avehit.	   235
+hinc omne cladis mutuae fluxit malum;
+per regna trepidus exul erravi mea,
+pars nulla generis tuta ab insidiis vacat,
+corrupta coniunx, imperi quassa est fides, 
+domus aegra, dubius sanguis est. certi nihil  240
+nisi frater hostis. 
+	
+hunc = acc do
+facinus = acc do
+consorte = abl subject
+dubius = pred nom
+certi = partitive genitive
+
+
+
+	[In soliloquy.]
+			    quid stupes? tandem incipe
+animosque sume. Tantalum et Pelopem aspice;
+ad haec manus exempla poscuntur meae. 
+
+quid = adv acc
+manus = subj nom
+
+***********************
+
+	[Addressing the SATELLES.]
+
+profare, dirum qua caput mactem via. 
+
+SATELLES: 
+Ferro peremptus spiritum inimicum expuat.	245
+
+ATREVS: 
+De fine poenae loqueris; ego poenam volo.
+perimat tyrannus lenis; in regno meo
+mors impetratur. 
+
+
+mactem = pres subj ind question
+
+
+***********************
+
+SATELLES: 
+			Nulla te pietas mouet?
+
+ATREVS: 
+Excede, Pietas, si modo in nostra domo 
+umquam fuisti. dira Furiarum cohors        250
+discorsque Erinys veniat et geminas faces
+Megaera quatiens. non satis magno meum
+ardet furore pectus, impleri iuvat
+maiore monstro. 
+
+impleri = subj inf
+monstro = abl of means
+
+***********************
+
+
+SATELLES: 
+			Quid novi rabidus struis? 
+
+ATREVS: 
+Nil quod doloris capiat assueti modum;	255
+nullum relinquam facinus et nullum est satis.
+
+SATELLES: 
+Ferrum? 
+
+ATREVS: 
+	   Parum est. 
+
+SATELLES: 
+		         Quid ignis? 
+
+ATREVS: 
+			                Etiam nunc parum est.
+
+Nil = acc do
+capiat = rel characteristic
+modum = acc do
+
+***********************
+
+SATELLES: 
+Quonam ergo telo tantus utetur dolor?
+
+
+ATREVS: 
+Ipso Thyeste. 
+
+SATELLES: 
+		Maius hoc ira est malum. 
+
+ira = abl of comparison
+hoc = subj nom
+malum = pred nom
+
+
+***********************
+
+ATREVS: 
+Fateor. tumultus pectora attonitus quatit   260
+penitusque volvit; rapior et quo nescio,
+sed rapior. imo mugit e fundo solum,
+tonat dies serenus ac totis domus
+ut fracta tectis crepuit et moti Lares 
+vertere vultum – fiat hoc, fiat nefas		265
+quod, di, timetis. 
+
+
+pectora = acc do
+vultum = acc do
+quod = acc do
+
+***********************
+
+SATELLES: 
+		     Facere quid tandem paras?
+
+ATREVS: 
+Nescioquid animus maius et solito amplius
+supraque fines moris humani tumet
+instatque pigris manibus; haud quid sit scio, 
+sed grande quiddam est. ita sit. hoc, anime, occupa.  	270
+
+quid = acc do
+manibus = dat with a compound
+quid = pred nom
+sit = pres subj ind question
+hoc = acc do
+
+***********************
+
+
+dignum est Thyeste facinus et dignum Atreo;
+uterque faciat. vidit infandas domus
+Odrysia mensas – fateor, immane est scelus,
+sed occupatum; maius hoc aliquid dolor 
+inveniat. animum Daulis inspira parens	275
+sororque (causa est similis); assiste et manum
+impelle nostram. liberos avidus pater
+gaudensque laceret et suos artus edat.
+bene est, abunde est; hic placet poenae modus 
+tantisper.
+
+uterque = subj nom
+hoc = abl of comparison
+aliquid = acc do
+
+***********************
+
+
+          ubinam est? tam diu cur innocens                	280
+versatur Atreus? tota iam ante oculos meos
+imago caedis errat, ingesta orbitas
+in ora patris – anime, quid rursus times
+et ante rem subsidis? audendum est, age;
+quod est in isto scelere praecipuum nefas,	285
+hoc ipse faciet. 
+
+quod = subj nom
+hoc = acc do
+nefas = pred nom
+quid = adv acc
+
+
+
+
+***********************
+
+SATELLES: 
+		 Sed quibus captus dolis
+nostros dabit perductus in laqueos pedem?
+inimica credit cuncta. 
+
+inimica = pred nom
+cuncta = subj nom
+
+***********************
+
+ ATREVS: 
+			Non poterat capi, 
+nisi capere vellet; regna nunc sperat mea. 
+hac spe subibit gurgitis tumidi minas		291
+dubiumque Libycae Syrtis intrabit fretum,	292
+hac spe minanti fulmen occurret Iovi,       290
+hac spe, quod esse maximum retur malum,
+fratrem videbit. 
+
+quod = subj acc in ind statement
+malum = pred acc
+vellet = imperf subj prot in present ctf
+
+***********************
+
+SATELLES: 
+			Quis fidem pacis dabit? 
+cui tanta credet? 
+
+tanta = acc do
+
+***********************
+
+ATREVS: 
+		     Credula est spes improba.	295
+natis tamen mandata quae patruo ferant
+dabimus, relictis exul hospitiis vagus
+regno ut miserias mutet atque Argos regat
+ex parte dominus. si nimis durus preces 
+spernet Thyestes, liberos eius rudes                               	300
+malisque fessos gravibus et faciles capi
+praecommovebunt. hinc vetus regni furor,
+illinc egestas tristis ac durus labor
+quamvis rigentem tot malis subigent virum. 
+
+
+ferant = rel cl of purpose
+hospitiis = abl subj in abl absolute
+regno = abl of price
+capi = epexegetical infinitive (might not be in tag list)
+regni = epexegetical genitive
+
+
+***********************
+
+
+SATELLES: 
+Iam tempus illi fecit aerumnas leves.		305
+
+ATREVS: 
+Erras; malorum sensus accrescit die.
+leve est miserias ferre, perferre est grave.
+
+SATELLES: 
+Alios ministros consili tristis lege.
+
+ATREVS: 
+Peiora iuvenes facile praecepta audiunt. 
+
+SATELLES: 
+In patre facient quidquid in patruo doces;              	310
+saepe in magistrum scelera redierunt sua.
+
+leves = pred acc
+ferre = subj inf
+leve = pred nom
+
+
+***********************
+
+
+ATREVS: 
+Ut nemo doceat fraudis et sceleris vias,
+regnum docebit. ne mali fiant times?
+nascuntur. istud quod vocas saevum asperum 
+agique dure credis et nimium impie,		315
+fortasse et illic agitur. 
+
+mali = pred nom
+istud = subj acc in ind statement
+agique = pres inf in ind statement showing simultaneous time
+
+***********************
+
+
+SATELLES: 
+			Hanc fraudem scient
+nati parari? 
+
+
+ATREVS: 
+		Tacita tam rudibus fides
+non est in annis; detegent forsan dolos.
+tacere multis discitur vitae malis. 
+
+fraudem = subj acc in ind statement
+tacere = subj inf
+
+***********************
+
+
+
+SATELLES: 
+Ipsosque, per quos fallere alium cogitas,    320
+falles? 
+
+ATREVS: 
+	                Ut ipsi crimine et culpa vacent.
+quid enim necesse est liberos sceleri meo
+inserere? per nos odia se nostra explicent –
+
+vacent = purpose clause
+quid = adverbial accusative
+se = acc do
+
+***********************
+
+		[To himself.]
+male agis, recedis, anime; si parcis tuis, 
+parces et illis. consili Agamemnon mei	325
+sciens minister fiat et fratri sciens
+Menelaus adsit. prolis incertae fides
+ex hoc petatur scelere; si bella abnuunt
+et gerere nolunt odia, si patruum vocant, 
+pater est. eatur	 –			330
+
+tuis = dative with certain intransitive verbs
+minister = pred nom
+eatur = pres subj jussive
+
+***********************
+
+
+		[Changing his mind again.]			
+		    multa sed trepidus solet                              
+detegere vultus, magna nolentem quoque
+consilia produnt; nesciant quantae rei
+fiant ministri. 
+	
+	[To the Satelles.]
+			nostra tu coepta occule.
+
+SATELLES: 
+Haud sum monendus; ista nostro in pectore 
+fides timorque, sed magis claudet fides. 	335
+
+
+fiant = pres subj ind question
+ministri = pred nom
+
+***********************
+
+CHORVS: 
+Tandem regia nobilis,
+antiqui genus Inachi,
+fratrum composuit minas.
+	Quis vos exagitat furor, 
+alternis dare sanguinem                              	340
+et sceptrum scelere aggredi?
+nescitis, cupidi arcium,
+regnum quo iaceat loco.
+regem non faciunt opes, 
+non vestis Tyriae color,		345
+non frontis nota regia,
+non auro nitidae trabes.
+
+iaceat = pres subj ind question
+
+***********************
+
+
+rex est qui posuit metus
+et diri mala pectoris,
+quem non ambitio impotens   350
+et numquam stabilis favor
+vulgi praecipitis movet,
+non quidquid fodit Occidens
+aut unda Tagus aurea 
+claro devehit alveo,		355
+non quidquid Libycis terit
+fervens area messibus,
+
+metus = acc do
+quidquid = acc do
+
+***********************
+
+quem non concutiet cadens
+obliqui via fulminis, 
+non Eurus rapiens mare      360
+aut saevo rabidus freto
+ventosi tumor Hadriae,
+quem non lancea militis,
+non strictus domuit chalybs, 
+qui tuto positus loco		365
+infra se videt omnia
+occurritque suo libens
+fato nec queritur mori.
+
+
+mare = acc do
+loco = abl with ellipsed spatial preposition
+fato = dat with a compound
+
+********************
+
+	Reges conveniant licet, 
+qui sparsos agitant Dahas,      370
+qui rubri vada litoris
+et gemmis mare lucidis
+late sanguineum tenent,
+aut qui Caspia fortibus 
+recludunt iuga Sarmatis,		375
+certet Danuvii vadum
+audet qui pedes ingredi
+et (quocumque loco iacent)
+Seres vellere nobiles;
+mens regnum bona possidet.    380
+
+vada = acc do
+conveniant = subst ut with the ut ellipsed (need a convention note)
+loco = ablative with ellipsed spatial preposition
+
+***********************
+nil ullis opus est equis,
+nil armis et inertibus
+telis, quae procul ingerit
+Parthus, cum simulat fugas, 
+admotis nihil est opus		385
+urbes sternere machinis
+longe saxa rotantibus;
+[rex est qui metuit nihil,
+rex est qui cupiet nihil;]
+hoc regnum sibi quisque dat.                              390
+
+quae = acc do
+nihil = adv acc
+regnum = acc do
+sternere = infinitive of purpose (need to add to tag list)
+
+***********************
+
+
+	Stet quicumque uolet potens
+aulae culmine lubrico;
+me dulcis saturet quies,
+obscuro positus loco 
+leni perfruar otio,    395
+nullis nota Quiritibus
+aetas per tacitum fluat.
+sic cum transierint mei
+nullo cum strepitu dies, 
+plebeius moriar senex.  400
+illi mors gravis incubat
+qui, notus nimis omnibus, 
+ignotus moritur sibi. 
+
+fluat = pres subj jussive
+aetas = subj nom
+culmine = abl with ellipsed spatial preposition
+illi = dat with a compount
+
+
+***********************

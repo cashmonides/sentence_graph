@@ -60,6 +60,7 @@ var get_real_type_tag_auto = function (input) {
 var alias_dict = {
     's': 'subject',
     'o': 'object',
+    'pa': 'predicate accusative',
     'ss': 'secondary',
     'ps': 'primary',
     'secondary sequence': 'secondary',
