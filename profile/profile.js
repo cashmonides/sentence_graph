@@ -112,6 +112,10 @@ var get_mf_and_syntax_sentences = function (fn) {
     get_syntax_questions(callback('syntax'));
 }
 
+var is_a_test = function (x) {
+    return starts_with(x, 'test');
+}
+
 
 ProfilePage.build_progress_table = function(user) {
     try {
@@ -156,6 +160,10 @@ ProfilePage.build_progress_table = function(user) {
                 for (var index = 0; index < sorted_order_as_list.length; index++) {
                     i = sorted_order_as_list[index];
                     chapter_and_question = i.split(/[\.\/]/g);
+                    if (is_a_test(chapter_and_question[0]) && IN_PRODUCTION_SWITCH) {
+                        continue;
+                    }
+                    
                     for (var index2 = 0; index2 < 2; index2++) {
                         j = ['mf', 'syntax'][index2];
                         mode_name = mode_names[j];
@@ -170,7 +178,7 @@ ProfilePage.build_progress_table = function(user) {
                             if (typeof x === 'function') {
                                 x = x(chapter_and_question[0], chapter_and_question[1]);
                             }
-                            console.log(x, chapter_and_question);
+                            // console.log(x, chapter_and_question);
                             return chapter_and_question.join(x) + ' ' + mode_name;
                         }
                         
@@ -201,7 +209,7 @@ ProfilePage.build_progress_table = function(user) {
                         
                         make(m, row);
                     };
-                    console.log(index, i, 'new row')
+                    // console.log(index, i, 'new row')
                     row = make({'tag': "tr"}, table);
                 }
                 getting("history|sentence_logs", function (x) {
@@ -210,7 +218,9 @@ ProfilePage.build_progress_table = function(user) {
                     for (var i in x) {
                         e = el(i.replace(/\bmf$/, 'translate').replace(/\bsyntax$/, 'analysis'));
                         if (e === null) {
-                            delete x[i];
+                            if (!(is_a_test(i))) {
+                                delete x[i];
+                            }
                         } else {
                             e.style.color = {
                                 'completed': 'green',
@@ -218,7 +228,7 @@ ProfilePage.build_progress_table = function(user) {
                             }[x[i]] || 'black';
                         }
                     }
-                    console.log(x);
+                    // console.log(x);
                     user.persist(['history', 'sentence_logs'], x);
                 }, {'get_user': function() {return user}})();
             });

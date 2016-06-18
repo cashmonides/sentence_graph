@@ -234,7 +234,12 @@ function sentence_entered(){
     // processes the text inasmuch as its able (brackets and auto-tags)
     // this auto-processing produces new regions and tags so we also update region list & subregions)
 // called by: window onload & sentence_entered
-function new_text(text){
+function new_text(text) {
+    var tags_auto = produce_tags_list_tag_auto(text);
+    
+    console.log('tags_auto', tags_auto);
+    
+    text = update_sentence_tags_auto(text);
 
 	var t = new Text(text);
 	t.setup();
@@ -248,12 +253,16 @@ function new_text(text){
     el("box").innerHTML = "";
     word_selector = new WordSelector("box", t);
     word_selector.setup();
+    
+    update_word_selector_tags_auto(tags_auto);
+    
     show_untagged_words();
 
     update_region_list();
     el("allregions").addEventListener("change", function(x){
         update_subregions();
     });
+    
     //M: Master flow logged below
     //console.log("M: Sentence after autotagging: ", JSON.stringify(sentence));
 }
@@ -331,13 +340,19 @@ function show_untagged_words() {
 
 // called by: generate_buttons()
 // argument is an integer (i.e. an index in the tag list)
-function submit_tag (tag_type) {
+function submit_tag (tag_type, indices) {
     var tag_type_as_string = tag_type;
     var tag = new SingleRegionTag(tag_type_as_string);
     //console.log("submit tag triggered here");
     //console.log("TEST OF tag type", tag, word_selector.highlighted_words.size, word_selector.highlighted_words.values());
-
-    var indices = word_selector.get_selected_indices();                                                                //indices = highlighted words
+    
+    //indices = highlighted words (or whatever was put in).
+    if (indices === undefined) {
+        indices = word_selector.get_selected_indices();
+    }
+    
+    console.log('submitting tag with', tag_type, indices);
+    
     //console.log(indices);
     var region = sentence.get_region(indices);                                                              //make a region to hold the tags
     if (region != undefined && region != null) {
@@ -494,11 +509,11 @@ function reset_all () {
 function submit_verb_tags () {
     submit_tag('verb');
     for (var i = 0; i < verb_drop_down_types.length; i++) {
-        choice = selected_option(el('select_element' + i));
+        var choice = selected_option(el('select_element' + i));
         if (choice === verb_drop_down_types[i].toUpperCase()) {
             continue;
         }
-        text = verb_drop_down_types[i][0] + '=' + choice;
+        var text = verb_drop_down_types[i][0] + '=' + choice;
         submit_tag(text);
     }
 }
@@ -506,8 +521,9 @@ function submit_verb_tags () {
 function submit_noun_tags () {
     submit_tag('noun');
     for (var i = 0; i < noun_drop_down_types.length; i++) {
-        choice = selected_option(el('select_element' + (
+        var choice = selected_option(el('select_element' + (
             verb_drop_down_types.length + i)));
+        // the verb_drop_down_types here is not a bug, since we skip over the verb dropdowns.
         if (choice === noun_drop_down_types[i].toUpperCase()) {
             continue;
         }

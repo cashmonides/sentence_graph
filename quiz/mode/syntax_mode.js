@@ -188,7 +188,7 @@ SyntaxModeGame.prototype.target_indices = function () {
 }
 
 SyntaxModeGame.prototype.get_sentence_words = function () {
-    return this.relevant_data().sentence.split(' ');
+    return words_as_in_text(this.relevant_data().sentence);
 }
 
 SyntaxModeGame.prototype.get_asked_words = function () {
@@ -512,9 +512,10 @@ SyntaxModeGame.prototype.process_correct_answer = function () {
         syntax_info = this.relevant_drop_downs()[0].correct_answer;
     }
     
-    var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_right) + '<br><br>' +
+    var asked_words = this.get_asked_words();
     
-    'The syntax of <em>' + this.get_asked_words().join(' ').
+    var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_right) + '<br><br>' +
+    'The syntax of <em>' + asked_words.join(' ').
     replace(/[^a-zA-ZāēīōūĀĒĪŌŪ ]/g, '') + '</em> is:<br>' +
     syntax_info + '<br>&nbsp;';
     var fbox = el("feedbackbox");
