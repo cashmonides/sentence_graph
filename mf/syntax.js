@@ -140,7 +140,8 @@ var syntax_module_filter = {
 			"subordinate clause in virtual indirect statement": "Caligula", // ***"
 			"anticipatory (priusquam/antequam/dum) clause without anticipation due to subjunctivitis": "Caligula",
 			"indirect question standing in for original deliberative": "Caligula",
-			"2nd singular generalizing subjunctive": "Caligula"
+			"2nd singular generalizing subjunctive": "Caligula",
+			"relative clause of cause": "Caligula"
 	    },
         "sequence": {
         	"primary": 2,
