@@ -48,12 +48,14 @@ var ALL_CONVENTIONS = {
         'applicable': ['12.4'],
         'message': 'Yes, that is technically possibly but it works better as a @construction.' 
     },
-    'testing convention': {
-        'correct': 'imperfect',
-        'arbitrarily incorrect': ['present', 'imperfect', 'future'],
-        'applicable': 'Caligula 37.5',
-        'message': '(This is a testing message! Only @tense is actually correct!) ' +
-        'Yes, $tense is (probably not) possible but it works better as a @tense.' 
+    'substantive ut clause convention advanced': {
+        'correct': 'substantive ut clause',
+        'arbitrarily incorrect': '*',
+        'applicable': 'Seneca_Thyestes 369',
+        'message': "You're potentially very lucky. This was a substantive ut clause with the ut removed. " +
+        "I'm not part of the Institute. I was just inputting this sentence and I was told to let some stuff through." +
+        "So for now I'm letting everything through. As I said, if your guess was nothing like a substantive ut clause, " +
+        "you're very lucky."
     }
 }
 
@@ -75,6 +77,9 @@ var get_cond = function (s_list) {
         for (var i = 0; i < s_list.length; i++) {
             s = s_list[i];
             if (s in convention) {
+                if (convention[s] === '*') {
+                    return '*';
+                }
                 return enlist(convention[s]);
             }
         }
@@ -85,7 +90,11 @@ var get_cond = function (s_list) {
 var check_same = function (s) {
     var g = get_cond(s);
     return function (convention, x) {
-        return g(convention).indexOf(x) !== -1;
+        var h = g(convention);
+        if (h === '*') {
+            return true;
+        }
+        return h.indexOf(x) !== -1;
     }
 }
 
@@ -94,8 +103,18 @@ var get_applicable_conv = get_cond('applicable');
 var get_non_applicable_conv = get_cond(['non-applicable', 'not applicable']);
 
 var applies_to = function (convention, sentence) {
+    var transform = function (x) {
+        return x.replace(/[ \-.\\]/g, ' ');
+    }
+    sentence = transform(sentence);
     var a = get_applicable_conv(convention);
+    if (a !== null) {
+        a = a.map(transform);
+    }
     var n = get_non_applicable_conv(convention);
+    if (n !== null) {
+        n = n.map(transform);
+    }
     if (a !== null) {
         return sentence.indexOf(a) !== -1;
     } else if (n !== null) {
@@ -123,6 +142,7 @@ var is_arbitarily_incorrect_conv = check_same('arbitrarily incorrect');
 var is_correct_conv = check_same('correct');
 
 var convention_applies = function (name, info) {
+    console.log(name, info);
     var convention = ALL_CONVENTIONS[name];
     
     // Check that the convention applies to the relevant drop down.

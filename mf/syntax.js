@@ -74,12 +74,15 @@ var syntax_module_filter = {
     		"ablative of possessive adjective agreeing with ellipsed rē with interest by analogy with rēfert": 16, 
     		"ablative of the supine to express respect": 17, 
     		"ablative of price": 18,
-    		"ablative of attendant circumstances": "Caligula"
+    		"ablative of attendant circumstances": "Caligula",
+    		"ablative with ellipsed spatial preposition": "Seneca_Thyestes"
     	},
     	"infinitive": {
     	    "subject infinitive": 1,
     	    "object infinitive": 1,
-    	    "complementary infinitive": 2
+    	    "complementary infinitive": 2,
+    	    "epexegetical infinitive": "Seneca_Thyestes",
+    	    "infinitive of purpose": "Seneca_Thyestes"
     	}
 	},
 	"verb_syntax" : {

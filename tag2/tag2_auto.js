@@ -60,13 +60,52 @@ var get_real_type_tag_auto = function (input) {
 var alias_dict = {
     's': 'subject',
     'o': 'object',
+    'p': 'predicate',
     'pa': 'predicate accusative',
+    'sa': 'subject accusative of an indirect statement',
+    'sa not is': 'subject accusative of an infinitive not in indirect statement',
+    'ind': 'indicative',
+    'subj': 'subjunctive',
+    'subjunct': 'subjunctive',
+    'inf': 'infinitive',
     'ss': 'secondary',
     'ps': 'primary',
     'secondary sequence': 'secondary',
     'primary sequence': 'primary',
     'subject': 'subject nominative',
-    'object': 'accusative direct object'
+    'object': 'accusative direct object',
+    'predicate': 'predicate nominative',
+    'proviso': 'proviso clause',
+    'pres': 'present',
+    'simultaneous': 'simultaneous time',
+    'char': 'relative clause of characteristic',
+    'simul': 'simultaneous time',
+    'prior': 'prior time',
+    'purpose': 'purpose clause',
+    'rel purpose': 'relative clause of purpose',
+    'am': 'ablative of means',
+    'means': 'ablative of means',
+    'manner': 'ablative of manner',
+    'juss': 'jussive',
+    'comp': 'compound',
+    'compound': 'dative with compound verbs',
+    'part': 'partitive',
+    'partitive': 'partitive genitive',
+    'abs': 'ablative subject in an ablative absolute',
+    'abp': 'ablative predicate in an ablative absolute',
+    'adv acc': 'adverbial accusative',
+    'is': 'indirect statement',
+    'iq': 'indirect question',
+    'ic': 'indirect command',
+    'si': 'subject infinitive',
+    'fmv': "protasis/apodosis of a future more vivid conditional sentence",
+	'fmv emph': "protasis/apodosis of a future more vivid conditional sentence with emphatic protasis",
+	'flv': "protasis/apodosis of a future less vivid conditional sentence",
+	'pres ctf': "protasis/apodosis of a present contrary to fact conditional sentence",
+	'present ctf': 'pres ctf',
+	'past ctf': "protasis/apodosis of a past contrary to fact conditional sentence",
+	'mixed ctf': "protasis/apodosis of a mixed contrary to fact conditional sentence",
+	'abl ell spat': "ablative with ellipsed spatial preposition"
 }
 
 var get_alias = function (x) {
@@ -76,7 +115,7 @@ var get_alias = function (x) {
     return x;
 }
 
-var tag_regex = /@+[a-zA-Z_\_|~`]+/g;
+var tag_regex = /@+[a-zA-Z_\_|~`^]+/g;
 
 var produce_tags_list_tag_auto = function (text) {
     var words = words_as_in_text(text);
@@ -159,7 +198,7 @@ var get_name_tag_auto = function (d) {
     } else {
         supposed_type = null;
     }
-    input = get_alias(input.replace(/`/g, ' '));
+    input = get_alias(input.replace(/[`^]/g, ' '));
     var i;
     var dd_type;
     var type_and_nov = get_real_type_tag_auto(input);
