@@ -138,7 +138,9 @@ var syntax_module_filter = {
 			"past optative - wish incapable of fulfillment": 12,
 		    "frequentative subjunctive": "Caligula", // ***"
 			"subordinate clause in virtual indirect statement": "Caligula", // ***"
-			"anticipatory (priusquam/antequam/dum) clause without anticipation due to subjunctivitis": "Caligula"
+			"anticipatory (priusquam/antequam/dum) clause without anticipation due to subjunctivitis": "Caligula",
+			"indirect question standing in for original deliberative": "Caligula",
+			"2nd singular generalizing subjunctive": "Caligula"
 	    },
         "sequence": {
         	"primary": 2,
