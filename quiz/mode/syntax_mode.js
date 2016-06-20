@@ -193,7 +193,7 @@ SyntaxModeGame.prototype.get_sentence_words = function () {
 
 SyntaxModeGame.prototype.get_asked_words = function () {
     var words = this.get_sentence_words();
-    return this.target_indices().map(function (x) {return words[x]})
+    return this.target_indices().map(function (x) {return words[x]});
 }
 
 SyntaxModeGame.prototype.highlight_indices = function () {
@@ -516,7 +516,7 @@ SyntaxModeGame.prototype.process_correct_answer = function () {
     
     var cell_1 = random_choice(SyntaxModeGame.cell_1_feedback_right) + '<br><br>' +
     'The syntax of <em>' + asked_words.join(' ').
-    replace(/[^a-zA-ZāēīōūĀĒĪŌŪ ]/g, '') + '</em> is:<br>' +
+    replace(/[^a-zA-ZāēīōūĀĒĪŌŪ\-' ]/g, '') + '</em> is:<br>' +
     syntax_info + '<br>&nbsp;';
     var fbox = el("feedbackbox");
     el('questionbox').innerHTML = '';

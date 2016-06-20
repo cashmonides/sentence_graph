@@ -220,7 +220,10 @@ var get_syntax_questions = function (fn) {
     });
 }
 
-var delete_sentence_from_firebase = function (chapter, number) {
+var delete_sentence_from_firebase = function (chapter, number, callback) {
+    if (!callback) {
+        callback = function () {};
+    }
     Persist.get(['sentence_mf'], function (x) {
         var v = x.val();
         var z = null;
@@ -233,6 +236,7 @@ var delete_sentence_from_firebase = function (chapter, number) {
         }
         
         if (z === null) {
+            callback();
             throw 'Trying to delete a nonexistant sentence!';
         }
         
@@ -255,7 +259,7 @@ var delete_sentence_from_firebase = function (chapter, number) {
         
         console.log(v);
         
-        Persist.set(['sentence_mf'], v);
+        Persist.set(['sentence_mf'], v, callback);
     });
 }
 

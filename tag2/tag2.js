@@ -488,7 +488,7 @@ function generate_buttons() {
 //FUNCTION summary
 //no input, no return, just side effects: clears all tags on the highlighted word
 //called by: the delete tag button on the html page
-function delete_tags(){
+function delete_tags() {
     var indices = word_selector.get_selected_indices();
     var region = sentence.get_region(indices);
     region.clear_tags();
@@ -570,7 +570,7 @@ function local_submit_sentence(){
 //FUNCTION summary
 //no input, calls save which has no return, just side effects: appends a child to firebase
 //called by: the submit button on the html page
-function global_submit_sentence(){
+function global_submit_sentence() {
     console.log('sentence =', sentence);
     var sentence_chapter = el("chapter_number_box").value;
     var sentence_number = el("sentence_number_box").value;

@@ -4,7 +4,7 @@
 
     <meta charset="UTF-8">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../tag2/style.css">
 	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 	<script src="../mf/syntax.js"></script>
 	
@@ -30,43 +30,17 @@
     <script src="../syntax_mode_utils/answer_type.js"></script>
     <script src="../syntax_mode_utils/get_syntax_question.js"></script>
     
-    <script src="alias_dict.js"></script>
-    <script src="tag_auto.js"></script>
-    <script src="tag2.js"></script>
+    <script src="../tag2/alias_dict.js"></script>
+    <script src="../tag2/advanced_autotag.js"></script>
 
     <title>Tag</title>
 
 </head>
 <body>
-    <!--keycode13 = enter-->
     <textarea id="sentencebox" style="width: 500px; height: 100px;"></textarea>
-    <button onclick="sentence_entered()">Start tagging</button>
-    <br/>
-    <div id="box"></div>
-    <input type="text" id="chapter_number_box" width="100">CHAPTER<br>
-    <input type="text" id="sentence_number_box" width="100">SENTENCE<br>
-    <button onclick="set_sentence_language('mf')">Morelad & Fleischer</button>
-    <button onclick="set_sentence_language('latin_author')">Latin Author</button>
-    <button onclick="set_sentence_language('other')">Other</button>
-    <button onclick="local_submit_sentence()">local submit</button>
-    <button onclick="global_submit_sentence()">global submit</button>
-    <button onclick="delete_tags()">delete tags</button>
-    <button onclick="clear_all_highlights()">clear highlights</button>
-    <button onclick="generate_syntax_report()">generate syntax report</button>
-    <button onclick="generate_syntax_answers_report()">generate syntax answers report</button>
-    <button onclick="generate_mf_answers_report()">generate mf answers report</button>
-    <div id="tagger_drop_downs"></div>
-    <div id="buttons"></div>
-    <select multiple size = "10" id="allregions"></select>
-    <select multiple size = "10" id="subregions"></select>
-    <br>
-    <select multiple size = "10" id="tags"></select>
-    <select multiple size = "10" id="regions" ></select>
-    <br>
-    <textarea id='syntax_report' style="height: 600px; width: 600px;"></textarea>
-    <br>
+    <button onclick="advanced_auto.full_process()">Start tagging</button>
     
-    <script>
+    <!--<script>
     while (true) {
         var password = prompt('Type in the password.');
         var correct_hash = 1942621097; // The correct value for the hash.
@@ -76,6 +50,6 @@
             alert('Try again!');
         }
     }
-    </script>
+    </script>-->
 </body>
 </html>

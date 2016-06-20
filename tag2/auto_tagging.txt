@@ -72,7 +72,7 @@ numquid secundis patitur in rebus modum,
 fessis quietem? novi ego ingenium viri 
 indocile; flecti non potest – frangi potest.                 	200
 proinde antequam se firmat aut vires parat,
-petatur ultro, ne quiescentem petat@pres|subjunct|ps|purpose.
+petatur ultro, ne quiescentem petat@pres|subjunct|ps|purpose|subseq.
 aut perdet aut peribit; in medio est scelus
 positum occupanti. 
 
@@ -473,7 +473,7 @@ Ipsosque, per quos fallere alium cogitas,    320
 falles? 
 
 ATREVS: 
-	                Ut ipsi crimine et culpa vacent@pres|subj|purpose|ps.
+	                Ut ipsi crimine et culpa vacent@pres|subj|purpose|ps|subseq.
 quid@adv`acc enim necesse est liberos sceleri meo
 inserere? per nos odia se@o nostra explicent –
 
@@ -782,7 +782,7 @@ pati = subj inf
 
 TANTALVS: 
 Nec abnuendum est, si dat imperium deus,
-nec appetendum est. frater ut regnes@pressubj|ic rogat.
+nec appetendum est. frater ut regnes@pres|subj|ic|ps|subseq rogat.
 
 THYESTES: 
 Rogat? timendum est; errat hic aliquis dolus.
@@ -811,7 +811,7 @@ TANTALVS:
 			Quam tamen fraudem times?
 
 THYESTES: 
-Omnem. timori quem meo statuam@pressubj|delib modum?
+Omnem. timori quem meo statuam@pres`subj|present`deliberative modum?
 tantum@adv`acc potest quantum odit. 
 
 statuam - deliberative
@@ -904,11 +904,7 @@ sed fateor, Atreu, fateor, admisi omnia
 quae credidisti. pessimam causam meam 
 hodierna pietas fecit; est prorsus nocens	515
 quicumque visus tam bono fratri est nocens.
-
-
-***********************
-
-lacrimis agendum est. supplicem primus vides,
+lacrimis@means agendum est. supplicem primus vides,
 hae te precantur pedibus intactae manus;
 ponatur omnis ira et ex animo tumor
 erasus abeat. obsides fidei accipe                               	520
@@ -927,11 +923,11 @@ ATREVS:
 aufer meosque potius amplexus pete.
 vos quoque, senum praesidia, tot iuvenes, meo
 pendete collo. – squalidam vestem exue, 
-oculisque nostris parce et ornatus cape	525
+oculisque nostris@dat`intrans parce et ornatus cape	525
 pares meis, laetusque fraterni imperi
-capesse partem. maior haec laus est mea,
+capesse partem. maior haec laus est mea@abl`comp,
 fratri paternum reddere incolumi decus;
-habere regnum casus est, virtus dare. 
+habere regnum casus est, virtus@p dare. 
 
 nostris - dat with certain intransitive
 mea - abl of comparison
@@ -941,7 +937,7 @@ virtus - pred nom
 
 THYESTES: 
 Di paria, frater, pretia pro tantis tibi                               530
-meritis rependant. regiam capitis notam
+meritis rependant@pres`subj|jussive. regiam capitis notam
 squalor recusat noster et sceptrum manus
 infausta refugit. liceat in media mihi
 latere turba.
@@ -954,13 +950,13 @@ rependant - jussive
 ***********************
 
 THYESTES: 
-Meum esse credo quidquid est, frater, tuum.	535
+Meum@pa esse credo quidquid@s est, frater, tuum@p.	535
 
 ATREVS: 
 Quis influentis dona fortunae abnuit?
 
 THYESTES: 
-Expertus est quicumque quam facile effluant. 
+Expertus est quicumque quam facile effluant@pres`subj|iq. 
 
 ATREVS: 
 Fratrem potiri gloria ingenti vetas?
@@ -984,7 +980,7 @@ sed iura et arma servient mecum tibi.
 
 
 		          ATREVS: 
-Imposita capiti vincla venerando gere; 
+Imposita capiti@comp vincla venerando gere; 
 ego destinatas victimas superis dabo. 		545
 [Exit.]
 
@@ -995,8 +991,8 @@ capiti - dative with a compound
 CHORVS: 
 Credat hoc quisquam? ferus ille et acer
 nec potens mentis truculentus Atreus
-fratris aspectu stupefactus haesit.
-nulla vis maior pietate vera est; 
+fratris aspectu@abl`cause stupefactus haesit.
+nulla vis maior pietate@abl`comp vera est; 
 iurgia externis inimica durant,                               	550
 quos amor verus tenuit, tenebit.
 
@@ -1012,10 +1008,10 @@ ira cum magnis agitata causis
 gratiam rupit cecinitque bellum,
 cum leves frenis sonuere turmae, 
 fulsit hinc illinc agitatus ensis,		555
-quem movet crebro furibundus ictu
+quem movet crebro furibundus ictu@means
 sanguinem Mavors cupiens recentem, 
-opprimit ferrum manibusque iunctis
-ducit ad pacem Pietas negantes. 
+opprimit ferrum manibusque@manner iunctis
+ducit ad pacem Pietas negantes@o. 
 
 ictu - abl means
 manibusque - abl of manner
@@ -1025,11 +1021,11 @@ negantes - acc do
 
      Otium tanto subitum e tumultu                               	560
 quis deus fecit? modo per Mycenas
-arma civilis crepuere belli.
+arma@s civilis crepuere belli.
 pallidae natos tenuere matres,
 uxor armato timuit marito, 
 cum manum invitus sequeretur ensis,		565
-sordidus pacis vitio quietae.
+sordidus pacis vitio@abl`cause quietae.
 
 arma - subj nom
 vitio - abl cause
@@ -1037,9 +1033,9 @@ vitio - abl cause
 ***********************
 
 ille labentes renovare muros,
-hic situ quassas stabilire turres,
+hic situ@abl`cause quassas stabilire turres,
 ferreis portas cohibere claustris 
-ille certabat, pavidusque pinnis                               	570
+ille certabat, pavidusque pinnis@comp                              	570
 anxiae noctis vigil incubabat. 
 
 situ - abl cause
@@ -1047,7 +1043,7 @@ pinnis - dat with a compound
 
 ***********************
 
-[peior est bello timor ipse belli.]
+[peior est bello@abl`comp timor ipse belli.]
 iam minae saevi cecidere ferri,
 iam silet murmur grave classicorum, 
 iam tacet stridor litui strepentis;		575
@@ -1061,13 +1057,13 @@ bello - abl of comparison
 Bruttium Coro feriente pontum,
 Scylla pulsatis resonat cauernis 
 ac mare in portu timuere nautae                               	580
-quod rapax haustum revomit Charybdis,
+quod@o rapax haustum revomit Charybdis,
 et ferus Cyclops metuit parentem
 rupe ferventis residens in Aetnae,
-ne superfusis violetur undis 
-ignis aeternis resonans caminis,		585
+ne superfusis violetur@pres|subj|subseq|ps|fear`clause undis 
+ignis aeternis resonans caminis@abl`ell`spat,		585
 et putat mergi sua posse pauper
-regna Laertes Ithaca tremente.
+regna@sa Laertes Ithaca tremente.
 
 violetur - fear clause
 quod - acc do
@@ -1076,10 +1072,10 @@ regna = acc subject of an indirect statement
 
 ***********************
 
-si suae ventis cecidere vires,
+si suae ventis@sep cecidere vires,
 mitius stagno pelagus recumbit; 
 alta, quae navis timuit secare                               	590
-hinc et hinc fusis speciosa velis,
+hinc et hinc fusis speciosa velis@ablative`of`respect,
 strata ludenti patuere cumbae,
 et vacat mersos numerare pisces
 hic, ubi ingenti modo sub procella 
@@ -1091,7 +1087,7 @@ ventis - abl of separation
 ***********************
 
      Nulla sors longa est. dolor ac uoluptas
-invicem cedunt; brevior voluptas.
+invicem cedunt; brevior@p voluptas.
 ima permutat levis hora summis.
 
 brevior = pred nom
@@ -1099,7 +1095,7 @@ brevior = pred nom
 ***********************
 
 ille qui donat diadema fronti, 
-quem genu nixae tremuere gentes,                               	600
+quem@o genu nixae tremuere gentes,                               	600
 cuius ad nutum posuere bella
 Medus et Phoebi propioris Indus
 et Dahae Parthis equitem minati,
@@ -1114,9 +1110,9 @@ quem - acc do
      Vos quibus rector maris atque terrae
 ius dedit magnum necis atque vitae,
 ponite inflatos tumidosque vultus. 
-quidquid a vobis minor expavescit, 610
+quidquid@o a vobis minor expavescit, 610
 maior hoc vobis dominus minatur;
-omne sub regno graviore regnum est.
+omne sub regno graviore regnum@s est.
 quem dies vidit veniens superbum,
 hunc dies vidit fugiens iacentem. 
 
@@ -1131,9 +1127,9 @@ nemo desperet meliora lassis.
 miscet haec illis prohibetque Clotho
 stare Fortunam, rotat omne fatum.
 nemo tam divos habuit faventes, 
-crastinum ut posset sibi polliceri; 620
+crastinum@o ut posset sibi polliceri; 620
 res deus nostras celeri citatas
-turbine versat. 
+turbine versat@imp`subj|result`clause. 
 
 
 crastinum = acc do
@@ -1148,11 +1144,11 @@ posset = result clause
 NVNTIVS: 
 Quis me per auras turbo praecipitem vehet
 atraque nube involvet, ut tantum nefas 
-eripiat oculis? o domus Pelopi quoque
-et Tantalo pudenda! 			625
+eripiat@pres|subj|subseq|ps|purpose oculis? o domus Pelopi quoque   625
+et Tantalo pudenda!
 
 CHORVS: 
-		        Quid portas novi?
+		        Quid portas novi@part?
 
 novi - parttitive
 eripiat - purpose
@@ -1162,7 +1158,7 @@ eripiat - purpose
 NVNTIVS: 
 Quaenam ista regio est? Argos et Sparte, pios
 sortita fratres, et maris gemini premens
-fauces Corinthos, an feris Hister fugam 
+fauces Corinthos@s, an feris Hister fugam 
 praebens Alanis, an sub aeterna nive                               630
 Hyrcana tellus, an vagi passim Scythae?
 quis hic nefandi est conscius monstri locus?
@@ -1175,7 +1171,7 @@ CHORVS:
 Effare, et istud pande, quodcumque est, malum.
 
 NVNTIVS: 
-Si steterit animus, si metu corpus rigens 
+Si steterit@fp|ind|fmv`emph animus, si metu corpus rigens 
 remittet artus. haeret in vultu trucis		635
 imago facti. ferte me insanae procul,
 illo, procellae, ferte, quo fertur dies
@@ -1192,8 +1188,6 @@ CHORVS:
 quid sit quod horres ede et auctorem indica; 
 non quaero quis sit, sed uter. effare ocius.                  	640
 
-***********************
-
 NVNTIVS: 
 In arce summa Pelopiae pars est domus
 conversa ad Austros, cuius extremum latus
@@ -1201,7 +1195,7 @@ aequale monti crescit atque urbem premit
 et contumacem regibus populum suis 
 habet sub ictu. fulget hic turbae capax		645
 immane tectum, cuius auratas trabes
-variis columnae nobiles maculis ferunt.
+variis columnae nobiles maculis@ablative`of`description ferunt.
 
 maculis - abl of description
 
@@ -1213,7 +1207,7 @@ arcana in imo regio secessu iacet, 650
 alta vetustum valle compescens nemus,
 penetrale regni, nulla qua laetos solet
 praebere ramos arbor aut ferro coli, 
-sed taxus et cupressus et nigra ilice 
+sed taxus et cupressus et nigra ilice@abl`cause 
 obscura nutat silva, quam supra eminens	655
 despectat alte quercus et vincit nemus.
 
@@ -1225,7 +1219,7 @@ hinc auspicari regna Tantalidae solent,
 hinc petere lassis rebus ac dubiis opem.
 affixa inhaerent dona; vocales tubae 
 fractique currus, spolia Myrtoi maris,                      	660
-iunctaeque falsis axibus pendent rotae
+iunctaeque falsis axibus@ablative`of`description pendent rotae
 et omne gentis facinus. hoc Phrygius loco
 fixus tiaras Pelopis, hic praeda hostium
 et de triumpho picta barbarico chlamys. 
@@ -1236,16 +1230,16 @@ axibus - description
 
 fons stat sub umbra tristis et nigra piger	665
 haeret palude; talis est dirae Stygis
-deformis unda quae facit caelo fidem.
+deformis unda quae facit caelo@abl`ell`spat fidem.
 
 caelo - ablative with ellipsed spatial preposition
 
 ***********************
 hinc nocte caeca gemere ferales deos
 fama est, catenis lucus excussis sonat 
-ululantque manes. quidquid audire est metus    	670
+ululantque manes. quidquid@s audire est metus@p    	670
 illic videtur; errat antiquis vetus
-emissa bustis turba et insultant loco
+emissa bustis turba et insultant loco@abl`ell`spat
 maiora notis monstra. 
 
 
@@ -1259,7 +1253,7 @@ micare silva flamma, et excelsae trabes
 ardent sine igne. saepe latratu nemus		675
 trino remugit, saepe simulacris domus
 attonita magnis. nec dies sedat metum;
-nox propria luco est, et superstitio inferum
+nox propria luco@dat`poss est, et superstitio inferum
 in luce media regnat. 
 
 luco - dative with possessor
@@ -1269,15 +1263,15 @@ luco - dative with possessor
 hinc orantibus 
 responsa dantur certa, cum ingenti sono                     	680
 laxantur adyto fata et immugit specus
-vocem deo solvente. quo postquam furens
+vocem deo@abs solvente. quo postquam furens
 intravit Atreus liberos fratris trahens,
-ornantur arae – quis queat digne eloqui? 
+ornantur arae – quis queat@pres|subj|present`potential digne eloqui? 
 post terga iuvenum nobiles revocat manus	685
 et maesta vitta capita purpurea ligat.
 non tura desunt, non sacer Bacchi liquor
-tangensque salsa victimam culter mola; 
+tangensque salsa victimam culter mola@means; 
 servatur omnis ordo, ne tantum nefas 
-non rite fiat. 
+non rite fiat@pres|subj|purpose|ps|subseq. 
 
 deo - abl subject
 queat - potential
@@ -1294,17 +1288,17 @@ Ipse est sacerdos, ipse funesta prece
 letale carmen ore violento canit;
 stat ipse ad aras, ipse devotos neci
 contrectat et componit et ferro parat, 
-attendit ipse; nulla pars sacri perit.		695
+attendit ipse; nulla pars sacri@part perit.		695
 
 sacri - partitive genitive
 ***********************
 
 lucus tremescit, tota succusso solo
-nutavit aula, dubia quo pondus daret
+nutavit aula, dubia quo pondus daret@iq`orig`del|imp`subj
 ac fluctuanti similis, e laevo aethere
 atrum cucurrit limitem sidus trahens, 
 libata in ignes vina mutato fluunt 700
-cruenta Baccho, regium capiti decus
+cruenta Baccho@abs, regium capiti decus
 bis terque lapsum est, flevit in templis ebur.
 
 daret - ind question original deliberative
@@ -1313,7 +1307,7 @@ Baccho - abl subject
 ***********************
 movere cunctos monstra, sed solus sibi
 immotus Atreus constat atque ultro deos 
-terret minantes iamque dimissa mora		705
+terret minantes iamque dimissa mora@abs		705
 adsistit aris, torvum et obliquum intuens. 
 
 mora - abl subj
@@ -1322,7 +1316,7 @@ mora - abl subj
 ***********************
 ieiuna silvis qualis in Gangeticis
 inter iuvencos tigris erravit duos,
-utriusque praedae cupida, quo primum ferat 
+utriusque praedae cupida, quo primum ferat@iq`orig`del|p`subj
 incerta morsus (flectit hoc rictus suos, 710
 illo reflectit et famem dubiam tenet) –
 
@@ -1334,7 +1328,7 @@ sic dirus Atreus capita devota impiae
 speculatur irae. quem prius mactet sibi
 dubitat, secunda deinde quem caede immolet. 
 nec interest, sed dubitat et saevum scelus	715
-iuvat ordinare. 
+iuvat ordinare@si. 
 
 ordinare - subj inf
 
@@ -1350,19 +1344,19 @@ avo dicatur; Tantalus prima hostia est.
 
 
 CHORVS: 
-Quo iuvenis animo, quo tulit vultu necem? 
+Quo iuvenis animo@manner, quo tulit vultu necem? 
 
 animo - abl manner
 
 ***********************
 
 NVNTIVS: 
-Stetit sui securus et non est preces                               	720
+Stetit sui@epexegetical`genitive securus et non est preces@sa`not`is                               	720
 perire frustra passus. ast illi ferus
 in vulnere ensem abscondit et penitus premens
 iugulo manum commisit; educto stetit
 ferro cadaver, cumque dubitasset diu 
-hac parte an illa caderet, in patruum cadit.	725
+hac parte an illa caderet@iq`orig`del|imp`subj, in patruum cadit.	725
 
 
 sui - epexegetical genitive
@@ -1373,8 +1367,8 @@ caderet - ind question orig deliberative
 ***********************
 
 tunc ille ad aras Plisthenem saevus trahit
-adicitque fratri. colla percussa amputat;
-cervice caesa truncus in pronum ruit,
+adicitque fratri@comp. colla percussa amputat;
+cervice@abs caesa truncus in pronum ruit,
 querulum cucurrit murmure incerto caput. 
 
 fratri - dative with a compound
@@ -1384,7 +1378,7 @@ cervice - abl abs
 
 CHORVS: 
 Quid deinde gemina caede perfunctus facit?            	730
-puerone parcit, an scelus sceleri ingerit?
+puerone@dat`intrans parcit, an scelus sceleri ingerit?
 
 
 puerone - dative with certain intransitive verbs
@@ -1392,11 +1386,11 @@ puerone - dative with certain intransitive verbs
 ***********************
 
 NVNTIVS: 
-Silva iubatus qualis Armenia leo
-in caede multa victor armento incubat
-(cruore rictus madidus et pulsa fame 
+Silva@abl`ell`spat iubatus qualis Armenia leo
+in caede multa victor armento@comp incubat
+(cruore rictus@accusative`of`respect madidus et pulsa fame 
 non ponit iras, hinc et hinc tauros premens	735
-vitulis minatur dente iam lasso impiger) –
+vitulis minatur dente@abs iam lasso impiger) –
 
 Silva - ablative with ellipsed spatial preposition
 armento - dative with a compound
@@ -1405,9 +1399,9 @@ dente - abl absolute
 
 ***********************
 
-non aliter Atreus saevit atque ira tumet
+non aliter Atreus saevit atque ira@abl`cause tumet
 ferrumque gemina caede perfusum tenens,
-oblitus in quem fureret, infesta manu 
+oblitus in quem fureret@imp`subj|iq`orig`del, infesta manu 
 exegit ultra corpus, ac pueri statim 740
 pectore receptus ensis e tergo exstitit.
 cadit ille et aras sanguine extinguens suo
@@ -1427,7 +1421,7 @@ Exhorruistis? hactenus si stat nefas,
 pius est. 
 
 CHORVS: 
-	   An ultra maius aut atrocius		745
+	   An ultra maius@o aut atrocius		745
 natura recipit? 
 
 
@@ -1436,12 +1430,12 @@ maius - acc do
 ***********************
 
 NVNTIVS: 
-		        Sceleris hunc finem putas?
+		        Sceleris hunc finem@pa putas?
 gradus est. 
 
 CHORVS: 
-		Quid ultra potuit? obiecit feris
-lanianda forsan corpora atque igne arcuit?
+		Quid@o ultra potuit? obiecit feris
+lanianda forsan corpora atque igne@sep arcuit?
 
 
 finem - pred acc
@@ -1453,17 +1447,17 @@ igne = ablative of separation
 
 NVNTIVS: 
 Utinam arcuisset! ne tegat functos humus 
-nec solvat ignis, avibus epulandos licet                   	750
-ferisque triste pabulum saevis trahat.
+nec solvat ignis@s, avibus epulandos licet                   	750
+ferisque triste pabulum saevis trahat@p`subj|substantive`ut.
 
 trahat - substantive ut
 ignis - subj nom
 
 ***********************
 
-votum est sub hoc quod esse supplicium solet;
+votum@p est sub hoc quod@s esse supplicium solet;
 pater insepultos spectet. o nullo scelus
-credibile in aevo quodque posteritas neget! 
+credibile in aevo quodque@o posteritas neget! 
 
 votum - pred nom
 quod - subj nom
@@ -1475,10 +1469,7 @@ erepta vivis exta pectoribus tremunt		755
 spirantque venae corque adhuc pavidum salit;
 at ille fibras tractat ac fata inspicit
 et adhuc calentes viscerum venas notat.
-
-
-***********************
-postquam hostiae placuere, securus vacat 
+postquam hostiae@dat`intrans placuere, securus vacat 
 iam fratris epulis. ipse divisum secat                               760
 in membra corpus, amputat trunco tenus
 umeros patentes et lacertorum moras,
@@ -1490,7 +1481,7 @@ hostiae - dat with certain intransitive verbs
 ***********************
 
 haec veribus haerent viscera et lentis data	765
-stillant caminis, illa flammatus latex
+stillant caminis@abl`ell`spat, illa flammatus latex
 candente aeno iactat. impositas dapes
 transiluit ignis inque trepidantes focos
 bis ter regestus et pati iussus moram 
@@ -1503,7 +1494,7 @@ caminis - ablative with ellipsed spatial preposition
 ***********************
 
 stridet in veribus iecur,                          	770
-nec facile dicam corpora an flammae magis
+nec facile dicam@pres|subj|present`potential corpora an flammae magis
 gemuere. piceos ignis in fumos abit, 
 et ipse fumus, tristis ac nebula gravis,
 non rectus exit seque in excelsum levat; 
@@ -1513,7 +1504,7 @@ dicam - present|subjunctive|potential^subjunctive
 
 ***********************
 
-o Phoebe patiens, fugeris retro licet
+o Phoebe patiens, fugeris@perf`subj|substantive`ut retro licet
 medioque ruptum merseris caelo diem,
 sero occidisti! lancinat natos pater
 artusque mandit ore funesto suos; 
@@ -1529,7 +1520,7 @@ fugeris - perfect|subjunctive|substantive^ut|primary|prior^time
 
 verterit currus licet 
 sibi ipse Titan obvium ducens iter		785
-tenebrisque facinus obruat taetrum novis
+tenebrisque facinus obruat@p`subj|substantive`ut taetrum novis
 nox missa ab ortu tempore alieno gravis,
 tamen videndum est; tota patefient mala.
 		[An unnatural darkness settles over the world.]
@@ -1542,14 +1533,9 @@ obruat - present|subjunctive|substantive^ut|primary|simultaneous
 CHORVS: 
 Quo, terrarum superumque parens, 
 cuius ad ortus noctis opacae                               	790
-decus omne fugit, quo vertis iter
+decus@o omne fugit, quo vertis iter
 medioque diem perdis Olympo?
 cur, Phoebe, tuos rapis aspectus?
-
-decus - direct^object
-
-************
-
 nondum serae nuntius horae 
 nocturna vocat lumina Vesper,		795
 nondum Hesperiae flexura rotae

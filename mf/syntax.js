@@ -43,7 +43,7 @@ var syntax_module_filter = {
     		"accusative of duration of time": 7,
     		"accusative of extent of space": 7,
     		"accusative of exclamation": 15,
-    		"subject accusative of an infinitive not in indirect statement": 15, 
+    		"subject accusative of an infinitive not in indirect statement": 15,
     		"accusative of the gerund to express purpose with a verb of motion": 16, 
     		"accusative of the feeler of the feeling with an impersonal verb of emotional distress": 16, 
     		"accusative of the [gerund/gerundive] with ad to show purpose": 16, 
@@ -51,7 +51,7 @@ var syntax_module_filter = {
     		"adverbial accusative": 18,
     		"accusative direct object of a verb in the middle voice": 18,
     		"accusative of respect": 18,
-    		"predicate accusative of an infinite not in indirect statement": "Caligula"
+    		"predicate accusative of an infinitive not in indirect statement": "Caligula"
     	},
     	"ablative": {
     		"ablative of means": 1, 

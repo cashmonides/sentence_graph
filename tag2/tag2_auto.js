@@ -22,6 +22,7 @@
 // current issue: produce_tags_list_tag_auto always returns [] (the empty list)
 // No longer.
 
+var tag_regex = /@+[a-zA-Z_\_\-|`^]+/g;
 
 var update_word_selector_tags_auto = function (tags) {
     // Each tag has an index and a name.
@@ -78,8 +79,6 @@ var get_alias = function (x) {
     }
     return x;
 }
-
-var tag_regex = /@+[a-zA-Z_\_|~`^]+/g;
 
 var produce_tags_list_tag_auto = function (text) {
     var words = words_as_in_text(text);
@@ -143,7 +142,7 @@ var raw_tags_in_word_auto = function (word) {
     // Be defensive and remove the at sign.
     e = remove_at_sign(e);
     
-    return e.split('|');
+    return e.split(/[|\-]/g);
 }
 
 var get_name_tag_auto = function (d) {

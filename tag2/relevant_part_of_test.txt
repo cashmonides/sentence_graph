@@ -1,0 +1,62 @@
+chapter: "test_Lucretius 1"
+
+// issue: predicate accusative of an infinitive not in indirect statement
+// turned out to be a bad spelling in syntax (infinite)
+
+
+*1
+
+ Aeneadum genetrix, hominum divomque voluptas,	1
+alma Venus, caeli subter labentia signa	
+quae mare navigerum, quae terras frugiferentis	
+concelebras, per te quoniam genus omne animantum	
+concipitur visitque exortum lumina solis:	5
+te, dea, te fugiunt venti, te nubila caeli	
+adventumque tuum, tibi suavis daedala tellus	
+summittit flores, tibi rident aequora ponti	
+placatumque nitet diffuso lumine caelum.
+nam simul ac species patefactast verna diei	10
+et reserata viget genitabilis aura favoni,	
+aeriae primum volucris te, diva, tuumque	
+significant initum perculsae corda tua vi.
+
+
+corda - accusative of respect
+
+
+*15
+
+inde ferae pecudes persultant pabula laeta	15
+et rapidos tranant amnis: ita capta lepore	14
+te sequitur cupide quo quamque inducere pergis.	16
+denique per maria ac montis fluviosque rapacis	
+frondiferasque domos avium camposque virentis	
+omnibus incutiens blandum per pectora amorem	
+efficis ut cupide generatim saecla propagent.	20
+
+
+propagent - present subjunctive substantive ut clause     //primary sequence and simultaneous time implied
+
+
+
+*21
+quae quoniam rerum naturam sola gubernas	
+nec sine te quicquam@1 dias in luminis oras	
+exoritur neque fit laetum neque amabile quicquam,	
+te@2 sociam studeo scribendis versibus esse,	
+quos ego de rerum natura pangere conor	25
+Memmiadae nostro, quem tu, dea, tempore in omni	
+omnibus ornatum voluisti excellere rebus.
+
+@1quicquam - subject nominative
+laetum - predicate nominative
+@2te - subject accusative of an infinitive not in indirect statement
+sociam - predicate accusative of an infinitive not in indirect statement
+
+*28
+quo magis aeternum da dictis, diva, leporem.	
+effice ut interea fera moenera militiai	
+per maria ac terras omnis sopita quiescant;	30
+
+
+quiescant - pres subj subst ut
