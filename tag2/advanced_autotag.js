@@ -89,7 +89,6 @@ advanced_auto.relevant_tag_types = function (tag_groups) {
 }
 
 advanced_auto.is_not_absence_tag = function (tag) {
-    console.log(tag);
     return tag.type !== 'absence';
 }
 
@@ -214,7 +213,8 @@ advanced_auto.interpret_tag = function (tag) {
 
 
 // This somewhat naive approach works since multiple possibilities
-// that are not quickly shown to be impossible are likely very rare.
+// that are not quickly shown to be impossible are likely very rare,
+// and since a typical list of words will be no more than 20 words long.
 advanced_auto.tag_descs_to_tags = function (words) {
     var a;
     var b;
@@ -268,9 +268,10 @@ advanced_auto.check_tags_validity = function (word, tags) {
 }
 
 advanced_auto.getter = function (x) {
-    var r= new RegExp('^' + x + ': *(.*)$', 'm');
+    var r = new RegExp('^' + x + ': *(.*)$', 'm');
     return function (text) {
-        return r.exec(text)[1].replace(/['"]/g, '');
+        return r.exec(text)[1].replace(/['"]/g, '').
+        replace(/ +/g, ' ').replace(/^ /g, '').replace(/ $/g, '');
     }
 }
 
