@@ -51,7 +51,7 @@ var get_tags_status = function (x) {
 }
 
 var has_tags = function (x) {
-    return x.tags.length > 0;
+    return x.tags && x.tags.length > 0;
 }
 
 var is_proper_tag = function (x) {
@@ -100,8 +100,11 @@ var process_region_from_firebase = function (sentence_data) {
 
 var parse_firebase_syntax_data = function (sentence_data) {
     // console.log(sentence_data);
-    var sentence_text = sentence_data.words;
-    var regions_with_tags = sentence_data.regions.map(with_tags).filter(has_tags);
+    // var sentence_text = sentence_data.words;
+    if (sentence_data === undefined || sentence_data === null) {
+        throw 'Somehow, this sentence does not seem to exist.'
+    }
+    var regions_with_tags = sentence_data.regions.filter(has_tags).map(with_tags);
     return regions_with_tags.map(process_region_from_firebase(sentence_data));
 }
 
@@ -179,6 +182,9 @@ var get_sentence_from_firebase = function (path, fn) {
 
 var flat_sentences = function (x) {
     var d = {};
+    if (typeof x !== 'object' || x === null) {
+        return d;
+    }
     if ('type' in x && x.type === 'sentence') {
         d[path_display(x.path)] = x;
         return d;

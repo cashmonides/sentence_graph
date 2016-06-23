@@ -61,7 +61,8 @@ var add_sentences_to_firebase = function (sentences) {
             node = v;
             for (var j = 0; j < path.length - 1; j++) {
                 node_name = path.slice(0, j + 1).join('_');
-                if (!(node_name in node)) {
+                if (!(node_name in node) || typeof node[node_name] !== 'object'
+                || node[node_name] === null) {
                     node[node_name] = {};
                 }
                 node = node[node_name];
@@ -89,7 +90,7 @@ advanced_auto.at_mark_regex = /\d*@\d*/g;
 
 // This regex is not optimal, but I think it strikes the right balance
 // of workability, maintainability, readability, and Cthulu-worship.
-advanced_auto.process_part_regex_parts = ['\\*(.+)', '([^]*?)', '((\n+[^\n\\-=]+[\\-=].*)+)'];
+advanced_auto.process_part_regex_parts = ['\\*(.+)', '([^]*?)', '((\n+[^\n\\=]+=.*)+)'];
 
 advanced_auto.process_part_regex = new RegExp(
     '^' + advanced_auto.process_part_regex_parts.join('\n+') + '\n*$');
@@ -146,7 +147,7 @@ advanced_auto.relevant_tag_types = function (tag_groups) {
 }
 
 advanced_auto.is_not_absence_tag = function (tag) {
-    return tag.type !== 'absence';
+    return tag.text !== 'absence';
 }
 
 advanced_auto.remove_absence_tags = function (tags) {
@@ -194,7 +195,7 @@ advanced_auto.combine_tags_on_word = function (word, tag_groups) {
     var relevant_tag_types = advanced_auto.relevant_tag_types(tag_groups);
     var surviving_tags = [];
     for (var i in relevant_tag_types) {
-        surviving_tags.push(advanced_auto.winning_tag(word, tag_groups, i))
+        surviving_tags.push(advanced_auto.winning_tag(word, tag_groups, i));
     }
     var r = advanced_auto.remove_absence_tags(surviving_tags);
     if (r.length === 0) {
@@ -219,8 +220,9 @@ advanced_auto.tag_group_from_tag_list = function (tag_list) {
     for (var i = 0; i < tag_list.length; i++) {
         tag = tag_list[i];
         if (tag.attribute in d) {
-            alert('Some tag overexpanded, that is, it had two distinct contradictory implications for ' +
-            tag.attribute + '. Definitely contact Akiva.');
+            alert('Some tag overexpanded, that is, it had two distinct ' +
+            'contradictory implications for ' + tag.attribute +
+            '. Definitely contact Akiva.');
             throw advanced_auto.ERROR;
         }
         d[tag.attribute] = tag;
@@ -248,7 +250,27 @@ advanced_auto.tag_text_to_tag = function (tag_text) {
     return null;
 }
 
+advanced_auto.is_override_tag = function (tag) {
+    var tag_words = tag.split(' ');
+    return tag_words[0] === 'no' && verb_drop_down_types.indexOf(
+        tag_words.slice(1).join(' ')) !== -1;
+}
+
+advanced_auto.make_override_tag = function (tag) {
+    var attribute = tag.split(' ').slice(1).join(' ');
+    var d = {};
+    d[attribute] = {
+        'attribute': attribute,
+        'text': 'absence',
+        'pos': 'verb'
+    };
+    return d;
+}
+
 advanced_auto.interpret_tag = function (tag) {
+    if (advanced_auto.is_override_tag(tag)) {
+        return advanced_auto.make_override_tag(tag);
+    }
     var tags = [tag];
     var repl = true;
     while (repl) {
@@ -328,6 +350,10 @@ advanced_auto.check_tags_validity = function (word, tags) {
 advanced_auto.getter = function (x) {
     var r = new RegExp('^' + x + ': *(.*)$', 'm');
     return function (text) {
+        if (!r.exec(text)) {
+            alert('No ' + x + ' can be found!');
+            throw advanced_auto.ERROR;
+        }
         return strip(r.exec(text)[1].replace(/['"]/g, ''));
     }
 }

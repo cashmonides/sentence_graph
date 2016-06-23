@@ -1,3 +1,6 @@
+//change to: dative with a compound
+
+
 var syntax_module_filter = {
 	"noun_syntax" : {
 		"nominative": {
@@ -141,7 +144,9 @@ var syntax_module_filter = {
 			"anticipatory (priusquam/antequam/dum) clause without anticipation due to subjunctivitis": "Caligula",
 			"indirect question standing in for original deliberative": "Caligula",
 			"2nd singular generalizing subjunctive": "Caligula",
-			"relative clause of cause": "Caligula"
+			"relative clause of cause": "Caligula",
+			"anticipatory (priusquam/antequam/dum) clause": "Caligula", //fix this later, make it part of unit 14 or whatever
+			"quod the fact that clause": "Caligula" //fix this later, make it part of unit 18 or wherever
 	    },
         "sequence": {
         	"primary": 2,

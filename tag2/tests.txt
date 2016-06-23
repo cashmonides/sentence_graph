@@ -1,13 +1,25 @@
 // current text is L 1.1-564
 //convention: * is any metacharacter that works
 
+begin comment
+the infamous "love bug"
+(seems to have actually been some browser-storing-old-data issue)
+
+chapter: test
+
+*1
+May we love to test!
+
+love = present subjunctive jussive no sequence no relative time
+end comment
+
 //begin input below
 
 chapter: "test_Lucretius 1"
 
 
 
-*1
+*1-9
 
  Aeneadum genetrix, hominum divomque voluptas,	1
 alma Venus, caeli subter labentia signa	
@@ -18,16 +30,26 @@ te, dea, te fugiunt venti, te nubila caeli
 adventumque tuum, tibi suavis daedala tellus	
 summittit flores, tibi rident aequora ponti	
 placatumque nitet diffuso lumine caelum.
+
+adventumque = accusative direct object
+
+
+*10-13
 nam simul ac species patefactast verna diei	10
 et reserata viget genitabilis aura favoni,	
 aeriae primum volucris te, diva, tuumque	
 significant initum perculsae corda tua vi.
 
 
-corda - accusative of respect
+corda = accusative of respect
 
 
-*15
+
+
+
+
+
+*14-20
 
 inde ferae pecudes persultant pabula laeta	15
 et rapidos tranant amnis: ita capta lepore	14
@@ -38,11 +60,11 @@ omnibus incutiens blandum per pectora amorem
 efficis ut cupide generatim saecla propagent.	20
 
 
-propagent - present subjunctive substantive ut clause     //primary sequence and simultaneous time implied
+propagent = present subjunctive substantive ut clause     //primary sequence and simultaneous time implied
 
 
 
-*21
+*21-27
 quae quoniam rerum naturam sola gubernas	
 nec sine te quicquam@1 dias in luminis oras	
 exoritur neque fit laetum neque amabile quicquam,	
@@ -51,61 +73,134 @@ quos ego de rerum natura pangere conor	25
 Memmiadae nostro, quem tu, dea, tempore in omni	
 omnibus ornatum voluisti excellere rebus.
 
-@1quicquam - subject nominative
-laetum - predicate nominative
-@2te - subject accusative of an infinitive not in indirect statement
-sociam - predicate accusative of an infinitive not in indirect statement
+@1quicquam = subject nominative
+laetum = predicate nominative
+@2te = subject accusative of an infinitive not in indirect statement
+sociam = predicate accusative of an infinitive not in indirect statement
+scribendis versibus = dative of purpose not used as a predicate
 
-*28
+*28-30
 quo magis aeternum da dictis, diva, leporem.	
 effice ut interea fera moenera militiai	
 per maria ac terras omnis sopita quiescant;	30
 
+quiescant = pres subj subst ut
+quo = ablative of degree of difference
 
-quiescant - pres subj subst ut
 
-*31
+
+
+
+
+*31-40
 nam tu sola potes tranquilla pace iuvare	
 mortalis, quoniam belli fera moenera Mavors	
 armipotens regit, in gremium qui saepe tuum se	
 reiicit aeterno devictus vulnere amoris,	
 atque ita suspiciens tereti cervice reposta	35
 pascit amore avidos inhians in te, dea, visus	
-eque tuo pendet resupini spiritus ore.	
+eque tuo pendet resupini spiritus ore.
 hunc tu, diva, tuo recubantem corpore sancto	
-circum fusa super, suavis ex ore loquellas	
+circumfusa super, suavis ex ore loquellas	
 funde petens placidam Romanis, incluta, pacem;	40
+
+amore = ablative of means
+spiritus = subject nominative
+
+*41-43
 nam neque nos agere hoc patriai tempore iniquo	
 possumus aequo animo nec Memmi clara propago	
-talibus in rebus communi desse saluti.	
+talibus in rebus communi desse saluti.
+
+animo = ablative of manner
+
+*44-49
 omnis enim per se divum natura necessest	
 immortali aevo summa cum pace fruatur	45
 semota ab nostris rebus seiunctaque longe;	
 nam privata dolore omni, privata periclis,	
 ipsa suis pollens opibus, nihil indiga nostri,	
-nec bene promeritis capitur nec tangitur ira.	
+nec bene promeritis capitur nec tangitur ira.
+
+fruatur = present subjunctive substantive ut clause
+
+
+*50-53
+Quod super est, [ut] vacuas auris animumque sagacem	50
+semotum a curis adhibe veram ad rationem,	
+ne mea dona tibi studio disposta fideli,	
+intellecta prius quam sint, contempta relinquas.
+
+intellecta sint = perfect subjunctive anticipatory (priusquam/antequam/dum) clause
+relinquas = present subjunctive purpose clause primary subsequent
+
+*54-61
+nam tibi de summa caeli ratione deumque	
+disserere incipiam et rerum primordia pandam,	55
+unde omnis natura creet res, auctet alatque,	
+quove eadem@1 rursum natura perempta resolvat,	
+quae nos materiem et genitalia corpora rebus	
+reddunda in ratione vocare et semina rerum	
+appellare suemus et haec eadem usurpare	60
+corpora prima, quod ex illis sunt omnia primis.
+
+res = accusative direct object
+haec = accusative direct object
+
+
+*62-67
   Humana ante oculos foede cum vita iaceret	62
 in terris oppressa gravi sub religione,	
 quae caput a caeli regionibus ostendebat	
 horribili super aspectu mortalibus instans,	65
 primum Graius homo mortalis tollere contra	
-est oculos ausus primusque obsistere contra;	
+est oculos ausus primusque obsistere contra;
+
+mortalibus = dative with compound verbs
+
+
+*68-71
 quem neque fama deum nec fulmina nec minitanti	
 murmure compressit caelum, sed eo magis acrem	
 inritat animi virtutem, effringere ut arta	70
 naturae primus portarum claustra cupiret.	
+
+eo = ablative of degree of difference
+cupiret = imperfect subjunctive purpose clause secondary subsequent
+
+
+
+
+*72-74
 ergo vivida vis animi pervicit et extra	
 processit longe flammantia moenia mundi	
-atque omne immensum peragravit mente animoque,	
+atque omne immensum peragravit mente animoque.
+
+mente = ablative of means
+omne = accusative direct object
+
+
+*75-79
 unde refert nobis victor quid possit oriri,	75
 quid nequeat, finita potestas denique cuique	
 qua nam sit ratione atque alte terminus haerens.	
 quare religio pedibus subiecta vicissim	
-opteritur, nos exaequat victoria caelo.	
+opteritur, nos exaequat victoria caelo.
+
+possit = present subjunctive indirect question
+//in the future add: cuique = dative of possessor or finita is predicate 
+
+
+*80-83
   Illud in his rebus vereor, ne forte rearis	80
 impia te rationis inire elementa viamque	
 indugredi sceleris. quod contra saepius illa	
-religio peperit scelerosa atque impia facta.	
+religio peperit scelerosa atque impia facta.
+
+rearis = present subjunctive fear clause primary subsequent
+
+
+*84-92
 Aulide quo pacto Triviai virginis aram	
 Iphianassai turparunt sanguine foede	85
 ductores Danaum delecti, prima virorum.	
@@ -115,6 +210,11 @@ et maestum simul ante aras adstare parentem
 sensit et hunc propter ferrum celare ministros	90
 aspectuque suo lacrimas effundere civis,	
 muta metu terram genibus summissa petebat.	
+
+parentem = subject accusative of an indirect statement
+
+
+*93-101
 nec miserae prodesse in tali tempore quibat,	
 quod patrio princeps donarat nomine regem;	
 nam sublata virum manibus tremibundaque ad aras	95
@@ -123,18 +223,37 @@ perfecto posset claro comitari Hymenaeo,
 sed casta inceste nubendi tempore in ipso	
 hostia concideret mactatu maesta parentis,	
 exitus ut classi felix faustusque daretur.	100
-tantum religio potuit suadere malorum.	
+tantum religio potuit suadere malorum.
+
+donarat = pluperfect indicative quod the fact that clause
+//first occurrence of anastrophe?
+
+
+*102-106
   Tutemet a nobis iam quovis tempore vatum	
 terriloquis victus dictis desciscere quaeres.	
 quippe etenim quam multa tibi iam fingere possunt	
 somnia, quae vitae rationes vertere possint	105
 fortunasque tuas omnis turbare timore!	
+
+
+possint = present subjunctive relative clause of characteristic
+
+
+*107-111
 et merito; nam si certam finem esse viderent	
 aerumnarum homines, aliqua ratione valerent	
 religionibus atque minis obsistere vatum.	
 nunc ratio nulla est restandi, nulla facultas,	110
-aeternas quoniam poenas in morte timendum.	
-ignoratur enim quae sit natura animai,	
+aeternas quoniam poenas in morte timendum.
+
+religionibus = dative with compound verbs
+poenas = accusative direct object
+
+
+
+*112-119
+ignoratur enim quae sit@1 natura animai,	
 nata sit an contra nascentibus insinuetur	
 et simul intereat nobiscum morte dirempta	
 an tenebras Orci visat vastasque lacunas	115
@@ -142,6 +261,11 @@ an pecudes alias divinitus insinuet se,
 Ennius ut noster cecinit, qui primus amoeno	
 detulit ex Helicone perenni fronde coronam,	
 per gentis Italas hominum quae clara clueret;	
+
+@1sit = present subjunctive indirect question
+
+
+//tagged up to here
 etsi praeterea tamen esse Acherusia templa	120
 Ennius aeternis exponit versibus edens,	
 quo neque permaneant animae neque corpora nostra,	

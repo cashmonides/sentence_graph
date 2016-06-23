@@ -7,7 +7,7 @@ var SyntaxModeGame = function (path) {
     this.level = 1;
     // we might replace this (this.level??? This comment was initially on the above line.)
     // with this.current_chapter & this.current_question
-    this.current_path = new Path(path);
+    this.current_path = path;
     this.metrics = {
         'completed': 0,
         'skipped': 0
@@ -75,6 +75,7 @@ SyntaxModeGame.prototype.next_question = function () {
         this.region_number = 0;
         this.current_path.get_syntax_sentence(this.real_next_question.bind(this));
     } else {
+        console.log('moving to next region');
        this.region_number++;
        this.real_next_question(this.data);
     }

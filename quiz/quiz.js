@@ -393,55 +393,52 @@ Quiz.prototype.get_modes = function () {
 }
 
 Quiz.prototype.next_mode = function (error) {
-    var allowed;
-    console.log("DEBUG 11-28 entering next_mode");
-    if (this.user.is_mf()) {
-        allowed = {'mf': .5, 'syntax': .5}
-    } else {
-        allowed = ALL_MODULES[this.module.id].mode_ratio;
-    }
-    
-    console.log("DEBUG 12-23 allowed before = ", allowed);
-    
-    /*
-    originally:
-    for (var i in this.sick_modes) {
-        delete allowed[i];
-    }
-    */
-    
-    for (var i = 0; i < this.sick_modes.length; i++) {
-        console.log('sick mode being added = ', this.sick_modes[i])
-        delete allowed[this.sick_modes[i]];
-        console.log("DEBUG 12-23 sick mode added");
-        console.log("DEBUG 12-23 allowed after = ", allowed);
-    }
-    
-    
-    if (Object.keys(allowed).length <= 0) {
-        console.log("DEBUG 12-23 all modes are sick");
-        if (this.urgent_error_count < 5) {
-             log_urgent_error("all modes are sick", "quiz.next_mode");
-             this.urgent_error_count++;
-        }
-        throw "modes exhausted";
-    }
-    
-    // Issue: previously a new game was created every question.
-    // This is not a good idea in all cases.
-    // Solution: commit the hack of putting in each module a setting
-    // of one_game or switch. Assume no setting is switch.
-    // We do this via an early return.
-    // error is a parameter which is true if next_mode was called due to an error.
-    
     if (!error && this.game && this.module.game_change_method === 'one_game') {
         return;
     }
     
-    console.log("DEBUG 5-6 checkpoint 1");
-    var mode = weighted(allowed);
-    console.log("DEBUG 5-6 checkpoint 2 mode = ", mode);
-    console.log("DEBUG 5-6 game_mode_map[mode] = ", game_mode_map[mode]);
+    var allowed;
+    if (!(this.user.is_mf())) {
+        allowed = ALL_MODULES[this.module.id].mode_ratio;
+        
+        console.log("DEBUG 12-23 allowed before = ", allowed);
+        
+        /*
+        originally:
+        for (var i in this.sick_modes) {
+            delete allowed[i];
+        }
+        */
+        
+        for (var i = 0; i < this.sick_modes.length; i++) {
+            console.log('sick mode being added = ', this.sick_modes[i])
+            delete allowed[this.sick_modes[i]];
+            console.log("DEBUG 12-23 sick mode added");
+            console.log("DEBUG 12-23 allowed after = ", allowed);
+        }
+        
+        
+        if (Object.keys(allowed).length <= 0) {
+            console.log("DEBUG 12-23 all modes are sick");
+            if (this.urgent_error_count < 5) {
+                 log_urgent_error("all modes are sick", "quiz.next_mode");
+                 this.urgent_error_count++;
+            }
+            throw "modes exhausted";
+        }
+        
+        // Issue: previously a new game was created every question.
+        // This is not a good idea in all cases.
+        // Solution: commit the hack of putting in each module a setting
+        // of one_game or switch. Assume no setting is switch.
+        // We do this via an early return.
+        // error is a parameter which is true if next_mode was called due to an error.
+        
+        console.log("DEBUG 5-6 checkpoint 1");
+        var mode = weighted(allowed);
+        console.log("DEBUG 5-6 checkpoint 2 mode = ", mode);
+        console.log("DEBUG 5-6 game_mode_map[mode] = ", game_mode_map[mode]);
+    }
     var game;
     if (this.user.is_mf()) {
         var modes_map = {
@@ -450,7 +447,7 @@ Quiz.prototype.next_mode = function (error) {
         }
         var current_mode = modes_map[this.id.mode];
         console.log('current mode =', current_mode);
-        game = new current_mode(this.id.path.split('_'));
+        game = new current_mode(Path.from_url_params(this.id));
     } else {
         game = Quiz.get_mode(game_mode_map[mode]);
     }

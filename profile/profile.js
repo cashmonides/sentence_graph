@@ -188,7 +188,7 @@ ProfilePage.build_progress_table = function(user) {
                             
                             // All modules are hoverable.
                             m.onclick = ProfilePage.go_straight_to([
-                                ['path', i.join('_')],
+                                ['path', Path.to_url_params(i)],
                                 ['mode', mode_name]
                             ]);
                             m.class.push('clickable');

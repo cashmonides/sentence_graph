@@ -606,8 +606,9 @@ var generate_region_report = function (x, sentence_words) {
 }
 
 var generate_all_regions_report = function (sentence_regions, sentence_words) {
-    return sentence_regions.sort(raw_region_sort).map(with_tags).
-    filter(has_tags).map(function (x) {
+    console.log(sentence_regions);
+    return sentence_regions.sort(raw_region_sort).
+    filter(has_tags).map(with_tags).map(function (x) {
         return generate_region_report(x, sentence_words);
     });
 }

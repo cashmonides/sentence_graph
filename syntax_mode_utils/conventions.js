@@ -103,6 +103,9 @@ var get_applicable_conv = get_cond('applicable');
 var get_non_applicable_conv = get_cond(['non-applicable', 'not applicable']);
 
 var applies_to = function (convention, sentence) {
+    if (typeof sentence !== 'string') {
+        throw 'sentence, ' + JSON.stringify(sentence) + ', is not a string!';
+    }
     var transform = function (x) {
         return x.replace(/[ \-.\\]/g, ' ');
     }
@@ -154,7 +157,7 @@ var convention_applies = function (name, info) {
         return false;
     }
     // Check that the convention applies given the sentence.
-    if (!(applies_to(convention, info.sentence))) {
+    if (!(applies_to(convention, info.path))) {
         return false;
     }
     // Check that the conditions are met for every drop down.

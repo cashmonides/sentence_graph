@@ -1,9 +1,41 @@
-our method before asking Gio
-    - build a gloss page in sentence graph
-    - connect it to Nicky's python stuff
-    - create a mini database
-    - update website
-    - try to query the mini database
+steps
+- google debian python 3
+- call media temple and check if python 3 is problematic
+- if not:
+    - install python3
+        in terminal
+        at root (i.e. html) will work
+        yum install python3
+- if python3 is problematic:
+    - rewrite the python as python 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+steps to take
+    - make sure our python file begins with #!/usr/bin/python
+    - run chmod 775 glosser/word_db.py
+    - make sure there is a htaccess file in the same folder as the glosser.py
+    - content type application
 
 
 bugs when using this method

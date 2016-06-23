@@ -5,7 +5,7 @@ var MFModeGame = function (path) {
     this.student_answer = null;
     // this.current_chapter = null;
     // this.current_question = null;
-    this.current_path = new Path(path);
+    this.current_path = path;
     this.metrics = {
         'completed': 0,
         'skipped': 0

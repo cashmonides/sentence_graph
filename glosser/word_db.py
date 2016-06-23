@@ -1,8 +1,18 @@
-#!/usr/bin/env python3
-
+#!/usr/bin/python
+#following 4 lines are for testing, remove when operational
+print "Content-Type: application/json"
+print
+print '{"x":123}'
+exit
 # The previous comment simply establishes this file as a python file.
 # It also lets us determine what happened
 # if we get it when we should get JSON.
+from json import JSONEncoder, loads
+import logging
+import MySQLdb
+import sys
+import cgi
+
 import os
 import re
 
