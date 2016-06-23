@@ -1,3 +1,5 @@
+// tag 2 is temporarily obsolete. We hope to be able to recover reporting capability soon.
+
 var test_sentences = [
     "Rex iubeat ut nauta reginam timeat."
 ];
@@ -576,19 +578,6 @@ function global_submit_sentence() {
     var sentence_number = el("sentence_number_box").value;
     if (sentence.language_of_sentence == null) {
         alert("no language specified");
-    /*
-    } else if (isNaN(sentence_chapter) || sentence_chapter === 0) {
-        alert("no chapter specified");
-    } else if (isNaN(sentence_number) || sentence_number === 0) {
-        alert('no sentence number specified');
-    }
-    */
-    /*
-    } else if (/[\.\-\/]/g.exec(sentence_chapter)) {
-        alert("chapter specified contains dash, period, or slash");
-    } else if (/[\.\-\/]/g.exec(sentence_number)) {
-        alert('no sentence number specified');
-    }*/
     } else if (sentence.has_region([])) {
         alert('empty region detected, please do sentence again');
     } else {

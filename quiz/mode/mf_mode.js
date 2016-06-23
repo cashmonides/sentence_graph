@@ -1,14 +1,11 @@
-var MFModeGame = function (chapter, question) {
+var MFModeGame = function (path) {
     this.data = null;
     this.quiz = null;
     this.match_fraction = null;
     this.student_answer = null;
     // this.current_chapter = null;
     // this.current_question = null;
-    this.current_chapter = chapter;
-    // We have to start here since we increment first.
-    // Not anymore.
-    this.current_question = question;
+    this.current_path = new Path(path);
     this.metrics = {
         'completed': 0,
         'skipped': 0
@@ -45,24 +42,20 @@ MFModeGame.prototype.attach = function() {
     // set_display("feedback_for_input", 'none');
 };
 
-MFModeGame.prototype.get_current_question = function () {
-    // This was said to not be working, but that makes no sense.
-    return this.current_question;
-}
-
-MFModeGame.prototype.get_current_chapter = function () {
-    // This was said to not be working, but that makes no sense.
-    return this.current_chapter;
-}
-
 // Once the game is attached to the quiz, this is what must be done.
+// (currently nothing)
 MFModeGame.prototype.do_with_quiz_attachment = function () {
-    this.chapter_and_sentence_init();
+    /// this.chapter_and_sentence_init();
+}
+
+/*
+
+MFModeGame.prototype.get_current_path = function () {
+    return this.current_path;
 }
 
 MFModeGame.prototype.chapter_and_sentence_init = function () {
     // This is being temporarily disabled.
-    /*
     console.log('WARNING: chapter and sentence initialized ' +
     '(perhaps re-initialized)');
     var sl = this.quiz.user.data.history.sentence_logs;
@@ -73,9 +66,10 @@ MFModeGame.prototype.chapter_and_sentence_init = function () {
     // this.current_chapter = 1;
     // this.current_question = 0;
     console.log('this =', this);
-    */
 }
+*/
 
+/*
 MFModeGame.prototype.set_question = function () {
     throw 'setting question number is not implemented!!!!';
 }
@@ -83,6 +77,7 @@ MFModeGame.prototype.set_question = function () {
 MFModeGame.prototype.set_chapter = function () {
     throw 'setting chapter number is not implemented!!!!';
 }
+*/
 
 // These functions were added during a period when the writer
 // was particularly interested in what someone somewhere
@@ -93,6 +88,7 @@ MFModeGame.prototype.set_chapter = function () {
 // may - or may not - be. The only way to find out is to check.
 // The internals are rather simple. The arguments are converted
 // to numbers so we can easily add to them.
+/*
 var SentenceFinder = function (chapter_n, question_n) {
     if (isNaN(chapter_n)) {
         this.chapter_type = 'string';
@@ -120,6 +116,7 @@ var sentence_finder_start_chapter = function (n) {
     return new SentenceFinder(n, 0);
 }
 
+
 // Turns the object into a searchable string.
 // (I feel like I don't want to override toString here.
 // Maybe I should.)
@@ -127,6 +124,7 @@ var sentence_finder_start_chapter = function (n) {
 SentenceFinder.prototype.as_string = function () {
     return this.chapter_n + '.' + this.question_n;
 }
+
 
 // Finds the number of questions to try to find.
 // This will fail only if a) some section has over 1000 questions,
@@ -263,6 +261,14 @@ MFModeGame.prototype.set_level = function (new_level) {
     this.level = new_level;
 }
 
+*/
+
+// The above OOP crap boils down to this, for current purposes.
+
+MFModeGame.prototype.get_current_sentence = function () {
+    return mf_sentences[path_display(this.current_path)];
+}
+
 MFModeGame.prototype.get_mode_name = function() {
     return "mf";
 }
@@ -389,7 +395,7 @@ MFModeGame.prototype.log_data_to_firebase = function () {
     };
     
     getting(['mf_translation_logs', this.quiz.user.get_personal_data('name'),
-    this.current_chapter + '-' + this.current_question], function (x) {
+    this.current_path.chapter_to_database()], function (x) {
         if (!('latin' in x)) {
             x.latin = data_to_log.latin;
         }
@@ -468,8 +474,8 @@ MFModeGame.prototype.process_correct_answer = function () {
     console.log("DEBUG 5/23 checkpoint 1");
     // currently being removed
     // this.quiz.update_sentence_log(this.sentence_finder(), "completed");
-    console.log("this.current_chapter = ", this.current_chapter);
-    console.log("this.current_question = ", this.current_question);
+    // console.log("this.current_chapter = ", this.current_chapter);
+    // console.log("this.current_question = ", this.current_question);
     console.log("DEBUG 5/23 checkpoint 2");
     
     

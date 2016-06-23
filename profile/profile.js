@@ -95,6 +95,7 @@ var get_mf_and_syntax_sentences = function (fn) {
     var total_callbacks = 2;
     var callback = function (name) {
         return function (x) {
+            console.log(name, x);
             // Note: this only cares about the keys.
             for (var i in x) {
                 if (!(i in sentences)) {
@@ -113,7 +114,10 @@ var get_mf_and_syntax_sentences = function (fn) {
 }
 
 var is_a_test = function (x) {
-    return starts_with(x, 'test');
+    if (Array.isArray(x)) {
+        x = x[0];
+    }
+    return starts_with(x[0], 'test');
 }
 
 
@@ -141,26 +145,14 @@ ProfilePage.build_progress_table = function(user) {
                 var j;
                 var k;
                 
-                var new_order = {};
-                for (i in order) {
-                    j = i.replace(/\//g, '.');
-                    if (!(j in new_order)) {
-                        new_order[j] = {};
-                    }
-                    for (var k in order[i]) {
-                        new_order[j][k] = order[i][k];
-                    }
-                }
-                order = new_order;
-                var sorted_order_as_list = Object.keys(order).sort(sentence_sort);
+                var sorted_order_as_list = Object.keys(order).map(split_text_into_path).sort(sentence_path_sort);
                 var mode_name;
                 var chapter_and_question;
                 var img_class = ["progress_image", 'hoverable_mod'];
                 console.log(sorted_order_as_list);
                 for (var index = 0; index < sorted_order_as_list.length; index++) {
                     i = sorted_order_as_list[index];
-                    chapter_and_question = i.split(/[\.\/]/g);
-                    if (is_a_test(chapter_and_question[0]) && IN_PRODUCTION_SWITCH) {
+                    if (is_a_test(i) && IN_PRODUCTION_SWITCH) {
                         continue;
                     }
                     
@@ -174,6 +166,7 @@ ProfilePage.build_progress_table = function(user) {
                             'class': ["progress_cell"]
                         };
                         
+                        /*
                         var text = function (x) {
                             if (typeof x === 'function') {
                                 x = x(chapter_and_question[0], chapter_and_question[1]);
@@ -181,27 +174,21 @@ ProfilePage.build_progress_table = function(user) {
                             // console.log(x, chapter_and_question);
                             return chapter_and_question.join(x) + ' ' + mode_name;
                         }
+                        */
                         
-                        if (j in order[i]) {
+                        if (j in order[path_display(i)]) {
                             m.children = [{
-                                'id': text('-'),
+                                'id': path_display(i),
                                 'tag': 'font',
                                 'style': {
                                     'color': 'black'
                                 },
-                                'text': text(function (x, y) {
-                                    if (isNaN(x) && x.indexOf(' ') === -1) {
-                                        return ' ';
-                                    } else {
-                                        return '.';
-                                    }
-                                })
+                                'text': path_display(i) + ' ' + mode_name
                             }];
                             
                             // All modules are hoverable.
                             m.onclick = ProfilePage.go_straight_to([
-                                ['chapter', chapter_and_question[0]],
-                                ['question', chapter_and_question[1]],
+                                ['path', i.join('_')],
                                 ['mode', mode_name]
                             ]);
                             m.class.push('clickable');
@@ -213,16 +200,23 @@ ProfilePage.build_progress_table = function(user) {
                     row = make({'tag': "tr"}, table);
                 }
                 getting("history|sentence_logs", function (x) {
-                    console.log(x);
+                    var tds = document.getElementsByTagName('td');
+                    var triggers = {};
+                    for (var i = 0; i < tds.length; i++) {
+                        triggers[standardize_path(tds[i].innerHTML.replace(/<[^<>]+>/g, ''))] = tds[i].children[0];
+                    }
+                    
+                    console.log(x, triggers);
                     console.log(JSON.stringify(x));
                     for (var i in x) {
-                        e = el(i.replace(/\bmf$/, 'translate').replace(/\bsyntax$/, 'analysis'));
-                        if (e === null) {
+                        var new_i = standardize_path(i.replace(/\bmf$/, 'translate').replace(/\bsyntax$/, 'analysis'));
+                        if (!(new_i in triggers)) {
                             if (!(is_a_test(i))) {
                                 delete x[i];
                             }
                         } else {
-                            e.style.color = {
+                            console.log(triggers[new_i]);
+                            triggers[new_i].style.color = {
                                 'completed': 'green',
                                 'skipped': 'red'
                             }[x[i]] || 'black';

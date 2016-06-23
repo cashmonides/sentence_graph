@@ -7,7 +7,7 @@
 // there are also tags of absence
 // no sequence
 // they remove whatever the absence is of
-// thus a tag group has an index and tags
+// thus a tag group has indices and tags
 // and a tag has a pos (noun/verb), an attribute (e.g, tense),
 // and either a type is absence or as an actual type
 
@@ -47,6 +47,33 @@ var dict_extend = function (a, b) {
     return a;
 }
 
+var add_sentences_to_firebase = function (sentences) {
+    console.log(sentences);
+    Persist.get(['sentence_mf_by_author'], function (x) {
+        var v = x.val();
+        var node;
+        var sentence;
+        var path;
+        var node_name;
+        for (var i = 0; i < sentences.length; i++) {
+            sentence = sentences[i];
+            path = sentence.path;
+            node = v;
+            for (var j = 0; j < path.length - 1; j++) {
+                node_name = path.slice(0, j + 1).join('_');
+                if (!(node_name in node)) {
+                    node[node_name] = {};
+                }
+                node = node[node_name];
+            }
+            node_name = path.join('_');
+            node[node_name] = sentence;
+        }
+        console.log(v);
+        Persist.set(['sentence_mf_by_author'], v);
+    });
+}
+
 var advanced_auto = {};
 
 // 'a'.charCodeAt(0) = 97
@@ -62,14 +89,44 @@ advanced_auto.at_mark_regex = /\d*@\d*/g;
 
 // This regex is not optimal, but I think it strikes the right balance
 // of workability, maintainability, readability, and Cthulu-worship.
-advanced_auto.process_part_regex = /^(\*\d+)\n+([^]*?)\n+((\n[^ \n]+ [\-=] [^\n]*)+)\n*$/;
+advanced_auto.process_part_regex_parts = ['\\*(.+)', '([^]*?)', '((\n+[^\n\\-=]+[\\-=].*)+)'];
+
+advanced_auto.process_part_regex = new RegExp(
+    '^' + advanced_auto.process_part_regex_parts.join('\n+') + '\n*$');
 
 advanced_auto.remove_comments_on_line = function (line) {
     return line.replace(/ *\/\/.*$/, '');
 }
 
+advanced_auto.remove_multiline_comment_lines = function (lines) {
+    var depth = 0;
+    var non_comment_lines = [];
+    var line;
+    var stripped_line;
+    for (var i = 0; i < lines.length; i++) {
+        line = lines[i];
+        stripped_line = strip(line);
+        if (stripped_line === 'begin comment') {
+            depth++;
+        } else if (stripped_line === 'end comment') {
+            depth--;
+        } else if (depth === 0) {
+            non_comment_lines.push(line);
+        } else if (depth < 0) {
+            alert('Too many "end comment"s.');
+            throw advanced_auto.ERROR;
+        }
+    }
+    if (depth > 0) {
+        alert('Too many "begin comment"s.');
+        throw advanced_auto.ERROR;
+    }
+    return non_comment_lines;
+}
+
 advanced_auto.remove_comments = function (text) {
-    return text.split('\n').map(advanced_auto.remove_comments_on_line).join('\n');
+    var l = advanced_auto.remove_multiline_comment_lines(text.split('\n'));
+    return l.map(advanced_auto.remove_comments_on_line).join('\n');
 }
 
 advanced_auto.relevant_tag_types_in_group = function (tag_group) {
@@ -120,8 +177,9 @@ advanced_auto.winning_tag = function (word, tag_groups, prop) {
     return winner[prop];
 }
 
+// word is only used for debugging in this function.
 advanced_auto.interpret_line = function (word, line) {
-    var tag_groups = advanced_auto.tag_descs_to_tags(line.split(' '));
+    var tag_groups = advanced_auto.tag_descs_to_tags(strip(line).split(' '));
     if (tag_groups === null) {
         alert('Error: could not interpret ' + line + '!');
         throw advanced_auto.ERROR;
@@ -270,8 +328,7 @@ advanced_auto.check_tags_validity = function (word, tags) {
 advanced_auto.getter = function (x) {
     var r = new RegExp('^' + x + ': *(.*)$', 'm');
     return function (text) {
-        return r.exec(text)[1].replace(/['"]/g, '').
-        replace(/ +/g, ' ').replace(/^ /g, '').replace(/ $/g, '');
+        return strip(r.exec(text)[1].replace(/['"]/g, ''));
     }
 }
 
@@ -287,10 +344,6 @@ advanced_auto.process_part = function (part) {
     return [result[1], result[2], result[3]];
 }
 
-advanced_auto.get_sentence_from_sentence_line = function (line) {
-    return parseInt(line.slice(1), 10);
-}
-
 advanced_auto.get_parts = function (text) {
     var lines = text.split('\n');
     var parts = [];
@@ -298,7 +351,7 @@ advanced_auto.get_parts = function (text) {
     var line;
     for (var i = 0; i < lines.length; i++) {
         line = lines[i];
-        if (/^\*\d+$/g.exec(line)) {
+        if (/^\*.*$/g.exec(line)) {
             if (part !== null) {
                 parts.push(part.join('\n'));
             }
@@ -316,24 +369,32 @@ advanced_auto.get_parts = function (text) {
 }
 
 advanced_auto.start_and_end_of_tag_line = function (x) {
-    var result = /([^ \n]+) [\-=] ([^\n]*)/.exec(x);
+    var result = /([^-=\n]+)[\-=] ([^\n]*)/.exec(x);
     if (result === null) {
         alert('This really should not have happened: the line ' +
         x + ' does not seem to indicate tags. But it\'s probably my fault, ' +
-        'not yours. Tell Akiva.');
+        'not yours. Tell Akiva. (I am not Akiva, by the way.)');
         throw advanced_auto.ERROR;
     }
-    return [result[1], result[2]];
+    return [strip(result[1]), result[2]];
+}
+
+advanced_auto.find_all_indices = function (words, lookup_dict) {
+    var word_list = words.split(' ');
+    return word_list.map(function (word) {
+        return advanced_auto.find_index(word, lookup_dict);
+    });
 }
 
 advanced_auto.tags_from_tag_line = function (line, lookup_dict) {
     var tag_line_broken = advanced_auto.start_and_end_of_tag_line(line);
-    var word = tag_line_broken[0];
+    var words = tag_line_broken[0];
     var tag_line_main = tag_line_broken[1];
-    var index = advanced_auto.find_index(word, lookup_dict);
-    var tags = advanced_auto.interpret_line(word, tag_line_main);
+    var indices = advanced_auto.find_all_indices(words, lookup_dict);
+    // This doesn't use word except for debugging.
+    var tags = advanced_auto.interpret_line(words, tag_line_main);
     for (var i = 0; i < tags.length; i++) {
-        tags[i].index = index;
+        tags[i].indices = indices;
     }
     return tags;
 }
@@ -411,7 +472,7 @@ advanced_auto.get_lookup_dict = function (main_text) {
 advanced_auto.data_for_part = function (part) {
     console.log(part);
     var processed_part = advanced_auto.process_part(part);
-    var sentence_number = advanced_auto.get_sentence_from_sentence_line(processed_part[0]);
+    var sentence_number = processed_part[0];
     var main_text = processed_part[1];
     var lookup_dict = advanced_auto.get_lookup_dict(main_text);
     var tags = processed_part[2].split('\n').filter(function (x) {return x !== ''});
@@ -451,8 +512,6 @@ advanced_auto.get_data_text = function (tag) {
     }
 }
 
-// called by: generate_buttons()
-// argument is an integer (i.e. an index in the tag list)
 function submit_tag (sentence, tag_type, indices) {
     var tag_type_as_string = tag_type;
     var tag = new SingleRegionTag(tag_type_as_string);
@@ -469,11 +528,11 @@ function submit_tag (sentence, tag_type, indices) {
 }
 
 advanced_auto.add_tag = function (sentence, tag) {
-    submit_tag(sentence, advanced_auto.get_data_text(tag), [tag.index]);
+    submit_tag(sentence, advanced_auto.get_data_text(tag), tag.indices);
 }
 
 advanced_auto.add_pos_tag = function (sentence, tag) {
-    submit_tag(sentence, tag.pos, [tag.index]);
+    submit_tag(sentence, tag.pos, tag.indices);
 }
 
 advanced_auto.add_tags = function (sentence, tags) {
@@ -504,13 +563,15 @@ advanced_auto.auto_submit = function (data, deleted) {
 	t.setup();
     var sentence = new Sentence(t.get_words(), text);
     advanced_auto.add_tags_for_all_words(sentence, data.tags);
-    sentence.chapter = data.chapter;
-    sentence.number = data.sentence_number;
+    sentence.path = split_text_into_path(data.chapter).
+    concat(split_text_into_path(data.sentence_number));
+    sentence.type = 'sentence';
     sentence.language_of_sentence = 'latin_author';
     
     return sentence;
 }
 
+/*
 // We assume no one finds this.
 advanced_auto.completely_replace = function (sentences) {
     Persist.get(['sentence_mf'], function (x) {
@@ -531,12 +592,13 @@ advanced_auto.completely_replace = function (sentences) {
         });
     });
 }
+*/
 
 
 // Data contains a list of questions.
 advanced_auto.auto_submit_all = function (data) {
     var sentences = data.map(advanced_auto.auto_submit);
-    advanced_auto.completely_replace(sentences);
+    add_sentences_to_firebase(sentences);
 }
 
 advanced_auto.full_process = function () {

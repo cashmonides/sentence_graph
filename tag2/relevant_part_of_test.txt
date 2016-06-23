@@ -53,6 +53,20 @@ laetum - predicate nominative
 @2te - subject accusative of an infinitive not in indirect statement
 sociam - predicate accusative of an infinitive not in indirect statement
 
+begin comment
+convention
+construction: fear clause, substantive ut clause
+correct: fear clause
+message: although this clause could be considered a substantive ut clause, we arbitrarily consider it a fear clause.
+
+click-response-message
+dropdown: tense
+message: remember 
+
+hint-button-response-message
+message: do you say any mental verbs?
+end comment
+
 *28
 quo magis aeternum da dictis, diva, leporem.	
 effice ut interea fera moenera militiai	
@@ -60,3 +74,10 @@ per maria ac terras omnis sopita quiescant;	30
 
 
 quiescant - pres subj subst ut
+
+begin comment
+convention
+construction: result, substantive ut
+correct: substantive ut
+message: although M&F call these constructions substantive clauses of result, they are not really result clauses, they're just substantive clauses
+end comment

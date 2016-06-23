@@ -1,14 +1,13 @@
 // syntax mode.
 
-var SyntaxModeGame = function (chapter, question) {
+var SyntaxModeGame = function (path) {
     this.data = null;
     this.quiz = null;
     // todo we here assume that 1 is the initial level
     this.level = 1;
     // we might replace this (this.level??? This comment was initially on the above line.)
     // with this.current_chapter & this.current_question
-    this.current_chapter = chapter;
-    this.current_question = question;
+    this.current_path = new Path(path);
     this.metrics = {
         'completed': 0,
         'skipped': 0
@@ -52,17 +51,21 @@ SyntaxModeGame.prototype.get_mode_name = function() {
     return "syntax";
 };
 
+/*
 SyntaxModeGame.prototype.sentence_finder = function () {
     return new SentenceFinder(this.current_chapter, this.current_question);
 }
+*/
 
 SyntaxModeGame.prototype.on_last_region = function () {
     return this.data.length - 1 === this.region_number;
 }
 
+/*
 SyntaxModeGame.prototype.chapter_and_question = function () {
     return this.current_chapter + '.' + this.current_question;
 }
+*/
 
 SyntaxModeGame.prototype.next_question = function () {
     if (this.data && this.on_last_region()) {
@@ -70,9 +73,7 @@ SyntaxModeGame.prototype.next_question = function () {
     }
     if (!this.data) {
         this.region_number = 0;
-        make_syntax_question(
-            this.current_chapter, this.current_question,
-            this.real_next_question.bind(this));
+        this.current_path.get_syntax_sentence(this.real_next_question.bind(this));
     } else {
        this.region_number++;
        this.real_next_question(this.data);
@@ -96,6 +97,7 @@ SyntaxModeGame.prototype.next_question = function () {
 SyntaxModeGame.prototype.real_next_question = function (data) {
     console.log('data =', data);
     
+    /*
     if ('id' in data) {
         this.sentence_id = data.id;
         
@@ -103,6 +105,7 @@ SyntaxModeGame.prototype.real_next_question = function (data) {
         
         data = data.main;
     }
+    */
     
     this.data = data;
     
@@ -246,7 +249,7 @@ SyntaxModeGame.prototype.get_convention_info = function (type) {
         'correct': this.correct_answer_for(type),
         'given': this.selected_answer_for(type),
         'get_drop_down_correct': this.correct_answer_for.bind(this),
-        'sentence': this.chapter_and_question()
+        'path': this.current_path.unamb_string()
     }
 }
 
@@ -418,7 +421,6 @@ SyntaxModeGame.prototype.log_data_to_firebase = function (answer_type) {
         '$text': this.sentence,
         // 'target': this.correct_answer,
         '$data': this.data,
-        '$sentence_id': this.sentence_id,
         'attempt': this.get_attempt_data(answer_type),
         'messages': this.messages,
         'status': answer_type,
@@ -439,7 +441,7 @@ SyntaxModeGame.prototype.log_data_to_firebase = function (answer_type) {
     }
     
     getting(['syntax_logs', this.quiz.user.get_personal_data('name'),
-    this.current_chapter + '-' + this.current_question], function (x) {
+    this.current_path.chapter_to_database()], function (x) {
         for (var i in data_to_log) {
             if (i !== 'attempt' && !(i in x)) {
                 x[i] = data_to_log[i];

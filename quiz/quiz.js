@@ -102,6 +102,7 @@ Quiz.prototype.start = function() {
         this.user_loaded();
     }
     
+    
     Sentence.get_all_sentences(function (ss) {
         self.sentences = ss.filter(function (sentence) {
             var language = sentence.language_of_sentence;
@@ -109,6 +110,7 @@ Quiz.prototype.start = function() {
             return language in sentence_levels &&
             sentence.difficulty_level <= sentence_levels[language];
         });
+        
         self.next_module();
     });
 
@@ -152,7 +154,7 @@ Quiz.prototype.get_start_module = function() {
     
     console.log("DEBUG 11-23 current module = ", this.user.get_current_module());
     
-    if("mod" in ups){
+    if ("mod" in ups){
         var selected_mod = ups["mod"];
         console.log("DEBUG 11-23 selected mod = ", selected_mod);
         // Logically, exactly one of these things must happen,
@@ -190,7 +192,7 @@ Quiz.prototype.get_start_module = function() {
         }
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         */
-    } else if ('chapter' in ups) {
+    } else if ('path' in ups) {
         this.advance_improve_status = "mf";
         return ups;
     } else {
@@ -370,10 +372,10 @@ Quiz.prototype.next_submodule_mf = function () {
     console.log("DEBUG 1-22 module_id = ", this.module.id);
     
     this.time_data = list_of_repetitions(null, 9);
-    // check that we have established a link to the game
+    
     this.time_data[0] = this.user.uid;
-    this.time_data[6] = this.id.chapter;
-    this.time_data[7] = this.id.question;
+    this.time_data[6] = this.id.path;
+    this.time_data[7] = 'no longer applicable';
     this.time_data[8] = this.id.mode;
 
     var user_data = this.user.get_personal_data();
@@ -448,7 +450,7 @@ Quiz.prototype.next_mode = function (error) {
         }
         var current_mode = modes_map[this.id.mode];
         console.log('current mode =', current_mode);
-        game = new current_mode(this.id.chapter, this.id.question);
+        game = new current_mode(this.id.path.split('_'));
     } else {
         game = Quiz.get_mode(game_mode_map[mode]);
     }
@@ -506,10 +508,14 @@ Quiz.prototype.next_question = function (error) {
         this.game.next_question(this);
         console.log('DEBUG 12-23 no error, everything is fine')
     } catch (e) {
+        if (this.user.is_mf()) {
+            throw 'Complete crash with ' + JSON.stringify(e) + ' , look at log to find issues.';
+        }
         console.log("DEBUG 12-23 entering catch block error caught");
         
         console.log("DEBUG 5-6 this.game = ", this.game);
         // Originally: add not push
+        
         var sick_mode = (this.game || {'get_mode_name': function () {
            return 'no_game';
         }}).get_mode_name();
@@ -526,6 +532,7 @@ Quiz.prototype.next_question = function (error) {
             }
             this.urgent_error_count++;
         }
+        
         console.log("URGENT error logged");
         console.log("desperate move triggered");
         
@@ -631,13 +638,13 @@ Quiz.prototype.get_mf_game_status = function () {
 }
 
 Quiz.prototype.log_sentence = function (callback) {
-    var sentence_finder = this.game.sentence_finder();
+    var current_path = this.game.current_path;
     var status = this.get_mf_game_status();
     console.log('DEBUG 5/23 checkpoint 4 skipped before',
-    sentence_finder);
-    this.user.log_sentences(sentence_finder, status, this.game.get_mode_name(), callback);
+    current_path);
+    this.user.log_sentences(current_path, status, this.game.get_mode_name(), callback);
     console.log('DEBUG 5/23 checkpoint 5 skipped after',
-    sentence_finder);
+    current_path);
 }
 
 Quiz.prototype.update_accuracy_dict = function () {

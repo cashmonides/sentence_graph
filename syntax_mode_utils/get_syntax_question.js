@@ -81,8 +81,7 @@ var process_region_from_firebase = function (sentence_data) {
             'pos': tags_status,
             'text': sentence_data.text,
             'words': sentence_data.words,
-            'chapter': sentence_data.chapter,
-            'number': sentence_data.number,
+            'path': sentence_data.path,
             'indices': x.indices,
             'tags': {}
         };
@@ -110,46 +109,24 @@ var get_author_name = function (x) {
     return x.split(' ')[0];
 }
 
-var allowed_options_repository = function () {
-    var known = {};
-    return function (chapter, type, pos) {
-        /*
-        if (chapter === undefined || chapter === null ||
-        type === undefined || type === null ||
-        pos === undefined || pos === null) {
-            alert('There\'s something weird about this sentence, tell your instructor.');
-            return_to_profile();
-        }
-        */
-        var key = [chapter, type, pos].join('/');
-        if (key in known) {
-            return known[key];
-        }
-        var chapter_type;
-        if (isNaN(chapter)) {
-            chapter_type = 'string';
-        } else {
-            chapter = Number(chapter);
-            chapter_type = 'number';
-        }
-        var d = syntax_module_filter[pos + '_syntax'][type];
-        var r = [type.toUpperCase()].concat(Object.keys(d).filter(function (x) {
-            if (chapter_type === 'number') {
-                return typeof d[x] === 'number' && d[x] <= chapter;
-            } else if (chapter_type === 'string') {
-                return typeof d[x] === 'number' ||
-                !is_earlier_author(get_author_name(chapter), get_author_name(d[x]));
-            }
-        }));
-        if (should_have_non_applicable(type)) {
-           r.push('not applicable');
-        };
-        known[key] = r;
-        return r;
+var get_allowed_options = function (path, type, pos) {
+    /*
+    if (chapter === undefined || chapter === null ||
+    type === undefined || type === null ||
+    pos === undefined || pos === null) {
+        alert('There\'s something weird about this sentence, tell your instructor.');
+        return_to_profile();
     }
+    */
+    var d = syntax_module_filter[pos + '_syntax'][type];
+    var r = [type.toUpperCase()].concat(Object.keys(d).filter(function (x) {
+        return sentence_path_sort(path, d[x]) !== -1;
+    }));
+    if (should_have_non_applicable(type)) {
+       r.push('not applicable');
+    };
+    return r;
 }
-
-var get_allowed_options = allowed_options_repository();
 
 var has_choices = function (x) {
     return x.choices.length > 0;
@@ -166,7 +143,7 @@ var convert_syntax_data_to_drop_down_data = function (data) {
         var drop_downs = drop_down_types.map(function (y) {
             return {
                 'type': y,
-                'choices': get_allowed_options(x.chapter, y, x.pos),
+                'choices': get_allowed_options(x.path, y, x.pos),
                 'correct_answer': x.tags[y] || 'not applicable'
             }
         }).filter(has_choices);
@@ -183,43 +160,48 @@ var convert_syntax_data_to_drop_down_data = function (data) {
     return r.sort(region_sort);
 }
 
-var get_sentence_from_firebase = function (chapter_n, question_n, fn) {
-    Persist.get(['sentence_mf'], function (x) {
+var get_sentence_from_firebase = function (path, fn) {
+    var transformed_path = ['sentence_mf_by_author'].concat(path.map(function (_, i) {
+        // Yes, join('_'), not join(_); we don't use _.
+        return path.slice(0, i + 1).join('_');
+    }));
+    console.log('paths =', path, transformed_path);
+    Persist.get(transformed_path, function (x) {
         var v = x.val();
-        var sentences = [];
-        var id;
-        Object.keys(v).forEach(function (y) {
-            var j = JSON.parse(v[y].data);
-            // old code
-            // if (j.language_of_sentence === 'mf' &&)
-            if (j.chapter.toString() === chapter_n.toString()
-            && j.number.toString() === question_n.toString()) {
-                sentences.push(j);
-                if (sentences.length === 1) {
-                    id = y;
-                };
-            }
-        });
-        if (sentences.length === 0) {
-            throw 'No sentences!!! chapter_number = ' + chapter_n +
-            ' question_number = ' + question_n;
+        console.log(v);
+        if (Array.isArray(v)) {
+            fn(v[0]);
+        } else {
+            fn(v);
         }
-        fn(sentences[0], id);
     });
+}
+
+var flat_sentences = function (x) {
+    var d = {};
+    if ('type' in x && x.type === 'sentence') {
+        d[path_display(x.path)] = x;
+        return d;
+    }
+    for (var i in x) {
+        var f = flat_sentences(x[i]);
+        for (var j in f) {
+            d[j] = f[j];
+        }
+    }
+    return d;
 }
 
 var get_syntax_questions = function (fn) {
-    Persist.get(['sentence_mf'], function (x) {
-        var v = x.val();
-        var sentences = {};
-        Object.keys(v).forEach(function (y) {
-            var j = JSON.parse(v[y].data);
-            sentences[j.chapter + '/' + j.number] = {'data': j, 'id': y};
-        });
-        fn(sentences);
+    Persist.get(['sentence_mf_by_author'], function (x) {
+        fn(flat_sentences(x.val()));
     });
 }
 
+// This function is useless now that everything's been moved.
+// It is not critical and will be replaced when needed.
+
+/*
 var delete_sentence_from_firebase = function (chapter, number, callback) {
     if (!callback) {
         callback = function () {};
@@ -262,18 +244,21 @@ var delete_sentence_from_firebase = function (chapter, number, callback) {
         Persist.set(['sentence_mf'], v, callback);
     });
 }
+*/
 
 var should_have_non_applicable = function (x) {
     return x === 'sequence' || x === 'relative time';
 }
 
+/*
 // This function may never be used.
 var get_syntax_question_ns = function (fn) {
     get_syntax_questions(function (x) {fn(Object.keys(x))});
 }
+*/
 
-var make_syntax_question = function (chapter_n, question_n, fn) {
-    return get_sentence_from_firebase(chapter_n, question_n, function (x, y) {
-        fn({'id': y, 'main': convert_syntax_data_to_drop_down_data(parse_firebase_syntax_data(x))});
+var make_syntax_question = function (path, fn) {
+    return get_sentence_from_firebase(path, function (x) {
+        fn(convert_syntax_data_to_drop_down_data(parse_firebase_syntax_data(x)));
     });
 }
