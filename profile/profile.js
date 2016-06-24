@@ -114,9 +114,11 @@ var get_mf_and_syntax_sentences = function (fn) {
 }
 
 var is_a_test = function (x) {
+    /*
     if (Array.isArray(x)) {
         x = x[0];
     }
+    */
     return starts_with(x[0], 'test');
 }
 
