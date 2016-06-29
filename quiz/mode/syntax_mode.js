@@ -76,8 +76,8 @@ SyntaxModeGame.prototype.next_question = function () {
         this.current_path.get_syntax_sentence(this.real_next_question.bind(this));
     } else {
         console.log('moving to next region');
-       this.region_number++;
-       this.real_next_question(this.data);
+        this.region_number++;
+        this.real_next_question(this.data);
     }
     /*
     if (!(this.data) || this.on_last_region()) {
@@ -94,6 +94,21 @@ SyntaxModeGame.prototype.next_question = function () {
     // this.real_next_question(this.data);
     /*}*/
 }
+
+/*
+SyntaxModeGame.prototype.add_check_methods = function () {
+    var self = this;
+    var item;
+    for (var i = 0; i < this.drop_downs.length; i++) {
+        item = this.drop_downs[i];
+        item.check = (function (item) {
+            return function () {
+                return self.correct_type(selected_option(item.e), item.correct_answer, item.type);
+            }
+        })(item);
+    }
+}
+*/
 
 SyntaxModeGame.prototype.real_next_question = function (data) {
     console.log('data =', data);
@@ -142,6 +157,7 @@ SyntaxModeGame.prototype.real_next_question = function (data) {
         //correct answer (string or index?)
     //is the following formulation otiose? should we just do data.drop_downs?
     this.drop_downs = data.drop_downs;
+    // this.add_check_methods();
     
     this.give_away_phrase = 'If you\'d like to skip this question and move on, click "SKIP". If you\'d like to keep trying, click "SUBMIT".';
     this.give_away_ending_phrase = "";
@@ -236,13 +252,41 @@ SyntaxModeGame.prototype.drop_down_for = function (x) {
     throw 'No ' + x + ' drop down found!';
 };
 
-SyntaxModeGame.prototype.correct_answer_for = function (x) {
-    return this.drop_down_for(x).correct_answer;
+var is_significant_answer = function (answer) {
+    if (typeof answer !== 'string') {
+        throw 'answer, ' + JSON.stringify(answer) + ', is not a string.';
+    }
+    return answer !== 'not applicable' && answer !== answer.toUpperCase();
 }
 
-SyntaxModeGame.prototype.selected_answer_for = function (x) {
-    return selected_option(this.drop_down_for(x).e);
+var functions = {}
+
+functions.correct = function (x) {
+    return x.correct_answer;
 }
+
+functions.selected = function (x) {
+    return selected_option(x.e);
+}
+
+SyntaxModeGame.prototype.has_significant = function (p) {
+    return function (x) {
+        return is_significant_answer(functions[p](x));
+    }
+}
+
+var answer_for = function (p) {
+    return function (x, noun_switch) {
+        if (this.pos_is('noun') && noun_switch) {
+            return functions[p](this.drop_downs.filter(this.has_significant(p))[0]);
+        }
+        return functions[p](this.drop_down_for(x));
+    }
+}
+
+SyntaxModeGame.prototype.correct_answer_for = answer_for('correct');
+
+SyntaxModeGame.prototype.selected_answer_for = answer_for('selected');
 
 SyntaxModeGame.prototype.get_convention_info = function (type) {
     return {
@@ -258,23 +302,69 @@ SyntaxModeGame.prototype.is_against_convention = function (type) {
     var info = this.get_convention_info(type);
     var result = conventions_matched(info);
     
+    for (var i = 0; i < result.length; i++) {
+        this.alerts.conventions.push(this.convention_to_message(result[i]));
+    }
+    
     if (result.length > 0) {
-        this.conventions_broken[type] = result;
         return true;
     } else {
         return false;
     }
 }
 
+SyntaxModeGame.prototype.pos_is = function (x) {
+    return this.current_pos() === x;
+}
+
+SyntaxModeGame.prototype.is_transcendent = function (given) {
+    return this.pos_is('noun') && (given === 'not applicable' || given === given.toUpperCase());
+}
+
 SyntaxModeGame.prototype.correct_type = function (given, correct, type) {
-    if (correct === 'not applicable' || correct === given) {
+    if (this.is_transcendent(given)) {
+        return new LegalAnswerType('transcendent');
+    } else if ((this.pos_is('verb') && correct === 'not applicable') || correct === given) {
         return new LegalAnswerType('correct');
-    } else if (this.is_against_convention(type)) {
+    } else if (this.check_all_conventions(type)) {
         return new LegalAnswerType('convention');
+    } else if (this.triggers_local_defensibles(type)) {
+        return new LegalAnswerType('defensible');
     } else {
         return new LegalAnswerType('incorrect');
     }
 }
+
+SyntaxModeGame.prototype.check_all_conventions = function (type) {
+    var global = this.pos_is('verb') && this.is_against_convention(type);
+    var local = this.triggers_local_conventions(type);
+    return global || local;
+}
+
+var triggers = function (s, message) {
+    return function (type) {
+        var d = this.relevant_data().special_tags;
+        if (!(s in d)) {
+            return false;
+        }
+        var triggers = d[s];
+        var selected = this.selected_answer_for(type);
+        if (triggers.indexOf(selected) !== -1) {
+            this.alerts[s].push(message.replace(/[@$]type\b/g, function (x) {
+                return x.replace(/type/g, type);
+            }));
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+SyntaxModeGame.prototype.triggers_local_conventions = triggers('conventions',
+'Yes $type is possible but we conventionally call this @type.');
+
+SyntaxModeGame.prototype.triggers_local_defensibles = triggers('defensible',
+'Yes $type is a defensible answer but there\'s a better possibility that you should try to find.');
 
 SyntaxModeGame.prototype.add_single_drop_down = function (x, index) {
     // console.log('making a drop down with', x, index);
@@ -291,6 +381,7 @@ SyntaxModeGame.prototype.relevant_drop_downs = function () {
     });
 }
 
+/*
 SyntaxModeGame.prototype.check_verb_correctness = function () {
     var self = this;
     return combine_answer_types(this.drop_downs.map(function (x) {
@@ -298,21 +389,20 @@ SyntaxModeGame.prototype.check_verb_correctness = function () {
     }));
 }
 
-/*
-SyntaxModeGame.prototype.turn_dropdown_red = function (name) {
-    var d = this.drop_down_for(name).e;
-    
-    console.log(d);
-    
-    var v = d.options[d.selectedIndex];
-    
-    v.style.color = 'red';
-    
-    if (v.indexOf('<') === -1) {
-        d.options[d.selectedIndex].innerHTML = redden(v);
-    }
-}
-*/
+
+//SyntaxModeGame.prototype.turn_dropdown_red = function (name) {
+//    var d = this.drop_down_for(name).e;
+//    
+//    console.log(d);
+//    
+//    var v = d.options[d.selectedIndex];
+//    
+//    v.style.color = 'red';
+//    
+//    if (v.indexOf('<') === -1) {
+//        d.options[d.selectedIndex].innerHTML = redden(v);
+//    }
+//}
 
 SyntaxModeGame.prototype.check_noun_dropdowns = function () {
     var num_selected = this.drop_downs.filter(function (x) {
@@ -348,42 +438,76 @@ SyntaxModeGame.prototype.check_correctness = function () {
         return this.check_noun_correctness();
     }
 }
+*/
+
+SyntaxModeGame.prototype.check_noun_dropdowns = function () {
+    var num_selected = this.drop_downs.filter(function (x) {
+        return x.e.selectedIndex !== 0;
+    }).length;
+    if (num_selected === 0) {
+        return 'You didn\'t seem to select any answer choices!';
+    } else if (num_selected > 1) {
+        return 'You seemed to select more than one answer choice!';
+    } else {
+        return null;
+    }
+}
+
+SyntaxModeGame.prototype.check_correctness = function () {
+    var self = this;
+    if (this.current_pos() === 'noun') {
+        var issue = this.check_noun_dropdowns();
+        if (issue !== null) {
+            return new LegalAnswerType('message', {'message': issue});
+        }
+    }
+    return combine_answer_types(this.drop_downs.map(function (x) {
+        return self.correct_type(selected_option(x.e), x.correct_answer, x.type);
+    }));
+}
 
 // Do these things before processing the answer.
 SyntaxModeGame.prototype.pre_process_answer = function () {
-    this.conventions_broken = {};
+    this.alerts = {
+        'conventions': [],
+        'defensible': []
+    }
     this.messages = [];
 }
 
-SyntaxModeGame.prototype.alert_convention_broken = function (name, times) {
-    var convention = ALL_CONVENTIONS[name];
-    /*
-    var init_string;
-    if (times === 0) {
-        init_string = 'Correct! But ';
-    } else {
-        init_string = 'Also, '
-    }
-    */
+SyntaxModeGame.prototype.format = function (message) {
     var self = this;
-    var message = convention.message.replace(
-        /@(\w+)/g, function (x) {return self.correct_answer_for(x.slice(1))}).replace(
-        /\$(\w+)/g, function (x) {return self.selected_answer_for(x.slice(1))}).replace(/~/g, '');
+    return message.replace(
+        /@(\w+)/g, function (x) {return self.correct_answer_for(x.slice(1), true)}).replace(
+        /\$(\w+)/g, function (x) {return self.selected_answer_for(x.slice(1), true)}).replace(/~/g, '');
+}
+
+SyntaxModeGame.prototype.convention_to_message = function (name) {
+    return ALL_CONVENTIONS[name].message;
+}
+
+var display_alerts = function (x) {
+    return function () {
+        var alerts = this.alerts[x];
+        for (var i = 0; i < alerts.length; i++) {
+            this.alert_and_display_formatted(alerts[i]);
+        }
+    }
+}
+
+SyntaxModeGame.prototype.display_broken_convention_alerts = display_alerts('conventions');
+
+SyntaxModeGame.prototype.alert_and_display_formatted = function (message) {
+    message = this.format(message);
+    this.alert_and_display(message);
+}
+
+SyntaxModeGame.prototype.alert_and_display = function (message) {
     this.messages.push(message);
     alert(message);
 }
 
-SyntaxModeGame.prototype.display_broken_convention_alerts = function () {
-    var times_alerted = 0;
-    var type;
-    for (var i = 0; i < verb_drop_down_types.length; i++) {
-        type = verb_drop_down_types[i];
-        if (type in this.conventions_broken) {
-            this.alert_convention_broken(this.conventions_broken[type], times_alerted);
-            times_alerted++;
-        }
-    }
-}
+SyntaxModeGame.prototype.display_defensible_alerts = display_alerts('defensible');
 
 var SYNTAX_LOG_VERSION = 0.0001;
 
@@ -399,6 +523,14 @@ SyntaxModeGame.prototype.get_attempt_data = function (answer_type) {
     }
     return r;
 }
+
+/*
+SyntaxModeGame.prototype.remove_check_methods = function () {
+    for (var i = 0; i < this.drop_downs.length; i++) {
+        delete this.drop_downs[i].check;
+    }
+}
+*/
 
 SyntaxModeGame.prototype.log_data_to_firebase = function (answer_type) {
     
@@ -454,7 +586,6 @@ SyntaxModeGame.prototype.log_data_to_firebase = function (answer_type) {
         }
         
         x.attempts.push(data_to_log.attempt);
-        
         return x;
     }, {'global': true, 'save_result': true, 'transform_null': true})();
     
@@ -475,6 +606,9 @@ SyntaxModeGame.prototype.process_answer = function() {
     } else if (answer_type.is_type('convention')) {
         this.display_broken_convention_alerts();
         this.process_correct_answer();
+    } else if (answer_type.is_type('defensible')) {
+        this.display_defensible_alerts();
+        this.process_incorrect_answer();
     } else if (answer_type.is_type('message')) {
         alert(answer_type.get('message'));
     }
@@ -634,13 +768,3 @@ SyntaxModeGame.prototype.give_away_answer = function () {
     
     console.log("DEBUG 5/23 checkpoint #3 - give away answer triggered");
 };
-
-/*
-SyntaxModeGame.prototype.give_away_answer = function () {
-    set_display("skip_button", 'initial');
-    this.remove_drop_downs();
-    var fbox = el("feedbackbox");
-    fbox.innerHTML = this.give_away_phrase + this.correct_answer + this.give_away_ending_phrase;
-    this.quiz.question_complete();
-};
-*/

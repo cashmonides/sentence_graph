@@ -19,6 +19,7 @@ var verb_drop_down_types = ['tense', 'mood', 'construction', 'sequence', 'relati
 var noun_drop_down_types = ['nominative', 'genitive', 'dative',
 'accusative', 'ablative', 'infinitive'];
 
+// This may be a property of all tags for all I know.
 var is_tag_we_care_about = function (tag) {
     return tag.class_id === 3;
 }
@@ -28,23 +29,24 @@ var with_tags = function (region) {
         is_tag_we_care_about)}
 }
 
-var get_tags_status = function (x) {
+var get_tags_status = function (tags) {
     var tag_error = function () {
         alert('This sentence has an internal issue. Please tell your ' +
         'instructor that there is a software issue: a sentence without ' +
         'proper tags has not been deleted.');
         return_to_profile();
     }
+    console.log(tags);
     var status = 'none';
-    for (var i = 0; i < x.tags.length; i++) {
-        if (!is_proper_tag(x.tags[i].type)) {
-            if (!is_proper_tag(status)) {
+    for (var i = 0; i < tags.length; i++) {
+        if (is_status_tag(tags[i])) {
+            if (is_status_tag(status)) {
                 tag_error();
             }
-            status = x.tags[i].type;
+            status = tags[i];
         }
     }
-    if (is_proper_tag(status)) {
+    if (!is_status_tag(status)) {
         tag_error();
     }
     return status;
@@ -55,11 +57,25 @@ var has_tags = function (x) {
 }
 
 var is_proper_tag = function (x) {
-    return x !== 'verb' && x !== 'noun';
+    return x !== 'verb' && x !== 'noun' && !is_special_tag(x);
+}
+
+var is_status_tag = function (x) {
+    return x === 'verb' || x === 'noun';
 }
 
 var get_proper_tags = function (x) {
-    return x.tags.map(function (x) {return x.type}).filter(is_proper_tag);
+    return get_all_tags(x).filter(is_proper_tag);
+}
+
+var is_special_tag = function (x) {
+    return x[0] === '%';
+}
+
+var get_special_tags = function (x) {
+    return get_all_tags(x).filter(is_special_tag).map(function (x) {
+        return x.slice(1);
+    });
 }
 
 var find_noun_tag_case = function (x) {
@@ -73,16 +89,34 @@ var find_noun_tag_case = function (x) {
     return_to_profile();
 }
 
+var make_special_tag_dict = function (special_tags) {
+    var result = {};
+    for (var i = 0; i < special_tags.length; i++) {
+        var split_tag = special_tags[i].split('~');
+        if (!(split_tag[0] in result)) {
+            result[split_tag[0]] = [];
+        }
+        result[split_tag[0]].push(split_tag[1]);
+    }
+    return result;
+}
+
+var get_all_tags = function (x) {
+    return x.tags.map(function (x) {return x.type});
+}
+
 var process_region_from_firebase = function (sentence_data) {
     return function (x) {
-        var tags_status = get_tags_status(x);
         var proper_tags = get_proper_tags(x);
+        var special_tags = get_special_tags(x);
+        var tags_status = get_tags_status(get_all_tags(x));
         var r = {
             'pos': tags_status,
             'text': sentence_data.text,
             'words': sentence_data.words,
             'path': sentence_data.path,
             'indices': x.indices,
+            'special_tags': make_special_tag_dict(special_tags),
             'tags': {}
         };
         if (tags_status === 'verb') {
@@ -135,31 +169,33 @@ var has_choices = function (x) {
     return x.choices.length > 0;
 }
 
-var convert_syntax_data_to_drop_down_data = function (data) {
-    var r = data.map(function (x) {
-        var drop_down_types;
-        if (x.pos === 'verb') {
-            drop_down_types = verb_drop_down_types;
-        } else if (x.pos === 'noun') {
-            drop_down_types = noun_drop_down_types;
-        }
-        var drop_downs = drop_down_types.map(function (y) {
-            return {
-                'type': y,
-                'choices': get_allowed_options(x.path, y, x.pos),
-                'correct_answer': x.tags[y] || 'not applicable'
-            }
-        }).filter(has_choices);
+var convert_region_to_drop_down_data = function (x) {
+    var drop_down_types;
+    if (x.pos === 'verb') {
+        drop_down_types = verb_drop_down_types;
+    } else if (x.pos === 'noun') {
+        drop_down_types = noun_drop_down_types;
+    }
+    var drop_downs = drop_down_types.map(function (y) {
         return {
-            'pos': x.pos,
-            'words': x.words,
-            'sentence': x.text,
-            'question': "Give the syntax of the highlighted word.",
-            'target_indices': x.indices,
-            'drop_downs': drop_downs
+            'type': y,
+            'choices': get_allowed_options(x.path, y, x.pos),
+            'correct_answer': x.tags[y] || 'not applicable'
         }
-    });
-    
+    }).filter(has_choices);
+    return {
+        'pos': x.pos,
+        'words': x.words,
+        'sentence': x.text,
+        'question': "Give the syntax of the highlighted word.",
+        'target_indices': x.indices,
+        'special_tags': x.special_tags,
+        'drop_downs': drop_downs
+    }
+}
+
+var convert_syntax_data_to_drop_down_data = function (data) {
+    var r = data.map(convert_region_to_drop_down_data);
     return r.sort(region_sort);
 }
 
@@ -204,64 +240,9 @@ var get_syntax_questions = function (fn) {
     });
 }
 
-// This function is useless now that everything's been moved.
-// It is not critical and will be replaced when needed.
-
-/*
-var delete_sentence_from_firebase = function (chapter, number, callback) {
-    if (!callback) {
-        callback = function () {};
-    }
-    Persist.get(['sentence_mf'], function (x) {
-        var v = x.val();
-        var z = null;
-        for (var i in v) {
-            var j = JSON.parse(v[i].data);
-            if (j.chapter === chapter && j.number === number) {
-                z = v[i];
-                delete v[i];
-            }
-        }
-        
-        if (z === null) {
-            callback();
-            throw 'Trying to delete a nonexistant sentence!';
-        }
-        
-        // In case someone malicious finds this function and uses it
-        // but can't figure out how to delete stuff otherwise,
-        // we save the sentences somewhere else.
-        Persist.get(['obsolete_mf'], function (y) {
-            console.log(y, i, z);
-            
-            var w = y.val();
-            
-            if (w === null) {
-                w = {};
-            }
-            
-            w[i] = z;
-            
-            Persist.set(['obsolete_mf'], w);
-        });
-        
-        console.log(v);
-        
-        Persist.set(['sentence_mf'], v, callback);
-    });
-}
-*/
-
 var should_have_non_applicable = function (x) {
     return x === 'sequence' || x === 'relative time';
 }
-
-/*
-// This function may never be used.
-var get_syntax_question_ns = function (fn) {
-    get_syntax_questions(function (x) {fn(Object.keys(x))});
-}
-*/
 
 var make_syntax_question = function (path, fn) {
     return get_sentence_from_firebase(path, function (x) {

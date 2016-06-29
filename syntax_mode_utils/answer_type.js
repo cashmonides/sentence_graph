@@ -1,8 +1,10 @@
-var legal_answer_types = ['correct', 'incorrect', 'convention', 'message'];
+var legal_answer_types = ['correct', 'incorrect', 'convention', 'message', 'defensible', 'transcendent'];
 
 var goodness_dict = {
-    'correct': 2,
-    'convention': 1,
+    'transcendent': 4,
+    'correct': 3,
+    'convention': 2,
+    'defensible': 1,
     'incorrect': 0
 }
 

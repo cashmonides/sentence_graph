@@ -151,6 +151,7 @@ var syntax_module_filter = {
         "sequence": {
         	"primary": 2,
         	"secondary": 2,
+        	"breaking sequence": "Caligula",
         	"breaking sequence for repraesentatio": "Caligula"
         },
         "relative time" : {

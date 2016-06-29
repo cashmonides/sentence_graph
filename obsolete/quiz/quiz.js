@@ -190,3 +190,12 @@ post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict()
 type: "update_accuracy_old"});
 console.log("DEBUG 3-2 just finished update_accuracy_old");
 */
+
+/*
+    var init_string;
+    if (times === 0) {
+        init_string = 'Correct! But ';
+    } else {
+        init_string = 'Also, '
+    }
+    */

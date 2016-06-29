@@ -95,6 +95,13 @@ advanced_auto.process_part_regex_parts = ['\\*(.+)', '([^]*?)', '((\n+[^\n\\=]+=
 advanced_auto.process_part_regex = new RegExp(
     '^' + advanced_auto.process_part_regex_parts.join('\n+') + '\n*$');
 
+
+advanced_auto.type_to_special_type = {
+    'convention': 'conventions',
+    'acceptable': 'conventions',
+    'defensible': 'defensible'
+}
+
 advanced_auto.remove_comments_on_line = function (line) {
     return line.replace(/ *\/\/.*$/, '');
 }
@@ -130,10 +137,16 @@ advanced_auto.remove_comments = function (text) {
     return l.map(advanced_auto.remove_comments_on_line).join('\n');
 }
 
+advanced_auto.is_not_tag_type = function (i) {
+    return i === 'strength';
+}
+
 advanced_auto.relevant_tag_types_in_group = function (tag_group) {
     var s = {};
     for (var i in tag_group) {
-        s[i] = true;
+        if (!advanced_auto.is_not_tag_type(i)) {
+            s[i] = true;
+        }
     }
     return s;
 }
@@ -154,17 +167,37 @@ advanced_auto.remove_absence_tags = function (tags) {
     return tags.filter(advanced_auto.is_not_absence_tag);
 }
 
+advanced_auto.compare_groups = function (a, b) {
+    if (a === null && b !== null) {
+        return -1;
+    } else if (a !== null && b === null) {
+        return 1;
+    }
+    var c = cmp(a.strength, b.strength);
+    if (c !== 0) {
+        return c;
+    } else if (strict_subset(a, b)) {
+        return 1;
+    } else if (strict_subset(b, a)) {
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
 advanced_auto.winning_tag = function (word, tag_groups, prop) {
     var relevant_tag_groups = tag_groups.filter(function (x) {
         return prop in x;
     });
     var winner = null;
     var group = null;
+    var c;
     for (var i = 0; i < relevant_tag_groups.length; i++) {
         group = relevant_tag_groups[i];
-        if (winner === null || strict_subset(group, winner)) {
+        c = advanced_auto.compare_groups(winner, group);
+        if (c === -1) {
             winner = group;
-        } else if (!(strict_subset(winner, group))) {
+        } else if (c === 0) {
             alert('Error on ' + prop + ' and ' + word + ', with two competing tag groups. ' +
             'You probably got this error because you tagged a word twice with the same tag type.');
             throw advanced_auto.ERROR;
@@ -178,14 +211,78 @@ advanced_auto.winning_tag = function (word, tag_groups, prop) {
     return winner[prop];
 }
 
+// Is it not sad that after but ten lines of list existance,
+// the special tags are turned into strings once more?
+advanced_auto.special_tag_to_string = function (l) {
+    var t = advanced_auto.tag_to_tag_list(l[1]);
+    /*if (t.length !== 1) {
+        alert(t + ' implied something!');
+        throw advanced_auto.ERROR;
+    }*/
+    return '%' + advanced_auto.type_to_special_type[l[0]] + '~' + t[0];
+}
+
+advanced_auto.read_tag_line_part = function (s) {
+    var l = s.split(/ *: */g);
+    if (l.length === 1) {
+        return ['main', strip(s).split(' ')];
+    } else if (l.length === 2) {
+        if (!(l[0] in advanced_auto.type_to_special_type)) {
+            alert('Weird text before colon: ' + l[0]);
+            throw advanced_auto.ERROR;
+        }
+        return ['other', advanced_auto.special_tag_to_string(l)];
+    } else {
+        alert('Reading part ' + s + ' failed. This is because there are ' +
+        'two (or more) colons in it: there should not be.');
+        throw advanced_auto.ERROR;
+    }
+}
+
+advanced_auto.divide_tags = function (line) {
+    var r = line.split(/ *\+ */).map(advanced_auto.read_tag_line_part);
+    var d = {'other': []};
+    var type;
+    var value;
+    for (var i = 0; i < r.length; i++) {
+        type = r[i][0];
+        value = r[i][1];
+        if (type === 'main') {
+            if ('main' in d) {
+                alert('Two main components.');
+                throw advanced_auto.ERROR;
+            }
+            d.main = value;
+        } else if (type === 'other') {
+            d.other.push(value);
+        } else {
+            alert('Weird component.');
+            throw advanced_auto.ERROR;
+        }
+    }
+    if (!('main' in d)) {
+        alert('No main components.');
+        throw advanced_auto.ERROR;
+    }
+    return d;
+}
+
+advanced_auto.transform_special_tags = function (special_tags) {
+    return special_tags.map(function (x) {
+        return {'text': x}
+    });
+}
+
 // word is only used for debugging in this function.
 advanced_auto.interpret_line = function (word, line) {
-    var tag_groups = advanced_auto.tag_descs_to_tags(strip(line).split(' '));
+    var d = advanced_auto.divide_tags(line);
+    var tag_groups = advanced_auto.tag_descs_to_tags(d.main);
     if (tag_groups === null) {
         alert('Error: could not interpret ' + line + '!');
         throw advanced_auto.ERROR;
     }
-    return advanced_auto.combine_tags_on_word(word, tag_groups); 
+    return advanced_auto.combine_tags_on_word(word, tag_groups).concat(
+        advanced_auto.transform_special_tags(d.other))
 }
 
 // Major Function
@@ -214,6 +311,14 @@ var concat_map = function (x, f) {
     return [].concat.apply([], x.map(f));
 }
 
+advanced_auto.get_tag_strength = function (tag) {
+    return tag.strength;
+}
+
+advanced_auto.get_tag_list_strength = function (tag_list) {
+    return Math.max.apply(null, tag_list.map(advanced_auto.get_tag_strength));
+}
+
 advanced_auto.tag_group_from_tag_list = function (tag_list) {
     var d = {};
     var tag;
@@ -227,10 +332,26 @@ advanced_auto.tag_group_from_tag_list = function (tag_list) {
         }
         d[tag.attribute] = tag;
     }
+    d.strength = advanced_auto.get_tag_list_strength(tag_list);
     return d;
 }
 
-advanced_auto.tag_text_to_tag = function (tag_text) {
+advanced_auto.remove_strength = function (tag) {
+    return tag.split('!')[0];
+}
+
+advanced_auto.get_strength = function (tag) {
+    if (tag.indexOf('!') !== -1) {
+        return Number(tag.split('!')[1]);
+    } else {
+        return 0;
+    }
+}
+
+advanced_auto.tag_text_to_strengthless_tag = function (tag_text) {
+    if (advanced_auto.is_override_tag(tag_text)) {
+        return advanced_auto.make_override_tag(tag_text);
+    }
     var i;
     var dd_type;
     for (i = 0; i < verb_drop_down_types.length; i++) {
@@ -250,6 +371,18 @@ advanced_auto.tag_text_to_tag = function (tag_text) {
     return null;
 }
 
+advanced_auto.tag_text_to_tag = function (tag) {
+    console.log(tag);
+    var tag_text = advanced_auto.remove_strength(tag);
+    var strength = advanced_auto.get_strength(tag);
+    var d = advanced_auto.tag_text_to_strengthless_tag(tag_text);
+    if (d === null) {
+        return null;
+    }
+    d.strength = strength;
+    return d;
+}
+
 advanced_auto.is_override_tag = function (tag) {
     var tag_words = tag.split(' ');
     return tag_words[0] === 'no' && verb_drop_down_types.indexOf(
@@ -258,32 +391,66 @@ advanced_auto.is_override_tag = function (tag) {
 
 advanced_auto.make_override_tag = function (tag) {
     var attribute = tag.split(' ').slice(1).join(' ');
-    var d = {};
-    d[attribute] = {
+    return {
         'attribute': attribute,
         'text': 'absence',
         'pos': 'verb'
     };
-    return d;
 }
 
-advanced_auto.interpret_tag = function (tag) {
+advanced_auto.is_end_tag = function (x) {
+    return x[0] === '^';
+}
+
+advanced_auto.get_non_end_tags = function (tags) {
+    return tags.filter(function (x) {
+        return !advanced_auto.is_end_tag(x);
+    });
+}
+
+advanced_auto.get_end_tags = function (tags) {
+    return tags.filter(advanced_auto.is_end_tag).map(function (x) {
+        return x.slice(1);
+    });
+}
+
+advanced_auto.replace_its = function (y) {
+    return function (z) {
+        console.log(y, z);
+        return z.replace(/^[^A-Za-z]*it[^A-Za-z]*$/g, function (w) {
+            return w.replace(/it/g, y);
+        });
+    }
+}
+
+advanced_auto.tag_to_tag_list = function (tag) {
+    // Handled downstream.
+    /*
     if (advanced_auto.is_override_tag(tag)) {
         return advanced_auto.make_override_tag(tag);
     }
+    */
     var tags = [tag];
+    var end_tags = [];
     var repl = true;
     while (repl) {
+        end_tags = end_tags.concat(advanced_auto.get_end_tags(tags));
+        tags = advanced_auto.get_non_end_tags(tags);
         repl = false;
         tags = concat_map(tags, function (y) {
             if (y in alias_dict) {
                 repl = true;
-                return alias_dict[y].split(/ *& */g);
+                return alias_dict[y].split(/ *& */g).map(advanced_auto.replace_its(y));
             } else {
                 return [y];
             }
         });
     }
+    tags = end_tags.concat(tags);
+    return tags;
+}
+
+advanced_auto.interpet_tag_list = function (tags) {
     var tag_list = tags.map(advanced_auto.tag_text_to_tag);
     if (tag_list.indexOf(null) !== -1) {
         return null;
@@ -291,6 +458,10 @@ advanced_auto.interpret_tag = function (tag) {
     return advanced_auto.tag_group_from_tag_list(tag_list);
 }
 
+
+advanced_auto.interpret_tag = function (tag) {
+    return advanced_auto.interpet_tag_list(advanced_auto.tag_to_tag_list(tag));
+}
 
 // This somewhat naive approach works since multiple possibilities
 // that are not quickly shown to be impossible are likely very rare,
@@ -321,6 +492,7 @@ advanced_auto.tag_descs_to_tags = function (words) {
 
 // I think this is all the checking we need.
 advanced_auto.check_tags_validity = function (word, tags) {
+    console.log(word, tags);
     if (tags.length === 0) {
         alert('Something is severely wrong: the tags given for ' + word + ' all cancel out.');
         throw advanced_auto.ERROR;
@@ -596,29 +768,6 @@ advanced_auto.auto_submit = function (data, deleted) {
     
     return sentence;
 }
-
-/*
-// We assume no one finds this.
-advanced_auto.completely_replace = function (sentences) {
-    Persist.get(['sentence_mf'], function (x) {
-        var v = x.val();
-        for (var i in v) {
-            var j = JSON.parse(v[i].data);
-            if (sentences.some(function (x) {
-                return j.chapter === x.chapter && j.number === x.number;
-            })) {
-                delete v[i];
-            }
-        }
-        
-        Persist.set(['sentence_mf'], v, function () {
-            for (var i = 0; i < sentences.length; i++) {
-                Persist.push(["sentence_mf"], JSON.stringify(sentences[i]), function () {});
-            }
-        });
-    });
-}
-*/
 
 
 // Data contains a list of questions.

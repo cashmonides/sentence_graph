@@ -1,0 +1,43 @@
+DONE
+- no sequence or relative time for jussive, potential, optative, deliberative and all conditionals
+
+- add defensible and acceptable according to the model
+
+
+- implications should be added to the actual source data (i.e. the inline tagged text)
+
+e.g. 
+text 1 enters
+implications happen
+text 2  comes out and is stored somewhere
+
+- alert message with all tags (button either says submit or fix)
+
+-------------------------
+
+display mode vs. computer readable mode
+
+display mode: (essentially "not applicable" replaced with "")
+present subjunctive jussive
+
+present subjunctive purpose clause primary subsequent time
+
+computer mode:
+present subjunctive jussive not applicable not applicable
+
+present subjunctive purpose clause primary subsequent time
+
+--------------------------------
+
+DONE (taken into account)
+constructions which trigger subsequent time:
+
+purpose
+relative clause of purpose
+
+indirect command
+
+result
+relative clause of result
+
+fear
