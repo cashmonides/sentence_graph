@@ -361,7 +361,7 @@ var triggers = function (s, message) {
 }
 
 SyntaxModeGame.prototype.triggers_local_conventions = triggers('conventions',
-'Yes $type is possible but we conventionally call this @type.');
+'Yes $type is possible. Another possible solution is: @type.');
 
 SyntaxModeGame.prototype.triggers_local_defensibles = triggers('defensible',
 'Yes $type is a defensible answer but there\'s a better possibility that you should try to find.');

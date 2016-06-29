@@ -47,6 +47,10 @@ var dict_extend = function (a, b) {
     return a;
 }
 
+var concat_all = function (l) {
+    return [].concat.apply([], l);
+}
+
 var add_sentences_to_firebase = function (sentences) {
     console.log(sentences);
     Persist.get(['sentence_mf_by_author'], function (x) {
@@ -276,7 +280,7 @@ advanced_auto.transform_special_tags = function (special_tags) {
 // word is only used for debugging in this function.
 advanced_auto.interpret_line = function (word, line) {
     var d = advanced_auto.divide_tags(line);
-    var tag_groups = advanced_auto.tag_descs_to_tags(d.main);
+    var tag_groups = advanced_auto.tag_descs_to_tags(d.main, false);
     if (tag_groups === null) {
         alert('Error: could not interpret ' + line + '!');
         throw advanced_auto.ERROR;
@@ -423,7 +427,10 @@ advanced_auto.replace_its = function (y) {
     }
 }
 
-advanced_auto.tag_to_tag_list = function (tag) {
+advanced_auto.tag_to_tag_list = function (tag, as_is) {
+    if (as_is) {
+        return [tag];
+    }
     // Handled downstream.
     /*
     if (advanced_auto.is_override_tag(tag)) {
@@ -458,29 +465,31 @@ advanced_auto.interpet_tag_list = function (tags) {
     return advanced_auto.tag_group_from_tag_list(tag_list);
 }
 
-
-advanced_auto.interpret_tag = function (tag) {
-    return advanced_auto.interpet_tag_list(advanced_auto.tag_to_tag_list(tag));
+advanced_auto.interpret_tag = function (tag, as_is) {
+    return advanced_auto.interpet_tag_list(advanced_auto.tag_to_tag_list(tag, as_is));
 }
 
 // This somewhat naive approach works since multiple possibilities
 // that are not quickly shown to be impossible are likely very rare,
 // and since a typical list of words will be no more than 20 words long.
-advanced_auto.tag_descs_to_tags = function (words) {
+advanced_auto.tag_descs_to_tags = function (words, as_is) {
+    if (words[0] === '*') {
+        return advanced_auto.tag_descs_to_tags(words.slice(1), true);
+    }
     var a;
     var b;
     if (words.length === 0) {
         return [];
     }
-    // The loop order is important here! We want the interpreation where
+    // The loop order is important here! We want the interpretation where
     // present and subjunctive are part of the same tag to beat the one
     // where they are part of different tags!
     // (Believe it or not, I originally wrote this message next to,
     // and changed, a different loop!)
     for (var i = words.length; i > -1; i--) {
-        a = advanced_auto.interpret_tag(words.slice(0, i + 1).join(' '));
+        a = advanced_auto.interpret_tag(words.slice(0, i + 1).join(' '), as_is);
         if (a !== null) {
-            var b = advanced_auto.tag_descs_to_tags(words.slice(i + 1));
+            var b = advanced_auto.tag_descs_to_tags(words.slice(i + 1), as_is);
             if (b !== null) {
                 b.push(a);
                 return b;
@@ -684,15 +693,20 @@ advanced_auto.data_for_part = function (part) {
     }
 }
 
-advanced_auto.data_from_text = function (text) {
-    var comment_less = advanced_auto.remove_comments(text);
-    var chapter = advanced_auto.get_chapter(comment_less);
-    var parts = advanced_auto.get_parts(comment_less);
+advanced_auto.data_from_text_with_chapter = function (text) {
+    var chapter = advanced_auto.get_chapter(text);
+    var parts = advanced_auto.get_parts(text);
     var results = parts.map(advanced_auto.data_for_part);
     for (var i = 0; i < results.length; i++) {
         results[i].chapter = chapter;
     }
     return results;
+}
+
+advanced_auto.data_from_text = function (text) {
+    var comment_less = advanced_auto.remove_comments(text);
+    return comment_less.split(/\n-{5,}\n/).map(
+        advanced_auto.data_from_text_with_chapter);
 }
 
 advanced_auto.get_data = function () {
@@ -777,7 +791,7 @@ advanced_auto.auto_submit_all = function (data) {
 }
 
 advanced_auto.full_process = function () {
-    var data = advanced_auto.get_data();
+    var data = concat_all(advanced_auto.get_data());
     advanced_auto.auto_submit_all(data);
     alert('Everything successful! All the data was submitted!');
 }

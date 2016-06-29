@@ -50,6 +50,7 @@ var alias_dict = {
     'plu subj': 'pluperfect & subj & ss & prior',
     'pluperf subj': 'plu subj',
     'pluperfect subj': 'plu subj',
+    'pluperfect subjunctive': 'plu subj',
     'potential': '^it & no sequence & no relative time!10',
     'predicate': 'predicate nominative',
     'pres': 'present',
