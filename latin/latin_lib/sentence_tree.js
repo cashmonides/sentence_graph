@@ -1,7 +1,7 @@
 //todo make a new directory that contains the whole tree
 
 
-var Kernel = function(form_list, clause_type, voice, verb_type, level){
+var Kernel = function (form_list, clause_type, voice, verb_type, level) {
 
     this.form_list = form_list;                                                     //list of Form objects (with each Form object having a property - what Element enum it is (subject, object, verb, etc.)
     this.clause_type = clause_type;                                                 //main, iq, is, cond_prot, cond_apod. purpose, ic

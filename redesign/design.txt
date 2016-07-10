@@ -1,0 +1,122 @@
+In general I think we should shoot for those basic design principles of modularity:
+
+- keeping .js files at 100 lines or less (not including comments)
+- commenting the code as we go (for the benefit of rubber ducks like me)
+> automatic tests
+> design documents (comments at the top of each file?)
+> verify that these things exist? (i.e., no file with more than 100 non-comment lines can be commited)
+
+- work incrementally: start small (e.g. with verbs only) and advance from there
+> create fake languages that only have verbs?
+
+
+Here are some design goals:
+
+- be able to produce e.g. verbs in both directions: latin to english and english to latin
+
+- be totally language independent (i.e. be able to work in a third language altogether) 
+
+- have a layer of abstraction at which we can work with a purely language independent template of this sort:
+(the subject mental verbs that the subject of-genitive will verb object-of genitive by-means-of-ablative-of-genitive)
+(we might want to develop an object that can take on this role of these components)
+
+> have a different layer of abstraction that works with filled templates (perfect language?)
+
+> maintain the idea of lexemes and forms
+
+- produce conditional sentences and general subordinate clauses (ut, ne, quia etc.)
+
+- after we can get verbs going, then we move to produce nouns and more complex nouns (e.g. adding genitive)
+
+
+- lexicon should be expandable
+    - e.g. when we realize that a telescope cannot be a murder weapon
+    - then we can add it to white list or black list
+
+- animate-subj transitive-verbs ruler-object of-placenoun with-implement-nouns
+   a            b                 c             d         e
+   
+   a: animate
+   b: transitive
+   c: ruler
+   d: place
+
+
+
+- bootstrap from existing latin textbooks
+    -i.e. able to do the following process:
+    - don't only reinvent the wheel
+    - i.e. sometimes reinvent the wheel, sometimes produce a sentence entirely procedurally
+    - BUT sometimes use all the hard work that went into M&F into R&K into GL into NLS
+    - take as input a sentence (e.g. in Latin, say a unit 4 sentence from a latin textbook)
+    - manually tag or convert a latin sentence into a template format (i.e. make a target string)
+    - run target string through Nicky's nltk - to match part of speech
+    - manually tag things with categories not in nltk (animate, ruler, implement)
+    - convert it to pure template  
+        - animate-subj transitive-verbs ruler-object of-placenoun with-implement-nouns
+    - take that template and produce every variation:
+        - the sailor kills the queen of the island with a sword (original)
+        - the mouse sees the god of the underworld with a telescope
+
+RESEARCH TO DO 
+- see if nltk has any pre-existing resources
+    - part of speech detector
+    - nonsense filters: e.g. some inanimate objects make good murder instruments
+
+
+
+some thoughts on early steps:
+
+in general: 
+- start with verbs and subordination
+- move on to nouns after we produce compound sentences
+
+STEP: 
+build a verb generator that can go latin to english, english to latin
+given simple arguments like tense, person, etc.
+
+> or go perfect language to any other language
+
+STEP: 
+rework our lexicon so it's more elegant
+
+STEP:  
+revisit our kernel object so its smaller and cleaner, try and get the kernel object to perform the functions of the verb generator (so that it contains tense, person, voice, etc.)
+
+STEP:
+build a larger object that contains multiple kernels, call it a sentence and try and get it to produce main kernel + subordinate kernel
+no nouns for the initial steps
+(nouns seem to be generatable from verbs - e.g. 2sg verbs produce no subject, passive verbs produce no object - so it seems wise to make the nouns get triggered downstream from the verbs)
+
+> and eventually, adjectives downstream from nouns
+
+
+
+
+
+Random thoughts:
+
+Our lexicon is a bit of a mess. It grew up quickly and in the manner of a Frankenstein. So we might want to try rebuilding the lexicon on more elegant design principles.
+
+> data? text file? ???
+
+
+Perhaps a bad idea but: I suggest we start with some arbitrary third language just so that we have proof of concept of language independence - i.e. some arbitrary variation on Latin called SSSlatin where every ending is preceded by three S's
+
+
+NAUT-SSSA TIM-E-SSST REGIN-SSSAM
+
+Just for a proof of concept. Later, when I have more time I can convert SSSlatin to Sanskrit.
+
+
+
+
+
+okay like I said, pretty random thoughts.
+
+Let me know what you think!!
+
+
+
+
+

@@ -2814,6 +2814,15 @@ res = * accusative direct object
 
 chapter: Lucretius 5
 
+*419-421
+
+nam certe neque consilio primordia rerum    
+ordine se suo quaeque sagaci mente locarunt 420
+nec quos quaeque darent motus pepigere profecto.
+
+mente = * ablative of manner + acceptable: ablative of means
+darent = * imperfect subjunctive indirect question secondary simultaneous time
+
 *849-854
 
 multa videmus enim rebus concurrere debere,	
@@ -2826,6 +2835,17 @@ mutua qui mutent inter se gaudia uterque.
 membris = * ablative subject in an ablative absolute + defensible: ablative of separation
 possit = * present subjunctive substantive ut clause primary simultaneous time + defensible: subsequent time!10
 mutent = * present subjunctive relative clause of characteristic primary simultaneous time + acceptable: subsequent time!10
+
+*925-930
+
+Et genus humanum multo fuit illud in arvis	925
+durius, ut decuit, tellus quod dura creasset,	
+et maioribus et solidis magis ossibus intus	
+fundatum, validis aptum per viscera nervis,	
+nec facile ex aestu nec frigore quod caperetur	
+nec novitate cibi nec labi corporis ulla.	930
+
+creasset = * pluperfect subjunctive relative clause of cause secondary prior time + acceptable: relative clause of characteristic
 
 ----------
 
@@ -5096,6 +5116,18 @@ best = * predicate nominative
 This should not fail.
 
 fail = * present subjunctive
+
+*21
+
+This is a test
+
+test = * subject nominative
+
+*22
+
+This is a test
+
+is = * pluperfect subjunctive relative clause of cause secondary prior time
 
 ----------
 

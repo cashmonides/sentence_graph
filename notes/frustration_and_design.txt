@@ -1,4 +1,0 @@
-ISSUES
-
-Testing at the end of sessions
-- 

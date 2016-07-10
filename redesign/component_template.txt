@@ -1,0 +1,71 @@
+below are just some rough notes, different ways for the data to look, though not necessarily generated this way
+
+version A
+
+component_template_1 : {
+    kernel_form: [k_1, c_1, k_2],
+    role_form: [[s, v], [c_when, s, v, o]],                 //the c can be at the head of the k_2 list as is, or it could be [k_1], [c], [k_2]
+    kernel_map: {
+        k_1: {
+            subject: [animate || inanimate]
+            verb: [intransitive || transitive && passive]                           
+            object: null
+        },
+        c_1: {
+            type: when
+        },
+        k_2: {
+            subject: [animate]
+            verb: [transitive]
+            object: free_choice
+        },
+    },
+    
+}
+
+
+version B
+
+
+[a, b, c, d, e, f]
+
+
+
+a: {
+    part_of_speech: noun,
+    animate: true,
+    ruler: false,
+    role: subject,
+    case_in_latin: nominative
+},
+
+b: {
+    part_of_speech: verb,
+    transitive: true,
+    takes_an_implement: true,
+    etc.
+},
+
+c: {
+    part_of_speech: noun,
+    animate: false,
+    ruler: false,
+    role: object,
+    case_in_latin: accusative
+},
+
+d: {
+    part_of_speech: noun,
+    animate: false,
+    ruler: false,
+    implement: true,
+    role: implement,
+    case_in_latin: ablative
+},
+
+etc.
+
+
+
+
+

@@ -15,7 +15,7 @@ end comment
 
 //begin input below
 
-chapter: "test_Lucretius 1"
+chapter: "Lucretius 1"
 
 
 
@@ -265,14 +265,19 @@ per gentis Italas hominum quae clara clueret;
 @1sit = present subjunctive indirect question
 
 
-//tagged up to here
+*120-126
 etsi praeterea tamen esse Acherusia templa	120
 Ennius aeternis exponit versibus edens,	
 quo neque permaneant animae neque corpora nostra,	
 sed quaedam simulacra modis pallentia miris;	
 unde sibi exortam semper florentis Homeri	
 commemorat speciem lacrimas effundere salsas	125
-coepisse et rerum naturam expandere dictis.	
+coepisse et rerum naturam expandere dictis.
+
+speciem = subject accusative of an indirect statement
+
+
+//tagged up to here
 qua propter bene cum superis de rebus habenda	
 nobis est ratio, solis lunaeque meatus	
 qua fiant ratione, et qua vi quaeque gerantur	

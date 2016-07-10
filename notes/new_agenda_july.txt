@@ -1,0 +1,23 @@
+AGENDA
+
+discuss design principles - come up with plan
+- agree on coding rules (??? coding rules may already be understood)
+- and steps in morphology (likely more important)
+
+- Dan had fun writing a file that both checks other files and itself conforms to the current standards.
+
+create basic proof of concept
+- amat and portat in present, imperfect, future indicative (english, latin, sss-latin, perfect language)
+- at least have some idea of what each component of the system does, and what the different types of object are
+
+question:
+Should there be a random seed controlling what sentence/kernel/verb gets made, in the interests of
+being able to duplicate results?
+If so, the lexicon plus this seed would always give the same sentence.
+
+start:
+lexemes (amat, portat)
+middle:
+gnivol erew ew (subtitute for unknown (as of July 7th) perfect language, will be filled eventually)
+end:
+amabamus, we were loving, gnivol erew ew (perfect language)
