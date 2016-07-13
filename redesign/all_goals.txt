@@ -1,0 +1,88 @@
+What has happened and our plans:
+
+PART 1
+
+STAGE -1
+- 1: decide on design rules
+- 2: decide on object types
+
+STAGE 0:
+- 1: produce blank kernels
+- 2: add determistic properties
+
+STAGE 1
+- 1: add random properties
+- 2: add sequence
+- 3: add person and number
+
+(we are here)
+
+STAGE 1.5
+- 1: display
+- 2: check to make sure we have enough information to make a quiz from this
+explanation from Akiva:
+i.e. we want to ask about all properties and we want to ask about part of speech
+so we just want to make sure that we have all that information and it's easy to access
+(we don't need to make the quiz obviously)
+What part of speech is the highlighted word?
+Is the highlighted word transitive or intransitive?
+Is the highlighted word active of passive?
+
+
+STAGE 2
+general note: don't add nouns yet!!!
+- 1: instead, feed K C K into our pipeline
+question from Dan to Akiva: are we doing this?
+- 2: and plug the end result V(with properties) C(with properties) V(with properties)
+into a function that inflects English, Latin and SSSLatin
+- 3: we already have such functions, we should pull them out into their own files
+(inflect_verb.js or something similar) and adapt them as necessary
+
+
+STAGE 3
+- 1: reflect on the process so far
+- 2: make any redesign decisions
+
+End of PART 1
+
+PART 2
+
+STAGE 4
+- 1: add lexeme choice
+- 2: rebuild our verb lexicon
+
+STAGE 5
+note: in this stage we have a new MVP
+question from Dan: Wasn't stage 4 intended for the same MVP?
+- 1: produce sentences of the form:
+"you love because we shout"
+"he will attack if they shout"
+"if they shout, he will attack"
+with enough information to make a quiz on all properties, including clause type
+
+End of PART 2
+
+PART 3
+
+STAGE 6 (and maybe more)
+- add nouns
+
+...
+
+End of PART 3
+
+(the unknown beyond)
+
+END
+
+Notes:
+Why do so much with verbs before adding nouns?
+Isn't it descending into the messy reality prematurely?
+Shouldn't we just generate purely abstract kernels
+with S and O and adjectives first?
+
+Well, maybe. But we have the inflect verb functions pretty well developed
+already and it won't take long to chain them up into the pipeline.
+The advantage of doing this now is that we will see all the strange things
+and weird linguistic realities and bugs and design issues and pain points.
+We might learn a great deal and it won't take too long.

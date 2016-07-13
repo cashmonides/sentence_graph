@@ -6,12 +6,14 @@ var testing_allowed_library = {
     time: ['past', 'present', 'future'],
     voice: ['active', 'passive'],
     mood: ['indicative', 'subjunctive'],
-    transitivity: ['transitive', 'intransitive']
+    transitivity: ['transitive', 'intransitive'],
+    person_and_number: ['1s', '2s', '3s', '1p', '2p', '3p']
 }
 
-
-
-
+// 
+var testing_rules = [
+    'transitive | active'
+];
 
 var testing_kernels = {
     attack : {

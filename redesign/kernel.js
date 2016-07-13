@@ -153,12 +153,13 @@ var add_language_specific_restriction = function (type) {
         // We check that the restriction is valid.
         if (restriction instanceof NonexistantKey) {
             // This means that the key does not exist (unless
-            // someone actually used a NonexistantKey object as a value.)
+            // someone actually used a NonexistantKey object as a value,
+            // which should never happen).
             // We put together debugging information for this error.
             throw 'The restriction with ' + conjunction_debug_info(
                 conjunction, direction, type) +
                 'appears not to exist.';
-        } else if (typeof restriction !== 'object' || restriction === null) {
+        } else if (!is_object(restriction)) {
             // The restriction exists, it just isn't valid. We throw an error
             // saying what the restriction is.
             throw 'The restriction with ' + conjunction_debug_info(
@@ -201,7 +202,7 @@ Kernel.prototype.add_determined_properties = function () {
     // We iterate over our restrictions.
     for (var i in this.restrictions) {
         // We add each one to the verb.
-        verb_component.add_property(i, this.restrictions[i])
+        verb_component.set_property(i, this.restrictions[i])
     }
 }
 
@@ -214,11 +215,17 @@ Kernel.prototype.add_random_properties = function () {
     }
 }
 
+// This function makes the kernel adopt a sequence.
+Kernel.prototype.adopt_sequence = function (sequence) {
+    // Set the sequence of the verb component to the sequence given.
+    this.get_verb().set_property('sequence', sequence);
+}
+
 // This function displays a restriction in a given language.
 var display_restriction = function (restriction, language) {
     // We check whether the restriction is an object and, if not,
     // whether it is a string or null.
-    if (typeof restriction === 'object' && restriction !== null) {
+    if (is_object(restriction)) {
         // The restriction is a true object: we find our language in it.
         return restriction[language];
     } else if (typeof restriction === 'string' || restriction === null) {
@@ -263,5 +270,18 @@ var display_kernel_in = function (language) {
         // We join by ', ', surround by brackets, and precede
         // the result by 'K', as said above.
         return 'K[' + filtered_restrictions.join(', ') + ']';
+    }
+}
+
+// This function is higher-order: it takes a language
+// and returns a function that translates a kernel into that language.
+var translate_kernel_into = function (language) {
+    return function (kernel) {
+        // Return a string describing each role, separated by ', '
+        // and surrounded by brackets.
+        return '[' + kernel.role_list.map(function (role) {
+            // Describe each role.
+            return role.describe_in_language(language);
+        }).join(', ') + ']';
     }
 }

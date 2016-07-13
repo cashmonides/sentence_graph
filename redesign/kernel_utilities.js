@@ -80,7 +80,9 @@ var conjunction_JSON_from_name = function (conjunction) {
     // we use c_null instead.
    var true_conjunction = conjunction_library[conjunction || 'c_null'];
    // We check that the true conjunction is a non-null object.
-   if (typeof true_conjunction !== 'object' || true_conjunction === null) {
+   // (Note that is_object does a check for null
+   // so we don't have to do it ourselves here.)
+   if (!is_object(true_conjunction)) {
        // Oh no! The true conjunction was not as expected,
        // so we throw an error.
        throw 'Could not find conjunction ' +

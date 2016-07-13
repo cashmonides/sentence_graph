@@ -12,13 +12,85 @@ var Role = function (role_name) {
     this.component = new Component();
 }
 
+// Describe a role in a language.
+Role.prototype.describe_in_language = function (language) {
+    // Include the rol name and the properties.
+    return this.role_name + ' with properties \n' +
+    this.component.describe_in_language(language) + '\n';
+}
+
+// This means that latin is our default setting.
+var default_language = 'latin';
+
 // This method adds random properties to the component in a role.
+
+// Note: the random properties to be added are
+// time, voice, mood, and transitivity.
+
+// Another note:
+// The operations of getting a property in the default language,
+// setting it to something, then resetting it to the value previously
+// gotten have no effect. We use this to our advantange to undo changes.
+
+// Thus, our basic setup is:
+// get everything
+// while true
+// set everything
+// if it works, break and if not, revert
+
 Role.prototype.add_random_properties = function () {
-    throw 'This function is broken!';
-    for (var i in testing_allowed_library) {
-        if (this.component.get_property(i) === null) {
-            this.component.set_property(i, random_choice(
-                testing_allowed_library[i]));
+    // The properties we need to add are the keys
+    // of the testing_allowed_library.
+    var properties = Object.keys(testing_allowed_library);
+    
+    // i is just a looping variable.
+    var i;
+    
+    // property is a temporary variable storing
+    // the property currently being added.
+    var property;
+    
+    // This variable stores the initial values.
+    var original_values = {};
+    
+    // Loop over the properties.
+    for (i = 0; i < properties.length; i++) {
+        // Set property to the property under consideration.
+        property = properties[i];
+        // The original value for the property is its value
+        // in the default language.
+        original_values[property] = this.component.get_property_in_language(
+            property, default_language);
+    }
+    
+    // This is an infinite loop.
+    while (true) {
+        // Loop over the properties.
+        for (i = 0; i < properties.length; i++) {
+            // Set property to the property under consideration.
+            property = properties[i];
+            // Check whether the property is chosen.
+            if (!this.component.chosen(property)) {
+                // value is the randomly chosen value of the property.
+                var value = random_choice(testing_allowed_library[property]);
+                // Set the property to the value.
+                this.component.set_property(property, value);
+            }
+        }
+        // Check.
+        if (this.component.check_all_rules()) {
+            // Break.
+            break;
+        } else {
+            // Revert.
+            // Loop over the properties.
+            for (i = 0; i < properties.length; i++) {
+                // Set property to the property under consideration.
+                property = properties[i];
+                // Set the value for the property to what it was originally.
+                this.component.set_property(
+                    property, original_values[property]);
+            }
         }
     }
 }
@@ -28,20 +100,151 @@ var Component = function () {
     this.properties = {};
 }
 
-// This function adds a property to a component given the property's
-// name and value.
-Component.prototype.add_property = function (name, value) {
-    this.properties[name] = value;
+// This function finds whether a property has been chosen
+// given the property's name.
+Component.prototype.chosen = function (name) {
+    // Is there a property corresponding to the name?
+    if (name in this.properties) {
+        // value is the value of the property.
+        var value = this.properties[name];
+        // Is the value of the property not null?
+        if (value === null) {
+            // If so, the property does not exist: return false.
+            return value;
+        } else if (typeof value === 'string') {
+            // If the value of the property is a string, it does exist;
+            // return true.
+            return true;
+        } else {
+            // The property is an object. Check the default language's value.
+            // If it is null, the default languge, at least, has no value,
+            // so we return false. Otherwise every language without a value
+            // can use the default language's value, so we can return true.
+            return value[default_language] !== null;
+        }
+    } else {
+        // Otherwise return false, since the property is unchosen.
+        return false;
+    }
 }
 
-// This function gets a property from a component
-// given the property's name. It uses a null default value.
-Component.prototype.get_property = function (name) {
+// This function sets a property given the property's name
+// and the value to set it to.
+
+// Note: This method, in some sense, does two things.
+// If a property completely does not exist, or is not a dictionary,
+// it sets it to the value given.
+// But if the property exists and is a dictionary, it only sets
+// the default in the dictionary to the value given.
+Component.prototype.set_property = function (name, set_to) {
+    // Is there a property corresponding to the name?
     if (name in this.properties) {
-        return this.properties[name];
+        // value is the value of the property.
+        var value = this.properties[name];
+        // Is the value of the property not null?
+        if (value === null || typeof value === 'string') {
+            // The property is not a dictionary, so just reset it.
+            this.properties[name] = set_to;
+        } else {
+            // Set the default language's value.
+            value[default_language] = set_to;
+        }
     } else {
+        // Otherwise just set the property, since it is unchosen.
+        this.properties[name] = set_to;
+    }
+}
+
+// This function checks whether a component satisfies some property.
+// It currently simply checks for the property in the component's
+// properties.
+// This function is not very efficient, but it hardly matters right now.
+Component.prototype.check = function (string) {
+    return values(this.properties).indexOf(string) !== -1;
+}
+
+// This function tests whether a component satisifes a rule.
+Component.prototype.check_rule = function (rule) {
+    // We parse the rule and apply it to the component.
+    return parse_rule(rule)(this);
+}
+
+// This function tests whether a component satisfies all rules.
+Component.prototype.check_all_rules = function () {
+    // We iterate over the rules.
+    for (var i = 0; i < testing_rules.length; i++) {
+        // We see if the component fails to satisfy a rule.
+        if (!this.check_rule(testing_rules[i])) {
+            // If so, it does not satisfy all rules.
+            return false;
+        }
+    }
+    // No rules were not satisfied, so the kernel satisfies all rules.
+    return true;
+}
+
+// This function gets a property from a component in a language
+// given the property's name and language's name.
+// It, like the above function, uses a null default value.
+Component.prototype.get_property_in_language = function (name, language) {
+    // Is there no property corresponding to the name?
+    if (!(name in this.properties)) {
+        // If so, return the null default value.
         return null;
     }
+    
+    // value is the value of the property.
+    var value = this.properties[name];
+    
+    // Is the value not an object?
+    if (!is_object(value)) {
+        // If so, return the value. (It is language-independent.)
+        return value;
+    }
+    
+    // The property should be language-dependent.
+    // We check that the language given is supported,
+    // that is, the language is a property of the value.
+    if (!(language in value)) {
+        // We throw an error.
+        throw 'Error! ' + language + ' is not in ' +
+        JSON.stringify(value) + '!';
+    }
+    
+    // This is the value of the property in the language.
+    var value_in_language = value[language];
+    
+    // Is the value in the language null?
+    if (value_in_language === null) {
+        // Default to the default language.
+        return value[default_language];
+    } else {
+        // Return the non-null value.
+        return value_in_language;
+    }
+}
+
+// This function returns a description of a property
+// (actually, just the property and its value in a particular language).
+Component.prototype.describe_property = function (
+    property, language) {
+    // Just add together the property, a colon and space,
+    // and the value of the property.
+    return property + ': ' + this.get_property_in_language(
+        property, language);
+}
+
+// This method describes the component.
+Component.prototype.describe_in_language = function (language) {
+    // properties is the list of properties sorted.
+    var properties = Object.keys(this.properties).sort();
+    // Since we use this inside a function, we need to define
+    // self to be this and use self instead.
+    var self = this;
+    // Describe each property, add indents, and join by '\n'
+    return properties.map(function (property) {
+        return '    ' + self.describe_property(property, language);
+    }).join('\n');
 }
 
 // The function displays a role list of a kernel.
