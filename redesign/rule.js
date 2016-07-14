@@ -71,7 +71,46 @@ var function_from_tokenized_rule = function (rule) {
     }
 }
 
+// A regex to match arrows.
+var arrow_regex = /[=\-]>/g;
+
+var parse_arrow_rule = function (rule) {
+    // The rules within the rule.
+    var sub_rules = rule.split(arrow_regex);
+    // We remove the last one, parse it, and make it
+    // a consequence of the others.
+    // (Logically, in 'main -> indicative', 'indicative' should be
+    // the consequence of 'main').
+    var consequence = parse_rule(sub_rules.pop());
+    // We also have the assumptions: those things that are needed
+    // for the consequence. They, indeed, are everything
+    // but the consequence.
+    var assumptions = sub_rules.map(parse_rule);
+    // We then return our function. It assumes the situation is good
+    // if any of the assumptions fail, but otherwise
+    // it all rests on the consequence.
+    // (Yes, by the logical behavior of an if-statement, an assumption failing
+    // means that statement evaluates to true.)
+    return function (x) {
+        // Iterate over the assumptions.
+        for (var i = 0; i < assumptions.length; i++) {
+            // Check whether the assumption failed.
+            if (!assumptions[i](x)) {
+                // The assumption failed so the statement passes.
+                return true;
+            }
+        }
+        // It all comes down to the consequence.
+        return consequence(x);
+    }
+}
+
 // This function does the complete process to a rule.
 var parse_rule = function (rule) {
+    // Check whether the rule has an arrow.
+    if (rule.match(arrow_regex)) {
+        // Parse the rule in a different way since it has an arrow.
+        return parse_arrow_rule(rule);
+    }
     return function_from_tokenized_rule(tokenize_rule(rule));
 }

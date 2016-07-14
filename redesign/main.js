@@ -4,6 +4,7 @@
 var main = function () {
     // We make a random sentence.
     var sentence = make_random_sentence();
+    console.log(sentence);
     // We add the determined properties.
     sentence.add_determined_properties();
     // We determine sequence.
@@ -13,7 +14,7 @@ var main = function () {
     // We haven't yet implemented choosing random lexemes
     // and don't really plan to very soon.
     // We choose random lexemes.
-    // sentence.choose_random_lexemes();
+    sentence.choose_random_lexemes();
     // Finally, we display the sentence.
     display_on_page(sentence.display());
 }

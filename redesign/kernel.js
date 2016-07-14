@@ -15,6 +15,8 @@ var kernel_constructor = function (conjunction, direction) {
     // property of the conjunction.
     var clause_type = conjunction['k_' + direction + '_clause_type'];
     
+    
+    
     // We check that the clause type is not undefined
     // and throw an error if it is.
     if (clause_type === undefined) {
@@ -41,6 +43,10 @@ var kernel_constructor = function (conjunction, direction) {
     // We add the mood restriction (as above, it will be a dictionary
     // where the keys are languages, and should exist).
     kernel.add_mood_restriction(conjunction, direction);
+    // We add the main or sub retriction. Any kernel is main,
+    // independent subjunctive, subordinate,
+    // or nonexistant; we call this its main or sub.
+    kernel.add_main_or_sub_restriction(conjunction, direction);
     
     // We return our just-constructed kernel.
     return kernel;
@@ -69,6 +75,7 @@ var Kernel = function (role_list, clause_type) {
 }
 
 // This method gets the role at a given position in the role list.
+// This might not actually be used and might be worth deleting.
 Kernel.prototype.get_role = function (position) {
     return this.role_list[position];
 };
@@ -88,99 +95,6 @@ Kernel.prototype.visit = function (visitor) {
         visitor(this, this.role_list[i]);
     }
 };
-
-// This function adds the appropriate lexical restriction (if any)
-// to the kernel. It takes a conjunction (in JSON format) and a direction.
-Kernel.prototype.add_lexical_restriction = function (
-    conjunction, direction) {
-    // We find the appropriate lexical restriction by property lookup
-    // in the conjunction.
-    var lexical_restriction = get_conjunction_restriction(
-        conjunction, direction, 'lexical');
-    // If the lexical restriction we just got exists, we add it.
-    // This includes checing that it is not of type NonexistantKey.
-    if (lexical_restriction && !(
-        lexical_restriction instanceof NonexistantKey)) {
-        this.restrictions.lexical = lexical_restriction;
-    }
-}
-
-// This function uses property lookup on the conjunction
-// to get a specific restriction.
-var get_conjunction_restriction = function (conjunction, direction, type) {
-    // We create our lookup string.
-    var lookup_string = 'k_' + direction + '_' + type + '_restriction';
-    // We check whether the lookup string is actually a property.
-    if (lookup_string in conjunction) {
-        // All is well and we return the associated value.
-        return conjunction['k_' + direction + '_' + type + '_restriction'];
-    } else {
-        // We have an issue since the lookup string is not a property.
-        // We return a NonexistantKey, which will likely cause an
-        // error-catching part of the code to throw an information-rich
-        // error.
-        return new NonexistantKey();
-    }
-}
-
-// This function returns debuging information for a situation where
-// we come across an error while adding a restriction.
-var restriction_debug_info = function (conjunction, direction, type) {
-    // We concatenate a lot of strings to make our debugging information.
-    return 'conjunction ' +
-    JSON.stringify(conjunction) + ', direction ' +
-    JSON.stringify(direction) + ', and restriction' +
-    JSON.stringify(type);
-}
-
-// The function is higher-order. It takes a type of restriction
-// (as a string, e.g., lexical) and returns a function
-// which, when used as a method on the Kernel,
-// adds a restriction of the type specified given
-// a conjunction (as JSON) and a direction.
-var add_language_specific_restriction = function (type) {
-    // As said above, this function takes a conjunction
-    // and a direction and adds a restriction of
-    // the specified type to the conjunction.
-    return function (conjunction, direction) {
-        // We get the restriction based on the conjunction,
-        // direction, and type.
-        var restriction = get_conjunction_restriction(
-            conjunction, direction, type);
-        // We check that the restriction is a true object
-        // (its type is object and it is not null).
-        
-        // We check that the restriction is valid.
-        if (restriction instanceof NonexistantKey) {
-            // This means that the key does not exist (unless
-            // someone actually used a NonexistantKey object as a value,
-            // which should never happen).
-            // We put together debugging information for this error.
-            throw 'The restriction with ' + conjunction_debug_info(
-                conjunction, direction, type) +
-                'appears not to exist.';
-        } else if (!is_object(restriction)) {
-            // The restriction exists, it just isn't valid. We throw an error
-            // saying what the restriction is.
-            throw 'The restriction with ' + conjunction_debug_info(
-                conjunction, direction, type) +
-                'appears to be invalid; it is ' + JSON.stringify(restriction);
-        }
-        // We add the restriction as a restiction of the specified type.
-        this.restrictions[type] = restriction;
-    }
-}
-
-// This function adds the appropriate time restriction to the kernel.
-// It takes a conjunction (in JSON format) and a direction.
-Kernel.prototype.add_time_restriction = add_language_specific_restriction(
-    'time');
-
-
-// This function is as above, except that it adds a mood restriction
-// instead of a time restriction.
-Kernel.prototype.add_mood_restriction = add_language_specific_restriction(
-    'mood');
 
 // This function gets the verb component from the kernel.
 Kernel.prototype.get_verb = function () {
@@ -220,6 +134,15 @@ Kernel.prototype.adopt_sequence = function (sequence) {
     // Set the sequence of the verb component to the sequence given.
     this.get_verb().set_property('sequence', sequence);
 }
+
+// This function determines a lexeme for each role in a kernel.
+Kernel.prototype.choose_random_lexemes = function (visitor) {
+    // We iterate over the role list.
+    for (var i = 0; i < this.role_list.length; i++) {
+        // We determine a lexeme for the current role.
+        this.role_list[i].choose_random_lexeme();
+    }
+};
 
 // This function displays a restriction in a given language.
 var display_restriction = function (restriction, language) {

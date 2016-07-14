@@ -88,8 +88,8 @@ var conjunction_JSON_from_name = function (conjunction) {
        throw 'Could not find conjunction ' +
        JSON.stringify(true_conjunction);
    }
-   // We return the true conjunction.
-   return true_conjunction;
+   // We return the true conjunction, parsing and stringifying to copy.
+   return JSON.parse(JSON.stringify(true_conjunction));
 }
 
 // This function makes a random sentence.

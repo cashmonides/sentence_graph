@@ -18,9 +18,11 @@ Sentence.prototype.get_conjunction = function () {
 }
 
 // The function gets the conjunction of the sentence as JSON,
-// by finding its entry in the conjunction library.
+// by finding its entry in the conjunction library. We stringify and parse
+// to avoid modification.
 Sentence.prototype.get_conjunction_as_json = function () {
-    return conjunction_library[this.get_conjunction()];
+    return JSON.parse(JSON.stringify(conjunction_library[
+        this.get_conjunction()]));
 }
 
 // The function determines whether the sentence is just one clause.

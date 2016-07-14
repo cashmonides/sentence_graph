@@ -10,9 +10,11 @@ var testing_allowed_library = {
     person_and_number: ['1s', '2s', '3s', '1p', '2p', '3p']
 }
 
-// 
+
 var testing_rules = [
-    'transitive | active'
+    'transitive | active',
+    'main & secondary => past',
+    'main => indicative'
 ];
 
 var testing_kernels = {
