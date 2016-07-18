@@ -3,36 +3,42 @@
 
 // This function constructs a kernel from a conjunction
 // and a choice of left or right.
-// Note that the conjunction here is a string which will be
-// converted into a JSON object.
+// Note that the conjunction here is simply a conjunction object.
 var kernel_constructor = function (conjunction, direction) {
-    // We convert the conjunction into JSON.
-    conjunction = conjunction_JSON_from_name(conjunction);
-    // We access a property of the conjunction telling us
-    // the appropriate clause type.
-    // We do so via concatinating strings to make k_left_clause_type
-    // or k_right_clause_type, and then look at that
-    // property of the conjunction.
-    var clause_type = conjunction['k_' + direction + '_clause_type'];
+    // We get the appropriate construction from the conjunction.
+    var construction = conjunction.get_construction(direction);
     
     
     
-    // We check that the clause type is not undefined
+    // We check that the construction is not undefined
     // and throw an error if it is.
-    if (clause_type === undefined) {
-        // The clause type is undefined! We throw an error
-        // with the clause type, the direction, and the conjunction.
-        throw 'clause_type is undefined, left_or_right = ' + direction +
+    if (construction === undefined) {
+        // The construction is undefined! We throw an error
+        // with the construction, the direction, and the conjunction.
+        throw 'construction is undefined, left_or_right = ' + direction +
         ', conjunction = ' + JSON.stringify(conjunction); 
     }
+    
+    // main or sub is a variable that stores whether
+    // our kernel is main or subordinate.
+    var main_or_sub;
+    // We check whether our direction is the default direction.
+    if (direction === default_direction) {
+        // If our direction is the default, we are in the main clause.
+        main_or_sub = 'main';
+    } else {
+        // Otherwise we are in the subordinate clause.
+        main_or_sub = 'subordinate';
+    }
+    
     // We construct a random role list.
     // For now this is just a list containing a verb role.
     
     // todo: when we are done with the minimum viable product,
     // we should make this more complicated.
     var role_list = [new Role('verb')];
-    // We construct a Kernel object from our clause type and role list.
-    var kernel = new Kernel(role_list, clause_type);
+    // We construct a Kernel object from our construction and role list.
+    var kernel = new Kernel(role_list, construction, main_or_sub);
     // In the next few lines we just add restrictions.
     
     // We add any lexical restriction that may exist.
@@ -43,21 +49,24 @@ var kernel_constructor = function (conjunction, direction) {
     // We add the mood restriction (as above, it will be a dictionary
     // where the keys are languages, and should exist).
     kernel.add_mood_restriction(conjunction, direction);
-    // We add the main or sub retriction. Any kernel is main,
+    // We add the clause type retriction. Any kernel is main,
     // independent subjunctive, subordinate,
-    // or nonexistant; we call this its main or sub.
-    kernel.add_main_or_sub_restriction(conjunction, direction);
+    // or nonexistant (plus some possibilities for conditionals);
+    // we call this its clause type.
+    kernel.add_clause_type_restriction(conjunction, direction);
     
     // We return our just-constructed kernel.
     return kernel;
 }
 
 // This is the initial definition of the Kernel object.
-var Kernel = function (role_list, clause_type) {
+var Kernel = function (role_list, construction, main_or_sub) {
     // list of roles (objects)
     this.role_list = role_list;
-    // main, iq, is, cond_prot, cond_apod. purpose, ic
-    this.clause_type = clause_type;
+    // main, iq, is, cond_prot, cond_apod. purpose, ic, etc.
+    this.construction = construction;
+    // main, subordinate
+    this.main_or_sub = main_or_sub;
     // active, passive
     this.voice = null;
     // past, present, future - agnostic as to subtleties of tense and aspect
@@ -85,16 +94,21 @@ Kernel.prototype.get_size = function () {
     return this.role_list.length;
 };
 
+// From my point of view, although I think I understand it,
+// visit acts as a mystical piece of code.
+// Since we're not using it, and mystical pieces of code
+// can be confusing, I commented it out.
+
 // This method does something to each role in the role list.
 // It may be obsolete or at least in need of replacement.
-Kernel.prototype.visit = function (visitor) {
-    // We iterate over the role list.
-    for (var i = 0; i < this.role_list.length; i++) {
-        // We pass our input function both the kernel
-        // and the current role.
-        visitor(this, this.role_list[i]);
-    }
-};
+// Kernel.prototype.visit = function (visitor) {
+//     // We iterate over the role list.
+//     for (var i = 0; i < this.role_list.length; i++) {
+//         // We pass our input function both the kernel
+//         // and the current role.
+//         visitor(this, this.role_list[i]);
+//     }
+// };
 
 // This function gets the verb component from the kernel.
 Kernel.prototype.get_verb = function () {
@@ -136,13 +150,48 @@ Kernel.prototype.adopt_sequence = function (sequence) {
 }
 
 // This function determines a lexeme for each role in a kernel.
-Kernel.prototype.choose_random_lexemes = function (visitor) {
+Kernel.prototype.choose_random_lexemes = function (chosen_lexemes) {
+    // We initialize some lexemes chosen in this kernel.
+    this.chosen_lexemes = {};
     // We iterate over the role list.
     for (var i = 0; i < this.role_list.length; i++) {
         // We determine a lexeme for the current role.
-        this.role_list[i].choose_random_lexeme();
+        // Note that we do this by calling a method on its component.
+        var success = this.role_list[i].component.choose_random_lexeme(
+            chosen_lexemes, this.chosen_lexemes);
+        // We throw an error if we fail.
+        if (!success) {
+            // We check whether we want to throw an error
+            // or take some other type of action.
+            if (LEXEME_ERROR_CATCHING_MODE === 'throw') {
+                // We failed so we throw an error.
+                throw 'Failed to choose lexeme for ' +
+                JSON.stringify(this.role_list[i].component);
+            } else {
+                // We just return false.
+                return false;
+            }
+        }
     }
+    // We add the lexemes chosen in the kernel to our master dictionary
+    // of chosen lexemes, one at a time.
+    for (var i in this.chosen_lexemes) {
+        // Add i.
+        chosen_lexemes[i] = true;
+    }
+    // Return true since all went well.
+    return true;
 };
+
+// This method lets us inflect all the components of a kernel
+// in a given language.
+Kernel.prototype.inflect_all_components_in = function (language) {
+    // We iterate over the role list.
+    for (var i = 0; i < this.role_list.length; i++) {
+        // We inflect the component at position i.
+        this.role_list[i].component.inflect(language);
+    }
+}
 
 // This function displays a restriction in a given language.
 var display_restriction = function (restriction, language) {
@@ -197,8 +246,9 @@ var display_kernel_in = function (language) {
 }
 
 // This function is higher-order: it takes a language
-// and returns a function that translates a kernel into that language.
-var translate_kernel_into = function (language) {
+// and returns a function that partially translates
+// a kernel into that language.
+var partial_translate_kernel_into = function (language) {
     return function (kernel) {
         // Return a string describing each role, separated by ', '
         // and surrounded by brackets.
@@ -206,5 +256,18 @@ var translate_kernel_into = function (language) {
             // Describe each role.
             return role.describe_in_language(language);
         }).join(', ') + ']';
+    }
+}
+
+// This function is higher-order: it takes a language
+// and returns a function that translates
+// a kernel into that language.
+var translate_kernel_into = function (language) {
+    return function (kernel) {
+        // Return the translation of each role, separated by spaces.
+        return kernel.role_list.map(function (role) {
+            // Describe each role.
+            return role.component.form[language];
+        }).join(' ');
     }
 }

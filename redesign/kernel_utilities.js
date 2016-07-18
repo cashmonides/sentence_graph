@@ -45,7 +45,10 @@ var conj_list = Object.keys(conjunction_library);
 
 // This function expands a conjunction.
 var expand_conj = function () {
-    return random_choice(conj_list);
+    // We pick a random key from the conjunction library.
+    var key = random_choice(conj_list);
+    // We return a conjunction constructed from that key.
+    return new Conjunction(key);
 }
 
 // This function seems to have been a mistake:
@@ -74,23 +77,25 @@ var find_conjunction_index = function (seed) {
     return seed.indexOf('c');
 }
 
-// This function returns a conjunction JSON object given its name or null.
-var conjunction_JSON_from_name = function (conjunction) {
-    // If the conjunction parameter is false-like (i.e., null),
-    // we use c_null instead.
-   var true_conjunction = conjunction_library[conjunction || 'c_null'];
-   // We check that the true conjunction is a non-null object.
-   // (Note that is_object does a check for null
-   // so we don't have to do it ourselves here.)
-   if (!is_object(true_conjunction)) {
-       // Oh no! The true conjunction was not as expected,
-       // so we throw an error.
-       throw 'Could not find conjunction ' +
-       JSON.stringify(true_conjunction);
-   }
-   // We return the true conjunction, parsing and stringifying to copy.
-   return JSON.parse(JSON.stringify(true_conjunction));
-}
+
+// This function seems to be obsolete due to conjunction objects.
+// // This function returns a conjunction JSON object given its name or null.
+// var conjunction_JSON_from_name = function (conjunction) {
+//     // If the conjunction parameter is false-like (i.e., null),
+//     // we use c_null instead.
+//    var true_conjunction = conjunction_library[conjunction || 'c_null'];
+//    // We check that the true conjunction is a non-null object.
+//    // (Note that is_object does a check for null
+//    // so we don't have to do it ourselves here.)
+//    if (!is_object(true_conjunction)) {
+//        // Oh no! The true conjunction was not as expected,
+//        // so we throw an error.
+//        throw 'Could not find conjunction ' +
+//        JSON.stringify(true_conjunction);
+//    }
+//    // We return the true conjunction, parsing and stringifying to copy.
+//    return JSON.parse(JSON.stringify(true_conjunction));
+// }
 
 // This function makes a random sentence.
 var make_random_sentence = function () {
@@ -122,14 +127,17 @@ var check_is_direction = function (direction) {
     }
 }
 
-// Our default direction is right.
+// Our default direction is left.
 // This comes into play when we make a main clause,
-// in which case it is considered to be on the right of a null conjunction.
-var default_direction = 'right';
+// in which case it is considered to be on the left of a null conjunction.
+var default_direction = 'left';
 
-// Our non-default direction is left.
+// Our non-default direction is right.
 // This is simple the direction other than our default direction.
-var non_default_direction = 'left';
+var non_default_direction = 'right';
+
+// Our directions are left and right.
+var directions = ['left', 'right'];
 
 // This function makes a random sentence.
 // It also prints as it goes.

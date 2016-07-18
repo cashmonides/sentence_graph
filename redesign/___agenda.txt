@@ -1,4 +1,40 @@
+/////
+
+SHORT TERM AGENDA
+
+- fix the independendent subjunctive bugs (done)
+
+- switch past present future to prior, simultaneous, subsequent in conjunction library (done)
+
+- include conditional type as a clause type (pres ctf, etc.) (done, but was it done in a good way?)
+
+- include independent subjunctive type as a clause type (present deliberative etc.)
+(done. but there's one clause type for all independent subjunctives)
+
+- make a conjunction object (seems to be done)
+
+-????: use our dummy lexicon to produce a display
+    - dummy lexicon is var testing_kernels in testing_kernel_library
+
+- rebuild lexicon
+
+- plug in our lexicon to the stream
+
+- decide if we want to add sequence property to conditionals
+(only an issue to distinguish between flv and pres ctf and e.g. to tell whether we want pluperf subj or perf subj)
+
+
+/////
+
+
+
+
+
+/////
 What has happened and our plans:
+
+
+
 
 PART 1
 

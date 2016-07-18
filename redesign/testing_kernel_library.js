@@ -3,7 +3,7 @@
 
 
 var testing_allowed_library = {
-    time: ['past', 'present', 'future'],
+    time: ['prior', 'simultaneous', 'subsequent'],
     voice: ['active', 'passive'],
     mood: ['indicative', 'subjunctive'],
     transitivity: ['transitive', 'intransitive'],
@@ -12,13 +12,20 @@ var testing_allowed_library = {
 
 
 var testing_rules = [
-    'transitive | active',
-    'main & secondary => past',
+    'transitive or active',                 //intransitive verbs cannot be passive
+    'main and secondary => prior',
     'main => indicative'
 ];
 
+var testing_time_to_tense_map = {
+    'simultaneous': 'present',
+    'subsequent': 'future',
+    'prior': 'past'
+}
+
 var testing_kernels = {
     attack : {
+        name: 'attack',
         transitivity: 'transitive',
         lexical_properties: null,
         english : {
@@ -98,9 +105,10 @@ var testing_kernels = {
                     future: 'sssNO SUCH FORM'
                 }
             }
-    },
+        },
     },
     speak : {
+        name: 'speak',
         transitivity: 'intransitive',
         lexical_properties: 'mental verb',
         english : {
@@ -183,6 +191,7 @@ var testing_kernels = {
     },
     },
     love : {
+        name: 'love',
         transitivity: 'transitive',
         lexical_properties: null,
         english : {
@@ -265,7 +274,8 @@ var testing_kernels = {
         }
     },
     command : {
-        transitivity: 'transitive if alone',
+        name: 'command',
+        transitivity: 'transitive',
         lexical_properties: 'verb of commanding',
         english : {
             indicative: {
@@ -322,32 +332,33 @@ var testing_kernels = {
         ssslatin : {
             indicative: {
                 active: {
-                    past: 'sssamabat',
-                    present: 'sssamat',
-                    future: 'sssamabit'
+                    past: 'sssiubebat',
+                    present: 'sssiubet',
+                    future: 'sssiubebit'
                 },
                 passive: {
-                    past: 'sssamabatur',
-                    present: 'sssamatur',
-                    future: 'sssamabitur'
+                    past: 'sssiubatur',
+                    present: 'sssiubetur',
+                    future: 'sssiubebitur'
                 }
             },
             subjunctive: {
                 active: {
-                    past: 'sssamaverit',
-                    present: 'sssamet',
-                    future: 'sssamaturus sit'
+                    past: 'sssiuberet',
+                    present: 'sssiubeat',
+                    future: 'sssiussurus sit'
                 },
                 passive: {
-                    past: 'sssamatus sit',
-                    present: 'sssametur',
+                    past: 'sssiussus est',
+                    present: 'sssiubetur',
                     future: 'sssNO SUCH FORM'
                 }
             }
         }
     },
     fear : {
-        transitivity: 'transitive if alone',
+        name: 'fear',
+        transitivity: 'transitive',
         lexical_properties: 'verb of fearing',
         english : {
             indicative: {

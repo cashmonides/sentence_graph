@@ -1,45 +1,18 @@
 // This function adds the appropriate lexical restriction (if any)
-// to the kernel. It takes a conjunction (in JSON format) and a direction.
+// to the kernel. It takes a conjunction and a direction.
 Kernel.prototype.add_lexical_restriction = function (
     conjunction, direction) {
-    // We find the appropriate lexical restriction by property lookup
+    // We find the appropriate lexical restriction
     // in the conjunction.
-    var lexical_restriction = get_conjunction_restriction(
-        conjunction, direction, 'lexical');
+    var lexical_restriction = conjunction.get_restriction(
+        direction, 'lexical');
     // If the lexical restriction we just got exists, we add it.
     // This includes checking that it is not of type NonexistantKey.
     if (lexical_restriction && !(
         lexical_restriction instanceof NonexistantKey)) {
+        // The lexical restriction exists, so (as said above) we add it.
         this.restrictions.lexical = lexical_restriction;
     }
-}
-
-// This function uses property lookup on the conjunction
-// to get a specific restriction.
-var get_conjunction_restriction = function (conjunction, direction, type) {
-    // We create our lookup string.
-    var lookup_string = 'k_' + direction + '_' + type + '_restriction';
-    // We check whether the lookup string is actually a property.
-    if (lookup_string in conjunction) {
-        // All is well and we return the associated value.
-        return conjunction['k_' + direction + '_' + type + '_restriction'];
-    } else {
-        // We have an issue since the lookup string is not a property.
-        // We return a NonexistantKey, which will likely cause an
-        // error-catching part of the code to throw an information-rich
-        // error.
-        return new NonexistantKey();
-    }
-}
-
-// This function returns debuging information for a situation where
-// we come across an error while adding a restriction.
-var restriction_debug_info = function (conjunction, direction, type) {
-    // We concatenate a lot of strings to make our debugging information.
-    return 'conjunction ' +
-    JSON.stringify(conjunction) + ', direction ' +
-    JSON.stringify(direction) + ', and restriction' +
-    JSON.stringify(type);
 }
 
 // The function is higher-order. It takes a type of restriction
@@ -52,10 +25,9 @@ var add_language_specific_restriction = function (type) {
     // and a direction and adds a restriction of
     // the specified type to the conjunction.
     return function (conjunction, direction) {
-        // We get the restriction based on the conjunction,
-        // direction, and type.
-        var restriction = get_conjunction_restriction(
-            conjunction, direction, type);
+        // We get the restriction from the conjunction based on the
+        // direction and type.
+        var restriction = conjunction.get_restriction(direction, type);
         // We check that the restriction is a true object
         // (its type is object and it is not null).
         
@@ -65,15 +37,14 @@ var add_language_specific_restriction = function (type) {
             // someone actually used a NonexistantKey object as a value,
             // which should never happen).
             // We put together debugging information for this error.
-            throw 'The restriction with ' + conjunction_debug_info(
-                conjunction, direction, type) +
-                'appears not to exist.';
+            throw 'The restriction with ' + conjunction.debug_info(
+                direction, type) + 'appears not to exist.';
         } else if (!is_object(restriction)) {
             // The restriction exists, it just isn't valid. We throw an error
             // saying what the restriction is.
-            throw 'The restriction with ' + conjunction_debug_info(
-                conjunction, direction, type) +
-                'appears to be invalid; it is ' + JSON.stringify(restriction);
+            throw 'The restriction with ' + conjunction.debug_info(
+                direction, type) + 'appears to be invalid; it is ' +
+                JSON.stringify(restriction);
         }
         // We add the restriction as a restiction of the specified type.
         this.restrictions[type] = restriction;
@@ -91,7 +62,7 @@ Kernel.prototype.add_time_restriction = add_language_specific_restriction(
 Kernel.prototype.add_mood_restriction = add_language_specific_restriction(
     'mood');
 
-// This function adds a main or sub restriction.
+// This function adds a clause type restriction.
 // Those restrictions have different rules than other types of restriction.
 // This function takes a conjunction (in JSON format) and a direction.
 
@@ -105,66 +76,90 @@ Kernel.prototype.add_mood_restriction = add_language_specific_restriction(
 // but we're not making it smarter right now because we don't need to.
 // todo: Fix this when we have some idea of what happens
 // with multiple clauses.
-Kernel.prototype.add_main_or_sub_restriction = function (
+Kernel.prototype.add_clause_type_restriction = function (
     conjunction, direction) {
     // We create our ConjunctionType object.
     var conjunction_type = new ConjunctionType(conjunction);
-    // We create a main or sub variable to store
-    // the main or sub value of the clause.
-    var main_or_sub;
+    // We create a variable called clause_type to store
+    // the clause type of the clause.
+    var clause_type;
     
     // We have a bunch of if statements.
     
     // Is the conjunction coordinating?
     if (conjunction_type.is('coordinating')) {
         // If so, the clause is main.
-        main_or_sub = 'main';
+        clause_type = 'main';
     } else if (conjunction_type.is('subordinating')) {
         // The conjunction is subordinating.
         if (direction === 'left') {
             // The left clause is main.
             // (Here, it is the subordinating clause).
-            main_or_sub = 'main';
+            clause_type = 'main';
         } else {
             // The right clause is subordinate, subordinated
             // by the conjunction passed in as an argument.
-            main_or_sub = 'subordinate';
+            clause_type = 'subordinate';
         }
     } else if (conjunction_type.is('subordinating conditional')) {
         // The conjunction is an if statement.
-        // It seems wise to adopt the structure a if b for now,
-        // so the right clause is the subortdinate apotasis.
-        // todo: Should this be changed?
-        if (direction === 'left') {
-            // The left clause is the apotasis.
-            main_or_sub = 'apotasis';
-        } else {
-            // The right clause is the protasis.
-            main_or_sub = 'protasis';
-        }
+        // For if statements, it seems that the constructions in
+        // the conjunction library are sufficient, so we simply use those.
+        clause_type = conjunction.get_construction(direction);
     } else if (conjunction_type.is('dummy main')) {
         // The conjunction is a dummy.
         if (direction === default_direction) {
             // The clause in the default direction exists (and is main).
             // But does it have an independent subjunctive?
             // We determine this by checking whether our mood restriction
-            // (in latin) is indicative, or, as it would otherwise be,
-            // subjunctive.
-            // todo: This is teribly hacky, try to remove it.
-            if (conjunction.k_left_mood_restriction.latin === 'indicative') {
-                // Indicative implies no independent subjunctive.
-                main_or_sub = 'main';
-            } else {
+            // on the default side (in latin) is subjunctive, or,
+            // as it would otherwise be, indicative (or null
+            // since indicative is implicit).
+            
+            // We define a variable to be the mood restriction.
+            var mood_restriction = conjunction.get_restriction(
+                default_direction, 'mood').latin;
+            // We do the check of the mood restriction.
+            if (mood_restriction === 'subjunctive') {
                 // Subjunctive implies an independent subjunctive.
-                main_or_sub = 'independent subjunctive';
+                clause_type = 'independent subjunctive';
+            } else {
+                // We check that the mood restriction is indicative or null.
+                if (mood_restriction !== 'indicative'
+                && mood_restriction !== null) {
+                    // The mood restriction was neither indicative or null,
+                    // so we throw an error.
+                    throw 'mood restriction ' + JSON.stringify(
+                        mood_restriction) + ' of conjunction ' +
+                        JSON.stringify(conjunction) +
+                        ' is neither indicative or null!';
+                }
+                // Indicative implies no independent subjunctive.
+                clause_type = 'main';
             }
         } else {
             // All the other clauses (currently, only one; the one
             // in the non-default direction) are nonexistant.
-            main_or_sub = 'nonexistant';
+            clause_type = 'nonexistant';
         }
+    } else {
+        // We throw an informative error.
+        throw 'Error with conjunction ' + JSON.stringify(conjunction) +
+        ', direction ' + JSON.stringify(direction) +
+        ', and conjunction type ' + JSON.stringify(conjunction_type) +
+        '; conjunction type appears to have slipped through the if statement';
+    }
+    
+    // We check that clause_type is a string.
+    if (typeof clause_type !== 'string') {
+        // We throw an informative error.
+        throw 'Error with conjunction ' + JSON.stringify(conjunction) +
+        ', direction ' + JSON.stringify(direction) +
+        ', conjunction type ' + JSON.stringify(conjunction_type) +
+        ', and clause_type ' + JSON.stringify(clause_type) +
+        '; clause_type was somehow not set or set to a non-string.';
     }
     
     // We actually set the property.
-    this.restrictions.main_or_sub = main_or_sub;
+    this.restrictions.clause_type = clause_type;
 }

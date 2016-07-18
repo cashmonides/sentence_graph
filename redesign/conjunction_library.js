@@ -1,23 +1,26 @@
 var conjunction_library = {
     c_null: {
+        //citation_name: "c_null",
         type: "dummy main",
         english_form: null,
         latin_form: null,
         ssslatin_form: null,
+        // not really relevant
+        removable: null,
         // not sure how these will work
-        k_left_clause_type: null,
+        k_left_construction: 'main',
         // not sure how these will work
-        k_right_clause_type: 'main',
+        k_right_construction: null,
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative',
+            ssslatin: 'indicative'
         },
         k_right_mood_restriction: {
             english: null,
-            latin: 'indicative',
-            ssslatin: 'indicative'
+            latin: null,
+            ssslatin: null
         },
         k_left_time_restriction: {
             english: null,
@@ -35,20 +38,22 @@ var conjunction_library = {
         english_form: null,
         latin_form: null,
         ssslatin_form: null,
+        // not really relevant
+        removable: null,
         // not sure how these will work
-        k_left_clause_type: null,
+        k_left_construction: 'independent subjunctive',
         // not sure how these will work
-        k_right_clause_type: 'independent subjunctive',
+        k_right_construction: null,
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
         },
         k_right_mood_restriction: {
             english: null,
-            latin: 'subjunctive',
-            ssslatin: 'subjunctive'
+            latin: null,
+            ssslatin: null
         },
         k_left_time_restriction: {
             english: null,
@@ -66,8 +71,9 @@ var conjunction_library = {
         english_form: 'and',
         latin_form: 'et',
         ssslatin_form: 'ssset',
-        k_left_clause_type: null,
-        k_right_clause_type: 'coordinate',
+        removable: true,
+        k_left_construction: null,
+        k_right_construction: 'coordinate',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -95,8 +101,9 @@ var conjunction_library = {
         english_form: 'but',
         latin_form: 'sed',
         ssslatin_form: 'ssssed',
-        k_left_clause_type: null,
-        k_right_clause_type: 'coordinate',
+        removable: true,
+        k_left_construction: null,
+        k_right_construction: 'coordinate',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -124,8 +131,9 @@ var conjunction_library = {
         english_form: 'or',
         latin_form: 'aut',
         ssslatin_form: 'sssaut',
-        k_left_clause_type: null,
-        k_right_clause_type: 'coordinate',
+        removable: true,
+        k_left_construction: null,
+        k_right_construction: 'coordinate',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -153,8 +161,9 @@ var conjunction_library = {
         english_form: 'when',
         latin_form: 'ubi',
         ssslatin_form: 'sssubi',
-        k_left_clause_type: null,
-        k_right_clause_type: 'temporal',
+        removable: true,
+        k_left_construction: null,
+        k_right_construction: 'temporal',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -182,8 +191,9 @@ var conjunction_library = {
         english_form: 'in order that',
         latin_form: 'ut',
         ssslatin_form: 'sssut',
-        k_left_clause_type: null,
-        k_right_clause_type: 'purpose',
+        removable: true,
+        k_left_construction: null,
+        k_right_construction: 'purpose',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -202,8 +212,8 @@ var conjunction_library = {
         },
         k_right_time_restriction: {
             english: null,
-            latin: 'present',
-            ssslatin: 'present'
+            latin: 'simultaneous',
+            ssslatin: 'simultaneous'
         }
     },
     c_indirect_command: {
@@ -211,8 +221,9 @@ var conjunction_library = {
         english_form: 'that',
         latin_form: 'ut',
         ssslatin_form: 'sssut',
-        k_left_clause_type: null,
-        k_right_clause_type: 'indirect command',
+        removable: false,
+        k_left_construction: null,
+        k_right_construction: 'indirect command',
         k_left_lexical_restriction: 'verb of commanding',
         k_left_mood_restriction: {
             english: null,
@@ -231,8 +242,8 @@ var conjunction_library = {
         },
         k_right_time_restriction: {
             english: null,
-            latin: 'present',
-            ssslatin: 'present'
+            latin: 'simultaneous',
+            ssslatin: 'simultaneous'
         }
     },
     c_fear: {
@@ -240,8 +251,9 @@ var conjunction_library = {
         english_form: 'that',
         latin_form: 'nē',
         ssslatin_form: 'sssnē',
-        k_left_clause_type: null,
-        k_right_clause_type: 'fear',
+        removable: false,
+        k_left_construction: null,
+        k_right_construction: 'fear',
         k_left_lexical_restriction: 'verb of fearing',
         k_left_mood_restriction: {
             english: null,
@@ -269,8 +281,9 @@ var conjunction_library = {
         english_form: 'when',
         latin_form: 'cum',
         ssslatin_form: 'ssscum',
-        k_left_clause_type: null,
-        k_right_clause_type: 'cum temporal',
+        removable: true,
+        k_left_construction: null,
+        k_right_construction: 'cum temporal',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -298,8 +311,9 @@ var conjunction_library = {
         english_form: 'because',
         latin_form: 'cum',
         ssslatin_form: 'ssscum',
-        k_left_clause_type: null,
-        k_right_clause_type: 'cum causal',
+        removable: true,
+        k_left_construction: null,
+        k_right_construction: 'cum causal',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -324,11 +338,12 @@ var conjunction_library = {
     },
     c_cum_circumstantial: {
         type: "subordinating",
-        english_form: 'because',
+        english_form: 'under the circumstances when',
         latin_form: 'cum',
         ssslatin_form: 'ssscum',
-        k_left_clause_type: null,
-        k_right_clause_type: 'cum circumstantial',
+        removable: true,
+        k_left_construction: null,
+        k_right_construction: 'cum circumstantial',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -342,8 +357,8 @@ var conjunction_library = {
         },
         k_left_time_restriction: {
             english: null,
-            latin: 'past',
-            ssslatin: 'past'
+            latin: 'prior',
+            ssslatin: 'prior'
         },
         k_right_time_restriction: {
             english: null,
@@ -356,8 +371,9 @@ var conjunction_library = {
         english_form: 'because allegedly',
         latin_form: 'quod',
         ssslatin_form: 'sssquod',
-        k_left_clause_type: null,
-        k_right_clause_type: 'temporal',
+        removable: true,
+        k_left_construction: null,
+        k_right_construction: 'causal',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -385,8 +401,9 @@ var conjunction_library = {
         english_form: 'why',
         latin_form: 'cūr',
         ssslatin_form: 'ssscūr',
-        k_left_clause_type: null,
-        k_right_clause_type: 'indirect question',
+        removable: false,
+        k_left_construction: null,
+        k_right_construction: 'indirect question',
         k_left_lexical_restriction: 'mental',
         k_left_mood_restriction: {
             english: null,
@@ -414,8 +431,9 @@ var conjunction_library = {
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',
-        k_left_clause_type: 'protasis_flv',
-        k_right_clause_type: 'apodosis_flv',
+        removable: false,
+        k_left_construction: 'apodosis_flv',
+        k_right_construction: 'protasis_flv',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -429,13 +447,13 @@ var conjunction_library = {
         },
         k_left_time_restriction: {
             english: null,
-            latin: 'present',
-            ssslatin: 'present',
+            latin: 'simultaneous',
+            ssslatin: 'simultaneous',
         },
         k_right_time_restriction: {
             english: null,
-            latin: 'present',
-            ssslatin: 'present'
+            latin: 'simultaneous',
+            ssslatin: 'simultaneous'
         }
     },
     c_if_fmv: {
@@ -443,8 +461,9 @@ var conjunction_library = {
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',
-        k_left_clause_type: 'protasis_fmv',
-        k_right_clause_type: 'apodosis_fmv',
+        removable: false,
+        k_left_construction: 'apodosis_fmv',
+        k_right_construction: 'protasis_fmv',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -458,13 +477,13 @@ var conjunction_library = {
         },
         k_left_time_restriction: {
             english: null,
-            latin: 'future',
-            ssslatin: 'future',
+            latin: 'subsequent',
+            ssslatin: 'subsequent',
         },
         k_right_time_restriction: {
             english: null,
-            latin: 'future',
-            ssslatin: 'future'
+            latin: 'subsequent',
+            ssslatin: 'subsequent'
         }
     },
     c_if_fmve: {
@@ -472,8 +491,9 @@ var conjunction_library = {
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',
-        k_left_clause_type: 'protasis_fmve',
-        k_right_clause_type: 'apodosis_fmve',
+        removable: false,
+        k_left_construction: 'apodosis_fmve',
+        k_right_construction: 'protasis_fmve',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -487,13 +507,13 @@ var conjunction_library = {
         },
         k_left_time_restriction: {
             english: null,
-            latin: 'future',        //should we override to future perfect here?
-            ssslatin: 'future',
+            latin: 'subsequent',        //should we override to future perfect here?
+            ssslatin: 'subsequent',
         },
         k_right_time_restriction: {
             english: null,
-            latin: 'future',
-            ssslatin: 'future'
+            latin: 'subsequent',
+            ssslatin: 'subsequent'
         }
     },
     c_if_present_ctf: {
@@ -501,8 +521,9 @@ var conjunction_library = {
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',
-        k_left_clause_type: 'protasis_present_ctf',
-        k_right_clause_type: 'apodosis_present_ctf',
+        removable: false,
+        k_left_construction: 'apodosis_present_ctf',
+        k_right_construction: 'protasis_present_ctf',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -516,13 +537,13 @@ var conjunction_library = {
         },
         k_left_time_restriction: {
             english: null,
-            latin: 'present',      //should we just have an override here? overriding to imperfect?
-            ssslatin: 'present',
+            latin: 'simultaneous',      //should we just have an override here? overriding to imperfect?
+            ssslatin: 'simultaneous',
         },
         k_right_time_restriction: {
             english: null,
-            latin: 'present',      //should we just have an override here? overriding to imperfect?
-            ssslatin: 'present'
+            latin: 'simultaneous',      //should we just have an override here? overriding to imperfect?
+            ssslatin: 'simultaneous'
         }
     },
     c_if_past_ctf: {
@@ -530,8 +551,9 @@ var conjunction_library = {
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',
-        k_left_clause_type: 'protasis_past_ctf',
-        k_right_clause_type: 'apodosis_past_ctf',
+        removable: false,
+        k_left_construction: 'apodosis_past_ctf',
+        k_right_construction: 'protasis_past_ctf',
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
@@ -545,13 +567,13 @@ var conjunction_library = {
         },
         k_left_time_restriction: {
             english: null,
-            latin: 'past',      //should we just have an override here? overriding to imperfect?
-            ssslatin: 'past',
+            latin: 'prior',      //should we just have an override here? overriding to imperfect?
+            ssslatin: 'prior',
         },
         k_right_time_restriction: {
             english: null,
-            latin: 'past',      //should we just have an override here? overriding to imperfect?
-            ssslatin: 'past'
+            latin: 'prior',      //should we just have an override here? overriding to imperfect?
+            ssslatin: 'prior'
         }
     },
 }

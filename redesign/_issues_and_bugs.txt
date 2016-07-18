@@ -1,3 +1,11 @@
+July 16th
+
+- independent subjunctive is not currently constraining the verb to be subjunctive
+- semantics: we don't currently constrain against past,indicative WHEN future, indicative
+- semantics: "They attacked the city because I will find the money"
+- semantics: we're currently allowing "you were commanded that I laugh"
+
+
 July 10th
 
 
@@ -7,7 +15,7 @@ July 10th
     - weird
         k[subjunctive] C k[subjunctive]
         (i.e. main clause that's independent subjunctive)
-    - we don't want wierd scenario happening randomly
+    - we don't want weird scenario happening randomly
     - it has to be constrained by allowed
     - one option:
         produce the c-null
@@ -17,7 +25,7 @@ July 10th
     
 - another scenario
     k0 c1 k1 c2 k2
-    k1 will be conmstrained by c1 but not by c2
+    k1 will be constrained by c1 but not by c2
     so we need to make sure that it actually gets constrained
     
     

@@ -6,29 +6,22 @@ var Sentence = function (x) {
     this.sentence = x;
 }
 
-// This detects whether a conjunction is null
-// by checking for "null" in its name.
-Sentence.prototype.is_null_conjunction = function (conjunction) {
-    return conjunction_library[conjunction].type === 'dummy main';
+// The function gets the conjunction of the sentence, as a string.
+// We do this by accessing the conjunction's 'citation_name' property.
+Sentence.prototype.get_conjunction_as_string = function () {
+    return this.sentence.conjunction.get_property('citation_name');
 }
 
-// The function gets the conjunction of the sentence, as a string.
+// The function gets the conjunction of the sentence
+// as a conjunction object.
 Sentence.prototype.get_conjunction = function () {
     return this.sentence.conjunction;
 }
 
-// The function gets the conjunction of the sentence as JSON,
-// by finding its entry in the conjunction library. We stringify and parse
-// to avoid modification.
-Sentence.prototype.get_conjunction_as_json = function () {
-    return JSON.parse(JSON.stringify(conjunction_library[
-        this.get_conjunction()]));
-}
-
 // The function determines whether the sentence is just one clause.
 Sentence.prototype.is_single_clause = function () {
-    // Note that this.get_conjunction() is a string.
-    return this.is_null_conjunction(this.get_conjunction());
+    // Note that this.get_conjunction() is a conjunction.
+    return this.get_conjunction().is_null_conjunction();
 }
 
 // This allows us to call a method on each kernel.
@@ -42,9 +35,9 @@ Sentence.prototype.each_kernel = function (method, arg) {
         throw method + ' is not a method of Kernel!';
     }
     // We only call the method on the left kernel
-    // (left is currently the non default direction)
-    // if it is relevant because there is more than one clause.
-    if (!this.is_single_clause()) {
+    // (right is currently the non default direction)
+    // if it exists.
+    if (this.sentence[non_default_direction]) {
         this.sentence[non_default_direction][method](arg);
     }
     // The default direction is always relevant.
@@ -64,78 +57,55 @@ Sentence.prototype.add_random_properties = function () {
 
 // This method chooses random lexemes throughout a sentence.
 Sentence.prototype.choose_random_lexemes = function () {
-    this.each_kernel('choose_random_lexemes');
-}
-
-// This method determines sequence within a sentence.
-Sentence.prototype.determine_sequence = function () {
-    var sequence = random_choice(['primary', 'secondary']);
-    this.each_kernel('adopt_sequence', sequence);
-}
-
-// This function displays the template of a sentence given
-// a display for its conjunction and a function to log a kernel
-// (and an optional separator, defaulting to ' ').
-Sentence.prototype.template_display = function (
-    conjunction_display, kernel_log, separator) {
-    // The separator defaults to ' '.
-    if (separator === undefined) {
-        separator = ' ';
+    // Was our attempt to choose lexemes for a kernel successful?
+    var success;
+    // What lexemes have we chosen?
+    this.chosen_lexemes = {};
+    // We get our main kernel.
+    var main_kernel = this.get_main_kernel();
+    // We choose lexemes for our main kernel.
+    success = main_kernel.choose_random_lexemes(this.chosen_lexemes);
+    // We check if we did not succeed.
+    if (!success) {
+        // If we did not succeed, we return false,
+        // since the whole sentence did not succeed.
+        return false;
     }
-    // If kernel_log is undefined, we make it just return 'K'.
-    // 'K' is thus our default.
-    if (kernel_log === undefined) {
-        // We set kernel_log to a function that just returns 'K',
-        // as said above.
-        kernel_log = function () {
-            return 'K';
+    // We get our subordinate kernel.
+    var subordinate_kernel = this.get_subordinate_kernel();
+    // If our subordinate kernel does not exist, we are done,
+    // so we return true.
+    if (!subordinate_kernel) {
+        // We return true, as said above.
+        return true;
+    }
+    // We try to choose lexemes for our subordinate kernel.
+    success = subordinate_kernel.choose_random_lexemes(this.chosen_lexemes);
+    // What if we failed to find lexemes for our subordinate kernel?
+    if (!success) {
+        // We check whether we want to prune.
+        if (LEXEME_ERROR_CATCHING_MODE === 'prune'
+        // And we also check if we can.
+        && this.subordinate_kernel_can_be_removed()) {
+            // If we want to prune and we can, we of course prune. (Why not?)
+            this.remove_subordinate_kernel();
+        } else {
+            // Otherwise (if we do not want to, or cannot,
+            // remove part of the sentence) we (yet again) have failed,
+            // so as in all the previous places where we have failed,
+            // we return false.
+            return false;
         }
     }
-    // We check whether the sentence is just a single clause.
-    if (this.is_single_clause()) {
-        // The sentence is just a single clause so we return our kernel_log
-        // ('K' by default).
-        return kernel_log(this.sentence[default_direction]);
-    } else {
-        // We assume that the sentence only has a single conjunction.
-        
-        // We display both kernels and the conjunction
-        // and join the results by spaces.
-        
-        // todo: make this more sophisticated.
-        return [kernel_log(this.sentence.left), conjunction_display,
-        kernel_log(this.sentence.right)].join(separator);
-    }
-}
-
-// This function displays the conjunction of a sentence.
-Sentence.prototype.conjunction_display = function () {
-    return title(this.get_conjunction());
-}
-
-// This function displays the conjunction of a sentence
-// in a given language.
-Sentence.prototype.conjunction_translation_display = function (language) {
-    // We lowercase the language, since entries
-    // for languages are in lowercase.
-    // We also add _form to it, because this too
-    // is in conjunction translation entries.
-    language = language.toLowerCase() + '_form';
-    // We get the conjunction as a JSON object.
-    var conjunction = this.get_conjunction_as_json();
-    // We check that the conjunction has a translation in the language.
-    if (!(language in conjunction)) {
-        // We can't find the translation so we throw an error.
-        throw JSON.stringify(conjunction) + ' does not have a/an '
-        + language + '!';
-    }
-    // We return the translation.
-    return conjunction[language];
-}
+    // We are finally done and have hit no fatal issues,
+    // so we return true.
+    return true;
+};
 
 // This function takes another function f. When the result is called,
 // it does f for each language and joins the results by a newline
-// (or a string if a string is given).
+// (or a string if a string is given). However, the result string
+// does not need to be used, and indeed sometimes is not.
 var each_language = function (f, string) {
     // We let '\n' be the default value for string and set it to that
     // if no value is given.
@@ -150,51 +120,43 @@ var each_language = function (f, string) {
     }
 }
 
-// This function displays the sentence structure
-// and restrictions in each language.
-Sentence.prototype.display_structure_and_restrictions = each_language(
+// This method inflects all components in the kernels in a sentence,
+// in every available language.
+Sentence.prototype.inflect_all_components = each_language(
     function (language) {
-        // We show the language and the sentence structure and
-        // restrictions in the language. To show the sentence
-        // structure and restrictions in the language,
-        // we use display_kernel_in and this.template_display.
-        return language + ': ' + this.template_display(
-            this.conjunction_display(),
-            display_kernel_in(language.toLowerCase()));
+        // We inflect all the components of the kernel in the language.
+        // (But first we lowercase the language, since the information
+        // we care about is stored under the language's lowercased version.)
+        this.each_kernel(
+            'inflect_all_components_in', language.toLowerCase());
     }
 );
 
-// This function displays a sentence without translations.
-Sentence.prototype.display_without_translations = function () {
-    // We combine a lot of pieces together
-    return [
-        // This simplest display: just K's and C's.
-        this.template_display('C'),
-        // Same as the first, but with a more complicated conjunction.
-        this.template_display(this.conjunction_display()),
-        // This has the same conjunction as the second,
-        // but the kernels log their role lists rather than just K.
-        this.template_display(this.conjunction_display(), role_list_display)
-    ].join('\n') + '\n\n' + this.display_structure_and_restrictions();
+// This method gets the main kernel of a sentence.
+Sentence.prototype.get_main_kernel = function () {
+    return this.sentence.left;
 }
 
-// This method displays the translations of a sentence.
-Sentence.prototype.display_translations = each_language(
-    function (language) {
-        // We show the language and the translation in the language.
-        // To show the translation, we use translate_kernel_into
-        // and this.template_display.
-        // Note that we also have to translate the conjunction.
-        return language + ':\n' + this.template_display(
-            this.conjunction_translation_display(language),
-            translate_kernel_into(language.toLowerCase()), '\n');
-    }, '\n\n'
-);
+// This method gets the subordinate kernel of a sentence
+// (actually, the right kernel, which may not exist).
+Sentence.prototype.get_subordinate_kernel = function () {
+    return this.sentence.right;
+}
 
-// This method displays the sentence.
-Sentence.prototype.display = function () {
-    // We have the part displayed without translations,
-    // then after a line break, we have the translations.
-    return this.display_without_translations() + '\n\n' +
-    this.display_translations();
+// This method checks whether the subordinate kernel of a sentence
+// can be removed by testing whether the conjunction is removable.
+Sentence.prototype.subordinate_kernel_can_be_removed = function () {
+    return this.sentence.conjunction.get_property('removable');
+}
+
+// This method removes the subordinate kernel of a sentence
+// (actually, the right kernel).
+Sentence.prototype.remove_subordinate_kernel = function () {
+    this.sentence.right = null;
+}
+
+// This method determines sequence within a sentence.
+Sentence.prototype.determine_sequence = function () {
+    var sequence = random_choice(['primary', 'secondary']);
+    this.each_kernel('adopt_sequence', sequence);
 }
