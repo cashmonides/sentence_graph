@@ -25,6 +25,10 @@ var testing_time_to_tense_map = {
 
 var testing_kernels = {
     attack : {
+        stem_2: '[hacky stem 2]',
+        stem_3: '[hacky stem 3]',
+        stem_4: '[hacky stem 4]',
+        conjugation: '1',
         name: 'attack',
         transitivity: 'transitive',
         lexical_properties: null,
@@ -108,6 +112,10 @@ var testing_kernels = {
         },
     },
     speak : {
+        stem_2: '[hacky stem 2]',
+        stem_3: '[hacky stem 3]',
+        stem_4: '[hacky stem 4]',
+        conjugation: '3',
         name: 'speak',
         transitivity: 'intransitive',
         lexical_properties: 'mental verb',
@@ -191,6 +199,10 @@ var testing_kernels = {
     },
     },
     love : {
+        stem_2: '[hacky stem 2]',
+        stem_3: '[hacky stem 3]',
+        stem_4: '[hacky stem 4]',
+        conjugation: '1',
         name: 'love',
         transitivity: 'transitive',
         lexical_properties: null,
@@ -274,6 +286,10 @@ var testing_kernels = {
         }
     },
     command : {
+        stem_2: '[hacky stem 2]',
+        stem_3: '[hacky stem 3]',
+        stem_4: '[hacky stem 4]',
+        conjugation: '2',
         name: 'command',
         transitivity: 'transitive',
         lexical_properties: 'verb of commanding',
@@ -357,6 +373,10 @@ var testing_kernels = {
         }
     },
     fear : {
+        stem_2: '[hacky stem 2]',
+        stem_3: '[hacky stem 3]',
+        stem_4: '[hacky stem 4]',
+        conjugation: '2',
         name: 'fear',
         transitivity: 'transitive',
         lexical_properties: 'verb of fearing',

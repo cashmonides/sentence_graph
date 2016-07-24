@@ -93,21 +93,34 @@ Component.prototype.choose_random_lexeme = function (
 // This method inflects a component's lexeme in a language passed in
 // as a parameter. It will likely become more complicated.
 // todo: Come back to this when we have nouns.
+// Component.prototype.inflect = function (language) {
+//     // We check that language is not undefined or null.
+//     if (language === undefined || language === null) {
+//         // The language was undefined or null, so we throw an error.
+//         throw 'Cannot inflect in the ' + language + ' language.';
+//     }
+//     // We get the mood and time in the language,
+//     // and the language-independent voice.
+//     var mood = this.get_property_in_language('mood', language);
+//     var voice = this.get_language_independent_property('voice');
+//     var time = this.get_property_in_language('time', language);
+//     // Get the form based on the mood, tense (as determined
+//     // by putting the time into the testing_time_to_tense_map), and voice.
+//     // todo: Solve this in a better way when the testing_time_to_tense_map
+//     // is removed.
+//     this.form[language] = this.lexeme[language][mood][voice][
+//         testing_time_to_tense_map[time]];
+// }
+
+// This method inflects a component's lexeme in a language passed in
+// as a parameter. It will likely become more complicated.
+// todo: Come back to this when we have nouns.
 Component.prototype.inflect = function (language) {
     // We check that language is not undefined or null.
     if (language === undefined || language === null) {
         // The language was undefined or null, so we throw an error.
         throw 'Cannot inflect in the ' + language + ' language.';
     }
-    // We get the mood and time in the language,
-    // and the language-independent voice.
-    var mood = this.get_property_in_language('mood', language);
-    var voice = this.get_language_independent_property('voice');
-    var time = this.get_property_in_language('time', language);
-    // Get the form based on the mood, tense (as determined
-    // by putting the time into the testing_time_to_tense_map), and voice.
-    // todo: Solve this in a better way when the testing_time_to_tense_map
-    // is removed.
-    this.form[language] = this.lexeme[language][mood][voice][
-        testing_time_to_tense_map[time]];
+    // We do the inflection.
+    this.form[language] = global_inflectors[language](this);
 }
