@@ -14,11 +14,7 @@ var values = function (dictionary) {
 }
 
 // This function checks whether its input (x) is an object.
-// It does so by applying the operator typeof to x.
-// It x is an object, typeof x is 'object'.
-// However, typeof null is also 'object',
-// so we also do a check for null, since we don't
-// generally want to consider null an object.
+// It does so by applying the real_type_of function to x.
 var is_object = function (x) {
-    return typeof x === 'object' && x !== null;
+    return real_type_of(x) === 'object';
 }

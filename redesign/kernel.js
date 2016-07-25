@@ -130,8 +130,10 @@ Kernel.prototype.add_determined_properties = function () {
     // We iterate over our restrictions.
     for (var i in this.restrictions) {
         // We add each one to the verb.
-        verb_component.set_property(i, this.restrictions[i])
+        verb_component.set_property(i, this.restrictions[i]);
     }
+    // We also add the construction.
+    verb_component.set_property('construction', this.construction);
 }
 
 // This function adds random properties to the component in each role.

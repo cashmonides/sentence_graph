@@ -114,40 +114,10 @@ Component.prototype.check_all_rules = function () {
     return true;
 }
 
-// This dictionary stores fake property accessors,
-// for more about which see below.
-Component.fake_properties = {};
-
-// This method on Component allows for adding of fake properties,
-// such as system, which only exists based on other properties.
-Component.add_fake_property = function (name, uses, determination) {
-    // Add an entry to the fake_properties dictionary.
-    Component.fake_properties[name] = function (language) {
-        // We have results from getting the requisite properties.
-        var results = {};
-        // We declare a variable for the upcoming loop.
-        var item;
-        // We loop over the required properties.
-        for (var i = 0; i < uses.length; i++) {
-            item = uses[i];
-            // Add the result for the property under the property's heading.
-            results[item] = this.get_property_in_language(item, language);
-        }
-        // Use the results for the determination.
-        return determination(results);
-    }
-}
-
 // This function gets a property from a component in a language
 // given the property's name and language's name.
 // It, like the above function, uses a null default value.
 Component.prototype.get_property_in_language = function (name, language) {
-    // First check if the property is fake and if so deal with it as such.
-    if (name in Component.fake_properties) {
-        // Get the value for the fake property, being careful
-        // to maintain this.
-        return Component.fake_properties[name].call(this, language);
-    }
     // Is there no property corresponding to the name?
     if (!(name in this.properties)) {
         // If so, return the null default value.

@@ -25,13 +25,20 @@ var testing_time_to_tense_map = {
 
 var testing_kernels = {
     attack : {
-        stem_2: '[hacky stem 2]',
-        stem_3: '[hacky stem 3]',
-        stem_4: '[hacky stem 4]',
+        stem_2: 'OPPUGN',
+        stem_3: 'OPPUGNAV',
+        stem_4: 'OPPUGNAT',
         conjugation: '1',
         name: 'attack',
         transitivity: 'transitive',
         lexical_properties: null,
+        english_stems: {
+			'default': 'attack',
+			'final-s': 'attacks',
+			'gerund': 'attacking',
+			'past participle': 'attacked',
+			'preterite': 'attacked'
+		},
         english : {
             indicative: {
                 active: {
@@ -112,13 +119,20 @@ var testing_kernels = {
         },
     },
     speak : {
-        stem_2: '[hacky stem 2]',
-        stem_3: '[hacky stem 3]',
-        stem_4: '[hacky stem 4]',
+        stem_2: 'DĪC',
+        stem_3: 'DĪX',
+        stem_4: 'DICT',
         conjugation: '3',
         name: 'speak',
         transitivity: 'intransitive',
         lexical_properties: 'mental verb',
+        english_stems: {
+			'default': 'speak',
+			'final-s': 'speaks',
+			'gerund': 'speaking',
+			'past participle': 'spoken',
+			'preterite': 'spoke'
+		},
         english : {
             indicative: {
                 active: {
@@ -199,13 +213,20 @@ var testing_kernels = {
     },
     },
     love : {
-        stem_2: '[hacky stem 2]',
-        stem_3: '[hacky stem 3]',
-        stem_4: '[hacky stem 4]',
+        stem_2: 'AM',
+        stem_3: 'AMĀV',
+        stem_4: 'AMĀT',
         conjugation: '1',
         name: 'love',
         transitivity: 'transitive',
         lexical_properties: null,
+        english_stems: {
+			'default': 'love',
+			'final-s': 'loves',
+			'gerund': 'loving',
+			'past participle': 'loved',
+			'preterite': 'loved'
+		},
         english : {
             indicative: {
                 active: {
@@ -286,13 +307,20 @@ var testing_kernels = {
         }
     },
     command : {
-        stem_2: '[hacky stem 2]',
-        stem_3: '[hacky stem 3]',
-        stem_4: '[hacky stem 4]',
+        stem_2: 'IUB',
+        stem_3: 'IUSS',
+        stem_4: 'IUSS',
         conjugation: '2',
         name: 'command',
         transitivity: 'transitive',
         lexical_properties: 'verb of commanding',
+        english_stems: {
+			'default': 'command',
+			'final-s': 'commands',
+			'gerund': 'commanding',
+			'past participle': 'commanded',
+			'preterite': 'commanded'
+		},
         english : {
             indicative: {
                 active: {
@@ -373,13 +401,20 @@ var testing_kernels = {
         }
     },
     fear : {
-        stem_2: '[hacky stem 2]',
-        stem_3: '[hacky stem 3]',
-        stem_4: '[hacky stem 4]',
+        stem_2: 'TIM',
+        stem_3: 'TIMU',
+        stem_4: 'TIMIT',
         conjugation: '2',
         name: 'fear',
         transitivity: 'transitive',
         lexical_properties: 'verb of fearing',
+        english_stems: {
+			'default': 'fear',
+			'final-s': 'fears',
+			'gerund': 'fearing',
+			'past participle': 'feared',
+			'preterite': 'feared'
+		},
         english : {
             indicative: {
                 active: {
