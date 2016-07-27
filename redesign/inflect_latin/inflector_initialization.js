@@ -1,1 +1,0 @@
-var latin_verb_inflector = new Inflector(latin_verb_inflector_json);

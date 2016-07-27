@@ -22,6 +22,8 @@ var main = function () {
         sentence.determine_sequence();
         // We make whatever random choices we have to.
         sentence.add_random_properties();
+        // We determine tense.
+        sentence.determine_tense();
         // We choose random lexemes and see whether it worked.
         success = sentence.choose_random_lexemes();
         // We see if we failed and if we want our error to be thrown.
@@ -30,6 +32,7 @@ var main = function () {
             // Throw some error.
             throw 'No usable lexemes left!';
         }
+        // We inflect the components.
         sentence.inflect_all_components();
     }
     // Finally, we display the sentence.

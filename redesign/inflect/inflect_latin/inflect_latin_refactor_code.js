@@ -151,7 +151,6 @@ var get_helping_verb = function (component) {
 var latin_verb_future_subjunctive = function (component) {
     var person_and_number = component.get_property_in_language(
         'person_and_number', 'latin');
-    console.log(person_and_number);
     var form_of_to_be = latin_form_of_to_be[
         'present subjunctive ' + person_and_number];
     return component.lexeme.stem_4 + '-ŪR-' +
@@ -177,7 +176,10 @@ var inflect_latin_verb_main = function (component) {
         var tense = get_latin_verb_tense(component);
         var mood = component.get_property_in_language('mood', 'latin');
         if (tense === 'future' && mood === 'subjunctive') {
-            return latin_verb_future_subjunctive(component)
+            if (voice === 'passive') {
+                throw 'future subjunctives should not be passive due to a rule against it!';
+            }
+            return latin_verb_future_subjunctive(component);
         }
         inflected.verb = stem + get_middle_inflection(component) +
         get_end_inflection(component);

@@ -112,6 +112,12 @@ Kernel.prototype.get_size = function () {
 
 // This function gets the verb component from the kernel.
 Kernel.prototype.get_verb = function () {
+    // We get the verb role and return its component.
+    return this.get_verb_role().component;
+}
+
+// This function gets the verb role from the kernel.
+Kernel.prototype.get_verb_role = function () {
     // We filter the role list to include only verbs,
     // then take the first one (but there should be only one).
     // This gives us the verb role.
@@ -119,8 +125,8 @@ Kernel.prototype.get_verb = function () {
         // We only keep the roles which are verbs.
         return x.role_name === 'verb';
     })[0];
-    // We return the component corresponding to the verb role.
-    return verb_role.component;
+    // We return the verb role.
+    return verb_role;
 }
 
 // This function adds determined properties from the kernel to the verb.
@@ -143,6 +149,13 @@ Kernel.prototype.add_random_properties = function () {
         // We add random properties to each role.
         this.role_list[i].add_random_properties();
     }
+}
+
+// This function determines the tense of a kernel (in each language).
+// It does this by determining the tense of the kernel's verb.
+Kernel.prototype.determine_tense = function (sequence) {
+    // Ask the verb to determine its tense.
+    this.get_verb().determine_tense();
 }
 
 // This function makes the kernel adopt a sequence.

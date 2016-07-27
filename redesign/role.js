@@ -39,9 +39,6 @@ Role.prototype.describe_in_language = function (language) {
     // return random_choice(lexemes);
 // }
 
-// This means that latin is our default setting.
-var default_language = 'latin';
-
 // This method adds random properties to the component in a role.
 
 // Note: the random properties to be added are
@@ -78,9 +75,10 @@ Role.prototype.add_random_properties = function () {
         // Set property to the property under consideration.
         property = properties[i];
         // The original value for the property is its value
-        // in the default language.
+        // in the default language (which we first must
+        // convert to lowercase.)
         original_values[property] = this.component.get_property_in_language(
-            property, default_language);
+            property, default_language.toLowerCase());
     }
     
     // This is an infinite loop.

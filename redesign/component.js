@@ -16,76 +16,6 @@ var Component = function (role_name) {
     this.form = {};
 }
 
-// This function finds whether a property has been chosen
-// given the property's name.
-// Note: a null propery has not been chosen.
-Component.prototype.chosen = function (name) {
-    // Is there a property corresponding to the name?
-    if (name in this.properties) {
-        // value is the value of the property.
-        var value = this.properties[name];
-        // Is the value of the property not null?
-        if (value === null) {
-            // If so, the property does not exist: return false.
-            return false;
-        } else if (typeof value === 'string') {
-            // If the value of the property is a string, it does exist;
-            // return true.
-            return true;
-        } else {
-            // The property is an object. Check the default language's value.
-            // If it is null, the default languge, at least, has no value,
-            // so we return false. Otherwise every language without a value
-            // can use the default language's value, so we can return true.
-            return value[default_language] !== null;
-        }
-    } else {
-        // Otherwise return false, since the property is unchosen.
-        return false;
-    }
-}
-
-// This function sets a property given the property's name
-// and the value to set it to.
-
-// Note: This method, in some sense, does two things.
-// If a property completely does not exist, or is not a dictionary,
-// it sets it to the value given.
-// But if the property exists and is a dictionary, it only sets
-// the default in the dictionary to the value given.
-Component.prototype.set_property = function (name, set_to) {
-    // Is there a property corresponding to the name?
-    if (name in this.properties) {
-        // value is the value of the property.
-        var value = this.properties[name];
-        // Is the value of the property not null?
-        if (value === null || typeof value === 'string') {
-            // The property is not a dictionary, so just reset it.
-            this.properties[name] = set_to;
-        } else {
-            // Set the default language's value.
-            value[default_language] = set_to;
-        }
-    } else {
-        // Otherwise just set the property, since it is unchosen.
-        this.properties[name] = set_to;
-    }
-}
-
-// The function gets the values of the properties of a component.
-Component.prototype.values = function () {
-    // Define self to be this since we use this
-    // within an anonymous function.
-    var self = this;
-    // Map the keys by a function.
-    return Object.keys(this.properties).map(function (property) {
-        // The function, for each property, returns its value
-        // (in the default language).
-        return self.get_property_in_language(
-            property, default_language);
-    });
-}
-
 // This function checks whether a component satisfies some property.
 // It currently simply checks for the property in the component's
 // properties.
@@ -114,71 +44,6 @@ Component.prototype.check_all_rules = function () {
     return true;
 }
 
-// This function gets a property from a component in a language
-// given the property's name and language's name.
-// It, like the above function, uses a null default value.
-Component.prototype.get_property_in_language = function (name, language) {
-    // Is there no property corresponding to the name?
-    if (!(name in this.properties)) {
-        // If so, return the null default value.
-        return null;
-    }
-    
-    // value is the value of the property.
-    var value = this.properties[name];
-    
-    // Is the value not an object?
-    if (!is_object(value)) {
-        // If so, return the value. (It is language-independent.)
-        return value;
-    }
-    
-    // The property should be language-dependent.
-    // We check that the language given is supported,
-    // that is, the language is a property of the value.
-    if (!(language in value)) {
-        // We throw an error.
-        throw 'Error! ' + language + ' is not in ' +
-        JSON.stringify(value) + '!';
-    }
-    
-    // This is the value of the property in the language.
-    var value_in_language = value[language];
-    
-    // Is the value in the language null?
-    if (value_in_language === null) {
-        // Default to the default language.
-        return value[default_language];
-    } else {
-        // Return the non-null value.
-        return value_in_language;
-    }
-}
-
-// This function gets a language-independent property from a component.
-// It uses a null default value.
-Component.prototype.get_language_independent_property = function (name) {
-    // Is there no property corresponding to the name?
-    if (!(name in this.properties)) {
-        // If so, return the null default value.
-        return null;
-    }
-    
-    // value is the value of the property.
-    var value = this.properties[name];
-    
-    // Is the value not an object?
-    if (!is_object(value)) {
-        // If so, return the value. (It is language-independent.)
-        return value;
-    }
-    
-    // The property should have been language-independent.
-    // But it seems to be language-dependent. We throw an error.
-    throw 'Error! ' + JSON.stringify(value) + ' for property ' + name +
-    ' is language-dependent!';
-}
-
 // This function returns a description of a property
 // (actually, just the property and its value in a particular language).
 Component.prototype.describe_property = function (
@@ -201,4 +66,120 @@ Component.prototype.describe_in_language = function (language) {
     properties.map(function (property) {
         return '    ' + self.describe_property(property, language);
     }).join('\n');
+}
+
+// This method determines the tense of the component.
+Component.prototype.determine_tense = function () {
+    // We first initialize the language-independent property of tense.
+    this.initialize_language_dependent_property('tense');
+    // We will need time and mood. We get the default values.
+    var time = this.get_property_default('time');
+    var mood = this.get_property_default('mood');
+    // We then determine the tense taxonomy's tense, as well as the
+    // time-mood-sequence combination used to get it.
+    var time_mood_sequence = this.get_tense_mood_sequence(
+        default_language.toLowerCase());
+    // We randomly choose amoung the possibilities.
+    var tense_from_tense_taxonomy = random_tense_from(
+        tense_taxonomy[time_mood_sequence]);
+    console.log(tense_from_tense_taxonomy);
+    // Then we set tense for the other languages.
+    // We loop over the languages.
+    for (var i = 0; i < languages.length; i++) {
+        // We add tense for each language.
+        this.determine_tense_in_language(
+            languages[i].toLowerCase(), tense_from_tense_taxonomy);
+    }
+}
+
+// This allows for getting the time, mood, and sequence
+// (to use as a key for the tense_maps) in a language passed in as
+// a parameter.
+Component.prototype.get_tense_mood_sequence = function (language) {
+    // We will need time and mood. We get the values in the language.
+    var time = this.get_property_in_language('time', language);
+    var mood = this.get_property_in_language('mood', language);
+    // We check for a time and mood entry in the tense maps for the language.
+    if (time + ' ' + mood in tense_maps[language]) {
+        // We only need time and mood.
+        return time + ' ' + mood;
+    } else {
+        // In this case, we also need sequence.
+        var sequence = this.get_property_in_language('sequence', language);
+        return time + ' ' + mood + ' ' + sequence;
+    }
+}
+
+// This function gets the override tense in a language.
+Component.prototype.get_override_tense_in = function (language) {
+    // We get the tense from tense override and
+    // the translation formula from tf.
+    var tense_from_tense_override = this.get_override_tense_via(
+        'tense', language);
+    var translation_formula = this.get_override_tense_via(
+        'tf', language);
+    // We get the tense from the translation formula.
+    var tense_from_translation_formula = get_tense_from_translation_formula(
+        language, translation_formula);
+    // If both are null, return null.
+    if (tense_from_tense_override === null
+    && tense_from_translation_formula === null) {
+        return null;
+    }
+    // We then check if neither is null.
+    if (tense_from_tense_override !== null
+    && tense_from_translation_formula !== null) {
+        // If so, check that they are the same and otherwise throw an error.
+        if (tense_from_tense_override !== tense_from_translation_formula) {
+            throw tense_from_tense_override + ' is not the same as ' +
+            tense_from_translation_formula + '!';
+        }
+    }
+    // We return the first non-null one, which we can get via the or operator.
+    // (Since null is the only false-like value we expect.)
+    return tense_from_tense_override || tense_from_translation_formula;
+}
+
+// This method allows us to determine tense in a given language.
+Component.prototype.determine_tense_in_language = function (
+    language, tense_from_tense_taxonomy) {
+    // Before we do anything else, check whether we have an override tense.
+    var override_tense = this.get_override_tense_in(language);
+    // If the override tense is not null, just use it.
+    if (override_tense !== null) {
+        return override_tense;
+    }
+    // We get the time, mood, and sequence (which is language-dependant)
+    var time_mood_sequence = this.get_tense_mood_sequence(language);
+    // We see what is possible given the time, mood, and sequence alone.
+    var possible_given_tms = tense_maps[
+        language][time_mood_sequence];
+    // We filter what is possible given that it has to match the tense
+    // from the tense taxonomy.
+    var possible_given_taxonomy_choice = possible_given_tms.filter(
+        function (tense_string) {
+            // Check that the tense from the tense taxonomy
+            // matches the tense string.
+            return tense_from_tense_taxonomy.matches(tense_string);
+        }
+    );
+    // We have some error cases.
+    if (possible_given_taxonomy_choice.length === 0) {
+        // No tense.
+        throw 'No appropriate tense exists! (' +
+        [language, tense_from_tense_taxonomy.name,
+        time_mood_sequence].join(', ') + ')';
+    } else if (possible_given_taxonomy_choice.length > 1) {
+        // More than one tense.
+        throw 'More than one appropriate tense exists! (' +
+        [language, tense_from_tense_taxonomy.name,
+        time_mood_sequence].join(', ') + ')';
+    }
+    // We get the unique possible tense.
+    var tense = possible_given_taxonomy_choice[0];
+    // We get rid of anything before (and including) a possible colon,
+    // as that is what we call the tense in other languages
+    // (such as imperfect subjunctive: aorist optative,
+    // in which case we want only aorist optative here.)
+    return last(tense.split(/: */g));
 }

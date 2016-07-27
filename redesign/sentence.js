@@ -55,6 +55,11 @@ Sentence.prototype.add_random_properties = function () {
     this.each_kernel('add_random_properties');
 }
 
+// This method adds tense (in all languages) to the kernels in a sentence.
+Sentence.prototype.determine_tense = function () {
+    this.each_kernel('determine_tense');
+}
+
 // This method chooses random lexemes throughout a sentence.
 Sentence.prototype.choose_random_lexemes = function () {
     // Was our attempt to choose lexemes for a kernel successful?

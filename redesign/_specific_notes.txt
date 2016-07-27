@@ -102,7 +102,11 @@ Sentence.prototype.main_kernel_first = new Tasks([
 
 ]).
 
+////////////
 
+translation formulae:
+do we need translation formulae to be sequence-dependent?
+or do we want default subjunctive translations instead?
 
 ////////////
 

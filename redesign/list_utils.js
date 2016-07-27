@@ -8,3 +8,8 @@ var remove_null = function (list) {
         return x !== null;
     })
 }
+
+// This function gets the last item of a list.
+var last = function (list) {
+    return list[list.length - 1];
+}

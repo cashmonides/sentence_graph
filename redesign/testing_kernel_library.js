@@ -14,7 +14,9 @@ var testing_allowed_library = {
 var testing_rules = [
     'transitive or active',                 //intransitive verbs cannot be passive
     'main and secondary => prior',
-    'main => indicative'
+    'main => indicative',
+    // latin apparently has no subsequent subjunctive passives.
+    'subsequent and subjunctive => active'
 ];
 
 var testing_time_to_tense_map = {

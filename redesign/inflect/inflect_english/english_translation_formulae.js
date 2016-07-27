@@ -138,7 +138,7 @@ example of a generated lexeme
 
 
 
-/*
+
 // Commented out for now, going to be used in the future.
 //map between teacher friendly blanket terms and english grammatical terminology
 var english_grammatical_terminology_correspendence = {
@@ -151,7 +151,6 @@ var english_grammatical_terminology_correspendence = {
 	"had verbed" : "pluperfect",
 	"will have verbed" : "future perfect"
 }
-*/
 
 
 

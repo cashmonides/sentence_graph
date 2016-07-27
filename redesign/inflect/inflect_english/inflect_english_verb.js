@@ -85,6 +85,11 @@ var inflect_english_verb = function (verb_lexeme, tense_voice, person_and_number
     // Step 1.5. (Simply getting the translation formula.)
     var translation_formula = english_tense_to_translation_formula[
         tense_voice];
+    // Check that the translation formula is not undefined.
+    if (translation_formula === undefined) {
+        throw 'Translation formula for ' + tense_voice +
+        ' should not be undefined!';
+    }
     // End of step 1.5.
     // Step 2.
     // First get the verb formula.
