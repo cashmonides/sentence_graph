@@ -163,3 +163,23 @@ Kernel.prototype.add_clause_type_restriction = function (
     // We actually set the property.
     this.restrictions.clause_type = clause_type;
 }
+
+// This method lets us add tense overrides and translation formulae to the kernel.
+Kernel.prototype.add_tense_overrides_and_tf = function (conjunction, direction) {
+    // This adds a tense_override and translation_formula "restriction".
+    // They are null if they cannot be found.
+    // This is the cleanest way I know of of looping over a few items.
+    // I consider a for loop over an array less clear,
+    // and forEach potentially confusing.
+    for (var property in {
+        'tense_override': true,
+        'translation_formula': true,
+    }) {
+        // This is the key for accessing the property.
+        var key = 'k_' + direction + '_' + property;
+        // If the conjuction has the property, add what the conjunction has.
+        if (conjunction.has_property(key)) {
+            this.restrictions[property] = conjunction.get_property(key);
+        }
+    }
+}

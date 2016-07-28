@@ -4,10 +4,10 @@ var global_inflectors = {};
 // Latin inflection.
 global_inflectors.latin = inflect_latin_verb_main;
 
-// English inflection. Currently dummy.
-// todo: fix dummy.
+// English inflection.
 global_inflectors.english = function (component) {
-    var tense_voice = get_english_tense_from_verb(component);
+    var tense_voice = component.get_property_in_language('tense', 'english') +
+    ' ' + component.get_language_independent_property('voice');
     var person_and_number = component.get_property_in_language(
         'person_and_number', 'english');
     var lexeme = component.lexeme;

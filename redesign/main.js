@@ -11,7 +11,7 @@ var main = function () {
         // We make a random sentence.
         var sentence = make_random_sentence();
         console.log(sentence);
-        // We delete the (basicly nonexistant) dummy clause from the sentence
+        // We remove the (basicly nonexistant) dummy clause from the sentence
         // if it is a single clause.
         if (sentence.is_single_clause()) {
             sentence.sentence[non_default_direction] = null;
@@ -20,10 +20,8 @@ var main = function () {
         sentence.add_determined_properties();
         // We determine sequence.
         sentence.determine_sequence();
-        // We make whatever random choices we have to.
+        // We make whatever random choices we have to (including tense).
         sentence.add_random_properties();
-        // We determine tense.
-        sentence.determine_tense();
         // We choose random lexemes and see whether it worked.
         success = sentence.choose_random_lexemes();
         // We see if we failed and if we want our error to be thrown.

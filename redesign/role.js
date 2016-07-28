@@ -91,12 +91,34 @@ Role.prototype.add_random_properties = function () {
             if (!this.component.chosen(property)) {
                 // value is the randomly chosen value of the property.
                 var value = random_choice(testing_allowed_library[property]);
-                // Set the property to the value.
-                this.component.set_property(property, value);
+            } else if (this.component.get_property_default(property).slice(
+                0, 4) === 'not ') {
+                // So it starts with not.
+                // The illegal value is easy to determine.
+                var illegal = this.component.get_property_default(
+                    property).slice(4);
+                // value is the randomly chosen value of the property,
+                // chosen not to be the illegal value.
+                var value = random_choice(
+                    testing_allowed_library[property].filter(function (x) {
+                        return x !== illegal;
+                    })
+                );
+            } else {
+                // We neither set the property nor perform a sanity check.
+                // We just continue.
+                continue;
             }
+            // Set the property to the value.
+            this.component.set_property(property, value);
         }
+        // Tell the component to do what needs to be done
+        // after determining random properties (but still in the loop).
+        // The return value indicates whether the operation was successful.
+        var after_failure = this.component.after_random_properties();
+        var failure = after_failure || this.component.rule_failed();
         // Check.
-        if (this.component.check_all_rules()) {
+        if (!failure) {
             // Break.
             break;
         } else {
@@ -109,6 +131,8 @@ Role.prototype.add_random_properties = function () {
                 this.component.set_property(
                     property, original_values[property]);
             }
+            // I don't think tense needs to be cleared.
+            // I might be wrong.
         }
     }
 }

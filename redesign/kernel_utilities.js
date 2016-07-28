@@ -145,7 +145,6 @@ var log_make_random_sentence = function () {
     // We pick a random seed and then log it.
     // For now our seed is always ['k', 'c', 'k'].
     // var seed = ['k', 'c', 'k'];
-    // console.log('seed:', seed);
     // We make a random sentence and display the sentence.
     var sentence = make_random_sentence();
     display_on_page(sentence.display_without_translations());

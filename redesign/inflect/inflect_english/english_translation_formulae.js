@@ -28,8 +28,8 @@ var english_tense_to_translation_formula = {
 	"present passive" : "are verbed",			//is eaten
 	"present subjunctive active" : "verb no -s",
 	"present subjunctive passive" : "be verbed",
-	"perfect active" : "verbed-preterite",			//ate
-	"perfect passive": "were verbed",			//was eaten
+	"preterite active" : "verbed-preterite",			//ate
+	"preterite passive": "were verbed",			//was eaten
 	"present continuous active" : "are verbing",
 	"present continuous passive" : "are being verbed",
 	"past continuous active" : "were verbing",
@@ -39,7 +39,15 @@ var english_tense_to_translation_formula = {
 	"pluperfect active" : "had verbed",
 	"pluperfect passive" : "had been verbed",
 	"future perfect active" : "will have verbed",
-	"future perfect passive" : "will have been verbed"
+	"future perfect passive" : "will have been verbed",
+	"may tense active": "may verb no -s",
+	"may tense passive": "may be verbed",
+	"might tense active": "might verb no -s",
+	"might tense passive": "might be verbed",
+	"can tense active": "can verb no -s",
+	"can tense passive": "can be verbed",
+	"could tense active": "could verb no -s",
+	"could tense passive": "could be verbed"
 }
 
 
@@ -144,12 +152,16 @@ example of a generated lexeme
 var english_grammatical_terminology_correspendence = {
 	"verb" : 'present indicative',  //default present indicative
 	"verb no -s" : "present subjunctive",	//fossilized english subjunctive that...
-	"verbed" : "preterite", //preterite
+	"verbed-preterite" : "preterite", //preterite
 	"were verbing" : "past continuous", // was "was verbing"
 	"will verb" : "future",
 	"verbed" : "perfect",          // was "has verbed"
 	"had verbed" : "pluperfect",
-	"will have verbed" : "future perfect"
+	"will have verbed" : "future perfect",
+	"may verb no -s": "may tense",
+	'might verb no -s': "might tense",
+	"can verb no -s": "can tense",
+	'could verb no -s': "could tense"
 }
 
 

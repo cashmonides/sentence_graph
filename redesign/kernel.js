@@ -54,7 +54,8 @@ var kernel_constructor = function (conjunction, direction) {
     // or nonexistant (plus some possibilities for conditionals);
     // we call this its clause type.
     kernel.add_clause_type_restriction(conjunction, direction);
-    
+    // We give the kernel its tense overrides (and translation formulae).
+    kernel.add_tense_overrides_and_tf(conjunction, direction);
     // We return our just-constructed kernel.
     return kernel;
 }
@@ -151,13 +152,6 @@ Kernel.prototype.add_random_properties = function () {
     }
 }
 
-// This function determines the tense of a kernel (in each language).
-// It does this by determining the tense of the kernel's verb.
-Kernel.prototype.determine_tense = function (sequence) {
-    // Ask the verb to determine its tense.
-    this.get_verb().determine_tense();
-}
-
 // This function makes the kernel adopt a sequence.
 Kernel.prototype.adopt_sequence = function (sequence) {
     // Set the sequence of the verb component to the sequence given.
@@ -214,7 +208,17 @@ var display_restriction = function (restriction, language) {
     // whether it is a string or null.
     if (is_object(restriction)) {
         // The restriction is a true object: we find our language in it.
-        return restriction[language];
+        var value = restriction[language];
+        if (typeof value === 'string' || value === null) {
+            // The value is a string or null. We use it as it is.
+            return value;
+        } else if (value === undefined) {
+            // The value is undefined. Who wants to see that?
+            return null;
+        } else {
+            // Stringify.
+            return JSON.stringify(value, null, 4);
+        }
     } else if (typeof restriction === 'string' || restriction === null) {
         // The restriction is a string or null. It is thus
         // language-independent, so we just return it.

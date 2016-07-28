@@ -19,18 +19,16 @@ var replace_ops = function (rule) {
 // This divides a rule into tokens.
 var tokenize_rule = function (rule) {
     // Replace the operators.
-    var with_ops_replaced = replace_ops(rule);
-    // Then divide into words.
-    return words_in_rule(with_ops_replaced);
+    return replace_ops(rule);
+    // We don't need to divide into words anymore.
+    // // Then divide into words.
+    // return words_in_rule(with_ops_replaced);
 }
 
 // This function removes the operators from a tokenized rule.
 var get_non_operators = function (rule) {
-    // We filter the rule.
-    return rule.filter(function (x) {
-        // We filter out 'and' and 'or', currently our only operators.
-        return x !== 'and' && x !== 'or';
-    });
+    // We split the rule by and and or.
+    return rule.split(/ +(and|or) +/g);
 }
 
 // This function creates a function from a tokenized rule.
@@ -40,7 +38,7 @@ var function_from_tokenized_rule = function (rule) {
     var non_operators = get_non_operators(rule);
     // We check whether the rule has an 'and'
     // by checking whether the index of and is not negative one.
-    if (rule.indexOf('and') !== -1) {
+    if (rule.indexOf(' and ') !== -1) {
         // We return a function.
         return function (x) {
             // We loop over the non-operators.
@@ -72,7 +70,7 @@ var function_from_tokenized_rule = function (rule) {
 }
 
 // A regex to match arrows.
-var arrow_regex = /[=\-]>/g;
+var arrow_regex = / *[=\-]> */g;
 
 var parse_arrow_rule = function (rule) {
     // The rules within the rule.

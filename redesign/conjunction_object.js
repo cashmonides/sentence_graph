@@ -25,6 +25,12 @@ Conjunction.prototype.get_property = function (x) {
     return this.conjunction[x];
 }
 
+// This function checks existance of properties
+// in the underlying JSON dictionary.
+Conjunction.prototype.has_property = function (x) {
+    return x in this.conjunction;
+}
+
 // This method lets us access a property of the conjunction telling us
 // the appropriate construction.
 // We do so via concatinating strings to make k_left_construction

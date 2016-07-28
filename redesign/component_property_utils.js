@@ -127,10 +127,9 @@ Component.prototype.get_property_in_language = function (name, language) {
     // The property should be language-dependent.
     // We check that the language given is supported,
     // that is, the language is a property of the value.
+    // If it is not we return null (we don't want to use default behavior).
     if (!(language in value)) {
-        // We throw an error.
-        throw 'Error! ' + language + ' is not in ' +
-        JSON.stringify(value) + '!';
+        return null;
     }
     
     // This is the value of the property in the language.

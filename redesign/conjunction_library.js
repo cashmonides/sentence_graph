@@ -1,5 +1,5 @@
 var conjunction_library = {
-    c_null: {
+    /* c_null: {
         //citation_name: "c_null",
         type: "dummy main",
         english_form: null,
@@ -32,8 +32,8 @@ var conjunction_library = {
             latin: null,
             ssslatin: null
         }
-    },
-    c_null_independent_subjunctive: {
+    },*/
+    c_null_potential_subjunctive: {
         type: "dummy main",
         english_form: null,
         latin_form: null,
@@ -57,16 +57,22 @@ var conjunction_library = {
         },
         k_left_time_restriction: {
             english: null,
-            latin: null,
+            latin: 'simultaneous',
             ssslatin: null
         },
         k_right_time_restriction: {
             english: null,
             latin: null,
             ssslatin: null
+        },
+        k_left_translation_formula: {
+            'english': {
+                'primary': 'can verb no -s',
+                'secondary': 'could verb no -s'
+            }
         }
     },
-    c_and: {
+    /* c_and: {
         type: "coordinating",
         english_form: 'and',
         latin_form: 'et',
@@ -214,8 +220,15 @@ var conjunction_library = {
             english: null,
             latin: 'simultaneous',
             ssslatin: 'simultaneous'
+        },
+        k_right_translation_formula: {
+            'english': {
+                'primary': 'may verb no -s',
+                'secondary': 'might verb no -s'
+            }
         }
-    },
+    }, */
+    /*
     c_indirect_command: {
         type: "subordinating",
         english_form: 'that',
@@ -576,4 +589,5 @@ var conjunction_library = {
             ssslatin: 'prior'
         }
     },
+    */
 }
