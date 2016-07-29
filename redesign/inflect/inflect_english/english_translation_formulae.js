@@ -8,7 +8,7 @@
 // verb no -s -> verb no verbs -> no rule with right hand side verbs can be applied
 // match number and person: look for anything matching /[1-3][sp]/g and use it
 // check indexOf for each of these, check the ones that match.
-// We still need to know which stem to use for each tense.
+// We still need to know which root to use for each tense.
 
 // Should the english_grammatical_terminology_correspendence go both ways?
 
@@ -52,7 +52,7 @@ var english_tense_to_translation_formula = {
 
 
 /////STEP 2
-var english_verb_formula_to_stem = {
+var english_verb_formula_to_root = {
 	"verbed" : "past participle",
 	"verbing" : "gerund",
 	"verbed-preterite": "preterite",
@@ -62,7 +62,7 @@ var english_verb_formula_to_stem = {
 
 
 //////STEP 3
-//get stem from lexicon (accounts for the irregularity of eat/ate)
+//get root from lexicon (accounts for the irregularity of eat/ate)
 //check english_person_irregularities overrides   (person-dependent was/were)
 	//processes verb and helping verb
 
@@ -87,14 +87,21 @@ var english_person_irregularities = {
 
 
 /////STEP 4
-//combine info from step 3 with stem
+//combine info from step 3 with root
 //previous steps returned an english_verb_template
-//wherever string_containing_verb occurs in template, replace with stem
+//wherever string_containing_verb occurs in template, replace with root
 
 
 
 
-
+var english_subject_pronoun_dict = {
+	'1s': 'I',
+	'2s': 'you',
+	'3s': 'he',
+	'1p': 'we',
+	'2p': 'y\'all',
+	'3p': 'they'
+}
 
 
 
@@ -116,7 +123,7 @@ var forms_to_autogenerate = [
 /*
 example of a generated lexeme
 	love
-		english_stems: {
+		english_roots: {
 			default: love,
 			final-s: loves,			//need this to capture carries
 			gerund: loving,
@@ -215,7 +222,7 @@ plug in eat and attack to past ctf
 
 check if irregular:
 
-had verbed -> verb_replacer (replaces "verb" with "stem")
+had verbed -> verb_replacer (replaces "verb" with "root")
 
 consults irregular verb dictionary:
 eat: {
@@ -235,7 +242,7 @@ consults irregular verb info alternative 2:
 
 had verbed -> past pple  
 
-verbed -> pretertie
+verbed -> preterite
 
 was verbed
 

@@ -102,6 +102,20 @@ Sentence.prototype.main_kernel_first = new Tasks([
 
 ]).
 
+
+////////////
+
+We got this output:
+English:
+were commanded in order that may be feared
+
+Latin:
+IUSS[dummy agreement marker] SUMUS ut TIM-EA-TUR
+
+SSSLatin:
+SSSIUSS[dummy agreement marker] SUMUS sssut SSSTIM-EA-TUR
+
+But it was greek perfect. This seems OK, but is it?
 ////////////
 
 translation formulae:

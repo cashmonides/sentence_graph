@@ -73,7 +73,7 @@ Component.prototype.describe_in_language = function (language) {
     // Describe each property (and the lexeme), add indents,
     // remove descriptions that shouldn't have been included,
     // and join by '\n'.
-    return '    lexeme: ' + this.lexeme.name + '\n' +
+    return '    lexeme: ' + this.lexeme.get_name() + '\n' +
     remove_null(properties.map(function (property) {
         // Get the description.
         var description = self.describe_property(property, language);

@@ -15,7 +15,7 @@ component template
             - some properties are deterministic
             - some properties are randomized
 lexeme_template
-            - a language-independant word, fills a word-role
+            - a language-independent word, fills a word-role
 form_template
             - language-dependent
 final display
@@ -37,7 +37,7 @@ SSSLatin: SSSiubet SSSut SSSamet
 
 
 
-translation - a translation of a sentence, language-dependant
+translation - a translation of a sentence, language-dependent
 question? - a question to ask about a translation/pair of translation
 
 

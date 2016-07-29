@@ -122,7 +122,7 @@ Component.prototype.determine_tense_in_language = function (
         }
         return override_tense;
     }
-    // We get the time, mood, and sequence (which is language-dependant)
+    // We get the time, mood, and sequence (which are language-dependent).
     var time_mood_sequence = this.get_time_mood_sequence(language);
     // We see what is possible given the time, mood, and sequence alone.
     var possible_given_tms = tense_maps[

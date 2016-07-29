@@ -112,6 +112,12 @@ var tense_taxonomy = {
     ],
     'subsequent subjunctive secondary': [
         'imperfect subjunctive of the active periphrastic'
+    ],
+    'present infinitive': [
+        'present infinitive'
+    ],
+    'perfect infinitive': [
+        'perfect infinitive'
     ]
 }
 

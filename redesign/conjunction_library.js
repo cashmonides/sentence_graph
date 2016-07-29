@@ -1,5 +1,5 @@
 var conjunction_library = {
-    /* c_null: {
+    /*c_null: {
         //citation_name: "c_null",
         type: "dummy main",
         english_form: null,
@@ -32,7 +32,7 @@ var conjunction_library = {
             latin: null,
             ssslatin: null
         }
-    },*/
+    },
     c_null_potential_subjunctive: {
         type: "dummy main",
         english_form: null,
@@ -72,7 +72,7 @@ var conjunction_library = {
             }
         }
     },
-    /* c_and: {
+    c_and: {
         type: "coordinating",
         english_form: 'and',
         latin_form: 'et',
@@ -192,6 +192,7 @@ var conjunction_library = {
             ssslatin: null
         }
     },
+    */
     c_purpose: {
         type: "subordinating",
         english_form: 'in order that',
@@ -227,7 +228,7 @@ var conjunction_library = {
                 'secondary': 'might verb no -s'
             }
         }
-    }, */
+    },
     /*
     c_indirect_command: {
         type: "subordinating",
@@ -257,6 +258,12 @@ var conjunction_library = {
             english: null,
             latin: 'simultaneous',
             ssslatin: 'simultaneous'
+        },
+        k_right_translation_formula: {
+            'english': {
+                'primary': 'verb no -s',
+                'secondary': 'verb'
+            }
         }
     },
     c_fear: {

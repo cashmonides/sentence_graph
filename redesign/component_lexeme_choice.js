@@ -19,25 +19,26 @@ Component.prototype.accepts_part_of_speech_of = function (lexeme) {
 // Note that the kernel's lexical restrictions are
 // stored under the key "lexical", which created a bug:
 // I thought they were stored under "lexical_restrictions".
-// todo: Change this when we know how to represent
-// multiple lexical restrictions. That is, make this check that every
-// lexical restriction of the component is a lexical property
-// of the lexeme. This is probably doable now but is not being done
-// in the interest of avoiding overcomplication.
 Component.prototype.accepts_lexical_restrictions_of = function (lexeme) {
-    return !this.chosen('lexical') ||
-    this.get_language_independent_property('lexical')
-    === lexeme.lexical_properties;
+    // If there are no lexical restrictions, we are fine.
+    if (!this.chosen('lexical')) {
+        return true;
+    }
+    // We define our lexical properties.
+    var lexical_properties = lexeme.get_core_property('lexical_properties');
+    // Check that the required lexical property is in those of the lexeme.
+    return lexical_properties.indexOf(
+        this.get_language_independent_property('lexical')) !== -1;
 }
 
 // This method determined whether a component can accept a lexeme
-// with regard to trnasitivity. Currently,
+// with regard to transitivity. Currently,
 // it just checks whether the two transitivities are the same.
 // todo: Change this when we want advanced transitivity
 // (such as transitive if alone).
 Component.prototype.accepts_transitivity_of = function (lexeme) {
     return this.get_language_independent_property('transitivity') ===
-    lexeme.transitivity;
+    lexeme.get_core_property('transitivity');
 }
 
 // This method determines whether a component can accept a lexeme.
@@ -56,9 +57,10 @@ Component.prototype.accepts_lexeme = function (lexeme) {
 Component.prototype.choose_random_lexeme = function (
     chosen_lexemes, kernel_chosen_lexemes) {
     // We get all lexemes.
-    // We do this by simply taking the values of
-    // our testing kernels dictionary.
-    var all_lexemes = values(testing_kernels);
+    // We used to do this by simply taking the values of
+    // our testing lexemes dictionary,
+    // but now we use the converted lexemes.
+    var all_lexemes = converted_lexeme_list;
     // We use this inside an anonymous function, so we use the self pattern.
     // (We could also have used bind, but I feel like
     // that can be less clear.)
@@ -68,11 +70,13 @@ Component.prototype.choose_random_lexeme = function (
     // bound to the component. We also check that the lexeme
     // has not been chosen before.
     var filtered_lexemes = all_lexemes.filter(function (lexeme) {
+        // Get the name. (We compare lexemes by their names.)
+        var name = lexeme.get_name();
         // Check that no one else has chosen the lexeme,
         // in the kernel or outside of it, and that this component
         // will accept the lexeme.
-        return !(lexeme.name in kernel_chosen_lexemes ||
-        lexeme.name in chosen_lexemes)
+        return !(name in kernel_chosen_lexemes ||
+        name in chosen_lexemes)
         && self.accepts_lexeme(lexeme);
     });
     // We check that there are some lexemes which we can use.
@@ -81,11 +85,11 @@ Component.prototype.choose_random_lexeme = function (
         return false;
     }
     // We choose randomly from our list of lexemes.
-    var lexeme = random_choice(filtered_lexemes);
+    var chosen_lexeme = random_choice(filtered_lexemes);
     // We set our component's lexeme property to the chosen lexeme.
-    this.lexeme = lexeme;
+    this.lexeme = chosen_lexeme;
     // We put our new lexeme in the kernel chosen lexemes.
-    kernel_chosen_lexemes[lexeme.name] = true;
+    kernel_chosen_lexemes[chosen_lexeme.get_name()] = true;
     // We return true to represent that we succeeded.
     return true;
 }

@@ -1,5 +1,12 @@
 var english_verb_formula_regex = /\b[A-Za-z\-]*verb[A-Za-z\-]*\b/g;
 
+// This function allows us to get the correct english pronoun.
+var get_english_subject_pronoun = function (person_and_number) {
+    // Look in the english_subject_pronoun_dict for the
+    // person and number passed in.
+    return english_subject_pronoun_dict[person_and_number];
+}
+
 var english_translation_formula_to_verb_formula = function (translation_formula) {
     // In this specific case, there should only be one match.
     return translation_formula.match(english_verb_formula_regex)[0];
@@ -53,9 +60,9 @@ var apply_english_person_irregularities = function (
     return formula;
 }
 
-var put_stem_in_formula = function (stem, formula) {
-    // Simply replace anything mentioning the word 'verb' with the stem.
-    return formula.replace(english_verb_formula_regex, stem);
+var put_root_in_formula = function (root, formula) {
+    // Simply replace anything mentioning the word 'verb' with the root.
+    return formula.replace(english_verb_formula_regex, root);
 }
 
 var remove_dashed_tense_indicators = function (translation_formula) {
@@ -95,20 +102,20 @@ var inflect_english_verb = function (verb_lexeme, tense_voice, person_and_number
     // First get the verb formula.
     var verb_formula = english_translation_formula_to_verb_formula(
         translation_formula);
-    // Then get the stem type.
-    var english_stem_type = english_verb_formula_to_stem[verb_formula];
-    // Check that the stem type is a string.
-    if (typeof english_stem_type !== 'string') {
-        throw english_stem_type + ' is not a string! (It comes from ' +
+    // Then get the root type.
+    var english_root_type = english_verb_formula_to_root[verb_formula];
+    // Check that the root type is a string.
+    if (typeof english_root_type !== 'string') {
+        throw english_root_type + ' is not a string! (It comes from ' +
         verb_formula + '.)';
     }
     // End of step 2.
     // Step 3.
-    // Part 1 (getting the stem from the lexicon).
-    var english_stem = verb_lexeme.english_stems[english_stem_type];
-    if (typeof english_stem !== 'string') {
+    // Part 1 (getting the root from the lexeme).
+    var english_root = verb_lexeme.get_root(english_root_type, 'english');
+    if (typeof english_root !== 'string') {
         throw JSON.stringify(verb_lexeme) + ' has a bad ' +
-        english_stem_type + '!';
+        english_root_type + '!';
     }
     // Part 1.3 (removing extra things like -preterite
     // which we no longer need)
@@ -122,7 +129,11 @@ var inflect_english_verb = function (verb_lexeme, tense_voice, person_and_number
     translation_formula = apply_english_person_irregularities(
         translation_formula, person_and_number, changes_to_not_apply);
     // End of step 3.
-    // Step 4 (putting the stem in the formula)
-    var english_form = put_stem_in_formula(english_stem, translation_formula);
-    return english_form;
+    // Step 4 (putting the root in the formula)
+    var english_form = put_root_in_formula(english_root, translation_formula);
+    // Step 5 (adding the subject pronoun).
+    // todo: Change this when we might not have a subject pronoun.
+    var subject_pronoun = get_english_subject_pronoun(person_and_number);
+    // Return.
+    return subject_pronoun + ' ' + english_form;
 }

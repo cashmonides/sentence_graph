@@ -3,14 +3,10 @@
 // but now we have less implementation work.
 
 // Determines tense.
-// todo: remove this when we have actual tense.
 var get_latin_verb_tense = function (component) {
-    var time = component.get_property_in_language('time', 'latin');
-    return {
-        'prior': 'imperfect',
-        'simultaneous': 'present',
-        'subsequent': 'future'
-    }[time];
+    // Get rid of voice and everything after.
+    return component.get_property_in_language('tense', 'latin').
+    replace(/ *(indicative|subjunctive|infinitive).*/, '');
 };
 
 var get_latin_verb_system = function (component) {
@@ -46,19 +42,19 @@ var get_latin_subject_number_from_verb = function (verb_component) {
 }
 // Done with the fake methods.
 
-//rename to get_latin_verb_stem
-var get_stem = function (component) {
+//rename to get_latin_verb_root
+var get_root = function (component) {
     // We enabled adding of fake properties
     // so we can ask about perfect system in a clean way.
     var in_perfect_system = get_latin_verb_system(component)
     === 'perfect system';
     var voice = component.get_property_in_language('voice', 'latin');
     if (in_perfect_system && voice === 'active') {
-        return component.lexeme.stem_3;
+        return component.lexeme.get_root('root_3', 'latin');
     } else if (in_perfect_system && voice === 'passive') {
-        return component.lexeme.stem_4;
+        return component.lexeme.get_root('root_4', 'latin');
     } else {
-        return component.lexeme.stem_2;
+        return component.lexeme.get_root('root_2', 'latin');
     }
 }
 
@@ -72,7 +68,9 @@ var get_middle_inflection = function (component) {
         // rename to latin_verb_perfect_middle
         return perfect_middle[tense + ' ' + mood];
     } else {
-        var conjugation = component.lexeme.conjugation;
+        // Get the latin conjugation.
+        var conjugation = component.lexeme.get_language_dependent_property(
+            'conjugation', 'latin');
         var latin_verb_middle_for_conjugation = middle_inflections[
             'conjugation ' + conjugation];
         var latin_tense_mood_string = tense + ' ' + mood;
@@ -139,12 +137,15 @@ var get_helping_verb = function (component) {
         return 'ESSE';
     } else {
         var tense = get_latin_verb_tense(component);
-        var voice = component.get_property_in_language('voice', 'latin');
+        // We need mood but not voice; voice is
+        // always passive when we call this.
+        // We need an active form of to be, however.
+        var mood = component.get_property_in_language('mood', 'latin');
         var person_and_number = component.get_property_in_language(
             'person_and_number', 'latin');
         return latin_form_of_to_be[
             latin_perfect_tense_to_present_tense_map[tense] +
-            ' ' + voice + ' ' + person_and_number];
+            ' ' + mood + ' ' + person_and_number];
     }
 }
 
@@ -153,7 +154,7 @@ var latin_verb_future_subjunctive = function (component) {
         'person_and_number', 'latin');
     var form_of_to_be = latin_form_of_to_be[
         'present subjunctive ' + person_and_number];
-    return component.lexeme.stem_4 + '-ŪR-' +
+    return component.lexeme.get_root('root_4', 'latin') + '-ŪR-' +
     get_agreement_marker(component) + ' ' + form_of_to_be;
 }
 
@@ -164,13 +165,13 @@ var get_subject_accusative_pronoun = function (component) {
 }
 
 var inflect_latin_verb_main = function (component) {
-    var stem = get_stem(component);
+    var root = get_root(component);
     var in_perfect_system = get_latin_verb_system(component)
     === 'perfect system';
     var voice = component.get_property_in_language('voice', 'latin');
     var inflected = {};
     if (in_perfect_system && voice === 'passive') {
-        inflected.verb = stem + get_agreement_marker(component) + ' ' +
+        inflected.verb = root + get_agreement_marker(component) + ' ' +
         get_helping_verb(component);
     } else {
         var tense = get_latin_verb_tense(component);
@@ -181,7 +182,7 @@ var inflect_latin_verb_main = function (component) {
             }
             return latin_verb_future_subjunctive(component);
         }
-        inflected.verb = stem + get_middle_inflection(component) +
+        inflected.verb = root + get_middle_inflection(component) +
         get_end_inflection(component);
     }
     // var clause_type = component;

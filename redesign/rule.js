@@ -27,9 +27,37 @@ var tokenize_rule = function (rule) {
 
 // This function removes the operators from a tokenized rule.
 var get_non_operators = function (rule) {
-    // We split the rule by and and or.
-    return rule.split(/ +(and|or) +/g);
+    // We split the rule by and and or. We do not capture because
+    // some browsers would add and and or back in,
+    // due to them being captured.
+    return rule.split(/ +(?:and|or) +/g).filter(function (x) {
+        return x !== 'and' && x !== 'or';
+    });
 }
+
+// A simple test.
+var get_non_operators_test = function () {
+    // Form a result and an expected result.
+    var result = get_non_operators('stranger and weirder or at any rate ' +
+    'unusual and that is all');
+    var expected = ['stranger', 'weirder', 'at any rate unusual',
+    'that is all'];
+    // Check for the same length.
+    if (result.length !== expected.length) {
+        throw 'Not the same length: ' + result.length + ' is not ' +
+        expected.length + '!';
+    }
+    // Loop over the actual result.
+    for (var i = 0; i < result.length; i++) {
+        // Throw an error is the results are different in some position.
+        if (result[i] !== expected[i]) {
+            throw result[i] + ' is not ' + expected[i] + '!';
+        }
+    }
+    // If we get to here, the test passed.
+}
+
+get_non_operators_test();
 
 // This function creates a function from a tokenized rule.
 var function_from_tokenized_rule = function (rule) {
