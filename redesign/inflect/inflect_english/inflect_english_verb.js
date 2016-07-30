@@ -7,9 +7,20 @@ var get_english_subject_pronoun = function (person_and_number) {
     return english_subject_pronoun_dict[person_and_number];
 }
 
-var english_translation_formula_to_verb_formula = function (translation_formula) {
+var english_translation_formula_to_verb_formula = function (
+    translation_formula, person_and_number) {
+    // The verb formula is found in the translation formula.
     // In this specific case, there should only be one match.
-    return translation_formula.match(english_verb_formula_regex)[0];
+    var verb_formula = translation_formula.match(english_verb_formula_regex)[0];
+    // todo: Change this special case of 3s present.
+    // It's entirely sustainable: this is indeed the only weird case.
+    if (person_and_number === '3s' && translation_formula === 'verb') {
+        // Return 'verbs'.
+        return 'verbs';
+    } else {
+        // Return the verb formula.
+        return verb_formula;
+    }
 }
 
 // The person_and_number_key is like 1sg & 3sg.
@@ -60,9 +71,29 @@ var apply_english_person_irregularities = function (
     return formula;
 }
 
-var put_root_in_formula = function (root, formula) {
-    // Simply replace anything mentioning the word 'verb' with the root.
-    return formula.replace(english_verb_formula_regex, root);
+var get_verb_form_of_english_root = function (root) {
+    // Just drop everything after the first dash.
+    // Example: verbed-preterite becomes verbed
+    return root.split('-')[0];
+}
+
+var put_english_root_in_formula = function (root, formula, verb_formula) {
+    // Just drop everything after the first dash.
+    // Example: verbed-preterite becomes verbed.
+    verb_formula = verb_formula.split('-')[0];
+    // Simply replace anything mentioning the word 'verb' with the root
+    // (but actually, only rep[lace what we expect and throw an error
+    // on anything else).
+    return formula.replace(english_verb_formula_regex, function (x) {
+        // Check that the thing we're replacing is indeed
+        // the form of the root.
+        if (x !== verb_formula) {
+            throw 'Error in putting a root in a formula: ' +
+            x + ' is not ' + verb_formula + '!';
+        };
+        // Return the root.
+        return root;
+    });
 }
 
 var remove_dashed_tense_indicators = function (translation_formula) {
@@ -88,7 +119,7 @@ var remove_english_irregularities_to_not_apply = function (translation_formula) 
     return translation_formula.split(' no ')[0];
 }
 
-var inflect_english_verb = function (verb_lexeme, tense_voice, person_and_number) {
+var get_english_translation_formula = function (tense_voice) {
     // Step 1.5. (Simply getting the translation formula.)
     var translation_formula = english_tense_to_translation_formula[
         tense_voice];
@@ -97,26 +128,61 @@ var inflect_english_verb = function (verb_lexeme, tense_voice, person_and_number
         throw 'Translation formula for ' + tense_voice +
         ' should not be undefined!';
     }
-    // End of step 1.5.
-    // Step 2.
-    // First get the verb formula.
-    var verb_formula = english_translation_formula_to_verb_formula(
-        translation_formula);
-    // Then get the root type.
+    // Return the translation formula.
+    return translation_formula;
+}
+
+var get_english_root_type = function (verb_formula) {
+    // Get the root type.
     var english_root_type = english_verb_formula_to_root[verb_formula];
     // Check that the root type is a string.
     if (typeof english_root_type !== 'string') {
         throw english_root_type + ' is not a string! (It comes from ' +
         verb_formula + '.)';
     }
-    // End of step 2.
-    // Step 3.
-    // Part 1 (getting the root from the lexeme).
+    // Return the root type.
+    return english_root_type;
+}
+
+var get_english_root = function (english_root_type, verb_lexeme) {
+    // Get the english root.
     var english_root = verb_lexeme.get_root(english_root_type, 'english');
+    // Error checking.
     if (typeof english_root !== 'string') {
         throw JSON.stringify(verb_lexeme) + ' has a bad ' +
         english_root_type + '!';
     }
+    // Return the root.
+    return english_root;
+}
+
+
+// main function
+// returns an english string (e.g. "he had attacked")
+// takes a verb lexeme, and tense-voice combination (as a string),
+// and a person-number combination (e.g., 1s)
+var inflect_english_verb = function (
+    verb_lexeme, tense_voice, person_and_number) {
+    // Step 1.5. (Simply getting the translation formula, e.g., "was verbing")
+    var translation_formula = get_english_translation_formula(tense_voice);
+    // End of step 1.5.
+    // Step 2.
+    // First get the verb formula.
+    // aka the part of the translation formula that includes the verb but excludes all helping words
+    // e.g. 'verbs', 'verbing', 'verbed', 'verb'
+    // Note that the verb formula depends on the person and number.
+    var verb_formula = english_translation_formula_to_verb_formula(
+        translation_formula, person_and_number);
+    // Then get the root type.
+    // aka a slightly expanded version of English principal parts
+    // 'verb' -> 'default'
+    // 'verbs' -> 'final-s'
+    // 'verbed' -> 'preterite'
+    var english_root_type = get_english_root_type(verb_formula);
+    // End of step 2.
+    // Step 3.
+    // Part 1 (getting the root from the lexeme).
+    var english_root = get_english_root(english_root_type, verb_lexeme)
     // Part 1.3 (removing extra things like -preterite
     // which we no longer need)
     translation_formula = remove_dashed_tense_indicators(translation_formula);
@@ -129,8 +195,10 @@ var inflect_english_verb = function (verb_lexeme, tense_voice, person_and_number
     translation_formula = apply_english_person_irregularities(
         translation_formula, person_and_number, changes_to_not_apply);
     // End of step 3.
-    // Step 4 (putting the root in the formula)
-    var english_form = put_root_in_formula(english_root, translation_formula);
+    // Step 4 (putting the root in the formula).
+    // We put the root in the translation formula.
+    var english_form = put_english_root_in_formula(
+        english_root, translation_formula, verb_formula);
     // Step 5 (adding the subject pronoun).
     // todo: Change this when we might not have a subject pronoun.
     var subject_pronoun = get_english_subject_pronoun(person_and_number);

@@ -1,5 +1,5 @@
 var conjunction_library = {
-    /*c_null: {
+    c_null: {
         //citation_name: "c_null",
         type: "dummy main",
         english_form: null,
@@ -192,7 +192,6 @@ var conjunction_library = {
             ssslatin: null
         }
     },
-    */
     c_purpose: {
         type: "subordinating",
         english_form: 'in order that',

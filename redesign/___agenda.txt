@@ -98,6 +98,15 @@ with enough information to make a quiz on all properties, including clause type
 
 End of PART 2
 
+
+
+MAKE DROP DOWN FUNCTIONALITY IN BOTH DIRECTIONS
+
+
+
+
+
+
 PART 3
 
 STAGE 6 (and maybe more)

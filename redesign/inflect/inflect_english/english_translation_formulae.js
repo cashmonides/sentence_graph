@@ -106,6 +106,108 @@ var english_subject_pronoun_dict = {
 
 
 
+// arguments
+// conjunction
+// left right
+// allowed dictionary
+	// allowed sequence
+	// allowed tenses (Latin-driven)
+	// allowed relative
+	// allowed voice
+	// LATER: allowed person-number
+	// allowed clause types (or maybe this is better we need allowed conjunctions)
+//red herring boolean
+
+// voice
+//person & number
+// indicative vs. subjunctive
+// subordinate vs. 
+// construction
+// mood
+// voice
+// time
+// subordinate or main
+var maximal_english_tf_space = {
+	'indicative': {
+		'active' : {
+			// default, normal, indicative
+			'verb': ['simultaneous'],
+			'verbed': ['prior'],
+			'will verb': ['subsequent'],
+			
+			//advanced tenses in normal clauses, indicative
+			'had verbed': ['pluperfect indicative'],
+			'will have verbed': ['future perfect indicative'],
+			'was verbing': ['imperfect indicative'],
+			//'has/have verbed': ['perfect-in-primary-sequence']
+		}, 
+		'passive' : {
+			// default, normal, indicative
+			'is verbed': ['simultaneous'],
+			'was verbed': ['prior'],
+			'will be verbed': ['subsequent'],
+			
+			//advanced tenses in normal clauses, indicative
+			'had been verbed': ['pluperfect indicative'],
+			'will have been verbed': ['future perfect indicative'],
+			'was being verbed': ['imperfect indicative'],
+			//'has/have been verbed': ['perfect-in-primary-sequence']
+		}
+	},
+	'subordinate && subjunctive || infinitive &! conditional' : {
+		'active' : {
+			'verb': ['simultaneous', 'primary'],
+			'verbed': ['prior', 'primary'],
+			'will verb': ['subsequent', 'primary'],
+			'was verbing': ['simultaneous', 'secondary'],
+			'had verbed': ['prior', 'secondary'],
+			'would verb': ['subsequent', 'secondary'],
+		},
+		'passive' : {
+			'is verbed': ['simultaneous', 'primary'],
+			'was verbed': ['prior', 'primary'],
+			'will be verbed': ['subsequent', 'primary'],
+			'was being verbed': ['simultaneous', 'secondary'],
+			'had been verbed': ['prior', 'secondary'],
+			'would have been verbed': ['subsequent', 'secondary'],
+		}
+	
+	},
+	'conditional' : {
+		'active' : {
+			'should verb': ['protasis_flv'],
+			'would verb': ['apodosis_flv'],
+			'verb': ['protasis_fmv'],
+			'will verb': ['apodosis_fmv'],
+			'were verbing': ['protasis_present_ctf'], //was 1sg & 3sg
+			'would be verbing': ['apodosis_present_ctf'],
+			'had verbed': ['protasis_past_ctf'], 
+			'would have verbed': ['apodosis_past_ctf']
+		}, 
+		'passive' : {
+			'should be verbed': ['protasis_flv'],
+			'would be verbed': ['apodosis_flv'],
+			'is verbed': ['protasis_fmv'],
+			'will be verbed': ['apodosis_fmv'],
+			'were being verbed': ['protasis_present_ctf'], //was 1sg & 3sg
+			'would be being verbing': ['apodosis_present_ctf'],
+			'had been verbed': ['protasis_past_ctf'], 
+			'would have been verbed': ['apodosis_past_ctf']
+		}
+	},
+	'purpose' : {
+		'active' : {
+			'may verb' : ['primary'],
+			'might verb' : ['secondary']
+		},
+		'passive' : {
+			'may be verbed' : ['primary'],
+			'might be verbed' : ['secondary']
+		}
+	}
+}
+
+
 
 
 

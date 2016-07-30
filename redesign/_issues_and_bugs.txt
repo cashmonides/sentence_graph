@@ -1,3 +1,12 @@
+July 29th
+
+- sequence should be determined independently for coordinating conjunctions
+(maybe more generally?)
+- he come
+var come_lexeme = new Lexeme(testing_lexemes.come);
+inflect_english_verb(come_lexeme, 'present active', '3s');
+"he come"
+
 July 16th
 
 - independent subjunctive is not currently constraining the verb to be subjunctive

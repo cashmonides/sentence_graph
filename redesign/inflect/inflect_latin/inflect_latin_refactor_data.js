@@ -61,7 +61,7 @@ var perfect_endings = {
     '3s': '-IT',
     '1p': '-IMUS',
     '2p': '-ITIS',
-    '2p': '-ERUNT'
+    '3p': '-ERUNT'
 }
 
 var normal_endings = {

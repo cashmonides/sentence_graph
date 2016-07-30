@@ -167,7 +167,7 @@ var testing_lexemes = {
             lexical_properties: ['verb of commanding']
         },
         latin: {
-            conjugation: '1',
+            conjugation: '2',
             roots: {
                 root_2: 'IUB',
                 root_3: 'IUSS',
@@ -192,7 +192,7 @@ var testing_lexemes = {
             lexical_properties: ['verb of fearing']
         },
         latin: {
-            conjugation: '1',
+            conjugation: '2',
             roots: {
                 root_2: 'TIM',
                 root_3: 'TIMU',

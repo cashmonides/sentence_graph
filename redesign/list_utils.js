@@ -13,3 +13,25 @@ var remove_null = function (list) {
 var last = function (list) {
     return list[list.length - 1];
 }
+
+// This function removes duplicates from a list.
+var remove_duplicates = function (list) {
+    // Initialize a list and a set.
+    var new_list = [];
+    var list_as_set = {};
+    // Some completely typical looping code.
+    var item;
+    for (var i = 0; i < list.length; i++) {
+        item = list[i];
+        // This skips items we've already seen.
+        if (item in list_as_set) {
+            continue;
+        }
+        // We've not seen this item yet, so add the item to the list
+        // and put it in the set.
+        new_list.push(item);
+        list_as_set[item] = true;
+    }
+    // Return the new list. (We did not mutate.)
+    return new_list;
+}
