@@ -33,7 +33,7 @@ Conjunction.prototype.has_property = function (x) {
 
 // This method lets us access a property of the conjunction telling us
 // the appropriate construction.
-// We do so via concatinating strings to make k_left_construction
+// We do so via concatenating strings to make k_left_construction
 // or k_right_construction, and then look at that
 // property of the conjunction.
 Conjunction.prototype.get_construction = function (direction) {

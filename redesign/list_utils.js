@@ -35,3 +35,13 @@ var remove_duplicates = function (list) {
     // Return the new list. (We did not mutate.)
     return new_list;
 }
+
+// This function concatenates a list of lists.
+var concat_all = function (list_of_lists) {
+    return [].concat.apply([], list_of_lists);
+}
+
+// This function maps a list, then concatenates the results.
+var concat_map = function (list, f) {
+    return concat_all(list.map(f));
+}

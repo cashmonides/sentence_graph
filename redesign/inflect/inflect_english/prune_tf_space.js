@@ -1,138 +1,183 @@
+var check_properties_from_allowed = [
+    'time', 'latin_indicative_tenses_allowed', 'voice', 'sequence'
+];
+
 var prune_tf_space = function (tf_space, allowed, conjunction, direction) {
-    // Find the allowed conjunctions.
-    var conjunction_list = get_conjunction_list(
-        allowed, conjunction, direction);
-    // Get a check function.
-    var check = check_function_from_allowed(allowed, conjunction_list);
-    // Prune.
-    var pruned = abstract_prune(tf_space_operators, tf_space, check);
+    // Get the value of the red herring switch as a boolean.
+    var red_herring_bool = get_red_herring_bool(allowed);
+    // Find all the allowed conjunctions.
+    var all_conjunction_direction_combos =
+    get_all_conjunction_direction_combos(allowed);
+    // If red herrings are on, we include all the conjunction-direction combos.
+    // Otherwise, only the one.
+    var conjunction_direction_combos;
+    if (red_herring_bool) {
+        conjunction_direction_combos = all_conjunction_direction_combos;
+    } else {
+        conjunction_direction_combos = [
+            new ConjunctionDirectionCombo(conjunction, direction)];
+    }
+    var verb_regimes = Object.keys(tf_space);
+    var allowed_verb_regimes = verb_regimes.filter(function (verb_regime) {
+        var parts = verb_regime.split('.');
+        var thing_tested = parts[0];
+        if (thing_tested !== 'regime') {
+            throw 'Not testing regime at the top level; testing ' +
+            thing_tested + ' instead.';
+        }
+        var verb_regime = parts[1];
+        return conjunction_direction_combos.some(function (x) {
+            return x.has_verb_regime(verb_regime);
+        })
+    });
+    if (allowed_verb_regimes.length === 0) {
+        throw 'No allowed verb regimes!';
+    }
+    var constructions = remove_duplicates(
+        all_conjunction_direction_combos.map(function (x) {
+            return x.construction;
+        })
+    );
+    var check = check_function_from_allowed([
+        {
+            'get_props_from': allowed,
+            'props_to_get': check_properties_from_allowed
+        },
+        {
+            'get_props_from': {'construction': constructions},
+            'props_to_get': ['construction']
+        }
+    ]);
+    var pruned = concat_map(allowed_verb_regimes, function (x) {
+        // Iterate over the relevant values of the translation formula space.
+        return abstract_prune(tf_space_operators, tf_space[x], check)
+    });
     // Remove duplicates.
     return remove_duplicates(pruned);
 }
 
-var get_conjunction_prop = function (conj_and_dir, prop_name) {
-    return conj_and_dir.conjunction[
-        'k_' + conj_and_dir.direction + '_' + prop_name];
+var get_all_conjunction_direction_combos = function (allowed) {
+    var conjunctions = allowed.conjunctions;
+    if (conjunctions === 'all_conjunctions') {
+        conjunctions = Object.keys(conjunction_library);
+    }
+    return concat_map(conjunctions, function (conj) {
+        var conj_object = new Conjunction(conj);
+        return [
+            new ConjunctionDirectionCombo(conj_object, 'left'),
+            new ConjunctionDirectionCombo(conj_object, 'right')
+        ];
+    });
 }
 
-var conjunctions_in_both_directions = function (conjunctions) {
-    return [].concat.apply(
-        [], conjunctions.map(function (x) {
-            return [
-                [{'conjunction': x, 'direction': 'left'}],
-                [{'conjunction': x, 'direction': 'right'}]
-            ]
-        })
-    );
+var ConjunctionDirectionCombo = function (conjunction, direction) {
+    // Note that the conjunction is a conjunction object.
+    this.conjunction = conjunction;
+    this.direction = direction;
+    // Add verb regime (using the general get_property method).
+    this.verb_regime = conjunction.get_property(
+        'k_' + direction + '_verb_regime');
+    if (!this.verb_regime) {
+        this.verb_regime = null;
+    }
+    // Add construction (using the special get_construction method).
+    this.construction = conjunction.get_construction(direction);
 }
 
-var get_conjunction_list = function (allowed, conjunction, direction) {
-    // Yes, 'false'. (But we also allow false in case someone makes a mistake.)
-    if (allowed['red herring'] === 'false'
-    || allowed['red herring'] === false) {
-        // A single conjunction.
-        return [{'conjunction': conjunction, 'direction': direction}];
-    } else if (allowed.conjunctions === 'all_conjunctions') {
-        return conjunctions_in_both_directions(values(conjunction_library));
+ConjunctionDirectionCombo.prototype.has_verb_regime = function (x) {
+    return this.verb_regime === x;
+}
+
+// Get the red herring bool from allowed.
+var get_red_herring_bool = function (allowed) {
+    var red_herring = allowed['red herring'];
+    if (red_herring === 'false' || red_herring === false) {
+        return false;
+    } else if (red_herring === 'true' || red_herring === true) {
+        return false;
     } else {
-        return conjunctions_in_both_directions(
-            allowed.conjunctions.map(function (x) {
-                return conjunction_library[x];
-            })
-        );
+        throw 'Weird value for red herring: ' + red_herring;
     }
 }
 
-var check_function_from_allowed = function (allowed, conjunction_list) {
-    // The things we return true for.
+var check_function_from_allowed = function (list_of_allowed_sources) {
+    // The categories are keys. Each value is a set of things
+    // we return true for within that category.
     var hash_yes = {};
-    var i;
-    var item;
-    // Add a conjunction property, checking if it's null.
-    var add = function (x, prop, dependent) {
-        var prop_value = get_conjunction_prop(x, prop);
-        if (dependent === 'dependent') {
-            prop_value = prop_value[default_language];
-        }
-        if (prop_value) {
-            hash_yes[prop_value] = true;
-        }
-    }
-    for (i in allowed) {
-        item = allowed[i];
-        if (Array.isArray(item) && i !== 'conjunction') {
-            // Loop over the items of this list, adding each one.
-            for (var j = 0; j < item.length; j++) {
-                hash_yes[item[j]] = true;
+    for (var i = 0; i < list_of_allowed_sources.length; i++) {
+        var item = list_of_allowed_sources[i];
+        var what_to_get_props_from = item.get_props_from;
+        var props_to_get = item.props_to_get;
+        for (var j = 0; j < props_to_get.length; j++) {
+            var prop = props_to_get[j];
+            if (!(prop in what_to_get_props_from)) {
+                throw JSON.stringify(what_to_get_props_from) +
+                ' is missing ' + prop + '!';
+            } else if (prop in hash_yes) {
+                throw JSON.stringify(hash_yes) + ' already has ' +
+                prop + '! This entry should not be overwriten!';
             }
-        }
-    }
-    for (i = 0; i < conjunction_list.length; i++) {
-        // Item is a conjunction.
-        item = conjunction_list[i];
-        // Add the language-dependent mood restriction.
-        add(item, 'mood_restriction', 'dependent');
-        // Add the language-independent construction.
-        add(item, 'construction', 'independent');
-        // The type is special. We can use it to get
-        // "subordinate" and "conditional".
-        var type = item.conjunction.type;
-        if (item.direction + ' ' + type in type_inferences) {
-            hash_yes[type_inferences[item.direction + ' ' + type]] = true;
+            hash_yes[prop] = set_from(what_to_get_props_from[prop]);
+            // We remove null.
+            // Questions:
+            // Is it OK to use null instead of 'null' here? Yes,
+            // keys are converted to string.
+            // What if we didn't add null? delete works anyway.
+            delete hash_yes[prop][null];
         }
     }
     return function (x) {
-        return x in hash_yes;
+        var parts = x.split('.');
+        if (parts.length !== 2) {
+            throw 'Bad thing being checked: ' + x;
+        }
+        var category = parts[0];
+        if (!(category in hash_yes)) {
+            throw 'Bad category: ' + category + '. This is the category of '
+            + x;
+        }
+        // Examples: present, imperfect.
+        var value_for_category = parts[1];
+        return value_for_category in hash_yes[category];
     }
-}
-
-var type_inferences = {
-    'subordinating right': 'subordinate',
-    // Annoying but true.
-    // A protasis is subordinate.
-    // Anything else would be unexpected.
-    'subordinating conditional right': 'subordinate',
-    'subordinating conditional left': 'conditional',
-    'subordinating conditional right': 'conditional'
 }
 
 var abstract_prune = function (operators, space, check) {
     var results = [];
     for (var i in space) {
         if (Array.isArray(space[i])) {
-            if (space[i].every(check)) {
+            if (space[i].every(function (x) {
+                // Parse the conditions in values that are lists,
+                // to handle
+                // 'verb no -s' : ['sequence.primary || sequence.secondary']
+                return parse_expr(operators, check, x);
+            })) {
                 results.push([i]);
             }
         } else if (parse_expr(operators, check, i)) {
             results.push(abstract_prune(operators, space[i], check))
         }
     }
-    return [].concat.apply([], results);
+    return concat_all(results);
 }
 
 var tf_space_operators = [
     {
         re: / *&! */g,
         f: function (x, y) {
-            return function (z) {
-                return x(z) && !(y(z));
-            }
+            return x && !y;
         }
     },
     {
         re: / *\|\| */g,
         f: function (x, y) {
-            return function (z) {
-                return x(z) || y(z);
-            }
+            return x || y;
         }  
     },
     {
         re: / *&& */g,
         f: function (x, y) {
-            return function (z) {
-                return x(z) && y(z);
-            }
+            return x && y;
         }
     }
 ];
@@ -141,6 +186,9 @@ var parse_expr = function (operators, each_term, expr) {
     if (operators.length === 0) {
         return each_term(expr);
     } else {
+        if (typeof expr !== 'string') {
+            throw 'Weird expression: ' + expr + '!';
+        }
         return expr.split(operators[0].re).map(function (x) {
             return parse_expr(operators.slice(1), each_term, x);
         }).reduce(operators[0].f);

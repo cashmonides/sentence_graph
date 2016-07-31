@@ -40,13 +40,13 @@ var english_tense_to_translation_formula = {
 	"pluperfect passive" : "had been verbed",
 	"future perfect active" : "will have verbed",
 	"future perfect passive" : "will have been verbed",
-	"may tense active": "may verb no -s",
+	"may tense active": "may verb",
 	"may tense passive": "may be verbed",
-	"might tense active": "might verb no -s",
+	"might tense active": "might verb",
 	"might tense passive": "might be verbed",
-	"can tense active": "can verb no -s",
+	"can tense active": "can verb",
 	"can tense passive": "can be verbed",
-	"could tense active": "could verb no -s",
+	"could tense active": "could verb",
 	"could tense passive": "could be verbed"
 }
 
@@ -128,81 +128,132 @@ var english_subject_pronoun_dict = {
 // time
 // subordinate or main
 var maximal_english_tf_space = {
-	'indicative': {
-		'active' : {
+	//check red_herring_bool
+	//if true, check if conjunction is in allowed conjunction 
+	//if true, go down this path
+	//once we've entered inside
+	//check if voice is in allowed
+	//if true go down the path
+	//at each point check whatever is listed
+	
+	//if false, check CONJUNCTION ACTUALLY USED
+	//if conjunction -> indicative
+	//go down this path
+	
+	
+	// 'conjunction.used.mood_restriction'
+	
+	// 'conjunctions that use the indicative in the specified direction'
+	
+	
+	
+	// 'conjunctions that use the subjunctive || infinitive in the specified direction && are subordinate'
+
+	// 'conjunctions that are purpose clause on the right'	
+	
+	
+	
+	
+	'regime.absolute': {
+		// check ALLOWED
+		// if voice.active, go down this path
+		'voice.active' : {
 			// default, normal, indicative
-			'verb': ['simultaneous'],
-			'verbed': ['prior'],
-			'will verb': ['subsequent'],
+			//information comes from ALLOWED
+			'verb': ['time.simultaneous'],
+			'verbed': ['time.prior'],
+			'will verb': ['time.subsequent'],
 			
 			//advanced tenses in normal clauses, indicative
-			'had verbed': ['pluperfect indicative'],
-			'will have verbed': ['future perfect indicative'],
-			'was verbing': ['imperfect indicative'],
+			//information comes from ALLOWED
+			'had verbed': ['latin_indicative_tenses_allowed.pluperfect indicative'],
+			'will have verbed': ['latin_indicative_tenses_allowed.future perfect indicative'],
+			'was verbing': ['latin_indicative_tenses_allowed.imperfect indicative'],
 			//'has/have verbed': ['perfect-in-primary-sequence']
 		}, 
-		'passive' : {
+		'voice.passive' : {
 			// default, normal, indicative
-			'is verbed': ['simultaneous'],
-			'was verbed': ['prior'],
-			'will be verbed': ['subsequent'],
+			//information comes from ALLOWED
+			'is verbed': ['time.simultaneous'],
+			'was verbed': ['time.prior'],
+			'will be verbed': ['time.subsequent'],
 			
 			//advanced tenses in normal clauses, indicative
-			'had been verbed': ['pluperfect indicative'],
-			'will have been verbed': ['future perfect indicative'],
-			'was being verbed': ['imperfect indicative'],
+			//information comes from ALLOWED
+			'had been verbed': ['latin_indicative_tenses_allowed.pluperfect indicative'],
+			'will have been verbed': ['latin_indicative_tenses_allowed.future perfect indicative'],
+			'was being verbed': ['latin_indicative_tenses_allowed.imperfect indicative'],
 			//'has/have been verbed': ['perfect-in-primary-sequence']
 		}
 	},
-	'subordinate && subjunctive || infinitive &! conditional' : {
-		'active' : {
-			'verb': ['simultaneous', 'primary'],
-			'verbed': ['prior', 'primary'],
-			'will verb': ['subsequent', 'primary'],
-			'was verbing': ['simultaneous', 'secondary'],
-			'had verbed': ['prior', 'secondary'],
-			'would verb': ['subsequent', 'secondary'],
+	//information comes from CONJUNCTION actually chosen + red_herring_bool
+	'regime.relative' : {
+		'voice.active' : {
+			'verb': ['time.simultaneous', 'sequence.primary'],
+			'verbed': ['time.prior', 'sequence.primary'],
+			'will verb': ['time.subsequent', 'sequence.primary'],
+			'was verbing': ['time.simultaneous', 'sequence.secondary'],
+			'had verbed': ['time.prior', 'sequence.secondary'],
+			'would verb': ['time.subsequent', 'sequence.secondary'],
 		},
-		'passive' : {
-			'is verbed': ['simultaneous', 'primary'],
-			'was verbed': ['prior', 'primary'],
-			'will be verbed': ['subsequent', 'primary'],
-			'was being verbed': ['simultaneous', 'secondary'],
-			'had been verbed': ['prior', 'secondary'],
-			'would have been verbed': ['subsequent', 'secondary'],
+		'voice.passive' : {
+			'is verbed': ['time.simultaneous', 'sequence.primary'],
+			'was verbed': ['time.prior', 'sequence.primary'],
+			'will be verbed': ['time.subsequent', 'sequence.primary'],
+			'was being verbed': ['time.simultaneous', 'sequence.secondary'],
+			'had been verbed': ['time.prior', 'sequence.secondary'],
+			'would have been verbed': ['time.subsequent', 'sequence.secondary'],
 		}
 	
 	},
-	'conditional' : {
-		'active' : {
-			'should verb': ['protasis_flv'],
-			'would verb': ['apodosis_flv'],
-			'verb': ['protasis_fmv'],
-			'will verb': ['apodosis_fmv'],
-			'were verbing': ['protasis_present_ctf'], //was 1sg & 3sg
-			'would be verbing': ['apodosis_present_ctf'],
-			'had verbed': ['protasis_past_ctf'], 
-			'would have verbed': ['apodosis_past_ctf']
+	'regime.conditional' : {
+		'voice.active' : {
+			'should verb': ['construction.protasis_flv'],
+			'would verb': ['construction.apodosis_flv'],
+			'verb': ['construction.protasis_fmv'],
+			'will verb': ['construction.apodosis_fmv'],
+			'were verbing': ['construction.protasis_present_ctf'], //was 1sg & 3sg
+			'would be verbing': ['construction.apodosis_present_ctf'],
+			'had verbed': ['construction.protasis_past_ctf'], 
+			'would have verbed': ['construction.apodosis_past_ctf']
 		}, 
-		'passive' : {
-			'should be verbed': ['protasis_flv'],
-			'would be verbed': ['apodosis_flv'],
-			'is verbed': ['protasis_fmv'],
-			'will be verbed': ['apodosis_fmv'],
-			'were being verbed': ['protasis_present_ctf'], //was 1sg & 3sg
-			'would be being verbing': ['apodosis_present_ctf'],
-			'had been verbed': ['protasis_past_ctf'], 
-			'would have been verbed': ['apodosis_past_ctf']
+		'voice.passive' : {
+			'should be verbed': ['construction.protasis_flv'],
+			'would be verbed': ['construction.apodosis_flv'],
+			'is verbed': ['construction.protasis_fmv'],
+			'will be verbed': ['construction.apodosis_fmv'],
+			'were being verbed': ['construction.protasis_present_ctf'], //was 1sg & 3sg
+			'would be being verbing': ['construction.apodosis_present_ctf'],
+			'had been verbed': ['construction.protasis_past_ctf'], 
+			'would have been verbed': ['construction.apodosis_past_ctf']
 		}
 	},
-	'purpose' : {
-		'active' : {
-			'may verb' : ['primary'],
-			'might verb' : ['secondary']
+	'regime.purpose' : {
+		'voice.active' : {
+			'may verb' : ['sequence.primary'],
+			'might verb' : ['sequence.secondary']
 		},
-		'passive' : {
-			'may be verbed' : ['primary'],
-			'might be verbed' : ['secondary']
+		'voice.passive' : {
+			'may be verbed' : ['sequence.primary'],
+			'might be verbed' : ['sequence.secondary']
+		}
+	},
+	'regime.independent subjunctive' : {
+		'voice.active' : {
+			'can verb' : ['sequence.primary'],
+			'could verb' : ['sequence.secondary']
+		},
+		'voice.passive' : {
+			'can be verbed' : ['sequence.primary'],
+			'could be verbed' : ['sequence.secondary']
+		}
+	},
+	'regime.english subjunctive' : {
+		'voice.active' : {
+			'verb no -s' : ['sequence.primary || sequence.secondary']
+		},
+		'voice.passive' : {
+			'be verbed' : ['sequence.primary || sequence.secondary']
 		}
 	}
 }
@@ -267,10 +318,10 @@ var english_grammatical_terminology_correspendence = {
 	"verbed" : "perfect",          // was "has verbed"
 	"had verbed" : "pluperfect",
 	"will have verbed" : "future perfect",
-	"may verb no -s": "may tense",
-	'might verb no -s': "might tense",
-	"can verb no -s": "can tense",
-	'could verb no -s': "could tense"
+	"may verb": "may tense",
+	'might verb': "might tense",
+	"can verb": "can tense",
+	'could verb': "could tense"
 }
 
 

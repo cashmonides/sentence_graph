@@ -34,5 +34,16 @@ var main = function () {
         sentence.inflect_all_components();
     }
     // Finally, we display the sentence.
-    display_on_page(sentence.display());
+    display_on_page(sentence.display() + hacky_text(sentence));
+}
+
+var hacky_text = function (sentence) {
+    var text = '\nleft: ' + prune_tf_space(
+    maximal_english_tf_space, allowed_max, sentence.sentence.conjunction, 'left').join(' - ');
+    if (sentence.sentence['right']) {
+        text += '\nright: ' +
+        prune_tf_space(maximal_english_tf_space, allowed_max,
+        sentence.sentence.conjunction, 'right').join(' - ');
+    }
+    return text;
 }

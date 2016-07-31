@@ -1,8 +1,9 @@
 var allowed_max = {
-    'relative time' : ['simultaneous', 'prior', 'subsequent'],
+    'time' : ['simultaneous', 'prior', 'subsequent'],
     'sequence': ['primary', 'secondary'],
     'latin_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
-        'imperfect indicative', 'perfect indicative', 'pluperfect indicative'],
+        'imperfect indicative', 'perfect indicative', 'pluperfect indicative',
+        'future perfect indicative'],
     'voice' : ['active', 'passive'],
     'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
     'conjunctions': 'all_conjunctions',
@@ -10,10 +11,11 @@ var allowed_max = {
 }
 
 var allowed_high = {
-    'relative time' : ['simultaneous', 'prior', 'subsequent'],
-    'sequence': ['primary'],
+    'time' : ['simultaneous', 'prior', 'subsequent'],
+    'sequence': ['primary', 'secondary'],
     'latin_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
-        'imperfect indicative'],
+        'imperfect indicative', 'perfect indicative', 'pluperfect indicative',
+        'future perfect indicative'],
     'voice' : ['active', 'passive'],
     'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
     'conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when'],
@@ -22,7 +24,7 @@ var allowed_high = {
 
 
 var allowed_medium = {
-    'relative time' : ['simultaneous', 'prior', 'subsequent'],
+    'time' : ['simultaneous', 'prior', 'subsequent'],
     'sequence': ['primary'],
     'latin_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
         'imperfect indicative'],
@@ -34,7 +36,7 @@ var allowed_medium = {
 
 
 var allowed_min = {
-    'relative time' : ['simultaneous', 'prior', 'subsequent'],
+    'time' : ['simultaneous', 'prior', 'subsequent'],
     'sequence': ['primary'],
     'latin_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
         'imperfect indicative'],
