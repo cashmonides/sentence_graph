@@ -13,14 +13,14 @@ var testing_allowed_library = {
 
 var testing_rules = [
     'transitive or active',                 //intransitive verbs cannot be passive
-    'main and secondary => prior',
-    'main => indicative',
+    'clause_type.main and secondary => prior',
+    'clause_type.main => indicative',
     // latin apparently has no subsequent subjunctive passives.
     'subsequent and subjunctive => active',
     // A main clause in secondary sequence cannot have a greek perfect indicative.
     // 'impossible' is just a constraint no clause will satisfy.
-    'main and greek perfect indicative and secondary => impossible',
-    'main and primary and prior => greek perfect indicative'
+    'clause_type.main and greek perfect indicative and secondary => impossible',
+    'clause_type.main and primary and prior => greek perfect indicative'
 ];
 
 var testing_time_to_tense_map = {

@@ -22,8 +22,11 @@ var kernel_constructor = function (conjunction, direction) {
     // main or sub is a variable that stores whether
     // our kernel is main or subordinate.
     var main_or_sub;
-    // We check whether our direction is the default direction.
-    if (direction === default_direction) {
+    // We check whether our direction is the default direction
+    // or our conjunction's type property (it has a type property,
+    // not a clause_type property) is coordinating.
+    if (direction === default_direction 
+    || conjunction.get_property('type') === 'coordinating') {
         // If our direction is the default, we are in the main clause.
         main_or_sub = 'main';
     } else {
@@ -38,7 +41,8 @@ var kernel_constructor = function (conjunction, direction) {
     // we should make this more complicated.
     var role_list = [new Role('verb')];
     // We construct a Kernel object from our construction and role list.
-    var kernel = new Kernel(role_list, construction, main_or_sub);
+    var kernel = new Kernel(role_list, construction, main_or_sub,
+    conjunction, direction);
     // In the next few lines we just add restrictions.
     
     // We add any lexical restriction that may exist.
@@ -56,32 +60,45 @@ var kernel_constructor = function (conjunction, direction) {
     kernel.add_clause_type_restriction(conjunction, direction);
     // We give the kernel its tense overrides (and translation formulae).
     kernel.add_tense_overrides_and_tf(conjunction, direction);
+    // We give the kernel its regime.
+    kernel.add_regime(conjunction, direction);
     // We return our just-constructed kernel.
     return kernel;
 }
 
 // This is the initial definition of the Kernel object.
-var Kernel = function (role_list, construction, main_or_sub) {
+var Kernel = function (
+    role_list, construction, main_or_sub, conjunction, direction) {
     // list of roles (objects)
     this.role_list = role_list;
-    // main, iq, is, cond_prot, cond_apod. purpose, ic, etc.
-    this.construction = construction;
-    // main, subordinate
-    this.main_or_sub = main_or_sub;
-    // active, passive
-    this.voice = null;
-    // past, present, future - agnostic as to subtleties of tense and aspect
-    this.time = null;
-    // transitive, intransitive, copula
-    this.verb_type = null;
-    // Restrictions contains verious types of restriction.
+    // Classification contains verious types of classification.
     // lexical: e.g., mental, command, fear, etc.
     // time: i.e., present, past, and future.
     // todo: add more types of time
     // mood: i.e., indicative and subjunctive
     // Note that time and mood are dictionaries
     // with one entry for each language.
-    this.restrictions = {};
+    this.classifications = {};
+    // main, iq, is, cond_prot, cond_apod. purpose, ic, etc.
+    this.classifications.construction = construction;
+    // main, subordinate
+    this.classifications.main_or_sub = main_or_sub;
+    // conjunction and direction
+    // currently stored directly.
+    this.conjunction = conjunction;
+    this.direction = direction;
+}
+
+// Helper method for getting the conjunction in case we decide
+// to store it indirectly in the future.
+Kernel.prototype.get_conjunction = function () {
+    return this.conjunction;
+}
+
+// Helper method for getting the direction in case we decide
+// to store it indirectly in the future.
+Kernel.prototype.get_direction = function () {
+    return this.direction;
 }
 
 // This method gets the role at a given position in the role list.
@@ -134,13 +151,11 @@ Kernel.prototype.get_verb_role = function () {
 Kernel.prototype.add_determined_properties = function () {
     // We find the verb component.
     var verb_component = this.get_verb();
-    // We iterate over our restrictions.
-    for (var i in this.restrictions) {
+    // We iterate over our classifications.
+    for (var i in this.classifications) {
         // We add each one to the verb.
-        verb_component.set_property(i, this.restrictions[i]);
+        verb_component.set_property(i, this.classifications[i]);
     }
-    // We also add the construction.
-    verb_component.set_property('construction', this.construction);
 }
 
 // This function adds random properties to the component in each role.
@@ -199,94 +214,5 @@ Kernel.prototype.inflect_all_components_in = function (language) {
     for (var i = 0; i < this.role_list.length; i++) {
         // We inflect the component at position i.
         this.role_list[i].component.inflect(language);
-    }
-}
-
-// This function displays a restriction in a given language.
-var display_restriction = function (restriction, language) {
-    // We check whether the restriction is an object and, if not,
-    // whether it is a string or null.
-    if (is_object(restriction)) {
-        // The restriction is a true object: we find our language in it.
-        var value = restriction[language];
-        if (typeof value === 'string' || value === null) {
-            // The value is a string or null. We use it as it is.
-            return value;
-        } else if (value === undefined) {
-            // The value is undefined. Who wants to see that?
-            return null;
-        } else {
-            // Stringify.
-            return JSON.stringify(value, null, 4);
-        }
-    } else if (typeof restriction === 'string' || restriction === null) {
-        // The restriction is a string or null. It is thus
-        // language-independent, so we just return it.
-        return restriction;
-    } else {
-        // The restriction is strange. It's a number or boolean or something.
-        // Currently, this should never happen, so we throw an error.
-        throw 'Weird restriction: ' + JSON.stringify(restriction);
-    }
-}
-
-// This function displays the kernel in a given language.
-// It is higher-order: first you pass the language,
-// which gives you a function to which you can pass the kernel.
-var display_kernel_in = function (language) {
-    // We create a function that displays a restriction
-    // in the given language.
-    var display_restriction_in_language = function (restriction) {
-        // Very simple: just display the restriction in the language.
-        return display_restriction(restriction, language);
-    }
-    
-    // This is the above-mentioned function that takes the kernel.
-    return function (kernel) {
-        // These are the values of the kernel.restrictions dictionary.
-        // This is a list not of the names/types of the restrictions,
-        // but rather the restrictions themselves.
-        var restrictions = values(kernel.restrictions);
-        // We display each restriction, filter out the null restrictions,
-        // and then join by ', ', surround by brackets, and precede
-        // the result by 'K'.
-        
-        // We puts the restrictions in display form.
-        var restrictions_displayed = restrictions.map(
-            display_restriction_in_language);
-        
-        // We remove null from our displayed restrictions.
-        var filtered_restrictions = remove_null(restrictions_displayed);
-        
-        // We join by ', ', surround by brackets, and precede
-        // the result by 'K', as said above.
-        return 'K[' + filtered_restrictions.join(', ') + ']';
-    }
-}
-
-// This function is higher-order: it takes a language
-// and returns a function that partially translates
-// a kernel into that language.
-var partial_translate_kernel_into = function (language) {
-    return function (kernel) {
-        // Return a string describing each role, separated by ', '
-        // and surrounded by brackets.
-        return '[' + kernel.role_list.map(function (role) {
-            // Describe each role.
-            return role.describe_in_language(language);
-        }).join(', ') + ']';
-    }
-}
-
-// This function is higher-order: it takes a language
-// and returns a function that translates
-// a kernel into that language.
-var translate_kernel_into = function (language) {
-    return function (kernel) {
-        // Return the translation of each role, separated by spaces.
-        return kernel.role_list.map(function (role) {
-            // Describe each role.
-            return role.component.form[language];
-        }).join(' ');
     }
 }

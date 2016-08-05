@@ -21,7 +21,25 @@ var Component = function (role_name) {
 // properties.
 // This function is not very efficient, but it hardly matters right now.
 Component.prototype.check = function (string) {
+    if (string.indexOf('.') !== -1) {
+        return this.check_string_with_period(default_language, string);
+    }
     return this.values().indexOf(string) !== -1;
+}
+
+// Check a string with a period.
+Component.prototype.check_string_with_period = function (language, string) {
+    // Divide by .
+    var parts = string.split('.');
+    // Check that there are two parts.
+    if (parts.length !== 2) {
+        throw 'Not two parts: ' + string;
+    }
+    // Name each part.
+    var prop = parts[0];
+    var value = parts[1];
+    // Return the check.
+    return this.get_property_in_language(prop, language) === value;
 }
 
 // This function tests whether a component satisifes a rule.

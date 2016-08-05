@@ -113,10 +113,25 @@ Sentence.prototype.display_translations = each_language(
 Sentence.prototype.display = function () {
     // We have the part displayed without translations,
     // then after a line break, we have the partial translations,
-    // then after another line break, we have the translations.
+    // then after another line break, we have the translations,
+    // then we have the verb options.
     return [
         this.display_without_translations(),
         this.display_partial_translations(),
-        this.display_translations()
+        this.display_translations(),
+        this.display_verb_options()
     ].join('\n\n');
 }
+
+// This method displays the verb options of a sentence.
+Sentence.prototype.display_verb_options = function () {
+    // For each kernel...
+    return this.each_kernel(function (kernel) {
+        // ...and each language...
+        return each_language(function (language) {
+            // ...produce the verb options in that language.
+            return language + ': ' +
+            display_verb_options_in_language(kernel, language);
+        })
+    }).join('\n');
+};

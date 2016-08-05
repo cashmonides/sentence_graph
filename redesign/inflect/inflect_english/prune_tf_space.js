@@ -2,7 +2,14 @@ var check_properties_from_allowed = [
     'time', 'latin_indicative_tenses_allowed', 'voice', 'sequence'
 ];
 
-var prune_tf_space = function (tf_space, allowed, conjunction, direction) {
+var prune_tf_space = function (language, tf_space, allowed, conjunction, direction) {
+    // My philosophy: any error the was not completely stupid is likely
+    // to be made more than once.
+    // Thus, due to a case of misordered parameters, we check that the
+    // conjunction is a conjunction object.
+    if (!(conjunction instanceof Conjunction)) {
+        throw JSON.stringify(conjunction) + ' is not a conjunction!';
+    }
     // Get the value of the red herring switch as a boolean.
     var red_herring_bool = get_red_herring_bool(allowed);
     // Find all the allowed conjunctions.
@@ -17,6 +24,7 @@ var prune_tf_space = function (tf_space, allowed, conjunction, direction) {
         conjunction_direction_combos = [
             new ConjunctionDirectionCombo(conjunction, direction)];
     }
+    console.log(conjunction_direction_combos);
     var verb_regimes = Object.keys(tf_space);
     var allowed_verb_regimes = verb_regimes.filter(function (verb_regime) {
         var parts = verb_regime.split('.');
@@ -27,7 +35,7 @@ var prune_tf_space = function (tf_space, allowed, conjunction, direction) {
         }
         var verb_regime = parts[1];
         return conjunction_direction_combos.some(function (x) {
-            return x.has_verb_regime(verb_regime);
+            return x.has_verb_regime(verb_regime, language);
         })
     });
     if (allowed_verb_regimes.length === 0) {
@@ -84,8 +92,8 @@ var ConjunctionDirectionCombo = function (conjunction, direction) {
     this.construction = conjunction.get_construction(direction);
 }
 
-ConjunctionDirectionCombo.prototype.has_verb_regime = function (x) {
-    return this.verb_regime === x;
+ConjunctionDirectionCombo.prototype.has_verb_regime = function (x, language) {
+    return this.verb_regime[language] === x;
 }
 
 // Get the red herring bool from allowed.
@@ -143,6 +151,9 @@ var check_function_from_allowed = function (list_of_allowed_sources) {
 }
 
 var abstract_prune = function (operators, space, check) {
+    if (typeof space === 'string') {
+        return [space];
+    }
     var results = [];
     for (var i in space) {
         if (Array.isArray(space[i])) {

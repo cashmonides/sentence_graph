@@ -11,7 +11,7 @@ Kernel.prototype.add_lexical_restriction = function (
     if (lexical_restriction && !(
         lexical_restriction instanceof NonexistantKey)) {
         // The lexical restriction exists, so (as said above) we add it.
-        this.restrictions.lexical = lexical_restriction;
+        this.classifications.lexical = lexical_restriction;
     }
 }
 
@@ -46,8 +46,8 @@ var add_language_specific_restriction = function (type) {
                 direction, type) + 'appears to be invalid; it is ' +
                 JSON.stringify(restriction);
         }
-        // We add the restriction as a restiction of the specified type.
-        this.restrictions[type] = restriction;
+        // We add the restriction as a classification of the specified type.
+        this.classifications[type] = restriction;
     }
 }
 
@@ -161,7 +161,7 @@ Kernel.prototype.add_clause_type_restriction = function (
     }
     
     // We actually set the property.
-    this.restrictions.clause_type = clause_type;
+    this.classifications.clause_type = clause_type;
 }
 
 // This method lets us add tense overrides and translation formulae to the kernel.
@@ -179,7 +179,18 @@ Kernel.prototype.add_tense_overrides_and_tf = function (conjunction, direction) 
         var key = 'k_' + direction + '_' + property;
         // If the conjuction has the property, add what the conjunction has.
         if (conjunction.has_property(key)) {
-            this.restrictions[property] = conjunction.get_property(key);
+            this.classifications[property] = conjunction.get_property(key);
         }
+    }
+}
+
+// This method lets us add a regime to the kernel.
+Kernel.prototype.add_regime = function (conjunction, direction) {
+    // This is the key for accessing the verb regime.
+    var key = 'k_' + direction + '_verb_regime';
+    // If the conjuction has a verb regime (which it should),
+    // add what the conjunction has.
+    if (conjunction.has_property(key)) {
+        this.classifications.regime = conjunction.get_property(key);
     }
 }

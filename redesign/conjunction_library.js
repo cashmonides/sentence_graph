@@ -2,7 +2,11 @@ var conjunction_library = {
     c_null: {
         //citation_name: "c_null",
         type: "dummy main",
-        k_left_verb_regime: "absolute",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
         english_form: null,
         latin_form: null,
         ssslatin_form: null,
@@ -36,14 +40,18 @@ var conjunction_library = {
     },
     c_null_potential_subjunctive: {
         type: "dummy main",
-        k_left_verb_regime: "independent subjunctive",
+        k_left_verb_regime: {
+            english: 'independent subjunctive',
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
+        },
         english_form: null,
         latin_form: null,
         ssslatin_form: null,
         // not really relevant
         removable: null,
         // not sure how these will work
-        k_left_construction: 'independent subjunctive',
+        k_left_construction: 'potential',
         // not sure how these will work
         k_right_construction: null,
         k_left_lexical_restriction: null,
@@ -66,18 +74,20 @@ var conjunction_library = {
             english: null,
             latin: null,
             ssslatin: null
-        },
-        k_left_translation_formula: {
-            'english': {
-                'primary': 'can verb',
-                'secondary': 'could verb'
-            }
         }
     },
     c_and: {
         type: "coordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "absolute",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
         english_form: 'and',
         latin_form: 'et',
         ssslatin_form: 'ssset',
@@ -108,8 +118,16 @@ var conjunction_library = {
     },
     c_but: {
         type: "coordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "absolute",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
         english_form: 'but',
         latin_form: 'sed',
         ssslatin_form: 'ssssed',
@@ -140,8 +158,16 @@ var conjunction_library = {
     },
     c_or: {
         type: "coordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "absolute",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
         english_form: 'or',
         latin_form: 'aut',
         ssslatin_form: 'sssaut',
@@ -172,8 +198,16 @@ var conjunction_library = {
     },
     c_when: {
         type: "subordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "absolute",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
         english_form: 'when',
         latin_form: 'ubi',
         ssslatin_form: 'sssubi',
@@ -204,8 +238,16 @@ var conjunction_library = {
     },
     c_purpose: {
         type: "subordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "purpose",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'purpose',
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
+        },
         english_form: 'in order that',
         latin_form: 'ut',
         ssslatin_form: 'sssut',
@@ -232,18 +274,20 @@ var conjunction_library = {
             english: null,
             latin: 'simultaneous',
             ssslatin: 'simultaneous'
-        },
-        k_right_translation_formula: {
-            'english': {
-                'primary': 'may verb',
-                'secondary': 'might verb'
-            }
         }
     },
     c_indirect_command: {
         type: "subordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "english subjunctive",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'english subjunctive',
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
+        },
         english_form: 'that',
         latin_form: 'ut',
         ssslatin_form: 'sssut',
@@ -270,15 +314,20 @@ var conjunction_library = {
             english: null,
             latin: 'simultaneous',
             ssslatin: 'simultaneous'
-        },
-        k_right_translation_formula: {
-            'english': 'verb no -s'
         }
     },
     c_fear: {
         type: "subordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "relative",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'relative',
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
+        },
         english_form: 'that',
         latin_form: 'nē',
         ssslatin_form: 'sssnē',
@@ -305,26 +354,20 @@ var conjunction_library = {
             english: null,
             latin: null,
             ssslatin: null
-        },
-        k_right_translation_formula: {
-            'english': {
-                'primary': {
-                    'simultaneous': 'verb',
-                    'prior': 'verbed',
-                    'subsequent': 'will verb'
-                },
-                'secondary': {
-                    'simultaneous': 'was verbing',
-                    'prior': 'had verbed',
-                    'subsequent': 'would verb'
-                }
-            }
         }
     },
     c_cum_when: {
         type: "subordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "absolute",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
         english_form: 'when',
         latin_form: 'cum',
         ssslatin_form: 'ssscum',
@@ -355,8 +398,16 @@ var conjunction_library = {
     },
     c_cum_because: {
         type: "subordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "relative",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'relative',
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
+        },
         english_form: 'because',
         latin_form: 'cum',
         ssslatin_form: 'ssscum',
@@ -387,8 +438,16 @@ var conjunction_library = {
     },
     c_cum_circumstantial: {
         type: "subordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "relative",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'relative',
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
+        },
         english_form: 'under the circumstances when',
         latin_form: 'cum',
         ssslatin_form: 'ssscum',
@@ -419,8 +478,16 @@ var conjunction_library = {
     },
     c_because_allegedly: {
         type: "subordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "relative",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'relative',
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
+        },
         english_form: 'because allegedly',
         latin_form: 'quod',
         ssslatin_form: 'sssquod',
@@ -451,8 +518,16 @@ var conjunction_library = {
     },
     c_why: {
         type: "subordinating",
-        k_left_verb_regime: "absolute",
-        k_right_verb_regime: "relative",
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'relative',
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
+        },
         english_form: 'why',
         latin_form: 'cūr',
         ssslatin_form: 'ssscūr',
@@ -483,8 +558,16 @@ var conjunction_library = {
     },
     c_if_flv: {
         type: "subordinating conditional",
-        k_left_verb_regime: "conditional",
-        k_right_verb_regime: "conditional",
+        k_left_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
+        k_right_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',
@@ -515,8 +598,16 @@ var conjunction_library = {
     },
     c_if_fmv: {
         type: "subordinating conditional",
-        k_left_verb_regime: "conditional",
-        k_right_verb_regime: "conditional",
+        k_left_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
+        k_right_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',
@@ -543,12 +634,26 @@ var conjunction_library = {
             english: null,
             latin: 'subsequent',
             ssslatin: 'subsequent'
+        },
+        k_left_tense_override: {
+            latin: 'future indicative'
+        },
+        k_right_tense_override: {
+            latin: 'future indicative'
         }
     },
     c_if_fmve: {
         type: "subordinating conditional",
-        k_left_verb_regime: "conditional",
-        k_right_verb_regime: "conditional",
+        k_left_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
+        k_right_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',
@@ -575,12 +680,26 @@ var conjunction_library = {
             english: null,
             latin: 'subsequent',
             ssslatin: 'subsequent'
+        },
+        k_left_tense_override: {
+            latin: 'future indicative'
+        },
+        k_right_tense_override: {
+            latin: 'future perfect indicative'
         }
     },
     c_if_present_ctf: {
         type: "subordinating conditional",
-        k_left_verb_regime: "conditional",
-        k_right_verb_regime: "conditional",
+        k_left_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
+        k_right_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',
@@ -611,8 +730,16 @@ var conjunction_library = {
     },
     c_if_past_ctf: {
         type: "subordinating conditional",
-        k_left_verb_regime: "conditional",
-        k_right_verb_regime: "conditional",
+        k_left_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
+        k_right_verb_regime: {
+            english: 'conditional',
+            latin: 'conditional',
+            ssslatin: 'conditional'
+        },
         english_form: 'if',
         latin_form: 'sī',
         ssslatin_form: 'ssssī',

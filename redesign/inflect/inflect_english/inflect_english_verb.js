@@ -156,19 +156,12 @@ var get_english_root = function (english_root_type, verb_lexeme) {
     return english_root;
 }
 
-
-// main function
-// returns an english string (e.g. "he had attacked")
-// takes a verb lexeme, and tense-voice combination (as a string),
-// and a person-number combination (e.g., 1s)
-var inflect_english_verb = function (
-    verb_lexeme, tense_voice, person_and_number) {
-    // Step 1.5. (Simply getting the translation formula, e.g., "was verbing")
-    var translation_formula = get_english_translation_formula(tense_voice);
-    // End of step 1.5.
+var inflect_english_verb_given_tf = function (
+    verb_lexeme, translation_formula, person_and_number) {
     // Step 2.
     // First get the verb formula.
-    // aka the part of the translation formula that includes the verb but excludes all helping words
+    // aka the part of the translation formula that includes the verb
+    // but excludes all helping words
     // e.g. 'verbs', 'verbing', 'verbed', 'verb'
     // Note that the verb formula depends on the person and number.
     var verb_formula = english_translation_formula_to_verb_formula(
@@ -188,9 +181,11 @@ var inflect_english_verb = function (
     translation_formula = remove_dashed_tense_indicators(translation_formula);
     // Part 1.6 (pulling of changes to not apply)
     // Get the changes to not apply.
-    var changes_to_not_apply = get_english_irregularities_to_not_apply(translation_formula);
+    var changes_to_not_apply = get_english_irregularities_to_not_apply(
+        translation_formula);
     // Remove them from the translation formula.
-    translation_formula = remove_english_irregularities_to_not_apply(translation_formula);
+    translation_formula = remove_english_irregularities_to_not_apply(
+        translation_formula);
     // Part 2 (applying the english_person_irregularities overrides).
     translation_formula = apply_english_person_irregularities(
         translation_formula, person_and_number, changes_to_not_apply);
@@ -204,4 +199,19 @@ var inflect_english_verb = function (
     var subject_pronoun = get_english_subject_pronoun(person_and_number);
     // Return.
     return subject_pronoun + ' ' + english_form;
+}
+
+
+// main function
+// returns an english string (e.g. "he had attacked")
+// takes a verb lexeme, and tense-voice combination (as a string),
+// and a person-number combination (e.g., 1s)
+var inflect_english_verb = function (
+    verb_lexeme, tense_voice, person_and_number) {
+    // Step 1.5. (Simply getting the translation formula, e.g., "was verbing")
+    var translation_formula = get_english_translation_formula(tense_voice);
+    // End of step 1.5.
+    // Use another function to do the rest.
+    return inflect_english_verb_given_tf(
+        verb_lexeme, translation_formula, person_and_number);
 }

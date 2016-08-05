@@ -7,7 +7,7 @@ var allowed_max = {
     'voice' : ['active', 'passive'],
     'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
     'conjunctions': 'all_conjunctions',
-    'red herring': 'true'
+    'red herring': 'false'
 }
 
 var allowed_high = {
@@ -45,3 +45,6 @@ var allowed_min = {
     'conjunctions': ['c_null', 'c_and', 'c_purpose', 'c_when'],
     'red herring': 'false'
 }
+
+// The default settings are the maximum.
+var default_allowed = allowed_max;

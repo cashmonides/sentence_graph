@@ -45,3 +45,38 @@ var concat_all = function (list_of_lists) {
 var concat_map = function (list, f) {
     return concat_all(list.map(f));
 }
+
+// This function takes the product of a list of numbers.
+var product = function (list) {
+    return list.reduce(function (x, y) {return x * y}, 1);
+}
+
+// This function converts arguments to a list.
+var args_to_list = function (x) {
+    return [].slice.call(x);
+}
+
+// This function 'cross'es some lists by another function.
+// Examples:
+// ['a', 'b'], ['c', 'd'], + -> ['ac', 'ad', 'bc', 'bd']
+// [1, 2, 4], [6, 7, 8], * -> [6, 7, 8, 12, 14, 16, 24, 28, 32]
+var cross = function () {
+    var args = args_to_list(arguments);
+    var lists = args.slice(0, -1);
+    var f = args[args.length - 1];
+    var elems_in_cross = product(lists.map(function (x) {
+        return x.length;
+    }));
+    var l = [];
+    for (var i = 0; i < elems_in_cross; i++) {
+        var k = i;
+        var sub_l = [];
+        for (var j = lists.length - 1; j > -1; j--) {
+            sub_l.push(lists[j][k % lists[j].length]);
+            k = Math.floor(k / lists[j].length);
+        }
+        sub_l.reverse();
+        l.push(f.apply(null, sub_l));
+    }
+    return l;
+}

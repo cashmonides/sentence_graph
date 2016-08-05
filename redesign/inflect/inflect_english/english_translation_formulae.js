@@ -47,7 +47,15 @@ var english_tense_to_translation_formula = {
 	"can tense active": "can verb",
 	"can tense passive": "can be verbed",
 	"could tense active": "could verb",
-	"could tense passive": "could be verbed"
+	"could tense passive": "could be verbed",
+	"should tense active": "should verb",
+	"should tense passive": "should be verbed",
+	"would tense active": "would verb",
+	"would tense passive": "would be verbed",
+	"would tense continuous active": "would be verbing",
+	"would tense continuous passive": "would be being verbed",
+	"would tense perfect active": "would have verbed",
+	"would tense perfect passive": "would have been verbed"
 }
 
 
@@ -210,8 +218,8 @@ var maximal_english_tf_space = {
 		'voice.active' : {
 			'should verb': ['construction.protasis_flv'],
 			'would verb': ['construction.apodosis_flv'],
-			'verb': ['construction.protasis_fmv'],
-			'will verb': ['construction.apodosis_fmv'],
+			'verb': ['construction.protasis_fmv || construction.protasis_fmve'],
+			'will verb': ['construction.apodosis_fmv || construction.apodosis_fmve'],
 			'were verbing': ['construction.protasis_present_ctf'], //was 1sg & 3sg
 			'would be verbing': ['construction.apodosis_present_ctf'],
 			'had verbed': ['construction.protasis_past_ctf'], 
@@ -220,8 +228,8 @@ var maximal_english_tf_space = {
 		'voice.passive' : {
 			'should be verbed': ['construction.protasis_flv'],
 			'would be verbed': ['construction.apodosis_flv'],
-			'is verbed': ['construction.protasis_fmv'],
-			'will be verbed': ['construction.apodosis_fmv'],
+			'is verbed': ['construction.protasis_fmv || construction.protasis_fmve'],
+			'will be verbed': ['construction.apodosis_fmv || construction.apodosis_fmve'],
 			'were being verbed': ['construction.protasis_present_ctf'], //was 1sg & 3sg
 			'would be being verbing': ['construction.apodosis_present_ctf'],
 			'had been verbed': ['construction.protasis_past_ctf'], 
@@ -310,18 +318,22 @@ example of a generated lexeme
 // Commented out for now, going to be used in the future.
 //map between teacher friendly blanket terms and english grammatical terminology
 var english_grammatical_terminology_correspendence = {
-	"verb" : 'present indicative',  //default present indicative
+	"verb" : 'present',  //default present indicative
 	"verb no -s" : "present subjunctive",	//fossilized english subjunctive that...
 	"verbed-preterite" : "preterite", //preterite
 	"were verbing" : "past continuous", // was "was verbing"
 	"will verb" : "future",
-	"verbed" : "perfect",          // was "has verbed"
+	// "verbed" : "perfect",          // was "has verbed"
 	"had verbed" : "pluperfect",
 	"will have verbed" : "future perfect",
-	"may verb": "may tense",
-	'might verb': "might tense",
-	"can verb": "can tense",
-	'could verb': "could tense"
+	'may verb': 'may tense',
+	'might verb': 'might tense',
+	'can verb': 'can tense',
+	'could verb': 'could tense',
+	'should verb': 'should tense',
+	'would verb': 'would tense',
+	'would be verbing': 'would tense continuous',
+	'would have verbed': 'would tense perfect'
 }
 
 

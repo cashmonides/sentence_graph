@@ -74,39 +74,50 @@ Component.prototype.get_override_tense_from = function (method, language) {
     }
 }
 
+// Get the translation formula from the regime and language.
+Component.prototype.get_translation_formula_from_regime = function (
+    regime, language) {
+    // Get the translation formulas for the regime.
+    var dict = regime_to_translation_formula[language][regime];
+    // All the things checked should have a period.
+    var check = this.check_string_with_period.bind(this, language);
+    // No operators. That is the meaning of [] here.
+    var results = abstract_prune([], dict, check);
+    // Check for exactly one result.
+    if (results.length !== 1) {
+        throw 'There is not exactly one result: [' +
+        results.join(', ') + ']. ' +
+        [regime, language, JSON.stringify(this.properties)].join(' ');
+    }
+    return results[0];
+}
+
 // This function gets the override tense in a language.
 Component.prototype.get_override_tense_in = function (language) {
-    // We get the tense from tense override and
-    // the translation formula from tf.
+    // We get the tense from tense override.
     var tense_from_tense_override = this.get_override_tense_from(
         'tense_override', language);
-    var translation_formula = this.get_override_tense_from(
-        'translation_formula', language);
-    // We get the tense from the translation formula.
-    var tense_from_translation_formula = get_tense_from_translation_formula(
-        language, translation_formula);
-    // We check that tense_from_translation_formula is not undefined.
-    if (tense_from_translation_formula === undefined) {
-        throw 'tense_from_translation_formula is undefined in ' +
-        language + ' for translation formula ' + translation_formula + '!';
+    // If we have a tense from the tense override, return it.
+    if (tense_from_tense_override) {
+        return tense_from_tense_override;
     }
-    // If both are null, return null.
-    if (tense_from_tense_override === null
-    && tense_from_translation_formula === null) {
+    // If the language is one of those with no translation formulae,
+    // return null.
+    if (language in languages_with_no_translation_formulae) {
         return null;
     }
-    // We then check if neither is null.
-    if (tense_from_tense_override !== null
-    && tense_from_translation_formula !== null) {
-        // If so, check that they are the same and otherwise throw an error.
-        if (tense_from_tense_override !== tense_from_translation_formula) {
-            throw tense_from_tense_override + ' is not the same as ' +
-            tense_from_translation_formula + '!';
-        }
+    // Get the regime.
+    var regime = this.get_property_in_language('regime', language);
+    // If the regime is the default regime (e.g., indicative for latin,
+    // or absolute for english), return null.
+    if (regime === default_regimes[language]) {
+        return null;
     }
-    // We return the first non-null one, which we can get via the or operator.
-    // (Since null is the only false-like value we expect.)
-    return tense_from_tense_override || tense_from_translation_formula;
+    // Get a tense from the regime in the language.
+    var tense = get_tense_from_translation_formula(
+        this.get_translation_formula_from_regime(regime, language), language);
+    // Return the tense.
+    return tense;
 }
 
 // This method allows us to determine tense in a given language.

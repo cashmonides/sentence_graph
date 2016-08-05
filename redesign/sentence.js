@@ -25,24 +25,43 @@ Sentence.prototype.is_single_clause = function () {
 }
 
 // This allows us to call a method on each kernel.
-// method is a string which is the name of the method to call.
+// method is a string which is the name of the method to call,
+// or a function to pass the kernel into.
 // arg is the argument to pass in. If it is undefined,
 // it is still passed in, but javascript doesn't generally
 // care about an undefined argument.
+// Similarly, we return a list of results. We might not need
+// this sometimes, but it's useful to have.
 Sentence.prototype.each_kernel = function (method, arg) {
-    // Is the method a method on Kernel?
-    if (!(method in Kernel.prototype)) {
-        throw method + ' is not a method of Kernel!';
+    // If the method isn't a function, make it one.
+    if (typeof method !== 'function') {
+        // Is the method a method on Kernel?
+        if (!(method in Kernel.prototype)) {
+            throw method + ' is not a method of Kernel!';
+        }
+        // Define a variable to be the method since
+        // we'll need it in a closure.
+        var old_method = method;
+        // Make method a function that calls the method on the kernel.
+        method = function (kernel) {
+            return function (arg) {
+                return kernel[old_method](arg);
+            }
+        }
     }
-    // We only call the method on the left kernel
+    // This is the list of results, as mentioned above.
+    var list = [];
+    // The default direction is always relevant.
+    // That kernel always exists.
+    list.push(method(this.sentence[default_direction])(arg));
+    // We only call the method on the right kernel
     // (right is currently the non default direction)
     // if it exists.
     if (this.sentence[non_default_direction]) {
-        this.sentence[non_default_direction][method](arg);
+        list.push(method(this.sentence[non_default_direction])(arg));
     }
-    // The default direction is always relevant.
-    // That kernel always exists.
-    this.sentence[default_direction][method](arg);
+    // Return the list of results.
+    return list;
 }
 
 // This method adds determined properties to the kernels in a sentence.
