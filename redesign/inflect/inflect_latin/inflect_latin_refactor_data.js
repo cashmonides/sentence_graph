@@ -151,3 +151,11 @@ var latin_perfect_tense_to_present_tense_map = {
     'pluperfect': 'imperfect',
     'future perfect': 'future'
 }
+
+var latin_root_vowel_map = {
+    'conjugation 1': 'Ā',
+    'conjugation 2': 'Ē',
+    'conjugation 3': 'Ē',
+    'conjugation 3i': 'IĒ',
+    'conjugation 4': 'IĒ',
+}

@@ -176,21 +176,21 @@ var maximal_english_tf_space = {
 			//information comes from ALLOWED
 			'had verbed': ['latin_indicative_tenses_allowed.pluperfect indicative'],
 			'will have verbed': ['latin_indicative_tenses_allowed.future perfect indicative'],
-			'was verbing': ['latin_indicative_tenses_allowed.imperfect indicative'],
+			'were verbing': ['latin_indicative_tenses_allowed.imperfect indicative'],
 			//'has/have verbed': ['perfect-in-primary-sequence']
 		}, 
 		'voice.passive' : {
 			// default, normal, indicative
 			//information comes from ALLOWED
-			'is verbed': ['time.simultaneous'],
-			'was verbed': ['time.prior'],
+			'are verbed': ['time.simultaneous'],
+			'were verbed': ['time.prior'],
 			'will be verbed': ['time.subsequent'],
 			
 			//advanced tenses in normal clauses, indicative
 			//information comes from ALLOWED
 			'had been verbed': ['latin_indicative_tenses_allowed.pluperfect indicative'],
 			'will have been verbed': ['latin_indicative_tenses_allowed.future perfect indicative'],
-			'was being verbed': ['latin_indicative_tenses_allowed.imperfect indicative'],
+			'were being verbed': ['latin_indicative_tenses_allowed.imperfect indicative'],
 			//'has/have been verbed': ['perfect-in-primary-sequence']
 		}
 	},
@@ -200,15 +200,15 @@ var maximal_english_tf_space = {
 			'verb': ['time.simultaneous', 'sequence.primary'],
 			'verbed': ['time.prior', 'sequence.primary'],
 			'will verb': ['time.subsequent', 'sequence.primary'],
-			'was verbing': ['time.simultaneous', 'sequence.secondary'],
+			'were verbing': ['time.simultaneous', 'sequence.secondary'],
 			'had verbed': ['time.prior', 'sequence.secondary'],
 			'would verb': ['time.subsequent', 'sequence.secondary'],
 		},
 		'voice.passive' : {
-			'is verbed': ['time.simultaneous', 'sequence.primary'],
-			'was verbed': ['time.prior', 'sequence.primary'],
+			'are verbed': ['time.simultaneous', 'sequence.primary'],
+			'were verbed': ['time.prior', 'sequence.primary'],
 			'will be verbed': ['time.subsequent', 'sequence.primary'],
-			'was being verbed': ['time.simultaneous', 'sequence.secondary'],
+			'were being verbed': ['time.simultaneous', 'sequence.secondary'],
 			'had been verbed': ['time.prior', 'sequence.secondary'],
 			'would have been verbed': ['time.subsequent', 'sequence.secondary'],
 		}
@@ -228,7 +228,7 @@ var maximal_english_tf_space = {
 		'voice.passive' : {
 			'should be verbed': ['construction.protasis_flv'],
 			'would be verbed': ['construction.apodosis_flv'],
-			'is verbed': ['construction.protasis_fmv || construction.protasis_fmve'],
+			'are verbed': ['construction.protasis_fmv || construction.protasis_fmve'],
 			'will be verbed': ['construction.apodosis_fmv || construction.apodosis_fmve'],
 			'were being verbed': ['construction.protasis_present_ctf'], //was 1sg & 3sg
 			'would be being verbing': ['construction.apodosis_present_ctf'],

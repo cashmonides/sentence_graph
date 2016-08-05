@@ -2,12 +2,21 @@
 // Seems to get us rather far. We still have a lot of data,
 // but now we have less implementation work.
 
+var in_latin_periphrastic = function (component) {
+    var latin_tense = component.get_property_in_language('tense', 'latin');
+    return latin_tense.indexOf('periphrastic') !== -1;
+}
+
 // Determines tense.
 var get_latin_verb_tense = function (component) {
     // Get rid of voice and everything after.
     return component.get_property_in_language('tense', 'latin').
-    replace(/ *(indicative|subjunctive|infinitive).*/, '');
+    replace(/ (indicative|subjunctive|infinitive).*/, '');
 };
+
+var get_latin_root_vowel = function (component) {
+    return latin_root_vowel_map[component.lexeme.latin.conjugation];
+}
 
 var get_latin_verb_system = function (component) {
     var tense = get_latin_verb_tense(component);
@@ -149,13 +158,29 @@ var get_helping_verb = function (component) {
     }
 }
 
-var latin_verb_future_subjunctive = function (component) {
-    var person_and_number = component.get_property_in_language(
-        'person_and_number', 'latin');
-    var form_of_to_be = latin_form_of_to_be[
-        'present subjunctive ' + person_and_number];
-    return component.lexeme.get_root('root_4', 'latin') + '-ŪR-' +
-    get_agreement_marker(component) + ' ' + form_of_to_be;
+var latin_periphrastics = {
+    'active': function (component) {
+        var tense = get_latin_verb_tense(component);
+        var mood = component.get_property_in_language(
+            'mood', 'latin');
+        var person_and_number = component.get_property_in_language(
+            'person_and_number', 'latin');
+        var form_of_to_be = latin_form_of_to_be[
+            [tense, mood, person_and_number].join(' ')];
+        return component.lexeme.get_root('root_4', 'latin') + '-ŪR-' +
+        get_agreement_marker(component) + ' ' + form_of_to_be;
+    },
+    'passive': function (component) {
+        var tense = get_latin_verb_tense(component);
+        var mood = component.get_property_in_language(
+            'mood', 'latin');
+        var person_and_number = component.get_property_in_language(
+            'person_and_number', 'latin');
+        var form_of_to_be = latin_form_of_to_be[
+            [tense, mood, person_and_number].join(' ')];
+        return component.lexeme.get_root('root_2', 'latin') + get_latin_root_vowel(component) + 'ND-' +
+        get_agreement_marker(component) + ' ' + form_of_to_be;
+    },
 }
 
 var get_subject_accusative_pronoun = function (component) {
@@ -177,10 +202,12 @@ var inflect_latin_verb_main = function (component) {
         var tense = get_latin_verb_tense(component);
         var mood = component.get_property_in_language('mood', 'latin');
         if (tense === 'future' && mood === 'subjunctive') {
-            if (voice === 'passive') {
-                throw 'future subjunctives should not be passive due to a rule against it!';
-            }
-            return latin_verb_future_subjunctive(component);
+            throw 'A future subjunctive is a bug!';
+        }
+        // Check for periphrastics.
+        var in_periphrastic = in_latin_periphrastic(component);
+        if (in_periphrastic) {
+            return latin_periphrastics[voice](component);
         }
         inflected.verb = root + get_middle_inflection(component) +
         get_end_inflection(component);

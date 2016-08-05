@@ -109,20 +109,6 @@ Sentence.prototype.display_translations = each_language(
     }, '\n\n'
 );
 
-// This method displays the sentence.
-Sentence.prototype.display = function () {
-    // We have the part displayed without translations,
-    // then after a line break, we have the partial translations,
-    // then after another line break, we have the translations,
-    // then we have the verb options.
-    return [
-        this.display_without_translations(),
-        this.display_partial_translations(),
-        this.display_translations(),
-        this.display_verb_options()
-    ].join('\n\n');
-}
-
 // This method displays the verb options of a sentence.
 Sentence.prototype.display_verb_options = function () {
     // For each kernel...
@@ -131,7 +117,30 @@ Sentence.prototype.display_verb_options = function () {
         return each_language(function (language) {
             // ...produce the verb options in that language.
             return language + ': ' +
-            display_verb_options_in_language(kernel, language);
+            display_verb_options_in_language(kernel, language.toLowerCase());
         })
     }).join('\n');
 };
+
+// Should the many verb options be displayed?
+var VERB_OPTIONS_DISPLAY = true;
+
+// This method displays the sentence.
+Sentence.prototype.display = function () {
+    // We have the part displayed without translations,
+    // then after a line break, we have the partial translations,
+    // then after another line break, we have the translations,
+    // then we have the verb options.
+    var parts_of_display = [
+        this.display_without_translations(),
+        this.display_partial_translations(),
+        this.display_translations(),
+        this.display_verb_options()
+    ];
+    // Remove the verb options if they should not be displayed.
+    if (!VERB_OPTIONS_DISPLAY) {
+       parts_of_display.pop() 
+    }
+    // Join the parts of the display.
+    return parts_of_display.join('\n\n');
+}

@@ -2,7 +2,8 @@ var check_properties_from_allowed = [
     'time', 'latin_indicative_tenses_allowed', 'voice', 'sequence'
 ];
 
-var prune_tf_space = function (language, tf_space, allowed, conjunction, direction) {
+var prune_tf_space = function (
+    language, tf_space, allowed, conjunction, direction) {
     // My philosophy: any error the was not completely stupid is likely
     // to be made more than once.
     // Thus, due to a case of misordered parameters, we check that the

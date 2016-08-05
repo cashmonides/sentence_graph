@@ -93,6 +93,6 @@ var display_verb_options_in_language = function (kernel, language) {
     // Create the list of options and then join them.
     // todo: replace default_allowed with something level-dependent.
     var options = get_drop_down_options(
-        language, default_allowed, kernel, kernel.get_verb().lexeme);
+        language, default_allowed, [kernel.get_verb().lexeme], kernel);
     return options.join(' - ');
 }

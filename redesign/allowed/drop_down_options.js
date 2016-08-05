@@ -8,6 +8,11 @@ var get_person_number_combinations = function (allowed) {
 }
 
 var get_drop_down_options = function (language, allowed, lexemes, kernel) {
+    // Check that our supposed kernel is a kernel.
+    if (!(kernel instanceof Kernel)) {
+        throw JSON.stringify(kernel) + ' is not a kernel!';
+    }
+    // Get its conjunction and direction.
     var conjunction = kernel.get_conjunction();
     var direction = kernel.get_direction();
     var person_number_combinations = get_person_number_combinations(allowed);
@@ -23,31 +28,35 @@ var tf_spaces = {
 }
 
 var fake_component_from = function (tense, person_number_combination, lexeme) {
-    // Believed to work, except for periphrastics.
-    // todo: handle periphrastics as a special case.
-    var component = Component();
+    // This is a new component.
+    var component = new Component();
     component.properties.tense = tense;
-    component.properties.voice = /active|passive/.exec(tense)[0];
-    component.properties.mood = /indicative|subjunctive|infinitive|imperative/.exec(tense)[0];
+    // Make sure that the tense is as expected.
+    if (/^.* (indicative|subjunctive|infinitive|imperative) (active|passive)$/.exec(tense) ||
+    /^.* (indicative|subjunctive|infinitive|imperative) of the (active|passive) periphrastic$/.exec(tense)) {
+        component.properties.voice = /active|passive/.exec(tense)[0];
+        component.properties.mood = /indicative|subjunctive|infinitive|imperative/.exec(tense)[0];
+    } else {
+        throw 'Weird tense: ' + tense;
+    }
     component.properties.person_and_number = person_number_combination;
     component.lexeme = lexeme;
     return component;
 }
 
-var latin_tense_to_translations = function (tense, person_number_combination, lexeme) {
+var latin_tense_to_translations = function (lexeme, tense, person_number_combination) {
     var component = fake_component_from(tense, person_number_combination, lexeme);
     return inflect_latin_verb_main(component);
 }
 
 var tf_to_translations = {
-    english: function (translation_formula, person_number_combination, lexeme) {
+    english: function (lexeme, translation_formula, person_number_combination) {
         return [inflect_english_verb_given_tf(
             lexeme, translation_formula, person_number_combination)];
     },
     latin: latin_tense_to_translations,
-    ssslatin: function (tense, lexeme) {
-        return latin_tense_to_translations(tense, lexeme).map(function (x) {
-            return 'SSS' + x;
-        });
+    ssslatin: function (lexeme, tense, person_number_combination) {
+        return 'SSS' + latin_tense_to_translations(
+            lexeme, tense, person_number_combination);
     }
 }

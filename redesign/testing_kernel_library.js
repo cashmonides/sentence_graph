@@ -12,6 +12,7 @@ var testing_allowed_library = {
 
 
 var testing_rules = [
+    // How do we get this rule into the prune function elegantly?
     'transitive or active',                 //intransitive verbs cannot be passive
     'clause_type.main and secondary => prior',
     'clause_type.main => indicative',
