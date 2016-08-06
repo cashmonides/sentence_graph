@@ -21,11 +21,13 @@ var set_from = function (x) {
         for (i = 0; i < x.length; i++) {
             our_set[x[i]] = true;
         }
-    } else {
+    } else if (is_object(x)) {
         // Loop over x as a dictionary, again adding each item to the set.
         for (i in x) {
             our_set[i] = true;
         }
+    } else {
+        throw JSON.stringify(x) + ' is not convertible to a set!';
     }
     // After having added elements to it, we return our set.
     return our_set;

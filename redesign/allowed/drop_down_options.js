@@ -16,9 +16,18 @@ var get_drop_down_options = function (language, allowed, lexemes, kernel) {
     var conjunction = kernel.get_conjunction();
     var direction = kernel.get_direction();
     var person_number_combinations = get_person_number_combinations(allowed);
-    // We have conjunction then direction, not vice versa (as before).
-    var tf_options = prune_tf_space(language, tf_spaces[language], allowed, conjunction, direction);
-    return cross(lexemes, tf_options, person_number_combinations, tf_to_translations[language]);
+    // We need the lexeme for the tf options, so we can't do a triple-cross.
+    // But we can do a concat-map and then a double-cross inside.
+    return concat_map(lexemes, function (lexeme) {
+        // We filter allowed based on the lexeme.
+        var filtered_allowed = filter_allowed_with_lexeme(allowed, lexeme);
+        // We have conjunction then direction, not vice versa (as before).
+        var tf_options = prune_tf_space(language, tf_spaces[language], filtered_allowed, conjunction, direction);
+        return cross(tf_options, person_number_combinations, function (
+            tf_option, person_number_combination) {
+            return tf_to_translations[language](lexeme, tf_option, person_number_combination);
+        });
+    });
 }
 
 var tf_spaces = {

@@ -3,7 +3,6 @@
 // This function allows us to get the tense from the translation formula.
 var get_tense_from_translation_formula = function (
     translation_formula, language) {
-    console.log(translation_formula, language);
     // We check whether the translation formula is null or not.
     if (translation_formula === null) {
         // The corrsponding tense is clearly null.

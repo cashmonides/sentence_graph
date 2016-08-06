@@ -6,7 +6,6 @@ global_inflectors.latin = inflect_latin_verb_main;
 
 // English inflection.
 global_inflectors.english = function (component) {
-    console.log(component.get_property_in_language('tense', 'english'));
     var tense_voice = component.get_property_in_language('tense', 'english') +
     ' ' + component.get_language_independent_property('voice');
     var person_and_number = component.get_property_in_language(
