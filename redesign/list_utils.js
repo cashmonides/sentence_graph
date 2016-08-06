@@ -63,6 +63,10 @@ var args_to_list = function (x) {
 var cross = function () {
     var args = args_to_list(arguments);
     var lists = args.slice(0, -1);
+    if (lists.some(function (x) {return !Array.isArray(x)})) {
+        throw 'Some of the supposed lists in ' +
+        JSON.stringify(lists) + ' are not lists!';
+    }
     var f = args[args.length - 1];
     var elems_in_cross = product(lists.map(function (x) {
         return x.length;

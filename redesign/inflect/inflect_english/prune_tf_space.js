@@ -1,7 +1,8 @@
 var check_properties_from_allowed = [
-    'time', 'latin_indicative_tenses_allowed', 'voice', 'sequence'
+    'time', 'latin_indicative_tenses_allowed', 'sequence', 'voice'
 ];
 
+// Note that this function knows nothing about the lexeme.
 var prune_tf_space = function (
     language, tf_space, allowed, conjunction, direction) {
     // My philosophy: any error the was not completely stupid is likely
@@ -11,13 +12,15 @@ var prune_tf_space = function (
     if (!(conjunction instanceof Conjunction)) {
         throw JSON.stringify(conjunction) + ' is not a conjunction!';
     }
+    
     // Get the value of the red herring switch as a boolean.
     var red_herring_bool = get_red_herring_bool(allowed);
     // Find all the allowed conjunctions.
     var all_conjunction_direction_combos =
     get_all_conjunction_direction_combos(allowed);
+    
     // If red herrings are on, we include all the conjunction-direction combos.
-    // Otherwise, only the one.
+    // Otherwise, only the one used.
     var conjunction_direction_combos;
     if (red_herring_bool) {
         conjunction_direction_combos = all_conjunction_direction_combos;
@@ -25,7 +28,7 @@ var prune_tf_space = function (
         conjunction_direction_combos = [
             new ConjunctionDirectionCombo(conjunction, direction)];
     }
-    console.log(conjunction_direction_combos);
+    
     var verb_regimes = Object.keys(tf_space);
     var allowed_verb_regimes = verb_regimes.filter(function (verb_regime) {
         var parts = verb_regime.split('.');
@@ -39,14 +42,17 @@ var prune_tf_space = function (
             return x.has_verb_regime(verb_regime, language);
         })
     });
+    
     if (allowed_verb_regimes.length === 0) {
         throw 'No allowed verb regimes!';
     }
+    
     var constructions = remove_duplicates(
         all_conjunction_direction_combos.map(function (x) {
             return x.construction;
         })
     );
+    
     var check = check_function_from_allowed([
         {
             'get_props_from': allowed,
@@ -57,10 +63,12 @@ var prune_tf_space = function (
             'props_to_get': ['construction']
         }
     ]);
+    
     var pruned = concat_map(allowed_verb_regimes, function (x) {
         // Iterate over the relevant values of the translation formula space.
-        return abstract_prune(tf_space_operators, tf_space[x], check)
+        return abstract_prune(tf_space_operators, tf_space[x], check);
     });
+    
     // Remove duplicates.
     return remove_duplicates(pruned);
 }
@@ -174,6 +182,12 @@ var abstract_prune = function (operators, space, check) {
 }
 
 var tf_space_operators = [
+    {
+        re: / *[=\-]> */g,
+        f: function (x, y) {
+            return !x || y;
+        }
+    },
     {
         re: / *&! */g,
         f: function (x, y) {
