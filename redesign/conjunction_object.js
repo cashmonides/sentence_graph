@@ -31,6 +31,11 @@ Conjunction.prototype.has_property = function (x) {
     return x in this.conjunction;
 }
 
+// This function gets the type of the conjunction.
+Conjunction.prototype.get_type = function (x) {
+    return this.conjunction.type;
+}
+
 // This method lets us access a property of the conjunction telling us
 // the appropriate construction.
 // We do so via concatenating strings to make k_left_construction
@@ -85,7 +90,7 @@ Conjunction.prototype.debug_info = function (direction, type) {
 // This detects whether a conjunction is null
 // by checking whether its type is 'dummy main'.
 Conjunction.prototype.is_null_conjunction = function (conjunction) {
-    return this.get_property('type') === 'dummy main';
+    return this.get_type() === 'dummy main';
 }
 
 // This function translates a conjunction into a given language.

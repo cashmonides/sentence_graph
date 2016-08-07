@@ -174,8 +174,23 @@ Sentence.prototype.remove_subordinate_kernel = function () {
     this.sentence.right = null;
 }
 
+// This method determines whether a sentence has the same sequence
+// in both clauses.
+// todo: Check whether this still makes sense with more clauses.
+Sentence.prototype.has_same_sequence_on_both_sides = function () {
+    // Currently, only subordinate clauses require this.
+    return this.get_conjunction().get_type() === 'subordinating';
+}
+
 // This method determines sequence within a sentence.
 Sentence.prototype.determine_sequence = function () {
-    var sequence = random_choice(['primary', 'secondary']);
-    this.each_kernel('adopt_sequence', sequence);
+    // Check if the sentence requires the same sequence on both sides.
+    if (this.has_same_sequence_on_both_sides()) {
+        // If so, choose a master sequence.
+        var sequence = random_choice(['primary', 'secondary']);
+        this.each_kernel('adopt_sequence', sequence);
+    } else {
+        // Otherwise choose a random sequence on both sides.
+        this.each_kernel('adopt_random_sequence');
+    }
 }

@@ -1,7 +1,48 @@
-/* rough draft order of animals not finished yet:
+/*
+
+//the kind of order they would have after learning about six terms
+var order_1 = ['vert', 'ped', 'cell', 'scop']
+
+approaches to order:
+//enveloping
+
+//randomized
+
+
+their clicking through the sequence should leave a cookie crumb trail
+each decision point is somehow stored
+and each decision point can be then highlighted
+
+this could work at multiple levels
+LEVEL 1: taxonomy
+- they've left a cookie crumb trail which is 
+'multicellular', 'macroscopic', 'bilateral symmetry', 'vertebrate', 'quadruped', 'carnivore'
+if it's lion, that's the right answer
+if it's eagle they made a mistake at the PED level
+so all that list should be green except quadruped, which should be red
+they click on the red and fix it (using the "any element can be a dropdown' appraoch)
+
+
+LEVEL 2: 
+
+
+
+*/
+
+
+/* 
+
+animals done (not in order)
+wolf bear lion horse crow bull 
+
+
+rough draft order of animals not finished yet:
+
+
+
 fly, snail, millipede, kangaroo
 
-lion, mouse, bird, dog, cerberus, cow, centipede, sorpion, bee, fish, rabbit, pig
+mouse, bird, dog, cerberus, cow, centipede, sorpion, bee, fish, rabbit, pig
 
 crocodile,*
 scorpion* 
@@ -71,6 +112,9 @@ ibex
 hydra (polypus)
 hydra
 
+
+
+
 */
 
 
@@ -92,7 +136,7 @@ wolf :
 	species: "lupus",
 
 
-
+	vor: "carnivore",
 	vert: "vertebrate",
 	symmetr: "bilateral symmetry",
 	ped: "quadruped",
@@ -160,6 +204,8 @@ bear :
 	psid: "synapsid",
 	placental: "placental"
 },
+
+
 
 horse :
 {
@@ -506,5 +552,49 @@ spider :
 	psid: "review",
 	placental: "na"
 },
+
+
+lion :
+{
+	name: "panthera leo", 		//ursus arctos arctos is a brown bear
+								//other kinds include usrus arctos horribilis = grizzly
+	domain: "eukarya",
+	kingdom: "animalia",
+	phylum: "chordata",
+	subphylum: "mammalia",
+	subclass: "eutheria",
+	order: "carnivora",
+	family: "felidae",
+	genus: "panthera",
+	species: "leo",
+
+
+	vor: ["carnivore"],
+	vert: "vertebrate",
+	symmetr: "bilateral symmetry",
+	ped: "quadruped",
+	stome: "deuterostome",
+	mot: "motile",
+	cell: "multicellular",
+	scop: "macroscopic",
+	par: "viviparous",
+	therm: "endothermic",
+	XXXXXX: "eukaryotic",
+	troph: "heterotroph",
+	extinct: "extant",
+	gastr: "monogastric",
+	habitat: "terrestrial",
+	vis: "visible",
+	aud: "audible",
+	edible: "skip",
+	pred: "predator",
+	grad: "plantigrade",
+	ungulate: "false",
+	dactyl: "review",
+	amniote: "amniote",
+	psid: "synapsid",
+	placental: "placental"
+},
+
 
 }

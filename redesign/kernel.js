@@ -26,7 +26,7 @@ var kernel_constructor = function (conjunction, direction) {
     // or our conjunction's type property (it has a type property,
     // not a clause_type property) is coordinating.
     if (direction === default_direction 
-    || conjunction.get_property('type') === 'coordinating') {
+    || conjunction.get_type() === 'coordinating') {
         // If our direction is the default, we are in the main clause.
         main_or_sub = 'main';
     } else {
@@ -112,21 +112,12 @@ Kernel.prototype.get_size = function () {
     return this.role_list.length;
 };
 
-// From my point of view, although I think I understand it,
-// visit acts as a mystical piece of code.
-// Since we're not using it, and mystical pieces of code
-// can be confusing, I commented it out.
-
-// This method does something to each role in the role list.
-// It may be obsolete or at least in need of replacement.
-// Kernel.prototype.visit = function (visitor) {
-//     // We iterate over the role list.
-//     for (var i = 0; i < this.role_list.length; i++) {
-//         // We pass our input function both the kernel
-//         // and the current role.
-//         visitor(this, this.role_list[i]);
-//     }
-// };
+// This method chooses a random sequence for the kernel.
+Kernel.prototype.adopt_random_sequence = function () {
+    // Just pick a random sequence and adopt it.
+    // todo: change if additional sequences are found.
+    this.adopt_sequence(random_choice(['primary', 'secondary']));
+}
 
 // This function gets the verb component from the kernel.
 Kernel.prototype.get_verb = function () {

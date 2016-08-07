@@ -8,7 +8,7 @@ var legal_conjunction_types = ['coordinating', 'subordinating', 'dummy main',
 // To create one, you need the conjunction you want the type of.
 var ConjunctionType = function (conjunction) {
     // First, get the type of the conjunction.
-    var conjunction_type = conjunction.get_property('type');
+    var conjunction_type = conjunction.get_type();
     // Then, check that it is a legal conjunction type.
     if (legal_conjunction_types.indexOf(conjunction_type) === -1) {
         // The conjunction type is not legal; we throw an error.
