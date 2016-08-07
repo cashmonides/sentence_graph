@@ -23,3 +23,8 @@ var real_type_of = function (x) {
         return 'object';
     }
 }
+
+// This function gets the maximum of a list.
+var max_list = function (list) {
+    return Math.max.apply(null, list);
+}

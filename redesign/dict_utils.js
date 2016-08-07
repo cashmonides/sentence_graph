@@ -41,3 +41,24 @@ var join_disjoint_dicts = function (dicts) {
     // Return the result.
     return result;
 }
+
+// This function does a function throughout a dictionary in a nested way.
+var iterate_through_dict = function (d, f) {
+    // Check if the dictionary actually is a dictionary.
+    if (is_object(d)) {
+        // Do the obvious recursive thing.
+        // (just {i: iterate_through_dict(d[i], f) for i in d} in python,
+        // but javascript doesn't work that way)
+        var result = {};
+        for (var i in d) {
+            // Note: not f(d[i]). This would cause problems
+            // in the case of more than one level of nesting.
+            result[i] = iterate_through_dict(d[i], f);
+        }
+        return result;
+    } else {
+        // If the dictionary is not actually a dictionary there is
+        // no nesting, so just apply the function.
+        return f(d);
+    }
+}
