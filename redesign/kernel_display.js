@@ -97,5 +97,9 @@ Kernel.prototype.display_verb_options_in_language = function (language) {
     var json_options = option_list_to_json(
         options, global_test_important_options,
         overall_ordering_preference, language_sorts[language]);
+    // todo change hack
+    if ('test_add_drop_down_to_page' in window) {
+        test_add_drop_down_to_page(json_options);
+    }
     return JSON.stringify(json_options, null, 2);
 }
