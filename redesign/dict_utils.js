@@ -62,3 +62,11 @@ var iterate_through_dict = function (d, f) {
         return f(d);
     }
 }
+
+// This function gets a list of key-value pairs from a dictionary.
+// It does this by getting the key-value pair for each key.
+var list_of_pairs_from_dict = function (obj) {
+    return Object.keys(obj).map(function (x) {
+        return [x, obj[x]];
+    });
+}

@@ -405,7 +405,8 @@ states_allowed, master_lexeme_list, level) {
                 fn_result.lexeme = ((j === result_role) ?
                 master_lexeme_list[source] : "not the right lexeme");
                 fn_result.form = kernel.form.j;
-                if (!(j in output)) {output[j] === []};
+                // This was a bug: it had output[j] === [].
+                if (!(j in output)) {output[j] = []};
                 output[j].push(fn_result);
             }
         }

@@ -10,9 +10,17 @@ var in_latin_periphrastic = function (component) {
 // Determines tense.
 var get_latin_verb_tense = function (component) {
     // Get rid of voice and everything after.
-    return component.get_property_in_language('tense', 'latin').
-    replace(/ (indicative|subjunctive|infinitive).*/, '');
+    var tense = component.get_property_in_language('tense', 'latin');
+    return get_real_latin_tense_from_component_tense(tense);
 };
+
+var get_real_latin_tense_from_component_tense = function (tense) {
+    return tense.replace(/ (indicative|subjunctive|infinitive|imperative).*/, '');
+}
+
+var get_latin_tense_and_mood_from_component_tense = function (tense) {
+    return tense.replace(/ (active|passive)$/, '');
+}
 
 var get_latin_root_vowel = function (component) {
     return latin_root_vowel_map[component.lexeme.latin.conjugation];

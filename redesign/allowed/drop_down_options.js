@@ -18,22 +18,60 @@ var get_drop_down_options = function (language, allowed, lexemes, kernel) {
     var person_number_combinations = get_person_number_combinations(allowed);
     // We need the lexeme for the tf options, so we can't do a triple-cross.
     // But we can do a concat-map and then a double-cross inside.
-    return concat_map(lexemes, function (lexeme) {
+    // We have a result variable for convenient logging. 
+    var result = concat_map(lexemes, function (lexeme) {
         // We filter allowed based on the lexeme.
         var filtered_allowed = filter_allowed_with_lexeme(allowed, lexeme);
         // We have conjunction then direction, not vice versa (as before).
-        var tf_options = prune_tf_space(language, tf_spaces[language], filtered_allowed, conjunction, direction);
+        var tf_options = prune_tf_space(
+            language, tf_spaces[language], filtered_allowed, conjunction, direction);
         return cross(tf_options, person_number_combinations, function (
             tf_option, person_number_combination) {
-            return tf_to_translations[language](lexeme, tf_option, person_number_combination);
+            // Make a function translation_and_features_from
+            // to avoid too much ugliness.
+            return translation_and_features_from(
+                language, lexeme, tf_option, person_number_combination);
         });
     });
+    // We return our result.
+    return result;
+}
+
+var translation_and_features_from = function (
+    language, lexeme, tf_option, person_number_combination) {
+    var tf_text = tf_option.text;
+    var features = {
+        'voice': get_voice_from_tf_option(tf_option),
+        'lexeme': lexeme.get_name(),
+        'person_and_number': person_number_combination
+    };
+    var item;
+    for (var i = 0; i < features_from_tf.length; i++) {
+        item = features_from_tf[i];
+        features[item] = get_feature_from_tf[language][item](tf_text);
+    }
+    return [
+        tf_to_translations[language](lexeme, tf_text, person_number_combination),
+        features
+    ];
+}
+
+var get_voice_from_tf_option = function (x) {
+    return x.choices[0].split('.')[1];
 }
 
 var tf_spaces = {
     english: maximal_english_tf_space,
     latin: maximal_latin_tense_space,
     ssslatin: maximal_latin_tense_space
+}
+
+var get_latin_voice_from_tense = function (tense) {
+    return /active|passive/.exec(tense)[0];
+}
+
+var get_latin_mood_from_tense = function (tense) {
+    return /indicative|subjunctive|infinitive|imperative/.exec(tense)[0];
 }
 
 var fake_component_from = function (tense, person_number_combination, lexeme) {
@@ -43,8 +81,8 @@ var fake_component_from = function (tense, person_number_combination, lexeme) {
     // Make sure that the tense is as expected.
     if (/^.* (indicative|subjunctive|infinitive|imperative) (active|passive)$/.exec(tense) ||
     /^.* (indicative|subjunctive|infinitive|imperative) of the (active|passive) periphrastic$/.exec(tense)) {
-        component.properties.voice = /active|passive/.exec(tense)[0];
-        component.properties.mood = /indicative|subjunctive|infinitive|imperative/.exec(tense)[0];
+        component.properties.voice = get_latin_voice_from_tense(tense);
+        component.properties.mood = get_latin_mood_from_tense(tense);
     } else {
         throw 'Weird tense: ' + tense;
     }
@@ -59,10 +97,7 @@ var latin_tense_to_translations = function (lexeme, tense, person_number_combina
 }
 
 var tf_to_translations = {
-    english: function (lexeme, translation_formula, person_number_combination) {
-        return [inflect_english_verb_given_tf(
-            lexeme, translation_formula, person_number_combination)];
-    },
+    english: inflect_english_verb_given_tf,
     latin: latin_tense_to_translations,
     ssslatin: function (lexeme, tense, person_number_combination) {
         return 'SSS' + latin_tense_to_translations(

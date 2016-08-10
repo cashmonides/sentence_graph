@@ -1,0 +1,4 @@
+time, sequence - use language-dependent dictionaries
+tense, mood - use language-dependent functions
+voice - given with tf (done)
+person/number, lexeme - trivial (done)

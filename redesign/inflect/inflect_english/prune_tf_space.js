@@ -70,7 +70,7 @@ var prune_tf_space = function (
     });
     
     // Remove duplicates.
-    return remove_duplicates(pruned);
+    return remove_duplicates(pruned, function (x) {return x.text});
 }
 
 var get_all_conjunction_direction_combos = function (allowed) {
@@ -161,7 +161,8 @@ var check_function_from_allowed = function (list_of_allowed_sources) {
 
 var abstract_prune = function (operators, space, check) {
     if (typeof space === 'string') {
-        return [space];
+        // Have choices and text.
+        return [{'choices': [], 'text': space}];
     }
     var results = [];
     for (var i in space) {
@@ -172,10 +173,20 @@ var abstract_prune = function (operators, space, check) {
                 // 'verb no -s' : ['sequence.primary || sequence.secondary']
                 return parse_expr(operators, check, x);
             })) {
-                results.push([i]);
+                // Again, include choices in the entry we're pushing.
+                results.push({'choices': [], 'text': i});
             }
         } else if (parse_expr(operators, check, i)) {
-            results.push(abstract_prune(operators, space[i], check))
+            results.push(abstract_prune(
+                operators, space[i], check
+            ).map(function (x) {
+                // Add i to the front.
+                // I'm not fanatical about performance here,
+                // so I don't really care about this being O(n),
+                // especially since n <= 2 right now.
+                x.choices.unshift(i);
+                return x;
+            }));
         }
     }
     return concat_all(results);

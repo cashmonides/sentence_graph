@@ -89,10 +89,13 @@ var translate_kernel_into = function (language) {
 }
 
 // This method displays the verb translations of a kernel, in a language.
-var display_verb_options_in_language = function (kernel, language) {
+Kernel.prototype.display_verb_options_in_language = function (language) {
     // Create the list of options and then join them.
     // todo: replace default_allowed with something level-dependent.
     var options = get_drop_down_options(
-        language, default_allowed, [kernel.get_verb().lexeme], kernel);
-    return options.join(' - ');
+        language, default_allowed, [this.get_verb().lexeme], this);
+    var json_options = option_list_to_json(
+        options, global_test_important_options,
+        overall_ordering_preference, language_sorts[language]);
+    return JSON.stringify(json_options, null, 2);
 }

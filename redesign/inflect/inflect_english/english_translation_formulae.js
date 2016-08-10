@@ -169,7 +169,7 @@ var maximal_english_tf_space = {
 			// default, normal, indicative
 			//information comes from ALLOWED
 			'verb': ['time.simultaneous'],
-			'verbed': ['time.prior'],
+			'verbed-preterite': ['time.prior'],
 			'will verb': ['time.subsequent'],
 			
 			//advanced tenses in normal clauses, indicative
@@ -198,7 +198,7 @@ var maximal_english_tf_space = {
 	'regime.relative' : {
 		'voice.active' : {
 			'verb': ['time.simultaneous', 'sequence.primary'],
-			'verbed': ['time.prior', 'sequence.primary'],
+			'verbed-preterite': ['time.prior', 'sequence.primary'],
 			'will verb': ['time.subsequent', 'sequence.primary'],
 			'were verbing': ['time.simultaneous', 'sequence.secondary'],
 			'had verbed': ['time.prior', 'sequence.secondary'],
@@ -231,7 +231,7 @@ var maximal_english_tf_space = {
 			'are verbed': ['construction.protasis_fmv || construction.protasis_fmve'],
 			'will be verbed': ['construction.apodosis_fmv || construction.apodosis_fmve'],
 			'were being verbed': ['construction.protasis_present_ctf'], //was 1sg & 3sg
-			'would be being verbing': ['construction.apodosis_present_ctf'],
+			'would be being verbed': ['construction.apodosis_present_ctf'],
 			'had been verbed': ['construction.protasis_past_ctf'], 
 			'would have been verbed': ['construction.apodosis_past_ctf']
 		}
@@ -333,7 +333,23 @@ var english_grammatical_terminology_correspendence = {
 	'should verb': 'should tense',
 	'would verb': 'would tense',
 	'would be verbing': 'would tense continuous',
-	'would have verbed': 'would tense perfect'
+	'would have verbed': 'would tense perfect',
+	"are verbed" : 'present',  //default present indicative
+	"be verbed" : "present subjunctive",	//fossilized english subjunctive that...
+	"were verbed" : "preterite", //preterite
+	"were being verbed" : "past continuous", // was "was verbing"
+	"will be verbed" : "future",
+	// "verbed" : "perfect",          // was "has verbed"
+	"had been verbed" : "pluperfect",
+	"will have been verbed" : "future perfect",
+	'may be verbed': 'may tense',
+	'might be verbed': 'might tense',
+	'can be verbed': 'can tense',
+	'could be verbed': 'could tense',
+	'should be verbed': 'should tense',
+	'would be verbed': 'would tense',
+	'would be being verbed': 'would tense continuous',
+	'would have been verbed': 'would tense perfect'
 }
 
 

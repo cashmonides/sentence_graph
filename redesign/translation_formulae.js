@@ -7,8 +7,12 @@ var get_tense_from_translation_formula = function (
     if (translation_formula === null) {
         // The corrsponding tense is clearly null.
         return null;
+    } else if (typeof translation_formula !== 'string') {
+        // Throw an error since translation formulas should be strings.
+        throw 'The translation formula ' + JSON.stringify(
+            translation_formula) + ' is not a string.';
     } else {
-        // We check that our translation forula to tense map
+        // We check that our translation formula to tense map
         // has an entry for the language.
         if (!(language in translation_formula_to_tense)) {
             throw 'No translation formula for ' + language + '!';

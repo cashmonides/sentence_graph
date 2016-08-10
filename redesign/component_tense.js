@@ -81,15 +81,16 @@ Component.prototype.get_translation_formula_from_regime = function (
     var dict = regime_to_translation_formula[language][regime];
     // All the things checked should have a period.
     var check = this.check_string_with_period.bind(this, language);
-    // No operators. That is the meaning of [] here.
-    var results = abstract_prune([], dict, check);
+    // We use the operators from the tf space.
+    var results = abstract_prune(tf_space_operators, dict, check);
     // Check for exactly one result.
     if (results.length !== 1) {
         throw 'There is not exactly one result: [' +
         results.join(', ') + ']. ' +
         [regime, language, JSON.stringify(this.properties)].join(' ');
     }
-    return results[0];
+    // Results from pruning now have text.
+    return results[0].text;
 }
 
 // This function gets the override tense in a language.

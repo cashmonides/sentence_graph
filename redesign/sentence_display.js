@@ -116,8 +116,8 @@ Sentence.prototype.display_verb_options = function () {
         // ...and each language...
         return each_language(function (language) {
             // ...produce the verb options in that language.
-            return language + ': ' +
-            display_verb_options_in_language(kernel, language.toLowerCase());
+            return language + ':\n' +
+            kernel.display_verb_options_in_language(language.toLowerCase());
         })
     }).join('\n');
 };

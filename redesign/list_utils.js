@@ -15,7 +15,13 @@ var last = function (list) {
 }
 
 // This function removes duplicates from a list.
-var remove_duplicates = function (list) {
+// It takes an optional function that turns elements into strings
+// so that they can be compared.
+var remove_duplicates = function (list, f) {
+    // Let the function be the identity if it is not passed in.
+    if (!f) {
+        f = function (x) {return x};
+    }
     // Initialize a list and a set.
     var new_list = [];
     var list_as_set = {};
@@ -24,13 +30,13 @@ var remove_duplicates = function (list) {
     for (var i = 0; i < list.length; i++) {
         item = list[i];
         // This skips items we've already seen.
-        if (item in list_as_set) {
+        if (f(item) in list_as_set) {
             continue;
         }
         // We've not seen this item yet, so add the item to the list
         // and put it in the set.
         new_list.push(item);
-        list_as_set[item] = true;
+        list_as_set[f(item)] = true;
     }
     // Return the new list. (We did not mutate.)
     return new_list;
