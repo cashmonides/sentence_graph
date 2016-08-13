@@ -22,6 +22,10 @@ var get_drop_down_options = function (language, allowed, lexemes, kernel) {
     var result = concat_map(lexemes, function (lexeme) {
         // We filter allowed based on the lexeme.
         var filtered_allowed = filter_allowed_with_lexeme(allowed, lexeme);
+        // Check that the language is in the tf space.
+        if (!(language in tf_spaces)) {
+            throw 'Weird language: ' + JSON.stringify(language);
+        }
         // We have conjunction then direction, not vice versa (as before).
         var tf_options = prune_tf_space(
             language, tf_spaces[language], filtered_allowed, conjunction, direction);

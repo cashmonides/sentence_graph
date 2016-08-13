@@ -5,7 +5,7 @@
 var LEXEME_ERROR_CATCHING_MODE = 'throw';
 
 // This is the master function.
-var main = function () {
+var main = function (display_in_text_box) {
     var success = false;
     while (!success) {
         // We make a random sentence.
@@ -33,6 +33,9 @@ var main = function () {
         // We inflect the components.
         sentence.inflect_all_components();
     }
-    // Finally, we display the sentence.
-    display_on_page(sentence.display());
+    if (display_in_text_box) {
+        // Finally, we display the sentence.
+        display_on_page(sentence.display());
+    }
+    return sentence;
 }

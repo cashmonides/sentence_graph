@@ -88,8 +88,9 @@ var translate_kernel_into = function (language) {
     }
 }
 
-// This method displays the verb translations of a kernel, in a language.
-Kernel.prototype.display_verb_options_in_language = function (language) {
+// This method makes a JSON object with the verb translations
+// of a kernel, in a language.
+Kernel.prototype.get_verb_json_options = function (language) {
     // Create the list of options and then join them.
     // todo: replace default_allowed with something level-dependent.
     var options = get_drop_down_options(
@@ -97,9 +98,23 @@ Kernel.prototype.display_verb_options_in_language = function (language) {
     var json_options = option_list_to_json(
         options, global_test_important_options,
         overall_ordering_preference, language_sorts[language]);
-    // todo change hack
-    if ('test_add_drop_down_to_page' in window) {
-        test_add_drop_down_to_page(json_options);
-    }
+    return json_options;
+}
+
+// This method displays the verb translations of a kernel, in a language.
+Kernel.prototype.display_verb_options_in_language = function (language) {
+    var json_options = this.get_verb_json_options(language);
     return JSON.stringify(json_options, null, 2);
+}
+
+// This method makes a drop down for a verb in a language.
+Kernel.prototype.get_verb_drop_down = function (language) {
+    var json_options = this.get_verb_json_options(language);
+    return new DropDown('VERB', json_options);
+}
+
+// This method gets all drop downs for a kernel.
+Kernel.prototype.get_all_drop_downs = function (language) {
+    // todo: fix this when we go beyond verbs
+    return [this.get_verb_drop_down(language)];
 }

@@ -22,7 +22,6 @@ var test_callback = function (answer, path) {
 }
 
 var create_menu = function (path, data, callback) {
-    console.log(data);
     var div;
     var li;
     var ul;
@@ -65,8 +64,23 @@ var test_add_drop_down_to_page = function (drop_down) {
     var menu = create_menu([], drop_down, test_callback);
     $(menu).menu();
     document.body.appendChild(menu);
+    document.body.appendChild(document.createElement('br'));
 }
 
 window.onload = function () {
-    main();
+    var sentence = main(true);
+    var drops = sentence.get_all_drop_downs('latin');
+    var e;
+    for (var i = 0; i < drops.length; i++) {
+        if (i !== 0) {
+            e = document.createElement('div');
+            e.innerHTML = '&nbsp;';
+            e.style.display = 'inline-block';
+            document.body.appendChild(e);
+        }
+        e = document.createElement('div');
+        e.style.display = 'inline-block';
+        document.body.appendChild(e);
+        drops[i].attach_to(e);
+    }
 }

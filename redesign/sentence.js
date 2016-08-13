@@ -194,3 +194,15 @@ Sentence.prototype.determine_sequence = function () {
         this.each_kernel('adopt_random_sequence');
     }
 }
+
+// This method gets all drop downs from the sentence.
+Sentence.prototype.get_all_drop_downs = function (language) {
+    var drop_down_lists = this.each_kernel('get_all_drop_downs', language);
+    if (drop_down_lists.length === 0) {
+         return drop_down_lists[0];
+    } else {
+        return drop_down_lists[0].concat(
+            new NonDropDown(this.get_conjunction().translate_into(language)),
+            concat_all(drop_down_lists.slice(1)));
+    }
+}
