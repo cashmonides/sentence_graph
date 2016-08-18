@@ -4,8 +4,8 @@ var check_properties_from_allowed = [
 
 // Note that this function knows nothing about the lexeme.
 var prune_tf_space = function (
-    language, tf_space, allowed, conjunction, direction) {
-    // My philosophy: any error the was not completely stupid is likely
+    language, tf_space, allowed, conjunction, direction, regime) {
+    // My philosophy: any error that was not completely stupid is likely
     // to be made more than once.
     // Thus, due to a case of misordered parameters, we check that the
     // conjunction is a conjunction object.
@@ -14,11 +14,10 @@ var prune_tf_space = function (
     }
     
     // Get the value of the red herring switch as a boolean.
-    var red_herring_bool = get_red_herring_bool(allowed);
+    var red_herring_bool = read_bool_maybe_string(allowed['red herring']);
     // Find all the allowed conjunctions.
     var all_conjunction_direction_combos =
     get_all_conjunction_direction_combos(allowed);
-    
     // If red herrings are on, we include all the conjunction-direction combos.
     // Otherwise, only the one used.
     var conjunction_direction_combos;
@@ -28,7 +27,8 @@ var prune_tf_space = function (
         conjunction_direction_combos = [
             new ConjunctionDirectionCombo(conjunction, direction)];
     }
-    
+    var verb_regimes_in_grouping = get_allowable_verb_regime_set(
+        language, regime, allowed);
     var verb_regimes = Object.keys(tf_space);
     var allowed_verb_regimes = verb_regimes.filter(function (verb_regime) {
         var parts = verb_regime.split('.');
@@ -40,7 +40,8 @@ var prune_tf_space = function (
         var verb_regime = parts[1];
         return conjunction_direction_combos.some(function (x) {
             return x.has_verb_regime(verb_regime, language);
-        })
+        }) && (verb_regimes_in_grouping === 'all'
+        || verb_regimes_in_grouping.indexOf(verb_regime) !== -1);
     });
     
     if (allowed_verb_regimes.length === 0) {
@@ -66,11 +67,20 @@ var prune_tf_space = function (
     
     var pruned = concat_map(allowed_verb_regimes, function (x) {
         // Iterate over the relevant values of the translation formula space.
-        return abstract_prune(tf_space_operators, tf_space[x], check);
+        return abstract_prune(tf_space_operators, tf_space[x], check).map(function (y) {
+            y.regime = x.split('.')[1];
+            return y;
+        });
     });
     
     // Remove duplicates.
-    return remove_duplicates(pruned, function (x) {return x.text});
+    return remove_duplicates(pruned, function (x) {return x.regime + '/' + x.text});
+}
+
+var get_allowable_verb_regime_set = function (language, regime, allowed) {
+    var regimes_in_language = translation_formula_compatibility_dictionary[
+        language];
+    return get_option_with_settings(regime, allowed, regimes_in_language);
 }
 
 var get_all_conjunction_direction_combos = function (allowed) {
@@ -80,10 +90,16 @@ var get_all_conjunction_direction_combos = function (allowed) {
     }
     return concat_map(conjunctions, function (conj) {
         var conj_object = new Conjunction(conj);
-        return [
-            new ConjunctionDirectionCombo(conj_object, 'left'),
-            new ConjunctionDirectionCombo(conj_object, 'right')
-        ];
+        if (conj_object.is_null_conjunction()) {
+            return [
+                new ConjunctionDirectionCombo(conj_object, 'left')
+            ];
+        } else {
+            return [
+                new ConjunctionDirectionCombo(conj_object, 'left'),
+                new ConjunctionDirectionCombo(conj_object, 'right')
+            ];
+        }
     });
 }
 
@@ -95,7 +111,8 @@ var ConjunctionDirectionCombo = function (conjunction, direction) {
     this.verb_regime = conjunction.get_property(
         'k_' + direction + '_verb_regime');
     if (!this.verb_regime) {
-        this.verb_regime = null;
+        throw 'No verb regime for ' +
+        conjunction.conjunction.citation_name;
     }
     // Add construction (using the special get_construction method).
     this.construction = conjunction.get_construction(direction);
@@ -103,18 +120,6 @@ var ConjunctionDirectionCombo = function (conjunction, direction) {
 
 ConjunctionDirectionCombo.prototype.has_verb_regime = function (x, language) {
     return this.verb_regime[language] === x;
-}
-
-// Get the red herring bool from allowed.
-var get_red_herring_bool = function (allowed) {
-    var red_herring = allowed['red herring'];
-    if (red_herring === 'false' || red_herring === false) {
-        return false;
-    } else if (red_herring === 'true' || red_herring === true) {
-        return false;
-    } else {
-        throw 'Weird value for red herring: ' + red_herring;
-    }
 }
 
 var check_function_from_allowed = function (list_of_allowed_sources) {

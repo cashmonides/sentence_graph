@@ -57,7 +57,10 @@ Component.prototype.set_property = function (name, set_to) {
 // This function sets a property given the property's name,
 // the value to set it to, and a language to set it in.
 
-// Note: This method only works if the property is a dictionary.
+// Note: If the property is not a dictionary,
+// it becomes one and is set to its current value
+// in every language except the one chosen,
+// where it becomes the new value.
 Component.prototype.set_property_in_language = function (
     name, set_to, language) {
     // Is there a property corresponding to the name?
@@ -66,9 +69,19 @@ Component.prototype.set_property_in_language = function (
         var value = this.properties[name];
         // Is the value of the property not null?
         if (value === null || typeof value === 'string') {
-            // This should not happen.
-            throw value + ', for ' + name + ' should be a dictionary, '
-            'since we are trying to set it in a language-specific way.';
+            // Do the replacement by a dictionary.
+            var new_value = {};
+            var language_item;
+            for (var i = 0; i < languages.length; i++) {
+                // Remember to lowercase the language.
+                language_item = languages[i].toLowerCase();
+                if (language_item === language) {
+                    new_value[language_item] = set_to;
+                } else {
+                    new_value[language_item] = value;
+                }
+                this.properties[name] = new_value;
+            }
         } else {
             // Set the input language's value.
             // We lowercase the language for convenience.

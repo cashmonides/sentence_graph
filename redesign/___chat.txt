@@ -1,6 +1,3 @@
-ERROR IN CONSOLE
-html_utils.js:10 Uncaught TypeError: Cannot set property 'value' of null (fixed)
-
 FIX IN DROP DOWN (fundamental issue)
 
 
@@ -60,7 +57,7 @@ FUNCTIONS
 - show drop down
 - store drop down path as a variable
 
-TODO
+THINGS TO DO
 - restructure the drop down data such that it has header strings like verb or subject
 - add a submit button
 

@@ -27,12 +27,14 @@ Sentence.prototype.is_single_clause = function () {
 // This allows us to call a method on each kernel.
 // method is a string which is the name of the method to call,
 // or a function to pass the kernel into.
-// arg is the argument to pass in. If it is undefined,
-// it is still passed in, but javascript doesn't generally
-// care about an undefined argument.
-// Similarly, we return a list of results. We might not need
+// The remaining arguments are the arguments to pass in.
+// Also, we return a list of results. We might not need
 // this sometimes, but it's useful to have.
-Sentence.prototype.each_kernel = function (method, arg) {
+Sentence.prototype.each_kernel = function (method) {
+    // Get the arguments.
+    var args = args_to_list(arguments);
+    // Get the arguments to pass in.
+    var args_to_pass_in = args.slice(1);
     // If the method isn't a function, make it one.
     if (typeof method !== 'function') {
         // Is the method a method on Kernel?
@@ -44,8 +46,8 @@ Sentence.prototype.each_kernel = function (method, arg) {
         var old_method = method;
         // Make method a function that calls the method on the kernel.
         method = function (kernel) {
-            return function (arg) {
-                return kernel[old_method](arg);
+            return function () {
+                return kernel[old_method].apply(kernel, arguments);
             }
         }
     }
@@ -53,12 +55,16 @@ Sentence.prototype.each_kernel = function (method, arg) {
     var list = [];
     // The default direction is always relevant.
     // That kernel always exists.
-    list.push(method(this.sentence[default_direction])(arg));
+    list.push(method(
+        this.sentence[default_direction]).apply(
+            null, args_to_pass_in));
     // We only call the method on the right kernel
     // (right is currently the non default direction)
     // if it exists.
     if (this.sentence[non_default_direction]) {
-        list.push(method(this.sentence[non_default_direction])(arg));
+        list.push(method(
+            this.sentence[non_default_direction]).apply(
+                null, args_to_pass_in));
     }
     // Return the list of results.
     return list;
@@ -116,10 +122,47 @@ Sentence.prototype.choose_random_lexemes = function () {
             return false;
         }
     }
+    // Pick some drop down lexemes.
+    // todo: Come back to this when we have nouns,
+    // because we can't have noun and verb options coexisting.
+    this.pick_drop_down_lexemes();
     // We are finally done and have hit no fatal issues,
     // so we return true.
     return true;
 };
+
+Sentence.prototype.pick_drop_down_lexemes = function () {
+    var original_chosen_lexemes = this.chosen_lexemes;
+    // This function changes chosen_lexemes to add some new ones.
+    var chosen_lexemes = {};
+    var all_lexemes = converted_lexeme_list;
+    var lexeme;
+    var part_of_speech;
+    for (var name in original_chosen_lexemes) {
+        // We retain references to all lexemes ever created.
+        lexeme = Lexeme.lexemes[name];
+        part_of_speech = lexeme.get_part_of_speech();
+        if (!(part_of_speech in chosen_lexemes)) {
+            var n = number_of_dummies[part_of_speech];
+            // Only keep the non-chosen lexemes with
+            // the correct part of speech.
+            var allowed_dummies = all_lexemes.filter(function (x) {
+                return x.get_part_of_speech() === part_of_speech &&
+                !(x.get_name() in original_chosen_lexemes);
+            })
+            // Automatically defensive.
+            chosen_lexemes[part_of_speech] =
+            shuffle(allowed_dummies).slice(0, n);
+        }
+        chosen_lexemes[part_of_speech].push(lexeme);
+    }
+    for (var i in chosen_lexemes) {
+        chosen_lexemes[i].sort(function (x, y) {
+            return cmp(x.get_name(), y.get_name());
+        });
+    }
+    this.chosen_lexemes = chosen_lexemes;
+}
 
 // This function takes another function f. When the result is called,
 // it does f for each language and joins the results by a newline
@@ -197,12 +240,22 @@ Sentence.prototype.determine_sequence = function () {
 
 // This method gets all drop downs from the sentence.
 Sentence.prototype.get_all_drop_downs = function (language) {
-    var drop_down_lists = this.each_kernel('get_all_drop_downs', language);
-    if (drop_down_lists.length === 0) {
+    var drop_down_lists = this.each_kernel(
+        'get_all_drop_downs', language, this.chosen_lexemes);
+    if (drop_down_lists.length === 1) {
          return drop_down_lists[0];
     } else {
         return drop_down_lists[0].concat(
             new NonDropDown(this.get_conjunction().translate_into(language)),
             concat_all(drop_down_lists.slice(1)));
     }
+}
+
+// This method gets all translation-path pairs from the sentence.
+Sentence.prototype.get_all_translations_and_paths = function (language) {
+    var translation_path_lists = this.each_kernel('get_all_translations_and_paths', language);
+    // Each translation_path_list is a list, so translation_path_lists is a list of lists,
+    // which we concatenate.
+    // todo: Add the conjunction if it's a drop down.
+    return concat_all(translation_path_lists);
 }

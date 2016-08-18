@@ -49,3 +49,60 @@ var list_of_pairs_from_dict = function (obj) {
         return [x, obj[x]];
     });
 }
+
+// Handy dictionary navigation.
+// Supports three types of navigation.
+// plain - does what's usual.
+// ? (at end) - defaults to null, returns null when given null.
+// ! (at end) - throws an error if it is not fed a dictionary or
+// the key is not found.
+var dict_navigate = function (dict, string) {
+    // Split into the navigational parts.
+    var navigate_through = string.split('.');
+    // Store the original dictionary in case of an error.
+    var orig_dict = dict;
+    var item;
+    var search_by;
+    var last_char;
+    var get_all_error_data = function () {
+        return 'navigate_through = ' + JSON.stringify(navigate_through) +
+        ', item = ' + JSON.stringify(item) + ', dict = ' +
+        JSON.stringify(dict) + ', original = ' + JSON.stringify(orig_dict);
+    }
+    for (var i = 0; i < navigate_through.length; i++) {
+        item = navigate_through[i];
+        last_char = item[item.length - 1];
+        // What type of navigation?
+        if (last_char === '?') {
+            // Safe navigation.
+            // (Note undefined will throw an error. Be careful.)
+            if (dict !== null) {
+                // Take off the question mark.
+                search_by = item.slice(0, -1);
+                // Safely check for key existance.
+                if (search_by in dict) {
+                    dict = dict[search_by]
+                } else {
+                    // No key so null.
+                    dict = null;
+                }
+            }
+        } else if (last_char === '!') {
+            // Check!
+            if (!is_object(dict)) {
+                throw 'dict is not an object! ' + get_all_error_data();
+            }
+            // Take off the exclamation point.
+            search_by = item.slice(0, -1);
+            // Check!
+            if (!(search_by in dict)) {
+                throw 'Failed to find key in object! ' + get_all_error_data();
+            }
+            dict = dict[search_by];
+        } else {
+            // Do the normal thing.
+            dict = dict[item];
+        }
+    }
+    return dict;
+}

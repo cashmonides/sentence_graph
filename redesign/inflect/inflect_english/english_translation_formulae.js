@@ -210,7 +210,7 @@ var maximal_english_tf_space = {
 			'will be verbed': ['time.subsequent', 'sequence.primary'],
 			'were being verbed': ['time.simultaneous', 'sequence.secondary'],
 			'had been verbed': ['time.prior', 'sequence.secondary'],
-			'would have been verbed': ['time.subsequent', 'sequence.secondary'],
+			'would be verbed': ['time.subsequent', 'sequence.secondary'],
 		}
 	
 	},

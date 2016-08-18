@@ -34,6 +34,7 @@ $("#menu").menu();
 <script src="../set_utils.js"></script>
 <script src="../sort_utils.js"></script>
 <script src="../string_utils.js"></script>
+<script src="../compare_path.js"></script>
 <script src="../conjunction_object.js"></script>
 <script src="../conjunction_type.js"></script>
 <script src="../nonexistant.js"></script>
@@ -47,8 +48,8 @@ $("#menu").menu();
 <script src="../conjunction_library.js"></script>
 <script src="../kernel_utilities.js"></script>
 <script src="../language_library.js"></script>
-<script src="../drop_down.js"></script>
 <script src="../language_data/tense_maps.js"></script>
+<script src="../drop_down.js"></script>
 <script src="../tense.js"></script>
 <script src="../option_list_to_json.js"></script>
 <script src="../language_data/features_from_tf_dict.js"></script>
@@ -61,6 +62,7 @@ $("#menu").menu();
 <script src="../inflect/inflect_latin/maximal_latin_tense_space.js"></script>
 <script src="../allowed/allowed.js"></script>
 <script src="../allowed/lexeme_constraints.js"></script>
+<script src="../allowed/get_settings_option.js"></script>
 <script src="../inflect/inflect_english/prune_tf_space.js"></script>
 <script src="../inflect/inflect_english/regime_to_translation_formula.js"></script>
 <!--The files below depend on things above.-->
@@ -81,6 +83,27 @@ This turned out to be a bad idea.
 </head>
 
 <body>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div id='drop_down_div'></div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <button id='submit_button'>Submit</button>
+    <br/>
+    <div id='feedback_div'></div>
+    <br/>
     <textarea id="output_box" style="height: 600px; width: 600px;"></textarea>
 </body>
 </html>

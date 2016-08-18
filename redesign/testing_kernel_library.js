@@ -70,9 +70,9 @@ var testing_lexemes = {
         latin: {
             conjugation: '1',
             roots: {
-                root_2: 'OPPUGN',
-                root_3: 'OPPUGNAV',
-                root_4: 'OPPUGNAT'
+                root_2: 'oppugn',
+                root_3: 'oppugnāv',
+                root_4: 'oppugnāt'
             }
         },
         english: {
@@ -95,9 +95,9 @@ var testing_lexemes = {
         latin: {
             conjugation: '3',
             roots: {
-                root_2: 'DĪC',
-                root_3: 'DĪX',
-                root_4: 'DICT',
+                root_2: 'dīc',
+                root_3: 'dīx',
+                root_4: 'dict',
             }
         },
         english: {
@@ -120,9 +120,9 @@ var testing_lexemes = {
         latin: {
             conjugation: '4',
             roots: {
-                root_2: 'VEN',
-                root_3: 'VĒN',
-                root_4: 'VENT'
+                root_2: 'ven',
+                root_3: 'vēn',
+                root_4: 'vent'
             }
         },
         english: {
@@ -145,9 +145,9 @@ var testing_lexemes = {
         latin: {
             conjugation: '1',
             roots: {
-                root_2: 'AM',
-                root_3: 'AMĀV',
-                root_4: 'AMĀT',
+                root_2: 'am',
+                root_3: 'amāv',
+                root_4: 'amāt',
             }
         },
         english: {
@@ -170,9 +170,9 @@ var testing_lexemes = {
         latin: {
             conjugation: '2',
             roots: {
-                root_2: 'IUB',
-                root_3: 'IUSS',
-                root_4: 'IUSS',
+                root_2: 'iub',
+                root_3: 'iuss',
+                root_4: 'iuss',
             }
         },
         english: {
@@ -195,9 +195,9 @@ var testing_lexemes = {
         latin: {
             conjugation: '2',
             roots: {
-                root_2: 'TIM',
-                root_3: 'TIMU',
-                root_4: 'TIMIT',
+                root_2: 'tim',
+                root_3: 'timu',
+                root_4: 'timit',
             }
         },
         english: {

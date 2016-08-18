@@ -352,8 +352,8 @@ var conjunction_library = {
         },
         k_right_time_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'subsequent',
+            ssslatin: 'subsequent'
         }
     },
     c_cum_when: {

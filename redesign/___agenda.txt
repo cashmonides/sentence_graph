@@ -1,8 +1,82 @@
 /////
 
-SHORT TERM AGENDA
+SHORT TERM AGENDA (everything before nouns)
 
-- fix the independendent subjunctive bugs (done)
+- put sentences up top (done)
+
+- refactor "correct answer" such that there's both a path and a final string (done)
+
+- write a compare_path path function (done)
+    - which returns a bool (correct or not)
+    - which also returns a list or similar which can turn parts red and green
+
+- submit button (done)
+
+- display path function (done)
+    - red and green functionality (done)
+
+SHORT TERM MIDTERM
+
+
+- make the conjunction a drop down
+
+- dummy lexemes (both verbs and conjunctions)
+    - for first step, just pick three lexemes (we'll make it more nuanced very soon)
+    - build in defensiveness, if not enough lexemes exist, then just skip those without crashing
+
+
+
+LONG TERM MIDTERM
+
+- switch everything to lower case in data
+- make a display preferences dictionary (adapt from previous version with ratios and ranges)
+    - number of dummy lexemes
+    - upper or lower case
+    - drop down path preference
+    - which components are given and which components are drops
+    - which language to which language
+
+
+- make sure that relative and absolute time are properly distinguished backstage
+
+- write a terminology display dictionary for all languages
+    - key: value
+    - preterite: past
+    - imperfect subjunctive: same time subjunctive 2nd degree
+    - teacher should be able to update at a fine-grained level
+
+- try sending zoological data to drop down
+
+- ambiguity resolution
+ - two distinct answers with same text
+        - ruit (perfect) = ruit (present)
+        - leones (nom) = leones (acc)
+        - he verbs = more than one path in english
+        - lexeme-level phenomenon
+ - impossible to determine correct answer with information given (down the road)
+        - leones amant duces
+        - sentence-level phenominon
+
+- add a bunch of verb lexemes
+
+- run a bunch of tests, looking for semantic nonsense just in verbs
+    - of the sort: "he will be feared that he will attack"
+
+- add more conjunctions to conjunction library
+
+
+MIDTERM AGENDA
+
+- testing
+- integrate into quiz and profile
+
+
+
+DONE AND OLDER STUFF BELOW
+
+
+
+- fix the independent subjunctive bugs (done)
 
 - switch past present future to prior, simultaneous, subsequent in conjunction library (done)
 

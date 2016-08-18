@@ -111,13 +111,16 @@ Sentence.prototype.display_translations = each_language(
 
 // This method displays the verb options of a sentence.
 Sentence.prototype.display_verb_options = function () {
+    // Get the chosen lexemes.
+    var chosen_lexemes = this.chosen_lexemes;
     // For each kernel...
     return this.each_kernel(function (kernel) {
         // ...and each language...
         return each_language(function (language) {
             // ...produce the verb options in that language.
             return language + ':\n' +
-            kernel.display_verb_options_in_language(language.toLowerCase());
+            kernel.display_verb_options_in_language(
+                language.toLowerCase(), chosen_lexemes.verb);
         })
     }).join('\n');
 };
@@ -127,14 +130,16 @@ var VERB_OPTIONS_DISPLAY = true;
 
 // This method displays the sentence.
 Sentence.prototype.display = function () {
-    // We have the part displayed without translations,
-    // then after a line break, we have the partial translations,
-    // then after another line break, we have the translations,
+    // We have the translations,
+    // then after a line break, some asterisks, and another line break,
+    // we have the part displayed without translations,
+    // then after another line break, we have the partial translations,
     // then we have the verb options.
     var parts_of_display = [
+        this.display_translations(),
+        '************',
         this.display_without_translations(),
         this.display_partial_translations(),
-        this.display_translations(),
         this.display_verb_options()
     ];
     // Remove the verb options if they should not be displayed.

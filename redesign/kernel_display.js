@@ -90,31 +90,101 @@ var translate_kernel_into = function (language) {
 
 // This method makes a JSON object with the verb translations
 // of a kernel, in a language.
-Kernel.prototype.get_verb_json_options = function (language) {
+Kernel.prototype.get_verb_json_options = function (
+    language, verb_lexeme_options) {
+    // Get the verb.
+    var verb = this.get_verb();
     // Create the list of options and then join them.
     // todo: replace default_allowed with something level-dependent.
     var options = get_drop_down_options(
-        language, default_allowed, [this.get_verb().lexeme], this);
+        language, default_allowed, verb_lexeme_options, this,
+        verb.get_property_in_language('regime', language));
+    // Initialize the regime.
+    var regime = verb.get_property_in_language('regime', language);
+    // Find what to leave out.
+    // todo: Come back to this area while removing defaults.
+    var leave_out = filter_set_with_settings(
+        null, default_leave_out_settings, properties_to_leave_out[language][regime]);
+    // Do an error check.
+    if (!is_object(leave_out)) {
+        throw 'leave_out is not an object: it is ' + JSON.stringify(leave_out);
+    }
     var json_options = option_list_to_json(
-        options, global_test_important_options,
-        overall_ordering_preference, language_sorts[language]);
+        options, drop_down_path,
+        overall_ordering_preference, language_sorts[language], leave_out);
     return json_options;
 }
 
 // This method displays the verb translations of a kernel, in a language.
-Kernel.prototype.display_verb_options_in_language = function (language) {
-    var json_options = this.get_verb_json_options(language);
+Kernel.prototype.display_verb_options_in_language = function (
+    language, verb_lexeme_options) {
+    var json_options = this.get_verb_json_options(
+        language, verb_lexeme_options);
     return JSON.stringify(json_options, null, 2);
 }
 
 // This method makes a drop down for a verb in a language.
-Kernel.prototype.get_verb_drop_down = function (language) {
-    var json_options = this.get_verb_json_options(language);
-    return new DropDown('VERB', json_options);
+Kernel.prototype.get_verb_drop_down = function (
+    language, verb_lexeme_options) {
+    var json_options = this.get_verb_json_options(
+        language, verb_lexeme_options);
+    var verb_translation_and_path =
+    this.get_verb_translation_and_path(language);
+    return new DropDown('VERB', json_options, verb_translation_and_path);
+}
+
+
+// This method gets a verb's correct translation and path.
+Kernel.prototype.get_verb_translation_and_path = function (language) {
+    // Get the verb component.
+    var verb = this.get_verb();
+    // Get the translation of the verb in the language.
+    var translation = verb.form[language];
+    // Create an empty path (to be pushed to).
+    var path = [];
+    // Get the regime.
+    var regime = verb.get_property_in_language('regime', language)
+    // Get the options to leave out. For example, in an English conditional
+    // we want to avoid time.
+    var options_to_leave_out = properties_to_leave_out[language][regime];
+    // Loop over the important options.
+    var option;
+    for (var i = 0; i < drop_down_path.length; i++) {
+        option = drop_down_path[i];
+        // Check that the option is not one of the options to leave out.
+        // If it is, use continue to skip this iteration of the loop
+        // and go to the next one.
+        if (option in options_to_leave_out) {
+            continue;
+        }
+        // For each option, if it is 'lexeme', push the verb's lexeme:
+        // otherwise, push that property of the verb.
+        // (lexeme is not stored as a property.)
+        if (option === 'lexeme') {
+            // Push the name of the lexeme.
+            path.push(verb.lexeme.get_name());
+        } else {
+            // Get the property and push it.
+            path.push(verb.get_property_in_language(option, language));
+        }
+    }
+    // Push the translation to the path.
+    path.push(translation);
+    // Return the translation and path.
+    return {
+        'translation': translation,
+        'path': path
+    }
+}
+
+// This method gets all of a kernel's correct translation-and-path pairs.
+Kernel.prototype.get_all_translations_and_paths = function (language) {
+    // todo: Fix this when we go beyond verbs.
+    return [this.get_verb_translation_and_path(language)];
 }
 
 // This method gets all drop downs for a kernel.
-Kernel.prototype.get_all_drop_downs = function (language) {
-    // todo: fix this when we go beyond verbs
-    return [this.get_verb_drop_down(language)];
+Kernel.prototype.get_all_drop_downs = function (language, lexeme_options) {
+    // todo: Fix this when we go beyond verbs.
+    return [this.get_verb_drop_down(language, lexeme_options.verb)];
 }

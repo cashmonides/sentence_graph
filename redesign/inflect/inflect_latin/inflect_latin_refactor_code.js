@@ -3,18 +3,21 @@
 // but now we have less implementation work.
 
 var in_latin_periphrastic = function (component) {
-    var latin_tense = component.get_property_in_language('tense', 'latin');
+    var latin_tense = component.get_property_in_language('tense_and_mood', 'latin');
     return latin_tense.indexOf('periphrastic') !== -1;
 }
 
 // Determines tense.
 var get_latin_verb_tense = function (component) {
     // Get rid of voice and everything after.
-    var tense = component.get_property_in_language('tense', 'latin');
+    var tense = component.get_property_in_language('tense_and_mood', 'latin');
     return get_real_latin_tense_from_component_tense(tense);
 };
 
 var get_real_latin_tense_from_component_tense = function (tense) {
+    if (!tense) {
+        throw 'No tense! tense = ' + JSON.stringify(tense);
+    }
     return tense.replace(/ (indicative|subjunctive|infinitive|imperative).*/, '');
 }
 

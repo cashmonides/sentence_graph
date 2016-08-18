@@ -1,3 +1,16 @@
+TEACHER FRIENDLY DROP DOWN SETTINGS
+
+- overall we have _4_ different settings that will come into play in nested drop downs
+    - tense_name_boolean (do tense names occur at all)
+    - tense_name_advanced (do tense names occur in the advanced format -preterite, pluperfect etc.)
+    - relative_absolute_overlap (do relative and absolute times occur in the same drop down)
+    - pseudotense_tense_overlap (do pseudotenses and tenses occur in the same drop down)
+
+
+
+
+
+
 TEACHER FRIENDLY LEXICON DESIGN
 queen : {
     part_of_speech: noun, 

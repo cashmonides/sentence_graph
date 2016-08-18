@@ -1,7 +1,7 @@
 // This method determines the tense of the component.
 Component.prototype.determine_tense = function () {
     // We first initialize the language-independent property of tense.
-    this.initialize_language_dependent_property('tense');
+    this.initialize_language_dependent_property('tense_and_mood');
     // We then determine the tense taxonomy's tense, as well as the
     // time-mood-sequence combination used to get it.
     var time_mood_sequence = this.get_time_mood_sequence(
@@ -31,7 +31,7 @@ Component.prototype.determine_tense = function () {
         }
         // Then we actually set it.
         this.set_property_in_language(
-            'tense', tense_in_language, languages[i].toLowerCase())
+            'tense_and_mood', tense_in_language, languages[i].toLowerCase())
     }
 }
 
@@ -43,11 +43,21 @@ Component.prototype.get_time_mood_sequence = function (language) {
     // (like english, where the subjunctive is so vestigial we ignore it),
     // just return the time.
     if (!has_mood[language]) {
-        return this.get_property_in_language('time', language);
+        var time = this.get_property_in_language('time', language);
+        if (typeof time !== 'string') {
+            throw 'The time ' + JSON.stringify(time) + ' is not a string!';
+        }
+        return time;
     }
     // We will need time and mood. We get the values in the language.
     var time = this.get_property_in_language('time', language);
     var mood = this.get_property_in_language('mood', language);
+    if (typeof time !== 'string') {
+        throw 'The time ' + JSON.stringify(time) + ' is not a string!';
+    }
+    if (typeof mood !== 'string') {
+        throw 'The mood ' + JSON.stringify(mood) + ' is not a string!';
+    }
     // We check for a time and mood entry in the tense maps for the language.
     if (time + ' ' + mood in tense_maps[language]) {
         // We only need time and mood.
@@ -55,6 +65,10 @@ Component.prototype.get_time_mood_sequence = function (language) {
     } else {
         // In this case, we also need sequence.
         var sequence = this.get_property_in_language('sequence', language);
+        if (typeof sequence !== 'string') {
+            throw 'The sequence ' + JSON.stringify(sequence) +
+            ' is not a string!';
+        }
         return time + ' ' + mood + ' ' + sequence;
     }
 }
@@ -93,6 +107,36 @@ Component.prototype.get_translation_formula_from_regime = function (
     return results[0].text;
 }
 
+// No longer resetting properties.
+/*
+// This function resets the properties of the component based upon
+// the translation formula and a language.
+Component.prototype.reset_properties = function (
+    translation_formula, language) {
+    var properties_to_reset = properties_that_tf_resets[language];
+    // Check that properties_to_reset is an array.
+    if (!Array.isArray(properties_to_reset)) {
+        throw 'Something went very wrong! properties_to_reset = ' +
+        JSON.stringify(properties_to_reset) + ' (not an array), language = ' +
+        language + '!';
+    }
+    // Standard loop.
+    var property;
+    for (var i = 0; i < properties_to_reset.length; i++) {
+        property = properties_to_reset[i];
+        // Get the value of the property.
+        var value_to_reset_to = get_feature_from_tf[
+            language][property](
+                translation_formula,
+                this.get_property_in_language('regime', language),
+                default_allowed);
+        // Actually reset the property
+        this.set_property_in_language(
+            property, value_to_reset_to, language);
+    }
+}
+*/
+
 // This function gets the override tense in a language.
 Component.prototype.get_override_tense_in = function (language) {
     // We get the tense from tense override.
@@ -114,9 +158,20 @@ Component.prototype.get_override_tense_in = function (language) {
     if (regime === default_regimes[language]) {
         return null;
     }
+    // Get the translation formula.
+    var translation_formula = this.get_translation_formula_from_regime(
+        regime, language);
+    // Check that the translation formula exists.
+    if (!translation_formula) {
+        throw 'Null, undefined, or otherwise unusual translation formula!' +
+        ' It is ' + JSON.stringify(translation_formula);
+    }
+    // No longer resetting properties.
+    // Reset some properties based on the translation formula.
+    // this.reset_properties(translation_formula, language);
     // Get a tense from the regime in the language.
     var tense = get_tense_from_translation_formula(
-        this.get_translation_formula_from_regime(regime, language), language);
+        translation_formula, language);
     // Return the tense.
     return tense;
 }
@@ -139,6 +194,11 @@ Component.prototype.determine_tense_in_language = function (
     // We see what is possible given the time, mood, and sequence alone.
     var possible_given_tms = tense_maps[
         language][time_mood_sequence];
+    // We do a sanity check.
+    if (!Array.isArray(possible_given_tms)) {
+        throw 'Something went wrong getting ' + language +
+        ' entries that are ' + time_mood_sequence + '!';
+    }
     // We filter what is possible given that it has to match the tense
     // from the tense taxonomy.
     var possible_given_taxonomy_choice = possible_given_tms.filter(

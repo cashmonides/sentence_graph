@@ -7,7 +7,8 @@ var allowed_max = {
     'voice' : ['active', 'passive'],
     'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
     'conjunctions': 'all_conjunctions',
-    'red herring': 'false'
+    'red herring': 'true',
+    'absolute-relative-split': 'on'
 }
 
 var allowed_high = {
@@ -19,7 +20,8 @@ var allowed_high = {
     'voice' : ['active', 'passive'],
     'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
     'conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when'],
-    'red herring': 'true'
+    'red herring': 'true',
+    'absolute-relative-split': 'on'
 }
 
 
@@ -31,7 +33,8 @@ var allowed_medium = {
     'voice' : ['active', 'passive'],
     'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
     'conjunctions': ['c_null', 'c_and', 'c_purpose', 'c_when'],
-    'red herring': 'false'
+    'red herring': 'false',
+    'absolute-relative-split': 'on'
 }
 
 
@@ -43,8 +46,11 @@ var allowed_min = {
     'voice' : ['active'],
     'person_and_number' : ['3s', '3p'],
     'conjunctions': ['c_null', 'c_and', 'c_purpose', 'c_when'],
-    'red herring': 'false'
+    'red herring': 'false',
+    'absolute-relative-split': 'on'
 }
 
 // The default settings are the maximum.
 var default_allowed = allowed_max;
+
+var default_leave_out_settings = {}

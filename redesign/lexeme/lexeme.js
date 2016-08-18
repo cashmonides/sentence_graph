@@ -4,7 +4,13 @@ var Lexeme = function (json_lexeme) {
     for (var i in json_lexeme) {
         this[i] = json_lexeme[i];
     }
+    var name = this.get_name();
+    if (!(name in Lexeme.lexemes)) {
+        Lexeme.lexemes[name] = this;
+    }
 }
+
+Lexeme.lexemes = {};
 
 // Gets the lexeme's name.
 Lexeme.prototype.get_name = function () {

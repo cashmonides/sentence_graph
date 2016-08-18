@@ -1,9 +1,9 @@
 var option_list_to_json = function (
-    option_list, priorities, order_at_bottom_level, sorts) {
+    option_list, priorities, order_at_bottom_level, sorts, leave_out) {
     if (priorities.length === 0 && order_at_bottom_level.length === 0) {
-        if (option_list.length > 1) {
-            throw 'More than one option: ' + JSON.stringify(option_list);
-        }
+        // if (option_list.length > 1) {
+        //     throw 'More than one option: ' + JSON.stringify(option_list);
+        // }
         return option_list.map(function (x) {
             return x[0];
         });
@@ -22,7 +22,10 @@ var option_list_to_json = function (
     }
     var recursive_call = function (x) {
         return option_list_to_json(
-            x, new_priorities, new_order_at_bottom_level, sorts);
+            x, new_priorities, new_order_at_bottom_level, sorts, leave_out);
+    }
+    if (current_feature in leave_out) {
+        return recursive_call(option_list);
     }
     var by_current_feature = by_feature(
         current_feature, option_list, recursive_call);
