@@ -1,5 +1,5 @@
 var check_properties_from_allowed = [
-    'time', 'latin_indicative_tenses_allowed', 'sequence', 'voice'
+    'time', 'universal_indicative_tenses_allowed', 'sequence', 'voice'
 ];
 
 // Note that this function knows nothing about the lexeme.
@@ -84,7 +84,10 @@ var get_allowable_verb_regime_set = function (language, regime, allowed) {
 }
 
 var get_all_conjunction_direction_combos = function (allowed) {
-    var conjunctions = allowed.conjunctions;
+    var conjunctions = allowed.allowed_conjunctions;
+    if (conjunctions === null || conjunctions === undefined) {
+        throw 'Bad conjunctions (null or undefined)!'
+    }
     if (conjunctions === 'all_conjunctions') {
         conjunctions = Object.keys(conjunction_library);
     }
@@ -111,8 +114,7 @@ var ConjunctionDirectionCombo = function (conjunction, direction) {
     this.verb_regime = conjunction.get_property(
         'k_' + direction + '_verb_regime');
     if (!this.verb_regime) {
-        throw 'No verb regime for ' +
-        conjunction.conjunction.citation_name;
+        throw 'No verb regime for ' + conjunction.get_name();
     }
     // Add construction (using the special get_construction method).
     this.construction = conjunction.get_construction(direction);

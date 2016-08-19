@@ -12,9 +12,12 @@ Component.prototype.determine_tense = function () {
     }
     // We get a part of the tense taxonomy.
     var part_of_tense_taxonomy = tense_taxonomy[time_mood_sequence];
+    // If the sentence is indicative,
+    var allowed_tenses_apply = this.get_property_in_language(
+        'mood', default_language.toLowerCase()) === 'indicative';
     // We randomly choose amoung the possibilities.
     var tense_from_tense_taxonomy = random_tense_from(
-        part_of_tense_taxonomy);
+        part_of_tense_taxonomy, allowed_tenses_apply);
     // Set the universal tense to be the tense from the tense taxonomy
     // (actually, its name).
     this.set_property('universal_tense', tense_from_tense_taxonomy.name);
@@ -106,36 +109,6 @@ Component.prototype.get_translation_formula_from_regime = function (
     // Results from pruning now have text.
     return results[0].text;
 }
-
-// No longer resetting properties.
-/*
-// This function resets the properties of the component based upon
-// the translation formula and a language.
-Component.prototype.reset_properties = function (
-    translation_formula, language) {
-    var properties_to_reset = properties_that_tf_resets[language];
-    // Check that properties_to_reset is an array.
-    if (!Array.isArray(properties_to_reset)) {
-        throw 'Something went very wrong! properties_to_reset = ' +
-        JSON.stringify(properties_to_reset) + ' (not an array), language = ' +
-        language + '!';
-    }
-    // Standard loop.
-    var property;
-    for (var i = 0; i < properties_to_reset.length; i++) {
-        property = properties_to_reset[i];
-        // Get the value of the property.
-        var value_to_reset_to = get_feature_from_tf[
-            language][property](
-                translation_formula,
-                this.get_property_in_language('regime', language),
-                default_allowed);
-        // Actually reset the property
-        this.set_property_in_language(
-            property, value_to_reset_to, language);
-    }
-}
-*/
 
 // This function gets the override tense in a language.
 Component.prototype.get_override_tense_in = function (language) {

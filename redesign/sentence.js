@@ -98,29 +98,32 @@ Sentence.prototype.choose_random_lexemes = function () {
     }
     // We get our subordinate kernel.
     var subordinate_kernel = this.get_subordinate_kernel();
-    // If our subordinate kernel does not exist, we are done,
-    // so we return true.
-    if (!subordinate_kernel) {
-        // We return true, as said above.
-        return true;
-    }
-    // We try to choose lexemes for our subordinate kernel.
-    success = subordinate_kernel.choose_random_lexemes(this.chosen_lexemes);
-    // What if we failed to find lexemes for our subordinate kernel?
-    if (!success) {
-        // We check whether we want to prune.
-        if (LEXEME_ERROR_CATCHING_MODE === 'prune'
-        // And we also check if we can.
-        && this.subordinate_kernel_can_be_removed()) {
-            // If we want to prune and we can, we of course prune. (Why not?)
-            this.remove_subordinate_kernel();
-        } else {
-            // Otherwise (if we do not want to, or cannot,
-            // remove part of the sentence) we (yet again) have failed,
-            // so as in all the previous places where we have failed,
-            // we return false.
-            return false;
+    // If our subordinate kernel exists, we have to choose lexemes for it.
+    if (subordinate_kernel) {
+        // We try to choose lexemes for our subordinate kernel.
+        success = subordinate_kernel.choose_random_lexemes(this.chosen_lexemes);
+        // What if we failed to find lexemes for our subordinate kernel?
+        if (!success) {
+            // We check whether we want to prune.
+            if (LEXEME_ERROR_CATCHING_MODE === 'prune'
+            // And we also check if we can.
+            && this.subordinate_kernel_can_be_removed()) {
+                // If we want to prune and we can, we of course prune. (Why not?)
+                this.remove_subordinate_kernel();
+            } else {
+                // Otherwise (if we do not want to, or cannot,
+                // remove part of the sentence) we (yet again) have failed,
+                // so as in all the previous places where we have failed,
+                // we return false.
+                return false;
+            }
         }
+    }
+    // Set a variable to the conjunction so we don't get it twice.
+    var conjunction = this.get_conjunction();
+    // Add the conjunction as a lexeme.
+    if (conjunction.usable_as_lexeme()) {
+        this.chosen_lexemes[conjunction.get_name()] = true;
     }
     // Pick some drop down lexemes.
     // todo: Come back to this when we have nouns,
@@ -135,15 +138,30 @@ Sentence.prototype.pick_drop_down_lexemes = function () {
     var original_chosen_lexemes = this.chosen_lexemes;
     // This function changes chosen_lexemes to add some new ones.
     var chosen_lexemes = {};
+    // This list contains all lexemes
+    // (including pseudo-lexemes like conjunction).
     var all_lexemes = converted_lexeme_list;
     var lexeme;
     var part_of_speech;
     for (var name in original_chosen_lexemes) {
+        // Check that the lexeme exists.
+        if (!(name in Lexeme.lexemes)) {
+            throw 'No lexeme called ' + name;
+        }
         // We retain references to all lexemes ever created.
         lexeme = Lexeme.lexemes[name];
+        if (!(is_object(lexeme) && 'get_part_of_speech' in lexeme)) {
+            throw 'lexeme ' + JSON.stringify(lexeme) +
+            ' has no part of speech!';
+        }
         part_of_speech = lexeme.get_part_of_speech();
         if (!(part_of_speech in chosen_lexemes)) {
             var n = number_of_dummies[part_of_speech];
+            // Check that the number of dummies is a number 
+            if (typeof n !== 'number') {
+                throw 'n is not a number! It is not even ' +
+                'Not A Number! It is ' + JSON.stringify(n);
+            }
             // Only keep the non-chosen lexemes with
             // the correct part of speech.
             var allowed_dummies = all_lexemes.filter(function (x) {
@@ -230,7 +248,7 @@ Sentence.prototype.determine_sequence = function () {
     // Check if the sentence requires the same sequence on both sides.
     if (this.has_same_sequence_on_both_sides()) {
         // If so, choose a master sequence.
-        var sequence = random_choice(['primary', 'secondary']);
+        var sequence = random_choice(get_current_module().sequence);
         this.each_kernel('adopt_sequence', sequence);
     } else {
         // Otherwise choose a random sequence on both sides.
@@ -238,24 +256,43 @@ Sentence.prototype.determine_sequence = function () {
     }
 }
 
+// This method makes a conjunction drop down for a sentence.
+Sentence.prototype.get_conjunction_drop_down = function (language) {
+    var options = remove_duplicates(this.chosen_lexemes.conjunction.map(
+        function (x) {return x.translate_into(language)}
+    ).sort());
+    return new DropDown('CONJUNCTION', options);
+}
+
 // This method gets all drop downs from the sentence.
 Sentence.prototype.get_all_drop_downs = function (language) {
     var drop_down_lists = this.each_kernel(
         'get_all_drop_downs', language, this.chosen_lexemes);
-    if (drop_down_lists.length === 1) {
+    var len = drop_down_lists.length;
+    if (len === 1) {
          return drop_down_lists[0];
-    } else {
+    } else if (len === 2) {
         return drop_down_lists[0].concat(
-            new NonDropDown(this.get_conjunction().translate_into(language)),
-            concat_all(drop_down_lists.slice(1)));
+            this.get_conjunction_drop_down(language),
+            drop_down_lists[1]);
+    } else {
+        throw 'There seem to be ' + len + ' kernels, not 1 or 2!';
     }
 }
 
 // This method gets all translation-path pairs from the sentence.
 Sentence.prototype.get_all_translations_and_paths = function (language) {
     var translation_path_lists = this.each_kernel('get_all_translations_and_paths', language);
-    // Each translation_path_list is a list, so translation_path_lists is a list of lists,
-    // which we concatenate.
-    // todo: Add the conjunction if it's a drop down.
-    return concat_all(translation_path_lists);
+    var len = translation_path_lists.length;
+    if (len === 1) {
+         return translation_path_lists[0];
+    } else if (len === 2) {
+        var conjunction = this.conjunction_translation_display(language);
+        return translation_path_lists[0].concat({
+            'translation': conjunction,
+            'path': [conjunction]
+        }, translation_path_lists[1]);
+    } else {
+        throw 'There seem to be ' + len + ' kernels, not 1 or 2!';
+    }
 }

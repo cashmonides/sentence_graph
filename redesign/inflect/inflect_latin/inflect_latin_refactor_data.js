@@ -3,7 +3,7 @@ var middle_inflections = {
         'present indicative': '-ā',
         'imperfect indicative': '-ābā',
         'future indicative': '-ābi',
-        'present subjunctive': '-ā',
+        'present subjunctive': '-ē',
         'imperfect subjunctive': '-ārē',
         'present infinitive active': '-āre',
         'present infinitive passive': '-ārī'

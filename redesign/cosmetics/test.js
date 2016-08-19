@@ -98,6 +98,11 @@ var submit = function (actual_drops, correct_answers) {
     var drop_downs_statuses = [];
     // Loop.
     for (var i = 0; i < l; i++) {
+        var correct_answer = correct_answers[i];
+        if (!(is_object(correct_answer) && 'translation' in correct_answer
+        && 'path' in correct_answer)) {
+            throw 'Weird correct answer: ' + JSON.stringify(correct_answer);
+        }
         var correct_path = correct_answers[i].path;
         var drop_path = actual_drops[i].path;
         // The drop down has not been answered yet so don't even try to check it.

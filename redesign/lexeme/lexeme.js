@@ -17,6 +17,11 @@ Lexeme.prototype.get_name = function () {
     return this.core_properties.name;
 }
 
+// Any lexeme can be used as a lexeme.
+Lexeme.prototype.usable_as_lexeme = function () {
+    return true;
+}
+
 // Gets the lexeme's part of speech.
 Lexeme.prototype.get_part_of_speech = function () {
     return this.core_properties.part_of_speech;

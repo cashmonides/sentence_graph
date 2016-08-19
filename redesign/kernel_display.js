@@ -92,23 +92,31 @@ var translate_kernel_into = function (language) {
 // of a kernel, in a language.
 Kernel.prototype.get_verb_json_options = function (
     language, verb_lexeme_options) {
+    if (!Array.isArray(verb_lexeme_options)) {
+        throw 'verb_lexeme_options are not a list; they are ' +
+        JSON.stringify(verb_lexeme_options);
+    }
     // Get the verb.
     var verb = this.get_verb();
+    // Get the current value of allowed
+    // (that is, the value at the current level).
+    var current_module = get_current_module();
     // Create the list of options and then join them.
-    // todo: replace default_allowed with something level-dependent.
     var options = get_drop_down_options(
-        language, default_allowed, verb_lexeme_options, this,
+        language, current_module, verb_lexeme_options, this,
         verb.get_property_in_language('regime', language));
     // Initialize the regime.
     var regime = verb.get_property_in_language('regime', language);
     // Find what to leave out.
     // todo: Come back to this area while removing defaults.
     var leave_out = filter_set_with_settings(
-        null, default_leave_out_settings, properties_to_leave_out[language][regime]);
+        null, {}, properties_to_leave_out[language][regime]);
     // Do an error check.
     if (!is_object(leave_out)) {
         throw 'leave_out is not an object: it is ' + JSON.stringify(leave_out);
     }
+    // Get the dropdown path from the module.
+    var drop_down_path = get_current_module().drop_down_path;
     var json_options = option_list_to_json(
         options, drop_down_path,
         overall_ordering_preference, language_sorts[language], leave_out);
@@ -147,6 +155,8 @@ Kernel.prototype.get_verb_translation_and_path = function (language) {
     // Get the options to leave out. For example, in an English conditional
     // we want to avoid time.
     var options_to_leave_out = properties_to_leave_out[language][regime];
+    // Get the dropdown path from the module.
+    var drop_down_path = get_current_module().drop_down_path;
     // Loop over the important options.
     var option;
     for (var i = 0; i < drop_down_path.length; i++) {
@@ -184,7 +194,10 @@ Kernel.prototype.get_all_translations_and_paths = function (language) {
 }
 
 // This method gets all drop downs for a kernel.
+// todo: Fix this when we go beyond verbs.
 Kernel.prototype.get_all_drop_downs = function (language, lexeme_options) {
-    // todo: Fix this when we go beyond verbs.
+    if (!('verb' in lexeme_options) || !lexeme_options.verb) {
+        throw 'No \'verb\' in ' + JSON.stringify(lexeme_options);
+    }
     return [this.get_verb_drop_down(language, lexeme_options.verb)];
 }

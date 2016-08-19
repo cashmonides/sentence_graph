@@ -18,6 +18,10 @@ var Conjunction = function (citation_name) {
     this.conjunction = copied_conjunction;
     // We keep the original conjunction around so we can search it.
     this.original_conjunction = conjunction;
+    // We add the conjunction as a lexeme if we should.
+    if (this.usable_as_lexeme()) {
+        Lexeme.lexemes[citation_name] = this;
+    }
 }
 
 // This function simply does access into the underlying JSON dictionary.
@@ -43,6 +47,23 @@ Conjunction.prototype.get_type = function (x) {
 // property of the conjunction.
 Conjunction.prototype.get_construction = function (direction) {
     return this.conjunction['k_' + direction + '_construction'];
+}
+
+// This method lets us get the part of speech of a conjunction.
+Conjunction.prototype.get_part_of_speech = function () {
+    return 'conjunction';
+}
+
+// This method lets us get the name of a conjunction.
+Conjunction.prototype.get_name = function () {
+    return this.conjunction.citation_name;
+}
+
+// This method lets us find whether a conjunction can be used as a lexeme.
+Conjunction.prototype.usable_as_lexeme = function () {
+    // A conjunction can be used as a lexeme if and only
+    // if it is not the null conjunction.
+    return !this.is_null_conjunction();
 }
 
 // This function lets us create conjunction methods that

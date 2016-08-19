@@ -3,12 +3,23 @@
 
 // It also contains the method for inflecting a lexeme.
 
+// This method determines the part of speech of a component.
+// It only currently works on subjects, objects, and verbs.
+// todo: fix when we have adjectives and other nouns.
+Component.prototype.get_part_of_speech = function () {
+    return {
+        'verb': 'verb',
+        'subject': 'noun',
+        'object': 'noun'
+    }[this.role_name];
+}
+
 // This method determined whether a component can accept a lexeme
-// with regard to part of speech. Currently it always returns true,
-// since we only have verbs.
-// todo: Change this method when we add nouns.
+// with regard to part of speech. All it does is check whether
+// the parts of speech are the same, which seems to be
+// all it needs to do (except in tricky cases like predicates).
 Component.prototype.accepts_part_of_speech_of = function (lexeme) {
-    return true;
+    return this.get_part_of_speech() === lexeme.get_part_of_speech();
 }
 
 // This method determined whether a component can accept a lexeme
@@ -33,12 +44,13 @@ Component.prototype.accepts_lexical_restrictions_of = function (lexeme) {
 
 // This method determined whether a component can accept a lexeme
 // with regard to transitivity. Currently,
-// it just checks whether the two transitivities are the same.
+// it just checks that the lexeme is transitive or the voice is active.
 // todo: Change this when we want advanced transitivity
 // (such as transitive if alone).
+// todo: Change this when voice stops being language-independent.
 Component.prototype.accepts_transitivity_of = function (lexeme) {
-    return this.get_language_independent_property('transitivity') ===
-    lexeme.get_core_property('transitivity');
+    return this.get_language_independent_property('voice') === 'active'
+    || lexeme.get_core_property('transitivity') === 'transitive';
 }
 
 // This method determines whether a component can accept a lexeme.

@@ -174,9 +174,9 @@ var maximal_english_tf_space = {
 			
 			//advanced tenses in normal clauses, indicative
 			//information comes from ALLOWED
-			'had verbed': ['latin_indicative_tenses_allowed.pluperfect indicative'],
-			'will have verbed': ['latin_indicative_tenses_allowed.future perfect indicative'],
-			'were verbing': ['latin_indicative_tenses_allowed.imperfect indicative'],
+			'had verbed': ['universal_indicative_tenses_allowed.pluperfect indicative'],
+			'will have verbed': ['universal_indicative_tenses_allowed.future perfect indicative'],
+			'were verbing': ['universal_indicative_tenses_allowed.imperfect indicative'],
 			//'has/have verbed': ['perfect-in-primary-sequence']
 		}, 
 		'voice.passive' : {
@@ -188,9 +188,9 @@ var maximal_english_tf_space = {
 			
 			//advanced tenses in normal clauses, indicative
 			//information comes from ALLOWED
-			'had been verbed': ['latin_indicative_tenses_allowed.pluperfect indicative'],
-			'will have been verbed': ['latin_indicative_tenses_allowed.future perfect indicative'],
-			'were being verbed': ['latin_indicative_tenses_allowed.imperfect indicative'],
+			'had been verbed': ['universal_indicative_tenses_allowed.pluperfect indicative'],
+			'will have been verbed': ['universal_indicative_tenses_allowed.future perfect indicative'],
+			'were being verbed': ['universal_indicative_tenses_allowed.imperfect indicative'],
 			//'has/have been verbed': ['perfect-in-primary-sequence']
 		}
 	},

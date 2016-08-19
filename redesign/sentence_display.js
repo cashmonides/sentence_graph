@@ -113,6 +113,10 @@ Sentence.prototype.display_translations = each_language(
 Sentence.prototype.display_verb_options = function () {
     // Get the chosen lexemes.
     var chosen_lexemes = this.chosen_lexemes;
+    // Do an error check.
+    if (!('verb' in chosen_lexemes) || !chosen_lexemes.verb) {
+        throw 'No \'verb\' in ' + JSON.stringify(chosen_lexemes);
+    }
     // For each kernel...
     return this.each_kernel(function (kernel) {
         // ...and each language...

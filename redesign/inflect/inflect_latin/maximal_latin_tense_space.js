@@ -5,29 +5,31 @@ var maximal_latin_tense_space = {
 		'voice.active' : {
 			// default, normal, indicative
 			//information comes from ALLOWED
-			'present indicative active': ['latin_indicative_tenses_allowed.present indicative'],
-			'imperfect indicative active': ['latin_indicative_tenses_allowed.imperfect indicative'],
-			'future indicative active': ['latin_indicative_tenses_allowed.future indicative'],
+			'present indicative active': ['universal_indicative_tenses_allowed.present indicative'],
+			'imperfect indicative active': ['universal_indicative_tenses_allowed.imperfect indicative'],
+			'future indicative active': ['universal_indicative_tenses_allowed.future indicative'],
 			
 			//advanced tenses in normal clauses, indicative
 			//information comes from ALLOWED
-			'pluperfect indicative active': ['latin_indicative_tenses_allowed.pluperfect indicative'],
-			'future perfect indicative active': ['latin_indicative_tenses_allowed.future perfect indicative'],
-			'perfect indicative active': ['latin_indicative_tenses_allowed.perfect indicative'],
+			'pluperfect indicative active': ['universal_indicative_tenses_allowed.pluperfect indicative'],
+			'future perfect indicative active': ['universal_indicative_tenses_allowed.future perfect indicative'],
+			'perfect indicative active': ['universal_indicative_tenses_allowed.greek perfect indicative ' + 
+			'|| universal_indicative_tenses_allowed.aorist indicative']
 			//'has/have verbed': ['perfect-in-primary-sequence']
 		}, 
 		'voice.passive' : {
 			// default, normal, indicative
 			//information comes from ALLOWED
-			'present indicative passive': ['latin_indicative_tenses_allowed.present indicative'],
-			'imperfect indicative passive': ['latin_indicative_tenses_allowed.imperfect indicative'],
-			'future indicative passive': ['latin_indicative_tenses_allowed.future indicative'],
+			'present indicative passive': ['universal_indicative_tenses_allowed.present indicative'],
+			'imperfect indicative passive': ['universal_indicative_tenses_allowed.imperfect indicative'],
+			'future indicative passive': ['universal_indicative_tenses_allowed.future indicative'],
 			
 			//advanced tenses in normal clauses, indicative
 			//information comes from ALLOWED
-			'pluperfect indicative passive': ['latin_indicative_tenses_allowed.pluperfect indicative'],
-			'future perfect indicative passive': ['latin_indicative_tenses_allowed.future perfect indicative'],
-			'perfect indicative passive': ['latin_indicative_tenses_allowed.perfect indicative'],
+			'pluperfect indicative passive': ['universal_indicative_tenses_allowed.pluperfect indicative'],
+			'future perfect indicative passive': ['universal_indicative_tenses_allowed.future perfect indicative'],
+			'perfect indicative passive': ['universal_indicative_tenses_allowed.greek perfect indicative ' + 
+			'|| universal_indicative_tenses_allowed.aorist indicative']
 			//'has/have been verbed': ['perfect-in-primary-sequence']
 		}
 	},

@@ -1,19 +1,10 @@
 // This is a way to test kernels.
-// dumping ground of arbitrary test data
 
 
-var testing_allowed_library = {
-    time: ['prior', 'simultaneous', 'subsequent'],
-    voice: ['active', 'passive'],
-    mood: ['indicative', 'subjunctive'],
-    transitivity: ['transitive', 'intransitive'],
-    person_and_number: ['1s', '2s', '3s', '1p', '2p', '3p']
-}
+var random_component_properties = ['person_and_number', 'time', 'voice'];
 
 
 var testing_rules = [
-    // How do we get this rule into the prune function elegantly?
-    'transitive or active',                 //intransitive verbs cannot be passive
     'clause_type.main and secondary => prior',
     'clause_type.main => indicative',
     // latin apparently has no subsequent subjunctive passives.
@@ -207,6 +198,31 @@ var testing_lexemes = {
     			'gerund': 'fearing',
     			'past participle': 'feared',
     			'preterite': 'feared'
+    		}
+		}
+    },
+    feel: {
+        core_properties: {
+            name: 'feel',
+            part_of_speech: 'verb',
+            transitivity: 'transitive',
+            lexical_properties: ['mental verb']
+        },
+        latin: {
+            conjugation: '4',
+            roots: {
+                root_2: 'sent',
+                root_3: 'sēns',
+                root_4: 'sēns'
+            }
+        },
+        english: {
+            roots: {
+    			'default': 'feel',
+    			'final-s': 'feels',
+    			'gerund': 'feeling',
+    			'past participle': 'felt',
+    			'preterite': 'felt'
     		}
 		}
     }

@@ -114,9 +114,10 @@ Kernel.prototype.get_size = function () {
 
 // This method chooses a random sequence for the kernel.
 Kernel.prototype.adopt_random_sequence = function () {
-    // Just pick a random sequence and adopt it.
+    // Just pick a random sequence (from those in
+    // the current module) and adopt it.
     // todo: change if additional sequences are found.
-    this.adopt_sequence(random_choice(['primary', 'secondary']));
+    this.adopt_sequence(random_choice(get_current_module().sequence));
 }
 
 // This function gets the verb component from the kernel.

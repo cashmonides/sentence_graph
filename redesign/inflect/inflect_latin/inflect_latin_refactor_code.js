@@ -154,7 +154,7 @@ var get_agreement_marker = function () {
 var get_helping_verb = function (component) {
     var mood = component.get_property_in_language('mood', 'latin');
     if (mood === 'infinitive') {
-        return 'ESSE';
+        return 'esse';
     } else {
         var tense = get_latin_verb_tense(component);
         // We need mood but not voice; voice is
@@ -178,7 +178,7 @@ var latin_periphrastics = {
             'person_and_number', 'latin');
         var form_of_to_be = latin_form_of_to_be[
             [tense, mood, person_and_number].join(' ')];
-        return component.lexeme.get_root('root_4', 'latin') + '-ŪR-' +
+        return component.lexeme.get_root('root_4', 'latin') + '-ūr-' +
         get_agreement_marker(component) + ' ' + form_of_to_be;
     },
     'passive': function (component) {
@@ -189,7 +189,7 @@ var latin_periphrastics = {
             'person_and_number', 'latin');
         var form_of_to_be = latin_form_of_to_be[
             [tense, mood, person_and_number].join(' ')];
-        return component.lexeme.get_root('root_2', 'latin') + get_latin_root_vowel(component) + 'ND-' +
+        return component.lexeme.get_root('root_2', 'latin') + get_latin_root_vowel(component) + 'nd-' +
         get_agreement_marker(component) + ' ' + form_of_to_be;
     },
 }

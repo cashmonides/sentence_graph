@@ -1,11 +1,11 @@
-// This is our list for types of conjunction.
-// We get it by taking the list of keys in the conjunction library.
-var conj_list = Object.keys(conjunction_library);
-
-// This function expands a conjunction.
+// This function expands (and creates) a conjunction.
 var expand_conj = function () {
-    // We pick a random key from the conjunction library.
-    var key = random_choice(conj_list);
+    // This is the list of possible conjunction choices.
+    // They are keys in the conjunction library and are
+    // the conjunctions allowed in the current module.
+    var conj_choices = get_current_module().allowed_conjunctions;
+    // We pick a random key from the possibilities.
+    var key = random_choice(conj_choices);
     // We return a conjunction constructed from that key.
     return new Conjunction(key);
 }
@@ -56,16 +56,3 @@ var non_default_direction = 'right';
 
 // Our directions are left and right.
 var directions = ['left', 'right'];
-
-// This function makes a random sentence.
-// It also prints as it goes.
-var log_make_random_sentence = function () {
-    // We pick a random seed and then log it.
-    // For now our seed is always ['k', 'c', 'k'].
-    // var seed = ['k', 'c', 'k'];
-    // We make a random sentence and display the sentence.
-    var sentence = make_random_sentence();
-    display_on_page(sentence.display_without_translations());
-    // We return our sentence.
-    return sentence;
-}

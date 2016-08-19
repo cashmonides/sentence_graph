@@ -97,13 +97,13 @@ var conjunction_library = {
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_left_time_restriction: {
             english: null,
@@ -137,13 +137,13 @@ var conjunction_library = {
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_left_time_restriction: {
             english: null,
@@ -177,13 +177,13 @@ var conjunction_library = {
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_left_time_restriction: {
             english: null,
@@ -217,8 +217,8 @@ var conjunction_library = {
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
@@ -257,8 +257,8 @@ var conjunction_library = {
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
@@ -297,8 +297,8 @@ var conjunction_library = {
         k_left_lexical_restriction: 'verb of commanding',
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
@@ -337,8 +337,8 @@ var conjunction_library = {
         k_left_lexical_restriction: 'verb of fearing',
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
@@ -377,8 +377,8 @@ var conjunction_library = {
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
@@ -417,8 +417,8 @@ var conjunction_library = {
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
@@ -457,8 +457,8 @@ var conjunction_library = {
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
@@ -497,8 +497,8 @@ var conjunction_library = {
         k_left_lexical_restriction: null,
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,
@@ -534,11 +534,11 @@ var conjunction_library = {
         removable: false,
         k_left_construction: null,
         k_right_construction: 'indirect question',
-        k_left_lexical_restriction: 'mental',
+        k_left_lexical_restriction: 'mental verb',
         k_left_mood_restriction: {
             english: null,
-            latin: null,
-            ssslatin: null
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
         },
         k_right_mood_restriction: {
             english: null,

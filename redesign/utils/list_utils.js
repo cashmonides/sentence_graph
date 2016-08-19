@@ -49,6 +49,10 @@ var concat_all = function (list_of_lists) {
 
 // This function maps a list, then concatenates the results.
 var concat_map = function (list, f) {
+    if (!Array.isArray(list)) {
+        throw 'This function only works with the list monad, not ' +
+        JSON.stringify(list) + '!';
+    }
     return concat_all(list.map(f));
 }
 

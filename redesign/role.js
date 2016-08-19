@@ -56,9 +56,11 @@ Role.prototype.describe_in_language = function (language) {
 // if it works, break and if not, revert
 
 Role.prototype.add_random_properties = function () {
-    // The properties we need to add are the keys
-    // of the testing_allowed_library.
-    var properties = Object.keys(testing_allowed_library);
+    // The properties we need to add are the random component properties.
+    var properties = random_component_properties;
+    
+    // Get the module.
+    var module = get_current_module();
     
     // i is just a looping variable.
     var i;
@@ -90,7 +92,7 @@ Role.prototype.add_random_properties = function () {
             // Check whether the property is chosen.
             if (!this.component.chosen(property)) {
                 // value is the randomly chosen value of the property.
-                var value = random_choice(testing_allowed_library[property]);
+                var value = random_choice(module[property]);
             } else if (this.component.get_property_default(property).slice(
                 0, 4) === 'not ') {
                 // So it starts with not.
@@ -100,7 +102,7 @@ Role.prototype.add_random_properties = function () {
                 // value is the randomly chosen value of the property,
                 // chosen not to be the illegal value.
                 var value = random_choice(
-                    testing_allowed_library[property].filter(function (x) {
+                    module[property].filter(function (x) {
                         return x !== illegal;
                     })
                 );

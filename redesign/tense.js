@@ -81,6 +81,18 @@ var list_tenses_in = function (tense_obj) {
 }
 
 // To get a random tense, choose randomly from the possibilities.
-var random_tense_from = function (tense_obj) {
-    return random_choice(list_tenses_in(tense_obj));
+var random_tense_from = function (tense_obj, allowed_tenses_apply) {
+    var tenses = list_tenses_in(tense_obj);
+    if (!allowed_tenses_apply) {
+        return random_choice(tenses);
+    }
+    var tenses_allowed = get_current_module().universal_indicative_tenses_allowed;
+    var pruned_tenses = tenses.filter(function (x) {
+        return tenses_allowed.indexOf(x.name) !== -1;
+    });
+    if (pruned_tenses.length === 0) {
+        return random_choice(tenses);
+    } else {
+        return random_choice(pruned_tenses);
+    }
 }

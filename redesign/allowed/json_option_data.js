@@ -68,14 +68,16 @@ var drop_down_language = 'latin';
 
 // This variable controls the number of dummies to include.
 var number_of_dummies = {
-    'verb': 1
+    'verb': 3,
+    'conjunction': 5
 };
 
 // drop_down_path gives the order of categories which the user will see while navigating through a drop down
 // var drop_down_path = ['lexeme', 'person_and_number', 'voice', 'tense_and_mood'];
 // var drop_down_path = ['person_and_number', 'voice', 'tense_and_mood', 'lexeme'];
 // var drop_down_path = ['voice', 'tense_and_mood', 'lexeme', 'person_and_number'];
-var drop_down_path = ['lexeme', 'tense_and_mood', 'voice', 'person_and_number'];
+// var drop_down_path = ['lexeme', 'tense_and_mood', 'voice', 'person_and_number'];
+// var drop_down_path = ['lexeme', 'voice', 'person_and_number'];
 
 // default order of drop downs in the absence of any given order
 var overall_ordering_preference = [
