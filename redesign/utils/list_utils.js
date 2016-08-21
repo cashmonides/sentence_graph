@@ -56,9 +56,49 @@ var concat_map = function (list, f) {
     return concat_all(list.map(f));
 }
 
+// This function takes the sum of a list of numbers.
+var sum = function (list) {
+    return list.reduce(function (x, y) {return x + y}, 0);
+}
+
 // This function takes the product of a list of numbers.
 var product = function (list) {
     return list.reduce(function (x, y) {return x * y}, 1);
+}
+
+// This function counts the number of items in a list with a certain property.
+var count = function (list, f) {
+    // The total number of items satisfying the condition is initially zero.
+    var total = 0;
+    // We loop over the list.
+    for (var i = 0; i < list.length; i++) {
+        // We add one to the total for each item satisfying the condition.
+        if (f(list[i])) {
+            total++;
+        }
+    }
+    // We return the total.
+    return total;
+}
+
+// This function counts the number of items in a list
+// equal to a certain value.
+var count_occurances = function (list, value) {
+    return count(list, function (x) {
+        return x === value;
+    });
+}
+
+// This function builds a list of repetitions of a value.
+var repeat = function (value, n) {
+    // Initialize an empty result.
+    var result = [];
+    // Push value to the result n times.
+    for (var i = 0; i < n; i++) {
+        result.push(value);
+    }
+    // Return the result.
+    return result;
 }
 
 // This function converts arguments to a list.

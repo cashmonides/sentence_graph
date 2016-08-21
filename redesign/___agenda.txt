@@ -1,37 +1,20 @@
 /////
 
-DONE AGENDA (everything before nouns)
-
-- put sentences up top (done)
-
-- refactor "correct answer" such that there's both a path and a final string (done)
-
-- write a compare_path path function (done)
-    - which returns a bool (correct or not)
-    - which also returns a list or similar which can turn parts red and green
-
-- submit button (done)
-
-- display path function (done)
-    - red and green functionality (done)
-    
-    
-- dummy lexemes (both verbs and conjunctions) (done)
-    - for first step, just pick three lexemes (we'll make it more nuanced very soon)
-    - build in defensiveness, if not enough lexemes exist, then just skip those without crashing
-
-
-
 SHORT TERM
 
-- allowed (e.g. allowed conjunctions) should govern kernel generation (now it just governs drop down generation)
+- allowed is not controling drop down parameters
+    - drop/non-drop
+    - number of dummy options
+    - swap
 
-- allowed is currently fully working in time, mood, person_and_number, sequence, and tense
-- it is also controling correct conjunction
-- it is also controling drop down path
-- it is not controling verbs or drop down options
-- it is not controling drop down language
-- it is not controling drop display level
+- example of wanted function behavior for drop/non-drop
+- ['subject', 'verb', conjunction', 'verb'] -> ['drop', 'non-drop', 'non-drop', 'drop']
+- the subject and second verb become drop downs and the first verb and conjunction do not
+        
+- drop/non-drop in detail
+    - prob. should operate on role so it's language independent
+    - at some point we'll need to reorder and scramble things in Latin so we shouldn't code ourselves into a corner
+
 
 
 SHORT TERM MIDTERM
@@ -58,8 +41,6 @@ SHORT TERM MIDTERM
 
 
 
-- package as many display preferences and allowed parameters as possible into a level
-
 
 3. time distinctions
 
@@ -73,7 +54,8 @@ SHORT TERM MIDTERM
     - teacher should be able to update at a fine-grained level
 
 5. other types of data
-- try sending zoological data to drop down
+- try sending zoological (taxonomy) data to drop downs
+
 
 6. ambiguity
 - ambiguity resolution
@@ -94,9 +76,12 @@ SHORT TERM MIDTERM
 8. adding more lexemes
 
 - add a bunch of verb lexemes
-    - transitive mental verbs
 
 - add more conjunctions to conjunction library
+    
+9. make vocabulary cheat sheets
+
+- make vocabulary cheat sheets
 
 LONG TERM MIDTERM AGENDA
 
@@ -112,9 +97,11 @@ LONG TERM MIDTERM AGENDA
 - testing
     - make a button/drop-down/slider to set level (just for testing)
 
+- testing dummy lexemes/drop downs
+    - build in defensiveness, if not enough lexemes exist, then just skip those without crashing
 
 
-9. integration
+10. integration
 - integrate into quiz and profile
 
 
@@ -127,6 +114,33 @@ LONGER TERM
     - lexeme, principal part, infix, ending
     - attack, oppugnav, era, s -> oppugnav-era-s
     - goal: nested drop down can be used as a latin morphology trainer
+
+
+////////
+
+
+
+
+randomly generate maximal templates
+    aS S gen-S a-gen-S V a-O O with-abl adj-with-abl prep-phrase
+
+randomly fill whole template
+
+remove certain parts of template (replace with none)
+
+add nouns
+
+add none display
+
+add adjectives
+
+
+
+
+
+
+
+/////////////////
 
 
 DONE AND OLDER STUFF BELOW
@@ -155,13 +169,7 @@ DONE AND OLDER STUFF BELOW
 (only an issue to distinguish between flv and pres ctf and e.g. to tell whether we want pluperf subj or perf subj)
 
 
-/////
 
-
-
-
-
-/////
 What has happened and our plans:
 
 

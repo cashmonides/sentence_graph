@@ -1,19 +1,3 @@
-/*
-var test_data = [
-    'Lorum',
-    'Dolor',
-    'Ipsus',
-    ['Sit', ['Amet', 'Consecutur']],
-    'Adipsing',
-    ['Tibi', [
-        ['Arma', ['Virumque', 'Cano']],
-        ['At', ['Regina', 'Gravi', 'Iamdudem']],
-        'Saucia',
-        'Cura'
-    ]]
-];
-*/
-
 var create_menu = function (path, data, callback) {
     var div;
     var li;
@@ -62,6 +46,8 @@ var test_add_drop_down_to_page = function (drop_down) {
 
 window.onload = function () {
     var sentence = main(true);
+    var drop_down_language = weighted_choice(
+        get_current_module().drop_down_language);
     var correct_answers = sentence.get_all_translations_and_paths(
         drop_down_language);
     var drops = sentence.get_all_drop_downs(drop_down_language);

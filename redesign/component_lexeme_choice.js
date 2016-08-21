@@ -55,12 +55,12 @@ Component.prototype.accepts_transitivity_of = function (lexeme) {
 
 // This method determines whether a component can accept a lexeme.
 Component.prototype.accepts_lexeme = function (lexeme) {
-    // We check the part of speech, lexical restrictions,
-    // and transitivity.
-    // Having three conditions like this may be unhealthy,
+    // We check lexical restrictions and transitivity.
+    // Having two conditions like this may be unhealthy,
     // but I don't think it's that bad yet.
-    return this.accepts_part_of_speech_of(lexeme) &&
-    this.accepts_lexical_restrictions_of(lexeme) &&
+    // Note that part of speech is checked earlier.
+    // todo: Adapt for nouns when the time comes.
+    return this.accepts_lexical_restrictions_of(lexeme) &&
     this.accepts_transitivity_of(lexeme);
 }
 
@@ -77,6 +77,16 @@ Component.prototype.choose_random_lexeme = function (
     // (We could also have used bind, but I feel like
     // that can be less clear.)
     var self = this;
+    // We get the part of speech.
+    var part_of_speech = this.get_part_of_speech();
+    // We get a list of allowed lexeme names for the given part of speech
+    // from our settings, with dictionary lookup and string concatination.
+    var allowed_lexemes = set_from(get_current_module()[
+        'allowed_' + part_of_speech + 's']);
+    // We make a function that detects whether a lexeme is not yet used.
+    var not_yet_used = function (name) {
+        return !(name in kernel_chosen_lexemes || name in chosen_lexemes);
+    }
     // We filter our lexemes by a function that checks whether
     // the role accepts them, that is, the accepts_lexeme method
     // bound to the component. We also check that the lexeme
@@ -85,16 +95,33 @@ Component.prototype.choose_random_lexeme = function (
         // Get the name. (We compare lexemes by their names.)
         var name = lexeme.get_name();
         // Check that no one else has chosen the lexeme,
-        // in the kernel or outside of it, and that this component
-        // will accept the lexeme.
-        return !(name in kernel_chosen_lexemes ||
-        name in chosen_lexemes)
+        // in the kernel or outside of it, that the lexeme is one of those allowed,
+        // and that this component will accept the lexeme.
+        return not_yet_used(name)
+        && name in allowed_lexemes
         && self.accepts_lexeme(lexeme);
     });
     // We check that there are some lexemes which we can use.
     if (filtered_lexemes.length === 0) {
-        // There are no usable lexemes! We fail.
-        return false;
+        // We become less restrictive.
+        filtered_lexemes = all_lexemes.filter(function (lexeme) {
+            // Get the name. (We compare lexemes by their names.)
+            var name = lexeme.get_name();
+            // Get the part of speech.
+            var lexeme_part_of_speech = lexeme.get_part_of_speech();
+            // Check that no one else has chosen the lexeme,
+            // in the kernel or outside of it, that the lexeme has
+            // the right part of speech, and that this component
+            // will accept the lexeme.
+            return not_yet_used(name)
+            && lexeme_part_of_speech === part_of_speech 
+            && self.accepts_lexeme(lexeme);
+        });
+        // We check that there are some lexemes which we can use.
+        if (filtered_lexemes.length === 0) {
+            // There are no usable lexemes! We fail.
+            return false;
+        }
     }
     // We choose randomly from our list of lexemes.
     var chosen_lexeme = random_choice(filtered_lexemes);

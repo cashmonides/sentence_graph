@@ -156,19 +156,29 @@ Sentence.prototype.pick_drop_down_lexemes = function () {
         }
         part_of_speech = lexeme.get_part_of_speech();
         if (!(part_of_speech in chosen_lexemes)) {
+            // Get the lexemes allowed by the module with
+            // the correct part of speech.
+            var allowed_lexemes = get_current_module()[
+                'allowed_' + part_of_speech + 's'
+            ].map(function (x) {
+                return Lexeme.lexemes[x];
+            }).filter(function (x) {
+                return x !== undefined;
+            });
+            // Find the number of dummies.
             var n = number_of_dummies[part_of_speech];
-            // Check that the number of dummies is a number 
+            // Check that the number of dummies is a number.
             if (typeof n !== 'number') {
                 throw 'n is not a number! It is not even ' +
                 'Not A Number! It is ' + JSON.stringify(n);
             }
             // Only keep the non-chosen lexemes with
             // the correct part of speech.
-            var allowed_dummies = all_lexemes.filter(function (x) {
+            var allowed_dummies = allowed_lexemes.filter(function (x) {
                 return x.get_part_of_speech() === part_of_speech &&
                 !(x.get_name() in original_chosen_lexemes);
-            })
-            // Automatically defensive.
+            });
+            // Automatically defensive (I think).
             chosen_lexemes[part_of_speech] =
             shuffle(allowed_dummies).slice(0, n);
         }
