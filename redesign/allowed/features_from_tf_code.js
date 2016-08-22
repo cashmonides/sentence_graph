@@ -15,7 +15,7 @@ var make_feature_getter = function (what_feature, what_language) {
     }
 }
 
-var get_feature_from_tf = {}
+var get_feature_from_tf = {};
 
 get_feature_from_tf.english = {
     'tense_and_mood': make_feature_getter('tense_and_mood', 'english'),

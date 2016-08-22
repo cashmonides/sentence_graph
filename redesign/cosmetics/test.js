@@ -48,12 +48,20 @@ window.onload = function () {
     var sentence = main(true);
     var drop_down_language = weighted_choice(
         get_current_module().drop_down_language);
-    var correct_answers = sentence.get_all_translations_and_paths(
-        drop_down_language);
-    var drops = sentence.get_all_drop_downs(drop_down_language);
+    var drops_and_non_drops = sentence.get_all_drops_and_non_drops(drop_down_language);
+    var roles = drops_and_non_drops.map(function (x) {
+        return x.role;
+    });
+    var drop_choices = choose_drops_and_non_drops(roles);
+    var used_drops_and_non_drops = [];
+    var i;
+    var role_num = drops_and_non_drops.length;
+    for (i = 0; i < role_num; i++) {
+        used_drops_and_non_drops.push(drops_and_non_drops[i][drop_choices[i]]);
+    }
     var parent_el = el('drop_down_div');
     var e;
-    for (var i = 0; i < drops.length; i++) {
+    for (i = 0; i < role_num; i++) {
         if (i !== 0) {
             e = document.createElement('div');
             e.innerHTML = '&nbsp;';
@@ -63,7 +71,7 @@ window.onload = function () {
         e = document.createElement('div');
         e.style.display = 'inline-block';
         parent_el.appendChild(e);
-        drops[i].attach_to(e);
+        used_drops_and_non_drops[i].attach_to(e);
     }
     // Filter out the non-drop downs.
     var actual_drops = drops.filter(function (x) {
