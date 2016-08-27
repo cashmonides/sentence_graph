@@ -1,3 +1,17 @@
+//purely cosmetic output of latin
+
+var latin_cosmetic_level = {
+    1: {
+        'case': {
+            'english': 'lower',
+            'latin': 'upper'
+        },
+        'dashes': true
+    }
+}
+
+
+
 //extra items in lexicon and drop
 //none option
 var latin_extra_levels = {

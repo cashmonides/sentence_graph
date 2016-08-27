@@ -4,22 +4,22 @@ var taxonomy_levels = {
     //we'll set 1000 as our max level, including every possible category
     
     1000: {
-    	name: "review", 		
-    	domain: "eukarya",
-    	kingdom: "animalia",
-    	phylum: "arthropoda",
-    	superclass: "review",
-    	tax_class: "arachnida",
-    	subclass: "review",
-    	clade: "review",
-    	order: "araneae",   
-    	suborder: "review",
-    	family: "review",
-    	genus: "review",
-    	species: "review",
+    // 	name: "review", 		
+    // 	domain: "eukarya",
+    // 	kingdom: "animalia",
+    // 	phylum: "arthropoda",
+    // 	superclass: "review",
+    // 	tax_class: "arachnida",
+    // 	subclass: "review",
+    // 	clade: "review",
+    // 	order: "araneae",   
+    // 	suborder: "review",
+    // 	family: "review",
+    // 	genus: "review",
+    // 	species: "review",
     
     
-    	vor: ["carnivore", "herbivore", "omnivore", "insectivore", "detrivore"]
+    	vor: ["carnivore", "herbivore", "omnivore", "insectivore", "detrivore"],
     	vert: ["invertebrate", "vertebrate"],
     	symmetr: ["bilateral symmetry", "radial symmetry", "asymmetrical"],
     	ped: ["biped", "quadruped", "vestigial quadruped", "biped, originally quadruped", "arthropod", "macropod", "cephalopod"],

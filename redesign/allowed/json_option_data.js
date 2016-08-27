@@ -66,12 +66,6 @@ var properties_to_leave_out = {
 // var drop_down_language = 'english';
 var drop_down_language = 'latin';
 
-// This variable controls the number of dummies to include.
-var number_of_dummies = {
-    'verb': 3,
-    'conjunction': 5
-};
-
 // drop_down_path gives the order of categories which the user will see while navigating through a drop down
 // var drop_down_path = ['lexeme', 'person_and_number', 'voice', 'tense_and_mood'];
 // var drop_down_path = ['person_and_number', 'voice', 'tense_and_mood', 'lexeme'];

@@ -66,6 +66,7 @@ $("#menu").menu();
 <script src="../allowed/get_settings_option.js"></script>
 <script src="../allowed/drop_display_levels.js"></script>
 <script src="../allowed/drop_non_drop_choice.js"></script>
+<script src="../allowed/drop_display_level_accessors.js"></script>
 <script src="../inflect/inflect_english/prune_tf_space.js"></script>
 <script src="../inflect/inflect_english/regime_to_translation_formula.js"></script>
 <!--The files below depend on things above.-->
@@ -86,6 +87,9 @@ This turned out to be a bad idea.
 </head>
 
 <body>
+    <input id='module_input'></input>
+    <button onclick='set_module()'>Set the module.</button>
+    <button onclick='make_new_sentence()'>Create a sentence.</button>
     <br/>
     <br/>
     <br/>

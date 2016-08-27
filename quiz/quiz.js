@@ -392,8 +392,11 @@ Quiz.prototype.get_modes = function () {
     return Object.keys(ALL_MODULES[this.module.id].mode_ratio);
 }
 
+var global_sickness = 0;
+
 Quiz.prototype.next_mode = function (error) {
     if (!error && this.game && this.module.game_change_method === 'one_game') {
+        global_sickness = 0;
         return;
     }
     
@@ -409,7 +412,11 @@ Quiz.prototype.next_mode = function (error) {
             delete allowed[i];
         }
         */
-        
+        global_sickness++;
+        if (global_sickness > 30) {
+            alert('Everything is broken!');
+            return;
+        }
         for (var i = 0; i < this.sick_modes.length; i++) {
             console.log('sick mode being added = ', this.sick_modes[i])
             delete allowed[this.sick_modes[i]];
@@ -482,6 +489,7 @@ Quiz.get_mode = function(mode_number) {
         case 5 : return new InputModeGame();
         case 6 : return new MFModeGame();
         case 7 : return new SyntaxModeGame();
+        case 8 : return new KCKModeGame();
         default : throw "no game mode triggered";
     }
     
@@ -1047,6 +1055,14 @@ Quiz.prototype.set_word_selector = function(sentence){
     this.word_selector = new WordSelector("testbox", text_data);
     this.word_selector.setup();    
     
+};
+
+// todo new check that this works
+Quiz.prototype.add_question_text = function(sentence){
+    //console.log"DEBUG 9-29 sentence in set_word_selector", sentence);
+    el("testbox").innerHTML = sentence;
+    //console.logsentence.text);
+    this.sentence = sentence;
 };
 
 Quiz.prototype.get_selected_region = function(){

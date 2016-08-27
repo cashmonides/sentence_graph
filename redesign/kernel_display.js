@@ -131,14 +131,19 @@ Kernel.prototype.display_verb_options_in_language = function (
     return JSON.stringify(json_options, null, 2);
 }
 
-// This method makes a drop down for a verb in a language.
-Kernel.prototype.get_verb_drop_down = function (
+// This method makes a drop-down and non-drop-down for a verb in a language.
+Kernel.prototype.get_verb_drop_and_non_drop = function (
     language, verb_lexeme_options) {
     var json_options = this.get_verb_json_options(
         language, verb_lexeme_options);
     var verb_translation_and_path =
     this.get_verb_translation_and_path(language);
-    return new DropDown('VERB', json_options, verb_translation_and_path);
+    return {
+        'role': 'verb',
+        'drop': new DropDown(
+            'VERB', json_options, verb_translation_and_path.path),
+        'non_drop': new NonDropDown(verb_translation_and_path.translation)
+    }
 }
 
 
@@ -187,17 +192,12 @@ Kernel.prototype.get_verb_translation_and_path = function (language) {
     }
 }
 
-// This method gets all of a kernel's correct translation-and-path pairs.
-Kernel.prototype.get_all_translations_and_paths = function (language) {
-    // todo: Fix this when we go beyond verbs.
-    return [this.get_verb_translation_and_path(language)];
-}
-
-// This method gets all drop downs for a kernel.
+// This method gets all drop-downs and non-drop-downs for a kernel.
 // todo: Fix this when we go beyond verbs.
-Kernel.prototype.get_all_drop_downs = function (language, lexeme_options) {
+Kernel.prototype.get_all_drops_and_non_drops = function (
+    language, lexeme_options) {
     if (!('verb' in lexeme_options) || !lexeme_options.verb) {
         throw 'No \'verb\' in ' + JSON.stringify(lexeme_options);
     }
-    return [this.get_verb_drop_down(language, lexeme_options.verb)];
+    return [this.get_verb_drop_and_non_drop(language, lexeme_options.verb)];
 }

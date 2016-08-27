@@ -1,20 +1,20 @@
-// MC mode.
+// KCK mode.
 
-var MCMode3Game = function(){
+var KCKModeGame = function () {
     this.data = null;
     this.quiz = null;
     // todo we here assume that 1 is the initial level
     this.level = 1;
 };
 
-MCMode3Game.cell_1_feedback_right = ["Correct!", "Excellent!"];
-MCMode3Game.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
-MCMode3Game.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
+KCKModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
+KCKModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
+KCKModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
-MCMode3Game.prototype.attach = function(){
+KCKModeGame.prototype.attach = function () {
     // make word selector nonclickable (somewhere in set word selector)
-    //(should word_selector.setup bave a flag for clickable or not clickable?
-    //maybe something like in setup, if clickable is false then it just sets r[0] to false
+    // (should word_selector.setup bave a flag for clickable or not clickable?
+    // maybe something like in setup, if clickable is false then it just sets r[0] to false
 
     //todo
     set_display("latin_answer_choices", 'initial');
@@ -35,39 +35,34 @@ MCMode3Game.prototype.attach = function(){
 };
 
 // set_level now moved up
-MCMode3Game.prototype.set_level = function (new_level) {
+KCKModeGame.prototype.set_level = function (new_level) {
     this.level = new_level;
 }
 
 
-MCMode3Game.prototype.get_mode_name = function() {
-    return "latin";
+KCKModeGame.prototype.get_mode_name = function() {
+    return "kck";
 };
 
 
-MCMode3Game.prototype.next_question = function () {
-    var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_level'];
+KCKModeGame.prototype.next_question = function () {
+    var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_cosmetic_level', 'kck_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
     
     //sets up our lexicon
-    console.log("DEBUG 1/15 this.quiz.module.id =", this.quiz, this.quiz.module, this.quiz.module.id)
     var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
-    console.log('DEBUG 11-16 lexicon = ', list_of_lexeme_strings)
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
-    console.log("DEBUG 4-25 checkpoint 1, current_Lexicon produced, about to make output");
-    console.log("DEBUG 4-25 about to make output with this.level = ", this.level);
-    console.log("DEBUG 4-25 about to make output with current_lexicon = ", current_lexicon);
-    var data = make_output(this.level, current_lexicon);
-    console.log("DEBUG 4-25 exited make_output with data = ", data);
-    this.cheat_sheet = data.cheat_sheet;
-    console.log("DEBUG 4-25 data.cheat_sheet = ", data.cheat_sheet);
-    //sets data
+    // todo implement generate_sentence function returning a sentence
+    var sentence = generate_sentence();
+    // this.cheat_sheet = data.cheat_sheet;
+    // sets data
     // var data = make_output(this.level, null, 'quiz_english');
-    this.question = data.question;
-    //todo is the following otiose?
-    this.sentence = data.sentence;              // text displayed in display box
-    this.target_indices = data.target_indices;      //highlighted word if necessary
+    // todo implement or find some method that does this
+    this.question = sentence.get_text_in_source_language();
+    // todo is the following otiose?
+    // this.sentence = data.sentence;              // text displayed in display box
+    // this.target_indices = data.target_indices;      //highlighted word if necessary
 
     
     
@@ -75,21 +70,19 @@ MCMode3Game.prototype.next_question = function () {
     this.quiz.update_display();
 
     Quiz.set_question_text("Translate the following sentence:");
-    this.quiz.set_word_selector(data.sentence);
+    this.quiz.add_question_text(this.question);
     //todo check if this works
     
-    //drop_downs is a list of dictionaries
-        //each dictionary has 3 properties:
-        //heading
-        //choices
-        //correct answer (string or index?)
-    //is the following formulation otiose? should we just do data.drop_downs?
-    this.drop_downs = data.drop_downs;
+    // todo implement or find some method that does this
+    this.drops_and_non_drops = sentence.get_drops_and_non_drops_in_target_language();
     
-    this.give_away_phrase = data.give_away_phrase;
-    this.give_away_ending_phrase = data.give_away_ending_phrase;
-    this.correct_answer = this.drop_downs.map(function (x) {
-        return x.correct_answer || x.non_drop_text}).join(' ');
+    this.give_away_phrase = "The correct answer was: ";
+    this.give_away_ending_phrase = ".";
+    
+    // todo implement or find some method that does this
+    this.correct_answer_as_string = sentence.get_correct_answer_string();
+    
+    this.correct_answer_as_path = sentence.get_correct_answer_paths();
     
     // console.log("DEBUG this.correct_answer = ", this.correct_answer);
     
@@ -114,32 +107,39 @@ MCMode3Game.prototype.next_question = function () {
     e.id = 'latin_answer_wrapper';
     new_answer_choices.appendChild(e);
     
-    //todo - I found this in the code - what is the point of it?
+    // todo - I found this in the code - what is the point of it?
     // remove_children(document.getElementById("answer_choices"));
-    //todo why is this capitalized
+    // todo why is this capitalized
     Quiz.set_question_text(this.question);
     this.quiz.set_word_selector(this.sentence);
     
    
-    // this.quiz.word_selector.is_clickable = false;
-    // this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
+    this.quiz.word_selector.is_clickable = false;
+    this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
     
+    /*
     if (this.target_indices) {
         this.target_indices.forEach(function (x) {state.word_selector.set_highlighted(x, true)});
     }
+    */
 
-    // Hacky way to guarantee a drop down.
-    var x = this.make_drop_down(e);
-    if (x === 0) {this.next_question()}
+    // Make the drop downs.
+    this.make_drop_down(e);
 
 };
 
-MCMode3Game.prototype.display = function (x) {
+KCKModeGame.prototype.display = function (x) {
     return x.type === 'non_drop' || x.correct_answer || this.none_display;
 };
 
 //master function makes all the drops and non-drops
-MCMode3Game.prototype.make_drop_down = function (e) {
+KCKModeGame.prototype.make_drop_down = function (e) {
+    // todo is this right?
+    for (var i = 0; i < this.drop_downs.length; i++) {
+        // todo do we need breaks?
+        this.drop_downs[i].attach_to(e);
+    }
+    /*
     //initialize a count of how many drop down menus we'll have
     // if it remains 0 we start all over again
     var drops = 0;
@@ -174,18 +174,17 @@ MCMode3Game.prototype.make_drop_down = function (e) {
         }
     });
     return drops
+    */
 };
 
 
 
-MCMode3Game.prototype.process_answer = function(){
-    
-    
-    
-    var self = this;
+KCKModeGame.prototype.process_answer = function(){
     var is_correct = this.drop_downs.every(function (x) {
-        return (x.type === 'non_drop') || (!self.display(x)) ||
-            (selected_option(x.HTML_element) === strip(x.correct_answer || x.none_option || 'none'))});
+        // todo how do we do this?
+        return x.check_drop_down_correctness();
+    });
+    this.display_green_and_red_path();
     if (is_correct) {
         this.process_correct_answer();
     } else {
@@ -201,11 +200,11 @@ MCMode3Game.prototype.process_answer = function(){
 
 
 
-MCMode3Game.prototype.process_correct_answer = function () {
+KCKModeGame.prototype.process_correct_answer = function () {
     this.quiz.increment_score();
     
     console.log("DEBUG entering 2nd random_choice");
-    var cell_1 = random_choice(MCMode3Game.cell_1_feedback_right);
+    var cell_1 = random_choice(KCKModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
 
@@ -214,7 +213,7 @@ MCMode3Game.prototype.process_correct_answer = function () {
 
 
 
-MCMode3Game.prototype.process_incorrect_answer = function () {
+KCKModeGame.prototype.process_incorrect_answer = function () {
     this.quiz.submodule.incorrect_streak ++;
     if (this.quiz.submodule.incorrect_streak === 1) {
         this.quiz.decrement_score();
@@ -225,8 +224,8 @@ MCMode3Game.prototype.process_incorrect_answer = function () {
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
         console.log("DEBUG entering 3rd random_choice");
         
-        var cell_1 = random_choice(MCMode3Game.cell_1_feedback_wrong);
-        var cell_3 = random_choice(MCMode3Game.cell_3_feedback_wrong);
+        var cell_1 = random_choice(KCKModeGame.cell_1_feedback_wrong);
+        var cell_3 = random_choice(KCKModeGame.cell_3_feedback_wrong);
         
         
         
@@ -238,14 +237,22 @@ MCMode3Game.prototype.process_incorrect_answer = function () {
         this.give_away_answer();
     }
     this.quiz.update_display();
-    // MCMode3 has no real word selector
+    // KCKMode has no real word selector
     // this.quiz.word_selector.clear();
 };
 
-MCMode3Game.prototype.give_away_answer = function (){
+KCKModeGame.prototype.give_away_answer = function () {
     var fbox = el("feedbackbox");
-    fbox.innerHTML = this.give_away_phrase + this.correct_answer + this.give_away_ending_phrase;
+    fbox.innerHTML = this.display_give_away_answer();
     this.quiz.question_complete();
 };
 
+KCKModeGame.prototype.display_give_away_answer = function () {
+    // todo figure out how to combine string and path
+    return this.give_away_phrase + ' [todo] ' + this.give_away_ending_phrase
+}
 
+// todo implement this (maybe a new div?)
+KCKModeGame.prototype.display_green_and_red_path = function () {
+    throw 'Not yet implemented!';
+}

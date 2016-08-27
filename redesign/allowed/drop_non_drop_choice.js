@@ -33,12 +33,6 @@ var choose_drops_and_non_drops = function (list_of_role_strings) {
         list_of_role_strings, len, drop_non_drop_settings, min, max);
 }
 
-// It's annoying that this is how you do this, but it is.
-var get_drop_non_drop_settings = function () {
-    return drop_display_levels[
-        get_current_module().drop_display_level].drop_non_drop_map;
-}
-
 var get_chance = function (role, drop_non_drop_settings) {
     var result = drop_non_drop_settings[role + '_drop'];
     if (result === undefined) {

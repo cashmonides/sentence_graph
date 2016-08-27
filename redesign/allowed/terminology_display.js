@@ -1,20 +1,101 @@
 var terminology_display_dictionary = {
-    'latin' : {
-        'imperfect subjunctive': {
-            'basic': 'same time subjunctive 2nd degree',
-            'advanced': 'imperfect subjunctive'
-        }
+    //latin cases
+    
+    
+    //if the word nominative occurs in the control flow
+    'nominative': {
+        //its default output if basic is true is the following
+        'basic': 'subject',
+        //its default if advanced is true is the follow
+        'advanced': 'nominative',
+        //
+        'translation_formula': 'subject'
     },
-    'english': {
-        'preterite': {
-            'basic': 'past',
-            'advanced': 'preterite'
-        }
+    'genitive': {
+        'basic': '\'of\'',
+        'advanced': 'genitive'},
+    'dative': {
+        'basic': '\'to\'',
+        'advanced': 'dative'},
+    'accusative': {
+        'basic': 'object',
+        'advanced': 'accusative'},
+    'ablative': {
+        'basic': '\'with/by\'',
+        'advanced': 'ablative'},
+    //latin verb tenses
+    'present indicative': {
+        'basic': 'present',
+        'advanced': 'present indicative'
+        },
+    'imperfect indicative': {
+        'basic': 'past (repeatedly)',
+        'advanced': 'imperfect indicative'
+        },
+    'future indicative': {
+        'basic': 'future',
+        'advanced': 'future indicative'
+        },
+    'perfect indicative': {
+        'basic': 'past (once)',
+        'advanced': 'perfect indicative'
+        },
+    'pluperfect indicative': {
+        'basic': 'had VERBed',
+        'advanced': 'pluperfect indicative'
+        },
+    'future perfect indicative': 'will have...',
+    'present subjunctive': 'same time subjunctive 1st degree',
+    'imperfect subjunctive': 'same time subjunctive 2nd degree',
+    'perfect subjunctive': 'prior time subjunctive 1st degree',
+    'pluperfect subjunctive': {
+        'basic': 'prior time subjunctive 2nd degree',
+        'advanced': 'pluperfect subjunctive',
+        'translation_formula': 'no translation formula'
+    //sequence
+    'primary sequence': '1st degree',
+    'secondary sequence': 'e2nd degre',
+    //english verb tenses
+    'preterite': 'past (once)',
+    'pluperfect': 'had...', 
+    'past continuous': 'was...-ing', 
+    'future perfect': 'will have...-ed', 
+    'present subjunctive': 'present subjunctive???', 
+    'may tense': 'may...', 
+    'might tense': 'might...', 
+    'can tense': 'can...', 
+    'could tense': 'could...', 
+    'should tense': 'should...', 
+    'would tense': 'would...', 
+    'would tense continuous': 'would be...', 
+    'would tense perfect': 'would have...',
+    
+    
+    
+    'subsequent': {
+            'regime.relative': {
+                'basic': 'subsequent',
+                'advanced': 'subsequent',
+                'translation_formula': {
+                    'sequence.primary': 'will VERB',
+                    'sequence.secondary' 'would VERB'
+                }
+            },
+            'regime.absolute': {
+                'basic': 'future',
+                'advanced': 'future',
+                'translation_formula': {
+                    'sequence.primary': 'will VERB',
+                    'sequence.secondary' 'will VERB'
+                }
+            },
     },
-    'ssslatin': {
-        
-    }
+   
+   
+   
+    
 }
+
 
 
 var advanced_terminology_display = {
@@ -52,6 +133,11 @@ var advanced_terminology_display = {
     'would tense': 'would...', 
     'would tense continuous': 'would be...', 
     'would tense perfect': 'would have...'
+    
+    
+    
+    
+    
 }
 
 var basic_terminology_display = {

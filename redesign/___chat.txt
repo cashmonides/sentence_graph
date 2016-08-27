@@ -1,3 +1,7 @@
+INTEGRATION
+- probably our top priority right now
+- I think the first step is to make a new latin mode
+
 FIX IN DROP DOWN (fundamental issue)
 
 

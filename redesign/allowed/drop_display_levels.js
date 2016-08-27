@@ -6,16 +6,32 @@ var drop_display_levels = {
     //no extras
     10: {
         drop_non_drop_map: {'subject_drop': 0, 'verb_drop': 1, 'object_drop': 0, 'conjunction_drop': 1,
-            min: 1, max: 3},
+            min: 1, max: 1},
         drop_down_settings: {
             noun: {
-                extra_options: 0,
-                lexicon_dummies: 0,
-                swap: true
+                extra_options: 0
             },
             verb: {
-                extra_options: 3,
-                lexicon_dummies: 3
+                extra_options: 2
+            },
+            conjunction: {
+                extra_options: 2
+            }
+        },
+        none_display: [false]
+    },
+    20: {
+        drop_non_drop_map: {'subject_drop': 0, 'verb_drop': 1, 'object_drop': 0, 'conjunction_drop': 1,
+            min: 1, max: 2},
+        drop_down_settings: {
+            noun: {
+                extra_options: 0
+            },
+            verb: {
+                extra_options: 3
+            },
+            conjunction: {
+                extra_options: 3
             }
         },
         none_display: [false]

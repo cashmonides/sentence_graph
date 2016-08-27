@@ -166,7 +166,7 @@ Sentence.prototype.pick_drop_down_lexemes = function () {
                 return x !== undefined;
             });
             // Find the number of dummies.
-            var n = number_of_dummies[part_of_speech];
+            var n = number_of_dummies_for(part_of_speech);
             // Check that the number of dummies is a number.
             if (typeof n !== 'number') {
                 throw 'n is not a number! It is not even ' +
@@ -266,42 +266,31 @@ Sentence.prototype.determine_sequence = function () {
     }
 }
 
-// This method makes a conjunction drop down for a sentence.
-Sentence.prototype.get_conjunction_drop_down = function (language) {
+// This method makes a conjunction drop-down and its non-drop version
+// for a sentence.
+Sentence.prototype.get_conjunction_drop_and_non_drop = function (language) {
+    var correct = this.get_conjunction().translate_into(language);
     var options = remove_duplicates(this.chosen_lexemes.conjunction.map(
         function (x) {return x.translate_into(language)}
     ).sort());
-    return new DropDown('CONJUNCTION', options);
+    return {
+        'role': 'conjunction',
+        'drop': new DropDown('CONJUNCTION', options, [correct]),
+        'non_drop': new NonDropDown(correct)
+    };
 }
 
-// This method gets all drop downs from the sentence.
-Sentence.prototype.get_all_drop_downs = function (language) {
-    var drop_down_lists = this.each_kernel(
-        'get_all_drop_downs', language, this.chosen_lexemes);
-    var len = drop_down_lists.length;
+// This method gets all drop-downs and non-drop-downs from the sentence.
+Sentence.prototype.get_all_drops_and_non_drops = function (language) {
+    var drop_and_non_drop_lists = this.each_kernel(
+        'get_all_drops_and_non_drops', language, this.chosen_lexemes);
+    var len = drop_and_non_drop_lists.length;
     if (len === 1) {
-         return drop_down_lists[0];
+         return drop_and_non_drop_lists[0];
     } else if (len === 2) {
-        return drop_down_lists[0].concat(
-            this.get_conjunction_drop_down(language),
-            drop_down_lists[1]);
-    } else {
-        throw 'There seem to be ' + len + ' kernels, not 1 or 2!';
-    }
-}
-
-// This method gets all translation-path pairs from the sentence.
-Sentence.prototype.get_all_translations_and_paths = function (language) {
-    var translation_path_lists = this.each_kernel('get_all_translations_and_paths', language);
-    var len = translation_path_lists.length;
-    if (len === 1) {
-         return translation_path_lists[0];
-    } else if (len === 2) {
-        var conjunction = this.conjunction_translation_display(language);
-        return translation_path_lists[0].concat({
-            'translation': conjunction,
-            'path': [conjunction]
-        }, translation_path_lists[1]);
+        return drop_and_non_drop_lists[0].concat(
+            this.get_conjunction_drop_and_non_drop(language),
+            drop_and_non_drop_lists[1]);
     } else {
         throw 'There seem to be ' + len + ' kernels, not 1 or 2!';
     }
