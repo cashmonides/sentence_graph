@@ -1,0 +1,14 @@
+* put in correct principle parts (currently we are using dummies) (done)
+* find why some conjugations do not work (seemed to actually be future subjunctives)
+* put in future subjunctives (done, but in a very hacky way)
+
+* do english conjugation (started)
+
+* put in extensive comments throughout code
+* figure out tense from time without just a one-to-one correspondence
+(we might need to also use the conjunction for this and perhaps even do it upstream)
+* put in subject pronouns (we should be able to create them and put them before the verb,
+but this will be trickier in the future due to scrambling)
+* put in non-dummy agreement markers (this will be hard right now since
+we don't have subject gender; also it's not very important)
+* make a lexeme constructor (not necessarily needed, but probably good for OO reasons)

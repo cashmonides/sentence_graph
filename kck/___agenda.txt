@@ -1,0 +1,327 @@
+/////
+
+- priorities for today
+    - load a bunch of modules and test different parameters
+    - see why latin mode is broken
+    - tense override in flv
+    - conditionals shouldn't have time
+    - double verbs in English to Latin mode at end of path
+    - we would like to be able to have a module that switches from E->L and from L->E
+        - but:
+            - if we stupidly just: 
+                    'source_language' : {'english': 0.5, 'latin': 0.5},
+                    'target_language' : {'english': 0.5, 'latin': 0.5},
+            - then it's possible we could end up with source and target being the same
+
+- next time
+    - fix cosmetic issues in drop downs
+    - fix comsetic issues in feedback box
+
+
+- profound things that can be delayed without disaster
+    - ambiguity resolution and avoidance
+    
+- cosmetic user experience things
+    - drops go up instead of down
+    - green/red feebdack should probably go in a different spot
+    - better give away answers
+
+- the dropping up instead of down issue
+    - possible solution here: 
+        - https://www.onedesigns.com/support/topic/how-to-get-the-sub-categories-menu-to-drop-down-instead-of-up
+
+
+use this for issues
+
+SHORT TERM
+
+- allowed is not controlling drop down parameters
+    - drop/non-drop (dan: done)
+    - number of dummy options (dan: done)
+
+- finish writing a terminology display dictionary for all languages (excluding relative stuff) (Akiva will do)
+  
+INTEGRATION
+- integrate into quiz and profile
+
+- rename to kck_sentence
+
+
+- functions that need to be made in KCKMode
+    - generate_sentence() 
+    - get_text_in_source_language()
+    - get_drops_and_non_drops_in_target_language()
+    - get_correct_answer_string()
+    - check_drop_down_correctness()
+    - get_correct_answer_paths()
+    
+- questions to resolve
+    - new name for kck_sentence?
+
+- progress: we're currently getting a display, but it doesn't yet work
+
+  
+  
+TAXONOMY
+- write a taxonomy_level_dictionary
+
+- write a taxonomy JSON object that is testable
+
+- look over taxonomy_level_dictionary for coherence
+
+
+- send zoological (taxonomy) data to drop downs
+
+
+
+
+LOOSE ENDS
+- add relative and absolute time to terminology_display_dictionary (Akiva will do)
+- make sure relative and absolute time properly distinguished backstage (Dan should do)
+
+
+
+
+
+TESTING
+- run a bunch of tests, looking for semantic nonsense just in verbs
+    - of the sort: "he will be feared that he will attack"
+
+
+ADD LEXEMES
+- add a bunch of verb lexemes
+- add more conjunctions to conjunction library
+- build in defensiveness, if not enough lexemes exist, then just skip those without crashing
+
+
+VOCABULARY CHEAT SHEETS
+- make vocabulary cheat sheets
+- add number of dummy lexemes (by part of speech) to the allowed dictionary
+
+
+RANGE CAPACITY
+- make parameters able to be set as ranges, not just booleans
+- import and adapt range-reading functions from previous incarnation
+
+
+COSMETICS AND CLEAN UP
+- investigate lingering drop down bugs
+    - maybe use a mouse-over functionality
+
+
+TESTING
+- make many levels (Akiva will do)
+- make a button/drop-down/slider to set level - for testing (Dan will do)
+- test and catalog nonsense/ambiguity
+
+
+
+END OF MVP STAGE FOR LATE SUMMER
+////////////////////
+
+
+
+
+
+MAKE A LIST OF ALL SITUATIONS WHERE AMBIGUITIES ARE RESOLVED BY CONTEXT
+
+
+AMBIGUITY
+- ambiguity resolution
+ - two distinct answers with same text
+        - ruit (perfect) = ruit (present)
+        - leones (nom) = leones (acc)
+        - he verbs = more than one path in english
+        - lexeme-level phenomenon
+        - ideal solution:
+            2 kinds of sitation
+            - truly ambiguous
+                - "correct. It could also be ___other-option-here__"
+            - not ambiguous
+                - "well... it could be in isolation, but look at the context and fix"
+        - stopgap solution:
+            - skip fut.1st.sg and pres.subj.1st.sg. in 3rd conj.
+ - impossible to determine correct answer with information given (down the road)
+        - leones amant duces
+            - solution: don't produce the sentence
+        - sentence-level phenominon
+
+
+MORPHOLOGY
+
+
+- write a dash-removal function
+    - adapt from previous incarnation
+
+
+
+
+
+
+LONGER TERM
+
+- lexeme is always in english in the drop downs, should also be available in latin
+
+
+- somehow add morphological data to drop downs 
+    - lexeme, principal part, infix, ending
+    - attack, oppugnav, era, s -> oppugnav-era-s
+    - goal: nested drop down can be used as a latin morphology trainer
+
+
+////////
+
+
+
+
+randomly generate maximal templates
+    aS S gen-S a-gen-S V a-O O with-abl adj-with-abl prep-phrase
+
+randomly fill whole template
+
+remove certain parts of template (replace with none)
+
+add nouns
+
+add swap
+
+add none display
+
+add adjectives
+
+
+
+
+
+
+
+/////////////////
+
+
+DONE AND OLDER STUFF BELOW
+
+
+
+- fix the independent subjunctive bugs (done)
+
+- switch past present future to prior, simultaneous, subsequent in conjunction library (done)
+
+- include conditional type as a clause type (pres ctf, etc.) (done, but was it done in a good way?)
+
+- include independent subjunctive type as a clause type (present deliberative etc.)
+(done. but there's one clause type for all independent subjunctives)
+
+- make a conjunction object (seems to be done)
+
+-????: use our dummy lexicon to produce a display
+    - dummy lexicon is var testing_kernels in testing_kernel_library
+
+- rebuild lexicon
+
+- plug in our lexicon to the stream
+
+- decide if we want to add sequence property to conditionals
+(only an issue to distinguish between flv and pres ctf and e.g. to tell whether we want pluperf subj or perf subj)
+
+
+
+What has happened and our plans:
+
+
+
+
+PART 1
+
+STAGE -1
+- 1: decide on design rules
+- 2: decide on object types
+
+STAGE 0:
+- 1: produce blank kernels
+- 2: add determistic properties
+
+STAGE 1
+- 1: add random properties
+- 2: add sequence
+- 3: add person and number
+
+(we are here)
+
+STAGE 1.5
+- 1: display
+- 2: check to make sure we have enough information to make a quiz from this
+explanation from Akiva:
+i.e. we want to ask about all properties and we want to ask about part of speech
+so we just want to make sure that we have all that information and it's easy to access
+(we don't need to make the quiz obviously)
+What part of speech is the highlighted word?
+Is the highlighted word transitive or intransitive?
+Is the highlighted word active of passive?
+
+
+STAGE 2
+general note: don't add nouns yet!!!
+- 1: instead, feed K C K into our pipeline
+question from Dan to Akiva: are we doing this?
+- 2: and plug the end result V(with properties) C(with properties) V(with properties)
+into a function that inflects English, Latin and SSSLatin
+- 3: we already have such functions, we should pull them out into their own files
+(inflect_verb.js or something similar) and adapt them as necessary
+
+
+STAGE 3
+- 1: reflect on the process so far
+- 2: make any redesign decisions
+
+End of PART 1
+
+PART 2
+
+STAGE 4
+- 1: add lexeme choice
+- 2: rebuild our verb lexicon
+
+STAGE 5
+note: in this stage we have a new MVP
+question from Dan: Wasn't stage 4 intended for the same MVP?
+- 1: produce sentences of the form:
+"you love because we shout"
+"he will attack if they shout"
+"if they shout, he will attack"
+with enough information to make a quiz on all properties, including clause type
+
+End of PART 2
+
+
+
+MAKE DROP DOWN FUNCTIONALITY IN BOTH DIRECTIONS
+
+
+
+
+
+
+PART 3
+
+STAGE 6 (and maybe more)
+- add nouns
+
+...
+
+End of PART 3
+
+(the unknown beyond)
+
+END
+
+Notes:
+Why do so much with verbs before adding nouns?
+Isn't it descending into the messy reality prematurely?
+Shouldn't we just generate purely abstract kernels
+with S and O and adjectives first?
+
+Well, maybe. But we have the inflect verb functions pretty well developed
+already and it won't take long to chain them up into the pipeline.
+The advantage of doing this now is that we will see all the strange things
+and weird linguistic realities and bugs and design issues and pain points.
+We might learn a great deal and it won't take too long.

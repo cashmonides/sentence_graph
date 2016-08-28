@@ -12,7 +12,10 @@
     <!--<link rel="stylesheet" type="text/css" href="../libs/featherlight.min.css">-->
     
     <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
-    <script src="../libs/jquery-1.11.3.min.js"></script>
+    
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <!--<script src="../libs/featherlight.min.js"></script>-->
     <!--<script src="../libs/bootstrap.min.js"></script>-->
    
@@ -88,15 +91,74 @@
     
     <script src="../levels/etym_levels.js"></script>
     <script src="../levels/grammar_levels.js"></script>
+    <script src="../levels/kck_levels.js"></script>
     <script src="../levels/latin_levels.js"></script>
     <script src="../levels/latin_display_levels.js"></script>
     
     <!--<script src="../tag/tag.js"></script>-->
     
     
-    
     <script src="quiz.js"></script> 
     
+    
+    <!-- new scripts -->
+    <script src="../kck/testing_kernel_library.js"></script>
+    <script src="../kck/role.js"></script>
+    <script src="../kck/component.js"></script>
+    <script src="../kck/component_lexeme_choice.js"></script>
+    <script src="../kck/component_property_utils.js"></script>
+    <script src="../kck/component_tense.js"></script>
+    <script src="../kck/utils/dict_utils.js"></script>
+    <script src="../kck/utils/game_utils.js"></script>
+    <script src="../kck/utils/html_utils.js"></script>
+    <script src="../kck/utils/list_utils.js"></script>
+    <script src="../kck/utils/misc_utils.js"></script>
+    <script src="../kck/utils/random_utils.js"></script>
+    <script src="../kck/utils/set_utils.js"></script>
+    <script src="../kck/utils/sort_utils.js"></script>
+    <script src="../kck/utils/string_utils.js"></script>
+    <script src="../kck/conjunction_object.js"></script>
+    <script src="../kck/conjunction_type.js"></script>
+    <script src="../kck/nonexistant.js"></script>
+    <script src="../kck/compare_path.js"></script>
+    <script src="../kck/rule.js"></script>
+    <script src="../kck/kernel.js"></script>
+    <script src="../kck/kernel_display.js"></script>
+    <script src="../kck/kernel_restrictions.js"></script>
+    <script src="../kck/sentence.js"></script>
+    <script src="../kck/sentence_display.js"></script>
+    <script src="../kck/language_library.js"></script>
+    <script src="../kck/conjunction_library.js"></script>
+    <script src="../kck/kernel_utilities.js"></script>
+    <script src="../kck/language_library.js"></script>
+    <script src="../kck/language_data/tense_maps.js"></script>
+    <script src="../kck/tense.js"></script>
+    <script src="../kck/option_list_to_json.js"></script>
+    <script src="../kck/language_data/features_from_tf_dict.js"></script>
+    <script src="../kck/lexeme/lexeme.js"></script>
+    <script src="../kck/inflect/inflect_english/english_translation_formulae.js"></script>
+    <script src="../kck/inflect/inflect_english/inflect_english_verb.js"></script>
+    <script src="../kck/inflect/inflect_latin/inflect_latin_refactor_code.js"></script>
+    <script src="../kck/inflect/inflect_latin/inflect_latin_refactor_data.js"></script>
+    <script src="../kck/inflect/inflect_language_independent/inflectors.js"></script>
+    <script src="../kck/inflect/inflect_latin/maximal_latin_tense_space.js"></script>
+    <script src="../kck/allowed/lexeme_constraints.js"></script>
+    <script src="../kck/allowed/get_settings_option.js"></script>
+    <script src="../kck/drop_down/drop_non_drop_choice.js"></script>
+    <script src="../kck/drop_down/drop_down_options.js"></script>
+    <script src="../kck/drop_down/drop_down.js"></script>
+    <script src="../kck/drop_down/drop_display_utils.js"></script>
+    <script src="../kck/drop_down/drop_display_level_accessors.js"></script>
+    <script src="../kck/inflect/inflect_language_independent/prune_tf_space.js"></script>
+    <script src="../kck/inflect/inflect_language_independent/regime_to_translation_formula.js"></script>
+    <!--The files below depend on things above.-->
+    <script src="../kck/lexeme/converted_lexeme_list.js"></script>
+    <script src="../kck/translation_formulae.js"></script>
+    <script src="../kck/allowed/features_from_tf_code.js"></script>
+    <script src="../kck/allowed/json_option_data.js"></script>
+    <script src="../kck/allowed/language_sorts.js"></script>
+    <!-- I'm not sure what this depends on but it was at the bottom before. -->
+    <script src="../kck/main.js"></script>
 
 </head>
 
@@ -156,8 +218,18 @@
                 <div id="feedback_for_input"></div>
             </div>
             <div id="footer">
-                
                 <table id="footer_table">
+                    <tr>
+                        <td class="footer_cell">
+                            <button class="button" id="next_button" onclick="quiz.question_complete()">next</button>
+                            <!--<button class="button" id="next_level_button" style="display: none;">next level</button>-->
+                            <button class="button" id="skip_button" onclick="quiz.question_complete('skip_button')">skip</button>
+                            <button class="button" id="submit_button" onclick="quiz.process_answer()">submit</button>
+                            <button class="button" id="cheat_sheet_button" onclick="quiz.initialize_cheat_sheet()">cheat sheet</button>
+                            <button class="button" id="vocab_cheat_button" onclick="quiz.initialize_vocab_cheat_sheet()">vocabulary cheat sheet</button>
+                            <button class="button" id="etym_cheat_button" onclick="quiz.initialize_etym_cheat_sheet()">etymology cheat sheet</button>
+                        </td>
+                    </tr>
                     <tr>
                         <td class="footer_cell">
                             <div id="drop_downs">
@@ -169,16 +241,27 @@
                         </td>
                         <td class="footer_cell">
                         </td>
-                        <td class="footer_cell">
-                            <button class="button" id="next_button" onclick="quiz.question_complete()">next</button>
+                        <!--<td class="footer_cell">-->
+                        <!--    <button class="button" id="next_button" onclick="quiz.question_complete()">next</button>-->
                             <!--<button class="button" id="next_level_button" style="display: none;">next level</button>-->
-                            <button class="button" id="skip_button" onclick="quiz.question_complete('skip_button')">skip</button>
-                            <button class="button" id="submit_button" onclick="quiz.process_answer()">submit</button>
-                            <button class="button" id="cheat_sheet_button" onclick="quiz.initialize_cheat_sheet()">cheat sheet</button>
-                            <button class="button" id="vocab_cheat_button" onclick="quiz.initialize_vocab_cheat_sheet()">vocabulary cheat sheet</button>
-                            <button class="button" id="etym_cheat_button" onclick="quiz.initialize_etym_cheat_sheet()">etymology cheat sheet</button>
-                        </td>
+                        <!--    <button class="button" id="skip_button" onclick="quiz.question_complete('skip_button')">skip</button>-->
+                        <!--    <button class="button" id="submit_button" onclick="quiz.process_answer()">submit</button>-->
+                        <!--    <button class="button" id="cheat_sheet_button" onclick="quiz.initialize_cheat_sheet()">cheat sheet</button>-->
+                        <!--    <button class="button" id="vocab_cheat_button" onclick="quiz.initialize_vocab_cheat_sheet()">vocabulary cheat sheet</button>-->
+                        <!--    <button class="button" id="etym_cheat_button" onclick="quiz.initialize_etym_cheat_sheet()">etymology cheat sheet</button>-->
+                        <!--</td>-->
                     </tr>
+                    <!--<tr>-->
+                    <!--    <td class="footer_cell">-->
+                    <!--        <button class="button" id="next_button" onclick="quiz.question_complete()">next</button>-->
+                            <!--<button class="button" id="next_level_button" style="display: none;">next level</button>-->
+                    <!--        <button class="button" id="skip_button" onclick="quiz.question_complete('skip_button')">skip</button>-->
+                    <!--        <button class="button" id="submit_button" onclick="quiz.process_answer()">submit</button>-->
+                    <!--        <button class="button" id="cheat_sheet_button" onclick="quiz.initialize_cheat_sheet()">cheat sheet</button>-->
+                    <!--        <button class="button" id="vocab_cheat_button" onclick="quiz.initialize_vocab_cheat_sheet()">vocabulary cheat sheet</button>-->
+                    <!--        <button class="button" id="etym_cheat_button" onclick="quiz.initialize_etym_cheat_sheet()">etymology cheat sheet</button>-->
+                    <!--    </td>-->
+                    <!-- </tr>-->
                 </table>
             </div>
         </div>

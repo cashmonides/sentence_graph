@@ -122,7 +122,7 @@ Quiz.prototype.user_loaded = function() {
     //todo var id will change depending on url parameters (given by profile page)
     var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE) or improving via url paramaters
     
-    console.log("DEBUG 11-20 user_loaded id = ", id);
+    // console.log("DEBUG 11-20 user_loaded id = ", id);
     
     this.id = id;
     
@@ -135,7 +135,7 @@ Quiz.prototype.user_loaded = function() {
         this.module = ALL_MODULES[id];
     }
     
-    console.log("DEBUG 11-20 user_loaded this.module = ", this.module);
+    console.log("LOG: in user_loaded: this.module = ", this.module);
     
     
     this.user.start_module(id);
@@ -145,18 +145,18 @@ Quiz.prototype.user_loaded = function() {
 
 //decides whether we go to current or some other module determined at profile page
 Quiz.prototype.get_start_module = function() {
-    console.log("DEBUG 11-22 get_start_module entered");
+    // console.log("DEBUG 11-22 get_start_module entered");
     //todo
     //if (improving)
     var ups = get_url_parameters();
-    console.log("quiz url parameters:", ups);
+    // console.log("quiz url parameters:", ups);
     
     
-    console.log("DEBUG 11-23 current module = ", this.user.get_current_module());
+    console.log("LOG: current module = ", this.user.get_current_module());
     
     if ("mod" in ups){
         var selected_mod = ups["mod"];
-        console.log("DEBUG 11-23 selected mod = ", selected_mod);
+        console.log("LOG: selected mod = ", selected_mod);
         // Logically, exactly one of these things must happen,
         // (unless the user is an mf user, which overrides everything else),
         // so we could remove the final if in the second else if.
@@ -168,10 +168,10 @@ Quiz.prototype.get_start_module = function() {
             if (!this.is_allowed_module(parseInt(selected_mod, 10))) {
                 return_to_profile();
             } else if (selected_mod == this.user.get_current_module()) {
-                console.log("DEBUG 11-23 clicked mod = current mod");
+                // console.log("DEBUG 11-23 clicked mod = current mod");
                 this.advance_improve_status = "advancing";
             } else if (selected_mod == this.user.get_improving_module()) {
-                console.log("DEBUG 11-23 clicked mod != current mod");
+                // console.log("DEBUG 11-23 clicked mod != current mod");
                 this.advance_improve_status = "improving";
             }
         }
@@ -226,7 +226,7 @@ Quiz.prototype.get_start_module = function() {
 
 
 Quiz.prototype.next_module = function () {
-    console.log("DEBUG 11-15 next_module entered");
+    console.log("LOG entering next_module");
     this.next_submodule();
 };
 
@@ -277,14 +277,14 @@ Quiz.prototype.next_submodule_not_mf = function () {
     // todo new ends here
     // this.clear_cheat_sheet();
 
-    console.log("DEBUG 1-22 entering log start time");
+    console.log("LOG: entering log start time");
     
     
     var submodule_id = this.user.get_module(this.module.id).progress;
     
-    console.log("DEBUG 1-22 user_id = ", this.user.uid);
-    console.log("DEBUG 1-22 module_id = ", this.module.id);
-    console.log("DEBUG 1-22 submodule_id = ", submodule_id);
+    // console.log("DEBUG 1-22 user_id = ", this.user.uid);
+    console.log("LOG: about to log start time for module_id = ", this.module.id);
+    console.log("LOG: about to log start time for submodule_id = ", submodule_id);
     
     /*
     
@@ -333,7 +333,7 @@ Quiz.prototype.next_submodule_not_mf = function () {
         this.time_data[i + 1] = user_data[i];
     }
     
-    console.log(this.time_data);
+    // console.log(this.time_data);
     
     
     this.initialize_time_metrics('insert_time_data');
@@ -342,8 +342,8 @@ Quiz.prototype.next_submodule_not_mf = function () {
 
 Quiz.prototype.initialize_time_metrics = function (s) {
     var time_data = this.time_data;
-    console.log("DEBUG 2-11 entering post #1");
-    console.log("DEBUG 2-11 this.time_data = ", time_data);
+    console.log("LOG: entering post #1");
+    console.log("LOG: about to post this.time_data = ", time_data);
     
     // todo very important - comment back in when fixed
     
@@ -351,18 +351,18 @@ Quiz.prototype.initialize_time_metrics = function (s) {
     // now we need a callback because we're getting a piece of data coming back to us
     // also: 3/27 deleted null_string: list_of_repetitions("null", 17).join(', ')
     if (this.user.uid !== null) {
-        console.log('DEBUG 3/4/2016 this.user.uid !== null; about to post');
+        console.log('LOG: this.user.uid !== null; about to post');
         var self = this;
         post({data: time_data, type: s}, function (data) {
-            console.log("DEBUG 2-11 data = ", data);
+            console.log("LOG: posting data = ", data);
             self.time_data_id = data.id;
         });
     } else {
-        console.log('DEBUG 3/4/2016 this.user.uid === null; post refused');
+        console.log('LOG: this.user.uid === null; post refused');
     }
     // todo maybe a good idea later to add an urgent error log here
     
-    console.log("DEBUG 2-11 exiting post #1");
+    console.log("LOG: exiting post #1");
 }
 
 Quiz.prototype.next_submodule_mf = function () {
@@ -404,7 +404,7 @@ Quiz.prototype.next_mode = function (error) {
     if (!(this.user.is_mf())) {
         allowed = ALL_MODULES[this.module.id].mode_ratio;
         
-        console.log("DEBUG 12-23 allowed before = ", allowed);
+        console.log("LOG: allowed before checking for non-functioning mode = ", allowed);
         
         /*
         originally:
@@ -420,13 +420,13 @@ Quiz.prototype.next_mode = function (error) {
         for (var i = 0; i < this.sick_modes.length; i++) {
             console.log('sick mode being added = ', this.sick_modes[i])
             delete allowed[this.sick_modes[i]];
-            console.log("DEBUG 12-23 sick mode added");
-            console.log("DEBUG 12-23 allowed after = ", allowed);
+            console.log("LOG: sick mode added");
+            console.log("LOG: allowed after sick mode added = ", allowed);
         }
         
         
         if (Object.keys(allowed).length <= 0) {
-            console.log("DEBUG 12-23 all modes are sick");
+            console.log("BIG ERROR: all modes are sick");
             if (this.urgent_error_count < 5) {
                  log_urgent_error("all modes are sick", "quiz.next_mode");
                  this.urgent_error_count++;
@@ -441,10 +441,10 @@ Quiz.prototype.next_mode = function (error) {
         // We do this via an early return.
         // error is a parameter which is true if next_mode was called due to an error.
         
-        console.log("DEBUG 5-6 checkpoint 1");
+        // console.log("DEBUG 5-6 checkpoint 1");
         var mode = weighted(allowed);
-        console.log("DEBUG 5-6 checkpoint 2 mode = ", mode);
-        console.log("DEBUG 5-6 game_mode_map[mode] = ", game_mode_map[mode]);
+        // console.log("DEBUG 5-6 checkpoint 2 mode = ", mode);
+        // console.log("DEBUG 5-6 game_mode_map[mode] = ", game_mode_map[mode]);
     }
     var game;
     if (this.user.is_mf()) {
@@ -501,22 +501,22 @@ Quiz.prototype.next_question = function (error) {
     
     //todo xxx hack this was a hack, remove 
     el('image_display_box').innerHTML = '';
-    console.log('DEBUG 12-23 entering next_question')
+    console.log('LOG: entering next_question')
     //previously:
     // this.next_mode();
     // this.game.next_question(this);
     try {
-        console.log('DEBUG 12-23 entering try block')
+        console.log('LOG: entering try block in next question')
         this.clean_up();
         this.next_mode(error);
-        console.log('still OK, about to call next_question');
+        console.log('LOG: about to call next_question');
         this.game.next_question(this);
-        console.log('DEBUG 12-23 no error, everything is fine')
+        console.log('LOG: no error after calling next_question')
     } catch (e) {
         if (this.user.is_mf()) {
             throw 'Complete crash with ' + JSON.stringify(e) + ' , look at log to find issues.';
         }
-        console.log("DEBUG 12-23 entering catch block error caught");
+        console.log("LOG: PROBLEM: entering catch block error caught");
         
         console.log("DEBUG 5-6 this.game = ", this.game);
         // Originally: add not push
@@ -824,10 +824,10 @@ Quiz.prototype.is_allowed_module = function (mod) {
 
 Quiz.prototype.update_display = function() {
     
-    console.log("DEBUG 11-15 update_display entered");
-    console.log("DEBUG 11-24 this.user.data.profile.name = ", this.user.data.profile.name);
-    console.log("DEBUG 11-24 this.user.data.profile.class_number = ", this.user.data.profile.class_number);
-    console.log("DEBUG 11-24 this.module.id = ", this.module.id);
+    // console.log("DEBUG 11-15 update_display entered");
+    // console.log("DEBUG 11-24 this.user.data.profile.name = ", this.user.data.profile.name);
+    // console.log("DEBUG 11-24 this.user.data.profile.class_number = ", this.user.data.profile.class_number);
+    // console.log("DEBUG 11-24 this.module.id = ", this.module.id);
     //todo in improve mode the following will break
     // var mod = this.user.get_current_module();
     
@@ -842,17 +842,17 @@ Quiz.prototype.update_display = function() {
     this.set_progress_bar();
     console.log("Still ok after progress bar");*/
     
-    console.log("Still ok before innerhtml");
-    console.log(el("name_header") === null);
-    console.log(el("class_header") === null);
-    console.log(el("level_header") === null);
-    console.log(el("fraction_header") === null);
+    console.log("LOG: about to enter innerhtml");
+    // console.log(el("name_header") === null);
+    // console.log(el("class_header") === null);
+    // console.log(el("level_header") === null);
+    // console.log(el("fraction_header") === null);
     el("name_header").innerHTML = this.user.data.profile.name;
     el("class_header").innerHTML = this.user.data.profile.class_number;
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
     el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     
-    console.log("Still ok after innerhtml");
+    console.log("LOG: leaving innerhtml");
     
     
 };

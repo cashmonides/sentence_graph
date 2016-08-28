@@ -1,0 +1,29 @@
+question: do we want to have subjunctives in english?
+presumably no: get_tense_mood_sequence in english should contain only tense
+If a language (like english) has no 'real' mood, get_time_mood_sequence
+should probably just be time.
+
+
+
+
+indirect statement - sequence matters
+
+
+.......scio ....leonem canem amavisse
+.......sciebam
+
+prior english:   loved
+
+
+
+k_right_tf/_override: {
+            english: {
+                primary: {
+                    simultaenous: verb,
+                    subsequent: will verb,
+                    prior: verbed
+                }may verb
+                secondary: might verb
+            }     
+        }
+

@@ -1,5 +1,8 @@
 /////
 
+- can 
+
+
 use this for issues
 
 SHORT TERM
@@ -13,7 +16,9 @@ SHORT TERM
 INTEGRATION
 - integrate into quiz and profile
 
-- rename to kck_sentence
+- renaming 
+    - sentence to kck_sentence
+    - latin_drop_levels to kck_drop_levels (make surte mcmode and modules is consisten with this change)
 
 
 - functions that need to be made in KCKMode
@@ -27,7 +32,26 @@ INTEGRATION
 - questions to resolve
     - new name for kck_sentence?
 
-  
+- clean up functions that work with HTML page so they can be called by KCK mode
+
+- comb through inflect latin/inflect english 
+    - find language-independent features and move them to a language-independent file
+ 
+ 
+ - cosmetics of new drop downs
+    - the nested drop down goes up, we want it to go down
+        - because when we hover on drop down it hides the whole question
+        - seems (???) to be happening only when we have drop and non drop
+       - might have something to do with how much room is reserved for the drop down    
+            - the html thinks it's out of room and it's at the bottom of the div so it drops up
+        - some info from stackoverflow
+            - one answer: can't be controlled
+                - As it's an element left to the browser to render, no, it's not possible to control (at least not as far as standards are concerned).
+            - another answer: has to do with position:absolute
+                - First of all remove position:absolute from .topmenu li. Then you should use visibility: hidden; instead of display: none; to hide the submenus. This way the submenu is hidden but the space for it is reserved
+- bad data should be handled better
+    - game should still be internally consistent
+    - we should also check for bad data somehow
   
 TAXONOMY
 - write a taxonomy_level_dictionary

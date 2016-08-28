@@ -1,0 +1,119 @@
+[lexeme, voice, time]
+
+
+[time, voice, lexeme]
+
+[lexeme, voice, time, person/number]
+
+
+
+
+UNCHANGING
+- ordering preferences within a category
+- overall ordering preference of all categories
+
+CHANGING (arguments)
+- display string     
+- which ones get made into dropdowns
+- which ones don't get made into dropdowns
+
+	FOR EACH DROPDOWN
+- ordered list for each dropdown 
+- correct answer for each dropdown
+- nested lists of options for each dropdown
+
+
+
+---------
+
+
+Someone else gives this example:
+
+#parentMenu {
+    display: block;
+    top: 0;
+}
+
+/* Helps position submenu */
+.dropdown-submenu {
+    position: relative;
+}
+
+/* Menus under the submenu should show up on the right of the parent */
+.dropdown-submenu > .dropdown-menu {
+    top:0;
+    left:100%;
+    margin-top:-6px;
+    margin-left:-1px;
+    -webkit-border-radius:0 6px 6px 6px;
+       -moz-border-radius:0 6px 6px 6px;
+            border-radius:0 6px 6px 6px;
+}
+
+/* Make submenu visible when hovering on link */
+.dropdown-submenu:hover > .dropdown-menu {
+    display:block;
+}
+
+/* Add caret to submenu links */
+.dropdown-submenu > a:after {
+    display:block;
+    float:right;
+    
+    /* simple */
+    /* The unicode version is '\u25BA' */
+    content: "►";
+    color: #cccccc;
+    
+    /* looks a little better */
+    content:" ";
+    width:0;
+    height:0;
+    border-color:transparent;
+    border-style:solid;
+    border-width:5px 0 5px 5px;
+    border-left-color:#cccccc;
+    margin-top:5px;
+    margin-right:-10px;
+}
+
+/* Change carot color on hover */
+.dropdown-submenu:hover > a:after {
+    border-left-color:#ffffff;
+}
+
+<!-- Parent Menu -->
+<ul class="dropdown-menu" id="parentMenu"
+    role="menu" aria-labelledby="dropdownMenu">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    
+    <!-- Child Menu -->
+    <li class="dropdown-submenu">
+        <a tabindex="-1" href="#">More options</a>
+        <ul class="dropdown-menu">
+            <li><a tabindex="-1" href="#">Second level</a></li>
+            
+            <!-- Grandchild Menu -->
+            <li class="dropdown-submenu">
+                <a href="#">More..</a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">3rd level</a></li>
+                    <li><a href="#">3rd level</a></li>
+                </ul>
+            </li>
+            
+            <li><a href="#">Second level</a></li>
+            <li><a href="#">Second level</a></li>
+        </ul>
+    </li>
+</ul>
+
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+

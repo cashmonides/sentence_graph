@@ -1,0 +1,318 @@
+sentence 
+    contains a list of clauses
+        - or perhaps dependencies are worked in with the language of ()  and /
+clause
+    a kernel with an optional conjunction
+    each kernel contains a role template
+role template
+    role
+            - not an actual word, but a position that can be filled with a component
+            - (e.g. subject, object, verb, prepositional phrase)
+            - no fixed properties (animate, ruler, transitive, etc.)
+component template
+    component
+            - has properties (animate, ruler, transitive, etc.)
+            - some properties are deterministic
+            - some properties are randomized
+lexeme_template
+            - a language-independent word, fills a word-role
+form_template
+            - language-dependent
+final display
+            -dashes, stars, etc. are added or removed
+
+
+//output of sentence_display
+K C K
+K C_that K
+[v] C_that [v] 
+English: K[commanding] C_that K[]
+Latin: K[commanding] C_that K[subjunctive, future]
+SSSLatin: K[commanding] C_that K[subjunctive, future]
+
+//output of form_display
+English: commands that loves
+Latin: iubet ut amet
+SSSLatin: SSSiubet SSSut SSSamet
+
+
+
+translation - a translation of a sentence, language-dependent
+question? - a question to ask about a translation/pair of translation
+
+
+
+sentence ---> clauses <--------> kernels ---------> roles <---> components (-------> properties)
+                |                                     ^
+                +--------------> conjunctions         |
+                                                      v
+                                                    lexeme
+
+
+
+KERNEL LEVEL
+k, c, k
+
+ROLE LEVEL
+
+[v], c_when, [s,s-genitive, v]
+
+
+STEP 1 RANDOM CHOICE of active/passive & transitive/intransitive
+
+
+k_1 : {
+    v: {
+        transitive: false,                  
+        active: true,
+        person: not_decided_yet,
+        number: not_decided_yet,
+        tense_mood: not_decided_yet
+    }
+}
+
+c_1 : {
+    type: when
+}
+
+
+k_2 : {
+        transitive: true,
+        active: true,
+        person: not_decided_yet,
+        number: not_decided_yet,
+        tense_mood: not_decided_yet
+    }
+
+
+COMPONENT LEVEL STEP 2 determine animacy (deterministic)
+
+k_1 : {
+    v: {
+        transitive: false,                  
+        active: true,
+        person: not_decided_yet,
+        number: not_decided_yet,
+        tense_mood: not_decided_yet
+    }
+}
+
+c_1 : {
+    type: when
+}
+
+
+k_2 : {
+        s: {
+            animacy: true,
+            ruler: true
+        },
+        s-genitive : {
+            
+        }
+        
+        v: {
+        transitive: false,                  
+        active: true,
+        person: not_decided_yet,
+        number: not_decided_yet,
+        tense_mood: not_decided_yet
+    }
+    }
+
+COMPONENT LEVEL STEP 3 determine genitives (random)
+
+k_1 : {
+    v: {
+        transitive: false,                  
+        active: true,
+        person: not_decided_yet,
+        number: not_decided_yet,
+        tense_mood: not_decided_yet
+    }
+}
+
+c_1 : {
+    type: when
+}
+
+
+k_2 : {
+        s: {
+            animacy: true,
+            ruler: true
+        },
+        s-genitive : {
+            place: true
+        },
+        v: {
+        transitive: false,                  
+        active: true,
+        person: not_decided_yet,
+        number: not_decided_yet,
+        tense_mood: not_decided_yet
+    }
+    }
+
+
+
+
+
+
+
+
+
+COMPONENT LEVEL
+subj: animate: true, human: true
+verb: transitive: true, destructive: true, disrespectful: true
+object: animate: true, human: true, ruler: true
+genitive: place: true
+implement-phrase: inanimate: true
+prepositional-phrase: superdordinate: verb
+
+steps needed to avoid repetition:
+somewhat hacky solution: fill kernels, most importent words first
+then remove any unfilled roles from the sentence (maybe try switching a little?)
+issue: this does not work if two roles depend on each other
+
+
+steps needed to avoid nonsense:
+start by giving properties to the most important roles, based on randomness and other words in the kernel
+over time, some proerties will impact others
+ex:
+verb
+has to take the subject, object, and implement
+randomly chosen to take the prep phrase
+---
+does this stuff happen?
+prep phrase format kicks in
+prep phrase chosen to be: location
+implies: verb has location
+---
+must be transitive since it has an object
+randomly chosen to be destructive
+
+subject
+randomly chosen to not take the genitive
+must be animate because it is the subject
+
+object
+must take the genitive
+genitive formats kick in
+format chosen: ruler of place
+must be a ruler
+implies: animate, human
+
+genitive:
+must be a place
+implies: inanimate
+
+with-implement
+verb is: destructive
+thing being destroyed: human
+implement is: destructive to humans
+implies: inanimate
+
+prepositional-phrase
+does this happen here or upstream?
+chosen: location
+specific preposition chosen: under
+word must be: a location (this is questionable)
+implies: inanimate
+
+note: genitives impact nouns superordinate to them
+
+
+
+steps needed to avoid ambiguity:
+I don't know, ambiguity should be rare so we should be able to redo a kernel where it happens? That seems possible.
+
+catching ambiguity???
+
+
+format of filling template:
+tasks
+a task can force another task to be done (in which case the relevant tasks succeed or fail together)
+it can also ask that another task be done (in which case the other task is put on some task list)
+if a task fails to get done, it just doesn't happen
+
+
+var TaskPool = function () {
+    this.important_tasks = [];
+    this.other_tasks = [];
+}
+
+TaskPool.prototype['do'] = function () {
+    
+}
+
+animate-subj transitive-verbs ruler-object of-placenoun with-implement-noun prepositional-phrase
+the sailor kills the queen of the island with a sword under the bridge
+
+
+
+
+
+
+
+CANDIDATES FOR ROLE
+verb
+subject
+object
+indirect object
+instrument
+spatiotemporal prepositional phrase
+list of all non-spatiotemporal prepositions
+    with = manner
+    ab = ablative of 
+locative
+separative/ablative
+vocative
+
+(genitive - should it ever be an independent role or it should it just be a property of another words that it's dependent on)
+
+
+EDGE CASES & ????
+prepositional phrases have dependency, usually either on nouns or  verbs
+
+
+
+???
+at what stage do we multiply O into O et O??
+
+
+
+
+
+
+
+
+//random choice from seed list
+seed_list = [['k'], ['k', 'c', 'k'], ['k', 'c', 'k', 'c', 'k']]
+
+
+//expand k and c by random choice from k and c list
+k_list = [['s', 'v', 'o'], ['s', 'v'], ['v']]
+c_list = ['c_because', 'c_when']
+
+//componentalize roles by random choice
+s_properties = {
+    animate: true
+    human: [true, false]
+    respect: [true, false]
+}
+
+o_properties = {
+    animate: [true, false]
+    human: [true, false]
+    respect: [true, false]
+}
+
+v_properties = {
+    transitive: [true, false]
+}
+
+
+//randomly pick lexemes
+
+

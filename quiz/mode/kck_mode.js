@@ -1,5 +1,8 @@
 // KCK mode.
 
+// Global levels, somewhat of a hack.
+var global_levels;
+
 var KCKModeGame = function () {
     this.data = null;
     this.quiz = null;
@@ -50,16 +53,28 @@ KCKModeGame.prototype.next_question = function () {
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
     
+    console.log('level =', this.level);
+    
     //sets up our lexicon
-    var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
-    var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
+    // var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
+    // var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
     // todo implement generate_sentence function returning a sentence
-    var sentence = generate_sentence();
+    var sentence = generate_sentence(
+        this.level.kck_level, this.level.latin_extra_level);
+    console.log('sentence =', sentence);
+    var source_language = weighted_choice(
+        get_current_module(this.level.kck_level).source_language);
+    var target_language = weighted_choice(
+        get_current_module(this.level.kck_level).target_language,
+        function (x) {return x !== source_language});
+    this.source_language = source_language;
+    this.target_language = target_language;
     // this.cheat_sheet = data.cheat_sheet;
     // sets data
     // var data = make_output(this.level, null, 'quiz_english');
     // todo implement or find some method that does this
-    this.question = sentence.get_text_in_source_language();
+    this.question = sentence.translate_into(source_language);
+    console.log('question =', this.question);
     // todo is the following otiose?
     // this.sentence = data.sentence;              // text displayed in display box
     // this.target_indices = data.target_indices;      //highlighted word if necessary
@@ -74,15 +89,38 @@ KCKModeGame.prototype.next_question = function () {
     //todo check if this works
     
     // todo implement or find some method that does this
-    this.drops_and_non_drops = sentence.get_drops_and_non_drops_in_target_language();
+    var drops_and_non_drops = sentence.get_all_drops_and_non_drops(this.level.kck_level, target_language);
+    console.log('drops and non drops =', drops_and_non_drops);
+    
+    var roles = drops_and_non_drops.map(function (x) {
+        return x.role;
+    });
+    var drop_choices = choose_drops_and_non_drops(roles, this.level.latin_drop_level);
+    this.used_drops_and_non_drops = [];
+    var i;
+    var role_num = drops_and_non_drops.length;
+    for (i = 0; i < role_num; i++) {
+        this.used_drops_and_non_drops.push(drops_and_non_drops[i][drop_choices[i]]);
+    }
+    
+    this.actual_drops = this.used_drops_and_non_drops.filter(function (x) {
+        return x instanceof DropDown;
+    })
+    
+    console.log('used drops and non drops =', this.used_drops_and_non_drops);
     
     this.give_away_phrase = "The correct answer was: ";
     this.give_away_ending_phrase = ".";
     
     // todo implement or find some method that does this
-    this.correct_answer_as_string = sentence.get_correct_answer_string();
+    this.correct_answer_as_string = sentence.translate_into(target_language);
     
-    this.correct_answer_as_path = sentence.get_correct_answer_paths();
+    this.correct_answer_as_path = drops_and_non_drops.map(function (x) {
+        return x.drop.correct_path;
+    });
+    
+    console.log('correct =', this.correct_answer_as_string,
+    this.correct_answer_as_path);
     
     // console.log("DEBUG this.correct_answer = ", this.correct_answer);
     
@@ -110,12 +148,11 @@ KCKModeGame.prototype.next_question = function () {
     // todo - I found this in the code - what is the point of it?
     // remove_children(document.getElementById("answer_choices"));
     // todo why is this capitalized
-    Quiz.set_question_text(this.question);
-    this.quiz.set_word_selector(this.sentence);
+    Quiz.set_question_text('Translate the following sentence:');
     
    
-    this.quiz.word_selector.is_clickable = false;
-    this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
+    // this.quiz.word_selector.is_clickable = false;
+    // this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
     
     /*
     if (this.target_indices) {
@@ -134,11 +171,7 @@ KCKModeGame.prototype.display = function (x) {
 
 //master function makes all the drops and non-drops
 KCKModeGame.prototype.make_drop_down = function (e) {
-    // todo is this right?
-    for (var i = 0; i < this.drop_downs.length; i++) {
-        // todo do we need breaks?
-        this.drop_downs[i].attach_to(e);
-    }
+    attach_all_to(this.used_drops_and_non_drops, e);
     /*
     //initialize a count of how many drop down menus we'll have
     // if it remains 0 we start all over again
@@ -178,14 +211,15 @@ KCKModeGame.prototype.make_drop_down = function (e) {
 };
 
 
-
 KCKModeGame.prototype.process_answer = function(){
-    var is_correct = this.drop_downs.every(function (x) {
-        // todo how do we do this?
-        return x.check_drop_down_correctness();
+    var drop_down_statuses = this.actual_drops.map(function (x) {
+        return x.get_status();
     });
-    this.display_green_and_red_path();
-    if (is_correct) {
+    console.log('drop down statuses =', drop_down_statuses);
+    this.display_green_and_red_path(drop_down_statuses);
+    // 'correct', 'incorrect', or 'missed'
+    var correct_status = get_correct_status(drop_down_statuses);
+    if (correct_status === 'correct') {
         this.process_correct_answer();
     } else {
         this.process_incorrect_answer();
@@ -206,7 +240,7 @@ KCKModeGame.prototype.process_correct_answer = function () {
     console.log("DEBUG entering 2nd random_choice");
     var cell_1 = random_choice(KCKModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
-    fbox.innerHTML = cell_1;
+    fbox.innerHTML += '<br/>' + cell_1;
 
     this.quiz.question_complete();
 };
@@ -232,7 +266,7 @@ KCKModeGame.prototype.process_incorrect_answer = function () {
         console.log("DEBUG leaving 3rd random_choice");
         
         var fbox = el("feedbackbox");
-        fbox.innerHTML = cell_1 + " " + cell_3;
+        fbox.innerHTML += "<br/>" + cell_1 + " " + cell_3;
     } else {
         this.give_away_answer();
     }
@@ -249,10 +283,27 @@ KCKModeGame.prototype.give_away_answer = function () {
 
 KCKModeGame.prototype.display_give_away_answer = function () {
     // todo figure out how to combine string and path
-    return this.give_away_phrase + ' [todo] ' + this.give_away_ending_phrase
+    return this.give_away_phrase + this.correct_answer_as_string + this.give_away_ending_phrase
 }
 
 // todo implement this (maybe a new div?)
-KCKModeGame.prototype.display_green_and_red_path = function () {
-    throw 'Not yet implemented!';
+KCKModeGame.prototype.display_green_and_red_path = function (statuses) {
+    var o = el('feedbackbox');
+    remove_all_children(o);
+    var status;
+    var e;
+    for (var i = 0; i < statuses.length; i++) {
+        if (i !== 0 && o.lastChild.tagName.toLowerCase() !== 'div') {
+            o.appendChild(document.createElement('br'));
+        }
+        status = statuses[i];
+        if (status === 'missed') {
+            var e = document.createElement('font');
+            e.style.color = 'gray';
+            e.innerHTML = 'You missed this drop down';
+        } else {
+            var e = display_status(status);
+        }
+        o.appendChild(e);
+    }
 }

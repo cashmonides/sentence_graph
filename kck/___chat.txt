@@ -1,0 +1,109 @@
+INTEGRATION
+- probably our top priority right now
+- I think the first step is to make a new latin mode
+
+FIX IN DROP DOWN (fundamental issue)
+
+
+
+FIX IN DROP DOWN (cosmetic issues)
+- display sentences at the top
+- lingering highlighting (not in jquery website)
+- menu never closes (in jquery website)
+
+
+ADD FUNCTIONALITY
+- build in as an argument language of display 
+    - (to start with we might just set it as randomized)
+- turn off computation for all non-relevant languages
+- display a single target sentence
+    - for now all three languages
+- add a function to the final click (e.g. select option as answer)
+- make "header string" part of the drop downs
+- make a function that promotes clicked answer to header string
+- before check answer: 
+    - e.g. starting position SUBJECT VERB OBJECT
+    - hover on verb -> drop downs
+    - select loved
+    - "loved" replaces the string "verb" in the drop down
+    - "loved" still hoverable and changeable
+    - display answer gradually 
+    - answer should replace the drop down (visually)
+    - but the person should still be able to change their answer
+        - hovering over the answer should open drop down
+    - submit button sends the full answer to check answer
+    - check answer highlight in red the part that's wrong
+
+DESIRED BEHAVIOR
+- header string should be "verb" or "subject"
+- click on "header string" gives no action
+- click on a final point changes header string
+- sum of paths is your answer
+- submit button submits your answer
+
+
+AGENDA
+- create drop down object with role as a property of the drop down
+- make role the header string of drop down
+- display drop down
+
+
+
+
+OVERALL
+- splits into two
+    - restructuring the drop down data
+        - has header strings
+    - writing the functions
+
+FUNCTIONS
+- replace header string
+- show drop down
+- store drop down path as a variable
+
+THINGS TO DO
+- restructure the drop down data such that it has header strings like verb or subject
+- add a submit button
+
+
+DROP DOWN OBJECT
+- header string
+- drop down
+
+target: the wolf loved the bear
+goal: drops on all
+
+initial appearance:
+subject verb object
+
+after a click:
+wolf verb object
+
+
+
+instead of
+I love
+because
+you walk
+
+we want
+I love because you walk
+
+SUBJECT VERB OBJECT (string: 'SUBJECT', drop down: <html element>)
+
+(hover on subject)
+
+wolf verb object    (string: null, drop down: <html element>)
+bear
+...
+(the wolf selected)
+
+the wolf verb object  (string: 'the wolf', drop down: <html element>)
+
+
+
+SYNCHRONIZE DROP DOWN WITH RANDOM CONJUNCTION MAKER
+
+
+
+

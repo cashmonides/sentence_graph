@@ -28,6 +28,31 @@ body {
 }
 
 
+.kck_string {
+
+    
+}
+
+
+
+.kck_drop {
+    position: relative;
+    /*z-index:589;*/
+    /*float:left;*/
+    /*top:100%;*/
+    bottom:auto;
+    /*list-style:none;*/
+    /*margin:20px 0;*/
+}
+
+.kck_drop li {
+    /*float:left;*/
+    /*height:10px;*/
+    /*margin:0;*/
+    /*margin-right:36px;*/
+    vertical-align:middle;
+}
+
 #header {
     /*padding: 10px;*/
     text-align: center;

@@ -1,0 +1,66 @@
+issue: our semantic info must be teacher-friendly
+but it has to be elegant enough to fit neatly into the code 
+(i.e. it has to be code-friendly)
+
+possible format?
+
+x: {
+    if x is z: do y
+}
+
+possible idea?
+y could be a teacher-friendly shorthand name for a more 'code-like' function, e.g. 
+if y says "subject=animate"
+then we look up "subject=animate" in a map from teacher-friendly to code-friendly
+e.g.
+
+"subject=animate": function(.......)
+
+
+e.g. 
+
+verb: {
+    object: transitive && active,                       //key is template property
+    no object: intransitive || passive,                 //key is template property
+    transitive && active: subject=animate,              //key is component property
+    intransitive: no passive                            //key is component property
+}
+
+
+noun_role: {
+    subject: animate,
+    implement: inanimate,
+    dative: animate
+}
+
+
+
+genitive_combo_map: {
+    animal: {
+            animal: false,                   //no wolf of the lion
+            animate: true,                  //yes wolf of the sailor
+            inanimate: false,               //no wolf of the sword
+            place: true,                    //yes wolf of the island
+            rulership: true,               //yes wolf of the king
+            kinship: true,                 //yes wolf of the father
+            human: true                     //yes wolf of the sailor
+        },
+    human && !rulership && !kinship:
+        {
+            animal: false,                   //no sailor of the lion
+            animate: false,                  //no sailor of the farmer
+            inanimate: false,               //no sailor of the sword
+            place: false,                    //no sailor of the island
+            rulership: true,               //yes sailor of the king
+            kinship: false,                 //no sailor of the father
+            human: false                     //no sailor of the sailor
+        };     
+    
+    
+}
+
+
+
+
+order of operations: transitivity, voice, explicit/implicit
+

@@ -1,0 +1,143 @@
+An example of a lexeme as it is now:
+attack : {
+    root_2: 'OPPUGN',
+    root_3: 'OPPUGNAV',
+    root_4: 'OPPUGNAT',
+    conjugation: '1',
+    name: 'attack',
+    transitivity: 'transitive',
+    lexical_properties: null,
+    english_roots: {
+		'default': 'attack',
+		'final-s': 'attacks',
+		'gerund': 'attacking',
+		'past participle': 'attacked',
+		'preterite': 'attacked'
+	}
+}
+
+note how many types of data are combined
+english verb roots
+latin verb roots
+latin conjugation
+language-independent things
+in the future we will need part of speech, which is also language-independent.
+
+another format:
+attack: {
+    core_properties: {
+        name: 'attack',
+        part_of_speech: 'verb',
+        transitivity: 'transitive',
+        lexical_properties: []
+    },
+    latin: {
+        conjugation: '1',
+        roots: {
+            root_2: 'OPPUGN',
+            root_3: 'OPPUGNAV',
+            root_4: 'OPPUGNAT'
+        }
+    },
+    english: {
+        roots: {
+    		'default': 'attack',
+    		'final-s': 'attacks',
+    		'gerund': 'attacking',
+    		'past participle': 'attacked',
+    		'preterite': 'attacked'
+		}
+	}
+}
+
+the main question with this is whether name, transitivity, and lexical_properties
+should be combined in some language independent thing.
+
+Also, part_of_speech?
+
+object structure itself:
+
+it could just be the same as the json dictionary structure
+or it could have some methods like get_root (example usage: get_root('latin', 'root_3'))
+or get_transitivity
+
+pitfall: there are places where we access properties,
+which will break if we get rid of the properties
+
+very old lexeme file
+
+// KCKLexemes should just take a JSON object.
+var KCKLexeme = function(word_id, properties) {
+// word_id should be part of the JSON object.
+    this.word_id = word_id;
+// properties correspond to the JSON object.
+    this.properties = properties;
+    // this is filled in by latin_word_properties or english_word_properties -
+    // which makes it more modular
+    // this will be p.animate or p.family etc.
+    // (might want to put these into the language-specific lexemes)
+// Whether a lexeme should store part of speech is still an issue.
+    //todo should lexeme store part of speech???
+
+// The following would, of course, be on the prototype.
+
+// This seems strange. Maybe it is valuable to get the default root, though.
+    //input is a language, output is a string
+    this.display = function(language_enum){
+        switch (language_enum){
+            case (Language_enum.English) : return this.properties.english.root;
+            case (Language_enum.Latin) : return this.properties.latin.root;
+        }
+    };
+
+// This seems like it should be done differently.
+    // returns a string
+    this.inflect = function(language_enum, word_settings){
+        switch (language_enum) {
+            case (Language_enum.English) :
+                return inflect_english(this, word_settings);
+            case (Language_enum.Latin) :
+                return inflect_latin(this, word_settings);
+        }
+    };
+
+// "is transitive, is animate, etc."
+// Those are exactly the types of things that should not depend on language.
+// If we have general methods for getting properties,
+// we will probably need at least two:
+// one language-dependent one and one language-independent one.
+    //gets a word property, e.g. is transitive, is animate, etc.
+    this.get_property = function(language_enum, property) {
+        return this.properties[language_enum][property];
+    };
+
+// Do we want this power? Will the language-independent method
+// for getting properties give it to us?
+    this.get_properties = function(language_enum) {
+        return this.properties[language_enum];
+        //this will return all the properties of a word for a particular
+        // language (a map which we access via p.tense, p.voice, etc.)
+    }
+
+};
+
+// This feels sort of like a role/component.
+var Form = function(lexeme, word_settings, element) {
+    this.lexeme = lexeme;
+    this.word_settings = word_settings;
+
+
+    //Subject Object Verb
+    this.element = element;
+
+    // this will return e.g. dogs or perros or loved   (this is the final string output)
+    this.display = function(language_enum) {
+        return this.lexeme.inflect(language_enum, this.word_settings);
+    }
+};
+
+
+// These are just messes.
+(removed Latin_word_properties and English_word_properties)
+
+// Are these the only methods we want?

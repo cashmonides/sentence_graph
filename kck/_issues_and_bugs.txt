@@ -1,0 +1,86 @@
+August 18th
+- nonsense: 'he was being feared that he would attack'
+
+- in latin drop downs we seem to be terminating in two identical verbs
+
+
+
+
+July 29th
+
+- sequence should be determined independently for coordinating conjunctions
+(maybe more generally?)
+- he come
+var come_lexeme = new KCKLexeme(testing_lexemes.come);
+inflect_english_verb(come_lexeme, 'present active', '3s');
+"he come"
+
+July 16th
+
+- independent subjunctive is not currently constraining the verb to be subjunctive
+- semantics: we don't currently constrain against past,indicative WHEN future, indicative
+- semantics: "They attacked the city because I will find the money"
+- semantics: we're currently allowing "you were commanded that I laugh"
+
+
+July 10th
+
+
+- K C K has two possibilities
+    - normal
+        k[indicative] C k [subjunctive]
+    - weird
+        k[subjunctive] C k[subjunctive]
+        (i.e. main clause that's independent subjunctive)
+    - we don't want weird scenario happening randomly
+    - it has to be constrained by allowed
+    - one option:
+        produce the c-null
+        so the weird case looks like:
+            (K) C-null K C K
+
+    
+- another scenario
+    k0 c1 k1 c2 k2
+    k1 will be constrained by c1 but not by c2
+    so we need to make sure that it actually gets constrained
+    
+    
+- downstream english will end up having very little determination
+    - we can't just pick randomly
+    - it has to match what has been determined
+    - we have to mutate our kernels 
+      until they have reached maximum point of determinsistic mutation within the linguistic regime of latin
+      then we mutate randomly within the latin regime
+    - then we consult the conjunction library (and any other exceptions library)
+        - if it overrides, then we override
+        - if it says null, we translate the latin
+    - this seems to work for (mood, and tense)
+
+
+- our current structure has only one kind of past and so can only restrict 
+left and right kernels to past subjunctive, which in general is fine
+since in general we only have a pst subjunctive, 
+and sequence will tell us whether we're going to use primary or secondary options
+but it's not very friendly to present and past ctf conditionals
+should we just have some sort of overrride that forces the proper tense and mood?
+(a similar override issue comes up for fmve conditionals. 
+we just want to  override in latin with no change in other languages)
+(or should we just have anoither time category future perfect?)
+
+
+
+- for purposes of not repeating code, we've got to realize that many conjunctions overlap
+    - there are some totally synonymous conjunctions (quod, quia, quando)
+    we don't want to have a separate category for all of them
+    so maybe when we specify their latin_form we can just give a list of synonymous options
+    
+    - a slightly more complicated case: cur, quando, ubi, quo modo (are all used in indirect questions, 
+    but we might not want to create a separate category for them, 
+    since they all have the same behavior)
+    so we might want to create a category called c_interrogative
+    and this would somehow contain them all
+    
+
+
+

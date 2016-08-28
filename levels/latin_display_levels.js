@@ -26,6 +26,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 0,
                 lexicon_dummies: 0
+            },
+            conjunction: {
+                extra_options: 0,
+                lexicon_dummies: 0
             }
         },
         none_display: [false]
@@ -41,6 +45,10 @@ var latin_extra_levels = {
                 swap: true
             },
             verb: {
+                extra_options: 1,
+                lexicon_dummies: 0
+            },
+            conjunction: {
                 extra_options: 1,
                 lexicon_dummies: 0
             }
@@ -60,6 +68,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 2,
                 lexicon_dummies: 0
+            },
+            conjunction: {
+                extra_options: 2,
+                lexicon_dummies: 0
             }
         },
         none_display: [false]
@@ -76,6 +88,10 @@ var latin_extra_levels = {
             },
             verb: {
                 extra_options: 3,
+                lexicon_dummies: 0
+            },
+            conjunction: {
+                extra_options: 2,
                 lexicon_dummies: 0
             }
         },
@@ -94,6 +110,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 4,
                 lexicon_dummies: 0
+            },
+            conjunction: {
+                extra_options: 3,
+                lexicon_dummies: 0
             }
         },
         none_display: [false]
@@ -110,6 +130,10 @@ var latin_extra_levels = {
             },
             verb: {
                 extra_options: 5,
+                lexicon_dummies: 0
+            },
+            conjunction: {
+                extra_options: 3,
                 lexicon_dummies: 0
             }
         },
@@ -132,6 +156,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 0,
                 lexicon_dummies: 1
+            },
+            conjunction: {
+                extra_options: 3,
+                lexicon_dummies: 0
             }
         },
         none_display: [false]
@@ -148,6 +176,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 1,
                 lexicon_dummies: 1
+            },
+            conjunction: {
+                extra_options: 4,
+                lexicon_dummies: 0
             }
         },
         none_display: [false]
@@ -165,6 +197,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 2,
                 lexicon_dummies: 2
+            },
+            conjunction: {
+                extra_options: 4,
+                lexicon_dummies: 0
             }
         },
         none_display: [false]
@@ -182,6 +218,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 3,
                 lexicon_dummies: 3
+            },
+            conjunction: {
+                extra_options: 4,
+                lexicon_dummies: 0
             }
         },
         none_display: [false]
@@ -199,6 +239,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 4,
                 lexicon_dummies: 4
+            },
+            conjunction: {
+                extra_options: 4,
+                lexicon_dummies: 0
             }
         },
         none_display: [false]
@@ -216,6 +260,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 5,
                 lexicon_dummies: 5
+            },
+            conjunction: {
+                extra_options: 5,
+                lexicon_dummies: 0
             }
         },
         none_display: [false]
@@ -231,6 +279,10 @@ var latin_extra_levels = {
                 swap: true
             },
             verb: {
+                extra_options: 0,
+                lexicon_dummies: 0
+            },
+            conjunction: {
                 extra_options: 0,
                 lexicon_dummies: 0
             }
@@ -250,6 +302,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 1,
                 lexicon_dummies: 0
+            },
+            conjunction: {
+                extra_options: 1,
+                lexicon_dummies: 0
             }
         },
         none_display: [true]
@@ -265,6 +321,10 @@ var latin_extra_levels = {
                 swap: true
             },
             verb: {
+                extra_options: 2,
+                lexicon_dummies: 0
+            },
+            conjunction: {
                 extra_options: 2,
                 lexicon_dummies: 0
             }
@@ -284,6 +344,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 3,
                 lexicon_dummies: 0
+            },
+            conjunction: {
+                extra_options: 2,
+                lexicon_dummies: 0
             }
         },
         none_display: [true]
@@ -301,6 +365,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 4,
                 lexicon_dummies: 0
+            },
+            conjunction: {
+                extra_options: 3,
+                lexicon_dummies: 0
             }
         },
         none_display: [true]
@@ -317,6 +385,10 @@ var latin_extra_levels = {
             },
             verb: {
                 extra_options: 5,
+                lexicon_dummies: 0
+            },
+            conjunction: {
+                extra_options: 3,
                 lexicon_dummies: 0
             }
         },
@@ -339,6 +411,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 0,
                 lexicon_dummies: 1
+            },
+            conjunction: {
+                extra_options: 3,
+                lexicon_dummies: 0
             }
         },
         none_display: [true]
@@ -355,6 +431,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 1,
                 lexicon_dummies: 1
+            },
+            conjunction: {
+                extra_options: 2,
+                lexicon_dummies: 0
             }
         },
         none_display: [true]
@@ -372,6 +452,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 2,
                 lexicon_dummies: 2
+            },
+            conjunction: {
+                extra_options: 2,
+                lexicon_dummies: 0
             }
         },
         none_display: [true]
@@ -389,6 +473,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 3,
                 lexicon_dummies: 3
+            },
+            conjunction: {
+                extra_options: 2,
+                lexicon_dummies: 0
             }
         },
         none_display: [true]
@@ -406,6 +494,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 4,
                 lexicon_dummies: 4
+            },
+            conjunction: {
+                extra_options: 2,
+                lexicon_dummies: 0
             }
         },
         none_display: [true]
@@ -423,6 +515,10 @@ var latin_extra_levels = {
             verb: {
                 extra_options: 5,
                 lexicon_dummies: 5
+            },
+            conjunction: {
+                extra_options: 2,
+                lexicon_dummies: 0
             }
         },
         none_display: [true]
@@ -488,12 +584,12 @@ var latin_drop_levels = {
         }
     },
     100: {
-        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0.001,
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .3, 'object_drop': .3, 'conjunction_drop': 0.5,
             min: 2, max:3}
     },
     //iq and is levels
     200: {
-        drop_non_drop_map: {'subject_drop': .001, 'verb_drop': .9, 'object_drop': .001, 'conjunction_drop': 0.9,
+        drop_non_drop_map: {'subject_drop': .001, 'verb_drop': .1, 'object_drop': .001, 'conjunction_drop': 0.9,
             min: 1, max:3}
     },
     300: {

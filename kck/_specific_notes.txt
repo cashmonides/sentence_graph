@@ -1,0 +1,217 @@
+TEACHER FRIENDLY DROP DOWN SETTINGS
+
+- overall we have _4_ different settings that will come into play in nested drop downs
+    - tense_name_boolean (do tense names occur at all)
+    - tense_name_advanced (do tense names occur in the advanced format -preterite, pluperfect etc.)
+    - relative_absolute_overlap (do relative and absolute times occur in the same drop down)
+    - pseudotense_tense_overlap (do pseudotenses and tenses occur in the same drop down)
+
+
+
+
+
+
+TEACHER FRIENDLY LEXICON DESIGN
+queen : {
+    part_of_speech: noun, 
+    specific_properties_map: {
+        //core properties specific to a noun
+        animate: true,
+        ruler: true,
+        respect: false
+        
+        //language specific properties
+        english_singular:
+        english_plural:
+        latin_form2: regi 
+        }
+}
+
+
+love : {
+    part_of_speech: verb, 
+    specific_properties_map: {
+        //core properties specific to a noun
+        transitive: true,
+        mentl: false,
+        command: false
+        
+        //language specific properties
+        english_singular:
+        english_plural:
+        latin_form2: am
+        }
+}
+
+sī
+[constraints:
+right mood: indicative
+right time: simultaneous]
+
+////////////
+
+prune on:
+fear/command/iq/is/doubt/conditional
+
+////////////
+how to handle reverting:
+
+failure values
+prune requires no starting over, simply some changes
+
+ideal syntax
+var foo = function () {
+    var d = new Do();
+    var f = new Foo();
+    d.do(f);
+}
+if fails 'cannot do foo to do!'
+frobnicate(foo)
+continue
+if fails 'foo not produced'
+send very urgent email
+try again
+if fails '!!!'
+send VERY urgent email
+throw error
+
+var foo = catch_errors(function () {
+    var d = new Do();
+    var f = new Foo();
+    d.do(f);
+}).catch('cannot do foo to do!', function () {
+    frobnicate(foo);
+}).catch('foo not produced', function () {
+    send('very urgent email');
+    return 'redo';
+}).catch('!!!', function () {
+    send('VERY urgent email');
+    throw 'error';
+}).();
+
+to allow failure on any kernel (actual code)
+
+// This function determines a lexeme for each role in a kernel.
+Kernel.prototype.choose_random_lexemes = new CatchErrors(function () {
+    // We iterate over the role list.
+    for (var i = 0; i < this.role_list.length; i++) {
+        // We determine a lexeme for the current role.
+        // Note that we do this by calling a method on its component.
+        this.role_list[i].component.choose_random_lexeme();
+    }
+}).catch('Could not find lexeme!', function (_, args) {
+    throw 'Remove ' + args[0] + ' kernel';
+}).end();
+
+// This method chooses random lexemes throughout a sentence.
+KCKSentence.prototype.choose_random_lexemes = new CatchErrors(function () {
+    this.main_kernel_first('choose_random_lexemes');
+}).catch(/^Remove ([a-z]+) kernel$/, function (regex_match) {
+    var direction = match[1];
+    return 'resume';
+}).end();
+
+KCKSentence.prototype.main_kernel_first = new Tasks([
+
+]).
+
+
+////////////
+
+We got this output:
+English:
+were commanded in order that may be feared
+
+Latin:
+IUSS[dummy agreement marker] SUMUS ut TIM-EA-TUR
+
+SSSLatin:
+SSSIUSS[dummy agreement marker] SUMUS sssut SSSTIM-EA-TUR
+
+But it was greek perfect. This seems OK, but is it?
+////////////
+
+translation formulae:
+do we need translation formulae to be sequence-dependent?
+or do we want default subjunctive translations instead?
+
+////////////
+
+open questions:
+    - do we want clause types? 
+  - current clause types and do we need more?
+        - main
+        - subordinate
+        - apodosis
+        - protasis
+        - indepedent subjunctive
+        - nonexistent
+
+"clause types":
+
+Most of the decisions that need to be made are related to a type of thing here called "clause types"
+(although some relate to sequence).
+
+"clause types" (this is not a good name since we're using it for something else) are a very general classifications which clauses fall into. It has the following possible values:
+nonexistent. This represents a fake clause in a main or independent subjunctive construction.
+main. This represents  an indicative main clause not in a conditional.
+subordinate. This represents  a subordinate clause (not in an if statement).
+independent subjunctive, protasis, apodosis. These are all what they sound like.
+
+How are clause types used?
+Certain things only happen in main clauses.
+They don't happen in independent subjunctives.
+For example, no subjunctive verbs are allowed.
+No past secondary sequence verbs also holds in certain "clause type"s.
+Due to this type of thing, we want to be able to use "clause type" in rules.
+
+Here is a long list of issues. Sorry for sending you so many. I tried to put the more important ones at the top.
+
+Design issues:
+- Do we want "clause type"?
+- What should we call it?
+- Should it be on the kernel or the verb? Or both? (Both is the current option.)
+- Should we store it as a string or an enumeration? Or something else?
+
+Do we want to always determine sequence?
+- It's really only relevant in main/subordinate combinations.
+- If we determine it randomly for independent main clauses, they will have to be past half the time.
+- Unless we create separate "clause type"s for independent main clauses and subordinating main clauses.
+
+Secondary sequence implies past in what "clause types"?
+- main
+- independent subjunctive? This shouldn't matter unless we have multiple "conjunctions".
+- Are there any other clause types in which this happens?
+
+Are there any clause types we're not considering?
+- Relative, for example: does it have to be its own clause type?
+- We certainly don't want random subjunctive relatives; we want to be able to control them.
+
+In an if statement, which side is which?
+- Is the protasis on the left and the apodosis on the right?
+- Or vice versa?
+
+Rule design issue:
+- The rule system is sort of quarantined and seems to work so far.
+- But it's a little ugly and doesn't have much of any failure checking.
+- Should we look back on it?
+- Also, is it powerful enough? Or will we need to add new stuff?
+
+Infinite loops
+- Sometimes we seemed to go into an infinite loop due to over-constraining prohibitions
+which were always satisfied in some clause types.
+- Should we try to fix this or test for it? It doesn't seem to be happening now.
+- if you are mortal, start reading from 4 lines up.
+
+How should we distinguish a main clause conjunction from an independent subjunctive conjunction?
+- Currently, we look at whether its verb is indicative or subjunctive in Latin.
+- This feels somewhat hacky.
+- Is the fact that we have to do this in the first place a bad thing?
+
+My misspelling of apodosis as apodasis/apotasis.
+- This is a very minor issue which we can easily fix.
+- But perhaps we should check for other misspellings?
+
+I feel like we're still making a lot of progress, though! We should expect more weeds as we head toward the murky swamp of language-dependance.
+
+Excelsior!
