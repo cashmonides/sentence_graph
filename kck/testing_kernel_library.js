@@ -51,12 +51,49 @@ example of format
 */
 
 var testing_lexemes = {
+    wolf: {
+        core_properties: {
+            name: 'wolf',
+            part_of_speech: 'noun',
+            // version 1
+            // lexical_properties: ['animate'],
+            // version 2
+            lexical_property_dictionary: {
+                animate: true,
+                edible: false,
+                human: false,
+                god: false,
+                ruler: false,
+                implement: false,
+                abstraction: false,
+                location: false,
+                //mental is true for 'word', 'thought', 'sentence', etc. 
+                //the consequence is that nouns with mental=true can be direct objects of mental verbs
+                mental: false
+            }
+        },
+        latin: {
+            declension: '2',
+            gender: 'm',
+            roots: ['lup']
+        },
+        english: {
+            roots: {
+        		'singular': 'wolf',
+        		'plural': 'wolves'
+    		}
+    	}
+    },
     attack: {
         core_properties: {
             name: 'attack',
             part_of_speech: 'verb',
             transitivity: 'transitive',
-            lexical_properties: []
+            lexical_properties: [],
+            subject_white_list: ['animate'],
+            object_white_list: [], //left empty because almost every thing can be an object?
+            subject_black_list: ['abstraction'], // I don;t think we need abstraction here since nothing is both animate and an abstraction
+            object_black_list: ['abstraction', 'implement', 'mental']
         },
         latin: {
             conjugation: '1',
@@ -81,7 +118,11 @@ var testing_lexemes = {
             name: 'speak',
             part_of_speech: 'verb',
             transitivity: 'intransitive',
-            lexical_properties: ['mental verb']
+            lexical_properties: ['mental verb'],
+            subject_white_list: ['animate'],
+            object_white_list: ['mental'], //left empty because almost every thing can be an object?
+            subject_black_list: [], //left empty because animate white list excludes all things necessary
+            object_black_list: [],
         },
         latin: {
             conjugation: '3',
@@ -106,7 +147,11 @@ var testing_lexemes = {
             name: 'come',
             part_of_speech: 'verb',
             transitivity: 'intransitive',
-            lexical_properties: []
+            lexical_properties: [],
+            subject_white_list: ['animate'],
+            object_white_list: [], 
+            subject_black_list: [], 
+            object_black_list: [],
         },
         latin: {
             conjugation: '4',
@@ -131,7 +176,11 @@ var testing_lexemes = {
             name: 'love',
             part_of_speech: 'verb',
             transitivity: 'transitive',
-            lexical_properties: []
+            lexical_properties: [],
+            subject_white_list: ['animate'],
+            object_white_list: [], 
+            subject_black_list: ['abstraction'],
+            object_black_list: [],
         },
         latin: {
             conjugation: '1',
@@ -156,7 +205,11 @@ var testing_lexemes = {
             name: 'command',
             part_of_speech: 'verb',
             transitivity: 'transitive',
-            lexical_properties: ['verb of commanding']
+            lexical_properties: ['verb of commanding'],
+            subject_white_list: ['animate'],
+            object_white_list: [], 
+            subject_black_list: ['abstraction'],
+            object_black_list: ['abstraction', 'implement', 'location', 'mental'],
         },
         latin: {
             conjugation: '2',
@@ -181,7 +234,11 @@ var testing_lexemes = {
             name: 'fear',
             part_of_speech: 'verb',
             transitivity: 'transitive',
-            lexical_properties: ['verb of fearing']
+            lexical_properties: ['verb of fearing'],
+            subject_white_list: ['animate'],
+            object_white_list: [], 
+            subject_black_list: ['abstraction'],
+            object_black_list: [],
         },
         latin: {
             conjugation: '2',
@@ -206,7 +263,11 @@ var testing_lexemes = {
             name: 'feel',
             part_of_speech: 'verb',
             transitivity: 'transitive',
-            lexical_properties: ['mental verb']
+            lexical_properties: ['mental verb'],
+            subject_white_list: ['animate'],
+            object_white_list: ['mental'], 
+            subject_black_list: ['abstraction'],
+            object_black_list: [],
         },
         latin: {
             conjugation: '4',

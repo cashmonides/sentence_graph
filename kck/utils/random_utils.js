@@ -44,6 +44,14 @@ var weighted_choice = function (dict, accept_key) {
     if (!accept_key) {
         accept_key = function () {return true};
     }
+    // If the object being chosen from is an array, this is very simple.
+    if (Array.isArray(dict)) {
+        return random_choice(dict.filter(accept_key));
+    }
+    // Check that the object being chosen from is a real object.
+    if (!is_object(dict)) {
+        throw JSON.stringify(dict) + ' is not a real object.';
+    }
     // We get the keys to choose from.
     var keys_to_choose_from = Object.keys(dict).filter(accept_key);
     // This just sums the values of the dictionary

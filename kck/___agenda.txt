@@ -1,21 +1,270 @@
 /////
 
-- priorities for today
-    - load a bunch of modules and test different parameters
-    - see why latin mode is broken
-    - tense override in flv
-    - conditionals shouldn't have time
-    - double verbs in English to Latin mode at end of path
-    - we would like to be able to have a module that switches from E->L and from L->E
-        - but:
-            - if we stupidly just: 
-                    'source_language' : {'english': 0.5, 'latin': 0.5},
-                    'target_language' : {'english': 0.5, 'latin': 0.5},
-            - then it's possible we could end up with source and target being the same
-
 - next time
+     - comb through language data
+        - tense override in flv
+        - conditionals shouldn't have time
+         - comb through data involved in latin drop down and check for inconsistencies and check for time in conditionals
+    - double verbs in English to Latin mode at end of path
     - fix cosmetic issues in drop downs
     - fix comsetic issues in feedback box
+    - agenda for final week
+        - check noun lexeme (DONE)
+        - exami level of abstraction in which roles get created
+            - distinct level
+            - i.e. it should be a template that we produce 
+                - k -> sv
+                - k -> v
+                - k -> svo
+                - k -> vo
+            - we should be able to "check" the role template for sense
+        - question: have we already determined transitivity upstream of verb lexeme choice?
+        - is transitivity part of our kernel, upstream of choosing verb lexeme?
+        - process
+            - determine transitivity
+            - transitivity
+                - determined directly from verb lexeme choice (chosen randomly from allowed)
+            - explicitness
+                - 
+        
+- Akiva's notes on the process
+    - we add settings to kck levels
+        - transitivity: {'transitive': 0.6 , 'intransitive': 0.3}
+        - voice: {'active': 0.8, 'passive': 0.1}
+        - explicitness: {'explicit': 0.8, 'implicit': 0.1}
+    - we pick transitivity, voice and explicitness way upstream in the kernel
+    - we generate a role template
+        - k -> sv
+        - k -> v
+        - k -> svo
+        - k -> vo
+    - we send role template plus transitivity boolean and voice boolean to our next step
+    - next step: add lexemes
+    - next step: inflect
+
+- it seems like a straightforward proces
+
+- one thing to be on the lookout for:
+    - we need to choose verb first
+    - and that will constrain our noun lexeme choice
+    - e.g. certain nouns cannot combine with certain verbs 
+        - abstractions can't be objects of certain verbs, etc.
+    - we probably need to create some type of verb-noun implications
+        - we might want to do something like this in verb lexemes:
+            - subject_black_list:
+            - object_black_list:
+        - e.g.
+            - 'throw': {
+                object_black_list: [abstraction, location]
+            }
+        - option 2 would be:
+            - create a larger category like physicality/concreteness
+            - and this would always exclude abstraction and locatio 
+        - e.g.
+            - 'throw': {
+                lexical properties: [physical]
+            }
+        - option 1 is more explicit and maybe less liable to lead to vagueness and user error
+        - that seems to make sense so maybe we want to use option 1 even though option 2 might be less typing
+            - since users can make mistakes and might want to have the information in one place
+
+        - AS: I think in general the option 1 approach is better because we might have verbs
+            that occupy gray areas, like rule works nicely with location but not abstraction
+            
+        - for me the big question that arises:
+            - should we also make a white list?
+            - like animate for the subject of mental verbs?
+            - yes and inanimate for verbs like "lie"  - the rock lies next to the river
+            - maybe we could just make it a list of constraints
+            - like 'throw': {
+                'object_constraints': ['not abstraction', 'not location']
+            }
+            - 'speak': {
+                'subject_constraints': ['animate']
+            }
+            - 'lie': {
+                'subject_constraints': ['not animate']
+            }
+            
+            AS: well a person can lie next to a river (or another person, although we might want a grade-level restriction) ..  but that's just a detail
+            yeah ha that's a good point we're gonna have to be careful with the young minds
+            
+            I don't know about that format. I kind of prefer the white and black list approach
+            it seems a little easier to read (yes, it seems to make sense to have more type of data that each do one thing)
+            AS: though of course there is the potential for collision
+            DS: what type of collision?
+            AS: just user error, like if someone was sloppy and put something on both lists
+            but I think we can live with that
+            we'll never eliminate user error
+            DS: we seem to have a potential for this kind of error whatever we do
+            AS: so I suggest we implement white and black lists for the following
+                (although this is getting a little ahead of ourselves)
+                subject
+                object
+                implement
+                recipient
+                
+              (moving these to semantic notes)
+                
+            AS: so what else do we need to do before getting started? 
+            what other design do we need to carefully deliberate?
+            
+
+
+- DS: fear clauses and mental verbs don't take a (direct) object
+    as main verbs introducing is/fear, even though they're transitive
+    - I feel pain
+    - I fear the wolf
+    - I feel that the bird eats the spider (grammatically coherent)
+    - I fear that he will go to Rome
+    - * I feel pain that the bird eats the spider (not grammatically coherent without apposition)
+    - * I fear the wolf that he will go to Rome
+
+- AS: above is a good point. I feel like it's useful for there to be a category called clause
+    - so fear   
+        object_white_list: [clause, noun]
+    - think
+        object_white_list: [clause]
+        object_black_list: [noun]
+
+- Yes, and a conjunction can force its subordinate clause to be the object of the verb's main clause
+    - a rather unrelated issue is that if a verb is passive the subject and object reverse
+        - so a sword can be thrown but not throw
+
+    - yes let's talk about how voice plays a role in this
+        - it seems like we need voice to be determined before we pick the noun lexeme (which we said we would do)
+        - like if we have S V and we don't know the voice then we're in trouble
+        - 
+            - *the republic is thrown
+            - *the sword is thought
+            - stuff like that (those aren't very good examples but I can't think of others)
+        - it seems to me like we need to use subject restrictions on the object and vice versa
+
+- okay I added voice to the process above
+    - we send template, voice boolean, transitivity boolean to lexeme picker
+    
+- is it worth not making them strictly booleans?
+    - like having it be 'transitive' or 'intransitive'?
+    - this might allow for more flexibility down the road like double transitive verbs
+       - yes it seems to be worthwhile to not just use strict booleans
+       - (by the way, I don't actually think double transitive verbs exist
+           except insofar as they have an indirect object which has the meaning of a dative)
+        - I might not be using the word right but I'm thinking of the double accusative
+            - he teaches the children art (two accus objects in latin)
+               - Can't we treat the first accusative like a type of dative which happens to be in the accusitive case for some verbs?
+                   - because this just means he teaches art to the children
+                       - although this does have the issue of not allowing for certain type of passive
+                           - I told the king the story
+                           - the story was told to the king by me
+                           - the king was told the story by me (issue nai
+                           vely)
+                - yeah maybe that's a good solution
+                - I don't know how many double accusatives there are in latin. I have a book at home we can look it up
+                - yeah good point, theres some tricky behavior in the passive of double accusatives
+                
+                
+- but let's stay on track. I'll migrate these to advanced semantics
+- let's get something basic going
+- it seems like subject and object white and black lists are a good started
+- shall I start adding white and black lists and you make a template generator?
+
+- yeah let's try to write white/black lists and implement everything until line 31.
+   - should we include clauses as objects?
+        - yes definitely, there are quite a few cases in latin at least where clauses are objects
+    - so do we have to denote this in the conjunction object?
+        - i.e., a fear conjunction has some type of difference from 
+        - I'm not sure - the conjunction library itself might be powerful enough to handle this
+            - it does seem like the conjunction library should handle this or the verb should 
+                - it just seems to me like the conjunction should say "I need to be considered the object of my verb"
+                    - and in addition have any restriction it might need
+                - yeah that seems a good idea
+                    - the conjunction could have a property
+                        - clause_acts_as_noun
+                            (and thus can be subject or object)
+                            (and thus no other object possible)
+                            (i.e. *he fears the wolf that he will attack)
+                        - clause_acts_as_adverb
+                            (and thus can't be subject or object)
+                            (and thus objects are allowed)
+                        - clasue_acts_as_adjective
+                            (to be implemented for relative clauses)
+                        - I think a clause_acts_as property seems wise.
+                            - for all our current conjunctions it would be object or adverb
+                            - I don't think it should be noun since that's really more like what happens with a the fact that clause
+                        - can act as a noun in the sense that it can be the subject of a passive verb
+                            - It just seems like we have to distinguish this from a the fact that clause which can crop up anywhere
+                            - by means of the fact that I was prepared, I was able to attack the country
+                                - but the fact that is weird and I really don't care whether we call this noun or object
+                            - it's a little advanced but:
+                                - that he will attack was feared
+                                - yes it is the subject there but this only happens with passive verbs
+                                - right so it's inaccurate to call it clause acts as object 
+                                    (in a sense - it's a small inaccuracy maybe)
+                            - so do you have any opinion about "the fact that" or do you want to ignore it for now (which make sense)
+                            - I think we should leave it for now. 
+                            I want to think about it longer and look up some examples beforehand
+                            - seems reasonable
+                        - so should it look like this?
+                            clause_acts_as: 'noun'   //choices: noun, adverb, adjective (yes that seems fine)
+                            let's do that and I'll take account of that in my code (not "adjective" though)
+        - the white list in the verb might be redundant
+        - the only advantage would be that for certain verbs (like fear)
+            - we want to be able to use fear even when we don't have a clause, like he fears the wolf
+            - as well as when it gets triggered by the conjunction library (he fears that)
+        - maybe it's just the case that we can leave all clause stuff to the conjunction library
+        - and fear will get picked
+
+- so how do you want to proceed? here are some agenda items:
+    - (yes this seems reasonable)
+    - does this seem like a good division of labor?
+    - (yes. It seems like the template implications should be part of the template generator, though;
+        there aren't that many and it doesn't seem worthwhile to store them as data)
+        (okay sounds good. I'll get cracking on my items, sound good?
+        (all kck verbs are currently stored in testing kernel library right?)
+        (yes that's where the lexicon is stored)
+        (okay ill get started)
+        are you gonna make template generator in the kck folder? that seems like the place to do it
+        yeah if you look you'll see that file
+    - add clause_acts_as to conjunctions (AS)
+    - add black and white lists to verb lexicon (AS)
+    - make set of template implications (DS) (not needed)
+        - e.g. transitive implies object
+    - make a template generator (DS) (done)
+    - make a lexeme picker
+
+- current state
+    - everything seems to be going well
+    - but we eventually get a mysterious error about mood.
+    - which is surprisingly far downstream!
+
+-  seems like much of this should be migrated
+    
+- down the road
+    - design taxonomical object for drop down
+    - load taxonomical data
+    - morphological path
+    - green/red for input mode
+  
+  
+- design filters for ablative and dative semantics with verb    
+    - discussion
+          but those last two categories are obviously down the road issues
+                
+                i.e. you can attack with a spear
+                so attack has implement with the normal category of implements
+                but you can rule with kindness (is this even really implement? are you ruling by means of kindness?)
+                    AS: we might want to develop another kind of role that captures this other meaning of with
+                    we could call it manner
+                    when you conquer someone by means of tears it's an implement
+                    so you might be able to conquer someone with pity
+                    
+                    
+                    DS: Yeah that seems like what it is.
+                anyway this is getting complicated, we shouldn't worry about it now
+                just wanted to bring it up so we're thinking of it
+                
+                let's not get too lost in the weeds, glad we're thinking about this ahead of time though
+                
 
 
 - profound things that can be delayed without disaster

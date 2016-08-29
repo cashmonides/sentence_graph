@@ -58,6 +58,10 @@ Conjunction.prototype.get_part_of_speech = function () {
 Conjunction.prototype.get_name = function () {
     return this.conjunction.citation_name;
 }
+// The method lets us get the clause_acts_as property of the conjunction.
+Conjunction.prototype.clause_acts_as = function () {
+    return this.conjunction.clause_acts_as;
+}
 
 // This method lets us find whether a conjunction can be used as a lexeme.
 Conjunction.prototype.usable_as_lexeme = function () {

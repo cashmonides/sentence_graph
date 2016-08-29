@@ -10,7 +10,6 @@ var generate_sentence = function (kck_level, drop_extra_level) {
     while (!success) {
         // We make a random sentence.
         var sentence = make_random_sentence(kck_level);
-        // console.log(sentence);
         // We remove the (basicly nonexistant) dummy clause from the sentence
         // if it is a single clause.
         if (sentence.is_single_clause()) {

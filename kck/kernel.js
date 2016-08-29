@@ -4,12 +4,13 @@
 // This function constructs a kernel from a conjunction
 // and a choice of left or right.
 // Note that the conjunction here is simply a conjunction object.
-var kernel_constructor = function (conjunction, direction) {
+var kernel_constructor = function (conjunction, direction, clause_acts_as, level) {
     // We get the appropriate construction from the conjunction.
     var construction = conjunction.get_construction(direction);
     
     
-    
+    // We get our template.
+    var template = template_generator(clause_acts_as, level);
     // We check that the construction is not undefined
     // and throw an error if it is.
     if (construction === undefined) {
@@ -37,12 +38,9 @@ var kernel_constructor = function (conjunction, direction) {
     // We construct a random role list.
     // For now this is just a list containing a verb role.
     
-    // todo: when we are done with the minimum viable product,
-    // we should make this more complicated.
-    var role_list = [new Role('verb')];
-    // We construct a Kernel object from our construction and role list.
-    var kernel = new Kernel(role_list, construction, main_or_sub,
-    conjunction, direction);
+    // We construct a Kernel object from our construction
+    var kernel = new Kernel(construction, main_or_sub,
+    conjunction, direction, template);
     // In the next few lines we just add restrictions.
     
     // We add any lexical restriction that may exist.
@@ -68,9 +66,7 @@ var kernel_constructor = function (conjunction, direction) {
 
 // This is the initial definition of the Kernel object.
 var Kernel = function (
-    role_list, construction, main_or_sub, conjunction, direction) {
-    // list of roles (objects)
-    this.role_list = role_list;
+    construction, main_or_sub, conjunction, direction, template) {
     // Classification contains verious types of classification.
     // lexical: e.g., mental, command, fear, etc.
     // time: i.e., present, past, and future.
@@ -87,6 +83,15 @@ var Kernel = function (
     // currently stored directly.
     this.conjunction = conjunction;
     this.direction = direction;
+    // Add the information in our template.
+    this.voice = template.voice;
+    this.explicitness = template.explicitness;
+    this.clause_location = template.clause_location;
+    // And finally, the role list, created by turning everything
+    // in the template into a role.
+    this.role_list = template.template.map(function (x) {
+        return new Role(x);
+    });
 }
 
 // Helper method for getting the conjunction in case we decide

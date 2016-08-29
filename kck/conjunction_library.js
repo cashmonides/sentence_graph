@@ -238,6 +238,7 @@ var conjunction_library = {
     },
     c_purpose: {
         type: "subordinating",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'absolute',
             latin: 'indicative',
@@ -278,6 +279,7 @@ var conjunction_library = {
     },
     c_indirect_command: {
         type: "subordinating",
+        clause_acts_as: 'noun',
         k_left_verb_regime: {
             english: 'absolute',
             latin: 'indicative',
@@ -318,6 +320,7 @@ var conjunction_library = {
     },
     c_fear: {
         type: "subordinating",
+        clause_acts_as: 'noun',
         k_left_verb_regime: {
             english: 'absolute',
             latin: 'indicative',
@@ -358,6 +361,7 @@ var conjunction_library = {
     },
     c_cum_when: {
         type: "subordinating",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'absolute',
             latin: 'indicative',
@@ -398,6 +402,7 @@ var conjunction_library = {
     },
     c_cum_because: {
         type: "subordinating",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'absolute',
             latin: 'indicative',
@@ -438,6 +443,7 @@ var conjunction_library = {
     },
     c_cum_circumstantial: {
         type: "subordinating",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'absolute',
             latin: 'indicative',
@@ -478,6 +484,7 @@ var conjunction_library = {
     },
     c_because_allegedly: {
         type: "subordinating",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'absolute',
             latin: 'indicative',
@@ -518,6 +525,7 @@ var conjunction_library = {
     },
     c_why: {
         type: "subordinating",
+        clause_acts_as: 'noun',
         k_left_verb_regime: {
             english: 'absolute',
             latin: 'indicative',
@@ -558,6 +566,7 @@ var conjunction_library = {
     },
     c_if_flv: {
         type: "subordinating conditional",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'conditional',
             latin: 'conditional',
@@ -604,6 +613,7 @@ var conjunction_library = {
     },
     c_if_fmv: {
         type: "subordinating conditional",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'conditional',
             latin: 'conditional',
@@ -650,6 +660,7 @@ var conjunction_library = {
     },
     c_if_fmve: {
         type: "subordinating conditional",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'conditional',
             latin: 'conditional',
@@ -696,6 +707,7 @@ var conjunction_library = {
     },
     c_if_present_ctf: {
         type: "subordinating conditional",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'conditional',
             latin: 'conditional',
@@ -742,6 +754,7 @@ var conjunction_library = {
     },
     c_if_past_ctf: {
         type: "subordinating conditional",
+        clause_acts_as: 'adverb',
         k_left_verb_regime: {
             english: 'conditional',
             latin: 'conditional',

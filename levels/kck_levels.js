@@ -11,6 +11,8 @@ var kck_levels = {
         'absolute-relative-split': 'on',
         'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear'],
         'drop_down_path' : ['lexeme', 'voice', 'time', 'person_and_number'],
+        'transitivity' : {'transitive': 0.9, 'intranstive': 0.1},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
         'source_language' : {'english': 0, 'latin': 1},
         'target_language' : {'english': 1, 'latin': 0},
         'terminology_display_dictionary': 'basic'
@@ -27,6 +29,8 @@ var kck_levels = {
         'absolute-relative-split': 'on',
         'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear'],
         'drop_down_path' : ['lexeme', 'voice', 'time', 'person_and_number'],
+        'transitivity' : {'transitive': 0.9, 'intranstive': 0.1},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
         'source_language' : {'english': 1, 'latin': 0},
         'target_language' : {'english': 0, 'latin': 1},
         //setting for default display
@@ -44,6 +48,8 @@ var kck_levels = {
         'absolute-relative-split': 'on',
         'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear'],
         'drop_down_path' : ['lexeme', 'voice', 'time', 'person_and_number'],
+        'transitivity' : {'transitive': 0.9, 'intranstive': 0.1},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
         'source_language' : {'english': 0.5, 'latin': 0.5},
         'target_language' : {'english': 0.5, 'latin': 0.5},
         //setting for default display
