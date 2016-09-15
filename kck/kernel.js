@@ -87,6 +87,12 @@ var Kernel = function (
     this.voice = template.voice;
     this.explicitness = template.explicitness;
     this.clause_location = template.clause_location;
+    // This is a map from roles in the sentence to the roles looked at
+    // for whitelist/blacklist. So, for example, a possible
+    // key-value pair might be 'personal agent': 'subject',
+    // since personal agent inherits subject restrictions.
+    this.role_to_role_for_verb_restrictions =
+    template.role_to_role_for_verb_restrictions;
     // And finally, the role list, created by turning everything
     // in the template into a role.
     this.role_list = template.template.map(function (x) {
@@ -170,29 +176,71 @@ Kernel.prototype.adopt_sequence = function (sequence) {
     this.get_verb().set_property('sequence', sequence);
 }
 
+// This method adds white and black lists to a kernel.
+// todo: Fix this when adding adjectives.
+Kernel.prototype.add_white_and_black_lists = function (
+    component, role_name, verb_component) {
+    // We want to skip other roles.
+    if (!(role_name in this.role_to_role_for_verb_restrictions)) {
+        return;
+    }
+    role_name = this.role_to_role_for_verb_restrictions[role_name];
+    var white_list = verb_component.lexeme.get_core_property(
+        role_name + '_white_list');
+    var black_list = verb_component.lexeme.get_core_property(
+        role_name + '_black_list');
+    component.set_property('white_list', white_list);
+    component.set_property('black_list', black_list);
+}
+
+// This method chooses a random lexeme for a component.
+Kernel.prototype.choose_random_lexeme_for = function (
+    component, chosen_lexemes, level) {
+    // We determine a lexeme for the current role.
+    // Note that we do this by calling a method on its component.
+    var success = component.choose_random_lexeme(
+        chosen_lexemes, this.chosen_lexemes, level);
+    // We throw an error if we fail.
+    if (!success) {
+        // We check whether we want to throw an error
+        // or take some other type of action.
+        if (LEXEME_ERROR_CATCHING_MODE === 'throw') {
+            // We failed so we throw an error.
+            throw 'Failed to choose lexeme for ' +
+            JSON.stringify(component);
+        } else {
+            // We just return false.
+            return false;
+        }
+    }
+    // We are still fine.
+    return true;
+}
+
 // This function determines a lexeme for each role in a kernel.
 Kernel.prototype.choose_random_lexemes = function (chosen_lexemes, level) {
     // We initialize some lexemes chosen in this kernel.
     this.chosen_lexemes = {};
+    // Get the verb component.
+    var verb_component = this.get_verb();
+    // Choose the verb.
+    var verb_success = this.choose_random_lexeme_for(
+        verb_component, chosen_lexemes, level);
+    if (!verb_success) {return false}
     // We iterate over the role list.
     for (var i = 0; i < this.role_list.length; i++) {
-        // We determine a lexeme for the current role.
-        // Note that we do this by calling a method on its component.
-        var success = this.role_list[i].component.choose_random_lexeme(
-            chosen_lexemes, this.chosen_lexemes, level);
-        // We throw an error if we fail.
-        if (!success) {
-            // We check whether we want to throw an error
-            // or take some other type of action.
-            if (LEXEME_ERROR_CATCHING_MODE === 'throw') {
-                // We failed so we throw an error.
-                throw 'Failed to choose lexeme for ' +
-                JSON.stringify(this.role_list[i].component);
-            } else {
-                // We just return false.
-                return false;
-            }
-        }
+        // Get the component.
+        var component = this.role_list[i].component;
+        // Get the role name.
+        var role_name = component.role_name;
+        // Skip the verb.
+        if (role_name === 'verb') {continue}
+        // Add the white and black lists.
+        this.add_white_and_black_lists(component, role_name, verb_component);
+        // Choose the lexeme.
+        var success = this.choose_random_lexeme_for(
+            component, chosen_lexemes, level);
+        if (!success) {return false}
     }
     // We add the lexemes chosen in the kernel to our master dictionary
     // of chosen lexemes, one at a time.

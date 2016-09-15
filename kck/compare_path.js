@@ -1,5 +1,6 @@
 var compare_path = function (correct_path, answered_path) {
-    var correct_path_set = set_from(correct_path);
+    var correct_path_set = set_from(correct_path,
+    'The correct path, $, is somehow weird.');
     var correct = true;
     var red_green_list = [];
     var item;

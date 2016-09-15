@@ -1,48 +1,176 @@
 /////
 
-- next time
-     - comb through language data
-        - tense override in flv
-        - conditionals shouldn't have time
-         - comb through data involved in latin drop down and check for inconsistencies and check for time in conditionals
-    - double verbs in English to Latin mode at end of path
-    - fix cosmetic issues in drop downs
-    - fix comsetic issues in feedback box
-    - agenda for final week
-        - check noun lexeme (DONE)
-        - exami level of abstraction in which roles get created
-            - distinct level
-            - i.e. it should be a template that we produce 
-                - k -> sv
-                - k -> v
-                - k -> svo
-                - k -> vo
-            - we should be able to "check" the role template for sense
-        - question: have we already determined transitivity upstream of verb lexeme choice?
-        - is transitivity part of our kernel, upstream of choosing verb lexeme?
-        - process
-            - determine transitivity
-            - transitivity
-                - determined directly from verb lexeme choice (chosen randomly from allowed)
-            - explicitness
-                - 
-        
-- Akiva's notes on the process
-    - we add settings to kck levels
-        - transitivity: {'transitive': 0.6 , 'intransitive': 0.3}
-        - voice: {'active': 0.8, 'passive': 0.1}
-        - explicitness: {'explicit': 0.8, 'implicit': 0.1}
-    - we pick transitivity, voice and explicitness way upstream in the kernel
-    - we generate a role template
-        - k -> sv
-        - k -> v
-        - k -> svo
-        - k -> vo
-    - we send role template plus transitivity boolean and voice boolean to our next step
-    - next step: add lexemes
-    - next step: inflect
 
-- it seems like a straightforward proces
+Agenda for future (made in mid-september 2016)
+
+current findings:
+mental verbs have weird rules
+examples:
+they spoke why he was killed
+they were spoken why the mountain is pushed (would make sense as "told", though)
+so we have to fix this
+
+also only one answer choice is somewhat awkward
+
+but the noun switch appears to work
+its secret is that unless there are nouns, there's no subject and object (in the template)
+this might also create issues with "why", since "why" introduces a clause
+that acts as an object
+
+since "why" is causing so many issues, one solution would be to just throw it out
+but this is somehow unsatisfying
+
+
+Goal 1: test pre-redesign functionality and make sure we have a working game
+two options
+    option 1: push to the server
+    option 2: not to push to the server
+    
+    
+
+
+Goal 2: get kck verbs only to work (vcv), with workable nested drop down and incorporate into the game
+virtue of vcv sentences
+- learn about conjunctions, endings, sequence, etc.
+- stalling maneuver (stalls long enough for us to work in nouns)
+- prereqs before release
+    - making the noun switch functionality
+    - a few cases with ambiguity (-am = future || pres subj)
+        - quick and dirty solution (e.g. if ambiguous, don't produce)
+    - drop downs have cosmetic issues
+        - dropping up
+        - drop down menus don't disappear when they've been opened
+        - cramped
+        
+    - check lexicon and avoid transitive verbs that can't lack object
+
+Goal 3: taxonomy
+
+Goal 4: to get nouns working
+- information-rich templates
+- choosing lexemes (I'm not sure what our level of progress on this is)
+- making sure not to choose time for nouns (and other such category-mixing blunders)
+
+- declining nouns (seem to work for declensions 1, 2, 3, need to be tied in)
+- assembling components and giving them the proper order (SOV, SCRAMBLE, VERB FINAL)
+  - avoiding scrambled infinitives
+  - word order: upstream vs. language-by-language
+        - option 1: forced to match word order of source language
+        - option 2: look at module preferences and choose independently of source language
+
+- ambiguity and nonsense avoidance
+
+
+- display issues (dash removal, upper case)
+
+Goal 5: adjectives
+
+Goal 6: other types of noun (ablative, genitive)
+
+
+
+
+
+
+
+
+Agenda for saturday
+
+
+
+
+
+- give verb information about subject gender and explicitness
+
+
+PREP-CHORES
+- add noun lexemes (AS - DONE)
+- add noun drop downs to parameters in allowed (AS - MOSTLY DONE)
+- add noun decliner (DS)
+    - need to write a function
+        - determine_case 
+        - arguments: target language, conjunction/direction, role_name
+        
+KCK GENERATION WITH NOUNS
+- produce templates with S V O
+- pick lexemes
+- lexeme choice of subject determines gender
+- set gender of kernel based on noun picked
+    - need function: set_gender_of_kernel
+- if implicit, choose gender randomly from allowed
+
+
+DROP DOWN
+- add noun drop-down options implementation
+  - adapt most of our verb machinery for nouns
+  - create a separate drop_down_path for nouns parameter in kck_levels (AS - DONE)
+  - noun drop downs probably not nested (though we should build in the possibility just to be consistent)
+        - nested behavior probably not useful in english
+            (we just want wolf / wolves / lion / lions)
+        - but nested behavior could be useful in Latin
+            - first level of drop:
+                LUP
+                URS
+                CORV
+                LEO/LEON
+            - second level of drop
+                singular
+                plural
+            - third level of drop
+                LEO
+                LEON-IS
+                LEON-Ī
+                LEON-EM
+                LEON-E
+            - or (right?)
+                LEON-ĒS
+                LEON-UM
+                LEON-IBUS
+                LEON-ĒS
+                LEON-IBUS
+
+
+
+
+
+
+
+
+ADD FUNCTIONALITY
+- add subject pronouns in Latin
+
+
+ONLY AN ISSUE IN IMPLICIT VERB
+- parameter in kck_level to set for handling gender in translation
+    - call it gender_preference
+        'default_he'
+        'random_gender'
+        'he/she/it'
+    - English: 
+        he is default
+        pick he || she || it 
+        'he/she/it'
+    - Latin: 
+        - option a -us/a/um
+        - pick -us || -a || -um
+        - option b '-us' is the default or us/a/um
+    - suppose the subject options are lupus and regina
+        - then to avoid giving away information we need to have both -us and -a (in a periphrastic)
+        - but we don't need to have -um (and we might not want to)
+
+
+
+
+MOPPING UP CHORES
+- rename drop_down_path to drop_down_path_verb
+
+
+
+
+
+
+
+- it seems like a straightforward process
 
 - one thing to be on the lookout for:
     - we need to choose verb first
@@ -505,7 +633,7 @@ so we just want to make sure that we have all that information and it's easy to 
 (we don't need to make the quiz obviously)
 What part of speech is the highlighted word?
 Is the highlighted word transitive or intransitive?
-Is the highlighted word active of passive?
+Is the highlighted word active or passive?
 
 
 STAGE 2

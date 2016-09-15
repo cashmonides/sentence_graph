@@ -5,7 +5,8 @@
 
 // This function creates a set from a list or dictionary (or other set).
 // It can also be used to copy a set.
-var set_from = function (x) {
+// There is an optional error message.
+var set_from = function (x, error_message) {
     // We create our set.
     // "set" is used syntactically in javascript
     // (although it is not a reserved word)
@@ -27,7 +28,11 @@ var set_from = function (x) {
             our_set[i] = true;
         }
     } else {
-        throw JSON.stringify(x) + ' is not convertible to a set!';
+        if (error_message === undefined) {
+            throw JSON.stringify(x) + ' is not convertible to a set!';
+        } else {
+            throw error_message.replace(/\$/g, JSON.stringify(x));
+        }
     }
     // After having added elements to it, we return our set.
     return our_set;
@@ -48,4 +53,18 @@ var set_disjoint_union = function (x, y, err) {
     }
     // We return the first set.
     return x;
+}
+
+// Take the intersection of two sets.
+var set_intersection = function (a, b) {
+    // Make an empty set.
+    var s = {};
+    // Add every item in both sets to it.
+    for (var i in a) {
+        if (i in b) {
+            s[i] = true;
+        }
+    }
+    // Return the new set.
+    return s;
 }

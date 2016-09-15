@@ -71,7 +71,9 @@ var filter_allowed_with_constaints = function (allowed, other_constraints) {
             // the small size of this set.
             // But it shouldn't matter because it's not nested that deeply,
             // so I'm keeping it.
-            var constraints_set = set_from(other_constraints[i]);
+            var constraints_set = set_from(other_constraints[i],
+            '$, which seems like it should be some type of list ' +
+            'of constraints, is not.');
             result[i] = allowed[i].filter(function (x) {
                 return x in constraints_set;
             });

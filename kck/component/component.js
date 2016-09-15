@@ -127,21 +127,27 @@ Component.prototype.get_value_from_dict = function (dict) {
 
 // This does what needs to be do after determining the random properties
 // (but still in the loop). Currently that is just determining tense.
-// todo: Fix this when nouns are added.
 Component.prototype.after_random_properties = function (kck_level) {
-    try {
-        // Determine the tense and indicate that we did not fail.
-        this.determine_tense(kck_level);
-        return false;
-    } catch (e) {
-        // If there is an error, check if it contains the phrase
-        // 'tense error:'. If so, return error e.
-        // Otherwise, we want to hear
-        // about this error, so rethrow the error.
-        if (typeof e === 'string' && e.indexOf('tense error:') !== -1) {
-            return e;
-        } else {
-            throw e;
+    if (this.get_part_of_speech() === 'verb') {
+        try {
+            // Determine the tense and indicate that we did not fail.
+            this.determine_tense(kck_level);
+            return false;
+        } catch (e) {
+            // If there is an error, check if it contains the phrase
+            // 'tense error:'. If so, return error e.
+            // Otherwise, we want to hear
+            // about this error, so rethrow the error.
+            if (typeof e === 'string' && e.indexOf('tense error:') !== -1) {
+                return e;
+            } else {
+                throw e;
+            }
         }
+    } else {
+        // For types of word other than verb
+        // I can't think of anything needing to be done
+        // after random properties, so we just return false.
+        return false;
     }
 }

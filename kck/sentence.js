@@ -140,9 +140,6 @@ KCKSentence.prototype.pick_drop_down_lexemes = function (kck_level, drop_extra_l
     var original_chosen_lexemes = this.chosen_lexemes;
     // This function changes chosen_lexemes to add some new ones.
     var chosen_lexemes = {};
-    // This list contains all lexemes
-    // (including pseudo-lexemes like conjunction).
-    var all_lexemes = converted_lexeme_list;
     var lexeme;
     var part_of_speech;
     for (var name in original_chosen_lexemes) {
@@ -177,7 +174,6 @@ KCKSentence.prototype.pick_drop_down_lexemes = function (kck_level, drop_extra_l
             // Only keep the non-chosen lexemes with
             // the correct part of speech.
             var allowed_dummies = allowed_lexemes.filter(function (x) {
-                return x.get_part_of_speech() === part_of_speech &&
                 !(x.get_name() in original_chosen_lexemes);
             });
             // Automatically defensive (I think).

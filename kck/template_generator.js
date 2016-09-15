@@ -1,5 +1,6 @@
 var template_generator = function (clause_acts_as, level) {
     var this_module = get_current_module(level);
+    var noun_switch = this_module.noun_switch;
     var transitivity;
     if (clause_acts_as === 'noun') {
         transitivity = 'transtive';
@@ -22,21 +23,44 @@ var template_generator = function (clause_acts_as, level) {
     }
     var explicitness = weighted_choice(this_module.explicitness);
     var template = ['verb'];
-    if (explicitness === 'explicit') {
-        // Put 's' at the beginning, because there's a subject.
-        template.unshift('subject');
+    if (noun_switch) {
+        if (explicitness === 'explicit') {
+            // Put 'subject' at the beginning, because there's a subject.
+            template.unshift('subject');
+        }
+        if (transitivity === 'transitive') {
+            if (voice === 'active') {
+                template.push('object');
+            } else {
+                template.push('personal agent');
+            }
+        }
     }
-    if (transitivity === 'transitive') {
-        if (voice === 'active') {
-            template.push('object');
-        } else {
-            template.push('personal agent');
+    var maximal_role_to_role_for_verb_restrictions = {};
+    if (voice === 'active') {
+        maximal_role_to_role_for_verb_restrictions = {
+            'subject': 'subject',
+            'object': 'object'
+        }
+    } else {
+        maximal_role_to_role_for_verb_restrictions = {
+            'subject': 'object',
+            'personal agent': 'subject'
+        }
+    }
+    var role_to_role_for_verb_restrictions = {};
+    for (var i = 0; i < template.length; i++) {
+        if (template[i] in maximal_role_to_role_for_verb_restrictions) {
+            role_to_role_for_verb_restrictions[template[i]] =
+            maximal_role_to_role_for_verb_restrictions[template[i]];
         }
     }
     return {
         'template': template,
         'voice': voice,
         'transitivity': transitivity,
-        'clause_location': clause_location
+        'clause_location': clause_location,
+        'role_to_role_for_verb_restrictions':
+        role_to_role_for_verb_restrictions
     }
 }

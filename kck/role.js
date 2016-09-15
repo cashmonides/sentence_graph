@@ -17,28 +17,6 @@ Role.prototype.describe_in_language = function (language) {
     this.component.describe_in_language(language) + '\n';
 }
 
-// Forgetting about this for now.
-// Choose a specific lexeme to fill a role.
-// Role.prototype.choose_random_lexeme = function () {
-    // Get the restrictions for a lexeme.
-    // ???;
-    // The lexemes are currently the keys of the testing_kernel
-    // dictionary. This will also change when we move to verbs.
-    // todo: Get lexemes in some other way when we add nouns.
-    // var all_lexemes = Object.keys(testing_kernels);
-    
-    // Filter all lexemes so that they satisfy the restrictions.
-    // Note: we currently have only verbs, so we don't filter
-    // by part of speech.
-    
-    // todo: Filter by part of speech when we add nouns.
-    // var lexemes = all_lexemes.filter(function (lexeme) {
-        // ???;
-    // });
-    // Return a random choice from the lexemes.
-    // return random_choice(lexemes);
-// }
-
 // This method adds random properties to the component in a role.
 
 // Note: the random properties to be added are

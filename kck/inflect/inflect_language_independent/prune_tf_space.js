@@ -141,7 +141,8 @@ var check_function_from_allowed = function (list_of_allowed_sources) {
                 throw JSON.stringify(hash_yes) + ' already has ' +
                 prop + '! This entry should not be overwriten!';
             }
-            hash_yes[prop] = set_from(what_to_get_props_from[prop]);
+            hash_yes[prop] = set_from(what_to_get_props_from[prop],
+            'Error getting allowed! Probably bad data!');
             // We remove null.
             // Questions:
             // Is it OK to use null instead of 'null' here? Yes,

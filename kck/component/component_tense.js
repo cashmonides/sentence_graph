@@ -1,5 +1,9 @@
 // This method determines the tense of the component.
 Component.prototype.determine_tense = function (kck_level) {
+    if (this.get_part_of_speech() !== 'verb') {
+        throw 'Determining tense for a component filling role ' +
+        this.role_name + '!';
+    }
     // We first initialize the language-independent property of tense.
     this.initialize_language_dependent_property('tense_and_mood');
     // We then determine the tense taxonomy's tense, as well as the
