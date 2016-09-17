@@ -1,7 +1,7 @@
 // This is a way to test kernels.
 
 
-var random_component_properties = ['person_and_number', 'time', 'voice'];
+var random_component_properties = ['person_and_number', 'time'];
 
 
 var testing_rules = [
@@ -591,15 +591,76 @@ var testing_lexemes = {
         },
     },
     verb: {
-        attack: {
+        //transitive
+        carry: {
             core_properties: {
-                name: 'attack',
+                name: 'carry',
                 part_of_speech: 'verb',
                 transitivity: 'transitive',
                 lexical_properties: [],
                 subject_white_list: ['animate'],
                 object_white_list: [], //left empty because almost every thing can be an object?
-                subject_black_list: ['abstraction'], // I don;t think we need abstraction here since nothing is both animate and an abstraction
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '1',
+                roots: {
+                    root_2: 'port',
+                    root_3: 'portāv',
+                    root_4: 'portāt'
+                }
+            },
+            english: {
+                roots: {
+            		'default': 'carry',
+            		'final-s': 'carries',
+            		'gerund': 'carrying',
+            		'past participle': 'carried',
+            		'preterite': 'carried'
+        		}
+        	}
+        },
+        //transitive
+        fill: {
+            core_properties: {
+                name: 'fill',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '1',
+                roots: {
+                    root_2: 'impl',
+                    root_3: 'implēv',
+                    root_4: 'implēt'
+                }
+            },
+            english: {
+                roots: {
+            		'default': 'fill',
+            		'final-s': 'fills',
+            		'gerund': 'filling',
+            		'past participle': 'filled',
+            		'preterite': 'filled'
+        		}
+        	}
+        },
+        //ditransitive
+        attack: {
+            core_properties: {
+                name: 'attack',
+                part_of_speech: 'verb',
+                transitivity: 'ditransitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
                 object_black_list: ['abstraction', 'implement', 'mental']
             },
             latin: {
@@ -620,11 +681,12 @@ var testing_lexemes = {
         		}
         	}
         },
+        //ditransitive
         eat: {
             core_properties: {
                 name: 'eat',
                 part_of_speech: 'verb',
-                transitivity: 'transitive',
+                transitivity: 'ditransitive',
                 lexical_properties: [],
                 subject_white_list: ['animate'],
                 object_white_list: [], //left empty because almost every thing can be an object?
@@ -649,11 +711,12 @@ var testing_lexemes = {
         		}
         	}
         },
+        //mental ditransitive with context-dependent translations
         speak: {
             core_properties: {
                 name: 'speak',
                 part_of_speech: 'verb',
-                transitivity: 'intransitive',
+                transitivity: 'ditransitive',
                 lexical_properties: ['mental verb'],
                 subject_white_list: ['animate'],
                 object_white_list: ['mental'], //left empty because almost every thing can be an object?
@@ -678,6 +741,7 @@ var testing_lexemes = {
         		}
         	}
         },
+        //intransitive
         come: {
             core_properties: {
                 name: 'come',
@@ -707,11 +771,12 @@ var testing_lexemes = {
                 }
     		}
         },
+        //ditransitive
         love: {
             core_properties: {
                 name: 'love',
                 part_of_speech: 'verb',
-                transitivity: 'transitive',
+                transitivity: 'ditransitive',
                 lexical_properties: [],
                 subject_white_list: ['animate'],
                 object_white_list: [], 
@@ -740,7 +805,7 @@ var testing_lexemes = {
             core_properties: {
                 name: 'command',
                 part_of_speech: 'verb',
-                transitivity: 'transitive',
+                transitivity: 'ditransitive',
                 lexical_properties: ['verb of commanding'],
                 subject_white_list: ['animate'],
                 object_white_list: [], 
@@ -769,7 +834,7 @@ var testing_lexemes = {
             core_properties: {
                 name: 'fear',
                 part_of_speech: 'verb',
-                transitivity: 'transitive',
+                transitivity: 'ditransitive',
                 lexical_properties: ['verb of fearing'],
                 subject_white_list: ['animate'],
                 object_white_list: [], 
@@ -794,6 +859,7 @@ var testing_lexemes = {
         		}
     		}
         },
+        //mental transitive
         feel: {
             core_properties: {
                 name: 'feel',

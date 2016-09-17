@@ -1,17 +1,21 @@
 var template_generator = function (clause_acts_as, level) {
     var this_module = get_current_module(level);
     var noun_switch = this_module.noun_switch;
+    var voice = weighted_choice(this_module.voice);
+    // If the subordinate clause acts as a noun or the voice is passive,
+    // the verb must be transitive.
+    // If the noun switch is off and the voice is active and there is
+    // no subordinate clause object to save the day, due to the lack
+    // of possible objects we have to choose intransitive.
+    // Otherwise the choice is free.
     var transitivity;
-    if (clause_acts_as === 'noun') {
-        transitivity = 'transtive';
+    if (clause_acts_as === 'noun' || voice === 'passive') {
+        transitivity = 'transitive';
+    } else if (clause_acts_as !== 'noun'
+    && voice === 'active' && !noun_switch) {
+        transitivity = 'intransitive';
     } else {
         transitivity = weighted_choice(this_module.transitivity);
-    }
-    var voice;
-    if (transitivity === 'intransitive') {
-        voice = 'active';
-    } else {
-        voice = weighted_choice(this_module.voice);
     }
     var clause_location;
     if (clause_acts_as !== 'noun') {

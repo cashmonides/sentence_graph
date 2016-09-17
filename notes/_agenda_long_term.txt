@@ -1,0 +1,72 @@
+MAINSTREAM FUNCTIONALITY
+- add nouns of all cases
+- basic ablative
+
+- basic dative
+- basic genitive
+- add adjectives
+- add prepositional phrases
+- add adverbs
+- add relative pronoun
+- advanced ablatives, datives, genitives, accusatives
+
+
+SQL NOSQL ETC.
+reevaluate our setup
+english sentence tagging might live best as data (based on our experience with upper level latin students)
+    - data easier to fix and proofread
+    - I believe our upper level was sort of a hybrid between data and firebase, it was entered as data and converted to firebas
+
+
+TESTING
+- systematically testing all levels
+    - something like: produce 100 sentences and right answer at each oevel 
+- having a switch for test/production/release/whatever
+
+DISPLAY FUNCTIONALITY
+- silhouette sentences
+- maze
+- fill in the blank
+- decline this noun-adjective pair
+- conjugative this verb
+
+STATS 1 INFRASTRUCTURE
+- create a vector
+
+STATS 2 DISPLAY
+
+
+GAME-IFICATION
+- maze gameification
+- capture animals, capture pictures, capture gifs
+- animals 'escape' and are recaptured
+
+ETYMOLOGY
+- images
+
+ENGLISH SENTENCE ANALYSIS
+- more sentences
+- more ways of giving hints
+- re-evaulate whether a tagged firebase object is really the best way
+
+
+TAXONOMY
+- research button
+- 
+
+
+
+REDESIGN THE BASIC KCK
+- in the light of the hacks it has encrusted upon itself
+- in the light of linguistics
+
+
+
+
+DEEPER SEMANTICS
+- maybe at some higher level of student sophistication, remove the weakly ditransitive verbs
+    - e.g. love is mostly transitive, used intransitively only in highly context-bound scenarios (e.g. odi et amo)
+    - in the intro levels (vcv type sentences) we want to see love a lot, even if used intransitively and a little fishy
+        - e.g. he loves because they attacked is not a great sentence but it has the virute of giving them practice in useful words 
+    - so maybe we allow all ditransitive possibilities when in vcv mode but not in full sentence mode
+    - are there other ditransitive verbs that are just as strong transititve and intransitive??

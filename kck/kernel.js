@@ -79,14 +79,19 @@ var Kernel = function (
     this.classifications.construction = construction;
     // main, subordinate
     this.classifications.main_or_sub = main_or_sub;
+    // transitivity
     // conjunction and direction
     // currently stored directly.
     this.conjunction = conjunction;
     this.direction = direction;
     // Add the information in our template.
     this.voice = template.voice;
+    this.transitivity = template.transitivity;
     this.explicitness = template.explicitness;
     this.clause_location = template.clause_location;
+    // Add transitivity and voice to classifications.
+    this.classifications.voice = this.voice;
+    this.classifications.transitivity = this.transitivity;
     // This is a map from roles in the sentence to the roles looked at
     // for whitelist/blacklist. So, for example, a possible
     // key-value pair might be 'personal agent': 'subject',

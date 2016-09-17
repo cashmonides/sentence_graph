@@ -1,4 +1,4 @@
-- Dan coding (in mf mode)
+- Dan not coding (in mf mode)
 - Akiva not coding (working in quiz.js and modules.js and a new mode called input_mode.js)
 
 don't leave this lying around as a global object

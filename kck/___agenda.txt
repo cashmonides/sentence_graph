@@ -4,6 +4,9 @@
 Agenda for future (made in mid-september 2016)
 
 current findings:
+
+START OF MENTAL VERB DIGRESSION
+
 mental verbs have weird rules
 examples:
 they spoke why he was killed
@@ -21,12 +24,74 @@ since "why" is causing so many issues, one solution would be to just throw it ou
 but this is somehow unsatisfying
 
 
-Goal 1: test pre-redesign functionality and make sure we have a working game
-two options
-    option 1: push to the server
-    option 2: not to push to the server
+AKIVA'S RESPONSE:
+Clearly mental verbs are special in that they can take clauses as subjects and objects.
+There are other situations where clauses are subjects and objects (e.g. quod the fact that clause)
+At some point in the future we should bring our system into alignment as much as possible with
+current linguistic theory, if it's useful.
+
+But for mental verbs we need a short-term solution and a long-term solution.
+The short-term solution is necessary during our stalling phase. 
+In the stalling phase we just want vcv
+and we want indirect statement and indirect question to be functional in the stalling phase
+
+This is what suggests itself to me:
+
+short-term solution:
+    - classify speak, say, know, and all mental verbs as intransitive for now
+    - or: classify them as clause_transitive (or some similar term) and treat
+            all clause_transitive verbs as intransitive
+
+long-term solution:
+    - see if any other kinds of verbs besides mental verbs need special treatment
+    - (e.g. quod the fact that clause can be subject or object of any verb, not just mental)
+    - come up with a classification term that encompasses mental verbs
+        - e.g. clause_transitive, complementizer_transitive
+    - when we make a template creator, clause_transitive verbs produce a clause_object
+       or a clause_subject
+   - and of course they don't make a regular noun_object if they make a clause_object
+    - (in other words: we develop an information-rich template)
+    - we might even call it a mental_clause_object
     
     
+    
+- with regard to the problem of speak:
+    they spoke why he was killed
+    they were poken why the mountain is pushed (would make sense as "told", though)
+    
+    - a quick and dirty option would be to limit dico to clause_transitive and can never be intransitive
+    - but this isn't a realistic account of language
+    
+    - I guess to fully work up a sophisticated model we need to have multiple translations that are dependent on context
+    - e.g. dico, dicere = speak, say
+    - when intransitive it should be 'speak'
+        they spoke
+    - when transitive it could be either, but we could just pick one    
+        they spoke words = they said words
+    - when clause_transitive it should be 'say'
+        they said why the mountain was pushed
+    - when passive
+        intransitive - no passive
+        transitive - were spoken (special subjects only, see below)
+        clause_transitive - were said
+        
+- one other point, I've added a category of mental_nouns
+    - word, sentence, opinion, etc. are mental_nouns
+    - they're not entire clauses of mental verbs
+    - but they're the only sensible noun objects of mental verbs
+    - *the cow was spoken is ungrammatical
+    
+END OF AKIVA'S RESPONSE
+    
+END OF MENTAL VERB DIGRESSION
+
+TAXONOMY OF VERBS
+    transitive (aka obligatory transitive) //fill
+    intransitive (aka onligatory intransitive)   //sleep
+    ditransitive //eat
+    mental ditransitive //speak (when intransitive), say (when transitive)
+    mental transitive //know
+    mental intransitive //ruminate (identical to any intransitive)
 
 
 Goal 2: get kck verbs only to work (vcv), with workable nested drop down and incorporate into the game
@@ -34,7 +99,7 @@ virtue of vcv sentences
 - learn about conjunctions, endings, sequence, etc.
 - stalling maneuver (stalls long enough for us to work in nouns)
 - prereqs before release
-    - making the noun switch functionality
+    - making the noun switch functionality (seems to be done)
     - a few cases with ambiguity (-am = future || pres subj)
         - quick and dirty solution (e.g. if ambiguous, don't produce)
     - drop downs have cosmetic issues
@@ -43,6 +108,7 @@ virtue of vcv sentences
         - cramped
         
     - check lexicon and avoid transitive verbs that can't lack object
+        - say? know? feel? mental verbs seem to either require an object or forbid it
 
 Goal 3: taxonomy
 
@@ -57,6 +123,11 @@ Goal 4: to get nouns working
   - word order: upstream vs. language-by-language
         - option 1: forced to match word order of source language
         - option 2: look at module preferences and choose independently of source language
+- we need a parameter for how often we expand to include personal agent/implement
+- in general we want parameters for all expansions
+    - adding genitives to nouns
+    - adding datives to verbs that have optional datives
+
 
 - ambiguity and nonsense avoidance
 

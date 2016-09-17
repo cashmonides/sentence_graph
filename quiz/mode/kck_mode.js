@@ -105,7 +105,7 @@ KCKModeGame.prototype.next_question = function () {
     
     this.actual_drops = this.used_drops_and_non_drops.filter(function (x) {
         return x instanceof DropDown;
-    })
+    });
     
     console.log('used drops and non drops =', this.used_drops_and_non_drops);
     

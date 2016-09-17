@@ -55,13 +55,19 @@ Component.prototype.accepts_verb_lexical_restrictions_of = function (lexeme) {
 
 // This method determined whether a component can accept a lexeme
 // with regard to transitivity. Currently,
-// it just checks that the lexeme is transitive or the voice is active.
+// it just checks that the lexeme is either ditransitive or
+// the same as the component.
 // todo: Change this when we want advanced transitivity
 // (such as transitive if alone).
 // todo: Change this when voice stops being language-independent.
 Component.prototype.accepts_transitivity_of = function (lexeme) {
-    return this.get_language_independent_property('voice') === 'active'
-    || lexeme.get_core_property('transitivity') === 'transitive';
+    // Get the component and lexeme transitivities.
+    var component_transitivity = this.get_language_independent_property(
+        'transitivity');
+    var lexeme_transitivity = lexeme.get_core_property('transitivity');
+    // Do the check.
+    return lexeme_transitivity === 'ditransitive' ||
+    lexeme_transitivity === component_transitivity;
 }
 
 Component.prototype.accepts_noun_lexical_restrictions_of = function (lexeme) {

@@ -87,14 +87,16 @@ var display_status = function (status) {
 }
 
 var get_correct_status = function (statuses) {
-    var index = Math.min.apply(null, statuses.map(function (status) {
+    var index = Math.min.apply(null, statuses.map(function (status, index) {
         if (status === 'missing') {
             return 0;
         } else if (status.correct) {
             return 2;
+        } else if (status.ambiguous) {
+            return 3;
         } else {
             return 1;
         }
     }));
-    return ['missing', 'incorrect', 'correct'][index];
+    return ['missing', 'incorrect', 'correct', 'ambiguous'][index];
 }
