@@ -94,21 +94,61 @@ TAXONOMY OF VERBS
     mental intransitive //ruminate (identical to any intransitive)
 
 
-Goal 2: get kck verbs only to work (vcv), with workable nested drop down and incorporate into the game
-virtue of vcv sentences
-- learn about conjunctions, endings, sequence, etc.
-- stalling maneuver (stalls long enough for us to work in nouns)
+Goal 2: get vcv mode to work, with workable nested drop down and incorporate into the game
 - prereqs before release
     - making the noun switch functionality (seems to be done)
-    - a few cases with ambiguity (-am = future || pres subj)
-        - quick and dirty solution (e.g. if ambiguous, don't produce)
+    - ambiguity 
+        - convergent ambiguity (two different paths have same terminal string)
+            - (-am = future || pres subj)
+            - solution: check set of dropdown answers, if a duplicate exists, send an alert "the one you selected is a duplicate answer with x"
+            - seems to be fixable with a language-independent solution
+        - divergent ambiguity (one origin has two correct divergent paths with different terminal string)
+            - ruit = what tense in english?
+            - solution: have a catch statement (if two stems are identical in Latin && )
+            - seems to be fixable only with a language-specific solution
     - drop downs have cosmetic issues
         - dropping up
         - drop down menus don't disappear when they've been opened
         - cramped
-        
     - check lexicon and avoid transitive verbs that can't lack object
         - say? know? feel? mental verbs seem to either require an object or forbid it
+    - dummy agreement markers 
+        - solution: set subject gender as masculine upstream
+- big bug: drop downs not giving full options, only the two verbs that are included
+    - always only 2 choices for verb, 1 for conjunction
+        - dropdowns should be giving as many extra items as are specified in the parameter latin_extra_levels
+        - but somehow we're only getting the words that are used
+        - e.g. if it's he attacks but they eat, we only get attack and eat as options
+    - vocabulary cheat sheet is not functional in kck mode    
+
+
+
+- bug: the one-option problem
+    - when there's only one option, a nesting drop down level shouldn't be spawned, it should be skipped
+    - e.g.:
+    - sometimes the range of allowed options is low (i.e. only active not passive)
+    - and if voice is part of the drop_down_path
+    - we end up with a path like: command / love -> active -> 3s / 3p
+    - we don't want the active drop down level to even start
+  
+- add to data: 2s, 3s, 3p etc. should have level specific terminology (you, he, they, etc. for more basic levels) 
+
+- get a dashed version ready for release
+
+- start dash removal
+    - adapt the old library for dash removal
+    - set the parameter for dashes in modules
+    - after dash removal, test ambiguity control
+
+
+- cosmetics: clarify for students the green and red path    
+    - include the question along with the green and red answer
+    - some sort of symbol for the drop downs
+    - correct answer comes first and is big
+    - path name comes second and is smaller
+    - with some sort of symbol for path
+    - such as: AMABANT love->prior->3p
+    the green and red path should have some sort of symbole
 
 Goal 3: taxonomy
 
@@ -131,6 +171,8 @@ Goal 4: to get nouns working
 
 - ambiguity and nonsense avoidance
 
+- in e.g. I speak, the I should be classed as animate so that verbs that can't have animate subjects don't produce forms with anything but 3rd person
+
 
 - display issues (dash removal, upper case)
 
@@ -140,7 +182,8 @@ Goal 6: other types of noun (ablative, genitive)
 
 
 
-
+DOWN THE ROAD
+- improve cheat sheet display (maybe make the text appear in the top of the box)
 
 
 

@@ -55,13 +55,7 @@ KCKModeGame.prototype.next_question = function () {
     
     console.log('level =', this.level);
     
-    //sets up our lexicon
-    // var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
-    // var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
-    // todo implement generate_sentence function returning a sentence
-    var sentence = generate_sentence(
-        this.level.kck_level, this.level.latin_extra_level);
-    console.log('sentence =', sentence);
+    // define source and target language
     var source_language = weighted_choice(
         get_current_module(this.level.kck_level).source_language);
     var target_language = weighted_choice(
@@ -69,6 +63,15 @@ KCKModeGame.prototype.next_question = function () {
         function (x) {return x !== source_language});
     this.source_language = source_language;
     this.target_language = target_language;
+    
+    //sets up our lexicon
+    // var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
+    // var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
+    // todo implement generate_sentence function returning a sentence
+    var sentence = generate_sentence(
+        source_language, target_language,
+        this.level.kck_level, this.level.latin_extra_level);
+    console.log('sentence =', sentence);
     // this.cheat_sheet = data.cheat_sheet;
     // sets data
     // var data = make_output(this.level, null, 'quiz_english');

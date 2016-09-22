@@ -33,16 +33,30 @@ body {
     
 }
 
-
+/*.kck_drop:hover {*/
+/*}*/
 
 .kck_drop {
-    position: relative;
+    /*position: relative;*/
+    /*absolute makes everything collapse on itself*/
+    /*position: absolute;  */
+    position: static; 
     /*z-index:589;*/
-    /*float:left;*/
+    float:left;
     /*top:100%;*/
-    bottom:auto;
+    /*top:auto;*/
+    /*bottom:auto;*/
+    /*bottom:-10px;*/
     /*list-style:none;*/
     /*margin:20px 0;*/
+    transition: .5s;
+    
+ /*   float: left;*/
+	/*position: relative;*/
+	/*width: 150px;*/
+	/*list-style: none;*/
+	/*-webkit-transition: .5s;*/
+	/*transition: .5s;*/
 }
 
 .kck_drop li {
@@ -50,7 +64,9 @@ body {
     /*height:10px;*/
     /*margin:0;*/
     /*margin-right:36px;*/
-    vertical-align:middle;
+    /*vertical-align:middle;*/
+    /*vertical-align:top;*/
+    vertical-align:bottom;
 }
 
 #header {

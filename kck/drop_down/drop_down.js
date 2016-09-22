@@ -40,6 +40,9 @@ DropDown.prototype.display_drop_down = function () {
         self.display_header();
     });
     $(menu).menu();
+    $(menu).mouseleave(function() {
+        self.display_header();
+    });
     // Clear all the current children.
     this.clear_all_current_children();
     this.elem.appendChild(menu);

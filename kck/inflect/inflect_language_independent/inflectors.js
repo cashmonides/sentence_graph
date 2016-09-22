@@ -11,7 +11,15 @@ global_inflectors.english = function (component) {
     var person_and_number = component.get_property_in_language(
         'person_and_number', 'english');
     var lexeme = component.lexeme;
-    return kck_inflect_english_verb(lexeme, tense_voice, person_and_number);
+    var options = kck_inflect_english_verb_all_options(
+        lexeme, tense_voice, person_and_number);
+    if (typeof options === 'string') {
+        return options
+    } else {
+        var transitivity = component.get_language_independent_property(
+            'transitivity');
+        return options[transitivity];
+    }
 }
 
 // SSSLatin inflection.

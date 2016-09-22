@@ -634,7 +634,7 @@ var testing_lexemes = {
                 object_black_list: ['abstraction', 'implement', 'mental']
             },
             latin: {
-                conjugation: '1',
+                conjugation: '2',
                 roots: {
                     root_2: 'impl',
                     root_3: 'implēv',
@@ -733,11 +733,20 @@ var testing_lexemes = {
             },
             english: {
                 roots: {
-            		'default': 'speak',
-        			'final-s': 'speaks',
-        			'gerund': 'speaking',
-        			'past participle': 'spoken',
-        			'preterite': 'spoke'
+            		'transitive': {
+            		    'default': 'say',
+            			'final-s': 'says',
+            			'gerund': 'saying',
+            			'past participle': 'said',
+            			'preterite': 'said'
+            		},
+            		'intransitive': {
+            		    'default': 'speak',
+            			'final-s': 'speaks',
+            			'gerund': 'speaking',
+            			'past participle': 'spoken',
+            			'preterite': 'spoke'
+            		}
         		}
         	}
         },

@@ -5,7 +5,7 @@
 var LEXEME_ERROR_CATCHING_MODE = 'throw';
 
 // This is the master function.
-var generate_sentence = function (kck_level, drop_extra_level) {
+var generate_sentence = function (source, target, kck_level, drop_extra_level) {
     var success = false;
     while (!success) {
         // We make a random sentence.
@@ -31,6 +31,9 @@ var generate_sentence = function (kck_level, drop_extra_level) {
         }
         // We inflect the components.
         sentence.inflect_all_components();
+        // We check for ambiguity.
+        success = success && sentence.check_for_no_ambiguity(
+            source.toLowerCase());
     }
     /*
     if (display_in_text_box) {

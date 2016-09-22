@@ -10,6 +10,9 @@ MAINSTREAM FUNCTIONALITY
 - add relative pronoun
 - advanced ablatives, datives, genitives, accusatives
 
+IMPORTANT EARLY SEMANTICS
+- in e.g. I speak, the I should be classed as animate so that verbs that can't have animate subjects don't produce forms with anything but 3rd person
+
 
 SQL NOSQL ETC.
 reevaluate our setup
@@ -20,7 +23,7 @@ english sentence tagging might live best as data (based on our experience with u
 
 TESTING
 - systematically testing all levels
-    - something like: produce 100 sentences and right answer at each oevel 
+    - something like: produce 100 sentences and right answer at each level 
 - having a switch for test/production/release/whatever
 
 DISPLAY FUNCTIONALITY

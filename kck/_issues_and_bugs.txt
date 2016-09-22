@@ -1,3 +1,29 @@
+September 21
+kck went sick in the following way:
+    LOG: entering next_question
+    quiz.js:509 LOG: entering try block in next question
+    quiz.js:407 LOG: allowed before checking for non-functioning mode =  Object {kck: 0.9, quick: 1e-10, etymology: 0.00003}
+    quiz.js:512 LOG: about to call next_question
+    kck_mode.js:56 level = Object {latin_drop_level: 400, latin_extra_level: 30, latin_cosmetic_level: 1, kck_level: 1}
+    quiz.js:519 LOG: PROBLEM: entering catch block error caught
+    quiz.js:521 DEBUG 5-6 this.game =  KCKModeGame {data: null, quiz: Quiz, level: Object}
+    error_logging.js:34 urgent log_error initiated {"core_properties":{"name":"speak","part_of_speech":"verb","transitivity":"ditransitive","lexical_properties":["mental verb"],"subject_white_list":["animate"],"object_white_list":["mental"],"subject_black_list":[],"object_black_list":[]},"latin":{"conjugation":"3","roots":{"root_2":"dīc","root_3":"dīx","root_4":"dict"}},"english":{"roots":{"transitive":{"default":"say","final-s":"says","gerund":"saying","past participle":"said","preterite":"said"},"intransitive":{"default":"speak","final-s":"speaks","gerund":"speaking","past participle":"spoken","preterite":"spoke"}}}} has a bad gerund!
+    quiz.js:541 URGENT error logged
+    quiz.js:542 desperate move triggered
+    quiz.js:545 DEBUG 12-23 error handler initiated
+    quiz.js:504 LOG: entering next_question
+    quiz.js:509 LOG: entering try block in next question
+    quiz.js:407 LOG: allowed before checking for non-functioning mode =  Object {kck: 0.9, quick: 1e-10, etymology: 0.00003}
+    quiz.js:421 sick mode being added =  kck
+    quiz.js:423 LOG: sick mode added
+    quiz.js:424 LOG: allowed after sick mode added =  Object {quick: 1e-10, etymology: 0.00003}
+    quiz.js:512 LOG: about to call next_question
+    etymology_mode.js:150 DEBUG 11-16 EtymologyModeGame new_level =  Object {etym_level: 40}
+    quiz.js:845 LOG: about to enter innerhtml
+    quiz.js:855 LOG: leaving innerhtml
+    etymology_mode.js:187 OK in etymology, now only HTML remains
+    quiz.js:514 LOG: no error after calling next_question
+
 August 18th
 - nonsense: 'he was being feared that he would attack'
 

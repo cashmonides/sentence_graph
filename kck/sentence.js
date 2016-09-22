@@ -295,3 +295,8 @@ KCKSentence.prototype.get_all_drops_and_non_drops = function (kck_level, languag
         throw 'There seem to be ' + len + ' kernels, not 1 or 2!';
     }
 }
+
+// Check for no ambiguity method.
+KCKSentence.prototype.check_for_no_ambiguity = function (source) {
+	return this.each_kernel('check_for_no_ambiguity', source);
+}

@@ -50,6 +50,9 @@ var by_feature = function (current_feature, option_list, recursive_call) {
     var option_feature;
     for (var i = 0; i < option_list.length; i++) {
         option = option_list[i];
+        if (!Array.isArray(option)) {
+            throw 'option is not an array, it is ' + JSON.stringify(option);
+        }
         option_feature = option[1][current_feature];
         if (!(option_feature in by_current_feature)) {
             by_current_feature[option_feature] = [];

@@ -37,6 +37,11 @@ KCKLexeme.prototype.get_language_dependent_property = function (x, language) {
     return this[language][x];
 }
 
+// Gets all roots in a given language.
+KCKLexeme.prototype.get_roots = function (language) {
+    return this[language].roots;
+}
+
 // Gets a root in a given language.
 KCKLexeme.prototype.get_root = function (x, language) {
     return this[language].roots[x];

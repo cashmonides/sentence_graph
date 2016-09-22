@@ -1,4 +1,4 @@
-// Creates a menu.
+// Creates a nested drop down menu where terminal strings are clickable
 var create_menu = function (path, data, callback) {
     var div;
     var li;
@@ -11,6 +11,7 @@ var create_menu = function (path, data, callback) {
         div.innerHTML = data;
         div.onclick = function () {
             callback(data, path.concat([data]));
+            console.log("terminal string clicked");
         }
         li = document.createElement('li');
         li.appendChild(div);

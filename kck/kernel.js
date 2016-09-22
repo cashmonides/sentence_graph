@@ -266,3 +266,30 @@ Kernel.prototype.inflect_all_components_in = function (language) {
         this.role_list[i].component.inflect(language);
     }
 }
+
+// This is maybe over-specific to nouns.
+Kernel.prototype.check_for_no_ambiguity = function (source) {
+    var ambiguous = possibly_ambiguous_tenses[source];
+    if (ambiguous === null) {
+        return true;
+    }
+    var verb = this.get_verb();
+    var person_and_number = verb.get_language_independent_property(
+        'person_and_number');
+    var lexeme = verb.lexeme;
+    var tense = verb.get_property_in_language('tense_and_mood', source);
+    console.log(tense, source);
+    var voice = verb.get_language_independent_property('voice');
+    var translator = tf_to_translations[source];
+    var translation = translator(
+        lexeme, tense + ' ' + voice, person_and_number);
+    return ambiguous.every(function (tense_list) {
+        return tense_list.indexOf(tense) === -1 ||
+        tense_list.every(function (other_tense) {
+            return other_tense === tense || translator(lexeme, 
+                other_tense + ' ' + voice,
+                person_and_number
+            ) !== translation;
+        });
+    });
+}

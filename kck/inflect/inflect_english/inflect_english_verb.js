@@ -9,9 +9,21 @@ var get_english_subject_pronoun = function (person_and_number) {
 
 var english_translation_formula_to_verb_formula = function (
     translation_formula, person_and_number) {
+    if (typeof translation_formula !== 'string'
+    || typeof person_and_number !== 'string') {
+        throw 'Something is wrong: translation_formula, person_and_number ='
+        + JSON.stringify(translation_formula) + ', ' +
+        JSON.stringify(person_and_number);
+    }
     // The verb formula is found in the translation formula.
     // In this specific case, there should only be one match.
-    var verb_formula = translation_formula.match(english_verb_formula_regex)[0];
+    var match = translation_formula.match(english_verb_formula_regex);
+    if (match === null || match.length !== 1) {
+        throw 'Weird match: ' + JSON.stringify(match) + ' with '
+        + JSON.stringify(translation_formula) + ', ' +
+        JSON.stringify(person_and_number);
+    }
+    var verb_formula = match[0];
     // todo: Change this special case of 3s present.
     // It's entirely sustainable: this is indeed the only weird case.
     if (person_and_number === '3s' && translation_formula === 'verb') {
@@ -144,20 +156,20 @@ var get_english_root_type = function (verb_formula) {
     return english_root_type;
 }
 
-var get_english_root = function (english_root_type, verb_lexeme) {
+var get_english_root = function (english_root_type, root_dictionary) {
     // Get the english root.
-    var english_root = verb_lexeme.get_root(english_root_type, 'english');
+    var english_root = root_dictionary[english_root_type];
     // Error checking.
     if (typeof english_root !== 'string') {
-        throw JSON.stringify(verb_lexeme) + ' has a bad ' +
-        english_root_type + '!';
+        throw JSON.stringify(root_dictionary) + ' has a bad entry ' +
+        '(or none at all) for ' + english_root_type + '!';
     }
     // Return the root.
     return english_root;
 }
 
 var inflect_english_verb_given_tf = function (
-    verb_lexeme, translation_formula, person_and_number) {
+    root_dictionary, translation_formula, person_and_number) {
     // Step 2.
     // First get the verb formula.
     // aka the part of the translation formula that includes the verb
@@ -175,7 +187,7 @@ var inflect_english_verb_given_tf = function (
     // End of step 2.
     // Step 3.
     // Part 1 (getting the root from the lexeme).
-    var english_root = get_english_root(english_root_type, verb_lexeme)
+    var english_root = get_english_root(english_root_type, root_dictionary);
     // Part 1.3 (removing extra things like -preterite
     // which we no longer need)
     translation_formula = remove_dashed_tense_indicators(translation_formula);
@@ -201,17 +213,32 @@ var inflect_english_verb_given_tf = function (
     return subject_pronoun + ' ' + english_form;
 }
 
-
-// main function
 // returns an english string (e.g. "he had attacked")
 // takes a verb lexeme, and tense-voice combination (as a string),
 // and a person-number combination (e.g., 1s)
-var kck_inflect_english_verb = function (
+var inflect_english_verb_given_tf_all_options = function (
+    verb_lexeme, tense_voice, person_and_number) {
+    var roots = verb_lexeme.get_roots('english');
+    if (typeof values(roots)[0] === 'string') {
+        return inflect_english_verb_given_tf(
+            roots, tense_voice, person_and_number);
+    } else {
+        var translations = {};
+        for (var i in roots) {
+            translations[i] = inflect_english_verb_given_tf(
+                roots[i], tense_voice, person_and_number);
+        }
+        return translations;
+    }
+}
+
+// main function
+var kck_inflect_english_verb_all_options = function (
     verb_lexeme, tense_voice, person_and_number) {
     // Step 1.5. (Simply getting the translation formula, e.g., "was verbing")
     var translation_formula = get_english_translation_formula(tense_voice);
     // End of step 1.5.
     // Use another function to do the rest.
-    return inflect_english_verb_given_tf(
+    return inflect_english_verb_given_tf_all_options(
         verb_lexeme, translation_formula, person_and_number);
 }

@@ -16,6 +16,8 @@ var get_drop_down_options = function (
     // Get its conjunction and direction.
     var conjunction = kernel.get_conjunction();
     var direction = kernel.get_direction();
+    var transitivity = kernel.get_verb().get_language_independent_property(
+        'transitivity');
     var person_number_combinations = get_person_number_combinations(allowed);
     // We need the lexeme for the tf options, so we can't do a triple-cross.
     // But we can do a concat-map and then a double-cross inside.
@@ -35,8 +37,14 @@ var get_drop_down_options = function (
             tf_option, person_number_combination) {
             // Make a function translation_and_features_from
             // to avoid too much ugliness.
-            return translation_and_features_from(
+            var options = translation_and_features_from(
                 language, lexeme, tf_option, person_number_combination, allowed);
+            // Hacky way to handle verbs where the translation
+            // depends on transitivity.
+            if (typeof options[0] === 'object') {
+                options[0] = options[0][transitivity];
+            }
+            return options;
         });
     });
     // We return our result.
@@ -105,7 +113,7 @@ var latin_tense_to_translations = function (lexeme, tense, person_number_combina
 }
 
 var tf_to_translations = {
-    english: inflect_english_verb_given_tf,
+    english: inflect_english_verb_given_tf_all_options,
     latin: latin_tense_to_translations,
     ssslatin: function (lexeme, tense, person_number_combination) {
         return 'SSS' + latin_tense_to_translations(
