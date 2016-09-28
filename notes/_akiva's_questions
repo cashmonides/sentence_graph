@@ -1,0 +1,66 @@
+CHORE-FRIENDLY BASICS
+- the numerical parameter in JSON.stringify
+    - kck > kernel_display.js reads as follows:
+    - return JSON.stringify(json_options, null, 2);
+    - what is the 2?
+- track down all uses of the term 'regime' and strictly define
+
+CHORE
+- console.log all the steps in kernel_display.js
+
+
+HIGH PRIORITY QUESTIONS
+- overall concept of kck > kernel_display.js    
+    - what is a concrete example of a kernel passing through kernel_display.js?
+    - i.e. K[...]  fill in the blank
+
+
+MID PRIORITY QUESTIONS
+
+
+- the missing citation_name issue   
+    - in kck -> conjunction_object.js we have a method that uses citation name
+    - but citation_name is not filled in for any conjunction in the conjunction_library
+    - (though there is a commented out citation_name for the first conjunction)
+    - is this just an oversight and every conjunction should have a citation_name?
+    - or is the conjunction object and citation_name obsolete and need to be replaced?
+    - has the Conjunction object been replaced with conjunction_type?
+    
+
+
+
+
+
+
+
+
+
+LOW PRIORITY QUESTIONS
+- nonexistant key
+- what is the point of this in kck > compare_path?
+    - var same_last_answer = false;
+    - is it just a not yet implemented functionality
+    
+
+
+CURRENT FILE UNDER REVIEW
+- kck > kernel_display.js  (gonna be a long time to finish)
+
+FILES TO REVIEW FURTHER HIGH PRIORITY
+- kck > kernel.js
+
+FILES TO REVIEW FURTHER MID PRIORITY
+- kck > conjunction_object.js
+
+
+FILES REVIEWED AND MORE OR LESS UNDERSTOOD
+kck > compare_path.js
+kck > conjunction_library
+kck > conjunction_type
+kck > kernel_restrictions.js
+
+
+
+
+THINGS THAT NEED TO BE CHANGED WHEN NOUNS ARE ADDED
+get_all_drops_and_non_drops

@@ -7,6 +7,8 @@ var get_person_number_combinations = function (allowed) {
     return allowed.person_and_number;
 }
 
+// Gets options for drop downs.
+// Does not choose lexemes to be used.
 var get_drop_down_options = function (
     language, allowed, lexemes, kernel, regime) {
     // Check that our supposed kernel is a kernel.
@@ -47,6 +49,7 @@ var get_drop_down_options = function (
             return options;
         });
     });
+    console.log(result);
     // We return our result.
     return result;
 }
@@ -57,7 +60,8 @@ var translation_and_features_from = function (
     var regime = tf_option.regime;
     var features = {
         'voice': get_voice_from_tf_option(tf_option),
-        'lexeme': lexeme.get_name(),
+        'lexeme': lexeme.get_language_dependent_property(
+            'citation_form', language),
         'person_and_number': person_number_combination
     };
     var item;

@@ -136,8 +136,15 @@ KCKSentence.prototype.choose_random_lexemes = function (kck_level, drop_extra_le
     return true;
 };
 
+// Picks dummy lexemes as options for dropdowns.
 KCKSentence.prototype.pick_drop_down_lexemes = function (kck_level, drop_extra_level) {
     var original_chosen_lexemes = this.chosen_lexemes;
+    // Do a sanity check to make sure that the originally chosen lexemes
+    // are a true object, not a list.
+    if (!(is_object(original_chosen_lexemes))) {
+        throw 'original_chosen_lexemes, ' + JSON.stringify(
+            original_chosen_lexemes) + ', must be an object.';
+    }
     // This function changes chosen_lexemes to add some new ones.
     var chosen_lexemes = {};
     var lexeme;
@@ -171,10 +178,13 @@ KCKSentence.prototype.pick_drop_down_lexemes = function (kck_level, drop_extra_l
                 throw 'n is not a number! It is not even ' +
                 'Not A Number! It is ' + JSON.stringify(n);
             }
+            console.log(n + ' lexemes needed to be dummy ' + part_of_speech + 's');
             // Only keep the non-chosen lexemes with
             // the correct part of speech.
             var allowed_dummies = allowed_lexemes.filter(function (x) {
-                !(x.get_name() in original_chosen_lexemes);
+                // Check that the name is not one of
+                // the originally chosen lexemes.
+                return !(x.get_name() in original_chosen_lexemes);
             });
             // Automatically defensive (I think).
             chosen_lexemes[part_of_speech] =

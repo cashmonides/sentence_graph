@@ -52,9 +52,10 @@ var terminology_display_dictionary = {
         'basic': 'prior time subjunctive 2nd degree',
         'advanced': 'pluperfect subjunctive',
         'translation_formula': 'no translation formula'
+    },
     //sequence
     'primary sequence': '1st degree',
-    'secondary sequence': 'e2nd degre',
+    'secondary sequence': '2nd degree',
     //english verb tenses
     'preterite': 'past (once)',
     'pluperfect': 'had...', 

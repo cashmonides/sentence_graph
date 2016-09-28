@@ -1,5 +1,12 @@
 // This function displays a classification in a given language.
 // (Its values, not its name.)
+// Classification contains verious types of classification.
+    // lexical: e.g., mental, command, fear, etc.
+    // time: i.e., present, past, and future.
+    // todo: add more types of time
+    // mood: i.e., indicative and subjunctive
+    // Note that time and mood are dictionaries
+    // with one entry for each language.
 var display_classification = function (classification, language) {
     // We check whether the classification is an object and, if not,
     // whether it is a string or null.
@@ -148,6 +155,8 @@ Kernel.prototype.get_verb_drop_and_non_drop = function (
 
 
 // This method gets a verb's correct translation and path.
+// returns it as a dictionary {'translation': translation, 'path': path}
+// the path is of course dependent on module since the module determines what properties go into the path name
 Kernel.prototype.get_verb_translation_and_path = function (kck_level, language) {
     // Get the verb component.
     var verb = this.get_verb();
@@ -176,8 +185,9 @@ Kernel.prototype.get_verb_translation_and_path = function (kck_level, language) 
         // otherwise, push that property of the verb.
         // (lexeme is not stored as a property.)
         if (option === 'lexeme') {
-            // Push the name of the lexeme.
-            path.push(verb.lexeme.get_name());
+            // Push the name of the lexeme in the language.
+            path.push(verb.lexeme.get_language_dependent_property(
+                'citation_form', language));
         } else {
             // Get the property and push it.
             path.push(verb.get_property_in_language(option, language));

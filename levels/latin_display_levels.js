@@ -82,17 +82,17 @@ var latin_extra_levels = {
     30: {
         drop_down_settings: {
             noun: {
-                extra_options: 4,
-                lexicon_dummies: 0,
+                extra_options: 3,
+                lexicon_dummies: 4,
                 swap: true
             },
             verb: {
-                extra_options: 4,
-                lexicon_dummies: 0
+                extra_options: 7,
+                lexicon_dummies: 4
             },
             conjunction: {
-                extra_options: 4,
-                lexicon_dummies: 0
+                extra_options: 1,
+                lexicon_dummies: 4
             }
         },
         none_display: [false]

@@ -1,4 +1,5 @@
 // This file implements a conjunction type.
+//coordinating, subordinating, etc.
 
 // This is a list of legal conjunction types.
 var legal_conjunction_types = ['coordinating', 'subordinating', 'dummy main',
@@ -20,6 +21,7 @@ var ConjunctionType = function (conjunction) {
 
 // This method determines whether two conjunction types,
 // or a conjunction type and a string, are equal.
+// this is used just to do the basic operation if conjunction_type.is('coordinating') and so on.
 ConjunctionType.prototype.is = function (other) {
     // We get the string in other if other is a conjunction type,
     // so we're always dealing with strings belond this conditional.

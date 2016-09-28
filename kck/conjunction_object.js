@@ -19,6 +19,8 @@ var Conjunction = function (citation_name) {
     // We keep the original conjunction around so we can search it.
     this.original_conjunction = conjunction;
     // We add the conjunction as a lexeme if we should.
+    //as: i.e. some conjunctions (such as the null conjunctions)
+    //should not be manifested as lexemes
     if (this.usable_as_lexeme()) {
         KCKLexeme.lexemes[citation_name] = this;
     }
@@ -29,13 +31,14 @@ Conjunction.prototype.get_property = function (x) {
     return this.conjunction[x];
 }
 
-// This function checks existance of properties
+// This function checks existence of properties
 // in the underlying JSON dictionary.
 Conjunction.prototype.has_property = function (x) {
     return x in this.conjunction;
 }
 
 // This function gets the type of the conjunction.
+//coordinating, subordinating, subordinating conditional, dummy main
 Conjunction.prototype.get_type = function (x) {
     return this.conjunction.type;
 }
@@ -59,11 +62,13 @@ Conjunction.prototype.get_name = function () {
     return this.conjunction.citation_name;
 }
 // The method lets us get the clause_acts_as property of the conjunction.
+//i.e. whether a clause acts as adverb noun or adjective
 Conjunction.prototype.clause_acts_as = function () {
     return this.conjunction.clause_acts_as;
 }
 
 // This method lets us find whether a conjunction can be used as a lexeme.
+//i.e. if it's a null conjunction, defined as type = dummy_main
 Conjunction.prototype.usable_as_lexeme = function () {
     // A conjunction can be used as a lexeme if and only
     // if it is not the null conjunction.

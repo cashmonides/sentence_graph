@@ -34,6 +34,10 @@ KCKLexeme.prototype.get_core_property = function (x) {
 
 // Gets a language-dependent property.
 KCKLexeme.prototype.get_language_dependent_property = function (x, language) {
+    if (!(language in this)) {
+        throw 'The lexeme given has no properties in the language '
+        + language + '.';
+    }
     return this[language][x];
 }
 

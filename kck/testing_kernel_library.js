@@ -605,6 +605,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '1',
+                citation_form: 'portāre',
                 roots: {
                     root_2: 'port',
                     root_3: 'portāv',
@@ -612,6 +613,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'carry',
                 roots: {
             		'default': 'carry',
             		'final-s': 'carries',
@@ -635,6 +637,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '2',
+                citation_form: 'implēre',
                 roots: {
                     root_2: 'impl',
                     root_3: 'implēv',
@@ -642,6 +645,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'fill',
                 roots: {
             		'default': 'fill',
             		'final-s': 'fills',
@@ -665,6 +669,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '1',
+                citation_form: 'oppūgnāre',
                 roots: {
                     root_2: 'oppugn',
                     root_3: 'oppugnāv',
@@ -672,6 +677,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'attack',
                 roots: {
             		'default': 'attack',
             		'final-s': 'attacks',
@@ -695,6 +701,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '1',
+                citation_form: 'vorāre',
                 roots: {
                     root_2: 'vor',
                     root_3: 'vorāv',
@@ -702,6 +709,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'eat',
                 roots: {
             		'default': 'eat',
             		'final-s': 'eats',
@@ -725,6 +733,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '3',
+                citation_form: 'dīcere',
                 roots: {
                     root_2: 'dīc',
                     root_3: 'dīx',
@@ -732,6 +741,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'say',
                 roots: {
             		'transitive': {
             		    'default': 'say',
@@ -764,6 +774,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '4',
+                citation_form: 'venīre',
                 roots: {
                     root_2: 'ven',
                     root_3: 'vēn',
@@ -771,6 +782,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'come',
                 roots: {
         			'default': 'come',
         			'final-s': 'comes',
@@ -794,6 +806,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '1',
+                citation_form: 'amāre',
                 roots: {
                     root_2: 'am',
                     root_3: 'amāv',
@@ -801,6 +814,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'love',
                 roots: {
         			'default': 'love',
         			'final-s': 'loves',
@@ -823,6 +837,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '2',
+                citation_form: 'iubēre',
                 roots: {
                     root_2: 'iub',
                     root_3: 'iuss',
@@ -830,6 +845,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'command',
                 roots: {
         			'default': 'command',
         			'final-s': 'commands',
@@ -852,6 +868,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '2',
+                citation_form: 'timēre',
                 roots: {
                     root_2: 'tim',
                     root_3: 'timu',
@@ -859,6 +876,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'fear',
                 roots: {
         			'default': 'fear',
         			'final-s': 'fears',
@@ -882,6 +900,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '4',
+                citation_form: 'sentīre',
                 roots: {
                     root_2: 'sent',
                     root_3: 'sēns',
@@ -889,6 +908,7 @@ var testing_lexemes = {
                 }
             },
             english: {
+                citation_form: 'feel',
                 roots: {
         			'default': 'feel',
         			'final-s': 'feels',

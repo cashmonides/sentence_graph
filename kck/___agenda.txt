@@ -1,9 +1,103 @@
-/////
-
-
 Agenda for future (made in mid-september 2016)
 
-current findings:
+PREREQ
+
+
+seems to be fixed
+- cosmetic: the one-option problem in medial drop down
+    - when there's only one option, a nesting drop down level shouldn't be spawned, it should be skipped
+    - e.g.:
+    - sometimes the range of allowed options is low (i.e. only active not passive)
+    - and if voice is part of the drop_down_path
+    - we end up with a path like: command / love -> active -> 3s / 3p
+    - we don't want the active drop down level to even start
+
+
+
+- bug: vocabulary cheat sheet is not functional in kck mode    
+
+
+- requisite functionality: dummy agreement marker
+    - solution: set subject gender as masculine upstream
+
+
+- smallish bug: turn terminology display dictionary on
+
+potential issue: say vs speak in drop down heading
+
+
+NOT REQUIRED FOR MVP
+
+- add to data: 2s, 3s, 3p etc. should have level specific terminology (you, he, they, etc. for more basic levels) 
+
+- get a dashed version ready for release
+
+- start dash removal
+    - adapt the old library for dash removal
+    - set the parameter for dashes in modules
+    - after dash removal, test ambiguity control
+
+- ambiguity 
+        - convergent ambiguity (two different paths have same terminal string)
+            - (-am = future || pres subj)
+            - solution: check set of dropdown answers, if a duplicate exists, send an alert "the one you selected is a duplicate answer with x"
+            - seems to be fixable with a language-independent solution
+        - divergent ambiguity (one origin has two correct divergent paths with different terminal string)
+            - ruit = what tense in english?
+            - solution: have a catch statement (if two stems are identical in Latin && )
+            - seems to be fixable only with a language-specific solution
+
+
+- non-required functionality: include latin stem in drop down path name
+
+
+
+- cosmetics: clarify for students the green and red path    
+    - include the question along with the green and red answer
+    - include the full drop and non drop in the feedback
+        - if the question is VERB CONJUNCTION THEY ATTACK
+        - the feedback should be red and green for VERB and CONJUNCTION but include THEY ATTACK in black
+    - some sort of symbol for the drop downs
+    - correct answer comes first and is big
+    - path name comes second and is smaller
+    - with some sort of symbol for path
+    - such as: AMABANT love->prior->3p
+    the green and red path should have some sort of symbole
+
+
+
+- check lexicon and avoid transitive verbs that can't lack object
+        - say? know? feel? mental verbs seem to either require an object or forbid it
+    
+
+
+- semantic issue:  avoid "I am written"
+
+Agenda for saturday
+
+
+
+
+
+- give verb information about subject gender and explicitness
+
+
+PREP-CHORES
+- add noun lexemes (AS - DONE)
+- add noun drop downs to parameters in allowed (AS - MOSTLY DONE)
+- add noun decliner (DS)
+    - need to write a function
+        - determine_case 
+        - arguments: target language, conjunction/direction, role_name
+        
+KCK GENERATION WITH NOUNS
+- produce templates with S V O
+- pick lexemes
+- lexeme choice of subject determines gender
+- set gender of kernel based on noun picked
+    - need function: set_gender_of_kernel
+- if implicit, choose gender randomly from allowed
+
 
 START OF MENTAL VERB DIGRESSION
 
@@ -94,124 +188,6 @@ TAXONOMY OF VERBS
     mental intransitive //ruminate (identical to any intransitive)
 
 
-Goal 2: get vcv mode to work, with workable nested drop down and incorporate into the game
-- prereqs before release
-    - making the noun switch functionality (seems to be done)
-    - ambiguity 
-        - convergent ambiguity (two different paths have same terminal string)
-            - (-am = future || pres subj)
-            - solution: check set of dropdown answers, if a duplicate exists, send an alert "the one you selected is a duplicate answer with x"
-            - seems to be fixable with a language-independent solution
-        - divergent ambiguity (one origin has two correct divergent paths with different terminal string)
-            - ruit = what tense in english?
-            - solution: have a catch statement (if two stems are identical in Latin && )
-            - seems to be fixable only with a language-specific solution
-    - drop downs have cosmetic issues
-        - dropping up
-        - drop down menus don't disappear when they've been opened
-        - cramped
-    - check lexicon and avoid transitive verbs that can't lack object
-        - say? know? feel? mental verbs seem to either require an object or forbid it
-    - dummy agreement markers 
-        - solution: set subject gender as masculine upstream
-- big bug: drop downs not giving full options, only the two verbs that are included
-    - always only 2 choices for verb, 1 for conjunction
-        - dropdowns should be giving as many extra items as are specified in the parameter latin_extra_levels
-        - but somehow we're only getting the words that are used
-        - e.g. if it's he attacks but they eat, we only get attack and eat as options
-    - vocabulary cheat sheet is not functional in kck mode    
-
-
-
-- bug: the one-option problem
-    - when there's only one option, a nesting drop down level shouldn't be spawned, it should be skipped
-    - e.g.:
-    - sometimes the range of allowed options is low (i.e. only active not passive)
-    - and if voice is part of the drop_down_path
-    - we end up with a path like: command / love -> active -> 3s / 3p
-    - we don't want the active drop down level to even start
-  
-- add to data: 2s, 3s, 3p etc. should have level specific terminology (you, he, they, etc. for more basic levels) 
-
-- get a dashed version ready for release
-
-- start dash removal
-    - adapt the old library for dash removal
-    - set the parameter for dashes in modules
-    - after dash removal, test ambiguity control
-
-
-- cosmetics: clarify for students the green and red path    
-    - include the question along with the green and red answer
-    - some sort of symbol for the drop downs
-    - correct answer comes first and is big
-    - path name comes second and is smaller
-    - with some sort of symbol for path
-    - such as: AMABANT love->prior->3p
-    the green and red path should have some sort of symbole
-
-Goal 3: taxonomy
-
-Goal 4: to get nouns working
-- information-rich templates
-- choosing lexemes (I'm not sure what our level of progress on this is)
-- making sure not to choose time for nouns (and other such category-mixing blunders)
-
-- declining nouns (seem to work for declensions 1, 2, 3, need to be tied in)
-- assembling components and giving them the proper order (SOV, SCRAMBLE, VERB FINAL)
-  - avoiding scrambled infinitives
-  - word order: upstream vs. language-by-language
-        - option 1: forced to match word order of source language
-        - option 2: look at module preferences and choose independently of source language
-- we need a parameter for how often we expand to include personal agent/implement
-- in general we want parameters for all expansions
-    - adding genitives to nouns
-    - adding datives to verbs that have optional datives
-
-
-- ambiguity and nonsense avoidance
-
-- in e.g. I speak, the I should be classed as animate so that verbs that can't have animate subjects don't produce forms with anything but 3rd person
-
-
-- display issues (dash removal, upper case)
-
-Goal 5: adjectives
-
-Goal 6: other types of noun (ablative, genitive)
-
-
-
-DOWN THE ROAD
-- improve cheat sheet display (maybe make the text appear in the top of the box)
-
-
-
-
-Agenda for saturday
-
-
-
-
-
-- give verb information about subject gender and explicitness
-
-
-PREP-CHORES
-- add noun lexemes (AS - DONE)
-- add noun drop downs to parameters in allowed (AS - MOSTLY DONE)
-- add noun decliner (DS)
-    - need to write a function
-        - determine_case 
-        - arguments: target language, conjunction/direction, role_name
-        
-KCK GENERATION WITH NOUNS
-- produce templates with S V O
-- pick lexemes
-- lexeme choice of subject determines gender
-- set gender of kernel based on noun picked
-    - need function: set_gender_of_kernel
-- if implicit, choose gender randomly from allowed
 
 
 DROP DOWN

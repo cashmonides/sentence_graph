@@ -29,6 +29,9 @@ var option_list_to_json = function (
     }
     var by_current_feature = by_feature(
         current_feature, option_list, recursive_call);
+    if (Object.keys(by_current_feature).length === 1) {
+        return values(by_current_feature)[0];
+    }
     var sorting_function = sorts(current_feature);
     var key_value_pairs_in_order = list_of_pairs_from_dict(
         by_current_feature
