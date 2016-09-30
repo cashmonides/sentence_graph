@@ -1130,6 +1130,8 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
     };
     return map*/
     
+    console.log("DEBUG 9-30 this.game.cheat_sheet", this.game.cheat_sheet);
+    
     return this.game.cheat_sheet || 'no cheat sheet for this mode';
 }
     

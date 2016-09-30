@@ -623,6 +623,37 @@ var testing_lexemes = {
         		}
         	}
         },
+        scare: {
+            core_properties: {
+                name: 'scare',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'mental']
+            },
+            latin: {
+                conjugation: '2',
+                citation_form: 'terrēre',
+                roots: {
+                    root_2: 'terr',
+                    root_3: 'terru',
+                    root_4: 'territ'
+                }
+            },
+            english: {
+                citation_form: 'scare',
+                roots: {
+            		'default': 'scare',
+            		'final-s': 'scares',
+            		'gerund': 'scaring',
+            		'past participle': 'scared',
+            		'preterite': 'scared'
+        		}
+        	}
+        },
         //transitive
         fill: {
             core_properties: {
@@ -917,6 +948,37 @@ var testing_lexemes = {
         			'preterite': 'felt'
         		}
     		}
-        }
+        },
+        see: {
+            core_properties: {
+                name: 'see',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: ['mental verb'],
+                subject_white_list: ['animate'],
+                object_white_list: ['mental'], 
+                subject_black_list: ['abstraction'],
+                object_black_list: [],
+            },
+            latin: {
+                conjugation: '2',
+                citation_form: 'vidēre',
+                roots: {
+                    root_2: 'vid',
+                    root_3: 'vīd',
+                    root_4: 'vīs'
+                }
+            },
+            english: {
+                citation_form: 'see',
+                roots: {
+        			'default': 'see',
+        			'final-s': 'sees',
+        			'gerund': 'seeing',
+        			'past participle': 'seen',
+        			'preterite': 'saw'
+        		}
+    		}
+        },
     }
 }

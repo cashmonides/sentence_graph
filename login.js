@@ -88,9 +88,6 @@ function success(authData){
     document.location = "../profile/";
 }
 
-
-
-
 function enter_anonymous_game() {
     User.remove_cookie();
     document.location = "../quiz/";

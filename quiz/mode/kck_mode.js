@@ -1,5 +1,9 @@
 // KCK mode.
 
+// damage control Akiva
+var number_of_dummy_lexemes_hack = 5;
+
+var available_lexemes_hack;
 // Global levels, somewhat of a hack.
 var global_levels;
 
@@ -55,6 +59,16 @@ KCKModeGame.prototype.next_question = function () {
     
     console.log('level =', this.level);
     
+    
+    //damage control begin:
+    // console.log("DEBUG 9-30-16 test of get current module = ", get_current_module(this.level).lexicon);
+    console.log("DEBUG 9-30-16 test of get current module = ", get_current_module(this.level.kck_level).lexicon);
+    
+    available_lexemes_hack = get_current_module(this.level.kck_level).lexicon;
+    // console.log("DEBUG 9-30-16 in next_question available_lexemes_hack = ", available_lexemes_hack);
+    //damage control end
+    
+    
     // define source and target language
     var source_language = weighted_choice(
         get_current_module(this.level.kck_level).source_language);
@@ -82,7 +96,21 @@ KCKModeGame.prototype.next_question = function () {
     // this.sentence = data.sentence;              // text displayed in display box
     // this.target_indices = data.target_indices;      //highlighted word if necessary
 
+
+    // damage control begin: Akiva's attempts to console.log the vocab cheat sheet function
+    console.log("DEBUG 9-30 about to make vocab_cheat_sheet = ");
+    // below is the super hacky version that works but just gives lexeme objects:
+    var kck_cheat_sheet = chosen_lexemes_as_global_variable_hack;
+    //below is an attempt at JSON stringify
+    // var kck_cheat_sheet = JSON.stringify(chosen_lexemes_as_global_variable_hack);
+    var hack_output = hackily_convert_kck_lexeme_list_to_real_lexeme_list(kck_cheat_sheet);
+    this.cheat_sheet = hack_output;
+
     
+
+    console.log("DEBUG 9-30 finished making kck_cheat_sheet with this.cheat_sheet = ", this.cheat_sheet);
+    
+    // damage control end
     
     //changes the score, progress bar, etc.
     this.quiz.update_display();
@@ -310,3 +338,194 @@ KCKModeGame.prototype.display_green_and_red_path = function (statuses) {
         o.appendChild(e);
     }
 }
+
+
+
+//damage control begin:
+// Akiva makes a global variable to hold chosen lexemes
+// i.e. chosen_lexemes is what is produced by the kernel generation process
+
+var chosen_lexemes_as_global_variable_hack;
+
+
+// damage control end
+
+
+
+
+
+
+//damage control begin:
+// Akiva added this global variable to handle the kck_vocab_cheat_sheet
+
+// argument should be a function that takes a real argument (something like master_lexeme_list)
+// for hacking purposes we are going to use a global variable 
+// gradually we'll upgrade it to a real argument and function
+
+// var kck_cheat_sheet = chosen_lexemes_as_global_variable_hack;
+
+    /*
+    function (chosen_lexemes_as_global_variable_hack) {
+    
+    // damage control begin
+    console.log("DEBUG 9-30-16 in kck_mode.js chosen_lexemes_as_global_variable_hack", chosen_lexemes_as_global_variable_hack);
+    // damage control end
+    
+    
+
+    
+    
+    // damage control begin
+    console.log("DEBUG 9-30-16 in kck_mode.js chosen_lexemes_as_global_variable_hack", chosen_lexemes_as_global_variable_hack);
+    // damage control end
+    
+    
+    
+    // We put our lexemes in groups corresponding to their part of speech.
+    var lexemes_by_part_of_speech = separate_and_sort_by(
+        master_lexeme_list, function (x) {
+            return x.properties.core.part_of_speech});
+    // We sort each group.
+    var lexemes_sorted_by_root = lexemes_by_part_of_speech.map(
+        function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
+    // We push the part of speach to each item (as a header).
+    lexemes_sorted_by_root.forEach(function (x) {
+        x.unshift(x[0].properties.core.part_of_speech + 's')});
+    return concat_arrays(lexemes_sorted_by_root).map(function (x) {
+        if (typeof x === 'object') {
+            return [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root]
+        } else {
+            return x
+        }
+    });
+    
+}
+*/
+
+//damage control end
+
+
+
+
+
+
+//damage control begin:
+// Akiva added this global variable to handle the kck_vocab_cheat_sheet
+
+// argument should be a real argument (master_lexeme_list)
+// for hacking purposes we are going to use a global variable 
+// gradually we'll upgrade it to a real argument
+
+// var kck_cheat_sheet_first_attempt = function (chosen_lexemes_as_global_variable_hack) {
+    
+//     // damage control begin
+//     console.log("DEBUG 9-30-16 in kck_mode.js chosen_lexemes_as_global_variable_hack", chosen_lexemes_as_global_variable_hack);
+//     // damage control end
+    
+    
+    
+//     // We put our lexemes in groups corresponding to their part of speech.
+//     var lexemes_by_part_of_speech = separate_and_sort_by(
+//         master_lexeme_list, function (x) {
+//             return x.properties.core.part_of_speech});
+//     // We sort each group.
+//     var lexemes_sorted_by_root = lexemes_by_part_of_speech.map(
+//         function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
+//     // We push the part of speach to each item (as a header).
+//     lexemes_sorted_by_root.forEach(function (x) {
+//         x.unshift(x[0].properties.core.part_of_speech + 's')});
+//     return concat_arrays(lexemes_sorted_by_root).map(function (x) {
+//         if (typeof x === 'object') {
+//             return [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root]
+//         } else {
+//             return x
+//         }
+//     });
+// }
+
+
+//damage control end
+
+
+
+
+//modified for the different lexicon format of kck
+// no properties
+var kck_cheat_sheet = function (chosen_lexemes_as_global_variable_hack) {
+    
+    console.log("DEBUG 9-30-16 checkpoint #1");
+    
+    
+    // We put our lexemes in groups corresponding to their part of speech.
+    var lexemes_by_part_of_speech = separate_and_sort_by(
+        chosen_lexemes_as_global_variable_hack, function (x) {
+            return x.core_properties.part_of_speech});
+    // We sort each group.
+    var lexemes_sorted_by_root = lexemes_by_part_of_speech.map(
+        function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
+    // We push the part of speach to each item (as a header).
+    lexemes_sorted_by_root.forEach(function (x) {
+        x.unshift(x[0].core_properties.part_of_speech + 's')});
+    return concat_arrays(lexemes_sorted_by_root).map(function (x) {
+        if (typeof x === 'object') {
+            return [x.latin.roots.root_2 + ' (' + x.latin.conjugation + ')', x.core_properties.name]
+        } else {
+            return x
+        }
+    });
+}
+
+
+var hackily_convert_kck_lexeme_list_to_real_lexeme_list = function(kck_lexeme_list_asJSON) {
+    console.log("DEBUG 9-30-16 kck_lexeme_list_stringified", kck_lexeme_list_asJSON);
+    var keys = Object.keys(kck_lexeme_list_asJSON);
+    console.log("DEBUG 9-30-16 keys = ", keys);
+   
+
+    var kck_vocab_cheat_sheet_list_hack = [];
+
+    console.log("DEBUG 9-30-16 in hackily convert available_lexemes_hack = ", available_lexemes_hack);
+
+    for (var i=0; i < number_of_dummy_lexemes_hack; i++) {
+        var randomly_chosen_lexeme = random_choice(available_lexemes_hack);
+        console.log("DEBUG 9-30-16 randomly_chosen_lexeme = ", randomly_chosen_lexeme);
+        keys.push(randomly_chosen_lexeme);
+        console.log("DEBUG 9-30-16 keys = ", keys);
+        console.log("DEBUG 9-30-16 kck_vocab_cheat_sheet_list_hack = ", kck_vocab_cheat_sheet_list_hack);
+    }
+    
+    // for (var i = 0; i < keys.length; i++) {
+    //     kck_vocab_cheat_sheet_list_hack.push(keys[i]);
+    // }
+
+    
+    
+
+    for (var i = 0; i < keys.length; i++) {
+        var english_name_hack = keys[i];
+        console.log("DEBUG 9-30-16 english_name_hack", english_name_hack);
+        if (keys[i].startsWith("c_")) {
+            var lexeme_hack = conjunction_library[english_name_hack];
+            var latin_form_hack = lexeme_hack.latin_form;
+            latin_form_hack = latin_form_hack.toUpperCase();
+            var english_form_hack = lexeme_hack.english_form;
+            console.log("DEBUG 9-30 lexeme_hack = ", lexeme_hack);
+            console.log("DEBUG 9-30 latin_form_hack = ", latin_form_hack);
+            var dictionary_output_hack = latin_form_hack + ' ' + english_form_hack;
+            kck_vocab_cheat_sheet_list_hack.push(dictionary_output_hack);
+        } else {
+            var lexeme_hack = testing_lexemes.verb[english_name_hack];
+            var latin_form_hack = lexeme_hack.latin.citation_form;
+            latin_form_hack = latin_form_hack.toUpperCase();
+            console.log("DEBUG 9-30 lexeme_hack = ", lexeme_hack);
+            console.log("DEBUG 9-30 latin_form_hack = ", latin_form_hack);
+            var dictionary_output_hack = latin_form_hack + ' ' + keys[i];
+            kck_vocab_cheat_sheet_list_hack.push(dictionary_output_hack);
+        }
+    }
+   console.log("DEBUG 9-30-16 kck_vocab_cheat_sheet_list_hack", kck_vocab_cheat_sheet_list_hack);
+   kck_vocab_cheat_sheet_list_hack = remove_duplicates(kck_vocab_cheat_sheet_list_hack);
+   kck_vocab_cheat_sheet_list_hack = kck_vocab_cheat_sheet_list_hack.sort();
+   return kck_vocab_cheat_sheet_list_hack;
+}
+

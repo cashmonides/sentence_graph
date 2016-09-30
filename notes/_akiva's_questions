@@ -1,3 +1,9 @@
+DAMAGE CONTROL
+akiva has modified
+kck_mode
+new_sentence_tree_generator
+
+
 CHORE-FRIENDLY BASICS
 - the numerical parameter in JSON.stringify
     - kck > kernel_display.js reads as follows:
@@ -7,13 +13,13 @@ CHORE-FRIENDLY BASICS
 
 CHORE
 - console.log all the steps in kernel_display.js
-
+- console.log all the classifications
 
 HIGH PRIORITY QUESTIONS
 - overall concept of kck > kernel_display.js    
     - what is a concrete example of a kernel passing through kernel_display.js?
     - i.e. K[...]  fill in the blank
-
+- just a basic definition of "classifications" - synonyms, fuller explanation, etc.
 
 MID PRIORITY QUESTIONS
 
@@ -39,7 +45,7 @@ LOW PRIORITY QUESTIONS
 - nonexistant key
 - what is the point of this in kck > compare_path?
     - var same_last_answer = false;
-    - is it just a not yet implemented functionality
+    - is it just a not yet implemented functionality?
     
 
 

@@ -224,6 +224,13 @@ Kernel.prototype.choose_random_lexeme_for = function (
 
 // This function determines a lexeme for each role in a kernel.
 Kernel.prototype.choose_random_lexemes = function (chosen_lexemes, level) {
+    
+    //damage control begin:
+    console.log("DEBUG 9-30-16 chosen_lexemes", chosen_lexemes);
+    chosen_lexemes_as_global_variable_hack = chosen_lexemes;
+    console.log("DEBUG 9-30-16 chosen_lexemes_as_global_variable_hack", chosen_lexemes_as_global_variable_hack);
+    //damage control end
+    
     // We initialize some lexemes chosen in this kernel.
     this.chosen_lexemes = {};
     // Get the verb component.
