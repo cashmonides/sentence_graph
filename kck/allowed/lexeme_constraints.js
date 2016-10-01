@@ -1,6 +1,8 @@
 // This is some stuff that was rushed out in a hurry
 // and could be much better commented.
 
+
+//AS: this perhaps belongs in utils??
 // Returns a list of matches.
 var match_dicts = function (dict_being_matched, matching_dict) {
     if (!is_object(matching_dict)) {
@@ -28,6 +30,12 @@ var match_dicts = function (dict_being_matched, matching_dict) {
     });
 }
 
+
+//AS notes begin:
+//below seems to be an example of a single constraint
+// in shorthand, it would be "intransitive" requires "active voice"
+// this might be something that belongs in a data file, alterable by teachers
+//AS notes end
 // transitivity is in core_properties.
 var lexeme_constraints = {
     'core_properties': {
@@ -49,7 +57,7 @@ var get_constraints_from_lexeme = function (lexeme) {
 // Filter allowed based on what a lexeme allows.
 var filter_allowed_with_lexeme = function (allowed, lexeme) {
     var constraints = get_constraints_from_lexeme(lexeme);
-    return filter_allowed_with_constaints(allowed, constraints);
+    return filter_allowed_with_constraints(allowed, constraints);
 }
 
 // This method combines allowed with some constraints.
@@ -62,7 +70,7 @@ var filter_allowed_with_lexeme = function (allowed, lexeme) {
 // value in constraints: {voice: ['active']}
 // everything but voice goes through
 // every voice is filtered by whether it's active
-var filter_allowed_with_constaints = function (allowed, other_constraints) {
+var filter_allowed_with_constraints = function (allowed, other_constraints) {
     var result = {};
     for (var i in allowed) {
         if (i in other_constraints) {

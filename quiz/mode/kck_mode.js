@@ -78,6 +78,8 @@ KCKModeGame.prototype.next_question = function () {
     this.source_language = source_language;
     this.target_language = target_language;
     
+    console.log("DAMAGE CONTROL DEBUG 1-1-16 checkpoint #1 about to generate_sentence");
+    
     //sets up our lexicon
     // var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
     // var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
@@ -86,6 +88,10 @@ KCKModeGame.prototype.next_question = function () {
         source_language, target_language,
         this.level.kck_level, this.level.latin_extra_level);
     console.log('sentence =', sentence);
+    
+    console.log("DAMAGE CONTROL DEBUG 1-1-16 checkpoint #2 about to translate_into");
+    
+    
     // this.cheat_sheet = data.cheat_sheet;
     // sets data
     // var data = make_output(this.level, null, 'quiz_english');

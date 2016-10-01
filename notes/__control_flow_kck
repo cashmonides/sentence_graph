@@ -1,0 +1,14 @@
+
+
+
+
+
+
+at some point fairly early on the whole package meets up with the lexeme_constraints
+    (this is so named I guess because it is a constraint that arises when a lexeme is picked
+    e.g. if an intransitive verb lexeme is picked, it will impose certain constraints)
+    
+    i.e. there are certain data-centric constraints such as "intransitive verbs must be active"
+    so we basically filter constraints and allowed together
+    
+    (add further explanation here)

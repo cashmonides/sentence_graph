@@ -90,6 +90,8 @@ var sort_functions_from_orders = function (orders, language) {
                 return orders_as_dicts[x][y] - orders_as_dicts[x][z];
             }
         } else {
+            // cmp is a function that compares numbers or strings
+            // a > b returns 1 a < b returns -1 a === b returns 0
             return cmp;
         }
     }

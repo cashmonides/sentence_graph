@@ -99,7 +99,9 @@ var terminology_display_dictionary = {
 
 
 
-var advanced_terminology_display = {
+// below was an attempt that put advanced and basic into separate dictionaries
+// but it seemed easier to keep them all in one dictionary as above
+var advanced_terminology_display_obsolete = {
     //latin cases
     'nominative': 'nominative',
     'genitive': 'genitive',
@@ -141,7 +143,7 @@ var advanced_terminology_display = {
     
 }
 
-var basic_terminology_display = {
+var basic_terminology_display_obsolete = {
     //latin cases
     'nominative': 'subject',
     'genitive': '\'of\'',

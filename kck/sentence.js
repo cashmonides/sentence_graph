@@ -197,6 +197,8 @@ KCKSentence.prototype.pick_drop_down_lexemes = function (kck_level, drop_extra_l
             return cmp(x.get_name(), y.get_name());
         });
     }
+    
+    
     this.chosen_lexemes = chosen_lexemes;
 }
 

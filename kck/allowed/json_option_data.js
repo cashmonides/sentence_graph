@@ -31,6 +31,11 @@ var translation_formula_compatibility_dictionary = {
     'ssslatin': 'all'
 }
 
+// AS notes below
+// properties are the properties that appear on the drop-down path (tense, person, etc)
+// in some constructions those properties are irrelevant or non-applicable or confusing
+// e.g. conditionals have sequence but are irrelevant
+// e.g. independent
 var properties_to_leave_out = {
     'english': {
         'absolute': {},
@@ -70,6 +75,7 @@ var properties_to_leave_out = {
 // var drop_down_language = 'english';
 var drop_down_language = 'latin';
 
+//AS: presumably the below is obsolete because it is now a parameter set in module
 // drop_down_path gives the order of categories which the user will see while navigating through a drop down
 // var drop_down_path = ['lexeme', 'person_and_number', 'voice', 'tense_and_mood'];
 // var drop_down_path = ['person_and_number', 'voice', 'tense_and_mood', 'lexeme'];

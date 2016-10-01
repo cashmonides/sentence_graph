@@ -24,9 +24,8 @@ var kck_levels = {
         'target_language' : {'english': 0, 'latin': 1},
         'terminology_display_dictionary': 'basic',
         //damage control begin:
-        'lexicon': [ 'eat', 'love', 'attack', 'carry', 'fear', 'see', 'scare'
-                 ]
-         //damage control end
+        'lexicon': [ 'eat', 'love', 'attack', 'carry', 'fear', 'see', 'scare']
+        //  //damage control end
     },
     '10': {
         'time': ['simultaneous', 'prior', 'subsequent'],

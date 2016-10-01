@@ -20,9 +20,10 @@ HIGH PRIORITY QUESTIONS
     - what is a concrete example of a kernel passing through kernel_display.js?
     - i.e. K[...]  fill in the blank
 - just a basic definition of "classifications" - synonyms, fuller explanation, etc.
+- get_current_module(kck_level) seems fishy
+
 
 MID PRIORITY QUESTIONS
-
 
 - the missing citation_name issue   
     - in kck -> conjunction_object.js we have a method that uses citation name
@@ -60,6 +61,9 @@ FILES TO REVIEW FURTHER MID PRIORITY
 
 
 FILES REVIEWED AND MORE OR LESS UNDERSTOOD
+kck > allowed (folder)
+kck > ambiguity (folder)
+
 kck > compare_path.js
 kck > conjunction_library
 kck > conjunction_type
@@ -70,3 +74,29 @@ kck > kernel_restrictions.js
 
 THINGS THAT NEED TO BE CHANGED WHEN NOUNS ARE ADDED
 get_all_drops_and_non_drops
+
+SPECIFIC QUESTIONS
+- relation of red_herring to bool_maybe_string?
+- is the following something that's globally fixed when we want it to be a changeable parameter?
+    var drop_down_language = 'latin'; 
+    (in kck > allowed > json_option_data.js
+- what are 'orders'?
+- just a little more clarity on the function filter_allowed_with_constraints (just because it seems so important)
+
+WTF
+- kck > allowed > features_from_tf_code.js
+- kck > allowed > language_sorts.js
+- option_list_to_json.js (not sure where it is but it contains the var by_feature)
+
+GLOBAL VARIABLES
+red_herring
+lexeme_constraints
+
+
+FILES THAT ARE MOSTLY DATA (possibly move to a single data folder)
+kck > allowed > json_option_data.js
+kck > allowed > terminology_display.js (definitely belongs in data)
+kck > ambiguity > ambiguous_tenses.js
+
+FILES THAT ARE PERHAPS UTILS (possibly integrate into utils folder)
+var match_dicts (in kck > allowed > lexeme_constraints.js)
