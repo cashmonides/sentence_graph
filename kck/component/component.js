@@ -62,6 +62,7 @@ Component.prototype.rule_failed = function () {
     return false;
 }
 
+
 // This function returns a description of a property
 // (actually, just the property and its value in a particular language).
 Component.prototype.describe_property = function (
@@ -72,7 +73,7 @@ Component.prototype.describe_property = function (
         // If the value is null, return null.
         return null;
     } else if (typeof value === 'string') {
-        // If the value is a string, ust add together the property,
+        // If the value is a string, just add together the property,
         // a colon and space, and the value of the property.
         return property + ': ' + value;
     } else {

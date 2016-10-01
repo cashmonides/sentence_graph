@@ -437,32 +437,6 @@ var cheat_sheet = function (master_lexeme_list) {
     });
 }
 
-//damage control begin:
-
-var kck_cheat_sheet = function (chosen_lexemes_as_global_variable_hack) {
-    
-    console.log("DEBUG 9-30-16 checkpoint #1");
-    
-    
-    // We put our lexemes in groups corresponding to their part of speech.
-    var lexemes_by_part_of_speech = separate_and_sort_by(
-        chosen_lexemes_as_global_variable_hack, function (x) {
-            return x.core_properties.part_of_speech});
-    // We sort each group.
-    var lexemes_sorted_by_root = lexemes_by_part_of_speech.map(
-        function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
-    // We push the part of speach to each item (as a header).
-    lexemes_sorted_by_root.forEach(function (x) {
-        x.unshift(x[0].core_properties.part_of_speech + 's')});
-    return concat_arrays(lexemes_sorted_by_root).map(function (x) {
-        if (typeof x === 'object') {
-            return [x.latin.roots.root_2 + ' (' + x.latin.conjugation + ')', x.core_properties.name]
-        } else {
-            return x
-        }
-    });
-}
-//damage control end
 
 
 

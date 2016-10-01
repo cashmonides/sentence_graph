@@ -1,5 +1,20 @@
+//damage control begin:
+//sentence produces a full set of lexemes (both the right answers and the dummy ones)
+// it's called chosen_lexemes here
+// in kck chosen_lexemes is just the right answers (i.e. the ones used in the sentence)
+// in kck they're produced as a map with attack: true, command: true
+// here in sentence they are kcklexeme objects
+var full_lexemes_hack;
+
+//damage control end
+
+
+
 // A sentence basically currently just wraps a tree structure
 // in an object we can add methods to.
+
+
+
 
 // This function initializes a sentence.
 var KCKSentence = function (x) {
@@ -198,8 +213,14 @@ KCKSentence.prototype.pick_drop_down_lexemes = function (kck_level, drop_extra_l
         });
     }
     
+    //damage control begin:
+    console.log("Damage control DEBUG 1-1-16 chosen_lexemes in sentence = ", chosen_lexemes);
+    full_lexemes_hack = chosen_lexemes;
+    console.log("Damage control DEBUG 1-1-16 full_lexemes_hack in sentence = ", full_lexemes_hack);
+    console.log("Damage control DEBUG 1-1-16 allowed_dummies in sentence = ", allowed_dummies);
     
-    this.chosen_lexemes = chosen_lexemes;
+    //damage control end
+    
 }
 
 // This function takes another function f. When the result is called,

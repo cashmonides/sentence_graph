@@ -25,7 +25,7 @@ Component.prototype.get_part_of_speech = function () {
     return part_of_speech;
 }
 
-// This method determined whether a component can accept a lexeme
+// This method determines whether a component can accept a lexeme
 // with regard to part of speech. All it does is check whether
 // the parts of speech are the same, which seems to be
 // all it needs to do (except in tricky cases like predicates).
@@ -33,7 +33,7 @@ Component.prototype.accepts_part_of_speech_of = function (lexeme) {
     return this.get_part_of_speech() === lexeme.get_part_of_speech();
 }
 
-// This method determined whether a component can accept a lexeme
+// This method determines whether a component can accept a lexeme
 // with regard to lexical restrictions. Currently,
 // it succeeds if either the component has no lexical restriction
 // or the lexeme's lexical properties (currently only one)
@@ -85,6 +85,7 @@ Component.prototype.accepts_noun_lexical_restrictions_of = function (lexeme) {
     return (white_list.length === 0 || white_list[0] in lexeme_props) &&
     Object.keys(set_intersection(black_list, lexeme_props)).length === 0;
 }
+
 
 // This method determines whether a component can accept a lexeme.
 Component.prototype.accepts_lexeme = function (lexeme) {

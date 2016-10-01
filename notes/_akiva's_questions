@@ -15,6 +15,17 @@ CHORE
 - console.log all the steps in kernel_display.js
 - console.log all the classifications
 
+RELATIVELY SIMPLE QUESTIONS
+- what is the deal witb "string with period"?
+    - it looks like it deals with a data type property.value
+    - but what's an example of this? how is it used?
+    - would it be e.g. animate.false?
+- walk me through a use of get_name for a lexeme
+
+
+GO  INTO IN DEPTH BECAUSE IMPORTANT
+- all of component folder
+
 HIGH PRIORITY QUESTIONS
 - overall concept of kck > kernel_display.js    
     - what is a concrete example of a kernel passing through kernel_display.js?
@@ -97,6 +108,14 @@ FILES THAT ARE MOSTLY DATA (possibly move to a single data folder)
 kck > allowed > json_option_data.js
 kck > allowed > terminology_display.js (definitely belongs in data)
 kck > ambiguity > ambiguous_tenses.js
+kck > component > var role_to_part_of_speech_map
 
-FILES THAT ARE PERHAPS UTILS (possibly integrate into utils folder)
+FILES THAT ARE PERHAPS BETTER AS UTILS (possibly integrate into utils folder)
 var match_dicts (in kck > allowed > lexeme_constraints.js)
+
+
+
+
+
+ARE THESE OBSOLETE?
+- entire cosmetics folder

@@ -1,9 +1,16 @@
 // KCK mode.
 
 // damage control Akiva
+//we set an arbitrary number of dummy lexemes for the cheat sheet
+// later we'll make this a parameter
 var number_of_dummy_lexemes_hack = 5;
 
+// hackily, we store the available lexemes as a global variable and add to is as we go along
+
 var available_lexemes_hack;
+// var chosen_lexemes_as_global_variable_hack2;
+
+
 // Global levels, somewhat of a hack.
 var global_levels;
 
@@ -453,8 +460,8 @@ var chosen_lexemes_as_global_variable_hack;
 //damage control end
 
 
-
-
+/*
+// below is the more advanced version not used
 //modified for the different lexicon format of kck
 // no properties
 var kck_cheat_sheet = function (chosen_lexemes_as_global_variable_hack) {
@@ -480,9 +487,35 @@ var kck_cheat_sheet = function (chosen_lexemes_as_global_variable_hack) {
         }
     });
 }
-
+*/
 
 var hackily_convert_kck_lexeme_list_to_real_lexeme_list = function(kck_lexeme_list_asJSON) {
+    
+    console.log("DAMAGE DEBUG 1-1-16 about to insert");
+    console.log("Damage control DEBUG 1-1-16 full_lexemes_hack in kckmode = ", full_lexemes_hack);
+    // console.log("Damage control DEBUG 1-1-16 Object.keys(full_lexemes_hack) in kckmode = ", Object.keys(full_lexemes_hack));
+    // console.log("Damage control DEBUG 1-1-16 Object.keys(full_lexemes_hack.verb) in kckmode = ", Object.keys(full_lexemes_hack.verb));
+    // console.log("Damage control DEBUG 1-1-16 Object.keys(full_lexemes_hack.verb.english) in kckmode = ", Object.keys(full_lexemes_hack.verb.english));
+    
+    
+    // for (var lexeme in full_lexemes_hack) {
+    //     if (lexeme == 'conjunction') {
+    //         continue;
+    //     } else {
+    //         for (var entry in lexeme) {
+    //             var dummy_name_hack = entry.get_name();
+    //             console.log("DESPERATE LOOP dummy_name_hack = ", dummy_name_hack);
+    //         }
+    //     }
+            
+    //     }
+        
+    // }
+    
+    // console.log("Damage control DEBUG 666 JSON.stringifyfull_lexemes_hack in kckmode = ", JSON.stringify(full_lexemes_hack));
+    
+    
+    
     console.log("DEBUG 9-30-16 kck_lexeme_list_stringified", kck_lexeme_list_asJSON);
     var keys = Object.keys(kck_lexeme_list_asJSON);
     console.log("DEBUG 9-30-16 keys = ", keys);

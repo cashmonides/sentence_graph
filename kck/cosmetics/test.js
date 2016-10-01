@@ -1,3 +1,4 @@
+/*
 var create_menu = function (path, data, callback) {
     var div;
     var li;
@@ -139,3 +140,6 @@ var display_status = function (status) {
     }
     return parent_el;
 }
+
+
+*/
