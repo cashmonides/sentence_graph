@@ -70,7 +70,6 @@ KCKModeGame.prototype.next_question = function () {
     //damage control begin:
     // console.log("DEBUG 9-30-16 test of get current module = ", get_current_module(this.level).lexicon);
     console.log("DEBUG 9-30-16 test of get current module = ", get_current_module(this.level.kck_level).lexicon);
-    
     available_lexemes_hack = get_current_module(this.level.kck_level).lexicon;
     // console.log("DEBUG 9-30-16 in next_question available_lexemes_hack = ", available_lexemes_hack);
     //damage control end
@@ -124,18 +123,21 @@ KCKModeGame.prototype.next_question = function () {
     console.log("DEBUG 9-30 finished making kck_cheat_sheet with this.cheat_sheet = ", this.cheat_sheet);
     
     // damage control end
-    
+    console.log("DEBUG 1-2-16 checkpoint #1 reached");
     //changes the score, progress bar, etc.
     this.quiz.update_display();
 
     Quiz.set_question_text("Translate the following sentence:");
     this.quiz.add_question_text(this.question);
     //todo check if this works
-    
+    console.log("DEBUG 1-2-16 checkpoint #2 reached");
     // todo implement or find some method that does this
     var drops_and_non_drops = sentence.get_all_drops_and_non_drops(this.level.kck_level, target_language);
+    
     console.log('drops and non drops =', drops_and_non_drops);
     
+    
+    console.log("DEBUG 1-2-16 checkpoint #3 reached");
     var roles = drops_and_non_drops.map(function (x) {
         return x.role;
     });
@@ -146,6 +148,8 @@ KCKModeGame.prototype.next_question = function () {
     for (i = 0; i < role_num; i++) {
         this.used_drops_and_non_drops.push(drops_and_non_drops[i][drop_choices[i]]);
     }
+    
+    console.log("DEBUG 1-2-16 checkpoint #4 reached");
     
     this.actual_drops = this.used_drops_and_non_drops.filter(function (x) {
         return x instanceof DropDown;
@@ -163,14 +167,21 @@ KCKModeGame.prototype.next_question = function () {
         return x.drop.correct_path;
     });
     
+    console.log("DEBUG 1-2-16 checkpoint #5 reached");
+    
     console.log('correct =', this.correct_answer_as_string,
     this.correct_answer_as_path);
     
     // console.log("DEBUG this.correct_answer = ", this.correct_answer);
     
+    
+    console.log("DEBUG 1-2-16 checkpoint #6 reached");
+    
     console.log("DEBUG entering 1st random_choice");
     this.none_display = random_choice(map_level_to_allowed(
         this.level.latin_extra_level, latin_extra_levels).none_display);
+    
+    console.log("DEBUG 1-2-16 checkpoint #7 reached");
     
     // We now use this to guarantee that our answer choices end up in the right place.
     // remove_element(el("answer_choices"));

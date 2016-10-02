@@ -46,10 +46,14 @@ KCKSentence.prototype.is_single_clause = function () {
 // Also, we return a list of results. We might not need
 // this sometimes, but it's useful to have.
 KCKSentence.prototype.each_kernel = function (method) {
+    console.log("DAMAGE CONTROL DEBUG 1-2-16 checkpoint #10 reached");
     // Get the arguments.
     var args = args_to_list(arguments);
     // Get the arguments to pass in.
     var args_to_pass_in = args.slice(1);
+    
+    console.log("DAMAGE CONTROL DEBUG 1-2-16 checkpoint #11 reached");
+    
     // If the method isn't a function, make it one.
     if (typeof method !== 'function') {
         // Is the method a method on Kernel?
@@ -66,6 +70,8 @@ KCKSentence.prototype.each_kernel = function (method) {
             }
         }
     }
+    
+    console.log("DAMAGE CONTROL DEBUG 1-2-16 checkpoint #12 reached");
     // This is the list of results, as mentioned above.
     var list = [];
     // The default direction is always relevant.
@@ -76,12 +82,15 @@ KCKSentence.prototype.each_kernel = function (method) {
     // We only call the method on the right kernel
     // (right is currently the non default direction)
     // if it exists.
+    console.log("DAMAGE CONTROL DEBUG 1-2-16 checkpoint #14 reached");
     if (this.sentence[non_default_direction]) {
+        console.log("DAMAGE CONTROL DEBUG 1-2-16 checkpoint #15 reached");
         list.push(method(
             this.sentence[non_default_direction]).apply(
                 null, args_to_pass_in));
     }
     // Return the list of results.
+    console.log("DAMAGE CONTROL DEBUG 1-2-16 checkpoint #13 reached");
     return list;
 }
 
@@ -315,9 +324,12 @@ KCKSentence.prototype.get_conjunction_drop_and_non_drop = function (language) {
 
 // This method gets all drop-downs and non-drop-downs from the sentence.
 KCKSentence.prototype.get_all_drops_and_non_drops = function (kck_level, language) {
+    console.log("DEBUG 1-2-16 checkpoint #8 reached");
     var drop_and_non_drop_lists = this.each_kernel(
         'get_all_drops_and_non_drops', kck_level, language, this.chosen_lexemes);
     var len = drop_and_non_drop_lists.length;
+    
+    console.log("DEBUG 1-2-16 checkpoint #9 reached");
     if (len === 1) {
          return drop_and_non_drop_lists[0];
     } else if (len === 2) {
