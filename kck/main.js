@@ -9,9 +9,15 @@ var generate_sentence = function (source, target, kck_level, drop_extra_level) {
     var success = false;
     while (!success) {
         // We make a random sentence.
-        console.log("DAMAGE CONTROL DEBUG 1-1-16 checkpoint #3 about to make random_sentence");
+        // console.log("DEBUG NO VERB IN 10-2-16 checkpoint #3 about to make random_sentence");
+        
+        
         var sentence = make_random_sentence(kck_level);
-        console.log("DAMAGE CONTROL DEBUG 1-1-16 checkpoint #4 done making random sentence");
+        
+        
+        // console.log("DEBUG NO VERB IN 10-2-16 checkpoint #4 done making random sentence");
+        
+        
         // We remove the (basicly nonexistant) dummy clause from the sentence
         // if it is a single clause.
         if (sentence.is_single_clause()) {

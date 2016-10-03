@@ -18,7 +18,8 @@ var create_menu = function (path, data, callback) {
         return li;
     } else if (Array.isArray(data)) {
         ul = document.createElement('ul');
-        //todo Akiva damage control AKiva added this for cosmetic reasons check if ok
+        //todo Akiva damage control AKiva added this for cosmetic reasons (to adjust the css settings for the drop down)
+        //check if ok
         ul.className = 'kck_drop';
         //end Akiva damage control
         var item;

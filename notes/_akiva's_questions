@@ -1,7 +1,13 @@
+SCHEDULE
+need to do: inflect
+review: drop down
+that brings me up to kck > utils
+
+
 DAMAGE CONTROL
 akiva has modified
-kck_mode
-new_sentence_tree_generator
+
+
 
 
 CHORE-FRIENDLY BASICS
@@ -59,6 +65,13 @@ LOW PRIORITY QUESTIONS
     - var same_last_answer = false;
     - is it just a not yet implemented functionality?
     
+BLACK BOXES
+drop_display_level_accessors
+most of drop_down folder in kck needs deep review by Akiva
+
+SLIGHT COMMENTING WOULD BE HELPFUL
+drop_display_utils.js
+
 
 
 CURRENT FILE UNDER REVIEW
@@ -98,10 +111,14 @@ WTF
 - kck > allowed > features_from_tf_code.js
 - kck > allowed > language_sorts.js
 - option_list_to_json.js (not sure where it is but it contains the var by_feature)
+- kck > lexeme > converted_lexeme_list (what the hell is the syntax here?)
+
+
 
 GLOBAL VARIABLES
 red_herring
 lexeme_constraints
+
 
 
 FILES THAT ARE MOSTLY DATA (possibly move to a single data folder)
