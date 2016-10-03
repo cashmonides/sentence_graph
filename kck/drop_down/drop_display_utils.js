@@ -6,7 +6,7 @@ var create_menu = function (path, data, callback) {
     if (typeof data === 'string') {
         div = document.createElement('div');
         //todo Akiva damage control AKiva added this for cosmetic reasons check if ok
-        div.className = 'kck_string';
+        div.className = 'kck_string'; //i.e. the display header
         //end Akiva damage control
         div.innerHTML = data;
         div.onclick = function () {
@@ -32,6 +32,7 @@ var create_menu = function (path, data, callback) {
                 div = document.createElement('div');
                 div.innerHTML = name;
                 li = document.createElement('li');
+                
                 li.appendChild(div);
                 li.appendChild(create_menu(
                     path.concat([name]), item[1], callback));

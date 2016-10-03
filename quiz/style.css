@@ -28,37 +28,68 @@ body {
 }
 
 
-.kck_string {
 
+/*is this just the display header???*/
+.kck_string {
+    font-size: 15px;
+    color: grey;
     
+}
+
+/*this has something also to do with the display header - perhaps the div it's contained in*/
+.kck_string_div {
+    /*font-size: 200px*/
 }
 
 /*.kck_drop:hover {*/
 /*}*/
 
+/*this presumably refers to the entire drop down menu*/
 .kck_drop {
-    /*position: relative;*/
-    /*absolute makes everything collapse on itself*/
-    /*position: absolute;  */
-    position: static; 
     /*z-index:589;*/
-    float:left;
+    
     /*top:100%;*/
     /*top:auto;*/
     /*bottom:auto;*/
     /*bottom:-10px;*/
     /*list-style:none;*/
     /*margin:20px 0;*/
-    transition: .5s;
     
- /*   float: left;*/
-	/*position: relative;*/
+ 
+	
 	/*width: 150px;*/
 	/*list-style: none;*/
 	/*-webkit-transition: .5s;*/
 	/*transition: .5s;*/
+	/* width doesn't seem to matter so far*/
+	
+	float:left;
+	transition: 3s;
+	
+	/*RESOLVED PROBLEMS BELOW*/
+	
+	
+	
+	/*IN PROGRESS PROBLEMS BELOW*/
+	/*font-size does not control the font-size of the display headers so we need another solution*/
+	/*font-size: 500px; don't use doesnt work*/
+	
+	
+	/*UNRESOLVED PROBLEMS BELOW*/
+	
+	/*addressing the dropup problem*/
+	/*position: relative;*/
+    /*absolute is kind-of good - it does make them drop down */
+    /*but problematic beccause it collapses them in the horizontal dimension*/
+    /*position: absolute;  */
+    /*position: static; */
+    /*position:fixed;*/
+    /*position:initial;*/
+    /*position:inherit;*/
+	
 }
 
+/*this refers to the actual items in the path of the drop down*/
 .kck_drop li {
     /*float:left;*/
     /*height:10px;*/
@@ -66,7 +97,80 @@ body {
     /*margin-right:36px;*/
     /*vertical-align:middle;*/
     /*vertical-align:top;*/
-    vertical-align:bottom;
+    /*vertical-align:bottom;*/
+    
+    /*RESOLVED PROBLEMS BELOW*/
+    
+    /* need width to be wide enough to accomodate long verbs 200 px seems to work*/
+    /*careful! if it's too wide it forces paths to shift to the left and very annoying*/
+    /* conntrolling by % width doesn't seem to work
+    /*height should not be adjusted, doesnt seem to help*/
+    width: 100px;
+    
+    /*exploring min-width*/
+    min-width: 200px;
+    
+    
+    /*______font-size______*/
+    font-size: 20px;
+    color: green;
+    
+    
+    /*IN PROGRESS PROBLEMS BELOW*/
+    
+    
+    
+    /*UNRESOLVED PROBLEMS BELOW*/
+    
+    /*__________transition time_______*/
+    /*transition time of the drop down is clearly not controlled here*/
+    /*transition: 30s; no effect*/
+    
+    /*addressing the dropping up issue*/
+    /*visibility: hidden; does not work*/
+    /*absolute seems to clump everything vertically*/
+    /*position: absolute; */
+    /*relative (with nothing in kck_drop) just makes it go uop*/
+    position: relative;
+    
+    /*position: static; */
+    
+    /*
+    some combos that don't work
+    upper relative lower absolute
+    upper static lower relative = drops up
+    upper relative lower relative = drops up
+    upper fixed lower relative = overlapping
+    upper initial and inherit don't seem to work
+    */
+    
+    /*
+    possibly works: 
+    upper absolute lower relative (drops down but smushes horizontally)
+    */
+    
+}
+
+
+
+
+/*this controls the actual text of the drop downs*/
+#drop_downs {
+    /*border: solid 1px black;*/
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 20px;
+    /*color: red;*/
+    font-size:20px;
+    
+
+}
+
+
+
+/*I can't figure out how focus works but it might be useful*/
+.focus {
+    /*font-size:100px;*/
 }
 
 #header {
@@ -195,14 +299,7 @@ body {
     /*color: red;*/
 }
 
-#drop_downs {
-    /*border: solid 1px black;*/
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 20px;
-    /*color: red;*/
 
-}
 
 
 #input_box
