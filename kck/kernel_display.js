@@ -108,10 +108,13 @@ Kernel.prototype.get_verb_json_options = function (
     // Get the current value of allowed
     // (that is, the value at the current level).
     var current_module = get_current_module(kck_level);
+    // Get the terminology transformer.
+    var transform_all_terminology = get_terminology_transformer(kck_level);
     // Create the list of options and then join them.
     var options = get_drop_down_options(
         language, current_module, verb_lexeme_options, this,
-        verb.get_property_in_language('regime', language));
+        verb.get_property_in_language('regime', language),
+        transform_all_terminology);
     // Initialize the regime.
     var regime = verb.get_property_in_language('regime', language);
     // Find what to leave out.
@@ -125,8 +128,8 @@ Kernel.prototype.get_verb_json_options = function (
     // Get the dropdown path from the module.
     var drop_down_path = get_current_module(kck_level).drop_down_path;
     var json_options = option_list_to_json(
-        options, drop_down_path,
-        overall_ordering_preference, language_sorts[language], leave_out);
+        options, drop_down_path, overall_ordering_preference,
+        language_sorts[language], leave_out);
     return json_options;
 }
 
@@ -160,6 +163,9 @@ Kernel.prototype.get_verb_drop_and_non_drop = function (
 Kernel.prototype.get_verb_translation_and_path = function (kck_level, language) {
     // Get the verb component.
     var verb = this.get_verb();
+    var feature_dictionary = verb.get_verb_features(language);
+    var correct_terminology_feature_dictionary =
+    get_terminology_transformer(kck_level)(feature_dictionary);
     // Get the translation of the verb in the language.
     var translation = verb.form[language];
     // Create an empty path (to be pushed to).
@@ -181,17 +187,7 @@ Kernel.prototype.get_verb_translation_and_path = function (kck_level, language) 
         if (option in options_to_leave_out) {
             continue;
         }
-        // For each option, if it is 'lexeme', push the verb's lexeme:
-        // otherwise, push that property of the verb.
-        // (lexeme is not stored as a property.)
-        if (option === 'lexeme') {
-            // Push the name of the lexeme in the language.
-            path.push(verb.lexeme.get_language_dependent_property(
-                'citation_form', language));
-        } else {
-            // Get the property and push it.
-            path.push(verb.get_property_in_language(option, language));
-        }
+        path.push(correct_terminology_feature_dictionary[option]);
     }
     // Push the translation to the path.
     path.push(translation);

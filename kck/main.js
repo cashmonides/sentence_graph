@@ -18,14 +18,17 @@ var generate_sentence = function (source, target, kck_level, drop_extra_level) {
         // console.log("DEBUG NO VERB IN 10-2-16 checkpoint #4 done making random sentence");
         
         
-        // We remove the (basicly nonexistant) dummy clause from the sentence
-        // if it is a single clause.
+        // if we detect a null_conjunction
+        // We remove the (basically nonexistant) dummy clause from the sentence
         if (sentence.is_single_clause()) {
             sentence.sentence[non_default_direction] = null;
         }
         // We add the determined properties.
         sentence.add_determined_properties();
         // We determine sequence.
+        // i.e. check whether the conjunction requires sequence to match
+        // if so we pick a random sequence and set it for both sides
+        // if not we pick a random sequence for each side
         sentence.determine_sequence(kck_level);
         // We make whatever random choices we have to (including tense).
         sentence.add_random_properties(kck_level);

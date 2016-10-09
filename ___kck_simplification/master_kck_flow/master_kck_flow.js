@@ -16,10 +16,6 @@ var expand_conj = function (kck_level) {
     return new Conjunction(key);
 }
 
-// This function finds the index of a conjunction (c) in a seed.
-var find_conjunction_index = function (seed) {
-    return seed.indexOf('c');
-}
 
 // This function makes a random sentence.
 var make_random_sentence = function (kck_level) {
@@ -50,25 +46,3 @@ var make_random_sentence = function (kck_level) {
         'right': kernel_constructor(conjunction, 'right', null, kck_level)
     });
 }
-
-// This function checks whether its input is a direction.
-// It is used for error-checking.
-var check_is_direction = function (direction) {
-    // left and right are the only legal directions.
-    if (direction !== 'left' && direction !== 'right') {
-        throw 'Expected a direction but got ' + JSON.stringify(direction);
-    }
-}
-
-// Our default direction is left.
-// This comes into play when we make a main clause,
-// in which case it is considered to be on the left of a null conjunction.
-var default_direction = 'left';
-
-// Our non-default direction is right.
-// This is simple the direction other than our default direction.
-var non_default_direction = 'right';
-
-// Our directions are left and right.
-// we need to declare this because we will be iterating over this list
-var directions = ['left', 'right'];

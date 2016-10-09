@@ -106,6 +106,7 @@ Quiz.prototype.start = function() {
     Sentence.get_all_sentences(function (ss) {
         self.sentences = ss.filter(function (sentence) {
             var language = sentence.language_of_sentence;
+            console.log("DEBUG 10-9-16 self.module = ", self.module);
             var sentence_levels = self.module.sentence_levels;
             return language in sentence_levels &&
             sentence.difficulty_level <= sentence_levels[language];

@@ -1,4 +1,5 @@
-// Creates a nested drop down menu where terminal strings are clickable
+// Creates a nested drop down menu where terminal strings are clickable.
+// tags: @dropdown, @html, @creation, @tagged
 var create_menu = function (path, data, callback) {
     var div;
     var li;
@@ -43,7 +44,9 @@ var create_menu = function (path, data, callback) {
         }
         return ul;
     } else {
-        throw 'Bad data: ' + JSON.stringify(data);
+        throw 'Bad data in menu creation: ' + JSON.stringify(data) +
+        ' This data is neither a string nor an array, ' +
+        'and it should be one or the other.';
     }
 }
 

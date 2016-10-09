@@ -1,5 +1,5 @@
 var etym_levels = {
-    1 : {
+    10 : {
         roots: ['CARN', 'HERBI', 'OMNI', 'VOR/VOUR'],
         question_types: {
             'word_to_latin_root': 1,

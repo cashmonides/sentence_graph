@@ -309,6 +309,12 @@ KCKModeGame.prototype.display_give_away_answer = function () {
 KCKModeGame.prototype.display_green_and_red_path = function (statuses) {
     var o = el('feedbackbox');
     remove_all_children(o);
+    var question_as_string_for_path = this.question;
+    console.log("DEBUG question_as_string_for_path =", question_as_string_for_path);
+    o.appendChild(document.createTextNode(question_as_string_for_path));
+    o.appendChild(document.createElement('br'));
+    o.appendChild(document.createElement('br'));
+    
     var status;
     var e;
     for (var i = 0; i < statuses.length; i++) {
@@ -325,6 +331,7 @@ KCKModeGame.prototype.display_green_and_red_path = function (statuses) {
         }
         o.appendChild(e);
     }
+    
 }
 
 

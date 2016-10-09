@@ -10,7 +10,7 @@ var get_person_number_combinations = function (allowed) {
 // Gets options for drop downs.
 // Does not choose lexemes to be used.
 var get_drop_down_options = function (
-    language, allowed, lexemes, kernel, regime) {
+    language, allowed, lexemes, kernel, regime, transform_all_terminology) {
     // Check that our supposed kernel is a kernel.
     if (!(kernel instanceof Kernel)) {
         throw JSON.stringify(kernel) + ' is not a kernel!';
@@ -39,14 +39,16 @@ var get_drop_down_options = function (
             tf_option, person_number_combination) {
             // Make a function translation_and_features_from
             // to avoid too much ugliness.
-            var options = translation_and_features_from(
+            var option = translation_and_features_from(
                 language, lexeme, tf_option, person_number_combination, allowed);
             // Hacky way to handle verbs where the translation
             // depends on transitivity.
-            if (typeof options[0] === 'object') {
-                options[0] = options[0][transitivity];
+            if (typeof option[0] === 'object') {
+                option[0] = option[0][transitivity];
             }
-            return options;
+            // Here we transform the terminology in the features dictionary.
+            // tags: @transform, @terminology, @tagged, @dropdown
+            return [option[0], transform_all_terminology(option[1])];
         });
     });
     console.log(result);
@@ -54,6 +56,7 @@ var get_drop_down_options = function (
     return result;
 }
 
+// tags: @dropdown, @option, @translation, @tagged, @uncommented
 var translation_and_features_from = function (
     language, lexeme, tf_option, person_number_combination, allowed) {
     var tf_text = tf_option.text;
@@ -62,7 +65,8 @@ var translation_and_features_from = function (
         'voice': get_voice_from_tf_option(tf_option),
         'lexeme': lexeme.get_language_dependent_property(
             'citation_form', language),
-        'person_and_number': person_number_combination
+        'person_and_number': person_number_combination,
+        'regime': regime
     };
     var item;
     for (var i = 0; i < features_from_tf.length; i++) {

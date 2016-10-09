@@ -270,6 +270,16 @@ Kernel.prototype.inflect_all_components_in = function (language) {
     }
 }
 
+// Combine a tense and voice.
+var combine_tense_and_voice = function (tense, voice) {
+    var tense_already_has_voice = /active|passive/.exec(tense);
+    if (tense_already_has_voice) {
+        return tense;
+    } else {
+        return tense + ' ' + voice;
+    }
+}
+
 // This is maybe over-specific to nouns.
 Kernel.prototype.check_for_no_ambiguity = function (source) {
     var ambiguous = possibly_ambiguous_tenses[source];
@@ -281,16 +291,16 @@ Kernel.prototype.check_for_no_ambiguity = function (source) {
         'person_and_number');
     var lexeme = verb.lexeme;
     var tense = verb.get_property_in_language('tense_and_mood', source);
-    console.log(tense, source);
+    // console.log(tense, source);
     var voice = verb.get_language_independent_property('voice');
     var translator = tf_to_translations[source];
     var translation = translator(
-        lexeme, tense + ' ' + voice, person_and_number);
+        lexeme, combine_tense_and_voice(tense, voice), person_and_number);
     return ambiguous.every(function (tense_list) {
         return tense_list.indexOf(tense) === -1 ||
         tense_list.every(function (other_tense) {
             return other_tense === tense || translator(lexeme, 
-                other_tense + ' ' + voice,
+                combine_tense_and_voice(other_tense, voice),
                 person_and_number
             ) !== translation;
         });

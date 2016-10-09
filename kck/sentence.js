@@ -266,6 +266,7 @@ KCKSentence.prototype.determine_sequence = function (kck_level) {
     // Get the allowed sequences.
     var sequences = get_current_module(kck_level).sequence;
     // Check if the sentence requires the same sequence on both sides.
+    // so far we only say that subordinating conjunctions require same sequence on both side
     if (this.has_same_sequence_on_both_sides()) {
         // If so, choose a master sequence.
         var sequence = random_choice(sequences);

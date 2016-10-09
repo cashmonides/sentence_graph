@@ -225,44 +225,44 @@ var master_features_from_tf_dictionary = {
         },
         "purpose": {
             "may verb": {
-                "time": "may...",
+                "time": "may time",
                 "sequence": "primary",
                 "tense_and_mood": "may tense"
             },
             "might verb": {
-                "time": "might...",
+                "time": "might time",
                 "sequence": "secondary",
                 "tense_and_mood": "might tense"
             },
             "may be verbed": {
-                "time": "may...",
+                "time": "may time",
                 "sequence": "primary",
                 "tense_and_mood": "may tense"
             },
             "might be verbed": {
-                "time": "might...",
+                "time": "might time",
                 "sequence": "primary",
                 "tense_and_mood": "might tense"
             }
         },
         "independent subjunctive": {
             "can verb": {
-                "time": "can...",
+                "time": "can time",
                 "sequence": "primary",
                 "tense_and_mood": "can tense"
             },
             "could verb": {
-                "time": "could...",
+                "time": "could time",
                 "sequence": "secondary",
                 "tense_and_mood": "could tense"
             },
             "can be verbed": {
-                "time": "can...",
+                "time": "can time",
                 "sequence": "primary",
                 "tense_and_mood": "can tense"
             },
             "could be verbed": {
-                "time": "could...",
+                "time": "could time",
                 "sequence": "secondary",
                 "tense_and_mood": "could tense"
             }

@@ -12,22 +12,22 @@ var tense_maps = {
             'perfect indicative: preterite',
             'pluperfect indicative: pluperfect'
         ],
-        'can...': [
+        'can tense': [
             'present subjunctive: can tense'
         ],
-        'could...': [
+        'could tense': [
             'imperfect subjunctive: could tense'
         ],
-        'may...': [
+        'may tense': [
             'present subjunctive: may tense'
         ],
-        'might...': [
+        'might tense': [
             'imperfect subjunctive: might tense'
         ],
-        'conditional should...': [
+        'conditional should tense': [
             'present subjunctive: future indicative'
         ],
-        'conditional would...': [
+        'conditional would tense': [
             'imperfect subjunctive: would tense continuous',
             'pluperfect indicative: would tense perfect'
         ]

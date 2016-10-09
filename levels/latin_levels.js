@@ -1,6 +1,8 @@
 var latin_levels = {
     
     //starting level
+    // present tense only
+    // 3s explicit only
     1 : {
         clause_type : ["main"],
         sequence: {
@@ -29,10 +31,9 @@ var latin_levels = {
         genitive_scramble: false
     },
     
-    
+    // adding 3p to 3s
     //present tense only
-    //singular only
-    //no verb drop and only present
+    // explicit 3s and 3p
     10 : {
         clause_type : ["main"],
         sequence: {

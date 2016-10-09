@@ -152,3 +152,21 @@ Component.prototype.after_random_properties = function (kck_level) {
         return false;
     }
 }
+
+// Get verb features from the component.
+Component.prototype.get_verb_features = function (language) {
+    var verb_features_list = ['voice', 'lexeme', 'person_and_number', 'regime'].concat(
+        features_from_tf);
+    var verb_features = {};
+    for (var i = 0; i < verb_features_list.length; i++) {
+        var feature = verb_features_list[i];
+        if (feature === 'lexeme') {
+            // Push the name of the lexeme in the language.
+            verb_features[feature] = this.lexeme.get_language_dependent_property(
+                'citation_form', language);
+        } else {
+            verb_features[feature] = this.get_property_in_language(feature, language);
+        }
+    }
+    return verb_features;
+}

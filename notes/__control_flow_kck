@@ -1,3 +1,86 @@
+some conventions:
+default direction is left (i.e. a null conjunction produces the left kernel and kills the right kernel)
+removable (true || null ) in conjunction library refers to whether a clause can be removed, 
+    - e.g. clamabat sed... (sed can be removed)
+    - but iubebat ut... (ut can't be removed)
+    - full list:
+        indirect command
+        fear
+        why (and all indirect questions)
+        conditionals
+
+
+
+___________CONTROL FLOW BELOW__________________
+
+main.js contains the master function generate sentence
+
+it's going to do a few things which in outline are this:
+
+-STEP 1 make a KCK
+    - pick and make a conjunction
+    - pick and make a left and right-hand side conjunction
+- STEP 2 delete right hand clause if necessary (main and indep. subj.)
+- STEP 3 add_determined_properties
+- STEP 4 determine_sequence
+- STEP 5 add_random_properties
+- STEP 6 choose random lexemes (arguments = kck_level, drop_extra_level)
+    we choose random lexemes in two places (I think)
+    checking for success at this stage
+- STEP 7 check for ambiguity
+- STEP 8 inflect all components
+- STEP 9 return sentence and (presumably) send to quiz and drop down and all that
+
+
+
+
+STEP 1
+
+
+main function (generate sentence) calls the following process in make_random_sentence
+
+a Conjunction object is chosen and created 
+    expand_conj (kck > kernel_utilities )
+    makes a random choice from allowed_conjunctions
+    console.log("BACKSTAGE LOG allowed conjunctions = ", conj_choices);
+    console.log("BACKSTAGE LOG chosen conjunction = ", key);
+
+using that Conjunction just created, we are going to create a new KCKSentence
+    but one important thing we need to know is the property clause_acts_as (noun, adverb, adjective, etc.)
+    this is passed to the left-hand kernel!!
+    i.e. it really means right_hand_clause_acts_as 
+    and the left hand kernel needs to know this info so it can have such behavior as follows:
+    if the left hand kernel is passive and the right_hand_clause_acts_as noun then the left hand verb must be transitive
+    the left hand kernel needs to know about the right hand kernel but not vice versa
+    
+to create a new KCKSentence we create a dictionary:
+    {
+    'conjunction': conjunction, (either an object or a string I'm not sure)
+    'left': kernel_constructor
+    'right': kernel_constructor
+    }
+    
+    
+this dictionary creates the right and left-hand kernel using the kernel constructor
+    arguments are: conjunction, direction, clause_acts_as (can be null), kck_level
+
+
+?????????????NOTE HERE ON KERNEL CONSTRUCTOR????????????
+
+So the end-result of STEP 1 is a KCKSentence
+
+
+
+________________________________________________
+
+
+role vs component
+
+the role creates the component
+
+
+________________________________________________
+
 
 
 a role_name is fed into the component constructor

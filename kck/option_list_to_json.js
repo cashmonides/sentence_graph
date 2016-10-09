@@ -1,11 +1,18 @@
+// This is the recursive drop down options function.
+// tags: @recursive, @terminology, @dropdown, @uncommented,
+// @tagged, @confusing
 var option_list_to_json = function (
     option_list, priorities, order_at_bottom_level, sorts, leave_out) {
     if (priorities.length === 0 && order_at_bottom_level.length === 0) {
         // if (option_list.length > 1) {
         //     throw 'More than one option: ' + JSON.stringify(option_list);
         // }
-        return option_list.map(function (x) {
-            return x[0];
+        // option_list is here a list of possible translations,
+        // each of which is a pair consisting of a translation and some data.
+        // We here need only the translation, not the data,
+        // so we only take the first item.
+        return option_list.map(function (i) {
+            return i[0];
         });
     }
     var current_feature;
@@ -44,6 +51,13 @@ var option_list_to_json = function (
         });
     } else {
         return key_value_pairs_in_order;
+        // If we did the below we would be transforming terminology
+        // at the last minute, which we can't do.
+        /*return key_value_pairs_in_order.map(function (x) {
+            // Make sure to transform the terminology heading
+            // that is the first item here.
+            return [transform_terminology(x[0]), x[1]];
+        });*/
     }
 };
 

@@ -4,9 +4,40 @@ review: drop down
 that brings me up to kck > utils
 
 
-DAMAGE CONTROL
-akiva has modified
 
+REVIEW IN DEPTH: 
+kernel.js
+role.js
+
+
+STUFF IN SENTENCE.JS THAT ARE UNCLEAR
+get_conjunction_drop_and_non_drop
+get_all_drops_and_non_drops
+
+
+CHECK
+are we doing c_null_main ever - add to module and see if it works
+
+
+NAMING
+- should we call all kck instances of sentence kcksentence?
+    - to avoid overlap with other uses of sentence
+
+IMPORTANT EXPLAIN
+what does this.each_kernel do? For instance in determine_sequence
+        e.g.
+            // Otherwise choose a random sequence on both sides.
+        this.each_kernel('adopt_random_sequence', sequences);
+
+
+EXPLAIN
+error catching mode
+    what is LEXEME_ERROR_CATCHING_MODE? what effect do the different options have
+    can we have a version that does this:
+        development:
+            shows backstage log and doesn't write to urgent error log
+        release:
+            hides backstage log and does write to urgent error log
 
 
 
@@ -27,6 +58,12 @@ RELATIVELY SIMPLE QUESTIONS
     - but what's an example of this? how is it used?
     - would it be e.g. animate.false?
 - walk me through a use of get_name for a lexeme
+- when do we use find_conjunction_index? (doesn't seem to be used anywhere)
+- is conjunction in kernel_utilities a string or an object?
+- should we make a backstage log when we return new KCKSentence?
+    - i.e. assign new KCKSentence to a variable
+    - console log that variable
+    - then return that variable?
 
 
 GO  INTO IN DEPTH BECAUSE IMPORTANT
@@ -64,6 +101,7 @@ LOW PRIORITY QUESTIONS
 - what is the point of this in kck > compare_path?
     - var same_last_answer = false;
     - is it just a not yet implemented functionality?
+    - is it when they answer the same thing twice in a row
     
 BLACK BOXES
 drop_display_level_accessors
@@ -82,7 +120,11 @@ FILES TO REVIEW FURTHER HIGH PRIORITY
 
 FILES TO REVIEW FURTHER MID PRIORITY
 - kck > conjunction_object.js
+- kck > sentence_display.js
 
+
+FILES THAT DON'T MAKE ANY SENSE
+kck > option_list_to_json.js
 
 FILES REVIEWED AND MORE OR LESS UNDERSTOOD
 kck > allowed (folder)
@@ -92,8 +134,10 @@ kck > compare_path.js
 kck > conjunction_library
 kck > conjunction_type
 kck > kernel_restrictions.js
-
-
+kck > kernel_utilities.js
+kck > language_library.js
+kck > main.js
+kck > nonexistant.js
 
 
 THINGS THAT NEED TO BE CHANGED WHEN NOUNS ARE ADDED
@@ -112,8 +156,9 @@ WTF
 - kck > allowed > language_sorts.js
 - option_list_to_json.js (not sure where it is but it contains the var by_feature)
 - kck > lexeme > converted_lexeme_list (what the hell is the syntax here?)
-
-
+- the whole point of NonexistantKey
+- why does this happen in rule.js?
+        get_non_operators_test();
 
 GLOBAL VARIABLES
 red_herring
@@ -129,10 +174,37 @@ kck > component > var role_to_part_of_speech_map
 
 FILES THAT ARE PERHAPS BETTER AS UTILS (possibly integrate into utils folder)
 var match_dicts (in kck > allowed > lexeme_constraints.js)
+check_is_direction should be a util, while the rest of kernel_utilities should be a master function
 
 
+FILES THAT MAYBE SHOULD BE CHANGED IN LOCATION
+make_random_sentence right now lives in kernel_utils but it really is part of the master control flow
+maybe there should be a master flow that contains all the big functions
+    pick and make conjunction
+    expand conjunction and create two kernels
+var default_direction etc. maybe should be stored in a global variables file    
 
 
 
 ARE THESE OBSOLETE?
 - entire cosmetics folder
+
+
+
+MAYBE MOVE TO GLOBALS
+- some of kernel_utilities
+- entire contents of language_library.js
+- we should probably redesign the following so that it's a global or data-driven
+        KCKSentence.prototype.has_same_sequence_on_both_sides = function () {
+            // Currently, only subordinate clauses require this.
+            return this.get_conjunction().get_type() === 'subordinating';
+        }
+
+
+
+A USEFUL KIND OF NOTE
+- an example of the output in sentence_display.js
+
+
+DESIGN ISSUES
+- maybe better to quarantine all drop-down decisions from the actual kernel and sentence generation

@@ -3,7 +3,7 @@ Agenda for future (made in mid-september 2016)
 PREREQ
 
 
-seems to be fixed
+SEEMS TO BE FIXED
 - cosmetic: the one-option problem in medial drop down
     - when there's only one option, a nesting drop down level shouldn't be spawned, it should be skipped
     - e.g.:
@@ -12,18 +12,29 @@ seems to be fixed
     - we end up with a path like: command / love -> active -> 3s / 3p
     - we don't want the active drop down level to even start
 
+- fix: turn terminology display dictionary on DONE
 
-
-- bug: vocabulary cheat sheet is not functional in kck mode    
-
+NEEDS TO BE FIXED AS A PREREQ
+- fix: vocabulary cheat sheet is not functional in kck mode    
 
 - requisite functionality: dummy agreement marker
-    - solution: set subject gender as masculine upstream
+    - short term solution: set subject gender as masculine upstream
+    - long term solution: set gender based either on gender of noun 
+        or on some parameter set module-by-module e.g. subject_gender: ['masculine': 0.3, 'feminine': 0.3, 'neuter': 0.3]
+
+- potential issue: say vs speak in drop down heading
+
+- small thing: Weird tense: imperfect subjunctive of the active periphrastic active
+
+- small thing: full text of question should appear in the feedback box IN PROCESS
 
 
-- smallish bug: turn terminology display dictionary on
+SMALL SEMANTIC ISSUES
+vid-ēbā-tur cūr dīx-issē-t = he was being seen why he had spoken (not great)
 
-potential issue: say vs speak in drop down heading
+DESIDERATA BEFORE NOUNS
+
+- root, middle, ending in drop_down_path
 
 
 NOT REQUIRED FOR MVP

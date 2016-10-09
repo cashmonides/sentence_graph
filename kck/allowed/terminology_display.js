@@ -8,8 +8,8 @@ var terminology_display_dictionary = {
         'basic': 'subject',
         //its default if advanced is true is the follow
         'advanced': 'nominative',
-        //
-        'translation_formula': 'subject'
+        // no plans to implement translation formula exist
+        // 'translation_formula': 'subject'
     },
     'genitive': {
         'basic': '\'of\'',
@@ -27,7 +27,7 @@ var terminology_display_dictionary = {
     'present indicative': {
         'basic': 'present',
         'advanced': 'present indicative'
-        },
+    },
     'imperfect indicative': {
         'basic': 'past (repeatedly)',
         'advanced': 'imperfect indicative'
@@ -51,131 +51,78 @@ var terminology_display_dictionary = {
     'pluperfect subjunctive': {
         'basic': 'prior time subjunctive 2nd degree',
         'advanced': 'pluperfect subjunctive',
-        'translation_formula': 'no translation formula'
+        // 'translation_formula': 'no translation formula'
     },
     //sequence
-    'primary sequence': '1st degree',
-    'secondary sequence': '2nd degree',
+    'primary': {
+        'basic': '1st degree',
+        'advanced': 'primary sequence'
+    },
+    'secondary': {
+        'basic': '2nd degree',
+        'advanced': 'secondary sequence'
+    },
     //english verb tenses
-    'preterite': 'past (once)',
-    'pluperfect': 'had...', 
-    'past continuous': 'was...-ing', 
-    'future perfect': 'will have...-ed', 
+    'preterite': 'VERBed (once)',
+    'pluperfect': 'had VERBed', 
+    'past continuous': 'was VERBing', 
+    'future perfect': 'will have VERBed', 
     'present subjunctive': 'present subjunctive???', 
-    'may tense': 'may...', 
-    'might tense': 'might...', 
-    'can tense': 'can...', 
-    'could tense': 'could...', 
-    'should tense': 'should...', 
-    'would tense': 'would...', 
-    'would tense continuous': 'would be...', 
-    'would tense perfect': 'would have...',
-    
-    
-    
+    'may time': 'may VERB', 
+    'might time': 'might VERB',
+    'can time': 'can VERB', 
+    'could time': 'could VERB',
+    'may tense': 'may VERB', 
+    'might tense': 'might VERB', 
+    'can tense': 'can VERB', 
+    'could tense': 'could VERB', 
+    'should tense': 'should VERB', 
+    'would tense': 'would VERB', 
+    'would tense continuous': 'would be VERBing', 
+    'would tense perfect': 'would have VERBed',
+    'prior': {
+        'regime.relative|subjunctive': {
+            'basic': 'prior',
+            'advanced': 'prior'
+        },
+        'regime.absolute|indicative': {
+            'basic': 'past',
+            'advanced': 'past'
+        },
+        'default': 'If you see this, tell your teacher!'
+    },
+    'simultaneous': {
+        'regime.relative|subjunctive': {
+            'basic': 'same-time',
+            'advanced': 'simultaneous'
+        },
+        'regime.absolute|indicative': {
+            'basic': 'present',
+            'advanced': 'present'
+        },
+        'default': 'If you see this, tell your teacher!'
+    },
     'subsequent': {
-            'regime.relative': {
+            'regime.relative|subjunctive': {
                 'basic': 'subsequent',
                 'advanced': 'subsequent',
-                'translation_formula': {
+                /*'translation_formula': {
                     'sequence.primary': 'will VERB',
-                    'sequence.secondary' 'would VERB'
-                }
+                    'sequence.secondary': 'would VERB'
+                }*/
             },
-            'regime.absolute': {
+            'regime.absolute|indicative': {
                 'basic': 'future',
                 'advanced': 'future',
-                'translation_formula': {
+                /*'translation_formula': {
                     'sequence.primary': 'will VERB',
-                    'sequence.secondary' 'will VERB'
-                }
+                    'sequence.secondary': 'will VERB'
+                }*/
             },
-    },
-   
-   
-   
-    
+            'default': 'If you see this, tell your teacher!'
+    }
 }
 
 
 
-// below was an attempt that put advanced and basic into separate dictionaries
-// but it seemed easier to keep them all in one dictionary as above
-var advanced_terminology_display_obsolete = {
-    //latin cases
-    'nominative': 'nominative',
-    'genitive': 'genitive',
-    'dative': 'dative',
-    'accusative': 'accusative',
-    'ablative': 'ablative',
-    //latin verb tenses
-    'present indicative': 'present indicative',
-    'imperfect indicative': 'imperfect indicative',
-    'future indicative': 'future indicative',
-    'perfect indicative': 'perfect indicative',
-    'pluperfect indicative': 'pluperfect indicative',
-    'future perfect indicative': 'future perfect indicative',
-    'present subjunctive': 'present subjunctive',
-    'imperfect subjunctive': 'imperfect subjunctive',
-    'perfect subjunctive': 'perfect subjunctive',
-    'pluperfect subjunctive': 'pluperfect subjunctive',
-    //sequence
-    'primary sequence': 'primary sequence',
-    'secondary sequence': 'secondary sequence',
-    //english verb tenses
-    'preterite': 'preterite',
-    'pluperfect': 'pluperfect', 
-    'past continuous': 'past continuous', 
-    'future perfect': 'future perfect', 
-    'present subjunctive': 'present subjunctive', 
-    'may tense': 'may...', 
-    'might tense': 'might...', 
-    'can tense': 'can...', 
-    'could tense': 'could...', 
-    'should tense': 'should...', 
-    'would tense': 'would...', 
-    'would tense continuous': 'would be...', 
-    'would tense perfect': 'would have...'
-    
-    
-    
-    
-    
-}
 
-var basic_terminology_display_obsolete = {
-    //latin cases
-    'nominative': 'subject',
-    'genitive': '\'of\'',
-    'dative': '\'to\'',
-    'accusative': 'object',
-    'ablative': '\'with/by\'',
-    //latin verb tenses
-    'present indicative': 'present',
-    'imperfect indicative': 'past (repeatedly)',
-    'future indicative': 'future',
-    'perfect indicative': 'past (once)',
-    'pluperfect indicative': 'had...',
-    'future perfect indicative': 'will have...',
-    'present subjunctive': 'same time subjunctive 1st degree',
-    'imperfect subjunctive': 'same time subjunctive 2nd degree',
-    'perfect subjunctive': 'prior time subjunctive 1st degree',
-    'pluperfect subjunctive': 'prior time subjunctive 2nd degree',
-    //sequence
-    'primary sequence': '1st degree',
-    'secondary sequence': 'e2nd degre',
-    //english verb tenses
-    'preterite': 'past (once)',
-    'pluperfect': 'had...', 
-    'past continuous': 'was...-ing', 
-    'future perfect': 'will have...-ed', 
-    'present subjunctive': 'present subjunctive???', 
-    'may tense': 'may...', 
-    'might tense': 'might...', 
-    'can tense': 'can...', 
-    'could tense': 'could...', 
-    'should tense': 'should...', 
-    'would tense': 'would...', 
-    'would tense continuous': 'would be...', 
-    'would tense perfect': 'would have...'
-}
