@@ -19,6 +19,9 @@ step 3 possibly
     
     
 step 4
+
+
+
     
 PREREQ
 
@@ -40,7 +43,10 @@ SEEMS TO BE FIXED
 
 
 NEEDS TO BE FIXED AS A PREREQ
-  
+
+- crucial bugs: present subjunctive???? is still there  
+
+
 
 - requisite functionality: dummy agreement marker
     - short term solution: set subject gender as masculine upstream
@@ -68,13 +74,13 @@ CHORES
 - add lots of verb lexemes
 - make cheat_sheets (verb charts) for the new conjunctions (e.g. ut = that/in order that)
 - add lots of lexemes to mcmode (to stall the students)
-
+- add metacharacters to dashes
 
 COSMETICS
 
 - feedback box could be a better
     - green and red path should not show the final string perhaps, just the path elements that are wrong
-    
+- drop down on mouseleave switches to fast  DONE
 
 AS CONTROL FLOW MAPPING TASK
 - implement indirect statement conjunction without nouns

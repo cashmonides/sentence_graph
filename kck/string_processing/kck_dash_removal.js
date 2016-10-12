@@ -90,7 +90,9 @@ var metacharacter_replacement_dictionary = {
 
 
 var remove_dashes_and_metacharacters = function (input) {
-    return remove_metacharacters(remove_dashes(input));
+    // return remove_metacharacters(remove_dashes(input));
+    console.log("remove_dashes_disabled_until_fixed");
+    return input;
 }
 
 var tr = function (input, dict) {

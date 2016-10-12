@@ -39,10 +39,20 @@ DropDown.prototype.display_drop_down = function () {
         }
         self.display_header();
     });
+    var timeout_function;
     $(menu).menu();
     $(menu).mouseleave(function() {
-        self.display_header();
+        // below will make an immediate collapse of the drop down, makes it hard to navigate
+        // self.display_header();
+        //gives a delay - 1700 seems about right, not too fast not too slow
+        //but this doesn't work because it always closes even if you hover back in
+        timeout_function = setTimeout(function () {self.display_header();}, 1700);
     });
+    $(menu).mouseenter(function () {
+            // timeout_function = setTimeout(function () {self.display_header();}, 3000);
+            console.log("MOUSEENTER TRIGGERED");
+            clearTimeout(timeout_function);
+        })
     // Clear all the current children.
     this.clear_all_current_children();
     this.elem.appendChild(menu);
@@ -66,6 +76,22 @@ DropDown.prototype.display_header = function () {
     this.mode = 'text';
     this.create_text_div_from(this.header);
 }
+
+
+//ideally we create a function like the following
+// but not yet implemented
+DropDown.prototype.display_header_with_delay = function () {
+    this.elem_should_not_be_null();
+    this.mode = 'text';
+    this.create_text_div_from(this.header);
+    
+    //some logic like this
+    // if mouseover happens again we cancel the timeout
+    
+}
+
+
+
 
 DropDown.prototype.attach_to = function (elem) {
     this.elem = elem;
