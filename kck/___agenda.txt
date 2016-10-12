@@ -1,5 +1,25 @@
 Agenda for future (made in mid-september 2016)
 
+BIRD'S EYE AGENDA
+step 1
+    add lexemes and make levels
+    test kck mode
+    commit
+    test basic functionality after commiting
+    test SQL posting after commiting
+
+step 2
+    remove dashes
+    make cheat_sheet for dash removal
+    (use a paper handout/PDF cheat sheet for ambiguity)
+
+
+step 3 possibly
+    test Dan's ambiguity eliminator on undashed forms
+    
+    
+step 4
+    
 PREREQ
 
 
@@ -14,32 +34,61 @@ SEEMS TO BE FIXED
 
 - fix: turn terminology display dictionary on DONE
 
+- small thing: Weird tense: imperfect subjunctive of the active periphrastic active
+
+- fix: vocabulary cheat sheet is not functional in kck mode  
+
+
 NEEDS TO BE FIXED AS A PREREQ
-- fix: vocabulary cheat sheet is not functional in kck mode    
+  
 
 - requisite functionality: dummy agreement marker
     - short term solution: set subject gender as masculine upstream
     - long term solution: set gender based either on gender of noun 
         or on some parameter set module-by-module e.g. subject_gender: ['masculine': 0.3, 'feminine': 0.3, 'neuter': 0.3]
 
-- potential issue: say vs speak in drop down heading
+- potential issue: say vs speak in drop down heading PERHAPS DONE NEEDS CHECKING
 
-- small thing: Weird tense: imperfect subjunctive of the active periphrastic active
+- small thing: full text of question should appear in the feedback box DONE
 
-- small thing: full text of question should appear in the feedback box IN PROCESS
+- crucial: was verbing vs verbed needs to be either explained in paper handout/PDF cheat sheet or eliminated!!!!
 
 
-SMALL SEMANTIC ISSUES
-vid-ēbā-tur cūr dīx-issē-t = he was being seen why he had spoken (not great)
 
+    
 DESIDERATA BEFORE NOUNS
+- morphological elements in path name
+    - they were loving
+    - am / port / vor / port
+    - -> a / aba / abi / e / eba / ebi / e / ie / ia / are/ ere / ere
+    - -> o s t mus tis nt
 
-- root, middle, ending in drop_down_path
+
+CHORES
+- add lots of verb lexemes
+- make cheat_sheets (verb charts) for the new conjunctions (e.g. ut = that/in order that)
+- add lots of lexemes to mcmode (to stall the students)
 
 
-NOT REQUIRED FOR MVP
+COSMETICS
 
+- feedback box could be a better
+    - green and red path should not show the final string perhaps, just the path elements that are wrong
+    
+
+AS CONTROL FLOW MAPPING TASK
+- implement indirect statement conjunction without nouns
+    - use it as an opportunity to draw a control flow map between all the different tense maps and tense taxonomies
+    - produce a dummy version with no noun (just for testing)
+    
+    
+    
+AS DATA-LOGIC CONNECTION TASK
 - add to data: 2s, 3s, 3p etc. should have level specific terminology (you, he, they, etc. for more basic levels) 
+
+
+AS STRING PROCESSING TASK
+- figure out where in the control flow we should intervene to drop dashes
 
 - get a dashed version ready for release
 
@@ -47,6 +96,17 @@ NOT REQUIRED FOR MVP
     - adapt the old library for dash removal
     - set the parameter for dashes in modules
     - after dash removal, test ambiguity control
+
+
+
+SMALL SEMANTIC ISSUES
+vid-ēbā-tur cūr dīx-issē-t = he was being seen why he had spoken 
+    - (not great but we can fix when we do gender
+    - mental verbs that have a clause as the subject should be neuter
+
+NOT REQUIRED FOR MVP
+
+
 
 - ambiguity 
         - convergent ambiguity (two different paths have same terminal string)

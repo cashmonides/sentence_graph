@@ -140,6 +140,7 @@ Component.prototype.after_random_properties = function (kck_level) {
             // Otherwise, we want to hear
             // about this error, so rethrow the error.
             if (typeof e === 'string' && e.indexOf('tense error:') !== -1) {
+                console.log(e);
                 return e;
             } else {
                 throw e;

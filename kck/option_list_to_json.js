@@ -2,7 +2,8 @@
 // tags: @recursive, @terminology, @dropdown, @uncommented,
 // @tagged, @confusing
 var option_list_to_json = function (
-    option_list, priorities, order_at_bottom_level, sorts, leave_out) {
+    option_list, priorities, order_at_bottom_level, sorts, leave_out,
+    process_final_string) {
     if (priorities.length === 0 && order_at_bottom_level.length === 0) {
         // if (option_list.length > 1) {
         //     throw 'More than one option: ' + JSON.stringify(option_list);
@@ -12,7 +13,7 @@ var option_list_to_json = function (
         // We here need only the translation, not the data,
         // so we only take the first item.
         return option_list.map(function (i) {
-            return i[0];
+            return process_final_string(i[0]);
         });
     }
     var current_feature;
@@ -29,7 +30,8 @@ var option_list_to_json = function (
     }
     var recursive_call = function (x) {
         return option_list_to_json(
-            x, new_priorities, new_order_at_bottom_level, sorts, leave_out);
+            x, new_priorities, new_order_at_bottom_level, sorts, leave_out,
+            process_final_string);
     }
     if (current_feature in leave_out) {
         return recursive_call(option_list);

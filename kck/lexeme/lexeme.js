@@ -74,3 +74,8 @@ KCKLexeme.prototype.get_lexical_properties = function () {
         throw 'Lexeme ' + this.get_name() + ' is bad.';
     }
 }
+
+// Gets a citation form in a given language.
+KCKLexeme.prototype.get_citation_form_in = function (language) {
+    return this.get_language_dependent_property('citation_form', language);
+}

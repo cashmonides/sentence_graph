@@ -62,7 +62,27 @@ var tense_maps = {
         ],
         'subsequent subjunctive secondary': [
             'imperfect subjunctive of the active periphrastic'
+        ],
+        'simultaneous infinitive primary': [
+            'present infinitive primary'
+        ],
+        'subsequent infinitive primary': [
+            'future infinitive primary'
+        ],
+        'prior infinitive primary': [
+            'perfect infinitive primary'
         ]
+        /*
+        'simultaneous infinitive secondary': [
+            'present infinitive secondary'
+        ],
+        'subsequent infinitive secondary': [
+            'future infinitive secondary'
+        ],
+        'prior infinitive secondary': [
+            'perfect infinitive secondary'
+        ]
+        */
     },
     'ssslatin': {
         'simultaneous indicative': [
@@ -98,6 +118,9 @@ var tense_maps = {
     }
 }
 
+
+//seems to be: key is backstage meta-description of a verb
+// value is: list of universal tense names that match
 var tense_taxonomy = {
     'simultaneous indicative': [
         'present indicative'
@@ -132,12 +155,26 @@ var tense_taxonomy = {
     'subsequent subjunctive secondary': [
         'imperfect subjunctive of the active periphrastic'
     ],
-    'present infinitive': [
+    'simultaneous infinitive primary': [
+        'present infinitive'
+    ]
+    /*
+    'simultaneous infinitive secondary': [
         'present infinitive'
     ],
-    'perfect infinitive': [
+    'prior infinitive primary': [
         'perfect infinitive'
+    ],
+    'prior infinitive secondary': [
+        'perfect infinitive'
+    ],
+    'subsequent infinitive primary': [
+        'future infinitive'
+    ],
+    'subsequent infinitive secondary': [
+        'future infinitive'
     ]
+    */
 }
 
 // This map stores whether languages have moods.

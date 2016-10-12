@@ -12,7 +12,8 @@ Component.prototype.determine_tense = function (kck_level) {
         default_language.toLowerCase());
     // We check for the time_mood_sequence.
     if (!(time_mood_sequence in tense_taxonomy)) {
-        throw 'Weird time_mood_sequence: ' + time_mood_sequence;
+        throw 'Weird time_mood_sequence (not in the tense taxonomy): ' +
+        time_mood_sequence;
     }
     // We get a part of the tense taxonomy.
     var part_of_tense_taxonomy = tense_taxonomy[time_mood_sequence];

@@ -523,6 +523,49 @@ var conjunction_library = {
             ssslatin: null
         }
     },
+    /*
+    c_that_indirect_statement: {
+        type: "subordinating",
+        clause_acts_as: 'noun',
+        k_left_verb_regime: {
+            english: 'absolute',
+            latin: 'indicative',
+            ssslatin: 'indicative'
+        },
+        k_right_verb_regime: {
+            english: 'relative',
+            latin: 'subjunctive',
+            ssslatin: 'subjunctive'
+        },
+        english_form: 'that',
+        latin_form: 'I.S. THAT PLACEHOLDER',
+        ssslatin_form: 'sssI.S. THAT PLACEHOLDER',
+        removable: false,
+        k_left_construction: null,
+        k_right_construction: 'indirect statement',
+        k_left_lexical_restriction: 'mental verb',
+        k_left_mood_restriction: {
+            english: null,
+            latin: 'indicative', //reset when ready for indep. subjunctives introducing subordination
+            ssslatin: 'indicative' //reset when ready for indep. subjunctives introducing subordination
+        },
+        k_right_mood_restriction: {
+            english: null,
+            latin: 'infinitive',
+            ssslatin: 'infinitive'
+        },
+        k_left_time_restriction: {
+            english: null,
+            latin: null,
+            ssslatin: null
+        },
+        k_right_time_restriction: {
+            english: null,
+            latin: null,
+            ssslatin: null
+        }
+    },
+    */
     c_why: {
         type: "subordinating",
         clause_acts_as: 'noun',

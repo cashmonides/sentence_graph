@@ -125,11 +125,12 @@ Kernel.prototype.get_verb_json_options = function (
     if (!is_object(leave_out)) {
         throw 'leave_out is not an object: it is ' + JSON.stringify(leave_out);
     }
+    var process_final_string = remove_dashes_and_metacharacters;
     // Get the dropdown path from the module.
     var drop_down_path = get_current_module(kck_level).drop_down_path;
     var json_options = option_list_to_json(
         options, drop_down_path, overall_ordering_preference,
-        language_sorts[language], leave_out);
+        language_sorts[language], leave_out, process_final_string);
     return json_options;
 }
 

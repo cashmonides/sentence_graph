@@ -135,6 +135,10 @@ KCKSentence.prototype.display_verb_options = function (kck_level) {
 };
 
 // Should the many verb options be displayed?
+// Note: this was really only relevant in the olden days when
+// we used it to debug our sentences. It appears to control whether
+// the possible drop down options for the verbs show up.
+// tags: @boolean, @global, @confusing, @obsolete, @tagged
 var VERB_OPTIONS_DISPLAY = true;
 
 // This method displays the sentence.
@@ -153,7 +157,7 @@ KCKSentence.prototype.display = function (kck_level) {
     ];
     // Remove the verb options if they should not be displayed.
     if (!VERB_OPTIONS_DISPLAY) {
-       parts_of_display.pop() 
+       parts_of_display.pop();
     }
     // Join the parts of the display.
     return parts_of_display.join('\n\n');

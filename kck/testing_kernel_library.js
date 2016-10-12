@@ -753,7 +753,7 @@ var testing_lexemes = {
         //mental ditransitive with context-dependent translations
         speak: {
             core_properties: {
-                name: 'speak',
+                name: 'say/speak',
                 part_of_speech: 'verb',
                 transitivity: 'ditransitive',
                 lexical_properties: ['mental verb'],
@@ -772,7 +772,7 @@ var testing_lexemes = {
                 }
             },
             english: {
-                citation_form: 'say',
+                citation_form: 'say/speak',
                 roots: {
             		'transitive': {
             		    'default': 'say',

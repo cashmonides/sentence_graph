@@ -49,16 +49,20 @@ var get_latin_verb_1st_person_ending = function (component) {
     }
 };
 
-var get_latin_subject_number_from_verb = function (verb_component) {
-    var person_and_number = verb_component.get_property_in_language(
-        'person_and_number', 'latin');
+var get_latin_subject_number_from_person_and_number = function (person_and_number) {
     // The second character of the person and number is s or p,
     // corresponding to singular or plural.
     var initial_letter = person_and_number[1];
     return {
         's': 'singular',
         'p': 'plural'
-    }[initial];
+    }[initial_letter];
+}
+
+var get_latin_subject_number_from_verb = function (verb_component) {
+    var person_and_number = verb_component.get_property_in_language(
+        'person_and_number', 'latin');
+    return get_latin_subject_number_from_person_and_number(person_and_number);
 }
 // Done with the fake methods.
 
@@ -146,9 +150,25 @@ var get_end_inflection = function (component) {
 //     }
 // }
 
-// todo: fix dummy.
-var get_agreement_marker = function () {
-    return '[dummy agreement marker]'
+// This function gets the agreement marker.
+// todo: gender dependence
+var get_agreement_marker = function (subject_number, in_indirect_statement) {
+    var participle_case;
+    if (in_indirect_statement) {
+        participle_case = 'accusative';
+    } else {
+        participle_case = 'nominative';
+    }
+    // We have to avoid always using the masculine here.
+    return latin_noun_declining_dictionary['2m'][
+        subject_number][participle_case];
+}
+
+var get_agreement_marker_from_component = function (component) {
+    var subject_number = get_latin_subject_number_from_verb(component);
+    var in_indirect_statement = component.get_language_independent_property(
+        'construction') === 'indirect statement';
+    return get_agreement_marker(subject_number, in_indirect_statement);
 }
 
 var get_helping_verb = function (component) {
@@ -179,7 +199,8 @@ var latin_periphrastics = {
         var form_of_to_be = latin_form_of_to_be[
             [tense, mood, person_and_number].join(' ')];
         return component.lexeme.get_root('root_4', 'latin') + '-ūr-' +
-        get_agreement_marker(component) + ' ' + form_of_to_be;
+        get_agreement_marker_from_component(component) +
+        ' ' + form_of_to_be;
     },
     'passive': function (component) {
         var tense = get_latin_verb_tense(component);
@@ -189,8 +210,10 @@ var latin_periphrastics = {
             'person_and_number', 'latin');
         var form_of_to_be = latin_form_of_to_be[
             [tense, mood, person_and_number].join(' ')];
-        return component.lexeme.get_root('root_2', 'latin') + get_latin_root_vowel(component) + 'nd-' +
-        get_agreement_marker(component) + ' ' + form_of_to_be;
+        return component.lexeme.get_root('root_2', 'latin') +
+        get_latin_root_vowel(component) + 'nd-' +
+        get_agreement_marker_from_component(component) +
+        ' ' + form_of_to_be;
     },
 }
 
@@ -207,8 +230,8 @@ var inflect_latin_verb_main = function (component) {
     var voice = component.get_property_in_language('voice', 'latin');
     var inflected = {};
     if (in_perfect_system && voice === 'passive') {
-        inflected.verb = root + get_agreement_marker(component) + ' ' +
-        get_helping_verb(component);
+        inflected.verb = root + get_agreement_marker_from_component(
+            component) + ' ' + get_helping_verb(component);
     } else {
         var tense = get_latin_verb_tense(component);
         var mood = component.get_property_in_language('mood', 'latin');

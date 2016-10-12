@@ -6,12 +6,13 @@ var kck_levels = {
             'imperfect indicative'],
         'voice' : ['active', 'passive'],
         'person_and_number' : ['3s', '3p'],
-        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
-        'allowed_conjunctions': ['c_purpose', 'c_when', 'c_why'],
+        // 'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
+        'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
+        // 'allowed_conjunctions': ['c_purpose', 'c_when', 'c_why'],
         'red herring': 'false',
         'absolute-relative-split': 'on',
-        // 'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear'],
-        'allowed_verbs' : ['speak', 'attack'],
+        'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear'],
+        // 'allowed_verbs' : ['speak', 'attack'],
         'noun_switch' : false,
         'allowed_nouns': ['wolf'],
         'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
@@ -24,7 +25,8 @@ var kck_levels = {
         'target_language' : {'english': 1, 'latin': 0},
         // 'source_language' : {'english': 1, 'latin': 0},
         // 'target_language' : {'english': 0, 'latin': 1},
-        'terminology_display_dictionary': 'basic'
+        'terminology_display_dictionary': 'basic',
+        'verb_dashes_removed': false
     },
     '10': {
         'time': ['simultaneous', 'prior', 'subsequent'],
@@ -47,7 +49,8 @@ var kck_levels = {
         'source_language' : {'english': 1, 'latin': 0},
         'target_language' : {'english': 0, 'latin': 1},
         //setting for default display
-        'terminology_display_dictionary': 'basic'
+        'terminology_display_dictionary': 'basic',
+        'verb_dashes_removed': false
     },
     '20': {
         'time': ['simultaneous', 'prior', 'subsequent'],
@@ -70,6 +73,7 @@ var kck_levels = {
         'source_language' : {'english': 0.5, 'latin': 0.5},
         'target_language' : {'english': 0.5, 'latin': 0.5},
         //setting for default display
-        'terminology_display_dictionary': 'basic'
+        'terminology_display_dictionary': 'basic',
+        'verb_dashes_removed': false
     }
 }

@@ -84,8 +84,9 @@ KCKModeGame.prototype.next_question = function () {
     // todo is the following otiose?
     // this.sentence = data.sentence;              // text displayed in display box
     // this.target_indices = data.target_indices;      //highlighted word if necessary
-
-
+    
+    this.cheat_sheet = this.kck_cheat_sheet(sentence.chosen_lexemes);
+    /*
     // damage control begin: Akiva's attempts to console.log the vocab cheat sheet function
     console.log("DEBUG 9-30 about to make vocab_cheat_sheet = ");
     // below is the super hacky version that works but just gives lexeme objects:
@@ -99,6 +100,7 @@ KCKModeGame.prototype.next_question = function () {
     console.log("DEBUG 9-30 finished making kck_cheat_sheet with this.cheat_sheet = ", this.cheat_sheet);
     
     // damage control end
+    */
     
     //changes the score, progress bar, etc.
     this.quiz.update_display();
@@ -133,6 +135,10 @@ KCKModeGame.prototype.next_question = function () {
     
     // todo implement or find some method that does this
     this.correct_answer_as_string = sentence.translate_into(target_language);
+    
+    //implement this when ready
+    // if remove_verb_dashes = true
+    // this.correct_answer_as_string = remove_verb_dashes(this.correct_answer_as_string);
     
     this.correct_answer_as_path = drops_and_non_drops.map(function (x) {
         return x.drop.correct_path;
@@ -259,8 +265,14 @@ KCKModeGame.prototype.process_correct_answer = function () {
     console.log("DEBUG entering 2nd random_choice");
     var cell_1 = random_choice(KCKModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
-    fbox.innerHTML += '<br/>' + cell_1;
-
+    fbox.innerHTML += '<br/>' + cell_1 + " ";
+    var correct_answer_as_string_for_path = this.correct_answer_as_string;
+    var question_as_string_for_path = this.question;
+    var question_plus_answer_as_string = question_as_string_for_path + " = " + correct_answer_as_string_for_path;
+    console.log("DEBUG answer_as_string_for_path =", correct_answer_as_string_for_path);
+    fbox.appendChild(document.createTextNode(question_plus_answer_as_string));
+    fbox.appendChild(document.createElement('br'));
+    fbox.appendChild(document.createElement('br'));
     this.quiz.question_complete();
 };
 
@@ -302,18 +314,18 @@ KCKModeGame.prototype.give_away_answer = function () {
 
 KCKModeGame.prototype.display_give_away_answer = function () {
     // todo figure out how to combine string and path
-    return this.give_away_phrase + this.correct_answer_as_string + this.give_away_ending_phrase
+    return this.give_away_phrase + " " + this.correct_answer_as_string + this.give_away_ending_phrase
 }
 
 // todo implement this (maybe a new div?)
 KCKModeGame.prototype.display_green_and_red_path = function (statuses) {
     var o = el('feedbackbox');
     remove_all_children(o);
-    var question_as_string_for_path = this.question;
-    console.log("DEBUG question_as_string_for_path =", question_as_string_for_path);
-    o.appendChild(document.createTextNode(question_as_string_for_path));
-    o.appendChild(document.createElement('br'));
-    o.appendChild(document.createElement('br'));
+    // var question_as_string_for_path = this.question;
+    // console.log("DEBUG question_as_string_for_path =", question_as_string_for_path);
+    // o.appendChild(document.createTextNode(question_as_string_for_path));
+    // o.appendChild(document.createElement('br'));
+    // o.appendChild(document.createElement('br'));
     
     var status;
     var e;
@@ -335,7 +347,7 @@ KCKModeGame.prototype.display_green_and_red_path = function (statuses) {
 }
 
 
-
+/*
 //damage control begin:
 // Akiva makes a global variable to hold chosen lexemes
 // i.e. chosen_lexemes is what is produced by the kernel generation process
@@ -344,7 +356,7 @@ var chosen_lexemes_as_global_variable_hack;
 
 
 // damage control end
-
+*/
 
 
 
@@ -444,28 +456,38 @@ var chosen_lexemes_as_global_variable_hack;
 
 
 
-//modified for the different lexicon format of kck
+// modified for the different lexicon format of kck
 // no properties
-var kck_cheat_sheet = function (chosen_lexemes_as_global_variable_hack) {
-    
+KCKModeGame.prototype.kck_cheat_sheet = function (chosen_lexemes) {
+    var source_language = this.source_language;
+    var target_language = this.target_language;
     console.log("DEBUG 9-30-16 checkpoint #1");
-    
-    
-    // We put our lexemes in groups corresponding to their part of speech.
-    var lexemes_by_part_of_speech = separate_and_sort_by(
-        chosen_lexemes_as_global_variable_hack, function (x) {
-            return x.core_properties.part_of_speech});
-    // We sort each group.
-    var lexemes_sorted_by_root = lexemes_by_part_of_speech.map(
-        function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
-    // We push the part of speach to each item (as a header).
-    lexemes_sorted_by_root.forEach(function (x) {
-        x.unshift(x[0].core_properties.part_of_speech + 's')});
-    return concat_arrays(lexemes_sorted_by_root).map(function (x) {
-        if (typeof x === 'object') {
-            return [x.latin.roots.root_2 + ' (' + x.latin.conjugation + ')', x.core_properties.name]
-        } else {
-            return x
-        }
+    var lexemes_sorted_by_part_of_speech = Object.keys(chosen_lexemes).sort().map(function (x) {
+        return chosen_lexemes[x];
     });
+    // We sort each group.
+    var lexemes_sorted_by_root = lexemes_sorted_by_part_of_speech.map(function (x) {
+        return quick_sort(x, sort_by_func(function (x) {
+            return x.get_citation_form_in(source_language);
+        }))
+    });
+    // We push the part of speech to each item (as a header).
+    for (var i = 0; i < lexemes_sorted_by_root.length; i++) {
+        var item = lexemes_sorted_by_root[i];
+        var typical_lexeme = item[0];
+        item.unshift(typical_lexeme.get_part_of_speech() + 's');
+    }
+    var result = concat_map(lexemes_sorted_by_root, function (x) {
+        return x.map(function (y) {
+            if (y instanceof KCKLexeme) {
+                return [y.latin.roots.root_2 + ' (' + y.latin.conjugation + ')', y.core_properties.name];
+            } else if (is_object(y)) {
+                return [y.get_citation_form_in(source_language), y.get_citation_form_in(target_language)];
+            } else {
+                return y;
+            }
+        });
+    });
+    console.log(result);
+    return result;
 }

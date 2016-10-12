@@ -61,6 +61,12 @@ Conjunction.prototype.get_part_of_speech = function () {
 Conjunction.prototype.get_name = function () {
     return this.conjunction.citation_name;
 }
+
+// This method lets us get the citation form of a conjunction in any language.
+Conjunction.prototype.get_citation_form_in = function (language) {
+    return this.conjunction[language + '_form'];
+}
+
 // The method lets us get the clause_acts_as property of the conjunction.
 //i.e. whether a clause acts as adverb noun or adjective
 Conjunction.prototype.clause_acts_as = function () {
