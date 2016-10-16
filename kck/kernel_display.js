@@ -114,7 +114,7 @@ Kernel.prototype.get_verb_json_options = function (
     var options = get_drop_down_options(
         language, current_module, verb_lexeme_options, this,
         verb.get_property_in_language('regime', language),
-        transform_all_terminology);
+        transform_all_terminology, kck_level);
     // Initialize the regime.
     var regime = verb.get_property_in_language('regime', language);
     // Find what to leave out.
@@ -125,7 +125,14 @@ Kernel.prototype.get_verb_json_options = function (
     if (!is_object(leave_out)) {
         throw 'leave_out is not an object: it is ' + JSON.stringify(leave_out);
     }
-    var process_final_string = remove_dashes_and_metacharacters;
+    
+    var process_final_string;
+    if (get_current_module(kck_level).verb_dashes_removed) {
+        process_final_string = remove_dashes_and_metacharacters;
+    } else {
+        process_final_string = remove_metacharacters;
+    }
+    
     // Get the dropdown path from the module.
     var drop_down_path = get_current_module(kck_level).drop_down_path;
     var json_options = option_list_to_json(

@@ -32,8 +32,26 @@ var english_tense_to_translation_formula = {
 	"preterite passive": "were verbed",			//was eaten
 	"present continuous active" : "are verbing",
 	"present continuous passive" : "are being verbed",
-	"past continuous active" : "were verbing",
-	"past continuous passive" : "were being verbed",
+	"past continuous active" : {
+		"absolute": {
+			"basic": "verbed-preterite",
+			"advanced": "were verbing"
+		},
+		"default": {
+			"basic": "were verbing",
+			"advanced": "were verbing"
+		}
+	},
+	"past continuous passive" : {
+	    "absolute": {
+			"basic": "were verbed",
+			"advanced": "were being verbed"
+		},
+		"default": {
+			"basic": "were being verbed",
+			"advanced": "were being verbed"
+		}
+	},
 	"future active" : "will verb",
 	"future passive" : "will be verbed",
 	"pluperfect active" : "had verbed",
@@ -169,28 +187,28 @@ var maximal_english_tf_space = {
 			// default, normal, indicative
 			//information comes from ALLOWED
 			'verb': ['time.simultaneous'],
-			'verbed-preterite': ['time.prior'],
+			'verbed-preterite': ['time.prior || tf_level.basic'],
 			'will verb': ['time.subsequent'],
 			
 			//advanced tenses in normal clauses, indicative
 			//information comes from ALLOWED
 			'had verbed': ['universal_indicative_tenses_allowed.pluperfect indicative'],
 			'will have verbed': ['universal_indicative_tenses_allowed.future perfect indicative'],
-			'were verbing': ['universal_indicative_tenses_allowed.imperfect indicative'],
+			'were verbing': ['universal_indicative_tenses_allowed.imperfect indicative', 'tf_level.advanced'],
 			//'has/have verbed': ['perfect-in-primary-sequence']
 		}, 
 		'voice.passive' : {
 			// default, normal, indicative
 			//information comes from ALLOWED
 			'are verbed': ['time.simultaneous'],
-			'were verbed': ['time.prior'],
+			'were verbed': ['time.prior || tf_level.basic'],
 			'will be verbed': ['time.subsequent'],
 			
 			//advanced tenses in normal clauses, indicative
 			//information comes from ALLOWED
 			'had been verbed': ['universal_indicative_tenses_allowed.pluperfect indicative'],
 			'will have been verbed': ['universal_indicative_tenses_allowed.future perfect indicative'],
-			'were being verbed': ['universal_indicative_tenses_allowed.imperfect indicative'],
+			'were being verbed': ['universal_indicative_tenses_allowed.imperfect indicative', 'tf_level.advanced'],
 			//'has/have been verbed': ['perfect-in-primary-sequence']
 		}
 	},

@@ -176,12 +176,12 @@ Component.prototype.choose_random_lexeme = function (
 // This method inflects a component's lexeme in a language passed in
 // as a parameter. It will likely become more complicated.
 // todo: Come back to this when we have nouns.
-Component.prototype.inflect = function (language) {
+Component.prototype.inflect = function (language, kck_level) {
     // We check that language is not undefined or null.
     if (language === undefined || language === null) {
         // The language was undefined or null, so we throw an error.
         throw 'Cannot inflect in the ' + language + ' language.';
     }
     // We do the inflection.
-    this.form[language] = global_inflectors[language](this);
+    this.form[language] = global_inflectors[language](this, kck_level);
 }

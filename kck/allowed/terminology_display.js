@@ -65,9 +65,22 @@ var terminology_display_dictionary = {
     //english verb tenses
     'preterite': 'VERBed (once)',
     'pluperfect': 'had VERBed', 
-    'past continuous': 'was VERBing', 
+    //original version
+    // 'past continuous': 'was VERBing',
+    //new version
+    'past continuous': {
+        'basic': 'VERBed',
+        'advanced': 'was VERBing'
+    },
     'future perfect': 'will have VERBed', 
-    'present subjunctive': 'present subjunctive???', 
+    'present subjunctive': {
+        'basic': 'VERB',
+        'advanced': 'present subjunctive'
+    },
+    'imperfect subjunctive': {
+        'basic': 'VERB',
+        'advanced': 'imperfect subjunctive'
+    },
     'may time': 'may VERB', 
     'might time': 'might VERB',
     'can time': 'can VERB', 

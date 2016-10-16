@@ -8,14 +8,15 @@ var kck_levels = {
         'person_and_number' : ['3s', '3p'],
         // 'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
         'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
-        // 'allowed_conjunctions': ['c_purpose', 'c_when', 'c_why'],
+        // 'allowed_conjunctions': ['c_why'],
         'red herring': 'false',
         'absolute-relative-split': 'on',
         'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear'],
         // 'allowed_verbs' : ['speak', 'attack'],
         'noun_switch' : false,
         'allowed_nouns': ['wolf'],
-        'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+        'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
         // 'drop_down_path' : ['lexeme', 'person_and_number'],
         // 'drop_down_path' : ['lexeme'],
         'drop_down_path_noun' : ['lexeme', 'case'],
@@ -28,7 +29,7 @@ var kck_levels = {
         'source_language' : {'english': 0.5, 'latin': 0.5},
         'target_language' : {'english': 0.5, 'latin': 0.5},
         'terminology_display_dictionary': 'basic',
-        'verb_dashes_removed': false
+        'verb_dashes_removed': true
     },
     '10': {
         'time': ['simultaneous', 'prior', 'subsequent'],

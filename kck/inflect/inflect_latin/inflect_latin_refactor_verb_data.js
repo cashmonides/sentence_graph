@@ -20,16 +20,16 @@ var middle_inflections = {
     'conjugation 3': {
         'present indicative': '-i',
         'imperfect indicative': '-ēbā',
-        'future indicative': '-ē',
+        'future indicative': '-ē$',
         'present subjunctive': '-ā',
         'imperfect subjunctive': '-erē',
         'present infinitive active': '-ere',
         'present infinitive passive': '-ī'
     },
     'conjugation 3i': {
-        'present indicative': '-i',
+        'present indicative': '-i@',
         'imperfect indicative': '-iēbā',
-        'future indicative': '-iē',
+        'future indicative': '-iē$',
         'present subjunctive': '-iā',
         'imperfect subjunctive': '-erē',
         'present infinitive active': '-ere',
@@ -38,7 +38,7 @@ var middle_inflections = {
     'conjugation 4': {
         'present indicative': '-ī',
         'imperfect indicative': '-iēbā',
-        'future indicative': '-iē',
+        'future indicative': '-iē$',
         'present subjunctive': '-iā',
         'imperfect subjunctive': '-īrē',
         'present infinitive active': '-īre',
@@ -49,8 +49,8 @@ var middle_inflections = {
 var perfect_middle = {
     'perfect indicative': '-*',
     'pluperfect indicative': '-erā',
-    'future perfect indicative': '-erī',
-    'perfect subjunctive': '-eri',
+    'future perfect indicative': '-eri#',
+    'perfect subjunctive': '-eri%',
     'pluperfect subjunctive': '-issē',
     'perfect infinitive': '-isse'
 }

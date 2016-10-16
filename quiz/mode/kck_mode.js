@@ -102,16 +102,39 @@ KCKModeGame.prototype.next_question = function () {
     // damage control end
     */
     
+    var remove_dashes_bool = get_current_module(this.level.kck_level).verb_dashes_removed;
+    
+    var process_output;
+    
+    if (remove_dashes_bool) {
+        process_output = remove_dashes_and_metacharacters;
+    } else {
+        process_output = remove_metacharacters;
+    }
+    
     //changes the score, progress bar, etc.
     this.quiz.update_display();
 
     Quiz.set_question_text("Translate the following sentence:");
+    
+    this.question = process_output(this.question);
+    
     this.quiz.add_question_text(this.question);
+    
     //todo check if this works
     
     // todo implement or find some method that does this
     var drops_and_non_drops = sentence.get_all_drops_and_non_drops(this.level.kck_level, target_language);
     console.log('drops and non drops =', drops_and_non_drops);
+    
+    
+    for (var i = 0; i < drops_and_non_drops.length; i++) {
+        var path = drops_and_non_drops[i].drop.correct_path;
+        path[path.length - 1] = process_output(
+            path[path.length - 1]);
+        drops_and_non_drops[i].non_drop.text = process_output(
+            drops_and_non_drops[i].non_drop.text);
+    }
     
     var roles = drops_and_non_drops.map(function (x) {
         return x.role;
@@ -138,7 +161,7 @@ KCKModeGame.prototype.next_question = function () {
     
     //implement this when ready
     // if remove_verb_dashes = true
-    // this.correct_answer_as_string = remove_verb_dashes(this.correct_answer_as_string);
+    this.correct_answer_as_string = process_output(this.correct_answer_as_string);
     
     this.correct_answer_as_path = drops_and_non_drops.map(function (x) {
         return x.drop.correct_path;

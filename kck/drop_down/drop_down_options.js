@@ -9,8 +9,10 @@ var get_person_number_combinations = function (allowed) {
 
 // Gets options for drop downs.
 // Does not choose lexemes to be used.
+// tags: @tagged, @hardtofind, @long, @dropdown
 var get_drop_down_options = function (
-    language, allowed, lexemes, kernel, regime, transform_all_terminology) {
+    language, allowed, lexemes, kernel, regime,
+    transform_all_terminology, kck_level) {
     // Check that our supposed kernel is a kernel.
     if (!(kernel instanceof Kernel)) {
         throw JSON.stringify(kernel) + ' is not a kernel!';
@@ -34,7 +36,7 @@ var get_drop_down_options = function (
         // We have conjunction then direction, not vice versa (as before).
         var tf_options = prune_tf_space(
             language, tf_spaces[language], filtered_allowed,
-            conjunction, direction, regime);
+            conjunction, direction, regime, kck_level);
         return cross(tf_options, person_number_combinations, function (
             tf_option, person_number_combination) {
             // Make a function translation_and_features_from

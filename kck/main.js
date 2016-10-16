@@ -41,7 +41,7 @@ var generate_sentence = function (source, target, kck_level, drop_extra_level) {
             throw 'No usable lexemes left!';
         }
         // We inflect the components.
-        sentence.inflect_all_components();
+        sentence.inflect_all_components(kck_level);
         // We check for ambiguity.
         success = success && sentence.check_for_no_ambiguity(
             source.toLowerCase());

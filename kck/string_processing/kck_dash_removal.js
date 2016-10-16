@@ -22,6 +22,11 @@ I% = short I in perfect subjunctive that doesn't get swallowed by O
 
 var latin_replacement_dictionary = {
 
+    // applies in all situations
+    "I-RIS": "ERIS",
+    "I-RE": "ERE",
+
+
     // long a in 1st conjugation and all imperfects
     "Ā-M" : "AM",
     "Ā-T" : "AT",
@@ -41,6 +46,7 @@ var latin_replacement_dictionary = {
 
     //i in ERI (perfect subjunctive 1st singular)
     "I%-Ō/M" : "IM",
+    "I%-NT" : "INT",
 
     //i in ERI (perfect subjunctive & future perfect + NT)
     "I#-NT" : "INT",
@@ -66,6 +72,7 @@ var latin_replacement_dictionary = {
     "Ī-Ō/M" : "Ō",
     "Ī-T" : "IT",
     "Ī-OR/R" : "IOR",
+    "Ī-NT" : "IUNT",
     "Ī-NTUR" : "IUNTUR",
     
     //all other dashes
@@ -90,14 +97,26 @@ var metacharacter_replacement_dictionary = {
 
 
 var remove_dashes_and_metacharacters = function (input) {
-    // return remove_metacharacters(remove_dashes(input));
-    console.log("remove_dashes_disabled_until_fixed");
-    return input;
+    return remove_metacharacters(remove_dashes(input));
+    // console.log("remove_dashes_disabled_until_fixed");
+    // return input;
+}
+
+var escape_string = function (string) {
+    return string.replace(/\W/g, function (i) {return '\\' + i})
 }
 
 var tr = function (input, dict) {
     for (var key in dict) {
-        input = input.split(key).join(dict[key]);
+        input = input.replace(new RegExp(escape_string(key), 'gi'), function (i) {
+            if (i.toLowerCase() === i) {
+                return dict[key].toLowerCase();
+            } else if (i.toUpperCase() === i) {
+                return dict[key].toUpperCase();
+            } else {
+                throw i + ' is mixed case.';
+            }
+        });
     }
     return input;
 }

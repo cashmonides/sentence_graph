@@ -131,10 +131,19 @@ var remove_english_irregularities_to_not_apply = function (translation_formula) 
     return translation_formula.split(' no ')[0];
 }
 
-var get_english_translation_formula = function (tense_voice) {
+var get_english_translation_formula = function (tense_voice, regime, kck_level) {
+    console.log(tense_voice);
     // Step 1.5. (Simply getting the translation formula.)
     var translation_formula = english_tense_to_translation_formula[
         tense_voice];
+    if (is_object(translation_formula)) {
+        var terminology_display_mode = get_current_module(kck_level).
+        terminology_display_dictionary;
+        if (!(regime in translation_formula)) {
+            regime = 'default';
+        }
+        translation_formula = translation_formula[regime][terminology_display_mode];
+    }
     // Check that the translation formula is not undefined.
     if (translation_formula === undefined) {
         throw 'Translation formula for ' + JSON.stringify(tense_voice) +
@@ -234,9 +243,10 @@ var inflect_english_verb_given_tf_all_options = function (
 
 // main function
 var kck_inflect_english_verb_all_options = function (
-    verb_lexeme, tense_voice, person_and_number) {
+    verb_lexeme, tense_voice, person_and_number, regime, kck_level) {
     // Step 1.5. (Simply getting the translation formula, e.g., "was verbing")
-    var translation_formula = get_english_translation_formula(tense_voice);
+    var translation_formula = get_english_translation_formula(
+        tense_voice, regime, kck_level);
     // End of step 1.5.
     // Use another function to do the rest.
     return inflect_english_verb_given_tf_all_options(

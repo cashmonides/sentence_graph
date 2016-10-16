@@ -262,11 +262,11 @@ Kernel.prototype.choose_random_lexemes = function (chosen_lexemes, level) {
 
 // This method lets us inflect all the components of a kernel
 // in a given language.
-Kernel.prototype.inflect_all_components_in = function (language) {
+Kernel.prototype.inflect_all_components_in = function (language, kck_level) {
     // We iterate over the role list.
     for (var i = 0; i < this.role_list.length; i++) {
         // We inflect the component at position i.
-        this.role_list[i].component.inflect(language);
+        this.role_list[i].component.inflect(language, kck_level);
     }
 }
 

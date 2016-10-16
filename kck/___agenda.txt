@@ -2,20 +2,29 @@ Agenda for future (made in mid-september 2016)
 
 BIRD'S EYE AGENDA
 step 1
-    add lexemes and make levels
-    test kck mode
+    dash removal (done)
+    fix admin (done)
+    test
     commit
     test basic functionality after commiting
     test SQL posting after commiting
+    remove "verbed" from translation formulae of relative verb regime   
+        we don't want what we have now which is:
+            they saw why he spoke = vid-ēbā-nt cūr dīc-erē-t
+        we want:
+            they say why he was speaking
+        i.e. in relative: we always preserve the regime
+        but in absolute regime we want to be able to adjust thinks like:
+            in imperfect basic level = "spoke" advanced level = "was speaking"
 
 step 2
-    remove dashes
+    add lexemes and make levels
     make cheat_sheet for dash removal
     (use a paper handout/PDF cheat sheet for ambiguity)
 
 
 step 3 possibly
-    test Dan's ambiguity eliminator on undashed forms
+    finish and test Dan's ambiguity eliminator on undashed forms
     
     
 step 4
@@ -41,33 +50,46 @@ SEEMS TO BE FIXED
 
 - fix: vocabulary cheat sheet is not functional in kck mode  
 
-
-NEEDS TO BE FIXED AS A PREREQ
-
-- crucial bugs: present subjunctive???? is still there  
-
-
-
 - requisite functionality: dummy agreement marker
     - short term solution: set subject gender as masculine upstream
     - long term solution: set gender based either on gender of noun 
         or on some parameter set module-by-module e.g. subject_gender: ['masculine': 0.3, 'feminine': 0.3, 'neuter': 0.3]
+
+- crucial bugs: present subjunctive???? is still there
+
+
+NEEDS TO BE FIXED AS A PREREQ
+
+  
+
+
+
 
 - potential issue: say vs speak in drop down heading PERHAPS DONE NEEDS CHECKING
 
 - small thing: full text of question should appear in the feedback box DONE
 
 - crucial: was verbing vs verbed needs to be either explained in paper handout/PDF cheat sheet or eliminated!!!!
+    - for now: remove perfect tense
 
 
+- in early stages of kck, passives should be late in the path
+- "was verbing" hasn't been taught to the kids yet
 
     
 DESIDERATA BEFORE NOUNS
+- if nothing entered in a field when creating account, it should still create a field in firebase (otherwise it messes up and makes the user sick - like beatrice and brandon)
+
 - morphological elements in path name
     - they were loving
     - am / port / vor / port
     - -> a / aba / abi / e / eba / ebi / e / ie / ia / are/ ere / ere
     - -> o s t mus tis nt
+
+
+
+- move to utils:
+function add(a, b) {return a + b}
 
 
 CHORES

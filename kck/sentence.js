@@ -218,17 +218,12 @@ var each_language = function (f, string) {
     }
 }
 
-// This method inflects all components in the kernels in a sentence,
-// in every available language.
-KCKSentence.prototype.inflect_all_components = each_language(
-    function (language) {
-        // We inflect all the components of the kernel in the language.
-        // (But first we lowercase the language, since the information
-        // we care about is stored under the language's lowercased version.)
+KCKSentence.prototype.inflect_all_components = function (kck_level) {
+    for (var i = 0; i < languages.length; i++) {
         this.each_kernel(
-            'inflect_all_components_in', language.toLowerCase());
+            'inflect_all_components_in', languages[i].toLowerCase(), kck_level);
     }
-);
+}
 
 // This method gets the main kernel of a sentence.
 KCKSentence.prototype.get_main_kernel = function () {

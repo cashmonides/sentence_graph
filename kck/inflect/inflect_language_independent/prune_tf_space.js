@@ -4,7 +4,7 @@ var check_properties_from_allowed = [
 
 // Note that this function knows nothing about the lexeme.
 var prune_tf_space = function (
-    language, tf_space, allowed, conjunction, direction, regime) {
+    language, tf_space, allowed, conjunction, direction, regime, kck_level) {
     // My philosophy: any error that was not completely stupid is likely
     // to be made more than once.
     // Thus, due to a case of misordered parameters, we check that the
@@ -54,6 +54,9 @@ var prune_tf_space = function (
         })
     );
     
+    var terminology_display_level = get_current_module(kck_level).
+    terminology_display_dictionary;
+    
     var check = check_function_from_allowed([
         {
             'get_props_from': allowed,
@@ -62,6 +65,10 @@ var prune_tf_space = function (
         {
             'get_props_from': {'construction': constructions},
             'props_to_get': ['construction']
+        },
+        {
+            'get_props_from': {'tf_level': [terminology_display_level]},
+            'props_to_get': ['tf_level']
         }
     ]);
     
