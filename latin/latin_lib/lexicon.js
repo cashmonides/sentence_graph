@@ -8,6 +8,58 @@ var zU = "\u016A";
 
 var lexicon = [
     //NOUNS////////
+    
+    //1st declension gods
+    new Lexeme(
+        "poseidon",
+        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
+            english : new English_word_properties("Poseidon", "Poseidon", "", true, true, false, false, null),
+            latin : new Latin_word_properties("NEPTUN-US", "NEPTUN", "NEPTUN", null, "2", "m", true, true, false, true, null)
+        }),
+    new Lexeme(
+        "cronos",
+        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
+            english : new English_word_properties("Cronos", "Cronos", "", true, true, false, false, null),
+            latin : new Latin_word_properties("SATURN-US", "SATURN", "SATURN", null, "2", "m", true, true, false, true, null)
+        }),
+    new Lexeme(
+        "hermes",
+        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
+            english : new English_word_properties("Hermes", "Hermes", "", true, true, false, false, null),
+            latin : new Latin_word_properties("MERCURI-US", "MERCURI", "MERCURI", null, "2", "m", true, true, false, true, null)
+        }),
+    new Lexeme(
+        "ouranos",
+        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
+            english : new English_word_properties("Ouranus", "Ouranus", "", true, true, false, false, null),
+            latin : new Latin_word_properties("CAEL-US", "CAEL", "CAEL", null, "2", "m", true, true, false, true, null)
+        }),
+    //3rd declension gods
+    new Lexeme(
+        "zeus",
+        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
+            english : new English_word_properties("Zeus", "Zeus", "", true, true, false, false, null),
+            latin : new Latin_word_properties("*JUPPITER* JOV-", "*JUPPITER*", "JOV", null, "3", "f", true, true, false, true, null)
+        }),
+    new Lexeme(
+        "hades",
+        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
+            english : new English_word_properties("Hades", "Hades", "", true, true, false, false, null),
+            latin : new Latin_word_properties("*PLUTO* PLUTON-", "*PLUTO*", "PLUTON", null, "3", "f", true, true, false, true, null)
+        }),
+    new Lexeme(
+        "aphrodite",
+        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
+            english : new English_word_properties("Aphrodite", "Aphrodite", "", true, true, false, false, null),
+            latin : new Latin_word_properties("*VENUS* VENER-", "*VENUS*", "VENER", null, "3", "f", true, true, false, true, null)
+        }),
+    new Lexeme(
+        "ares",
+        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
+            english : new English_word_properties("Ares", "Ares", "", true, true, false, false, null),
+            latin : new Latin_word_properties("*MARS* MART-", "*MARS*", "MART", null, "3", "f", true, true, false, true, null)
+        }),
+    // begin usual section
     //1st declension nouns
     new Lexeme(
         "goddess",
@@ -68,7 +120,7 @@ var lexicon = [
         "man",
         {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: true, god: false},
             english : new English_word_properties("man", "man", "men", true, true, false, false, null),
-            latin : new Latin_word_properties("*VIR*", "*VIR*", "VIR", null, "2", "m", true, true, false, false, null)
+            latin : new Latin_word_properties("*VIR* VIR-", "*VIR*", "VIR", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "god",
@@ -81,24 +133,6 @@ var lexicon = [
         {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: true, human: true, god: false},
             english : new English_word_properties("son", "son", "sons", true, true, false, false, null),
             latin : new Latin_word_properties("FĪLI-US", "FĪLI", "FĪLI", null, "2", "m", true, true, false, false, null)
-        }),
-    new Lexeme(
-        "Poseidon",
-        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: false, god: true},
-            english : new English_word_properties("Poseidon", "Poseidon", "NO PLURAL", true, true, false, false, null),
-            latin : new Latin_word_properties("NEPTUN-US", "NEPTUN", "NEPTUN", null, "2", "m", true, true, false, false, null)
-        }),
-    new Lexeme(
-        "Chronos",
-        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: false, god: true},
-            english : new English_word_properties("Chronos", "Chronos", "NO PLURAL", true, true, false, false, null),
-            latin : new Latin_word_properties("SATURN-US", "SATURN", "SATURN", null, "2", "m", true, true, false, false, null)
-        }),
-    new Lexeme(
-        "Hermes",
-        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: false, god: true},
-            english : new English_word_properties("Hermes", "Hermes", "NO PLURAL", true, true, false, false, null),
-            latin : new Latin_word_properties("MERCURI-US", "MERCURI", "MERCURI", null, "2", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "bear",
@@ -184,30 +218,6 @@ var lexicon = [
         {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: true, human: true, god: false},
             english : new English_word_properties("mother", "mother", "mothers", true, true, false, false, null),
             latin : new Latin_word_properties("*MATER*", "*MATER*", "MATR", null, "3", "m", true, true, false, false, null)
-        }),
-    new Lexeme(
-        "Hades",
-        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: false, god: true},
-            english : new English_word_properties("Hades", "Hades", "NO PLURAL", true, true, false, false, null),
-            latin : new Latin_word_properties("*PLUTO*", "*PLUTO*", "PLUTON", null, "3", "m", true, true, false, false, null)
-        }),
-    new Lexeme(
-        "Zeus",
-        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: false, god: true},
-            english : new English_word_properties("Zeus", "Zeus", "NO PLURAL", true, true, false, false, null),
-            latin : new Latin_word_properties("*JUPPITER*", "*JUPPITER*", "JOV", null, "3", "m", true, true, false, false, null)
-        }),
-    new Lexeme(
-        "Aphrodite",
-        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: false, god: true},
-            english : new English_word_properties("Aphrodite", "Aphrodite", "NO PLURAL", true, true, false, false, null),
-            latin : new Latin_word_properties("*VENUS*", "*VENUS*", "VENER", null, "3", "f", true, true, false, false, null)
-        }),
-    new Lexeme(
-        "Ares",
-        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: false, god: true},
-            english : new English_word_properties("Ares", "Ares", "NO PLURAL", true, true, false, false, null),
-            latin : new Latin_word_properties("*MARS*", "*MARS*", "MART", null, "3", "m", true, true, false, false, null)
         }),
     new Lexeme(
         "scorpion",

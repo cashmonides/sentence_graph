@@ -25,15 +25,33 @@ body {
 .button {
     font-family: 'Baskerville';
     background: antiquewhite;
+    font-size: 16;
+    /*text-align: right;*/
+    /*margin-left: auto;*/
+    /*position: absolute;*/
+    /*margin: 0;*/
+    float: right;
+    /*align-items: center;*/
+    /*margin: 0 auto;*/
+    /*text-align: center;*/
+    /*width: 100px;*/
 }
 
 
 
-/*is this just the display header???*/
+
+
+
+/*is this just the display header and terminal string*/
 .kck_string {
-    font-size: 19px;
+    font-size: 24px;
     color: black;
+    background-color: white;
     text-transform: uppercase;
+    width: 200px;
+    
+  
+    min-width: 250px;
 
     
 }
@@ -110,12 +128,12 @@ body {
     width: 100px;
     
     /*exploring min-width*/
-    min-width: 200px;
+    min-width: 100px;
     
     
     /*______font-size______*/
     font-size: 14px;
-    color: green;
+    color: blue;
     
     
     /*IN PROGRESS PROBLEMS BELOW*/

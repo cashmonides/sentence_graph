@@ -3,8 +3,10 @@ var check_properties_from_allowed = [
 ];
 
 // Note that this function knows nothing about the lexeme.
+// tags: @prune, @tagged, @long, @confusing, @hardtofind, @tfspace
 var prune_tf_space = function (
-    language, tf_space, allowed, conjunction, direction, regime, kck_level) {
+    language, tf_space, allowed, conjunction, direction, regime, kck_level,
+    allowed_conjunctions_override) {
     // My philosophy: any error that was not completely stupid is likely
     // to be made more than once.
     // Thus, due to a case of misordered parameters, we check that the
@@ -13,11 +15,16 @@ var prune_tf_space = function (
         throw JSON.stringify(conjunction) + ' is not a conjunction!';
     }
     
+    // Similarly, we check if the direction is left or right.
+    if (direction !== 'left' && direction !== 'right') {
+        throw direction + ' is not a direction!';
+    }
+    
     // Get the value of the red herring switch as a boolean.
     var red_herring_bool = read_bool_maybe_string(allowed['red herring']);
     // Find all the allowed conjunctions.
     var all_conjunction_direction_combos =
-    get_all_conjunction_direction_combos(allowed);
+    get_all_conjunction_direction_combos(allowed, allowed_conjunctions_override);
     // If red herrings are on, we include all the conjunction-direction combos.
     // Otherwise, only the one used.
     var conjunction_direction_combos;
@@ -90,8 +97,14 @@ var get_allowable_verb_regime_set = function (language, regime, allowed) {
     return get_option_with_settings(regime, allowed, regimes_in_language);
 }
 
-var get_all_conjunction_direction_combos = function (allowed) {
-    var conjunctions = allowed.allowed_conjunctions;
+var get_all_conjunction_direction_combos = function (
+    allowed, allowed_conjunctions_override) {
+    var conjunctions;
+    if (allowed_conjunctions_override === null) {
+        conjunctions = allowed.allowed_conjunctions;
+    } else {
+        conjunctions = allowed_conjunctions_override;
+    }
     if (conjunctions === null || conjunctions === undefined) {
         throw 'Bad conjunctions (null or undefined)!'
     }
@@ -121,7 +134,7 @@ var ConjunctionDirectionCombo = function (conjunction, direction) {
     this.verb_regime = conjunction.get_property(
         'k_' + direction + '_verb_regime');
     if (!this.verb_regime) {
-        throw 'No verb regime for ' + conjunction.get_name();
+        throw 'No ' + direction + ' verb regime for ' + conjunction.get_name();
     }
     // Add construction (using the special get_construction method).
     this.construction = conjunction.get_construction(direction);

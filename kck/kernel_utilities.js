@@ -1,16 +1,22 @@
 // This function expands (and creates) a conjunction.
-var expand_conj = function (kck_level) {
+var expand_conj = function (kck_level, allowed_conjunctions_override) {
     // This is the list of possible conjunction choices.
     // They are keys in the conjunction library and are
     // the conjunctions allowed in the current module.
-    var conj_choices = get_current_module(kck_level).allowed_conjunctions;
+    // If the override exists, they are the conjunctions in the override.
+    var conj_choices;
+    if (allowed_conjunctions_override === null) {
+        conj_choices = get_current_module(kck_level).allowed_conjunctions;
+    } else {
+        conj_choices = allowed_conjunctions_override;
+    }
     
-    console.log("BACKSTAGE LOG allowed conjunctions = ", conj_choices);
+    // console.log("BACKSTAGE LOG allowed conjunctions = ", conj_choices);
     
     // We pick a random key from the possibilities.
     var key = random_choice(conj_choices);
     
-    console.log("BACKSTAGE LOG chosen conjunction = ", key);
+    // sconsole.log("BACKSTAGE LOG chosen conjunction = ", key);
     
     // We return a conjunction constructed from that key.
     return new Conjunction(key);
@@ -22,10 +28,10 @@ var find_conjunction_index = function (seed) {
 }
 
 // This function makes a random sentence.
-var make_random_sentence = function (kck_level) {
+var make_random_sentence = function (kck_level, allowed_conjunctions_override) {
     // We make a conjunction.
     // returns a new Conjunction object
-    var conjunction = expand_conj(kck_level);
+    var conjunction = expand_conj(kck_level, allowed_conjunctions_override);
     // We get the clause_acts_as property of the conjunction.
     var clause_acts_as = conjunction.clause_acts_as();
     

@@ -50,7 +50,7 @@ DropDown.prototype.display_drop_down = function () {
     });
     $(menu).mouseenter(function () {
             // timeout_function = setTimeout(function () {self.display_header();}, 3000);
-            console.log("MOUSEENTER TRIGGERED");
+            // console.log("MOUSEENTER TRIGGERED");
             clearTimeout(timeout_function);
         })
     // Clear all the current children.

@@ -7,7 +7,7 @@
 function make_output(level, current_lexicon, none_display) {
     
     
-    console.log("DEBUG 4-25 checkpoint 2 in make_output");
+    console.log("CHECKPOINT 1 in make_output");
     
     var i;        //a looping variable
     var item;     // another looping variable
@@ -23,7 +23,7 @@ function make_output(level, current_lexicon, none_display) {
         'object': ['number_of_other_nouns'],
         'verb': ['clause_type', 'sequence', 'tense', 'implicitness', 'person', 'voice']};
     
-    
+    console.log("DEBUG 4-25 checkpoint 2 in make_output");
     /*
     we need to loop through each part of speech (noun, verb etc)
     for each part of speech we need to loop through functions that that part of speech can fill
@@ -60,7 +60,7 @@ function make_output(level, current_lexicon, none_display) {
     //we set our drop_down_settings    
     var drop_down_settings = map_level_to_allowed(level.latin_extra_level, latin_extra_levels)['drop_down_settings'];
     
-    console.log("DEBUG 4-25 checkpoint 4 in make_output");
+    // console.log("DEBUG 4-25 checkpoint 4 in make_output");
     
     //we randomly pick a state to be made out of all possible states
     var state_to_be_made = master_cartesian(level.latin_level, full_order, 'random');
@@ -218,8 +218,8 @@ function make_output(level, current_lexicon, none_display) {
     
     console.log("DEBUG 4-25 checkpoint 11 in make_output");
     
-    // console.log('DEBUG 12-23 master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make = ',
-    // master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make;
+    console.log('DEBUG 4-25 master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make = ',
+    master_lexeme_list.used_only, creation_by_part_of_speech, words_to_make);
 
 
     ////////////////new equilibrium
@@ -230,9 +230,9 @@ function make_output(level, current_lexicon, none_display) {
     ////////end of establishing equilibrium
     /////////begin generating kernels
 
-    console.log("DEBUG 4-25 level = ", level);
-    console.log("DEBUG 4-25 state_to_be_made = ", state_to_be_made);
-    console.log("DEBUG 4-25 master_lexeme_list = ", master_lexeme_list);
+    // console.log("DEBUG 4-25 level = ", level);
+    // console.log("DEBUG 4-25 state_to_be_made = ", state_to_be_made);
+    // console.log("DEBUG 4-25 master_lexeme_list = ", master_lexeme_list);
 
     //now that equilibrium is established, we need to produce a target sentence (here called "correct")
     var correct = make_kernel_new(level, state_to_be_made,
@@ -351,7 +351,7 @@ function make_output(level, current_lexicon, none_display) {
             })
     }
     
-    console.log("DEBUG 4-25 checkpoint 16 in make_output");
+    // console.log("DEBUG 4-25 checkpoint 16 in make_output");
     
     // console.log('output =', output);
 
@@ -380,8 +380,9 @@ function make_output(level, current_lexicon, none_display) {
         'give_away_ending_phrase': ".",
         'cheat_sheet': cheat_sheet(master_lexeme_list.get_lexemes_as_list('all_lexemes'))
     };
-    
-    console.log("DEBUG 4-25 checkpoint 19 in make_output");
+    debug_log("ERASE WHEN DONE r.cheat_sheet = ", r.cheat_sheet);
+    debug_log("ERASE WHEN DONE = master_lexeme_list.get_lexemes_as_list('all_lexemes')", master_lexeme_list.get_lexemes_as_list('all_lexemes'));
+    // console.log("DEBUG 4-25 checkpoint 19 in make_output");
     // console.log('DEBUG 12-23 make_output result = ', r);
     return r
 }
@@ -430,6 +431,13 @@ var cheat_sheet = function (master_lexeme_list) {
         x.unshift(x[0].properties.core.part_of_speech + 's')});
     return concat_arrays(lexemes_sorted_by_root).map(function (x) {
         if (typeof x === 'object') {
+            
+            //Akiva's intervention start
+            var new_cheat_sheet_item_with_3_items = [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root, x.properties.latin.stem_2];
+            debug_log("ERASE WHEN DONE new_cheat_sheet_item_with_3_items = ", new_cheat_sheet_item_with_3_items);
+            // return [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root, x.properties.latin.stem_2];
+            //Akiva's intervention end
+            
             return [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root]
         } else {
             return x
@@ -449,6 +457,16 @@ function change_state_to_be_made_final (state, lexeme_list) {
     // If other stuff needs to be changed it can go here too.
     state.transitivity = lexeme_list.verb.properties.latin.transitive;
     state.subject_gender = lexeme_list.subject.properties.latin.gender;
+    
+    
+    /*
+    //AKIVA PSEUDO CODE
+    if (lexeme_list.subject.properties.latin.proper == true) {
+        console.log("PROPER NOUN TRIGGERED");
+        state.number = 'singular';
+        state.person[1] = 's';
+    }
+    */
 }
 
 function english_mental_wrap(choice, drop_downs, level) {
@@ -616,6 +634,30 @@ function pick_lexeme_new(kernel, element, part_of_speech, current_lexicon, lexem
         allowed_lexemes = allowed_lexemes.filter(function (lexeme) {
             return lexeme.properties.core.animate === true})
     }
+    
+    
+    //START AKIVA INTERVENTION
+    //why doesn't the below work?
+    // //we don't want proper nouns to be plural
+    // if (kernel.number === "singular" && element === "subject") {
+    //     allowed_lexemes = allowed_lexemes.filter(function (lexeme) {
+    //         return lexeme.properties.latin.proper === true})
+    // }
+    
+    //we don't want proper nouns to be plural as subjects
+    if (kernel.number === "plural" && element === "subject") {
+        allowed_lexemes = allowed_lexemes.filter(function (lexeme) {
+            return lexeme.properties.latin.proper === false})
+    }
+    
+    //we don't want plural proper nouns to be plural as objects
+    if (element === 'object' && kernel.number_of_other_nouns === 'plural') {
+        allowed_lexemes = allowed_lexemes.filter(function (lexeme) {
+            return lexeme.properties.latin.proper === false})
+    }
+    
+    
+    //END AKIVA INTERVENTION
 
     // We don't want intransitive passive verbs.
     if (part_of_speech === "verb" && kernel.voice === 'passive') {
@@ -669,15 +711,15 @@ function make_kernel_new (level, state, lexeme_list) {
     //within this iteration we iterate through the sentences (here latin and english)
     for (i in form_dict) {
         var current_form = form_dict[i];
-        console.log("DEBUG 4-25 current_form = ", current_form);
-        // console.log("DEBUG 4-25 current_form.lexeme = ", current_form.lexeme);
-        // console.log("DEBUG 4-25 current_form.word_settings = ", current_form.word_settings);
+        console.log("DEBUG 4-25 checkpoint 3.1 current_form = ", current_form);
+        console.log("DEBUG 4-25 checkpoint 3.2 current_form.lexeme = ", current_form.lexeme);
+        console.log("DEBUG 4-25 checkpoint 3.3 current_form.word_settings = ", current_form.word_settings);
         
         for (var j = 0; j < sentences.length; j++) {
             var sentence = sentences[j];
             
-            console.log("DEBUG 4-25 current_form.lexeme = ", current_form.lexeme);
-            console.log("DEBUG 4-25 current_form.word_settings = ", current_form.word_settings);
+            console.log("DEBUG 4-25 checkpoint 3.4 current_form.lexeme = ", current_form.lexeme);
+            console.log("DEBUG 4-25 checkpoint 3.5 current_form.word_settings = ", current_form.word_settings);
             
             // if sentence is implicit and we are dealing with a subject do not do anything else this loop
             if (i === 'subject' && state.implicitness === "implicit") {continue}
@@ -686,7 +728,7 @@ function make_kernel_new (level, state, lexeme_list) {
             //todo should helping verbs in english also be treated the same way?
             //first condition is if the return is an object (i.e. a dictionary)
 
-            console.log("DEBUG 4-25 word = ", word);
+            console.log("DEBUG 4-25 checkpoint 3.6 word = ", word);
             
             if (typeof word === 'object') {
                 //in which case we iterate through the dictionary

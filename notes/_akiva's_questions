@@ -1,3 +1,7 @@
+USEFUL HELP FROM DAN
+- examples of what the utils do, especially dict_utils
+
+
 SCHEDULE
 need to do: inflect
 review: drop down
@@ -8,6 +12,8 @@ that brings me up to kck > utils
 REVIEW IN DEPTH: 
 kernel.js
 role.js
+
+must review dict_utils.js (especially dict_navigate)
 
 
 STUFF IN SENTENCE.JS THAT ARE UNCLEAR

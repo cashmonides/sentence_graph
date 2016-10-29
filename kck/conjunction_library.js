@@ -38,6 +38,7 @@ var conjunction_library = {
             ssslatin: null
         }
     },
+    //perhaps c_null_morphology gives us a dummy conjunction
     c_null_potential_subjunctive: {
         type: "dummy main",
         k_left_verb_regime: {

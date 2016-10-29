@@ -115,7 +115,7 @@ function inflect_latin_noun (kernel, lexeme, word_settings) {
             }
         }
     } else if (lexeme.properties.latin.family === "3") {
-        if (lexeme.properties.latin.gender === "m") {
+        if (lexeme.properties.latin.gender === "m" || "f") {
             if (word_settings.number === "singular") {
                 var map_decl_3s = {
                     nominative: "",

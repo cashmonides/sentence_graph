@@ -1,4 +1,29 @@
 var terminology_display_dictionary = {
+    
+    '1s': {
+        'basic': 'I',
+        'advanced': '1st sing.'
+    },
+    '2s': {
+        'basic': 'you',
+        'advanced': '2nd sing.'
+    },
+    '3s': {
+        'basic': 'he',
+        'advanced': '3rd sing.'
+    },
+    '1p': {
+        'basic': 'we',
+        'advanced': '1st plur.'
+    },
+    '2p': {
+        'basic': 'y\'all',
+        'advanced': '2nd plur.'
+    },
+    '3p': {
+        'basic': 'they',
+        'advanced': '3rd plur.'
+    },
     //latin cases
     
     

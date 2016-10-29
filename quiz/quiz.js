@@ -106,7 +106,7 @@ Quiz.prototype.start = function() {
     Sentence.get_all_sentences(function (ss) {
         self.sentences = ss.filter(function (sentence) {
             var language = sentence.language_of_sentence;
-            console.log("DEBUG 10-9-16 self.module = ", self.module);
+            // console.log("DEBUG 10-9-16 self.module = ", self.module);
             var sentence_levels = self.module.sentence_levels;
             return language in sentence_levels &&
             sentence.difficulty_level <= sentence_levels[language];
@@ -502,7 +502,7 @@ Quiz.prototype.next_question = function (error) {
     
     //todo xxx hack this was a hack, remove 
     el('image_display_box').innerHTML = '';
-    console.log('LOG: entering next_question')
+    // console.log('LOG: entering next_question')
     //previously:
     // this.next_mode();
     // this.game.next_question(this);
@@ -517,9 +517,9 @@ Quiz.prototype.next_question = function (error) {
         if (this.user.is_mf()) {
             throw 'Complete crash with ' + JSON.stringify(e) + ' , look at log to find issues.';
         }
-        console.log("LOG: PROBLEM: entering catch block error caught");
+        console.log("PROBLEM: entering catch block error caught");
         
-        console.log("DEBUG 5-6 this.game = ", this.game);
+        console.log("PROBLEM: this.game = ", this.game);
         // Originally: add not push
         
         var sick_mode = (this.game || {'get_mode_name': function () {
@@ -539,11 +539,11 @@ Quiz.prototype.next_question = function (error) {
             this.urgent_error_count++;
         }
         
-        console.log("URGENT error logged");
-        console.log("desperate move triggered");
+        console.log("PROBLEM: URGENT error logged");
+        console.log("PROBLEM: desperate move triggered");
         
         if (e !== "modes exhausted") {
-            console.log("DEBUG 12-23 error handler initiated");
+            console.log("PROBLEM: error handler initiated");
             this.next_question(true);
         }
     }
@@ -843,7 +843,7 @@ Quiz.prototype.update_display = function() {
     this.set_progress_bar();
     console.log("Still ok after progress bar");*/
     
-    console.log("LOG: about to enter innerhtml");
+    // console.log("LOG: about to enter innerhtml");
     // console.log(el("name_header") === null);
     // console.log(el("class_header") === null);
     // console.log(el("level_header") === null);
@@ -887,7 +887,7 @@ Quiz.prototype.set_progress_bar = function () {
 
 
 Quiz.prototype.process_answer = function(){
-    console.log("quiz.process_answer triggered");
+    // console.log("quiz.process_answer triggered");
     this.game.process_answer(this);
 };
 
@@ -895,8 +895,8 @@ Quiz.prototype.process_answer = function(){
 Quiz.prototype.get_lightbox_image = function(mod_id, progress) {
     var image_list = safe_lookup(ALL_MODULES, mod_id, 'lightbox_images');
     if (image_list) {
-        console.log("DEBUG 5-12 image_list = ", image_list);
-        console.log("DEBUG 5-12 entering image picking");
+        // console.log("DEBUG 5-12 image_list = ", image_list);
+        // console.log("DEBUG 5-12 entering image picking");
         var true_progress;
         if (mod_id in this.user.data.history) {
             if (progress === undefined) {
@@ -912,14 +912,14 @@ Quiz.prototype.get_lightbox_image = function(mod_id, progress) {
         
         if (index === -1) {index++};
         
-        console.log("DEBUG 5-12 index = ", index);
+        // console.log("DEBUG 5-12 index = ", index);
         var image = image_list[index];
     } else {
-        console.log('image list does not exist');
+        // console.log('image list does not exist');
         var image = null;
     }
-    console.log('DEBUG 5-12 ')
-    console.log('DEBUG 5-12 image =', image);
+    // console.log('DEBUG 5-12 ')
+    // console.log('DEBUG 5-12 image =', image);
     return image;
 }
 
@@ -931,15 +931,15 @@ Quiz.prototype.process_lightbox_image = function (offset, progress) {
     var mod;
     if (this.advance_improve_status === "advancing") {
         mod = this.user.get_current_module();
-        console.log("DEBUG 1-17 advancing status triggered, mod = ", mod);
+        console.log("LOG advancing status triggered, mod = ", mod);
     } else if (this.advance_improve_status === "improving") {
         mod = this.user.get_improving_module();
-        console.log("DEBUG 1-17 improving status triggered, mod = ", mod);
+        console.log("LOG improving status triggered, mod = ", mod);
     } else {
-        console.log("DEBUG 5-13 weird status triggered, namely ",
+        console.log("LOG weird status triggered, namely ",
         this.advance_improve_status);
         if (this.advance_improve_status === null) {
-            console.log('the status is null!!!');
+            console.log('PROBLEM the status is null!!!');
         }
     }
     
@@ -1131,7 +1131,7 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
     };
     return map*/
     
-    console.log("DEBUG 9-30 this.game.cheat_sheet", this.game.cheat_sheet);
+    // console.log("DEBUG 9-30 this.game.cheat_sheet", this.game.cheat_sheet);
     
     return this.game.cheat_sheet || 'no cheat sheet for this mode';
 }
@@ -1174,6 +1174,7 @@ Quiz.prototype.initialize_cheat_sheet = function() {
 Quiz.prototype.initialize_vocab_cheat_sheet = function () {
     var name = "vocab_cheat_sheet"
     var vocabulary_items = this.get_vocab_cheat_sheet_map();
+    debug_log("ERASE WHEN DONE vocabulary_items = ", vocabulary_items);
     // var outer_div = el("image_display_box");
     var outer_div = el(name + "_div");
     // var e = el('vocab_cheat_sheet');

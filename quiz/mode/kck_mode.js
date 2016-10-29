@@ -4,7 +4,8 @@
 
 
 // Global levels, somewhat of a hack.
-var global_levels;
+// (Akiva: this seems to be only used here. Is it actually used or is it just a free-floating hack?)
+// // var global_levels;
 
 var KCKModeGame = function () {
     this.data = null;
@@ -56,7 +57,7 @@ KCKModeGame.prototype.next_question = function () {
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
     
-    console.log('level =', this.level);
+    
     
     // define source and target language
     var source_language = weighted_choice(
@@ -73,34 +74,20 @@ KCKModeGame.prototype.next_question = function () {
     // todo implement generate_sentence function returning a sentence
     var sentence = generate_sentence(
         source_language, target_language,
-        this.level.kck_level, this.level.latin_extra_level);
-    console.log('sentence =', sentence);
+        this.level.kck_level, this.level.latin_extra_level, null);
+    // console.log('sentence =', sentence);
     // this.cheat_sheet = data.cheat_sheet;
     // sets data
     // var data = make_output(this.level, null, 'quiz_english');
     // todo implement or find some method that does this
     this.question = sentence.translate_into(source_language);
-    console.log('question =', this.question);
+    // console.log('question =', this.question);
     // todo is the following otiose?
     // this.sentence = data.sentence;              // text displayed in display box
     // this.target_indices = data.target_indices;      //highlighted word if necessary
     
     this.cheat_sheet = this.kck_cheat_sheet(sentence.chosen_lexemes);
-    /*
-    // damage control begin: Akiva's attempts to console.log the vocab cheat sheet function
-    console.log("DEBUG 9-30 about to make vocab_cheat_sheet = ");
-    // below is the super hacky version that works but just gives lexeme objects:
-    // var kck_cheat_sheet = chosen_lexemes_as_global_variable_hack;
-    //below is an attempt at JSON stringify
-    var kck_cheat_sheet = JSON.stringify(chosen_lexemes_as_global_variable_hack);
-    this.cheat_sheet = kck_cheat_sheet;
-
     
-
-    console.log("DEBUG 9-30 finished making kck_cheat_sheet with this.cheat_sheet = ", this.cheat_sheet);
-    
-    // damage control end
-    */
     
     var remove_dashes_bool = get_current_module(this.level.kck_level).verb_dashes_removed;
     
@@ -125,7 +112,7 @@ KCKModeGame.prototype.next_question = function () {
     
     // todo implement or find some method that does this
     var drops_and_non_drops = sentence.get_all_drops_and_non_drops(this.level.kck_level, target_language);
-    console.log('drops and non drops =', drops_and_non_drops);
+    // console.log('drops and non drops =', drops_and_non_drops);
     
     
     for (var i = 0; i < drops_and_non_drops.length; i++) {
@@ -151,7 +138,7 @@ KCKModeGame.prototype.next_question = function () {
         return x instanceof DropDown;
     });
     
-    console.log('used drops and non drops =', this.used_drops_and_non_drops);
+    // console.log('used drops and non drops =', this.used_drops_and_non_drops);
     
     this.give_away_phrase = "The correct answer was: ";
     this.give_away_ending_phrase = ".";
@@ -167,12 +154,11 @@ KCKModeGame.prototype.next_question = function () {
         return x.drop.correct_path;
     });
     
-    console.log('correct =', this.correct_answer_as_string,
-    this.correct_answer_as_path);
+    // console.log('correct =', this.correct_answer_as_string, this.correct_answer_as_path);
     
     // console.log("DEBUG this.correct_answer = ", this.correct_answer);
     
-    console.log("DEBUG entering 1st random_choice");
+    // console.log("DEBUG entering 1st random_choice");
     this.none_display = random_choice(map_level_to_allowed(
         this.level.latin_extra_level, latin_extra_levels).none_display);
     
@@ -263,7 +249,7 @@ KCKModeGame.prototype.process_answer = function(){
     var drop_down_statuses = this.actual_drops.map(function (x) {
         return x.get_status();
     });
-    console.log('drop down statuses =', drop_down_statuses);
+    // console.log('drop down statuses =', drop_down_statuses);
     this.display_green_and_red_path(drop_down_statuses);
     // 'correct', 'incorrect', or 'missed'
     var correct_status = get_correct_status(drop_down_statuses);
@@ -285,14 +271,14 @@ KCKModeGame.prototype.process_answer = function(){
 KCKModeGame.prototype.process_correct_answer = function () {
     this.quiz.increment_score();
     
-    console.log("DEBUG entering 2nd random_choice");
+    // console.log("DEBUG entering 2nd random_choice");
     var cell_1 = random_choice(KCKModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML += '<br/>' + cell_1 + " ";
     var correct_answer_as_string_for_path = this.correct_answer_as_string;
     var question_as_string_for_path = this.question;
     var question_plus_answer_as_string = question_as_string_for_path + " = " + correct_answer_as_string_for_path;
-    console.log("DEBUG answer_as_string_for_path =", correct_answer_as_string_for_path);
+    // console.log("DEBUG answer_as_string_for_path =", correct_answer_as_string_for_path);
     fbox.appendChild(document.createTextNode(question_plus_answer_as_string));
     fbox.appendChild(document.createElement('br'));
     fbox.appendChild(document.createElement('br'));
@@ -310,14 +296,14 @@ KCKModeGame.prototype.process_incorrect_answer = function () {
     }
     
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
-        console.log("DEBUG entering 3rd random_choice");
+        // console.log("DEBUG entering 3rd random_choice");
         
         var cell_1 = random_choice(KCKModeGame.cell_1_feedback_wrong);
         var cell_3 = random_choice(KCKModeGame.cell_3_feedback_wrong);
         
         
         
-        console.log("DEBUG leaving 3rd random_choice");
+        // console.log("DEBUG leaving 3rd random_choice");
         
         var fbox = el("feedbackbox");
         fbox.innerHTML += "<br/>" + cell_1 + " " + cell_3;
@@ -370,111 +356,6 @@ KCKModeGame.prototype.display_green_and_red_path = function (statuses) {
 }
 
 
-/*
-//damage control begin:
-// Akiva makes a global variable to hold chosen lexemes
-// i.e. chosen_lexemes is what is produced by the kernel generation process
-
-var chosen_lexemes_as_global_variable_hack;
-
-
-// damage control end
-*/
-
-
-
-
-
-//damage control begin:
-// Akiva added this global variable to handle the kck_vocab_cheat_sheet
-
-// argument should be a function that takes a real argument (something like master_lexeme_list)
-// for hacking purposes we are going to use a global variable 
-// gradually we'll upgrade it to a real argument and function
-
-// var kck_cheat_sheet = chosen_lexemes_as_global_variable_hack;
-
-    /*
-    function (chosen_lexemes_as_global_variable_hack) {
-    
-    // damage control begin
-    console.log("DEBUG 9-30-16 in kck_mode.js chosen_lexemes_as_global_variable_hack", chosen_lexemes_as_global_variable_hack);
-    // damage control end
-    
-    
-
-    
-    
-    // damage control begin
-    console.log("DEBUG 9-30-16 in kck_mode.js chosen_lexemes_as_global_variable_hack", chosen_lexemes_as_global_variable_hack);
-    // damage control end
-    
-    
-    
-    // We put our lexemes in groups corresponding to their part of speech.
-    var lexemes_by_part_of_speech = separate_and_sort_by(
-        master_lexeme_list, function (x) {
-            return x.properties.core.part_of_speech});
-    // We sort each group.
-    var lexemes_sorted_by_root = lexemes_by_part_of_speech.map(
-        function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
-    // We push the part of speach to each item (as a header).
-    lexemes_sorted_by_root.forEach(function (x) {
-        x.unshift(x[0].properties.core.part_of_speech + 's')});
-    return concat_arrays(lexemes_sorted_by_root).map(function (x) {
-        if (typeof x === 'object') {
-            return [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root]
-        } else {
-            return x
-        }
-    });
-    
-}
-*/
-
-//damage control end
-
-
-
-
-
-
-//damage control begin:
-// Akiva added this global variable to handle the kck_vocab_cheat_sheet
-
-// argument should be a real argument (master_lexeme_list)
-// for hacking purposes we are going to use a global variable 
-// gradually we'll upgrade it to a real argument
-
-// var kck_cheat_sheet_first_attempt = function (chosen_lexemes_as_global_variable_hack) {
-    
-//     // damage control begin
-//     console.log("DEBUG 9-30-16 in kck_mode.js chosen_lexemes_as_global_variable_hack", chosen_lexemes_as_global_variable_hack);
-//     // damage control end
-    
-    
-    
-//     // We put our lexemes in groups corresponding to their part of speech.
-//     var lexemes_by_part_of_speech = separate_and_sort_by(
-//         master_lexeme_list, function (x) {
-//             return x.properties.core.part_of_speech});
-//     // We sort each group.
-//     var lexemes_sorted_by_root = lexemes_by_part_of_speech.map(
-//         function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
-//     // We push the part of speach to each item (as a header).
-//     lexemes_sorted_by_root.forEach(function (x) {
-//         x.unshift(x[0].properties.core.part_of_speech + 's')});
-//     return concat_arrays(lexemes_sorted_by_root).map(function (x) {
-//         if (typeof x === 'object') {
-//             return [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root]
-//         } else {
-//             return x
-//         }
-//     });
-// }
-
-
-//damage control end
 
 
 
@@ -484,7 +365,6 @@ var chosen_lexemes_as_global_variable_hack;
 KCKModeGame.prototype.kck_cheat_sheet = function (chosen_lexemes) {
     var source_language = this.source_language;
     var target_language = this.target_language;
-    console.log("DEBUG 9-30-16 checkpoint #1");
     var lexemes_sorted_by_part_of_speech = Object.keys(chosen_lexemes).sort().map(function (x) {
         return chosen_lexemes[x];
     });
@@ -511,6 +391,6 @@ KCKModeGame.prototype.kck_cheat_sheet = function (chosen_lexemes) {
             }
         });
     });
-    console.log(result);
+    // console.log(result);
     return result;
 }

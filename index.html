@@ -41,8 +41,10 @@
 
         <input name="user_option" type="radio" onchange="set_mode(1)" checked>I already have an account <br>
         <input name="user_option" type="radio" onchange="set_mode(2)">I want to create an account <br>
-        <input name="user_option" type="radio" onchange="enter_anonymous_game()">I want to play without logging in <br>
-        <input name="user_option" type="radio" onchange="set_mode(4)">I want to reset my password <br>
+        <!--anonymous mode is not yet supported so anonymous game is disabled for now-->
+        <!--<input name="user_option" type="radio" onchange="enter_anonymous_game()">I want to play without logging in <br>-->
+        <!--change password is not workable if students have firewall so we're disabling change password functionality-->
+        <!--<input name="user_option" type="radio" onchange="set_mode(4)">I want to reset my password <br>-->
        <br>
 
 
@@ -63,7 +65,8 @@
         <br>
         <button id="login_button" type="button" class="hoverable" style="font-family:baskerville" onclick="login()">login</button>
         <button id="create_account_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="create_account()" style="display:none">create account</button>
-        <button id="forgot_password_button" type="button" class="hoverable" style="font-family:baskerville" onclick="reset_password()">I forgot my password</button>
+        <!--forgot password is not yet supported so disabled for now-->
+        <!--<button id="forgot_password_button" type="button" class="hoverable" style="font-family:baskerville" onclick="reset_password()">I forgot my password</button>-->
         <button id="change_password_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="initiate_change_password()" style="display:none">change password</button>
         
         <!--<button id="email_new_password_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="reset_password()">email me a temporary password</button>-->
@@ -73,7 +76,8 @@
         <br>
         <br>
         <br>
-        <div id="info_footer" class="hoverable" style="font-family:baskerville; font-size:10px"><a href=\"https://sentence-graph-cashmonides.c9.io/index.html\">information for parents</a></div>
+        <!--information for parents not yet linked to anything so disabled for now-->
+        <!--<div id="info_footer" class="hoverable" style="font-family:baskerville; font-size:10px"><a href=\"https://sentence-graph-cashmonides.c9.io/index.html\">information for parents</a></div>-->
 
 
     </div>

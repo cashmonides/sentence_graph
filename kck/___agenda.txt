@@ -4,34 +4,144 @@ BIRD'S EYE AGENDA
 step 1
     dash removal (done)
     fix admin (done)
-    test
-    commit
+    test (done)
+    commit (done)
     test basic functionality after commiting
     test SQL posting after commiting
-    remove "verbed" from translation formulae of relative verb regime   
-        we don't want what we have now which is:
-            they saw why he spoke = vid-ēbā-nt cūr dīc-erē-t
-        we want:
-            they say why he was speaking
-        i.e. in relative: we always preserve the regime
-        but in absolute regime we want to be able to adjust thinks like:
-            in imperfect basic level = "spoke" advanced level = "was speaking"
+    
+FIX in step 1
+    e-m changes only if final 
+        e.g. ē-m -> e-m not in terrē-mur only in terrē-m
+    range sampler doesn't seem to work with true false?
+        e.g. 'verb_dashes_removed': {'true': 0.0005, 'false': 0.5},
+    MUST DO: 
+        check AKiva's proper nouns intervention
+        eliminate null strings from drop downs
+    BUG
+        cannot read 'properties' of undefined (when gods are included)
+            one of the gods must be sick in a lexical sense
+    little tiny thing   
+        in feedback box in quick mode, the sentence should be repeated
+
 
 step 2
-    add lexemes and make levels
+    disable change password DONE
+    clean out console log DONE
+    change 1s 2s 3s to I you he DONE
+    narrow drop downs except at final string DONE
+    make names and password for LLS DONE
+    enter accounts DONE
+    change citation form of latin lexemes (e.g. iub- (2) not iubere) DONE
+    move submit button and cheat sheets to the right (won't overlap with hoverable drop downs) DONE
+    short-term solution to final vs medial m
+    tweak drop_levels so that there are more drops
+    make kck levels
+    proof modules 1-5
+    add a lot of intransitive and ditransitive verbs to kck mode
+    add a lot of verbs to mcmode
+    add english sentences
     make cheat_sheet for dash removal
-    (use a paper handout/PDF cheat sheet for ambiguity)
-
-
-step 3 possibly
-    finish and test Dan's ambiguity eliminator on undashed forms
     
+
+
+step 3 
+    - morphological elements in path name
+        - they were loving
+        - am / port / vor / port
+        - -> a / aba / abi / e / eba / ebi / e / ie / ia / are/ ere / ere
+        - -> o s t mus tis nt
+    
+        -
+    
+    
+step 3.5
+    before launching into nouns: make debugging more elegant
+        the error logger (which logs in urgent error log) conceals some information
+        in development mode we should switch it off
+    before launching into nouns: log the relevant info (not a debug log)
+        e.g. log what the correct answer is, what lexeme choices we've made
+        have it invisible when the development flag is off
+    perhaps before making nouns: we make a more elegant dictionary traverser
+        - we want a more generalized form of the dictionary traverser
+        - goal: get a terminal entry in a dictionary that is buried beneath an arbitrary number of sublevels
+          with an arbitrary kind of key
+        - i.e. certain triggers (level.basic) dictate certain paths through the dictionary
+        - i.e. it seems conceivable that a dictionary interrogator could descend a dictionary
+        - at each step it consults a list of relevant properties (terminology.basic, regime.relative)
+        - if it matches true it descends that branch, if it matches false it keeps going
+        - I imagine an argument structure something like this:
+            - let's say we want to get the english translation of the universal tense "imperfect"
+            - but the true answer to this may be buried benath a few layes of nesting in the dictionary
+            - and the true answer may be subject to a wide range of constraints
+        
+
+
     
 step 4
+    make a totally modular way for nouns to be introduced
+        completely quarantine all pre-noun steps
+        the info that gets sent to the noun-bulding unit should be:
+            entirely recoverable from components and/or kernels
+            in a very minimalist form
+                e.g.
+                    subject: true, animate,
+                    object: optional
+                    implement: false
+            feedable into our weighted-allowed in some way:
+                e.g. if we've specified that we want explicit: 0.5, implicit: 0.5
+        seems like there are three categories of info about each role:
+            - possible (e.g. ditransitive verbs and objects)
+                outcome would depend on how our randomized interrogation of weighted allowed comes out
+            - mandatory (e.g. indirect statements need a noun)
+            - forbidden (e.g. certain verbs cannot take an implement *he saw with a sword)
+        
+        
+            
+            
+SET UP FOR FURTHER STEPS
+    walk through control flow for indirect statement
+        goal: find hacky parts, pain points, gather info for redesign
+        goal: test how nouns can be introduced (indirect statment forces at least one noun to appear)
 
 
+NEEDS
+- security
+    - make a captcha for login 
+        - (classify photo as animal as biped quadruped arthropod)
+        - basic latin translation (e.g. the wolf will love the horses)
+        - congratulations! you've demonstrated that you are both a human and a creature that knows latin
+        - add a 5 second timeout somewhere in the flow to discourage any bots
+    - make a log of anytime there are more than 20 login attempts (i.e. some kind of security log)
+    - in the admin page, post any security alerts
+    - make a dictionary of jpegs with biped, quadruped, arthropod
+        key: wolf1.jpg
+        value: biped
+    - as well as a list
+- a generalized form of the dictionary traverser (also mentioned above)
+    - goal: get property from a dictionary that has an arbitrary number of sublevels
+      with an arbitrary kind of key
+    - i.e. certain triggers (level.basic) dictate certain paths through the dictionary
+    - i.e. it seems conceivable that a dictionary interrogator could descend a dictionary
+    - at ech step it consults a list of relavent properties (terminology.basic, regime.relative)
+    - if it matches true it descends that branch, if it matches false it keeps going
+    - I imagine an argument structure something like this:
+        - let's say we want to get the english translation of the universal tense "perfect"
+        - but the true answer to this may be buried benath a few layes of nesting in the dictionary
+        - and the 
+        that's subject to some constraints, so
+- a testing routine in admin 
+    - iterates through every level (kck, etymology etc.)
+    - produces 2 things:
+        - a sample output (100 outputs)
+        - an error status (all is well, fatal error at level 20, sick mode at level 20, 10 or more retries attempted)   
+    - would be very useful to do this in etymology (in csv format for easy human-readable conversion)
 
     
+    
+- at some point - not necesarily soon - terminal string click should serve as submit
+    - at more advanced levels that would allow for quicker input and more practice per minutes
+    - it would be especially useful in a very targeted mode like morphology mode
+    - 
 PREREQ
 
 
@@ -55,15 +165,9 @@ SEEMS TO BE FIXED
     - long term solution: set gender based either on gender of noun 
         or on some parameter set module-by-module e.g. subject_gender: ['masculine': 0.3, 'feminine': 0.3, 'neuter': 0.3]
 
-- crucial bugs: present subjunctive???? is still there
 
 
 NEEDS TO BE FIXED AS A PREREQ
-
-  
-
-
-
 
 - potential issue: say vs speak in drop down heading PERHAPS DONE NEEDS CHECKING
 
@@ -74,17 +178,13 @@ NEEDS TO BE FIXED AS A PREREQ
 
 
 - in early stages of kck, passives should be late in the path
-- "was verbing" hasn't been taught to the kids yet
+
 
     
 DESIDERATA BEFORE NOUNS
 - if nothing entered in a field when creating account, it should still create a field in firebase (otherwise it messes up and makes the user sick - like beatrice and brandon)
 
-- morphological elements in path name
-    - they were loving
-    - am / port / vor / port
-    - -> a / aba / abi / e / eba / ebi / e / ie / ia / are/ ere / ere
-    - -> o s t mus tis nt
+
 
 
 

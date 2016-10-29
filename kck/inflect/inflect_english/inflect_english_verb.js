@@ -132,7 +132,7 @@ var remove_english_irregularities_to_not_apply = function (translation_formula) 
 }
 
 var get_english_translation_formula = function (tense_voice, regime, kck_level) {
-    console.log(tense_voice);
+    
     // Step 1.5. (Simply getting the translation formula.)
     var translation_formula = english_tense_to_translation_formula[
         tense_voice];

@@ -8,6 +8,10 @@ var Conjunction = function (citation_name) {
     // We get the conjunction corresponding to our string
     // from the conjunction library.
     var conjunction = conjunction_library[citation_name];
+    // We check that the conjunction exists.
+    if (!is_object(conjunction)) {
+        throw 'Conjunction ' + citation_name + ' does not exist!';
+    }
     // We stringify and parse the conjunction corresponding to our string
     // to avoid mutability issues, in effect copying it.
     var copied_conjunction = JSON.parse(JSON.stringify(conjunction));

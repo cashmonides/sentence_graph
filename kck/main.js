@@ -5,14 +5,15 @@
 var LEXEME_ERROR_CATCHING_MODE = 'throw';
 
 // This is the master function.
-var generate_sentence = function (source, target, kck_level, drop_extra_level) {
+var generate_sentence = function (source, target, kck_level, drop_extra_level,
+allowed_conjunctions_override) {
     var success = false;
     while (!success) {
         // We make a random sentence.
         // console.log("DEBUG NO VERB IN 10-2-16 checkpoint #3 about to make random_sentence");
         
         
-        var sentence = make_random_sentence(kck_level);
+        var sentence = make_random_sentence(kck_level, allowed_conjunctions_override);
         
         
         // console.log("DEBUG NO VERB IN 10-2-16 checkpoint #4 done making random sentence");

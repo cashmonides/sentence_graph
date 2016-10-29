@@ -1,4 +1,17 @@
+var proper_noun_article;
+
 function inflect_english (kernel, lexeme, word_settings) {
+    
+    //begin AKiva intervention
+    
+    if (lexeme.properties.latin.proper === true) {
+        proper_noun_article = 'proper';
+    } else {
+        proper_noun_article = 'improper';
+    }
+    
+    //end AKiva intervention
+    
     if (!lexeme) {return {}}
     switch (lexeme.properties.core.part_of_speech) {
         case (Part_of_speech.Noun) :
@@ -12,7 +25,12 @@ function inflect_english (kernel, lexeme, word_settings) {
 
 
 var make_article = function () {
-    return "the";
+    if (proper_noun_article == 'proper') {
+        return "";
+    } else {
+        return "the";
+    }
+    
 
 
     //below is an idea but first we have to implement a dictionary called article_number

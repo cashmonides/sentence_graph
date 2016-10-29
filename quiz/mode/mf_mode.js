@@ -278,7 +278,7 @@ MFModeGame.prototype.get_mode_name = function() {
 
 
 MFModeGame.prototype.next_question = function () {
-    console.log("DEBUG 4-9 starting next_question in mf mode");
+    console.log("DEBUG  starting next_question in mf mode");
     
     
     clear_input_box("input_box");

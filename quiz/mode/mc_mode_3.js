@@ -46,22 +46,29 @@ MCMode3Game.prototype.get_mode_name = function() {
 
 
 MCMode3Game.prototype.next_question = function () {
+    console.log("DEBUG 10-23 checkpoint #1 entering next_question in mf_mode");
     var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
     
     //sets up our lexicon
-    console.log("DEBUG 1/15 this.quiz.module.id =", this.quiz, this.quiz.module, this.quiz.module.id)
+    console.log("DEBUG 10-23 checkpoint #2 about to generate lexicon");
+    // console.log("DEBUG 1/15 this.quiz.module.id =", this.quiz, this.quiz.module, this.quiz.module.id)
     var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
-    console.log('DEBUG 11-16 lexicon = ', list_of_lexeme_strings)
+    console.log('DEBUG 10-23 list_of_lexeme_strings = ', list_of_lexeme_strings)
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
-    console.log("DEBUG 4-25 checkpoint 1, current_Lexicon produced, about to make output");
-    console.log("DEBUG 4-25 about to make output with this.level = ", this.level);
-    console.log("DEBUG 4-25 about to make output with current_lexicon = ", current_lexicon);
+    console.log('DEBUG 10-23 current_lexicon = ', current_lexicon);
+    
+    console.log("DEBUG 10-23 checkpoint 3, current_Lexicon produced, about to make output");
+    console.log("DEBUG 10-23 about to make output with this.level = ", this.level);
+    console.log("DEBUG 10-23 about to make output with current_lexicon = ", current_lexicon);
     var data = make_output(this.level, current_lexicon);
-    console.log("DEBUG 4-25 exited make_output with data = ", data);
+    console.log("DEBUG 10-23 exited make_output with data = ", data);
+    
+    
+    
     this.cheat_sheet = data.cheat_sheet;
-    console.log("DEBUG 4-25 data.cheat_sheet = ", data.cheat_sheet);
+    // console.log("DEBUG 4-25 data.cheat_sheet = ", data.cheat_sheet);
     //sets data
     // var data = make_output(this.level, null, 'quiz_english');
     this.question = data.question;
@@ -204,7 +211,7 @@ MCMode3Game.prototype.process_answer = function(){
 MCMode3Game.prototype.process_correct_answer = function () {
     this.quiz.increment_score();
     
-    console.log("DEBUG entering 2nd random_choice");
+    // console.log("DEBUG entering 2nd random_choice");
     var cell_1 = random_choice(MCMode3Game.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
@@ -219,18 +226,18 @@ MCMode3Game.prototype.process_incorrect_answer = function () {
     if (this.quiz.submodule.incorrect_streak === 1) {
         this.quiz.decrement_score();
     } else {
-        console.log("DEBUG if not triggered");
+        console.log("PROBLEM if not triggered");
     }
     
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
-        console.log("DEBUG entering 3rd random_choice");
+        // console.log("DEBUG entering 3rd random_choice");
         
         var cell_1 = random_choice(MCMode3Game.cell_1_feedback_wrong);
         var cell_3 = random_choice(MCMode3Game.cell_3_feedback_wrong);
         
         
         
-        console.log("DEBUG leaving 3rd random_choice");
+        
         
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_3;

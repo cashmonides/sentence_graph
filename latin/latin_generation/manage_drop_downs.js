@@ -15,7 +15,7 @@ function manage_drop_downs(choice, output, english_template, language_enum, drop
     var r = concat_arrays(english_template.map(function (x) {return (drop_non_drop_map[x] === 'drop' ?
             create_drop_down_object : create_non_drop_object)
         (x, output, choice, language_enum)}));
-    console.log('DEBUG 12-23 manage_drop_downs result = ', r);
+    // console.log('DEBUG 12-23 manage_drop_downs result = ', r);
     return r;
 }
 

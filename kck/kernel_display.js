@@ -138,6 +138,7 @@ Kernel.prototype.get_verb_json_options = function (
     var json_options = option_list_to_json(
         options, drop_down_path, overall_ordering_preference,
         language_sorts[language], leave_out, process_final_string);
+    console.log('json_options =', json_options);
     return json_options;
 }
 

@@ -178,7 +178,7 @@ KCKSentence.prototype.pick_drop_down_lexemes = function (kck_level, drop_extra_l
                 throw 'n is not a number! It is not even ' +
                 'Not A Number! It is ' + JSON.stringify(n);
             }
-            console.log(n + ' lexemes needed to be dummy ' + part_of_speech + 's');
+            // console.log(n + ' lexemes needed to be dummy ' + part_of_speech + 's');
             // Only keep the non-chosen lexemes with
             // the correct part of speech.
             var allowed_dummies = allowed_lexemes.filter(function (x) {

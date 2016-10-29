@@ -23,10 +23,15 @@ get_feature_from_tf.english = {
     'time': make_feature_getter('time', 'english')
 };
 
+
+
+
 get_feature_from_tf.latin = {
     'tense_and_mood': get_latin_tense_and_mood_from_component_tense,
     'sequence': make_feature_getter('sequence', 'latin'),
     'time': make_feature_getter('time', 'latin')
 };
 
+
+//implement later when ready for ssslatin
 get_feature_from_tf.ssslatin = get_feature_from_tf.latin;

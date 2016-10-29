@@ -70,9 +70,12 @@ var cheat_sheet_map = {
     }
 }
 
+
+//chooses all available roots as specified for each module
 var select_available_roots = function (etym_level) {
     return map_level_to_allowed(etym_level, etym_levels).roots;
 }
+
 
 var get_words_from_roots = function (allowed_roots) {
     return Object.keys(words).filter(function (x) {
@@ -183,6 +186,7 @@ available_words, available_roots, number_of_answer_choices) {
                 correct_answer = word;
                 choices = word_choices;
             }
+            
             break;
         case 'root_to_root_definition':
         case 'root_definition_to_root':
@@ -206,6 +210,13 @@ available_words, available_roots, number_of_answer_choices) {
                 choices = root_choices;
             }
     };
+    //akiva_damage_control 10-21-16
+    console.log("ETYM.CSV output = ", question_template + clue + JSON.stringify(choices) + correct_answer); 
+    console.log("ETYM.CSV correct_answer = ", correct_answer);
+    console.log("ETYM.CSV choices = ", JSON.stringify(choices));
+    console.log("ETYM.CSV clue = ", clue);
+    console.log("ETYM.CSV question_template = ", question_template); 
+    console.log("ETYM.CSV question_type = ", question_type); 
     return {
         'question_type': question_type,
         'question_template': question_template,

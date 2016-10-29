@@ -591,7 +591,69 @@ var testing_lexemes = {
         },
     },
     verb: {
-        //transitive
+        //transitive no implement
+        rule: {
+            core_properties: {
+                name: 'rule',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '3',
+                citation_form: 'reg- (3)',
+                roots: {
+                    root_2: 'reg',
+                    root_3: 'rex',
+                    root_4: 'rect'
+                }
+            },
+            english: {
+                citation_form: 'rule',
+                roots: {
+            		'default': 'rule',
+            		'final-s': 'rules',
+            		'gerund': 'ruling',
+            		'past participle': 'ruled',
+            		'preterite': 'ruled'
+        		}
+        	}
+        },
+        grab: {
+            core_properties: {
+                name: 'grab',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '3i',
+                citation_form: 'cap- (3i)',
+                roots: {
+                    root_2: 'cap',
+                    root_3: 'cēp',
+                    root_4: 'capt'
+                }
+            },
+            english: {
+                citation_form: 'grab',
+                roots: {
+            		'default': 'grab',
+            		'final-s': 'grabs',
+            		'gerund': 'grabbing',
+            		'past participle': 'grabbed',
+            		'preterite': 'grabbed'
+        		}
+        	}
+        },
         carry: {
             core_properties: {
                 name: 'carry',
@@ -605,7 +667,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '1',
-                citation_form: 'portāre',
+                citation_form: 'port- (1)',
                 roots: {
                     root_2: 'port',
                     root_3: 'portāv',
@@ -623,6 +685,7 @@ var testing_lexemes = {
         		}
         	}
         },
+        //transitive with implement
         scare: {
             core_properties: {
                 name: 'scare',
@@ -636,7 +699,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '2',
-                citation_form: 'terrēre',
+                citation_form: 'terr- (2)',
                 roots: {
                     root_2: 'terr',
                     root_3: 'terru',
@@ -654,7 +717,6 @@ var testing_lexemes = {
         		}
         	}
         },
-        //transitive
         fill: {
             core_properties: {
                 name: 'fill',
@@ -668,7 +730,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '2',
-                citation_form: 'implēre',
+                citation_form: 'impl- (2)',
                 roots: {
                     root_2: 'impl',
                     root_3: 'implēv',
@@ -687,6 +749,7 @@ var testing_lexemes = {
         	}
         },
         //ditransitive
+        
         attack: {
             core_properties: {
                 name: 'attack',
@@ -700,7 +763,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '1',
-                citation_form: 'oppūgnāre',
+                citation_form: 'oppūgn- (1)',
                 roots: {
                     root_2: 'oppugn',
                     root_3: 'oppugnāv',
@@ -718,112 +781,6 @@ var testing_lexemes = {
         		}
         	}
         },
-        //ditransitive
-        eat: {
-            core_properties: {
-                name: 'eat',
-                part_of_speech: 'verb',
-                transitivity: 'ditransitive',
-                lexical_properties: [],
-                subject_white_list: ['animate'],
-                object_white_list: [], //left empty because almost every thing can be an object?
-                subject_black_list: ['abstraction'], // I don;t think we need abstraction here since nothing is both animate and an abstraction
-                object_black_list: ['abstraction', 'implement', 'mental']
-            },
-            latin: {
-                conjugation: '1',
-                citation_form: 'vorāre',
-                roots: {
-                    root_2: 'vor',
-                    root_3: 'vorāv',
-                    root_4: 'vorāt'
-                }
-            },
-            english: {
-                citation_form: 'eat',
-                roots: {
-            		'default': 'eat',
-            		'final-s': 'eats',
-            		'gerund': 'eating',
-            		'past participle': 'eaten',
-            		'preterite': 'ate'
-        		}
-        	}
-        },
-        //mental ditransitive with context-dependent translations
-        speak: {
-            core_properties: {
-                name: 'say/speak',
-                part_of_speech: 'verb',
-                transitivity: 'ditransitive',
-                lexical_properties: ['mental verb'],
-                subject_white_list: ['animate'],
-                object_white_list: ['mental'], //left empty because almost every thing can be an object?
-                subject_black_list: [], //left empty because animate white list excludes all things necessary
-                object_black_list: [],
-            },
-            latin: {
-                conjugation: '3',
-                citation_form: 'dīcere',
-                roots: {
-                    root_2: 'dīc',
-                    root_3: 'dīx',
-                    root_4: 'dict',
-                }
-            },
-            english: {
-                citation_form: 'say/speak',
-                roots: {
-            		'transitive': {
-            		    'default': 'say',
-            			'final-s': 'says',
-            			'gerund': 'saying',
-            			'past participle': 'said',
-            			'preterite': 'said'
-            		},
-            		'intransitive': {
-            		    'default': 'speak',
-            			'final-s': 'speaks',
-            			'gerund': 'speaking',
-            			'past participle': 'spoken',
-            			'preterite': 'spoke'
-            		}
-        		}
-        	}
-        },
-        //intransitive
-        come: {
-            core_properties: {
-                name: 'come',
-                part_of_speech: 'verb',
-                transitivity: 'intransitive',
-                lexical_properties: [],
-                subject_white_list: ['animate'],
-                object_white_list: [], 
-                subject_black_list: [], 
-                object_black_list: [],
-            },
-            latin: {
-                conjugation: '4',
-                citation_form: 'venīre',
-                roots: {
-                    root_2: 'ven',
-                    root_3: 'vēn',
-                    root_4: 'vent'
-                }
-            },
-            english: {
-                citation_form: 'come',
-                roots: {
-        			'default': 'come',
-        			'final-s': 'comes',
-        			'gerund': 'coming',
-        			'past participle': 'come',
-        			'preterite': 'came'
-                }
-    		}
-        },
-        //ditransitive
         love: {
             core_properties: {
                 name: 'love',
@@ -837,7 +794,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '1',
-                citation_form: 'amāre',
+                citation_form: 'am- (1)',
                 roots: {
                     root_2: 'am',
                     root_3: 'amāv',
@@ -855,6 +812,69 @@ var testing_lexemes = {
                 }
     		}
         },
+        eat: {
+            core_properties: {
+                name: 'eat',
+                part_of_speech: 'verb',
+                transitivity: 'ditransitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don;t think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '1',
+                citation_form: 'vor- (1)',
+                roots: {
+                    root_2: 'vor',
+                    root_3: 'vorāv',
+                    root_4: 'vorāt'
+                }
+            },
+            english: {
+                citation_form: 'eat',
+                roots: {
+            		'default': 'eat',
+            		'final-s': 'eats',
+            		'gerund': 'eating',
+            		'past participle': 'eaten',
+            		'preterite': 'ate'
+        		}
+        	}
+        },
+        //intransitive
+        come: {
+            core_properties: {
+                name: 'come',
+                part_of_speech: 'verb',
+                transitivity: 'intransitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], 
+                subject_black_list: [], 
+                object_black_list: [],
+            },
+            latin: {
+                conjugation: '4',
+                citation_form: 'ven- (4)',
+                roots: {
+                    root_2: 'ven',
+                    root_3: 'vēn',
+                    root_4: 'vent'
+                }
+            },
+            english: {
+                citation_form: 'come',
+                roots: {
+        			'default': 'come',
+        			'final-s': 'comes',
+        			'gerund': 'coming',
+        			'past participle': 'come',
+        			'preterite': 'came'
+                }
+    		}
+        },
         command: {
             core_properties: {
                 name: 'command',
@@ -868,7 +888,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '2',
-                citation_form: 'iubēre',
+                citation_form: 'iub- (2)',
                 roots: {
                     root_2: 'iub',
                     root_3: 'iuss',
@@ -899,7 +919,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '2',
-                citation_form: 'timēre',
+                citation_form: 'tim- (2)',
                 roots: {
                     root_2: 'tim',
                     root_3: 'timu',
@@ -917,6 +937,129 @@ var testing_lexemes = {
         		}
     		}
         },
+        //mental object or animate noun object (implement mental part later)
+        hear: {
+            core_properties: {
+                name: 'hear',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [], //later on we'll make it a combo mental verb and regular transitive
+                subject_white_list: ['animate'],
+                object_white_list: ['animate'], //left empty because almost every thing can be an object?
+                subject_black_list: [], //left empty because animate white list excludes all things necessary
+                object_black_list: [],
+            },
+            latin: {
+                conjugation: '4',
+                citation_form: 'aud- (4)',
+                roots: {
+                    root_2: 'aud',
+                    root_3: 'audīv',
+                    root_4: 'audīt',
+                }
+            },
+            english: {
+                citation_form: 'hear',
+                roots: {
+            		'transitive': {
+            		    'default': 'hear',
+            			'final-s': 'hears',
+            			'gerund': 'hearing',
+            			'past participle': 'heard',
+            			'preterite': 'heard'
+            		},
+            		'intransitive': {
+            		    'default': 'hear',
+            			'final-s': 'hears',
+            			'gerund': 'hearing',
+            			'past participle': 'heard',
+            			'preterite': 'heard'
+            		}
+        		}
+        	}
+        },
+        //mental ditransitive with consistent translations
+        shout: {
+            core_properties: {
+                name: 'shout',
+                part_of_speech: 'verb',
+                transitivity: 'ditransitive',
+                lexical_properties: ['mental verb'],
+                subject_white_list: ['animate'],
+                object_white_list: ['mental'], //left empty because almost every thing can be an object?
+                subject_black_list: [], //left empty because animate white list excludes all things necessary
+                object_black_list: [],
+            },
+            latin: {
+                conjugation: '1',
+                citation_form: 'clām- (1)',
+                roots: {
+                    root_2: 'clām',
+                    root_3: 'clāmāv',
+                    root_4: 'clāmāt',
+                }
+            },
+            english: {
+                citation_form: 'shout',
+                roots: {
+            		'transitive': {
+            		    'default': 'shout',
+            			'final-s': 'shouts',
+            			'gerund': 'shouting',
+            			'past participle': 'shouted',
+            			'preterite': 'shouted'
+            		},
+            		'intransitive': {
+            		    'default': 'shout',
+            			'final-s': 'shouts',
+            			'gerund': 'shouting',
+            			'past participle': 'shouted',
+            			'preterite': 'shouted'
+            		}
+        		}
+        	}
+        },
+        //mental ditransitive with context-dependent translations
+        speak: {
+            core_properties: {
+                name: 'say/speak',
+                part_of_speech: 'verb',
+                transitivity: 'ditransitive',
+                lexical_properties: ['mental verb'],
+                subject_white_list: ['animate'],
+                object_white_list: ['mental'], //left empty because almost every thing can be an object?
+                subject_black_list: [], //left empty because animate white list excludes all things necessary
+                object_black_list: [],
+            },
+            latin: {
+                conjugation: '3',
+                citation_form: 'dīc- (3)',
+                roots: {
+                    root_2: 'dīc',
+                    root_3: 'dīx',
+                    root_4: 'dict',
+                }
+            },
+            english: {
+                citation_form: 'say/speak',
+                roots: {
+            		'transitive': {
+            		    'default': 'say',
+            			'final-s': 'says',
+            			'gerund': 'saying',
+            			'past participle': 'said',
+            			'preterite': 'said'
+            		},
+            		'intransitive': {
+            		    'default': 'speak',
+            			'final-s': 'speaks',
+            			'gerund': 'speaking',
+            			'past participle': 'spoken',
+            			'preterite': 'spoke'
+            		}
+        		}
+        	}
+        },
         //mental transitive
         feel: {
             core_properties: {
@@ -931,7 +1074,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '4',
-                citation_form: 'sentīre',
+                citation_form: 'sent- (4)',
                 roots: {
                     root_2: 'sent',
                     root_3: 'sēns',
@@ -962,7 +1105,7 @@ var testing_lexemes = {
             },
             latin: {
                 conjugation: '2',
-                citation_form: 'vidēre',
+                citation_form: 'vid- (2)',
                 roots: {
                     root_2: 'vid',
                     root_3: 'vīd',

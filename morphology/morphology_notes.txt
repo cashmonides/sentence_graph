@@ -1,0 +1,759 @@
+
+PARAMETERS IN MODULE
+- drop down path    
+    - usually lexeme, verb_beginning, verb_middle, verb_ending
+- scramble morphological elements (bool)
+    - i.e. does it look like a aba abi e e eba ebi ea
+      or is it scrambled e i ie abi a aba
+
+
+
+
+FUNCTIONS THAT CONVERT ALLOWED LEVELS TO LATIN TENSE-MOOD COMBOS
+
+- input: lexemes allowed
+- output: list of conjugations
+
+- input: kck_levels
+- output: tenses and moodes
+
+
+QUESTION TYPE: English to Latin translation
+he walks and he sees
+
+what is the translation of "he sees"?
+
+correct answer:
+
+videt
+
+
+
+
+
+
+QUESTION TYPES
+-the main question type will be english-to-latin    
+    - we produce a kck sentence in english 
+        (he will walk / if he walks, he will see / he walks and he sees)
+    - we pick a part to test 
+        - we will only pick one verb to ask about
+        - unlike usual kck mode we won't ask about more than one verb or about a conjunction
+    - 
+- another question type will be: transformation mode (change X to Y)
+    - change AM-ABA-T (he loved) to passive (he was loved)
+    - or change AMAV-ISSE-T to imperfect subjunctive 
+    - this is widely considered to be one of the best ways of training students in the verb
+    - on the one hand: it might be best to make this a different mode
+    - on the other hand: this is really just a superset that contains the first question type
+        - i.e. it's just the first question type with only the last element displayed (he was loved)
+        - so it might make sense to just have a single mode with a parameter    
+            of whether we want to display the transformation part
+
+
+CHANGES IN GAME MODE
+- game mode is almost exactly like kck mode
+- terminal click should serve as submit
+
+
+
+
+
+INFRASTRUCTURE FUNCTIONS
+- component gives beginning,middle, end 
+    kernel and component need to be checked to see if they can produce 
+    an easy dictionary of beginning, middle, end
+    for us to compare with the answer given
+
+
+
+
+
+
+
+
+LITTLE THINGS
+- default order of morphological elements
+    - the dictionaries themselves may not give us a default order 
+        e.g. 1s 2s 3s
+        present imperfect future
+    so we may need to specify those somewhere if we haven't already done so
+
+PLANNING TO DO
+- step: decide on path names for verb morphotalk
+        morpho_drop_down_path: ['morpho_lexeme', 'verb_beginning', 'verb_middle', 'verb_ending']
+- decide game mode name : morphology
+
+
+AGENDA
+- build morphology mode game (on the model of KCK mode)
+- 
+
+
+WAY TO GENERATE SENTENCE FOR MORPHOLOGY MODE
+
+generate_sentence('english', 'latin', 10, 10, ['c_null', 'c_null_potential_subjunctive'])
+
+STEPS
+
+we start at the module
+the module says two things
+
+hey I want the path to be lexeme beginning middle end
+
+- step #1: add paths to modules
+
+
+and I want you to grab morphological material from these domains:
+
+3s and 3p
+active and passive
+past present and future
+conjugations 1 and 2
+
+- step #2: obtain this from kck level
+    - step #2a: obtain allowed persons and numbers
+    - step #2b: obtain allowed voices
+    - step #2c: obtain allowed tense-mood combinations
+        - step #2ci: put conjunction override in morphology_levels.js (done)
+        - step #2cii: use prune_tf_space with conjunction override from morphology_levels.js
+    - step #2d: obtain allowed conjugations
+        - step #2di: obtain allowed verbs
+        - step #2dii: obtain conjugations of allowed verbs
+
+we have a full-fledged data library of morphological elements in our inflect function
+so we know what we want to choose and where to get it.But how do we get these parameters?
+i.e. 3s and 3p active and passive
+We don’t want to have to manually specify it in the module itself because we might make a mistake. we might accidentally limit to 1st and 2nd conjugations but we actually have a 3rd conjugation verb in our allowed lexemes.
+But all this info is recoverable from kck_levels.
+so it seems best to go there
+we pull all allowed parameters there and we send this to a dictionary traverse
+the dictionary traverser crawls through our library of endings
+and picks the ones that match
+
+- step #3: dictionary traverser
+    - step #3i: traverse middles (present and perfect systems)
+    - step #3ii: traverse endings (present and perfect systems)
+        - note: how o/m works in endings is confusing. There is no o/m option,
+          only two o and m options that are chosen between.
+        - this clearly makes ending traversal more complex (but not much)
+        - all we have to do is pull both (which will also work for -or/r)
+         
+
+- step #3.5: get verb beginnings
+
+we either scramble them or keep them in their natural order
+
+step #4: get scrambling parameter, scramble
+    step #4i: get scrambling parameter
+    step #4ii: scramble
+
+compare path
+give red and green
+
+
+step #5:
+    - step #5i: get correct answer
+    - step #5ii: compare
+        - remember: for dashes, consider both posiibilities
+    - step #5iii: red and green
+
+and that's it
+
+
+
+
+
+
+
+
+
+
+
+COPY OF CHAT
+
+Hi!
+Akiva saunders (cashmonides@gmail.com)
+hey dan
+can you see this chat?
+Yes.
+Akiva saunders (cashmonides@gmail.com)
+great. I had a lookat thegame real quick. Very cool!
+is the change  in rule that you can't capture via suicide?
+I'm glad you found it interesting.
+I know you don't have a lot of time, so should we get started?
+From what I've seen so far, it seems like something strange happened that I don't know about.
+Akiva saunders (cashmonides@gmail.com)
+you mean with the game
+?
+With our game, sorry for the context shift.
+It's confusing to have two types of game being talked about at once,
+especially when they have so little in common.
+Akiva saunders (cashmonides@gmail.com)
+ok why don't we wrap up the discussion of the go variant first. 
+OK.
+Akiva saunders (cashmonides@gmail.com)
+Is the variation what I said?
+So, have you figured out the rules yet?
+Yes, you can't capture via suicide.
+Akiva saunders (cashmonides@gmail.com)
+no capture via suicide?
+There's another change.
+You see it when you play a whole game.
+Akiva saunders (cashmonides@gmail.com)
+does white make random moves?
+Yes.
+Random allowed moves
+Akiva saunders (cashmonides@gmail.com)
+I played through a quick game and finished but I didn't notice any other change
+Although it might just look like the computer is being stubborn about resigning,
+It really only stops playing when it has no legal move
+which means it loses.
+So there's no territory or prisoners counting.
+Akiva saunders (cashmonides@gmail.com)
+oh yeah I did notice that. I guess that is a variant
+well that is very cool! Impressive. 
+There are several implications of these changes in the rules, like that it's very hard to kill a stone and very easy to invade, but it seems like we should start talking about the much more complicated other game we have on our hands.
+Akiva saunders (cashmonides@gmail.com)
+yes lets
+So do you want to call me, or should I call you?
+Akiva saunders (cashmonides@gmail.com)
+I'm using this new fangled device that I just bought to have internet in my house. 
+It's possible we will be able to make it work for our chat functionality
+but it's also possible that it won't have enough bandwidth
+So should we just use the text communication?
+Akiva saunders (cashmonides@gmail.com)
+and we will have to use our phones for the audio communication
+That seems fine with me.
+Akiva saunders (cashmonides@gmail.com)
+let's send a few more texts back and forth and then we'll try a call
+OK. So let's start with talking about agenda. (You can call me at any time you want to.)
+So far, I've just played a little.
+I also created a debug_log function
+Akiva saunders (cashmonides@gmail.com)
+I don't have much to report on feedback from the game from players
+Which only logs when we are not in production
+Akiva saunders (cashmonides@gmail.com)
+all we had time to do was set up accounts
+ok that's very useful
+since I noticed that we cshouldn't be logging the correct answer
+when the students are playing.
+I see you added some greek gods.
+and removed some options on the login page
+Akiva saunders (cashmonides@gmail.com)
+yes i've added greek gods and added a proper noun interceptor and changed the login
+the proper noun interceptor prevents proper nouns
+ frombeing plural or having the
+in front of them
+I was going to ask 'what does interceptor mean?'
+but instead I'll note that we still seem to have an empty plural option in dropdowns.
+Akiva saunders (cashmonides@gmail.com)
+just intercepts them upstreamand changes the behavior
+I know now, but I was thinking it was a latin word that was somehow a proper noun.
+Akiva saunders (cashmonides@gmail.com)
+yeah that's something I wanted to ask if you knew how to fix easily. I can't quite track down in the control flow where we remove such things from the drop down
+I'm not sure either.
+But it should be on the agenda to find out.
+Akiva saunders (cashmonides@gmail.com)
+for now it's merely a cosmetic issue so it's not a super high priority
+OK.
+So what are our highest-priority issues right now?
+Akiva saunders (cashmonides@gmail.com)
+but I did do some testing with a more advanced student on the kck mode and it works smoothly and it's challenging. More lexemes will make it even better. So overall we're good and we should get player feedback next week
+here's my sense of our current situation
+OK. So do we want to add lexemes?
+Akiva saunders (cashmonides@gmail.com)
+no adding lexemes is an easy chore I can do
+no need for us to do it together
+I'll give you my sense of the situation then we'll start a call to discuss
+as I see it the crossroads we are at is
+our major new task is to add nouns to vcv mode
+while at the same time making vcv mode less hacky and more modular andmore data driven with a cleaner overall architecture
+that's the most important step
+but it's also something with a lot of careful design that needs to go into it
+and we don't want to rush it
+I agree.
+Akiva saunders (cashmonides@gmail.com)
+so one thing we want to do is buy ourselves a little time
+and stall the kids on something to give us plenty of time to work on this
+to me there are two relatively simple interventions we can make that would stall them immensely
+but that would be fairly simple for us to implement
+because we have the architecture already set up
+but do you get what I mean? does that all make sense and sound reasonable?
+Yes. What are the two interventions?
+Akiva saunders (cashmonides@gmail.com)
+intervention 1:
+make a tweak in vcv mode where the drop down path is not metacategories like tense, sequence, person etc
+but rather the actual morphological elements like
+a, aba, abi, 
+s, t, mus
+am , amav, amat
+Yes, that doesn't seem especially hard
+although we would have to make it only apply in latin-to-english
+Akiva saunders (cashmonides@gmail.com)
+yes English to Latin only. and yes the appeal is that it seems easy to implement but it adds huge pedagogical value and will take them a logng time to master
+and make our dropdowns differently
+i.e., with respect to the morphology
+instead of the voice, sequence, time etc. directly.
+But that seems like something we should be able to do anyway.
+Akiva saunders (cashmonides@gmail.com)
+yes it seems the drop down path should just be BEGINNING MIDDLE END
+Plus an initial choice between lexemes.
+Akiva saunders (cashmonides@gmail.com)
+and the things that populate it are just a library of all the possible morphological elements that can go into that slot
+the initial choice of lexeme would lead to the BEGINNING drop down, where they would pick between the principal parts AM, AMAV, AMAT
+I think I understand.
+I see how this is a good thing to do pedagogically.
+So what is the other thing?
+Akiva saunders (cashmonides@gmail.com)
+that step seems the most tractable and seems like we can cover today. The second step is a little more difficult perhaps but we have the architecture for it set up. 
+intervention 2:
+adjust the drop down funcitonality that we currently use in kck mode 
+to accept the taxonomical data
+Yes, that seems like a good idea.
+Akiva saunders (cashmonides@gmail.com)
+a little more design needs to go into this before we can dive right in
+I think we once tried to do that and it was rather easy.
+Akiva saunders (cashmonides@gmail.com)
+but it seems tractable
+and the pedagogical value is huge
+since right now they learn about 3 animals in class per week
+that doesn't give them much practice.if we add taxonomy they can practice tens of animals per hour
+I see. It does seem like this would really help them learn taxonomy.
+Akiva saunders (cashmonides@gmail.com)
+so what do you think? does that sound like a good agenda?give them some challenges so we can design nouns in kck mode at leisure and not be forced to hack our way through the mindfield?
+It actually seems to me that this text chat is rather good.
+Yes this seems like a good agenda.
+I'm not sure we need a call.
+Akiva saunders (cashmonides@gmail.com)
+(yeah text somehow can be more efficient for certain discussions. Let's only go to a call if we need to)
+so does intervention #1 seem like the best thing to start with?
+Yes, let's start with intervention #1,
+Akiva saunders (cashmonides@gmail.com)
+let's talk about some of the prereqs before we dive in
+What do you think the first step is for that?
+Akiva saunders (cashmonides@gmail.com)
+I think we need to talk about the overall architecture
+maybe we should start with the requisite info in module
+what info does module need to send to the game?
+drop down path
+range of options to populate
+I'm not sure there's a drop down path in intervention #1.
+Akiva saunders (cashmonides@gmail.com)
+(i.e. we don't want to give them o/m s t mustisnt and or, ris tur mur mini ntur if they haven't learned options)
+you mean no drop down path because it'salways beginning middle ending?
+Yes, that's what I was thinking.
+Akiva saunders (cashmonides@gmail.com)
+yeah I think that's generally true
+it seems unlikely but maybe there would come a day where we only want them to see ENDING or to give them only MIDDLE andENDING
+Yes that makes sense.
+Akiva saunders (cashmonides@gmail.com)
+seems unlikely but maybe worth making it controllable since it's fairly easy and it mimics the drop down architecture in kck mode
+Yes that seems like a good idea.
+Akiva saunders (cashmonides@gmail.com)
+did that make sense what I said about allowable options
+?
+We also might want variation sometimes, like beginning, end, middle.
+Allowable options make sense.
+Akiva saunders (cashmonides@gmail.com)
+both path and options seem something we would want to parameterize in the module
+We should probably try to figure out what the various parameters are.
+Akiva saunders (cashmonides@gmail.com)
+those are the only two I can think of that would be set by module
+can you think of any more?
+Those are the only ones I can think of.
+I meant the subparameters for range of options to populate.
+Akiva saunders (cashmonides@gmail.com)
+let's talk libraries of data.
+seems like we can either autogenerate the morphological elements
+or store them as data
+the data library apprach would be:
+here are all the things that can go into a middle element
+a
+aba
+abi
+e
+eba
+ebi
+etc.
+the allowed_morphological_options parameter in module would tell us which ones to grab
+It seems to me that there has to be some kind of connection to the actual meanings.
+Actually, I'm not sure there does.
+It depends on whether we want things like -t showing up as perfect endings.
+Akiva saunders (cashmonides@gmail.com)
+yes well lets talk now or at some point how we check for right answer
+One way would be to store the elements with metacharacters
+but actually we have to avoid being naive here
+Akiva saunders (cashmonides@gmail.com)
+whats the issue with the perfect -t ending?
+we would call that -it right?
+I mean, the question is whether we want present endings showing up in the perfect.
+If not, we can't just put very ending as an option everywhere
+Akiva saunders (cashmonides@gmail.com)
+let me check if I understand you properly: if -it shows up alongside -t it might be confusing?
+Yes, that's what I was wondering.
+Akiva saunders (cashmonides@gmail.com)
+I dont think it would be too confusing once they got used to it. After a day or so it would actually reinforce the pedagogical point that -t and -it are distinct morphological elements
+Ok, that makes sense.
+So creating drop downs should be rather easy.
+We just generate all possible combinations at every layer.
+Akiva saunders (cashmonides@gmail.com)
+yes I think we generate everything possible at that level of allowed
+so the middle element would literally look like this at a high level of allowed
+a
+aba
+abi
+e
+eba
+ebi
+e
+ie
+ia
+era
+eri
+isse
+NOTHING
+that's not a big drop down
+and that's at nearly the highest level 
+ending at highest level of allowed would be
+o
+m
+s
+t
+mus
+tis
+nt
+or
+r
+ris
+tur
+mur
+mini
+ntur
+i
+isti
+it
+imus
+istis
+erunt
+it seems easy enough just to store those as data 
+i.e. store the whole maximal set as daya
+the trick is we don't want to show them everything if they're at a lower level
+Yes, that seems like a good idea.
+Now the question is what we want the answer choices to look like.
+Akiva saunders (cashmonides@gmail.com)
+so yes we now have two questions:
+Do we want them to be dashed, or undashed, or to be able to control the behavior'
+Akiva saunders (cashmonides@gmail.com)
+what are the answer choices looking like and what is the correct answer that we compare it to look like
+let's put aside dashes for one second because that's more complicated
+but if we had a basic low level dashed correct answer
+AM-ABA-T
+it seems like we should be able to just match three things
+three distinct things
+and turn each  one red or green accordingly
+Yes that seems possible.
+Akiva saunders (cashmonides@gmail.com)
+removing dashes is a little more tricky but I think I have some ideas how to implement it down the road
+short version is basically: 
+The other issue is that we have to know things like what the correct answer uses o and when it uses m.
+Akiva saunders (cashmonides@gmail.com)
+(yes good point, we could use o/m and have the choice between them be part of remove dashes mode)
+it seems simplest to dealwith dashremoval like this:
+they answer AM-ABI-NT
+they get
+yay correct you got it right
+now pick which is the final version
+AMABINT (no change)
+AMABANT
+AMABENT
+AMABONT
+AMABUNT
+or something silly like that
+the non-silly version would be
+yay correct you got it right
+now pick the final form
+AMABINT (no change)
+AMABUNT
+OK. That makes sense.
+Akiva saunders (cashmonides@gmail.com)
+same goeswith macrons
+same goes with o/m
+yay you got it correct
+the answer is AMAV-ERI-O/M
+now is the final answer
+AMAVERO
+or AMAVERIM
+?
+something like that
+seems simple enough to just push that downstream
+So we'd have an ending o/m, as opposed to o and m being two separate endings?
+Akiva saunders (cashmonides@gmail.com)
+yes I think that's best
+not because it's true
+but it's how it's taught at the institute
+and how i teach it in class
+o/m is really just one thing that switches according to rules
+If it fits in pedagogically, it's probably a good idea to do it.
+Since it also seems simpler in other ways.
+Akiva saunders (cashmonides@gmail.com)
+if we are going to be comparing two sets of BEGINNING MIDDLE END we should make sure that the component is sending us the right info
+is that something we should be getting just from the string?
+or from the component itself?
+The component can send beginning middle end.
+Akiva saunders (cashmonides@gmail.com)
+like acomponent property beginning: ABA
+oh it can? that's good
+(Or at least it can easily be made to.)
+Akiva saunders (cashmonides@gmail.com)
+yeah i think it seems more modular if the component stores it and we compare to that
+The hacky way is to conjugate the verb and split on -.
+But just using the sub-functions
+that get the beginning, middle, and end
+seems more modular and just as easy.
+Akiva saunders (cashmonides@gmail.com)
+yeah that sounds true
+The only issue is that they'll come with metacharacters.
+Akiva saunders (cashmonides@gmail.com)
+well we can just strip those off no?
+Yes, we can
+and indeed down the road the meta characters will probably be helpful
+so we probably only want to strip them off
+right when we do the comparison
+Akiva saunders (cashmonides@gmail.com)
+yeah that sounds right
+ok so want to add anything before we sum things up?
+The only other issue I can think of is how to handle nouns in this mode.
+and also how to handle the parameter for allowable stems
+Akiva saunders (cashmonides@gmail.com)
+hmmm...
+i wasn't thinking of doing nouns yet
+Oh, and I though of the third issue of participles
+Akiva saunders (cashmonides@gmail.com)
+just verbs
+because we don't have nouns in kck mode
+and I think it's best to run this using the kck engine
+Yes, that's right. We won't need to worry about nouns.
+Akiva saunders (cashmonides@gmail.com)
+thought just start with verbs
+So what about the allowable stem parameter.
+It can't just be a list of the allowed items for that position,
+since it has to communicate with the verb.
+Akiva saunders (cashmonides@gmail.com)
+yeahthat's a good point
+each verb lexeme  in testing kernel library has root_2 root_3 root_4
+seems like the first step in the path
+is choose lexeme
+then we hit BEGINNING
+and then we have all allowed roots
+So we can probable just handle beginning
+Akiva saunders (cashmonides@gmail.com)
+1,2, or 3
+by instead of displaying
+stem_1
+stem_2
+stem_3
+displaying
+AM
+AMAV
+AMAT
+Akiva saunders (cashmonides@gmail.com)
+yeah exactly
+so their traversal of the drop down would look like this
+lexeme:
+amare
+videre
+timere
+then they see 
+AM / AMAV / AMAT
+they pick am
+then they see
+a aba abi e eba ea i
+(scrambled up)
+then they see the endings (possibly scrambled too)
+The only other issue I can see is participles
+(and in the future, infinitives)
+When we have something like amatus est
+Akiva saunders (cashmonides@gmail.com)
+participles and infinitives and imperatives don't have endings in the same way
+But participles still do have endings
+Akiva saunders (cashmonides@gmail.com)
+so yeah that's a good point. They don't have endings from the same morphological universe as the other verbs
+I usually teach a participle as:
+beginning = pp4
+middle = 
+nothing (perfect)
+ns/nt (present)
+ur (future)
+and so on
+and the ending is us, a, um with est
+but I think to properly handle these compound verb forms we'll need something like 
+beginning
+middle
+ending
+helping verb
+helping verb has a lot of possibilities
+Akiva saunders (cashmonides@gmail.com)
+and then ending needs to toggle appropriately between the verb ending universe and the noun ending universe
+it might be hard to have them all on one dropdown
+Akiva saunders (cashmonides@gmail.com)
+yes that's true
+The issue is that if participles are showing up with other verbs as options, then we need
+Akiva saunders (cashmonides@gmail.com)
+the kids don't actually use such advanced constructions yet
+both the noun and the verb endings as options (this is an additional issue).
+So one thing we could try to do is put participles off.
+Akiva saunders (cashmonides@gmail.com)
+so we should build it in to the design but we're not going to be showing it to the kids for at least another year, when they'll start learnign those forms
+So we could just act like participles don't exist.
+Of course then we have to make sure KCK modes
+Akiva saunders (cashmonides@gmail.com)
+Yes I agree. I think we should build in the architecture for them, but not commit to implementing them
+does not produce sentences where they are correct.
+Akiva saunders (cashmonides@gmail.com)
+yes thats true.I wonder if there's an easy way to detect such forms upstream and just not produce them..
+They occur in lots of different situations, though
+although you can tell whether they'll occur with just tense and voice
+Akiva saunders (cashmonides@gmail.com)
+I think we should try building in as much leeway for them as possible
+but exclude them upstream
+for now
+along the way we might discover an elegant option for how to handle the issue
+For now we should probably have some participles-off switch
+Akiva saunders (cashmonides@gmail.com)
+(the issue seems to be mainly that the drop downs are getting overpopulated if we have participle endings and helping verbs)
+and if it is turned on participles are not produced
+Akiva saunders (cashmonides@gmail.com)
+yes that's a good idea actually
+It might also be helpful to avoid participles accidentally showing up
+Akiva saunders (cashmonides@gmail.com)
+even in kck mode it's a good idea because the kids can't quite handle them yet when they're not in indirect question
+which they would probably do sometimes before the kids learned about them
+Yes I agree that it seems like a good idea even in KCK mode
+Akiva saunders (cashmonides@gmail.com)
+yes great. good thoughts
+ok before summing up, any other thoughts?
+No. I think we can start to implement now.
+Akiva saunders (cashmonides@gmail.com)
+ok let me try to summarize things.
+Listen to this and at the end, add things you think are missing or wrong
+we start at the module
+the module says two things
+
+hey I want the path to be lexeme beginning middle end
+and I want you to grab morphological material from these domains:
+
+3s and 3p
+active and passive
+past present and future
+conjugations 1 and 2
+we have a full-fledged data library of morphological elements in our inflect function
+so we know what we want to choose and where to get it.But how do we get these parameters?
+i.e. 3s and 3p active and passive
+We don’t want to have to manually specify it in the module itself because we might make a mistake. we might accidentally limit to 1st and 2nd conjugations but we actually have a 3rd conjugation verb in our allowed lexemes.
+But all this info is recoverable from kck_levels.
+so it seems best to go there
+we pull all allowed parameters there andwe send this to a dictionary traverse
+the dictionary traverser crawls through our library of endings
+and picks the ones that match
+we either scramble them or keep them in their natural order
+compare path
+give red and green
+and that's it
+let me use the bathroom real quick and I'll be right back
+OK.
+I agree with all of this.
+I think it's relatively hard to get tense-mood-combinations from KCK levels, but I think we have some function that does it that we can use.
+Akiva saunders (cashmonides@gmail.com)
+ok. hard because kck levels don't tell us latin-specific-information about tenses, only time?
+Yes, that's what I was thinking.
+Akiva saunders (cashmonides@gmail.com)
+and universal indicative tenses?
+ok well one thing that's just of pedagogical usefulness
+is this:
+hold on one second
+I think it's still possible, though.
+Akiva saunders (cashmonides@gmail.com)
+I'm looking at kck > inflect_latin > inflect_latin_refactor_verb_code
+it seems to me like the difficulty of translating kck levels to allowed morphological elements is only an issue in the middle element right?
+Well, it has an impact on other elements.
+For example, to know whether to allow perfect endings
+you need to know whether perfect tense is allowed.
+Akiva saunders (cashmonides@gmail.com)
+yeah that's true but overall the middle is more difficult than the end
+by a huge degree
+Yes, that's true.
+Akiva saunders (cashmonides@gmail.com)
+so do you have inflect_latin_refactor_verb_code open in front of you?
+yes, I do
+Akiva saunders (cashmonides@gmail.com)
+I'mjust looking at it now to see just how hairy the situation is
+it isn't the place where the hairiness shows up
+the hairiness shows up when getting all the possibilities
+which happens in
+kck/inflect/inflect_language_independent/prune_tf_space.js
+and in
+/kck/drop_down/drop_down_options.js
+in inflect_latin_refactor_verb_code we just get one possible outcome
+(actually, we just deal with one possible outcome)
+Akiva saunders (cashmonides@gmail.com)
+yeah prune_tf_space is hairy
+but whatever happens there
+cant we just traverse the inflection data and pick things
+we could just try every possiblility
+Akiva saunders (cashmonides@gmail.com)
+like so we're traversing the middle inflections variable
+we hit conjugation 1
+we check if there are conj 1 lexemes
+if true
+we go down a step
+we check present indicative
+is it in the allowed universal indicative tense
+if so we addit
+we move to the next one
+but how do we check perfect indicative
+Akiva saunders (cashmonides@gmail.com)
+when we hit present subjunctive we have to get more sophisticated
+I meant something like present subjunctive
+(I see that indicatives would generally be in the universal allowed indicative tense.)
+Akiva saunders (cashmonides@gmail.com)
+maybe we can check allowed_conjunctions and see whether they take subjunctives
+if so we check what sequences are allowed
+i.e. it seems like without going into a complicated space-prunign mode we could write a function that just returns a bool
+is a subjunctive ever going to occur?
+if so what sequences?
+and then we see only secondary sequence is allowed and miss flv present subjunctive.
+Akiva saunders (cashmonides@gmail.com)
+ok i think i see the edge case here
+let me see
+we have a module where only secondary sequence is allowed
+and we also have conditionals
+then we lose data
+well i don't know
+maybe there's some solution
+maybe if any conditionals occur at all, we add primary and secondary sequence
+It seems like prune_tf_space is a rather good solution.
+We iterate over regimes.
+Akiva saunders (cashmonides@gmail.com)
+oh really? is prune-tf-space workable?
+For each regime we feed it into prune_tf_space
+we get out a list of tense-voice combinations
+we remove any periphrastic that showed up, lop the voices off, and there we are.
+Akiva saunders (cashmonides@gmail.com)
+cool. that sounds good
+just a little time check here.
+I have a meeting I have to leave for
+in 15 minutes
+we've got a lot done so far in terms of design
+shall we try to identify the new functions that need to be written?
+or what do you think is best to do now?
+I'm not sure. I think we should be modular and put everything new into some new folder. Then we can start sketching out the function structure.
+Akiva saunders (cashmonides@gmail.com)
+i've made a morphology folder
+i'm not sure there's any unique data that can't be found in latin_inflect_refactor_verb_code
+I'mgonna start a notes file
+Right. I'm actually not sure whether we'll need to do almost everything in KCK files that already exist.
+But having a notes file in its own place seems wise.
+Akiva saunders (cashmonides@gmail.com)
+we will need to create a new game mode. I'll do that when I'm back from my meeting, which should be at 6
+why don't we each add some notes to the notes file and divvy up the work

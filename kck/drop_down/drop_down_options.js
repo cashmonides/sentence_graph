@@ -36,7 +36,7 @@ var get_drop_down_options = function (
         // We have conjunction then direction, not vice versa (as before).
         var tf_options = prune_tf_space(
             language, tf_spaces[language], filtered_allowed,
-            conjunction, direction, regime, kck_level);
+            conjunction, direction, regime, kck_level, null);
         return cross(tf_options, person_number_combinations, function (
             tf_option, person_number_combination) {
             // Make a function translation_and_features_from
@@ -53,7 +53,7 @@ var get_drop_down_options = function (
             return [option[0], transform_all_terminology(option[1])];
         });
     });
-    console.log(result);
+    // console.log("BACKLOG result of dropdowns = ", result");
     // We return our result.
     return result;
 }
