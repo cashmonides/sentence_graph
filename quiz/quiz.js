@@ -414,7 +414,8 @@ Quiz.prototype.next_mode = function (error) {
         }
         */
         global_sickness++;
-        if (global_sickness > 30) {
+        //todo akiva changed below because it was triggering during a functioning game
+        if (global_sickness > 1000) {
             alert('Everything is broken!');
             return;
         }

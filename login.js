@@ -74,7 +74,11 @@ function create_account() {
 function login() {
     var e = el("email").value;
     var p = el("password").value;
-    //console.log"logging in: ", e, p);
+    // console.log"logging in: ", e, p);
+    if (is_team(e)) {
+        console.log("team user detected");
+        check_time_stamp();
+    }
     Persist.login_user(e, p, success);
 }
 
@@ -92,6 +96,15 @@ function enter_anonymous_game() {
     User.remove_cookie();
     document.location = "../quiz/";
 }
+
+var is_team = function (email) {
+    var email_parts = email.split(/\./)
+    var last_part = peek(email_parts);
+    return last_part in {
+        'team': true
+    }
+}
+
 
 var is_special = function (email) {
     var email_parts = email.split(/\./)
@@ -164,4 +177,117 @@ function reset_password() {
     };
 
     Persist.reset_password(email, callback);
+}
+
+function check_time_stamp() {
+    var d = new Date();
+    console.log("DATE DEBUG pre-adjusted date = ", d);
+    var time = d.getTime();
+    console.log("DATE DEBUG pre-adjusted time = ", time);
+    var hour = d.getHours();
+    console.log("DATE DEBUG pre-adjusted hour = ", hour);
+    var local_day = d.getDay();
+
+    if (local_day == 2 || local_day == 4 || local_day == 5) {
+        if (hour == 9 || hour == 10 || hour == 11 || hour == 12 || hour == 13 || hour == 14 || hour == 15) {
+            console.log("success triggered, hour = ", hour);
+            alert("SUCCESS team play is allowed because it is within school hours");
+        } else {
+            console.log('failure triggered at hour level, hour = ', hour);
+            alert("FAILURE team play is only allowed within school hours");
+            location.reload();
+        }  
+    } else {
+        console.log('failure triggered at the day level, local_day = ', local_day);
+        location.reload();
+    }
+    
+    //below is the hour block
+    // if (hour == 9 || hour == 10 || hour == 11 || hour == 12 || hour == 13 || hour == 14 || hour == 15) {
+    //     console.log("success triggered, hour = ", hour);
+    //     alert("SUCCESS team play is allowed because it is within school hours");
+    // } else {
+    //     console.log('failure triggered, hour = ', hour);
+    //     alert("FAILURE team play is only allowed within school hours");
+    // }
+    
+    //this attempts the offset which doesn't seem needed
+    // d.setTime( d.getTime() + d.getTimezoneOffset()*60*1000 );
+    // console.log("DATE DEBUG post-adjusted time = ", d);
+    
+    // if (hour == (9 || 10 || 11 || 12 || 13 || 14 || 15)) {
+    //     console.log("success triggered, hour = ", hour);
+    //     alert("SUCCESS team play is allowed because it is within school hours");
+    // } else if (hour == (0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 16 || 17 || 18 || 19 || 20 || 21 || 22 || 23)) {
+    //     console.log("failure triggered, hour = ", hour);
+    //     alert("FAILURE team play is not allowed except within school hours");
+    // }
+    
+    
+    // if (hour === (9 || 10 || 11 || 12 || 13 || 14 || 15)) {
+    //     console.log("success triggered, hour = ", hour);
+    //     alert("SUCCESS team play is allowed because it is within school hours");
+    // } else if (hour === (1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 16 || 17 || 18 || 19 || 20 || 21 || 22 || 23)) {
+    //     console.log("failure triggered, hour = ", hour);
+    //     alert("FAILURE team play is not allowed except within school hours");
+    // } else {
+    //     console.log("bad data, hour = ", hour);
+    // }
+    
+    // if (local_day === (2|| 4 || 5)) {
+    //     if (hour === (9 || 10 || 11 || 12 || 13 || 14 || 15)) {
+    //         console.log("success triggered, hour = ", hour);
+    //         alert("SUCCESS team play is allowed because it is within team hours");
+    //     } else if (hour === (1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 16 || 17 || 18 || 19 || 20 || 21 || 22 || 23)) {
+    //         console.log("failure triggered, hour = ", hour);
+    //         alert("FAILURE team play is not allowed except within team hours");
+    //     } else {
+    //         console.log("bad data, hour = ", hour);
+    //     }
+    // } else if (local_day === (0 || 1 || 3 || 6)) {
+    //     alert("FAILURE team play only allowed during latin class");
+    // } else {
+    //     alert("SERIOUS PROBLEM today is not sunday-saturday")
+    // }
+    
+    
+    
+    
+    
+    
+    // if (local_day === (2 || 4 || 5)) {
+    //     alert("SUCCESS today is allowed for team-play because today is ");
+    // } else if (local_day === (0 || 1 || 3 || 6)) {
+    //     alert("FAILURE today is not a day allowed for team-play beause today is");
+    // } else {
+        
+    // }
+    
+    
+    // var utc_date = new Date();
+    // console.log("DATE DEBUG utc_date = ", utc_date);
+    // var utc_day = utc_date.getDay();
+    // console.log("DEBUG DATE utc_day = ", utc_day);
+    
+    // var local_date = utc_date.getTimezoneOffset();
+    // console.log("DEBUG DATE local_date = ", local_date);
+    // console.log("DEBUG DATE local_day = ", local_day);
+    
+    // var utc_date = new Date();
+    // console.log("DATE DEBUG utc_date = ", utc_date);
+    // var utc_day = utc_date.getDay();
+    // var local_date = utc_date.getTimezoneOffset();
+    // var local_day = local_date.getDay();
+    // console.log("DATE DEBUG utc_date = ", utc_date);
+    // console.log("DATE DEBUG utc_day = ", utc_day);
+    // console.log("DATE DEBUG local_date = ", local_date);
+    // console.log("DATE DEBUG local_day = ", local_day);
+    
+    // if (local_day === (2 || 4 || 5)) {
+    //     alert("SUCCESS today is allowed for team-play because today is ");
+    // } else if (local_day === (0 || 1 || 3 || 6)) {
+    //     alert("FAILURE today is not a day allowed for team-play beause today is");
+    // } else {
+    //     alert("SERIOUS PROBLEM today is not sunday-saturday")
+    // }
 }

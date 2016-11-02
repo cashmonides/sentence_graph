@@ -22,7 +22,8 @@ FIX in step 1
             one of the gods must be sick in a lexical sense
     little tiny thing   
         in feedback box in quick mode, the sentence should be repeated
-
+    global sickness was getting triggered in hardcore kck mode  
+        akiva changed from 30 to 1000
 
 step 2
     disable change password DONE
@@ -52,6 +53,13 @@ step 3
         - -> o s t mus tis nt
     
         -
+ 
+THINGS TO CHECK BEFORE STEP 3.5
+    - is ditransitive working properly
+    
+AKIVA'S QUESTIONS FOR HIS CONTROL FLOW
+    maximal_role_to_role_for_verb_restriction?????
+    main.js generate_sentence has a simple error catching mode right? (the success variable)
     
     
 step 3.5
@@ -103,6 +111,17 @@ SET UP FOR FURTHER STEPS
         goal: find hacky parts, pain points, gather info for redesign
         goal: test how nouns can be introduced (indirect statment forces at least one noun to appear)
 
+CLEANUP
+- is there a problematic inconsistency in notation (3s vs 3sg)?
+    in kck > inflect > inflect_english > inflect_english_verb it says:
+    // The person_and_number_key is like 1sg & 3sg.
+    // The person_and_number is like 1s.
+    what's the point of this?
+
+WALK THROUGH
+kck > inflect_language_indepednent > inflectors
+kck > inflect_language_indepednent > prune_tf_space
+
 
 NEEDS
 - security
@@ -135,8 +154,9 @@ NEEDS
         - a sample output (100 outputs)
         - an error status (all is well, fatal error at level 20, sick mode at level 20, 10 or more retries attempted)   
     - would be very useful to do this in etymology (in csv format for easy human-readable conversion)
-
-    
+- we need to decide whether sequence and indicative tenses allowed in kck levels must matches   
+    - if we have present_indicative allowed and all sequences we end with source= he ate and choices only include: present indicatives (and no choice offered is correct)
+    - weirdly, when sequence = primary and time = simultaenous and indicative tenses allowed = present, then past tenses show up in the drop down choices (he attacked)
     
 - at some point - not necesarily soon - terminal string click should serve as submit
     - at more advanced levels that would allow for quicker input and more practice per minutes

@@ -18,8 +18,11 @@ main.js contains the master function generate sentence
 it's going to do a few things which in outline are this:
 
 -STEP 1 make a KCK
+    
     - pick and make a conjunction
     - pick and make a left and right-hand side conjunction
+- STEP 1.5 make a kernel
+    - (at some point we make a template when we construct a kernel)
 - STEP 2 delete right hand clause if necessary (main and indep. subj.)
 - STEP 3 add_determined_properties
 - STEP 4 determine_sequence

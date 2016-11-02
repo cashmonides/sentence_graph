@@ -749,7 +749,6 @@ var testing_lexemes = {
         	}
         },
         //ditransitive
-        
         attack: {
             core_properties: {
                 name: 'attack',
