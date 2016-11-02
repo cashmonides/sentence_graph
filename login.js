@@ -75,10 +75,10 @@ function login() {
     var e = el("email").value;
     var p = el("password").value;
     // console.log"logging in: ", e, p);
-    if (is_team(e)) {
-        console.log("team user detected");
-        check_time_stamp();
-    }
+    // if (is_team(e)) {
+    //     console.log("team user detected");
+    //     check_time_stamp();
+    // }
     Persist.login_user(e, p, success);
 }
 
