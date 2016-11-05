@@ -393,11 +393,16 @@ Quiz.prototype.get_modes = function () {
     return Object.keys(ALL_MODULES[this.module.id].mode_ratio);
 }
 
-var global_sickness = 0;
+// var global_sickness = 0;
 
 Quiz.prototype.next_mode = function (error) {
+    
+    // pertains only to MF mode
+    // shouldn't be triggered
+    // its apparent function was to keep the mode the same
+    // except if the mode (MF in this case) triggered high levels of global sickness
     if (!error && this.game && this.module.game_change_method === 'one_game') {
-        global_sickness = 0;
+        // global_sickness = 0;
         return;
     }
     
@@ -413,12 +418,13 @@ Quiz.prototype.next_mode = function (error) {
             delete allowed[i];
         }
         */
-        global_sickness++;
+        // global_sickness++;
         //todo akiva changed below because it was triggering during a functioning game
-        if (global_sickness > 1000) {
+        // previously set to 30
+        /* if (global_sickness > 1000) {
             alert('Everything is broken!');
             return;
-        }
+        } */
         for (var i = 0; i < this.sick_modes.length; i++) {
             console.log('sick mode being added = ', this.sick_modes[i])
             delete allowed[this.sick_modes[i]];
@@ -500,6 +506,23 @@ Quiz.get_mode = function(mode_number) {
 
 
 Quiz.prototype.next_question = function (error) {
+    
+    
+    //CLEANUP this horrible pollution eventually
+    // morphology_dictionary_traverser_main(['latin verb morphology middle', 'imperfect indicative active', 'conjugation 1', '3s', '3p']);
+    // morphology_dictionary_traverser_main(['latin verb morphology end', 'present indicative active', 'imperfect indicative active', 'conjugation 1', '3s', '3p']);
+    
+    var test_output_of_morphology = {};
+    
+    test_output_of_morphology.beginning = morphology_dictionary_traverser_main(['latin verb morphology beginning', 'present indicative active', 'imperfect indicative active', 'future indicative active', 'present indicative passive', 'imperfect indicative passive', 'future indicative passive', 'perfect indicative active', 'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', '3s', '3p']);
+    
+    
+    test_output_of_morphology.middle = morphology_dictionary_traverser_main(['latin verb morphology middle', 'present indicative active', 'imperfect indicative active', 'future indicative active', 'present indicative passive', 'imperfect indicative passive', 'future indicative passive', 'perfect indicative active', 'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', '3s', '3p']);
+    
+    test_output_of_morphology.end = morphology_dictionary_traverser_main(['latin verb morphology ending', 'present indicative active', 'imperfect indicative active', 'future indicative active', 'present indicative passive', 'imperfect indicative passive', 'future indicative passive', 'perfect indicative active', 'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', '3s', '3p']);
+    
+    console.log("MORPHOLOGY LOG test_output_of_morphology = ", JSON.stringify(test_output_of_morphology, null, 4));
+    
     
     //todo xxx hack this was a hack, remove 
     el('image_display_box').innerHTML = '';

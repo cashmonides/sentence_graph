@@ -1,3 +1,128 @@
+/*
+requirement
+    - every morphology data dictionary can give a result as long as these are specified:
+        tense_mood_voice
+        person_number
+        conjugation
+    - additional information can be specified but is not necessary  
+        - e.g. gradeschool || cuny is an argument
+        (
+        default: ris
+        gradeschool: ris
+        cuny: ris/re)
+
+design of the dictionary traverser function
+    - arguments are strings
+    - returns a single string
+    - the traverser will be iterated over to produce lists of strings when fort instance we want to produce all possible endings
+    - order of arguments is unimportant
+    - function runs a preliminary test on the minimum arguments and alerts if they fail
+    - function runs a test on whether 
+
+some needed maps for the pre-tests (upstream from traverser)
+    basic pointing: which dictionary do we look up
+        latin:
+            middle: latin_verb_morphology_middle
+
+    bad data catcher: what minimum arguments are required?
+        latin_verb_morphology_middle: tense_mood_voice, conjugation
+    
+    log in a development-log all supplementary data 
+        i.e. non matches to 
+            1s, 2s, 3s, 1p, 2p, 3p
+            conjugation 1, etc.
+            present indicative active
+        and misspellings
+            prefect indicative active
+    
+    log in a development-log all duplicates
+        (designed to catch sneaky bugs in the bundler)
+    
+    
+    
+
+
+*/
+
+/*
+
+UPSTREAM 1 bad data checker
+
+UPSTREAM 2 optional: choose dictionary to traverse
+
+
+
+send that to argument
+[NAME OF DICTIONARY TO TRANSVERSE, imperfect indicative active', 'conjugation 1', '3s']
+
+
+
+'latin verb morphology middle', 
+
+
+['latin verb middle', imperfect indicative active', 'conjugation 1', '3s']
+
+
+*/
+
+
+
+
+
+
+
+
+
+//example argument:
+// type 1 return single form
+// argument: ['latin, 'verb middle', imperfect indicative active', 'conjugation 1', '3s']
+//return: aba
+//
+
+// type 2 return a list of forms
+// argument: ['latin middle', 
+/*
+[
+latin,
+middle,
+[present_indicative_active, imperfect_indicative_active, future_indicative active],
+[3s, 3p]
+[conjugation 1, conjugation 2]
+]
+*/
+// return: [a, aba, abi, e, eba, ebi]
+
+
+/* the infinitely specifiable virtue of the utopian dictionary traverser
+any arbitrary argument can be passed in as specified by module
+
+e.g. ['latin middle', perfect indicative active', 'conjugation 1', ['3s', '3p'], 'lgi: unit 18']
+
+
+at least 3 types of comparison
+    - straight match
+    - default 
+    - special
+        e.g. we have a map called special_arguments_in_dictionary_traverser
+            {
+                'lgi_unit': 'greater than or equal to'
+            }
+
+handling default
+    skip on first pass
+    pick if nothing else triggered
+
+
+
+
+
+
+
+
+*/
+
+
+
 
 PARAMETERS IN MODULE
 - drop down path    
@@ -101,17 +226,76 @@ the module says two things
 
 hey I want the path to be lexeme beginning middle end
 
-- step #1: add paths to modules
+- step #1: get all level-specific info from module
+- minimum content
+    - path name (lexeme, morphology-beginning, morphology-middle, morphology-ending)
+    - kck level
+    - in morphology mode what are the display characteristics (remove dashes at end, lower case)
+
+the module (and all the levels it might point to) tell us
+hey! I want you to grab morphological material from these domains:
+(aka the maximal space)
+e.g.
+    from kck_level:
+        3s and 3p
+        active and passive
+        past present and future
+        conjugations 1 and 2
 
 
-and I want you to grab morphological material from these domains:
 
-3s and 3p
-active and passive
-past present and future
-conjugations 1 and 2
 
 - step #2: obtain this from kck level
+
+
+    - some data is simple and easy to collect
+        person_number
+        voice
+        
+    - some data is accessible easily but indirectly
+        consult allowed_lexemes and return some value like a list of all_used_conjugations
+        
+    - other data requires a more sophisticated collection method
+        namely tense_mood_combos
+            the problem is, we don't want to willy nilly grab every tense_mood
+            e.g. the students may not know any periphrastic uses
+            
+            the goal is a packaging of tense_mood_voice combos
+            
+            we have indicative tense & voice available from kck_levels
+                
+            
+            what we don't have is any info on subjunctives
+            
+            that's the problem
+            
+            
+            solution 1:
+                - use our already sophisticated machinery
+                - use it to produce a list of 
+                    [present_indicative_active, present_indicative_passive, perfect_indicative_active]
+                    
+            
+            
+            solution 2:
+                - be more direct
+                - specify directly instead of trying to control all the codependencies
+                - we want tense_mood_voice combos
+                - so justlist the tense_mood_voice combos that we want 
+                - in module crow we just specify
+                    [present_indicative_active, present_indicative_passive, perfect_indicative_active]
+                    
+                    
+                
+            
+            e.g. if we want only indicatives we pick null
+            if we want only subjunctives of simul time we could pick ut_purpose
+            it we want all subjunctives we could pick why_indirect_question
+            
+            
+            
+            
+
     - step #2a: obtain allowed persons and numbers
     - step #2b: obtain allowed voices
     - step #2c: obtain allowed tense-mood combinations
@@ -130,6 +314,17 @@ so it seems best to go there
 we pull all allowed parameters there and we send this to a dictionary traverse
 the dictionary traverser crawls through our library of endings
 and picks the ones that match
+
+
+
+
+step #2.5: bundling??
+
+bundle all this data into appropriate codependencies (tense-mood-voice)
+    tense-mood-voice (hard-coded)
+    person-numbers (from allowed)
+    conjugation (from allowed lexemes)
+
 
 - step #3: dictionary traverser
     - step #3i: traverse middles (present and perfect systems)
@@ -158,7 +353,7 @@ step #5:
         - remember: for dashes, consider both posiibilities
     - step #5iii: red and green
 
-and that's it
+and that's it!!!!
 
 
 

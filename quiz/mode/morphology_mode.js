@@ -108,7 +108,7 @@ KCKModeGame.prototype.next_question = function () {
     this.cheat_sheet = this.kck_cheat_sheet(sentence.chosen_lexemes);
     
     
-    var remove_dashes_bool = get_current_module(this.level.kck_level).verb_dashes_removed;
+    var remove_dashes_bool = get_remove_dashes_bool(this.level.kck_level);
     
     var process_output;
     

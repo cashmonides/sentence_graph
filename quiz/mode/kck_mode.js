@@ -7,6 +7,15 @@
 // (Akiva: this seems to be only used here. Is it actually used or is it just a free-floating hack?)
 // // var global_levels;
 
+var get_remove_dashes_bool = function (kck_level) {
+    var dashes_removed = get_current_module(kck_level).verb_dashes_removed;
+    if (typeof dashes_removed === 'boolean') {
+        return dashes_removed;
+    } else {
+        return read_bool_maybe_string(weighted(dashes_removed));
+    }
+}
+
 var KCKModeGame = function () {
     this.data = null;
     this.quiz = null;
@@ -27,7 +36,7 @@ KCKModeGame.prototype.attach = function () {
     set_display("latin_answer_choices", 'initial');
     set_display("drop_answer_choices", 'none');
     set_display("submit_button", 'initial');
-    set_display("cheat_sheet_button", 'initial');
+    set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'initial');
     set_display("etym_cheat_button", 'none');
     set_display("input_box", 'none');
@@ -89,7 +98,7 @@ KCKModeGame.prototype.next_question = function () {
     this.cheat_sheet = this.kck_cheat_sheet(sentence.chosen_lexemes);
     
     
-    var remove_dashes_bool = get_current_module(this.level.kck_level).verb_dashes_removed;
+    var remove_dashes_bool = get_remove_dashes_bool(this.level.kck_level);
     
     var process_output;
     

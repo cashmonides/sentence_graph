@@ -1,8 +1,7 @@
-var proper_noun_article;
-
 function inflect_english (kernel, lexeme, word_settings) {
     
     //begin AKiva intervention
+    var proper_noun_article;
     
     if (lexeme.properties.latin.proper === true) {
         proper_noun_article = 'proper';
@@ -10,13 +9,15 @@ function inflect_english (kernel, lexeme, word_settings) {
         proper_noun_article = 'improper';
     }
     
+    // note: with proper nouns we do not want a space
+    
     //end AKiva intervention
     
     if (!lexeme) {return {}}
     switch (lexeme.properties.core.part_of_speech) {
         case (Part_of_speech.Noun) :
-            return (make_preposition(word_settings) + make_article() + ' ' +
-            inflect_english_noun (kernel, lexeme, word_settings));
+            return (make_preposition(word_settings) + make_article(proper_noun_article) +
+            make_spacing(proper_noun_article) + inflect_english_noun (kernel, lexeme, word_settings));
         case (Part_of_speech.Verb) : return inflect_english_verb (kernel, lexeme);
         case (Part_of_speech.Adjective) : return inflect_english_adjective (kernel, lexeme, word_settings);
         case (Part_of_speech.Co) : return lexeme.display(Language_enum.English);
@@ -24,7 +25,7 @@ function inflect_english (kernel, lexeme, word_settings) {
 }
 
 
-var make_article = function () {
+var make_article = function (proper_noun_article) {
     if (proper_noun_article == 'proper') {
         return "";
     } else {
@@ -39,6 +40,14 @@ var make_article = function () {
 
     //below is unworkable when it produces multiple answer choices because it produces inconsistencies
     //return random_choice(['the', word_settings.number === 'singular' ? 'a': '']);
+}
+
+var make_spacing = function (proper_noun_article) {
+    if (proper_noun_article == 'proper') {
+        return "";
+    } else {
+        return " ";
+    }
 }
 
 var make_preposition = function (word_settings) {

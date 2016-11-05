@@ -178,7 +178,6 @@ function make_output(level, current_lexicon, none_display) {
     }
 
 
-
     console.log("DEBUG 4-25 checkpoint 8 in make_output");
 
 
@@ -432,11 +431,6 @@ var cheat_sheet = function (master_lexeme_list) {
     return concat_arrays(lexemes_sorted_by_root).map(function (x) {
         if (typeof x === 'object') {
             
-            //Akiva's intervention start
-            var new_cheat_sheet_item_with_3_items = [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root, x.properties.latin.stem_2];
-            debug_log("ERASE WHEN DONE new_cheat_sheet_item_with_3_items = ", new_cheat_sheet_item_with_3_items);
-            // return [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root, x.properties.latin.stem_2];
-            //Akiva's intervention end
             
             return [x.properties.latin.root + ' (' + x.properties.latin.family + ')', x.properties.english.root]
         } else {
@@ -455,6 +449,8 @@ function change_state_to_be_made_initial (state) {
 function change_state_to_be_made_final (state, lexeme_list) {
     // Part of Grand Decoupling.
     // If other stuff needs to be changed it can go here too.
+    
+    
     state.transitivity = lexeme_list.verb.properties.latin.transitive;
     state.subject_gender = lexeme_list.subject.properties.latin.gender;
     
@@ -679,8 +675,14 @@ function pick_lexeme_new(kernel, element, part_of_speech, current_lexicon, lexem
         allowed_lexemes = allowed_lexemes.filter(lexeme_criteria[info.role](info.source_lexeme));
     }
 
-    if (allowed_lexemes.length === 0) {return null}
-    return random_choice(allowed_lexemes);
+    if (allowed_lexemes.length === 0) {
+        console.log(element, null);
+        // No alllowed lexemes exist.
+        return null;
+    }
+    var lexeme_chosen = random_choice(allowed_lexemes);
+    console.log(element, lexeme_chosen)
+    return lexeme_chosen;
 }
 
 

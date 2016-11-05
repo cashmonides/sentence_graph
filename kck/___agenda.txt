@@ -1,5 +1,9 @@
 Agenda for future (made in mid-september 2016)
 
+
+dictionary traverser
+
+
 BIRD'S EYE AGENDA
 step 1
     dash removal (done)
@@ -10,20 +14,10 @@ step 1
     test SQL posting after commiting
     
 FIX in step 1
-    e-m changes only if final 
+    test e-m and similar issues
+    previously: e-m changes only if final 
         e.g. ē-m -> e-m not in terrē-mur only in terrē-m
-    range sampler doesn't seem to work with true false?
-        e.g. 'verb_dashes_removed': {'true': 0.0005, 'false': 0.5},
-    MUST DO: 
-        check AKiva's proper nouns intervention
-        eliminate null strings from drop downs
-    BUG
-        cannot read 'properties' of undefined (when gods are included)
-            one of the gods must be sick in a lexical sense
-    little tiny thing   
-        in feedback box in quick mode, the sentence should be repeated
-    global sickness was getting triggered in hardcore kck mode  
-        akiva changed from 30 to 1000
+    
 
 step 2
     disable change password DONE
@@ -34,7 +28,6 @@ step 2
     enter accounts DONE
     change citation form of latin lexemes (e.g. iub- (2) not iubere) DONE
     move submit button and cheat sheets to the right (won't overlap with hoverable drop downs) DONE
-    short-term solution to final vs medial m
     tweak drop_levels so that there are more drops
     make kck levels
     proof modules 1-5
@@ -63,6 +56,15 @@ AKIVA'S QUESTIONS FOR HIS CONTROL FLOW
     
     
 step 3.5
+    before launching nouns
+        map the tribes
+        purge the degenerate and unruly tribes
+        to test their purity, we enslave them with the following tasks
+            produce ind. statement translation formulae and forms
+            produce periphrastics at morphology in morphology and kck mode
+        remap the purified landscape
+        carve the new map into marble
+        and place it in the center of the city
     before launching into nouns: make debugging more elegant
         the error logger (which logs in urgent error log) conceals some information
         in development mode we should switch it off

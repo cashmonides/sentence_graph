@@ -28,22 +28,24 @@ var latin_replacement_dictionary = {
 
 
     // long a in 1st conjugation and all imperfects
-    "Ā-M" : "AM",
+    "Ā-M~" : "AM",
     "Ā-Ō" : "Ō",
-    "Ā-T" : "AT",
+    "Ā-T~" : "AT",
     "Ā-NT" : "ANT",
-    "Ā-R" : "AR",
+    "Ā-R~" : "AR",
     "Ā-NTUR" : "ANTUR",
 
     // long e in all situations
     //todo next three lines is hacky solution fix later
     "Ē$-Ō/M" : "AM",    //exception for 3/3i/4 ham and five eggs
     "Ē$-Ō" : "AM",
-    "Ē$-M" : "AM",
+    "Ē$-M~" : "AM",
     "Ē-Ō/M" : "EŌ",
     "Ē-Ō" : "EŌ",
-    "Ē-M" : "EM",
-    "Ē-T" : "ET",
+    "Ē-M~" : "EM",
+    "Ē-T~" : "ET",
+    //3rd conjugation
+    "Ē$-T~" : "ET",
     "Ē-NT" : "ENT",
     "Ē-OR/R" : "EOR",
     "Ē-NTUR" : "ENTUR",
@@ -75,7 +77,7 @@ var latin_replacement_dictionary = {
 
     //long I in 4th conjugatio
     "Ī-Ō/M" : "Ō",
-    "Ī-T" : "IT",
+    "Ī-T~" : "IT",
     "Ī-OR/R" : "IOR",
     "Ī-NT" : "IUNT",
     "Ī-NTUR" : "IUNTUR",
@@ -89,7 +91,8 @@ var metacharacter_replacement_dictionary = {
     "@" : "",
     "#" : "",
     "%" : "",
-    "$" : ""
+    "$" : "",
+    "~" : ""
 };
 
 // function remove_dashes (input) {

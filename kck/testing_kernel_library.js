@@ -393,7 +393,7 @@ var testing_lexemes = {
         //2nd decl neuter
         kingdom: {
             core_properties: {
-                name: 'rēgnum',
+                name: 'kingdom',
                 part_of_speech: 'noun',
                 lexical_property_dictionary: {
                     animate: false,

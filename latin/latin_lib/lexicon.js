@@ -4,10 +4,23 @@ var zI = "\u012A";
 var zO = "\u014C";
 var zU = "\u016A";
 
+/*
+the layout is:
+latin: root, stem_1, stem_2, stem_3, family, gender, animate, count, respect, proper, transitive
+english: root, singular, plural, present, present_3sg, past, passive, gerund
+*/
 
 
 var lexicon = [
     //NOUNS////////
+    
+    //count set to false
+    new Lexeme(
+        "hera",
+        {   core: {part_of_speech: "noun", animate: true, place: false, rulership: false, kinship: false, human: false, god: true},
+            english : new English_word_properties("Hera", "Hera", "Heras-shouldn't appear", true, true, false, false, null),
+            latin : new Latin_word_properties("HER-A", "HER", "HER", null, "1", "f", true, false, false, true, null)
+        }),
     
     //1st declension gods
     new Lexeme(
@@ -39,13 +52,13 @@ var lexicon = [
         "zeus",
         {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
             english : new English_word_properties("Zeus", "Zeus", "", true, true, false, false, null),
-            latin : new Latin_word_properties("*JUPPITER* JOV-", "*JUPPITER*", "JOV", null, "3", "f", true, true, false, true, null)
+            latin : new Latin_word_properties("*JUPPITER* JOV-", "*JUPPITER*", "JOV", null, "3", "m", true, true, false, true, null)
         }),
     new Lexeme(
         "hades",
         {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
             english : new English_word_properties("Hades", "Hades", "", true, true, false, false, null),
-            latin : new Latin_word_properties("*PLUTO* PLUTON-", "*PLUTO*", "PLUTON", null, "3", "f", true, true, false, true, null)
+            latin : new Latin_word_properties("*PLUTO* PLUTON-", "*PLUTO*", "PLUTON", null, "3", "m", true, true, false, true, null)
         }),
     new Lexeme(
         "aphrodite",
@@ -57,9 +70,9 @@ var lexicon = [
         "ares",
         {   core: {part_of_speech: "noun", animate: true, place: false, rulership: true, kinship: false, human: false, god: true},
             english : new English_word_properties("Ares", "Ares", "", true, true, false, false, null),
-            latin : new Latin_word_properties("*MARS* MART-", "*MARS*", "MART", null, "3", "f", true, true, false, true, null)
+            latin : new Latin_word_properties("*MARS* MART-", "*MARS*", "MART", null, "3", "m", true, true, false, true, null)
         }),
-    // begin usual section
+    // begin usual section (non-gods)
     //1st declension nouns
     new Lexeme(
         "goddess",
