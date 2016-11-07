@@ -62,6 +62,10 @@ KCKModeGame.prototype.get_mode_name = function() {
 
 
 KCKModeGame.prototype.next_question = function () {
+    
+    
+    
+    
     var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_cosmetic_level', 'kck_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
@@ -99,6 +103,10 @@ KCKModeGame.prototype.next_question = function () {
     
     
     var remove_dashes_bool = get_remove_dashes_bool(this.level.kck_level);
+    
+    //a hack using a global variable for quick result, refactor when possible
+    remove_dashes_global_hack = remove_dashes_bool;
+    console.log("DEBUG 11-5 remove_dashes_global_hack = ", remove_dashes_global_hack);
     
     var process_output;
     

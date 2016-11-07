@@ -177,6 +177,15 @@ Kernel.prototype.get_verb_translation_and_path = function (kck_level, language) 
     get_terminology_transformer(kck_level)(feature_dictionary);
     // Get the translation of the verb in the language.
     var translation = verb.form[language];
+    
+    if (remove_dashes_global_hack) {
+        console.log("DEBUG 11-5 remove dashes and global hack triggered");
+        console.log("DEBUG 11-5 translation pre-processing = ", translation);
+        translation = remove_dashes_and_metacharacters(translation);
+        console.log("DEBUG 11-5 translation post-processing = ", translation);
+    }
+    
+    
     // Create an empty path (to be pushed to).
     var path = [];
     // Get the regime.

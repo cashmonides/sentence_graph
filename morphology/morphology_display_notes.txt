@@ -1,0 +1,96 @@
+there are a few major components of our morphology display 
+    - the setting up of the morphological elements into a grid (possibly using the make function)
+    - making each word clickable (possibly using the word selector)
+    - the click on each word should populate a block of three cells
+    - when all 3 cells are populated, the answer is submitted
+    - the student's answer is compared to the correct answer and turned red/green
+
+
+the word selector in quick mode
+    the basic outline is this
+    in next_question
+        this.quiz.set_word_selector(data.sentence);
+        this.quiz.word_selector.click_callback = this.quiz.process_answer.bind(this.quiz);
+    in process_incorrect_answer
+        this.quiz.word_selector.clear();
+     
+     
+     in more detail:
+     
+     (we assign where we want the word selector to go - testbox)
+     Quiz.prototype.set_word_selector does this:
+        var text_data = new Text(word_sel_input);
+        text_data.setup();
+        this.word_selector = new WordSelector("testbox", text_data);
+        this.word_selector.setup();   
+     
+     
+     
+     
+     
+     Quiz.prototype.set_word_selector = function(sentence){
+        el("testbox").innerHTML = "";
+        
+        this.sentence = sentence;
+        
+        
+        var word_sel_input = sentence.text ? sentence.text : sentence;
+    
+        var text_data = new Text(word_sel_input);
+        text_data.setup();
+        this.word_selector = new WordSelector("testbox", text_data);
+        this.word_selector.setup();    
+        
+    };
+        
+        
+the word selector in morphology mode    
+    the click_callback will be bound to something like "submit morphological element"
+        that will populate one of the 3 cells with a or aba or abi and such
+        (when all 3 cells are populated the answer will be automatically submitted and compared)
+  
+  
+
+
+setting up the word selector
+    the main problem now is that all 3 new word selectors seem to behave as if they're one
+    so highlighting the 2nd index in the middle block, ends up highlighting the 2nd index in the first div
+
+
+binding
+    we bind the clicks on each element to a submit_morphological_element function
+    I'm not sure we can do something simple like submit_morphology("inout string", cell_destination).bind
+        (we get errors like 
+    that needs to call the word_selector method get_word 
+    get_word needs the index
+    we might??? be able to get this from the word selector method  get_selected_indices
+
+
+
+perhaps easier would just be to create a bunch of buttons, each with a function
+
+
+
+
+/////////THE BUTTON APPROACH////////////
+we need to dynamically create buttons
+
+so we iterate over our morphological output
+and for each item we create a button
+    var button = document.createElement("BUTTON");
+this button is now empty of text, so we need to add the text (e.g. amav, aba, erunt)
+    one method is this:
+    var t = document.createTextNode("ABA");     
+    button.appendChild(t); 
+then we append it to the div
+    document.body.appendChild(button); 
+
+we also need to make the button send the right information to the quiz
+and this involves two things: giving it an on-click function and assigning the morphplogical value to that click
+    this might work
+    button.onclick = function;    //not a string
+    
+    or maybe this:
+    button.onclick = function(){ //code in here };
+    
+    (I think the point is the function must be assigned, not called, so it can't have arguments, it must ebe anonymous)

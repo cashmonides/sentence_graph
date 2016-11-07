@@ -1,6 +1,6 @@
 var kck_levels = {
     //start with just variation in the middle element 3s only (v1-3 only)
-    '1': {
+    'test 1': {
         'time': ['simultaneous', 'prior', 'subsequent'],
         'sequence': ['primary', 'secondary'],
         'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
@@ -44,7 +44,7 @@ var kck_levels = {
         'verb_dashes_removed': {'true': 0.5, 'false': 0.5},
         // 'verb_dashes_removed': true
     },
-    'real 1': {
+    '1': {
         'time': ['simultaneous', 'prior', 'subsequent'],
         'sequence': ['primary', 'secondary'],
         'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
@@ -85,8 +85,9 @@ var kck_levels = {
         // 'target_language' : {'english': 0.5, 'latin': 0.5},
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
-        'verb_dashes_removed': false,
-        // 'verb_dashes_removed': true
+        // 'verb_dashes_removed': {'english': 0.5, 'latin': 0.5},
+        // 'verb_dashes_removed': {true: 0.5, false: 0.5},
+        'verb_dashes_removed': false
     },
     // adding 3p
     '10': {
@@ -1290,6 +1291,7 @@ var kck_levels = {
         'verb_dashes_removed': false,
         // 'verb_dashes_removed': true
     },
+    
     // L --> E
     '270': {
         'time': ['simultaneous', 'prior', 'subsequent'],
@@ -1336,7 +1338,55 @@ var kck_levels = {
         'verb_dashes_removed': false,
         // 'verb_dashes_removed': true
     },
-    
+    ///////
+    ///dashes removed below
+    '310': {
+        'time': ['simultaneous', 'prior', 'subsequent'],
+        'sequence': ['primary', 'secondary'],
+        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
+            'imperfect indicative'],
+        'voice' : ['active', 'passive'],
+        // 'voice' : ['active', 'passive'],
+        // 'person_and_number' : ['3s'],
+        // 'person_and_number' : ['3s', '3p'],
+        'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
+        // 'person_and_number' : ['1s'],
+        // 'allowed_conjunctions': ['c_null'],
+        'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but'],
+        // 'allowed_conjunctions': ['c_null', 'c_and'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
+        // 'allowed_conjunctions': ['c_why'],
+        'red herring': 'false',
+        'absolute-relative-split': 'on',
+        // 'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
+        'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
+            'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
+            'hear', 'shout', 'speak', 'see'
+            ],
+        // 'allowed_verbs' : ['speak', 'attack'],
+        'noun_switch' : false,
+        'allowed_nouns': ['wolf'],
+        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
+        'drop_down_path' : ['lexeme', 'voice'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'tense_and_mood'],
+        // 'drop_down_path' : ['lexeme', 'person_and_number'],
+        // 'drop_down_path' : ['lexeme'],
+        'drop_down_path_noun' : ['lexeme', 'case'],
+        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
+        // 'source_language' : {'english': 0, 'latin': 1},
+        // 'target_language' : {'english': 1, 'latin': 0},
+        // 'source_language' : {'english': 1, 'latin': 0},
+        // 'target_language' : {'english': 0, 'latin': 1},
+        'source_language' : {'english': 0.5, 'latin': 0.5},
+        'target_language' : {'english': 0.5, 'latin': 0.5},
+        'terminology_display_dictionary': 'basic',
+        // 'terminology_display_dictionary': 'advanced',
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
+    },
     /////////////
     // below are unprocessed levels, don't use
     '560': {

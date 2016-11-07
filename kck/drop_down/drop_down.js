@@ -1,3 +1,5 @@
+
+
 // A drop down object.
 var DropDown = function (header, data, correct_path) {
     // The header of the drop down.
@@ -11,6 +13,7 @@ var DropDown = function (header, data, correct_path) {
     this.elem = null;
     // The special correct path.
     this.correct_path = correct_path;
+    
 }
 
 // We sometimes want the element in the document the dropdown is attached to
@@ -101,11 +104,14 @@ DropDown.prototype.attach_to = function (elem) {
 DropDown.prototype.get_status = function () {
     var correct_path = this.correct_path;
     var drop_path = this.path;
+    console.log("DEBUG 11-5 correct_path = ", this.correct_path);
+    console.log("DEBUG 11-5 drop_path = ", this.path);
     // The drop down has not been answered yet so don't even try to check it.
     if (drop_path === null) {
         return 'missed';
     }
     var result_of_comparison = compare_path(correct_path, drop_path);
+    console.log("DEBUG 11-5 result_of_comparison = ", result_of_comparison);
     // Return the status (the result of the comparison).
     return result_of_comparison;
 }

@@ -114,7 +114,7 @@ var latin_verb_morphology_middle = {
             'conjugation 3i': '-ī',
             'conjugation 4': '-īrī',
     },
-    'perfect indicative active': '-__&',
+    'perfect indicative active': '-___',
     'perfect indicative passive': 'Dummy Agreement marker',
     'pluperfect indicative active': '-erā',
     'pluperfect indicative passive': 'Dummy Agreement marker',
@@ -133,7 +133,6 @@ var latin_verb_morphology_middle = {
 //VERBOSE VERSION OF ENDINGS
 var latin_verb_morphology_ending = {
     'present indicative active': {
-        //the question here is whether we should limit to o or give both options o/m
         '1s': '-ō',     
         '2s': '-s',
         '3s': '-t',
@@ -142,7 +141,6 @@ var latin_verb_morphology_ending = {
         '3p': '-nt'
     },
     'present indicative passive': {
-        //the question here is whether we should limit to or or give both options or/r
         '1s': '-or',
         '2s': '-ris',
         '3s': '-tur',
@@ -151,8 +149,7 @@ var latin_verb_morphology_ending = {
         '3p': '-ntur'
     },
     'imperfect indicative active': {
-        //the question here is whether we should limit to o or give both options o/m
-        '1s': "'-m",     
+        '1s': '-m',     
         '2s': '-s',
         '3s': '-t',
         '1p': '-mus',
@@ -160,7 +157,6 @@ var latin_verb_morphology_ending = {
         '3p': '-nt'
     },
     'imperfect indicative passive': {
-        //the question here is whether we should limit to or or give both options or/r
         's': '-r',
         '2s': '-ris',
         '3s': '-tur',
@@ -169,8 +165,7 @@ var latin_verb_morphology_ending = {
         '3p': '-ntur'
     },
     'future indicative active': {
-        //the question here is whether we should limit to o or give both options o/m
-        '1s': "'-ō",     
+        '1s': '-ō',     
         '2s': '-s',
         '3s': '-t',
         '1p': '-mus',
@@ -178,7 +173,6 @@ var latin_verb_morphology_ending = {
         '3p': '-nt'
     },
     'future indicative passive': {
-        //the question here is whether we should limit to or or give both options or/r
         '1s': '-or',
         '2s': '-ris',
         '3s': '-tur',
@@ -187,8 +181,7 @@ var latin_verb_morphology_ending = {
         '3p': '-ntur'
     },
     'present subjunctive active': {
-        //the question here is whether we should limit to o or give both options o/m
-        '1s': "'-m",     
+        '1s': '-m',     
         '2s': '-s',
         '3s': '-t',
         '1p': '-mus',
@@ -196,7 +189,6 @@ var latin_verb_morphology_ending = {
         '3p': '-nt'
     },
     'present subjunctive passive': {
-        //the question here is whether we should limit to or or give both options or/r
         '1s': '-r',
         '2s': '-ris',
         '3s': '-tur',
@@ -205,8 +197,7 @@ var latin_verb_morphology_ending = {
         '3p': '-ntur'
     },
     'imperfect subjunctive active': {
-        //the question here is whether we should limit to o or give both options o/m
-        '1s': "'-m",     
+        '1s': '-m',     
         '2s': '-s',
         '3s': '-t',
         '1p': '-mus',
@@ -214,7 +205,6 @@ var latin_verb_morphology_ending = {
         '3p': '-nt'
     },
     'imperfect subjunctive passive': {
-        //the question here is whether we should limit to or or give both options or/r
         '1s': '-r',
         '2s': {
             'gradeschool': '-ris',
@@ -237,7 +227,8 @@ var latin_verb_morphology_ending = {
             'gradeschool': '-ērunt',
             'lgi': {
                     'default': '-ērunt',
-                    'lgi: unit 18': '-ērunt/ēre'
+                    'basic': '-ērunt',
+                    'advanced': '-ērunt/ēre'
             },
             'default': '-ērunt'
         }
@@ -245,8 +236,7 @@ var latin_verb_morphology_ending = {
     'perfect indicative passive': 'Dummy ESSE helping verb',
     
     'pluperfect indicative active': {
-        //the question here is whether we should limit to o or give both options o/m
-        '1s': "'-m",     
+        '1s': '-m',     
         '2s': '-s',
         '3s': '-t',
         '1p': '-mus',
@@ -256,8 +246,7 @@ var latin_verb_morphology_ending = {
     'pluperfect indicative passive': 'Dummy ESSE helping verb',
     
     'future perfect indicative active': {
-        //the question here is whether we should limit to o or give both options o/m
-        '1s': "'-m",     
+        '1s': '-m',     
         '2s': '-s',
         '3s': '-t',
         '1p': '-mus',
@@ -267,8 +256,7 @@ var latin_verb_morphology_ending = {
     'future perfect indicative passive': 'Dummy ESSE helping verb',
     
     'perfect subjunctive active': {
-        //the question here is whether we should limit to o or give both options o/m
-        '1s': "'-m",     
+        '1s': '-m',     
         '2s': '-s',
         '3s': '-t',
         '1p': '-mus',
@@ -280,8 +268,7 @@ var latin_verb_morphology_ending = {
     
     
     'pluperfect subjunctive active': {
-        //the question here is whether we should limit to o or give both options o/m
-        '1s': "'-m",     
+        '1s': '-m',     
         '2s': '-s',
         '3s': '-t',
         '1p': '-mus',

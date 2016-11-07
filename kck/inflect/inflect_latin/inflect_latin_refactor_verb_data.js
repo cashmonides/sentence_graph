@@ -66,23 +66,23 @@ var perfect_endings = {
 
 var normal_endings = {
     'active 1s': {
-        'present 1st person ending': '-ō',
+        'present 1st person ending': '-ō~',
         'past/subjunctive 1st person ending': '-m~'
     },       
     'active 2s': '-s',
     'active 3s': '-t~',
     'active 1p': '-mus',
     'active 2p': '-tis',
-    'active 3p': '-nt',
+    'active 3p': '-nt~',
     'passive 1s': {
-        'present 1st person ending': '-or',
+        'present 1st person ending': '-or~',
         'past/subjunctive 1st person ending': '-r~'
     },
     'passive 2s': '-ris',
     'passive 3s': '-tur',
     'passive 1p': '-mur',
     'passive 2p': '-minī',
-    'passive 3p': '-ntur'
+    'passive 3p': '-ntur~'
 }
 
 var agreement_marker =  {

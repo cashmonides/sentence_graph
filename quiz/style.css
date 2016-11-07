@@ -37,8 +37,77 @@ body {
     /*width: 100px;*/
 }
 
+.morphology_option_button {
+    font-size: 26;
+}
+
+.morphology_beginning_button {
+    color: black;
+    font-size: 28;
+}
+
+.morphology_middle_button {
+    color: red;
+    font-size: 28;
+}
+
+.morphology_ending_button {
+    color: green;
+    font-size: 28;
+}
 
 
+.morphology_answer_table td { 
+    border-left: 1px solid #000; 
+}
+.morphology_answer_table td:first-child { 
+    border-left: none; 
+}
+
+.morphology_answer_table th { 
+    border-left: 1px solid #000; 
+}
+.morphology_answer_table th:first-child { 
+    border-left: none;
+}
+
+
+.morphology_answer_cell {
+    
+    border: 40px solid black;
+    border-left: 50px solid black;
+    border-right: 50px solid black;
+    background:  white;
+    font-size:56;
+    color: gray;
+}
+
+.morphology_answer_heading {
+    font-size: 14px;
+}
+
+.morphology_answer_table {
+    border: none; 
+    /*border-collapse: collapse;*/
+    text-align: center;
+    /*border: 40px solid black;*/
+    /*border-left: 50px solid black;*/
+    /*border-right: 50px solid black;*/
+    background: white;
+    /*below will center*/
+    vertical-align: middle;
+    font-size: 25px;
+    cursor:pointer;
+    /*width: 700px;*/
+    /*width: 100%-auto;*/
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+    padding: 10px;
+    white-space: wrap;
+    /*color: red;*/
+}
 
 
 

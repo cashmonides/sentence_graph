@@ -22,33 +22,63 @@ I% = short I in perfect subjunctive that doesn't get swallowed by O
 
 var latin_replacement_dictionary = {
 
-    // applies in all situations
-    "I-RIS": "ERIS",
-    "I-RE": "ERE",
-
-
-    // long a in 1st conjugation and all imperfects
+    
+    //A________________
+    //only one type of A
     "Ā-M~" : "AM",
-    "Ā-Ō" : "Ō",
+    "Ā-Ō~" : "Ō",
+    "Ā-OR~" : "OR",
     "Ā-T~" : "AT",
-    "Ā-NT" : "ANT",
+    "Ā-NT~" : "ANT",
     "Ā-R~" : "AR",
     "Ā-NTUR" : "ANTUR",
 
-    // long e in all situations
-    //todo next three lines is hacky solution fix later
-    "Ē$-Ō/M" : "AM",    //exception for 3/3i/4 ham and five eggs
-    "Ē$-Ō" : "AM",
-    "Ē$-M~" : "AM",
+
+    //E_______________
+    //default: E (2nd conjugation)
+    //3, 3i, 4: E$ (turns to am)
+    
     "Ē-Ō/M" : "EŌ",
-    "Ē-Ō" : "EŌ",
+    "Ē-Ō~" : "EŌ",
     "Ē-M~" : "EM",
+    "Ē-OR~" : "EOR",
     "Ē-T~" : "ET",
-    //3rd conjugation
+    "Ē-NT~" : "ENT",
+    "Ē-TUR~" : "ETUR",
+    "Ē-NTUR~" : "ENTUR",
+    
+    
+    //3rd conjugation ham and five eggs
+    "Ē$-Ō/M" : "AM",    //exception for 3/3i/4 ham and five eggs
+    "Ē$-Ō~" : "AM",
+    "Ē$-OR~" : "AR",
+    "Ē$-M~" : "AM",
+    
+    
+    
+    
+    //the rest of 3rd conjugation
     "Ē$-T~" : "ET",
-    "Ē-NT" : "ENT",
-    "Ē-OR/R" : "EOR",
-    "Ē-NTUR" : "ENTUR",
+    "Ē$-NT~" : "ENT",
+    "Ē$-TUR~" : "ETUR",
+    "Ē$-NTUR~" : "ENTUR",
+    
+
+    
+    
+    //I______________
+    // our default is: I
+    // perfect subjunctive: I% takes M
+    // perfect subjunctive and future perfect: I# doesn't turn to UNT
+    // strong short I: I@
+    
+    //the defailt
+    "I-RIS": "ERIS",
+    "I-RE": "ERE",
+    
+    
+    //i in all situations except 3i and 4
+    "I-OR" : "OR",
 
 
     //i in ERI (perfect subjunctive 1st singular)
@@ -62,6 +92,7 @@ var latin_replacement_dictionary = {
 
     //in in 3rd conjugation & ABI
     "I-Ō/M" : "O",
+    "I-Ō": "Ō",
     "I-NT" : "UNT",
     "I-OR/R" : "OR",
     "I-RIS" : "ERIS",
@@ -69,18 +100,21 @@ var latin_replacement_dictionary = {
 
 
     //i in 3i conjugation
-    "I@-NT" : "IUNT",
+    "I@-NT~" : "IUNT",
     "I@-OR/R" : "IOR",
+    "I@-OR~" : "IOR",
     "I@-RIS" : "ERIS",
     "I@-RE" : "ERE",
     "I@-NTUR" : "IUNTUR",
 
-    //long I in 4th conjugatio
+    //long I________________
     "Ī-Ō/M" : "Ō",
+    "Ī-Ō~" : "IŌ",
     "Ī-T~" : "IT",
     "Ī-OR/R" : "IOR",
-    "Ī-NT" : "IUNT",
-    "Ī-NTUR" : "IUNTUR",
+    "Ī-OR~" : "IOR",
+    "Ī-NT~" : "IUNT",
+    "Ī-NTUR~" : "IUNTUR",
     
     //all other dashes
     "-": ""

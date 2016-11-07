@@ -4,6 +4,9 @@
 // The legal values are 'throw', 'redo', and 'prune'.
 var LEXEME_ERROR_CATCHING_MODE = 'throw';
 
+// a temporary hack until we clean up string processing in compare path
+var remove_dashes_global_hack = false;
+
 // This is the master function.
 var generate_sentence = function (source, target, kck_level, drop_extra_level,
 allowed_conjunctions_override) {

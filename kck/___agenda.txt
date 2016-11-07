@@ -14,10 +14,16 @@ step 1
     test SQL posting after commiting
     
 FIX in step 1
-    test e-m and similar issues
-    previously: e-m changes only if final 
-        e.g. ē-m -> e-m not in terrē-mur only in terrē-m
-    
+    fix bad macrons and dash removal
+        (no bad macrons so far) 
+    akiva added a global hack to make the dashes work in both drop down answer and student's answer
+        remove_dashes_global_hack
+    ideally we don't want certain verbs to become passive  
+        I am shouted doesn't make a lot of sense
+        so we don't want this to be passive except when the mental clause itself is the subject
+    important: add scrambling parameter to kck level
+        at a higher level of difficulty, we should scramble all the terminal strings in kck drop downs
+        (it's a little too easy for more advanced students when it's all lined up)
 
 step 2
     disable change password DONE
@@ -54,6 +60,18 @@ AKIVA'S QUESTIONS FOR HIS CONTROL FLOW
     maximal_role_to_role_for_verb_restriction?????
     main.js generate_sentence has a simple error catching mode right? (the success variable)
     
+    
+    
+MORPHOLOGY MODE
+build the game mode
+pipe in lexeme_list
+pipe in the shuffle parameter (somewhere in module or morphology_level)
+figure out some way to deal with sound changes upon dash removal
+enumerate question types (change x to y, form x, etc.)
+generate the transformation (maybe generate the kernel and work backwards)
+make a submit method (when they've filled all three, the answer is submitted)
+    this will increase the speed
+
     
 step 3.5
     before launching nouns

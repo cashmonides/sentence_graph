@@ -977,6 +977,7 @@ var testing_lexemes = {
         		}
         	}
         },
+        //mental verb that can't take animate subject (only mental clauses)
         //mental ditransitive with consistent translations
         shout: {
             core_properties: {

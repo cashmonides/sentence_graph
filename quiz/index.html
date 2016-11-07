@@ -64,6 +64,7 @@
     <script src="mode/kck_mode.js"></script>
     <script src="mode/mf_mode.js"></script>
     <script src="mode/syntax_mode.js"></script>
+    <script src="mode/morphology_mode.js"></script>
     
     <script src="../syntax_mode_utils/answer_type.js"></script>
     <script src="../syntax_mode_utils/conventions.js"></script>
@@ -95,6 +96,7 @@
     
     <script src="../levels/etym_levels.js"></script>
     <script src="../levels/grammar_levels.js"></script>
+    <script src="../levels/morphology_levels.js"></script>
     <script src="../levels/kck_levels.js"></script>
     <script src="../levels/latin_levels.js"></script>
     <script src="../levels/latin_display_levels.js"></script>
@@ -286,6 +288,36 @@
 
 <div id="vocab_cheat_sheet_div"></div>
 <div id="etym_cheat_sheet_div"></div>
+<div id="morphology_clickable_choices_div"></div>
+
+
+
+<table id="morphology_cell_answer" style="width:50%" class="morphology_answer_table">
+    <tr>
+        <th class="morphology_answer_heading">BEGINNING</th>
+        <th class="morphology_answer_heading">MIDDLE</th>
+        <th class="morphology_answer_heading">ENDING</th>
+    </tr>
+    <tr class="morphology_answer_cell">
+        <td id="morphology_cell_answer_beginning">_____</td>
+        <td id="morphology_cell_answer_middle">_____</td> 
+        <td id="morphology_cell_answer_ending">_____</td>
+      </tr>
+</table>
+
+
+<table id="morphology_cell_options" style="width:100%">
+    <tr>
+        <th>BEGINNING OPTIONS</th>
+        <th>MIDDLE OPTIONS</th>
+        <th>ENDING OPTIONS</th>
+    </tr>
+    <tr id="morphology_options" class='morphology_option_button'>
+        <td id="morphology_cell_options_beginning"></td>
+        <td id="morphology_cell_options_middle"></td> 
+        <td id="morphology_cell_options_ending"></td>
+      </tr>
+</table>
 
 <!--<div id="image_display_box1" style="display:block">-->
 <button class="button" id="next_level_button" style="display: none;">next level</button>
