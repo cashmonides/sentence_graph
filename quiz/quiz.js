@@ -680,133 +680,133 @@ Quiz.prototype.next_question = function (error) {
     }
 };
 
-var submit_morphological_element_to_cell = function (morphological_element, cell_destination) {
-    console.log("BUTTON TESTING submit morphological element to cell entered");
+// var submit_morphological_element_to_cell = function (morphological_element, cell_destination) {
+//     console.log("BUTTON TESTING submit morphological element to cell entered");
     
-    console.log("BUTTON TESTING in submit morphological_element_sent to cell = ", morphological_element);
-    console.log("BUTTON TESTING in submit cell_destination = ", cell_destination);
-    // we first check if the submitted data is of the right type
-    if (typeof (morphological_element) !== 'string') {
-        alert("submitted morphological element is not a string");
-    }
+//     console.log("BUTTON TESTING in submit morphological_element_sent to cell = ", morphological_element);
+//     console.log("BUTTON TESTING in submit cell_destination = ", cell_destination);
+//     // we first check if the submitted data is of the right type
+//     if (typeof (morphological_element) !== 'string') {
+//         alert("submitted morphological element is not a string");
+//     }
     
-    //we need to display the morphological element
-    var div_to_fill_with_morphological_element;
-    if (cell_destination == 'beginning') {
-        el('morphology_cell_answer_beginning').innerHTML = morphological_element;
-    } else if (cell_destination == 'middle') {
-        el('morphology_cell_answer_middle').innerHTML = morphological_element;
-    } else if (cell_destination == 'ending') {
-        el('morphology_cell_answer_ending').innerHTML = morphological_element;
-    } else {
-        alert("cell_destination is neither beginning middle nor end");
-    }
-}
+//     //we need to display the morphological element
+//     var div_to_fill_with_morphological_element;
+//     if (cell_destination == 'beginning') {
+//         el('morphology_cell_answer_beginning').innerHTML = morphological_element;
+//     } else if (cell_destination == 'middle') {
+//         el('morphology_cell_answer_middle').innerHTML = morphological_element;
+//     } else if (cell_destination == 'ending') {
+//         el('morphology_cell_answer_ending').innerHTML = morphological_element;
+//     } else {
+//         alert("cell_destination is neither beginning middle nor end");
+//     }
+// }
 
 
-var createClickHandler = function(arg, destination) {
-  return function() { 
-      console.log("create_click_handler arg = ", arg);
-      console.log("BUTTON TESTING destination in createclickhandler = ", destination);
-      submit_morphological_element_to_cell(arg, destination);
-  };
-}
+// var createClickHandler = function(arg, destination) {
+//   return function() { 
+//       console.log("create_click_handler arg = ", arg);
+//       console.log("BUTTON TESTING destination in createclickhandler = ", destination);
+//       submit_morphological_element_to_cell(arg, destination);
+//   };
+// }
 
 
-Quiz.prototype.make_morphology_buttons = function(morphological_elements, cell_destination) {
+// Quiz.prototype.make_morphology_buttons = function(morphological_elements, cell_destination) {
     
-    console.log("BUTTON TESTING morphological_elements pre-processing = ", morphological_elements);
-    morphological_elements = JSON.parse(morphological_elements);
-    console.log("BUTTON TESTING morphological_elements after parse = ", morphological_elements);
+//     console.log("BUTTON TESTING morphological_elements pre-processing = ", morphological_elements);
+//     morphological_elements = JSON.parse(morphological_elements);
+//     console.log("BUTTON TESTING morphological_elements after parse = ", morphological_elements);
     
-    //not sure if necessary    
-    var docFragment = document.createDocumentFragment();
+//     //not sure if necessary    
+//     var docFragment = document.createDocumentFragment();
     
 
     
     
-    for (var i = 0; i < morphological_elements.length; i++) {
-        //we first make the button for each morphological element
-        var button = document.createElement("BUTTON");
+//     for (var i = 0; i < morphological_elements.length; i++) {
+//         //we first make the button for each morphological element
+//         var button = document.createElement("BUTTON");
         
-        //we want to tweak the cosmetics of this button so we give it a class
-        button.className += 'morphology_option_button';
-        
-        
-        // this button is now empty of text, so we need to add the text (e.g. amav, aba, erunt)
-        var morphological_element_to_input = morphological_elements[i];
-        var t = document.createTextNode(morphological_element_to_input);   
-        console.log("BUTTON TESTING morphological_element_to_input = ", morphological_element_to_input);
-        console.log("BUTTON TESTING type of morphological_element_to_input = ",typeof(morphological_element_to_input));
+//         //we want to tweak the cosmetics of this button so we give it a class
+//         button.className += 'morphology_option_button';
         
         
+//         // this button is now empty of text, so we need to add the text (e.g. amav, aba, erunt)
+//         var morphological_element_to_input = morphological_elements[i];
+//         var t = document.createTextNode(morphological_element_to_input);   
+//         console.log("BUTTON TESTING morphological_element_to_input = ", morphological_element_to_input);
+//         console.log("BUTTON TESTING type of morphological_element_to_input = ",typeof(morphological_element_to_input));
         
-        //we need to create a separate function so we don't end up with one variable
-        button.onclick = createClickHandler(morphological_element_to_input, cell_destination);
         
         
-        button.innerHTML = morphological_element_to_input
+//         //we need to create a separate function so we don't end up with one variable
+//         button.onclick = createClickHandler(morphological_element_to_input, cell_destination);
         
-        docFragment.appendChild(button); 
         
-        if (cell_destination == 'beginning') {
-            // button.className += 'morphology_beginning_button';
-            button.setAttribute('class', 'morphology_beginning_button');
-            var e = document.getElementById("morphology_cell_options_beginning");
-            e.appendChild(docFragment);
-        } else if (cell_destination == 'middle') {
-            // button.className += 'morphology_middle_button';
-            button.setAttribute('class', 'morphology_middle_button');
-            var e = document.getElementById("morphology_cell_options_middle");
-            e.appendChild(docFragment);
-        } else if (cell_destination == 'ending') {
-            // button.className += 'morphology_ending_button';
-            button.setAttribute('class', 'morphology_ending_button');
-            var e = document.getElementById("morphology_cell_options_ending");
-            e.appendChild(docFragment);
-        }
+//         button.innerHTML = morphological_element_to_input
         
-    }
-    //below just throws it up on the page
-    // document.body.appendChild(docFragment);
-    //we want it to be in the beginning, middle or end block
+//         docFragment.appendChild(button); 
+        
+//         if (cell_destination == 'beginning') {
+//             // button.className += 'morphology_beginning_button';
+//             button.setAttribute('class', 'morphology_beginning_button');
+//             var e = document.getElementById("morphology_cell_options_beginning");
+//             e.appendChild(docFragment);
+//         } else if (cell_destination == 'middle') {
+//             // button.className += 'morphology_middle_button';
+//             button.setAttribute('class', 'morphology_middle_button');
+//             var e = document.getElementById("morphology_cell_options_middle");
+//             e.appendChild(docFragment);
+//         } else if (cell_destination == 'ending') {
+//             // button.className += 'morphology_ending_button';
+//             button.setAttribute('class', 'morphology_ending_button');
+//             var e = document.getElementById("morphology_cell_options_ending");
+//             e.appendChild(docFragment);
+//         }
+        
+//     }
+//     //below just throws it up on the page
+//     // document.body.appendChild(docFragment);
+//     //we want it to be in the beginning, middle or end block
     
-    // e.appendChild(docFragment);
-}
+//     // e.appendChild(docFragment);
+// }
 
-//sometimes we know we want to display roots (e.g. root_2 & root_3)
-// but we want the actual lexical roots (e.g. am-, amav-, tim-, timu-)
-// this function will take a list of roots and a lexeme list
-// and return a list of items to populate morphological buttons
-var convert_root_items_to_actual_forms = function (root_list, lexeme_list, language) {
-    var dictionary_to_consult;
-    if (language == 'latin') {
-        dictionary_to_consult = testing_lexemes.verb;
-    }
-    console.log("ROOT LOOP dictionary_to_consult = ", dictionary_to_consult);
+// //sometimes we know we want to display roots (e.g. root_2 & root_3)
+// // but we want the actual lexical roots (e.g. am-, amav-, tim-, timu-)
+// // this function will take a list of roots and a lexeme list
+// // and return a list of items to populate morphological buttons
+// var convert_root_items_to_actual_forms = function (root_list, lexeme_list, language) {
+//     var dictionary_to_consult;
+//     if (language == 'latin') {
+//         dictionary_to_consult = testing_lexemes.verb;
+//     }
+//     console.log("ROOT LOOP dictionary_to_consult = ", dictionary_to_consult);
     
     
-    var list_of_lexical_roots = [];
-    for (i=0; i<root_list.length; i++) {
-        for (j=0; j<lexeme_list.length; j++) {
-            var root_to_find = root_list[i];
-            console.log("ROOT LOOP root_to_find = ", root_to_find);
-            var lexeme_to_consult = lexeme_list[j];
-            console.log("ROOT LOOP lexeme_to_consult = ", lexeme_to_consult); 
-            var lexeme_in_lexicon = testing_lexemes.verb[lexeme_to_consult];
-            console.log("ROOT LOOP testing_lexemes.verb[lexeme_to_consult] = ", lexeme_in_lexicon);
-            var latin_properties = lexeme_in_lexicon.latin;
-            console.log("ROOT LOOP latin_properties = ", latin_properties);
-            var roots = latin_properties.roots;
-            console.log("ROOT LOOP roots = ", roots);
-            var root_output = roots[root_to_find];
-            console.log("ROOT LOOP root_output = ", root_output);
-            list_of_lexical_roots.push(root_output);
-        }
-    }
-    console.log("ROOT LOOP list_of_lexical_roots =", list_of_lexical_roots);
-    return list_of_lexical_roots;
-}
+//     var list_of_lexical_roots = [];
+//     for (i=0; i<root_list.length; i++) {
+//         for (j=0; j<lexeme_list.length; j++) {
+//             var root_to_find = root_list[i];
+//             console.log("ROOT LOOP root_to_find = ", root_to_find);
+//             var lexeme_to_consult = lexeme_list[j];
+//             console.log("ROOT LOOP lexeme_to_consult = ", lexeme_to_consult); 
+//             var lexeme_in_lexicon = testing_lexemes.verb[lexeme_to_consult];
+//             console.log("ROOT LOOP testing_lexemes.verb[lexeme_to_consult] = ", lexeme_in_lexicon);
+//             var latin_properties = lexeme_in_lexicon.latin;
+//             console.log("ROOT LOOP latin_properties = ", latin_properties);
+//             var roots = latin_properties.roots;
+//             console.log("ROOT LOOP roots = ", roots);
+//             var root_output = roots[root_to_find];
+//             console.log("ROOT LOOP root_output = ", root_output);
+//             list_of_lexical_roots.push(root_output);
+//         }
+//     }
+//     console.log("ROOT LOOP list_of_lexical_roots =", list_of_lexical_roots);
+//     return list_of_lexical_roots;
+// }
 
 
 //not sure if I can make this work as a method, since it's called by a global function

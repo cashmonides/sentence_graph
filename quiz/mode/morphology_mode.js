@@ -7,8 +7,9 @@
 // the answer is fed into compare path (turns red and green)
 // has the same cheat sheets (principal parts + translations)
 
+var global_hack_verb_output;
 
-
+var global_hack_input_dictionary = {};
 
 var MorphologyModeGame = function () {
     this.data = null;
@@ -102,7 +103,12 @@ MorphologyModeGame.prototype.next_question = function () {
     
     
     this.question = sentence.translate_into(source_language);
+    console.log("DEBUG MORPHOLOGY next_question checkpoint 5.5");
+    console.log("DEBUG MORPHOLOGY this.question = ", this.question);
     
+    this.answer = sentence.translate_into(target_language);
+    console.log("DEBUG MORPHOLOGY next_question checkpoint 5.75");
+    console.log("DEBUG MORPHOLOGY this.question = ", this.answer);
     
     console.log("DEBUG MORPHOLOGY next_question checkpoint 6");
     console.log("sentence.chosen_lexemes =", sentence.chosen_lexemes);
@@ -294,8 +300,28 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     //the button approach end
 };
 
+var submit_morphological_element_to_input_dictionary = function (morphological_element, cell_destination) {
+    console.log("REMOVE HEY THIS IS CALLED 2");
+    
+    
+    if (cell_destination == 'beginning') {
+        global_hack_input_dictionary.beginning = morphological_element;
+    } else if (cell_destination == 'middle') {
+        global_hack_input_dictionary.middle = morphological_element;
+    } else if (cell_destination == 'ending') {
+        global_hack_input_dictionary.ending = morphological_element;
+    } else {
+        alert("cell_destination is neither beginning middle nor end");
+    }
+    console.log("REMOVE HEY input_dictionary = ", global_hack_input_dictionary);
+    console.log("REMOVE HEY input_dictionary stringified = ", JSON.stringify(global_hack_input_dictionary));
+    return global_hack_input_dictionary;
+}
 
 var submit_morphological_element_to_cell = function (morphological_element, cell_destination) {
+    console.log("REMOVE HEY THIS IS CALLED 1");
+    
+    submit_morphological_element_to_input_dictionary(morphological_element, cell_destination);
     console.log("BUTTON TESTING submit morphological element to cell entered");
     
     console.log("BUTTON TESTING in submit morphological_element_sent to cell = ", morphological_element);
@@ -449,23 +475,46 @@ MorphologyModeGame.prototype.process_answer = function(){
     // 'correct', 'incorrect', or 'missed'
     
     // console.log('LOG MORPHOLOGY answer_statuses =', answer_statuses);
-    this.display_green_and_red_path(answer_statuses);
+    // this.display_green_and_red_path(answer_statuses);
     // 'correct', 'incorrect', or 'missed'
     
     
     //compare path is obscure to Akiva
-    var correct_status = compare_path(drop_down_statuses);
+    // var correct_status = compare_path(drop_down_statuses);
     
-    if (correct_status === 'correct') {
+    
+    var correct_status = this.hack_compare_input_to_correct_answer(global_hack_input_dictionary);
+    console.log("HEY correct_status = ", correct_status);
+    
+    if (correct_status) {
         this.process_correct_answer();
     } else {
         this.process_incorrect_answer();
     }
 };
 
+var convert_dictionary_to_dashed_form = function (dictionary) {
+    console.log("HEY dictionary input into hack convert = ", dictionary);
+    var output;
+    output = dictionary.beginning + "-" + dictionary.middle + "-" + dictionary.ending;
+    console.log("HEY output = ", output);
+    return output;
+}
 
 
-
+MorphologyModeGame.prototype.hack_compare_input_to_correct_answer = function (input) {
+    input = convert_dictionary_to_dashed_form(input);
+    var processed_correct_answer_as_string = remove_metacharacters(this.correct_answer_as_string);
+    console.log("HEY processed_correct_answer_as_string = ", processed_correct_answer_as_string);
+    
+    if (input == processed_correct_answer_as_string) {
+        console.log("HEY input matches answer");
+        return true;
+    } else {
+        console.log("HEY input doesn't match answer")
+        return false;
+    }
+}
 
 
 
