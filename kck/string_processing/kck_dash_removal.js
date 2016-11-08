@@ -169,6 +169,7 @@ var remove_dashes = function (input) {
 
 
 var remove_metacharacters = function  (input) {
+    console.log("HEY 2 remove_metacharacters is called");
     return tr(input, metacharacter_replacement_dictionary);
 }
 

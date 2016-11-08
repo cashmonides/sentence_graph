@@ -1,4 +1,4 @@
-var latin_replacement_dictionary = {
+var latin_replacement_dictionary_old = {
 
     // long a in 1st conjugation and all imperfects
     "Ā-M" : "AM",
@@ -40,7 +40,7 @@ var latin_replacement_dictionary = {
     "I@-RE" : "ERE",
     "I@-NTUR" : "IUNTUR",
 
-    //long I in 4th conjugatio
+    //long I in 4th conjugation
     "Ī-Ō/M" : "Ō",
     "Ī-T" : "IT",
     "Ī-OR/R" : "IOR",
@@ -49,11 +49,12 @@ var latin_replacement_dictionary = {
 };
 
 
-var metacharacter_replacement_dictionary = {
+var metacharacter_replacement_dictionary_old = {
     "@" : "",
     "#" : "",
     "%" : "",
-    "$" : ""
+    "$" : "",
+    "~" : ""
 };
 
 // function remove_dashes (input) {
@@ -76,7 +77,7 @@ function remove_dashes (input) {
 }
 
 
-function remove_metacharacters (input) {
+function remove_metacharacters_old (input) {
     var dict = metacharacter_replacement_dictionary;
     for (var key in dict) {
         if (!dict.hasOwnProperty(key)) {

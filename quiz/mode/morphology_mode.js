@@ -7,7 +7,31 @@
 // the answer is fed into compare path (turns red and green)
 // has the same cheat sheets (principal parts + translations)
 
+/*
+agenda:
+pipe in lexicon
+do a test run with null conjunction and 4 levels 
+    active 3s 3p, 
+    active and passive 3s 3p
+    active 1s-3p, 
+    active and passive 1s-3p
+pipe in the usual kck cheat sheet   
+little cosmetic bug: correct answer from previous sentence stays on screen
+
+*/
+
+var global_hack_morphology_testing_level = 1;
+
 var global_hack_verb_output;
+
+var global_hack_full_lexicon_for_morphology = ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'come'];
+
+var global_hack_properties_from_morphology_level = ['present indicative active',
+    'imperfect indicative active', 'future indicative active', 'present indicative passive', 
+    'imperfect indicative passive', 'future indicative passive', 'perfect indicative active',
+    'present subjunctive active', 'present subjunctive passive', 'imperfect subjunctive active', 'imperfect subjunctive passive',
+    'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', 
+    '1s', '2s', '3s', '1p', '2p', '3p'];
 
 var global_hack_input_dictionary = {};
 
@@ -50,6 +74,9 @@ MorphologyModeGame.prototype.get_mode_name = function() {
 
 MorphologyModeGame.prototype.next_question = function () {
     console.log("DEBUG MORPHOLOGY next_question entered");
+
+    this.clear_buttons();
+    
     //todo we probably won't need drop or extra level
     // but latin_extra_level is hard-wired into kck's generate sentence
     // so it would be tricky to just delete it
@@ -201,8 +228,7 @@ MorphologyModeGame.prototype.next_question = function () {
     
     
     console.log("DEBUG MORPHOLOGY next_question checkpoint 12");
-    // todo we probably need to clean up the landscape and clear out whatever div we're populating
-    // document.getElementById("morphology_options").innerHTML = ""
+
     
     Quiz.set_question_text('Translate the following sentence:');
     console.log("DEBUG MORPHOLOGY next_question checkpoint 13");
@@ -212,6 +238,68 @@ MorphologyModeGame.prototype.next_question = function () {
     console.log("DEBUG MORPHOLOGY next_question checkpoint 14");
 };
 
+MorphologyModeGame.prototype.get_morphological_properties_from_level = function (morphological_level) {
+    
+    
+    
+    console.log("ECCE entering get_morphological_properties_from_level");
+    console.log("ECCE should be an integer morphological level = ", morphological_level);
+    var list_of_morphological_properties = [];
+    
+    //CUT OUT
+    // var list_of_morphological_properties = global_hack_properties_from_morphology_level;
+    // console.log("CUTOUT list_of_morphological_properties = ", list_of_morphological_properties);
+    // return list_of_morphological_properties;
+    
+    console.log("ECCE about to pick a specific level of morphology_levels = ", morphology_levels);
+    
+    var morphological_level_to_consult = morphology_levels[morphological_level];
+    
+    console.log("ECCE morphological_level_to_consult = ", morphological_level_to_consult);
+    
+    console.log("ECCE about to set tense_mood_voice");
+    //we push all the tense_mood_voice combos
+    //e.g. present indicative active
+    var allowed_tense_mood_voice_list = morphological_level_to_consult.allowed_tense_mood_voice;
+    console.log("ECCE allowed_tense_mood_voice_list = ", allowed_tense_mood_voice_list);
+    list_of_morphological_properties.push(allowed_tense_mood_voice_list);
+    console.log("ECCE list_of_morphological_properties = ", list_of_morphological_properties);
+    
+    //we push all the person_number combos
+    //e.g. 3s
+    var allowed_person_number_list = morphological_level_to_consult.allowed_person_number;
+    console.log("ECCE allowed_person_number_list = ", allowed_person_number_list);
+    list_of_morphological_properties.push(allowed_person_number_list);
+    console.log("ECCE list_of_morphological_properties = ", list_of_morphological_properties);
+    
+    
+    //we push all the person_number combos
+    //e.g. 3s
+    var allowed_conjugation_list = morphological_level_to_consult.allowed_conjugation;
+    console.log("ECCE allowed_conjugation_list = ", allowed_conjugation_list);
+    list_of_morphological_properties.push(allowed_conjugation_list);
+    console.log("ECCE list_of_morphological_properties pre-flattening = ", list_of_morphological_properties);
+    
+    list_of_morphological_properties = [].concat.apply([], list_of_morphological_properties);
+    console.log("ECCE list_of_morphological_properties post-flattening = ", list_of_morphological_properties);
+    
+    
+    return list_of_morphological_properties;
+}
+
+
+MorphologyModeGame.prototype.get_morphological_elements_from_level = function (position, morphological_level) {
+    var morphology_dictionary_to_traverse;
+    if (position == 'beginning') {
+        morphology_dictionary_to_traverse = 'latin verb morphology beginning';
+    } else if (position == 'middle') {
+        morphology_dictionary_to_traverse = 'latin verb morphology middle';
+    } else if (position == 'ending') {
+        morphology_dictionary_to_traverse = 'latin verb morphology ending';
+    }
+    
+    return morphology_dictionary_traverser_main([morphology_dictionary_to_traverse, global_hack_properties_from_morphology_level]);
+}
 
 MorphologyModeGame.prototype.generate_morphology_options_master_function = function (morphology_level) {
     
@@ -233,6 +321,8 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     
     
     
+    // getElementById("morphology_cell_answer_beginning").innerHTML = "cleared";
+    
     var shuffle_morphological_elements = false;
     remove_dashes_in_morphology_mode = true;
     
@@ -245,26 +335,43 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     
     var test_output_of_morphology = {};
     
-    test_output_of_morphology.beginning = morphology_dictionary_traverser_main(['latin verb morphology beginning', 'present indicative active',
-    'imperfect indicative active', 'future indicative active', 'present indicative passive', 
-    'imperfect indicative passive', 'future indicative passive', 'perfect indicative active',
-    'present subjunctive active', 'present subjunctive passive', 'imperfect subjunctive active', 'imperfect subjunctive passive',
-    'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', 
-    '1s', '2s', '3s', '1p', '2p', '3p'])
     
-    test_output_of_morphology.middle = morphology_dictionary_traverser_main(['latin verb morphology middle', 'present indicative active',
-    'imperfect indicative active', 'future indicative active', 'present indicative passive', 
-    'imperfect indicative passive', 'future indicative passive', 'perfect indicative active',
-    'present subjunctive active', 'present subjunctive passive', 'imperfect subjunctive active', 'imperfect subjunctive passive',
-    'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', 
-    '1s', '2s', '3s', '1p', '2p', '3p']);
+    //below is now obsolete
+    // test_output_of_morphology.beginning = morphology_dictionary_traverser_main(['latin verb morphology beginning', 'present indicative active',
+    // 'imperfect indicative active', 'future indicative active', 'present indicative passive', 
+    // 'imperfect indicative passive', 'future indicative passive', 'perfect indicative active',
+    // 'present subjunctive active', 'present subjunctive passive', 'imperfect subjunctive active', 'imperfect subjunctive passive',
+    // 'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', 
+    // '1s', '2s', '3s', '1p', '2p', '3p'])
+    //end obsolescence
     
-    test_output_of_morphology.ending = morphology_dictionary_traverser_main(['latin verb morphology ending', 'present indicative active',
-    'imperfect indicative active', 'future indicative active', 'present indicative passive', 
-    'imperfect indicative passive', 'future indicative passive', 'perfect indicative active',
-    'present subjunctive active', 'present subjunctive passive', 'imperfect subjunctive active', 'imperfect subjunctive passive',
-    'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', 
-    '1s', '2s', '3s', '1p', '2p', '3p']);
+    
+    console.log("ECCE 1 global_hack_properties_from_morphology_level pre-setting = ", global_hack_properties_from_morphology_level);
+    global_hack_properties_from_morphology_level = this.get_morphological_properties_from_level(global_hack_morphology_testing_level);
+    console.log("ECCE 2 global_hack_properties_from_morphology_level post-setting = ", global_hack_properties_from_morphology_level);
+    
+    
+    test_output_of_morphology.beginning = this.get_morphological_elements_from_level ('beginning', global_hack_properties_from_morphology_level);
+    
+    
+    test_output_of_morphology.middle = this.get_morphological_elements_from_level ('middle', global_hack_properties_from_morphology_level);
+    
+    // test_output_of_morphology.middle = morphology_dictionary_traverser_main(['latin verb morphology middle', 'present indicative active',
+    // 'imperfect indicative active', 'future indicative active', 'present indicative passive', 
+    // 'imperfect indicative passive', 'future indicative passive', 'perfect indicative active',
+    // 'present subjunctive active', 'present subjunctive passive', 'imperfect subjunctive active', 'imperfect subjunctive passive',
+    // 'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', 
+    // '1s', '2s', '3s', '1p', '2p', '3p']);
+    
+    
+    test_output_of_morphology.ending = this.get_morphological_elements_from_level ('ending', global_hack_properties_from_morphology_level);
+    //old version below
+    // test_output_of_morphology.ending = morphology_dictionary_traverser_main(['latin verb morphology ending', 'present indicative active',
+    // 'imperfect indicative active', 'future indicative active', 'present indicative passive', 
+    // 'imperfect indicative passive', 'future indicative passive', 'perfect indicative active',
+    // 'present subjunctive active', 'present subjunctive passive', 'imperfect subjunctive active', 'imperfect subjunctive passive',
+    // 'conjugation 1', 'conjugation 2', 'conjugation 3', 'conjugation 3i', 'conjugation 4', 
+    // '1s', '2s', '3s', '1p', '2p', '3p']);
     
     
     
@@ -274,7 +381,7 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     
     // console.log("ROOT LOOP stringified_beginning = ", stringified_beginning);
     
-    var final_root_output = convert_root_items_to_actual_forms(test_output_of_morphology.beginning, ['love', 'eat', 'rule'], 'latin');
+    var final_root_output = convert_root_items_to_actual_forms(test_output_of_morphology.beginning, global_hack_full_lexicon_for_morphology, 'latin');
     console.log("ROOT LOOP final_root_output = ", final_root_output);
     final_root_output = JSON.stringify(final_root_output);
     
@@ -353,6 +460,20 @@ var createClickHandler = function(arg, destination) {
   };
 }
 
+var clear_div = function (elementID) {
+    document.getElementById(elementID).innerHTML = "";
+}
+
+MorphologyModeGame.prototype.clear_buttons = function () {
+    console.log("HEY clear_buttons triggered");
+    var e1 = document.getElementById("morphology_cell_options_beginning");
+    e1.innerHTML = "";
+    var e2 = document.getElementById("morphology_cell_options_middle");
+    e2.innerHTML = "";
+    var e3 = document.getElementById("morphology_cell_options_ending");
+    e3.innerHTML = "";
+}
+
 MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_elements, cell_destination) {
     
     console.log("BUTTON TESTING morphological_elements pre-processing = ", morphological_elements);
@@ -362,7 +483,30 @@ MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_el
     //not sure if necessary    
     var docFragment = document.createDocumentFragment();
     
-
+    
+    // var e = document.getElementsByClassName("morphology_options");
+    // clear_div("morphology_options");
+    
+    
+    
+    //below somehow works but only on 3rd dive
+    // var node3 = document.getElementById("morphology_cell_options_ending");
+    // while (node3.hasChildNodes()) {
+    //     node3.removeChild(node3.firstChild);
+    // }
+    
+    // //we need to clear the 3 divs
+    // var e = document.getElementById("morphology_cell_options_ending");
+    // e.removeChild();
+    
+    // // var e2 = document.getElementById("morphology_cell_options_middle");
+    // // e2.innerHTML = "";
+    
+    // var top = document.getElementById("morphology_options");
+    // var nested = document.getElementById("morphology_cell_options_middle");
+    // top.removeChild(nested);
+    
+    
     
     
     for (var i = 0; i < morphological_elements.length; i++) {
@@ -396,7 +540,7 @@ MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_el
         
         console.log("DEBUG BUTTONS checkpoint 7");
         
-        docFragment.appendChild(button); 
+        // docFragment.appendChild(button); 
         
         console.log("DEBUG BUTTONS checkpoint 8");
         
@@ -404,17 +548,20 @@ MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_el
             // button.className += 'morphology_beginning_button';
             button.setAttribute('class', 'morphology_beginning_button');
             var e = document.getElementById("morphology_cell_options_beginning");
-            e.appendChild(docFragment);
+            // e.appendChild(docFragment);
+            e.appendChild(button);
         } else if (cell_destination == 'middle') {
             // button.className += 'morphology_middle_button';
             button.setAttribute('class', 'morphology_middle_button');
             var e = document.getElementById("morphology_cell_options_middle");
-            e.appendChild(docFragment);
+            // e.appendChild(docFragment);
+            e.appendChild(button);
         } else if (cell_destination == 'ending') {
             // button.className += 'morphology_ending_button';
             button.setAttribute('class', 'morphology_ending_button');
             var e = document.getElementById("morphology_cell_options_ending");
-            e.appendChild(docFragment);
+            // e.appendChild(docFragment);
+            e.appendChild(button);
         }
         
     }
@@ -528,7 +675,7 @@ MorphologyModeGame.prototype.process_correct_answer = function () {
     var cell_1 = random_choice(MorphologyModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML += '<br/>' + cell_1 + " ";
-    var correct_answer_as_string_for_path = this.correct_answer_as_string;
+    var correct_answer_as_string_for_path = remove_metacharacters(this.correct_answer_as_string);
     var question_as_string_for_path = this.question;
     var question_plus_answer_as_string = question_as_string_for_path + " = " + correct_answer_as_string_for_path;
     // console.log("DEBUG answer_as_string_for_path =", correct_answer_as_string_for_path);
@@ -574,7 +721,7 @@ MorphologyModeGame.prototype.give_away_answer = function () {
 
 MorphologyModeGame.prototype.display_give_away_answer = function () {
     // todo figure out how to combine string and path
-    return this.give_away_phrase + " " + this.correct_answer_as_string + this.give_away_ending_phrase
+    return this.give_away_phrase + " " + remove_metacharacters(this.correct_answer_as_string) + this.give_away_ending_phrase
 }
 
 // todo implement this (maybe a new div?)
