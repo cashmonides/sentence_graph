@@ -24,6 +24,10 @@ var global_hack_morphology_testing_level = 1;
 
 var global_hack_verb_output;
 
+var global_hack_full_lexicon_for_morphology_as_object;
+
+var global_hack_full_lexicon_for_morphology_as_object2;
+
 var global_hack_full_lexicon_for_morphology = ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'come'];
 
 var global_hack_properties_from_morphology_level = ['present indicative active',
@@ -123,6 +127,17 @@ MorphologyModeGame.prototype.next_question = function () {
     var sentence = generate_sentence(
         source_language, target_language,
         this.level.kck_level, this.level.latin_extra_level, null);
+    
+    
+    //lexicon intervention begin
+    global_hack_full_lexicon_for_morphology_as_object = sentence.chosen_lexemes;
+    
+    console.log("ECCE 3 sentence.chosen_lexemes = ", sentence.chosen_lexemes);
+    
+    
+    global_hack_full_lexicon_for_morphology_as_object2 = sentence.chosen_lexemes.verb;
+    console.log("ECCE 3 sentence.chosen_lexemes.verb = ", sentence.chosen_lexemes.verb); 
+    //lexicon intervention end
     
     
     console.log('LOG MORPHOLOGY sentence =', sentence);
@@ -381,7 +396,11 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     
     // console.log("ROOT LOOP stringified_beginning = ", stringified_beginning);
     
-    var final_root_output = convert_root_items_to_actual_forms(test_output_of_morphology.beginning, global_hack_full_lexicon_for_morphology, 'latin');
+    
+    
+    console.log("ECCE 3 global_hack_full_lexicon_for_morphology_as_object2 = ", global_hack_full_lexicon_for_morphology_as_object2);
+    
+    var final_root_output = convert_root_items_to_actual_forms(test_output_of_morphology.beginning, global_hack_full_lexicon_for_morphology, global_hack_full_lexicon_for_morphology_as_object2, 'latin');
     console.log("ROOT LOOP final_root_output = ", final_root_output);
     final_root_output = JSON.stringify(final_root_output);
     
@@ -576,13 +595,22 @@ MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_el
 // but we want the actual lexical roots (e.g. am-, amav-, tim-, timu-)
 // this function will take a list of roots and a lexeme list
 // and return a list of items to populate morphological buttons
-var convert_root_items_to_actual_forms = function (root_list, lexeme_list, language) {
+var convert_root_items_to_actual_forms = function (root_list, lexeme_list, lexeme_list_as_objects, language) {
+    console.log("ECCE 3 lexeme_list_as_objects = ", lexeme_list_as_objects);
+    var dictionary_to_consult;
+    if (language == 'latin') {
+        dictionary_to_consult = testing_lexemes;
+    }
+    console.log("ROOT LOOP dictionary_to_consult = ", dictionary_to_consult);
+    
+    
+    //version with strings
+    /*
     var dictionary_to_consult;
     if (language == 'latin') {
         dictionary_to_consult = testing_lexemes.verb;
     }
     console.log("ROOT LOOP dictionary_to_consult = ", dictionary_to_consult);
-    
     
     var list_of_lexical_roots = [];
     for (i=0; i<root_list.length; i++) {
@@ -604,6 +632,35 @@ var convert_root_items_to_actual_forms = function (root_list, lexeme_list, langu
     }
     console.log("ROOT LOOP list_of_lexical_roots =", list_of_lexical_roots);
     return list_of_lexical_roots;
+    */
+    
+    //version with objects
+    var list_of_lexical_roots = [];
+    for (i=0; i<root_list.length; i++) {
+        for (j=0; j<lexeme_list_as_objects.length; j++) {
+            var root_to_find = root_list[i];
+            console.log("ROOT LOOP root_to_find = ", root_to_find);
+            var lexeme_to_consult = lexeme_list_as_objects[j];
+            console.log("ROOT LOOP lexeme_to_consult = ", lexeme_to_consult); 
+            
+            //below should be otiose
+            // var lexeme_in_lexicon = testing_lexemes.verb[lexeme_to_consult];
+            // console.log("ROOT LOOP testing_lexemes.verb[lexeme_to_consult] = ", lexeme_in_lexicon);
+            
+            
+            var lexeme_in_lexicon = lexeme_to_consult;
+            var latin_properties = lexeme_in_lexicon.latin;
+            console.log("ROOT LOOP latin_properties = ", latin_properties);
+            var roots = latin_properties.roots;
+            console.log("ROOT LOOP roots = ", roots);
+            var root_output = roots[root_to_find];
+            console.log("ROOT LOOP root_output = ", root_output);
+            list_of_lexical_roots.push(root_output);
+        }
+    }
+    console.log("ROOT LOOP list_of_lexical_roots =", list_of_lexical_roots);
+    return list_of_lexical_roots;
+    
 }
 
 
