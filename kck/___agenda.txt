@@ -51,7 +51,19 @@ step 3
         - -> a / aba / abi / e / eba / ebi / e / ie / ia / are/ ere / ere
         - -> o s t mus tis nt
     
+   
+   
+   
         -
+ 
+
+
+BUGS IN MORPHOLOGY
+- feedback should give sentence plus correct answer
+- morphology mode is not completing module properly
+    - progress is not incremented to 1, stays 0
+    - means that user can never improve
+- the o/m or/r distinction may not be very clear on the cheat sheet
  
 THINGS TO CHECK BEFORE STEP 3.5
     - is ditransitive working properly
@@ -63,15 +75,19 @@ AKIVA'S QUESTIONS FOR HIS CONTROL FLOW
     
     
 MORPHOLOGY MODE
-build the game mode
-pipe in lexeme_list
+build the game mode DONE
+pipe in lexeme_list DONE
 pipe in the shuffle parameter (somewhere in module or morphology_level)
 figure out some way to deal with sound changes upon dash removal
 enumerate question types (change x to y, form x, etc.)
 generate the transformation (maybe generate the kernel and work backwards)
 make a submit method (when they've filled all three, the answer is submitted)
     this will increase the speed
-
+fix module_complete
+give away answer should contain both english and latin
+figure out how to adapt inflect latin for fixed forms with no translation   
+    - e.g. present subjunctive
+decouple kck and morphology mode
     
 step 3.5
     before launching nouns

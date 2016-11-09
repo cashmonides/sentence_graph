@@ -799,13 +799,75 @@ var testing_lexemes = {
                 }
             },
             english: {
-                citation_form: 'carry',
+                citation_form: 'find',
                 roots: {
-            		'default': 'carry',
-            		'final-s': 'carries',
-            		'gerund': 'carrying',
-            		'past participle': 'carried',
-            		'preterite': 'carried'
+            		'default': 'find',
+            		'final-s': 'finds',
+            		'gerund': 'finding',
+            		'past participle': 'found',
+            		'preterite': 'found'
+        		}
+        	}
+        },
+        avoid: {
+            core_properties: {
+                name: 'avoid',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '1',
+                citation_form: 'vit- (1)',
+                roots: {
+                    root_2: 'vit',
+                    root_3: 'vitāv',
+                    root_4: 'vitāt'
+                }
+            },
+            english: {
+                citation_form: 'find',
+                roots: {
+            		'default': 'find',
+            		'final-s': 'finds',
+            		'gerund': 'finding',
+            		'past participle': 'found',
+            		'preterite': 'found'
+        		}
+        	}
+        },
+        drag: {
+            core_properties: {
+                name: 'drag',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '3',
+                citation_form: 'trah- (3)',
+                roots: {
+                    root_2: 'trah',
+                    root_3: 'trax',
+                    root_4: 'tract'
+                }
+            },
+            english: {
+                citation_form: 'drag',
+                roots: {
+            		'default': 'drag',
+            		'final-s': 'drags',
+            		'gerund': 'dragging',
+            		'past participle': 'dragged',
+            		'preterite': 'dragged'
         		}
         	}
         },
@@ -900,6 +962,37 @@ var testing_lexemes = {
             		'gerund': 'filling',
             		'past participle': 'filled',
             		'preterite': 'filled'
+        		}
+        	}
+        },
+        push: {
+            core_properties: {
+                name: 'push',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'mental']
+            },
+            latin: {
+                conjugation: '3',
+                citation_form: 'pell- (3)',
+                roots: {
+                    root_2: 'pell',
+                    root_3: 'pepul',
+                    root_4: 'puls'
+                }
+            },
+            english: {
+                citation_form: 'push',
+                roots: {
+            		'default': 'push',
+            		'final-s': 'pushes',
+            		'gerund': 'pushing',
+            		'past participle': 'pushed',
+            		'preterite': 'pushed'
         		}
         	}
         },
@@ -1057,6 +1150,37 @@ var testing_lexemes = {
         			'gerund': 'coming',
         			'past participle': 'come',
         			'preterite': 'came'
+                }
+    		}
+        },
+        hurry: {
+            core_properties: {
+                name: 'hurry',
+                part_of_speech: 'verb',
+                transitivity: 'intransitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], 
+                subject_black_list: [], 
+                object_black_list: [],
+            },
+            latin: {
+                conjugation: '1',
+                citation_form: 'proper- (1)',
+                roots: {
+                    root_2: 'proper',
+                    root_3: 'properāv',
+                    root_4: 'properāt'
+                }
+            },
+            english: {
+                citation_form: 'hurry',
+                roots: {
+        			'default': 'hurry',
+        			'final-s': 'hurries',
+        			'gerund': 'hurrying',
+        			'past participle': 'hurried',
+        			'preterite': 'hurried'
                 }
     		}
         },

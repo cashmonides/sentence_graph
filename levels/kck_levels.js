@@ -71,7 +71,8 @@ var kck_levels = {
         // 'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
         'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
             'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
-            'hear', 'speak', 'see', 'send', 'seek', 'find', 'throw', 'move', 'invade'
+            'hear', 'speak', 'see', 'send', 'seek', 'find', 'throw', 'move', 'invade',
+            'hurry', 'drag', 'avoid', 'push'
             ],
         // 'allowed_verbs' : ['speak', 'attack'],
         'noun_switch' : false,
@@ -169,7 +170,8 @@ var kck_levels = {
         // 'allowed_verbs' : ['love', 'speak', 'carry', 'throw'],
         'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
             'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
-            'hear', 'speak', 'see', 'send', 'seek', 'throw', 'find', 'move', 'invade'
+            'hear', 'speak', 'see', 'send', 'seek', 'throw', 'find', 'move', 'invade',
+            'hurry', 'drag', 'avoid', 'push'
             ],
         // 'allowed_verbs' : ['speak', 'attack'],
         'noun_switch' : false,
