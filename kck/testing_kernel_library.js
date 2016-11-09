@@ -623,6 +623,68 @@ var testing_lexemes = {
         		}
         	}
         },
+        send: {
+            core_properties: {
+                name: 'send',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '3',
+                citation_form: 'mitt- (3)',
+                roots: {
+                    root_2: 'mitt',
+                    root_3: 'mīs',
+                    root_4: 'mitt'
+                }
+            },
+            english: {
+                citation_form: 'send',
+                roots: {
+            		'default': 'send',
+            		'final-s': 'sends',
+            		'gerund': 'sending',
+            		'past participle': 'sent',
+            		'preterite': 'sent'
+        		}
+        	}
+        },
+        seek: {
+            core_properties: {
+                name: 'seek',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '3',
+                citation_form: 'quaer- (3)',
+                roots: {
+                    root_2: 'quaer',
+                    root_3: 'quaesīv',
+                    root_4: 'quasīt'
+                }
+            },
+            english: {
+                citation_form: 'seek',
+                roots: {
+            		'default': 'seek',
+            		'final-s': 'seeks',
+            		'gerund': 'seeking',
+            		'past participle': 'sought',
+            		'preterite': 'sought'
+        		}
+        	}
+        },
         grab: {
             core_properties: {
                 name: 'grab',
@@ -654,6 +716,37 @@ var testing_lexemes = {
         		}
         	}
         },
+        'throw': {
+            core_properties: {
+                name: 'throw',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '3i',
+                citation_form: 'iac- (3i)',
+                roots: {
+                    root_2: 'iac',
+                    root_3: 'iēc',
+                    root_4: 'iact'
+                }
+            },
+            english: {
+                citation_form: 'throw',
+                roots: {
+            		'default': 'throw',
+            		'final-s': 'throws',
+            		'gerund': 'throwing',
+            		'past participle': 'thrown',
+            		'preterite': 'threw'
+        		}
+        	}
+        },
         carry: {
             core_properties: {
                 name: 'carry',
@@ -672,6 +765,37 @@ var testing_lexemes = {
                     root_2: 'port',
                     root_3: 'portāv',
                     root_4: 'portāt'
+                }
+            },
+            english: {
+                citation_form: 'carry',
+                roots: {
+            		'default': 'carry',
+            		'final-s': 'carries',
+            		'gerund': 'carrying',
+            		'past participle': 'carried',
+            		'preterite': 'carried'
+        		}
+        	}
+        },
+        find: {
+            core_properties: {
+                name: 'find',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '4',
+                citation_form: 'inven- (4)',
+                roots: {
+                    root_2: 'inven',
+                    root_3: 'invēn',
+                    root_4: 'invent'
                 }
             },
             english: {
@@ -714,6 +838,37 @@ var testing_lexemes = {
             		'gerund': 'scaring',
             		'past participle': 'scared',
             		'preterite': 'scared'
+        		}
+        	}
+        },
+        move: {
+            core_properties: {
+                name: 'move',
+                part_of_speech: 'verb',
+                transitivity: 'transitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'mental']
+            },
+            latin: {
+                conjugation: '2',
+                citation_form: 'mov- (2)',
+                roots: {
+                    root_2: 'mov',
+                    root_3: 'mōv',
+                    root_4: 'mōt'
+                }
+            },
+            english: {
+                citation_form: 'move',
+                roots: {
+            		'default': 'move',
+            		'final-s': 'moves',
+            		'gerund': 'moving',
+            		'past participle': 'moved',
+            		'preterite': 'moved'
         		}
         	}
         },
@@ -777,6 +932,37 @@ var testing_lexemes = {
             		'gerund': 'attacking',
             		'past participle': 'attacked',
             		'preterite': 'attacked'
+        		}
+        	}
+        },
+        invade: {
+            core_properties: {
+                name: 'invade',
+                part_of_speech: 'verb',
+                transitivity: 'ditransitive',
+                lexical_properties: [],
+                subject_white_list: ['animate'],
+                object_white_list: [], //left empty because almost every thing can be an object?
+                subject_black_list: ['abstraction'], // I don't think we need abstraction here since nothing is both animate and an abstraction
+                object_black_list: ['abstraction', 'implement', 'mental']
+            },
+            latin: {
+                conjugation: '3',
+                citation_form: 'invād- (3)',
+                roots: {
+                    root_2: 'invād',
+                    root_3: 'invās',
+                    root_4: 'invās'
+                }
+            },
+            english: {
+                citation_form: 'invade',
+                roots: {
+            		'default': 'invade',
+            		'final-s': 'invades',
+            		'gerund': 'invading',
+            		'past participle': 'invaded',
+            		'preterite': 'invaded'
         		}
         	}
         },

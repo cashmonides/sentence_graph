@@ -79,7 +79,14 @@ MorphologyModeGame.prototype.get_mode_name = function() {
 MorphologyModeGame.prototype.next_question = function () {
     console.log("DEBUG MORPHOLOGY next_question entered");
 
+    //todo very important
+    //is this the right place to clear the feedback box?
+    // var o = el('feedbackbox');
+    // remove_all_children(o);
+
     this.clear_buttons();
+    
+    this.clear_morphology_answer_cells();
     
     //todo we probably won't need drop or extra level
     // but latin_extra_level is hard-wired into kck's generate sentence
@@ -157,7 +164,7 @@ MorphologyModeGame.prototype.next_question = function () {
     
     
     //todo below should work but is making the game sick - commenting it out for now
-    // this.cheat_sheet = this.morphology_cheat_sheet(sentence.chosen_lexemes);
+    this.cheat_sheet = this.morphology_cheat_sheet(sentence.chosen_lexemes);
     
     console.log("DEBUG MORPHOLOGY next_question checkpoint 7");
     //we have to freeze out remove dashes for now
@@ -493,6 +500,17 @@ MorphologyModeGame.prototype.clear_buttons = function () {
     e3.innerHTML = "";
 }
 
+
+MorphologyModeGame.prototype.clear_morphology_answer_cells = function () {
+    console.log("HEY clear_buttons triggered");
+    var e1 = document.getElementById("morphology_cell_answer_beginning");
+    e1.innerHTML = "_____";
+    var e2 = document.getElementById("morphology_cell_answer_middle");
+    e2.innerHTML = "_____";
+    var e3 = document.getElementById("morphology_cell_answer_ending");
+    e3.innerHTML = "_____";
+}
+
 MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_elements, cell_destination) {
     
     console.log("BUTTON TESTING morphological_elements pre-processing = ", morphological_elements);
@@ -674,6 +692,9 @@ MorphologyModeGame.prototype.display = function (x) {
 
 //this needs to be extensively changed
 MorphologyModeGame.prototype.process_answer = function(){
+    
+    var o = el('feedbackbox');
+    remove_all_children(o);
     
     //we need to get answer_statuses somehow
     // 'correct', 'incorrect', or 'missed'

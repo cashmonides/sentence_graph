@@ -268,6 +268,25 @@ var latin_extra_levels = {
         },
         none_display: [false]
     },
+    //BELOW IS TESTING FOR 11-9 IN CLASS
+    160: {
+        drop_down_settings: {
+            noun: {
+                extra_options: 5,
+                lexicon_dummies: 5,
+                swap: true
+            },
+            verb: {
+                extra_options: 6,
+                lexicon_dummies: 6
+            },
+            conjunction: {
+                extra_options: 5,
+                lexicon_dummies: 0
+            }
+        },
+        none_display: [false]
+    },
     
     //////////////////
     

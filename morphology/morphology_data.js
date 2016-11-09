@@ -157,7 +157,7 @@ var latin_verb_morphology_ending = {
         '3p': '-nt'
     },
     'imperfect indicative passive': {
-        's': '-r',
+        '1s': '-r',
         '2s': '-ris',
         '3s': '-tur',
         '1p': '-mur',
