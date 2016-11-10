@@ -77,7 +77,7 @@ body {
     border: 40px solid black;
     border-left: 50px solid black;
     border-right: 50px solid black;
-    background:  white;
+    background:  navajowhite;
     font-size:56;
     color: gray;
 }
@@ -93,7 +93,7 @@ body {
     /*border: 40px solid black;*/
     /*border-left: 50px solid black;*/
     /*border-right: 50px solid black;*/
-    background: white;
+    background: navajowhite;
     /*below will center*/
     vertical-align: middle;
     font-size: 25px;
@@ -336,6 +336,7 @@ body {
 #before {
     text-align: left;
     vertical-align: middle;
+    /*old version pre-morphology*/
     width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -366,7 +367,10 @@ body {
     margin-left: auto;
     margin-right: auto;
     border: solid 1px black;
-    padding: 10px;
+    /*old version pre morphology*/
+    /*padding: 10px;*/
+    /*new version for morphology*/
+    padding: 1px;
     background:navajowhite;
     white-space: wrap;
     /*color: red;*/

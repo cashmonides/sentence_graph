@@ -830,13 +830,13 @@ var testing_lexemes = {
                 }
             },
             english: {
-                citation_form: 'find',
+                citation_form: 'avoid',
                 roots: {
-            		'default': 'find',
-            		'final-s': 'finds',
-            		'gerund': 'finding',
-            		'past participle': 'found',
-            		'preterite': 'found'
+            		'default': 'avoid',
+            		'final-s': 'avoids',
+            		'gerund': 'avoiding',
+            		'past participle': 'avoided',
+            		'preterite': 'avoided'
         		}
         	}
         },

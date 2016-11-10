@@ -98,6 +98,16 @@ MorphologyModeGame.prototype.next_question = function () {
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
     
+    // var test_level = weighted_choice(
+    //     get_current_module(this.level).morphology_level)
+        
+    console.log("ECCE 4 this.level = ", this.level);
+    console.log("ECCE 4 this.level.morphology_level = ", this.level.morphology_level);
+    
+    global_hack_morphology_testing_level = this.level.morphology_level;
+    
+    console.log("ECCE 4 global_hack_morphology_testing_level = ", global_hack_morphology_testing_level);
+    
     console.log("DEBUG MORPHOLOGY next_question checkpoint 2");
     
     
