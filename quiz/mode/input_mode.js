@@ -63,6 +63,9 @@ InputModeGame.prototype.attach = function(){
     set_display("next_button", 'none');
     set_display("next_level_button", 'none');
     // set_display("feedback_for_input", 'none');
+    //current best result for clearing morphology
+    set_display_of_class("morphology_to_clear", "none");
+    //end current best result
     
     
     

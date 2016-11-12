@@ -222,22 +222,41 @@
                     <!--<div id="testbox"></div>-->
                     
                     <!--put new stuff here perhaps-->
-                    <table id="morphology_cell_answer" style="width:50%" class="morphology_answer_table">
-                        <tr>
-                            <th>question</th>
-                            <th></th>
-                            <th class="morphology_answer_heading">WHAT</th>
-                            <th class="morphology_answer_heading">WHEN</th>
-                            <th class="morphology_answer_heading">WHO</th>
-                        </tr>
-                        <tr class="morphology_answer_cell">
-                            <td id="testbox"></td>
-                            <td>=</td>
-                            <td id="morphology_cell_answer_beginning">_____</td>
-                            <td id="morphology_cell_answer_middle">_____</td> 
-                            <td id="morphology_cell_answer_ending">_____</td>
-                          </tr>
-                    </table>
+                    
+                    <!--we clear the testbox in etymology-->
+                    <div class="cleared_in_etymology">
+                        <table id="morphology_cell_answer" style="width:50%" class="morphology_answer_table">
+                            <!--BEGIN ELEMENTS THAT ARE CLEARED WHEN NOT IN MORPHOLOGY MODE-->
+                            <!--starting div-->
+                            <!--<div id="morphology_to_clear1">-->
+                            <tr>
+                                
+                                <th class="morphology_to_clear">question</th>
+                                <th></th>
+                                <div id="morphology_to_clear1">
+                                <th class="morphology_to_clear" id="morphology_to_clear4">WHAT</th>
+                                <th class="morphology_to_clear" id="morphology_to_clear5">WHEN</th>
+                                <th class="morphology_to_clear" id="morphology_to_clear6">WHO</th>
+                                </div>
+                            </tr>
+                            <!--ending div-->
+                            <!--</div>-->
+                            <!--END ELEMENTS THAT ARE CLEARED WHEN NOT IN MORPHOLOGY MODE-->
+                            <tr class="morphology_answer_cell">
+                                <td id="testbox"></td>
+                                <!--BEGIN ELEMENTS THAT ARE CLEARED WHEN NOT IN MORPHOLOGY MODE-->
+                                <div id="morphology_to_clear2">
+                                <td class="morphology_to_clear">=</td>
+                                <td id="morphology_cell_answer_beginning" class="morphology_to_clear">_____</td>
+                                <td id="morphology_cell_answer_middle" class="morphology_to_clear">_____</td> 
+                                <td id="morphology_cell_answer_ending" class="morphology_to_clear">_____</td>
+                                </div>
+                                <!--END ELEMENTS THAT ARE CLEARED WHEN NOT IN MORPHOLOGY MODE-->
+                              </tr>
+                        </table>
+                    </div>
+                    
+                    
 
                     
                 </div>
@@ -328,18 +347,31 @@
 <!--</table>-->
 
 
-<table id="morphology_cell_options" style="width:100%">
-    <tr>
-        <th>WHAT</th>
-        <th>WHEN</th>
-        <th>WHO</th>
-    </tr>
-    <tr id="morphology_options">
-        <td id="morphology_cell_options_beginning"></td>
-        <td id="morphology_cell_options_middle"></td> 
-        <td id="morphology_cell_options_ending"></td>
-      </tr>
-</table>
+<!--_____MORPHOLOGY BUTTONS AND OPTIONS_______-->
+
+<div id="morphology_to_clear3" class="morphology_to_clear">
+    
+    <table id="morphology_cell_options" style="width:100%">
+        <tr>
+            <th>WHAT</th>
+            <th>WHEN</th>
+            <th>WHO</th>
+        </tr>
+        <tr>
+            <td>WHAT</td>
+            <td>WHEN</td>
+            <td>WHO</td>
+        </tr>
+        <tr id="morphology_options">
+            <td id="morphology_cell_options_beginning"></td>
+            <td id="morphology_cell_options_middle"></td> 
+            <td id="morphology_cell_options_ending"></td>
+          </tr>
+    </table>
+    
+    
+</div>
+
 
 <!--new spot for vocab_cheat_sheet_div-->
 <div id="vocab_cheat_sheet_div"></div>

@@ -82,6 +82,11 @@ body {
     color: gray;
 }
 
+.morphology_to_clear {
+    text-align: center;
+    font-size: 8px;
+}
+
 .morphology_answer_heading {
     font-size: 14px;
 }

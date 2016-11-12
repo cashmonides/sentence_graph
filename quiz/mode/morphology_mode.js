@@ -61,6 +61,14 @@ MorphologyModeGame.prototype.attach = function () {
     set_display("next_button", 'none');
     set_display("skip_button", 'none');
     set_display("next_level_button", 'none');
+    
+    
+    //start changes 11-12-16
+    set_display_of_class("morphology_to_clear", "initial");
+    // set_display("morphology_to_clear3", "initial");
+    //end changes 11-12-16
+    
+    
 };
 
 // set_level now moved up

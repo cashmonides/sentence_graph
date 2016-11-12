@@ -46,8 +46,8 @@ var kck_levels = {
         // 'target_language' : {'english': 0.5, 'latin': 0.5},
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
-        'verb_dashes_removed': false,
-        // 'verb_dashes_removed': true
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
     },
     '20': {
         'time': ['simultaneous', 'prior', 'subsequent'],
@@ -82,16 +82,20 @@ var kck_levels = {
         'drop_down_path_noun' : ['lexeme', 'case'],
         'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
         'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        'source_language' : {'english': 0.5, 'latin': 0.5},
-        'target_language' : {'english': 0.5, 'latin': 0.5},
+        /////////TARGET & SOURCE
+        // L2E
+        // 'source_language' : {'english': 0, 'latin': 1},
+        // 'target_language' : {'english': 1, 'latin': 0s},
+        //E2L
         // 'source_language' : {'english': 1, 'latin': 0},
         // 'target_language' : {'english': 0, 'latin': 1},
-        // 'source_language' : {'english': 0.5, 'latin': 0.5},
-        // 'target_language' : {'english': 0.5, 'latin': 0.5},
+        //E2L and L2E
+        'source_language' : {'english': 0.5, 'latin': 0.5},
+        'target_language' : {'english': 0.5, 'latin': 0.5},
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
-        'verb_dashes_removed': false,
-        // 'verb_dashes_removed': true
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
     },
     '30': {
         'time': ['simultaneous', 'prior', 'subsequent'],
@@ -125,12 +129,18 @@ var kck_levels = {
         'drop_down_path_noun' : ['lexeme', 'case'],
         'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
         'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        'source_language' : {'english': 0.5, 'latin': 0.5},
-        'target_language' : {'english': 0.5, 'latin': 0.5},
+        /////////TARGET & SOURCE
+        // L2E
+        // 'source_language' : {'english': 0, 'latin': 1},
+        // 'target_language' : {'english': 1, 'latin': 0s},
+        //E2L
         // 'source_language' : {'english': 1, 'latin': 0},
         // 'target_language' : {'english': 0, 'latin': 1},
-        // 'source_language' : {'english': 0.5, 'latin': 0.5},
-        // 'target_language' : {'english': 0.5, 'latin': 0.5},
+        //E2L and L2E
+        'source_language' : {'english': 0.5, 'latin': 0.5},
+        'target_language' : {'english': 0.5, 'latin': 0.5},
+        
+        
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
         'verb_dashes_removed': false,
