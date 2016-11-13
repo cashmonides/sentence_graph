@@ -25,7 +25,7 @@ body {
 .button {
     font-family: 'Baskerville';
     background: antiquewhite;
-    font-size: 16;
+    font-size: 16px;
     /*text-align: right;*/
     /*margin-left: auto;*/
     /*position: absolute;*/
@@ -38,22 +38,22 @@ body {
 }
 
 .morphology_option_button {
-    font-size: 26;
+    font-size: 26px;
 }
 
 .morphology_beginning_button {
     color: black;
-    font-size: 28;
+    font-size: 28px;
 }
 
 .morphology_middle_button {
     color: red;
-    font-size: 28;
+    font-size: 28px;
 }
 
 .morphology_ending_button {
     color: green;
-    font-size: 28;
+    font-size: 28px;
 }
 
 
@@ -73,18 +73,17 @@ body {
 
 
 .morphology_answer_cell {
-    
     border: 40px solid black;
     border-left: 50px solid black;
     border-right: 50px solid black;
     background:  navajowhite;
-    font-size:56;
+    font-size:56px;
     color: gray;
 }
 
 .morphology_to_clear {
     text-align: center;
-    font-size: 8px;
+    font-size: 20px;
 }
 
 .morphology_answer_heading {

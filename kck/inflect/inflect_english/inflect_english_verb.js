@@ -94,7 +94,7 @@ var put_english_root_in_formula = function (root, formula, verb_formula) {
     // Example: verbed-preterite becomes verbed.
     verb_formula = verb_formula.split('-')[0];
     // Simply replace anything mentioning the word 'verb' with the root
-    // (but actually, only rep[lace what we expect and throw an error
+    // (but actually, only replace what we expect and throw an error
     // on anything else).
     return formula.replace(english_verb_formula_regex, function (x) {
         // Check that the thing we're replacing is indeed

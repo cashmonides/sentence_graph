@@ -1276,33 +1276,37 @@ Quiz.prototype.update_display = function() {
     // console.log("DEBUG 11-24 this.user.data.profile.name = ", this.user.data.profile.name);
     // console.log("DEBUG 11-24 this.user.data.profile.class_number = ", this.user.data.profile.class_number);
     // console.log("DEBUG 11-24 this.module.id = ", this.module.id);
+    
+    //todo - update-todo:
     //todo in improve mode the following will break
     // var mod = this.user.get_current_module();
+    //end update-todo:
     
     var mod = this.module.id;
     var module_icon = ALL_MODULES[mod].icon_url;
-    //todo uncomment when testing
+    
     var module_name = ALL_MODULES[mod].icon_name;
-    // console.log("DEBUG 11-8 mod = ", mod);
-    // console.log("DEBUG 11-8 this.user.mod.progress = ", this.user.get_module(mod).progress);
+    
+    
+    console.log("LOG update_display mod = ", mod);
+    console.log("LOG update_display this.user.mod.progress = ", this.user.get_module(mod).progress);
+    
+    
+    //todo - update-todo
     /*Progress bar is reset somewhere else.
     console.log("Still ok before progress bar");
     this.set_progress_bar();
     console.log("Still ok after progress bar");*/
+    //end update-todo
     
-    // console.log("LOG: about to enter innerhtml");
-    // console.log(el("name_header") === null);
-    // console.log(el("class_header") === null);
-    // console.log(el("level_header") === null);
-    // console.log(el("fraction_header") === null);
+    
+    
     el("name_header").innerHTML = this.user.data.profile.name;
     el("class_header").innerHTML = this.user.data.profile.class_number;
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
     el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     
     console.log("LOG: leaving innerhtml");
-    
-    
 };
 
 

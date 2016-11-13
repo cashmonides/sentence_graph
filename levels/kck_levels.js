@@ -30,7 +30,7 @@ var kck_levels = {
         // 'allowed_verbs' : ['speak', 'attack'],
         'noun_switch' : false,
         'allowed_nouns': ['wolf'],
-        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
         // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
         // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
         // 'drop_down_path' : ['lexeme', 'person_and_number'],

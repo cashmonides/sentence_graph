@@ -1,0 +1,205 @@
+IN GENERAL
+
+traverse dictionary (with requirements as arguments)
+    e.g.
+    we have a conjunction
+    pick a list of tense-mood-voice combos allowed by that conjunction
+    
+    
+filter dictionary (not used at every stage)
+    throw out ones that are not allowed by module (or whatever other source)
+
+pick random choice
+    pick one of those tense-mood-voice
+
+get new requirements from whatever we picked
+    e.g. once we've picked ut_purpose we add
+
+DIFFERENT TYPES
+generate all possibilites
+get one
+
+
+ALL MAPS - DIFFERENT TYPES OF DATA DICTIONARY
+
+starts with a list of conjunction 
+
+determine a direction (a single direction, not a list)
+
+pick a single sequence for the actual sentence (we have to pick one that will govern both sides of the conjunction)
+
+pick a list of allowed sequences
+
+MAP: conjunction + direction + sequence TO allowed regime + tense-mood-voice
+
+FILTER: remove tense-mood-voice that aren't allowed
+
+
+
+
+MAP: tense-mood-voice + regime + additional info---> translation formula 
+    e.g. relative + present_subjunctive_passive + basic = is VERBed
+
+
+
+
+MAP: english translation formula TO what english root we use 
+    e.g. was VERBed ---> passive participle
+    
+MAP: person-number TO english_person_irregularities
+    e.g. 1sg, were ---> was
+    
+MAP: translation formula TO english tense name 
+    e.g. was verbing  -->  
+
+
+
+EXAMPLE OF A FLOW
+we start with 
+    conjunction (will spawn its own requirements)
+    time
+    sequence
+    person_number
+    (add: tense-mood-voice to control pedagogy)
+    (remove voice)
+    
+THINGS WE NEED TO PRODUCE
+- all tense-mood-voice possibilities
+- all regimes
+- all person_number
+
+
+
+TEST CASE
+we allow imperfect, present and future of indicatives
+but the students don't know periphrastics
+
+so we want absolute-regime to have present-indicative-active, imperf, fut all voices
+byt we only want relative-regime to have present-subjunctive-active
+
+
+
+
+USE DICTIONARY TRAVERSER TO GIVE DROP DOWNS
+'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'
+
+//we want to produce the tense_mood drop down for english
+// past continuous / was verbing
+// 1 possibility
+e.g. traverse_dictionary(english-tense-mood, 1, present-imperfect-indicative-active, basic, absolute)
+    ---> was verbing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+get allowed parameters
+    conjunction (will spawn its own requirements)
+    voice
+    time
+    sequence
+    person_number
+    (add: tense-mood-voice to control pedagogy)
+    
+
+
+to produce sentence:
+    given: nothing (maybe module?)
+    filter conjunctions given requirements in module
+    choose random conjunction
+    conjunction should 'sprout' kernels with given directions
+    the conjunction of each kernel is this
+    pick random sequence given conjunction and module
+    the sequence of each kernel is the kernel picked
+    produce each kernel
+
+to produce kernel:
+    choose tense-mood-voice combination
+    get translation formula
+    choose person and number
+
+to choose regime-tense-mood-voice combination
+    given: conjunction + direction + chosen_sequence of both sides
+    
+    
+    
+    get regime-tense-mood bundles from conjunction + directions
+    pick random regime-tense-mood bundle
+    traverse regime-tense-mood-voice combinations with sequence and regime
+    filter result by:
+       module (this would prevert periphrastics)
+       conjunction allows tense and mood
+    choose random result
+    
+
+to get translation formula:
+    traverse translation formulae with tense-mood-voice combination + regime
+    use single result
+
+to choose person and number:
+    choose random person and number from module
+
+
+    
+    
+
+
+
+
+to produce all possibilities
+    given: allowed conjunctions, allowed sequences, tense-mood-voice, person-number, explicitness
+
+
+ONE ATTEMPT AT FLOW
+
+GET ALL regime-tense-mood COMBOS
+get_allowed_rtm([conjunction], direction) -> [regime-tense-mood]
+
+FILTER BY ALLOWED SEQUENCES IN MODULE
+flter_sequences([regime-tense-mood], module) --> [regime-tense-mood]
+
+FILTER BY ALLOWED RTMV IN MODULE
+flter_by_rtmv([regime-tense-mood], module) --> [regime-tense-mood-voice]
+
+ADD PERSON_NUMBER
+add_person_number([regime-tense-mood-voice], module) --> [[regime-tense-mood-voice], [person_number]]
+
+
+PICK CHOSEN LEXEMES
+pick_chosen_lexeme(chosen_conjunction, direction) --> lexeme
+
+FILTER BY SEQUENCE
+filter_by_chosen_sequence(chosen_sequence, [regime-tense-mood-voice])
+    --> [regime-tense-mood-voice]
+
+
+PICK CHOSEN RTMV PN
+pick_chosen_properties(chosen_conjunction, [[regime-tense-mood-voice], [person_number]])
+    --> [rtmv, pn]
+    
+PICK CHOSEN TRANSLATION FORMULA
+pick_translation_formula([rtmv, pn], language, level, additional info) --> translation_formula (str)
+
+PROCESS TRANSLATION FORMULA FOR FINAL OUTPUT
+process_translation_formula(translation_formula, person_number, language, level, additional info)
+
+
+
+PICK DUMMY LEXEMES
+pick_dummy_lexemes()  --> [lexemes]
+
+MERGE LEXEMES
+merge_lexemes([lexemes], chosen_lexeme) --> [lexemes]
+
+
+
+

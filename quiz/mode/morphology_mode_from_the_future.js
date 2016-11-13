@@ -20,7 +20,7 @@ little cosmetic bug: correct answer from previous sentence stays on screen
 
 */
 
-var global_hack_morphology_testing_level = 1;
+// var global_hack_morphology_testing_level = 1;
 
 var global_hack_verb_output;
 
@@ -64,7 +64,7 @@ MorphologyModeGame.prototype.attach = function () {
     
     
     //start changes 11-12-16
-    set_display_of_class("morphology_to_clear", "initial");
+    set_display_of_class("morphology_to_clear", 'initial');
     set_display_of_class('cleared_in_etymology', 'initial');
     // set_display("morphology_to_clear3", "initial");
     //end changes 11-12-16
@@ -113,9 +113,9 @@ MorphologyModeGame.prototype.next_question = function () {
     console.log("ECCE 4 this.level = ", this.level);
     console.log("ECCE 4 this.level.morphology_level = ", this.level.morphology_level);
     
-    global_hack_morphology_testing_level = this.level.morphology_level;
+    // global_hack_morphology_testing_level = this.level.morphology_level;
     
-    console.log("ECCE 4 global_hack_morphology_testing_level = ", global_hack_morphology_testing_level);
+    // console.log("ECCE 4 global_hack_morphology_testing_level = ", global_hack_morphology_testing_level);
     
     console.log("DEBUG MORPHOLOGY next_question checkpoint 2");
     
@@ -339,7 +339,7 @@ MorphologyModeGame.prototype.get_morphological_elements_from_level = function (p
         morphology_dictionary_to_traverse = 'latin verb morphology ending';
     }
     
-    return morphology_dictionary_traverser_main([morphology_dictionary_to_traverse, global_hack_properties_from_morphology_level]);
+    return morphology_dictionary_traverser_main([morphology_dictionary_to_traverse, morphological_level]);
 }
 
 MorphologyModeGame.prototype.generate_morphology_options_master_function = function (morphology_level) {
@@ -365,7 +365,7 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     // getElementById("morphology_cell_answer_beginning").innerHTML = "cleared";
     
     var shuffle_morphological_elements = false;
-    remove_dashes_in_morphology_mode = true;
+    var remove_dashes_in_morphology_mode = true;
     
     var test_argument_for_morphology = ['latin verb morphology beginning', 'present indicative active',
     'imperfect indicative active', 'future indicative active', 'present indicative passive', 
@@ -387,15 +387,15 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     //end obsolescence
     
     
-    console.log("ECCE 1 global_hack_properties_from_morphology_level pre-setting = ", global_hack_properties_from_morphology_level);
-    global_hack_properties_from_morphology_level = this.get_morphological_properties_from_level(global_hack_morphology_testing_level);
-    console.log("ECCE 2 global_hack_properties_from_morphology_level post-setting = ", global_hack_properties_from_morphology_level);
+    // console.log("ECCE 1 global_hack_properties_from_morphology_level pre-setting = ", global_hack_properties_from_morphology_level);
+    var properties_from_morphology_level = this.get_morphological_properties_from_level(this.level.morphology_level);
+    // console.log("ECCE 2 global_hack_properties_from_morphology_level post-setting = ", global_hack_properties_from_morphology_level);
     
     
-    test_output_of_morphology.beginning = this.get_morphological_elements_from_level ('beginning', global_hack_properties_from_morphology_level);
+    test_output_of_morphology.beginning = this.get_morphological_elements_from_level ('beginning', properties_from_morphology_level);
     
     
-    test_output_of_morphology.middle = this.get_morphological_elements_from_level ('middle', global_hack_properties_from_morphology_level);
+    test_output_of_morphology.middle = this.get_morphological_elements_from_level ('middle', properties_from_morphology_level);
     
     // test_output_of_morphology.middle = morphology_dictionary_traverser_main(['latin verb morphology middle', 'present indicative active',
     // 'imperfect indicative active', 'future indicative active', 'present indicative passive', 
@@ -405,7 +405,7 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     // '1s', '2s', '3s', '1p', '2p', '3p']);
     
     
-    test_output_of_morphology.ending = this.get_morphological_elements_from_level ('ending', global_hack_properties_from_morphology_level);
+    test_output_of_morphology.ending = this.get_morphological_elements_from_level ('ending', properties_from_morphology_level);
     //old version below
     // test_output_of_morphology.ending = morphology_dictionary_traverser_main(['latin verb morphology ending', 'present indicative active',
     // 'imperfect indicative active', 'future indicative active', 'present indicative passive', 
@@ -505,18 +505,24 @@ var createClickHandler = function(arg, destination) {
   };
 }
 
+/*
+// This is not being used???
 var clear_div = function (elementID) {
     document.getElementById(elementID).innerHTML = "";
 }
+*/
 
 MorphologyModeGame.prototype.clear_buttons = function () {
     console.log("HEY clear_buttons triggered");
+    clear_inner_html_of_class('morphology_to_clear');
+    /*
     var e1 = document.getElementById("morphology_cell_options_beginning");
     e1.innerHTML = "";
     var e2 = document.getElementById("morphology_cell_options_middle");
     e2.innerHTML = "";
     var e3 = document.getElementById("morphology_cell_options_ending");
     e3.innerHTML = "";
+    */
 }
 
 
@@ -536,8 +542,9 @@ MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_el
     morphological_elements = JSON.parse(morphological_elements);
     console.log("BUTTON TESTING morphological_elements after parse = ", morphological_elements);
     
-    //not sure if necessary    
-    var docFragment = document.createDocumentFragment();
+    // doesn't seem to be used
+    // not sure if necessary    
+    // var docFragment = document.createDocumentFragment();
     
     
     // var e = document.getElementsByClassName("morphology_options");
@@ -751,7 +758,7 @@ MorphologyModeGame.prototype.hack_compare_input_to_correct_answer = function (in
     var processed_correct_answer_as_string = remove_metacharacters(this.correct_answer_as_string);
     console.log("HEY processed_correct_answer_as_string = ", processed_correct_answer_as_string);
     
-    if (input == processed_correct_answer_as_string) {
+    if (input === processed_correct_answer_as_string) {
         console.log("HEY input matches answer");
         return true;
     } else {

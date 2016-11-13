@@ -25,53 +25,10 @@ QuickModeGame.prototype.attach = function(){
     
     //current best result for clearing morphology
     set_display_of_class("morphology_to_clear", "none");
+    set_display_of_class('cleared_in_etymology', 'initial');
     //end current best result
     
-    
-    /////changes below
-    
-    //clear3 is the buttons and it works
-    // set_display("morphology_to_clear3", "none");
-    
-    
-    
-    
-    //this works
-    // set_inner_html_of_class("morphology_to_clear", "");
-    
-    //attempting to set display
-    // set_display_of_class("morphology_to_clear", "none");
-    
-    //doesn't work
-    // set_display("morphology_to_clear1", "none");
-    // set_display("morphology_to_clear2", "none");
- 
-    
-    // set_display_of_class("morphology_answer_heading", "none");
-    
-    // clear_inner_html_of_class("morphology_answer_heading");
-    
-    // clear_inner_html_of_div("morphology_cell_answer_beginning");
-    // clear_inner_html_of_div("morphology_cell_answer_middle");
-    // clear_inner_html_of_div("morphology_cell_answer_ending");
-    
-    //this works but is hacky so trying a better approach
-    // clear_inner_html_of_div("morphology_to_clear4");
-    // clear_inner_html_of_div("morphology_to_clear5");
-    // clear_inner_html_of_div("morphology_to_clear6");
-    
-    
-    //7 is question
-    // clear_inner_html_of_div("morphology_to_clear7");
-    // set_display("morphology_to_clear7", 'none');
-    // clear_inner_html("morphology_to_clear2");
-    // clear_inner_html("morphology_to_clear3");
-    
-    //end changes
-    
-    
-    // this.quiz.bar_threshold = 10;
-    // this.quiz.switch_count = 10;
+
 
 };
 

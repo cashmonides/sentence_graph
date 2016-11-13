@@ -30,6 +30,7 @@ MCMode3Game.prototype.attach = function(){
     
     //current best result for clearing morphology
     set_display_of_class("morphology_to_clear", "none");
+    set_display_of_class('cleared_in_etymology', 'initial');
     //end current best result
     
     // state.switch_count = 1
