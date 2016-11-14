@@ -97,20 +97,20 @@ body {
 #morphology_cell_answer_beginning {
     font-size: 40px;
     color: black;
-    border-right: 1px solid black;
+    /*border-right: 1px solid black;*/
     margin-left: 20px;
 }
 
 #morphology_cell_answer_middle {
     font-size: 40px;
     color: black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
 }
 #morphology_cell_answer_ending {
     font-size: 40px;
     color: black;
-    border-left: 1px solid black;
+    /*border-left: 1px solid black;*/
     margin-right: 20px;
 }
 
@@ -136,7 +136,7 @@ body {
 
 /*seems to control the 'background' which the testbox is the foreground of*/
 .morphology_answer_table {
-    table-layout: fixed;
+    /*table-layout: fixed;*/
     width: 100%;
     white-space: nowrap;
     /*white-space: wrap;*/

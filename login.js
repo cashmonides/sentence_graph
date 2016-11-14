@@ -21,8 +21,9 @@ var mode_map = {
 
     "login_button": [[1], "inline"],
     "create_account_button": [[2], "inline"],
-    "forgot_password_button": [[1], "inline"],
-    "change_password_button": [[4], "inline"],
+    //password changing is disabled until a later time, when students use regular email accounts
+    // "forgot_password_button": [[1], "inline"],
+    // "change_password_button": [[4], "inline"],
 
 
     // "reset_password_instructions": [[3], 'inline']          //something like "enter your email and you'll be sent a temporary password to change your account with

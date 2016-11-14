@@ -1410,7 +1410,9 @@ Quiz.prototype.fill_lightbox = function(text, offset, progress) {
     set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'none');
     set_display("etym_cheat_button", 'none');
-    
+    set_display_of_class("cleared_in_etymology", "none");
+    set_display_of_class("cleared_in_picture_display", "none");
+    set_display_of_class("morphology_to_clear", "none");
     el('image_display_box').innerHTML = "CONGRATULATIONS " + name + "!<br>" + text + image;
 };
 
