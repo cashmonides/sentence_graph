@@ -123,7 +123,7 @@ InputModeGame.prototype.next_question = function () {
     //changes the score, progress bar, etc.
     this.quiz.update_display();
 
-    Quiz.set_question_text("Translate the following sentence:");
+    Quiz.set_question_text("Translate the following sentence by typing in the white box:");
     this.quiz.set_word_selector(data.sentence);
     this.drop_downs = data.drop_downs;
     
