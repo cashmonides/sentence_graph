@@ -225,18 +225,20 @@
                     
                     <!--we clear the testbox in etymology-->
                     <div class="cleared_in_etymology">
-                        <table id="morphology_cell_answer" style="width:50%" class="morphology_answer_table">
+                        <table id='morphology_cell_table' class="morphology_answer_table">
+                            <!--style:50%-->
+                            <!--getting rid of headers in morphology cells until they can be made to look better-->
                             <!--BEGIN ELEMENTS THAT ARE CLEARED WHEN NOT IN MORPHOLOGY MODE-->
                             <!--starting div-->
                             <!--<div id="morphology_to_clear1">-->
-                            <tr>
+                            <!--<tr>-->
                                 
                                 <!--version without headings (question,what,when,who)-->
-                                <th class="morphology_to_clear"></th>
-                                <th></th>
-                                <th class="morphology_to_clear" id="morphology_to_clear4"></th>
-                                <th class="morphology_to_clear" id="morphology_to_clear5"></th>
-                                <th class="morphology_to_clear" id="morphology_to_clear6"></th>
+                            <!--    <th class="morphology_to_clear"></th>-->
+                            <!--    <th></th>-->
+                            <!--    <th class="morphology_to_clear" id="morphology_to_clear4"></th>-->
+                            <!--    <th class="morphology_to_clear" id="morphology_to_clear5"></th>-->
+                            <!--    <th class="morphology_to_clear" id="morphology_to_clear6"></th>-->
                                 
                                 <!--version with headings-->
                                 <!--<th class="morphology_to_clear">question</th>-->
@@ -246,17 +248,31 @@
                                 <!--<th class="morphology_to_clear" id="morphology_to_clear5">WHEN</th>-->
                                 <!--<th class="morphology_to_clear" id="morphology_to_clear6">WHO</th>-->
                                 <!--</div>-->
-                            </tr>
+                            <!--</tr>-->
                             <!--ending div-->
                             <!--</div>-->
                             <!--END ELEMENTS THAT ARE CLEARED WHEN NOT IN MORPHOLOGY MODE-->
+                            
+                            <tr>
+                                <!--<th class="morphology_to_clear morphology_row_1"></th>-->
+                                <!--<th class="morphology_to_clear morphology_row_2"></th>-->
+                                <!--<th class="morphology_to_clear morphology_row_3"></th>-->
+                                <!--<th class="morphology_to_clear morphology_row_4"></th>-->
+                                <!--<th class="morphology_to_clear morphology_row_5"></th>-->
+                                <!--id version below-->
+                                <th id="morphology_row_1" class="morphology_to_clear"></th>
+                                <th id="morphology_row_2" class="morphology_to_clear"></th>
+                                <th id="morphology_row_3" class="morphology_to_clear"></th>
+                                <th id="morphology_row_4" class="morphology_to_clear"></th>
+                                <th id="morphology_row_5" class="morphology_to_clear"></th>
+                            </tr>
                             <tr class="morphology_answer_cell">
                                 <td id="testbox"></td>
                                 <!--BEGIN ELEMENTS THAT ARE CLEARED WHEN NOT IN MORPHOLOGY MODE-->
-                                <td class="morphology_to_clear">=</td>
-                                <td id="morphology_cell_answer_beginning" class="morphology_to_clear">_____</td>
-                                <td id="morphology_cell_answer_middle" class="morphology_to_clear">_____</td> 
-                                <td id="morphology_cell_answer_ending" class="morphology_to_clear">_____</td>
+                                <td class="morphology_to_clear" id='equals_sign_in_morphology'>=</td>
+                                <td id="morphology_cell_answer_beginning" class="morphology_to_clear" class="morphology_cell_text">_____</td>
+                                <td id="morphology_cell_answer_middle" class="morphology_to_clear" class="morphology_cell_text">_____</td> 
+                                <td id="morphology_cell_answer_ending" class="morphology_to_clear" class="morphology_cell_text">_____</td>
                                 <!--END ELEMENTS THAT ARE CLEARED WHEN NOT IN MORPHOLOGY MODE-->
                               </tr>
                         </table>
@@ -363,11 +379,11 @@
             <th>WHEN</th>
             <th>WHO</th>
         </tr>
-        <tr>
-            <td>WHAT</td>
-            <td>WHEN</td>
-            <td>WHO</td>
-        </tr>
+        <!--<tr>-->
+        <!--    <td>WHAT</td>-->
+        <!--    <td>WHEN</td>-->
+        <!--    <td>WHO</td>-->
+        <!--</tr>-->
         <tr id="morphology_options">
             <td id="morphology_cell_options_beginning"></td>
             <td id="morphology_cell_options_middle"></td> 

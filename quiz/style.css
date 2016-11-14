@@ -58,24 +58,66 @@ body {
 
 
 .morphology_answer_table td { 
-    border-left: 1px solid #000; 
+    /*border-left: 1px solid #000; */
 }
 .morphology_answer_table td:first-child { 
-    border-left: none; 
+    /*border-left: none; */
 }
 
 .morphology_answer_table th { 
-    border-left: 1px solid #000; 
+    /*border-left: 1px solid #000; */
 }
 .morphology_answer_table th:first-child { 
-    border-left: none;
+    /*border-left: none;*/
 }
 
 
+
+/*doesn't seem to work?! why not*/
+.morphology_cell_text {
+    font-size: 360px;
+    /*color: green;*/
+    /*border-left: 50px solid black;*/
+    /*border-right: 50px solid black;*/
+}
+
+
+#equals_sign_in_morphology {
+    color: gray;
+    /*width: 150px;*/
+    
+    /*padding: 10px;*/
+}
+
+#morphology_cell_table {
+    width: 50%;
+    /*table-layout: fixed;*/
+}
+
+#morphology_cell_answer_beginning {
+    font-size: 40px;
+    color: black;
+    border-right: 1px solid black;
+    margin-left: 20px;
+}
+
+#morphology_cell_answer_middle {
+    font-size: 40px;
+    color: black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+#morphology_cell_answer_ending {
+    font-size: 40px;
+    color: black;
+    border-left: 1px solid black;
+    margin-right: 20px;
+}
+
 .morphology_answer_cell {
-    border: 40px solid black;
-    border-left: 50px solid black;
-    border-right: 50px solid black;
+    /*border: 40px solid black;*/
+    /*border-left: 50px solid black;*/
+    /*border-right: 50px solid black;*/
     background:  navajowhite;
     font-size:56px;
     color: gray;
@@ -83,14 +125,22 @@ body {
 
 .morphology_to_clear {
     text-align: center;
-    font-size: 20px;
+    /*font-size: 60px;*/
 }
 
 .morphology_answer_heading {
     font-size: 14px;
 }
 
+
+
+/*seems to control the 'background' which the testbox is the foreground of*/
 .morphology_answer_table {
+    table-layout: fixed;
+    width: 100%;
+    white-space: nowrap;
+    /*white-space: wrap;*/
+    
     border: none; 
     /*border-collapse: collapse;*/
     text-align: center;
@@ -104,15 +154,62 @@ body {
     cursor:pointer;
     /*width: 700px;*/
     /*width: 100%-auto;*/
-    width: 100%;
+    /*width: 100%;*/
     margin-left: auto;
     margin-right: auto;
-    border: solid 1px black;
+    /*border: solid 1px black;*/
     padding: 10px;
-    white-space: wrap;
+    
     /*color: red;*/
 }
 
+.morphology_answer_table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/*.morphology_row_1 {*/
+/*    width: 25%;*/
+/*}*/
+
+/*.morphology_row_2 {*/
+/*    width: 10%;*/
+/*}*/
+
+/*.morphology_row_3 {*/
+/*    width: 20%;*/
+/*}*/
+
+/*.morphology_row_4 {*/
+/*    width: 20%;*/
+/*}*/
+
+/*.morphology_row_5 {*/
+/*    width: 20%;*/
+/*}*/
+
+
+#morphology_row_1 {
+    width: 20%;
+}
+
+#morphology_row_2 {
+    width: 10%;
+}
+
+#morphology_row_3 {
+    width: 20%;
+}
+
+#morphology_row_4 {
+    width: 20%;
+}
+
+#morphology_row_5 {
+    width: 20%;
+}
 
 
 /*is this just the display header and terminal string*/
@@ -359,15 +456,12 @@ body {
 }
 #testbox {
     /*text-align: justify;*/
-
-
-
     vertical-align: middle;
     font-size: 25px;
     cursor:pointer;
     /*width: 700px;*/
     /*width: 100%-auto;*/
-    width: 100%;
+    /*width: 100%;*/
     margin-left: auto;
     margin-right: auto;
     border: solid 1px black;
