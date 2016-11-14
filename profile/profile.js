@@ -329,6 +329,7 @@ ProfilePage.get_display_caption = function (user, module_id) {
 
 //todo call bottleneck here
 ProfilePage.select_improvement_module = function(mod_id){
+    console.log("DEBUG 11-14-16 select_improvement_module triggered");
     // three cases
     // 1 no improving module at all
         // alert: would you like to improve your accuracy at this level? yes/no
@@ -353,12 +354,15 @@ ProfilePage.select_improvement_module = function(mod_id){
     var self = this;
     return function () {
         
+        console.log("DEBUG 11-14-16 subfunction entered");
+        
         var improving_mod = self.user.get_improving_module();
         var frontier_mod = self.user.get_current_module()
         //todo uncomment when done testing
         // var improving_mod_name = ALL_MODULES[improving_mod].icon_name;
-        console.log("DEBUG 11-20 improving_mod", improving_mod);
-        console.log("DEBUG 11-20 frontier_mod", frontier_mod);
+        console.log("LOG clicked_mod", mod_id);
+        console.log("LOG improving_mod", improving_mod);
+        console.log("LOG frontier_mod", frontier_mod);
         
         // console.log("DEBUG 11-20 improving_mod_name", improving_mod_name);
         

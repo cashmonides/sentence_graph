@@ -1,8 +1,38 @@
-//PROPERTIES WE MIGHT WANT TO ADD TO CONJUNCTION LIBRARY
-// - whether relative time should be allowed in the drop down path 
-//      - for ind. statement and ind. question the value would be true
-//      - for cum_causal, concessive, circumstantial, rel_clause_of_characteristic etc. the value would be true
-//      - for almost everything else it would be false
+//SUMMARY
+/*
+- below is a data-driven dictionary-traverser-based approach to kck control flow
+- the goal is that all info is essentially encapsulated in data dictionaries
+- the functions themselves are mostly uniform and relatively agnostic towards language-specific data
+- i.e. they just traverse dictionaries or filter or make random choices
+- there seems to be three basic functions
+    - TRAVERSAL 
+    - FILTER
+    - RANDOM CHOICE
+    
+- TRAVERSAL takes a list of arguments, traverses the dictionary and returns terminal strings that match the arguments
+    (e.g. we input [present-indicative-active , imperfect-indicative-active] & we want translation formula
+        and we return ["VERBs", "was VERBing"])
+        
+- FILTER (I guess) removes items from an argument based on the map it consults
+    (e.g. if we have a long list of tense-mood-voices that are allowed but only primary sequence is allowed
+        then we consult a map and throw out all the tense-mood-voices that don't match primary sequence)
+
+- RANDOM CHOICE
+    (e.g. we have a list of allowed tense-mood-voices and we want to pick one of them 
+        for final output)
+    (basically is just traversal with only one output not a list)
+        
+- traversal would be used for things like:
+    - getting translation formula
+    - 
+
+
+- there is a lot of bundling of information as it progresses
+    - tense-mood-voice gets bundled together
+    - regime is bundled with tense-mood-voice
+    - person_number is not bundled
+
+*/
 
 
 
@@ -379,9 +409,9 @@ var regime_tense_mood_to_translation_formula = {
             'protasis_past_ctf pluperfect subjunctive active': 'had verbed',
             'protasis_past_ctf pluperfect subjunctive passive': 'had been verbed',
             'apodosis_past_ctf pluperfect subjunctive active': 'would have verbed',
-            'apodosis_past_ctf pluperfect subjunctive passive': 'would have been verbed'
+            'apodosis_past_ctf pluperfect subjunctive passive': 'would have been verbed',
             'protasis_mixed_ctf pluperfect subjunctive active': 'had verbed',
-            'protasis_mixed_ctf pluperfect subjunctive passive': 'had been been verbed'
+            'protasis_mixed_ctf pluperfect subjunctive passive': 'had been been verbed',
             'apodosis_mixed_ctf imperfect subjunctive active': 'would be verbing',
             'apodosis_mixed_ctf imperfect subjunctive passive': {
                 'default': 'would be verbed',
@@ -670,3 +700,18 @@ var backstage_metatalk_to_frontstage_metatalk_map = {
     },
     
 };
+
+
+
+
+
+
+///////////BELOW ARE SOME NOTES FOR TWEAKS TO OVERALL PROGRAM/////////
+
+//PROPERTIES WE MIGHT WANT TO ADD TO CONJUNCTION LIBRARY
+// - whether relative time should be allowed in the drop down path 
+//      - for ind. statement and ind. question the value would be true
+//      - for cum_causal, concessive, circumstantial, rel_clause_of_characteristic etc. the value would be true
+//      - for almost everything else it would be false
+
+
