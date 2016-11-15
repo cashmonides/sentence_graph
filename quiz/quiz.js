@@ -21,6 +21,8 @@ var start = function () {
 window.onload = start;
 
 
+
+
 var Quiz = function () {
     
     this.user = null;

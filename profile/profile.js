@@ -7,6 +7,9 @@ var ProfilePage = {
     user: null
 };
 
+
+var global_improvement_suspension = true;
+
 ProfilePage.logout = function () {
     this.user.logout();
     document.location = "..";
@@ -329,6 +332,10 @@ ProfilePage.get_display_caption = function (user, module_id) {
 
 //todo call bottleneck here
 ProfilePage.select_improvement_module = function(mod_id){
+    
+    
+    
+    
     console.log("DEBUG 11-14-16 select_improvement_module triggered");
     // three cases
     // 1 no improving module at all
@@ -384,11 +391,19 @@ ProfilePage.select_improvement_module = function(mod_id){
         switch (status) {
             case 1 : if (confirm("Would you like to improve your accuracy at this level?")) {
                             // alert("you would be entering the improvement level now");
+                            if (global_improvement_suspension) {
+                                alert("improvement mode is not allowed during testing. Keep advancing for now and you'll get a chance to improve your percentage later.");
+                                return;
+                            }
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
                         } 
             case 2 : if (confirm("Would you like to continue improving your accuracy at this level?")) {
                             // alert("you would be entering the improvement level now");
+                            if (global_improvement_suspension) {
+                                alert("improvement mode is not allowed during testing. Keep advancing for now and you'll get a chance to improve your percentage later.");
+                                return;
+                            }
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
                         } 

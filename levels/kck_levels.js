@@ -22,7 +22,7 @@ var kck_levels = {
         // 'allowed_conjunctions': ['c_why'],
         'red herring': 'false',
         'absolute-relative-split': 'on',
-        'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
+        'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'scare', 'rule', 'grab'],
         // 'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
         //     'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
         //     'hear', 'shout', 'speak', 'see'
@@ -47,7 +47,7 @@ var kck_levels = {
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
         // 'verb_dashes_removed': false,
-        'verb_dashes_removed': true
+        'verb_dashes_removed': false
     },
     '20': {
         'time': ['simultaneous', 'prior', 'subsequent'],
@@ -95,7 +95,7 @@ var kck_levels = {
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
         // 'verb_dashes_removed': false,
-        'verb_dashes_removed': true
+        'verb_dashes_removed': false
     },
     '30': {
         'time': ['simultaneous', 'prior', 'subsequent'],
