@@ -67,6 +67,7 @@ MorphologyModeGame.prototype.attach = function () {
     set_display_of_class("morphology_to_clear", "initial");
     set_display_of_class('cleared_in_etymology', 'initial');
     set_display_of_class("cleared_in_picture_display", "initial");
+    set_display_of_class("cleared_in_picture_display2", "initial");
     // set_display("morphology_to_clear3", "initial");
     //end changes 11-12-16
     

@@ -38,12 +38,12 @@ var kck_levels = {
         'drop_down_path_noun' : ['lexeme', 'case'],
         'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
         'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        'source_language' : {'english': 0.5, 'latin': 0.5},
-        'target_language' : {'english': 0.5, 'latin': 0.5},
-        // 'source_language' : {'english': 1, 'latin': 0},
-        // 'target_language' : {'english': 0, 'latin': 1},
         // 'source_language' : {'english': 0.5, 'latin': 0.5},
         // 'target_language' : {'english': 0.5, 'latin': 0.5},
+        // 'source_language' : {'english': 1, 'latin': 0},
+        // 'target_language' : {'english': 0, 'latin': 1},
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
         // 'verb_dashes_removed': false,
@@ -84,14 +84,14 @@ var kck_levels = {
         'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
         /////////TARGET & SOURCE
         // L2E
-        // 'source_language' : {'english': 0, 'latin': 1},
-        // 'target_language' : {'english': 1, 'latin': 0s},
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
         //E2L
         // 'source_language' : {'english': 1, 'latin': 0},
         // 'target_language' : {'english': 0, 'latin': 1},
         //E2L and L2E
-        'source_language' : {'english': 0.5, 'latin': 0.5},
-        'target_language' : {'english': 0.5, 'latin': 0.5},
+        // 'source_language' : {'english': 0.5, 'latin': 0.5},
+        // 'target_language' : {'english': 0.5, 'latin': 0.5},
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
         // 'verb_dashes_removed': false,
@@ -131,14 +131,14 @@ var kck_levels = {
         'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
         /////////TARGET & SOURCE
         // L2E
-        // 'source_language' : {'english': 0, 'latin': 1},
-        // 'target_language' : {'english': 1, 'latin': 0s},
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
         //E2L
         // 'source_language' : {'english': 1, 'latin': 0},
         // 'target_language' : {'english': 0, 'latin': 1},
         //E2L and L2E
-        'source_language' : {'english': 0.5, 'latin': 0.5},
-        'target_language' : {'english': 0.5, 'latin': 0.5},
+        // 'source_language' : {'english': 0.5, 'latin': 0.5},
+        // 'target_language' : {'english': 0.5, 'latin': 0.5},
         
         
         'terminology_display_dictionary': 'basic',
@@ -179,12 +179,16 @@ var kck_levels = {
         'drop_down_path_noun' : ['lexeme', 'case'],
         'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
         'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        'source_language' : {'english': 0.5, 'latin': 0.5},
-        'target_language' : {'english': 0.5, 'latin': 0.5},
+        /////////TARGET & SOURCE
+        // L2E
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
+        //E2L
         // 'source_language' : {'english': 1, 'latin': 0},
         // 'target_language' : {'english': 0, 'latin': 1},
+        //E2L and L2E
         // 'source_language' : {'english': 0.5, 'latin': 0.5},
-        // 'target_language' : {'english': 0.5, 'latin': 0.5},
+        // 'targe
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
         'verb_dashes_removed': false,
@@ -222,12 +226,16 @@ var kck_levels = {
         'drop_down_path_noun' : ['lexeme', 'case'],
         'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
         'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        'source_language' : {'english': 0.5, 'latin': 0.5},
-        'target_language' : {'english': 0.5, 'latin': 0.5},
+        /////////TARGET & SOURCE
+        // L2E
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
+        //E2L
         // 'source_language' : {'english': 1, 'latin': 0},
         // 'target_language' : {'english': 0, 'latin': 1},
+        //E2L and L2E
         // 'source_language' : {'english': 0.5, 'latin': 0.5},
-        // 'target_language' : {'english': 0.5, 'latin': 0.5},
+        // 'targe
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
         'verb_dashes_removed': false,
@@ -261,17 +269,21 @@ var kck_levels = {
         // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
         // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
         // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'person_and_number'],
-        'drop_down_path' : ['lexeme'],
+        'drop_down_path' : ['lexeme', 'person_and_number'],
+        // 'drop_down_path' : ['lexeme'],
         'drop_down_path_noun' : ['lexeme', 'case'],
         'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
         'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        'source_language' : {'english': 0.5, 'latin': 0.5},
-        'target_language' : {'english': 0.5, 'latin': 0.5},
+       /////////TARGET & SOURCE
+        // L2E
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
+        //E2L
         // 'source_language' : {'english': 1, 'latin': 0},
         // 'target_language' : {'english': 0, 'latin': 1},
+        //E2L and L2E
         // 'source_language' : {'english': 0.5, 'latin': 0.5},
-        // 'target_language' : {'english': 0.5, 'latin': 0.5},
+        // 'targe
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
         'verb_dashes_removed': false,
