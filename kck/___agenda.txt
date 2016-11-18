@@ -288,6 +288,14 @@ vid-ēbā-tur cūr dīx-issē-t = he was being seen why he had spoken
     - (not great but we can fix when we do gender
     - mental verbs that have a clause as the subject should be neuter
 
+
+SMALL STRUCTURAL THINGS
+some parameters in etymology cheat sheet should be changed from hard-coded to specified by module   
+        e.g.
+        var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+        this.level.etym_level, weighted(this.legal_question_types), 4, 4, 4);
+
+
 NOT REQUIRED FOR MVP
 
 

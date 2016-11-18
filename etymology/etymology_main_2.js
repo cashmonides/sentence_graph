@@ -16,7 +16,13 @@ var question_template_dict = {
     // clue = QUADR, correct = four, hard (with cheat sheet medium)
     'root_to_root_definition': 'Pick the definition of the root ',
     // clue = four, corect = QUADR, hard (with cheat sheet medium)
-    'root_definition_to_root': 'Pick the root that means '
+    'root_definition_to_root': 'Pick the root that means ',
+    /////SPELLING (perhaps move to a special spelling section)
+    //below will be used for spelling mode
+    'spelling_word_definition_to_word': 'Spell the word that means ',
+    //below will be used for spelling mode
+    'spelling_root_definition_to_root': 'Pick the root that means '
+    
 };
 
 var legal_question_types = [

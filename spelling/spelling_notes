@@ -1,0 +1,38 @@
+BASIC DESIGN
+    - combo of etymology and input mode
+    - for now we can probably just tie it to the etym_level 
+        (not sure if it needs anything other than etym_level)
+
+pick word
+    - simple approach (pick any word that has allowed roots)
+    - more complex approach (pick any word that has allowed roots that is also at the right level)
+    
+display question
+    - e.g. spell the word that means "a four sided geometrical figure"
+    - (using: etymology's word_definition to word functionality)
+    
+generate clue for cheat sheet
+    - e.g. QUADR = four LATER = side
+    
+    
+generate dummy words for cheat sheet
+    - (just to make it harder)
+    
+    
+get display level for question and clues
+    keeping original capitalization of words
+    e.g. 
+        easy: a FOUR SIDEd geometrical figure, part of a machine operated by the FOOT
+        advanced: all lower case
+    
+display clues on cheat sheet
+
+submit string answer to green-red-path processor
+
+reprocess answer
+
+
+
+
+
+

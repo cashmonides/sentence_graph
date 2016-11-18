@@ -427,6 +427,11 @@ Quiz.prototype.next_mode = function (error) {
             alert('Everything is broken!');
             return;
         } */
+        
+        console.log("DEBUG 11-18-16 this.sick_modes = ", this.sick_modes);
+        
+        console.log("DEBUG 11-18 checkpoint 1");
+        
         for (var i = 0; i < this.sick_modes.length; i++) {
             console.log('sick mode being added = ', this.sick_modes[i])
             delete allowed[this.sick_modes[i]];
@@ -451,12 +456,14 @@ Quiz.prototype.next_mode = function (error) {
         // We do this via an early return.
         // error is a parameter which is true if next_mode was called due to an error.
         
-        // console.log("DEBUG 5-6 checkpoint 1");
+        console.log("DEBUG 11-18 checkpoint 2");
         var mode = weighted(allowed);
-        // console.log("DEBUG 5-6 checkpoint 2 mode = ", mode);
+        console.log("DEBUG 11-18 checkpoint 2.1 mode = ", mode);
         // console.log("DEBUG 5-6 game_mode_map[mode] = ", game_mode_map[mode]);
     }
     var game;
+    console.log("DEBUG 11-18 checkpoint 2.1");
+        
     if (this.user.is_mf()) {
         var modes_map = {
             'translate': MFModeGame,
@@ -466,11 +473,13 @@ Quiz.prototype.next_mode = function (error) {
         console.log('current mode =', current_mode);
         game = new current_mode(Path.from_url_params(this.id));
     } else {
+        console.log("DEBUG 11-18 checkpoint 2.4 mode = ", mode);
+        console.log("DEBUG 11-18 checkpoint 2.5 Quiz.get_mode(game_mode_map[mode]) = ", Quiz.get_mode(game_mode_map[mode]));
         game = Quiz.get_mode(game_mode_map[mode]);
     }
-    // console.log("DEBUG 5-6 checkpoint 3 game = ", game);
+    console.log("DEBUG 11-18 checkpoint 3 game = ", game);
     this.game = game;
-    // console.log("DEBUG 5-6 checkpoint 4 this.game = ", this.game);
+    console.log("DEBUG 11-18 checkpoint 4 this.game = ", this.game);
     
     //todo understand the following
     
@@ -501,6 +510,7 @@ Quiz.get_mode = function(mode_number) {
         case 7 : return new SyntaxModeGame();
         case 8 : return new KCKModeGame();
         case 9 : return new MorphologyModeGame();
+        case 10 : return new SpellingModeGame();
         default : throw "no game mode triggered";
     }
     

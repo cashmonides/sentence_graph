@@ -121,26 +121,22 @@ ISSUE 3 - what does etym level look like
 */
 
 
-var EtymologyModeGame = function(){
-    //todo should this really be like this
+var SpellingModeGame = function(){
     this.data = null;
     this.quiz = null;
     this.level = 0;
-    // this.words_and_roots = {};
 };
 
 
-EtymologyModeGame.prototype.attach = function(){
-    // make word selector nonclickable (somewhere in set word selector)
-    //(should word_selector.setup bave a flag for clickable or not clickable?
-    //maybe something like in setup, if clickable is false then it just sets r[0] to false
+SpellingModeGame.prototype.attach = function(){
     set_display("latin_answer_choices", 'none');
-    set_display("drop_answer_choices", 'initial');
+    set_display("drop_answer_choices", 'none');
     set_display("submit_button", 'initial');
     set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'none');
     set_display("etym_cheat_button", 'initial');
-    set_display("input_box", 'none');
+    //input box will be used
+    set_display("input_box", 'initial');
     set_display("next_button", 'none');
     set_display("skip_button", 'none');
     set_display("next_level_button", 'none');
@@ -152,36 +148,36 @@ EtymologyModeGame.prototype.attach = function(){
     //end current best result
 };
 
-EtymologyModeGame.prototype.set_level = function (new_level) {
-    console.log("DEBUG 11-16 EtymologyModeGame new_level = ", new_level);
+SpellingModeGame.prototype.set_level = function (new_level) {
+    console.log("LOG SpellingModeGame new_level = ", new_level);
     this.level = new_level;
 }
 
-EtymologyModeGame.prototype.get_mode_name = function() {
-    return "etymology";
+SpellingModeGame.prototype.get_mode_name = function() {
+    return "spelling";
 }
 
 
-EtymologyModeGame.prototype.next_question = function(){
+SpellingModeGame.prototype.next_question = function(){
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
     
     this.quiz.update_display();
-    /*
-    if (!(this.quiz.module.id in this.words_and_roots)) {
-        this.words_and_roots[this.quiz.module.id] = get_words_and_roots(
-            map_level_to_allowed(this.level.etym_level, etym_levels).roots);
-    }
     
-    
-    var make_etymology_question_with_cheat_sheet = function (
-    etym_level, question_type, number_of_answer_choices,
-    number_of_dummies, number_of_mandatory)
-    */
     this.legal_question_types = map_level_to_allowed(
         this.level.etym_level, etym_levels).question_types;
-    console.log("11-18-16 this.legal_question_types = ", this.legal_question_types);
+    
+    console.log("SPELLING LOG this.legal_question_types before change = ", this.legal_question_types);
+
+    
+    // this.legal_question_types = {'word_definition_to_word': 0.5,
+    // 'root_definition_to_root': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.5};
+    
+    console.log("SPELLING LOG this.legal_question_types after change = ", this.legal_question_types);
+    
+    
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
         this.level.etym_level, weighted(this.legal_question_types), 4, 4, 4);
     // console.log(question_with_cheat_sheet['question_data']);
@@ -205,6 +201,9 @@ EtymologyModeGame.prototype.next_question = function(){
     this.quiz.set_word_selector(empty_word_selector);
     
     
+    //todo we don't want drop downs in spelling mode so we need to disable below
+    
+    
     //remove all html elements in drop down
     remove_element_by_id("drop_answer_choices");
     
@@ -216,35 +215,64 @@ EtymologyModeGame.prototype.next_question = function(){
 };
 
 
+//todo change to input mode
 
-EtymologyModeGame.prototype.process_answer = function() {
-    var dd = el("select_element");
-    var selected_answer = dd.options[dd.selectedIndex].value;
-    console.log("selected_answer = ", selected_answer);
+//begin insertion of input mode
 
-    var is_correct = selected_answer === this.correct;
-
-    if (is_correct) {
-        //console.log"correct");
+SpellingModeGame.prototype.process_answer = function(){
+    var self = this;
+    var raw_input_string = el("input_box").value;
+    console.log("DEBUG SPELLING raw input string = ", raw_input_string);
+    
+    var processed_input_string = clean_input_string(raw_input_string);
+    console.log("DEBUG SPELLING process input string = ", processed_input_string);
+    
+    
+    //todo we need the correct english answer - should be stored as a variable somewhere in this.next_question
+    var correct_english_translation;
+    
+    //it might already be stored as this.correct_answer, in which case, we just do this
+    correct_english_translation = clean_input_string(this.correct);
+    
+    
+    if (object_equals(processed_input_string, correct_english_translation)) {
         this.process_correct_answer();
     } else {
-        //console.log"incorrect");
         this.process_incorrect_answer();
     }
-
 };
 
-EtymologyModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
-EtymologyModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
-EtymologyModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
+//end insertion of input mode
 
-EtymologyModeGame.prototype.process_correct_answer = function() {
+//old process_answer
+// SpellingModeGame.prototype.process_answer = function() {
+//     var dd = el("select_element");
+//     var selected_answer = dd.options[dd.selectedIndex].value;
+//     console.log("selected_answer = ", selected_answer);
+
+//     var is_correct = selected_answer === this.correct;
+
+//     if (is_correct) {
+//         //console.log"correct");
+//         this.process_correct_answer();
+//     } else {
+//         //console.log"incorrect");
+//         this.process_incorrect_answer();
+//     }
+
+// };
+
+SpellingModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
+SpellingModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
+SpellingModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
+
+SpellingModeGame.prototype.process_correct_answer = function() {
     //console.log"answer matches target");
     
     this.quiz.increment_score();
     
     
-    var cell_1 = random_choice(EtymologyModeGame.cell_1_feedback_right);
+    var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
     
@@ -273,8 +301,8 @@ EtymologyModeGame.prototype.process_incorrect_answer = function() {
         var cell_2;
         cell_2 = "";
     
-        var cell_1 = random_choice(EtymologyModeGame.cell_1_feedback_wrong);
-        var cell_3 = random_choice(EtymologyModeGame.cell_3_feedback_wrong);
+        var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_wrong);
+        var cell_3 = random_choice(SpellingModeGame.cell_3_feedback_wrong);
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
     } else {
@@ -286,7 +314,7 @@ EtymologyModeGame.prototype.process_incorrect_answer = function() {
     // this.quiz.word_selector.clear();
 };
 
-EtymologyModeGame.prototype.give_away_answer = function(){
+SpellingModeGame.prototype.give_away_answer = function(){
     var fbox = el("feedbackbox");
     fbox.innerHTML = "The correct answer was \"" + this.correct + '"';
     
