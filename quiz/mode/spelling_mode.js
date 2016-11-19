@@ -159,6 +159,9 @@ SpellingModeGame.prototype.get_mode_name = function() {
 
 
 SpellingModeGame.prototype.next_question = function(){
+    
+    clear_input_box("input_box");
+    
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
@@ -177,9 +180,14 @@ SpellingModeGame.prototype.next_question = function(){
     
     console.log("SPELLING LOG this.legal_question_types after change = ", this.legal_question_types);
     
-    
+    //the parameters for the following function is:
+    // etym_level, question_type, number_of_answer_choices, number_of_dummies, number_of_mandatory)
+    // so the numbers are number_of_answer_choices, number_of_dummies, number_of_mandatory
+    //1,0,1 gives good results
+    //2,0,1 gives a dummy
+    // 2,0,1 mysteriously gives good results, usually 3 answers with one dummy and two relevant ones
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, weighted(this.legal_question_types), 4, 4, 4);
+        this.level.etym_level, weighted(this.legal_question_types), 3, 0, 1);
     // console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
     this.etymology_cheat_sheet = alphabetize_dict(
@@ -193,7 +201,7 @@ SpellingModeGame.prototype.next_question = function(){
     
     
     //todo
-    //etymology mode is the only mode without a word selector
+    //etymology mode and spelling mode is the only mode without a word selector
     //that leads to a problem: the previous word selector remains on the page
     //the following a hacky solution that can probably be improved on
     
@@ -205,13 +213,13 @@ SpellingModeGame.prototype.next_question = function(){
     
     
     //remove all html elements in drop down
-    remove_element_by_id("drop_answer_choices");
+    // remove_element_by_id("drop_answer_choices");
     
     //make html elements
-    make_drop_down_html(this.choices);
+    // make_drop_down_html(this.choices);
     
     //todo new code 11-29 the following avoids drop-downs with only one answer
-    if (el("select_element").children.length === 1) {this.next_question()}
+    // if (el("select_element").children.length === 1) {this.next_question()}
 };
 
 
@@ -238,6 +246,7 @@ SpellingModeGame.prototype.process_answer = function(){
     if (object_equals(processed_input_string, correct_english_translation)) {
         this.process_correct_answer();
     } else {
+        console.log("swamp checkpoint 1 about to call process_incorrect_answer");
         this.process_incorrect_answer();
     }
 };
@@ -276,24 +285,24 @@ SpellingModeGame.prototype.process_correct_answer = function() {
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
     
+    clear_input_box("input_box");
     
     this.quiz.question_complete();
-    
-    
-
 };
 
 
-EtymologyModeGame.prototype.process_incorrect_answer = function() {
+SpellingModeGame.prototype.process_incorrect_answer = function() {
+    console.log("swamp checkpoint 2 about to call process_incorrect_answer");
     this.quiz.submodule.incorrect_streak ++;
     
+    console.log("swamp checkpoint 3 about to call process_incorrect_answer");
     
-    console.log("Debug 11-8 this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    console.log("swamp 4 11-8 this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
     if (this.quiz.submodule.incorrect_streak === 1) {
-        console.log("Debug 11-8 if triggered");
+        console.log("Swamp 11-8 if triggered");
         this.quiz.decrement_score();
     } else {
-        console.log("DEBUG 11-8 if not triggered");
+        console.log("swamp 11-8 if not triggered");
     }
     
     
@@ -323,5 +332,21 @@ SpellingModeGame.prototype.give_away_answer = function(){
     //     var text = this.quiz.sentence.get_region_text(r);
     //     fbox.innerHTML += Quiz.wrap_string(self.target_tag) + " = " + text + "<br>";
     // });
+    
+    
+    /////BELOW is one option which displays the word a little bigger with a next button
+    // set_display("next_button", 'initial');
+    // set_display("feedback_for_input", 'initial');
+    // set_display("submit_button", 'none');
+    // set_display("cheat_sheet_button", 'none');
+    // set_display("vocab_cheat_button", 'none');
+    // set_display("skip_button", 'none');
+    // var fbox_for_input = el("feedback_for_input");
+    // fbox_for_input.innerHTML = "the correct spelling is: " + "<br\/>" + this.correct;
+    // fbox_for_input.innerHTML = this.give_away_phrase + "<br\/>" + this.correct + this.give_away_ending_phrase;
+    // this.quiz.question_complete();
+    
+    
+    
     this.quiz.question_complete();
 };

@@ -412,7 +412,7 @@ Quiz.prototype.next_mode = function (error) {
     if (!(this.user.is_mf())) {
         allowed = ALL_MODULES[this.module.id].mode_ratio;
         
-        console.log("LOG: allowed before checking for non-functioning mode = ", allowed);
+        console.log("LOG: allowed modes before checking for non-functioning mode = ", allowed);
         
         /*
         originally:
