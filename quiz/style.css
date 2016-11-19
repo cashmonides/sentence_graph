@@ -212,6 +212,21 @@ body {
 }
 
 
+
+/*GREEN RED FUNCTIONALITY*/
+
+.correct_input {
+    color: green;
+}
+
+.incorrect_input {
+    color: red;
+}
+
+
+
+
+
 /*is this just the display header and terminal string*/
 .kck_string {
     font-size: 14px;

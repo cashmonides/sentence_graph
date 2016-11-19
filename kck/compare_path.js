@@ -37,7 +37,7 @@ var compare_path = function (correct_path, answered_path) {
 
 
 
-var compare_character_list = function (correct_character_list, answered_character_list) {
+var compare_character_list_old = function (correct_character_list, answered_character_list) {
     var results_map = {};
     
     for (var i = 0; i < answered_character_list.length; i++) {
@@ -59,4 +59,68 @@ var compare_character_list = function (correct_character_list, answered_characte
     // if (charsToSearch.indexOf(theChar) != -1) {
         
     // }
-}
+};
+
+//i = index at which all elements will be red to the right, including that index
+var turn_all_rightward_elements_red = function (character_list, index) {
+    //pseudo-code
+    // initialize a list of lists
+    // [[character, color], [character, color], [character, color], ...]
+    //iterate through character list
+    // if before index, push character and green
+    //if index and after, push character and red
+    //end pseudo-code
+    
+    //we need a master list to push all our elements to  
+    var master_list = [];
+    for (var i = 0; i < character_list.length; i++) {
+        //the character we are going to evaluate
+        var char = character_list[i];
+        var sub_list = [];
+        sub_list.push(char);
+        if (i < index) {
+            sub_list.push("green")
+        } else if (i >= index) {
+            sub_list.push("red");
+        } else {
+            alert("Something terribly wrong with index");
+        }
+        //we should now have a character and a color in this form [character, color]
+        // we push this sub-list to our master-list
+        master_list.push(sub_list);
+    };
+    console.log("SWAMP master_list = ", master_list);
+    console.log("SWAMP master_list.toString = ", master_list.toString());
+    return master_list;
+};
+
+
+//this is the less sophisticated version of the spellchecker
+// if a string is spelled correctly up to point i but a mistake is made at i
+// then everything before i is green, i and after is red
+var compare_character_list_rightward_red = function (correct_character_list, answered_character_list) {
+    var results_list = [];
+    
+    for (var i = 0; i < answered_character_list.length; i++) {
+        if (answered_character_list[i] == correct_character_list[i]) {
+            var character_to_push = answered_character_list[i];
+            // results_list[i] = character_to_push + "green";
+            continue;
+        } else {
+            var character_to_push = answered_character_list[i];
+            results_list[i] = character_to_push + "red";
+            results_list = turn_all_rightward_elements_red(answered_character_list, i);
+            return results_list;
+        }
+    }
+    console.log("SWAMP results_list = ", results_list);
+    return results_list;
+    
+    //does below seem viable
+    // var charsToSearch = answered_character_list;
+    // var theChar = correct_character_list.charAt(i); /* Wherever str and i comes from */
+
+    // if (charsToSearch.indexOf(theChar) != -1) {
+        
+    // }
+};

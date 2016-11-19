@@ -174,9 +174,9 @@ SpellingModeGame.prototype.next_question = function(){
     console.log("SPELLING LOG this.legal_question_types before change = ", this.legal_question_types);
 
     
-    this.legal_question_types = {'word_definition_to_word': 0.5,
-        'root_definition_to_root': 0.5};
-    // this.legal_question_types = {'word_definition_to_word': 0.5};
+    // this.legal_question_types = {'word_definition_to_word': 0.5,
+        // 'root_definition_to_root': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.5};
     
     console.log("SPELLING LOG this.legal_question_types after change = ", this.legal_question_types);
     
@@ -248,8 +248,18 @@ SpellingModeGame.prototype.process_answer = function(){
     
     //todo for now we're going to just send this function a string
     //later we'll need to do the necessary stripping of punctuation
-    this.submit_string_to_green_and_red(this.correct, raw_input_string);
+    console.log("SWAMP this.correct = ", this.correct);
+    console.log("SWAMP raw_input_string = ", raw_input_string);
+    var comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
+    console.log("SWAMP comparison_result = ", comparison_result);
+    this.comparison_result = comparison_result;
     
+    
+    console.log("SWAMP checkpoint 6 entering display_red_green-result");
+    console.log("SWAMP checkpoint 6.1 input to argument = ", comparison_result);
+    
+    this.display_red_green_result(comparison_result);
+    console.log("SWAMP checkpoint 6.9999999 leaving display_red_green-result");
     
     if (object_equals(processed_input_string, correct_english_translation)) {
         this.process_correct_answer();
@@ -283,6 +293,116 @@ SpellingModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
 SpellingModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
 SpellingModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
+
+SpellingModeGame.prototype.display_red_green_result_old_with_add_class = function (list) {
+    
+    //pseudo-code
+    //iterate through list
+    //if list[1] = red
+    //wrap in span or set style or something that will establish its color
+    //push to red_green_string which will be our final displayed string
+    var red_green_list = [];
+    
+    console.log("SWAMP checkpoint 6.2 red_green_list pre-push = ", red_green_list);
+    
+    for (var i = 0; i < list.length; i++) {
+        console.log("SWAMP entering for loop");
+        var sublist_to_query = list[i];
+        console.log("SWAMP sublist_to_query = ", sublist_to_query);
+        var character_with_class;
+        character_with_class = sublist_to_query[0];
+        console.log("SWAMP character_with_class pre-class = ", character_with_class);
+        if (sublist_to_query[1] == 'green') {
+            character_with_class.addClass('correct_input');
+            console.log("SWAMP character_with_class pre-class = ", character_with_class);
+        } else if (sublist_to_query[1] == 'red') {
+            character_with_class.addClass('incorrect_input');
+            console.log("SWAMP character_with_class pre-class = ", character_with_class);
+        }
+        red_green_list.push(character_with_class);
+    }
+    
+    
+        e = document.createElement('font');
+        e.style.color = red_green_list[i][1];
+        e.innerHTML = red_green_list[i][0];
+    
+    
+    console.log("SWAMP red_green_list after push = ", red_green_list);
+    
+    var red_green_string = red_green_list.toString();
+    
+    console.log("SWAMP red_green_string = ", red_green_string);
+    
+    var fbox = el("feedbackbox");
+    fbox.innerHTML = "Almost! Try again." + red_green_string;
+}
+
+
+
+SpellingModeGame.prototype.display_red_green_result = function (list) {
+    
+    //pseudo-code
+    //iterate through list
+    //if list[1] = red
+    //wrap in span or set style or something that will establish its color
+    //push to red_green_string which will be our final displayed string
+    var red_green_list = [];
+    
+    console.log("SWAMP checkpoint 6.2 red_green_list pre-push = ", red_green_list);
+    
+    
+    var parent_el = document.createElement('div');
+    var e;
+    var colored_character_list = [];
+    var colored_string;
+    var container_div = document.createElement('div');
+    for (var i = 0; i < list.length; i++) {
+        // if (i !== 0) {
+        //     //we need to create something that's not a div but rather a bit of text
+        //     // so instead of createElement as below
+        //     // e = document.createElement('div');
+        //     //we need create text
+        //     e.innerHTML = '&nbsp;';
+        //     e.style.display = 'inline-block';
+        //     parent_el.appendChild(e);
+        // }
+        e = document.createElement('font');
+        console.log("SWAMP 6.81 color = ", list[i][1]);
+        e.style.color = list[i][1];
+        console.log("SWAMP 6.81 text = ", list[i][0]);
+        e.innerHTML = list[i][0];
+        console.log("SWAMP 6.81 e = ", e);
+        container_div.appendChild(e);
+        // parent_el.appendChild(container_div);
+    }
+    
+    console.log("SWAMP 6.9 checkpoint out of for loop")
+    console.log("SWAMP 6.91 colored_character_list = ", colored_character_list);
+    
+    parent_el.appendChild(container_div);
+    
+    
+    console.log("SWAMP 6.92 checkpoint about to append to feedback box");
+    var fbox = el("image_display_box");
+    fbox.appendChild(parent_el);
+    
+    console.log("SWAMP 6.91 parent_el = ", parent_el);
+    return parent_el;
+    
+    
+    // console.log("SWAMP red_green_list after push = ", red_green_list);
+    
+    // var red_green_string = red_green_list.toString();
+    
+    // console.log("SWAMP red_green_string = ", red_green_string);
+    
+    // var fbox = el("feedbackbox");
+    // fbox.innerHTML = "Almost! Try again." + red_green_string;
+}
+
+
+
 SpellingModeGame.prototype.process_correct_answer = function() {
     //console.log"answer matches target");
     
@@ -304,7 +424,12 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
     console.log("swamp checkpoint 2 about to call process_incorrect_answer");
     this.quiz.submodule.incorrect_streak ++;
     
-    console.log("swamp checkpoint 3 about to call process_incorrect_answer");
+    console.log("swamp checkpoint 2.5 about to submit to red_green");
+    
+    
+    
+    
+    
     
     console.log("swamp 4 11-8 this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
     if (this.quiz.submodule.incorrect_streak === 1) {
@@ -341,10 +466,10 @@ SpellingModeGame.prototype.submit_string_to_green_and_red = function(correct_ans
     console.log("SWAMP input list = ", input_string_as_list_of_characters);
     
     
-    var red_green_result = compare_character_list(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
+    var red_green_result = compare_character_list_rightward_red(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
     // var red_green_result = compare_path(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
     console.log("SWAMP red_green_result = ", red_green_result);
-    console.log("SWAMP red_green_result.red_green_list = ", red_green_result.red_green_list);
+    // console.log("SWAMP red_green_result.red_green_list = ", red_green_result.red_green_list);
     return red_green_result;
 };
 
