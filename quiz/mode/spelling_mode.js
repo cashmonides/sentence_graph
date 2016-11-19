@@ -174,9 +174,9 @@ SpellingModeGame.prototype.next_question = function(){
     console.log("SPELLING LOG this.legal_question_types before change = ", this.legal_question_types);
 
     
-    // this.legal_question_types = {'word_definition_to_word': 0.5,
-    // 'root_definition_to_root': 0.5};
-    this.legal_question_types = {'word_definition_to_word': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.5,
+        'root_definition_to_root': 0.5};
+    // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     console.log("SPELLING LOG this.legal_question_types after change = ", this.legal_question_types);
     
@@ -236,11 +236,19 @@ SpellingModeGame.prototype.process_answer = function(){
     console.log("DEBUG SPELLING process input string = ", processed_input_string);
     
     
+    
+    
+    
     //todo we need the correct english answer - should be stored as a variable somewhere in this.next_question
     var correct_english_translation;
     
     //it might already be stored as this.correct_answer, in which case, we just do this
     correct_english_translation = clean_input_string(this.correct);
+    
+    
+    //todo for now we're going to just send this function a string
+    //later we'll need to do the necessary stripping of punctuation
+    this.submit_string_to_green_and_red(this.correct, raw_input_string);
     
     
     if (object_equals(processed_input_string, correct_english_translation)) {
@@ -291,6 +299,7 @@ SpellingModeGame.prototype.process_correct_answer = function() {
 };
 
 
+
 SpellingModeGame.prototype.process_incorrect_answer = function() {
     console.log("swamp checkpoint 2 about to call process_incorrect_answer");
     this.quiz.submodule.incorrect_streak ++;
@@ -321,6 +330,22 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
     this.quiz.update_display();
     // Etymology has no word selector
     // this.quiz.word_selector.clear();
+};
+
+
+SpellingModeGame.prototype.submit_string_to_green_and_red = function(correct_answer_string, input_string) {
+    //we want to turn each character green or red
+    var correct_answer_as_list_of_characters = correct_answer_string.split("");
+    var input_string_as_list_of_characters = input_string.split("");
+    console.log("SWAMP correct answer list = ", correct_answer_as_list_of_characters);
+    console.log("SWAMP input list = ", input_string_as_list_of_characters);
+    
+    
+    var red_green_result = compare_character_list(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
+    // var red_green_result = compare_path(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
+    console.log("SWAMP red_green_result = ", red_green_result);
+    console.log("SWAMP red_green_result.red_green_list = ", red_green_result.red_green_list);
+    return red_green_result;
 };
 
 SpellingModeGame.prototype.give_away_answer = function(){
