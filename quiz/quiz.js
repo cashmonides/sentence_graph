@@ -154,12 +154,15 @@ Quiz.prototype.get_start_module = function() {
     var ups = get_url_parameters();
     // console.log("quiz url parameters:", ups);
     
-    
+    console.log("TRUMP get_start module triggered");
     console.log("LOG: current module = ", this.user.get_current_module());
     
     if ("mod" in ups){
+        console.log("TRUMP mod in ups triggered");
         var selected_mod = ups["mod"];
-        console.log("LOG: selected mod = ", selected_mod);
+        console.log("LOG: hey selected mod = ", selected_mod);
+        console.log("TRUMP: allowed_module? =", this.is_allowed_module(parseInt(selected_mod, 10)));
+        
         // Logically, exactly one of these things must happen,
         // (unless the user is an mf user, which overrides everything else),
         // so we could remove the final if in the second else if.
@@ -169,6 +172,7 @@ Quiz.prototype.get_start_module = function() {
             this.advance_improve_status = "mf";
         } else {
             if (!this.is_allowed_module(parseInt(selected_mod, 10))) {
+                console.log("TRUMP return to profile forced");
                 return_to_profile();
             } else if (selected_mod == this.user.get_current_module()) {
                 // console.log("DEBUG 11-23 clicked mod = current mod");
@@ -178,6 +182,7 @@ Quiz.prototype.get_start_module = function() {
                 this.advance_improve_status = "improving";
             }
         }
+        console.log("TRUMP selected_mod = ", selected_mod);
         return selected_mod;
         /*
         if (selected_mod > this.user.get_current_module()) {
@@ -196,9 +201,11 @@ Quiz.prototype.get_start_module = function() {
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         */
     } else if ('path' in ups) {
+        console.log("TRUMP path in ups triggered");
         this.advance_improve_status = "mf";
         return ups;
     } else {
+        console.log("TRUMP else in ups triggered");
         console.log('DEBUG 1-18 mod not in parameters');
         this.advance_improve_status = "advancing";
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);

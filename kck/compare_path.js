@@ -95,10 +95,118 @@ var turn_all_rightward_elements_red = function (character_list, index) {
 };
 
 
+//the primitive version of adding padding to end
+var turn_all_rightward_elements_red_with_padding = function (character_list, index, padding) {
+    //pseudo-code
+    // initialize a list of lists
+    // [[character, color], [character, color], [character, color], ...]
+    //iterate through character list
+    // if before index, push character and green
+    //if index and after, push character and red
+    //end pseudo-code
+    
+    //we need a master list to push all our elements to  
+    var master_list = [];
+    for (var i = 0; i < character_list.length; i++) {
+        //the character we are going to evaluate
+        var char = character_list[i];
+        var sub_list = [];
+        sub_list.push(char);
+        if (i < index) {
+            sub_list.push("green")
+        } else if (i >= index) {
+            sub_list.push("red");
+        } else {
+            alert("Something terribly wrong with index");
+        }
+        //we should now have a character and a color in this form [character, color]
+        // we push this sub-list to our master-list
+        master_list.push(sub_list);
+    };
+    
+    for (var i = 0; i < padding; i++) {
+        var sub_list = [];
+        sub_list.push("_");
+        sub_list.push("red");
+        master_list.push(sub_list);
+    }
+    console.log("SWAMP master_list = ", master_list);
+    console.log("SWAMP master_list.toString = ", master_list.toString());
+    return master_list;
+};
+
 //this is the less sophisticated version of the spellchecker
 // if a string is spelled correctly up to point i but a mistake is made at i
 // then everything before i is green, i and after is red
+var compare_character_list_rightward_red_old = function (correct_character_list, answered_character_list) {
+    var results_list = [];
+    
+    for (var i = 0; i < answered_character_list.length; i++) {
+        if (answered_character_list[i] == correct_character_list[i]) {
+            var character_to_push = answered_character_list[i];
+            // results_list[i] = character_to_push + "green";
+            continue;
+        } else {
+            var character_to_push = answered_character_list[i];
+            results_list[i] = character_to_push + "red";
+            results_list = turn_all_rightward_elements_red(answered_character_list, i);
+            return results_list;
+        }
+    }
+    console.log("SWAMP results_list = ", results_list);
+    return results_list;
+    
+    //does below seem viable
+    // var charsToSearch = answered_character_list;
+    // var theChar = correct_character_list.charAt(i); /* Wherever str and i comes from */
+
+    // if (charsToSearch.indexOf(theChar) != -1) {
+        
+    // }
+};
+
+
+//this version iterates across correct_character_list (fixing the bug of words that are too short)
 var compare_character_list_rightward_red = function (correct_character_list, answered_character_list) {
+    var results_list = [];
+    
+    
+    //we need to determine if we're going to add any underscore paencedding for missing letters at end of word
+    //this is a primitive solution
+    var difference_in_length = correct_character_list.length - answered_character_list.length;
+    var underscore_padding_to_add = 0;
+    if (difference_in_length >= 1) {
+        underscore_padding_to_add = difference_in_length;
+    }
+    
+    for (var i = 0; i < correct_character_list.length; i++) {
+        if (answered_character_list[i] == correct_character_list[i]) {
+            var character_to_push = answered_character_list[i];
+            // results_list[i] = character_to_push + "green";
+            continue;
+        } else {
+            var character_to_push = answered_character_list[i];
+            results_list[i] = character_to_push + "red";
+            // results_list = turn_all_rightward_elements_red(answered_character_list, i);
+            results_list = turn_all_rightward_elements_red_with_padding(answered_character_list, i, underscore_padding_to_add);
+            return results_list;
+        }
+    }
+    console.log("SWAMP results_list = ", results_list);
+    return results_list;
+    
+    //does below seem viable
+    // var charsToSearch = answered_character_list;
+    // var theChar = correct_character_list.charAt(i); /* Wherever str and i comes from */
+
+    // if (charsToSearch.indexOf(theChar) != -1) {
+        
+    // }
+};
+
+
+//a slightly more sophisticated version with underscore padding added if characters are missing
+var compare_character_list_rightward_red_new = function (correct_character_list, answered_character_list) {
     var results_list = [];
     
     for (var i = 0; i < answered_character_list.length; i++) {

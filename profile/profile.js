@@ -8,7 +8,8 @@ var ProfilePage = {
 };
 
 
-var global_improvement_suspension = true;
+// var global_improvement_suspension = true;
+var global_improvement_suspension = false;
 
 ProfilePage.logout = function () {
     this.user.logout();
@@ -136,11 +137,11 @@ ProfilePage.build_progress_table = function(user) {
             remove_element_by_id('start_game_button');
             remove_element_by_id('improve_button');
             var table = el("table");
-            console.log("DEBUG 2-11 entering first make in profile");
-            console.log("DEBUG 2-11 user = ", user);
-            console.log("DEBUG 2-11 table = ", table);
+            // console.log("DEBUG 2-11 entering first make in profile");
+            // console.log("DEBUG 2-11 user = ", user);
+            // console.log("DEBUG 2-11 table = ", table);
             var row = make({"tag": "tr"}, table);
-            console.log("DEBUG 2-11 leaving first make");
+            // console.log("DEBUG 2-11 leaving first make");
             var max_columns = 4;
             get_mf_and_syntax_sentences(function (order) {
                 console.log('order =', order);
@@ -233,11 +234,11 @@ ProfilePage.build_progress_table = function(user) {
             });
         } else {
             var table = el("table");
-            console.log("DEBUG 2-11 entering first make in profile");
-            console.log("DEBUG 2-11 user = ", user);
-            console.log("DEBUG 2-11 table = ", table);
+            // console.log("DEBUG 2-11 entering first make in profile");
+            // console.log("DEBUG 2-11 user = ", user);
+            // console.log("DEBUG 2-11 table = ", table);
             var row = make({"tag": "tr"}, table);
-            console.log("DEBUG 2-11 leaving first make");
+            // console.log("DEBUG 2-11 leaving first make");
             var max_columns = 4;
             var order = get_module_order();
             
@@ -281,14 +282,14 @@ ProfilePage.build_progress_table = function(user) {
                     m.class.push('clickable')
                 }
                 
-                console.log("DEBUG 2-11 entering 2nd make in profile");
-                console.log("DEBUG 2-11 m = ", m);
-                console.log("DEBUG 2-11 row = ", row);
+                // console.log("DEBUG 2-11 entering 2nd make in profile");
+                // console.log("DEBUG 2-11 m = ", m);
+                // console.log("DEBUG 2-11 row = ", row);
                 make(m, row);
         
         
                 if (i > 0 && i % max_columns === max_columns - 1) {
-                    console.log("DEBUG 2-11 entering 3rd make in profile");
+                    // console.log("DEBUG 2-11 entering 3rd make in profile");
                     row = make({'tag': "tr"}, table);
                 }
             }
@@ -395,6 +396,8 @@ ProfilePage.select_improvement_module = function(mod_id){
                                 alert("improvement mode is not allowed during testing. Keep advancing for now and you'll get a chance to improve your percentage later.");
                                 return;
                             }
+                            console.log("TRUMP1 improve accuracy entered")
+                            console.log("TRUMP mod_id = ", mod_id);
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
                         } 
@@ -404,6 +407,8 @@ ProfilePage.select_improvement_module = function(mod_id){
                                 alert("improvement mode is not allowed during testing. Keep advancing for now and you'll get a chance to improve your percentage later.");
                                 return;
                             }
+                            console.log("TRUMP2 continue improving accuracy entered")
+                            console.log("TRUMP mod_id = ", mod_id);
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
                         } 
