@@ -21,7 +21,7 @@ var question_template_dict = {
     //below will be used for spelling mode
     'spelling_word_definition_to_word': 'Spell the word that means ',
     //below will be used for spelling mode
-    'spelling_root_definition_to_root': 'Pick the root that means '
+    'spelling_root_definition_to_root': 'Spell the root that means '
     
 };
 

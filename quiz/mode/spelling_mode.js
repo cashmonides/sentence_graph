@@ -146,6 +146,17 @@ SpellingModeGame.prototype.attach = function(){
     set_display_of_class("cleared_in_picture_display", "initial");
     set_display_of_class("cleared_in_picture_display2", "initial");
     //end current best result
+    
+    //we want to change the max incorrect streak
+    if (this.quiz.module.submodule.spelling_mode_max_incorrect_streak) {
+        console.log("PROBLEM: no spelling_mode_max_incorrect_streak specified");
+       this.temporary_max_incorrect_streak = this.quiz.module.submodule.spelling_mode_max_incorrect_streak;
+    } else {
+        this.temporary_max_incorrect_streak = this.quiz.module.submodule.max_incorrect_streak;
+    }
+    console.log("TRUMP this.quiz.module.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
+    console.log("TRUMP this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
+    
 };
 
 SpellingModeGame.prototype.set_level = function (new_level) {
@@ -174,11 +185,28 @@ SpellingModeGame.prototype.next_question = function(){
     console.log("SPELLING LOG this.legal_question_types before change = ", this.legal_question_types);
 
     
+    // this.legal_question_types = {'word_definition_to_word': 0.00000005,
+    //     'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.5,
         // 'root_definition_to_root': 0.5};
     this.legal_question_types = {'word_definition_to_word': 0.5};
     
     console.log("SPELLING LOG this.legal_question_types after change = ", this.legal_question_types);
+    
+    console.log("TRUMP weighted(this.legal_question_types) =", weighted(this.legal_question_types));
+    
+    this.chosen_question_type = weighted(this.legal_question_types);
+    
+    var spelling_intro_question;
+    if (this.chosen_question_type == 'root_definition_to_root') {
+        spelling_intro_question = "Spell the ROOT that means: "
+    } else if (this.chosen_question_type == 'word_definition_to_word') {
+        spelling_intro_question = "Spell the WORD that means: "
+    } else {
+        spelling_intro_question = "Type the closest match to: "
+        console.log("PROBLEM invalid question type in spelling mode");
+    }
+    
     
     //the parameters for the following function is:
     // etym_level, question_type, number_of_answer_choices, number_of_dummies, number_of_mandatory)
@@ -187,7 +215,7 @@ SpellingModeGame.prototype.next_question = function(){
     //2,0,1 gives a dummy
     // 2,0,1 mysteriously gives good results, usually 3 answers with one dummy and two relevant ones
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, weighted(this.legal_question_types), 3, 0, 1);
+        this.level.etym_level, this.chosen_question_type, 3, 0, 1);
     // console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
     this.etymology_cheat_sheet = alphabetize_dict(
@@ -195,9 +223,14 @@ SpellingModeGame.prototype.next_question = function(){
     this.choices = alphabetize_list(question.choices);
     this.correct = question.correct_answer;
     
-    console.log('OK in etymology, now only HTML remains')
+   
     
-    Quiz.set_question_text(question.question_template + '"' + question.clue + '".');
+    console.log("TRUMP question.question_template = ", question.question_template);
+    console.log("TRUMP question.clue = ", question.clue);
+    
+    
+    
+    Quiz.set_question_text(spelling_intro_question + '"' + question.clue + '".');
     
     
     //todo
@@ -250,7 +283,21 @@ SpellingModeGame.prototype.process_answer = function(){
     //later we'll need to do the necessary stripping of punctuation
     console.log("SWAMP this.correct = ", this.correct);
     console.log("SWAMP raw_input_string = ", raw_input_string);
-    var comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
+    
+    //more primitive version without slashes works
+    // var comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
+    //more advanced version with slashes in testing
+    console.log("TRUMP this.correct = ", this.correct);
+    console.log("TRUMP this.chosen_question_type = ", this.chosen_question_type);
+    
+    if (this.chosen_question_type == 'root_definition_to_root') {
+        console.log("TRUMP slash mode triggered");
+        var comparison_result = this.submit_to_green_red_master_with_slash(this.correct, raw_input_string, true);
+    } else {
+        //the old version that works
+        var comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
+    
+    }
     console.log("SWAMP comparison_result = ", comparison_result);
     this.comparison_result = comparison_result;
     
@@ -439,8 +486,12 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
         console.log("swamp 11-8 if not triggered");
     }
     
-    
-    if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
+    console.log("TRUMP this....submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak)
+    console.log("TRUMP this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
+    //old version worked but didn't reset incorrect streak
+    // if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
+    //attempt at new version resetting incorrect streak for spelling mode only
+    if (this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak) {
         var cell_2;
         cell_2 = "";
     
@@ -458,17 +509,54 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
 };
 
 
+
+
+SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(correct_answer_string, input_string, process_slashes_bool) {
+    //we want to create a table of divs for each slash option
+    // in each cell of the table row we will put a red-green result
+    //e.g.   star = ASTER/ASTR
+    // if they input ASTOR
+    //we return ASTor   /  ASTor
+    // var number_of_options_to_populate = get_number_of_slash_options(correct_answer_string);
+    var list_of_slash_options_to_process = correct_answer_string.split("/");
+    var number_of_options_to_populate = list_of_slash_options_to_process.length;
+    //we iterate through the list_of_slash_options_to_process
+    // produce a list of red_green_results for each
+    if (process_slashes_bool) {
+        console.log("TRUMP entering process slash block")
+        var red_green_result_list = [];
+        console.log("TRUMP red_green_result_list = ", red_green_result_list);
+        var list_of_slash_options_to_process = correct_answer_string.split("/");
+        console.log("TRUMP list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+        for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
+            console.log("TRUMP list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
+            var type_test = typeof list_of_slash_options_to_process[i];
+            console.log("TRUMP typeOf.list_of_slash_options_to_process[i] = ", type_test);
+            var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
+            red_green_result_list.push(result);
+        }
+        console.log("TRUMP red_green_result_list = ", red_green_result_list);
+        return red_green_result_list;
+        
+    } else {
+        this.submit_string_to_green_and_red(correct_answer_string, input_string);
+    }
+}
+
+
+
 SpellingModeGame.prototype.submit_string_to_green_and_red = function(correct_answer_string, input_string) {
     //we want to turn each character green or red
+    console.log("TRUMP entering submit string");
     var correct_answer_as_list_of_characters = correct_answer_string.split("");
     var input_string_as_list_of_characters = input_string.split("");
-    console.log("SWAMP correct answer list = ", correct_answer_as_list_of_characters);
-    console.log("SWAMP input list = ", input_string_as_list_of_characters);
+    console.log("TRUMP correct answer list = ", correct_answer_as_list_of_characters);
+    console.log("TRUMP input list = ", input_string_as_list_of_characters);
     
     
     var red_green_result = compare_character_list_rightward_red(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
     // var red_green_result = compare_path(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
-    console.log("SWAMP red_green_result = ", red_green_result);
+    console.log("TRUMP red_green_result = ", red_green_result);
     // console.log("SWAMP red_green_result.red_green_list = ", red_green_result.red_green_list);
     return red_green_result;
 };

@@ -420,7 +420,7 @@ Quiz.prototype.next_mode = function (error) {
             return;
         } */
         
-        console.log("DEBUG 11-18-16 this.sick_modes = ", this.sick_modes);
+        // console.log("DEBUG 11-18-16 this.sick_modes = ", this.sick_modes);
         
         console.log("DEBUG 11-18 checkpoint 1");
         
@@ -1483,6 +1483,8 @@ Quiz.prototype.get_reward = function () {
 
 
 Quiz.prototype.increment_score = function() {
+    console.log("TRUMP entered increment_score");
+    console.log("TRUMP entered this.get_reward = ", this.get_reward);
     if (!this.user.is_mf()) {
         this.progress_bar.change_number_correct(
             {'change_value': this.get_reward(),

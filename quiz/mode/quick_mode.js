@@ -31,7 +31,6 @@ QuickModeGame.prototype.attach = function(){
     //end current best result
     
 
-
 };
 
 

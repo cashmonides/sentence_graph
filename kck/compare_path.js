@@ -166,6 +166,7 @@ var compare_character_list_rightward_red_old = function (correct_character_list,
 };
 
 
+//a slightly more sophisticated version with underscore padding added if characters are missing
 //this version iterates across correct_character_list (fixing the bug of words that are too short)
 var compare_character_list_rightward_red = function (correct_character_list, answered_character_list) {
     var results_list = [];
@@ -205,8 +206,7 @@ var compare_character_list_rightward_red = function (correct_character_list, ans
 };
 
 
-//a slightly more sophisticated version with underscore padding added if characters are missing
-var compare_character_list_rightward_red_new = function (correct_character_list, answered_character_list) {
+var compare_character_list_rightward_red_old = function (correct_character_list, answered_character_list) {
     var results_list = [];
     
     for (var i = 0; i < answered_character_list.length; i++) {
@@ -232,3 +232,27 @@ var compare_character_list_rightward_red_new = function (correct_character_list,
         
     // }
 };
+
+
+
+
+//an attempt to add internal padding
+var compare_character_list1 = function (correct_character_list, answered_character_list) {
+    var results_list = [];
+    
+    for (var i = 0; i < answered_character_list.length; i++) {
+        var character_at_index = answered_character_list[i];
+        if (answered_character_list[i] == correct_character_list[i]) {
+            results_list[i] = character_at_index + "green";
+            continue;
+        } else {
+            results_list[i] = character_at_index + "red";
+            
+            
+            
+            return results_list;
+        }
+    }
+    console.log("SWAMP results_list = ", results_list);
+    return results_list;
+}
