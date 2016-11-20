@@ -124,7 +124,6 @@ Quiz.prototype.user_loaded = function() {
     // console.log("DEBUG 11-7 entering user_loaded = ");
     //todo var id will change depending on url parameters (given by profile page)
     var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE) or improving via url paramaters
-    
     // console.log("DEBUG 11-20 user_loaded id = ", id);
     
     this.id = id;
@@ -152,16 +151,9 @@ Quiz.prototype.get_start_module = function() {
     //todo
     //if (improving)
     var ups = get_url_parameters();
-    // console.log("quiz url parameters:", ups);
-    
-    console.log("TRUMP get_start module triggered");
-    console.log("LOG: current module = ", this.user.get_current_module());
     
     if ("mod" in ups){
-        console.log("TRUMP mod in ups triggered");
         var selected_mod = ups["mod"];
-        console.log("LOG: hey selected mod = ", selected_mod);
-        console.log("TRUMP: allowed_module? =", this.is_allowed_module(parseInt(selected_mod, 10)));
         
         // Logically, exactly one of these things must happen,
         // (unless the user is an mf user, which overrides everything else),
@@ -171,18 +163,15 @@ Quiz.prototype.get_start_module = function() {
             // todo add to this later.
             this.advance_improve_status = "mf";
         } else {
+            //parseInt converts an int to string with the radix of ten here
             if (!this.is_allowed_module(parseInt(selected_mod, 10))) {
-                console.log("TRUMP return to profile forced");
                 return_to_profile();
             } else if (selected_mod == this.user.get_current_module()) {
-                // console.log("DEBUG 11-23 clicked mod = current mod");
                 this.advance_improve_status = "advancing";
             } else if (selected_mod == this.user.get_improving_module()) {
-                // console.log("DEBUG 11-23 clicked mod != current mod");
                 this.advance_improve_status = "improving";
             }
         }
-        console.log("TRUMP selected_mod = ", selected_mod);
         return selected_mod;
         /*
         if (selected_mod > this.user.get_current_module()) {
@@ -201,14 +190,10 @@ Quiz.prototype.get_start_module = function() {
         console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         */
     } else if ('path' in ups) {
-        console.log("TRUMP path in ups triggered");
         this.advance_improve_status = "mf";
         return ups;
     } else {
-        console.log("TRUMP else in ups triggered");
-        console.log('DEBUG 1-18 mod not in parameters');
         this.advance_improve_status = "advancing";
-        console.log("DEBUG 11-22 advance/improve status = ", this.advance_improve_status);
         return this.user.get_current_module();
     }
     
@@ -1173,7 +1158,6 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 
 
 Quiz.prototype.submodule_complete = function () {
-    console.log('this.advance_improve_status =', this.advance_improve_status);
     if (this.user.uid !== null) {
         /*
         var accuracy_list = [];
@@ -1181,33 +1165,35 @@ Quiz.prototype.submodule_complete = function () {
             accuracy_list.push(this.accuracy_dictionary[i]);
         }
         */
-        console.log("DEBUG 2-11 entering post #2");
-        console.log("DEBUG 3-4 accuracy dictionary original (raw) = ", this.accuracy_dictionary);
+        console.log("LOG entering post #2");
+        console.log("LOG accuracy dictionary original (raw) = ", this.accuracy_dictionary);
         // console.log("DEBUG 3-26 accuracy dictionary converted 1 (old) = ", this.convert_accuracy_dict());
-        console.log("DEBUG 3-26 accuracy dictionary converted new = ", this.convert_accuracy_dict2());
-        console.log("DEBUG 2-11 this.time_data = ", this.time_data);
+        console.log("LOG accuracy dictionary converted new = ", this.convert_accuracy_dict2());
+        console.log("LOG this.time_data = ", this.time_data);
         post({data: this.time_data_id, type: "update_time_data"});
-        console.log("DEBUG 3-4 just finished update_time_data");
+        console.log("LOG just finished update_time_data");
         
-        console.log("DEBUG 3-26 about to enter update_accuracy_new");
+        console.log("LOG about to enter update_accuracy_new");
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict2(),
         type: "update_accuracy_new"});
-        console.log("DEBUG 3-4 just finished update_accuracy_new");
-        console.log("DEBUG 2-11 exiting post #2");
+        console.log("LOG just finished update_accuracy_new");
+        console.log("LOG exiting post #2");
     } else {
         // The user was anonymous for the first post, so if this second post continued,
         // it would also fail.
-        console.log("DEBUG 3/4/2016AD refusing post #2");
+        console.log("PROBLEM refusing post #2");
     }
     
+    //we check if we are in advance or improving
+    //advance mode returns current module
+    //improving returns improving module
     var mod = this.user.get_module_being_played();
     
     var gotten_module = this.user.get_module(mod);
     
+    
     var submodule_id = gotten_module.progress;
     
-    console.log("DEBUG 11-16 quiz.submodule_complete entered");
-    console.log("DEBUG 12-27 this.user.get_module(mod) = ", gotten_module);
     
     //logging the stop time
     // console.log("DEBUG 12-28 submodule_complete, about to call log_submodule_stop_time");
@@ -1235,10 +1221,10 @@ Quiz.prototype.submodule_complete = function () {
     // console.log("DEBUGGING entering problem lightbox area 11-19");
     
     
-    console.log("DEBUG 5-12 about to make callback - should be null until submodule is complete");
+    console.log("LOG about to make callback - should be null until submodule is complete");
     //callback is null when submodule is not yet complete
     var callback = this.user.submodule_complete(this.module.id);
-    console.log("DEBUG 5-12 callback = ", callback);
+    console.log("LOG callback = ", callback);
     
     var new_callback = debug_via_log(callback, 'callback');
     
@@ -1253,7 +1239,7 @@ Quiz.prototype.submodule_complete = function () {
             new_callback();
             return; // in case this somehow stays in scope.
         } else {
-            console.log("DEBUG 11-16 user.submodule_complete is true");
+            console.log("LOG user.submodule_complete is true");
             // console.log("DEBUG 1-29 this.module before change  = ", this.module);
             //todo might not be necessary so we comment it out
             // this.module = ALL_MODULES[this.user.get_current_module()];
@@ -1270,7 +1256,7 @@ Quiz.prototype.submodule_complete = function () {
     } 
     //else if submodule is not complete
     else {
-        console.log("DEBUG 11-16 user.submodule_complete is false");
+        console.log("LOG user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
         //todo make this less hacky
         this.fill_lightbox("YOUR PROGRESS IS: " + (numerator + 1) + "/" + denominator);
@@ -1282,11 +1268,25 @@ Quiz.prototype.submodule_complete = function () {
     el('next_level_button').onclick = new_callback;
 };
 
-Quiz.prototype.is_allowed_module = function (mod) {
+
+// TRUMP DAMAGE CONTROL
+//todo akiva added this, perhaps ill founded
+//old version below, seemed to perhaps not allow for the following case:
+// user clicks on a completed module and no improving module yet exists
+Quiz.prototype.is_allowed_module_old = function (mod) {
     return mod === this.user.get_improving_module()
     || mod === this.user.get_current_module();
 }
 
+
+// new version below
+Quiz.prototype.is_allowed_module = function (mod) {
+    return mod === this.user.get_improving_module()
+    || mod === this.user.get_current_module()
+    || this.user.get_improving_module() === null;
+}
+
+//END TRUMP DAMAGE CONTROL
 
 
 Quiz.prototype.update_display = function() {

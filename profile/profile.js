@@ -312,11 +312,11 @@ ProfilePage.get_display_caption = function (user, module_id) {
         case "improving" : return {
             tag : "span",
             children : [
+                "current progress: " + user.get_progress(module_id).join("/"),
+                {tag : "br"},
                 "current: " + user.get_current_accuracy(module_id) + "%",
                 {tag : "br"}, 
-                "best previous: " + user.get_previous_max_accuracy(module_id) + "%",
-                {tag : "br"}, 
-                "current progress: " + user.get_progress(module_id).join("/"),
+                "previous best: " + user.get_previous_max_accuracy(module_id) + "%",
                 {tag : "br"}
                 /*"number of times played",
                 {tag : "br"}, 
@@ -337,7 +337,7 @@ ProfilePage.select_improvement_module = function(mod_id){
     
     
     
-    console.log("DEBUG 11-14-16 select_improvement_module triggered");
+    // console.log("DEBUG 11-14-16 select_improvement_module triggered");
     // three cases
     // 1 no improving module at all
         // alert: would you like to improve your accuracy at this level? yes/no
@@ -361,9 +361,6 @@ ProfilePage.select_improvement_module = function(mod_id){
             // -> profile
     var self = this;
     return function () {
-        
-        console.log("DEBUG 11-14-16 subfunction entered");
-        
         var improving_mod = self.user.get_improving_module();
         var frontier_mod = self.user.get_current_module()
         //todo uncomment when done testing
@@ -371,8 +368,6 @@ ProfilePage.select_improvement_module = function(mod_id){
         console.log("LOG clicked_mod", mod_id);
         console.log("LOG improving_mod", improving_mod);
         console.log("LOG frontier_mod", frontier_mod);
-        
-        // console.log("DEBUG 11-20 improving_mod_name", improving_mod_name);
         
         var status;
         if (mod_id > frontier_mod) {
@@ -396,8 +391,6 @@ ProfilePage.select_improvement_module = function(mod_id){
                                 alert("improvement mode is not allowed during testing. Keep advancing for now and you'll get a chance to improve your percentage later.");
                                 return;
                             }
-                            console.log("TRUMP1 improve accuracy entered")
-                            console.log("TRUMP mod_id = ", mod_id);
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
                         } 
@@ -407,8 +400,6 @@ ProfilePage.select_improvement_module = function(mod_id){
                                 alert("improvement mode is not allowed during testing. Keep advancing for now and you'll get a chance to improve your percentage later.");
                                 return;
                             }
-                            console.log("TRUMP2 continue improving accuracy entered")
-                            console.log("TRUMP mod_id = ", mod_id);
                             document.location = "../quiz/?mod=" + mod_id;
                             break;
                         } 

@@ -158,6 +158,12 @@ WALK THROUGH
 kck > inflect_language_indepednent > inflectors
 kck > inflect_language_indepednent > prune_tf_space
 
+CHECK UP ON OLD TODOs
+lib > user.js 
+    //todo since we write to firebase in the wrapping function start_module 
+    // - shouldn't we skip the following line and just persist there?
+    //todo 2-6 akiva's additions, make sure nothing got broken
+
 
 NEEDS
 - security

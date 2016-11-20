@@ -352,7 +352,8 @@ function inflect_english_pronoun(kernel) {
         } else if (kernel.person === "1p") {
             pronoun = "we";
         } else if (kernel.person === "2p") {
-            pronoun = "y'all";
+            pronoun = "you (plural)";
+            // pronoun = "y'all";
         } else if (kernel.person === "3p") {
             pronoun = "they";
         }

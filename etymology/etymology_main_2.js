@@ -217,12 +217,12 @@ available_words, available_roots, number_of_answer_choices) {
             }
     };
     //akiva_damage_control 10-21-16
-    console.log("ETYM.CSV output = ", question_template + clue + JSON.stringify(choices) + correct_answer); 
-    console.log("ETYM.CSV correct_answer = ", correct_answer);
-    console.log("ETYM.CSV choices = ", JSON.stringify(choices));
-    console.log("ETYM.CSV clue = ", clue);
-    console.log("ETYM.CSV question_template = ", question_template); 
-    console.log("ETYM.CSV question_type = ", question_type); 
+    // console.log("ETYM.CSV output = ", question_template + clue + JSON.stringify(choices) + correct_answer); 
+    // console.log("ETYM.CSV correct_answer = ", correct_answer);
+    // console.log("ETYM.CSV choices = ", JSON.stringify(choices));
+    // console.log("ETYM.CSV clue = ", clue);
+    // console.log("ETYM.CSV question_template = ", question_template); 
+    // console.log("ETYM.CSV question_type = ", question_type); 
     return {
         'question_type': question_type,
         'question_template': question_template,
