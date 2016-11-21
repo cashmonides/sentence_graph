@@ -151,15 +151,26 @@ SpellingModeGame.prototype.attach = function(){
     //end current best result
     
     //we want to change the max incorrect streak
-    if (this.quiz.module.submodule.spelling_mode_max_incorrect_streak) {
-        console.log("PROBLEM: no spelling_mode_max_incorrect_streak specified");
-       this.temporary_max_incorrect_streak = this.quiz.module.submodule.spelling_mode_max_incorrect_streak;
-    } else {
-        this.temporary_max_incorrect_streak = this.quiz.module.submodule.max_incorrect_streak;
-    }
-    console.log("TRUMP this.quiz.module.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
-    console.log("TRUMP this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
     
+    this.secret_streak = 0;
+    
+    
+    if (this.quiz.module.submodule.spelling_mode_max_incorrect_streak) {
+        console.log("CLIMATE setting a temporary max incorrect streak");
+        this.temporary_max_incorrect_streak = this.quiz.module.submodule.spelling_mode_max_incorrect_streak;
+        // todo hack short term solution to accuracy metrics not having enough columns
+        this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
+        console.log("CLIMATE this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
+    } else {
+        console.log("PROBLEM: no spelling_mode_max_incorrect_streak specified");
+        console.log("CLIMATE no spelling mode max incorrect streak specified!!!");
+        this.temporary_max_incorrect_streak = this.quiz.module.submodule.max_incorrect_streak;
+        this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
+        console.log("CLIMATE this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
+    }
+    console.log("CLIMATE 5 this.quiz.module.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
+    console.log("CLIMATE this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
+    console.log("CLIMATE this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
 };
 
 SpellingModeGame.prototype.set_level = function (new_level) {
@@ -504,12 +515,95 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
         console.log("swamp 11-8 if not triggered");
     }
     
-    console.log("TRUMP this....submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak)
-    console.log("TRUMP this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
+    console.log("CLIMATE 7 this....submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
+    console.log("CLIMATE this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
     //old version worked but didn't reset incorrect streak
     // if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
     //attempt at new version resetting incorrect streak for spelling mode only
-    if (this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak) {
+    
+    ///////BEGIN HACKY CLIMATE INTERVENTION
+    console.log("CLIMATE entering hacky intervention");
+    console.log("CLIMATE before change this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    console.log("CLIMATE 8 before change this.quiz.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
+    console.log("CLIMATE before change this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
+    console.log("CLIMATE before change this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
+    
+    
+    if (this.secret_streak >= this.temporary_max_incorrect_streak) {
+        this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
+    } else {
+        if (this.quiz.submodule.incorrect_streak >= this.dummy_limit_to_streak) {
+            this.secret_streak++;
+            this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak - 1;
+            console.log("FLOOD TRIGGER1 above usual max but under secret max, so resetting to usual max - 1");
+            console.log("FLOOD RESET this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+        }
+    }
+        
+    
+    
+    
+    // if (this.quiz.submodule.incorrect_streak >= this.dummy_limit_to_streak) {
+    //         if (this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak){
+    //             //reset to dummy limit -1, to allow for continued play
+    //             this.secret_streak++;
+    //             this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak - 1;
+    //             console.log("FLOOD TRIGGER1 above usual max but under secret max, so resetting to usual max - 1");
+    //             console.log("FLOOD RESET this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    //         } else {
+    //             this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
+    //             console.log("FLOOD TRIGGER2 secret max triggered, so setting to usual max");
+    //             console.log("FLOOD RESET this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    //         }
+    //         } else {
+    //             console.log("FLOOD NO TRIGGER")
+    //         };
+    // }
+    
+    
+    // some problem in here
+    // if (this.quiz.submodule.incorrect_streak >= this.dummy_limit_to_streak && 
+    //         this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak) {
+    //     //reset to dummy limit -1, to allow for continued play
+    //     this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak - 1;
+    //     console.log("FLOOD above usual max but under secret max, so resetting to usual max - 1");
+    //     console.log("FLOOD RESET this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    // } else if (this.quiz.submodule.incorrect_streak >= this.temporary_max_incorrect_streak) {
+    //     //set to dummy limit, trigger end of play
+    //     console.log("FLOOD secret max triggered, so setting to usual max");
+    //     console.log("FLOOD this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    //     this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
+    // } else {
+    //     console.log("CLIMATE SICK not obeying math");
+    // }
+    
+    //// probably a mistake lurking here
+    // if (this.quiz.submodule.incorrect_streak >= this.dummy_limit_to_streak) {
+    //     if (this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak) {
+    //         //we set it to just beneath the triggering number, so we can continue playing
+    //         this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak - 1;
+    //         console.log("FLOOD above usual max but under secret max, so setting to usual max - 1");
+    //         console.log("FLOOD this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    //     } else if (this.quiz.submodule.incorrect_streak >= this.temporary_max_incorrect_streak) {
+    //         //we've hit our secret limit so we now want to trick the program into giving away answer
+    //         this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
+    //         console.log("FLOOD secret max triggered, so setting to usual max");
+    //         console.log("FLOOD this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    //     }
+        
+    // }
+    // if (this.quiz.submodule.incorrect_streak >= this.temporary_max_incorrect_streak) {
+    //     //we've hit our secret limit so we now want to trick the program into giving away answer
+    //     this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
+    //     console.log("FLOOD secret max triggered, so setting to usual max");
+    //     console.log("FLOOD this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    // }
+    console.log("CLIMATE this.quiz.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
+    console.log("CLIMATE after change this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    console.log("CLIMATE leaving hacky intervention");
+    
+    if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
+        console.log("CLIMATE less than triggered");
         var cell_2;
         cell_2 = "";
     
@@ -518,12 +612,38 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
     } else {
+        console.log("CLIMATE else triggered");
         this.give_away_answer();
         //refresh_score();
     }
     this.quiz.update_display();
     // Etymology has no word selector
     // this.quiz.word_selector.clear();
+    
+    
+    
+    ///END HACKY CLIMATE INTERVENTION
+    
+    
+    
+    
+    
+    //the better version is here, to be implemented when accuracy dictionary is improved
+    // if (this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak) {
+    //     var cell_2;
+    //     cell_2 = "";
+    
+    //     var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_wrong);
+    //     var cell_3 = random_choice(SpellingModeGame.cell_3_feedback_wrong);
+    //     var fbox = el("feedbackbox");
+    //     fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
+    // } else {
+    //     this.give_away_answer();
+    //     //refresh_score();
+    // }
+    // this.quiz.update_display();
+    // // Etymology has no word selector
+    // // this.quiz.word_selector.clear();
 };
 
 
