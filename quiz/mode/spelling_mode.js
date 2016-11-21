@@ -120,6 +120,9 @@ ISSUE 3 - what does etym level look like
 
 */
 
+// autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" supposedly turns spellcheck off
+// maybe we want to be selective and do this, but presumably only in SpellingModeGame
+
 
 var SpellingModeGame = function(){
     this.data = null;
@@ -256,9 +259,7 @@ SpellingModeGame.prototype.next_question = function(){
 };
 
 
-//todo change to input mode
 
-//begin insertion of input mode
 
 SpellingModeGame.prototype.process_answer = function(){
     var self = this;
@@ -316,7 +317,7 @@ SpellingModeGame.prototype.process_answer = function(){
     }
 };
 
-//end insertion of input mode
+
 
 //old process_answer
 // SpellingModeGame.prototype.process_answer = function() {
@@ -340,7 +341,7 @@ SpellingModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
 SpellingModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
 SpellingModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
-
+/*
 SpellingModeGame.prototype.display_red_green_result_old_with_add_class = function (list) {
     
     //pseudo-code
@@ -384,26 +385,40 @@ SpellingModeGame.prototype.display_red_green_result_old_with_add_class = functio
     var fbox = el("feedbackbox");
     fbox.innerHTML = "Almost! Try again." + red_green_string;
 }
-
-
+*/
 
 SpellingModeGame.prototype.display_red_green_result = function (list) {
+    var parent_el = document.createElement('div');
+    var e;
+    for (var i = 0; i < list.length; i++) {
+        e = document.createElement('font');
+        e.style.color = list[i][1];
+        e.innerHTML = list[i][0];
+        parent_el.appendChild(e);
+    }
+    var fbox = el("image_display_box");
+    fbox.appendChild(parent_el);
+    return parent_el;
+}
+
+
+/*SpellingModeGame.prototype.display_red_green_result = function (list) {
     
     //pseudo-code
     //iterate through list
     //if list[1] = red
     //wrap in span or set style or something that will establish its color
     //push to red_green_string which will be our final displayed string
-    var red_green_list = [];
+    // var red_green_list = [];
     
-    console.log("SWAMP checkpoint 6.2 red_green_list pre-push = ", red_green_list);
-    
+    // console.log("SWAMP checkpoint 6.2 red_green_list pre-push = ", red_green_list);
+    // var colored_character_list = [];
+    // var colored_string;
     
     var parent_el = document.createElement('div');
+    // var container_div = document.createElement('div');
+    
     var e;
-    var colored_character_list = [];
-    var colored_string;
-    var container_div = document.createElement('div');
     for (var i = 0; i < list.length; i++) {
         // if (i !== 0) {
         //     //we need to create something that's not a div but rather a bit of text
@@ -415,27 +430,30 @@ SpellingModeGame.prototype.display_red_green_result = function (list) {
         //     parent_el.appendChild(e);
         // }
         e = document.createElement('font');
-        console.log("SWAMP 6.81 color = ", list[i][1]);
         e.style.color = list[i][1];
-        console.log("SWAMP 6.81 text = ", list[i][0]);
         e.innerHTML = list[i][0];
-        console.log("SWAMP 6.81 e = ", e);
-        container_div.appendChild(e);
+        parent_el.appendChild(e);
+        // console.log("SWAMP 6.81 color = ", list[i][1]);
+        // e.style.color = list[i][1];
+        // console.log("SWAMP 6.81 text = ", list[i][0]);
+        // e.innerHTML = list[i][0];
+        // console.log("SWAMP 6.81 e = ", e);
+        // container_div.appendChild(e);
         // parent_el.appendChild(container_div);
     }
-    
-    console.log("SWAMP 6.9 checkpoint out of for loop")
-    console.log("SWAMP 6.91 colored_character_list = ", colored_character_list);
-    
-    parent_el.appendChild(container_div);
-    
-    
-    console.log("SWAMP 6.92 checkpoint about to append to feedback box");
     var fbox = el("image_display_box");
     fbox.appendChild(parent_el);
-    
-    console.log("SWAMP 6.91 parent_el = ", parent_el);
     return parent_el;
+    
+    // parent_el.appendChild(container_div);
+    // console.log("SWAMP 6.9 checkpoint out of for loop")
+    // console.log("SWAMP 6.91 colored_character_list = ", colored_character_list);
+    
+    
+    // console.log("SWAMP 6.92 checkpoint about to append to feedback box");
+    
+    // console.log("SWAMP 6.91 parent_el = ", parent_el);
+    // return parent_el;
     
     
     // console.log("SWAMP red_green_list after push = ", red_green_list);
@@ -446,7 +464,7 @@ SpellingModeGame.prototype.display_red_green_result = function (list) {
     
     // var fbox = el("feedbackbox");
     // fbox.innerHTML = "Almost! Try again." + red_green_string;
-}
+}*/
 
 
 
@@ -545,16 +563,24 @@ SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(corr
 
 
 
-SpellingModeGame.prototype.submit_string_to_green_and_red = function(correct_answer_string, input_string) {
+SpellingModeGame.prototype.submit_string_to_green_and_red = function (correct_answer_string, input_string) {
     //we want to turn each character green or red
-    console.log("TRUMP entering submit string");
+    /*console.log("TRUMP entering submit string");
     var correct_answer_as_list_of_characters = correct_answer_string.split("");
     var input_string_as_list_of_characters = input_string.split("");
     console.log("TRUMP correct answer list = ", correct_answer_as_list_of_characters);
-    console.log("TRUMP input list = ", input_string_as_list_of_characters);
+    console.log("TRUMP input list = ", input_string_as_list_of_characters);*/
     
     
-    var red_green_result = compare_character_list_rightward_red(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
+    var levenshtein_result = levenshtein(correct_answer_string, input_string)
+    var red_green_result;
+    if ('feedback' in levenshtein_result) {
+        red_green_result = levenshtein_result.feedback;
+    } else {
+        red_green_result = levenshtein_result.error.split('').map(function (x) {
+            return [x, 'yellow'];
+        });
+    }
     // var red_green_result = compare_path(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
     console.log("TRUMP red_green_result = ", red_green_result);
     // console.log("SWAMP red_green_result.red_green_list = ", red_green_result.red_green_list);

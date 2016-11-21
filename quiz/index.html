@@ -107,6 +107,8 @@
     
     <script src="quiz.js"></script> 
     
+    <!--distance-->
+    <script src="../algorithms/levenshtein.js"></script>
     
     <!-- new scripts -->
     <script src="../kck/testing_kernel_library.js"></script>
@@ -290,7 +292,7 @@
             </div>
             <div id = "pre_footer">
                 <div id="input_box_wrapper">
-                    <input type="text" id="input_box" size="99">
+                    <input type="text" id="input_box" size="99"  onkeydown="if (event.keyCode == 13) { quiz.process_answer()}">
                 </div> 
                 <div id="feedback_for_input"></div>
             </div>

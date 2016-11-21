@@ -61,6 +61,7 @@ InputModeGame.prototype.attach = function(){
     set_display("etym_cheat_button", 'none');
     set_display("input_box", 'initial');
     set_display("next_button", 'none');
+    set_display("skip_button", 'none');
     set_display("next_level_button", 'none');
     // set_display("feedback_for_input", 'none');
     //current best result for clearing morphology
@@ -184,7 +185,103 @@ InputModeGame.prototype.next_question = function () {
 
 //todo below is our string cleanup and matcher
 
+
 InputModeGame.prototype.process_answer = function(){
+    var self = this;
+    var raw_input_string = el("input_box").value;
+    console.log("DEBUG SPELLING raw input string = ", raw_input_string);
+
+    
+
+    var processed_input_string = clean_input_string(raw_input_string);
+    console.log("DEBUG SPELLING process input string = ", processed_input_string);
+    
+    
+    
+
+    //todo we need the correct english answer - should be stored as a variable somewhere in this.next_question
+    var correct_english_translation;
+    
+    //it might already be stored as this.correct_answer, in which case, we just do this
+    correct_english_translation = clean_input_string(this.correct_answer);
+    
+    
+    //todo for now we're going to just send this function a string
+    //later we'll need to do the necessary stripping of punctuation
+
+    console.log("TRUMP raw_input_string = ", raw_input_string);
+    
+    console.log("TRUMP this.correct_answer = ", this.correct_answer);
+    
+    var comparison_result = this.submit_string_to_green_and_red(this.correct_answer, raw_input_string);
+    
+    
+    
+    console.log("TRUMP comparison_result = ", comparison_result);
+    this.comparison_result = comparison_result;
+    
+    
+    console.log("SWAMP checkpoint 6 entering display_red_green-result");
+    console.log("SWAMP checkpoint 6.1 input to argument = ", comparison_result);
+    
+    this.display_red_green_result(comparison_result);
+    console.log("SWAMP checkpoint 6.9999999 leaving display_red_green-result");
+    
+    if (object_equals(processed_input_string, correct_english_translation)) {
+        this.process_correct_answer();
+    } else {
+        console.log("swamp checkpoint 1 about to call process_incorrect_answer");
+        this.process_incorrect_answer();
+    }
+};
+
+//need to bring over
+// this.submit_string_to_green_and_red
+// this.display_red_green_result
+
+InputModeGame.prototype.submit_string_to_green_and_red = function (correct_answer_string, input_string) {
+    //we want to turn each character green or red
+    /*console.log("TRUMP entering submit string");
+    var correct_answer_as_list_of_characters = correct_answer_string.split("");
+    var input_string_as_list_of_characters = input_string.split("");
+    console.log("TRUMP correct answer list = ", correct_answer_as_list_of_characters);
+    console.log("TRUMP input list = ", input_string_as_list_of_characters);*/
+    
+    console.log("TRUMP1 correct_answer_string = ", correct_answer_string);
+    console.log("TRUMP1 input_answer_string = ", input_string);
+    
+    var levenshtein_result = levenshtein(correct_answer_string, input_string)
+    var red_green_result;
+    if ('feedback' in levenshtein_result) {
+        red_green_result = levenshtein_result.feedback;
+    } else {
+        red_green_result = levenshtein_result.error.split('').map(function (x) {
+            return [x, 'yellow'];
+        });
+    }
+    // var red_green_result = compare_path(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
+    console.log("TRUMP red_green_result = ", red_green_result);
+    // console.log("SWAMP red_green_result.red_green_list = ", red_green_result.red_green_list);
+    return red_green_result;
+};
+
+
+InputModeGame.prototype.display_red_green_result = function (list) {
+    var parent_el = document.createElement('div');
+    var e;
+    for (var i = 0; i < list.length; i++) {
+        e = document.createElement('font');
+        e.style.color = list[i][1];
+        e.innerHTML = list[i][0];
+        parent_el.appendChild(e);
+    }
+    var fbox = el("image_display_box");
+    fbox.appendChild(parent_el);
+    return parent_el;
+}
+
+// more primitive version with no red-green functionality
+InputModeGame.prototype.process_answer_old = function(){
     var self = this;
     var raw_input_string = el("input_box").value;
     console.log("DEBUG INPUT 4-9 raw input string = ", raw_input_string);

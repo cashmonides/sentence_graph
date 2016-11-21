@@ -4,10 +4,13 @@
 - the goal is that all info is essentially encapsulated in data dictionaries
 - the functions themselves are mostly uniform and relatively agnostic towards language-specific data
 - i.e. they just traverse dictionaries or filter or make random choices
-- there seems to be three basic functions
+- there seems to be four basic functions
     - TRAVERSAL 
+        (get everything that matches a key)
     - FILTER
+        (exclude everything that doesn't match a value)
     - RANDOM CHOICE
+    - BUNDLE/MERGE
     
 - TRAVERSAL takes a list of arguments, traverses the dictionary and returns terminal strings that match the arguments
     (e.g. we input [present-indicative-active , imperfect-indicative-active] & we want translation formula
@@ -22,9 +25,7 @@
         for final output)
     (basically is just traversal with only one output not a list)
         
-- traversal would be used for things like:
-    - getting translation formula
-    - 
+
 
 
 - there is a lot of bundling of information as it progresses
@@ -38,6 +39,8 @@
 
 //DETERMINE ORDER OF DICTIONARIES THAT WE CONSULT
 //now it's a map for easy organization, but eventually will become a list probably
+
+//TYPE: iterate
 var order_of_maps_to_apply = {
     '1': 'conjunction_to_regime_tense_mood', 
     '2': 'tense_mood_to_sequence_map'
@@ -63,6 +66,13 @@ var kck_maps_to_apply = {
 
 // GET ALL REGIME-TENSE-MOOD COMBOS
 // get_allowed_rtm([conjunction], direction) -> [regime-tense-mood]
+
+//TYPE =  traversal
+// to reduce computational cost
+// (p)s(e)udo-code
+// conjunction to regime
+// regime to tense-mood list
+
 
 var conjunction_to_regime_tense_mood = {
     c_null: {
@@ -224,6 +234,11 @@ var conjunction_to_regime_tense_mood = {
 // filter_sequences([regime-tense-mood], [allowed_sequences]) --> [regime-tense-mood]
 //the below version is verbose but it ties together regime-tense-mood
 //probably could be simplified but at the cost of a loss of consistency
+
+//TYPE = filtration
+// argument 1: list of regime-tense-mood
+// argument 2: list of allowed sequences
+// return: list of regime-tense-mood
 var regime_tense_mood_to_sequence_map = {
 	//indicatives & imperative
 	'absolute present indicative': 'primary',
@@ -302,9 +317,12 @@ var regime_tense_mood_to_sequence_map = {
 
 
 
-// MERGE RTM WITH ALLOWED VOICES TO PRODUCE RTMV
-// we get from the module a list of allowed_tense_mood_voices
-// flter_by_rtmv([regime-tense-mood], [allowed tense_mood_voices]) --> [regime-tense-mood-voice]
+
+// 
+// BUNDLE-FILTER RTMV
+// different kind of filtration: if you're in list 1 and list 2 you get to go into the returned list
+//return list of allwed rtmv
+// flter_by_rtmv([regime-tense-mood], [allowed-regime-tense_mood_voices]) --> [regime-tense-mood-voice]
 
 //no set dictionary for this - more like a set function
 // but it would look something like this
@@ -318,7 +336,7 @@ var regime_tense_mood_to_sequence_map = {
 
 
 
-// MERGE RTMV WITH ALLOWED PERSON_NUMBERs TO PRODUCE [[RTMV], [PN]]
+// BUNDLE RTMV WITH ALLOWED PERSON_NUMBERs TO PRODUCE [[RTMV], [PN]]
 // from module we get list of allowed person_number
 // add_person_number([regime-tense-mood-voice], [allowed person_numbers) --> [[regime-tense-mood-voice], [person_number]]
 //straight read off the module, meld it into a list of lists
@@ -327,25 +345,8 @@ var regime_tense_mood_to_sequence_map = {
 
 
 
-/////////SELECT THE ACTUAL CHOSEN FORM
 
-// SELECT CHOSEN LEXEMES
-// pick_chosen_lexeme(chosen_conjunction, direction) --> lexeme
-
-// SELECT CHOSEN SEQUENCE
-// filter_by_chosen_sequence(chosen_sequence, [regime-tense-mood-voice])
-//     --> [regime-tense-mood-voice]
-
-
-// SELECT CHOSEN RTMV PN
-// pick_chosen_properties(chosen_conjunction, [[regime-tense-mood-voice], [person_number]])
-//     --> [rtmv, pn]
-    
-// SELECT CHOSEN TRANSLATION FORMULA
-// pick_translation_formula([rtmv, pn], language, level, additional info) --> translation_formula (str)
-
-
-var regime_tense_mood_to_translation_formula = {
+var regime_tense_mood_voice_to_translation_formula = {
     'english': {
         'absolute': {
             'present indicative active': 'verb',
@@ -456,12 +457,58 @@ var person_number_to_english_irregularity = {
 	}
 };
 
+// GET ENGLISH ROOT
+
+// END CARTESIAN
 
 //
+///////// SELECT THE ACTUAL CHOSEN FORM//////////////
+
+// SELECT RANDOM CONJUNCTION
+
+// GET LEXICAL RESTRICTIONS
+// from conjunction
+// add it to some restrictions list or object
+// e.g. we want to add verb of commanding left
+// we send direction and 'verb of commanding' to the backstage interpreter
+// it provides a function with those arguments and it consults the property
+
+// details on restriction object
+// 'in allowed_sequences' -> backstage json object interpreter turns this into function (x) {return x in sequences}
+// 'transitive?' -> backstage json object interpreter turns this into function (x) {return x.transitivity = transitive}
+
+// SELECT CHOSEN SEQUENCE
+// filter_by_chosen_sequence(chosen_sequence, [regime-tense-mood-voice])
+//     --> [regime-tense-mood-voice]
+
+// ENTANGLE SEQUENCE IN BOTH LEFT AND RIGHT KERNEL
+
+
+// SELECT CHOSEN RTMV PN
+// pick_chosen_properties(chosen_conjunction, [[regime-tense-mood-voice], [person_number]])
+//     --> [rtmv, pn]
+    
+// SELECT CHOSEN TRANSLATION FORMULA
+// pick_translation_formula([rtmv, pn], language, level, additional info) --> translation_formula (str)
+
+// SEND TRANSLATION FORMULA TO ENGLISH CLEAN UP
+// was vs were
+// ate vs eated
+
+// GET LEXICAL RESTRICTIONS
+// from RTMV PN
+// add it to some restrictions list or object
+
+
+// SELECT CHOSEN LEXEMES
+// (filter + select)
+// pick_chosen_lexeme(chosen_conjunction, direction) --> lexeme
 
 
 // PICK DUMMY LEXEMES
 // pick_dummy_lexemes()  --> [lexemes]
+// important: dummy lexemes do not need to meet lexical restrictions
+//  except must be different from chosen lexeme
 
 // MERGE LEXEMES
 // merge_lexemes([lexemes], chosen_lexeme) --> [lexemes]
@@ -471,18 +518,65 @@ var person_number_to_english_irregularity = {
 
 //BUNDLE AND ORGANIZE METATALK (tense names, person_number_names, etc.) FOR DROP DOWN PATH
 //get list of metatalk categories from module.drop_down_path
+// 
 //(we want to make sure that if relative time is in the drop down path, 
 // then we don't trigger except where it is relevant and non-confusing
 // namely indirect question, indirect statement and the like)
 // (so if we don't have any indirect statements or indirect questions, we should kill off relative time from the drop-down path)
 // something like consult a list of constructions where relative time is triggered
-// filter_categories_from_drop_down_path(conjunction, [drop_down_path_categories) --> [drop_down_path_categories]
+// filter_categories_from_drop_down_path(conjunction, [drop_down_path_categories]) --> [drop_down_path_categories]
 
 
 //here's a list, might be worth just setting it up as a property in the conjunction library
 var conjunctions_which_trigger_relative_time = ['c_why', 'c_that_indirect_statement'];
 
 
+// so we have a big list of translation formulae
+// and we want to turn it into a nested map of maps
+// 
+// before we do anything we need to drop some drop down categories nonsensical/confusing
+
+// argument 1: list of dropdown options (e.g. he loved, he will love, he loves)
+
+// argument 2: list of categories/aka drop down path (e.g. lexeme, voice, person_number)
+
+// we need a way of sorting items that appear in a single drop-down block (e.g. 1s, 2s, 3s not just random)
+// and we want to be able to control it block by block
+// argument 3: list of categories that control order within block (e.g. tense, person)
+
+// additional arguments:
+    // alphabetical order of lexemes?
+    // process_final_string
+
+
+// (1)
+// present
+//    3s
+//        he loves
+//    3p
+//        they love
+// past
+// future
+
+// (2)
+// present
+//     he loves
+//     they love
+// past
+// future
+
+// (3)
+// he loves
+// they love
+// he loved
+// ...
+
+// (4)
+// he loves
+// he loved
+// he will love
+// ...
+// ...
 
 
 

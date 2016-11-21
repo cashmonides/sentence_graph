@@ -181,7 +181,7 @@ var compare_character_list_rightward_red = function (correct_character_list, ans
     }
     
     for (var i = 0; i < correct_character_list.length; i++) {
-        if (answered_character_list[i] == correct_character_list[i]) {
+        if (answered_character_list[i] === correct_character_list[i]) {
             var character_to_push = answered_character_list[i];
             // results_list[i] = character_to_push + "green";
             continue;
