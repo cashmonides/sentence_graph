@@ -1077,7 +1077,38 @@ Quiz.prototype.question_complete = function (button_name) {
 };
 
 
+// below is a super hacky short term solution to the more than 3 attempts problem (see)
+// converts incorrect_streak 2-3 to 2 and incorrect_streak 8 to 3
+// the problem is our accuracy_metrics table only goes up to attempt 0-3
+// so when we post spelling mode (which will allow a bunch of attempts, 8 or more)
+// we will end up sending data the table can't understand
+Quiz.prototype.regularize_accuracy_dictionary_input = function (accuracy_dictionary) {
+    //pseudo-code
+    //iterate through keys
+    //if key = 3-7
+    //sum the value to key 2
+    // if key = 8
+    // sum the value to key 3
+    // e.g.   0: 1, 2: 1, 3: 5, 4: 6, 5: 1, 6: 0, 7: 1, 8: 9
+    // we sum all the values in 3: 5, 4: 6, 5: 1, 6: 0, 7: 1,
+    // sum = 5 + 6 + 1 + 0 + 1 = 13
+    // we add that sum to the original value for 2 (originally 2: 1)
+    // 2 is now 2:14
+    // moving on the 8th item (8: 9)
+    // we add that value to original value for 3 (originally 3: 5)
+    // 3 is now 3: 14
+};
+
 Quiz.prototype.update_accuracy = function () {
+    //todo super hacky short-term intervention for spelling mode, converts all incorrect_streak greater than 3 to 3
+    
+    console.log("BREITBART this.submodule.incorrect_streak pre-processing = ", this.submodule.incorrect_streak);
+    
+    
+    this.submodule.incorrect_streak = this.regularize_accuracy_dictionary_input(this.submodule.incorrect_streak);
+    
+    console.log("BREITBART this.submodule.incorrect_streak pre-processing = ", this.submodule.incorrect_streak);
+    
     
     //todo merge - below is a hacky way to stop bugs in week 1-2 of institute
     if (!this.user.is_mf()) {

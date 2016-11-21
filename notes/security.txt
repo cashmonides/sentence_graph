@@ -3,7 +3,7 @@ two problems with (possibly) one solution
 - problem 1: 
     - back button on browser or history can lead malicious user to another person's profile page
     - we don't really care if the malicious user sees the person's page
-    - but it would be a disaster if they were able to persist data to their account
+    - but it would be bad if they were able to persist data to their account
 - problem 2: 
     - a user logs in at computer A at home, never logs out, is on level 1
     - user goes to computer B at home, logs in, beats level 1 and 2

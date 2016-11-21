@@ -1,0 +1,20 @@
+
+
+probably modelled on the accuracy dictionary    
+    accuracy dictionary posts a mode ('spelling') with an accuracy dictionary
+    
+
+
+
+we want to post the word + the accuracy dictionary
+(ideally we would post the question type (stored as integ or string root_def_to_root)
+
+
+
+
+
+
+
+
+
+
