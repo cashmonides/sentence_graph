@@ -39,16 +39,137 @@ var global_hack_properties_from_morphology_level = ['present indicative active',
 
 var global_hack_input_dictionary = {};
 
+var global_hack_color_div_text = function (div, color) {
+    var e = el(div);
+    e.style.backgroundColor = color;
+};
+
+
+//this doesn't seem to work for mysterious reasons
+var register_cell_fill = function (cell) {
+    console.log("MORMON REGISTER");
+    if (cell == 'beginning') {
+        this.beginning_element_submitted = true;
+    } else if (cell == 'middle') {
+        this.middle_element_submitted = true;
+    } else if (cell == 'ending') {
+        this.ending_element_submitted = true;
+    }
+}
+
+
+//sometimes we know we want to display roots (e.g. root_2 & root_3)
+// but we want the actual lexical roots (e.g. am-, amav-, tim-, timu-)
+// this function will take a list of roots and a lexeme list
+// and return a list of items to populate morphological buttons
+var convert_root_items_to_actual_forms = function (root_list, lexeme_list, lexeme_list_as_objects, language) {
+    console.log("ECCE 3 lexeme_list_as_objects = ", lexeme_list_as_objects);
+    var dictionary_to_consult;
+    if (language == 'latin') {
+        dictionary_to_consult = testing_lexemes;
+    }
+    console.log("ROOT LOOP dictionary_to_consult = ", dictionary_to_consult);
+    
+    
+    //version with strings
+    /*
+    var dictionary_to_consult;
+    if (language == 'latin') {
+        dictionary_to_consult = testing_lexemes.verb;
+    }
+    console.log("ROOT LOOP dictionary_to_consult = ", dictionary_to_consult);
+    
+    var list_of_lexical_roots = [];
+    for (i=0; i<root_list.length; i++) {
+        for (j=0; j<lexeme_list.length; j++) {
+            var root_to_find = root_list[i];
+            console.log("ROOT LOOP root_to_find = ", root_to_find);
+            var lexeme_to_consult = lexeme_list[j];
+            console.log("ROOT LOOP lexeme_to_consult = ", lexeme_to_consult); 
+            var lexeme_in_lexicon = testing_lexemes.verb[lexeme_to_consult];
+            console.log("ROOT LOOP testing_lexemes.verb[lexeme_to_consult] = ", lexeme_in_lexicon);
+            var latin_properties = lexeme_in_lexicon.latin;
+            console.log("ROOT LOOP latin_properties = ", latin_properties);
+            var roots = latin_properties.roots;
+            console.log("ROOT LOOP roots = ", roots);
+            var root_output = roots[root_to_find];
+            console.log("ROOT LOOP root_output = ", root_output);
+            list_of_lexical_roots.push(root_output);
+        }
+    }
+    console.log("ROOT LOOP list_of_lexical_roots =", list_of_lexical_roots);
+    return list_of_lexical_roots;
+    */
+    
+    //version with objects
+    var list_of_lexical_roots = [];
+    for (i=0; i<root_list.length; i++) {
+        for (j=0; j<lexeme_list_as_objects.length; j++) {
+            var root_to_find = root_list[i];
+            console.log("ROOT LOOP root_to_find = ", root_to_find);
+            var lexeme_to_consult = lexeme_list_as_objects[j];
+            console.log("ROOT LOOP lexeme_to_consult = ", lexeme_to_consult); 
+            
+            //below should be otiose
+            // var lexeme_in_lexicon = testing_lexemes.verb[lexeme_to_consult];
+            // console.log("ROOT LOOP testing_lexemes.verb[lexeme_to_consult] = ", lexeme_in_lexicon);
+            
+            
+            var lexeme_in_lexicon = lexeme_to_consult;
+            var latin_properties = lexeme_in_lexicon.latin;
+            console.log("ROOT LOOP latin_properties = ", latin_properties);
+            var roots = latin_properties.roots;
+            console.log("ROOT LOOP roots = ", roots);
+            var root_output = roots[root_to_find];
+            console.log("ROOT LOOP root_output = ", root_output);
+            list_of_lexical_roots.push(root_output);
+        }
+    }
+    console.log("ROOT LOOP list_of_lexical_roots =", list_of_lexical_roots);
+    return list_of_lexical_roots;
+    
+}
+
+
+
+var global_hack_clear_morphology_cell_colors = function () {
+    
+    console.log("MORMON HEY HEY");
+    
+    // var e1 = el('morphology_cell_answer_beginning');
+    // e1.style.backgroundColor='navajowhite';
+    // console.log("MORMON 1 e1.style.backgroundColor = ", e1.style.backgroundColor);
+    
+    // var e2 = el('morphology_cell_answer_middle');
+    // e2.style.backgroundColor='navajowhite';
+    // console.log("MORMON 1 e2.style.backgroundColor = ", e2.style.backgroundColor);
+    
+    // var e3 = el('morphology_cell_answer_ending');
+    // e3.style.backgroundColor='navajowhite';
+    // console.log("MORMON 1 e3.style.backgroundColor = ", e3.style.backgroundColor);
+};
+
+
 var MorphologyModeGame = function () {
     this.data = null;
     this.quiz = null;
     // todo we here assume that 1 is the initial level
     this.level = 1;
+    
+    this.beginning_element_submitted = null;
+    this.middle_element_submitted = null;
+    this.ending_element_submitted = null;
 };
 
 MorphologyModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
 MorphologyModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
 MorphologyModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
+
+
+
+
+
+
 
 MorphologyModeGame.prototype.attach = function () {
     set_display("latin_answer_choices", 'none');
@@ -90,6 +211,45 @@ MorphologyModeGame.prototype.get_mode_name = function() {
 MorphologyModeGame.prototype.next_question = function () {
     console.log("DEBUG MORPHOLOGY next_question entered");
 
+    //AKIVA damage control 11-20-16
+    // global_hack_clear_morphology_cell_colors();
+    
+    // var f1 = el('morphology_cell_answer_beginning');
+    // f1.style.backgroundColor = 'navajo white';
+    
+    // var f2 = el('morphology_cell_answer_middle');
+    // f2.style.backgroundColor = 'navajo white';
+    
+    // var f3 = el('morphology_cell_answer_ending');
+    // f3.style.backgroundColor = 'navajo white';
+    
+    
+    //morphology cells do not seem to be cleared after submit????!!!
+    var e1 = el('morphology_cell_answer_beginning');
+    e1.innerHTML = '_____';
+    e1.style.backgroundColor = 'navajowhite';
+    // global_hack_color_div_text(e1, 'navajo white');
+    var e2 = el('morphology_cell_answer_middle');
+    e2.innerHTML = '_____';
+    e2.style.backgroundColor = 'navajowhite';
+    // global_hack_color_div_text(e2, 'navajo white');
+    var e3 = el('morphology_cell_answer_ending');
+    e3.innerHTML = '_____';
+    e3.style.backgroundColor = 'navajowhite';
+    // global_hack_color_div_text(e3, 'navajo white');
+    
+    
+    this.beginning_element_submitted = false;
+    this.middle_element_submitted = false;
+    this.ending_element_submitted = false;
+    
+    console.log("MORMON BEAST this.beginning_element_submitted = ", this.beginning_element_submitted);
+    console.log("MORMON BEAST this.middle_element_submitted = ", this.middle_element_submitted);
+    console.log("MORMON BEAST this.ending_element_submitted = ", this.ending_element_submitted);
+    
+    
+    //end AKIVA damage control
+    
     //todo very important
     //is this the right place to clear the feedback box?
     // var o = el('feedbackbox');
@@ -97,7 +257,6 @@ MorphologyModeGame.prototype.next_question = function () {
 
     this.clear_buttons();
     
-    this.clear_morphology_answer_cells();
     
     //todo we probably won't need drop or extra level
     // but latin_extra_level is hard-wired into kck's generate sentence
@@ -341,6 +500,7 @@ MorphologyModeGame.prototype.get_morphological_elements_from_level = function (p
         morphology_dictionary_to_traverse = 'latin verb morphology ending';
     }
     
+    
     return morphology_dictionary_traverser_main([morphology_dictionary_to_traverse, global_hack_properties_from_morphology_level]);
 }
 
@@ -460,15 +620,47 @@ var submit_morphological_element_to_input_dictionary = function (morphological_e
     
     if (cell_destination == 'beginning') {
         global_hack_input_dictionary.beginning = morphological_element;
+        console.log("MORMON TOGGLE BEGINNING");
+        // this.beginning_element_submitted = true;
+        // this.register_cell_fill('beginning');
+        register_cell_fill('beginning');
     } else if (cell_destination == 'middle') {
         global_hack_input_dictionary.middle = morphological_element;
+        console.log("MORMON TOGGLE MIDDLE");
+        // this.middle_element_submitted = true;
+        // this.register_cell_fill('middle');
+        register_cell_fill('middle');
     } else if (cell_destination == 'ending') {
         global_hack_input_dictionary.ending = morphological_element;
+        console.log("MORMON TOGGLE ENDING");
+        // this.ending_element_submitted = true;
+        // this.register_cell_fill('ending');
+        register_cell_fill('ending');
     } else {
         alert("cell_destination is neither beginning middle nor end");
     }
     console.log("REMOVE HEY input_dictionary = ", global_hack_input_dictionary);
     console.log("REMOVE HEY input_dictionary stringified = ", JSON.stringify(global_hack_input_dictionary));
+    
+    console.log("MORMON DEVIL this.beginning_element_submitted = ", this.beginning_element_submitted);
+    console.log("MORMON DEVIL this.middle_element_submitted = ", this.middle_element_submitted);
+    console.log("MORMON DEVIL this.ending_element_submitted = ", this.ending_element_submitted);
+    
+    
+    
+    
+    
+    //DAMAGE CONTROL
+    // below is not quite functional and perhaps not desirable
+    // if (this.beginning_element_submitted && this.middle_element_submitted 
+    //     && this.ending_element_submitted) {
+    //         console.log("MORMON GOD invoked");
+    //         //doesn't work
+    //         // self.process_answer();
+    //         // self.quiz.process_answer();
+    //         this.quiz.process_answer();
+    //     }
+    
     return global_hack_input_dictionary;
 }
 
@@ -489,13 +681,30 @@ var submit_morphological_element_to_cell = function (morphological_element, cell
     var div_to_fill_with_morphological_element;
     if (cell_destination == 'beginning') {
         el('morphology_cell_answer_beginning').innerHTML = morphological_element;
+        // this.beginning_element_submitted = true;
     } else if (cell_destination == 'middle') {
         el('morphology_cell_answer_middle').innerHTML = morphological_element;
+        // this.middle_element_submitted = true;
     } else if (cell_destination == 'ending') {
         el('morphology_cell_answer_ending').innerHTML = morphological_element;
+        // this.ending_element_submitted = true;
     } else {
         alert("cell_destination is neither beginning middle nor end");
     }
+    
+    // console.log("MORMON DEVIL this.beginning_element_submitted = ", this.beginning_element_submitted);
+    // console.log("MORMON DEVIL this.middle_element_submitted = ", this.middle_element_submitted);
+    // console.log("MORMON DEVIL this.ending_element_submitted = ", this.ending_element_submitted);
+    
+    // // below is not quite functional and perhaps not desirable
+    // if (this.beginning_element_submitted && this.middle_element_submitted 
+    //     && this.ending_element_submitted) {
+    //         console.log("MORMON GOD invoked");
+    //         //doesn't work
+    //         // self.process_answer();
+    //         // self.quiz.process_answer();
+    //         this.quiz.process_answer();
+    //     }
 }
 
 
@@ -630,77 +839,6 @@ MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_el
     // e.appendChild(docFragment);
 }
 
-//sometimes we know we want to display roots (e.g. root_2 & root_3)
-// but we want the actual lexical roots (e.g. am-, amav-, tim-, timu-)
-// this function will take a list of roots and a lexeme list
-// and return a list of items to populate morphological buttons
-var convert_root_items_to_actual_forms = function (root_list, lexeme_list, lexeme_list_as_objects, language) {
-    console.log("ECCE 3 lexeme_list_as_objects = ", lexeme_list_as_objects);
-    var dictionary_to_consult;
-    if (language == 'latin') {
-        dictionary_to_consult = testing_lexemes;
-    }
-    console.log("ROOT LOOP dictionary_to_consult = ", dictionary_to_consult);
-    
-    
-    //version with strings
-    /*
-    var dictionary_to_consult;
-    if (language == 'latin') {
-        dictionary_to_consult = testing_lexemes.verb;
-    }
-    console.log("ROOT LOOP dictionary_to_consult = ", dictionary_to_consult);
-    
-    var list_of_lexical_roots = [];
-    for (i=0; i<root_list.length; i++) {
-        for (j=0; j<lexeme_list.length; j++) {
-            var root_to_find = root_list[i];
-            console.log("ROOT LOOP root_to_find = ", root_to_find);
-            var lexeme_to_consult = lexeme_list[j];
-            console.log("ROOT LOOP lexeme_to_consult = ", lexeme_to_consult); 
-            var lexeme_in_lexicon = testing_lexemes.verb[lexeme_to_consult];
-            console.log("ROOT LOOP testing_lexemes.verb[lexeme_to_consult] = ", lexeme_in_lexicon);
-            var latin_properties = lexeme_in_lexicon.latin;
-            console.log("ROOT LOOP latin_properties = ", latin_properties);
-            var roots = latin_properties.roots;
-            console.log("ROOT LOOP roots = ", roots);
-            var root_output = roots[root_to_find];
-            console.log("ROOT LOOP root_output = ", root_output);
-            list_of_lexical_roots.push(root_output);
-        }
-    }
-    console.log("ROOT LOOP list_of_lexical_roots =", list_of_lexical_roots);
-    return list_of_lexical_roots;
-    */
-    
-    //version with objects
-    var list_of_lexical_roots = [];
-    for (i=0; i<root_list.length; i++) {
-        for (j=0; j<lexeme_list_as_objects.length; j++) {
-            var root_to_find = root_list[i];
-            console.log("ROOT LOOP root_to_find = ", root_to_find);
-            var lexeme_to_consult = lexeme_list_as_objects[j];
-            console.log("ROOT LOOP lexeme_to_consult = ", lexeme_to_consult); 
-            
-            //below should be otiose
-            // var lexeme_in_lexicon = testing_lexemes.verb[lexeme_to_consult];
-            // console.log("ROOT LOOP testing_lexemes.verb[lexeme_to_consult] = ", lexeme_in_lexicon);
-            
-            
-            var lexeme_in_lexicon = lexeme_to_consult;
-            var latin_properties = lexeme_in_lexicon.latin;
-            console.log("ROOT LOOP latin_properties = ", latin_properties);
-            var roots = latin_properties.roots;
-            console.log("ROOT LOOP roots = ", roots);
-            var root_output = roots[root_to_find];
-            console.log("ROOT LOOP root_output = ", root_output);
-            list_of_lexical_roots.push(root_output);
-        }
-    }
-    console.log("ROOT LOOP list_of_lexical_roots =", list_of_lexical_roots);
-    return list_of_lexical_roots;
-    
-}
 
 
 
@@ -781,12 +919,120 @@ MorphologyModeGame.prototype.process_correct_answer = function () {
     fbox.appendChild(document.createTextNode(question_plus_answer_as_string));
     fbox.appendChild(document.createElement('br'));
     fbox.appendChild(document.createElement('br'));
+    
+    //DAMAGE CONTROL
+    // global_hack_clear_morphology_cell_colors();
+    //DAMAGE CONTROL END
+    
     this.quiz.question_complete();
 };
 
 
+MorphologyModeGame.prototype.determine_red_green_cell_old = function () {
+  var text = remove_metacharacters(this.correct_answer_as_string);
+  console.log("MORMON text = ", text);
+  var text_split = text.split("-");
+  console.log("MORMON text_split = ", text_split);
+  console.log("MORMON global_hack_input_dictionary = ", global_hack_input_dictionary);
+  console.log("MORMON global_hack_input_dictionary.beginning = ", global_hack_input_dictionary.beginning);
+  console.log("MORMON global_hack_input_dictionary.middle = ", global_hack_input_dictionary.middle);
+  console.log("MORMON global_hack_input_dictionary.ending = ", global_hack_input_dictionary.ending);
+  
+  
+  var red_green_cell_map = {};
+  
+  if (global_hack_input_dictionary.beginning == text_split[0]) {
+      red_green_cell_map.beginning = 'green';
+  } else {
+      red_green_cell_map.beginning = 'red';
+  }
+  
+  if (global_hack_input_dictionary.middle == text_split[1]) {
+      red_green_cell_map.middle = 'green';
+  } else {
+      red_green_cell_map.middle = 'red';
+  }
+  
+  if (global_hack_input_dictionary.middle == text_split[2]) {
+      red_green_cell_map.ending = 'green';
+  } else {
+      red_green_cell_map.ending = 'red';
+  }
+  
+  console.log("MORMON red_green_cell_map = ",red_green_cell_map);
+  return red_green_cell_map;  
+};
+
+
+MorphologyModeGame.prototype.determine_red_green_cell = function () {
+  var text = remove_metacharacters(this.correct_answer_as_string);
+  console.log("MORMON text = ", text);
+  var text_split = text.split("-");
+  console.log("MORMON text_split = ", text_split);
+  console.log("MORMON global_hack_input_dictionary = ", global_hack_input_dictionary);
+  console.log("MORMON global_hack_input_dictionary.beginning = ", global_hack_input_dictionary.beginning);
+  console.log("MORMON global_hack_input_dictionary.middle = ", global_hack_input_dictionary.middle);
+  console.log("MORMON global_hack_input_dictionary.ending = ", global_hack_input_dictionary.ending);
+  
+  
+  var red_green_cell_list = [];
+  
+  if (global_hack_input_dictionary.beginning == text_split[0]) {
+      red_green_cell_list.push('green');
+  } else {
+      red_green_cell_list.push('red');
+  }
+  
+  if (global_hack_input_dictionary.middle == text_split[1]) {
+      red_green_cell_list.push('green');
+  } else {
+      red_green_cell_list.push('red');
+  }
+  
+  if (global_hack_input_dictionary.ending == text_split[2]) {
+      red_green_cell_list.push('green');
+  } else {
+      red_green_cell_list.push('red');
+  }
+  
+  console.log("MORMON red_green_cell_list = ",red_green_cell_list);
+  return red_green_cell_list;  
+};
+
+
+MorphologyModeGame.prototype.color_cells_red_and_green = function (cell_list) {
+    // morphology_cell_answer_beginning
+    for (var i = 0; i < cell_list.length; i++){
+        var color_to_add = cell_list[i];
+        if (i == 0) {
+            global_hack_color_div_text('morphology_cell_answer_beginning', color_to_add);
+        } else if (i == 1) {
+            global_hack_color_div_text('morphology_cell_answer_middle', color_to_add);
+        } else if (i == 2) {
+            global_hack_color_div_text('morphology_cell_answer_ending', color_to_add);
+        }
+    }
+};
+
+
+
+
 
 MorphologyModeGame.prototype.process_incorrect_answer = function () {
+    
+    //begin AKIVA Damage control 11-20-16
+    //map version
+    // var red_green_cell_map = this.determine_red_green_cell_old();
+    // this.color_cells_red_and_green(red_green_cell_map);
+    //list version
+    console.log("MORMON about to color cells");
+    // global_hack_clear_morphology_cell_colors();
+    var red_green_cell_list = this.determine_red_green_cell();
+    this.color_cells_red_and_green(red_green_cell_list);
+    console.log("MORMON done coloring cells");
+    //end Akiva damage control
+    
+    
     this.quiz.submodule.incorrect_streak ++;
     if (this.quiz.submodule.incorrect_streak === 1) {
         this.quiz.decrement_score();
@@ -815,6 +1061,9 @@ MorphologyModeGame.prototype.process_incorrect_answer = function () {
 MorphologyModeGame.prototype.give_away_answer = function () {
     var fbox = el("feedbackbox");
     fbox.innerHTML = this.display_give_away_answer();
+    //DAMAGE CONTROL
+    // global_hack_clear_morphology_cell_colors();
+    //DAMAGE CONTROL END
     this.quiz.question_complete();
 };
 
@@ -823,7 +1072,7 @@ MorphologyModeGame.prototype.display_give_away_answer = function () {
     return this.give_away_phrase + " " + remove_metacharacters(this.correct_answer_as_string) + this.give_away_ending_phrase
 }
 
-// todo implement this (maybe a new div?)
+// todo below are ideas maybe to implement this (maybe a new div?)
 MorphologyModeGame.prototype.display_green_and_red_path = function (statuses) {
     var o = el('feedbackbox');
     remove_all_children(o);
@@ -890,4 +1139,17 @@ MorphologyModeGame.prototype.morphology_cheat_sheet = function (chosen_lexemes) 
     });
     // console.log(result);
     return result;
-}
+};
+
+
+
+
+MorphologyModeGame.prototype.register_cell_fill = function (cell) {
+    if (cell === 'beginning') {
+        this.beginning_element_submitted = true;
+    } else if (cell === 'middle') {
+        this.middle_element_submitted = true;
+    } else if (cell === 'ending') {
+        this.ending_element_submitted = true;
+    }
+};
