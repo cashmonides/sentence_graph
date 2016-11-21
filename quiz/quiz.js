@@ -1254,6 +1254,8 @@ Quiz.prototype.submodule_complete = function () {
     console.log("LOG about to make callback - should be null until submodule is complete");
     //callback is null when submodule is not yet complete
     var callback = this.user.submodule_complete(this.module.id);
+    console.log("BREITBART this.module.id = ", this.module.id);
+    console.log("BREITBART is submodule complete? = ", callback);
     console.log("LOG callback = ", callback);
     
     var new_callback = debug_via_log(callback, 'callback');
