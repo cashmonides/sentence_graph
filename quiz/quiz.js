@@ -1102,12 +1102,11 @@ Quiz.prototype.regularize_accuracy_dictionary_input = function (accuracy_diction
 Quiz.prototype.update_accuracy = function () {
     //todo super hacky short-term intervention for spelling mode, converts all incorrect_streak greater than 3 to 3
     
-    // console.log("BREITBART this.submodule.incorrect_streak pre-processing = ", this.submodule.incorrect_streak);
+    console.log("BREITBART entering update_accuracy");
+    console.log("BREITBART this.submodule.incorrect_streak = ", this.submodule.incorrect_streak);
     
-    
+    // below would be an option very hacky
     // this.submodule.incorrect_streak = this.regularize_accuracy_dictionary_input(this.submodule.incorrect_streak);
-    
-    // console.log("BREITBART this.submodule.incorrect_streak pre-processing = ", this.submodule.incorrect_streak);
     
     
     //todo merge - below is a hacky way to stop bugs in week 1-2 of institute
