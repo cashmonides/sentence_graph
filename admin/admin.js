@@ -262,7 +262,10 @@ function get_current_stats2 (user, module_id) {
     } else if (mod.in_progress == false && mod.iteration == 0) {
         return "";
     } else {
-        throw new Error('No case successfully caught.')
+        //
+        return "BREITBART";
+        //BREITBART FIX
+        // throw new Error('No case successfully caught.')
     }
     // else if (mod.in_progress == "false" && mod.iteration == 0) {
     //     return ""
