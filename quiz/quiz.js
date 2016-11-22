@@ -1219,8 +1219,11 @@ Quiz.prototype.submodule_complete = function () {
     //improving returns improving module
     var mod = this.user.get_module_being_played();
     
+    console.log("BUGCHECK mod = ", mod);
+    
     var gotten_module = this.user.get_module(mod);
     
+    console.log("BUGCHECK gotten_module = ", gotten_module);
     
     var submodule_id = gotten_module.progress;
     
