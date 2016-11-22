@@ -60,11 +60,11 @@ function callback2(data) {
             tag:"ul",
             children: [
                 {tag: "li", text: "name = " + user.profile.name},
-                {tag: "li", text: "uid = " + uid},
-                {tag: "li", text: "grade = " + user.profile.grade},
-                {tag: "li", text: "school = " + user.profile.school},
+                // {tag: "li", text: "uid = " + uid},
+                // {tag: "li", text: "grade = " + user.profile.grade},
+                // {tag: "li", text: "school = " + user.profile.school},
                 {tag: "li", text: "max module = " + max_module(user)},
-                {tag: "li", text: report_accuracy(user)},
+                // {tag: "li", text: report_accuracy(user)},
                 {tag: "li", text: "aggregate accuracy = " +
                 get_aggregate_accuracy(user)}
             ]
