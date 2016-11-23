@@ -1644,7 +1644,15 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
 };
     
 Quiz.prototype.initialize_spelling_hint = function () {
-    this.game.make_spelling_hint();
+    if (this.game.make_spelling_hint()) {
+        
+        this.game.make_spelling_hint();
+    } else {
+        console.log("no spelling hint for this game");
+        return;
+    }
+    
+    
     // var output = this.game.make_spelling_hint();
     //  var div_to_add = el("image_display_box");
     
