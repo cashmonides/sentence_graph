@@ -59,7 +59,8 @@ function callback2(data) {
         make({
             tag:"ul",
             children: [
-                {tag: "li", text: "name = " + user.profile.name},
+                // {tag: "li", text: "name = " + user.profile.name},
+                {tag: "li", text: "user name = " + user.profile.email},
                 // {tag: "li", text: "uid = " + uid},
                 // {tag: "li", text: "grade = " + user.profile.grade},
                 // {tag: "li", text: "school = " + user.profile.school},

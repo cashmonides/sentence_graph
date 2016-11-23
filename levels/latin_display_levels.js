@@ -607,13 +607,18 @@ var latin_drop_levels = {
             min: 2, max:3}
     },
     //iq and is levels
+    // 200: {
+    //     drop_non_drop_map: {'subject_drop': .001, 'verb_drop': .9, 'object_drop': .001, 'conjunction_drop': 0.9,
+    //         min: 1, max:3}
+    // },
+    //testing below
     200: {
-        drop_non_drop_map: {'subject_drop': .001, 'verb_drop': .1, 'object_drop': .001, 'conjunction_drop': 0.9,
-            min: 1, max:3}
+        drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .9, 'object_drop': .3, 'conjunction_drop': 0.9,
+            min: 1, max:4}
     },
     300: {
         drop_non_drop_map: {'subject_drop': .3, 'verb_drop': .9, 'object_drop': .3, 'conjunction_drop': 0.9,
-            min: 2, max:3}
+            min: 2, max:4}
     },
     400: {
         drop_non_drop_map: {'subject_drop': .1, 'verb_drop': .9, 'object_drop': .1, 'conjunction_drop': 0.9,

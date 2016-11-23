@@ -7991,6 +7991,7 @@ var words = {
         "part of speech": "adjective",
         "roots": [
             "POLY",
+            //todo maybe swap out chromat and chros
             "CHROM/CHROMAT/CHROS"
         ],
         "type": "none",

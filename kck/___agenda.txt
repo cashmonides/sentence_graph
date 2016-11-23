@@ -1,7 +1,7 @@
 Agenda for future (made in mid-september 2016)
 
-
-dictionary traverser
+HIGHEST PRIORITY
+bug in improvement located where console.log says BUGCHECK
 
 
 BIRD'S EYE AGENDA

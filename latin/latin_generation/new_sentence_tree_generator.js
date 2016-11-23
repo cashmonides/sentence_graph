@@ -364,8 +364,7 @@ function make_output(level, current_lexicon, none_display) {
     
     console.log("DEBUG 4-25 checkpoint 17 in make_output");
     
-    var drop_non_drop_map = drop_non_drop_creation(
-        map_level_to_allowed(level.latin_drop_level, latin_drop_levels)['drop_non_drop_map'], english_template);
+    var drop_non_drop_map = drop_non_drop_creation(map_level_to_allowed(level.latin_drop_level, latin_drop_levels)['drop_non_drop_map'], english_template);
 
 
     console.log("DEBUG 4-25 checkpoint 18 in make_output");
@@ -496,7 +495,7 @@ function latin_mental_wrap(choice, sentence) {
 }
 
 function drop_non_drop_creation (drop_non_drop_allowed, template) {
-    // console.log('important info;', drop_non_drop_allowed, template, template.length);
+    console.log('LATIN MODE DEBUG important info;', drop_non_drop_allowed, template, template.length);
     var i = 0;
     while (i < 1000) {
         var drop_non_drop_map = {};
