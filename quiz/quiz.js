@@ -1641,7 +1641,23 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
     // console.log("DEBUG 9-30 this.game.cheat_sheet", this.game.cheat_sheet);
     
     return this.game.cheat_sheet || 'no cheat sheet for this mode';
-}
+};
+    
+Quiz.prototype.initialize_spelling_hint = function () {
+    this.game.make_spelling_hint();
+    // var output = this.game.make_spelling_hint();
+    //  var div_to_add = el("image_display_box");
+    
+    // var name = "etym_cheat_sheet"
+    // var etym_cheat = this.game.etymology_cheat_sheet;
+    // // var outer_div = el("image_display_box");
+    // var outer_div = el(name + "_div");
+    // create_cheat_sheet_table(outer_div, name,
+    // null, null, etym_cheat, 2);
+    // el('spelling_hint_button').onclick = function () {quiz.toggle_element(name)};
+
+}    
+    
     
 Quiz.prototype.initialize_cheat_sheet = function() {
     // var button = el("cheat_sheet_button");

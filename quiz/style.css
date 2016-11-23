@@ -556,6 +556,7 @@ body {
     width: auto;
     /*height: 800px;    not good*/
     height: auto;
+    font-size: 28px;
     overflow: auto;
     margin-left: auto;
     margin-right: auto;
