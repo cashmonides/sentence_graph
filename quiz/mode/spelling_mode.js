@@ -236,8 +236,20 @@ SpellingModeGame.prototype.next_question = function(){
         question_with_cheat_sheet['cheat_sheet']);
     this.choices = alphabetize_list(question.choices);
     this.correct = question.correct_answer;
-    
+    console.log("HINT this.correct = ", this.correct);
+    // var word_string = this.correct;
+    // console.log("HINT word_string = ", word_string);
+    // var pointer_to_word = words[word_string];
+    // console.log("HINT pointer_to_word = ", pointer_to_word);
+    // var underscore_hint = this.give_underscore_hint(pointer_to_word);
+    var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
+    console.log("HINT underscore_hint = ", underscore_hint);
    
+   
+   
+   var hint_to_add = document.createTextNode(underscore_hint);
+   var box_for_underscore_hint = el('image_display_box');
+   box_for_underscore_hint.append(hint_to_add);
     
     console.log("TRUMP question.question_template = ", question.question_template);
     console.log("TRUMP question.clue = ", question.clue);
@@ -647,7 +659,82 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
 };
 
 
-
+SpellingModeGame.prototype.give_underscore_hint = function (word) {
+    // var root_string = get_word_meaning(word);
+    // console.log("HINT root_string = ", root_string);
+    // var length_of_root_string = root_string.length;
+    // console.log("HINT length_of_root_string = ", length_of_root_string);
+    // var underscore_string = new Array(length_of_root_string + 1).join("_");
+    // console.log("HINT underscore_string = ", underscore_string);
+    // var underscore_hint = word.replace(root_string, underscore_string);
+    // console.log("HINT underscore_hint = ", underscore_hint);
+    
+    console.log("HINT entering underscore hit generator");
+    console.log("HINT word to process = ", word);
+    var roots_extracted = get_roots(word);
+    console.log('HINT roots_extracted = ', roots_extracted);
+    var random_root_to_replace = random_choice(roots_extracted);
+    console.log("HINT random_root_to_replace = ", random_root_to_replace);
+    var length_of_root_to_replace = random_root_to_replace.length;
+    console.log("HINT length_of_root_to_replace = ", length_of_root_to_replace);
+    var underscore_string = new Array(length_of_root_to_replace + 1).join("_");
+    console.log("HINT underscore_string = ", underscore_string);
+    
+    
+    ////////TEST VERSION//////
+    // var test_word = "CARNIVOROUS";
+    // var test_root_to_replace = "CARN";
+    // console.log("HINT test_word = ", test_word);
+    // console.log("HINT typeOf test_word = ", typeof test_word);
+    // console.log("HINT test_root_to_replace = ", test_root_to_replace);
+    // console.log("HINT typeOf test_root_to_replace = ", typeof test_root_to_replace);
+    // var word_with_root_replaced = test_word.replace(test_root_to_replace, "_____");
+    // console.log("HINT test_word after mutation = ", test_word);
+    // console.log("HINT word_with_root_replaced = ", word_with_root_replaced);
+    
+    
+    ////////REAL VERSION/////
+    var test_word = word;
+    var test_root_to_replace = random_root_to_replace;
+    test_root_to_replace = test_root_to_replace.toLowerCase();
+    var list_of_slashed_options = test_root_to_replace.split("/");
+    var first_slashed_option = list_of_slashed_options[0];
+    
+    console.log("HINT first_slashed_option = ", first_slashed_option);
+    console.log("HINT list of slashed options = ", list_of_slashed_options);
+    test_root_to_replace = first_slashed_option;
+    console.log("HINT test_word = ", test_word);
+    console.log("HINT typeOf test_word = ", typeof test_word);
+    console.log("HINT test_root_to_replace = ", test_root_to_replace);
+    console.log("HINT typeOf test_root_to_replace = ", typeof test_root_to_replace);
+    var length_of_root_to_replace = test_root_to_replace.length;
+    var underscore_string = new Array(length_of_root_to_replace + 1).join("_");
+    console.log("HINT underscore_string2 = ", underscore_string);
+    // var word_with_root_replaced = test_word.replace(test_root_to_replace, "_____");
+    var word_with_root_replaced = test_word.replace(test_root_to_replace, underscore_string);
+    console.log("HINT test_word after mutation = ", test_word);
+    console.log("HINT word_with_root_replaced = ", word_with_root_replaced);
+    
+    
+    
+    
+    // var word_with_root_replaced = word.replace(random_root_to_replace, "FR");
+    // var test_word = "CARNIVOROUS"
+    // // var test_word = word;
+    // console.log("HINT test_word = ", test_word);
+    // console.log("HINT typeOf test_word = ", typeof test_word);
+    // var word_with_root_replaced = test_word.replace("CARN", "_____");
+    // // var word_with_root_replaced = test_word.replace(random_root_to_replace, "XXXXX");
+    // // var word_with_root_replaced = test_word.replace(random_root_to_replace, underscore_string);
+    // console.log("HINT test_word after mutation = ", test_word);
+    // console.log("HINT word_with_root_replaced = ", word_with_root_replaced);
+    
+    
+    
+    
+    return word_with_root_replaced;
+    
+};
 
 SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(correct_answer_string, input_string, process_slashes_bool) {
     //we want to create a table of divs for each slash option
