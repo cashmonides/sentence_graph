@@ -4,43 +4,43 @@
 
 - add etymology question types
     - word to word_definition   "What is the meaning of the word QUADRUPED?"
-    - word_definition to word "What is a word meaning "dwelling on land""
-    - root to root_meaning   "What is the meaning of the root PED?"
-    - root_meaning to root  "which of the following roots means "foot"?
-    - root to word    "Which word has a root meaning "all"?
-    - word to root    "Select the root of the word QUADRUPED?"
-    - word to synonym  "What is a synonym of QUADRUPED?"
-    - word to antonym
-    - alternate root "What is an alternate root of AQU?"
-    - origin language "Is HYDR greek or latin?"
-    - type in answer 
-    - (one option, perhaps too easy to be used is latin root to word)
+//     - word_definition to word "What is a word meaning "dwelling on land""
+//     - root to root_meaning   "What is the meaning of the root PED?"
+//     - root_meaning to root  "which of the following roots means "foot"?
+//     - root to word    "Which word has a root meaning "all"?
+//     - word to root    "Select the root of the word QUADRUPED?"
+//     - word to synonym  "What is a synonym of QUADRUPED?"
+//     - word to antonym
+//     - alternate root "What is an alternate root of AQU?"
+//     - origin language "Is HYDR greek or latin?"
+//     - type in answer 
+//     - (one option, perhaps too easy to be used is latin root to word)
     
-Iteration 1.0
-- already have: root to word
-- word to root
-- word to word_definition
-- word_definition to word
-- root to root_definition
-- root_definition to root
+// Iteration 1.0
+// - already have: root to word
+// - word to root
+// - word to word_definition
+// - word_definition to word
+// - root to root_definition
+// - root_definition to root
 
-Iteration 2.0
-- what language the root is in (english, latin or both)
-- exclude synonyms (i.e. the coincidence factor)
-- word to synonym  "What is a synonym of QUADRUPED?"
-- word to antonym
+// Iteration 2.0
+// - what language the root is in (english, latin or both)
+// - exclude synonyms (i.e. the coincidence factor)
+// - word to synonym  "What is a synonym of QUADRUPED?"
+// - word to antonym
 
-Further away
-- alternate root "What is an alternate root of AQU?"
-- origin language "Is HYDR greek or latin?"
+// Further away
+// - alternate root "What is an alternate root of AQU?"
+// - origin language "Is HYDR greek or latin?"
 
 
 
-DESIGN ISSUE
-- two words may be quite close in meaning and by coincidence both words or both definitions
-    - once synonyms are loaded and ready, we could exclude synonyms
+// DESIGN ISSUE
+// - two words may be quite close in meaning and by coincidence both words or both definitions
+//     - once synonyms are loaded and ready, we could exclude synonyms
 
-*/
+// */
 // var etymology_question_types = {
 //     root_to_word: 0,
 //     word_to_root: 1,
@@ -187,10 +187,28 @@ SpellingModeGame.prototype.get_mode_name = function() {
 SpellingModeGame.prototype.make_spelling_hint = function () {
     var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
     console.log("HINT underscore_hint = ", underscore_hint);
-   var hint_to_add = document.createTextNode(underscore_hint);
-   var box_for_underscore_hint = el('image_display_box');
-   box_for_underscore_hint.append(hint_to_add);
+    var hint_to_add = document.createTextNode(underscore_hint);
+    var box_for_underscore_hint = el('image_display_box');
+    box_for_underscore_hint.append(hint_to_add);
 };
+
+
+SpellingModeGame.prototype.generate_final_spelling_hint_string = function () {
+    var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
+    console.log("HINT7 underscore_hint = ", underscore_hint);
+    return underscore_hint;
+    // var hint_to_add = document.createTextNode(underscore_hint);
+    // var box_for_underscore_hint = el('image_display_box');
+    // box_for_underscore_hint.append(hint_to_add);
+};
+
+// SpellingModeGame.prototype.make_spelling_hint = function () {
+//     var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
+//     console.log("HINT underscore_hint = ", underscore_hint);
+//     var hint_to_add = document.createTextNode(underscore_hint);
+//     var box_for_underscore_hint = el('image_display_box');
+//     box_for_underscore_hint.append(hint_to_add);
+// };
 
 SpellingModeGame.prototype.next_question = function(){
     
@@ -784,6 +802,8 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
     return word_with_root_replaced;
     
 };
+
+
 
 SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(correct_answer_string, input_string, process_slashes_bool) {
     //we want to create a table of divs for each slash option
