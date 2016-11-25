@@ -118,6 +118,45 @@ hydra
 */
 
 
+////THE DIFFERENT ANSWERS AT DIFFERENT LEVELS ISSUE////
+/*
+a human or a bird is a biped at the early level, 
+but at a more advanced level the answer is something like: 
+default: "biped"
+advanced: "biped (originally quadrupedal)"
+
+snake:
+default: "no legs at all"
+advanced: "vestigial quadruped"
+
+
+a bear is:
+default: "omnivore"
+advanced: "omnivore/herbivore/carnivore"  //either a list or a decomposable string like this
+	(maybe with an additional note after the correct answer like:
+	depends on the species: most bears are omnivores, polar bears are carnivores, panda bears are herbivores)
+
+*/
+
+////////SOME NOTATIONAL IDEAS//////
+/*
+@skip
+there are a few places where we want to suspend the usual process
+of matching a string to a category
+for instance, we might want to ask whether spiders are edible or inedible
+but we might not want to ask about whether dogs are edible
+so we want something like skip or maybe notated as @skip
+
+
+@review
+some categories are hard to answer at first glance
+is a dog pentadactyl?
+what about species that are tetradactyl on their front legs and pentadactyl on their hind legs?
+so we want a category that will mark this as tagged for further review and will suspend the category
+e.g.
+dactyl: '@review'
+*/
+
 
 var taxonomy_map = {
 
@@ -178,7 +217,10 @@ bear :
 	species: "arctos",
 
 
-	vor: ["carnivore", "opportunistic omnivore"],
+	vor: {
+		"default": "omnivore", 
+		"species-specific": "omnivore/herbivore/carnivore"
+	},
 	vert: "vertebrate",
 	symmetr: "bilateral symmetry",
 	ped: "quadruped",
@@ -207,8 +249,7 @@ bear :
 
 
 
-horse :
-{
+horse : {
 	name: "equus ferus caballus", 		
 	domain: "eukarya",
 	kingdom: "animalia",

@@ -4,6 +4,8 @@ HIGHEST PRIORITY
 bug in improvement located where console.log says BUGCHECK
 
 
+
+
 BIRD'S EYE AGENDA
 step 1
     dash removal (done)
@@ -72,7 +74,12 @@ AKIVA'S QUESTIONS FOR HIS CONTROL FLOW
     maximal_role_to_role_for_verb_restriction?????
     main.js generate_sentence has a simple error catching mode right? (the success variable)
     
-    
+  
+AKIVA MISC QUESTIONS
+- what is this in spelling mode?
+    // autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" supposedly turns spellcheck off
+    // maybe we want to be selective and do this, but presumably only in SpellingModeGame
+
     
 MORPHOLOGY MODE
 build the game mode DONE

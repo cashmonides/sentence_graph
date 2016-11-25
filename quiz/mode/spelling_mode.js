@@ -151,27 +151,40 @@ SpellingModeGame.prototype.attach = function(){
     set_display_of_class("cleared_in_picture_display2", "initial");
     //end current best result
     
-    //we want to change the max incorrect streak
     
+    
+    // todo hack short term solution to accuracy metrics not having enough columns
+    // todo a more modular way of resetting incorrect streak would be better here
+    // but this is a short-term solution
+    // we want to change the max incorrect streak for spelling mode
+    // without radically affecting the architecture of the game, 
+    // which currently checks for a single max incorrect streak for the whole module, 
+    // not for any particular game mode
+    
+    //so we set a hidden streak which we will compare to the mode-specific max_streak
+    // given by module
     this.secret_streak = 0;
     
-    
+    //we first check whether a  mode-specific max-streak exists
+    // if so we process
     if (this.quiz.module.submodule.spelling_mode_max_incorrect_streak) {
-        console.log("CLIMATE setting a temporary max incorrect streak");
+        console.log("BACKLOG setting a temporary max incorrect streak");
         this.temporary_max_incorrect_streak = this.quiz.module.submodule.spelling_mode_max_incorrect_streak;
-        // todo hack short term solution to accuracy metrics not having enough columns
-        this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
-        console.log("CLIMATE this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
+        
+        // this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
+        
     } else {
-        console.log("PROBLEM: no spelling_mode_max_incorrect_streak specified");
-        console.log("CLIMATE no spelling mode max incorrect streak specified!!!");
+        console.log("PROBLEM: no spelling_mode_max_incorrect_streak specified!!!");
         this.temporary_max_incorrect_streak = this.quiz.module.submodule.max_incorrect_streak;
-        this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
-        console.log("CLIMATE this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
+        // this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
+        
     }
-    console.log("CLIMATE 5 this.quiz.module.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
-    console.log("CLIMATE this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
-    console.log("CLIMATE this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
+    // this will be our secret triggering point
+    this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
+    // console.log("BACKLOG this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
+    // console.log("BACKLOG 5 this.quiz.module.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
+    // console.log("BACKLOG this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
+    // console.log("BACKLOG this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
 };
 
 SpellingModeGame.prototype.set_level = function (new_level) {
@@ -184,36 +197,17 @@ SpellingModeGame.prototype.get_mode_name = function() {
 }
 
 
-SpellingModeGame.prototype.make_spelling_hint = function () {
-    var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
-    console.log("HINT underscore_hint = ", underscore_hint);
-    var hint_to_add = document.createTextNode(underscore_hint);
-    var box_for_underscore_hint = el('image_display_box');
-    box_for_underscore_hint.append(hint_to_add);
-};
 
 
-SpellingModeGame.prototype.generate_final_spelling_hint_string = function () {
-    var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
-    console.log("HINT7 underscore_hint = ", underscore_hint);
-    return underscore_hint;
-    // var hint_to_add = document.createTextNode(underscore_hint);
-    // var box_for_underscore_hint = el('image_display_box');
-    // box_for_underscore_hint.append(hint_to_add);
-};
-
-// SpellingModeGame.prototype.make_spelling_hint = function () {
-//     var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
-//     console.log("HINT underscore_hint = ", underscore_hint);
-//     var hint_to_add = document.createTextNode(underscore_hint);
-//     var box_for_underscore_hint = el('image_display_box');
-//     box_for_underscore_hint.append(hint_to_add);
-// };
 
 SpellingModeGame.prototype.next_question = function(){
     
     clear_input_box("input_box");
-    
+
+    //todo do we need to do something here to clear and reset the spelling hint button?
+
+
+    // todo separate spelling level from etymology level
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
@@ -223,8 +217,12 @@ SpellingModeGame.prototype.next_question = function(){
     this.legal_question_types = map_level_to_allowed(
         this.level.etym_level, etym_levels).question_types;
     
-    console.log("SPELLING LOG this.legal_question_types before change = ", this.legal_question_types);
-
+    
+    //todo we need set the question type for spelling mode to a type that makes sense
+    // ideally we would have this established without any codependency
+    // with etymology mode, we should isolate spelling mode levels and question types
+    
+    
     
     // this.legal_question_types = {'word_definition_to_word': 0.00000005,
     //     'root_definition_to_root': 0.5};
@@ -232,7 +230,6 @@ SpellingModeGame.prototype.next_question = function(){
         // 'root_definition_to_root': 0.5};
     this.legal_question_types = {'word_definition_to_word': 0.5};
     
-    console.log("SPELLING LOG this.legal_question_types after change = ", this.legal_question_types);
     
     console.log("TRUMP weighted(this.legal_question_types) =", weighted(this.legal_question_types));
     
@@ -263,27 +260,17 @@ SpellingModeGame.prototype.next_question = function(){
         question_with_cheat_sheet['cheat_sheet']);
     this.choices = alphabetize_list(question.choices);
     this.correct = question.correct_answer;
-    console.log("HINT this.correct = ", this.correct);
-    // var word_string = this.correct;
-    // console.log("HINT word_string = ", word_string);
-    // var pointer_to_word = words[word_string];
-    // console.log("HINT pointer_to_word = ", pointer_to_word);
-    // var underscore_hint = this.give_underscore_hint(pointer_to_word);
-//     var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
-//     console.log("HINT underscore_hint = ", underscore_hint);
-   
-   
-   
-//   var hint_to_add = document.createTextNode(underscore_hint);
-//   var box_for_underscore_hint = el('image_display_box');
-//   box_for_underscore_hint.append(hint_to_add);
+    this.clue = question.clue;
+    // console.log("BACKLOG: this.correct spelling_mode  = ", this.correct);
     
-    console.log("TRUMP question.question_template = ", question.question_template);
-    console.log("TRUMP question.clue = ", question.clue);
-    
-    
+    var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
+    console.log("HINT777 underscore_hint = ", underscore_hint);
+    this.spelling_hint = underscore_hint;
+    console.log("HINT777 this.spelling_hint = ", this.spelling_hint);
     
     Quiz.set_question_text(spelling_intro_question + '"' + question.clue + '".');
+    
+   
     
     
     //todo
@@ -295,17 +282,7 @@ SpellingModeGame.prototype.next_question = function(){
     this.quiz.set_word_selector(empty_word_selector);
     
     
-    //todo we don't want drop downs in spelling mode so we need to disable below
-    
-    
-    //remove all html elements in drop down
-    // remove_element_by_id("drop_answer_choices");
-    
-    //make html elements
-    // make_drop_down_html(this.choices);
-    
-    //todo new code 11-29 the following avoids drop-downs with only one answer
-    // if (el("select_element").children.length === 1) {this.next_question()}
+    //unlike etymology mode we don't have any drop downs so we don't need to clear or make them
 };
 
 
@@ -314,55 +291,43 @@ SpellingModeGame.prototype.next_question = function(){
 SpellingModeGame.prototype.process_answer = function(){
     var self = this;
     var raw_input_string = el("input_box").value;
-    console.log("DEBUG SPELLING raw input string = ", raw_input_string);
+    // console.log("BACKLOG: raw input string = ", raw_input_string);
     
     var processed_input_string = clean_input_string(raw_input_string);
-    console.log("DEBUG SPELLING process input string = ", processed_input_string);
+    // console.log("BACKLOG: process input string = ", processed_input_string);
     
     
-    
-    
-    
-    //todo we need the correct english answer - should be stored as a variable somewhere in this.next_question
     var correct_english_translation;
     
-    //it might already be stored as this.correct_answer, in which case, we just do this
     correct_english_translation = clean_input_string(this.correct);
     
     
-    //todo for now we're going to just send this function a string
-    //later we'll need to do the necessary stripping of punctuation
-    console.log("SWAMP this.correct = ", this.correct);
-    console.log("SWAMP raw_input_string = ", raw_input_string);
-    
-    //more primitive version without slashes works
-    // var comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
-    //more advanced version with slashes in testing
-    console.log("TRUMP this.correct = ", this.correct);
-    console.log("TRUMP this.chosen_question_type = ", this.chosen_question_type);
-    
+    // todo below seems a little ad hoc
+    // submit...with_slash processes strings of the form (x/y) and matches to either x or y
+    // regular submit without slash processes regular input
+    // better would be to just have the processing take a consistent input 
+    // and process the slash downstream
+    var comparison_result;
     if (this.chosen_question_type == 'root_definition_to_root') {
-        console.log("TRUMP slash mode triggered");
-        var comparison_result = this.submit_to_green_red_master_with_slash(this.correct, raw_input_string, true);
+        comparison_result = this.submit_to_green_red_master_with_slash(this.correct, raw_input_string, true);
     } else {
-        //the old version that works
-        var comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
-    
+        comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
     }
-    console.log("SWAMP comparison_result = ", comparison_result);
+    
     this.comparison_result = comparison_result;
     
     
-    console.log("SWAMP checkpoint 6 entering display_red_green-result");
-    console.log("SWAMP checkpoint 6.1 input to argument = ", comparison_result);
+    // console.log("SPELLING checkpoint 6 entering display_red_green-result");
+    // console.log("SPELLING checkpoint 6.1 input to argument = ", comparison_result);
     
     this.display_red_green_result(comparison_result);
-    console.log("SWAMP checkpoint 6.9999999 leaving display_red_green-result");
+    
+    // console.log("SPELLING checkpoint 6.999 leaving display_red_green-result");
     
     if (object_equals(processed_input_string, correct_english_translation)) {
         this.process_correct_answer();
     } else {
-        console.log("swamp checkpoint 1 about to call process_incorrect_answer");
+        // console.log("SPELLING checkpoint 1 about to call process_incorrect_answer");
         this.process_incorrect_answer();
     }
 };
@@ -391,51 +356,7 @@ SpellingModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
 SpellingModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
 SpellingModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
-/*
-SpellingModeGame.prototype.display_red_green_result_old_with_add_class = function (list) {
-    
-    //pseudo-code
-    //iterate through list
-    //if list[1] = red
-    //wrap in span or set style or something that will establish its color
-    //push to red_green_string which will be our final displayed string
-    var red_green_list = [];
-    
-    console.log("SWAMP checkpoint 6.2 red_green_list pre-push = ", red_green_list);
-    
-    for (var i = 0; i < list.length; i++) {
-        console.log("SWAMP entering for loop");
-        var sublist_to_query = list[i];
-        console.log("SWAMP sublist_to_query = ", sublist_to_query);
-        var character_with_class;
-        character_with_class = sublist_to_query[0];
-        console.log("SWAMP character_with_class pre-class = ", character_with_class);
-        if (sublist_to_query[1] == 'green') {
-            character_with_class.addClass('correct_input');
-            console.log("SWAMP character_with_class pre-class = ", character_with_class);
-        } else if (sublist_to_query[1] == 'red') {
-            character_with_class.addClass('incorrect_input');
-            console.log("SWAMP character_with_class pre-class = ", character_with_class);
-        }
-        red_green_list.push(character_with_class);
-    }
-    
-    
-        e = document.createElement('font');
-        e.style.color = red_green_list[i][1];
-        e.innerHTML = red_green_list[i][0];
-    
-    
-    console.log("SWAMP red_green_list after push = ", red_green_list);
-    
-    var red_green_string = red_green_list.toString();
-    
-    console.log("SWAMP red_green_string = ", red_green_string);
-    
-    var fbox = el("feedbackbox");
-    fbox.innerHTML = "Almost! Try again." + red_green_string;
-}
-*/
+
 
 SpellingModeGame.prototype.display_red_green_result = function (list) {
     var parent_el = document.createElement('div');
@@ -452,79 +373,14 @@ SpellingModeGame.prototype.display_red_green_result = function (list) {
 }
 
 
-/*SpellingModeGame.prototype.display_red_green_result = function (list) {
-    
-    //pseudo-code
-    //iterate through list
-    //if list[1] = red
-    //wrap in span or set style or something that will establish its color
-    //push to red_green_string which will be our final displayed string
-    // var red_green_list = [];
-    
-    // console.log("SWAMP checkpoint 6.2 red_green_list pre-push = ", red_green_list);
-    // var colored_character_list = [];
-    // var colored_string;
-    
-    var parent_el = document.createElement('div');
-    // var container_div = document.createElement('div');
-    
-    var e;
-    for (var i = 0; i < list.length; i++) {
-        // if (i !== 0) {
-        //     //we need to create something that's not a div but rather a bit of text
-        //     // so instead of createElement as below
-        //     // e = document.createElement('div');
-        //     //we need create text
-        //     e.innerHTML = '&nbsp;';
-        //     e.style.display = 'inline-block';
-        //     parent_el.appendChild(e);
-        // }
-        e = document.createElement('font');
-        e.style.color = list[i][1];
-        e.innerHTML = list[i][0];
-        parent_el.appendChild(e);
-        // console.log("SWAMP 6.81 color = ", list[i][1]);
-        // e.style.color = list[i][1];
-        // console.log("SWAMP 6.81 text = ", list[i][0]);
-        // e.innerHTML = list[i][0];
-        // console.log("SWAMP 6.81 e = ", e);
-        // container_div.appendChild(e);
-        // parent_el.appendChild(container_div);
-    }
-    var fbox = el("image_display_box");
-    fbox.appendChild(parent_el);
-    return parent_el;
-    
-    // parent_el.appendChild(container_div);
-    // console.log("SWAMP 6.9 checkpoint out of for loop")
-    // console.log("SWAMP 6.91 colored_character_list = ", colored_character_list);
-    
-    
-    // console.log("SWAMP 6.92 checkpoint about to append to feedback box");
-    
-    // console.log("SWAMP 6.91 parent_el = ", parent_el);
-    // return parent_el;
-    
-    
-    // console.log("SWAMP red_green_list after push = ", red_green_list);
-    
-    // var red_green_string = red_green_list.toString();
-    
-    // console.log("SWAMP red_green_string = ", red_green_string);
-    
-    // var fbox = el("feedbackbox");
-    // fbox.innerHTML = "Almost! Try again." + red_green_string;
-}*/
-
 
 
 SpellingModeGame.prototype.process_correct_answer = function() {
-    //console.log"answer matches target");
-    
     this.quiz.increment_score();
     
+    var spelling_feedback = this.clue + " = " + this.correct;
     
-    var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_right);
+    var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_right) + " " + spelling_feedback;
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
     
@@ -536,15 +392,10 @@ SpellingModeGame.prototype.process_correct_answer = function() {
 
 
 SpellingModeGame.prototype.process_incorrect_answer = function() {
-    console.log("swamp checkpoint 2 about to call process_incorrect_answer");
+    // console.log("BACKLOG entering process_incorrect_answer");
     this.quiz.submodule.incorrect_streak ++;
     
-    console.log("swamp checkpoint 2.5 about to submit to red_green");
-    
-    
-    
-    
-    
+    // console.log("swamp checkpoint 2.5 about to submit to red_green");
     
     console.log("swamp 4 11-8 this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
     if (this.quiz.submodule.incorrect_streak === 1) {
@@ -554,11 +405,6 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
         console.log("swamp 11-8 if not triggered");
     }
     
-    console.log("CLIMATE 7 this....submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
-    console.log("CLIMATE this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
-    //old version worked but didn't reset incorrect streak
-    // if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
-    //attempt at new version resetting incorrect streak for spelling mode only
     
     ///////BEGIN HACKY CLIMATE INTERVENTION
     console.log("CLIMATE entering hacky intervention");
@@ -567,125 +413,92 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
     console.log("CLIMATE before change this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
     console.log("CLIMATE before change this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
     
-    
     if (this.secret_streak >= this.temporary_max_incorrect_streak) {
+        //we have hit our temporary max so we trigger give away answer
         this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
     } else {
+        // we haven't hit our temporary max so we want to continue allowing answers
+        // so we increment secret_streak 
+        this.secret_streak++;
+        // and if we trigger our dummy limit
+        // we decrement our incorrect streak to 1 beneath the limit
         if (this.quiz.submodule.incorrect_streak >= this.dummy_limit_to_streak) {
-            this.secret_streak++;
             this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak - 1;
-            console.log("FLOOD TRIGGER1 above usual max but under secret max, so resetting to usual max - 1");
-            console.log("FLOOD RESET this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+            console.log("CLIMATE above usual max but under secret max, so resetting to usual max - 1");
+            console.log("CLIMATE this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
         }
     }
         
-    
-    
-    
-    // if (this.quiz.submodule.incorrect_streak >= this.dummy_limit_to_streak) {
-    //         if (this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak){
-    //             //reset to dummy limit -1, to allow for continued play
-    //             this.secret_streak++;
-    //             this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak - 1;
-    //             console.log("FLOOD TRIGGER1 above usual max but under secret max, so resetting to usual max - 1");
-    //             console.log("FLOOD RESET this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    //         } else {
-    //             this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
-    //             console.log("FLOOD TRIGGER2 secret max triggered, so setting to usual max");
-    //             console.log("FLOOD RESET this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    //         }
-    //         } else {
-    //             console.log("FLOOD NO TRIGGER")
-    //         };
-    // }
-    
-    
-    // some problem in here
-    // if (this.quiz.submodule.incorrect_streak >= this.dummy_limit_to_streak && 
-    //         this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak) {
-    //     //reset to dummy limit -1, to allow for continued play
-    //     this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak - 1;
-    //     console.log("FLOOD above usual max but under secret max, so resetting to usual max - 1");
-    //     console.log("FLOOD RESET this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    // } else if (this.quiz.submodule.incorrect_streak >= this.temporary_max_incorrect_streak) {
-    //     //set to dummy limit, trigger end of play
-    //     console.log("FLOOD secret max triggered, so setting to usual max");
-    //     console.log("FLOOD this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    //     this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
-    // } else {
-    //     console.log("CLIMATE SICK not obeying math");
-    // }
-    
-    //// probably a mistake lurking here
-    // if (this.quiz.submodule.incorrect_streak >= this.dummy_limit_to_streak) {
-    //     if (this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak) {
-    //         //we set it to just beneath the triggering number, so we can continue playing
-    //         this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak - 1;
-    //         console.log("FLOOD above usual max but under secret max, so setting to usual max - 1");
-    //         console.log("FLOOD this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    //     } else if (this.quiz.submodule.incorrect_streak >= this.temporary_max_incorrect_streak) {
-    //         //we've hit our secret limit so we now want to trick the program into giving away answer
-    //         this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
-    //         console.log("FLOOD secret max triggered, so setting to usual max");
-    //         console.log("FLOOD this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    //     }
-        
-    // }
-    // if (this.quiz.submodule.incorrect_streak >= this.temporary_max_incorrect_streak) {
-    //     //we've hit our secret limit so we now want to trick the program into giving away answer
-    //     this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak;
-    //     console.log("FLOOD secret max triggered, so setting to usual max");
-    //     console.log("FLOOD this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    // }
     console.log("CLIMATE this.quiz.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
     console.log("CLIMATE after change this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
     console.log("CLIMATE leaving hacky intervention");
+    ///end the hacky section, the rest is as usual in other modes
+    
+    
     
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
-        console.log("CLIMATE less than triggered");
         var cell_2;
         cell_2 = "";
-    
         var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_wrong);
         var cell_3 = random_choice(SpellingModeGame.cell_3_feedback_wrong);
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
     } else {
-        console.log("CLIMATE else triggered");
         this.give_away_answer();
-        //refresh_score();
     }
     this.quiz.update_display();
+    
     // Etymology has no word selector
     // this.quiz.word_selector.clear();
-    
-    
-    
-    ///END HACKY CLIMATE INTERVENTION
-    
-    
-    
-    
-    
-    //the better version is here, to be implemented when accuracy dictionary is improved
-    // if (this.quiz.submodule.incorrect_streak < this.temporary_max_incorrect_streak) {
-    //     var cell_2;
-    //     cell_2 = "";
-    
-    //     var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_wrong);
-    //     var cell_3 = random_choice(SpellingModeGame.cell_3_feedback_wrong);
-    //     var fbox = el("feedbackbox");
-    //     fbox.innerHTML = cell_1 + " " + cell_2 + " " + cell_3;
-    // } else {
-    //     this.give_away_answer();
-    //     //refresh_score();
-    // }
-    // this.quiz.update_display();
-    // // Etymology has no word selector
-    // // this.quiz.word_selector.clear();
+};
+
+//this is a primitive version which does all the function at once doesn't toggle 
+// what we really want is something that will work with the toggle function
+
+
+SpellingModeGame.prototype.make_spelling_hint = function () {
+    // var underscore_hint = "HINT666: " + this.give_underscore_hint(this.correct);
+    // console.log("HINT666 underscore_hint = ", underscore_hint);
+    // var hint_to_add = document.createTextNode(underscore_hint);
+    // var box_for_underscore_hint = el('image_display_box');
+    // box_for_underscore_hint.append(hint_to_add);
+    var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
+    console.log("HINT99 underscore_hint = ", underscore_hint);
+    this.spelling_hint = underscore_hint;
+    console.log("HINT99 this.spelling_hint = ", this.spelling_hint);
 };
 
 
+
+// SpellingModeGame.prototype.make_spelling_hint = function () {
+//     var underscore_hint = "HINT666: " + this.give_underscore_hint(this.correct);
+//     console.log("HINT666 underscore_hint = ", underscore_hint);
+//     var hint_to_add = document.createTextNode(underscore_hint);
+//     var box_for_underscore_hint = el('image_display_box');
+//     box_for_underscore_hint.append(hint_to_add);
+// };
+
+//this will just return the string
+// e.g. ____ivorous for carnivorous
+// SpellingModeGame.prototype.generate_final_spelling_hint_string = function () {
+//     var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
+//     console.log("HINT7 underscore_hint = ", underscore_hint);
+//     this.spelling_hint = underscore_hint;
+//     return underscore_hint;
+//     // var hint_to_add = document.createTextNode(underscore_hint);
+//     // var box_for_underscore_hint = el('image_display_box');
+//     // box_for_underscore_hint.append(hint_to_add);
+// };
+
+// CONTROL FLOW NOTES
+///generate_final_spelling_hint_string (this.correct)
+//CALLS
+//give_underscore_hint
+
+//below is a hackily hacked together version which basically does the job
+// but it needs to be redesigned to be:
+// modular
+// iterate through all the roots until it finds one
 SpellingModeGame.prototype.give_underscore_hint = function (word) {
     // var root_string = get_word_meaning(word);
     // console.log("HINT root_string = ", root_string);
@@ -795,16 +608,12 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
     console.log("HINT word_with_root_replaced = ", word_with_root_replaced);
     
     
-    
-    
-    
-    
     return word_with_root_replaced;
-    
 };
 
 
-
+// todo below should be set up as a global function
+// some kind of mode-agnostic string processing function
 SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(correct_answer_string, input_string, process_slashes_bool) {
     //we want to create a table of divs for each slash option
     // in each cell of the table row we will put a red-green result
@@ -838,7 +647,8 @@ SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(corr
 }
 
 
-
+// todo below should be set up as a global function
+// some kind of mode-agnostic string processing function
 SpellingModeGame.prototype.submit_string_to_green_and_red = function (correct_answer_string, input_string) {
     //we want to turn each character green or red
     /*console.log("TRUMP entering submit string");
@@ -865,7 +675,7 @@ SpellingModeGame.prototype.submit_string_to_green_and_red = function (correct_an
 
 SpellingModeGame.prototype.give_away_answer = function(){
     var fbox = el("feedbackbox");
-    fbox.innerHTML = "The correct answer was \"" + this.correct + '"';
+    fbox.innerHTML = "The correct answer is \"" + this.clue + " = " + this.correct + '"';
     
     // var self = this;
     // this.quiz.sentence.get_regions_with_tag(this.target_tag).forEach(function(r){
@@ -886,7 +696,137 @@ SpellingModeGame.prototype.give_away_answer = function(){
     // fbox_for_input.innerHTML = this.give_away_phrase + "<br\/>" + this.correct + this.give_away_ending_phrase;
     // this.quiz.question_complete();
     
-    
-    
     this.quiz.question_complete();
 };
+
+
+
+
+
+
+
+/*
+SpellingModeGame.prototype.display_red_green_result_old_with_add_class = function (list) {
+    
+    //pseudo-code
+    //iterate through list
+    //if list[1] = red
+    //wrap in span or set style or something that will establish its color
+    //push to red_green_string which will be our final displayed string
+    var red_green_list = [];
+    
+    console.log("SWAMP checkpoint 6.2 red_green_list pre-push = ", red_green_list);
+    
+    for (var i = 0; i < list.length; i++) {
+        console.log("SWAMP entering for loop");
+        var sublist_to_query = list[i];
+        console.log("SWAMP sublist_to_query = ", sublist_to_query);
+        var character_with_class;
+        character_with_class = sublist_to_query[0];
+        console.log("SWAMP character_with_class pre-class = ", character_with_class);
+        if (sublist_to_query[1] == 'green') {
+            character_with_class.addClass('correct_input');
+            console.log("SWAMP character_with_class pre-class = ", character_with_class);
+        } else if (sublist_to_query[1] == 'red') {
+            character_with_class.addClass('incorrect_input');
+            console.log("SWAMP character_with_class pre-class = ", character_with_class);
+        }
+        red_green_list.push(character_with_class);
+    }
+    
+    
+        e = document.createElement('font');
+        e.style.color = red_green_list[i][1];
+        e.innerHTML = red_green_list[i][0];
+    
+    
+    console.log("SWAMP red_green_list after push = ", red_green_list);
+    
+    var red_green_string = red_green_list.toString();
+    
+    console.log("SWAMP red_green_string = ", red_green_string);
+    
+    var fbox = el("feedbackbox");
+    fbox.innerHTML = "Almost! Try again." + red_green_string;
+}
+*/
+
+
+
+
+// SpellingModeGame.prototype.make_spelling_hint = function () {
+//     var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
+//     console.log("HINT underscore_hint = ", underscore_hint);
+//     var hint_to_add = document.createTextNode(underscore_hint);
+//     var box_for_underscore_hint = el('image_display_box');
+//     box_for_underscore_hint.append(hint_to_add);
+// };
+
+
+
+
+
+
+/*SpellingModeGame.prototype.display_red_green_result = function (list) {
+    
+    //pseudo-code
+    //iterate through list
+    //if list[1] = red
+    //wrap in span or set style or something that will establish its color
+    //push to red_green_string which will be our final displayed string
+    // var red_green_list = [];
+    
+    // console.log("SWAMP checkpoint 6.2 red_green_list pre-push = ", red_green_list);
+    // var colored_character_list = [];
+    // var colored_string;
+    
+    var parent_el = document.createElement('div');
+    // var container_div = document.createElement('div');
+    
+    var e;
+    for (var i = 0; i < list.length; i++) {
+        // if (i !== 0) {
+        //     //we need to create something that's not a div but rather a bit of text
+        //     // so instead of createElement as below
+        //     // e = document.createElement('div');
+        //     //we need create text
+        //     e.innerHTML = '&nbsp;';
+        //     e.style.display = 'inline-block';
+        //     parent_el.appendChild(e);
+        // }
+        e = document.createElement('font');
+        e.style.color = list[i][1];
+        e.innerHTML = list[i][0];
+        parent_el.appendChild(e);
+        // console.log("SWAMP 6.81 color = ", list[i][1]);
+        // e.style.color = list[i][1];
+        // console.log("SWAMP 6.81 text = ", list[i][0]);
+        // e.innerHTML = list[i][0];
+        // console.log("SWAMP 6.81 e = ", e);
+        // container_div.appendChild(e);
+        // parent_el.appendChild(container_div);
+    }
+    var fbox = el("image_display_box");
+    fbox.appendChild(parent_el);
+    return parent_el;
+    
+    // parent_el.appendChild(container_div);
+    // console.log("SWAMP 6.9 checkpoint out of for loop")
+    // console.log("SWAMP 6.91 colored_character_list = ", colored_character_list);
+    
+    
+    // console.log("SWAMP 6.92 checkpoint about to append to feedback box");
+    
+    // console.log("SWAMP 6.91 parent_el = ", parent_el);
+    // return parent_el;
+    
+    
+    // console.log("SWAMP red_green_list after push = ", red_green_list);
+    
+    // var red_green_string = red_green_list.toString();
+    
+    // console.log("SWAMP red_green_string = ", red_green_string);
+    
+    // var fbox = el("feedbackbox");
+    // fbox.innerHTML = "Almost! Try again." + red_green_string;
+}*/

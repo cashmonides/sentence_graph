@@ -512,6 +512,12 @@ Quiz.get_mode = function(mode_number) {
 
 Quiz.prototype.next_question = function (error) {
     
+    // todo very important: need to figure out how to clear this box
+    // without calling some ad hoc step
+    // remove_children(el('spelling_hint_box'));
+    var div_to_clear_ad_hoc = el('spelling_hint_box');
+    div_to_clear_ad_hoc.innerHTML = "";
+    
     /*
     //CLEANUP this horrible pollution eventually
     // morphology_dictionary_traverser_main(['latin verb morphology middle', 'imperfect indicative active', 'conjugation 1', '3s', '3p']);
@@ -632,8 +638,8 @@ Quiz.prototype.next_question = function (error) {
     
     
     
-    
-    
+    // horrible hack fix
+    el('spelling_hint_div2').innerHTML = '';
     
     //todo xxx hack this was a hack, remove 
     el('image_display_box').innerHTML = '';
@@ -1589,11 +1595,15 @@ Quiz.prototype.clean_up = function() {
     remove_children(el('image_display_box'));
     remove_children(el('vocab_cheat_sheet_div'));
     remove_children(el('etym_cheat_sheet_div'));
+    remove_children(el('etym_cheat_sheet_div'));
+    remove_children(el("spelling_hint_box"));
+    
     // remove_children(el("spelling_hint_div"));
     // remove_children(el('image_display_box1'));
     el('cheat_sheet_button').onclick = this.initialize_cheat_sheet.bind(this);
     el('vocab_cheat_button').onclick = this.initialize_vocab_cheat_sheet.bind(this);
     el('etym_cheat_button').onclick = this.initialize_etym_cheat_sheet.bind(this);
+    el('spelling_hint_button').onclick = this.initialize_spelling_hint.bind(this);
     // el("spelling_hint_button").onclick = this.initialize_spelling_hint.bind(this);
 }
 
@@ -1648,9 +1658,9 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
  
 ////SPELLING HINT SECTION in development
 //below is a primitive version for testing with no toggle and no error catching
-Quiz.prototype.initialize_spelling_hint = function () {
-    var hint_output = this.game.give_underscore_hint();
-    console.log("HINT6 hint_output = ", hint_output);
+Quiz.prototype.initialize_spelling_hint_old = function () {
+    // var hint_output = this.game.give_underscore_hint();
+    // console.log("HINT6 hint_output = ", hint_output);
     this.game.make_spelling_hint();
     
     //a clumsy attempt at error catching
@@ -1672,7 +1682,6 @@ Quiz.prototype.initialize_spelling_hint = function () {
     // create_cheat_sheet_table(outer_div, name,
     // null, null, etym_cheat, 2);
     // el('spelling_hint_button').onclick = function () {quiz.toggle_element(name)};
-
 }    
  
  
@@ -1681,8 +1690,10 @@ Quiz.prototype.initialize_spelling_hint = function () {
 // toggle, not just append
 // catch errors
 // make sure we're not giving the actual word itself
-Quiz.prototype.initialize_spelling_hint_advanced = function () {
-    console.log("HINT6 entering advanced hint initialize");
+// make sure we're not producing multiple variations that give away the word
+// e.g. pod_____y     & __iatry
+Quiz.prototype.initialize_spelling_hint = function () {
+    
     //see if this simple error catcher works
     //(some games won't have a spelling hint because they're not spelling mode)
     // if (!this.game.make_spelling_hint()) {
@@ -1693,23 +1704,73 @@ Quiz.prototype.initialize_spelling_hint_advanced = function () {
     //we just want to generate a string and a div to put it in
     // this.game.make_spelling_hint();
     //
-    var spelling_hint_string = this.game.generate_final_spelling_hint_string();
-    console.log("HINT6 hint_output = ", spelling_hint_string);
     
-    //A SIMPLE VERSION
-    // var div = el('spelling_hint_box');
-    // div_name.innerHTML = spelling_hint_string;
     
-    // version using make
-    var name = 'spelling_hint_div';
-    var div = make({'tag': 'div', 'id': name,'style': {'display': 'block'}}, 
-        el("spelling_hint_wrapper"));
+    ////START HERE THURSDAY
     
-    div.innerHTML = spelling_hint_string;
+    // we generate a string for the spelling hint
+    // it should look like this _____ivorous
     
-    el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div')};
+    //one option that doesn't seem to update on new question
+    // var spelling_hint_string = this.game.generate_final_spelling_hint_string();
+    //so we try this one
+    
+    
+    console.log("TURKEY 10 initialize_spelling_hint triggered");
+    
+    var div_to_inspect = el('spelling_hint_box');
+    console.log("TURKEY 10 BEFORE div.innerHTML = ", div_to_inspect.innerHTML);
+    
+    // this.game.make_spelling_hint();
+    var spelling_hint_string = this.game.spelling_hint;
+    
+    
+    console.log("TURKEY 10.1 hint_output = ", spelling_hint_string);
+    
+    //we first test A SIMPLE VERSION
+    // SUMMARY: works but doesn't remove old hint, doesn't give new hint
+    // simple because it doesn't use make, it just alters a pre-existing div
+    // does this work??
+    // yes this works but sometimes (seemingly more than usual)
+    // it produces the full word
+    var div_string = 'spelling_hint_box'
+    var div_name = el('spelling_hint_box');
+    console.log("TURKEY div_name = ", div_name);
+    div_name.innerHTML = spelling_hint_string;
+    console.log("TURKEY 10 AFTER div.innerHTML = ", div_to_inspect.innerHTML);
+    //works
+    // el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div2')};
+    // quiz.toggle_element takes as its argument a string, not the div
+    el('spelling_hint_button').onclick = function () {quiz.toggle_element(div_string)};
+
+
+    //model below
+    // var name = "etym_cheat_sheet"
+    // var etym_cheat = this.game.etymology_cheat_sheet;
+    // // var outer_div = el("image_display_box");
+    // var outer_div = el(name + "_div");
+    // create_cheat_sheet_table(outer_div, name,
+    // null, null, etym_cheat, 2);
+    // el('etym_cheat_button').onclick = function () {quiz.toggle_element(name)};
+    //end model
+    
+    // better version using make to test soon
+    
+    
+    // the make version
+    // var name = 'spelling_hint_div3';
+    // var div = make({'tag': 'div', 'id': name,'style': {'display': 'block'}}, 
+    //     el("spelling_hint_wrapper"));
+    // div.innerHTML = spelling_hint_string;
+    
+    
+    // el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div3')};
+
+    
+    
 
     /*
+    // older version obsolete, don't use
     // BELOW IS THE ADVANCED BLOCK TO BE TESTED SHORTLY
     
     //we generate our final string
@@ -1813,6 +1874,7 @@ Quiz.prototype.initialize_etym_cheat_sheet = function () {
     el('etym_cheat_button').onclick = function () {quiz.toggle_element(name)};
 }
 
+// argument is a string
 Quiz.prototype.toggle_element = function(id) {
     // var button = el("cheat_sheet_button");
     // // var wrapper = el("cheat_sheet_wrapper");
@@ -1840,14 +1902,18 @@ Quiz.prototype.toggle_element = function(id) {
     // console.log('image display box = ', el("image_display_box"));
     
     console.log("BACKLOG div id in toggle_element = ", id);
+    
     var element = el(id);
+    console.log("BACKLOG div.innerHTML = ", element.innerHTML);
     if (!element) {
         throw "no element with id: " + id;
     }
     console.log("BACKLOG: toggle triggered");
     if (element.style.display !== 'none') {
+        console.log("TURKEY none display triggered");
         element.style.display = 'none';
     } else {
+        console.log("TURKEY block display triggered");
         element.style.display = 'block';
     }
     //};

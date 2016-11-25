@@ -40,6 +40,7 @@ DropModeGame.prototype.attach = function(){
     set_display("next_button", 'none');
     set_display("skip_button", 'none');
     set_display("next_level_button", 'none');
+    set_display("spelling_hint_button", 'none');
     //current best result for clearing morphology
     set_display_of_class("morphology_to_clear", "none");
     set_display_of_class('cleared_in_etymology', 'initial');

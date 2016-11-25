@@ -116,6 +116,31 @@ but you'll occasionally find yourself needing it.
 
 */
 
+/* APPLICATION OF MAP-FILTER-REDUCE TO LATIN
+we'll use map to do the following:
+- e.g. we have a list of tense-moods and we want to add voice to each
+- same length result
+
+
+var allowed_tense_moods = ["x","y","z"];
+var allowed_tense_mood_voices = allowed_tense_moods.map(function(animal) {
+  return is_this_an_allowed_tense_mood_voice_combo?;
+});
+console.log(allowed_tense_mood_voices); //[a, b, c]
+
+*/
+
+/*  MAP
+Mapping operates on all of the elements in an array 
+and producing another array of the same length with transformed contents.
+
+*/
+
+
+/* FILTER
+
+*/
+
 
 
 
@@ -123,7 +148,7 @@ var tmv_list = [a, b, c, d];
 
 
 var new_tmv_list = tmv_list.map(function(tmv){
-    	//compare to some allowed value
+    //compare to some allowed value
 	// e.g. secondary sequence, 
 	 return output;
 });
