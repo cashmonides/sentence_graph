@@ -376,6 +376,13 @@ SpellingModeGame.prototype.display_red_green_result = function (list) {
 
 
 SpellingModeGame.prototype.process_correct_answer = function() {
+    
+    
+    // todo turkey remove when done testing
+    // var test_list = ['pos', 'pot root 2'];
+    // var test_output = remove_metadata_from_roots(test_list);
+    // console.log("TURKEY test_output = ", test_output);
+    
     this.quiz.increment_score();
     
     var spelling_feedback = this.clue + " = " + this.correct;
@@ -514,6 +521,14 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
     console.log("HINT entering underscore hit generator");
     console.log("HINT word to process = ", word);
     var roots_extracted = get_roots(word);
+    
+    console.log("TURKEYCORE root_list premodification = ", roots_extracted);
+    console.log("TURKEYGOD output = ", remove_metadata_from_roots(roots_extracted));
+    roots_extracted = remove_metadata_from_roots(roots_extracted);
+    console.log("TURKEYCORE root_list postmodification = ", roots_extracted);
+    
+    
+    
     console.log('HINT roots_extracted = ', roots_extracted);
     var random_root_to_replace = random_choice(roots_extracted);
     // if (root_not_found_counter > 40) {

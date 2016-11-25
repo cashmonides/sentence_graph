@@ -3,8 +3,12 @@ Agenda for future (made in mid-september 2016)
 HIGHEST PRIORITY
 bug in improvement located where console.log says BUGCHECK
 
-
-
+SMALLISH ALOGRITHM THINGS
+- x/y root 2 --> [x, y]   //throwing away 'root 2'
+- needs to iterate over all the items in the slash list
+- (best to generate a string processor that does this)
+- (best to generate a string processor that returns a boolen if x/y/z is in the root)
+    - we can use that for matching quad with quad/quadr
 
 BIRD'S EYE AGENDA
 step 1
