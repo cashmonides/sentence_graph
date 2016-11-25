@@ -132,6 +132,13 @@ var similar_enough = function (x, y) {
     return common_word(get_root_meaning(x), get_root_meaning(y), 4);
 }
 
+
+// below returns a root which matches a substring in a word
+// the trick is that we are sending in a slashed
+// e.g. omnipotent  
+
+
+
 var make_question_data = function (question_type,
 available_words, available_roots, number_of_answer_choices) {
     // available_words and available_roots are lists.

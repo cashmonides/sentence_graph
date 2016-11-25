@@ -522,15 +522,35 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
     console.log("HINT word to process = ", word);
     var roots_extracted = get_roots(word);
     
-    console.log("TURKEYCORE root_list premodification = ", roots_extracted);
-    console.log("TURKEYGOD output = ", remove_metadata_from_roots(roots_extracted));
     roots_extracted = remove_metadata_from_roots(roots_extracted);
-    console.log("TURKEYCORE root_list postmodification = ", roots_extracted);
+    
+    
+    
     
     
     
     console.log('HINT roots_extracted = ', roots_extracted);
     var random_root_to_replace = random_choice(roots_extracted);
+    
+    
+    //MANCHESTER TEST HERE
+    console.log("MANCHESTER INPUT random_root_to_replace = ", random_root_to_replace);
+    console.log("MANCHESTER INPUT word = ", word);
+    var manchester_output = test_match_from_slash_options(random_root_to_replace, word);
+    console.log("MANCHESTER output = ", manchester_output);
+    
+    
+    
+    console.log("MANCHESTER INPUT2 random_root_to_replace = ", random_root_to_replace);
+    console.log("MANCHESTER INPUT2 word = ", word);
+    var manchester_output2 = return_match_from_slash_options(random_root_to_replace, word);
+    console.log("MANCHESTER output2 = ", manchester_output2);
+    
+    
+    
+    //END MACHESTER TEST HERE
+    
+    
     // if (root_not_found_counter > 40) {
     //     console.log("PROBLEM: root not found");
     //     this.next_question;
@@ -625,6 +645,8 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
     
     return word_with_root_replaced;
 };
+
+
 
 
 // todo below should be set up as a global function
