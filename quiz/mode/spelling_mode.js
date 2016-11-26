@@ -506,146 +506,61 @@ SpellingModeGame.prototype.make_spelling_hint = function () {
 // but it needs to be redesigned to be:
 // modular
 // iterate through all the roots until it finds one
+
 SpellingModeGame.prototype.give_underscore_hint = function (word) {
-    // var root_string = get_word_meaning(word);
-    // console.log("HINT root_string = ", root_string);
-    // var length_of_root_string = root_string.length;
-    // console.log("HINT length_of_root_string = ", length_of_root_string);
-    // var underscore_string = new Array(length_of_root_string + 1).join("_");
-    // console.log("HINT underscore_string = ", underscore_string);
-    // var underscore_hint = word.replace(root_string, underscore_string);
-    // console.log("HINT underscore_hint = ", underscore_hint);
     
-    // var root_not_found_counter;
-    // root_not_found_counter = 0;
-    console.log("HINT entering underscore hit generator");
-    console.log("HINT word to process = ", word);
+    console.log("BACKLOG entering underscore hit generator");
+    console.log("BACKLOG word to process = ", word);
+    // we extract all possible roots
+    // e.g. quadruped ---> ['QUAD/QUADR', 'PED/POD']
     var roots_extracted = get_roots(word);
+    // console.log('MANCHESTER0 roots_extracted premutation = ', roots_extracted);
     
+    // we need to remove metadata such as "root 2"
+    // e.g. ['POS/POT root 2'] ---> ['POS/POT']
     roots_extracted = remove_metadata_from_roots(roots_extracted);
+    console.log('BACKLOG roots_extracted postmutation = ', roots_extracted);
     
-    
-    
-    
-    
-    
-    console.log('HINT roots_extracted = ', roots_extracted);
+    // pick a random root from that list
     var random_root_to_replace = random_choice(roots_extracted);
+    // console.log("REMOVE random_root_to_replace premutation = ", random_root_to_replace);
     
     
-    //MANCHESTER TEST HERE
-    console.log("MANCHESTER INPUT random_root_to_replace = ", random_root_to_replace);
-    console.log("MANCHESTER INPUT word = ", word);
-    var manchester_output = test_match_from_slash_options(random_root_to_replace, word);
-    console.log("MANCHESTER output = ", manchester_output);
+    //here's where we should put the error catching
+    var is_there_a_match = false;
+    is_there_a_match = test_match_from_slash_options(random_root_to_replace, word);
+    if (!is_there_a_match) {
+        alert("NO MATCH DISCOVERED");
+    } else {
+        console.log("LOG spelling hint match detected");
+    }
     
     
+    // we find the substring that matches
+    // ped, quadruped ---> ped
+    random_root_to_replace = return_match_from_slash_options(random_root_to_replace, word);
     
-    console.log("MANCHESTER INPUT2 random_root_to_replace = ", random_root_to_replace);
-    console.log("MANCHESTER INPUT2 word = ", word);
-    var manchester_output2 = return_match_from_slash_options(random_root_to_replace, word);
-    console.log("MANCHESTER output2 = ", manchester_output2);
-    
-    
-    
-    //END MACHESTER TEST HERE
+    //we need to convert to lower case
+    random_root_to_replace = random_root_to_replace.toLowerCase();
+    console.log("BACKLOG root we've chosen to replace = ", random_root_to_replace);
     
     
-    // if (root_not_found_counter > 40) {
-    //     console.log("PROBLEM: root not found");
-    //     this.next_question;
-    // };
-    // while (word.indexOf(random_root_to_replace) !== -1) {
-    //     random_root_to_replace = random_choice(roots_extracted);
-    //     root_not_found_counter++; 
-        // console.log("HINT random_root_to_replace = ", random_root_to_replace);
-        // var length_of_root_to_replace = random_root_to_replace.length;
-        // console.log("HINT length_of_root_to_replace = ", length_of_root_to_replace);
-        // var underscore_string = new Array(length_of_root_to_replace + 1).join("_");
-        // console.log("HINT underscore_string = ", underscore_string);
-        
-        
-        
-        
-        // ////////REAL VERSION/////
-        // var test_word = word;
-        // var test_root_to_replace = random_root_to_replace;
-        // test_root_to_replace = test_root_to_replace.toLowerCase();
-        // var list_of_slashed_options = test_root_to_replace.split("/");
-        // var first_slashed_option = list_of_slashed_options[0];
-        
-        // console.log("HINT first_slashed_option = ", first_slashed_option);
-        // console.log("HINT list of slashed options = ", list_of_slashed_options);
-        // test_root_to_replace = first_slashed_option;
-        // console.log("HINT test_word = ", test_word);
-        // console.log("HINT typeOf test_word = ", typeof test_word);
-        // console.log("HINT test_root_to_replace = ", test_root_to_replace);
-        // console.log("HINT typeOf test_root_to_replace = ", typeof test_root_to_replace);
-        // var length_of_root_to_replace = test_root_to_replace.length;
-        // var underscore_string = new Array(length_of_root_to_replace + 1).join("_");
-        // console.log("HINT underscore_string2 = ", underscore_string);
-        // // var word_with_root_replaced = test_word.replace(test_root_to_replace, "_____");
-        // var word_with_root_replaced = test_word.replace(test_root_to_replace, underscore_string);
-        // console.log("HINT test_word after mutation = ", test_word);
-        // console.log("HINT word_with_root_replaced = ", word_with_root_replaced);
-        
-        
-        
-        
-        
-        
-        // return word_with_root_replaced;
-    
-    // }
-    console.log("HINT random_root_to_replace = ", random_root_to_replace);
+    // we need an underscore line to match the length of the word
     var length_of_root_to_replace = random_root_to_replace.length;
-    console.log("HINT length_of_root_to_replace = ", length_of_root_to_replace);
+    // console.log("REMOVE length_of_root_to_replace = ", length_of_root_to_replace);
+    
     var underscore_string = new Array(length_of_root_to_replace + 1).join("_");
-    console.log("HINT underscore_string = ", underscore_string);
+    // console.log("REMOVE underscore_string = ", underscore_string);
     
     
     
-    
-    ////////REAL VERSION/////
-    var test_word = word;
-    var test_root_to_replace = random_root_to_replace;
-    test_root_to_replace = test_root_to_replace.toLowerCase();
-    var list_of_slashed_options = test_root_to_replace.split("/");
-    var first_slashed_option = list_of_slashed_options[0];
-    
-    
-    
-    console.log("HINT first_slashed_option = ", first_slashed_option);
-    console.log("HINT list of slashed options = ", list_of_slashed_options);
-    test_root_to_replace = first_slashed_option;
-    
-    
-    if (word.indexOf(test_root_to_replace) !== -1) {
-        console.log("HINT snd slash triggered");
-        if (list_of_slashed_options[1]) {
-            if (word.indexOf(list_of_slashed_options[1]) !== -1) {
-                test_root_to_replace = list_of_slashed_options[1];
-            } else {
-                console.log("2nd slash not triggered");
-            }
-        };
-    };
-    console.log("HINT test_word = ", test_word);
-    console.log("HINT typeOf test_word = ", typeof test_word);
-    console.log("HINT test_root_to_replace = ", test_root_to_replace);
-    console.log("HINT typeOf test_root_to_replace = ", typeof test_root_to_replace);
-    var length_of_root_to_replace = test_root_to_replace.length;
-    var underscore_string = new Array(length_of_root_to_replace + 1).join("_");
-    console.log("HINT underscore_string2 = ", underscore_string);
-    // var word_with_root_replaced = test_word.replace(test_root_to_replace, "_____");
-    var word_with_root_replaced = test_word.replace(test_root_to_replace, underscore_string);
-    console.log("HINT test_word after mutation = ", test_word);
-    console.log("HINT word_with_root_replaced = ", word_with_root_replaced);
-    
-    
+    // we replace our matched substring with an underscore line
+    var word_with_root_replaced = word.replace(random_root_to_replace, underscore_string);
+    // console.log("REMOVE word after mutation = ", word);
+    // console.log("REMOVE word_with_root_replaced = ", word_with_root_replaced);
+
     return word_with_root_replaced;
 };
-
 
 
 
