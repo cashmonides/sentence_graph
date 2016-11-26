@@ -26,6 +26,30 @@ var return_slash_options = function (slashed_string) {
 // the problem is we might get multiple matches
 // [ig/il/im/in] might match 'in' twice with in.nivincible or inv.in.cible
 
+
+// we want to return a bool, whether an input word matches with a target list of slash_options
+// "ped", "ped/pod" --> true
+var test_match_in_slash_options = function (input_word, slash_options_string) {
+    //convert to lower case
+    slash_options_string = slash_options_string.toLowerCase();
+    var slash_options_list = slash_options_string.split("/");
+    
+    var boolean = false;
+    for (var i = 0; i < slash_options_list.length; i++) {
+        if (slash_options_list[i].indexOf(input_word)) {
+            console.log("LOG MANCHESTER match found, boolean switched to true");
+            boolean = true;
+            return boolean;
+        } else {
+            console.log("LOG MANCHESTER MATCH NOT FOUND continuing iteration");
+            continue;
+        }
+    }
+    console.log("MANCHESTER boolean returned = ", boolean);
+    return boolean;
+};
+
+
 // we want to return a bool (whether a match has been found or not)
 var test_match_from_slash_options = function (slash_options_string, query_word) {
     
@@ -46,6 +70,8 @@ var test_match_from_slash_options = function (slash_options_string, query_word) 
     console.log("MANCHESTER boolean returned = ", boolean);
     return boolean;
 };
+
+
 
 // this function returns either a string (the matched root)
 // or false

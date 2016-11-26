@@ -228,7 +228,8 @@ SpellingModeGame.prototype.next_question = function(){
     //     'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.5,
         // 'root_definition_to_root': 0.5};
-    this.legal_question_types = {'word_definition_to_word': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.000001, 'root_definition_to_root': 0.5};
+    // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     
     console.log("TRUMP weighted(this.legal_question_types) =", weighted(this.legal_question_types));
@@ -308,12 +309,16 @@ SpellingModeGame.prototype.process_answer = function(){
     // better would be to just have the processing take a consistent input 
     // and process the slash downstream
     var comparison_result;
+    console.log("GATOR this.chosen_question_type = ", this.chosen_question_type);
     if (this.chosen_question_type == 'root_definition_to_root') {
         comparison_result = this.submit_to_green_red_master_with_slash(this.correct, raw_input_string, true);
+        console.log("GATOR slash_mode comparison_result = ", comparison_result);
     } else {
         comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
+        console.log("GATOR no_slash_mode comparison_result = ", comparison_result);
     }
     
+    console.log("GATOR comparison_result = ", comparison_result);
     this.comparison_result = comparison_result;
     
     
@@ -509,57 +514,97 @@ SpellingModeGame.prototype.make_spelling_hint = function () {
 
 SpellingModeGame.prototype.give_underscore_hint = function (word) {
     
-    console.log("BACKLOG entering underscore hit generator");
-    console.log("BACKLOG word to process = ", word);
-    // we extract all possible roots
-    // e.g. quadruped ---> ['QUAD/QUADR', 'PED/POD']
-    var roots_extracted = get_roots(word);
-    // console.log('MANCHESTER0 roots_extracted premutation = ', roots_extracted);
-    
-    // we need to remove metadata such as "root 2"
-    // e.g. ['POS/POT root 2'] ---> ['POS/POT']
-    roots_extracted = remove_metadata_from_roots(roots_extracted);
-    console.log('BACKLOG roots_extracted postmutation = ', roots_extracted);
-    
-    // pick a random root from that list
-    var random_root_to_replace = random_choice(roots_extracted);
-    // console.log("REMOVE random_root_to_replace premutation = ", random_root_to_replace);
+    //////////BEGIN TEMPORARY TEST
+    // console.log("GATOR entering test of root matching");
+    // var correct_answer_string = "QUAD/QUADR";
+    // var input_string = "quad";
+    // // var input_string = "quaf";
     
     
-    //here's where we should put the error catching
-    var is_there_a_match = false;
-    is_there_a_match = test_match_from_slash_options(random_root_to_replace, word);
-    if (!is_there_a_match) {
-        alert("NO MATCH DISCOVERED");
+    
+    // console.log("GATOR entering process slash block")
+    // console.log("GATOR correct_answer_string pre-mutation = ", correct_answer_string);
+    // correct_answer_string = correct_answer_string.toLowerCase();
+    // console.log("GATOR correct_answer_string in lower case = ", correct_answer_string);
+    // var red_green_result_list = [];
+    // console.log("GATOR red_green_result_list pre-addition = ", red_green_result_list);
+    // var list_of_slash_options_to_process = correct_answer_string.split("/");
+    // console.log("GATOR list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+    // for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
+    //     console.log("GATOR list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
+    //     var type_test = typeof list_of_slash_options_to_process[i];
+    //     console.log("GATOR typeOf.list_of_slash_options_to_process[i] = ", type_test);
+    //     var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
+    //     console.log("GATOR result pre-slash addition = ", result);
+    //     // result = result + "/";
+    //     // console.log("GATOR result post-slash addition = ", result);
+    //     red_green_result_list.push(result);
+    //     console.log("GATOR red_green_result_list post-addition = ", red_green_result_list);
+    // }
+    // console.log("GATOR red_green_result_list at end of loop = ", red_green_result_list);
+    // // return red_green_result_list;
+    
+    
+    
+    
+    // console.log("GATOR exiting test of root matching");
+    //////////END TEMPORARY TEST
+    
+    if (this.chosen_question_type == "root_definition_to_root") {
+        return "DUMMY HINT";
     } else {
-        console.log("LOG spelling hint match detected");
+        console.log("BACKLOG entering underscore hit generator");
+        console.log("BACKLOG word to process = ", word);
+        // we extract all possible roots
+        // e.g. quadruped ---> ['QUAD/QUADR', 'PED/POD']
+        var roots_extracted = get_roots(word);
+        // console.log('MANCHESTER0 roots_extracted premutation = ', roots_extracted);
+        
+        // we need to remove metadata such as "root 2"
+        // e.g. ['POS/POT root 2'] ---> ['POS/POT']
+        roots_extracted = remove_metadata_from_roots(roots_extracted);
+        console.log('BACKLOG roots_extracted postmutation = ', roots_extracted);
+        
+        // pick a random root from that list
+        var random_root_to_replace = random_choice(roots_extracted);
+        // console.log("REMOVE random_root_to_replace premutation = ", random_root_to_replace);
+        
+        
+        //here's where we should put the error catching
+        var is_there_a_match = false;
+        is_there_a_match = test_match_from_slash_options(random_root_to_replace, word);
+        if (!is_there_a_match) {
+            alert("NO MATCH DISCOVERED");
+        } else {
+            console.log("LOG spelling hint match detected");
+        }
+        
+        
+        // we find the substring that matches
+        // ped, quadruped ---> ped
+        random_root_to_replace = return_match_from_slash_options(random_root_to_replace, word);
+        
+        //we need to convert to lower case
+        random_root_to_replace = random_root_to_replace.toLowerCase();
+        console.log("BACKLOG root we've chosen to replace = ", random_root_to_replace);
+        
+        
+        // we need an underscore line to match the length of the word
+        var length_of_root_to_replace = random_root_to_replace.length;
+        // console.log("REMOVE length_of_root_to_replace = ", length_of_root_to_replace);
+        
+        var underscore_string = new Array(length_of_root_to_replace + 1).join("_");
+        // console.log("REMOVE underscore_string = ", underscore_string);
+        
+        
+        
+        // we replace our matched substring with an underscore line
+        var word_with_root_replaced = word.replace(random_root_to_replace, underscore_string);
+        // console.log("REMOVE word after mutation = ", word);
+        // console.log("REMOVE word_with_root_replaced = ", word_with_root_replaced);
+    
+        return word_with_root_replaced;
     }
-    
-    
-    // we find the substring that matches
-    // ped, quadruped ---> ped
-    random_root_to_replace = return_match_from_slash_options(random_root_to_replace, word);
-    
-    //we need to convert to lower case
-    random_root_to_replace = random_root_to_replace.toLowerCase();
-    console.log("BACKLOG root we've chosen to replace = ", random_root_to_replace);
-    
-    
-    // we need an underscore line to match the length of the word
-    var length_of_root_to_replace = random_root_to_replace.length;
-    // console.log("REMOVE length_of_root_to_replace = ", length_of_root_to_replace);
-    
-    var underscore_string = new Array(length_of_root_to_replace + 1).join("_");
-    // console.log("REMOVE underscore_string = ", underscore_string);
-    
-    
-    
-    // we replace our matched substring with an underscore line
-    var word_with_root_replaced = word.replace(random_root_to_replace, underscore_string);
-    // console.log("REMOVE word after mutation = ", word);
-    // console.log("REMOVE word_with_root_replaced = ", word_with_root_replaced);
-
-    return word_with_root_replaced;
 };
 
 
@@ -573,25 +618,68 @@ SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(corr
     // if they input ASTOR
     //we return ASTor   /  ASTor
     // var number_of_options_to_populate = get_number_of_slash_options(correct_answer_string);
-    var list_of_slash_options_to_process = correct_answer_string.split("/");
-    var number_of_options_to_populate = list_of_slash_options_to_process.length;
+    // var list_of_slash_options_to_process = correct_answer_string.split("/");
+    // var number_of_options_to_populate = list_of_slash_options_to_process.length;
     //we iterate through the list_of_slash_options_to_process
     // produce a list of red_green_results for each
     if (process_slashes_bool) {
-        console.log("TRUMP entering process slash block")
+        // begin new code
+        
+        console.log("GATOR entering test of root matching");
+        // var correct_answer_string = "QUAD/QUADR";
+        // var input_string = "quad";
+        // var input_string = "quaf";
+        
+    
+        console.log("GATOR entering process slash block")
+        console.log("GATOR correct_answer_string pre-mutation = ", correct_answer_string);
+        correct_answer_string = correct_answer_string.toLowerCase();
+        console.log("GATOR correct_answer_string in lower case = ", correct_answer_string);
         var red_green_result_list = [];
-        console.log("TRUMP red_green_result_list = ", red_green_result_list);
+        console.log("GATOR red_green_result_list pre-addition = ", red_green_result_list);
         var list_of_slash_options_to_process = correct_answer_string.split("/");
-        console.log("TRUMP list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+        console.log("GATOR list_of_slash_options_to_process = ", list_of_slash_options_to_process);
         for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
-            console.log("TRUMP list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
+            console.log("GATOR list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
             var type_test = typeof list_of_slash_options_to_process[i];
-            console.log("TRUMP typeOf.list_of_slash_options_to_process[i] = ", type_test);
+            console.log("GATOR typeOf.list_of_slash_options_to_process[i] = ", type_test);
             var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
+            console.log("GATOR result pre-slash addition = ", result);
+            // result = result + "/";
+            // console.log("GATOR result post-slash addition = ", result);
             red_green_result_list.push(result);
+            red_green_result_list.push(["/"]);
+            console.log("GATOR red_green_result_list post-addition = ", red_green_result_list);
         }
-        console.log("TRUMP red_green_result_list = ", red_green_result_list);
-        return red_green_result_list;
+        //we drop the last slash
+        red_green_result_list.pop();
+        // we need to flatten the list
+        console.log("GATOR red_green_result_list at end of loop = ", red_green_result_list);
+        var flattened_red_green_result_list = [].concat.apply([], red_green_result_list);
+        console.log("GATOR flattened_red_green_result_list = ", flattened_red_green_result_list);
+        // return red_green_result_list;
+        return flattened_red_green_result_list;
+        
+        
+        
+        
+        
+        //old code below, probably pretty bad
+        // console.log("TRUMP entering process slash block")
+        // var red_green_result_list = [];
+        // console.log("TRUMP red_green_result_list = ", red_green_result_list);
+        // var list_of_slash_options_to_process = correct_answer_string.split("/");
+        // console.log("TRUMP list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+        // for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
+        //     console.log("TRUMP list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
+        //     var type_test = typeof list_of_slash_options_to_process[i];
+        //     console.log("TRUMP typeOf.list_of_slash_options_to_process[i] = ", type_test);
+        //     var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
+        //     red_green_result_list.push(result);
+        // }
+        // console.log("TRUMP red_green_result_list = ", red_green_result_list);
+        // return red_green_result_list;
+        //end old code
         
     } else {
         this.submit_string_to_green_and_red(correct_answer_string, input_string);
@@ -608,6 +696,10 @@ SpellingModeGame.prototype.submit_string_to_green_and_red = function (correct_an
     var input_string_as_list_of_characters = input_string.split("");
     console.log("TRUMP correct answer list = ", correct_answer_as_list_of_characters);
     console.log("TRUMP input list = ", input_string_as_list_of_characters);*/
+    
+    
+    
+    
     
     
     var levenshtein_result = levenshtein(correct_answer_string, input_string)

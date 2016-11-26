@@ -10,6 +10,40 @@ SMALLISH ALOGRITHM THINGS
 - (best to generate a string processor that returns a boolen if x/y/z is in the root)
     - we can use that for matching quad with quad/quadr
 
+A POSSIBLY FUN LITTLE PROJECT
+- convert etymology words to x.y.z format
+    - quadruped --> quadr.u.ped
+    - with categories   
+        - root
+        - formation element
+        - connector element (e.g. vowel between roots)
+        - unknown
+    - e.g. 
+    - root.connector.root  (quadr.u.ped)
+    - root.formation (herb.al)
+    - root.root.formation.formation (bin.ocul.ar.s)
+    (obviously if we don't know how to classify an element or its data hasn't been
+     loaded then we would need to classify it as unknown)
+     - e.g. perhaps we don't know what to make pusill. in pusill.anim.ous
+        it would end up as unknown.root.formation
+    - the utility of this would be:
+        - to display a word in x.y.z form could serve as a sort of hint
+        - they see quadruped
+        - it's confusing
+        - they hit hint
+        - the word gets turned into quadr.u.ped
+        - with the quadr and ped in bold or otherwise graphically distinguished
+        - they hit a second layer of hint and it tells them the meaning of the roots quadr and ped
+
+MEDIUM THING
+- now that slash recognition is more or less working, a 'Spell the root' mode would be good
+
+LITTLE THING
+- refactor temporary_incorrect_streak
+
+LITTLE THING
+- add a hint penalty at higher level (especially useful for spelling mode)
+
 BIRD'S EYE AGENDA
 step 1
     dash removal (done)

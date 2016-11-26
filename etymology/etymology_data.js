@@ -4547,7 +4547,7 @@ var words = {
         "meaning": "relating to plants",
         "part of speech": "adjective",
         "roots": [
-            "HERBI"
+            "HERB"
         ],
         "type": "none",
         "word": "herbal"
@@ -4557,7 +4557,7 @@ var words = {
         "meaning": "any chemical used to kill unwanted plants, etc.",
         "part of speech": "noun",
         "roots": [
-            "HERBI",
+            "HERB",
             "CIDE/CISE"
         ],
         "type": "none",
@@ -4568,7 +4568,7 @@ var words = {
         "meaning": "plant-eating",
         "part of speech": "adjective",
         "roots": [
-            "HERBI",
+            "HERB",
             "VOR/VOUR"
         ],
         "type": "none",
@@ -7560,7 +7560,6 @@ var words = {
         "meaning": "a doctor who treats children",
         "part of speech": "noun",
         "roots": [
-            "PED/POD",
             "IATR"
         ],
         "type": "none",
@@ -9732,7 +9731,7 @@ var words = {
     },
     "tetrapod": {
         "grade": 12,
-        "meaning": "a type of animal with four legs",
+        "meaning": "an animal with 4 limbs (either a quadruped with 4 legs or a biped with 2 legs and 2 arms)",
         "part of speech": "noun",
         "roots": [
             "TETRA",
@@ -10891,9 +10890,9 @@ var roots = {
         "meaning": "seven",
         "root": "HEPT/HEPTA"
     },
-    "HERBI": {
+    "HERB": {
         "meaning": "grass, plant",
-        "root": "HERBI"
+        "root": "HERB"
     },
     "HETERO": {
         "meaning": "different, other",
