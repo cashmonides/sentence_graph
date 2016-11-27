@@ -264,10 +264,10 @@ SpellingModeGame.prototype.next_question = function(){
         this.level.etym_level, this.chosen_question_type, 4, 4, 4);
     // console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
-    this.lizard_cheat_sheet = alphabetize_dict(
+    this.etymology_cheat_sheet = alphabetize_dict(
         question_with_cheat_sheet['cheat_sheet']);
         
-    console.log("LIZARD2 this.lizard_cheat_sheet = ", this.lizard_cheat_sheet);
+    console.log("LIZARD2 this.etymology_cheat_sheet = ", this.etymology_cheat_sheet);
     
     
     
@@ -312,7 +312,9 @@ SpellingModeGame.prototype.next_question = function(){
         //old version that works with just one root
         // this.etymology_cheat_sheet =  this.make_root_definition_to_root_cheat_sheet(this.correct);
         // new version that might work
-        this.etymology_cheat_sheet =  this.make_root_definition_to_root_cheat_sheet_new(dummy_root_list);
+        // this.etymology_cheat_sheet =  this.make_root_definition_to_root_cheat_sheet_new(dummy_root_list);
+        this.etymology_cheat_sheet = alphabetize_dict(
+            question_with_cheat_sheet['cheat_sheet']);
     } else {
         this.etymology_cheat_sheet = alphabetize_dict(
             question_with_cheat_sheet['cheat_sheet']);

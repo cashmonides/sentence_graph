@@ -1,7 +1,13 @@
 Agenda for future (made in mid-september 2016)
 
 HIGHEST PRIORITY
-bug in improvement located where console.log says BUGCHECK
+- ???bug in improvement located where console.log says BUGCHECK
+- morphology cells are red when open
+- feedback in morphology and etymology should repeat question
+
+
+
+
 
 SMALLISH ALOGRITHM THINGS
 - x/y root 2 --> [x, y]   //throwing away 'root 2'
