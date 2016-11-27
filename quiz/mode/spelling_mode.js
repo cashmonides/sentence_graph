@@ -294,14 +294,32 @@ SpellingModeGame.prototype.process_answer = function(){
     var raw_input_string = el("input_box").value;
     // console.log("BACKLOG: raw input string = ", raw_input_string);
     
+    
+    // todo clean_input_string creates objects (aka dictionaries)
+    // which is a little too complicated than we always need
+    // also some of the objects are called strings in their variable name so they should be changed
+    // we want just a basic lower case string
+    // like this
+    var user_input_string = raw_input_string.toLowerCase();
+    console.log("CROC user_input_string = ", user_input_string);
+    
     var processed_input_string = clean_input_string(raw_input_string);
-    // console.log("BACKLOG: process input string = ", processed_input_string);
+    console.log("BACKLOG: processed input string = ", processed_input_string);
+    
+    
+    
     
     
     var correct_english_translation;
     
+    // todo clean_input_string removes punctuation but too indifferently
+    console.log("CROC this.correct = ", this.correct);
     correct_english_translation = clean_input_string(this.correct);
     
+    // so instead we just convert to lower case
+    var correct_english_string = this.correct;
+    correct_english_string = correct_english_string.toLowerCase();
+    console.log("CROC correct_english_string = ", correct_english_string);
     
     // todo below seems a little ad hoc
     // submit...with_slash processes strings of the form (x/y) and matches to either x or y
@@ -329,12 +347,49 @@ SpellingModeGame.prototype.process_answer = function(){
     
     // console.log("SPELLING checkpoint 6.999 leaving display_red_green-result");
     
+    
+    // HERE IS WHERE THE INTERVENTION WILL GO
+    // slash_option_equals(input, target_list) will be altered
+    // such that it returns true if there is a match on either side
+    // it basically divides slash_options into string
+    // converts to lower case
+    // iterate through new list and apply object_equals
+    console.log("CROC correct_english_string = ", correct_english_string);
+    if (correct_english_string.indexOf("/") !== -1) {
+        console.log("CROC slash detected, applying slash_equals mode");
+        // we convert a slashed-string to a list
+        var boolean_result = string_matches_slashed_string(user_input_string, correct_english_string);
+        console.log("CROC boolean result = ", boolean_result);
+        if (boolean_result) {
+            console.log("CROC boolean true so process_correct triggered");
+            this.process_correct_answer();
+        } else {
+            console.log("CROC boolean true so process_incorrect triggered");
+            this.process_incorrect_answer();
+        }
+    } else {
+        console.log("CROC slash mode not detected, applying normal mode");
+        if (object_equals(processed_input_string, correct_english_translation)) {
+            this.process_correct_answer();
+        } else {
+            // console.log("SPELLING checkpoint 1 about to call process_incorrect_answer");
+            this.process_incorrect_answer();
+        }
+    }
+    
+    
+    // END OF INTERVENTION
+    
+    /////WORKING BLOCK BELOW
+    /*
+    
     if (object_equals(processed_input_string, correct_english_translation)) {
         this.process_correct_answer();
     } else {
         // console.log("SPELLING checkpoint 1 about to call process_incorrect_answer");
         this.process_incorrect_answer();
     }
+    */
 };
 
 

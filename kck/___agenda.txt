@@ -37,6 +37,29 @@ A POSSIBLY FUN LITTLE PROJECT
 
 MEDIUM THING
 - now that slash recognition is more or less working, a 'Spell the root' mode would be good
+    - agenda:
+        - change match to match either
+        - hunt down bug of the double slashes
+    - ideally:
+        - we would have something like:
+        - good you've spelled one version of the root
+        - how are the other ones spelled
+        - but for now it seem enough to match either
+        - so if the correct answer is bi/bin and they give either, it's processed as correct
+    - bug
+        - red/green result seems to work
+        - for some reason inout like bo/bil produces two sets of slashed items
+    - change red/green result
+        - we need to match either of the matches
+        - red/green feedback should be given for both
+        - input: quaf & correct answer: quad/quadr --> red-green / red-green
+        - split correct answer into list
+        - iterate through list
+        - push red-green result to list and display
+    - change test answer to see if correct
+        - test correct answer on either
+    - change hint
+    - change etymology cheat sheet
 
 LITTLE THING
 - refactor temporary_incorrect_streak
