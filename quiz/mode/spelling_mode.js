@@ -226,9 +226,9 @@ SpellingModeGame.prototype.next_question = function(){
     
     // this.legal_question_types = {'word_definition_to_word': 0.00000005,
     //     'root_definition_to_root': 0.5};
-    // this.legal_question_types = {'word_definition_to_word': 0.5,
-        // 'root_definition_to_root': 0.5};
-    this.legal_question_types = {'word_definition_to_word': 0.000001, 'root_definition_to_root': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.5,
+        'root_definition_to_root': 0.5};
+    // this.legal_question_types = {'word_definition_to_word': 0.000001, 'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     
@@ -253,15 +253,34 @@ SpellingModeGame.prototype.next_question = function(){
     //1,0,1 gives good results
     //2,0,1 gives a dummy
     // 2,0,1 mysteriously gives good results, usually 3 answers with one dummy and two relevant ones
+    
+    
+    console.log("GECKO this.chosen_question_type = ", this.chosen_question_type);
+    
+    // var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+    //     this.level.etym_level, this.chosen_question_type, 3, 3, 3);
+    
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
         this.level.etym_level, this.chosen_question_type, 3, 0, 1);
     // console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
-    this.etymology_cheat_sheet = alphabetize_dict(
-        question_with_cheat_sheet['cheat_sheet']);
-    this.choices = alphabetize_list(question.choices);
     this.correct = question.correct_answer;
     this.clue = question.clue;
+    
+    if (this.chosen_question_type == 'root_definition_to_root') {
+        console.log("DRAGON about to invoke the dragon with input = ", this.correct);
+        this.etymology_cheat_sheet = this.make_root_definition_to_root_cheat_sheet(this.correct);
+    } else {
+        this.etymology_cheat_sheet = alphabetize_dict(
+            question_with_cheat_sheet['cheat_sheet']);
+    };
+    
+    
+    
+    
+    console.log("GECKO this.etymology_cheat_sheet = ", this.etymology_cheat_sheet);
+    this.choices = alphabetize_list(question.choices);
+    
     // console.log("BACKLOG: this.correct spelling_mode  = ", this.correct);
     
     var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
@@ -521,6 +540,15 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
 
 //this is a primitive version which does all the function at once doesn't toggle 
 // what we really want is something that will work with the toggle function
+
+
+SpellingModeGame.prototype.make_root_definition_to_root_cheat_sheet = function (root) {
+    console.log("DRAGON about to enter the dragon");
+    console.log("DRAGON root_input = ", root);
+    var output_words = make_root_to_word_list(root);
+    console.log("DRAGON output_words = ", output_words);
+    return output_words;
+};
 
 
 SpellingModeGame.prototype.make_spelling_hint = function () {

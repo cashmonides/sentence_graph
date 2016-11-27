@@ -426,6 +426,41 @@ number_of_dummies, number_of_mandatory) {
     }
 }
 
+
+// we want a cheat sheet that will help when we are trying to go
+// from root_definition_to_root
+// e.g. spell the root that means "four"
+// cheat sheet would have a bunch of words that have that root, along with some dummies
+// arguments:
+// root = the root we want to be in common
+// max = the maximum number of words that we return
+
+var make_root_to_word_list = function (root) {
+    console.log("DRAGON entering the dragon make_root_to_word_list");
+    console.log("DRAGON input = ", root);
+    //we get all words with that root
+    var root_list = [];
+    root_list.push(root);
+    // todo later we'll push max - 1 random roots
+    var all_words_with_root = get_words_from_roots(root_list);
+    // var all_words_with_root = get_words_with_root(root, words);
+    console.log("DRAGON output all_words_with_root = ", all_words_with_root);
+    
+    //hacky quick test
+    var output_list = [];
+    for (var i = 0; i < all_words_with_root.length; i++) {
+        var word_to_query = all_words_with_root[i];
+        var meaning_of_word = get_word_meaning(word_to_query);
+        var word_and_meaning = word_to_query + " = " + meaning_of_word;
+        output_list.push(word_and_meaning);
+    }
+    
+    // primitive version below
+    // return all_words_with_root;
+    
+    return output_list;
+}
+
 /*
 // comment this out when done testing
 window.onload = function () {
