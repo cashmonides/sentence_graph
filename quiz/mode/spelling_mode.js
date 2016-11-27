@@ -529,9 +529,16 @@ SpellingModeGame.prototype.make_spelling_hint = function () {
     // var hint_to_add = document.createTextNode(underscore_hint);
     // var box_for_underscore_hint = el('image_display_box');
     // box_for_underscore_hint.append(hint_to_add);
-    var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
-    console.log("HINT99 underscore_hint = ", underscore_hint);
-    this.spelling_hint = underscore_hint;
+    if (this.chosen_question_type === 'root_definition_to_root') {
+        // the hacky test version
+        this.spelling_hint = "STARTS WITH THE LETTER: " + this.correct.charAt(0);
+        // the real version
+        // this.spelling_hint = this.give_first_letter_hint(this.correct);
+    } else {
+        var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
+        console.log("HINT99 underscore_hint = ", underscore_hint);
+        this.spelling_hint = underscore_hint; 
+    }
     console.log("HINT99 this.spelling_hint = ", this.spelling_hint);
 };
 
@@ -606,7 +613,8 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
     //////////END TEMPORARY TEST
     
     if (this.chosen_question_type == "root_definition_to_root") {
-        return "DUMMY HINT";
+        return "starts with the letter: " + this.correct.charAt(0);
+        // return "DUMMY HINT";
     } else {
         console.log("BACKLOG entering underscore hit generator");
         console.log("BACKLOG word to process = ", word);
