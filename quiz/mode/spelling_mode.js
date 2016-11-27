@@ -267,9 +267,31 @@ SpellingModeGame.prototype.next_question = function(){
     this.correct = question.correct_answer;
     this.clue = question.clue;
     
+    
+    //BEGIN DRAGON HACK
+    // we want to send a list of dummy roots to the cheat sheet
+    var dummy_root_list = [];
+    var number_of_dummy_roots = 2;
+    var input_level = this.level.etym_level;
+    var all_roots = select_available_roots(input_level);
+    console.log("DRAGON all_roots = ", all_roots);
+    for (var i = 0; i < number_of_dummy_roots; i++) {
+        var random_root = random_choice(all_roots);
+        console.log("DRAGON random_root = ", random_root);
+        dummy_root_list.push(random_root);
+    }
+    
+    dummy_root_list.push(this.correct);
+    console.log("DRAGON dummy_root_list after adding correct root = ", dummy_root_list);
+    ///END DRAGON HACK
+    
+    
     if (this.chosen_question_type == 'root_definition_to_root') {
         console.log("DRAGON about to invoke the dragon with input = ", this.correct);
-        this.etymology_cheat_sheet = this.make_root_definition_to_root_cheat_sheet(this.correct);
+        //old version that works with just one root
+        // this.etymology_cheat_sheet =  this.make_root_definition_to_root_cheat_sheet(this.correct);
+        // new version that might work
+        this.etymology_cheat_sheet =  this.make_root_definition_to_root_cheat_sheet_new(dummy_root_list);
     } else {
         this.etymology_cheat_sheet = alphabetize_dict(
             question_with_cheat_sheet['cheat_sheet']);
@@ -542,13 +564,122 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
 // what we really want is something that will work with the toggle function
 
 
+
+// a version that only takes one root, not as useful
 SpellingModeGame.prototype.make_root_definition_to_root_cheat_sheet = function (root) {
     console.log("DRAGON about to enter the dragon");
     console.log("DRAGON root_input = ", root);
     var output_words = make_root_to_word_list(root);
+    
     console.log("DRAGON output_words = ", output_words);
+    
+    
+    
+    
+    
+    
+    
+    ////////ENTERING SNAKE TEST
+    // console.log("SNAKE entering snake test");
+    // var name = "etym_cheat_sheet"
+    // var spell_root_cheat = output_words;
+    // console.log("SNAKE spell_root_cheat = ", spell_root_cheat);
+    // // var outer_div = el("image_display_box");
+    // var outer_div = el(name + "_div");
+    // create_cheat_sheet_table(outer_div, name,
+    // ['latin_cheat_sheet_item', 'english_cheat_sheet_item'], null, spell_root_cheat, 2);
+    // console.log("SNAKE leaving snake test");
+    /////LEAVING SNAKE TEST
+    
+    
     return output_words;
+    
+    
+    // above is fine, but it doesn't use the make function
+    // below is an attempt using the make function
+    // create cheat sheet table has everything we need to do the job
+    // it's arguments are:
+    // the outer_div where we will place it
+    // name of
+    // 
+    //
+    // items
+    // number of items per row
+    // var name = "etym_cheat_sheet"
+    // var spell_root_cheat = output_words;
+    // // var outer_div = el("image_display_box");
+    // var outer_div = el(name + "_div");
+    // create_cheat_sheet_table(outer_div, name,
+    // null, null, spell_root_cheat, 2);
+    
+    
 };
+
+
+// a version that takes a list of roots
+SpellingModeGame.prototype.make_root_definition_to_root_cheat_sheet_new = function (root_list) {
+    console.log("DRAGON about to enter the dragon");
+    console.log("DRAGON root_list_input = ", root_list);
+    var output_list = [];
+    var output_words;
+    for (var i = 0; i < root_list.length; i++) {
+        output_words = make_root_to_word_list(root_list[i]);
+        console.log("DRAGON output_words = ", output_words);
+        output_list.push(output_words);
+    }
+    
+    console.log("DRAGON output_list after for loop = ", output_list);
+    
+    var merged_output_list = [].concat.apply([], output_list);
+    
+    console.log("DRAGON merged_output_list = ", merged_output_list);
+    
+    // return merged_output_list;
+    
+    var shuffled_output_list = shuffle(merged_output_list);
+    shuffled_output_list = remove_duplicates(shuffled_output_list);
+    
+    return shuffled_output_list;
+    
+    
+    
+    
+    ////////ENTERING SNAKE TEST
+    // console.log("SNAKE entering snake test");
+    // var name = "etym_cheat_sheet"
+    // var spell_root_cheat = output_words;
+    // console.log("SNAKE spell_root_cheat = ", spell_root_cheat);
+    // // var outer_div = el("image_display_box");
+    // var outer_div = el(name + "_div");
+    // create_cheat_sheet_table(outer_div, name,
+    // ['latin_cheat_sheet_item', 'english_cheat_sheet_item'], null, spell_root_cheat, 2);
+    // console.log("SNAKE leaving snake test");
+    /////LEAVING SNAKE TEST
+    
+    
+    // return output_words;
+    
+    
+    // above is fine, but it doesn't use the make function
+    // below is an attempt using the make function
+    // create cheat sheet table has everything we need to do the job
+    // it's arguments are:
+    // the outer_div where we will place it
+    // name of
+    // 
+    //
+    // items
+    // number of items per row
+    // var name = "etym_cheat_sheet"
+    // var spell_root_cheat = output_words;
+    // // var outer_div = el("image_display_box");
+    // var outer_div = el(name + "_div");
+    // create_cheat_sheet_table(outer_div, name,
+    // null, null, spell_root_cheat, 2);
+    
+    
+};
+
 
 
 SpellingModeGame.prototype.make_spelling_hint = function () {

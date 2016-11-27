@@ -1843,6 +1843,15 @@ Quiz.prototype.initialize_vocab_cheat_sheet = function () {
     // var outer_div = el("image_display_box");
     var outer_div = el(name + "_div");
     // var e = el('vocab_cheat_sheet');
+    
+    // the arguments here are
+    // o = outer div
+    // table_id = nqme
+    // classes = ['latin_cheat_sheet_item', 'english_cheat_sheet_item']
+    // funcs = [latin_cheat_sheet_display, function (x) {
+        // return [[x, {'font-style': 'italic'}]]}]
+    // list_of_rows = vocabulary_items
+    // items_per_row = 2
     create_cheat_sheet_table(outer_div, name,
     ['latin_cheat_sheet_item', 'english_cheat_sheet_item'],
     [latin_cheat_sheet_display, function (x) {

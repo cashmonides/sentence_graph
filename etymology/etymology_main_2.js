@@ -451,7 +451,7 @@ var make_root_to_word_list = function (root) {
     for (var i = 0; i < all_words_with_root.length; i++) {
         var word_to_query = all_words_with_root[i];
         var meaning_of_word = get_word_meaning(word_to_query);
-        var word_and_meaning = word_to_query + " = " + meaning_of_word;
+        var word_and_meaning = word_to_query.toUpperCase() + " = " + meaning_of_word;
         output_list.push(word_and_meaning);
     }
     
