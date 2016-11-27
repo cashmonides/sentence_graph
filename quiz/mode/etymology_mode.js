@@ -180,6 +180,9 @@ EtymologyModeGame.prototype.next_question = function(){
     etym_level, question_type, number_of_answer_choices,
     number_of_dummies, number_of_mandatory)
     */
+    
+    //working below
+    /*
     this.legal_question_types = map_level_to_allowed(
         this.level.etym_level, etym_levels).question_types;
     console.log("11-18-16 this.legal_question_types = ", this.legal_question_types);
@@ -189,6 +192,29 @@ EtymologyModeGame.prototype.next_question = function(){
     var question = question_with_cheat_sheet['question_data'];
     this.etymology_cheat_sheet = alphabetize_dict(
         question_with_cheat_sheet['cheat_sheet']);
+        
+    */
+    
+    ///LIZARD TEST
+    this.legal_question_types = map_level_to_allowed(
+        this.level.etym_level, etym_levels).question_types;
+    console.log("11-18-16 this.legal_question_types = ", this.legal_question_types);
+    this.chosen_question_type = weighted(this.legal_question_types);
+    console.log("LIZARD1 chosen_question_type = ", this.chosen_question_type);
+    var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+        this.level.etym_level, this.chosen_question_type, 4, 4, 4);
+    // console.log(question_with_cheat_sheet['question_data']);
+    var question = question_with_cheat_sheet['question_data'];
+    this.etymology_cheat_sheet = alphabetize_dict(
+        question_with_cheat_sheet['cheat_sheet']);
+        
+        
+    // todo the logs below are for testing purposes, remove when done testing
+    console.log("LIZARD1 this.etymology_cheat_sheet = ", this.etymology_cheat_sheet);
+        
+        
+    //END LIZARD TEST
+        
     this.choices = alphabetize_list(question.choices);
     this.correct = question.correct_answer;
     
