@@ -513,6 +513,10 @@ Quiz.get_mode = function(mode_number) {
 
 Quiz.prototype.next_question = function (error) {
     
+    
+    
+    
+    
     // todo very important: need to figure out how to clear this box
     // without calling some ad hoc step
     // remove_children(el('spelling_hint_box'));

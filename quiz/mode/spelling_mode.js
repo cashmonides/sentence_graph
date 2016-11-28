@@ -166,30 +166,22 @@ SpellingModeGame.prototype.attach = function(){
     this.secret_streak = 0;
     
     //we first check whether a  mode-specific max-streak exists
-    // if so we process
+    // if so we set it as our secret triggering point
     if (this.quiz.module.submodule.spelling_mode_max_incorrect_streak) {
-        console.log("BACKLOG setting a temporary max incorrect streak");
+        
         this.temporary_max_incorrect_streak = this.quiz.module.submodule.spelling_mode_max_incorrect_streak;
-        
-        // this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
-        
+        backlog("temporary max incorrect streak = ", this.temporary_max_incorrect_streak);
     } else {
-        console.log("PROBLEM: no spelling_mode_max_incorrect_streak specified!!!");
         this.temporary_max_incorrect_streak = this.quiz.module.submodule.max_incorrect_streak;
-        // this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
-        
+        buglog("no spelling_mode_max_incorrect_streak specified. spellingmode.attach");
     }
-    // this will be our secret triggering point
+    // the usual max_streak needs to be stored
     this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
-    // console.log("BACKLOG this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
-    // console.log("BACKLOG 5 this.quiz.module.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
-    // console.log("BACKLOG this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
-    // console.log("BACKLOG this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
 };
 
 SpellingModeGame.prototype.set_level = function (new_level) {
-    console.log("LOG SpellingModeGame new_level = ", new_level);
     this.level = new_level;
+    backlog("this.level = ", this.level);
 }
 
 SpellingModeGame.prototype.get_mode_name = function() {
@@ -201,11 +193,7 @@ SpellingModeGame.prototype.get_mode_name = function() {
 
 
 SpellingModeGame.prototype.next_question = function(){
-    
     clear_input_box("input_box");
-
-    //todo do we need to do something here to clear and reset the spelling hint button?
-
 
     // todo separate spelling level from etymology level
     var types_of_level = ['etym_level'];
@@ -219,10 +207,12 @@ SpellingModeGame.prototype.next_question = function(){
     // the problem is: it accesses etym_levels
     // when what we really want a separate spelling level
     // so for now we'll comment this out
-    this.legal_question_types = map_level_to_allowed(
-        this.level.etym_level, etym_levels).question_types;
-    // and instead hard code the question types
+    // this.legal_question_types = map_level_to_allowed(
+    //     this.level.etym_level, etym_levels).question_types;
+    // and instead hard code the question types, as below
     
+    
+    // we have a few options for hard-coding
     // this.legal_question_types = {'word_definition_to_word': 0.00000005,
     //     'root_definition_to_root': 0.5};
     this.legal_question_types = {'word_definition_to_word': 0.5,
@@ -231,8 +221,9 @@ SpellingModeGame.prototype.next_question = function(){
     // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     this.chosen_question_type = weighted(this.legal_question_types);
-    console.log("LOG: this.chosen_question_type = ", this.chosen_question_type);
-    console.log("LIZARD: this.chosen_question_type = ", this.chosen_question_type);
+    
+    
+    backlog("[spellingmode.next_question] this.chosen_question_type = ", this.chosen_question_type);
     
     
     var spelling_intro_question;
@@ -242,7 +233,7 @@ SpellingModeGame.prototype.next_question = function(){
         spelling_intro_question = "Spell the WORD that means: "
     } else {
         spelling_intro_question = "Type the closest match to: "
-        console.log("PROBLEM invalid question type in spelling mode");
+        buglog("invalid question type in spelling mode");
     }
     
     
@@ -259,60 +250,23 @@ SpellingModeGame.prototype.next_question = function(){
     
     
     
-    console.log("LIZARD2 chosen_question_type = ", this.chosen_question_type);
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
         this.level.etym_level, this.chosen_question_type, 4, 4, 4);
     // console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
     this.etymology_cheat_sheet = alphabetize_dict(
         question_with_cheat_sheet['cheat_sheet']);
-        
-    console.log("LIZARD2 this.etymology_cheat_sheet = ", this.etymology_cheat_sheet);
-    
-    
-    
-    // console.log("LIZARD this.chosen_question_type = ", this.chosen_question_type);
-    // var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-    //     this.level.etym_level, this.chosen_question_type, 3, 0, 1);
-    // // console.log(question_with_cheat_sheet['question_data']);
-    // var question = question_with_cheat_sheet['question_data'];
-    
-    
-    
-    // this.lizard_cheat_sheet = alphabetize_dict(
-    //     question_with_cheat_sheet['cheat_sheet']);
-    
-    
     
     
     this.correct = question.correct_answer;
     this.clue = question.clue;
+    backlog("[spellingmode.next_question this.clue = ", this.clue);
+    backlog("[spellingmode.next_question this.correct = ", this.correct);
     
     
-    //BEGIN DRAGON HACK
-    // we want to send a list of dummy roots to the cheat sheet
-    var dummy_root_list = [];
-    var number_of_dummy_roots = 2;
-    var input_level = this.level.etym_level;
-    var all_roots = select_available_roots(input_level);
-    console.log("DRAGON all_roots = ", all_roots);
-    for (var i = 0; i < number_of_dummy_roots; i++) {
-        var random_root = random_choice(all_roots);
-        console.log("DRAGON random_root = ", random_root);
-        dummy_root_list.push(random_root);
-    }
-    
-    dummy_root_list.push(this.correct);
-    console.log("DRAGON dummy_root_list after adding correct root = ", dummy_root_list);
-    ///END DRAGON HACK
     
     
     if (this.chosen_question_type == 'root_definition_to_root') {
-        console.log("DRAGON about to invoke the dragon with input = ", this.correct);
-        //old version that works with just one root
-        // this.etymology_cheat_sheet =  this.make_root_definition_to_root_cheat_sheet(this.correct);
-        // new version that might work
-        // this.etymology_cheat_sheet =  this.make_root_definition_to_root_cheat_sheet_new(dummy_root_list);
         this.etymology_cheat_sheet = alphabetize_dict(
             question_with_cheat_sheet['cheat_sheet']);
     } else {
@@ -321,17 +275,9 @@ SpellingModeGame.prototype.next_question = function(){
     };
     
     
+    this.spelling_hint = "HINT: " + this.give_underscore_hint(this.correct);
+    backlog("[spellingmode.next_question] this.spelling_hint = ", this.spelling_hint);
     
-    
-    console.log("GECKO this.etymology_cheat_sheet = ", this.etymology_cheat_sheet);
-    this.choices = alphabetize_list(question.choices);
-    
-    // console.log("BACKLOG: this.correct spelling_mode  = ", this.correct);
-    
-    var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
-    console.log("HINT777 underscore_hint = ", underscore_hint);
-    this.spelling_hint = underscore_hint;
-    console.log("HINT777 this.spelling_hint = ", this.spelling_hint);
     
     Quiz.set_question_text(spelling_intro_question + '"' + question.clue + '".');
     
@@ -342,10 +288,8 @@ SpellingModeGame.prototype.next_question = function(){
     //etymology mode and spelling mode is the only mode without a word selector
     //that leads to a problem: the previous word selector remains on the page
     //the following a hacky solution that can probably be improved on
-    
     var empty_word_selector = "";
     this.quiz.set_word_selector(empty_word_selector);
-    
     
     //unlike etymology mode we don't have any drop downs so we don't need to clear or make them
 };
@@ -356,7 +300,7 @@ SpellingModeGame.prototype.next_question = function(){
 SpellingModeGame.prototype.process_answer = function(){
     var self = this;
     var raw_input_string = el("input_box").value;
-    // console.log("BACKLOG: raw input string = ", raw_input_string);
+    backlog("[spellingmode.process_answer] raw input string = ", raw_input_string);
     
     
     // todo clean_input_string creates objects (aka dictionaries)
@@ -364,26 +308,25 @@ SpellingModeGame.prototype.process_answer = function(){
     // also some of the objects are called strings in their variable name so they should be changed
     // we want just a basic lower case string
     // like this
-    var user_input_string = raw_input_string.toLowerCase();
-    console.log("CROC user_input_string = ", user_input_string);
-    
-    var processed_input_string = clean_input_string(raw_input_string);
-    console.log("BACKLOG: processed input string = ", processed_input_string);
+    // var user_input_string = raw_input_string.toLowerCase();
+    var processed_input_string = raw_input_string.toLowerCase();
     
     
     
+    backlog("[spellingmode.process_answer] processed input string = ", processed_input_string);
     
     
-    var correct_english_translation;
     
-    // todo clean_input_string removes punctuation but too indifferently
-    console.log("CROC this.correct = ", this.correct);
-    correct_english_translation = clean_input_string(this.correct);
     
+    
+    
+    
+    // here we don't want to remove slashes
     // so instead we just convert to lower case
     var correct_english_string = this.correct;
     correct_english_string = correct_english_string.toLowerCase();
-    console.log("CROC correct_english_string = ", correct_english_string);
+    backlog("[spellingmode.process_answer] correct_english_string = ", correct_english_string);
+    
     
     // todo below seems a little ad hoc
     // submit...with_slash processes strings of the form (x/y) and matches to either x or y
@@ -391,90 +334,37 @@ SpellingModeGame.prototype.process_answer = function(){
     // better would be to just have the processing take a consistent input 
     // and process the slash downstream
     var comparison_result;
-    console.log("GATOR this.chosen_question_type = ", this.chosen_question_type);
     if (this.chosen_question_type == 'root_definition_to_root') {
-        comparison_result = this.submit_to_green_red_master_with_slash(this.correct, raw_input_string, true);
-        console.log("GATOR slash_mode comparison_result = ", comparison_result);
+        this.comparison_result = this.submit_to_green_red_master_with_slash(this.correct, raw_input_string, true);
+        backlog("[spellingmode.process_answer] red-green comparison_result = ", comparison_result);
     } else {
-        comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
-        console.log("GATOR no_slash_mode comparison_result = ", comparison_result);
+        this.comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
+        backlog("[spellingmode.process_answer] red-green comparison_result = ", comparison_result);
     }
     
-    console.log("GATOR comparison_result = ", comparison_result);
-    this.comparison_result = comparison_result;
+    this.display_red_green_result(this.comparison_result);
     
     
-    // console.log("SPELLING checkpoint 6 entering display_red_green-result");
-    // console.log("SPELLING checkpoint 6.1 input to argument = ", comparison_result);
-    
-    this.display_red_green_result(comparison_result);
-    
-    // console.log("SPELLING checkpoint 6.999 leaving display_red_green-result");
-    
-    
-    // HERE IS WHERE THE INTERVENTION WILL GO
-    // slash_option_equals(input, target_list) will be altered
-    // such that it returns true if there is a match on either side
-    // it basically divides slash_options into string
-    // converts to lower case
-    // iterate through new list and apply object_equals
-    console.log("CROC correct_english_string = ", correct_english_string);
     if (correct_english_string.indexOf("/") !== -1) {
-        console.log("CROC slash detected, applying slash_equals mode");
         // we convert a slashed-string to a list
-        var boolean_result = string_matches_slashed_string(user_input_string, correct_english_string);
-        console.log("CROC boolean result = ", boolean_result);
+        var boolean_result = string_matches_slashed_string(processed_input_string, correct_english_string);
         if (boolean_result) {
-            console.log("CROC boolean true so process_correct triggered");
             this.process_correct_answer();
         } else {
-            console.log("CROC boolean true so process_incorrect triggered");
             this.process_incorrect_answer();
         }
     } else {
-        console.log("CROC slash mode not detected, applying normal mode");
-        if (object_equals(processed_input_string, correct_english_translation)) {
+        if (processed_input_string === correct_english_string) {
             this.process_correct_answer();
         } else {
-            // console.log("SPELLING checkpoint 1 about to call process_incorrect_answer");
             this.process_incorrect_answer();
         }
     }
-    
-    
-    // END OF INTERVENTION
-    
-    /////WORKING BLOCK BELOW
-    /*
-    
-    if (object_equals(processed_input_string, correct_english_translation)) {
-        this.process_correct_answer();
-    } else {
-        // console.log("SPELLING checkpoint 1 about to call process_incorrect_answer");
-        this.process_incorrect_answer();
-    }
-    */
 };
 
 
 
-//old process_answer
-// SpellingModeGame.prototype.process_answer = function() {
-//     var dd = el("select_element");
-//     var selected_answer = dd.options[dd.selectedIndex].value;
-//     console.log("selected_answer = ", selected_answer);
 
-//     var is_correct = selected_answer === this.correct;
-
-//     if (is_correct) {
-//         //console.log"correct");
-//         this.process_correct_answer();
-//     } else {
-//         //console.log"incorrect");
-//         this.process_incorrect_answer();
-//     }
-
-// };
 
 SpellingModeGame.cell_1_feedback_right = ["Correct!", "Excellent!"];
 SpellingModeGame.cell_1_feedback_wrong = ["Whoops!", "Not exactly."];
@@ -501,12 +391,6 @@ SpellingModeGame.prototype.display_red_green_result = function (list) {
 
 SpellingModeGame.prototype.process_correct_answer = function() {
     
-    
-    // todo turkey remove when done testing
-    // var test_list = ['pos', 'pot root 2'];
-    // var test_output = remove_metadata_from_roots(test_list);
-    // console.log("TURKEY test_output = ", test_output);
-    
     this.quiz.increment_score();
     
     var spelling_feedback = this.clue + " = " + this.correct;
@@ -523,26 +407,23 @@ SpellingModeGame.prototype.process_correct_answer = function() {
 
 
 SpellingModeGame.prototype.process_incorrect_answer = function() {
-    // console.log("BACKLOG entering process_incorrect_answer");
+    backlog("[spellingmode.process_incorrect answer] entering process_incorrect_answer");
     this.quiz.submodule.incorrect_streak ++;
     
-    // console.log("swamp checkpoint 2.5 about to submit to red_green");
-    
-    console.log("swamp 4 11-8 this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
     if (this.quiz.submodule.incorrect_streak === 1) {
-        console.log("Swamp 11-8 if triggered");
         this.quiz.decrement_score();
     } else {
-        console.log("swamp 11-8 if not triggered");
+        // // todo should anything go here?
+        // console.log("if not triggered");
     }
     
     
-    ///////BEGIN HACKY CLIMATE INTERVENTION
-    console.log("CLIMATE entering hacky intervention");
-    console.log("CLIMATE before change this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    console.log("CLIMATE 8 before change this.quiz.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
-    console.log("CLIMATE before change this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
-    console.log("CLIMATE before change this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
+    ///////BEGIN HACKY INTERVENTION
+    console.log("HACK entering hacky intervention");
+    // console.log("HACK before change this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    // console.log("HACK 8 before change this.quiz.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
+    // console.log("HACK before change this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
+    // console.log("HACK before change this.temporary_max_incorrect_streak = ", this.temporary_max_incorrect_streak);
     
     if (this.secret_streak >= this.temporary_max_incorrect_streak) {
         //we have hit our temporary max so we trigger give away answer
@@ -555,14 +436,14 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
         // we decrement our incorrect streak to 1 beneath the limit
         if (this.quiz.submodule.incorrect_streak >= this.dummy_limit_to_streak) {
             this.quiz.submodule.incorrect_streak = this.dummy_limit_to_streak - 1;
-            console.log("CLIMATE above usual max but under secret max, so resetting to usual max - 1");
-            console.log("CLIMATE this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+            // console.log("HACK above usual max but under secret max, so resetting to usual max - 1");
+            // console.log("HACK this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
         }
     }
         
-    console.log("CLIMATE this.quiz.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
-    console.log("CLIMATE after change this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
-    console.log("CLIMATE leaving hacky intervention");
+    // console.log("HACK this.quiz.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
+    // console.log("HACK after change this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
+    // console.log("HACK leaving hacky intervention");
     ///end the hacky section, the rest is as usual in other modes
     
     
@@ -578,279 +459,56 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
         this.give_away_answer();
     }
     this.quiz.update_display();
-    
-    // Etymology has no word selector
-    // this.quiz.word_selector.clear();
-};
-
-//this is a primitive version which does all the function at once doesn't toggle 
-// what we really want is something that will work with the toggle function
-
-
-
-// a version that only takes one root, not as useful
-SpellingModeGame.prototype.make_root_definition_to_root_cheat_sheet = function (root) {
-    console.log("DRAGON about to enter the dragon");
-    console.log("DRAGON root_input = ", root);
-    var output_words = make_root_to_word_list(root);
-    
-    console.log("DRAGON output_words = ", output_words);
-    
-    
-    
-    
-    
-    
-    
-    ////////ENTERING SNAKE TEST
-    // console.log("SNAKE entering snake test");
-    // var name = "etym_cheat_sheet"
-    // var spell_root_cheat = output_words;
-    // console.log("SNAKE spell_root_cheat = ", spell_root_cheat);
-    // // var outer_div = el("image_display_box");
-    // var outer_div = el(name + "_div");
-    // create_cheat_sheet_table(outer_div, name,
-    // ['latin_cheat_sheet_item', 'english_cheat_sheet_item'], null, spell_root_cheat, 2);
-    // console.log("SNAKE leaving snake test");
-    /////LEAVING SNAKE TEST
-    
-    
-    return output_words;
-    
-    
-    // above is fine, but it doesn't use the make function
-    // below is an attempt using the make function
-    // create cheat sheet table has everything we need to do the job
-    // it's arguments are:
-    // the outer_div where we will place it
-    // name of
-    // 
-    //
-    // items
-    // number of items per row
-    // var name = "etym_cheat_sheet"
-    // var spell_root_cheat = output_words;
-    // // var outer_div = el("image_display_box");
-    // var outer_div = el(name + "_div");
-    // create_cheat_sheet_table(outer_div, name,
-    // null, null, spell_root_cheat, 2);
-    
-    
 };
 
 
-// a version that takes a list of roots
-SpellingModeGame.prototype.make_root_definition_to_root_cheat_sheet_new = function (root_list) {
-    
-    
-    console.log("LIZARD entering the lizard");
-    console.log("LIZARD this.legal_question_types = ", this.legal_question_types);
-    console.log("LIZARD this.chosen_question_type = ", this.chosen_question_type);
-    // var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-    //     this.level.etym_level, weighted(this.legal_question_types), 4, 4, 4);
-        
-        
-    var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, this.chosen_question_type, 4, 4, 4);
-        
-    // console.log(question_with_cheat_sheet['question_data']);
-    console.log("LIZARD weighted(this.legal_question_types) = ", weighted(this.legal_question_types));
-    var question = question_with_cheat_sheet['question_data'];
-    this.etymology_cheat_sheet = alphabetize_dict(
-        question_with_cheat_sheet['cheat_sheet']);
-        
-    console.log("LIZARD this.etymology_cheat_sheet = ", this.etymology_cheat_sheet);
-    console.log("LIZARD exiting the lizard");
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    console.log("DRAGON about to enter the dragon");
-    console.log("DRAGON root_list_input = ", root_list);
-    var output_list = [];
-    var output_words;
-    for (var i = 0; i < root_list.length; i++) {
-        output_words = make_root_to_word_list(root_list[i]);
-        console.log("DRAGON output_words = ", output_words);
-        output_list.push(output_words);
-    }
-    
-    console.log("DRAGON output_list after for loop = ", output_list);
-    
-    var merged_output_list = [].concat.apply([], output_list);
-    
-    console.log("DRAGON merged_output_list = ", merged_output_list);
-    
-    // return merged_output_list;
-    
-    var shuffled_output_list = shuffle(merged_output_list);
-    shuffled_output_list = remove_duplicates(shuffled_output_list);
-    
-    return shuffled_output_list;
-    
-    
-    
-    
-    ////////ENTERING SNAKE TEST
-    // console.log("SNAKE entering snake test");
-    // var name = "etym_cheat_sheet"
-    // var spell_root_cheat = output_words;
-    // console.log("SNAKE spell_root_cheat = ", spell_root_cheat);
-    // // var outer_div = el("image_display_box");
-    // var outer_div = el(name + "_div");
-    // create_cheat_sheet_table(outer_div, name,
-    // ['latin_cheat_sheet_item', 'english_cheat_sheet_item'], null, spell_root_cheat, 2);
-    // console.log("SNAKE leaving snake test");
-    /////LEAVING SNAKE TEST
-    
-    
-    // return output_words;
-    
-    
-    // above is fine, but it doesn't use the make function
-    // below is an attempt using the make function
-    // create cheat sheet table has everything we need to do the job
-    // it's arguments are:
-    // the outer_div where we will place it
-    // name of
-    // 
-    //
-    // items
-    // number of items per row
-    // var name = "etym_cheat_sheet"
-    // var spell_root_cheat = output_words;
-    // // var outer_div = el("image_display_box");
-    // var outer_div = el(name + "_div");
-    // create_cheat_sheet_table(outer_div, name,
-    // null, null, spell_root_cheat, 2);
-    
-    
-};
+
 
 
 
 SpellingModeGame.prototype.make_spelling_hint = function () {
-    // var underscore_hint = "HINT666: " + this.give_underscore_hint(this.correct);
-    // console.log("HINT666 underscore_hint = ", underscore_hint);
-    // var hint_to_add = document.createTextNode(underscore_hint);
-    // var box_for_underscore_hint = el('image_display_box');
-    // box_for_underscore_hint.append(hint_to_add);
     if (this.chosen_question_type === 'root_definition_to_root') {
-        // the hacky test version
         this.spelling_hint = "STARTS WITH THE LETTER: " + this.correct.charAt(0);
-        // the real version
-        // this.spelling_hint = this.give_first_letter_hint(this.correct);
     } else {
         var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
-        console.log("HINT99 underscore_hint = ", underscore_hint);
         this.spelling_hint = underscore_hint; 
     }
-    console.log("HINT99 this.spelling_hint = ", this.spelling_hint);
 };
 
 
 
-// SpellingModeGame.prototype.make_spelling_hint = function () {
-//     var underscore_hint = "HINT666: " + this.give_underscore_hint(this.correct);
-//     console.log("HINT666 underscore_hint = ", underscore_hint);
-//     var hint_to_add = document.createTextNode(underscore_hint);
-//     var box_for_underscore_hint = el('image_display_box');
-//     box_for_underscore_hint.append(hint_to_add);
-// };
 
-//this will just return the string
-// e.g. ____ivorous for carnivorous
-// SpellingModeGame.prototype.generate_final_spelling_hint_string = function () {
-//     var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
-//     console.log("HINT7 underscore_hint = ", underscore_hint);
-//     this.spelling_hint = underscore_hint;
-//     return underscore_hint;
-//     // var hint_to_add = document.createTextNode(underscore_hint);
-//     // var box_for_underscore_hint = el('image_display_box');
-//     // box_for_underscore_hint.append(hint_to_add);
-// };
 
-// CONTROL FLOW NOTES
-///generate_final_spelling_hint_string (this.correct)
-//CALLS
-//give_underscore_hint
-
+// todo convert the following into a global function in etymology mode
+// probably going to be of general usage later, not just in spelling mode
 //below is a hackily hacked together version which basically does the job
 // but it needs to be redesigned to be:
 // modular
 // iterate through all the roots until it finds one
 
 SpellingModeGame.prototype.give_underscore_hint = function (word) {
-    
-    //////////BEGIN TEMPORARY TEST
-    // console.log("GATOR entering test of root matching");
-    // var correct_answer_string = "QUAD/QUADR";
-    // var input_string = "quad";
-    // // var input_string = "quaf";
-    
-    
-    
-    // console.log("GATOR entering process slash block")
-    // console.log("GATOR correct_answer_string pre-mutation = ", correct_answer_string);
-    // correct_answer_string = correct_answer_string.toLowerCase();
-    // console.log("GATOR correct_answer_string in lower case = ", correct_answer_string);
-    // var red_green_result_list = [];
-    // console.log("GATOR red_green_result_list pre-addition = ", red_green_result_list);
-    // var list_of_slash_options_to_process = correct_answer_string.split("/");
-    // console.log("GATOR list_of_slash_options_to_process = ", list_of_slash_options_to_process);
-    // for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
-    //     console.log("GATOR list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
-    //     var type_test = typeof list_of_slash_options_to_process[i];
-    //     console.log("GATOR typeOf.list_of_slash_options_to_process[i] = ", type_test);
-    //     var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
-    //     console.log("GATOR result pre-slash addition = ", result);
-    //     // result = result + "/";
-    //     // console.log("GATOR result post-slash addition = ", result);
-    //     red_green_result_list.push(result);
-    //     console.log("GATOR red_green_result_list post-addition = ", red_green_result_list);
-    // }
-    // console.log("GATOR red_green_result_list at end of loop = ", red_green_result_list);
-    // // return red_green_result_list;
-    
-    
-    
-    
-    // console.log("GATOR exiting test of root matching");
-    //////////END TEMPORARY TEST
-    
     if (this.chosen_question_type == "root_definition_to_root") {
         return "starts with the letter: " + this.correct.charAt(0);
-        // return "DUMMY HINT";
     } else {
-        console.log("BACKLOG entering underscore hit generator");
-        console.log("BACKLOG word to process = ", word);
         // we extract all possible roots
         // e.g. quadruped ---> ['QUAD/QUADR', 'PED/POD']
         var roots_extracted = get_roots(word);
-        // console.log('MANCHESTER0 roots_extracted premutation = ', roots_extracted);
         
         // we need to remove metadata such as "root 2"
         // e.g. ['POS/POT root 2'] ---> ['POS/POT']
         roots_extracted = remove_metadata_from_roots(roots_extracted);
-        console.log('BACKLOG roots_extracted postmutation = ', roots_extracted);
         
         // pick a random root from that list
         var random_root_to_replace = random_choice(roots_extracted);
-        // console.log("REMOVE random_root_to_replace premutation = ", random_root_to_replace);
         
         
-        //here's where we should put the error catching
+        // todo here's where we should put the error catching
         var is_there_a_match = false;
         is_there_a_match = test_match_from_slash_options(random_root_to_replace, word);
         if (!is_there_a_match) {
-            alert("NO MATCH DISCOVERED");
+            buglog("[spellingmode.give_underscore_hint] NO MATCH DISCOVERED");
         } else {
-            console.log("LOG spelling hint match detected");
+            // console.log("spelling hint match detected");
         }
         
         
@@ -860,23 +518,18 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
         
         //we need to convert to lower case
         random_root_to_replace = random_root_to_replace.toLowerCase();
-        console.log("BACKLOG root we've chosen to replace = ", random_root_to_replace);
         
         
         // we need an underscore line to match the length of the word
         var length_of_root_to_replace = random_root_to_replace.length;
-        // console.log("REMOVE length_of_root_to_replace = ", length_of_root_to_replace);
         
         var underscore_string = new Array(length_of_root_to_replace + 1).join("_");
-        // console.log("REMOVE underscore_string = ", underscore_string);
         
         
         
         // we replace our matched substring with an underscore line
         var word_with_root_replaced = word.replace(random_root_to_replace, underscore_string);
-        // console.log("REMOVE word after mutation = ", word);
-        // console.log("REMOVE word_with_root_replaced = ", word_with_root_replaced);
-    
+        
         return word_with_root_replaced;
     }
 };
@@ -884,97 +537,92 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
 
 
 // todo below should be set up as a global function
-// some kind of mode-agnostic string processing function
+// i.e. some kind of mode-agnostic string processing function
+// todo buggy: if you enter bi/bin as your answer you get a bad result
+
 SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(correct_answer_string, input_string, process_slashes_bool) {
-    //we want to create a table of divs for each slash option
-    // in each cell of the table row we will put a red-green result
-    //e.g.   star = ASTER/ASTR
-    // if they input ASTOR
-    //we return ASTor   /  ASTor
-    // var number_of_options_to_populate = get_number_of_slash_options(correct_answer_string);
-    // var list_of_slash_options_to_process = correct_answer_string.split("/");
-    // var number_of_options_to_populate = list_of_slash_options_to_process.length;
-    //we iterate through the list_of_slash_options_to_process
-    // produce a list of red_green_results for each
-    if (process_slashes_bool) {
-        // begin new code
+    // new version, on the assumption that we always process slashes
+    debuglog("entering process slash block")
+    debuglog("BUG correct_answer_string pre-mutation = ", correct_answer_string);
+    correct_answer_string = correct_answer_string.toLowerCase();
+    debuglog("BUG correct_answer_string in lower case = ", correct_answer_string);
+    var red_green_result_list = [];
+    debuglog("BUG red_green_result_list pre-addition = ", red_green_result_list);
+    var list_of_slash_options_to_process = correct_answer_string.split("/");
+    debuglog("BUG list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+    for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
+        debuglog("BUG list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
+        var type_test = typeof list_of_slash_options_to_process[i];
+        debuglog("BUG typeOf.list_of_slash_options_to_process[i] = ", type_test);
+        var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
+        debuglog("BUG result pre-slash addition = ", result);
+        // result = result + "/";
+        // console.log("GATOR result post-slash addition = ", result);
+        red_green_result_list.push(result);
+        red_green_result_list.push(["/"]);
+        debuglog("BUG red_green_result_list post-addition = ", red_green_result_list);
+    }
+    //we drop the last slash
+    red_green_result_list.pop();
+    // we need to flatten the list
+    debuglog("BUG red_green_result_list at end of loop = ", red_green_result_list);
+    var flattened_red_green_result_list = [].concat.apply([], red_green_result_list);
+    debuglog("BUG flattened_red_green_result_list = ", flattened_red_green_result_list);
+    // return red_green_result_list;
+    return flattened_red_green_result_list;
+    
+    
+    // todo make sure that new version above works, then delete the following
+    // old version, on the assumption that we would sometimes not want to process slashes
+    // if (process_slashes_bool) {
+    //     // begin new code
         
-        console.log("GATOR entering test of root matching");
-        // var correct_answer_string = "QUAD/QUADR";
-        // var input_string = "quad";
-        // var input_string = "quaf";
         
     
-        console.log("GATOR entering process slash block")
-        console.log("GATOR correct_answer_string pre-mutation = ", correct_answer_string);
-        correct_answer_string = correct_answer_string.toLowerCase();
-        console.log("GATOR correct_answer_string in lower case = ", correct_answer_string);
-        var red_green_result_list = [];
-        console.log("GATOR red_green_result_list pre-addition = ", red_green_result_list);
-        var list_of_slash_options_to_process = correct_answer_string.split("/");
-        console.log("GATOR list_of_slash_options_to_process = ", list_of_slash_options_to_process);
-        for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
-            console.log("GATOR list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
-            var type_test = typeof list_of_slash_options_to_process[i];
-            console.log("GATOR typeOf.list_of_slash_options_to_process[i] = ", type_test);
-            var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
-            console.log("GATOR result pre-slash addition = ", result);
-            // result = result + "/";
-            // console.log("GATOR result post-slash addition = ", result);
-            red_green_result_list.push(result);
-            red_green_result_list.push(["/"]);
-            console.log("GATOR red_green_result_list post-addition = ", red_green_result_list);
-        }
-        //we drop the last slash
-        red_green_result_list.pop();
-        // we need to flatten the list
-        console.log("GATOR red_green_result_list at end of loop = ", red_green_result_list);
-        var flattened_red_green_result_list = [].concat.apply([], red_green_result_list);
-        console.log("GATOR flattened_red_green_result_list = ", flattened_red_green_result_list);
-        // return red_green_result_list;
-        return flattened_red_green_result_list;
+    //     debuglog("entering process slash block")
+    //     debuglog("BUG correct_answer_string pre-mutation = ", correct_answer_string);
+    //     correct_answer_string = correct_answer_string.toLowerCase();
+    //     debuglog("BUG correct_answer_string in lower case = ", correct_answer_string);
+    //     var red_green_result_list = [];
+    //     debuglog("BUG red_green_result_list pre-addition = ", red_green_result_list);
+    //     var list_of_slash_options_to_process = correct_answer_string.split("/");
+    //     debuglog("BUG list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+    //     for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
+    //         debuglog("BUG list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
+    //         var type_test = typeof list_of_slash_options_to_process[i];
+    //         debuglog("BUG typeOf.list_of_slash_options_to_process[i] = ", type_test);
+    //         var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
+    //         debuglog("BUG result pre-slash addition = ", result);
+    //         // result = result + "/";
+    //         // console.log("GATOR result post-slash addition = ", result);
+    //         red_green_result_list.push(result);
+    //         red_green_result_list.push(["/"]);
+    //         debuglog("BUG red_green_result_list post-addition = ", red_green_result_list);
+    //     }
+    //     //we drop the last slash
+    //     red_green_result_list.pop();
+    //     // we need to flatten the list
+    //     debuglog("BUG red_green_result_list at end of loop = ", red_green_result_list);
+    //     var flattened_red_green_result_list = [].concat.apply([], red_green_result_list);
+    //     debuglog("BUG flattened_red_green_result_list = ", flattened_red_green_result_list);
+    //     // return red_green_result_list;
+    //     return flattened_red_green_result_list;
         
         
         
         
         
-        //old code below, probably pretty bad
-        // console.log("TRUMP entering process slash block")
-        // var red_green_result_list = [];
-        // console.log("TRUMP red_green_result_list = ", red_green_result_list);
-        // var list_of_slash_options_to_process = correct_answer_string.split("/");
-        // console.log("TRUMP list_of_slash_options_to_process = ", list_of_slash_options_to_process);
-        // for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
-        //     console.log("TRUMP list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
-        //     var type_test = typeof list_of_slash_options_to_process[i];
-        //     console.log("TRUMP typeOf.list_of_slash_options_to_process[i] = ", type_test);
-        //     var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
-        //     red_green_result_list.push(result);
-        // }
-        // console.log("TRUMP red_green_result_list = ", red_green_result_list);
-        // return red_green_result_list;
-        //end old code
+       
         
-    } else {
-        this.submit_string_to_green_and_red(correct_answer_string, input_string);
-    }
+    // } else {
+    //     this.submit_string_to_green_and_red(correct_answer_string, input_string);
+    // }
 }
 
 
 // todo below should be set up as a global function
 // some kind of mode-agnostic string processing function
 SpellingModeGame.prototype.submit_string_to_green_and_red = function (correct_answer_string, input_string) {
-    //we want to turn each character green or red
-    /*console.log("TRUMP entering submit string");
-    var correct_answer_as_list_of_characters = correct_answer_string.split("");
-    var input_string_as_list_of_characters = input_string.split("");
-    console.log("TRUMP correct answer list = ", correct_answer_as_list_of_characters);
-    console.log("TRUMP input list = ", input_string_as_list_of_characters);*/
-    
-    
-    
-    
-    
     
     var levenshtein_result = levenshtein(correct_answer_string, input_string)
     var red_green_result;
@@ -985,9 +633,7 @@ SpellingModeGame.prototype.submit_string_to_green_and_red = function (correct_an
             return [x, 'yellow'];
         });
     }
-    // var red_green_result = compare_path(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
     console.log("TRUMP red_green_result = ", red_green_result);
-    // console.log("SWAMP red_green_result.red_green_list = ", red_green_result.red_green_list);
     return red_green_result;
 };
 
@@ -995,31 +641,14 @@ SpellingModeGame.prototype.give_away_answer = function(){
     var fbox = el("feedbackbox");
     fbox.innerHTML = "The correct answer is \"" + this.clue + " = " + this.correct + '"';
     
-    // var self = this;
-    // this.quiz.sentence.get_regions_with_tag(this.target_tag).forEach(function(r){
-    //     var text = this.quiz.sentence.get_region_text(r);
-    //     fbox.innerHTML += Quiz.wrap_string(self.target_tag) + " = " + text + "<br>";
-    // });
-    
-    
-    /////BELOW is one option which displays the word a little bigger with a next button
-    // set_display("next_button", 'initial');
-    // set_display("feedback_for_input", 'initial');
-    // set_display("submit_button", 'none');
-    // set_display("cheat_sheet_button", 'none');
-    // set_display("vocab_cheat_button", 'none');
-    // set_display("skip_button", 'none');
-    // var fbox_for_input = el("feedback_for_input");
-    // fbox_for_input.innerHTML = "the correct spelling is: " + "<br\/>" + this.correct;
-    // fbox_for_input.innerHTML = this.give_away_phrase + "<br\/>" + this.correct + this.give_away_ending_phrase;
-    // this.quiz.question_complete();
-    
     this.quiz.question_complete();
 };
 
 
 
 
+
+////////////////GRAVEYARD OF CODE//////
 
 
 
@@ -1148,3 +777,210 @@ SpellingModeGame.prototype.display_red_green_result_old_with_add_class = functio
     // var fbox = el("feedbackbox");
     // fbox.innerHTML = "Almost! Try again." + red_green_string;
 }*/
+
+
+
+///graveyard of dead functions
+/*
+    //BEGIN DRAGON HACK
+    // we want to send a list of dummy roots to the cheat sheet
+    var dummy_root_list = [];
+    var number_of_dummy_roots = 2;
+    var input_level = this.level.etym_level;
+    var all_roots = select_available_roots(input_level);
+    console.log("DRAGON all_roots = ", all_roots);
+    for (var i = 0; i < number_of_dummy_roots; i++) {
+        var random_root = random_choice(all_roots);
+        console.log("DRAGON random_root = ", random_root);
+        dummy_root_list.push(random_root);
+    }
+    
+    dummy_root_list.push(this.correct);
+    console.log("DRAGON dummy_root_list after adding correct root = ", dummy_root_list);
+    ///END DRAGON HACK
+    */
+    
+    
+//old process_answer
+// SpellingModeGame.prototype.process_answer = function() {
+//     var dd = el("select_element");
+//     var selected_answer = dd.options[dd.selectedIndex].value;
+//     console.log("selected_answer = ", selected_answer);
+
+//     var is_correct = selected_answer === this.correct;
+
+//     if (is_correct) {
+//         //console.log"correct");
+//         this.process_correct_answer();
+//     } else {
+//         //console.log"incorrect");
+//         this.process_incorrect_answer();
+//     }
+
+// };
+
+
+
+
+// a version that only takes one root, not as useful
+// SpellingModeGame.prototype.make_root_definition_to_root_cheat_sheet = function (root) {
+//     console.log("DRAGON about to enter the dragon");
+//     console.log("DRAGON root_input = ", root);
+//     var output_words = make_root_to_word_list(root);
+    
+//     console.log("DRAGON output_words = ", output_words);
+    
+    
+    
+    
+    
+    
+    
+//     ////////ENTERING SNAKE TEST
+//     // console.log("SNAKE entering snake test");
+//     // var name = "etym_cheat_sheet"
+//     // var spell_root_cheat = output_words;
+//     // console.log("SNAKE spell_root_cheat = ", spell_root_cheat);
+//     // // var outer_div = el("image_display_box");
+//     // var outer_div = el(name + "_div");
+//     // create_cheat_sheet_table(outer_div, name,
+//     // ['latin_cheat_sheet_item', 'english_cheat_sheet_item'], null, spell_root_cheat, 2);
+//     // console.log("SNAKE leaving snake test");
+//     /////LEAVING SNAKE TEST
+    
+    
+//     return output_words;
+    
+    
+//     // above is fine, but it doesn't use the make function
+//     // below is an attempt using the make function
+//     // create cheat sheet table has everything we need to do the job
+//     // it's arguments are:
+//     // the outer_div where we will place it
+//     // name of
+//     // 
+//     //
+//     // items
+//     // number of items per row
+//     // var name = "etym_cheat_sheet"
+//     // var spell_root_cheat = output_words;
+//     // // var outer_div = el("image_display_box");
+//     // var outer_div = el(name + "_div");
+//     // create_cheat_sheet_table(outer_div, name,
+//     // null, null, spell_root_cheat, 2);
+    
+    
+// };
+
+
+// a version that takes a list of roots
+// SpellingModeGame.prototype.make_root_definition_to_root_cheat_sheet_new = function (root_list) {
+    
+    
+//     console.log("LIZARD entering the lizard");
+//     console.log("LIZARD this.legal_question_types = ", this.legal_question_types);
+//     console.log("LIZARD this.chosen_question_type = ", this.chosen_question_type);
+//     // var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+//     //     this.level.etym_level, weighted(this.legal_question_types), 4, 4, 4);
+        
+        
+//     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+//         this.level.etym_level, this.chosen_question_type, 4, 4, 4);
+        
+//     // console.log(question_with_cheat_sheet['question_data']);
+//     console.log("LIZARD weighted(this.legal_question_types) = ", weighted(this.legal_question_types));
+//     var question = question_with_cheat_sheet['question_data'];
+//     this.etymology_cheat_sheet = alphabetize_dict(
+//         question_with_cheat_sheet['cheat_sheet']);
+        
+//     console.log("LIZARD this.etymology_cheat_sheet = ", this.etymology_cheat_sheet);
+//     console.log("LIZARD exiting the lizard");
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//     console.log("DRAGON about to enter the dragon");
+//     console.log("DRAGON root_list_input = ", root_list);
+//     var output_list = [];
+//     var output_words;
+//     for (var i = 0; i < root_list.length; i++) {
+//         output_words = make_root_to_word_list(root_list[i]);
+//         console.log("DRAGON output_words = ", output_words);
+//         output_list.push(output_words);
+//     }
+    
+//     console.log("DRAGON output_list after for loop = ", output_list);
+    
+//     var merged_output_list = [].concat.apply([], output_list);
+    
+//     console.log("DRAGON merged_output_list = ", merged_output_list);
+    
+//     // return merged_output_list;
+    
+//     var shuffled_output_list = shuffle(merged_output_list);
+//     shuffled_output_list = remove_duplicates(shuffled_output_list);
+    
+//     return shuffled_output_list;
+    
+    
+    
+    
+//     ////////ENTERING SNAKE TEST
+//     // console.log("SNAKE entering snake test");
+//     // var name = "etym_cheat_sheet"
+//     // var spell_root_cheat = output_words;
+//     // console.log("SNAKE spell_root_cheat = ", spell_root_cheat);
+//     // // var outer_div = el("image_display_box");
+//     // var outer_div = el(name + "_div");
+//     // create_cheat_sheet_table(outer_div, name,
+//     // ['latin_cheat_sheet_item', 'english_cheat_sheet_item'], null, spell_root_cheat, 2);
+//     // console.log("SNAKE leaving snake test");
+//     /////LEAVING SNAKE TEST
+    
+    
+//     // return output_words;
+    
+    
+//     // above is fine, but it doesn't use the make function
+//     // below is an attempt using the make function
+//     // create cheat sheet table has everything we need to do the job
+//     // it's arguments are:
+//     // the outer_div where we will place it
+//     // name of
+//     // 
+//     //
+//     // items
+//     // number of items per row
+//     // var name = "etym_cheat_sheet"
+//     // var spell_root_cheat = output_words;
+//     // // var outer_div = el("image_display_box");
+//     // var outer_div = el(name + "_div");
+//     // create_cheat_sheet_table(outer_div, name,
+//     // null, null, spell_root_cheat, 2);
+    
+    
+// };
+
+
+
+ //old code below, probably pretty bad
+        // console.log("TRUMP entering process slash block")
+        // var red_green_result_list = [];
+        // console.log("TRUMP red_green_result_list = ", red_green_result_list);
+        // var list_of_slash_options_to_process = correct_answer_string.split("/");
+        // console.log("TRUMP list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+        // for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
+        //     console.log("TRUMP list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
+        //     var type_test = typeof list_of_slash_options_to_process[i];
+        //     console.log("TRUMP typeOf.list_of_slash_options_to_process[i] = ", type_test);
+        //     var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
+        //     red_green_result_list.push(result);
+        // }
+        // console.log("TRUMP red_green_result_list = ", red_green_result_list);
+        // return red_green_result_list;
+        //end old code

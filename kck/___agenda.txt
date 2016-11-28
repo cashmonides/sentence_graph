@@ -2,9 +2,13 @@ Agenda for future (made in mid-september 2016)
 
 HIGHEST PRIORITY
 - ???bug in improvement located where console.log says BUGCHECK
+- the 9/10 profile bug
+    - when you're at 9/10 and you finish, if you don't hit next level and isntead hit profile  
+    - it doesn't register submodule 9 as finished so you return to profile as 9/10
+    - i.e. you need to hit next level
 - morphology cells are red when open
 - feedback in morphology and etymology should repeat question
-
+-
 
 
 
