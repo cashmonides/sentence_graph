@@ -10,7 +10,20 @@ HIGHEST PRIORITY
 - feedback in morphology and etymology should repeat question
 -
 
+BIG BUG
+- etymology cheat sheet for spell root mode gives irrelevant clues
 
+
+DESIDERATA
+- a nice addition to spelling mode would be a sequence of hints
+    - each hint adds a letter (probably consoonants at first)
+    - but of course each hint lowers the prize
+        - e.g.:
+        - 'to turn into stone'
+        - hint1 -->  ______f_
+        - hint2 -->  ____r_f_
+        - hint3 ---> p___r_f_
+        - etc.
 
 SMALLISH ALOGRITHM THINGS
 - x/y root 2 --> [x, y]   //throwing away 'root 2'

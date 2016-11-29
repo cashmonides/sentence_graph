@@ -568,6 +568,7 @@ SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(corr
         debuglog("BUG typeOf.list_of_slash_options_to_process[i] = ", type_test);
         var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
         debuglog("BUG result pre-slash addition = ", result);
+        debuglog("BUG123 stringified result pre-slash addition = ", JSON.stringify(result));
         // result = result + "/";
         // console.log("GATOR result post-slash addition = ", result);
         red_green_result_list.push(result);
