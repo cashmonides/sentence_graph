@@ -165,12 +165,19 @@ SpellingModeGame.prototype.attach = function(){
     // given by module
     this.secret_streak = 0;
     
+    //test of new buglog
+    
+    // var debug2 = console.log.bind(window.console);
+    
     //we first check whether a  mode-specific max-streak exists
     // if so we set it as our secret triggering point
     if (this.quiz.module.submodule.spelling_mode_max_incorrect_streak) {
         
         this.temporary_max_incorrect_streak = this.quiz.module.submodule.spelling_mode_max_incorrect_streak;
         backlog("temporary max incorrect streak = ", this.temporary_max_incorrect_streak);
+        // debug2("test of new console log wrapper");
+        // debug2("test of new console log wrapper", this.temporary_max_incorrect_streak);
+        
     } else {
         this.temporary_max_incorrect_streak = this.quiz.module.submodule.max_incorrect_streak;
         buglog("no spelling_mode_max_incorrect_streak specified. spellingmode.attach");
@@ -193,6 +200,11 @@ SpellingModeGame.prototype.get_mode_name = function() {
 
 
 SpellingModeGame.prototype.next_question = function(){
+    
+    // debug.log("HELLO TEST WORLD");
+    // debug('level', "HELLO TEST WORLD goodbye");
+    debug9("FIRST STRING", "SECOND STRING");
+    
     clear_input_box("input_box");
 
     // todo separate spelling level from etymology level
