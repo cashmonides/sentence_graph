@@ -12,7 +12,6 @@ HIGHEST PRIORITY
 
 
 
-
 SMALLISH ALOGRITHM THINGS
 - x/y root 2 --> [x, y]   //throwing away 'root 2'
 - needs to iterate over all the items in the slash list
