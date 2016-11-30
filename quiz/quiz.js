@@ -1114,8 +1114,8 @@ Quiz.prototype.regularize_accuracy_dictionary_input = function (accuracy_diction
 Quiz.prototype.update_accuracy = function () {
     //todo super hacky short-term intervention for spelling mode, converts all incorrect_streak greater than 3 to 3
     
-    console.log("BREITBART entering update_accuracy");
-    console.log("BREITBART this.submodule.incorrect_streak = ", this.submodule.incorrect_streak);
+    backlog("[quiz.update_accuracy] entering update_accuracy");
+    backlog("[quiz.update_accuracy] this.submodule.incorrect_streak = ", this.submodule.incorrect_streak);
     
     // below would be an option very hacky
     // this.submodule.incorrect_streak = this.regularize_accuracy_dictionary_input(this.submodule.incorrect_streak);
@@ -1139,38 +1139,25 @@ Quiz.prototype.get_mf_game_status = function () {
 Quiz.prototype.log_sentence = function (callback) {
     var current_path = this.game.current_path;
     var status = this.get_mf_game_status();
-    console.log('DEBUG 5/23 checkpoint 4 skipped before',
-    current_path);
+    backlog("[quiz.log_sentence] current_path = ", current_path);
     this.user.log_sentences(current_path, status, this.game.get_mode_name(), callback);
-    console.log('DEBUG 5/23 checkpoint 5 skipped after',
-    current_path);
 }
 
+// we update the accuracy_dict by incrementing the incorrect_streak property
+// for each mode name
+// e.g. accuracy_dictionary.etymology.4 ---> 5
 Quiz.prototype.update_accuracy_dict = function () {
+    backlog("[quiz.update_accuracy_dict] entering update_accuracy_dict");
     var mode_name = this.game.get_mode_name();
-    console.log("DEBUG 4-9 mode_name = ", mode_name);
+    backlog("[quiz.update_accuracy] mode_name = ", mode_name);
     var incorrect_streak = this.submodule.incorrect_streak;
-    console.log("DEBUG 4-9 incorrect_streak = ", incorrect_streak);
+    backlog("[quiz.update_accuracy] incorrect_streak = ", incorrect_streak);
+    // update the accuracy dictionary 
     this.accuracy_dictionary[mode_name][incorrect_streak]++;
-    console.log('accuracy dict', incorrect_streak, this.accuracy_dictionary,
-    this.convert_accuracy_dict());
+    
+    
+    // console.log('accuracy dict', incorrect_streak, this.accuracy_dictionary, this.convert_accuracy_dict());
 }
-
-/*
-Obsolete now.
-Quiz.prototype.convert_accuracy_dict = function () {
-    var csv_list;
-    var result = {};
-    for (var i in this.accuracy_dictionary) {
-        csv_list = [];
-        for (var j = 0; j < 4; j++) {
-            csv_list.push(this.accuracy_dictionary[i][j]);
-        }
-        result[i] = csv_list.join('-');
-    };
-    return result;
-}
-*/
 
 
 Quiz.prototype.convert_accuracy_dict = function () {
@@ -1201,29 +1188,27 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 
 Quiz.prototype.submodule_complete = function () {
     if (this.user.uid !== null) {
-        /*
-        var accuracy_list = [];
-        for (var i = 0; i <= 3; i++) {
-            accuracy_list.push(this.accuracy_dictionary[i]);
-        }
-        */
-        console.log("LOG entering post #2");
-        console.log("LOG accuracy dictionary original (raw) = ", this.accuracy_dictionary);
-        // console.log("DEBUG 3-26 accuracy dictionary converted 1 (old) = ", this.convert_accuracy_dict());
-        console.log("LOG accuracy dictionary converted new = ", this.convert_accuracy_dict2());
-        console.log("LOG this.time_data = ", this.time_data);
-        post({data: this.time_data_id, type: "update_time_data"});
-        console.log("LOG just finished update_time_data");
+        backlog("[quiz.submodule_complete] entering post #2");
+        backlog("[quiz.submodule_complete] accuracy dictionary raw  = ", this.accuracy_dictionary);
+        backlog("[quiz.submodule_complete] accuracy dictionary converted = ", this.convert_accuracy_dict2());
+        backlog("[quiz.submodule_complete] this.time_data = ", this.time_data);
         
-        console.log("LOG about to enter update_accuracy_new");
+        post({data: this.time_data_id, type: "update_time_data"});
+        
+        
+        backlog("[quiz.submodule_complete] just finished update_time_data");
+        
+        backlog("[quiz.submodule_complete] about to enter update_accuracy_new");
+        
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict2(),
         type: "update_accuracy_new"});
-        console.log("LOG just finished update_accuracy_new");
-        console.log("LOG exiting post #2");
+        
+        backlog("[quiz.submodule_complete] just finished update_accuracy_new");
+        backlog("[quiz.submodule_complete] exiting post #2");
     } else {
         // The user was anonymous for the first post, so if this second post continued,
         // it would also fail.
-        console.log("PROBLEM refusing post #2");
+        buglog("[quiz.submodule_complete] PROBLEM refusing post #2");
     }
     
     //we check if we are in advance or improving
@@ -1231,11 +1216,11 @@ Quiz.prototype.submodule_complete = function () {
     //improving returns improving module
     var mod = this.user.get_module_being_played();
     
-    console.log("BUGCHECK mod = ", mod);
+    backlog("[quiz.submodule_complete] mod being played = ", mod);
     
     var gotten_module = this.user.get_module(mod);
     
-    console.log("BUGCHECK gotten_module = ", gotten_module);
+    backlog("[quiz.submodule_complete] gotten_module = ", gotten_module);
     
     var submodule_id = gotten_module.progress;
     
@@ -1266,12 +1251,12 @@ Quiz.prototype.submodule_complete = function () {
     // console.log("DEBUGGING entering problem lightbox area 11-19");
     
     
-    console.log("LOG about to make callback - should be null until submodule is complete");
+    backlog("[quiz.submodule_complete] about to make callback - should be null until submodule is complete");
     //callback is null when submodule is not yet complete
     var callback = this.user.submodule_complete(this.module.id);
-    console.log("BREITBART this.module.id = ", this.module.id);
-    console.log("BREITBART is submodule complete? = ", callback);
-    console.log("LOG callback = ", callback);
+    backlog("[quiz.submodule_complete] this.module.id = ", this.module.id);
+    backlog("[quiz.submodule_complete] is submodule complete? = ", callback);
+    backlog("[quiz.submodule_complete] callback = ", callback);
     
     var new_callback = debug_via_log(callback, 'callback');
     
@@ -1286,7 +1271,7 @@ Quiz.prototype.submodule_complete = function () {
             new_callback();
             return; // in case this somehow stays in scope.
         } else {
-            console.log("LOG user.submodule_complete is true");
+            backlog("[quiz.submodule_complete] user.submodule_complete is true");
             // console.log("DEBUG 1-29 this.module before change  = ", this.module);
             //todo might not be necessary so we comment it out
             // this.module = ALL_MODULES[this.user.get_current_module()];
@@ -1303,7 +1288,7 @@ Quiz.prototype.submodule_complete = function () {
     } 
     //else if submodule is not complete
     else {
-        console.log("LOG user.submodule_complete is false");
+        backlog("[quiz.submodule_complete] user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
         //todo make this less hacky
         this.fill_lightbox("YOUR PROGRESS IS: " + (numerator + 1) + "/" + denominator);
@@ -1316,7 +1301,7 @@ Quiz.prototype.submodule_complete = function () {
 };
 
 
-// TRUMP DAMAGE CONTROL
+// DAMAGE CONTROL
 //todo akiva added this, perhaps ill founded
 //old version below, seemed to perhaps not allow for the following case:
 // user clicks on a completed module and no improving module yet exists
@@ -1333,20 +1318,20 @@ Quiz.prototype.is_allowed_module = function (mod) {
     || this.user.get_improving_module() === null;
 }
 
-//END TRUMP DAMAGE CONTROL
+//END DAMAGE CONTROL
 
 
 Quiz.prototype.update_display = function() {
     
-    // console.log("DEBUG 11-15 update_display entered");
-    // console.log("DEBUG 11-24 this.user.data.profile.name = ", this.user.data.profile.name);
-    // console.log("DEBUG 11-24 this.user.data.profile.class_number = ", this.user.data.profile.class_number);
-    // console.log("DEBUG 11-24 this.module.id = ", this.module.id);
+    backlog("[quiz.update_display] update_display entered");
+    // backlog("[quiz.update_display] this.user.data.profile.name = ", this.user.data.profile.name);
+    // backlog("[quiz.update_display] this.user.data.profile.class_number = ", this.user.data.profile.class_number);
+    // backlog("[quiz.update_display] this.module.id = ", this.module.id);
     
-    //todo - update-todo:
-    //todo in improve mode the following will break
+    // todo - update-todo:
+    // todo in improve mode the following will break
     // var mod = this.user.get_current_module();
-    //end update-todo:
+    // end update-todo:
     
     var mod = this.module.id;
     var module_icon = ALL_MODULES[mod].icon_url;
@@ -1354,8 +1339,8 @@ Quiz.prototype.update_display = function() {
     var module_name = ALL_MODULES[mod].icon_name;
     
     
-    console.log("LOG update_display mod = ", mod);
-    console.log("LOG update_display this.user.mod.progress = ", this.user.get_module(mod).progress);
+    backlog("[quiz.update_display] update_display mod = ", mod);
+    backlog("[quiz.update_display] this.user.mod.progress = ", this.user.get_module(mod).progress);
     
     
     //todo - update-todo
@@ -1372,7 +1357,7 @@ Quiz.prototype.update_display = function() {
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
     el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     
-    console.log("LOG: leaving innerhtml");
+    backlog("[quiz.update_display] leaving update display");
 };
 
 
@@ -1448,10 +1433,8 @@ Quiz.prototype.process_lightbox_image = function (offset, progress) {
     var mod;
     if (this.advance_improve_status === "advancing") {
         mod = this.user.get_current_module();
-        console.log("LOG advancing status triggered, mod = ", mod);
     } else if (this.advance_improve_status === "improving") {
         mod = this.user.get_improving_module();
-        console.log("LOG improving status triggered, mod = ", mod);
     } else {
         console.log("LOG weird status triggered, namely ",
         this.advance_improve_status);
@@ -1492,7 +1475,7 @@ Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
         throw new Error("no tags are available in the sentence "
         + sentence.text + "!");
     } else {
-        console.log('All is fine, and the number of available tags is',
+        backlog('[quiz.pick_question_data] All is fine, and the number of available tags is',
         available_tags.length);
     }
     console.log('available_tags, a =', available_tags, available_tags);
@@ -1530,8 +1513,9 @@ Quiz.prototype.get_reward = function () {
 
 
 Quiz.prototype.increment_score = function() {
-    console.log("TRUMP entered increment_score");
-    console.log("TRUMP entered this.get_reward = ", this.get_reward);
+    backlog("[quiz.increment_score] entering increment_score");
+    backlog("[quiz.increment_score] this.get_reward = ", this.get_reward);
+    
     if (!this.user.is_mf()) {
         this.progress_bar.change_number_correct(
             {'change_value': this.get_reward(),
@@ -1620,9 +1604,6 @@ Quiz.prototype.get_cheat_sheet = function(mod_id) {
 
 Quiz.prototype.get_cheat_sheet_image = function () {
     var mod = this.user.get_module_being_played();
-    
-    console.log("DEBUG 11-23 advance/improve status = ", this.advance_improve_status);
-    console.log("DEBUG 11-23 mod = ", mod);
     image = this.get_cheat_sheet(mod);
     return image;
 }
@@ -1636,58 +1617,13 @@ Quiz.prototype.clear_cheat_sheet = function () {
     //image-cheat sheet is here
     var div = el("image_display_box");
     div.style.display = 'none';
-    
-    console.log("cheat sheet cleared");
-    
-    
 }
 
 Quiz.prototype.get_vocab_cheat_sheet_map = function () {
-    /*var map = {};
-    
-    //todo uncomment when done testing
-    map["noun"] = {
-        "CUCULLUS" : "cuckoo",
-        "DRACO" : "dragon"
-    };
-    map["verb"] = {
-        "VOR" : "love",
-        "PORT" : "carry"
-    };
-    return map*/
-    
-    // console.log("DEBUG 9-30 this.game.cheat_sheet", this.game.cheat_sheet);
-    
     return this.game.cheat_sheet || 'no cheat sheet for this mode';
 };
  
-// ////SPELLING HINT SECTION in development
-// //below is a primitive version for testing with no toggle and no error catching
-// Quiz.prototype.initialize_spelling_hint_old = function () {
-//     // var hint_output = this.game.give_underscore_hint();
-//     // console.log("HINT6 hint_output = ", hint_output);
-//     this.game.make_spelling_hint();
-    
-//     //a clumsy attempt at error catching
-//     // if (this.game.make_spelling_hint()) {
-//     //     this.game.make_spelling_hint();
-//     // } else {
-//     //     console.log("no spelling hint for this game");
-//     //     return;
-//     // }
-    
-    
-//     // var output = this.game.make_spelling_hint();
-//     //  var div_to_add = el("image_display_box");
-    
-//     // var name = "etym_cheat_sheet"
-//     // var etym_cheat = this.game.etymology_cheat_sheet;
-//     // // var outer_div = el("image_display_box");
-//     // var outer_div = el(name + "_div");
-//     // create_cheat_sheet_table(outer_div, name,
-//     // null, null, etym_cheat, 2);
-//     // el('spelling_hint_button').onclick = function () {quiz.toggle_element(name)};
-// }    
+
  
  
 //a more advanced version being developed
@@ -1699,38 +1635,23 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
 // e.g. pod_____y     & __iatry
 Quiz.prototype.initialize_spelling_hint = function () {
     
-    //see if this simple error catcher works
+    // todo see if something like this simple error catcher can work
     //(some games won't have a spelling hint because they're not spelling mode)
     // if (!this.game.make_spelling_hint()) {
     //     console.log("PROBLEM: no spelling hint for this game");
     //     return;
     // } 
-    //below was an insufficiently modular version
-    //we just want to generate a string and a div to put it in
-    // this.game.make_spelling_hint();
-    //
     
     
-    ////START HERE THURSDAY
     
-    // we generate a string for the spelling hint
-    // it should look like this _____ivorous
-    
-    //one option that doesn't seem to update on new question
-    // var spelling_hint_string = this.game.generate_final_spelling_hint_string();
-    //so we try this one
-    
-    
-    console.log("TURKEY 10 initialize_spelling_hint triggered");
+    backlog("[quiz.initialize_spelling_hint] initialize_spelling_hint entered");
     
     var div_to_inspect = el('spelling_hint_box');
-    console.log("TURKEY 10 BEFORE div.innerHTML = ", div_to_inspect.innerHTML);
     
-    // this.game.make_spelling_hint();
     var spelling_hint_string = this.game.spelling_hint;
     
     
-    console.log("TURKEY 10.1 hint_output = ", spelling_hint_string);
+    backlog("[quiz.initialize_spelling_hint] hint_output = ", spelling_hint_string);
     
     //we first test A SIMPLE VERSION
     // SUMMARY: works but doesn't remove old hint, doesn't give new hint
@@ -1740,67 +1661,11 @@ Quiz.prototype.initialize_spelling_hint = function () {
     // it produces the full word
     var div_string = 'spelling_hint_box'
     var div_name = el('spelling_hint_box');
-    console.log("TURKEY div_name = ", div_name);
     div_name.innerHTML = spelling_hint_string;
-    console.log("TURKEY 10 AFTER div.innerHTML = ", div_to_inspect.innerHTML);
     //works
     // el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div2')};
     // quiz.toggle_element takes as its argument a string, not the div
     el('spelling_hint_button').onclick = function () {quiz.toggle_element(div_string)};
-
-
-    //model below
-    // var name = "etym_cheat_sheet"
-    // var etym_cheat = this.game.etymology_cheat_sheet;
-    // // var outer_div = el("image_display_box");
-    // var outer_div = el(name + "_div");
-    // create_cheat_sheet_table(outer_div, name,
-    // null, null, etym_cheat, 2);
-    // el('etym_cheat_button').onclick = function () {quiz.toggle_element(name)};
-    //end model
-    
-    // better version using make to test soon
-    
-    
-    // the make version
-    // var name = 'spelling_hint_div3';
-    // var div = make({'tag': 'div', 'id': name,'style': {'display': 'block'}}, 
-    //     el("spelling_hint_wrapper"));
-    // div.innerHTML = spelling_hint_string;
-    
-    
-    // el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div3')};
-
-    
-    
-
-    /*
-    // older version obsolete, don't use
-    // BELOW IS THE ADVANCED BLOCK TO BE TESTED SHORTLY
-    
-    //we generate our final string
-    // e.g. _____IVOROUS
-    // not functional yet
-    // var spelling_hint_string = this.game.generate_spelling_hint_string();
-    // console.log("HINT: spelling_hint_string = ", spelling_hint_string);
-    
-    //we set the name of the id for the div we are going to create
-    var name = 'spelling_hint';
-    
-    // we make a div with that name
-    // and we are hard coding the div where it's going to be put (here = 'image_display_box' 
-    var div = make({'tag': 'div', 'id': name,
-    'style': {'display': 'block'}}, el("image_display_box"));
-    
-    
-    //innerHTML is how all the cheat sheets work
-    // we want to make sure we are appending spelling attempts
-    //we want a chain of hint + attempt 1 + attempt 2 ... etc.
-    div.innerHTML = spelling_hint_string;
-    // console.log("cheat sheet button clicked");
-    //the element is hard-coded in index
-    el('spelling_hint_button').onclick = function () {quiz.toggle_element(name)};
-    */
 };    
     
     
@@ -1833,7 +1698,6 @@ Quiz.prototype.initialize_cheat_sheet = function() {
     var div = make({'tag': 'div', 'id': name,
     'style': {'display': 'block'}}, el("image_display_box"));
     div.innerHTML = '<img src="'+ image_source +'" id=\'image_of_cheat_sheet\'/>';
-    // console.log("cheat sheet button clicked");
     el('cheat_sheet_button').onclick = function () {quiz.toggle_element(name)};
     //};
 };
@@ -1843,7 +1707,6 @@ Quiz.prototype.initialize_cheat_sheet = function() {
 Quiz.prototype.initialize_vocab_cheat_sheet = function () {
     var name = "vocab_cheat_sheet"
     var vocabulary_items = this.get_vocab_cheat_sheet_map();
-    debug_log("ERASE WHEN DONE vocabulary_items = ", vocabulary_items);
     // var outer_div = el("image_display_box");
     var outer_div = el(name + "_div");
     // var e = el('vocab_cheat_sheet');
@@ -1881,6 +1744,10 @@ Quiz.prototype.initialize_vocab_cheat_sheet = function () {
 Quiz.prototype.initialize_etym_cheat_sheet = function () {
     var name = "etym_cheat_sheet"
     var etym_cheat = this.game.etymology_cheat_sheet;
+    
+    backlog("[quiz.initialize_etym_cheat_sheet] this.game.etym_cheat_sheet stringified = ", 
+        JSON.stringify(etym_cheat));
+    
     // var outer_div = el("image_display_box");
     var outer_div = el(name + "_div");
     create_cheat_sheet_table(outer_div, name,
@@ -1915,41 +1782,18 @@ Quiz.prototype.toggle_element = function(id) {
     //button.onclick = function() {
     // console.log('image display box = ', el("image_display_box"));
     
-    console.log("BACKLOG div id in toggle_element = ", id);
     
     var element = el(id);
-    console.log("BACKLOG div.innerHTML = ", element.innerHTML);
     if (!element) {
         throw "no element with id: " + id;
     }
-    console.log("BACKLOG: toggle triggered");
     if (element.style.display !== 'none') {
-        console.log("TURKEY none display triggered");
         element.style.display = 'none';
     } else {
-        console.log("TURKEY block display triggered");
         element.style.display = 'block';
     }
-    //};
 };
 
 
-
-//todo some of the global functions below are hacky and need to be integrated
-
-
-
-
-
-// function process_answer_hack () {
-//     // alert("process_answer_hack triggered");
-//     // alert(Quiz.process_answer) = undefined
-//     // alert(Quiz.game); = undefined
-//     // alert(Quiz) = function with default properties (null)
-//     // alert(MCMode3game.process_answer)  = MCMode3game is not defined
-//     alert(this);
-//     console.log(this);
-    
-// }
 
 

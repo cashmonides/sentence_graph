@@ -231,8 +231,8 @@ SpellingModeGame.prototype.next_question = function(){
     // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     this.chosen_question_type = weighted(this.legal_question_types);
-    console.log("LOG: this.chosen_question_type = ", this.chosen_question_type);
-    console.log("LIZARD: this.chosen_question_type = ", this.chosen_question_type);
+    backlog("[spelling_mode.next_question] this.chosen_question_type = ", this.chosen_question_type);
+    backlog("[spelling_mode.next_question] this.chosen_question_type = ", this.chosen_question_type);
     
     
     var spelling_intro_question;
@@ -259,15 +259,20 @@ SpellingModeGame.prototype.next_question = function(){
     
     
     
-    console.log("LIZARD2 chosen_question_type = ", this.chosen_question_type);
+    backlog("[spelling_mode.next_question] chosen_question_type = ", this.chosen_question_type);
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
         this.level.etym_level, this.chosen_question_type, 4, 4, 4);
     // console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
-    this.lizard_cheat_sheet = alphabetize_dict(
-        question_with_cheat_sheet['cheat_sheet']);
+    
+    
+    
+    
+    
+    // this.lizard_cheat_sheet = alphabetize_dict(
+    //     question_with_cheat_sheet['cheat_sheet']);
         
-    console.log("LIZARD2 this.lizard_cheat_sheet = ", this.lizard_cheat_sheet);
+    // backlog("[spelling_mode.next_question] this.lizard_cheat_sheet = ", this.lizard_cheat_sheet);
     
     
     
@@ -319,17 +324,19 @@ SpellingModeGame.prototype.next_question = function(){
     };
     
     
+    console.log("FINAL ETYMOLOGY CHEAT SHEET = ", this.etymology_cheat_sheet);
     
     
-    console.log("GECKO this.etymology_cheat_sheet = ", this.etymology_cheat_sheet);
+    
+    backlog("[spelling_mode.next_question] this.etymology_cheat_sheet = ", this.etymology_cheat_sheet);
     this.choices = alphabetize_list(question.choices);
     
     // console.log("BACKLOG: this.correct spelling_mode  = ", this.correct);
     
     var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
-    console.log("HINT777 underscore_hint = ", underscore_hint);
+    backlog("[spelling_mode.next_question] underscore_hint = ", underscore_hint);
     this.spelling_hint = underscore_hint;
-    console.log("HINT777 this.spelling_hint = ", this.spelling_hint);
+    backlog("[spelling_mode.next_question] this.spelling_hint = ", this.spelling_hint);
     
     Quiz.set_question_text(spelling_intro_question + '"' + question.clue + '".');
     
@@ -830,7 +837,6 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
         // we extract all possible roots
         // e.g. quadruped ---> ['QUAD/QUADR', 'PED/POD']
         var roots_extracted = get_roots(word);
-        // console.log('MANCHESTER0 roots_extracted premutation = ', roots_extracted);
         
         // we need to remove metadata such as "root 2"
         // e.g. ['POS/POT root 2'] ---> ['POS/POT']

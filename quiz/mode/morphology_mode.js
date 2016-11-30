@@ -47,7 +47,6 @@ var global_hack_color_div_text = function (div, color) {
 
 //this doesn't seem to work for mysterious reasons
 var register_cell_fill = function (cell) {
-    // console.log("MORMON REGISTER");
     if (cell == 'beginning') {
         this.beginning_element_submitted = true;
     } else if (cell == 'middle') {
@@ -132,23 +131,7 @@ var convert_root_items_to_actual_forms = function (root_list, lexeme_list, lexem
 
 
 
-var global_hack_clear_morphology_cell_colors = function () {
-    
-    
-    
-    // var e1 = el('morphology_cell_answer_beginning');
-    // e1.style.backgroundColor='navajowhite';
-    // console.log("MORMON 1 e1.style.backgroundColor = ", e1.style.backgroundColor);
-    
-    // var e2 = el('morphology_cell_answer_middle');
-    // e2.style.backgroundColor='navajowhite';
-    // console.log("MORMON 1 e2.style.backgroundColor = ", e2.style.backgroundColor);
-    
-    // var e3 = el('morphology_cell_answer_ending');
-    // e3.style.backgroundColor='navajowhite';
-    // console.log("MORMON 1 e3.style.backgroundColor = ", e3.style.backgroundColor);
-};
-
+// 
 
 var MorphologyModeGame = function () {
     this.data = null;
@@ -210,49 +193,34 @@ MorphologyModeGame.prototype.get_mode_name = function() {
 
 
 MorphologyModeGame.prototype.next_question = function () {
-    console.log("DEBUG MORPHOLOGY next_question entered");
+    backlog("[morph_mode.next_question] next_question entered");
 
-    //AKIVA damage control 11-20-16
-    // global_hack_clear_morphology_cell_colors();
-    
-    // var f1 = el('morphology_cell_answer_beginning');
-    // f1.style.backgroundColor = 'navajo white';
-    
-    // var f2 = el('morphology_cell_answer_middle');
-    // f2.style.backgroundColor = 'navajo white';
-    
-    // var f3 = el('morphology_cell_answer_ending');
-    // f3.style.backgroundColor = 'navajo white';
-    
     
     //morphology cells do not seem to be cleared after submit????!!!
     var e1 = el('morphology_cell_answer_beginning');
     e1.innerHTML = '_____';
     e1.style.backgroundColor = 'navajowhite';
-    // global_hack_color_div_text(e1, 'navajo white');
     var e2 = el('morphology_cell_answer_middle');
     e2.innerHTML = '_____';
     e2.style.backgroundColor = 'navajowhite';
-    // global_hack_color_div_text(e2, 'navajo white');
     var e3 = el('morphology_cell_answer_ending');
     e3.innerHTML = '_____';
     e3.style.backgroundColor = 'navajowhite';
-    // global_hack_color_div_text(e3, 'navajo white');
     
     
     this.beginning_element_submitted = false;
     this.middle_element_submitted = false;
     this.ending_element_submitted = false;
     
-    // console.log("MORMON BEAST this.beginning_element_submitted = ", this.beginning_element_submitted);
-    // console.log("MORMON BEAST this.middle_element_submitted = ", this.middle_element_submitted);
-    // console.log("MORMON BEAST this.ending_element_submitted = ", this.ending_element_submitted);
+    backlog("[morph_mode.next_question] this.beginning_element_submitted = ", this.beginning_element_submitted);
+    backlog("[morph_mode.next_question] this.middle_element_submitted = ", this.middle_element_submitted);
+    backlog("[morph_mode.next_question] this.ending_element_submitted = ", this.ending_element_submitted);
     
     
-    //end AKIVA damage control
+
     
-    //todo very important
-    //is this the right place to clear the feedback box?
+    // todo very important
+    // is this the right place to clear the feedback box?
     // var o = el('feedbackbox');
     // remove_all_children(o);
 
@@ -263,7 +231,6 @@ MorphologyModeGame.prototype.next_question = function () {
     // but latin_extra_level is hard-wired into kck's generate sentence
     // so it would be tricky to just delete it
     // cosmetic level (dashes and such) - we can't implement until we build the functionality
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 1");
     
     var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_cosmetic_level', 'kck_level', 'morphology_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
@@ -272,14 +239,9 @@ MorphologyModeGame.prototype.next_question = function () {
     // var test_level = weighted_choice(
     //     get_current_module(this.level).morphology_level)
         
-    console.log("ECCE 4 this.level = ", this.level);
-    console.log("ECCE 4 this.level.morphology_level = ", this.level.morphology_level);
     
     global_hack_morphology_testing_level = this.level.morphology_level;
     
-    console.log("ECCE 4 global_hack_morphology_testing_level = ", global_hack_morphology_testing_level);
-    
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 2");
     
     
     //this will be the point at which we establish the question type
@@ -292,7 +254,7 @@ MorphologyModeGame.prototype.next_question = function () {
     //     get_current_module(this.level.morphology_levels).question_type);
     // console.log("DEBUG MORPHOLOGY checkpoint 2.5 question_type = ", question_type);
     
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 3");
+    
     //we will always set the target language as latin
     //since we will always be producing latin and evaluating those forms as the answer
     // the target language will be english
@@ -302,7 +264,7 @@ MorphologyModeGame.prototype.next_question = function () {
     this.source_language = source_language;
     this.target_language = target_language;
     
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 4");
+    
     // sets up our lexicon
     // var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
     // var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
@@ -320,34 +282,31 @@ MorphologyModeGame.prototype.next_question = function () {
     //lexicon intervention begin
     global_hack_full_lexicon_for_morphology_as_object = sentence.chosen_lexemes;
     
-    console.log("ECCE 3 sentence.chosen_lexemes = ", sentence.chosen_lexemes);
+    backlog("[morph_mode.next_question] sentence.chosen_lexemes = ", sentence.chosen_lexemes);
     
     
     global_hack_full_lexicon_for_morphology_as_object2 = sentence.chosen_lexemes.verb;
-    console.log("ECCE 3 sentence.chosen_lexemes.verb = ", sentence.chosen_lexemes.verb); 
-    //lexicon intervention end
+    backlog("[morph_mode.next_question] sentence.chosen_lexemes.verb = ", sentence.chosen_lexemes.verb); 
     
     
-    console.log('LOG MORPHOLOGY sentence =', sentence);
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 5");
+    
+    backlog("[morph_mode.next_question] sentence =", sentence);
     
     
     this.question = sentence.translate_into(source_language);
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 5.5");
-    console.log("DEBUG MORPHOLOGY this.question = ", this.question);
+    backlog("[morph_mode.next_question] this.question = ", this.question);
     
     this.answer = sentence.translate_into(target_language);
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 5.75");
-    console.log("DEBUG MORPHOLOGY this.question = ", this.answer);
+    backlog("[morph_mode.next_question] this.answer = ", this.answer);
     
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 6");
-    console.log("sentence.chosen_lexemes =", sentence.chosen_lexemes);
+    
+    backlog("[morph_mode.next_question] sentence.chosen_lexemes =", sentence.chosen_lexemes);
     
     
     //todo below should work but is making the game sick - commenting it out for now
     this.cheat_sheet = this.morphology_cheat_sheet(sentence.chosen_lexemes);
     
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 7");
+    
     //we have to freeze out remove dashes for now
     // maybe later we can develop some form of the student inputing the dash-removed form
     // var remove_dashes_bool = get_remove_dashes_bool(this.level.kck_level);
@@ -361,18 +320,15 @@ MorphologyModeGame.prototype.next_question = function () {
     //changes the score, progress bar, etc.
     this.quiz.update_display();
 
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 8");
 
     Quiz.set_question_text("Translate the following sentence:");
     
     
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 9");
     
     // this.question = process_output(this.question);
     
     this.quiz.add_question_text(this.question);
     
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 10");
     
     //we're not using drops so we comment it all out
     // todo implement or find some method that does this
@@ -409,11 +365,10 @@ MorphologyModeGame.prototype.next_question = function () {
     this.give_away_phrase = "The correct answer was: ";
     this.give_away_ending_phrase = ".";
     
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 11");
     
     // todo implement or find some method that does this
     this.correct_answer_as_string = sentence.translate_into(target_language);
-    console.log("LOG MORPHOLOGY correct_answer_as_string = ", this.correct_answer_as_string);
+    backlog("[morph_mode.next_question] correct_answer_as_string = ", this.correct_answer_as_string);
     
     //we are going to remove dashes from the morphological elements for cosmetic reason
     //so we are going to compare [am, aba, t] with the correct answer as string
@@ -429,62 +384,55 @@ MorphologyModeGame.prototype.next_question = function () {
     
     
     
-    
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 12");
 
     
     Quiz.set_question_text('Translate the following sentence:');
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 13");
     
     this.generate_morphology_options_master_function(1);
     
-    console.log("DEBUG MORPHOLOGY next_question checkpoint 14");
 };
 
 MorphologyModeGame.prototype.get_morphological_properties_from_level = function (morphological_level) {
     
+    backlog("morph_mode.get_morphological_properties_from_level] entering get_morphological_properties_from_level");
     
     
-    console.log("ECCE entering get_morphological_properties_from_level");
-    console.log("ECCE should be an integer morphological level = ", morphological_level);
+    backlog("morph_mode.get_morphological_properties_from_level] morphological level = ", morphological_level);
     var list_of_morphological_properties = [];
     
-    //CUT OUT
-    // var list_of_morphological_properties = global_hack_properties_from_morphology_level;
-    // console.log("CUTOUT list_of_morphological_properties = ", list_of_morphological_properties);
-    // return list_of_morphological_properties;
     
-    console.log("ECCE about to pick a specific level of morphology_levels = ", morphology_levels);
+    // morphology_levels is a global
+    backlog("morph_mode.get_morphological_properties_from_level] morphology_levels = ", morphology_levels);
     
     var morphological_level_to_consult = morphology_levels[morphological_level];
     
-    console.log("ECCE morphological_level_to_consult = ", morphological_level_to_consult);
+    backlog("morph_mode.get_morphological_properties_from_level] morphological_level_to_consult = ", morphological_level_to_consult);
     
-    console.log("ECCE about to set tense_mood_voice");
+    
     //we push all the tense_mood_voice combos
     //e.g. present indicative active
     var allowed_tense_mood_voice_list = morphological_level_to_consult.allowed_tense_mood_voice;
-    console.log("ECCE allowed_tense_mood_voice_list = ", allowed_tense_mood_voice_list);
+    backlog("morph_mode.get_morphological_properties_from_level] allowed_tense_mood_voice_list = ", allowed_tense_mood_voice_list);
     list_of_morphological_properties.push(allowed_tense_mood_voice_list);
-    console.log("ECCE list_of_morphological_properties = ", list_of_morphological_properties);
+    backlog("morph_mode.get_morphological_properties_from_level] list_of_morphological_properties = ", list_of_morphological_properties);
     
     //we push all the person_number combos
     //e.g. 3s
     var allowed_person_number_list = morphological_level_to_consult.allowed_person_number;
-    console.log("ECCE allowed_person_number_list = ", allowed_person_number_list);
+    backlog("morph_mode.get_morphological_properties_from_level] allowed_person_number_list = ", allowed_person_number_list);
     list_of_morphological_properties.push(allowed_person_number_list);
-    console.log("ECCE list_of_morphological_properties = ", list_of_morphological_properties);
+    backlog("morph_mode.get_morphological_properties_from_level] list_of_morphological_properties = ", list_of_morphological_properties);
     
     
     //we push all the person_number combos
     //e.g. 3s
     var allowed_conjugation_list = morphological_level_to_consult.allowed_conjugation;
-    console.log("ECCE allowed_conjugation_list = ", allowed_conjugation_list);
+    backlog("morph_mode.get_morphological_properties_from_level] allowed_conjugation_list = ", allowed_conjugation_list);
     list_of_morphological_properties.push(allowed_conjugation_list);
-    console.log("ECCE list_of_morphological_properties pre-flattening = ", list_of_morphological_properties);
+    backlog("morph_mode.get_morphological_properties_from_level] list_of_morphological_properties pre-flattening = ", list_of_morphological_properties);
     
     list_of_morphological_properties = [].concat.apply([], list_of_morphological_properties);
-    console.log("ECCE list_of_morphological_properties post-flattening = ", list_of_morphological_properties);
+    backlog("morph_mode.get_morphological_properties_from_level] list_of_morphological_properties post-flattening = ", list_of_morphological_properties);
     
     
     return list_of_morphological_properties;
@@ -550,9 +498,7 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     //end obsolescence
     
     
-    console.log("ECCE 1 global_hack_properties_from_morphology_level pre-setting = ", global_hack_properties_from_morphology_level);
     global_hack_properties_from_morphology_level = this.get_morphological_properties_from_level(global_hack_morphology_testing_level);
-    console.log("ECCE 2 global_hack_properties_from_morphology_level post-setting = ", global_hack_properties_from_morphology_level);
     
     
     test_output_of_morphology.beginning = this.get_morphological_elements_from_level ('beginning', global_hack_properties_from_morphology_level);
@@ -587,10 +533,9 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
     
     
     
-    console.log("ECCE 3 global_hack_full_lexicon_for_morphology_as_object2 = ", global_hack_full_lexicon_for_morphology_as_object2);
     
     var final_root_output = convert_root_items_to_actual_forms(test_output_of_morphology.beginning, global_hack_full_lexicon_for_morphology, global_hack_full_lexicon_for_morphology_as_object2, 'latin');
-    console.log("ROOT LOOP final_root_output = ", final_root_output);
+    
     final_root_output = JSON.stringify(final_root_output);
     
     if (shuffle_morphological_elements) {
@@ -666,13 +611,11 @@ var submit_morphological_element_to_input_dictionary = function (morphological_e
 }
 
 var submit_morphological_element_to_cell = function (morphological_element, cell_destination) {
-    console.log("REMOVE HEY THIS IS CALLED 1");
+    backlog("[morph.mode submit_morphological_element_to_cell] entering submit_morphological_element_to_cell");
     
     submit_morphological_element_to_input_dictionary(morphological_element, cell_destination);
-    console.log("BUTTON TESTING submit morphological element to cell entered");
-    
-    console.log("BUTTON TESTING in submit morphological_element_sent to cell = ", morphological_element);
-    console.log("BUTTON TESTING in submit cell_destination = ", cell_destination);
+    backlog("[morph.mode submit_morphological_element_to_cell] morphological_element = ", morphological_element);
+    backlog("[morph.mode submit_morphological_element_to_cell] cell_destination = ", cell_destination);
     // we first check if the submitted data is of the right type
     if (typeof (morphological_element) !== 'string') {
         alert("submitted morphological element is not a string");
@@ -711,8 +654,6 @@ var submit_morphological_element_to_cell = function (morphological_element, cell
 
 var createClickHandler = function(arg, destination) {
   return function() { 
-      console.log("create_click_handler arg = ", arg);
-      console.log("BUTTON TESTING destination in createclickhandler = ", destination);
       submit_morphological_element_to_cell(arg, destination);
   };
 }
@@ -722,7 +663,6 @@ var clear_div = function (elementID) {
 }
 
 MorphologyModeGame.prototype.clear_buttons = function () {
-    console.log("HEY clear_buttons triggered");
     var e1 = document.getElementById("morphology_cell_options_beginning");
     e1.innerHTML = "";
     var e2 = document.getElementById("morphology_cell_options_middle");
@@ -733,7 +673,6 @@ MorphologyModeGame.prototype.clear_buttons = function () {
 
 
 MorphologyModeGame.prototype.clear_morphology_answer_cells = function () {
-    console.log("HEY clear_buttons triggered");
     var e1 = document.getElementById("morphology_cell_answer_beginning");
     e1.innerHTML = "_____";
     var e2 = document.getElementById("morphology_cell_answer_middle");
@@ -744,9 +683,7 @@ MorphologyModeGame.prototype.clear_morphology_answer_cells = function () {
 
 MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_elements, cell_destination) {
     
-    console.log("BUTTON TESTING morphological_elements pre-processing = ", morphological_elements);
     morphological_elements = JSON.parse(morphological_elements);
-    console.log("BUTTON TESTING morphological_elements after parse = ", morphological_elements);
     
     //not sure if necessary    
     var docFragment = document.createDocumentFragment();
@@ -778,23 +715,20 @@ MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_el
     
     
     for (var i = 0; i < morphological_elements.length; i++) {
-        console.log("DEBUG BUTTONS checkpoint 1");
+        
         //we first make the button for each morphological element
         var button = document.createElement("BUTTON");
         
-        console.log("DEBUG BUTTONS checkpoint 3");
+        
         //we want to tweak the cosmetics of this button so we give it a class
         button.className += 'morphology_option_button';
         
-        console.log("DEBUG BUTTONS checkpoint 4");
+        
         
         // this button is now empty of text, so we need to add the text (e.g. amav, aba, erunt)
         var morphological_element_to_input = morphological_elements[i];
         var t = document.createTextNode(morphological_element_to_input);   
-        console.log("BUTTON TESTING morphological_element_to_input = ", morphological_element_to_input);
-        console.log("BUTTON TESTING type of morphological_element_to_input = ",typeof(morphological_element_to_input));
         
-        console.log("DEBUG BUTTONS checkpoint 5");
         
         
         
@@ -802,15 +736,12 @@ MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_el
         button.onclick = createClickHandler(morphological_element_to_input, cell_destination);
         
         
-        console.log("DEBUG BUTTONS checkpoint 6");
         
         button.innerHTML = morphological_element_to_input
         
-        console.log("DEBUG BUTTONS checkpoint 7");
         
         // docFragment.appendChild(button); 
         
-        console.log("DEBUG BUTTONS checkpoint 8");
         
         if (cell_destination == 'beginning') {
             // button.className += 'morphology_beginning_button';
@@ -836,7 +767,8 @@ MorphologyModeGame.prototype.make_morphology_buttons = function(morphological_el
     //below just throws it up on the page
     // document.body.appendChild(docFragment);
     //we want it to be in the beginning, middle or end block
-    console.log("DEBUG BUTTONS checkpoint 9");
+   
+   
     // e.appendChild(docFragment);
 }
 
@@ -869,7 +801,7 @@ MorphologyModeGame.prototype.process_answer = function(){
     
     
     var correct_status = this.hack_compare_input_to_correct_answer(global_hack_input_dictionary);
-    console.log("HEY correct_status = ", correct_status);
+    
     
     if (correct_status) {
         this.process_correct_answer();
@@ -879,10 +811,8 @@ MorphologyModeGame.prototype.process_answer = function(){
 };
 
 var convert_dictionary_to_dashed_form = function (dictionary) {
-    console.log("HEY dictionary input into hack convert = ", dictionary);
     var output;
     output = dictionary.beginning + "-" + dictionary.middle + "-" + dictionary.ending;
-    console.log("HEY output = ", output);
     return output;
 }
 
@@ -890,13 +820,10 @@ var convert_dictionary_to_dashed_form = function (dictionary) {
 MorphologyModeGame.prototype.hack_compare_input_to_correct_answer = function (input) {
     input = convert_dictionary_to_dashed_form(input);
     var processed_correct_answer_as_string = remove_metacharacters(this.correct_answer_as_string);
-    console.log("HEY processed_correct_answer_as_string = ", processed_correct_answer_as_string);
     
     if (input == processed_correct_answer_as_string) {
-        console.log("HEY input matches answer");
         return true;
     } else {
-        console.log("HEY input doesn't match answer")
         return false;
     }
 }
@@ -909,21 +836,19 @@ MorphologyModeGame.prototype.hack_compare_input_to_correct_answer = function (in
 MorphologyModeGame.prototype.process_correct_answer = function () {
     this.quiz.increment_score();
     
-    // console.log("DEBUG entering 2nd random_choice");
     var cell_1 = random_choice(MorphologyModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML += '<br/>' + cell_1 + " ";
     var correct_answer_as_string_for_path = remove_metacharacters(this.correct_answer_as_string);
     var question_as_string_for_path = this.question;
     var question_plus_answer_as_string = question_as_string_for_path + " = " + correct_answer_as_string_for_path;
-    // console.log("DEBUG answer_as_string_for_path =", correct_answer_as_string_for_path);
+    
+    backlog("[morph_mode.process_correct_answer] answer_as_string_for_path =", correct_answer_as_string_for_path);
+    
     fbox.appendChild(document.createTextNode(question_plus_answer_as_string));
     fbox.appendChild(document.createElement('br'));
     fbox.appendChild(document.createElement('br'));
     
-    //DAMAGE CONTROL
-    // global_hack_clear_morphology_cell_colors();
-    //DAMAGE CONTROL END
     
     this.quiz.question_complete();
 };
@@ -931,14 +856,9 @@ MorphologyModeGame.prototype.process_correct_answer = function () {
 
 MorphologyModeGame.prototype.determine_red_green_cell_old = function () {
   var text = remove_metacharacters(this.correct_answer_as_string);
-//   console.log("MORMON text = ", text);
+
   var text_split = text.split("-");
-//   console.log("MORMON text_split = ", text_split);
-//   console.log("MORMON global_hack_input_dictionary = ", global_hack_input_dictionary);
-//   console.log("MORMON global_hack_input_dictionary.beginning = ", global_hack_input_dictionary.beginning);
-//   console.log("MORMON global_hack_input_dictionary.middle = ", global_hack_input_dictionary.middle);
-//   console.log("MORMON global_hack_input_dictionary.ending = ", global_hack_input_dictionary.ending);
-  
+
   
   var red_green_cell_map = {};
   
@@ -967,15 +887,9 @@ MorphologyModeGame.prototype.determine_red_green_cell_old = function () {
 
 MorphologyModeGame.prototype.determine_red_green_cell = function () {
   var text = remove_metacharacters(this.correct_answer_as_string);
-//   console.log("MORMON text = ", text);
+
   var text_split = text.split("-");
-//   console.log("MORMON text_split = ", text_split);
-//   console.log("MORMON global_hack_input_dictionary = ", global_hack_input_dictionary);
-//   console.log("MORMON global_hack_input_dictionary.beginning = ", global_hack_input_dictionary.beginning);
-//   console.log("MORMON global_hack_input_dictionary.middle = ", global_hack_input_dictionary.middle);
-//   console.log("MORMON global_hack_input_dictionary.ending = ", global_hack_input_dictionary.ending);
-  
-  
+
   var red_green_cell_list = [];
   
   if (global_hack_input_dictionary.beginning == text_split[0]) {
@@ -996,7 +910,6 @@ MorphologyModeGame.prototype.determine_red_green_cell = function () {
       red_green_cell_list.push('red');
   }
   
-//   console.log("MORMON red_green_cell_list = ",red_green_cell_list);
   return red_green_cell_list;  
 };
 
@@ -1038,18 +951,16 @@ MorphologyModeGame.prototype.process_incorrect_answer = function () {
     if (this.quiz.submodule.incorrect_streak === 1) {
         this.quiz.decrement_score();
     } else {
-        console.log("DEBUG if not triggered");
+        // do nothing
     }
     
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
-        // console.log("DEBUG entering 3rd random_choice");
         
         var cell_1 = random_choice(MorphologyModeGame.cell_1_feedback_wrong);
         var cell_3 = random_choice(MorphologyModeGame.cell_3_feedback_wrong);
         
         
         
-        // console.log("DEBUG leaving 3rd random_choice");
         
         var fbox = el("feedbackbox");
         fbox.innerHTML += "<br/>" + cell_1 + " " + cell_3;
@@ -1062,9 +973,6 @@ MorphologyModeGame.prototype.process_incorrect_answer = function () {
 MorphologyModeGame.prototype.give_away_answer = function () {
     var fbox = el("feedbackbox");
     fbox.innerHTML = this.display_give_away_answer();
-    //DAMAGE CONTROL
-    // global_hack_clear_morphology_cell_colors();
-    //DAMAGE CONTROL END
     this.quiz.question_complete();
 };
 
@@ -1107,7 +1015,7 @@ MorphologyModeGame.prototype.display_green_and_red_path = function (statuses) {
 
 
 
-//needs to be modified for the different lexicon format of morphology (all principal parts)
+// todo needs to be modified for the different lexicon format of morphology (all principal parts)
 // no properties
 MorphologyModeGame.prototype.morphology_cheat_sheet = function (chosen_lexemes) {
     var source_language = this.source_language;
@@ -1154,3 +1062,5 @@ MorphologyModeGame.prototype.register_cell_fill = function (cell) {
         this.ending_element_submitted = true;
     }
 };
+
+

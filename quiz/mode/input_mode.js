@@ -190,12 +190,12 @@ InputModeGame.prototype.next_question = function () {
 InputModeGame.prototype.process_answer = function(){
     var self = this;
     var raw_input_string = el("input_box").value;
-    console.log("DEBUG SPELLING raw input string = ", raw_input_string);
+    backlog("[input_mode.process_answer] raw input string = ", raw_input_string);
 
     
 
     var processed_input_string = clean_input_string(raw_input_string);
-    console.log("DEBUG SPELLING process input string = ", processed_input_string);
+    backlog("[input_mode.process_answer] processed input string = ", processed_input_string);
     
     
     
@@ -210,28 +210,25 @@ InputModeGame.prototype.process_answer = function(){
     //todo for now we're going to just send this function a string
     //later we'll need to do the necessary stripping of punctuation
 
-    console.log("TRUMP raw_input_string = ", raw_input_string);
     
-    console.log("TRUMP this.correct_answer = ", this.correct_answer);
+    
+    backlog("[input_mode.process_answer] this.correct_answer = ", this.correct_answer);
     
     var comparison_result = this.submit_string_to_green_and_red(this.correct_answer, raw_input_string);
     
     
     
-    console.log("TRUMP comparison_result = ", comparison_result);
+    backlog("[input_mode.process_answer] comparison_result = ", comparison_result);
     this.comparison_result = comparison_result;
     
     
-    console.log("SWAMP checkpoint 6 entering display_red_green-result");
-    console.log("SWAMP checkpoint 6.1 input to argument = ", comparison_result);
-    
     this.display_red_green_result(comparison_result);
-    console.log("SWAMP checkpoint 6.9999999 leaving display_red_green-result");
     
     if (object_equals(processed_input_string, correct_english_translation)) {
+        backlog("[input_mode.process_answer] input matches correct, process_correct_answer triggered");
         this.process_correct_answer();
     } else {
-        console.log("swamp checkpoint 1 about to call process_incorrect_answer");
+        backlog("[input_mode.process_answer] input doesn't match correct, process_incorrect_answer triggered");
         this.process_incorrect_answer();
     }
 };
@@ -248,9 +245,6 @@ InputModeGame.prototype.submit_string_to_green_and_red = function (correct_answe
     console.log("TRUMP correct answer list = ", correct_answer_as_list_of_characters);
     console.log("TRUMP input list = ", input_string_as_list_of_characters);*/
     
-    console.log("TRUMP1 correct_answer_string = ", correct_answer_string);
-    console.log("TRUMP1 input_answer_string = ", input_string);
-    
     var levenshtein_result = levenshtein(correct_answer_string, input_string)
     var red_green_result;
     if ('feedback' in levenshtein_result) {
@@ -260,9 +254,6 @@ InputModeGame.prototype.submit_string_to_green_and_red = function (correct_answe
             return [x, 'yellow'];
         });
     }
-    // var red_green_result = compare_path(correct_answer_as_list_of_characters, input_string_as_list_of_characters);
-    console.log("TRUMP red_green_result = ", red_green_result);
-    // console.log("SWAMP red_green_result.red_green_list = ", red_green_result.red_green_list);
     return red_green_result;
 };
 
@@ -285,10 +276,8 @@ InputModeGame.prototype.display_red_green_result = function (list) {
 InputModeGame.prototype.process_answer_old = function(){
     var self = this;
     var raw_input_string = el("input_box").value;
-    console.log("DEBUG INPUT 4-9 raw input string = ", raw_input_string);
     
     var processed_input_string = clean_input_string(raw_input_string);
-    console.log("DEBUG INPUT 4-9 process input string = ", processed_input_string);
     
     
     //todo we need the correct english answer - should be stored as a variable somewhere in this.next_question
@@ -310,7 +299,6 @@ InputModeGame.prototype.process_answer_old = function(){
 InputModeGame.prototype.process_correct_answer = function () {
     this.quiz.increment_score();
     
-    console.log("DEBUG entering 2nd random_choice");
     var cell_1 = random_choice(InputModeGame.cell_1_feedback_right);
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
@@ -319,9 +307,7 @@ InputModeGame.prototype.process_correct_answer = function () {
     clear_input_box("input_box");
     
     
-    console.log("DEBUG 4-9 entering question_complete");
     this.quiz.question_complete();
-    
     
 };
 
@@ -332,23 +318,21 @@ InputModeGame.prototype.process_incorrect_answer = function () {
     if (this.quiz.submodule.incorrect_streak === 1) {
         this.quiz.decrement_score();
     } else {
-        console.log("DEBUG if not triggered");
+        // do nothing
     }
     
     if (this.quiz.submodule.incorrect_streak < this.quiz.module.submodule.max_incorrect_streak) {
-        console.log("DEBUG entering 3rd random_choice");
+        
         
         var cell_1 = random_choice(InputModeGame.cell_1_feedback_wrong);
         var cell_3 = random_choice(InputModeGame.cell_3_feedback_wrong);
         
         
         
-        console.log("DEBUG leaving 3rd random_choice");
         
         var fbox = el("feedbackbox");
         fbox.innerHTML = cell_1 + " " + cell_3;
     } else {
-        console.log("DEBUG 4-9 give away answer about to be triggered");
         this.give_away_answer();
         // clear_input_box("input_box");
     }

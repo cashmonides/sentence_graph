@@ -37,15 +37,14 @@ var test_match_in_slash_options = function (input_word, slash_options_string) {
     var boolean = false;
     for (var i = 0; i < slash_options_list.length; i++) {
         if (slash_options_list[i].indexOf(input_word)) {
-            console.log("LOG MANCHESTER match found, boolean switched to true");
+            backlog("[test_match_in_slash_options] match found, boolean switched to true");
             boolean = true;
             return boolean;
         } else {
-            console.log("LOG MANCHESTER MATCH NOT FOUND continuing iteration");
+            console.log("[test_match_in_slash_options] match not found continuing iteration");
             continue;
         }
     }
-    console.log("MANCHESTER boolean returned = ", boolean);
     return boolean;
 };
 
@@ -58,16 +57,15 @@ var test_match_from_slash_options = function (slash_options_string, query_word) 
     var boolean = false;
     for (var i = 0; i < slash_options_list.length; i++) {
         if (query_word.indexOf(slash_options_list[i])) {
-            console.log("MANCHESTER match found, boolean switched to true");
-            console.log("MANCHESTER discovered match = ", slash_options_list[i]);
+            backlog("[test_match_from_slash_options] match found, boolean switched to true");
+            backlog("[test_match_from_slash_options] discovered match = ", slash_options_list[i]);
             boolean = true;
             return boolean;
         } else {
-            console.log("MANCHESTER MATCH NOT FOUND continuing iteration")
+            console.log("[test_match_from_slash_options] match not found continuing iteration")
             continue;
         }
     }
-    console.log("MANCHESTER boolean returned = ", boolean);
     return boolean;
 };
 
@@ -77,127 +75,27 @@ var test_match_from_slash_options = function (slash_options_string, query_word) 
 // or false
 var return_match_from_slash_options = function (slash_options_string, query_word) {
     
-    // console.log("MANCHESTER3 sanity check begin");
-    // var query_word1 = 'carnivorous';
-    // var substring1 = 'carn';
-    
-    // if (query_word1.indexOf('carnov') !== -1) {
-    //     console.log("MANCHESTER3 sanity check match found");
-    // } else {
-    //     console.log("MANCHESTER3 sanity check match not found");
-    // }
-    
-    // // if (query_word1.indexOf('carn') !== -1) {
-    // //     console.log("MANCHESTER3 sanity check match found");
-    // //     console.log("MANCHESTER3 sanity check discovered match = ", substring1);
-    // //     var output = substring1;
-    // //     return;
-    // // } else {
-    // //     console.log("MANCHESTER3 sanity check MATCH NOT FOUND continuing iteration");
-    // //     return
-    // // }
-    // console.log("MANCHESTER3 sanity check end");
-    
-    
-    ///PASTING SANITY CHECK BEGIN
-    
-    // console.log("MANCHESTER3 sanity check begin");
-    
-    // console.log("MANCHESTER3 sanity check input slash-string = ", slash_options_string);
-    // console.log("MANCHESTER3 sanity check input query-word = ", query_word);
-    
-    // var query_word1 = query_word;
-
-    // var slash_options_list = slash_options_string.split("/");
-
-    // console.log("MANCHESTER3 sanity check slash_options_list = ", slash_options_list);
-    // console.log("MANCHESTER3 sanity check slash_options_list[0] = ", slash_options_list[0]);
-    
-    // var substring1 = slash_options_list[0];
-    // substring1 = substring1.toLowerCase();
-    
-    // console.log("MANCHESTER3 sanity check query_word1 = ", query_word1);
-    // console.log("MANCHESTER3 sanity check substring1 = ", substring1);
-    
-    // if (query_word1.indexOf(substring1) !== -1) {
-    //     console.log("MANCHESTER3 sanity check match found");
-    // } else {
-    //     console.log("MANCHESTER3 sanity check match not found");
-    // }
-    
-
-    // console.log("MANCHESTER3 sanity check end");
-    
-
-    ////PASTING SANITY CHECK END
-    
-    
-    //CASE WITH LOWER CASE
-    
-    console.log("MANCHESTER3 entering return_match");
-    console.log("MANCHESTER3 input slash-string = ", slash_options_string);
-    console.log("MANCHESTER3 input query-word = ", query_word);
+    backlog("[return_match_from_slash_options] slash-string = ", slash_options_string);
+    backlog("[return_match_from_slash_options] query-word = ", query_word);
     
     var slash_options_list = slash_options_string.split("/");
     
-    
-    console.log("MANCHESTER3 slash_options_list = ", slash_options_list);
-    
     var output = false;
     for (var i = 0; i < slash_options_list.length; i++) {
-        console.log("MANCHESTER slash_options_list[i] = ", slash_options_list[i]);
-        console.log("MANCHESTER3 word we're checking = ", query_word);
-        console.log("MANCHESTER3 equation = ", query_word.indexOf(slash_options_list[i]) !== -1);
-        console.log("MANCHESTER3 value = ", query_word.indexOf(slash_options_list[i]));
         var substring = slash_options_list[i].toLowerCase();
         // if (query_word.indexOf(slash_options_list[i]) !== -1) {
         if (query_word.indexOf(substring) !== -1) {
-            console.log("MANCHESTER match found");
-            console.log("MANCHESTER discovered match = ", slash_options_list[i]);
+            backlog("[return_match_from_slash_options] match found");
+            backlog("[return_match_from_slash_options] match = ", slash_options_list[i]);
             output = slash_options_list[i];
             return output;
         } else {
-            console.log("MANCHESTER MATCH NOT FOUND continuing iteration");
+            backlog("[return_match_from_slash_options] match not found continuing iteration");
             continue;
         }
     }
-    console.log("MANCHESTER output returned = ", output);
+    backlog("[return_match_from_slash_options] output returned = ", output);
     return output;
-    
-    
-    ///NO TOLOWER CASE VERSION
-    /*
-    console.log("MANCHESTER3 entering return_match");
-    console.log("MANCHESTER3 input slash-string = ", slash_options_string);
-    console.log("MANCHESTER3 input query-word = ", query_word);
-    
-    var slash_options_list = slash_options_string.split("/");
-    
-    
-    console.log("MANCHESTER3 slash_options_list = ", slash_options_list);
-    
-    var output = false;
-    for (var i = 0; i < slash_options_list.length; i++) {
-        console.log("MANCHESTER slash_options_list[i] = ", slash_options_list[i]);
-        console.log("MANCHESTER3 word we're checking = ", query_word);
-        console.log("MANCHESTER3 equation = ", query_word.indexOf(slash_options_list[i]) !== -1);
-        console.log("MANCHESTER3 value = ", query_word.indexOf(slash_options_list[i]));
-        var substring = slash_options_list[i];
-        // if (query_word.indexOf(slash_options_list[i]) !== -1) {
-        if (query_word.indexOf(substring) !== -1) {
-            console.log("MANCHESTER match found");
-            console.log("MANCHESTER discovered match = ", slash_options_list[i]);
-            output = slash_options_list[i];
-            return output;
-        } else {
-            console.log("MANCHESTER MATCH NOT FOUND continuing iteration");
-            continue;
-        }
-    }
-    console.log("MANCHESTER output returned = ", output);
-    return output;
-    
-    */
 };
 
 
