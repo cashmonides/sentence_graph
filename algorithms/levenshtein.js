@@ -1,4 +1,4 @@
-var MAX_ANSWER_LENGTH = 30;
+var MAX_ANSWER_LENGTH = 120;
 
 var min_by_first = function (list) {
     var best_so_far = [null, Infinity];
