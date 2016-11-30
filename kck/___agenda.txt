@@ -13,6 +13,11 @@ HIGHEST PRIORITY
 BIG BUG
 - etymology cheat sheet for spell root mode gives irrelevant clues
 
+BIG BUG
+- latin mode is triggering a bug at levels above 220
+    - the message is: initiated TypeError: Cannot read property 'j' of undefined
+    - problem might be the switch to implicit
+
 
 DESIDERATA
 - a nice addition to spelling mode would be a sequence of hints

@@ -47,7 +47,7 @@ var global_hack_color_div_text = function (div, color) {
 
 //this doesn't seem to work for mysterious reasons
 var register_cell_fill = function (cell) {
-    console.log("MORMON REGISTER");
+    // console.log("MORMON REGISTER");
     if (cell == 'beginning') {
         this.beginning_element_submitted = true;
     } else if (cell == 'middle') {
@@ -134,7 +134,7 @@ var convert_root_items_to_actual_forms = function (root_list, lexeme_list, lexem
 
 var global_hack_clear_morphology_cell_colors = function () {
     
-    console.log("MORMON HEY HEY");
+    
     
     // var e1 = el('morphology_cell_answer_beginning');
     // e1.style.backgroundColor='navajowhite';
@@ -244,9 +244,9 @@ MorphologyModeGame.prototype.next_question = function () {
     this.middle_element_submitted = false;
     this.ending_element_submitted = false;
     
-    console.log("MORMON BEAST this.beginning_element_submitted = ", this.beginning_element_submitted);
-    console.log("MORMON BEAST this.middle_element_submitted = ", this.middle_element_submitted);
-    console.log("MORMON BEAST this.ending_element_submitted = ", this.ending_element_submitted);
+    // console.log("MORMON BEAST this.beginning_element_submitted = ", this.beginning_element_submitted);
+    // console.log("MORMON BEAST this.middle_element_submitted = ", this.middle_element_submitted);
+    // console.log("MORMON BEAST this.ending_element_submitted = ", this.ending_element_submitted);
     
     
     //end AKIVA damage control
@@ -616,36 +616,36 @@ MorphologyModeGame.prototype.generate_morphology_options_master_function = funct
 };
 
 var submit_morphological_element_to_input_dictionary = function (morphological_element, cell_destination) {
-    console.log("REMOVE HEY THIS IS CALLED 2");
+    // console.log("REMOVE HEY THIS IS CALLED 2");
     
     
     if (cell_destination == 'beginning') {
         global_hack_input_dictionary.beginning = morphological_element;
-        console.log("MORMON TOGGLE BEGINNING");
+        // console.log("MORMON TOGGLE BEGINNING");
         // this.beginning_element_submitted = true;
         // this.register_cell_fill('beginning');
         register_cell_fill('beginning');
     } else if (cell_destination == 'middle') {
         global_hack_input_dictionary.middle = morphological_element;
-        console.log("MORMON TOGGLE MIDDLE");
+        // console.log("MORMON TOGGLE MIDDLE");
         // this.middle_element_submitted = true;
         // this.register_cell_fill('middle');
         register_cell_fill('middle');
     } else if (cell_destination == 'ending') {
         global_hack_input_dictionary.ending = morphological_element;
-        console.log("MORMON TOGGLE ENDING");
+        // console.log("MORMON TOGGLE ENDING");
         // this.ending_element_submitted = true;
         // this.register_cell_fill('ending');
         register_cell_fill('ending');
     } else {
         alert("cell_destination is neither beginning middle nor end");
     }
-    console.log("REMOVE HEY input_dictionary = ", global_hack_input_dictionary);
-    console.log("REMOVE HEY input_dictionary stringified = ", JSON.stringify(global_hack_input_dictionary));
+    // console.log("REMOVE HEY input_dictionary = ", global_hack_input_dictionary);
+    // console.log("REMOVE HEY input_dictionary stringified = ", JSON.stringify(global_hack_input_dictionary));
     
-    console.log("MORMON DEVIL this.beginning_element_submitted = ", this.beginning_element_submitted);
-    console.log("MORMON DEVIL this.middle_element_submitted = ", this.middle_element_submitted);
-    console.log("MORMON DEVIL this.ending_element_submitted = ", this.ending_element_submitted);
+    // console.log("MORMON DEVIL this.beginning_element_submitted = ", this.beginning_element_submitted);
+    // console.log("MORMON DEVIL this.middle_element_submitted = ", this.middle_element_submitted);
+    // console.log("MORMON DEVIL this.ending_element_submitted = ", this.ending_element_submitted);
     
     
     
@@ -931,13 +931,13 @@ MorphologyModeGame.prototype.process_correct_answer = function () {
 
 MorphologyModeGame.prototype.determine_red_green_cell_old = function () {
   var text = remove_metacharacters(this.correct_answer_as_string);
-  console.log("MORMON text = ", text);
+//   console.log("MORMON text = ", text);
   var text_split = text.split("-");
-  console.log("MORMON text_split = ", text_split);
-  console.log("MORMON global_hack_input_dictionary = ", global_hack_input_dictionary);
-  console.log("MORMON global_hack_input_dictionary.beginning = ", global_hack_input_dictionary.beginning);
-  console.log("MORMON global_hack_input_dictionary.middle = ", global_hack_input_dictionary.middle);
-  console.log("MORMON global_hack_input_dictionary.ending = ", global_hack_input_dictionary.ending);
+//   console.log("MORMON text_split = ", text_split);
+//   console.log("MORMON global_hack_input_dictionary = ", global_hack_input_dictionary);
+//   console.log("MORMON global_hack_input_dictionary.beginning = ", global_hack_input_dictionary.beginning);
+//   console.log("MORMON global_hack_input_dictionary.middle = ", global_hack_input_dictionary.middle);
+//   console.log("MORMON global_hack_input_dictionary.ending = ", global_hack_input_dictionary.ending);
   
   
   var red_green_cell_map = {};
@@ -960,20 +960,20 @@ MorphologyModeGame.prototype.determine_red_green_cell_old = function () {
       red_green_cell_map.ending = 'red';
   }
   
-  console.log("MORMON red_green_cell_map = ",red_green_cell_map);
+//   console.log("MORMON red_green_cell_map = ",red_green_cell_map);
   return red_green_cell_map;  
 };
 
 
 MorphologyModeGame.prototype.determine_red_green_cell = function () {
   var text = remove_metacharacters(this.correct_answer_as_string);
-  console.log("MORMON text = ", text);
+//   console.log("MORMON text = ", text);
   var text_split = text.split("-");
-  console.log("MORMON text_split = ", text_split);
-  console.log("MORMON global_hack_input_dictionary = ", global_hack_input_dictionary);
-  console.log("MORMON global_hack_input_dictionary.beginning = ", global_hack_input_dictionary.beginning);
-  console.log("MORMON global_hack_input_dictionary.middle = ", global_hack_input_dictionary.middle);
-  console.log("MORMON global_hack_input_dictionary.ending = ", global_hack_input_dictionary.ending);
+//   console.log("MORMON text_split = ", text_split);
+//   console.log("MORMON global_hack_input_dictionary = ", global_hack_input_dictionary);
+//   console.log("MORMON global_hack_input_dictionary.beginning = ", global_hack_input_dictionary.beginning);
+//   console.log("MORMON global_hack_input_dictionary.middle = ", global_hack_input_dictionary.middle);
+//   console.log("MORMON global_hack_input_dictionary.ending = ", global_hack_input_dictionary.ending);
   
   
   var red_green_cell_list = [];
@@ -996,7 +996,7 @@ MorphologyModeGame.prototype.determine_red_green_cell = function () {
       red_green_cell_list.push('red');
   }
   
-  console.log("MORMON red_green_cell_list = ",red_green_cell_list);
+//   console.log("MORMON red_green_cell_list = ",red_green_cell_list);
   return red_green_cell_list;  
 };
 
@@ -1026,11 +1026,11 @@ MorphologyModeGame.prototype.process_incorrect_answer = function () {
     // var red_green_cell_map = this.determine_red_green_cell_old();
     // this.color_cells_red_and_green(red_green_cell_map);
     //list version
-    console.log("MORMON about to color cells");
+    // console.log("MORMON about to color cells");
     // global_hack_clear_morphology_cell_colors();
     var red_green_cell_list = this.determine_red_green_cell();
     this.color_cells_red_and_green(red_green_cell_list);
-    console.log("MORMON done coloring cells");
+    // console.log("MORMON done coloring cells");
     //end Akiva damage control
     
     
