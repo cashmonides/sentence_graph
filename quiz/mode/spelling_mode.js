@@ -230,10 +230,10 @@ SpellingModeGame.prototype.next_question = function(){
     // we have a few options for hard-coding
     // this.legal_question_types = {'word_definition_to_word': 0.00000005,
     //     'root_definition_to_root': 0.5};
-    this.legal_question_types = {'word_definition_to_word': 0.5,
-        'root_definition_to_root': 0.5};
+    // this.legal_question_types = {'word_definition_to_word': 0.5,
+    //     'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.000001, 'root_definition_to_root': 0.5};
-    // this.legal_question_types = {'word_definition_to_word': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.5};
     
     this.chosen_question_type = weighted(this.legal_question_types);
     
