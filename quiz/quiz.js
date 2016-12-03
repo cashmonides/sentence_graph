@@ -516,7 +516,6 @@ Quiz.prototype.next_question = function (error) {
     
     
     
-    
     // todo very important: need to figure out how to clear this box
     // without calling some ad hoc step
     // remove_children(el('spelling_hint_box'));
@@ -1114,8 +1113,8 @@ Quiz.prototype.regularize_accuracy_dictionary_input = function (accuracy_diction
 Quiz.prototype.update_accuracy = function () {
     //todo super hacky short-term intervention for spelling mode, converts all incorrect_streak greater than 3 to 3
     
-    backlog("[quiz.update_accuracy] entering update_accuracy");
-    backlog("[quiz.update_accuracy] this.submodule.incorrect_streak = ", this.submodule.incorrect_streak);
+    console.log("[quiz.update_accuracy] entering update_accuracy");
+    console.log("[quiz.update_accuracy] this.submodule.incorrect_streak = ", this.submodule.incorrect_streak);
     
     // below would be an option very hacky
     // this.submodule.incorrect_streak = this.regularize_accuracy_dictionary_input(this.submodule.incorrect_streak);
@@ -1139,7 +1138,7 @@ Quiz.prototype.get_mf_game_status = function () {
 Quiz.prototype.log_sentence = function (callback) {
     var current_path = this.game.current_path;
     var status = this.get_mf_game_status();
-    backlog("[quiz.log_sentence] current_path = ", current_path);
+    console.log("[quiz.log_sentence] current_path = ", current_path);
     this.user.log_sentences(current_path, status, this.game.get_mode_name(), callback);
 }
 
@@ -1147,11 +1146,11 @@ Quiz.prototype.log_sentence = function (callback) {
 // for each mode name
 // e.g. accuracy_dictionary.etymology.4 ---> 5
 Quiz.prototype.update_accuracy_dict = function () {
-    backlog("[quiz.update_accuracy_dict] entering update_accuracy_dict");
+    console.log("[quiz.update_accuracy_dict] entering update_accuracy_dict");
     var mode_name = this.game.get_mode_name();
-    backlog("[quiz.update_accuracy] mode_name = ", mode_name);
+    console.log("[quiz.update_accuracy] mode_name = ", mode_name);
     var incorrect_streak = this.submodule.incorrect_streak;
-    backlog("[quiz.update_accuracy] incorrect_streak = ", incorrect_streak);
+    console.log("[quiz.update_accuracy] incorrect_streak = ", incorrect_streak);
     // update the accuracy dictionary 
     this.accuracy_dictionary[mode_name][incorrect_streak]++;
     
@@ -1188,23 +1187,23 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 
 Quiz.prototype.submodule_complete = function () {
     if (this.user.uid !== null) {
-        backlog("[quiz.submodule_complete] entering post #2");
-        backlog("[quiz.submodule_complete] accuracy dictionary raw  = ", this.accuracy_dictionary);
-        backlog("[quiz.submodule_complete] accuracy dictionary converted = ", this.convert_accuracy_dict2());
-        backlog("[quiz.submodule_complete] this.time_data = ", this.time_data);
+        console.log("[quiz.submodule_complete] entering post #2");
+        console.log("[quiz.submodule_complete] accuracy dictionary raw  = ", this.accuracy_dictionary);
+        console.log("[quiz.submodule_complete] accuracy dictionary converted = ", this.convert_accuracy_dict2());
+        console.log("[quiz.submodule_complete] this.time_data = ", this.time_data);
         
         post({data: this.time_data_id, type: "update_time_data"});
         
         
-        backlog("[quiz.submodule_complete] just finished update_time_data");
+        console.log("[quiz.submodule_complete] just finished update_time_data");
         
-        backlog("[quiz.submodule_complete] about to enter update_accuracy_new");
+        console.log("[quiz.submodule_complete] about to enter update_accuracy_new");
         
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict2(),
         type: "update_accuracy_new"});
         
-        backlog("[quiz.submodule_complete] just finished update_accuracy_new");
-        backlog("[quiz.submodule_complete] exiting post #2");
+        console.log("[quiz.submodule_complete] just finished update_accuracy_new");
+        console.log("[quiz.submodule_complete] exiting post #2");
     } else {
         // The user was anonymous for the first post, so if this second post continued,
         // it would also fail.
@@ -1216,11 +1215,11 @@ Quiz.prototype.submodule_complete = function () {
     //improving returns improving module
     var mod = this.user.get_module_being_played();
     
-    backlog("[quiz.submodule_complete] mod being played = ", mod);
+    console.log("[quiz.submodule_complete] mod being played = ", mod);
     
     var gotten_module = this.user.get_module(mod);
     
-    backlog("[quiz.submodule_complete] gotten_module = ", gotten_module);
+    console.log("[quiz.submodule_complete] gotten_module = ", gotten_module);
     
     var submodule_id = gotten_module.progress;
     
@@ -1251,12 +1250,12 @@ Quiz.prototype.submodule_complete = function () {
     // console.log("DEBUGGING entering problem lightbox area 11-19");
     
     
-    backlog("[quiz.submodule_complete] about to make callback - should be null until submodule is complete");
+    console.log("[quiz.submodule_complete] about to make callback - should be null until submodule is complete");
     //callback is null when submodule is not yet complete
     var callback = this.user.submodule_complete(this.module.id);
-    backlog("[quiz.submodule_complete] this.module.id = ", this.module.id);
-    backlog("[quiz.submodule_complete] is submodule complete? = ", callback);
-    backlog("[quiz.submodule_complete] callback = ", callback);
+    console.log("[quiz.submodule_complete] this.module.id = ", this.module.id);
+    console.log("[quiz.submodule_complete] is submodule complete? = ", callback);
+    console.log("[quiz.submodule_complete] callback = ", callback);
     
     var new_callback = debug_via_log(callback, 'callback');
     
@@ -1271,7 +1270,7 @@ Quiz.prototype.submodule_complete = function () {
             new_callback();
             return; // in case this somehow stays in scope.
         } else {
-            backlog("[quiz.submodule_complete] user.submodule_complete is true");
+            console.log("[quiz.submodule_complete] user.submodule_complete is true");
             // console.log("DEBUG 1-29 this.module before change  = ", this.module);
             //todo might not be necessary so we comment it out
             // this.module = ALL_MODULES[this.user.get_current_module()];
@@ -1288,7 +1287,7 @@ Quiz.prototype.submodule_complete = function () {
     } 
     //else if submodule is not complete
     else {
-        backlog("[quiz.submodule_complete] user.submodule_complete is false");
+        console.log("[quiz.submodule_complete] user.submodule_complete is false");
         //todo put following into function (encapsulation and information hiding)
         //todo make this less hacky
         this.fill_lightbox("YOUR PROGRESS IS: " + (numerator + 1) + "/" + denominator);
@@ -1323,10 +1322,7 @@ Quiz.prototype.is_allowed_module = function (mod) {
 
 Quiz.prototype.update_display = function() {
     
-    backlog("[quiz.update_display] update_display entered");
-    // backlog("[quiz.update_display] this.user.data.profile.name = ", this.user.data.profile.name);
-    // backlog("[quiz.update_display] this.user.data.profile.class_number = ", this.user.data.profile.class_number);
-    // backlog("[quiz.update_display] this.module.id = ", this.module.id);
+    console.log("[quiz.update_display] update_display entered");
     
     // todo - update-todo:
     // todo in improve mode the following will break
@@ -1339,8 +1335,8 @@ Quiz.prototype.update_display = function() {
     var module_name = ALL_MODULES[mod].icon_name;
     
     
-    backlog("[quiz.update_display] update_display mod = ", mod);
-    backlog("[quiz.update_display] this.user.mod.progress = ", this.user.get_module(mod).progress);
+    console.log("[quiz.update_display] update_display mod = ", mod);
+    console.log("[quiz.update_display] this.user.mod.progress = ", this.user.get_module(mod).progress);
     
     
     //todo - update-todo
@@ -1357,7 +1353,7 @@ Quiz.prototype.update_display = function() {
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
     el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     
-    backlog("[quiz.update_display] leaving update display");
+    console.log("[quiz.update_display] leaving update display");
 };
 
 
@@ -1475,7 +1471,7 @@ Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
         throw new Error("no tags are available in the sentence "
         + sentence.text + "!");
     } else {
-        backlog('[quiz.pick_question_data] All is fine, and the number of available tags is',
+        console.log('[quiz.pick_question_data] All is fine, and the number of available tags is',
         available_tags.length);
     }
     console.log('available_tags, a =', available_tags, available_tags);
@@ -1513,8 +1509,8 @@ Quiz.prototype.get_reward = function () {
 
 
 Quiz.prototype.increment_score = function() {
-    backlog("[quiz.increment_score] entering increment_score");
-    backlog("[quiz.increment_score] this.get_reward = ", this.get_reward);
+    console.log("[quiz.increment_score] entering increment_score");
+    console.log("[quiz.increment_score] this.get_reward = ", this.get_reward);
     
     if (!this.user.is_mf()) {
         this.progress_bar.change_number_correct(
@@ -1644,14 +1640,14 @@ Quiz.prototype.initialize_spelling_hint = function () {
     
     
     
-    backlog("[quiz.initialize_spelling_hint] initialize_spelling_hint entered");
+    console.log("[quiz.initialize_spelling_hint] initialize_spelling_hint entered");
     
     var div_to_inspect = el('spelling_hint_box');
     
     var spelling_hint_string = this.game.spelling_hint;
     
     
-    backlog("[quiz.initialize_spelling_hint] hint_output = ", spelling_hint_string);
+    console.log("[quiz.initialize_spelling_hint] hint_output = ", spelling_hint_string);
     
     //we first test A SIMPLE VERSION
     // SUMMARY: works but doesn't remove old hint, doesn't give new hint
@@ -1745,7 +1741,7 @@ Quiz.prototype.initialize_etym_cheat_sheet = function () {
     var name = "etym_cheat_sheet"
     var etym_cheat = this.game.etymology_cheat_sheet;
     
-    backlog("[quiz.initialize_etym_cheat_sheet] this.game.etym_cheat_sheet stringified = ", 
+    console.log("[quiz.initialize_etym_cheat_sheet] this.game.etym_cheat_sheet stringified = ", 
         JSON.stringify(etym_cheat));
     
     // var outer_div = el("image_display_box");

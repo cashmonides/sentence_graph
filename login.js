@@ -7,6 +7,10 @@
 // 2 creating account
 // 3 forgot password
 // 4 change password
+// 
+
+
+
 
 var mode_map = {
     "email_row": [[1, 2, 3, 4], "table-row"],

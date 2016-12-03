@@ -1,3 +1,19 @@
+////////DESCRIPTION OF BELOW
+//a general map of all the various tools that were developed in the summer of 2016
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 here (buried in maximal_english_tf_place) 
 seems to some of Dan's notes that are the basis of a translation formula dictionary traverser

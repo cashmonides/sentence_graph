@@ -171,3 +171,28 @@ var new_tmv_list = tmv_list.map(function(tmv){
 
 
 
+
+// say we want to loop through an array
+// and return only an array in which index(of)
+var uniqueProducts = array.filter(function(elem, i, array) {
+        return array.indexOf(elem) === i;
+    }
+);
+
+
+
+// say we want to loop through an array of tense mood combos and throw out anything 
+// that doesn't have the proper sequence
+// 
+
+function is_primary(item_in_map, map_to_query) {
+    return map_to_query[item_in_map] === 'primary';
+}
+
+function is_secondary(item_in_map) {
+    return map_to_query[item_in_map] === 'secondary';
+}
+
+var filtered_array1 = original_array.filter(is_primary);
+var filtered_array2 = original_array.filter(is_secondary);
+
