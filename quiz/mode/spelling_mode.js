@@ -224,8 +224,8 @@ SpellingModeGame.prototype.next_question = function(){
     //     'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.5,
     //     'root_definition_to_root': 0.5};
-    // this.legal_question_types = {'word_definition_to_word': 0.000001, 'root_definition_to_root': 0.5};
-    this.legal_question_types = {'word_definition_to_word': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.000001, 'root_definition_to_root': 0.5};
+    // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     this.chosen_question_type = weighted(this.legal_question_types);
     
@@ -258,10 +258,8 @@ SpellingModeGame.prototype.next_question = function(){
     //     this.level.etym_level, this.chosen_question_type, 3, 3, 3);
     
     
-    
-    
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, this.chosen_question_type, 4, 4, 4);
+        this.level.etym_level, this.chosen_question_type, 2, 2, 1);
     // console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
     this.etymology_cheat_sheet = alphabetize_dict(

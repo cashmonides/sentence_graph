@@ -12,6 +12,8 @@ HIGHEST PRIORITY
 
 BIG BUG
 - etymology cheat sheet for spell root mode gives irrelevant clues
+    e.g. spell the root that means "four"
+        cheat sheat = [quiz.initialize_etym_cheat_sheet] this.game.etym_cheat_sheet stringified =  [["bicycle","a vehicle with two wheels"],["encephalitis","inflammation of the brain"],["gradual","step-by-step"],["immortal","living forever, unable to die"],["inappropriate","not appropriate"],["incredible","unbelievable"],["missile","a weapon sent into the air"],["phonetic","relating to human speech sounds"]]
 
 BIG BUG
 - latin mode is triggering a bug at levels above 220

@@ -16,13 +16,7 @@ var question_template_dict = {
     // clue = QUADR, correct = four, hard (with cheat sheet medium)
     'root_to_root_definition': 'Pick the definition of the root ',
     // clue = four, corect = QUADR, hard (with cheat sheet medium)
-    'root_definition_to_root': 'Pick the root that means ',
-    /////SPELLING (perhaps move to a special spelling section)
-    //below will be used for spelling mode
-    'spelling_word_definition_to_word': 'Spell the word that means ',
-    //below will be used for spelling mode
-    'spelling_root_definition_to_root': 'Spell the root that means '
-    
+    'root_definition_to_root': 'Pick the root that means '
 };
 
 var legal_question_types = [
@@ -133,9 +127,6 @@ var similar_enough = function (x, y) {
 }
 
 
-// below returns a root which matches a substring in a word
-// the trick is that we are sending in a slashed
-// e.g. omnipotent  
 
 
 
@@ -417,6 +408,8 @@ number_of_dummies, number_of_mandatory) {
         mandatory = mandatory.concat(get_mandatory(
             mandatory_types[i], question_data, number_of_mandatory));
     };
+    console.log("DEBUG 12-1-16 mandatory = ", mandatory);
+    console.log("DEBUG 12-1-16 stringified mandatory = ", JSON.stringify(mandatory));
     number_of_dummies = get_number_of_dummies(
         number_of_dummies, cheat_sheet_type['dummies']);
     var cheat_sheet = cheat_sheet_x_to_y(x, y, mandatory, number_of_dummies);
@@ -460,125 +453,3 @@ var make_root_to_word_list = function (root) {
     
     return output_list;
 }
-
-/*
-// comment this out when done testing
-window.onload = function () {
-    legal_question_types.forEach(function (i) {
-        document.body.appendChild(document.createTextNode(
-            JSON.stringify(make_etymology_question_with_cheat_sheet
-            (5, i, 4, 0, 4))));
-        document.body.appendChild(document.createElement('br'));
-        document.body.appendChild(document.createElement('br'));
-    });
-    /*document.body.appendChild(document.createTextNode(
-        JSON.stringify(cheat_sheet_x_to_y('word', 'latin_root', [],
-        3, function () {return true}))));
-}
-
-var x_to_y = function (x, y, clue, choices, dummies) {
-    
-}
-*/
-
-/*
-
-var question_template_dict = {
-    'word_to_latin_root': 'Pick the root of the word ',                           //clue = english, choices = QUADR || four
-    'word_to_english_root': 'Pick the root of the word ',
-    'word_to_translated_root': 'Pick the root of the word ',
-    'english_root_to_word': 'Pick the word with a root that means ',                   //clue = english, choices = english
-    'word_to_word_definition': 'Pick the definition of the word ',
-    'word_definition_to_word': 'Pick the word that means ',
-    'root_to_root_definition': 'Pick the definition of the root ',
-    'root_definition_to_root': 'Pick the root that means '
-};
-
-- word to word_definition   "What is the meaning of the word QUADRUPED?"
-    - root to root_meaning   "What is the meaning of the root PED?"
-    - root_meaning to root  "which of the following roots means "foot"?
-    - root to word    "Which word has a root meaning "all"?
-    - word to root    "Select the root of the word QUADRUPED"
-
-    'word_to_latin_root', 'word_to_english_root', 'word_to_translated_root',
-    'english_root_to_word', 'word_to_word_definiton', 'word_definition_to_word',
-    'root_to_root_definiton', 'root_definition_to_root'
-
-- types of cheat sheet
-- root to root meaning
-- word to word meaning
-- root to word (i.e., word containing that root)
-cheat_sheet_map = {
-    'word_to_latin_root': 'root_to_root_definition', // (clue + choices + dummies)
-    'word_to_english_root': 'word_to_word_definition', // (clue) // no dummies (how do we implement this)
-    'word_to_translated_root': 'word_to_word_definition', // (clue)
-    'english_root_to_word': 'word_to_word_definition',  // (choices + dummies)
-    'word_to_word_definition': 'root_to_root_definition', // (clue + choices + dummies)
-    'word_definition_to_word': 'root_to_root_definition', // (clue + choices + dummies)
-    'root_to_root_definition': "word_containing_root_to_word definition"       //'root_to_word', (clue)
-    'root_definition_to_root': 'word_containing_root_to_word definition' // (clue + choices + dummies)
-}
-
-example: 
-question is: what is the meaning of micro?
-cheat sheet:  : microscope: a tool for looking at small things
-microeconomics: xxxxx
-microcephaly: asadsasdadsdas
-
-question is: what is a root meaning 'small'?
-choices: micro, macro, arthro, terra
-cheat sheet:
-microscope: a tool for looking at small things
-macropod: a kangaroo with large feet
-arthropod: a type of inveribrate with an exoskeleton
-terraform: to make like earth
-
-('root', 'root_definition', root, 0, function (word) {
-return words['word'].roots.indexOf(root) !== -1}) -> {word: word_definiton}
-
-x & y = type of data
-namely
-x = latin root | english root | translated root | word definition | root definition
-y = latin root | english root | translated root | word definition | root definition
-
-function x_to_y (x, y, clue, choices, dummies) {
-
-    
-}
-
-function x_to_y (root, root_definition, "quadruped", null, null) {
-
-    
-}
-
-function x_to_y (root, root_definition, "quadruped", ["arthropod", "gastropod", "macroscopic"], null) {
-
-    
-}
-
-display_type  = cheat_sheet, quiz
-quiz x = clue and y = choices
-cheat_sheet x = left side of dictionary, y = right side
-
-display_x_to_y (output_of_x_to_y, display_type)
-
-
-}
-
-{"question_data":{"question_type":"word_to_latin_root","question_template":"Pick the root of the word ","clue":"herbal","correct_answer":"HERBI","choices":["HERBI","OMNI","CARN","VOR/VOUR"]},"cheat_sheet":{"HERBI":"grass, plant","OMNI":"all","CARN":"flesh, meat","VOR/VOUR":"eat"}}
-
-{"question_data":{"question_type":"word_to_english_root","question_template":"Pick the english meaning of the root of the word ","clue":"carnivorous","correct_answer":"flesh, meat","choices":["flesh, meat","grass, plant","all"]},"cheat_sheet":{"carnivorous":"meat-eating"}}
-
-{"question_data":{"question_type":"word_to_translated_root","question_template":"Pick the translated root of the word ","clue":"voracious","correct_answer":"VOR/VOUR - eat","choices":["VOR/VOUR - eat","HERBI - grass, plant","OMNI - all","CARN - flesh, meat"]},"cheat_sheet":{"voracious":"desiring of eating food in great quantities"}}
-
-{"question_data":{"question_type":"english_root_to_word","question_template":"Pick the word with a root that means ","clue":"flesh, meat","correct_answer":"incarnate","choices":["incarnate","voracious","herbivorous","devour"]},"cheat_sheet":{"incarnate":"given bodily form","voracious":"desiring of eating food in great quantities","herbivorous":"plant-eating","devour":"to eat quickly, to swallow down"}}
-
-{"question_data":{"question_type":"word_to_word_definition","question_template":"Pick the definition of the word ","clue":"herbal","correct_answer":"relating to plants","choices":["relating to plants","everywhere at once","meat-eating","desiring of eating food in great quantities"]},"cheat_sheet":{"HERBI":"grass, plant"}}
-
-{"question_data":{"question_type":"word_definition_to_word","question_template":"Pick the word that means ","clue":"any chemical used to kill unwanted plants, etc.","correct_answer":"herbicide","choices":["herbicide","voracious","omnivorous","omniscient"]},"cheat_sheet":{"HERBI":"grass, plant","CIDE/CISE":"cut, kill","VOR/VOUR":"eat","OMNI":"all","SCI":"know"}}
-
-{"question_data":{"question_type":"root_to_root_definition","question_template":"Pick the definition of the root ","clue":"VOR/VOUR","correct_answer":"eat","choices":["eat","flesh, meat","all","grass, plant"]},"cheat_sheet":{"voracious":"desiring of eating food in great quantities","devour":"to eat quickly, to swallow down","carnivorous":"meat-eating","omnivorous":"eating all foods"}}
-
-{"question_data":{"question_type":"root_definition_to_root","question_template":"Pick the root that means ","clue":"grass, plant","correct_answer":"HERBI","choices":["HERBI","VOR/VOUR","CARN","OMNI"]},"cheat_sheet":{"herbicide":"any chemical used to kill unwanted plants, etc.","carnivorous":"meat-eating","voracious":"desiring of eating food in great quantities","omnivorous":"eating all foods"}}
-
-*/

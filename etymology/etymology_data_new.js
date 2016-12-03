@@ -1,3 +1,5 @@
+// an updated version of etymology data with words added
+
 var words = {
     "December": {
         "grade": 12,
@@ -134,6 +136,28 @@ var words = {
         "type": "none",
         "word": "absent"
     },
+    "absolve": {
+        "grade": 12,
+        "meaning": "to release from obligation",
+        "part of speech": "verb",
+        "roots": [
+            "A/AB/ABS root 2",
+            "SOLV"
+        ],
+        "type": "none",
+        "word": "absolve"
+    },
+    "abstract": {
+        "grade": 12,
+        "meaning": "not connected to reality",
+        "part of speech": "adjective",
+        "roots": [
+            "A/AB/ABS root 2",
+            "TRACT"
+        ],
+        "type": "none",
+        "word": "abstract"
+    },
     "abyss": {
         "grade": 12,
         "meaning": "something without a bottom",
@@ -230,6 +254,26 @@ var words = {
         "type": "none",
         "word": "act"
     },
+    "action": {
+        "grade": 12,
+        "meaning": "thing done",
+        "part of speech": "noun",
+        "roots": [
+            "ACT"
+        ],
+        "type": "none",
+        "word": "action"
+    },
+    "active": {
+        "grade": 12,
+        "meaning": "doing many things, not passive",
+        "part of speech": "adjective",
+        "roots": [
+            "ACT"
+        ],
+        "type": "none",
+        "word": "active"
+    },
     "activity": {
         "grade": 12,
         "meaning": "something that a person does",
@@ -239,6 +283,16 @@ var words = {
         ],
         "type": "none",
         "word": "activity"
+    },
+    "actor": {
+        "grade": 12,
+        "meaning": "one who does something, specifically: one who does something on stage or film",
+        "part of speech": "adjective",
+        "roots": [
+            "ACT"
+        ],
+        "type": "none",
+        "word": "actor"
     },
     "admittance": {
         "grade": 12,
@@ -250,6 +304,83 @@ var words = {
         ],
         "type": "none",
         "word": "admittance"
+    },
+    "adjudicate": {
+        "grade": 12,
+        "meaning": "to make a decision or judgment",
+        "part of speech": "verb",
+        "roots": [
+            "AC/AD/AN/AS",
+            "JUD"
+        ],
+        "type": "none",
+        "word": "adjudicate"
+    },
+    "admirable": {
+        "grade": 12,
+        "meaning": "inspiring amazement or respect",
+        "part of speech": "adjective",
+        "roots": [
+            "AC/AD/AN/AS",
+            "MIR"
+        ],
+        "type": "none",
+        "word": "admirable"
+    },
+    "admiration": {
+        "grade": 12,
+        "meaning": "the quality of amazement or respect",
+        "part of speech": "noun",
+        "roots": [
+            "AC/AD/AN/AS",
+            "MIR"
+        ],
+        "type": "none",
+        "word": "admiration"
+    },
+    "admire": {
+        "grade": 12,
+        "meaning": "to be amazed or impressed at something",
+        "part of speech": "verb",
+        "roots": [
+            "AC/AD/AN/AS",
+            "MIR"
+        ],
+        "type": "none",
+        "word": "admire"
+    },
+    "admit": {
+        "grade": 12,
+        "meaning": "to allow entry",
+        "part of speech": "verb",
+        "roots": [
+            "AC/AD/AN/AS",
+            "MISS/MIT"
+        ],
+        "type": "none",
+        "word": "admit"
+    },
+    "admonish": {
+        "grade": 12,
+        "meaning": "to warn",
+        "part of speech": "verb",
+        "roots": [
+            "AC/AD/AN/AS",
+            "MON"
+        ],
+        "type": "none",
+        "word": "admonish"
+    },
+    "advent": {
+        "grade": 12,
+        "meaning": "arrival",
+        "part of speech": "noun",
+        "roots": [
+            "AC/AD/AN/AS",
+            "VEN/VENT"
+        ],
+        "type": "none",
+        "word": "advent"
     },
     "adverb": {
         "grade": 12,
@@ -329,6 +460,78 @@ var words = {
         "type": "none",
         "word": "afire"
     },
+    "affirm": {
+        "grade": 12,
+        "meaning": "to strengthen or validate",
+        "part of speech": "verb",
+        "roots": [
+            "FIRM"
+        ],
+        "type": "none",
+        "word": "affirm"
+    },
+    "affirmative": {
+        "grade": 12,
+        "meaning": "positive",
+        "part of speech": "adjective",
+        "roots": [
+            "FIRM"
+        ],
+        "type": "none",
+        "word": "affirmative"
+    },
+    "aggravate": {
+        "grade": 12,
+        "meaning": "to annoy",
+        "part of speech": "verb",
+        "roots": [
+            "GRAV"
+        ],
+        "type": "none",
+        "word": "aggravate"
+    },
+    "aggravation": {
+        "grade": 12,
+        "meaning": "something annoying or burdensome",
+        "part of speech": "noun",
+        "roots": [
+            "GRAV"
+        ],
+        "type": "none",
+        "word": "aggravation"
+    },
+    "aggregate": {
+        "grade": 12,
+        "meaning": "to collect together into a group",
+        "part of speech": "verb",
+        "roots": [
+            "GREG"
+        ],
+        "type": "none",
+        "word": "aggregate"
+    },
+    "aggression": {
+        "grade": 12,
+        "meaning": "the action of moving hostilely toward someone",
+        "part of speech": "verb",
+        "roots": [
+            "AC/AD/AN/AS",
+            "GRESS/GRAD/GRADE/GRADI"
+        ],
+        "type": "none",
+        "word": "aggression"
+    },
+    "aggresor": {
+        "grade": 12,
+        "meaning": "one who moves hostilely toward someone",
+        "part of speech": "verb",
+        "roots": [
+            "AC/AD/AN/AS",
+            "GRESS/GRAD/GRADE/GRADI"
+        ],
+        "type": "none",
+        "word": "aggressor"
+    },
     "agrarian": {
         "grade": 12,
         "meaning": "relating to the management of land",
@@ -369,6 +572,26 @@ var words = {
         ],
         "type": "none",
         "word": "alexia"
+    },
+    "alien": {
+        "grade": 12,
+        "meaning": "foreign",
+        "part of speech": "adjective",
+        "roots": [
+            "ALIEN"
+        ],
+        "type": "none",
+        "word": "alien"
+    },
+    "alienation": {
+        "grade": 12,
+        "meaning": "the feeling of being foreign",
+        "part of speech": "noun",
+        "roots": [
+            "ALIEN"
+        ],
+        "type": "none",
+        "word": "alienation"
     },
     "alter ego": {
         "grade": 12,

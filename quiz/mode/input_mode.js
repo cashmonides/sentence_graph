@@ -192,19 +192,37 @@ InputModeGame.prototype.process_answer = function(){
     var raw_input_string = el("input_box").value;
     backlog("[input_mode.process_answer] raw input string = ", raw_input_string);
 
-    
+    // todo all the string processing below is pretty hacky and ugly
+    // at some point we should centralize it all in something like
+    // clear punctuation, clear extra space, clear trailing spaces
+    // and have it all in string_utils
 
     var processed_input_string = clean_input_string(raw_input_string);
     backlog("[input_mode.process_answer] processed input string = ", processed_input_string);
     
-    
+    var lower_case_input_string = raw_input_string.toLowerCase();
     
 
-    //todo we need the correct english answer - should be stored as a variable somewhere in this.next_question
     var correct_english_translation;
     
+    
+    var correct_answer_without_parentheses = this.correct_answer.replace("(", "");
+    correct_answer_without_parentheses = correct_answer_without_parentheses.replace(")", "");
+    correct_answer_without_parentheses = correct_answer_without_parentheses.replace("   ", " ");
+    correct_answer_without_parentheses = correct_answer_without_parentheses.replace("  ", " ");
+    
+    
+    
+    // clumsy attempt to remove final space
+    correct_answer_without_parentheses = correct_answer_without_parentheses.slice(0, -1);
+    
+    
     //it might already be stored as this.correct_answer, in which case, we just do this
-    correct_english_translation = clean_input_string(this.correct_answer);
+    correct_english_translation = clean_input_string(correct_answer_without_parentheses);
+    
+    console.log("GECKO correct_answer_without_parentheses = ", correct_answer_without_parentheses);
+    console.log("GECKO correct_english_translation = ", correct_english_translation);
+    console.log("GECKO processed_input_string = ", processed_input_string);
     
     
     //todo for now we're going to just send this function a string
@@ -214,7 +232,11 @@ InputModeGame.prototype.process_answer = function(){
     
     backlog("[input_mode.process_answer] this.correct_answer = ", this.correct_answer);
     
-    var comparison_result = this.submit_string_to_green_and_red(this.correct_answer, raw_input_string);
+    //old version buggy
+    // var comparison_result = this.submit_string_to_green_and_red(this.correct_answer, raw_input_string);
+    
+    // new version
+    var comparison_result = this.submit_string_to_green_and_red(correct_answer_without_parentheses, lower_case_input_string);
     
     
     
@@ -224,13 +246,23 @@ InputModeGame.prototype.process_answer = function(){
     
     this.display_red_green_result(comparison_result);
     
-    if (object_equals(processed_input_string, correct_english_translation)) {
+    if (lower_case_input_string === correct_answer_without_parentheses) {
         backlog("[input_mode.process_answer] input matches correct, process_correct_answer triggered");
         this.process_correct_answer();
     } else {
         backlog("[input_mode.process_answer] input doesn't match correct, process_incorrect_answer triggered");
         this.process_incorrect_answer();
     }
+    
+    
+    //old version below, seems not to work
+    // if (object_equals(processed_input_string, correct_english_translation)) {
+    //     backlog("[input_mode.process_answer] input matches correct, process_correct_answer triggered");
+    //     this.process_correct_answer();
+    // } else {
+    //     backlog("[input_mode.process_answer] input doesn't match correct, process_incorrect_answer triggered");
+    //     this.process_incorrect_answer();
+    // }
 };
 
 //need to bring over
@@ -285,6 +317,7 @@ InputModeGame.prototype.process_answer_old = function(){
     
     //it might already be stored as this.correct_answer, in which case, we just do this
     correct_english_translation = clean_input_string(this.correct_answer);
+    
     
     
     if (object_equals(processed_input_string, correct_english_translation)) {

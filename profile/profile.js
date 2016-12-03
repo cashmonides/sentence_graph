@@ -312,7 +312,7 @@ ProfilePage.get_display_caption = function (user, module_id) {
         case "improving" : return {
             tag : "span",
             children : [
-                "current progress: " + user.get_progress(module_id).join("/"),
+                "improving: " + user.get_progress(module_id).join("/"),
                 {tag : "br"},
                 "current: " + user.get_current_accuracy(module_id) + "%",
                 {tag : "br"}, 
