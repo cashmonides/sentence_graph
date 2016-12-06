@@ -56,7 +56,7 @@ InputModeGame.prototype.attach = function(){
     set_display("latin_answer_choices", 'none');
     set_display("drop_answer_choices", 'none');
     set_display("submit_button", 'initial');
-    set_display("cheat_sheet_button", 'initial');
+    set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'initial');
     set_display("etym_cheat_button", 'none');
     set_display("input_box", 'initial');
