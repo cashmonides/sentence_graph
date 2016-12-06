@@ -2,6 +2,8 @@ window.onload = start;
 
 var user = new User(false); // Not anonomous.
 
+// var email_termination_to_include = "test.team";
+var email_termination_to_include = "lls.team";
 
 function start() {
     //console.log"start triggered");
@@ -22,6 +24,8 @@ function callback2(data) {
     
     // Create a sick and non-sick users dictionary.
     var sick_users = {};
+    var old_users = {};
+    var old_users2 = {};
     var non_sick_users = {};
     
     // For each key (a uid) in users...
@@ -29,10 +33,14 @@ function callback2(data) {
         // Get the user that is the corresponding value.
         var user = users[uid];
         var sick = detect_sick_user(user, uid);
+        var old = detect_old_user(user, uid, email_termination_to_include);
         // If the user is sick...
         if (sick) {
             // Add the user to the sick users.
             sick_users[uid] = {'user': user, 'why_sick': sick};
+        } else if (old) {
+            // add the user to the old users
+            old_users[uid] = {'user': user, 'why_old': old};
         } else {
             // Otherwise add the user to the non-sick users dictionary
             // (with the key of uid).
@@ -103,6 +111,37 @@ function callback2(data) {
     })
     
 }
+
+// function detect_old_user (user, uid) {
+//     if (!ends_with(user.profile.email, "test.team")) {
+//         return 'old user';
+//     }
+// }
+
+
+// function detect_old_user2 (user, uid) {
+//     if (!ends_with(user.profile.email, "lls.team")) {
+//         return 'old user';
+//     }
+// }
+
+
+
+function detect_old_user (user, uid, email_termination) {
+    if (ends_with(user.profile.email, email_termination)) {
+        return false;
+    } else {
+        return 'old user';
+    }
+}
+
+
+
+// function detect_old_user (user, uid) {
+//     if ((!ends_with(user.profile.email, "test.team")) || (!ends_with(user.profile.email, "lls.team"))) {
+//         return 'old user';
+//     }
+// }
 
 
 function detect_sick_user (user, uid) {

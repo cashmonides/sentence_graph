@@ -8,7 +8,7 @@ HIGHEST PRIORITY
     - i.e. you need to hit next level
 - morphology cells are red when open
 - feedback in morphology and etymology should repeat question
--
+- 
 
 BIG BUG
 - etymology cheat sheet for spell root mode gives irrelevant clues
@@ -31,6 +31,20 @@ DESIDERATA
         - hint2 -->  ____r_f_
         - hint3 ---> p___r_f_
         - etc.
+- example sentences for spelling and etymology mode 
+    - semi-automated in sites such as http://sentence.yourdictionary.com/
+    - e.g. 
+    - select the definition of the root ARTHR
+    - example sentence: "All arthropods are invertebrates but not all invertebrates are arthropods"
+    - or
+    - example sentence: "Despite the remarkable variety of arthropod species, 
+            all share aspects of a single basic body plan. 
+            All arthropods possess a stiff exoskeleton composed primarily of chitin." 
+- venn diagrams in words and images
+    - given: "All arthropods are invertebrates but not all invertebrates are arthropods"
+    - true or false: the spider is an arthropod, therefore it is an invertebrate
+
+
 
 SMALLISH ALOGRITHM THINGS
 - x/y root 2 --> [x, y]   //throwing away 'root 2'

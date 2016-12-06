@@ -210,11 +210,14 @@ InputModeGame.prototype.process_answer = function(){
     correct_answer_without_parentheses = correct_answer_without_parentheses.replace(")", "");
     correct_answer_without_parentheses = correct_answer_without_parentheses.replace("   ", " ");
     correct_answer_without_parentheses = correct_answer_without_parentheses.replace("  ", " ");
+    correct_answer_without_parentheses = correct_answer_without_parentheses.replace(".", "");
     
     
     
     // clumsy attempt to remove final space
-    correct_answer_without_parentheses = correct_answer_without_parentheses.slice(0, -1);
+    if (correct_answer_without_parentheses.charAt(-1) === " ") {
+        correct_answer_without_parentheses = correct_answer_without_parentheses.slice(0, -1);
+    }
     
     
     //it might already be stored as this.correct_answer, in which case, we just do this
