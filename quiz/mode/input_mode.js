@@ -202,6 +202,16 @@ InputModeGame.prototype.process_answer = function(){
     
     var lower_case_input_string = raw_input_string.toLowerCase();
     
+    lower_case_input_string = lower_case_input_string.replace("(", "");
+    lower_case_input_string = lower_case_input_string.replace(")", "");
+    lower_case_input_string = lower_case_input_string.replace(".", "");
+    lower_case_input_string = lower_case_input_string.replace("  ", " ");
+    
+    if (lower_case_input_string.slice(-1) === " ") {
+        console.log("TENERIFE space triggered");
+        lower_case_input_string = lower_case_input_string.slice(0, -1);
+    }
+    
 
     var correct_english_translation;
     
@@ -211,13 +221,22 @@ InputModeGame.prototype.process_answer = function(){
     correct_answer_without_parentheses = correct_answer_without_parentheses.replace("   ", " ");
     correct_answer_without_parentheses = correct_answer_without_parentheses.replace("  ", " ");
     correct_answer_without_parentheses = correct_answer_without_parentheses.replace(".", "");
+    correct_answer_without_parentheses = correct_answer_without_parentheses.toLowerCase();
     
     
     
     // clumsy attempt to remove final space
-    if (correct_answer_without_parentheses.charAt(-1) === " ") {
+    // if (correct_answer_without_parentheses.charAt(-1) === " ") {
+    if (correct_answer_without_parentheses.slice(-1) === " ") {
+        console.log("TENERIFE space triggered");
         correct_answer_without_parentheses = correct_answer_without_parentheses.slice(0, -1);
     }
+    
+    // if (correct_answer_without_parentheses.charAt(-1) === ".") {
+    //     correct_answer_without_parentheses = correct_answer_without_parentheses.slice(0, -1);
+    // }
+    
+    
     
     
     //it might already be stored as this.correct_answer, in which case, we just do this
