@@ -514,7 +514,11 @@ Quiz.get_mode = function(mode_number) {
 Quiz.prototype.next_question = function (error) {
     
     
+    // euler_1_master (1, 1000, [3, 5]);
     
+    // var test_array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    // euler_1_master_2 ();
+    euler_1_master_3 ([3, 5], [0, 1000]);
     
     // todo very important: need to figure out how to clear this box
     // without calling some ad hoc step
