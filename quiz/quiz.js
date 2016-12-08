@@ -1536,6 +1536,16 @@ Quiz.prototype.decrement_score = function() {
 };
 
 
+Quiz.prototype.decrement_score_via_hint = function() {
+    if (!this.user.is_mf()) {
+        this.progress_bar.change_number_correct(
+            {'change_value': -this.module.submodule.spelling_hint_penalty,
+                'time_from_start': new Date() - this.began});
+        this.submodule.score -= this.module.submodule.spelling_hint_penalty;
+        this.submodule.score = Math.max(0, this.submodule.score);
+    }
+};
+
 
 
 
@@ -1641,6 +1651,21 @@ Quiz.prototype.initialize_spelling_hint = function () {
     //     console.log("PROBLEM: no spelling hint for this game");
     //     return;
     // } 
+    
+    
+    if (!this.module.submodule.spelling_hint_penalty) {
+        console.log("no penalty");
+    } else {
+      if (this.module.submodule.spelling_hint_penalty != 0) {
+        if (this.game.chosen_question_type == "root_definition_to_root") {
+            alert("At this advanced level hints will cost you one point.");
+            this.decrement_score_via_hint();
+            }
+        }  
+    }
+    
+    
+    
     
     
     

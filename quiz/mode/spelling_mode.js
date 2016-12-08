@@ -224,7 +224,7 @@ SpellingModeGame.prototype.next_question = function(){
     //     'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.5,
     //     'root_definition_to_root': 0.5};
-    this.legal_question_types = {'word_definition_to_word': 0.000001, 'root_definition_to_root': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.5, 'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     this.chosen_question_type = weighted(this.legal_question_types);
@@ -258,12 +258,26 @@ SpellingModeGame.prototype.next_question = function(){
     //     this.level.etym_level, this.chosen_question_type, 3, 3, 3);
     
     
-    var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, this.chosen_question_type, 2, 2, 1);
-    // console.log(question_with_cheat_sheet['question_data']);
-    var question = question_with_cheat_sheet['question_data'];
-    this.etymology_cheat_sheet = alphabetize_dict(
-        question_with_cheat_sheet['cheat_sheet']);
+    
+    // etymology cheat sheet is mysteriously not working for spell root mode
+    // so as a short term measure we set a special etymology cheat sheet for that mode with just one term
+    if (this.chosen_question_type == 'root_definition_to_root') {
+        var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+        this.level.etym_level, this.chosen_question_type, 0, 0, 1);
+        // console.log(question_with_cheat_sheet['question_data']);
+        var question = question_with_cheat_sheet['question_data'];
+        this.etymology_cheat_sheet = alphabetize_dict(
+            question_with_cheat_sheet['cheat_sheet']);
+    } else {
+        var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+        this.level.etym_level, this.chosen_question_type, 2, 5, 1);
+        // console.log(question_with_cheat_sheet['question_data']);
+        var question = question_with_cheat_sheet['question_data'];
+        this.etymology_cheat_sheet = alphabetize_dict(
+            question_with_cheat_sheet['cheat_sheet']);
+    }
+    
+    
     
     
     this.correct = question.correct_answer;
@@ -543,6 +557,13 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
 };
 
 
+SpellingModeGame.prototype.inflict_spelling_hint_penalty = function () {
+    if (this.chosen_question_type === "word_definition_to_word") {
+        
+    } else {
+        
+    }
+}
 
 // todo below should be set up as a global function
 // i.e. some kind of mode-agnostic string processing function
