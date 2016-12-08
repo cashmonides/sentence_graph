@@ -55,24 +55,24 @@ MCMode3Game.prototype.get_mode_name = function() {
 
 
 MCMode3Game.prototype.next_question = function () {
-    console.log("DEBUG 10-23 checkpoint #1 entering next_question in mf_mode");
+    // console.log("DEBUG 10-23 checkpoint #1 entering next_question in mf_mode");
     var types_of_level = ['latin_drop_level', 'latin_extra_level', 'latin_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     this.set_level(post_sampling_level);
     
     //sets up our lexicon
-    console.log("DEBUG 10-23 checkpoint #2 about to generate lexicon");
+    // console.log("DEBUG 10-23 checkpoint #2 about to generate lexicon");
     // console.log("DEBUG 1/15 this.quiz.module.id =", this.quiz, this.quiz.module, this.quiz.module.id)
     var list_of_lexeme_strings = return_lexicon_from_module(this.quiz.module.id);
-    console.log('DEBUG 10-23 list_of_lexeme_strings = ', list_of_lexeme_strings)
+    // console.log('DEBUG 10-23 list_of_lexeme_strings = ', list_of_lexeme_strings)
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
-    console.log('DEBUG 10-23 current_lexicon = ', current_lexicon);
+    // console.log('DEBUG 10-23 current_lexicon = ', current_lexicon);
     
-    console.log("DEBUG 10-23 checkpoint 3, current_Lexicon produced, about to make output");
-    console.log("DEBUG 10-23 about to make output with this.level = ", this.level);
-    console.log("DEBUG 10-23 about to make output with current_lexicon = ", current_lexicon);
+    // console.log("DEBUG 10-23 checkpoint 3, current_Lexicon produced, about to make output");
+    // console.log("DEBUG 10-23 about to make output with this.level = ", this.level);
+    // console.log("DEBUG 10-23 about to make output with current_lexicon = ", current_lexicon);
     var data = make_output(this.level, current_lexicon);
-    console.log("DEBUG 10-23 exited make_output with data = ", data);
+    // console.log("DEBUG 10-23 exited make_output with data = ", data);
     
     
     
@@ -109,7 +109,7 @@ MCMode3Game.prototype.next_question = function () {
     
     // console.log("DEBUG this.correct_answer = ", this.correct_answer);
     
-    console.log("DEBUG entering 1st random_choice");
+    // console.log("DEBUG entering 1st random_choice");
     this.none_display = random_choice(map_level_to_allowed(
         this.level.latin_extra_level, latin_extra_levels).none_display);
     
