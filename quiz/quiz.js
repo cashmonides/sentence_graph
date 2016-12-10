@@ -166,7 +166,14 @@ Quiz.prototype.get_start_module = function() {
         } else {
             //parseInt converts an int to string with the radix of ten here
             if (!this.is_allowed_module(parseInt(selected_mod, 10))) {
+                console.log("DEBUG MOD not an allowed module")
                 return_to_profile();
+                // todo dan check below, Akiva added this
+                // the idea was to fix that when malicious children tweaked mod
+                // in the url parameters, it was triggering that module, 
+                // even if it was way beyond them
+                return;
+                // end akiva's additions
             } else if (selected_mod == this.user.get_current_module()) {
                 this.advance_improve_status = "advancing";
             } else if (selected_mod == this.user.get_improving_module()) {
@@ -518,7 +525,33 @@ Quiz.prototype.next_question = function (error) {
     
     // var test_array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     // euler_1_master_2 ();
-    euler_1_master_3 ([3, 5], [0, 1000]);
+    // euler_1_master_3 ([3, 5], [0, 1000]);
+    // euler_1_master_4 ([3, 5], [0, 1000]);
+    
+    // euler_2_master(4000000);
+    
+    // produce_array_of_primes(100);
+    
+    // euler_3_master (13195);
+    // euler_3_master (600851475143);
+    
+    // euler_3_master_3 (13195);
+    // euler_3_master_2 (600851475143);
+    // console.log("EULER is 2639 prime? = ", is_x_prime(2639));
+    // console.log("EULER is 2639 prime lean? = ", is_x_prime_stepwise(2639));
+    
+    // SOLVED
+    // leet_412(15);
+    // SOLVED
+    // leet_344("hello");
+    
+    // var island_example = [[0,1,0,0],
+    //             [1,1,1,0],
+    //             [0,1,0,0],
+    //             [1,1,0,0]]
+    
+    // leet_463(island_example);
+    
     
     // todo very important: need to figure out how to clear this box
     // without calling some ad hoc step

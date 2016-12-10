@@ -196,3 +196,37 @@ function is_secondary(item_in_map) {
 var filtered_array1 = original_array.filter(is_primary);
 var filtered_array2 = original_array.filter(is_secondary);
 
+
+
+
+
+
+
+
+
+////////////BEGIN A FILTER EXAMPLE
+// we should do something like a basic filter operation
+// with some measures taken to deal with the arbitrary properties in our dictionaries
+// such as basic, default, advanced
+//below is a fairly clunky filter operation, probably can be improved, 
+
+// the following is fine for a test but we need a dictionary traverser that can
+// deal with traversing paths that hit default, basic, advanced
+function item_in_map_is_x (item, map, x) {
+    // todo probably should add an error catcher if x is not a string
+    return map[item] === x;
+};
+
+// purely for an example
+var original_array = ['absolute present indicative', 'absolute imperfect indicative',
+    'absolute future indicative'];
+
+var filtered_array1 = original_array.filter(function (item) {
+        return item_in_map_is_x(item, regime_tense_mood_to_sequence_map, 'primary');
+});
+
+
+// filtered array should be:['absolute present indicative', 'absolute future indicative'];
+
+
+////////////END A FILTER EXAMPLE

@@ -7,14 +7,15 @@
 
 - there seems to be four basic functions
     - TRAVERSAL 
-        (get everything that matches a key)
+        (get everything that matches a list of input terms)
         (this seems like a basic dictionary lookup)
+        (the input terms can be varied including arbitrary terms like basic, 4th grade, etc.)
     - FILTER
         (exclude everything that doesn't match a value)
-        (is this basically filter?)
+        (e.g. exclude all secondary sequnces)
     - BUNDLE/MERGE
         (mutate each inputted value)
-        (is this basically map?)
+        (e.g. add voice to a list of tensemoods)
     - RANDOM CHOICE
         (pick one from a list)
     
@@ -36,12 +37,12 @@
 
 
 - there is a lot of bundling of information as it progresses
-    - starts as regime-tense-mood 
-        (based on allowed conjunction in module)
+    - starts as conjunction
+    - picks up regime
+    - regime gets bundled with tense mood
     - voice gets added 
         (based on allowed voice in module
         & perhaps semantic nonsense filters e.g. we reject "he was spoken")
-    
     - person number is bundled separately
         (perhaps sent through a filter based on lexicon and semantics
          e.g. we reject 1st and 2nd persons that must be inanimate if such things ever exist)
@@ -59,7 +60,6 @@
 // we might as well encapsulate the process in a hard-coded data
 
 //now it's a map for easy organization, but eventually will become a list probably
-
 
 var order_of_maps_to_apply = {
     // traversal
@@ -93,22 +93,18 @@ var kck_maps_to_apply = {
 };
 
 
-// GET ALL REGIME-TENSE-MOOD COMBOS
-// get_allowed_rtm([conjunction], direction) -> [regime-tense-mood]
 
-//TYPE =  traversal
-// to reduce computational cost
-// pseudo-code
-// conjunction to regime
-// regime to tense-mood list
-// the regimes would be:
-//  absolute: ['present indicative', 'imperfect indicative', 'future indicative', 'perfect indicative','pluperfect indicative', 'future perfect indicative', 'imperative']
-// relative: ['present subjunctive', 'imperfect subjunctive', 'perfect subjunctive', 'pluperfect subjunctive', 'present subjunctive of the active periphrastic', 'imperfect subjunctive of the active periphrastic']
-  
-//  independent subjunctive: ['potential present subjunctive', 'potential perfect subjunctive', 'potential imperfect subjunctive']
+///////THE PROCESS BELOW
 
+//WE PICK A CONJUNCTION FROM ALLOWED CONJUNCTIONS IN MODULE
+// e.g. cur
 
-var conjunction_to_regime_newer_leaner_version = {
+//WE PICK A SIDE TO MAKE
+// e.g. cur - right
+
+//WE TRAVERSE TO FIND REGIMES
+// e.g. cur - right - relative 
+var conjunction_to_regime = {
     c_null: {
         //version 1
         'left': 'absolute',
@@ -207,211 +203,57 @@ var conjunction_to_regime_newer_leaner_version = {
 };
 
 
-
-
-// a more clunky traversal below
-// var conjunction_to_regime_tense_mood_verbose_clunky = {
-//     c_null: {
-//         //version 1
-//         'left': ['present indicative', 'imperfect indicative', 'future indicative', 
-//             'perfect indicative','pluperfect indicative', 'future perfect indicative', 'imperative'],
-//         //version 2 more verbose
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': null
-//     },
-//     c_null_potential_subjunctive: {
-//         'left': ['potential present subjunctive', 'potential perfect subjunctive', 
-//             'potential imperfect subjunctive'],
-//         'right': null
-//     },
-//     c_and: {
-//         //eventually we should prevent this kind of clause from having imperatives on oneside but not the other
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative']
-//     },
-//     c_but: {
-//         //eventually we should prevent this kind of clause from having imperatives on oneside but not the other
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative']
-//     },
-//     c_or: {
-//         //eventually we should prevent this kind of clause from having imperatives on oneside but not the other
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative']
-//     },
-//     c_when: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         //right side cannot have imperative
-//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative']
-//     },
-//     c_purpose: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['purpose present subjunctive', 'purpose imperfect subjunctive']
-        
-//     }, 
-//     c_indirect_command: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['indirect command present subjunctive', 'indirect command imperfect subjunctive']
-//     },
-//     c_fear: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['fear present subjunctive', 'fear imperfect subjunctive']
-//     },
-//     c_cum_when: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         //right side cannot have imperative
-//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative']
-//     },
-//     c_cum_because: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
-//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
-//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
-//     },
-//     c_cum_circumstantial: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
-//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
-//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
-//     },
-//     c_cum_concessive: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
-//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
-//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
-//     },
-//     c_because_allegedly: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
-//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
-//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
-//     },
-//     c_why: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
-//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
-//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
-//     },
-//     c_indirect_statement: {
-//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
-//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
-//             'absolute future perfect indicative', 'absolute imperative'],
-//       'right': ['relative present infinitve', 'relative perfect infinitive', 
-//             'relative future infinitive']  
-//     },
-//     c_if_fmv: {
-//         'left': 'conditional protasis_fmv future indicative',
-//         'right': 'conditional apodosis_fmv future indicative',
-//     },
-//     c_if_flv: {
-//         'left': 'conditional protasis_flv present subjunctive',
-//         'right': 'conditional apodosis_flv present subjunctive',
-//     },
-//     c_if_fmve: {
-//         'left': 'conditional protasis_fmve future perfect indicative',
-//         'right': 'conditional apodosis_fmve future indicative',
-//     },
-//     c_if_present_ctf: {
-//         'left': 'conditional protasis_present_ctf imperfect subjunctive',
-//         'right': 'conditional apodosis_present_ctf imperfect subjunctive',
-//     },
-//     c_if_past_ctf: {
-//         'left': 'conditional protasis_past_ctf pluperfect subjunctive',
-//         'right': 'conditional apodosis_past_ctf pluperfect subjunctive',
-//     },
-//     c_if_mixed_ctf: {
-//         'left': 'conditional protasis_mixed_ctf pluperfect subjunctive',
-//         'right': 'conditional apodosis_mixed_ctf imperfect subjunctive',
-//     }
-// };
-
-
-
-
+// WE TAKE REGIME AND BUNDLE IT TOGETHER WITH A TENSE MOOD
+// e.g. relative produces [pres. subj., imperf. subj., perf. subj., pluperf subj. etc]
+// we bundle to get cur - right - [relative pres. subj., relative imperf. subj., relative perf. subj., relative pluperf subj. etc]
 var regime_to_tense_mood = {
-    'absolute',
-    'relative',
-    'potential subjunctive',
-    'purpose',
-    'indirect command',
-    'fear',
-    'indirect statement',
-    'conditional protasis_fmv',
-    'conditional apodosis_fmv',
-    'conditional protasis_flv',
-    'conditional apodosis_flv',
-    'conditional protasis_fmve',
-    'conditional apodosis_fmve',
-    'conditional protasis_present_ctf',
-    'conditional apodosis_present_ctf',
-    'conditional protasis_past_ctf',
-    'conditional apodosis_past_ctf',
-    'conditional protasis_mixed_ctf',
-    'conditional apodosis_mixed_ctf'
+    'absolute': ['present indicative', 'imperfect indicative', 'future indicative', 
+                'perfect indicative','pluperfect indicative', 'future perfect indicative', 
+                'imperative'],
+    'relative': ['present subjunctive', 'imperfect subjunctive', 
+                'perfect subjunctive', 'pluperfect subjunctive', 
+                'present subjunctive of the active periphrastic', 
+                'imperfect subjunctive of the active periphrastic'],
+    'potential subjunctive': ['present subjuntive', 'perfect subjunctive'],
+    'purpose': ['present subjunctive', 'imperfect subjunctive'],
+    'indirect command': ['present subjunctive', 'imperfect subjunctive'],
+    'fear': ['present subjunctive', 'imperfect subjunctive'],
+    'indirect statement': ['present infinitive', 'perfect infinitive', 'future infinitive'],
+    'conditional protasis_fmv': ['future indicative'],
+    'conditional apodosis_fmv': ['future indicative'],
+    'conditional protasis_flv': ['present subjunctive'],
+    'conditional apodosis_flv': ['present subjunctive'],
+    'conditional protasis_fmve': ['future perfect indicative'],
+    'conditional apodosis_fmve': ['future indicative'],
+    'conditional protasis_present_ctf': ['imperfect subjunctive'],
+    'conditional apodosis_present_ctf': ['imperfect subjunctive'],
+    'conditional protasis_past_ctf': ['pluperfect subjunctive'],
+    'conditional apodosis_past_ctf': ['pluperfect subjunctive'],
+    'conditional protasis_mixed_ctf': ['pluperfect subjunctive'],
+    'conditional apodosis_mixed_ctf': ['imperfect subjunctive']
 };
 
 
-// we only apply the sequence filter to a few regimes
-// but we have to be careful here
-// in indirect statement it will have no effect except on the left hand side
+
+// WE FILTER OUT SEQUENCES THAT ARE NOT ALLOWED
+// e.g. we only allow secondary so we get:
+// cur - right - [relative pres. subj., relative perf. subj. etc]
+
+
+
+// but we only apply the sequence filter to a few regimes
+    // but we have to be careful here
+    // in indirect statement it will have no effect except on the left hand side
 var regimes_that_sequence_filter_applies_to = ['relative', 'purpose', 'indirect command','fear','indirect statement']
 
 
 
-// FILTER BY ALLOWED SEQUENCES IN MODULE
-//get [allowed_sequences] from module
-// filter_sequences([regime-tense-mood], [allowed_sequences]) --> [regime-tense-mood]
-//the below version is verbose but it ties together regime-tense-mood
-//probably could be simplified but at the cost of a loss of consistency
-
-//TYPE = filtration
-// argument 1: list of regime-tense-mood
-// argument 2: list of allowed sequences
-// return: list of regime-tense-mood
-
-
-// we ignore absolute, that won't be effected by sequenc
-var regime_tense_mood_to_sequence_map = {
-	
-	
+// one note: when picking a regular simple sentence (absolute) we ignore sequence
+// instead we just check for allowed tense-mood-voices in module
+// but of course when we have a complex sentence where sequence matters, we need to match left and right sequences
+var regime_tense_mood_to_sequence = {
+	// absolute
+	// usually we won't check for sequence
 	//indicatives & imperative
 	'absolute present indicative': 'primary',
 	'absolute imperfect indicative': 'secondary',
@@ -424,7 +266,8 @@ var regime_tense_mood_to_sequence_map = {
 	'absolute pluperfect indicative': 'secondary',
 	'absolute future perfect indicative': 'primary',
 	'absolute imperative': 'primary',
-
+	
+	
 	//subjunctives
 	'relative present subjunctive': 'primary',
 	'relative imperfect subjunctive': 'secondary',
@@ -489,34 +332,6 @@ var regime_tense_mood_to_sequence_map = {
 
 
 
-////////////BEGIN A FILTER EXAMPLE
-// we should do something like a basic filter operation
-// with some measures taken to deal with the arbitrary properties in our dictionaries
-// such as basic, default, advanced
-//below is a fairly clunky filter operation, probably can be improved, 
-
-// the following is fine for a test but we need a dictionary traverser that can
-// deal with traversing paths that hit default, basic, advanced
-function item_in_map_is_x (item, map, x) {
-    // todo probably should add an error catcher if x is not a string
-    return map[item] === x;
-};
-
-// purely for an example
-var original_array = ['absolute present indicative', 'absolute imperfect indicative',
-    'absolute future indicative'];
-
-var filtered_array1 = original_array.filter(function (item) {
-        return item_in_map_is_x(item, regime_tense_mood_to_sequence_map, 'primary');
-);
-
-
-// filtered array should be:['absolute present indicative', 'absolute future indicative'];
-
-
-////////////END A FILTER EXAMPLE
-
-
 
 // 
 // BUNDLE-FILTER RTMV
@@ -545,94 +360,117 @@ var filtered_array1 = original_array.filter(function (item) {
 
 
 
-
-var regime_tense_mood_voice_to_translation_formula_map = {
-    'english': {
-        'absolute': {
-            'present indicative active': 'verb',
-            'present indicative passive': 'are verbed',
-            'imperfect indicative active': {
-                'basic': 'verbed-preterite',
-                'advanced': 'were verbing'
-                },
-            'imperfect indicative passive': {
-                'basic': 'were verbed',
-                'advanced': 'were being verbed'
-                },
-            'future indicative active': 'will verb',
-            'future indicative passive': 'will be verbed',
-            'perfect indicative active': {
-                'basic': 'verbed-preterite (once)',
-                'advanced': 'verbed-preterite'
-            },
-            'perfect indicative passive': {
-                'basic': 'were verbed (once)',
-                'advanced': 'were verbed'
-            },
-            'pluperfect indicative active': 'had verbed',
-            'pluperfect indicative passive': 'had been verbed',
-            'future perfect indicative active': 'will have verbed',
-            'future perfect indicative passive': 'will have been verbed',
+// note: we need to send sequence into this map for only one case (indirect statement)
+var regime_tense_mood_voice_to_translation_formula = {
+    ////asbolute
+    'absolute present indicative active': 'verb',
+    'absolute present indicative passive': 'are verbed',
+    'absolute imperfect indicative active': {
+        'basic': 'verbed-preterite',
+        'advanced': 'were verbing'
         },
-        'relative': {
-            'present subjunctive active':'verb',
-            'present subjunctive passive':'are verbed',
-            'imperfect subjunctive active': 'were verbing',
-            'imperfect subjunctive passive': 'were being verbed',
-            'perfect subjunctive active': 'verbed-preterite',
-            'perfect subjunctive passive': 'were verbed',
-            'pluperfect subjunctive active': 'had verbed',
-            'pluperfect subjunctive passive': 'had been verbed',
-            'present subjunctive of the active periphrastic active': 'will verb',
-            'imperfect subjunctive of the active periphrastic active': 'would verb'
+    'absolute imperfect indicative passive': {
+        'basic': 'were verbed',
+        'advanced': 'were being verbed'
         },
-        'conditional': {
-            'protasis_flv present subjunctive active': 'should verb',
-            'protasis_flv present subjunctive passive': 'should be verbed',
-            'apodosis_flv present subjunctive active': 'would verb',
-            'apodosis_flv present subjunctive passive': 'would be verbed',
-            'protasis_fmv future indicative active': 'verb',
-            'protasis_fmv future indicative passive': 'are verbed',
-            'apodosis_fmv future indicative active': 'will verb',
-            'apodosis_fmv future indicative passive': 'will be verbed',
-            'protasis_fmve future perfect indicative active': 'verb (emphatic)',
-            'protasis_fmve future perfect indicative passive': 'are verbed (emphatic)',
-            'apodosis_fmve future indicative active': 'will verb',
-            'apodosis_fmve future indicative passive': 'will be verbed',
-            'protasis_present_ctf imperfect subjunctive active': 'were verbing',
-            'protasis_present_ctf imperfect subjunctive passive': 'were being verbed',
-            'apodosis_present_ctf imperfect subjunctive active': 'would be verbing',
-            'apodosis_present_ctf imperfect subjunctive passive': {
-                'default': 'would be verbed',
-                'basic': 'would be verbed',
-                'advanced': 'would be being verbed'
-            },
-            'protasis_past_ctf pluperfect subjunctive active': 'had verbed',
-            'protasis_past_ctf pluperfect subjunctive passive': 'had been verbed',
-            'apodosis_past_ctf pluperfect subjunctive active': 'would have verbed',
-            'apodosis_past_ctf pluperfect subjunctive passive': 'would have been verbed',
-            'protasis_mixed_ctf pluperfect subjunctive active': 'had verbed',
-            'protasis_mixed_ctf pluperfect subjunctive passive': 'had been been verbed',
-            'apodosis_mixed_ctf imperfect subjunctive active': 'would be verbing',
-            'apodosis_mixed_ctf imperfect subjunctive passive': {
-                'default': 'would be verbed',
-                'basic': 'would be verbed',
-                'advanced': 'would be being verbed'
-            },
-        },
-        'purpose': {
-            'present subjunctive active': 'may verb',
-            'present subjunctive passive': 'may be verbed',
-            'imperfect subjunctive active': 'might verb',
-            'imperfect subjunctive passive': 'might be verbed'
-        },
-        'independent subjunctive': {
-            'potential present subjunctive active': 'can verb',
-            'potential present subjunctive passive': 'can be verbed',
-            'potential imperfect subjunctive active': 'could verb',
-            'potential imperfect subjunctive passive': 'could be verbed'
-        },
-    }
+    'absolute future indicative active': 'will verb',
+    'absolute future indicative passive': 'will be verbed',
+    'absolute perfect indicative active': {
+        'basic': 'verbed-preterite (once)',
+        'advanced': 'verbed-preterite'
+    },
+    'absolute perfect indicative passive': {
+        'basic': 'were verbed (once)',
+        'advanced': 'were verbed'
+    },
+    'absolute pluperfect indicative active': 'had verbed',
+    'absolute pluperfect indicative passive': 'had been verbed',
+    'absolute future perfect indicative active': 'will have verbed',
+    'absolute future perfect indicative passive': 'will have been verbed',
+    
+    ////relative
+    'relative present subjunctive active':'verb',
+    'relative present subjunctive passive':'are verbed',
+    'relative imperfect subjunctive active': 'were verbing',
+    'relative imperfect subjunctive passive': 'were being verbed',
+    'relative perfect subjunctive active': 'verbed-preterite',
+    'relative perfect subjunctive passive': 'were verbed',
+    'relative pluperfect subjunctive active': 'had verbed',
+    'relative pluperfect subjunctive passive': 'had been verbed',
+    'relative present subjunctive of the active periphrastic active': 'will verb',
+    'relative imperfect subjunctive of the active periphrastic active': 'would verb',
+    
+    //////conditional
+    'conditional protasis_flv present subjunctive active': 'should verb',
+    'conditional protasis_flv present subjunctive passive': 'should be verbed',
+    'conditional apodosis_flv present subjunctive active': 'would verb',
+    'conditional apodosis_flv present subjunctive passive': 'would be verbed',
+    'conditional protasis_fmv future indicative active': 'verb',
+    'conditional protasis_fmv future indicative passive': 'are verbed',
+    'conditional apodosis_fmv future indicative passive': 'will be verbed',
+    'conditional protasis_fmve future perfect indicative active': 'verb (emphatic)',
+    'conditional protasis_fmve future perfect indicative passive': 'are verbed (emphatic)',
+    'conditional apodosis_fmve future indicative active': 'will verb',
+    'conditional apodosis_fmve future indicative passive': 'will be verbed',
+    'conditional protasis_present_ctf imperfect subjunctive active': 'were verbing',
+    'conditional protasis_present_ctf imperfect subjunctive passive': 'were being verbed',
+    'conditional apodosis_present_ctf imperfect subjunctive active': 'would be verbing',
+    'conditional apodosis_present_ctf imperfect subjunctive passive': {
+        'default': 'would be verbed',
+        'basic': 'would be verbed',
+        'advanced': 'would be being verbed'
+    },
+    'conditional protasis_past_ctf pluperfect subjunctive active': 'had verbed',
+    'conditional protasis_past_ctf pluperfect subjunctive passive': 'had been verbed',
+    'conditional apodosis_past_ctf pluperfect subjunctive active': 'would have verbed',
+    'conditional apodosis_past_ctf pluperfect subjunctive passive': 'would have been verbed',
+    'conditional protasis_mixed_ctf pluperfect subjunctive active': 'had verbed',
+    'conditional protasis_mixed_ctf pluperfect subjunctive passive': 'had been been verbed',
+    'conditional apodosis_mixed_ctf imperfect subjunctive active': 'would be verbing',
+    'conditional apodosis_mixed_ctf imperfect subjunctive passive': {
+        'default': 'would be verbed',
+        'basic': 'would be verbed',
+        'advanced': 'would be being verbed'
+    },
+    
+    /////purpose
+    'purpose present subjunctive active': 'may verb',  //no -s?
+    'purpose present subjunctive passive': 'may be verbed',
+    'purpose imperfect subjunctive active': 'might verb', //no -s?
+    'purpose imperfect subjunctive passive': 'might be verbed',
+ 
+    /////////indirect command
+    'indirect command present subjunctive active': 'verb', //no -s?
+    'indirect command present subjunctive passive': 'be verbed',
+    'indirect command imperfect subjunctive active': 'verb', //no -s?
+    'indirect command imperfect subjunctive passive': 'be verbed',
+    //////// fear
+    'indirect command present subjunctive active': 'will verb', 
+    'indirect command present subjunctive passive': 'will be verbed',
+    'indirect command imperfect subjunctive active': 'would verb', 
+    'indirect command imperfect subjunctive passive': 'would be verbed',
+    
+    //////// indirect statement
+    'indirect statement present infinitive active primary':'verb',
+    'indirect statement present infinitive passive primary':'are verbed',
+    'indirect statement present infinitive active secondary': 'were verbing',
+    'indirect statement present infinitive passive secondary': 'were being verbed',
+    
+    'indirect statement perfect infinitive active primary': 'verbed-preterite',
+    'indirect statement perfect infinitive passive primary': 'were verbed',
+    'indirect statement perfect infinitive active secondary': 'had verbed',
+    'indirect statement perfect infinitive passive secondary': 'had been verbed',
+    
+    'indirect statement present infinitive of the active periphrastic active primary': 'will verb',
+    'indirect statement present infinitive of the active periphrastic active secondary': 'would verb',
+    
+    
+    ////independent subjunctives
+    /////potential
+    'potential present subjunctive active': 'can verb',
+    'potential present subjunctive passive': 'can be verbed',
+    'potential imperfect subjunctive active': 'could verb',
+    'potential imperfect subjunctive passive': 'could be verbed'
 };
 
 
@@ -658,6 +496,195 @@ var person_number_to_english_irregularity = {
 };
 
 // GET ENGLISH ROOT
+var english_verb_formula_to_root = {
+	"verbed" : "past participle",
+	"verbing" : "gerund",
+	"verbed-preterite": "preterite",
+	"verbs" : "final-s",
+	"verb" : "default"
+}
+
+//// SET FINAL DISPLAY PREFERENCES
+
+var terminology_display_dictionary = {
+    
+    '1s': {
+        'basic': 'I',
+        'advanced': '1st sing.'
+    },
+    '2s': {
+        'basic': 'you',
+        'advanced': '2nd sing.'
+    },
+    '3s': {
+        'basic': 'he',
+        'advanced': '3rd sing.'
+    },
+    '1p': {
+        'basic': 'we',
+        'advanced': '1st plur.'
+    },
+    '2p': {
+        'basic': 'y\'all',
+        'advanced': '2nd plur.'
+    },
+    '3p': {
+        'basic': 'they',
+        'advanced': '3rd plur.'
+    },
+    //latin cases
+    
+    
+    //if the word nominative occurs in the control flow
+    'nominative': {
+        //its default output if basic is true is the following
+        'basic': 'subject',
+        //its default if advanced is true is the follow
+        'advanced': 'nominative',
+        // no plans to implement translation formula exist
+        // 'translation_formula': 'subject'
+    },
+    'genitive': {
+        'basic': '\'of\'',
+        'advanced': 'genitive'},
+    'dative': {
+        'basic': '\'to\'',
+        'advanced': 'dative'},
+    'accusative': {
+        'basic': 'object',
+        'advanced': 'accusative'},
+    'ablative': {
+        'basic': '\'with/by\'',
+        'advanced': 'ablative'},
+    //latin verb tenses
+    'present indicative': {
+        'basic': 'present',
+        'advanced': 'present indicative'
+    },
+    'imperfect indicative': {
+        'basic': 'past (repeatedly)',
+        'advanced': 'imperfect indicative'
+        },
+    'future indicative': {
+        'basic': 'future',
+        'advanced': 'future indicative'
+        },
+    'perfect indicative': {
+        'basic': 'past (once)',
+        'advanced': 'perfect indicative'
+        },
+    'pluperfect indicative': {
+        'basic': 'had VERBed',
+        'advanced': 'pluperfect indicative'
+        },
+    'future perfect indicative': 'will have...',
+    'present subjunctive': 'same time subjunctive 1st degree',
+    'imperfect subjunctive': 'same time subjunctive 2nd degree',
+    'perfect subjunctive': 'prior time subjunctive 1st degree',
+    'pluperfect subjunctive': {
+        'basic': 'prior time subjunctive 2nd degree',
+        'advanced': 'pluperfect subjunctive',
+        // 'translation_formula': 'no translation formula'
+    },
+    //sequence
+    'primary': {
+        'basic': '1st degree',
+        'advanced': 'primary sequence'
+    },
+    'secondary': {
+        'basic': '2nd degree',
+        'advanced': 'secondary sequence'
+    },
+    //english verb tenses
+    'preterite': 'VERBed (once)',
+    'pluperfect': 'had VERBed', 
+    //original version
+    // 'past continuous': 'was VERBing',
+    //new version
+    'past continuous': {
+        'basic': 'VERBed',
+        'advanced': 'was VERBing'
+    },
+    'future perfect': 'will have VERBed', 
+    'present subjunctive': {
+        'basic': 'VERB',
+        'advanced': 'present subjunctive'
+    },
+    'imperfect subjunctive': {
+        'basic': 'VERB',
+        'advanced': 'imperfect subjunctive'
+    },
+    'may time': 'may VERB', 
+    'might time': 'might VERB',
+    'can time': 'can VERB', 
+    'could time': 'could VERB',
+    'may tense': 'may VERB', 
+    'might tense': 'might VERB', 
+    'can tense': 'can VERB', 
+    'could tense': 'could VERB', 
+    'should tense': 'should VERB', 
+    'would tense': 'would VERB', 
+    'would tense continuous': 'would be VERBing', 
+    'would tense perfect': 'would have VERBed',
+    'prior': {
+        'regime.relative|subjunctive': {
+            'basic': 'prior',
+            'advanced': 'prior'
+        },
+        'regime.absolute|indicative': {
+            'basic': 'past',
+            'advanced': 'past'
+        },
+        'default': 'If you see this, tell your teacher!'
+    },
+    'simultaneous': {
+        'regime.relative|subjunctive': {
+            'basic': 'same-time',
+            'advanced': 'simultaneous'
+        },
+        'regime.absolute|indicative': {
+            'basic': 'present',
+            'advanced': 'present'
+        },
+        'default': 'If you see this, tell your teacher!'
+    },
+    'subsequent': {
+            'regime.relative|subjunctive': {
+                'basic': 'subsequent',
+                'advanced': 'subsequent',
+                /*'translation_formula': {
+                    'sequence.primary': 'will VERB',
+                    'sequence.secondary': 'would VERB'
+                }*/
+            },
+            'regime.absolute|indicative': {
+                'basic': 'future',
+                'advanced': 'future',
+                /*'translation_formula': {
+                    'sequence.primary': 'will VERB',
+                    'sequence.secondary': 'will VERB'
+                }*/
+            },
+            'default': 'If you see this, tell your teacher!'
+    }
+}
+
+
+
+
+
+
+///GET TEMPLATE INFO
+// animate subject, implement, dative, etc.
+
+
+
+
+
+
+
+
+
 
 // END CARTESIAN
 
@@ -1008,4 +1035,177 @@ var backstage_metatalk_to_frontstage_metatalk_map = {
 //      - for cum_causal, concessive, circumstantial, rel_clause_of_characteristic etc. the value would be true
 //      - for almost everything else it would be false
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//  GRAVEYARD
+
+
+// a more clunky traversal below
+// var conjunction_to_regime_tense_mood_verbose_clunky = {
+//     c_null: {
+//         //version 1
+//         'left': ['present indicative', 'imperfect indicative', 'future indicative', 
+//             'perfect indicative','pluperfect indicative', 'future perfect indicative', 'imperative'],
+//         //version 2 more verbose
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': null
+//     },
+//     c_null_potential_subjunctive: {
+//         'left': ['potential present subjunctive', 'potential perfect subjunctive', 
+//             'potential imperfect subjunctive'],
+//         'right': null
+//     },
+//     c_and: {
+//         //eventually we should prevent this kind of clause from having imperatives on oneside but not the other
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative']
+//     },
+//     c_but: {
+//         //eventually we should prevent this kind of clause from having imperatives on oneside but not the other
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative']
+//     },
+//     c_or: {
+//         //eventually we should prevent this kind of clause from having imperatives on oneside but not the other
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative']
+//     },
+//     c_when: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         //right side cannot have imperative
+//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative']
+//     },
+//     c_purpose: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['purpose present subjunctive', 'purpose imperfect subjunctive']
+        
+//     }, 
+//     c_indirect_command: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['indirect command present subjunctive', 'indirect command imperfect subjunctive']
+//     },
+//     c_fear: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['fear present subjunctive', 'fear imperfect subjunctive']
+//     },
+//     c_cum_when: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         //right side cannot have imperative
+//         'right': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative']
+//     },
+//     c_cum_because: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
+//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
+//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
+//     },
+//     c_cum_circumstantial: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
+//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
+//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
+//     },
+//     c_cum_concessive: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
+//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
+//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
+//     },
+//     c_because_allegedly: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
+//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
+//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
+//     },
+//     c_why: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//         'right': ['relative present subjunctive', 'relative imperfect subjunctive', 
+//             'relative perfect subjunctive', 'relative pluperfect subjunctive',
+//             'relative present subjunctive of the active periphrastic', 'relative imperfect subjunctive of the active periphrastic']
+//     },
+//     c_indirect_statement: {
+//         'left': ['absolute present indicative', 'absolute imperfect indicative', 
+//             'absolute future indicative', 'absolute perfect indicative', 'absolute pluperfect indicative', 
+//             'absolute future perfect indicative', 'absolute imperative'],
+//       'right': ['relative present infinitve', 'relative perfect infinitive', 
+//             'relative future infinitive']  
+//     },
+//     c_if_fmv: {
+//         'left': 'conditional protasis_fmv future indicative',
+//         'right': 'conditional apodosis_fmv future indicative',
+//     },
+//     c_if_flv: {
+//         'left': 'conditional protasis_flv present subjunctive',
+//         'right': 'conditional apodosis_flv present subjunctive',
+//     },
+//     c_if_fmve: {
+//         'left': 'conditional protasis_fmve future perfect indicative',
+//         'right': 'conditional apodosis_fmve future indicative',
+//     },
+//     c_if_present_ctf: {
+//         'left': 'conditional protasis_present_ctf imperfect subjunctive',
+//         'right': 'conditional apodosis_present_ctf imperfect subjunctive',
+//     },
+//     c_if_past_ctf: {
+//         'left': 'conditional protasis_past_ctf pluperfect subjunctive',
+//         'right': 'conditional apodosis_past_ctf pluperfect subjunctive',
+//     },
+//     c_if_mixed_ctf: {
+//         'left': 'conditional protasis_mixed_ctf pluperfect subjunctive',
+//         'right': 'conditional apodosis_mixed_ctf imperfect subjunctive',
+//     }
+// };
 

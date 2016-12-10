@@ -2,8 +2,8 @@ window.onload = start;
 
 var user = new User(false); // Not anonomous.
 
-// var email_termination_to_include = "test.team";
-var email_termination_to_include = "lls.team";
+var email_termination_to_include = "test.team";
+// var email_termination_to_include = "lls.team";
 
 function start() {
     //console.log"start triggered");
