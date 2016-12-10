@@ -331,7 +331,7 @@ var get_constraint = {
         if (starts_with(question_type, 'root_to')) {
             my_roots = [question_data['clue']];
         } else if (ends_with(question_type, 'to_root')) {
-            my_roots = question_data['choices'];
+            my_roots = [question_data['correct_answer']];
         } else {
             throw new Error('There is no root in this question,' +
             'but yet some answers must contain the root.');
@@ -408,6 +408,7 @@ number_of_dummies, number_of_mandatory) {
         mandatory = mandatory.concat(get_mandatory(
             mandatory_types[i], question_data, number_of_mandatory));
     };
+    console.log('mandatory =', mandatory, mandatory_types);
     console.log("DEBUG 12-1-16 mandatory = ", mandatory);
     console.log("DEBUG 12-1-16 stringified mandatory = ", JSON.stringify(mandatory));
     number_of_dummies = get_number_of_dummies(

@@ -37,7 +37,7 @@ var test_match_in_slash_options = function (input_word, slash_options_string) {
     var boolean = false;
     for (var i = 0; i < slash_options_list.length; i++) {
         if (slash_options_list[i].indexOf(input_word)) {
-            backlog("[test_match_in_slash_options] match found, boolean switched to true");
+            back.log("[test_match_in_slash_options] match found, boolean switched to true");
             boolean = true;
             return boolean;
         } else {
@@ -56,9 +56,9 @@ var test_match_from_slash_options = function (slash_options_string, query_word) 
     
     var boolean = false;
     for (var i = 0; i < slash_options_list.length; i++) {
-        if (query_word.indexOf(slash_options_list[i])) {
-            backlog("[test_match_from_slash_options] match found, boolean switched to true");
-            backlog("[test_match_from_slash_options] discovered match = ", slash_options_list[i]);
+        if (query_word.indexOf(slash_options_list[i]) !== -1) {
+            back.log("[test_match_from_slash_options] match found, boolean switched to true");
+            back.log("[test_match_from_slash_options] discovered match = ", slash_options_list[i]);
             boolean = true;
             return boolean;
         } else {
@@ -75,8 +75,8 @@ var test_match_from_slash_options = function (slash_options_string, query_word) 
 // or false
 var return_match_from_slash_options = function (slash_options_string, query_word) {
     
-    backlog("[return_match_from_slash_options] slash-string = ", slash_options_string);
-    backlog("[return_match_from_slash_options] query-word = ", query_word);
+    back.log("[return_match_from_slash_options] slash-string = ", slash_options_string);
+    back.log("[return_match_from_slash_options] query-word = ", query_word);
     
     var slash_options_list = slash_options_string.split("/");
     
@@ -85,16 +85,16 @@ var return_match_from_slash_options = function (slash_options_string, query_word
         var substring = slash_options_list[i].toLowerCase();
         // if (query_word.indexOf(slash_options_list[i]) !== -1) {
         if (query_word.indexOf(substring) !== -1) {
-            backlog("[return_match_from_slash_options] match found");
-            backlog("[return_match_from_slash_options] match = ", slash_options_list[i]);
+            back.log("[return_match_from_slash_options] match found");
+            back.log("[return_match_from_slash_options] match = ", slash_options_list[i]);
             output = slash_options_list[i];
             return output;
         } else {
-            backlog("[return_match_from_slash_options] match not found continuing iteration");
+            back.log("[return_match_from_slash_options] match not found continuing iteration");
             continue;
         }
     }
-    backlog("[return_match_from_slash_options] output returned = ", output);
+    back.log("[return_match_from_slash_options] output returned = ", output);
     return output;
 };
 

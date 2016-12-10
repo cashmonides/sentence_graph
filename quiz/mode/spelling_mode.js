@@ -220,11 +220,11 @@ SpellingModeGame.prototype.next_question = function(){
     
     
     // we have a few options for hard-coding
-    // this.legal_question_types = {'word_definition_to_word': 0.00000005,
-    //     'root_definition_to_root': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.00000005,
+        'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.5,
     //     'root_definition_to_root': 0.5};
-    this.legal_question_types = {'word_definition_to_word': 0.5, 'root_definition_to_root': 0.5};
+    // this.legal_question_types = {'word_definition_to_word': 0.5, 'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     this.chosen_question_type = weighted(this.legal_question_types);
@@ -257,20 +257,19 @@ SpellingModeGame.prototype.next_question = function(){
     // var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
     //     this.level.etym_level, this.chosen_question_type, 3, 3, 3);
     
-    
-    
     // etymology cheat sheet is mysteriously not working for spell root mode
+    // fails to give relevant data if the integers are anything except 0, 0, 1
     // so as a short term measure we set a special etymology cheat sheet for that mode with just one term
     if (this.chosen_question_type == 'root_definition_to_root') {
         var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, this.chosen_question_type, 0, 0, 1);
+        this.level.etym_level, this.chosen_question_type, 0, this.quiz.module.spell_root_cheat_sheet_dummies, 3);
         // console.log(question_with_cheat_sheet['question_data']);
         var question = question_with_cheat_sheet['question_data'];
         this.etymology_cheat_sheet = alphabetize_dict(
             question_with_cheat_sheet['cheat_sheet']);
     } else {
         var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, this.chosen_question_type, 2, 5, 1);
+        this.level.etym_level, this.chosen_question_type, 2, this.quiz.module.spell_word_cheat_sheet_dummies, 1);
         // console.log(question_with_cheat_sheet['question_data']);
         var question = question_with_cheat_sheet['question_data'];
         this.etymology_cheat_sheet = alphabetize_dict(
@@ -503,7 +502,7 @@ SpellingModeGame.prototype.make_spelling_hint = function () {
 
 // todo convert the following into a global function in etymology mode
 // probably going to be of general usage later, not just in spelling mode
-//below is a hackily hacked together version which basically does the job
+// below is a hackily hacked together version which basically does the job
 // but it needs to be redesigned to be:
 // modular
 // iterate through all the roots until it finds one
@@ -635,13 +634,6 @@ SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(corr
     //     debuglog("BUG flattened_red_green_result_list = ", flattened_red_green_result_list);
     //     // return red_green_result_list;
     //     return flattened_red_green_result_list;
-        
-        
-        
-        
-        
-       
-        
     // } else {
     //     this.submit_string_to_green_and_red(correct_answer_string, input_string);
     // }

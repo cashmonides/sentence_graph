@@ -69,6 +69,31 @@ function leet_344 (string) {
 // a cell of type 0 we ignore for perimeter
 // a cell of type 1 has perimeter n based on how many of its neighbors are 0
 
+// begin dan
+
+var dan_get_item = function (grid, i, j) {
+    if (i < 0 || j < 0 || grid.length <= i || grid.length <= j) {
+        return 0;
+    } else {
+        return grid[i][j];
+    }
+}
+
+var dan_brute_force_solution = function (grid) {
+    var count = 0;
+    for (var i = 0; i <= grid.length; i++) {
+        for (var j = 0; j <= grid[0].length; j++) {
+            if (dan_get_item(grid, i, j) !== dan_get_item(grid, i - 1, j)) {
+                count++;
+            }
+            if (dan_get_item(grid, i, j) !== dan_get_item(grid, i, j - 1)) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
 //pseudocode
 // we're given a list of lists
 // for each item (each list)
@@ -78,15 +103,7 @@ function leet_344 (string) {
     // get left_neighbor list[n-1][x]
     
     
-// a = column (indexed from 0)
-// b = row (indexed from 0)
-function get_value_in_matri_oldx (matrix, a, b) {
-    if (typeof a != 'number' || typeof b != 'number') {
-        console.log("ERROR, indices are not numbers")
-    };
-    
-    return matrix[a][b];
-}  
+
 
 function get_value_in_matrix (matrix, coordinates) {
     if (typeof coordinates[0] != 'number' || typeof coordinates[1] != 'number') {
