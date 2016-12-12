@@ -106,6 +106,8 @@ var latin_replacement_dictionary = {
     "I@-RIS" : "ERIS",
     "I@-RE" : "ERE",
     "I@-NTUR" : "IUNTUR",
+    
+    
 
     //long I________________
     "Ī-Ō/M" : "Ō",

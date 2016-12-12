@@ -430,7 +430,7 @@ var latin_levels = {
                 secondary: ["imperfect_subjunctive", "pluperfect_subjunctive"]
             }
         },
-        implicitness : ["explicit", "implicit"],
+        implicitness : ["implicit"],
         person : {
             explicit : ["3s", "3p"],
             implicit : ["1s", "1p", "2s", "2p", "3s", "3p"]

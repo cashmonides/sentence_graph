@@ -1,5 +1,13 @@
 Agenda for future (made in mid-september 2016)
 
+
+SUPERHIGH PRIORITY
+add individual users
+time control for team play and solo play
+tweak modules for tuesday
+
+
+
 HIGHEST PRIORITY
 - ???bug in improvement located where console.log says BUGCHECK
 - the 9/10 profile bug
@@ -11,6 +19,47 @@ HIGHEST PRIORITY
 - 
 
 
+
+MID PRIORITY
+- dash removal
+    - cheat sheet for dash removal
+- organize admin to output by grade and in order of highest module reached and highest accuracy
+- test implicit latin   
+    - above latin_level 220 there's a bug, probably tied to either
+    - the switch to implicit latin or the mixture of implicit and explicit
+    - the message is: initiated TypeError: Cannot read property 'j' of undefined
+- daily challenge
+- player vs player mode- daily challenge
+- player vs player mode
+
+
+LOW PRIORITY
+- example sentences for spelling and etymology mode
+- hint penalty
+- systematize console logs
+- in quick mode, add "find N subjects" functionality
+    - i.e. 
+- in quick mode, add some sentences that are both english and latin
+    - e.g. 
+    - click on 2 verbs (in english and latin)
+    - aliis volat propriis
+    - she flies with her own wing
+    - or e.g.
+    - click on the subject in the latin sentence
+    - Veritas vos liberabit
+    - the truth shall set you free
+    - in quick mode, add "find N subjects" functionality
+    - i.e. 
+- in quick mode, add some sentences that are both english and latin
+    - e.g. 
+    - click on 2 verbs (in english and latin)
+    - aliis volat propriis
+    - she flies with her own wing
+    - or e.g.
+    - click on the subject in the latin sentence
+    - Veritas vos liberabit
+    - the truth shall set you free
+    
 BIG BUG
 - etymology cheat sheet for spell root mode gives irrelevant clues
     e.g. spell the root that means "four"
@@ -18,11 +67,6 @@ BIG BUG
     - the current short-term solution is to adjust it so it only gives one relevamt word
     - occuring because current behavior is that the constraint 'words that contain root'
         only checks whether the words contain one of the answer choices
-
-BIG BUG
-- latin mode is triggering a bug at levels above 220
-    - the message is: initiated TypeError: Cannot read property 'j' of undefined
-    - problem might be the switch to implicit
 
 
 DESIDERATA
@@ -55,12 +99,14 @@ DESIDERATA
 
 
 
-SMALLISH ALOGRITHM THINGS
+SMALLISH ALGORITHM THINGS
 - x/y root 2 --> [x, y]   //throwing away 'root 2'
 - needs to iterate over all the items in the slash list
 - (best to generate a string processor that does this)
 - (best to generate a string processor that returns a boolen if x/y/z is in the root)
     - we can use that for matching quad with quad/quadr
+
+
 
 A POSSIBLY FUN LITTLE PROJECT
 - convert etymology words to x.y.z format
@@ -87,37 +133,14 @@ A POSSIBLY FUN LITTLE PROJECT
         - with the quadr and ped in bold or otherwise graphically distinguished
         - they hit a second layer of hint and it tells them the meaning of the roots quadr and ped
 
-MEDIUM THING
-- now that slash recognition is more or less working, a 'Spell the root' mode would be good
-    - agenda:
-        - change match to match either
-        - hunt down bug of the double slashes
-    - ideally:
-        - we would have something like:
-        - good you've spelled one version of the root
-        - how are the other ones spelled
-        - but for now it seem enough to match either
-        - so if the correct answer is bi/bin and they give either, it's processed as correct
-    - bug
-        - red/green result seems to work
-        - for some reason inout like bo/bil produces two sets of slashed items
-    - change red/green result
-        - we need to match either of the matches
-        - red/green feedback should be given for both
-        - input: quaf & correct answer: quad/quadr --> red-green / red-green
-        - split correct answer into list
-        - iterate through list
-        - push red-green result to list and display
-    - change test answer to see if correct
-        - test correct answer on either
-    - change hint
-    - change etymology cheat sheet
 
 LITTLE THING
 - refactor temporary_incorrect_streak
 
 LITTLE THING
 - add a hint penalty at higher level (especially useful for spelling mode)
+
+
 
 BIRD'S EYE AGENDA
 step 1

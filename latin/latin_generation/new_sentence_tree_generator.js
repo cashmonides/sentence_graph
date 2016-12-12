@@ -320,10 +320,15 @@ function make_output(level, current_lexicon, none_display) {
             we hit "subject"
             in output["subject"], we put "dog", "dogs", etc.
     */
+    
+    
+    back.log("checkpoint 14.5 creation_by_part_of_speech = ", creation_by_part_of_speech);
+    back.log("stringified creation_by_part_of_speech = ", JSON.stringify(creation_by_part_of_speech));
+    
     //
     for (i = 0; i < creation_by_part_of_speech.length; i++) {
         item = creation_by_part_of_speech[i];
-        // console.log('DEBUG 12-23 item = ', item);
+        back.log("debug checkpoint 14.6 item = ", item);
         for (var j = 0; j < item.sources.length; j++) {
             for (var k = 0; k < item.results.length; k++) {
                 add_to_output(output, item.sources[j],
@@ -332,6 +337,9 @@ function make_output(level, current_lexicon, none_display) {
             }
         }
     }
+    
+    back.log("debug checkpoint 14.9");
+    back.log("debug output = ", output);
 
     console.log("DEBUG 4-25 checkpoint 15 in make_output");
 
@@ -389,21 +397,32 @@ function add_to_output(output, source, result_role,
 states_allowed, master_lexeme_list, level) {
     var start_length = ((result_role in output) ? output[result_role].length : 0);
     var fn_result;
-    var kernel;
+    var kernel
+    
+    
+    console.log("DEBUG 12-10 start_length initial = ", start_length);
+    
+    
     
     if (!(result_role in output)) {output[result_role] = []};
     for (var i = 0; i < states_allowed.length; i++) {
         kernel = make_minimal_form_english(level, states_allowed[i],
         master_lexeme_list[source], result_role);
+        console.log("DEBUG 12-10 kernel = ", kernel);
+        console.log("DEBUG 12-10 type of kernel = ", typeof kernel);
         if (kernel === "should not be made") {continue}
         if (typeof kernel.form === "string") {
             output[result_role].push(kernel)
         } else {
             for (var j in kernel.form) {
+                console.log("DEBUG 12-10 j = ", j);
                 fn_result = kernel;
                 fn_result.lexeme = ((j === result_role) ?
                 master_lexeme_list[source] : "not the right lexeme");
+                console.log("DEBUG 12-10 kernel.form.j = ", kernel.form.j);
                 fn_result.form = kernel.form.j;
+                console.log("DEBUG 12-10 fn_result.lexeme = ", fn_result.lexeme);
+                console.log("DEBUG 12-10 output = ", output);
                 // This was a bug: it had output[j] === [].
                 if (!(j in output)) {output[j] = []};
                 output[j].push(fn_result);
@@ -411,6 +430,10 @@ states_allowed, master_lexeme_list, level) {
         }
     }
     var end_length = ((result_role in output) ? output[result_role].length : 0);
+    
+    console.log("DEBUG 12-10 start_length = ", start_length);
+    console.log("DEBUG 12-10 end_length = ", end_length);
+    
     if (start_length === end_length) {
         throw new Error("No new entries added.")
     }
@@ -787,6 +810,13 @@ function make_kernel_new (level, state, lexeme_list) {
 }
 
 function make_minimal_form_english (level, state, lexeme, lexeme_type) {
+    console.log("DEBUG 12-10 entering make_minimal_form ");
+    console.log("DEBUG 12-10 level = ", level);
+    console.log("DEBUG 12-10 state = ", state);
+    console.log("DEBUG 12-10 lexeme = ", lexeme);
+    console.log("DEBUG 12-10 lexeme_type = ", lexeme_type);
+    
+    
     if (lexeme_type === 'subject') {state.subject_gender = lexeme.properties.latin.gender}
 
     if (lexeme_type === 'subject' || lexeme_type === 'verb') {
@@ -796,7 +826,15 @@ function make_minimal_form_english (level, state, lexeme, lexeme_type) {
         return 'should not be made'}
 
     var word_setting = set_word_setting_drop_down(state, lexeme, lexeme_type);
+    
+    console.log("DEBUG 12-10 word_setting = ", word_setting);
+    
+    
     var form = new Form(lexeme, word_setting, lexeme_type);
+    
+    
+    console.log("DEBUG 12-10 form = ", form);
+    
     state.form = form;
 
     // We inflect our form.
@@ -808,6 +846,10 @@ function make_minimal_form_english (level, state, lexeme, lexeme_type) {
     kernel_with_output['lexeme_type'] = lexeme_type;
     kernel_with_output['lexeme'] = lexeme;
     kernel_with_output['form'] = word;
+    
+    
+    console.log("DEBUG 12-10 kernel_with_output = ", kernel_with_output);
+    
     return kernel_with_output;
 }
 

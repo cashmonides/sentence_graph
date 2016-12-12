@@ -10,10 +10,7 @@ function inflect_latin (kernel, lexeme, word_settings, dashes) {
         return inflect_latin_pre (kernel, lexeme, word_settings);
     } else if (!dashes) {
         var input = inflect_latin_pre(kernel, lexeme, word_settings);
-        // old version
-        // return remove_dashes(input);
-        // new version
-        return remove_dashes_and_metacharacters(input);
+        return remove_dashes(input);
     } else {
         console.log("Error caught at dash removal stage");
     }
@@ -76,16 +73,16 @@ function inflect_latin_noun (kernel, lexeme, word_settings) {
                 genitive: "-AE",
                 dative: "-AE",
                 accusative: "-AM",
-                ablative: "-Ā"
+                ablative: "-A"
             };
             noun_ending = map_decl_1s[word_settings.case];
         } else if (word_settings.number === "plural") {
             var map_decl_1p = {
                 nominative: "-AE",
-                genitive: "-ĀRUM",
-                dative: "-ĪS",
-                accusative: "-ĀS",
-                ablative: "-ĪS"
+                genitive: "-ARUM",
+                dative: "-IS",
+                accusative: "-AS",
+                ablative: "-IS"
             };
             noun_ending = map_decl_1p[word_settings.case];
         }
@@ -94,19 +91,19 @@ function inflect_latin_noun (kernel, lexeme, word_settings) {
             if (word_settings.number === "singular") {
                 var map_decl_2s = {
                     nominative: "-US",
-                    genitive: "-Ī",
-                    dative: "-Ō",
+                    genitive: "-I",
+                    dative: "-O",
                     accusative: "-UM",
-                    ablative: "-Ō"
+                    ablative: "-O"
                 };
                 noun_ending = map_decl_2s[word_settings.case];
             } else if (word_settings.number === "plural") {
                 var map_decl_2p = {
-                    nominative: "-Ī",
-                    genitive: "-ŌRUM",
-                    dative: "-ĪS",
-                    accusative: "-ŌS",
-                    ablative: "-ĪS"
+                    nominative: "-I",
+                    genitive: "-ORUM",
+                    dative: "-IS",
+                    accusative: "-OS",
+                    ablative: "-IS"
                 };
                 noun_ending = map_decl_2p[word_settings.case];
             }
@@ -114,19 +111,19 @@ function inflect_latin_noun (kernel, lexeme, word_settings) {
             if (word_settings.number === "singular") {
                 var map_decl_2s = {
                     nominative: "-UM",
-                    genitive: "-Ī",
-                    dative: "-Ō",
+                    genitive: "-I",
+                    dative: "-O",
                     accusative: "-UM",
-                    ablative: "-Ō"
+                    ablative: "-O"
                 };
                 noun_ending = map_decl_2s[word_settings.case];
             } else if (word_settings.number === "plural") {
                 var map_decl_2p = {
                     nominative: "-A",
-                    genitive: "-ŌRUM",
-                    dative: "-ĪS",
+                    genitive: "-ORUM",
+                    dative: "-IS",
                     accusative: "-A",
-                    ablative: "-ĪS"
+                    ablative: "-IS"
                 };
                 noun_ending = map_decl_2p[word_settings.case];
             }
@@ -137,17 +134,17 @@ function inflect_latin_noun (kernel, lexeme, word_settings) {
                 var map_decl_3s = {
                     nominative: "",
                     genitive: "-IS",
-                    dative: "-Ī",
+                    dative: "-I",
                     accusative: "-EM",
                     ablative: "-E"
                 };
                 noun_ending = map_decl_3s[word_settings.case];
             } else if (word_settings.number === "plural") {
                 var map_decl_3p = {
-                    nominative: "-ĒS",
+                    nominative: "-ES",
                     genitive: "-UM",
                     dative: "-IBUS",
-                    accusative: "-ĒS",
+                    accusative: "-ES",
                     ablative: "-IBUS"
                 };
                 noun_ending = map_decl_3p[word_settings.case];
@@ -157,7 +154,7 @@ function inflect_latin_noun (kernel, lexeme, word_settings) {
                 var map_decl_3s = {
                     nominative: "",
                     genitive: "-IS",
-                    dative: "-Ī",
+                    dative: "-I",
                     accusative: "",
                     ablative: "-E"
                 };
@@ -347,81 +344,81 @@ function inflect_latin_verb_middle (kernel, lexeme) {
     var verb_middle;
     if (lexeme.properties.latin.family === "1") {
         var map_conj_1 = {
-            present: "-Ā",
-            imperfect: "-ĀBĀ",
-            future: "-ĀBI",
-            present_subjunctive: "-Ā",
-            imperfect_subjunctive: "-ĀRĒ",
-            present_infinitive: "-ĀRE",
+            present: "-A",
+            imperfect: "-ABA",
+            future: "-ABI",
+            present_subjunctive: "-E",
+            imperfect_subjunctive: "-ARE",
+            present_infinitive: "-ARE",
             perfect: "-*",
-            pluperfect: "-ERĀ",
-            future_perfect: "-ERI#",
-            perfect_subjunctive: "-ERI#",
-            pluperfect_subjunctive: "-ISSĒ",
+            pluperfect: "-ERA",
+            future_perfect: "-ERI",
+            perfect_subjunctive: "-ERI",
+            pluperfect_subjunctive: "-ISSE",
             perfect_infinitive: "-ISSE"
         };
         verb_middle = map_conj_1[kernel.tense];
     } else if (lexeme.properties.latin.family === "2") {
         var map_conj_2 = {
-            present: "-Ē$",
-            imperfect: "-ĒBĀ",
-            future: "-ĒBI",
-            present_subjunctive: "-EĀ",
-            imperfect_subjunctive: "-ĒRĒ",
-            present_infinitive: "-ĒRE",
+            present: "-E",
+            imperfect: "-EBA",
+            future: "-EBI",
+            present_subjunctive: "-EA",
+            imperfect_subjunctive: "-ERE",
+            present_infinitive: "-ERE",
             perfect: "-*",
-            pluperfect: "-ERĀ",
-            future_perfect: "-ERI#",
-            perfect_subjunctive: "-ERI#",
-            pluperfect_subjunctive: "-ISSĒ",
+            pluperfect: "-ERA",
+            future_perfect: "-ERI",
+            perfect_subjunctive: "-ERI",
+            pluperfect_subjunctive: "-ISSE",
             perfect_infinitive: "-ISSE"
         };
         verb_middle = map_conj_2[kernel.tense];
     } else if (lexeme.properties.latin.family === "3") {
         var map_conj_3 = {
             present: "-I",
-            imperfect: "-ĒBĀ",
-            future: "-Ē",
-            present_subjunctive: "-Ā",
-            imperfect_subjunctive: "-ERĒ",
+            imperfect: "-EBA",
+            future: "-E",
+            present_subjunctive: "-A",
+            imperfect_subjunctive: "-ERE",
             present_infinitive: "-ERE",
             perfect: "-*",
-            pluperfect: "-ERĀ",
-            future_perfect: "-ERI#",
-            perfect_subjunctive: "-ERI#",
-            pluperfect_subjunctive: "-ISSĒ",
+            pluperfect: "-ERA",
+            future_perfect: "-ERI",
+            perfect_subjunctive: "-ERI",
+            pluperfect_subjunctive: "-ISSE",
             perfect_infinitive: "-ISSE"
         };
         verb_middle = map_conj_3[kernel.tense];
     } else if (lexeme.properties.latin.family === "3i") {
         var map_conj_3i = {
-            present: "-I@",
-            imperfect: "-IĒBĀ",
-            future: "-IĀ",
-            present_subjunctive: "-IĀ",
-            imperfect_subjunctive: "-ERĒ",
+            present: "-I",
+            imperfect: "-IEBA",
+            future: "-IE",
+            present_subjunctive: "-IA",
+            imperfect_subjunctive: "-ERE",
             present_infinitive: "-ERE",
             perfect: "-*",
-            pluperfect: "-ERĀ",
-            future_perfect: "-ERI#",
-            perfect_subjunctive: "-ERI#",
-            pluperfect_subjunctive: "-ISSĒ",
+            pluperfect: "-ERA",
+            future_perfect: "-ERI",
+            perfect_subjunctive: "-ERI",
+            pluperfect_subjunctive: "-ISSE",
             perfect_infinitive: "-ISSE"
         };
         verb_middle = map_conj_3i[kernel.tense];
     } else if (lexeme.properties.latin.family === "4") {
         var map_conj_4 = {
-            present: "-Ī",
-            imperfect: "-IĒBĀ",
-            future: "-IĒ",
-            present_subjunctive: "-IĀ",
-            imperfect_subjunctive: "-ĪRĒ",
-            present_infinitive: "-ĪRE",
+            present: "-I",
+            imperfect: "-IEBA",
+            future: "-IE",
+            present_subjunctive: "-IA",
+            imperfect_subjunctive: "-IRE",
+            present_infinitive: "-IRE",
             perfect: "-*",
-            pluperfect: "-ERĀ",
-            future_perfect: "-ERI%",
-            perfect_subjunctive: "-ERI%",
-            pluperfect_subjunctive: "-ISSĒ",
+            pluperfect: "-ERA",
+            future_perfect: "-ERI",
+            perfect_subjunctive: "-ERI",
+            pluperfect_subjunctive: "-ISSE",
             perfect_infinitive: "-ISSE"
         };
         verb_middle = map_conj_4[kernel.tense];
@@ -471,13 +468,13 @@ function inflect_latin_verb_end (kernel) {
             } else if (kernel.person === "2s") {
                 ending = "-S"
             } else if (kernel.person === "3s") {
-                ending = "-T~"
+                ending = "-T"
             } else if (kernel.person === "1p") {
                 ending = "-MUS"
             } else if (kernel.person === "2p") {
                 ending = "-TIS"
             } else if (kernel.person === "3p") {
-                ending = "-NT~"
+                ending = "-NT"
             }
         } else if (kernel.voice === "passive") {
             if (kernel.person === "1s") {
@@ -485,13 +482,13 @@ function inflect_latin_verb_end (kernel) {
             } else if (kernel.person === "2s") {
                 ending = "-RIS"
             } else if (kernel.person === "3s") {
-                ending = "-TUR~"
+                ending = "-TUR"
             } else if (kernel.person === "1p") {
                 ending = "-MUR"
             } else if (kernel.person === "2p") {
                 ending = "-MINI"
             } else if (kernel.person === "3p") {
-                ending = "-NTUR~"
+                ending = "-NTUR"
             }
         }
     }
@@ -505,7 +502,7 @@ function inflect_agreement_marker (kernel) {
             if (kernel.number === "singular") {
                 agreement_marker = "-US";
             } else if (kernel.number === "plural") {
-                agreement_marker = "-Ī";
+                agreement_marker = "-I";
             }
         } else if (kernel.subject_gender === "f") {
             if (kernel.number === "singular") {
@@ -525,13 +522,13 @@ function inflect_agreement_marker (kernel) {
             if (kernel.number === "singular") {
                 agreement_marker = "-UM";
             } else if (kernel.number === "plural") {
-                agreement_marker = "-ŌS";
+                agreement_marker = "-OS";
             }
         } else if (kernel.subject_gender === "f") {
             if (kernel.number === "singular") {
                 agreement_marker = "-AM";
             } else if (kernel.number === "plural") {
-                agreement_marker = "-ĀS";
+                agreement_marker = "-AS";
             }
         } else if (kernel.subject_gender === "n") {
             if (kernel.number === "singular") {

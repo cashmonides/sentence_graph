@@ -329,8 +329,8 @@ var kck_levels = {
         // 'targe
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
-        'verb_dashes_removed': false,
-        // 'verb_dashes_removed': true
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
     },
     '1000': {
         'time': ['simultaneous', 'prior', 'subsequent'],

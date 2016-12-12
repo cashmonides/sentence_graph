@@ -204,3 +204,135 @@ function leet_463 (matrix) {
     console.log("LEET 463 sum = ", sum);
     return sum;
 }
+
+
+
+
+// LEET 292 NIM GAME
+
+// You are playing the following Nim Game with your friend: 
+// There is a heap of stones on the table, each time one of you take turns to remove 1 to 3 stones. 
+// The one who removes the last stone will be the winner. You will take the first turn to remove the stones.
+// Both of you are very clever and have optimal strategies for the game. 
+// Write a function to determine whether you can win the game given the number of stones in the heap.
+// For example, if there are 4 stones in the heap, then you will never win the game: 
+// no matter 1, 2, or 3 stones you remove, the last stone will always be removed by your friend.
+
+
+function leet_292 (n) {
+    return n % 4 != 0;
+}
+
+
+
+// LEET 136 SINGLE NUMBER
+// Given an array of integers, every element appears twice except for one. Find that single one.
+// 
+// Note:
+// Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+
+// one option
+// iterate through array, hit an int, temporarily store the int,
+// remove that int, check for multiple occurrences of that int, 
+// if no occurrences, return that int
+// if occurrences
+// remove those occurrences
+// continue iteration
+
+
+// function leet_136 (array) {
+//     var current_item;
+//     var sliced_array = [];
+//     var filtered_array = [];
+//     for (var i = 0; i < array.length; i++) {
+//         console.log("starting array = ", array);
+//         current_item = array[i];
+//         sliced_array = array.slice(i + 1);
+
+//         console.log("item we're searching for = ", current_item);
+//         console.log("sliced_array we're searching in = ", sliced_array);
+//         if (sliced_array.indexOf(current_item) === -1) {
+//             console.log("LEET 136 unique item = ", current_item)
+//             return current_item;
+//         } else {
+//             console.log("match found")
+            
+//             continue;
+//         }
+//     }
+//     return "no unique item";
+// }
+
+function leet_136 (array) {
+    var current_item;
+    var sliced_array = [];
+    var filtered_array = [];
+    for (var i = 0; i < array.length; i++) {
+        console.log("starting array = ", array);
+        current_item = array[i];
+        sliced_array = array.slice(i + 1);
+        console.log("item we're searching for = ", current_item);
+        console.log("sliced_array we're searching in = ", sliced_array);
+        if ((sliced_array.indexOf(current_item) === -1) && (current_item != 'x')) {
+            console.log("LEET 136 unique item = ", current_item)
+            return current_item;
+        } else {
+          for (var j = 0; j < array.length; j++) {
+                if (current_item === array[j]) {
+                    array[j] ="x";
+                } else {
+                    continue;
+                }
+            }
+            continue;
+        }
+    }
+    return "no unique item";
+}
+
+// function leet_136 (array) {
+//     console.log("Entering function");
+//     var current_item;
+//     var sliced_array = array;
+//     var filtered_array = [];
+//     var i = 0;
+//     while (i < array.length) {
+//         current_item = sliced_array[0];
+//         console.log("current_item = ", current_item)
+//         sliced_array = sliced_array.slice(1);
+//         console.log("array we're searching = ", sliced_array);
+//         if (sliced_array.indexOf(current_item) === -1) {
+//             console.log("LEET 136 unique item = ", current_item)
+//             return current_item;
+//         } else {
+//             sliced_array = sliced_array.slice(1);
+//             console.log("match found reslicing array, new array = ", sliced_array);
+//         }
+//         i++;
+//     }
+// }
+
+
+// function leet_136 (array) {
+//     var current_item;
+//     for (var i = 0; i < array.length; i++) {
+//         current_item = array[i];
+//         var filtered_array = remove_item_from_array(array, current_item);
+//         console.log("item we're searching for = ", current_item);
+//         console.log("filtered_array = ", filtered_array);
+//         if (filtered_array.indexOf(current_item) === -1) {
+//             console.log("LEET 136 unique item = ", current_item)
+//             return current_item;
+//         } else {
+//             console.log("no match found");
+//             continue;
+//         }
+//     }
+//     return "no unique item";
+// }
+
+
+function remove_item_from_array (array, item) {
+    return array.filter(function(el){return el !== item});
+}

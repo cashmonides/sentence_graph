@@ -7,7 +7,14 @@ var latin_cosmetic_level = {
             'latin': 'upper'
         },
         'dashes': true
-    }
+    },
+    100: {
+        'case': {
+            'english': 'lower',
+            'latin': 'upper'
+        },
+        'dashes': false
+    },
 }
 
 

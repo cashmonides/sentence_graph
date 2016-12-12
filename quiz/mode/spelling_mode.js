@@ -1,28 +1,6 @@
-// If something doesn't make sense, it's probably from DropMode.
 
 /*
 
-- add etymology question types
-    - word to word_definition   "What is the meaning of the word QUADRUPED?"
-//     - word_definition to word "What is a word meaning "dwelling on land""
-//     - root to root_meaning   "What is the meaning of the root PED?"
-//     - root_meaning to root  "which of the following roots means "foot"?
-//     - root to word    "Which word has a root meaning "all"?
-//     - word to root    "Select the root of the word QUADRUPED?"
-//     - word to synonym  "What is a synonym of QUADRUPED?"
-//     - word to antonym
-//     - alternate root "What is an alternate root of AQU?"
-//     - origin language "Is HYDR greek or latin?"
-//     - type in answer 
-//     - (one option, perhaps too easy to be used is latin root to word)
-    
-// Iteration 1.0
-// - already have: root to word
-// - word to root
-// - word to word_definition
-// - word_definition to word
-// - root to root_definition
-// - root_definition to root
 
 // Iteration 2.0
 // - what language the root is in (english, latin or both)
@@ -220,12 +198,12 @@ SpellingModeGame.prototype.next_question = function(){
     
     
     // we have a few options for hard-coding
-    this.legal_question_types = {'word_definition_to_word': 0.00000005,
-        'root_definition_to_root': 0.5};
-    // this.legal_question_types = {'word_definition_to_word': 0.5,
+    // this.legal_question_types = {'word_definition_to_word': 0.00000005,
+    //     'root_definition_to_root': 0.5};
+    // // this.legal_question_types = {'word_definition_to_word': 0.5,
     //     'root_definition_to_root': 0.5};
     // this.legal_question_types = {'word_definition_to_word': 0.5, 'root_definition_to_root': 0.5};
-    // this.legal_question_types = {'word_definition_to_word': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.5};
     
     this.chosen_question_type = weighted(this.legal_question_types);
     
