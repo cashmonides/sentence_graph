@@ -304,6 +304,10 @@ MorphologyModeGame.prototype.next_question = function () {
     backlog("[morph_mode.next_question] sentence.chosen_lexemes =", sentence.chosen_lexemes);
     
     
+    
+    this.dash_hint = get_dash_hint_list2(this.quiz.module.dash_hint_level);
+    
+    
     //todo below should work but is making the game sick - commenting it out for now
     this.cheat_sheet = this.morphology_cheat_sheet(sentence.chosen_lexemes);
     

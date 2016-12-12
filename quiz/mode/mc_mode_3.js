@@ -76,6 +76,10 @@ MCMode3Game.prototype.next_question = function () {
     // console.log("DEBUG 10-23 exited make_output with data = ", data);
     
     
+    this.dash_hint = get_dash_hint_list2(this.quiz.module.dash_hint_level);
+    
+    
+    
     
     this.cheat_sheet = data.cheat_sheet;
     // console.log("DEBUG 4-25 data.cheat_sheet = ", data.cheat_sheet);

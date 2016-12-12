@@ -112,6 +112,11 @@ KCKModeGame.prototype.next_question = function () {
     this.cheat_sheet = this.kck_cheat_sheet(sentence.chosen_lexemes);
     
     
+    
+    this.dash_hint = get_dash_hint_list2(this.quiz.module.dash_hint_level);
+    
+    
+    
     var remove_dashes_bool = get_remove_dashes_bool(this.level.kck_level);
     
     //a hack using a global variable for quick result, refactor when possible

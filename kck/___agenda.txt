@@ -21,8 +21,9 @@ HIGHEST PRIORITY
 
 
 MID PRIORITY
-- dash removal
-    - cheat sheet for dash removal
+
+- spelling green and red results shouldn't be so long and list
+    - as more guesses are made, and the list gets long, the uppermost guesses are removed
 - organize admin to output by grade and in order of highest module reached and highest accuracy
 - test implicit latin   
     - above latin_level 220 there's a bug, probably tied to either

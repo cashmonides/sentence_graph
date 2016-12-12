@@ -583,6 +583,14 @@ body {
 }
 
 
+#dash_hint_box {
+    font-size: 14px;
+}
+
+
+#dash_hint_box li {
+    list-style-type: none;
+}
 
 
 

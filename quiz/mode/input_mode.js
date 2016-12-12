@@ -117,8 +117,32 @@ InputModeGame.prototype.next_question = function () {
     this.cheat_sheet = data.cheat_sheet;
     
     // setting up our dash-removal cheat sheet
-    // still primitive, just a list, not formatted nicely with a make function
-    this.dash_hint = dash_hint_as_list;
+    // short term solution is below
+    // longer term we will have a proper map in 
+    console.log("12-12-16 this.quiz.module.dash_hint_level = ", this.quiz.module.dash_hint_level);
+    
+    
+    
+    // todo AKiva explore this mysterious bug below
+    // 12-12-16 new version
+    var desired_output = get_dash_hint_list2(this.quiz.module.dash_hint_level);
+    console.log("12-12-16 working old output = ", dash_hint_as_list)
+    console.log("12-12-16 mysterious new output = ", desired_output);
+    
+    // old version
+    // this.dash_hint = dash_hint_as_list;
+    
+    
+    
+    // todo for some reason the following doesn't work
+    // this.dash.hint = get_dash_hint_list2(this.quiz.module.dash_hint_level);
+    
+    // works
+    // this.dash_hint = desired_output;
+    
+    // check this
+    this.dash_hint = get_dash_hint_list2(this.quiz.module.dash_hint_level);
+    
     
     
     //sets data

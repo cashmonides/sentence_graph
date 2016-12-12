@@ -1288,7 +1288,8 @@ Quiz.prototype.initialize_dash_hint = function () {
     
     
     var dash_hint_string;
-    
+    console.log("12-12-16 INITIALIZE_DASH_HINT");
+    console.log("12-12-16 entering problem area");
     console.log("12-12-16 this.game.dash_hint = ", this.game.dash_hint);
     
     // todo improve the crude error detection
@@ -1316,7 +1317,7 @@ Quiz.prototype.initialize_dash_hint = function () {
     // it produces the full word
     var div_string = 'dash_hint_box'
     var div_name = el('dash_hint_box');
-    div_name.innerHTML = "beginning div";
+    div_name.innerHTML = "DASH REMOVAL RULES";
     
     var node = document.createElement("LI");
     
@@ -1335,28 +1336,9 @@ Quiz.prototype.initialize_dash_hint = function () {
         // for some reason the below didn't work
         div_name.appendChild(node);
         // div_name.innerHTML = dash_hint_string[i];
-    }
+    };
         
-    
-    
-    
-    
-    // var e = el("dash_hint_box2");
-    
-    // var output_of_make_function = make({
-    //     tag:"ul",
-    //     children: [
-    //         // {tag: "li", text: "name = " + user.profile.name},
-    //         {tag: "li", text: "hint = " + dash_hint_string[0]},
-    //         // {tag: "li", text: "uid = " + uid},
-    //         // {tag: "li", text: "grade = " + user.profile.grade},
-    //         // {tag: "li", text: "school = " + user.profile.school},
-    //         // {tag: "li", text: "max module = " + max_module(user)},
-    //         // {tag: "li", text: report_accuracy(user)},
-    //         // {tag: "li", text: "aggregate accuracy = " +
-    //         // get_aggregate_accuracy(user)}
-    //     ]
-    // }, e);
+
     
     
     
