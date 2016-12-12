@@ -3,8 +3,8 @@
 
 
 
-//todo akiva's changes below
-//uncomment and change to inflect_latin to inflect_latin_pre when ready to implement
+// todo check if below is all good
+// this is a rather crude way of implementing dash removal
 function inflect_latin (kernel, lexeme, word_settings, dashes) {
     if (dashes) {
         return inflect_latin_pre (kernel, lexeme, word_settings);
@@ -33,7 +33,8 @@ function inflect_latin_pre (kernel, lexeme, word_settings){
 
 /// end of dash-testing section
 
-// function inflect_latin (kernel, lexeme, word_settings){
+// below is the old version without dash removal
+// function inflect_latin_old (kernel, lexeme, word_settings){
 //     switch (lexeme.properties.core.part_of_speech) {
 //         case (Part_of_speech.Noun) : return inflect_latin_noun (kernel, lexeme, word_settings);    //todo will inflect_latin_verb be a method on a lexeme or on another object, e.g. a latin word
 //         case (Part_of_speech.Verb) : return inflect_latin_verb (kernel, lexeme);
@@ -350,7 +351,7 @@ function inflect_latin_verb_middle (kernel, lexeme) {
             present: "-Ā",
             imperfect: "-ĀBĀ",
             future: "-ĀBI",
-            present_subjunctive: "-Ā",
+            present_subjunctive: "-Ē",
             imperfect_subjunctive: "-ĀRĒ",
             present_infinitive: "-ĀRE",
             perfect: "-*",
@@ -397,7 +398,7 @@ function inflect_latin_verb_middle (kernel, lexeme) {
         var map_conj_3i = {
             present: "-I@",
             imperfect: "-IĒBĀ",
-            future: "-IĀ",
+            future: "-IĒ",
             present_subjunctive: "-IĀ",
             imperfect_subjunctive: "-ERĒ",
             present_infinitive: "-ERE",
@@ -428,15 +429,15 @@ function inflect_latin_verb_middle (kernel, lexeme) {
     }
     if (kernel.voice === "passive" && kernel.tense === "present_infinitive"){
         if (lexeme.properties.latin.family === "1"){
-            verb_middle = "-ARI"
+            verb_middle = "-ĀRĪ"
         } else if (lexeme.properties.latin.family === "2"){
-            verb_middle = "-ERI"
+            verb_middle = "-ĒRĪ"
         } else if (lexeme.properties.latin.family === "3"){
-            verb_middle = "-I"
+            verb_middle = "-Ī"
         } else if (lexeme.properties.latin.family === "3i"){
-            verb_middle = "-I"
+            verb_middle = "-Ī"
         } else if (lexeme.properties.latin.family === "4"){
-            verb_middle = "-IRI"
+            verb_middle = "-ĪRĪ"
         }
     }
 
@@ -448,17 +449,17 @@ function inflect_latin_verb_end (kernel) {
 
     if (kernel.tense === "perfect" && kernel.voice === "active") {
         if (kernel.person === "1s") {
-            ending = "-I"
+            ending = "-Ī"
         } else if (kernel.person === "2s") {
-            ending = "ISTI"
+            ending = "ISTĪ"
         } else if (kernel.person === "3s") {
             ending = "-IT"
         } else if (kernel.person === "1p") {
             ending = "-IMUS"
         } else if (kernel.person === "2p") {
-            ending = "-ITIS"
+            ending = "-ISTIS"
         } else if (kernel.person === "3p") {
-            ending = "-ERUNT"
+            ending = "-ĒRUNT"
         }
     } else if (kernel.tense === "present_infinitive") {
         ending = "";
@@ -467,7 +468,7 @@ function inflect_latin_verb_end (kernel) {
     } else {
         if (kernel.voice === "active") {
             if (kernel.person === "1s") {
-                ending = "-O/M"
+                ending = "-Ō/M"
             } else if (kernel.person === "2s") {
                 ending = "-S"
             } else if (kernel.person === "3s") {
@@ -489,7 +490,7 @@ function inflect_latin_verb_end (kernel) {
             } else if (kernel.person === "1p") {
                 ending = "-MUR"
             } else if (kernel.person === "2p") {
-                ending = "-MINI"
+                ending = "-MINĪ"
             } else if (kernel.person === "3p") {
                 ending = "-NTUR~"
             }

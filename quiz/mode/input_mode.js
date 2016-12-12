@@ -64,6 +64,7 @@ InputModeGame.prototype.attach = function(){
     set_display("skip_button", 'none');
     set_display("next_level_button", 'none');
     set_display("spelling_hint_button", 'none');
+    set_display("dash_hint_button", 'initial');
     // set_display("feedback_for_input", 'none');
     //current best result for clearing morphology
     set_display_of_class("morphology_to_clear", "none");
@@ -114,6 +115,12 @@ InputModeGame.prototype.next_question = function () {
     var current_lexicon = generate_current_lexicon(list_of_lexeme_strings);
     var data = make_output(this.level, current_lexicon);
     this.cheat_sheet = data.cheat_sheet;
+    
+    // setting up our dash-removal cheat sheet
+    // still primitive, just a list, not formatted nicely with a make function
+    this.dash_hint = dash_hint_as_list;
+    
+    
     //sets data
     // var data = make_output(this.level, null, 'quiz_english');
     this.question = data.question;

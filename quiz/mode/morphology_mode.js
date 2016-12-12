@@ -166,6 +166,7 @@ MorphologyModeGame.prototype.attach = function () {
     set_display("skip_button", 'none');
     set_display("next_level_button", 'none');
     set_display("spelling_hint_button", 'none');
+    set_display("dash_hint_button", 'initial');
     
     
     //start changes 11-12-16

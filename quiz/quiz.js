@@ -1174,6 +1174,7 @@ Quiz.prototype.clean_up = function() {
     el('vocab_cheat_button').onclick = this.initialize_vocab_cheat_sheet.bind(this);
     el('etym_cheat_button').onclick = this.initialize_etym_cheat_sheet.bind(this);
     el('spelling_hint_button').onclick = this.initialize_spelling_hint.bind(this);
+    el('dash_hint_button').onclick = this.initialize_dash_hint.bind(this);
     // el("spelling_hint_button").onclick = this.initialize_spelling_hint.bind(this);
 }
 
@@ -1263,7 +1264,108 @@ Quiz.prototype.initialize_spelling_hint = function () {
     // quiz.toggle_element takes as its argument a string, not the div
     el('spelling_hint_button').onclick = function () {quiz.toggle_element(div_string)};
 };    
+   
+   
+   
+Quiz.prototype.initialize_dash_hint = function () {
     
+    // todo see if something like this simple error catcher can work
+    //(some games won't have a dash hint because they're not latin)
+    // if (!this.game.make_dash_hint()) {
+    //     console.log("PROBLEM: no dash hint for this game");
+    //     return;
+    // } 
+    
+    
+    
+    
+    
+    
+    
+    back.log("initialize_dash_hint entered");
+    
+    var div_to_inspect = el('dash_hint_box');
+    
+    
+    var dash_hint_string;
+    
+    console.log("12-12-16 this.game.dash_hint = ", this.game.dash_hint);
+    
+    // todo improve the crude error detection
+    if (this.game.dash_hint) {
+        dash_hint_string = this.game.dash_hint;
+    } else {
+        dash_hint_string = "NO DASH HINT FOR THIS GAME";    
+    }
+    
+    if (this.game.dash_hint) {
+        dash_hint_list = this.game.dash_hint;
+    } else {
+        dash_hint_list = ["NO DASH HINT FOR THIS GAME"];    
+    }
+    
+    
+    back.log("dash_hint_string = ", dash_hint_string);
+    back.log("dash_hint_list = ", dash_hint_list);
+    
+    //we first test A SIMPLE VERSION
+    // SUMMARY: works but doesn't remove old hint, doesn't give new hint
+    // simple because it doesn't use make, it just alters a pre-existing div
+    // does this work??
+    // yes this works but sometimes (seemingly more than usual)
+    // it produces the full word
+    var div_string = 'dash_hint_box'
+    var div_name = el('dash_hint_box');
+    div_name.innerHTML = "beginning div";
+    
+    var node = document.createElement("LI");
+    
+    console.log("12-12-16 before for loop");
+    for (var i = 0; i < dash_hint_list.length; i++) {
+        // document.getElementById("id").appendChild(element);
+        console.log("12-12-16 for loop entered");
+        console.log("12-12-16 dash_hint_list[i] = ", dash_hint_list[i]);
+        
+        
+        var textnode = document.createTextNode(dash_hint_list[i]);         // Create a text node
+        node.appendChild(textnode);  
+        var linebreak = document.createElement("br");
+        node.appendChild(linebreak);
+        // document.getElementById("dash_hint_box").appendChild(dash_hint_list[i]);
+        // for some reason the below didn't work
+        div_name.appendChild(node);
+        // div_name.innerHTML = dash_hint_string[i];
+    }
+        
+    
+    
+    
+    
+    // var e = el("dash_hint_box2");
+    
+    // var output_of_make_function = make({
+    //     tag:"ul",
+    //     children: [
+    //         // {tag: "li", text: "name = " + user.profile.name},
+    //         {tag: "li", text: "hint = " + dash_hint_string[0]},
+    //         // {tag: "li", text: "uid = " + uid},
+    //         // {tag: "li", text: "grade = " + user.profile.grade},
+    //         // {tag: "li", text: "school = " + user.profile.school},
+    //         // {tag: "li", text: "max module = " + max_module(user)},
+    //         // {tag: "li", text: report_accuracy(user)},
+    //         // {tag: "li", text: "aggregate accuracy = " +
+    //         // get_aggregate_accuracy(user)}
+    //     ]
+    // }, e);
+    
+    
+    
+    //works
+    // el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div2')};
+    // quiz.toggle_element takes as its argument a string, not the div
+    el('dash_hint_button').onclick = function () {quiz.toggle_element(div_string)};
+};    
+     
     
 Quiz.prototype.initialize_cheat_sheet = function() {
     // var button = el("cheat_sheet_button");

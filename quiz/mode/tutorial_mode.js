@@ -20,6 +20,7 @@ TutorialModeGame.prototype.attach = function(){
     set_display("input_box", 'none');
     set_display("next_level_button", 'none');
     set_display("spelling_hint_button", 'none');
+    set_display("dash_hint_button", 'none');
     
     //current best result for clearing morphology
     set_display_of_class("morphology_to_clear", "none");
