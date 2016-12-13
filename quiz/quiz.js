@@ -166,7 +166,6 @@ Quiz.prototype.get_start_module = function() {
         } else {
             //parseInt converts an int to string with the radix of ten here
             if (!this.is_allowed_module(parseInt(selected_mod, 10))) {
-                console.log("DEBUG MOD not an allowed module")
                 return_to_profile();
                 // todo dan check below, Akiva added this
                 // the idea was to fix that when malicious children tweaked mod
@@ -412,7 +411,7 @@ Quiz.prototype.next_mode = function (error) {
     if (!(this.user.is_mf())) {
         allowed = ALL_MODULES[this.module.id].mode_ratio;
         
-        console.log("LOG: allowed modes before checking for non-functioning mode = ", allowed);
+        back.log("allowed modes before checking for non-functioning mode = ", allowed);
         
         /*
         originally:
@@ -430,7 +429,7 @@ Quiz.prototype.next_mode = function (error) {
         
         // console.log("DEBUG 11-18-16 this.sick_modes = ", this.sick_modes);
         
-        console.log("DEBUG 11-18 checkpoint 1");
+        debug.log("checkpoint 1");
         
         for (var i = 0; i < this.sick_modes.length; i++) {
             console.log('sick mode being added = ', this.sick_modes[i])
@@ -456,13 +455,13 @@ Quiz.prototype.next_mode = function (error) {
         // We do this via an early return.
         // error is a parameter which is true if next_mode was called due to an error.
         
-        console.log("DEBUG 11-18 checkpoint 2");
+        debug.log("checkpoint 2");
         var mode = weighted(allowed);
-        console.log("DEBUG 11-18 checkpoint 2.1 mode = ", mode);
+        debug.log("checkpoint 2.1 mode = ", mode);
         // console.log("DEBUG 5-6 game_mode_map[mode] = ", game_mode_map[mode]);
     }
     var game;
-    console.log("DEBUG 11-18 checkpoint 2.1");
+    debug.log("checkpoint 2.1");
         
     if (this.user.is_mf()) {
         var modes_map = {
@@ -470,16 +469,16 @@ Quiz.prototype.next_mode = function (error) {
             'analysis': SyntaxModeGame
         }
         var current_mode = modes_map[this.id.mode];
-        console.log('current mode =', current_mode);
+        debug.log('checkpoint 2.2current mode =', current_mode);
         game = new current_mode(Path.from_url_params(this.id));
     } else {
-        console.log("DEBUG 11-18 checkpoint 2.4 mode = ", mode);
-        console.log("DEBUG 11-18 checkpoint 2.5 Quiz.get_mode(game_mode_map[mode]) = ", Quiz.get_mode(game_mode_map[mode]));
+        debug.log("checkpoint 2.4 mode = ", mode);
+        debug.log("checkpoint 2.5 Quiz.get_mode(game_mode_map[mode]) = ", Quiz.get_mode(game_mode_map[mode]));
         game = Quiz.get_mode(game_mode_map[mode]);
     }
-    console.log("DEBUG 11-18 checkpoint 3 game = ", game);
+    debug.log("checkpoint 3 game = ", game);
     this.game = game;
-    console.log("DEBUG 11-18 checkpoint 4 this.game = ", this.game);
+    debug.log("checkpoint 4 this.game = ", this.game);
     
     //todo understand the following
     
@@ -521,12 +520,18 @@ Quiz.get_mode = function(mode_number) {
 Quiz.prototype.next_question = function (error) {
     
     
+    
     // todo very important: need to figure out how to clear this box
     // without calling some ad hoc step
     // remove_children(el('spelling_hint_box'));
     var div_to_clear_ad_hoc = el('spelling_hint_box');
     div_to_clear_ad_hoc.innerHTML = "";
     
+    
+    var div_to_clear_ad_hoc2 = el('dash_hint_box');
+    div_to_clear_ad_hoc2.innerHTML = "";
+   
+   
    
     
     
@@ -897,7 +902,7 @@ Quiz.prototype.is_allowed_module = function (mod) {
 
 Quiz.prototype.update_display = function() {
     
-    console.log("[quiz.update_display] update_display entered");
+    back.log("quiz: update_display entered");
     
     // todo - update-todo:
     // todo in improve mode the following will break
@@ -910,8 +915,8 @@ Quiz.prototype.update_display = function() {
     var module_name = ALL_MODULES[mod].icon_name;
     
     
-    console.log("[quiz.update_display] update_display mod = ", mod);
-    console.log("[quiz.update_display] this.user.mod.progress = ", this.user.get_module(mod).progress);
+    back.log("quiz: update_display mod = ", mod);
+    back.log("quiz: this.user.mod.progress = ", this.user.get_module(mod).progress);
     
     
     //todo - update-todo
@@ -928,7 +933,7 @@ Quiz.prototype.update_display = function() {
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
     el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     
-    console.log("[quiz.update_display] leaving update display");
+    back.log("quiz: leaving update display");
 };
 
 
@@ -1226,7 +1231,7 @@ Quiz.prototype.initialize_spelling_hint = function () {
     
     
     if (!this.module.submodule.spelling_hint_penalty) {
-        console.log("no penalty");
+        bug.log("no spelling hint penalty specified");
     } else {
       if (this.module.submodule.spelling_hint_penalty != 0) {
         if (this.game.chosen_question_type == "root_definition_to_root") {
@@ -1288,9 +1293,6 @@ Quiz.prototype.initialize_dash_hint = function () {
     
     
     var dash_hint_string;
-    console.log("12-12-16 INITIALIZE_DASH_HINT");
-    console.log("12-12-16 entering problem area");
-    console.log("12-12-16 this.game.dash_hint = ", this.game.dash_hint);
     
     // todo improve the crude error detection
     if (this.game.dash_hint) {
@@ -1321,12 +1323,9 @@ Quiz.prototype.initialize_dash_hint = function () {
     
     var node = document.createElement("LI");
     
-    console.log("12-12-16 before for loop");
+
     for (var i = 0; i < dash_hint_list.length; i++) {
         // document.getElementById("id").appendChild(element);
-        console.log("12-12-16 for loop entered");
-        console.log("12-12-16 dash_hint_list[i] = ", dash_hint_list[i]);
-        
         
         var textnode = document.createTextNode(dash_hint_list[i]);         // Create a text node
         node.appendChild(textnode);  
@@ -1425,7 +1424,7 @@ Quiz.prototype.initialize_etym_cheat_sheet = function () {
     var name = "etym_cheat_sheet"
     var etym_cheat = this.game.etymology_cheat_sheet;
     
-    console.log("[quiz.initialize_etym_cheat_sheet] this.game.etym_cheat_sheet stringified = ", 
+    back.log("this.game.etym_cheat_sheet stringified = ", 
         JSON.stringify(etym_cheat));
     
     // var outer_div = el("image_display_box");

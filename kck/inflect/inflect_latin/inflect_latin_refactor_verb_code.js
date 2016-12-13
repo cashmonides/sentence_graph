@@ -224,7 +224,7 @@ var get_subject_accusative_pronoun = function (component) {
 }
 
 var inflect_latin_verb_main = function (component) {
-    console.log("LOG MORPHOLOGY component input into main = ", component);
+    back.log("component input into main = ", component);
     var root = get_root(component);
     var in_perfect_system = get_latin_verb_system(component)
     === 'perfect system';
@@ -253,6 +253,6 @@ var inflect_latin_verb_main = function (component) {
     //     inflected.subject = get_subject_accusative_pronoun(component);
     // }
     // todo: add subjects back.
-    console.log("LOG MORPHOLOGY in main inflected.verb = ", inflected.verb);
+    back.log("inflected.verb = ", inflected.verb);
     return inflected.verb;
 }

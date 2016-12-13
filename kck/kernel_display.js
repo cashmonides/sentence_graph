@@ -30,6 +30,7 @@ var display_classification = function (classification, language) {
     } else {
         // The classification is strange. It's a number or boolean or something.
         // Currently, this should never happen, so we throw an error.
+        bug.log("weird classification in kernel_display > display_classification");
         throw 'Weird classification: ' + JSON.stringify(classification);
     }
 }
@@ -138,7 +139,8 @@ Kernel.prototype.get_verb_json_options = function (
     var json_options = option_list_to_json(
         options, drop_down_path, overall_ordering_preference,
         language_sorts[language], leave_out, process_final_string);
-    console.log('json_options =', json_options);
+    back.log('json_options =', json_options);
+    back.log('json_options stringified = ', JSON.stringify(json_options));
     return json_options;
 }
 
@@ -179,10 +181,10 @@ Kernel.prototype.get_verb_translation_and_path = function (kck_level, language) 
     var translation = verb.form[language];
     
     if (remove_dashes_global_hack) {
-        console.log("DEBUG 11-5 remove dashes and global hack triggered");
-        console.log("DEBUG 11-5 translation pre-processing = ", translation);
+        back.log("remove dashes and global hack triggered");
+        back.log("translation pre-processing = ", translation);
         translation = remove_dashes_and_metacharacters(translation);
-        console.log("DEBUG 11-5 translation post-processing = ", translation);
+        back.log("translation post-processing = ", translation);
     }
     
     

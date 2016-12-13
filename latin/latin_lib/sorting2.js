@@ -1,5 +1,7 @@
 function sorted_choices(output, key_for_word) {
-    console.log(output, key_for_word);
+    back.log("entering sorted_choices");
+    back.log("output = ", output);
+    back.log("key_for_word = ", key_for_word);
     return map_by_text(
         separate_by_lexeme(
             quick_sort(output[key_for_word], custom_sort))

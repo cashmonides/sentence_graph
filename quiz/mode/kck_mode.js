@@ -121,7 +121,7 @@ KCKModeGame.prototype.next_question = function () {
     
     //a hack using a global variable for quick result, refactor when possible
     remove_dashes_global_hack = remove_dashes_bool;
-    console.log("DEBUG 11-5 remove_dashes_global_hack = ", remove_dashes_global_hack);
+    back.log("remove_dashes_global_hack = ", remove_dashes_global_hack);
     
     var process_output;
     

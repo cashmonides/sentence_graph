@@ -162,7 +162,6 @@ var morphology_dictionary_traverser_main = function (arguments_as_list) {
     var list_of_matches = morphology_dictionary_traverser(dictionary, list_of_keywords);
     // remove duplicates by calling unique_items
     var list_of_unique_matches = unique_items(list_of_matches);
-    console.log("MORPHOLOGY LOG list_of_unique_matches = ", list_of_unique_matches);
     return list_of_unique_matches;
 }
 

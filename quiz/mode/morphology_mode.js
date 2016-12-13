@@ -67,7 +67,6 @@ var convert_root_items_to_actual_forms = function (root_list, lexeme_list, lexem
     if (language == 'latin') {
         dictionary_to_consult = testing_lexemes;
     }
-    console.log("ROOT LOOP dictionary_to_consult = ", dictionary_to_consult);
     
     
     //version with strings
@@ -105,9 +104,7 @@ var convert_root_items_to_actual_forms = function (root_list, lexeme_list, lexem
     for (i=0; i<root_list.length; i++) {
         for (j=0; j<lexeme_list_as_objects.length; j++) {
             var root_to_find = root_list[i];
-            console.log("ROOT LOOP root_to_find = ", root_to_find);
             var lexeme_to_consult = lexeme_list_as_objects[j];
-            console.log("ROOT LOOP lexeme_to_consult = ", lexeme_to_consult); 
             
             //below should be otiose
             // var lexeme_in_lexicon = testing_lexemes.verb[lexeme_to_consult];
@@ -116,15 +113,11 @@ var convert_root_items_to_actual_forms = function (root_list, lexeme_list, lexem
             
             var lexeme_in_lexicon = lexeme_to_consult;
             var latin_properties = lexeme_in_lexicon.latin;
-            console.log("ROOT LOOP latin_properties = ", latin_properties);
             var roots = latin_properties.roots;
-            console.log("ROOT LOOP roots = ", roots);
             var root_output = roots[root_to_find];
-            console.log("ROOT LOOP root_output = ", root_output);
             list_of_lexical_roots.push(root_output);
         }
     }
-    console.log("ROOT LOOP list_of_lexical_roots =", list_of_lexical_roots);
     return list_of_lexical_roots;
     
 }
@@ -182,7 +175,7 @@ MorphologyModeGame.prototype.attach = function () {
 
 // set_level now moved up
 MorphologyModeGame.prototype.set_level = function (new_level) {
-    console.log("DEBUG MORPHOLOGY set_level entered new level = ", new_level);
+    back.log("set_level entered new level = ", new_level);
     this.level = new_level;
 }
 

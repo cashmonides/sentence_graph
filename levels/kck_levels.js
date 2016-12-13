@@ -317,7 +317,7 @@ var kck_levels = {
         'drop_down_path_noun' : ['lexeme', 'case'],
         'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
         'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-       /////////TARGET & SOURCE
+      /////////TARGET & SOURCE
         // L2E
         'source_language' : {'english': 0, 'latin': 1},
         'target_language' : {'english': 1, 'latin': 0},
@@ -327,58 +327,62 @@ var kck_levels = {
         //E2L and L2E
         // 'source_language' : {'english': 0.5, 'latin': 0.5},
         // 'targe
-        'terminology_display_dictionary': 'basic',
-        // 'terminology_display_dictionary': 'advanced',
-        // 'verb_dashes_removed': false,
-        'verb_dashes_removed': true
-    },
-    
-    
-    // no dashes below
-    '1': {
-        'time': ['simultaneous', 'prior', 'subsequent'],
-        'sequence': ['primary', 'secondary'],
-        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
-        'voice' : ['active'],
-        // 'voice' : ['active', 'passive'],
-        // 'person_and_number' : ['3s'],
-        'person_and_number' : ['3s'],
-        // 'person_and_number' : ['1s'],
-        'allowed_conjunctions': ['c_null'],
-        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
-        // 'allowed_conjunctions': ['c_null', 'c_and'],
-        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
-        // 'allowed_conjunctions': ['c_why'],
-        'red herring': 'false',
-        'absolute-relative-split': 'on',
-        'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'scare', 'rule', 'grab'],
-        // 'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
-        //     'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
-        //     'hear', 'shout', 'speak', 'see'
-        //     ],
-        // 'allowed_verbs' : ['speak', 'attack'],
-        'noun_switch' : false,
-        'allowed_nouns': ['wolf'],
-        // 'drop_down_path' : ['time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'person_and_number'],
-        'drop_down_path' : ['lexeme'],
-        'drop_down_path_noun' : ['lexeme', 'case'],
-        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
-        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        // 'source_language' : {'english': 0.5, 'latin': 0.5},
-        // 'target_language' : {'english': 0.5, 'latin': 0.5},
-        // 'source_language' : {'english': 1, 'latin': 0},
-        // 'target_language' : {'english': 0, 'latin': 1},
-        'source_language' : {'english': 0, 'latin': 1},
-        'target_language' : {'english': 1, 'latin': 0},
         'terminology_display_dictionary': 'basic',
         // 'terminology_display_dictionary': 'advanced',
         // 'verb_dashes_removed': false,
         'verb_dashes_removed': false
     },
-    '100': {
+    
+    
+    // I think this is redundant to above
+    // '1': {
+    //     'time': ['simultaneous', 'prior', 'subsequent'],
+    //     'sequence': ['primary', 'secondary'],
+    //     'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
+    //     'voice' : ['active'],
+    //     // 'voice' : ['active', 'passive'],
+    //     // 'person_and_number' : ['3s'],
+    //     'person_and_number' : ['3s'],
+    //     // 'person_and_number' : ['1s'],
+    //     'allowed_conjunctions': ['c_null'],
+    //     // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
+    //     // 'allowed_conjunctions': ['c_null', 'c_and'],
+    //     // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
+    //     // 'allowed_conjunctions': ['c_why'],
+    //     'red herring': 'false',
+    //     'absolute-relative-split': 'on',
+    //     'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'scare', 'rule', 'grab'],
+    //     // 'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
+    //     //     'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
+    //     //     'hear', 'shout', 'speak', 'see'
+    //     //     ],
+    //     // 'allowed_verbs' : ['speak', 'attack'],
+    //     'noun_switch' : false,
+    //     'allowed_nouns': ['wolf'],
+    //     // 'drop_down_path' : ['time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
+    //     // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+    //     // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
+    //     // 'drop_down_path' : ['lexeme', 'person_and_number'],
+    //     'drop_down_path' : ['lexeme'],
+    //     'drop_down_path_noun' : ['lexeme', 'case'],
+    //     'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
+    //     'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
+    //     // 'source_language' : {'english': 0.5, 'latin': 0.5},
+    //     // 'target_language' : {'english': 0.5, 'latin': 0.5},
+    //     // 'source_language' : {'english': 1, 'latin': 0},
+    //     // 'target_language' : {'english': 0, 'latin': 1},
+    //     'source_language' : {'english': 0, 'latin': 1},
+    //     'target_language' : {'english': 1, 'latin': 0},
+    //     'terminology_display_dictionary': 'basic',
+    //     // 'terminology_display_dictionary': 'advanced',
+    //     // 'verb_dashes_removed': false,
+    //     'verb_dashes_removed': false
+    // },
+    
+    
+    
+    // a dash removing level 3s, 3p active only
+    '200': {
         'time': ['simultaneous', 'prior', 'subsequent'],
         'sequence': ['primary', 'secondary'],
         'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
@@ -421,159 +425,266 @@ var kck_levels = {
         // 'verb_dashes_removed': false,
         'verb_dashes_removed': true
     },
-    '120': {
-        'time': ['simultaneous', 'prior', 'subsequent'],
-        'sequence': ['primary', 'secondary'],
-        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
-        'voice' : ['active'],
-        // 'voice' : ['active', 'passive'],
-        // 'person_and_number' : ['3s'],
-        'person_and_number' : ['3s', '3p'],
-        // 'person_and_number' : ['1s'],
-        'allowed_conjunctions': ['c_null'],
-        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
-        // 'allowed_conjunctions': ['c_null', 'c_and'],
-        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
-        // 'allowed_conjunctions': ['c_why'],
-        'red herring': 'false',
-        'absolute-relative-split': 'on',
-        // 'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
-        'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
-            'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
-            'hear', 'speak', 'see', 'send', 'seek', 'find', 'throw', 'move', 'invade',
-            'hurry', 'drag', 'avoid', 'push'
-            ],
-        // 'allowed_verbs' : ['speak', 'attack'],
-        'noun_switch' : false,
-        'allowed_nouns': ['wolf'],
-        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'person_and_number'],
-        'drop_down_path' : ['lexeme'],
-        'drop_down_path_noun' : ['lexeme', 'case'],
-        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
-        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        /////////TARGET & SOURCE
-        // L2E
-        'source_language' : {'english': 0, 'latin': 1},
-        'target_language' : {'english': 1, 'latin': 0},
-        //E2L
-        // 'source_language' : {'english': 1, 'latin': 0},
-        // 'target_language' : {'english': 0, 'latin': 1},
-        //E2L and L2E
-        // 'source_language' : {'english': 0.5, 'latin': 0.5},
-        // 'target_language' : {'english': 0.5, 'latin': 0.5},
-        'terminology_display_dictionary': 'basic',
-        // 'terminology_display_dictionary': 'advanced',
-        // 'verb_dashes_removed': false,
-        'verb_dashes_removed': true
-    },
-    '130': {
-        'time': ['simultaneous', 'prior', 'subsequent'],
-        'sequence': ['primary', 'secondary'],
-        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
-        'voice' : ['active'],
-        // 'voice' : ['active', 'passive'],
-        // 'person_and_number' : ['3s'],
-        'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
-        // 'person_and_number' : ['1s'],
-        'allowed_conjunctions': ['c_null'],
-        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
-        // 'allowed_conjunctions': ['c_null', 'c_and'],
-        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
-        // 'allowed_conjunctions': ['c_why'],
-        'red herring': 'false',
-        'absolute-relative-split': 'on',
-        'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
-        // 'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
-        //     'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
-        //     'hear', 'shout', 'speak', 'see'
-        //     ],
-        // 'allowed_verbs' : ['speak', 'attack'],
-        'noun_switch' : false,
-        'allowed_nouns': ['wolf'],
-        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'person_and_number'],
-        'drop_down_path' : ['lexeme'],
-        'drop_down_path_noun' : ['lexeme', 'case'],
-        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
-        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        /////////TARGET & SOURCE
-        // L2E
-        'source_language' : {'english': 0, 'latin': 1},
-        'target_language' : {'english': 1, 'latin': 0},
-        //E2L
-        // 'source_language' : {'english': 1, 'latin': 0},
-        // 'target_language' : {'english': 0, 'latin': 1},
-        //E2L and L2E
-        // 'source_language' : {'english': 0.5, 'latin': 0.5},
-        // 'target_language' : {'english': 0.5, 'latin': 0.5},
-        
-        
-        'terminology_display_dictionary': 'basic',
-        // 'terminology_display_dictionary': 'advanced',
-        // 'verb_dashes_removed': false,
-        'verb_dashes_removed': true
-    },
-    '140': {
-        'time': ['simultaneous', 'prior', 'subsequent'],
-        'sequence': ['primary', 'secondary'],
-        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
-        'voice' : ['active'],
-        // 'voice' : ['active', 'passive'],
-        // 'person_and_number' : ['3s'],
-        'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
-        // 'person_and_number' : ['1s'],
-        'allowed_conjunctions': ['c_null'],
-        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
-        // 'allowed_conjunctions': ['c_null', 'c_and'],
-        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
-        // 'allowed_conjunctions': ['c_why'],
-        'red herring': 'false',
-        'absolute-relative-split': 'on',
-        // 'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
-        'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
-            'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
-            'hear', 'speak', 'see', 'send', 'seek', 'find', 'throw', 'move', 'invade',
-            'hurry', 'drag', 'avoid', 'push'
-            ],
-        // 'allowed_verbs' : ['speak', 'attack'],
-        'noun_switch' : false,
-        'allowed_nouns': ['wolf'],
-        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
-        // 'drop_down_path' : ['lexeme', 'person_and_number'],
-        'drop_down_path' : ['lexeme'],
-        'drop_down_path_noun' : ['lexeme', 'case'],
-        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
-        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
-        /////////TARGET & SOURCE
-        // L2E
-        'source_language' : {'english': 0, 'latin': 1},
-        'target_language' : {'english': 1, 'latin': 0},
-        //E2L
-        // 'source_language' : {'english': 1, 'latin': 0},
-        // 'target_language' : {'english': 0, 'latin': 1},
-        //E2L and L2E
-        // 'source_language' : {'english': 0.5, 'latin': 0.5},
-        // 'targe
-        'terminology_display_dictionary': 'basic',
-        // 'terminology_display_dictionary': 'advanced',
-        // 'verb_dashes_removed': false,
-        'verb_dashes_removed': true
-    },
-    '150': {
+    // a dash removing level 3s, 3p active & passive
+    '210': {
         'time': ['simultaneous', 'prior', 'subsequent'],
         'sequence': ['primary', 'secondary'],
         'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
         // 'voice' : ['active'],
         'voice' : ['active', 'passive'],
+        // 'person_and_number' : ['3s'],
         'person_and_number' : ['3s', '3p'],
-        // 'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
+        // 'person_and_number' : ['1s'],
+        'allowed_conjunctions': ['c_null'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
+        // 'allowed_conjunctions': ['c_null', 'c_and'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
+        // 'allowed_conjunctions': ['c_why'],
+        'red herring': 'false',
+        'absolute-relative-split': 'on',
+        // 'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
+        'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
+            'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
+            'hear', 'speak', 'see', 'send', 'seek', 'find', 'throw', 'move', 'invade',
+            'hurry', 'drag', 'avoid', 'push'
+            ],
+        // 'allowed_verbs' : ['speak', 'attack'],
+        'noun_switch' : false,
+        'allowed_nouns': ['wolf'],
+        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'person_and_number'],
+        'drop_down_path' : ['lexeme'],
+        'drop_down_path_noun' : ['lexeme', 'case'],
+        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
+        /////////TARGET & SOURCE
+        // L2E
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
+        //E2L
+        // 'source_language' : {'english': 1, 'latin': 0},
+        // 'target_language' : {'english': 0, 'latin': 1},
+        //E2L and L2E
+        // 'source_language' : {'english': 0.5, 'latin': 0.5},
+        // 'target_language' : {'english': 0.5, 'latin': 0.5},
+        'terminology_display_dictionary': 'basic',
+        // 'terminology_display_dictionary': 'advanced',
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
+    },
+    // focus on iris -> eris  2s 3s passive only (3s added for comparison)
+    '220': {
+        'time': ['simultaneous', 'prior', 'subsequent'],
+        'sequence': ['primary', 'secondary'],
+        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
+        // 'voice' : ['active'],
+        'voice' : ['passive'],
+        // 'person_and_number' : ['3s'],
+        'person_and_number' : ['2s', '3s'],
+        // 'person_and_number' : ['1s'],
+        'allowed_conjunctions': ['c_null'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
+        // 'allowed_conjunctions': ['c_null', 'c_and'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
+        // 'allowed_conjunctions': ['c_why'],
+        'red herring': 'false',
+        'absolute-relative-split': 'on',
+        'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
+        // 'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
+        //     'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
+        //     'hear', 'shout', 'speak', 'see'
+        //     ],
+        // 'allowed_verbs' : ['speak', 'attack'],
+        'noun_switch' : false,
+        'allowed_nouns': ['wolf'],
+        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'person_and_number'],
+        'drop_down_path' : ['lexeme'],
+        'drop_down_path_noun' : ['lexeme', 'case'],
+        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
+        /////////TARGET & SOURCE
+        // L2E
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
+        //E2L
+        // 'source_language' : {'english': 1, 'latin': 0},
+        // 'target_language' : {'english': 0, 'latin': 1},
+        //E2L and L2E
+        // 'source_language' : {'english': 0.5, 'latin': 0.5},
+        // 'target_language' : {'english': 0.5, 'latin': 0.5},
+        
+        
+        'terminology_display_dictionary': 'basic',
+        // 'terminology_display_dictionary': 'advanced',
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
+    },
+    // reinforcing iris -> eris by putting it in context with everything, including active
+    '230': {
+        'time': ['simultaneous', 'prior', 'subsequent'],
+        'sequence': ['primary', 'secondary'],
+        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
+        // 'voice' : ['active'],
+        'voice' : ['active', 'passive'],
+        'person_and_number' : ['2s', '3s', '1p', '2p', '3p'],
+        // 'person_and_number' : ['1s'],
+        'allowed_conjunctions': ['c_null'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
+        // 'allowed_conjunctions': ['c_null', 'c_and'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
+        // 'allowed_conjunctions': ['c_why'],
+        'red herring': 'false',
+        'absolute-relative-split': 'on',
+        'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
+        // 'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
+        //     'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
+        //     'hear', 'shout', 'speak', 'see'
+        //     ],
+        // 'allowed_verbs' : ['speak', 'attack'],
+        'noun_switch' : false,
+        'allowed_nouns': ['wolf'],
+        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'person_and_number'],
+        'drop_down_path' : ['lexeme'],
+        'drop_down_path_noun' : ['lexeme', 'case'],
+        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
+        /////////TARGET & SOURCE
+        // L2E
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
+        //E2L
+        // 'source_language' : {'english': 1, 'latin': 0},
+        // 'target_language' : {'english': 0, 'latin': 1},
+        //E2L and L2E
+        // 'source_language' : {'english': 0.5, 'latin': 0.5},
+        // 'target_language' : {'english': 0.5, 'latin': 0.5},
+        
+        
+        'terminology_display_dictionary': 'basic',
+        // 'terminology_display_dictionary': 'advanced',
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
+    },
+    // narrowing down to 1st person -o swallowing 
+    // 3s added for comparison
+    // active only
+    // (unable to disable filter)
+    '240': {
+        'time': ['simultaneous', 'prior', 'subsequent'],
+        'sequence': ['primary', 'secondary'],
+        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
+        'voice' : ['active'],
+        // 'voice' : ['active', 'passive'],
+        // 'person_and_number' : ['3s'],
+        'person_and_number' : ['1s', '3s'],
+        // 'person_and_number' : ['1s'],
+        'allowed_conjunctions': ['c_null'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
+        // 'allowed_conjunctions': ['c_null', 'c_and'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
+        // 'allowed_conjunctions': ['c_why'],
+        'red herring': 'false',
+        'absolute-relative-split': 'on',
+        // 'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
+        'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
+            'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
+            'hear', 'speak', 'see', 'send', 'seek', 'find', 'throw', 'move', 'invade',
+            'hurry', 'drag', 'avoid', 'push'
+            ],
+        // 'allowed_verbs' : ['speak', 'attack'],
+        'noun_switch' : false,
+        'allowed_nouns': ['wolf'],
+        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'person_and_number'],
+        'drop_down_path' : ['lexeme'],
+        'drop_down_path_noun' : ['lexeme', 'case'],
+        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
+        /////////TARGET & SOURCE
+        // L2E
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
+        //E2L
+        // 'source_language' : {'english': 1, 'latin': 0},
+        // 'target_language' : {'english': 0, 'latin': 1},
+        //E2L and L2E
+        // 'source_language' : {'english': 0.5, 'latin': 0.5},
+        // 'targe
+        'terminology_display_dictionary': 'basic',
+        // 'terminology_display_dictionary': 'advanced',
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
+    },
+    // still focused on swallowing o, but adding passive
+    // no future to avoid ham and five eggs probelms
+    '250': {
+        'time': ['simultaneous', 'prior', 'subsequent'],
+        'sequence': ['primary', 'secondary'],
+        'universal_indicative_tenses_allowed' : ['present indicative', 'imperfect indicative','future indicative'],
+        // 'voice' : ['active'],
+        'voice' : ['active', 'passive'],
+        // 'person_and_number' : ['3s'],
+        'person_and_number' : ['1s', '3s'],
+        // 'person_and_number' : ['1s'],
+        'allowed_conjunctions': ['c_null'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
+        // 'allowed_conjunctions': ['c_null', 'c_and'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
+        // 'allowed_conjunctions': ['c_why'],
+        'red herring': 'false',
+        'absolute-relative-split': 'on',
+        // 'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
+        'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
+            'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
+            'hear', 'speak', 'see', 'send', 'seek', 'find', 'throw', 'move', 'invade',
+            'hurry', 'drag', 'avoid', 'push'
+            ],
+        // 'allowed_verbs' : ['speak', 'attack'],
+        'noun_switch' : false,
+        'allowed_nouns': ['wolf'],
+        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'person_and_number'],
+        'drop_down_path' : ['lexeme'],
+        'drop_down_path_noun' : ['lexeme', 'case'],
+        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
+        /////////TARGET & SOURCE
+        // L2E
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
+        //E2L
+        // 'source_language' : {'english': 1, 'latin': 0},
+        // 'target_language' : {'english': 0, 'latin': 1},
+        //E2L and L2E
+        // 'source_language' : {'english': 0.5, 'latin': 0.5},
+        // 'targe
+        'terminology_display_dictionary': 'basic',
+        // 'terminology_display_dictionary': 'advanced',
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
+    },
+    // all places with dash removal changes
+    // still no future
+    '260': {
+        'time': ['simultaneous', 'prior', 'subsequent'],
+        'sequence': ['primary', 'secondary'],
+        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
+        // 'voice' : ['active'],
+        'voice' : ['active', 'passive'],
+        // 'person_and_number' : ['3s', '3p'],
+        'person_and_number' : ['1s', '2s', '3s', '3p'],
         // 'person_and_number' : ['1s'],
         'allowed_conjunctions': ['c_null'],
         // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
@@ -613,7 +724,55 @@ var kck_levels = {
         // 'verb_dashes_removed': false,
         'verb_dashes_removed': true
     },
-    '160': {
+    //everything
+    '270': {
+        'time': ['simultaneous', 'prior', 'subsequent'],
+        'sequence': ['primary', 'secondary'],
+        'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
+        // 'voice' : ['active'],
+        'voice' : ['active', 'passive'],
+        // 'person_and_number' : ['3s', '3p'],
+        'person_and_number' : ['1s', '2s', '3s', '1p', '2p', '3p'],
+        // 'person_and_number' : ['1s'],
+        'allowed_conjunctions': ['c_null'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or',],
+        // 'allowed_conjunctions': ['c_null', 'c_and'],
+        // 'allowed_conjunctions': ['c_null', 'c_and', 'c_or', 'c_but', 'c_purpose', 'c_when', 'c_why'],
+        // 'allowed_conjunctions': ['c_why'],
+        'red herring': 'false',
+        'absolute-relative-split': 'on',
+        'allowed_verbs' : ['love', 'speak', 'carry', 'attack', 'fear', 'rule', 'grab'],
+        // 'allowed_verbs' : ['love', 'speak', 'command', 'attack', 'fear',
+        //     'rule', 'grab', 'carry', 'scare', 'fill', 'eat', 'come', 'command', 
+        //     'hear', 'shout', 'speak', 'see'
+        //     ],
+        // 'allowed_verbs' : ['speak', 'attack'],
+        'noun_switch' : false,
+        'allowed_nouns': ['wolf'],
+        // 'drop_down_path' : [ 'time', 'lexeme', 'voice', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'time', 'tense_and_mood','person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'voice', 'person_and_number'],
+        // 'drop_down_path' : ['lexeme', 'person_and_number'],
+        'drop_down_path' : ['lexeme'],
+        'drop_down_path_noun' : ['lexeme', 'case'],
+        'transitivity' : {'transitive': 0.5, 'intransitive': 0.5},
+        'explicitness' : {'explicit': 0.9, 'implicit': 0.1},
+        /////////TARGET & SOURCE
+        // L2E
+        'source_language' : {'english': 0, 'latin': 1},
+        'target_language' : {'english': 1, 'latin': 0},
+        //E2L
+        // 'source_language' : {'english': 1, 'latin': 0},
+        // 'target_language' : {'english': 0, 'latin': 1},
+        //E2L and L2E
+        // 'source_language' : {'english': 0.5, 'latin': 0.5},
+        // 'targe
+        'terminology_display_dictionary': 'basic',
+        // 'terminology_display_dictionary': 'advanced',
+        // 'verb_dashes_removed': false,
+        'verb_dashes_removed': true
+    },
+    '1160': {
         'time': ['simultaneous', 'prior', 'subsequent'],
         'sequence': ['primary', 'secondary'],
         'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
@@ -663,7 +822,7 @@ var kck_levels = {
     },
     
     
-    '1000': {
+    '2000': {
         'time': ['simultaneous', 'prior', 'subsequent'],
         'sequence': ['primary', 'secondary'],
         'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 'imperfect indicative'],
@@ -708,7 +867,7 @@ var kck_levels = {
     },
     //advance to here (no change in module)
     // 3s, 3p active & passive, many verbs
-    '2000': {
+    '3000': {
         'time': ['simultaneous', 'prior', 'subsequent'],
         'sequence': ['primary', 'secondary'],
         'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
@@ -759,7 +918,7 @@ var kck_levels = {
     //change module (add 1s-23p)
     //1s-3p
     //act pass
-    '3000': {
+    '4000': {
         'time': ['simultaneous', 'prior', 'subsequent'],
         'sequence': ['primary', 'secondary'],
         'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
@@ -806,7 +965,7 @@ var kck_levels = {
         // 'verb_dashes_removed': true
     },
     // adding more verbs
-    '4000': {
+    '5000': {
         'time': ['simultaneous', 'prior', 'subsequent'],
         'sequence': ['primary', 'secondary'],
         'universal_indicative_tenses_allowed' : ['present indicative', 'future indicative', 
@@ -855,7 +1014,7 @@ var kck_levels = {
 }
 
 
-var kck_levels_the_real_one = {
+var kck_levels_old = {
     //start with just variation in the middle element 3s only (v1-3 only)
     'test 1': {
         'time': ['simultaneous', 'prior', 'subsequent'],
