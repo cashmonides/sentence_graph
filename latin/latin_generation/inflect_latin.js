@@ -13,14 +13,13 @@ function inflect_latin (kernel, lexeme, word_settings, dashes) {
         // return inflect_latin_pre (kernel, lexeme, word_settings);
     } else if (!dashes) {
         var input = inflect_latin_pre(kernel, lexeme, word_settings);
-        //short term hack for 2nd graders
-        return remove_metacharacters(input);
+        
         
         // old version
         // return remove_dashes(input);
         // new version
         
-        // return remove_dashes_and_metacharacters(input);
+        return remove_dashes_and_metacharacters(input);
     } else {
         console.log("Error caught at dash removal stage");
     }

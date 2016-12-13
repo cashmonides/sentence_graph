@@ -2,11 +2,11 @@ Agenda for future (made in mid-september 2016)
 
 
 HIGHEST PRIORITY
-add individual users
+enter grades
+create individual tag users for final week and letter to parents
 time control for team play and solo play
 tweak modules for tuesday
 bug: "I will have loved" appeared in morphology level 240
-
 
 HIGH PRIORITY
 - ??? mysterious bug in improvement located where console.log says BUGCHECK
@@ -17,12 +17,14 @@ HIGH PRIORITY
     - it doesn't register submodule 9 as finished so you return to profile as 9/10
     - i.e. you need to hit next level
 - feedback in morphology and etymology should repeat question
-- 
+- add images to modules that don't have them
+- in inflect_latin dashes vs. !dashes does not seem to be working 
+    - (not hugely consequential but should be gotten to the bottom of
 
 
 
 MID PRIORITY
-- put a counter of sick modes in the header
+- put a counter of sick modes in the header DONE
     - e.g. if a mode is sick it will show up as a symbol in the header
     - the symbol shouldn't mean anything to the students (maybe just a dot)
     - the goal is to alert akiva to problems during class
@@ -39,9 +41,20 @@ MID PRIORITY
 
 
 LOW PRIORITY
+- add words
+- there should be an easier kind of cheat sheet called something like root + word list
+    - the hint looks like this:
+    - ROOT: [words_with_root]   // some dummies included
+    - e.g. spell the word that means "animal with jointed legs"
+    - click hint
+    - see: 
+    - IN: invisible, invertebrate, immutable
+    - PED/POD: pedestrian, arthropod, pseudopod
+    - POLY: polyglot, polychrome
+    - etc.
 - example sentences for spelling and etymology mode
 - hint penalty
-- systematize console logs
+- systematize console logs (nearing completion)
 - in quick mode, add "find N subjects" functionality
     - i.e. 
 - in quick mode, add some sentences that are both english and latin
@@ -76,7 +89,7 @@ BIG BUG
 
 DESIDERATA
 - there should be a bunch of example sentences that are used both
-    - as example sentences
+    - as example sentences for spelling and etymology
     - as grammatically tagged
 - a nice addition to spelling mode would be a sequence of hints
     - each hint adds a letter (probably consoonants at first)

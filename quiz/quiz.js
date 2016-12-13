@@ -407,6 +407,9 @@ Quiz.prototype.next_mode = function (error) {
         return;
     }
     
+    
+    
+    
     var allowed;
     if (!(this.user.is_mf())) {
         allowed = ALL_MODULES[this.module.id].mode_ratio;
@@ -432,6 +435,7 @@ Quiz.prototype.next_mode = function (error) {
         debug.log("checkpoint 1");
         
         for (var i = 0; i < this.sick_modes.length; i++) {
+            this.display_sick_mode_in_header();
             console.log('sick mode being added = ', this.sick_modes[i])
             delete allowed[this.sick_modes[i]];
             console.log("LOG: sick mode added");
@@ -584,7 +588,7 @@ Quiz.prototype.next_question = function (error) {
         back.log("PROBLEM: desperate move triggered");
         
         if (e !== "modes exhausted") {
-            console.log("PROBLEM: error handler initiated");
+            back.log("PROBLEM: error handler initiated");
             this.next_question(true);
         }
     }
@@ -598,7 +602,7 @@ Quiz.prototype.mf_sql_completed_log = function (ajax_callback) {
         this.get_mf_game_status(),
         this.time_data_id
     ];
-    console.log('about to update mf', data);
+    back.log('about to update mf', data);
     post({data: data, type: "update_mf_metrics"}, ajax_callback);
 }
 
@@ -623,17 +627,16 @@ Quiz.prototype.question_complete = function (button_name) {
     */
     //todo comment this back in when done testing
     // clear_input_feedback_box("feedback_for_input");
-    console.log("DEBUG 5-29 checkpoint 3");
+    
     set_display("feedback_for_input", 'none');
     this.update_accuracy();
-    console.log("DEBUG 5-29 checkpoint 4");
+    
     this.submodule.incorrect_streak = 0;
     // We reset the incorrect streak
     // due to the fact that there is a new question.
     if (this.submodule.score >= this.module.submodule.threshold) {
         this.submodule_complete();
     } else {
-        console.log("DEBUG 4-9 quiz.next_question triggered");
         if (this.game.get_mode_name() === 'mf' ||
         (this.game.get_mode_name() === 'syntax' && this.game.on_last_region())) {
             var general_callback;
@@ -693,8 +696,8 @@ Quiz.prototype.regularize_accuracy_dictionary_input = function (accuracy_diction
 Quiz.prototype.update_accuracy = function () {
     //todo super hacky short-term intervention for spelling mode, converts all incorrect_streak greater than 3 to 3
     
-    console.log("[quiz.update_accuracy] entering update_accuracy");
-    console.log("[quiz.update_accuracy] this.submodule.incorrect_streak = ", this.submodule.incorrect_streak);
+    back.log("entering update_accuracy");
+    back.log("this.submodule.incorrect_streak = ", this.submodule.incorrect_streak);
     
     // below would be an option very hacky
     // this.submodule.incorrect_streak = this.regularize_accuracy_dictionary_input(this.submodule.incorrect_streak);
@@ -718,7 +721,7 @@ Quiz.prototype.get_mf_game_status = function () {
 Quiz.prototype.log_sentence = function (callback) {
     var current_path = this.game.current_path;
     var status = this.get_mf_game_status();
-    console.log("[quiz.log_sentence] current_path = ", current_path);
+    back.log("current_path = ", current_path);
     this.user.log_sentences(current_path, status, this.game.get_mode_name(), callback);
 }
 
@@ -899,6 +902,9 @@ Quiz.prototype.is_allowed_module = function (mod) {
 
 //END DAMAGE CONTROL
 
+Quiz.prototype.display_sick_mode_in_header = function () {
+    el("sick_mode_header").innerHTML = '\u25AA';
+}
 
 Quiz.prototype.update_display = function() {
     
@@ -933,7 +939,7 @@ Quiz.prototype.update_display = function() {
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
     el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     
-    back.log("quiz: leaving update display");
+    back.log("leaving update display");
 };
 
 

@@ -126,8 +126,8 @@ InputModeGame.prototype.next_question = function () {
     // todo AKiva explore this mysterious bug below
     // 12-12-16 new version
     var desired_output = get_dash_hint_list2(this.quiz.module.dash_hint_level);
-    console.log("12-12-16 working old output = ", dash_hint_as_list)
-    console.log("12-12-16 mysterious new output = ", desired_output);
+    debug.log("mysterious bug 12-12-16 working old output = ", dash_hint_as_list)
+    debug.log("mysterious bug 12-12-16 mysterious new output = ", desired_output);
     
     // old version
     // this.dash_hint = dash_hint_as_list;

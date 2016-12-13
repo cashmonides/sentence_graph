@@ -62,7 +62,6 @@ var register_cell_fill = function (cell) {
 // this function will take a list of roots and a lexeme list
 // and return a list of items to populate morphological buttons
 var convert_root_items_to_actual_forms = function (root_list, lexeme_list, lexeme_list_as_objects, language) {
-    console.log("ECCE 3 lexeme_list_as_objects = ", lexeme_list_as_objects);
     var dictionary_to_consult;
     if (language == 'latin') {
         dictionary_to_consult = testing_lexemes;
