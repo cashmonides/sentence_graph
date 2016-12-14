@@ -6,6 +6,19 @@
 // todo check if below is all good
 // this is a rather crude way of implementing dash removal
 function inflect_latin (kernel, lexeme, word_settings, dashes) {
+    if (global_temporary_dash_hack) {
+        var input = inflect_latin_pre (kernel, lexeme, word_settings);
+        return remove_metacharacters(input);
+    } else if (!global_temporary_dash_hack) {
+        var input = inflect_latin_pre(kernel, lexeme, word_settings);
+        return remove_dashes_and_metacharacters(input);
+    }
+    
+    
+    // todo real version is below
+    // but dashes variable is not being set properly in latin_cosmetic_levels
+    // re-implement when that is fixed
+    /*
     if (dashes) {
         // short term hack
         var input = inflect_latin_pre (kernel, lexeme, word_settings);
@@ -23,6 +36,7 @@ function inflect_latin (kernel, lexeme, word_settings, dashes) {
     } else {
         console.log("Error caught at dash removal stage");
     }
+    */
 }
 
 
