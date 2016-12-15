@@ -1,4 +1,6 @@
 Agenda for future (made in mid-september 2016)
+REFACTORING
+remove all logs from inside of if loops (to avoid clutter)
 
 
 HIGHEST PRIORITY

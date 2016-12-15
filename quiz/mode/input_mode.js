@@ -221,7 +221,7 @@ InputModeGame.prototype.next_question = function () {
 InputModeGame.prototype.process_answer = function(){
     var self = this;
     var raw_input_string = el("input_box").value;
-    backlog("[input_mode.process_answer] raw input string = ", raw_input_string);
+    back.log("[input_mode.process_answer] raw input string = ", raw_input_string);
 
     // todo all the string processing below is pretty hacky and ugly
     // at some point we should centralize it all in something like
@@ -229,7 +229,7 @@ InputModeGame.prototype.process_answer = function(){
     // and have it all in string_utils
 
     var processed_input_string = clean_input_string(raw_input_string);
-    backlog("[input_mode.process_answer] processed input string = ", processed_input_string);
+    back.log("processed input string = ", processed_input_string);
     
     var lower_case_input_string = raw_input_string.toLowerCase();
     
@@ -239,7 +239,6 @@ InputModeGame.prototype.process_answer = function(){
     lower_case_input_string = lower_case_input_string.replace("  ", " ");
     
     if (lower_case_input_string.slice(-1) === " ") {
-        console.log("TENERIFE space triggered");
         lower_case_input_string = lower_case_input_string.slice(0, -1);
     }
     
@@ -283,7 +282,7 @@ InputModeGame.prototype.process_answer = function(){
 
     
     
-    backlog("[input_mode.process_answer] this.correct_answer = ", this.correct_answer);
+    back.log("this.correct_answer = ", this.correct_answer);
     
     //old version buggy
     // var comparison_result = this.submit_string_to_green_and_red(this.correct_answer, raw_input_string);
@@ -293,29 +292,19 @@ InputModeGame.prototype.process_answer = function(){
     
     
     
-    backlog("[input_mode.process_answer] comparison_result = ", comparison_result);
+    back.log("comparison_result = ", comparison_result);
     this.comparison_result = comparison_result;
     
     
     this.display_red_green_result(comparison_result);
     
     if (lower_case_input_string === correct_answer_without_parentheses) {
-        backlog("[input_mode.process_answer] input matches correct, process_correct_answer triggered");
+        back.log("input matches correct, process_correct_answer triggered");
         this.process_correct_answer();
     } else {
-        backlog("[input_mode.process_answer] input doesn't match correct, process_incorrect_answer triggered");
+        back.log("input doesn't match correct, process_incorrect_answer triggered");
         this.process_incorrect_answer();
     }
-    
-    
-    //old version below, seems not to work
-    // if (object_equals(processed_input_string, correct_english_translation)) {
-    //     backlog("[input_mode.process_answer] input matches correct, process_correct_answer triggered");
-    //     this.process_correct_answer();
-    // } else {
-    //     backlog("[input_mode.process_answer] input doesn't match correct, process_incorrect_answer triggered");
-    //     this.process_incorrect_answer();
-    // }
 };
 
 //need to bring over

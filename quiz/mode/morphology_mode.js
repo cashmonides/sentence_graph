@@ -186,7 +186,7 @@ MorphologyModeGame.prototype.get_mode_name = function() {
 
 
 MorphologyModeGame.prototype.next_question = function () {
-    backlog("[morph_mode.next_question] next_question entered");
+    back.log("[morph_mode.next_question] next_question entered");
 
     
     //morphology cells do not seem to be cleared after submit????!!!
@@ -205,9 +205,9 @@ MorphologyModeGame.prototype.next_question = function () {
     this.middle_element_submitted = false;
     this.ending_element_submitted = false;
     
-    backlog("[morph_mode.next_question] this.beginning_element_submitted = ", this.beginning_element_submitted);
-    backlog("[morph_mode.next_question] this.middle_element_submitted = ", this.middle_element_submitted);
-    backlog("[morph_mode.next_question] this.ending_element_submitted = ", this.ending_element_submitted);
+    back.log("this.beginning_element_submitted = ", this.beginning_element_submitted);
+    back.log("this.middle_element_submitted = ", this.middle_element_submitted);
+    back.log("this.ending_element_submitted = ", this.ending_element_submitted);
     
     
 
@@ -275,25 +275,25 @@ MorphologyModeGame.prototype.next_question = function () {
     //lexicon intervention begin
     global_hack_full_lexicon_for_morphology_as_object = sentence.chosen_lexemes;
     
-    backlog("[morph_mode.next_question] sentence.chosen_lexemes = ", sentence.chosen_lexemes);
+    back.log("sentence.chosen_lexemes = ", sentence.chosen_lexemes);
     
     
     global_hack_full_lexicon_for_morphology_as_object2 = sentence.chosen_lexemes.verb;
-    backlog("[morph_mode.next_question] sentence.chosen_lexemes.verb = ", sentence.chosen_lexemes.verb); 
+    back.log("sentence.chosen_lexemes.verb = ", sentence.chosen_lexemes.verb); 
     
     
     
-    backlog("[morph_mode.next_question] sentence =", sentence);
+    back.log("sentence =", sentence);
     
     
     this.question = sentence.translate_into(source_language);
-    backlog("[morph_mode.next_question] this.question = ", this.question);
+    back.log("this.question = ", this.question);
     
     this.answer = sentence.translate_into(target_language);
-    backlog("[morph_mode.next_question] this.answer = ", this.answer);
+    back.log("this.answer = ", this.answer);
     
     
-    backlog("[morph_mode.next_question] sentence.chosen_lexemes =", sentence.chosen_lexemes);
+    back.log("sentence.chosen_lexemes =", sentence.chosen_lexemes);
     
     
     
@@ -365,7 +365,7 @@ MorphologyModeGame.prototype.next_question = function () {
     
     // todo implement or find some method that does this
     this.correct_answer_as_string = sentence.translate_into(target_language);
-    backlog("[morph_mode.next_question] correct_answer_as_string = ", this.correct_answer_as_string);
+    back.log("correct_answer_as_string = ", this.correct_answer_as_string);
     
     //we are going to remove dashes from the morphological elements for cosmetic reason
     //so we are going to compare [am, aba, t] with the correct answer as string
@@ -391,46 +391,45 @@ MorphologyModeGame.prototype.next_question = function () {
 
 MorphologyModeGame.prototype.get_morphological_properties_from_level = function (morphological_level) {
     
-    backlog("morph_mode.get_morphological_properties_from_level] entering get_morphological_properties_from_level");
+    back.log("entering get_morphological_properties_from_level");
     
     
-    backlog("morph_mode.get_morphological_properties_from_level] morphological level = ", morphological_level);
+    back.log("morphological level = ", morphological_level);
     var list_of_morphological_properties = [];
     
     
     // morphology_levels is a global
-    backlog("morph_mode.get_morphological_properties_from_level] morphology_levels = ", morphology_levels);
+    back.log("morphology_levels = ", morphology_levels);
     
     var morphological_level_to_consult = morphology_levels[morphological_level];
     
-    backlog("morph_mode.get_morphological_properties_from_level] morphological_level_to_consult = ", morphological_level_to_consult);
+    back.log("morphological_level_to_consult = ", morphological_level_to_consult);
     
     
     //we push all the tense_mood_voice combos
     //e.g. present indicative active
     var allowed_tense_mood_voice_list = morphological_level_to_consult.allowed_tense_mood_voice;
-    backlog("morph_mode.get_morphological_properties_from_level] allowed_tense_mood_voice_list = ", allowed_tense_mood_voice_list);
+    back.log("allowed_tense_mood_voice_list = ", allowed_tense_mood_voice_list);
     list_of_morphological_properties.push(allowed_tense_mood_voice_list);
-    backlog("morph_mode.get_morphological_properties_from_level] list_of_morphological_properties = ", list_of_morphological_properties);
+    back.log("list_of_morphological_properties = ", list_of_morphological_properties);
     
     //we push all the person_number combos
     //e.g. 3s
     var allowed_person_number_list = morphological_level_to_consult.allowed_person_number;
-    backlog("morph_mode.get_morphological_properties_from_level] allowed_person_number_list = ", allowed_person_number_list);
+    back.log("allowed_person_number_list = ", allowed_person_number_list);
     list_of_morphological_properties.push(allowed_person_number_list);
-    backlog("morph_mode.get_morphological_properties_from_level] list_of_morphological_properties = ", list_of_morphological_properties);
+    back.log("list_of_morphological_properties = ", list_of_morphological_properties);
     
     
     //we push all the person_number combos
     //e.g. 3s
     var allowed_conjugation_list = morphological_level_to_consult.allowed_conjugation;
-    backlog("morph_mode.get_morphological_properties_from_level] allowed_conjugation_list = ", allowed_conjugation_list);
+    back.log("allowed_conjugation_list = ", allowed_conjugation_list);
     list_of_morphological_properties.push(allowed_conjugation_list);
-    backlog("morph_mode.get_morphological_properties_from_level] list_of_morphological_properties pre-flattening = ", list_of_morphological_properties);
+    back.log("list_of_morphological_properties pre-flattening = ", list_of_morphological_properties);
     
     list_of_morphological_properties = [].concat.apply([], list_of_morphological_properties);
-    backlog("morph_mode.get_morphological_properties_from_level] list_of_morphological_properties post-flattening = ", list_of_morphological_properties);
-    
+    back.log("list_of_morphological_properties post-flattening = ", list_of_morphological_properties);
     
     return list_of_morphological_properties;
 }
@@ -608,11 +607,11 @@ var submit_morphological_element_to_input_dictionary = function (morphological_e
 }
 
 var submit_morphological_element_to_cell = function (morphological_element, cell_destination) {
-    backlog("[morph.mode submit_morphological_element_to_cell] entering submit_morphological_element_to_cell");
+    back.log("entering submit_morphological_element_to_cell");
     
     submit_morphological_element_to_input_dictionary(morphological_element, cell_destination);
-    backlog("[morph.mode submit_morphological_element_to_cell] morphological_element = ", morphological_element);
-    backlog("[morph.mode submit_morphological_element_to_cell] cell_destination = ", cell_destination);
+    back.log("morphological_element = ", morphological_element);
+    back.log("cell_destination = ", cell_destination);
     // we first check if the submitted data is of the right type
     if (typeof (morphological_element) !== 'string') {
         alert("submitted morphological element is not a string");
@@ -840,7 +839,7 @@ MorphologyModeGame.prototype.process_correct_answer = function () {
     var question_as_string_for_path = this.question;
     var question_plus_answer_as_string = question_as_string_for_path + " = " + correct_answer_as_string_for_path;
     
-    backlog("[morph_mode.process_correct_answer] answer_as_string_for_path =", correct_answer_as_string_for_path);
+    back.log("answer_as_string_for_path =", correct_answer_as_string_for_path);
     
     fbox.appendChild(document.createTextNode(question_plus_answer_as_string));
     fbox.appendChild(document.createElement('br'));

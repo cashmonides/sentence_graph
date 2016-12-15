@@ -535,6 +535,9 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
 };
 
 
+
+// todo below got interrupted
+// develop it later
 SpellingModeGame.prototype.inflict_spelling_hint_penalty = function () {
     if (this.chosen_question_type === "word_definition_to_word") {
         
@@ -545,7 +548,7 @@ SpellingModeGame.prototype.inflict_spelling_hint_penalty = function () {
 
 // todo below should be set up as a global function
 // i.e. some kind of mode-agnostic string processing function
-// todo buggy: if you enter bi/bin as your answer you get a bad result
+// todo below is a little buggy: if you enter bi/bin as your answer you get a bad result
 
 SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(correct_answer_string, input_string, process_slashes_bool) {
     // new version, on the assumption that we always process slashes

@@ -1,17 +1,30 @@
-// DOCUMENTATION
+/* @documentation
+login is the topmost file / home page
+sends the user to profile
+
+- needs access to a few global variables
+    - User
+    - Persist (for the purpose of updating firebase)
+    
+- primary loose ends
+    - change password
+        - change password functionality is available but disabled
+        - because current body of users is too young to have access to it
+    
+end documentation
+*/ 
+
+
+// DOCUMENTATION ON FIREBASE
 // https://www.firebase.com/docs/web/guide/login/password.html
 
 
-//modes:
-// 1 logging in
-// 2 creating account
-// 3 forgot password
-// 4 change password
-// 
-
-
-
-
+// there are multiple modes that a user might want to do upon hitting the home page:
+    // 1 logging in
+    // 2 creating account
+    // 3 forgot password
+    // 4 change password (currently disabled)
+// mode map sets up what aspects of the interface will be visible in each mode
 var mode_map = {
     "email_row": [[1, 2, 3, 4], "table-row"],
     "password_row": [[1, 2], "table-row"],
@@ -25,27 +38,27 @@ var mode_map = {
 
     "login_button": [[1], "inline"],
     "create_account_button": [[2], "inline"],
+    
     //password changing is disabled until a later time, when students use regular email accounts
     // "forgot_password_button": [[1], "inline"],
     // "change_password_button": [[4], "inline"],
-
-
-    // "reset_password_instructions": [[3], 'inline']          //something like "enter your email and you'll be sent a temporary password to change your account with
+    // "reset_password_instructions": [[3], 'inline']          
+    
 };
 
 
-//todo Akiva changed id.style.display etc. to e.style.display (is that right?)
+// the mode argument is set by user input (radio buttons)
 function set_mode(mode){
-
-    //console.log"set mode entered");
-
-    //console.log"setting mode");
+    back.log("profile set mode entered, mode = ", mode);
+    
     for(id in mode_map){
         var data = mode_map[id];
         var e = el(id);
         e.style.display = contains(data[0], mode) ? data[1] : "none";
     }
 }
+
+
 
 function create_account() {
     var e = el("email").value;
@@ -56,17 +69,19 @@ function create_account() {
     var c = el("class_number").value;
     var ac = el("access_code").value;
     
+    // we use a password to prevent users from making their own accounts without Akiva's permission
     var correct_hash = 1327021340; // The correct hash value.
     if (hash(ac) !== correct_hash) {
-        alert("Talk to Akiva in class about how to log in.");
+        alert("Talk to your Latin teacher in class about how to log in.");
         return;
     }
     
-
+    // we need to create a user
+    // but because the connection to firebase is asynchronous,
+    // we need to use a callback
     var callback = function(error, userData) {
         if (error) {
             console.log("Error creating user:", error);
-            //todo should an urgent error log go here???
             alert(error);
         } else {
             console.log("Successfully created user account with uid:", userData);

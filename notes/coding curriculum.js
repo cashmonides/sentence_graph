@@ -1,3 +1,19 @@
+var terms_and_concepts = {
+    'semantic versioning'
+}
+
+
+var functional_paradigm = {
+    'random quotes': [
+        'it was very refreshing to find a front-end language (elm)',
+        'that uses signals instead of events and purity instead of mutation.',
+        '...',
+        'monoids in the category of endofunctors',
+        
+    ]
+}
+
+
 var coding_curriculum = "the disorganized maps below which need to be mapped into a map of map";
 
 
@@ -131,6 +147,52 @@ var auto_tagging = {
         'english word occurence frequency, e.g. cycloid occurs infrequently so it must be introduced to the innocent youngster with that in mind'
         ]
 }
+
+
+var possible_functional_toy_project = {
+    'object tagging game': [
+        'rapid, super modular super safe object bulletproof classification game',
+        'object enters the game, leaves with properties input by users',
+        'its so well designed and modular that everything will work',
+        'the html buttons that the user hits are generated super functionally',
+        'the worst that will happen is that it gets a human-error mistaken property',
+        'but it cant suffer from any code-based errors because the properties are just added as a list',
+        'any internal structure the tags might have is encapsulated in the properties themselves',
+        'applies to letter, morphological element, word, grammatical element, clause, sentence',
+        'it would be fairly easy to come up with a list of objects and a list of properties',
+        'the clicks send object + properties to some other function',
+        'e.g. we want to check if the user has made a correct choice',
+        'so we compare it to an existing map and return a bool if it matches',
+        'in another scenario we are actually entering data because were a teacher',
+        'so there is no existing map to compare to',
+        'so the operation is to actually build the map based on the clicking',
+        'or just maps it in the case of a tagging operation',
+        'say the object is randomly picked from a list of animals',
+        'properties are drawn from taxonomic properties',
+        'object enters the box (wolf)',
+        'a bunch of buttons get generated underneath',
+        'vertebrate athropod carnivore',
+        
+        'e.g. at the word level',
+        'generate 10 random words',
+        'like http://www.textfixer.com/tools/random-words.php',
+        'click on the words you dont know',
+        'generate 10 random words',
+        'click on the words with a root meaning X',
+        'e.g. at the etymological level',
+        'the word quadrupedal enters',
+        'user clicks on boundaries between letters',
+        'quadrupedal -> quadr.u.ped.al = root.connector.root.formator',
+        'e.g. at the latin word level',
+        'object enters vorabunt',
+        'user clicks on boundaries in the word',
+        'vorabant -> vor.aba.nt',
+        'somehow connect it to etymonline',
+        'random word shows up to super-user, he classifies it as worh including, having classical roots, having germanic or classical origins, too advanced, etc.',
+        
+        ]
+}
+
 
 
 OVERALL ARCHITECTURE OF THE PROJECT

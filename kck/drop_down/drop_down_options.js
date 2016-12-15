@@ -53,7 +53,7 @@ var get_drop_down_options = function (
             return [option[0], transform_all_terminology(option[1])];
         });
     });
-    // console.log("BACKLOG result of dropdowns = ", result");
+    back.log("result of dropdowns = ", result);
     // We return our result.
     return result;
 }
