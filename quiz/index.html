@@ -73,6 +73,7 @@
     <script src="mode/syntax_mode.js"></script>
     <script src="mode/morphology_mode.js"></script>
     <script src="mode/spelling_mode.js"></script>
+    <script src="mode/spelling_trainer_mode.js"></script>
     
     <script src="../syntax_mode_utils/answer_type.js"></script>
     <script src="../syntax_mode_utils/conventions.js"></script>
@@ -319,6 +320,8 @@
                             <button class="button" id="vocab_cheat_button" onclick="quiz.initialize_vocab_cheat_sheet()">vocabulary cheat sheet</button>
                             <button class="button" id="etym_cheat_button" onclick="quiz.initialize_etym_cheat_sheet()">etymology cheat sheet</button>
                             <button class="button" id="spelling_hint_button" onclick="quiz.initialize_spelling_hint()">hint</button>
+                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_drone()">set spelling bee level to drone</button>
+                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_queen()">set spelling bee level to queen</button>
                             <!--todo new button below, make sure it works-->
                             <button class="button" id="dash_hint_button" onclick="quiz.initialize_dash_hint()">dash removal hint</button>
                         </td>

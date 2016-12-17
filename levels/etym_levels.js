@@ -1,5 +1,34 @@
 var etym_levels = {
     
+    //testing simple things don't use
+    1 : {
+        roots: ['CARN'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .0001,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
+    5 : {
+        roots: ['HERB'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .0001,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
+    
+    
     // //testing 10
     10 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR'],

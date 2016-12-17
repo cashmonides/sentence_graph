@@ -168,35 +168,14 @@ SpellingModeGame.prototype.attach = function(){
 
 // @common to all quiz modes
 SpellingModeGame.prototype.set_level = function (new_level) {
-    console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
     this.level = new_level;
-    back.log("BEEHACK this.level = ", this.level);
-}
-
-
-SpellingModeGame.prototype.set_override_level = function (input) {
-    this.level = 100000;
-    // if (input === 100) {
-    //     this.level = 100
-    // }
-    
     back.log("this.level = ", this.level);
 }
-
-// @beehack
-SpellingModeGame.prototype.override_mode_level = function() {
-    console.log("HEY BEE TRIGGERED in override_mode_level");
-    // this.level = 300;
-}
-
-
 
 // @common to all quiz modes
 SpellingModeGame.prototype.get_mode_name = function() {
     return "spelling";
 }
-
-
 
 
 
@@ -208,15 +187,7 @@ SpellingModeGame.prototype.next_question = function(){
     // todo separate spelling level from etymology level
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
-    
-    // @beehack
-    console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
-    if (this.quiz.module.id === 0.5) {
-        console.log("123 BEE DETECTED skipping set_level");
-    } else {
-        this.set_level(post_sampling_level);
-    }
-    
+    this.set_level(post_sampling_level);
     
     this.quiz.update_display();
     
@@ -531,9 +502,7 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
         var is_there_a_match = false;
         is_there_a_match = test_match_from_slash_options(random_root_to_replace, word);
         if (!is_there_a_match) {
-            bug.log("PROBLEM: NO MATCH DISCOVERED where there should be a match, i.e. word should have root");
-            // todo add an escape clause here, go to next question or something like that
-            
+            console.log("PROBLEM [spellingmode.give_underscore_hint] NO MATCH DISCOVERED where there should be a match, i.e. word should have root");
         } else {
             // console.log("spelling hint match detected");
         }

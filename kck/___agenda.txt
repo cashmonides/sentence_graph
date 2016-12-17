@@ -9,8 +9,103 @@ create individual tag users for final week and letter to parents
 time control for team play and solo play
 tweak modules for tuesday
 bug: "I will have loved" appeared in morphology level 240
+make sure number of spelling hint cheat sheet dummies is set in all modules
+make a "set module" secret access button in profile
+bug in spelling mode    
+    - PROBLEM [spellingmode.give_underscore_hint] NO MATCH DISCOVERED where there should be a match, i.e. word should have root
+    - probably due to high etym level and some word having bad data
+move development status to module
+add etymology and spelling data posting to a new database
+
+MAPPING CONTROL FLOW & CLEANING UP
+- map the overall flow
+    - login -> profile -> quiz
+- map the basic quiz flow
+    - decision tree for different options
+        - e.g. process correct process incorrect submodule complete check for rollover etc.
+- move a lot of the things in lib to utils
+    - e.g. make.js
+
+DA.PUZZLES
+- mutate random characteristic
+- replace root
+- convert word to x and non-x
+- 
+
+
+ATTACK PLAN FOR SPELLING BEE
+____STEP 1____
+- make a testing file for etymology data
+- add synonyms for quad, quint
+- test synonyms
+- add example sentences for quad, quint, pod
+- test display example sentence with word removed
+    - e.g. "The ________ usually have exoskeletons and are carnivorous"
+    - e.g. "One example of an ________ is the beetle"
+- test read and booleanize example sentence THEN etymology
+- test example picture
+
+_____STEP 2_______
+- button in profile that leads to spelling trainer DONE
+- disable metrics for spelling bee
+- add a bee catcher (if it's in bee mode it's not counted as improvement)
+    - improve and advance all should ignore the bee
+- build a student-set level for spelling trainer
+- build a lean version of quiz for spelling bee mode
+    - without any firebase posting
+    - with a user set
+    - without any finishing, maybe upper threshhold is a million and the symbol is infinity
+- check if pictures can be added to submodule complete (just pictures of bees)
+
 
 HIGH PRIORITY
+- gameification acquisitive psychology
+    - add picture to gallery everytime they win
+- spelling mode for january release
+    - separate spelling bee trainer with student-set level
+    - bee mode with a very high threshold (maybe the infinity sign) 
+        - many bee pictures and a very very high threshold
+    - timer counting down
+    - add spans to root words in definition 
+        - e.g. a creature with <span>joint</span>ed <span>feet</span>
+        - in css we change the display (upper case, bold, etc.)
+    - player competition mode
+    - hint penalty
+    - first letter hint should go above the etymology cheat sheet
+    - etymology cheat sheet should be in two columns
+    - etymology cheat sheet left item (e.g. word) should be bold
+    - reduce size of first letter hint
+    - increase size of etymology cheat sheet
+    - backstage tester for etymology data
+        - find words that don't contain root
+        - find words whose roots don't match anything on the root list
+    - at some point they should be able to collect a lot of bees
+    - at some point the notion of magical spells should appear
+    - different hint types
+        - make root words in definition bold/underlined/upper case etc.
+        - gradual hint (adding letters one by one)
+        - use it in a sentence (with multiple clicks)
+        - contains these letters (they disappear as you spell the word)
+    - green and red should replace items on the list so it's not so long
+    - add example sentences
+    - question type: example sentence   
+        - the following highlighted word
+    - add words and roots
+    - add synonym functionality
+        - short term: give each root & word a synonym field
+        - longer term: 
+            - each root should be a list of all synonyms
+            - with subcategorization as to language
+            - e.g. ped/pod/pus
+            - e.g. quart / quad / quadr
+    - question type: distinguish between root and non-root substring
+        - e.g. all of the following words contain the letters PED
+        - click on the word that has the root PED = foot
+- reading comprehension THEN etymology
+    - read the following sentence (an example sentence from etymology data)
+    - then click on whether you think it's true, false or you don't know
+    - the sentence is e.g. true
+    - now do etymology exercise on the highlighted word
 - ??? mysterious bug in improvement located where console.log says BUGCHECK
 - the 9/10 profile bug
     - this bug has been reported by some users but doesn't seem very common
@@ -21,7 +116,7 @@ HIGH PRIORITY
 - feedback in morphology and etymology should repeat question
 - add images to modules that don't have them
 - in inflect_latin dashes vs. !dashes does not seem to be working 
-    - (not hugely consequential but should be gotten to the bottom of
+    - (not hugely consequential but should be gotten to the bottom of)
 
 
 

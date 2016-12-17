@@ -132,9 +132,6 @@ SpellingModeGame.prototype.attach = function(){
     
     
     
-    // todo migrate all this business below to something like setup unique game mode data
-
-    
     // todo hack short term solution to accuracy metrics not having enough columns
     // todo a more modular way of resetting incorrect streak would be better here
     // but this is a short-term solution
@@ -147,6 +144,9 @@ SpellingModeGame.prototype.attach = function(){
     // given by module
     this.secret_streak = 0;
     
+    //test of new buglog
+    
+    // var debug2 = console.log.bind(window.console);
     
     //we first check whether a  mode-specific max-streak exists
     // if so we set it as our secret triggering point
@@ -165,38 +165,14 @@ SpellingModeGame.prototype.attach = function(){
     this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
 };
 
-
-// @common to all quiz modes
 SpellingModeGame.prototype.set_level = function (new_level) {
-    console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
     this.level = new_level;
-    back.log("BEEHACK this.level = ", this.level);
+    console.log("this.level = ", this.level);
 }
 
-
-SpellingModeGame.prototype.set_override_level = function (input) {
-    this.level = 100000;
-    // if (input === 100) {
-    //     this.level = 100
-    // }
-    
-    back.log("this.level = ", this.level);
-}
-
-// @beehack
-SpellingModeGame.prototype.override_mode_level = function() {
-    console.log("HEY BEE TRIGGERED in override_mode_level");
-    // this.level = 300;
-}
-
-
-
-// @common to all quiz modes
 SpellingModeGame.prototype.get_mode_name = function() {
     return "spelling";
 }
-
-
 
 
 
@@ -208,15 +184,7 @@ SpellingModeGame.prototype.next_question = function(){
     // todo separate spelling level from etymology level
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
-    
-    // @beehack
-    console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
-    if (this.quiz.module.id === 0.5) {
-        console.log("123 BEE DETECTED skipping set_level");
-    } else {
-        this.set_level(post_sampling_level);
-    }
-    
+    this.set_level(post_sampling_level);
     
     this.quiz.update_display();
     
@@ -241,8 +209,10 @@ SpellingModeGame.prototype.next_question = function(){
     this.chosen_question_type = weighted(this.legal_question_types);
     
     
-    
-    back.log("this.chosen_question_type = ", this.chosen_question_type);
+    console.log("[spellingmode.next_question] this.chosen_question_type = ", this.chosen_question_type);
+    //testing back.log
+    // seems to work
+    back.log("[spellingmode.next_question] this.chosen_question_type = ", this.chosen_question_type);
     
     
     var spelling_intro_question;
@@ -252,7 +222,7 @@ SpellingModeGame.prototype.next_question = function(){
         spelling_intro_question = "Spell the WORD that means: "
     } else {
         spelling_intro_question = "Type the closest match to: "
-        bug.log("PROBLEM: invalid question type in spelling mode");
+        console.log("PROBLEM invalid question type in spelling mode");
     }
     
     
@@ -263,8 +233,12 @@ SpellingModeGame.prototype.next_question = function(){
     //2,0,1 gives a dummy
     // 2,0,1 mysteriously gives good results, usually 3 answers with one dummy and two relevant ones
     
-    // for root-definition-to-root we must have the number of answer choice set to 0
+    // var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+    //     this.level.etym_level, this.chosen_question_type, 3, 3, 3);
     
+    // etymology cheat sheet is mysteriously not working for spell root mode
+    // fails to give relevant data if the integers are anything except 0, 0, 1
+    // so as a short term measure we set a special etymology cheat sheet for that mode with just one term
     if (this.chosen_question_type == 'root_definition_to_root') {
         var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
         this.level.etym_level, this.chosen_question_type, 0, this.quiz.module.spell_root_cheat_sheet_dummies, 3);
@@ -286,8 +260,8 @@ SpellingModeGame.prototype.next_question = function(){
     
     this.correct = question.correct_answer;
     this.clue = question.clue;
-    back.log("this.clue = ", this.clue);
-    back.log("this.correct = ", this.correct);
+    console.log("[spellingmode.next_question] this.clue = ", this.clue);
+    console.log("[spellingmode.next_question] this.correct = ", this.correct);
     
     
     
@@ -302,7 +276,7 @@ SpellingModeGame.prototype.next_question = function(){
     
     
     this.spelling_hint = "HINT: " + this.give_underscore_hint(this.correct);
-    back.log("this.spelling_hint = ", this.spelling_hint);
+    console.log("[spellingmode.next_question] this.spelling_hint = ", this.spelling_hint);
     
     
     Quiz.set_question_text(spelling_intro_question + '"' + question.clue + '".');
@@ -313,10 +287,11 @@ SpellingModeGame.prototype.next_question = function(){
     //todo
     //etymology mode and spelling mode is the only mode without a word selector
     //that leads to a problem: the previous word selector remains on the page
-    //the following is a hacky solution that can probably be improved on
+    //the following a hacky solution that can probably be improved on
     var empty_word_selector = "";
     this.quiz.set_word_selector(empty_word_selector);
     
+    //unlike etymology mode we don't have any drop downs so we don't need to clear or make them
 };
 
 
@@ -325,11 +300,11 @@ SpellingModeGame.prototype.next_question = function(){
 SpellingModeGame.prototype.process_answer = function(){
     var self = this;
     var raw_input_string = el("input_box").value;
-    back.log("raw input string = ", raw_input_string);
+    console.log("[spellingmode.process_answer] raw input string = ", raw_input_string);
     
     
     // todo clean_input_string creates objects (aka dictionaries)
-    // which is a little more complicated than we really need
+    // which is a little too complicated than we always need
     // also some of the objects are called strings in their variable name so they should be changed
     // we want just a basic lower case string
     // like this
@@ -338,7 +313,7 @@ SpellingModeGame.prototype.process_answer = function(){
     
     
     
-    back.log("processed input string = ", processed_input_string);
+    console.log("[spellingmode.process_answer] processed input string = ", processed_input_string);
     
     
     
@@ -350,7 +325,7 @@ SpellingModeGame.prototype.process_answer = function(){
     // so instead we just convert to lower case
     var correct_english_string = this.correct;
     correct_english_string = correct_english_string.toLowerCase();
-    back.log("correct_english_string = ", correct_english_string);
+    console.log("[spellingmode.process_answer] correct_english_string = ", correct_english_string);
     
     
     // todo below seems a little ad hoc
@@ -361,10 +336,10 @@ SpellingModeGame.prototype.process_answer = function(){
     var comparison_result;
     if (this.chosen_question_type == 'root_definition_to_root') {
         this.comparison_result = this.submit_to_green_red_master_with_slash(this.correct, raw_input_string, true);
-        back.log("red-green comparison_result = ", comparison_result);
+        console.log("[spellingmode.process_answer] red-green comparison_result = ", comparison_result);
     } else {
         this.comparison_result = this.submit_string_to_green_and_red(this.correct, raw_input_string);
-        back.log("red-green comparison_result = ", comparison_result);
+        console.log("[spellingmode.process_answer] red-green comparison_result = ", comparison_result);
     }
     
     this.display_red_green_result(this.comparison_result);
@@ -432,7 +407,7 @@ SpellingModeGame.prototype.process_correct_answer = function() {
 
 
 SpellingModeGame.prototype.process_incorrect_answer = function() {
-    back.log("entering process_incorrect_answer");
+    console.log("[spellingmode.process_incorrect answer] entering process_incorrect_answer");
     this.quiz.submodule.incorrect_streak ++;
     
     if (this.quiz.submodule.incorrect_streak === 1) {
@@ -444,7 +419,7 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
     
     
     ///////BEGIN HACKY INTERVENTION
-    back.log("HACK entering hacky intervention for secret incorrect streak");
+    console.log("HACK entering hacky intervention");
     // console.log("HACK before change this.quiz.submodule.incorrect_streak = ", this.quiz.submodule.incorrect_streak);
     // console.log("HACK 8 before change this.quiz.submodule.max_incorrect_streak = ", this.quiz.module.submodule.max_incorrect_streak);
     // console.log("HACK before change this.dummy_limit_to_streak = ", this.dummy_limit_to_streak);
@@ -531,9 +506,7 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
         var is_there_a_match = false;
         is_there_a_match = test_match_from_slash_options(random_root_to_replace, word);
         if (!is_there_a_match) {
-            bug.log("PROBLEM: NO MATCH DISCOVERED where there should be a match, i.e. word should have root");
-            // todo add an escape clause here, go to next question or something like that
-            
+            console.log("PROBLEM [spellingmode.give_underscore_hint] NO MATCH DISCOVERED where there should be a match, i.e. word should have root");
         } else {
             // console.log("spelling hint match detected");
         }
@@ -563,7 +536,7 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
 
 
 
-// todo development of below got interrupted
+// todo below got interrupted
 // develop it later
 SpellingModeGame.prototype.inflict_spelling_hint_penalty = function () {
     if (this.chosen_question_type === "word_definition_to_word") {
@@ -573,42 +546,79 @@ SpellingModeGame.prototype.inflict_spelling_hint_penalty = function () {
     }
 }
 
-
-
 // todo below should be set up as a global function
 // i.e. some kind of mode-agnostic string processing function
-// todo slash processing seemed a little buggy, debug and get rid of these logs
-    // bug behavior: if you enter bi/bin as your answer you get a bad result
+// todo below is a little buggy: if you enter bi/bin as your answer you get a bad result
 
 SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(correct_answer_string, input_string, process_slashes_bool) {
     // new version, on the assumption that we always process slashes
-    back.log("entering process slash block")
-    debug.log("correct_answer_string pre-mutation = ", correct_answer_string);
+    console.log("entering process slash block")
+    console.log("BUG correct_answer_string pre-mutation = ", correct_answer_string);
     correct_answer_string = correct_answer_string.toLowerCase();
-    debug.log("correct_answer_string in lower case = ", correct_answer_string);
+    console.log("BUG correct_answer_string in lower case = ", correct_answer_string);
     var red_green_result_list = [];
-    debug.log("red_green_result_list pre-addition = ", red_green_result_list);
+    console.log("BUG red_green_result_list pre-addition = ", red_green_result_list);
     var list_of_slash_options_to_process = correct_answer_string.split("/");
-    console.log("list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+    console.log("BUG list_of_slash_options_to_process = ", list_of_slash_options_to_process);
     for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
-        debug.log("list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
+        console.log("BUG list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
         var type_test = typeof list_of_slash_options_to_process[i];
-        debug.log("typeOf.list_of_slash_options_to_process[i] = ", type_test);
+        console.log("BUG typeOf.list_of_slash_options_to_process[i] = ", type_test);
         var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
-        debug.log("result pre-slash addition = ", result);
-        debug.log("stringified result pre-slash addition = ", JSON.stringify(result));
+        console.log("BUG result pre-slash addition = ", result);
+        console.log("BUG123 stringified result pre-slash addition = ", JSON.stringify(result));
         red_green_result_list.push(result);
         red_green_result_list.push(["/"]);
-        debug.log("red_green_result_list post-addition = ", red_green_result_list);
+        console.log("BUG red_green_result_list post-addition = ", red_green_result_list);
     }
     //we drop the last slash
     red_green_result_list.pop();
     // we need to flatten the list
-    debug.log("red_green_result_list at end of loop = ", red_green_result_list);
+    console.log("BUG red_green_result_list at end of loop = ", red_green_result_list);
     var flattened_red_green_result_list = [].concat.apply([], red_green_result_list);
-    debug.log("flattened_red_green_result_list = ", flattened_red_green_result_list);
+    console.log("BUG flattened_red_green_result_list = ", flattened_red_green_result_list);
     // return red_green_result_list;
     return flattened_red_green_result_list;
+    
+    
+    // todo make sure that new version above works, then delete the following
+    // old version, on the assumption that we would sometimes not want to process slashes
+    // if (process_slashes_bool) {
+    //     // begin new code
+        
+        
+    
+    //     debuglog("entering process slash block")
+    //     debuglog("BUG correct_answer_string pre-mutation = ", correct_answer_string);
+    //     correct_answer_string = correct_answer_string.toLowerCase();
+    //     debuglog("BUG correct_answer_string in lower case = ", correct_answer_string);
+    //     var red_green_result_list = [];
+    //     debuglog("BUG red_green_result_list pre-addition = ", red_green_result_list);
+    //     var list_of_slash_options_to_process = correct_answer_string.split("/");
+    //     debuglog("BUG list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+    //     for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
+    //         debuglog("BUG list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
+    //         var type_test = typeof list_of_slash_options_to_process[i];
+    //         debuglog("BUG typeOf.list_of_slash_options_to_process[i] = ", type_test);
+    //         var result = this.submit_string_to_green_and_red(list_of_slash_options_to_process[i], input_string);
+    //         debuglog("BUG result pre-slash addition = ", result);
+    //         // result = result + "/";
+    //         // console.log("GATOR result post-slash addition = ", result);
+    //         red_green_result_list.push(result);
+    //         red_green_result_list.push(["/"]);
+    //         debuglog("BUG red_green_result_list post-addition = ", red_green_result_list);
+    //     }
+    //     //we drop the last slash
+    //     red_green_result_list.pop();
+    //     // we need to flatten the list
+    //     debuglog("BUG red_green_result_list at end of loop = ", red_green_result_list);
+    //     var flattened_red_green_result_list = [].concat.apply([], red_green_result_list);
+    //     debuglog("BUG flattened_red_green_result_list = ", flattened_red_green_result_list);
+    //     // return red_green_result_list;
+    //     return flattened_red_green_result_list;
+    // } else {
+    //     this.submit_string_to_green_and_red(correct_answer_string, input_string);
+    // }
 }
 
 
@@ -625,7 +635,7 @@ SpellingModeGame.prototype.submit_string_to_green_and_red = function (correct_an
             return [x, 'yellow'];
         });
     }
-    back.log("red_green_result of submit string = ", red_green_result);
+    console.log("TRUMP red_green_result = ", red_green_result);
     return red_green_result;
 };
 

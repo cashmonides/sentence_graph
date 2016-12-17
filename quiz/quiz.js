@@ -199,6 +199,10 @@ Quiz.prototype.get_start_module = function() {
     } else if ('path' in ups) {
         this.advance_improve_status = "mf";
         return ups;
+    } else if ('bee%20' in ups) {
+        back.log("ups triggered and bee entered");
+        return this.user.get_spelling_training_module();
+        // return this.user.get_current_module();
     } else {
         this.advance_improve_status = "advancing";
         return this.user.get_current_module();
@@ -521,9 +525,14 @@ Quiz.get_mode = function(mode_number) {
 
 
 
+
+
 Quiz.prototype.next_question = function (error) {
     
-    
+    if (this.module.id === 0.5) {
+        console.log("HEY BEE TRIGGERED IN NEXT QUESTION");
+        set_display("set_spelling_bee_level_button", 'initial');
+    }
     
     // todo very important: need to figure out how to clear this box
     // without calling some ad hoc step
@@ -769,6 +778,16 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 
 
 Quiz.prototype.submodule_complete = function () {
+    
+    
+    // if we are in spelling bee mode
+    // we want to bypass post
+    if (this.module.id === 0.5) {
+        console.log("HEY BEE MODE TRIGGERED");
+        this.user.submodule_complete(this.module.id);
+        return;
+    }
+    
     if (this.user.uid !== null) {
         console.log("[quiz.submodule_complete] entering post #2");
         console.log("[quiz.submodule_complete] accuracy dictionary raw  = ", this.accuracy_dictionary);
@@ -931,6 +950,7 @@ Quiz.prototype.update_display = function() {
     this.set_progress_bar();
     console.log("Still ok after progress bar");*/
     //end update-todo
+    
     
     
     
@@ -1129,6 +1149,23 @@ Quiz.prototype.decrement_score_via_hint = function() {
 };
 
 
+// todo clean and optimize the beehack
+// @beehack
+
+
+// todo move this somewhere good
+Quiz.prototype.set_spelling_bee_level = function () {
+    // this.game.set_level(100);
+    this.game.set_override_level(100);
+}
+
+Quiz.prototype.set_spelling_bee_level_drone = function () {
+    this.game.set_level(1);
+}
+
+Quiz.prototype.set_spelling_bee_level_queen = function () {
+    this.game.set_level(5);
+}
 
 
 
@@ -1237,7 +1274,8 @@ Quiz.prototype.initialize_spelling_hint = function () {
     
     
     if (!this.module.submodule.spelling_hint_penalty) {
-        bug.log("no spelling hint penalty specified");
+        // todo when spelling hint penalty is implemented, build a block of code here
+        // bug.log("no spelling hint penalty specified");
     } else {
       if (this.module.submodule.spelling_hint_penalty != 0) {
         if (this.game.chosen_question_type == "root_definition_to_root") {
@@ -1252,7 +1290,7 @@ Quiz.prototype.initialize_spelling_hint = function () {
     
     
     
-    console.log("[quiz.initialize_spelling_hint] initialize_spelling_hint entered");
+    back.log("initialize_spelling_hint entered");
     
     var div_to_inspect = el('spelling_hint_box');
     

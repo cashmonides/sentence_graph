@@ -4951,7 +4951,7 @@ var words = {
         "part of speech": "adjective",
         "roots": [
             "IG/IL/IM/IN/IR root 2",
-            "LEX/LEG"
+            "LEX"
         ],
         "type": "none",
         "word": "illegal"
@@ -11070,9 +11070,9 @@ var roots = {
         "meaning": "white, colorless",
         "root": "LEUK/LEUC"
     },
-    "LEX/LEG": {
+    "LEX": {
         "meaning": "word, law, reading",
-        "root": "LEX/LEG"
+        "root": "LEX"
     },
     "LIBER": {
         "meaning": "free",
@@ -11240,7 +11240,8 @@ var roots = {
     },
     "MULTI": {
         "meaning": "many, more than one or two",
-        "root": "MULTI"
+        "root": "MULTI",
+        "synonym": "POLY"
     },
     "MUT": {
         "meaning": "change",
@@ -11384,7 +11385,8 @@ var roots = {
     },
     "PENT/PENTA": {
         "meaning": "five",
-        "root": "PENT/PENTA"
+        "root": "PENT/PENTA",
+        "synonym": "QUINT"
     },
     "PEPT/PEPS": {
         "meaning": "digestion",
@@ -11444,7 +11446,8 @@ var roots = {
     },
     "POLY": {
         "meaning": "many, more than one",
-        "root": "POLY"
+        "root": "POLY",
+        "synonym": "MULTI"
     },
     "PON/POS root 1": {
         "meaning": "place, put",
@@ -11508,15 +11511,18 @@ var roots = {
     },
     "QUAD/QUADR": {
         "meaning": "four",
-        "root": "QUAD/QUADR"
+        "root": "QUAD/QUADR",
+        "synonym": "QUART"
     },
     "QUART": {
         "meaning": "fourth",
-        "root": "QUART"
+        "root": "QUART",
+        "synonym": "QUAD/QUADR"
     },
     "QUIN/QUINT": {
         "meaning": "five, fifth",
-        "root": "QUIN/QUINT"
+        "root": "QUIN/QUINT",
+        "synonym": "PENT/PENTA"
     },
     "RADIC/RADIX": {
         "meaning": "root",

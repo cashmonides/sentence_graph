@@ -30,11 +30,11 @@ ProfilePage.enter_improve = function () {
     var mod_id = this.user.get_improving_module();
     if (!mod_id) {
         if (!this.user.get_module(1)) {
-            // The user hasn't even begUn module 1.
+            // The user hasn't even began module 1.
             alert("You haven't started the game yet. Complete some modules and then you can improve your accuracy on them.")
         } else if (this.user.get_module(1).iteration === 0) {
             // The user hasn't finished module 1.
-            back.log("LOG no improving module detected");
+            console.log("LOG no improving module detected");
             alert("You don't have any completed modules to improve. Complete some modules and then improve your accuracy.");
         } else {
             alert("Click on a completed module to improve your accuracy.");
@@ -47,10 +47,6 @@ ProfilePage.enter_improve = function () {
 };
 
 
-ProfilePage.enter_spelling_bee = function () {
-  back.log("enter_spelling_trainer triggered");
-  document.location = "../quiz/?bee =";
-};
 
 //global functions can be simply reference but for methods we have to bind the method to "this" 
 // this.user points to the user object
