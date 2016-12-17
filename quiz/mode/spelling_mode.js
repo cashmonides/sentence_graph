@@ -174,20 +174,6 @@ SpellingModeGame.prototype.set_level = function (new_level) {
 }
 
 
-SpellingModeGame.prototype.set_override_level = function (input) {
-    this.level = 100000;
-    // if (input === 100) {
-    //     this.level = 100
-    // }
-    
-    back.log("this.level = ", this.level);
-}
-
-// @beehack
-SpellingModeGame.prototype.override_mode_level = function() {
-    console.log("HEY BEE TRIGGERED in override_mode_level");
-    // this.level = 300;
-}
 
 
 
@@ -209,13 +195,16 @@ SpellingModeGame.prototype.next_question = function(){
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
     
-    // @beehack
-    console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
-    if (this.quiz.module.id === 0.5) {
-        console.log("123 BEE DETECTED skipping set_level");
-    } else {
-        this.set_level(post_sampling_level);
-    }
+    this.set_level(post_sampling_level);
+    
+    
+    // // @beehack
+    // console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
+    // if (this.quiz.module.id === 0.5) {
+    //     console.log("123 BEE DETECTED skipping set_level");
+    // } else {
+    //     this.set_level(post_sampling_level);
+    // }
     
     
     this.quiz.update_display();

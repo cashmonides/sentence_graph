@@ -1156,15 +1156,22 @@ Quiz.prototype.decrement_score_via_hint = function() {
 // todo move this somewhere good
 Quiz.prototype.set_spelling_bee_level = function () {
     // this.game.set_level(100);
+    
     this.game.set_override_level(100);
 }
 
 Quiz.prototype.set_spelling_bee_level_drone = function () {
-    this.game.set_level(1);
+    console.log("BEEHACK in quiz drone button clicked");
+    var output = {"etym_level": 1}
+    this.game.set_level(output);
+    global_beehack_new_level_set = true;
 }
 
 Quiz.prototype.set_spelling_bee_level_queen = function () {
-    this.game.set_level(5);
+    console.log("BEEHACK in quick queen button clicked");
+    var output = {"etym_level": 5}
+    this.game.set_level(output);
+    global_beehack_new_level_set = true;
 }
 
 

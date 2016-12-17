@@ -101,6 +101,10 @@ ISSUE 3 - what does etym level look like
 // autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" supposedly turns spellcheck off
 // maybe we want to be selective and do this, but presumably only in SpellingModeGame
 
+// @beehack
+var global_beehack_new_level_set = false;
+
+
 
 var SpellingModeGame = function(){
     this.data = null;
@@ -168,8 +172,15 @@ SpellingModeGame.prototype.attach = function(){
 
 // @common to all quiz modes
 SpellingModeGame.prototype.set_level = function (new_level) {
+    console.log("BEEHACK new_level = ", new_level);
     this.level = new_level;
+    // console.log("BEEHACK in trainer mode triggered");
+    console.log("BEEHACK this.level = ", this.level);
     back.log("this.level = ", this.level);
+    if ((new_level === 5) || (new_level === 1)) {
+        global_beehack_new_level_set = true;
+        console.log("GLOBAL BEEHACK BOOL SET TO TRUE");
+    }
 }
 
 // @common to all quiz modes
@@ -182,12 +193,46 @@ SpellingModeGame.prototype.get_mode_name = function() {
 
 
 SpellingModeGame.prototype.next_question = function(){
+    
+    
+    
+    
+    
+    
+    
     clear_input_box("input_box");
 
     // todo separate spelling level from etymology level
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
-    this.set_level(post_sampling_level);
+    
+    
+    // @beehack
+    console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
+    if (this.quiz.module.id === 0.5) {
+        console.log("BEEHACK 123 BEE DETECTED skipping set_level");
+        console.log("BEEHACK post_sampling_level = ", post_sampling_level);
+        console.log("BEEHACK post_sampling_level stringified = ", JSON.stringify(post_sampling_level));
+        var default_level_for_beehack = {'etym_level': 10};
+        if (!global_beehack_new_level_set) {
+            this.set_level(default_level_for_beehack);
+        } else {
+            // we skip the usual set level operation
+            console.log("BEEHACK STAY WITH ARTIFICIALLY SET LEVEL");
+            
+        }
+        
+    } else {
+        this.set_level(post_sampling_level);
+    }
+    
+    
+    
+    // @beehack
+    console.log("BEEHACK FINAL LEVEL = ", this.level);
+    console.log("BEEHACK FINAL BOOL = ", global_beehack_new_level_set);
+    
+    
     
     this.quiz.update_display();
     

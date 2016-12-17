@@ -2,7 +2,7 @@ var etym_levels = {
     
     //testing simple things don't use
     1 : {
-        roots: ['CARN'],
+        roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR'],
         question_types: {
             'word_to_latin_root': .00001,
             'word_to_english_root': .0001,
@@ -15,7 +15,7 @@ var etym_levels = {
         }
     },
     5 : {
-        roots: ['HERB'],
+        roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR'],
         question_types: {
             'word_to_latin_root': .00001,
             'word_to_english_root': .0001,
