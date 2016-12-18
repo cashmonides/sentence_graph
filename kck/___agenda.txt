@@ -59,6 +59,7 @@ _____STEP 2_______
 
 
 HIGH PRIORITY
+- frontstage log
 - gameification acquisitive psychology
     - add picture to gallery everytime they win
 - spelling mode for january release
