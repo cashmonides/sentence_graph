@@ -105,11 +105,27 @@ ISSUE 3 - what does etym level look like
 var global_beehack_new_level_set = false;
 
 
+// @beehack
+var global_beehack_level;
+
 
 var SpellingModeGame = function(){
     this.data = null;
     this.quiz = null;
-    this.level = 0;
+    // todo
+    // @beehack the following is found in all modes
+    // it seems to be something like just the default for every attach
+    // but it seems to reset to 0 every time mode starts
+    // this.level = 0;
+    
+    // so for a short term solution we just bypass it
+    // longer term we should make amore bulletproof bypass
+    if (!global_beehack_new_level_set) {
+        this.level = 0;
+    } else {
+        this.level = global_beehack_level;
+    }
+    
 };
 
 
@@ -172,15 +188,11 @@ SpellingModeGame.prototype.attach = function(){
 
 // @common to all quiz modes
 SpellingModeGame.prototype.set_level = function (new_level) {
-    console.log("BEEHACK new_level = ", new_level);
+    console.log("BEEHACK set_level entered = ");
+    console.log("BEEHACK new_level argument = ", new_level);
     this.level = new_level;
-    // console.log("BEEHACK in trainer mode triggered");
-    console.log("BEEHACK this.level = ", this.level);
+    console.log("BEEHACK this.level set to = ", this.level);
     back.log("this.level = ", this.level);
-    if ((new_level === 5) || (new_level === 1)) {
-        global_beehack_new_level_set = true;
-        console.log("GLOBAL BEEHACK BOOL SET TO TRUE");
-    }
 }
 
 // @common to all quiz modes
@@ -194,8 +206,8 @@ SpellingModeGame.prototype.get_mode_name = function() {
 
 SpellingModeGame.prototype.next_question = function(){
     
-    
-    
+    console.log("entering next_question");
+    console.log("BEEHACK initial this.level = ", this.level);
     
     
     
@@ -205,21 +217,26 @@ SpellingModeGame.prototype.next_question = function(){
     // todo separate spelling level from etymology level
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
-    
+    console.log("BEEHACK post_sampling_level stringified = ", JSON.stringify(post_sampling_level));
+        
     
     // @beehack
     console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
+    
+    // @beehack
+    // this is 
     if (this.quiz.module.id === 0.5) {
-        console.log("BEEHACK 123 BEE DETECTED skipping set_level");
-        console.log("BEEHACK post_sampling_level = ", post_sampling_level);
-        console.log("BEEHACK post_sampling_level stringified = ", JSON.stringify(post_sampling_level));
+        console.log("BEEHACK BEE MODE DETECTED, initiating beecatcher");
+        
         var default_level_for_beehack = {'etym_level': 10};
         if (!global_beehack_new_level_set) {
+            console.log("BEEHACK beehack bool is false, setting to default");
             this.set_level(default_level_for_beehack);
+            console.log("BEEHACK level should be default", this.level);
         } else {
             // we skip the usual set level operation
-            console.log("BEEHACK STAY WITH ARTIFICIALLY SET LEVEL");
-            
+            console.log("BEEHACK beehack bool is true, skipping set level");
+            console.log("BEEHACK level should be user-input", this.level);
         }
         
     } else {

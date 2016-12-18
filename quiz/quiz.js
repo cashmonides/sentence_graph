@@ -529,8 +529,8 @@ Quiz.get_mode = function(mode_number) {
 
 Quiz.prototype.next_question = function (error) {
     
+    // @beehack
     if (this.module.id === 0.5) {
-        console.log("HEY BEE TRIGGERED IN NEXT QUESTION");
         set_display("set_spelling_bee_level_button", 'initial');
     }
     
@@ -780,6 +780,7 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 Quiz.prototype.submodule_complete = function () {
     
     
+    // @beehack
     // if we are in spelling bee mode
     // we want to bypass post
     if (this.module.id === 0.5) {
@@ -1153,25 +1154,29 @@ Quiz.prototype.decrement_score_via_hint = function() {
 // @beehack
 
 
-// todo move this somewhere good
-Quiz.prototype.set_spelling_bee_level = function () {
-    // this.game.set_level(100);
-    
-    this.game.set_override_level(100);
-}
 
+// @beehack
 Quiz.prototype.set_spelling_bee_level_drone = function () {
-    console.log("BEEHACK in quiz drone button clicked");
-    var output = {"etym_level": 1}
+    console.log("BEEHACK in quick queen button clicked");
+    var output = {"etym_level": 100}
+    
     this.game.set_level(output);
     global_beehack_new_level_set = true;
+    global_beehack_level = output;
+    console.log("BEEHACK argument passed via button = ", output);
+    console.log("BEEHACK bool set to ", global_beehack_new_level_set);
 }
 
+// @beehack
 Quiz.prototype.set_spelling_bee_level_queen = function () {
     console.log("BEEHACK in quick queen button clicked");
-    var output = {"etym_level": 5}
+    var output = {"etym_level": 200}
+    
     this.game.set_level(output);
     global_beehack_new_level_set = true;
+    global_beehack_level = output;
+    console.log("BEEHACK argument passed via button = ", output);
+    console.log("BEEHACK bool set to ", global_beehack_new_level_set);
 }
 
 
