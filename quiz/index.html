@@ -321,13 +321,31 @@
                             <button class="button" id="vocab_cheat_button" onclick="quiz.initialize_vocab_cheat_sheet()">vocabulary cheat sheet</button>
                             <button class="button" id="etym_cheat_button" onclick="quiz.initialize_etym_cheat_sheet()">etymology cheat sheet</button>
                             <button class="button" id="spelling_hint_button" onclick="quiz.initialize_spelling_hint()">hint</button>
-                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_egg()">set spelling bee level to EGG</button>
-                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_larva()">set spelling bee level to LARVA</button>
-                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_pupa()">set spelling bee level to PUPA</button>
-                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_drone()">set spelling bee level to DRONE</button>
-                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_worker()">set spelling bee level to WORKER</button>
-                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_warrior()">set spelling bee level to WARRIOR</button>
-                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_queen()">set spelling bee level to QUEEN</button>
+                            
+                            
+                            <!--non-switch order-->
+                            <!--<button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_egg()">EGG</button>-->
+                            <!--<button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_larva()">LARVA</button>-->
+                            <!--<button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_pupa()">PUPA</button>-->
+                            <!--<button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_drone()">DRONE</button>-->
+                            <!--<button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_worker()">WORKER</button>-->
+                            <!--<button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_warrior()">WARRIOR</button>-->
+                            <!--<button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_queen()">QUEEN</button>-->
+                            <!--<button class="button" id="set_spelling_bee_level_button">set level to:</button>-->
+                            
+                            
+                            
+                            <!--switch order-->
+                            
+                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_queen()">QUEEN</button>
+                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_warrior()">WARRIOR</button>
+                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_worker()">WORKER</button>
+                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_drone()">DRONE</button>
+                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_pupa()">PUPA</button>
+                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_larva()">LARVA</button>
+                            <button class="button" id="set_spelling_bee_level_button" onclick="quiz.set_spelling_bee_level_egg()">EGG</button>
+                            <button class="button" id="set_spelling_bee_level_button">set level to:</button>
+                            
                             <!--todo new button below, make sure it works-->
                             <button class="button" id="dash_hint_button" onclick="quiz.initialize_dash_hint()">dash removal hint</button>
                         </td>
@@ -420,6 +438,26 @@
     
 </div>
 
+<!--VERSION 2-->
+<div class='hint_div' id="spelling_hint_div2" style="display:block">
+    <div id="spelling_hint_box_old" style="display:block"></div>
+</div>
+<div class='hint_div' id="spelling_hint_box" style="display:block"></div>
+<div class='hint_div' id="dash_hint_box" style="display:block"></div>
+<!--<div id="dash_hint_box2" style="display:block"></div>-->
+<!--<div id="spelling_hint_div3" style="display:block">-->
+<!--    <div id="spelling_hint_box" style="display:block"></div>-->
+<!--</div>-->
+
+
+<!--VERSION 1-->
+<!--<div id="spelling_hint_box" style="display:block"></div> -->
+<div class='hint_div' id="spelling_hint_div" style="display:block"></div>
+<div class='hint_div' id="image_display_box" style="display:block">
+    <!--<div id="spelling_hint_box" style="display:block"></div>-->
+
+</div>
+
 
 <!--new spot for vocab_cheat_sheet_div-->
 <!--<div class="morphology_to_clear" id="vocab_cheat_sheet_div"></div>-->
@@ -432,25 +470,7 @@
 <button class="button" id="next_level_button" style="display: none;">next level</button>
    
    
-<!--VERSION 2-->
-<div id="spelling_hint_div2" style="display:block">
-    <div id="spelling_hint_box_old" style="display:block"></div>
-</div>
-<div id="spelling_hint_box" style="display:block"></div>
-<div id="dash_hint_box" style="display:block"></div>
-<!--<div id="dash_hint_box2" style="display:block"></div>-->
-<!--<div id="spelling_hint_div3" style="display:block">-->
-<!--    <div id="spelling_hint_box" style="display:block"></div>-->
-<!--</div>-->
 
-
-<!--VERSION 1-->
-<!--<div id="spelling_hint_box" style="display:block"></div> -->
-<div id="spelling_hint_div" style="display:block"></div>
-<div id="image_display_box" style="display:block">
-    <!--<div id="spelling_hint_box" style="display:block"></div>-->
-
-</div>
 
 
 </body>

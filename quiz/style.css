@@ -82,6 +82,13 @@ body {
 }
 
 
+#set_spelling_bee_level_button {
+    font-size: 10px;
+    background-color: gray;
+    color: black
+    ;
+}
+
 
 
 #equals_sign_in_morphology {
@@ -583,9 +590,13 @@ body {
 }
 
 
-#dash_hint_box {
-    font-size: 14px;
+.hint_div {
+   font-size: 14px; 
 }
+
+/*#dash_hint_box {*/
+/*    font-size: 14px;*/
+/*}*/
 
 
 #dash_hint_box li {

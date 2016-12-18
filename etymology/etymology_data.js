@@ -1,5 +1,5 @@
 var words = {
-    "December": {
+    "december": {
         "grade": 12,
         "meaning": "a month, formerly the 10th month of the Roman calendar",
         "part of speech": "noun",
@@ -9,7 +9,7 @@ var words = {
         "type": "none",
         "word": "December"
     },
-    "November": {
+    "november": {
         "grade": 12,
         "meaning": "a month, formerly the 9th month of the Roman calendar",
         "part of speech": "noun",
@@ -19,7 +19,7 @@ var words = {
         "type": "none",
         "word": "November"
     },
-    "Heptateuch": {
+    "heptateuch": {
         "grade": 12,
         "meaning": "the first seven books of the Old Testament",
         "part of speech": "noun",
@@ -29,7 +29,7 @@ var words = {
         "type": "none",
         "word": "Heptateuch"
     },
-    "Mesoamerica": {
+    "mesoamerica": {
         "grade": 12,
         "meaning": "Middle America",
         "part of speech": "noun",
@@ -39,7 +39,7 @@ var words = {
         "type": "none",
         "word": "Mesoamerica"
     },
-    "Paleolithic": {
+    "paleolithic": {
         "grade": 12,
         "meaning": "period of the Stone Age",
         "part of speech": "noun",
@@ -49,7 +49,7 @@ var words = {
         "type": "none",
         "word": "Paleolithic"
     },
-    "September": {
+    "september": {
         "grade": 12,
         "meaning": "a month, formerly the 7th month of the Roman calendar",
         "part of speech": "noun",
@@ -487,7 +487,7 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "AMBI/AMPHI",
-            "BIO"
+            "BIO/BI"
         ],
         "type": "none",
         "word": "amphibian"
@@ -760,7 +760,7 @@ var words = {
     },
     "antisocial": {
         "grade": 12,
-        "meaning": "opposing social norm",
+        "meaning": "opposing social norms",
         "part of speech": "adjective",
         "roots": [
             "ANTI"
@@ -1453,7 +1453,7 @@ var words = {
         "meaning": "a life story written by another person",
         "part of speech": "noun",
         "roots": [
-            "BIO"
+            "BIO/BI"
         ],
         "type": "none",
         "word": "biography"
@@ -1463,7 +1463,7 @@ var words = {
         "meaning": "the science of life",
         "part of speech": "noun",
         "roots": [
-            "BIO",
+            "BIO/BI",
             "LOG"
         ],
         "type": "none",
@@ -1474,7 +1474,7 @@ var words = {
         "meaning": "Earth's surface inhabited by living things",
         "part of speech": "noun",
         "roots": [
-            "BIO",
+            "BIO/BI",
             "SPHERE"
         ],
         "type": "none",
@@ -2296,7 +2296,7 @@ var words = {
         "meaning": "to win someone over",
         "part of speech": "verb",
         "roots": [
-            "VINCE/VIC"
+            "VINC/VIC"
         ],
         "type": "none",
         "word": "convince"
@@ -5455,7 +5455,7 @@ var words = {
         "part of speech": "adjective",
         "roots": [
             "IG/IL/IM/IN/IR root 2",
-            "VINCE/VIC"
+            "VINC/VIC"
         ],
         "type": "none",
         "word": "invincible"
@@ -6403,7 +6403,7 @@ var words = {
         "meaning": "1,000 years",
         "part of speech": "noun",
         "roots": [
-            "MILLI",
+            "MILL",
             "ANN/ENN"
         ],
         "type": "none",
@@ -6414,7 +6414,7 @@ var words = {
         "meaning": "one thousandth of a bar",
         "part of speech": "noun",
         "roots": [
-            "MILLI",
+            "MILL",
             "BAR"
         ],
         "type": "none",
@@ -6425,7 +6425,7 @@ var words = {
         "meaning": "one thousandth of a liter",
         "part of speech": "noun",
         "roots": [
-            "MILLI"
+            "MILL"
         ],
         "type": "none",
         "word": "milliliter"
@@ -6435,7 +6435,7 @@ var words = {
         "meaning": "one thousandth of a meter",
         "part of speech": "noun",
         "roots": [
-            "MILLI"
+            "MILL"
         ],
         "type": "none",
         "word": "millimeter"
@@ -10174,7 +10174,7 @@ var words = {
         "meaning": "the conquest of an enemy",
         "part of speech": "noun",
         "roots": [
-            "VINCE/VIC"
+            "VINC/VIC"
         ],
         "type": "none",
         "word": "victory"
@@ -10554,9 +10554,9 @@ var roots = {
         "meaning": "book",
         "root": "BIBLI"
     },
-    "BIO": {
+    "BIO/BI": {
         "meaning": "life, living matter",
-        "root": "BIO"
+        "root": "BIO/BI"
     },
     "BLAST": {
         "meaning": "cell, immature cell",
@@ -11034,6 +11034,7 @@ var roots = {
         "meaning": "throw, put",
         "root": "JECT"
     },
+    // todo change to jud/jur
     "JUD": {
         "meaning": "law",
         "root": "JUD"
@@ -11198,9 +11199,9 @@ var roots = {
         "meaning": "move",
         "root": "MIGR"
     },
-    "MILLI": {
+    "MILL": {
         "meaning": "one thousandth",
-        "root": "MILLI"
+        "root": "MILL"
     },
     "MIN/MINI": {
         "meaning": "small, less",
@@ -11786,9 +11787,9 @@ var roots = {
         "meaning": "see",
         "root": "VID/VIS"
     },
-    "VINCE/VIC": {
+    "VINC/VIC": {
         "meaning": "conquer",
-        "root": "VINCE/VIC"
+        "root": "VINC/VIC"
     },
     "VIV/VIT": {
         "meaning": "live, life",

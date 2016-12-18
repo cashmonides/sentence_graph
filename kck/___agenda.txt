@@ -34,6 +34,44 @@ DA.PUZZLES
 
 
 ATTACK PLAN FOR SPELLING BEE
+_____DO NOW_____
+- change size and cosmetics of spelling bee buttons DONE
+- clear hint and etymology display box in spelling bee mode
+- display drone, queen level in header
+- hide display of spelling bee buttons in other modes
+- reduce number of dummies in etymology cheat sheet for spelling mode
+- move hint (first letter or underscore) to above etymology cheat sheet
+- wrong guesses should kick out earlier levels
+- pull out the beecatcher into an overall function if possible
+- disable metrics for spelling bee
+- check if pictures can be added to submodule complete (just pictures of bees)
+
+____BEEBUG_____
+???mystery???
+    BEEBUG checkpoint #3
+    spelling_mode.js:336 this.clue =  the act of growing plants in a liquid nutrient solution
+    string_utils.js:56 BEEBUG slash_options_string =  HYDR
+    string_utils.js:57 BEEBUG query_word =  hydroponics
+    string_utils.js:66 BEEBUG slash_options_list =  ["HYDR"]
+    string_utils.js:76 BEEBUG match not found continuing iteration
+    spelling_mode.js:577 PROBLEM [spellingmode.give_underscore_hint] NO MATCH DISCOVERED where there should be a match, i.e. word should have root
+- MILLI seems to be lingering hidden somewhere
+- BIO also seems to be hiding urgent log_error initiated root not found in roots: BIO
+- seems to have something to do with upper case words
+    - short term: november, mesoamerica, december, paleolithic turned to lower case
+    - at some point go through control flow and add tolowercase where appropriate
+
+
+___WITH DAN____
+high priority bug and long term solution (BEEBUG is the tag)  
+    NO MATCH DISCOVERED where there should be a match, i.e. word should have root
+    etymology data checker
+refactor hacky parts of beehack
+turn etym cheat sheet into 2 columns
+
+
+- 
+
 ____STEP 1____
 - make a testing file for etymology data
 - add synonyms for quad, quint
@@ -47,7 +85,7 @@ ____STEP 1____
 
 _____STEP 2_______
 - button in profile that leads to spelling trainer DONE
-- disable metrics for spelling bee
+
 - add a bee catcher (if it's in bee mode it's not counted as improvement)
     - improve and advance all should ignore the bee
 - build a student-set level for spelling trainer
@@ -55,7 +93,6 @@ _____STEP 2_______
     - without any firebase posting
     - with a user set
     - without any finishing, maybe upper threshhold is a million and the symbol is infinity
-- check if pictures can be added to submodule complete (just pictures of bees)
 
 
 HIGH PRIORITY

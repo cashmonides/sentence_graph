@@ -52,17 +52,28 @@ var test_match_in_slash_options = function (input_word, slash_options_string) {
 // we want to return a bool (whether a match has been found or not)
 var test_match_from_slash_options = function (slash_options_string, query_word) {
     
+    
+    console.log("BEEBUG slash_options_string = ", slash_options_string);
+    console.log("BEEBUG query_word = ", query_word);
+    
+    // todo improve this into something more modular
+    // capitalized words like December seem to be throwing a bug
+    query_word = query_word.toLowerCase();
+    
+    
     var slash_options_list = slash_options_string.split("/");
+    
+    console.log("BEEBUG slash_options_list = ", slash_options_list);
     
     var boolean = false;
     for (var i = 0; i < slash_options_list.length; i++) {
         if (query_word.indexOf(slash_options_list[i]) !== -1) {
-            back.log("[test_match_from_slash_options] match found, boolean switched to true");
-            back.log("[test_match_from_slash_options] discovered match = ", slash_options_list[i]);
+            console.log("BEEBUG match found, boolean switched to true");
+            console.log("BEEBUG discovered match = ", slash_options_list[i]);
             boolean = true;
             return boolean;
         } else {
-            console.log("[test_match_from_slash_options] match not found continuing iteration")
+            console.log("BEEBUG match not found continuing iteration")
             continue;
         }
     }

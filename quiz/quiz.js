@@ -232,7 +232,7 @@ Quiz.prototype.get_start_module = function() {
 
 
 Quiz.prototype.next_module = function () {
-    console.log("LOG entering next_module");
+    console.log("entering next_module");
     this.next_submodule();
 };
 
@@ -1160,14 +1160,16 @@ Quiz.prototype.decrement_score_via_hint = function() {
 // @beehack
 Quiz.prototype.set_spelling_bee_level_egg = function () {
     console.log("BEEHACK in quiz egg button clicked");
-    var output = {"etym_level": 100}
+    var output = {"etym_level": 1}
     
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
-    this.game.next_question();
+
+    
+    this.next_question();
 }
 
 
@@ -1181,7 +1183,7 @@ Quiz.prototype.set_spelling_bee_level_larva = function () {
     global_beehack_level = output;
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
-    this.game.next_question();
+    this.next_question();
 }
 
 
@@ -1195,7 +1197,7 @@ Quiz.prototype.set_spelling_bee_level_pupa = function () {
     global_beehack_level = output;
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
-    this.game.next_question();
+    this.next_question();
 }
 
 // @beehack
@@ -1208,7 +1210,7 @@ Quiz.prototype.set_spelling_bee_level_drone = function () {
     global_beehack_level = output;
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
-    this.game.next_question();
+    this.next_question();
 }
 
 
@@ -1223,7 +1225,7 @@ Quiz.prototype.set_spelling_bee_level_worker = function () {
     global_beehack_level = output;
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
-    this.game.next_question();
+    this.next_question();
 }
 
 
@@ -1237,7 +1239,7 @@ Quiz.prototype.set_spelling_bee_level_warrior = function () {
     global_beehack_level = output;
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
-    this.game.next_question();
+    this.next_question();
 }
 
 
@@ -1254,7 +1256,7 @@ Quiz.prototype.set_spelling_bee_level_queen = function () {
     global_beehack_level = output;
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
-    this.game.next_question();
+    this.next_question();
 }
 
 

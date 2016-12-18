@@ -213,6 +213,10 @@ SpellingModeGame.prototype.next_question = function(){
     
     
     clear_input_box("input_box");
+    
+    
+    // @beehack
+    
 
     // todo separate spelling level from etymology level
     var types_of_level = ['etym_level'];
@@ -289,6 +293,8 @@ SpellingModeGame.prototype.next_question = function(){
     }
     
     
+    console.log("BEEBUG checkpoint #1");
+    
     //the parameters for the following function is:
     // etym_level, question_type, number_of_answer_choices, number_of_dummies, number_of_mandatory)
     // so the numbers are number_of_answer_choices, number_of_dummies, number_of_mandatory
@@ -315,6 +321,7 @@ SpellingModeGame.prototype.next_question = function(){
     }
     
     
+    console.log("BEEBUG checkpoint #3");
     
     
     this.correct = question.correct_answer;
@@ -555,6 +562,11 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
     if (this.chosen_question_type == "root_definition_to_root") {
         return "starts with the letter: " + this.correct.charAt(0);
     } else {
+        
+        
+        // todo tolowercase should be way upstream somewhere
+        word = word.toLowerCase();
+        
         // we extract all possible roots
         // e.g. quadruped ---> ['QUAD/QUADR', 'PED/POD']
         var roots_extracted = get_roots(word);

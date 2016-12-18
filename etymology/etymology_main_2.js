@@ -397,6 +397,12 @@ etym_level, question_type, number_of_answer_choices,
 number_of_dummies, number_of_mandatory) {
     var question_data = make_etymology_question(
         etym_level, question_type, number_of_answer_choices);
+        
+        
+    debug.log("BEEBUG question_data = ", question_data);
+    debug.log("BEEBUG question_data stringified = ", JSON.stringify(question_data));
+
+        
     var cheat_sheet_type = cheat_sheet_map[question_type];
     var x = cheat_sheet_type['type'].split('_to_')[0];
     var y = cheat_sheet_type['type'].split('_to_')[1];
