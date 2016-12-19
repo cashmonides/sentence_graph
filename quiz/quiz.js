@@ -1170,6 +1170,8 @@ Quiz.prototype.set_spelling_bee_level_egg = function () {
 
     
     this.next_question();
+    var div = el("spelling_level_header");
+    div.innerHTML = "level=EGG";
 }
 
 
@@ -1184,6 +1186,8 @@ Quiz.prototype.set_spelling_bee_level_larva = function () {
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
+    var div = el("spelling_level_header");
+    div.innerHTML = "level=LARVA";
 }
 
 
@@ -1198,6 +1202,8 @@ Quiz.prototype.set_spelling_bee_level_pupa = function () {
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
+    var div = el("spelling_level_header");
+    div.innerHTML = "level=PUPA";
 }
 
 // @beehack
@@ -1211,6 +1217,8 @@ Quiz.prototype.set_spelling_bee_level_drone = function () {
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
+    var div = el("spelling_level_header");
+    div.innerHTML = "level=DRONE";
 }
 
 
@@ -1226,6 +1234,8 @@ Quiz.prototype.set_spelling_bee_level_worker = function () {
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
+    var div = el("spelling_level_header");
+    div.innerHTML = "level=WORKER";
 }
 
 
@@ -1240,6 +1250,8 @@ Quiz.prototype.set_spelling_bee_level_warrior = function () {
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
+    var div = el("spelling_level_header");
+    div.innerHTML = "level=WARRIOR";
 }
 
 
@@ -1257,6 +1269,8 @@ Quiz.prototype.set_spelling_bee_level_queen = function () {
     console.log("BEEHACK argument passed via button = ", output);
     console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
+    var div = el("spelling_level_header");
+    div.innerHTML = "level=QUEEN";
 }
 
 

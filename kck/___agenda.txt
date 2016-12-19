@@ -36,8 +36,8 @@ DA.PUZZLES
 ATTACK PLAN FOR SPELLING BEE
 _____DO NOW_____
 - change size and cosmetics of spelling bee buttons DONE
-- clear hint and etymology display box in spelling bee mode
-- display drone, queen level in header
+- clear hint and etymology display box in spelling bee mode DONE
+- display drone, queen level in header DONE
 - hide display of spelling bee buttons in other modes
 - reduce number of dummies in etymology cheat sheet for spelling mode
 - move hint (first letter or underscore) to above etymology cheat sheet

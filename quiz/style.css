@@ -84,7 +84,7 @@ body {
 
 #set_spelling_bee_level_button {
     font-size: 10px;
-    background-color: gray;
+    background-color: lightgray;
     color: black
     ;
 }
@@ -400,6 +400,11 @@ body {
     font-size: 15px;
     color: slategrey;
     background: white;
+}
+
+/*for some reason this cell was getting too big and pushing aside other cells*/
+#spelling_level_header{
+    width: 15px;
 }
 
 /*#header {*/

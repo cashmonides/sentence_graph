@@ -9,13 +9,16 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Libre+Baskerville'>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!--<link rel="stylesheet" type="text/css" href="../libs/featherlight.min.css">-->
+    
+    
     
     <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
     
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
     <script src="//code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <!--below was for the lightbox, which was causing some bugs. Lightbox was disabled-->
+    <!--<link rel="stylesheet" type="text/css" href="../libs/featherlight.min.css">-->
     <!--<script src="../libs/featherlight.min.js"></script>-->
     <!--<script src="../libs/bootstrap.min.js"></script>-->
    
@@ -23,8 +26,9 @@
    <script src="../exercises/euler.js"></script>
    <script src="../exercises/leet.js"></script>
    
+   
+   
     <!-- utils in html here -->
-    
     <script src="../lib/utils.js"></script>
     <script src="../lib/list_utils.js"></script>
     <script src="../lib/sorting_utils.js"></script>
@@ -43,6 +47,7 @@
     <script src="../lib/sentence.js"></script>
     <script src="../lib/text.js"></script>
     <script src="../lib/word_selector.js"></script>
+    <!--lightbox was disabled because it was causing bugs-->
     <!--<script src="../lib/lightbox.js"></script>-->
     <script src="../lib/progress_bar.js"></script>
     <script src="../lib/ajax.js"></script>
@@ -73,8 +78,7 @@
     <script src="mode/syntax_mode.js"></script>
     <script src="mode/morphology_mode.js"></script>
     <script src="mode/spelling_mode.js"></script>
-    <!-- todo @beehack below was the testing mode, delete when done testing-->
-    <!--<script src="mode/spelling_trainer_mode.js"></script>-->
+    
     
     <script src="../syntax_mode_utils/answer_type.js"></script>
     <script src="../syntax_mode_utils/conventions.js"></script>
@@ -95,8 +99,7 @@
     <script src="../lib/range_sampler.js"></script>
     <script src="../latin/latin_generation/new_sentence_tree_generator.js"></script>
     <script src="../latin/latin_generation/manage_drop_downs.js"></script>
-    <!--This file was obsolete.-->
-    <!--<script src="../latin/latin_generation/word_setting_generator.js"></script>-->
+    
     <script src="../latin/latin_generation/inflect_english.js"></script>
     <script src="../latin/latin_generation/inflect_latin.js"></script>
     <script src="../latin/latin_lib/dashes.js"></script>
@@ -116,7 +119,6 @@
     
     <script src="quiz.js"></script> 
     
-    <!--distance-->
     <script src="../algorithms/levenshtein.js"></script>
     
     <!-- new scripts -->
@@ -195,14 +197,13 @@
     <div id="header">
         <table id="header_table">
             <tr>
-                <!--new-->
                 <td class="sick_mode_cell" id="sick_mode_header">
-                    
                 </td>
                 <td class="header_cell" id="name_header">
-                    
                 </td>
                 <td class="header_cell" id="class_header">
+                </td>
+                <td class="header_cell" id="spelling_level_header">
                 </td>
                 <td class="header_cell" id="level_header">
                 </td>
