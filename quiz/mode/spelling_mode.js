@@ -109,6 +109,40 @@ var global_beehack_new_level_set = false;
 var global_beehack_level;
 
 
+// @beehack
+var global_beehack_counter = 0;
+
+
+// @beehack
+var counter_to_etym_level_map = {
+    0: {"etym_level": 10},
+    1: {"etym_level": 20},
+    2: {"etym_level": 30},
+    3: {"etym_level": 40},
+    4: {"etym_level": 50},
+    5: {"etym_level": 60},
+    6: {"etym_level": 70},
+    7: {"etym_level": 80},
+    8: {"etym_level": 90},
+    9: {"etym_level": 100},
+    10: {"etym_level": 200},
+    11: {"etym_level": 300},
+    12: {"etym_level": 400},
+    13: {"etym_level": 500},
+    14: {"etym_level": 600},
+    15: {"etym_level": 700},
+    16: {"etym_level": 800},
+    17: {"etym_level": 900},
+    18: {"etym_level": 1000}
+}
+
+
+// below might be obsolete
+var default_level_for_beehack = {'etym_level': 10};
+
+
+
+
 var SpellingModeGame = function(){
     this.data = null;
     this.quiz = null;
@@ -199,6 +233,20 @@ SpellingModeGame.prototype.set_level = function (new_level) {
     back.log("set_level initiated, this.level = ", this.level);
 }
 
+// @beehack 
+// short term version to connect counter to level
+SpellingModeGame.prototype.set_default_beehack_level = function (counter) {
+    var output = counter_to_etym_level_map[counter];
+    console.log("QUEENBEE output = ", output);
+    if (output) {
+        this.level = output;
+    } else {
+        this.level = {'etym_level': 50}
+    }
+}
+
+
+
 // @common to all quiz modes
 SpellingModeGame.prototype.get_mode_name = function() {
     return "spelling";
@@ -237,10 +285,16 @@ SpellingModeGame.prototype.next_question = function(){
     if (this.quiz.module.id === 0.5) {
         console.log("BEEHACK BEE MODE DETECTED, initiating beecatcher");
         
-        var default_level_for_beehack = {'etym_level': 10};
+        
         if (!global_beehack_new_level_set) {
             console.log("BEEHACK beehack bool is false, setting to default");
-            this.set_level(default_level_for_beehack);
+            // old version that didn't connect counter to level
+            // this.set_level(default_level_for_beehack);
+            // end old version
+            
+            // new version
+            this.set_default_beehack_level(global_beehack_counter);
+            
             console.log("BEEHACK level should be default", this.level);
         } else {
             // we skip the usual set level operation

@@ -19,8 +19,6 @@ var start = function () {
 }
 
 
-var global_beehack_counter = 0;
-
 window.onload = start;
 
 
