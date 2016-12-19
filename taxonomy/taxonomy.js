@@ -135,7 +135,7 @@ default: "omnivore"
 advanced: "omnivore/herbivore/carnivore"  //either a list or a decomposable string like this
 	(maybe with an additional note after the correct answer like:
 	depends on the species: most bears are omnivores, polar bears are carnivores, panda bears are herbivores)
-
+	(maybe we should call opportunistic carnivore)
 */
 
 ////////SOME NOTATIONAL IDEAS//////
