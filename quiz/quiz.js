@@ -1129,11 +1129,13 @@ Quiz.prototype.fill_lightbox = function(text, offset, progress) {
 // they don't check user at all
 Quiz.prototype.get_lightbox_image_without_post = function(mod_id, counter) {
     var image_list = safe_lookup(ALL_MODULES, mod_id, 'lightbox_images');
+    console.log("QUEENBEE image_list = ", image_list);
     if (image_list) {
         // console.log("DEBUG 5-12 image_list = ", image_list);
         // console.log("DEBUG 5-12 entering image picking");
         var true_progress = 0;
         true_progress = counter;
+        console.log("QUEENBEE true_progress = ", true_progress);
         // if (mod_id in this.user.data.history) {
         //     if (progress === undefined) {
         //         true_progress = this.user.data.history[mod_id].progress;
@@ -1146,12 +1148,15 @@ Quiz.prototype.get_lightbox_image_without_post = function(mod_id, counter) {
         
         var index = (true_progress - 1) % image_list.length;
         
+        console.log("QUEENBEE index = ", index);
+        
         if (index === -1) {index++};
         
         // console.log("DEBUG 5-12 index = ", index);
         var image = image_list[index];
+        console.log("QUEENBEE image = ", image);
     } else {
-        // console.log('image list does not exist');
+        console.log('QUEENBEE image list does not exist');
         var image = null;
     }
     // console.log('DEBUG 5-12 ')

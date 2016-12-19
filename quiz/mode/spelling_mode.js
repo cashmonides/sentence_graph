@@ -237,7 +237,7 @@ SpellingModeGame.prototype.set_level = function (new_level) {
 // short term version to connect counter to level
 SpellingModeGame.prototype.set_default_beehack_level = function (counter) {
     var output = counter_to_etym_level_map[counter];
-    console.log("QUEENBEE output = ", output);
+    
     if (output) {
         this.level = output;
     } else {
