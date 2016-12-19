@@ -222,8 +222,13 @@ EtymologyModeGame.prototype.next_question = function(){
     console.log("BEEHACK FINAL BOOL = ", global_beehack_new_level_set);
     
     
+    // @beehack
+    if (this.quiz.module.id === 0.5) {
+        //skip update display
+    } else {
+        this.quiz.update_display(); 
+    }
     
-    this.quiz.update_display();
     
     
     this.legal_question_types = map_level_to_allowed(
@@ -346,7 +351,16 @@ EtymologyModeGame.prototype.process_incorrect_answer = function() {
         this.give_away_answer();
         //refresh_score();
     }
-    this.quiz.update_display();
+    
+    
+    
+    // @beehack
+    if (this.quiz.module.id === 0.5) {
+        //skip update display
+    } else {
+        this.quiz.update_display(); 
+    }
+    
     // Etymology has no word selector
     // this.quiz.word_selector.clear();
 };

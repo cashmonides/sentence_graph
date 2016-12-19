@@ -258,9 +258,14 @@ SpellingModeGame.prototype.next_question = function(){
     console.log("BEEHACK FINAL LEVEL = ", this.level);
     console.log("BEEHACK FINAL BOOL = ", global_beehack_new_level_set);
     
+    // // @beehack
+    // if (this.quiz.module.id === 0.5) {
+    //     //skip update display
+    // } else {
+    //     this.quiz.update_display(); 
+    // }
     
-    
-    this.quiz.update_display();
+    this.quiz.update_display(); 
     
     
     // todo below is the typical way of getting legal question types
@@ -522,6 +527,14 @@ SpellingModeGame.prototype.process_incorrect_answer = function() {
     } else {
         this.give_away_answer();
     }
+    
+    // @beehack
+    // if (this.quiz.module.id === 0.5) {
+    //     //skip update display
+    // } else {
+    //     this.quiz.update_display(); 
+    // }
+    //old version
     this.quiz.update_display();
 };
 

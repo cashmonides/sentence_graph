@@ -18,6 +18,9 @@ var start = function () {
     quiz.start();
 }
 
+
+var global_beehack_counter = 0;
+
 window.onload = start;
 
 
@@ -777,15 +780,55 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 }
 
 
+
+// @beehack
+Quiz.prototype.submodule_complete_without_post = function () {
+    
+    
+    // don't think we need these below
+    // var mod = this.user.get_module_being_played();
+    // back.log("mod being played = ", mod);
+    // var gotten_module = this.user.get_module(mod);
+    // back.log("gotten_module = ", gotten_module);
+    // var submodule_id = gotten_module.progress;
+    
+   
+    
+    
+    //setting up lightbox
+    // var numerator = this.user.get_module(mod).progress;
+    
+    // var denominator = ALL_MODULES[mod].threshold;
+    
+    // we need mod and counter,
+    
+    ++global_beehack_counter;
+    console.log("BEEHACK global_beehack_counter = ", global_beehack_counter);
+    
+    this.fill_lightbox_without_post(0.5, global_beehack_counter);
+    
+    el("fraction_header").innerHTML =  global_beehack_counter + "/100";
+    
+    
+    var dummy_function = this.next_submodule.bind(this);
+    
+    set_display("next_level_button", 'initial');
+    
+    
+    // el('next_level_button').onclick = this.next_question();
+    el('next_level_button').onclick = dummy_function;
+}
+//end @beehack
+
 Quiz.prototype.submodule_complete = function () {
     
     
     // @beehack
     // if we are in spelling bee mode
-    // we want to bypass post
+    // we want to bypass post so this much simple
     if (this.module.id === 0.5) {
-        console.log("HEY BEE MODE TRIGGERED");
-        this.user.submodule_complete(this.module.id);
+        console.log("HEY BEE MODE TRIGGERED in Quiz.submodule_complete");
+        this.submodule_complete_without_post();
         return;
     }
     
@@ -899,6 +942,8 @@ Quiz.prototype.submodule_complete = function () {
         // $.featherlight($('#pop_up_div'), {afterClose: this.next_submodule.bind(this)});
     }
     set_display("next_level_button", 'initial');
+    
+    // todo this is probably the source of the bug
     el('next_level_button').onclick = new_callback;
 };
 
@@ -958,7 +1003,15 @@ Quiz.prototype.update_display = function() {
     el("name_header").innerHTML = this.user.data.profile.name;
     el("class_header").innerHTML = this.user.data.profile.class_number;
     el("level_header").innerHTML = "<img src=" + module_icon + ">";
-    el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
+    
+    
+    // @beehack
+    if (this.module.id === 0.5){
+        // do nothing
+    } else {
+        el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
+    }
+    
     
     back.log("leaving update display");
 };
@@ -1072,6 +1125,73 @@ Quiz.prototype.fill_lightbox = function(text, offset, progress) {
 
 
 
+
+// @beehack
+// below are some more modular versions of lightbox filling for spelling bee mode
+// they don't check user at all
+Quiz.prototype.get_lightbox_image_without_post = function(mod_id, counter) {
+    var image_list = safe_lookup(ALL_MODULES, mod_id, 'lightbox_images');
+    if (image_list) {
+        // console.log("DEBUG 5-12 image_list = ", image_list);
+        // console.log("DEBUG 5-12 entering image picking");
+        var true_progress = 0;
+        true_progress = counter;
+        // if (mod_id in this.user.data.history) {
+        //     if (progress === undefined) {
+        //         true_progress = this.user.data.history[mod_id].progress;
+        //     } else {
+        //         true_progress = progress;
+        //     }
+        // } else {
+        //     true_progress = 0;
+        // }
+        
+        var index = (true_progress - 1) % image_list.length;
+        
+        if (index === -1) {index++};
+        
+        // console.log("DEBUG 5-12 index = ", index);
+        var image = image_list[index];
+    } else {
+        // console.log('image list does not exist');
+        var image = null;
+    }
+    // console.log('DEBUG 5-12 ')
+    // console.log('DEBUG 5-12 image =', image);
+    return image;
+}
+
+// @beehack
+// below are some more modular versions of lightbox filling for spelling bee mode
+// they don't check user at all
+Quiz.prototype.return_lightbox_image_without_post = function (mod, counter) {
+    var image = this.get_lightbox_image_without_post(mod, counter);
+    return image ? ('<img style="max-height: 100%; max-width: 100%" src="' + image +'" />') : '';
+}
+
+
+// @beehack
+// below are some more modular versions of lightbox filling for spelling bee mode
+// they don't check user at all
+Quiz.prototype.fill_lightbox_without_post = function(mod, counter) {
+    
+    var image = this.return_lightbox_image_without_post(mod, counter);
+    
+    set_display("submit_button", 'none');
+    set_display("cheat_sheet_button", 'none');
+    set_display("vocab_cheat_button", 'none');
+    set_display("etym_cheat_button", 'none');
+    
+    set_display_of_class("cleared_in_etymology", "none");
+    set_display_of_class("cleared_in_picture_display", "none");
+    set_display_of_class("cleared_in_picture_display2", "none");
+    set_display_of_class("morphology_to_clear", "none");
+    el('image_display_box').innerHTML = "CONGRATULATIONS " + "!<br>" + image;
+};
+
+// end @beehack
+
+
 Quiz.pick_question_data = function(sentence, region_filter, tag_filter){
     var available_tags = sentence.get_all_tag_types(region_filter, tag_filter);
     if (available_tags.length === 0) {
@@ -1114,7 +1234,7 @@ Quiz.prototype.get_reward = function () {
 }
 
 
-
+// todo this is an older function based on progress bars, check if it's useful or should be scrapped
 Quiz.prototype.increment_score = function() {
     console.log("[quiz.increment_score] entering increment_score");
     console.log("[quiz.increment_score] this.get_reward = ", this.get_reward);
@@ -1127,7 +1247,7 @@ Quiz.prototype.increment_score = function() {
     }
 };
 
-
+// todo this is an older function based on progress bars, check if it's useful or should be scrapped
 Quiz.prototype.decrement_score = function() {
     if (!this.user.is_mf()) {
         this.progress_bar.change_number_correct(
@@ -1138,7 +1258,7 @@ Quiz.prototype.decrement_score = function() {
     }
 };
 
-
+// todo this is an older function based on progress bars, check if it's useful or should be scrapped
 Quiz.prototype.decrement_score_via_hint = function() {
     if (!this.user.is_mf()) {
         this.progress_bar.change_number_correct(
