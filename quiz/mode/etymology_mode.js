@@ -127,6 +127,22 @@ var EtymologyModeGame = function(){
     this.quiz = null;
     this.level = 0;
     // this.words_and_roots = {};
+    
+    // todo
+    // @beehack the following is found in all modes
+    // it seems to be something like just the default for every attach
+    // but it seems to reset to 0 every time mode starts
+    // this.level = 0;
+    
+    // so for a short term solution we just bypass it
+    // longer term we should make amore bulletproof bypass
+    if (!global_beehack_new_level_set) {
+        this.level = 0;
+    } else {
+        this.level = global_beehack_level;
+    }
+    
+    
 };
 
 
@@ -163,8 +179,9 @@ EtymologyModeGame.prototype.attach = function(){
 };
 
 EtymologyModeGame.prototype.set_level = function (new_level) {
-    console.log("DEBUG 11-16 EtymologyModeGame new_level = ", new_level);
+    // console.log("DEBUG 11-16 EtymologyModeGame new_level = ", new_level);
     this.level = new_level;
+    back.log("set_level initiated, this.level = ", this.level);
 }
 
 EtymologyModeGame.prototype.get_mode_name = function() {
@@ -175,7 +192,36 @@ EtymologyModeGame.prototype.get_mode_name = function() {
 EtymologyModeGame.prototype.next_question = function(){
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
-    this.set_level(post_sampling_level);
+    //old version below
+    // this.set_level(post_sampling_level);
+    
+    
+    // todo
+    // @beehack
+    // this is the short term solution
+    if (this.quiz.module.id === 0.5) {
+        console.log("BEEHACK BEE MODE DETECTED, initiating beecatcher");
+        
+        var default_level_for_beehack = {'etym_level': 10};
+        if (!global_beehack_new_level_set) {
+            console.log("BEEHACK beehack bool is false, setting to default");
+            this.set_level(default_level_for_beehack);
+            console.log("BEEHACK level should be default", this.level);
+        } else {
+            // we skip the usual set level operation
+            console.log("BEEHACK beehack bool is true, skipping set level");
+            console.log("BEEHACK level should be user-input", this.level);
+        }
+        
+    } else {
+        this.set_level(post_sampling_level);
+    }
+    
+    // @beehack
+    console.log("BEEHACK FINAL LEVEL = ", this.level);
+    console.log("BEEHACK FINAL BOOL = ", global_beehack_new_level_set);
+    
+    
     
     this.quiz.update_display();
     
@@ -185,8 +231,17 @@ EtymologyModeGame.prototype.next_question = function(){
     
     this.chosen_question_type = weighted(this.legal_question_types);
     
+    
+    //the parameters for the following function is:
+    // etym_level, question_type, number_of_answer_choices, number_of_dummies, number_of_mandatory)
+    // so the numbers are number_of_answer_choices, number_of_dummies, number_of_mandatory
+    
+    
+    // todo check this
+    // turn the three numbers into a parameter
+    // @beehack 
     var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, this.chosen_question_type, 4, 4, 4);
+        this.level.etym_level, this.chosen_question_type, 8, 12, 6);
     // console.log(question_with_cheat_sheet['question_data']);
     var question = question_with_cheat_sheet['question_data'];
     this.etymology_cheat_sheet = alphabetize_dict(
@@ -196,6 +251,10 @@ EtymologyModeGame.prototype.next_question = function(){
         
     this.choices = alphabetize_list(question.choices);
     this.correct = question.correct_answer;
+    
+    
+    
+    console.log("BEEHACK 123 this.choices = ", this.choices);
     
     console.log('OK in etymology, now only HTML remains')
     

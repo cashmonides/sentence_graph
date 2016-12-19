@@ -195,11 +195,8 @@ SpellingModeGame.prototype.attach = function(){
 
 // @common to all quiz modes
 SpellingModeGame.prototype.set_level = function (new_level) {
-    console.log("BEEHACK set_level entered = ");
-    console.log("BEEHACK new_level argument = ", new_level);
     this.level = new_level;
-    console.log("BEEHACK this.level set to = ", this.level);
-    back.log("this.level = ", this.level);
+    back.log("set_level initiated, this.level = ", this.level);
 }
 
 // @common to all quiz modes
@@ -233,8 +230,10 @@ SpellingModeGame.prototype.next_question = function(){
     // @beehack
     console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
     
+    
+    // todo
     // @beehack
-    // this is 
+    // this is the short term solution
     if (this.quiz.module.id === 0.5) {
         console.log("BEEHACK BEE MODE DETECTED, initiating beecatcher");
         
