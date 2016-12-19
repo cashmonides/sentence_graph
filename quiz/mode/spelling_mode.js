@@ -125,15 +125,49 @@ var counter_to_etym_level_map = {
     7: {"etym_level": 80},
     8: {"etym_level": 90},
     9: {"etym_level": 100},
-    10: {"etym_level": 200},
-    11: {"etym_level": 300},
-    12: {"etym_level": 400},
-    13: {"etym_level": 500},
-    14: {"etym_level": 600},
-    15: {"etym_level": 700},
-    16: {"etym_level": 800},
-    17: {"etym_level": 900},
-    18: {"etym_level": 1000}
+    10: {"etym_level": 110},
+    11: {"etym_level": 120},
+    12: {"etym_level": 130},
+    13: {"etym_level": 140},
+    14: {"etym_level": 150},
+    15: {"etym_level": 160},
+    16: {"etym_level": 170},
+    17: {"etym_level": 180},
+    18: {"etym_level": 190},
+    19: {"etym_level": 200},
+    
+    20: {"etym_level": 210},
+    21: {"etym_level": 220},
+    22: {"etym_level": 230},
+    23: {"etym_level": 240},
+    24: {"etym_level": 250},
+    25: {"etym_level": 260},
+    26: {"etym_level": 270},
+    27: {"etym_level": 280},
+    28: {"etym_level": 290},
+    29: {"etym_level": 300},
+    
+    30: {"etym_level": 310},
+    31: {"etym_level": 320},
+    32: {"etym_level": 330},
+    33: {"etym_level": 340},
+    34: {"etym_level": 350},
+    35: {"etym_level": 360},
+    36: {"etym_level": 370},
+    37: {"etym_level": 380},
+    38: {"etym_level": 390},
+    39: {"etym_level": 400},
+    
+    
+    40: {"etym_level": 410},
+    41: {"etym_level": 420},
+    42: {"etym_level": 430},
+    43: {"etym_level": 440},
+    44: {"etym_level": 450},
+    45: {"etym_level": 460},
+    46: {"etym_level": 470},
+    47: {"etym_level": 480}
+
 }
 
 
@@ -272,11 +306,8 @@ SpellingModeGame.prototype.next_question = function(){
     // todo separate spelling level from etymology level
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
-    console.log("BEEHACK post_sampling_level stringified = ", JSON.stringify(post_sampling_level));
         
     
-    // @beehack
-    console.log("BEEHACK this.quiz.module.id = ", this.quiz.module.id);
     
     
     // todo
@@ -357,7 +388,7 @@ SpellingModeGame.prototype.next_question = function(){
     }
     
     
-    console.log("BEEBUG checkpoint #1");
+    
     
     //the parameters for the following function is:
     // etym_level, question_type, number_of_answer_choices, number_of_dummies, number_of_mandatory)
@@ -385,7 +416,6 @@ SpellingModeGame.prototype.next_question = function(){
     }
     
     
-    console.log("BEEBUG checkpoint #3");
     
     
     this.correct = question.correct_answer;
@@ -395,13 +425,6 @@ SpellingModeGame.prototype.next_question = function(){
     
     
     
-    // todo there's been some bugs in etymology/spelling mode
-    // perhaps due to bad data
-    // thr following logs are trying to keep track of it
-    debug.log("this.clue = ", this.clue);
-    debug.log("this.correct = ", this.correct);
-    
-    console.log("this.clue = ", this.clue);
     
     if (this.chosen_question_type == 'root_definition_to_root') {
         this.etymology_cheat_sheet = alphabetize_dict(

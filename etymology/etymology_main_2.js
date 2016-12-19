@@ -414,9 +414,6 @@ number_of_dummies, number_of_mandatory) {
         mandatory = mandatory.concat(get_mandatory(
             mandatory_types[i], question_data, number_of_mandatory));
     };
-    console.log('mandatory =', mandatory, mandatory_types);
-    console.log("DEBUG 12-1-16 mandatory = ", mandatory);
-    console.log("DEBUG 12-1-16 stringified mandatory = ", JSON.stringify(mandatory));
     number_of_dummies = get_number_of_dummies(
         number_of_dummies, cheat_sheet_type['dummies']);
     var cheat_sheet = cheat_sheet_x_to_y(x, y, mandatory, number_of_dummies);

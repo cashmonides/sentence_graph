@@ -825,7 +825,6 @@ Quiz.prototype.submodule_complete = function () {
     // if we are in spelling bee mode
     // we want to bypass post so this much simple
     if (this.module.id === 0.5) {
-        console.log("HEY BEE MODE TRIGGERED in Quiz.submodule_complete");
         this.submodule_complete_without_post();
         return;
     }
@@ -1129,13 +1128,12 @@ Quiz.prototype.fill_lightbox = function(text, offset, progress) {
 // they don't check user at all
 Quiz.prototype.get_lightbox_image_without_post = function(mod_id, counter) {
     var image_list = safe_lookup(ALL_MODULES, mod_id, 'lightbox_images');
-    console.log("QUEENBEE image_list = ", image_list);
+    
     if (image_list) {
         // console.log("DEBUG 5-12 image_list = ", image_list);
         // console.log("DEBUG 5-12 entering image picking");
         var true_progress = 0;
         true_progress = counter;
-        console.log("QUEENBEE true_progress = ", true_progress);
         // if (mod_id in this.user.data.history) {
         //     if (progress === undefined) {
         //         true_progress = this.user.data.history[mod_id].progress;
@@ -1148,15 +1146,12 @@ Quiz.prototype.get_lightbox_image_without_post = function(mod_id, counter) {
         
         var index = (true_progress - 1) % image_list.length;
         
-        console.log("QUEENBEE index = ", index);
         
         if (index === -1) {index++};
         
         // console.log("DEBUG 5-12 index = ", index);
         var image = image_list[index];
-        console.log("QUEENBEE image = ", image);
     } else {
-        console.log('QUEENBEE image list does not exist');
         var image = null;
     }
     // console.log('DEBUG 5-12 ')
@@ -1282,15 +1277,13 @@ Quiz.prototype.decrement_score_via_hint = function() {
 
 // @beehack
 Quiz.prototype.set_spelling_bee_level_egg = function () {
-    console.log("BEEHACK in quiz egg button clicked");
-    var output = {"etym_level": 1}
+
+    var output = {"etym_level": 10}
     
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    console.log("BEEHACK argument passed via button = ", output);
-    console.log("BEEHACK bool set to ", global_beehack_new_level_set);
-
+    
     
     this.next_question();
     var div = el("spelling_level_header");
@@ -1300,14 +1293,11 @@ Quiz.prototype.set_spelling_bee_level_egg = function () {
 
 // @beehack
 Quiz.prototype.set_spelling_bee_level_larva = function () {
-    console.log("BEEHACK in quiz larva button clicked");
-    var output = {"etym_level": 200}
+    var output = {"etym_level": 40}
     
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    console.log("BEEHACK argument passed via button = ", output);
-    console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
     var div = el("spelling_level_header");
     div.innerHTML = "level=LARVA";
@@ -1316,14 +1306,11 @@ Quiz.prototype.set_spelling_bee_level_larva = function () {
 
 // @beehack
 Quiz.prototype.set_spelling_bee_level_pupa = function () {
-    console.log("BEEHACK in quiz pupa button clicked");
-    var output = {"etym_level": 400}
+    var output = {"etym_level": 80}
     
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    console.log("BEEHACK argument passed via button = ", output);
-    console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
     var div = el("spelling_level_header");
     div.innerHTML = "level=PUPA";
@@ -1331,14 +1318,11 @@ Quiz.prototype.set_spelling_bee_level_pupa = function () {
 
 // @beehack
 Quiz.prototype.set_spelling_bee_level_drone = function () {
-    console.log("BEEHACK in quiz drone button clicked");
-    var output = {"etym_level": 600}
+    var output = {"etym_level": 200}
     
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    console.log("BEEHACK argument passed via button = ", output);
-    console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
     var div = el("spelling_level_header");
     div.innerHTML = "level=DRONE";
@@ -1348,14 +1332,11 @@ Quiz.prototype.set_spelling_bee_level_drone = function () {
 
 // @beehack
 Quiz.prototype.set_spelling_bee_level_worker = function () {
-    console.log("BEEHACK in quiz worker button clicked");
-    var output = {"etym_level": 800}
+    var output = {"etym_level": 300}
     
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    console.log("BEEHACK argument passed via button = ", output);
-    console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
     var div = el("spelling_level_header");
     div.innerHTML = "level=WORKER";
@@ -1364,14 +1345,11 @@ Quiz.prototype.set_spelling_bee_level_worker = function () {
 
 // @beehack
 Quiz.prototype.set_spelling_bee_level_warrior = function () {
-    console.log("BEEHACK in quiz warrior button clicked");
-    var output = {"etym_level": 800}
+    var output = {"etym_level": 400}
     
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    console.log("BEEHACK argument passed via button = ", output);
-    console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
     var div = el("spelling_level_header");
     div.innerHTML = "level=WARRIOR";
@@ -1383,14 +1361,11 @@ Quiz.prototype.set_spelling_bee_level_warrior = function () {
 
 // @beehack
 Quiz.prototype.set_spelling_bee_level_queen = function () {
-    console.log("BEEHACK in quiz queen button clicked");
-    var output = {"etym_level": 1000}
+    var output = {"etym_level": 470}
     
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    console.log("BEEHACK argument passed via button = ", output);
-    console.log("BEEHACK bool set to ", global_beehack_new_level_set);
     this.next_question();
     var div = el("spelling_level_header");
     div.innerHTML = "level=QUEEN";

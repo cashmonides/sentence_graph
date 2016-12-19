@@ -283,9 +283,7 @@ EtymologyModeGame.prototype.next_question = function(){
     
     
     
-    console.log("BEEHACK 123 this.choices = ", this.choices);
     
-    console.log('OK in etymology, now only HTML remains')
     
     Quiz.set_question_text(question.question_template + '"' + question.clue + '".');
     

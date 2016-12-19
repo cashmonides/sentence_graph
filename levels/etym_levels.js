@@ -1,6 +1,6 @@
 var etym_levels = {
     
-    //testing simple things don't use
+    
     1 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR'],
         question_types: {
