@@ -38,10 +38,11 @@ _____DO NOW_____
 - change size and cosmetics of spelling bee buttons DONE
 - clear hint and etymology display box in spelling bee mode DONE
 - display drone, queen level in header DONE
-- hide display of spelling bee buttons in other modes
+- hide display of spelling bee buttons in other modes DONE
 - reduce number of dummies in etymology cheat sheet for spelling mode
-- move hint (first letter or underscore) to above etymology cheat sheet
-- wrong guesses should kick out earlier levels
+- increase number of drop down options in etymology mode
+- move hint (first letter or underscore) to above etymology cheat sheet DONE
+- wrong guesses should kick out earlier levels DONE
 - pull out the beecatcher into an overall function if possible
 - disable metrics for spelling bee
 - check if pictures can be added to submodule complete (just pictures of bees)

@@ -450,19 +450,6 @@ SpellingModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
 
 
-SpellingModeGame.prototype.display_red_green_result = function (list) {
-    var parent_el = document.createElement('div');
-    var e;
-    for (var i = 0; i < list.length; i++) {
-        e = document.createElement('font');
-        e.style.color = list[i][1];
-        e.innerHTML = list[i][0];
-        parent_el.appendChild(e);
-    }
-    var fbox = el("image_display_box");
-    fbox.appendChild(parent_el);
-    return parent_el;
-}
 
 
 
@@ -684,6 +671,50 @@ SpellingModeGame.prototype.submit_string_to_green_and_red = function (correct_an
     back.log("red_green_result of submit string = ", red_green_result);
     return red_green_result;
 };
+
+
+
+
+SpellingModeGame.prototype.display_red_green_result = function (list) {
+    
+    
+    
+    
+    var parent_el = document.createElement('div');
+    var e;
+    
+    
+    
+    
+    for (var i = 0; i < list.length; i++) {
+        e = document.createElement('font');
+        e.style.color = list[i][1];
+        e.innerHTML = list[i][0];
+        parent_el.appendChild(e);
+    }
+    var fbox = el("image_display_box");
+    fbox.appendChild(parent_el);
+    
+    
+    console.log("HAIL MARY ENTERING");
+
+    // todo convert below into a parameter set module by module
+    var max_number_of_red_green_display = 4
+
+    if (fbox.childNodes[max_number_of_red_green_display]) {
+        // @currentchanges
+        console.log("HAIL MARY TRIGGERED");
+        console.log("fbox.childNodes[0] = ", fbox.childNodes[0]);
+        fbox.removeChild(fbox.childNodes[0]); 
+    }
+    
+    
+    
+    return parent_el;
+}
+
+
+
 
 SpellingModeGame.prototype.give_away_answer = function(){
     var fbox = el("feedbackbox");
