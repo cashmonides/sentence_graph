@@ -145,9 +145,9 @@ SpellingModeGame.prototype.attach = function(){
     set_display("next_level_button", 'none');
     
     if (this.quiz.module.id === 0.5) {
-        set_display("set_spelling_bee_level_button", 'initial');
+        set_display_of_class("bee_button", 'initial');
     } else {
-        set_display("set_spelling_bee_level_button", 'none');
+        set_display_of_class("bee_button", 'none');
     }
     
     //current best result for clearing morphology
