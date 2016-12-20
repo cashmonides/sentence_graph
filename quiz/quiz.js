@@ -256,6 +256,27 @@ Quiz.prototype.next_submodule = function() {
     this.next_question();
 };
 
+// @beehack
+Quiz.prototype.next_submodule_without_post = function() {
+    //initializes a default
+    this.submodule = {
+        score: 0, 
+        count_correct: 0,
+        count_incorrect: 0,
+        incorrect_streak: 0
+    };
+    
+    // this.initialize_accuracy_dictionary();
+    
+    // if (!this.user.is_mf()) {
+    //     this.next_submodule_not_mf();
+    // } else {
+    //     this.next_submodule_mf();
+    // }
+    this.next_question();
+};
+
+
 Quiz.prototype.next_submodule_not_mf = function () {
     //progress bars below
     this.began = new Date();
@@ -778,6 +799,14 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 }
 
 
+// @beehack
+Quiz.prototype.reset_submodule_without_post = function () {
+    el("fraction_header").innerHTML =  global_beehack_counter + "/100";
+    
+    this.next_submodule();
+}
+//end @beehack
+
 
 // @beehack
 Quiz.prototype.submodule_complete_without_post = function () {
@@ -1285,7 +1314,7 @@ Quiz.prototype.set_spelling_bee_level_egg = function () {
     global_beehack_level = output;
     
     
-    this.next_question();
+    this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=EGG";
 }
@@ -1298,7 +1327,7 @@ Quiz.prototype.set_spelling_bee_level_larva = function () {
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    this.next_question();
+    this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=LARVA";
 }
@@ -1311,7 +1340,7 @@ Quiz.prototype.set_spelling_bee_level_pupa = function () {
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    this.next_question();
+    this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=PUPA";
 }
@@ -1323,7 +1352,9 @@ Quiz.prototype.set_spelling_bee_level_drone = function () {
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    this.next_question();
+    // this.next_question();
+    
+    this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=DRONE";
 }
@@ -1337,7 +1368,7 @@ Quiz.prototype.set_spelling_bee_level_worker = function () {
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    this.next_question();
+    this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=WORKER";
 }
@@ -1350,7 +1381,7 @@ Quiz.prototype.set_spelling_bee_level_warrior = function () {
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    this.next_question();
+    this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=WARRIOR";
 }
@@ -1366,7 +1397,7 @@ Quiz.prototype.set_spelling_bee_level_queen = function () {
     this.game.set_level(output);
     global_beehack_new_level_set = true;
     global_beehack_level = output;
-    this.next_question();
+    this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=QUEEN";
 }
