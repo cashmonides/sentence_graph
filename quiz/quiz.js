@@ -803,8 +803,19 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 Quiz.prototype.reset_submodule_without_post = function () {
     el("fraction_header").innerHTML =  global_beehack_counter + "/100";
     
-    this.next_submodule();
-}
+    
+    this.submodule = {
+        score: 0, 
+        count_correct: 0,
+        count_incorrect: 0,
+        incorrect_streak: 0
+    };
+    
+    
+    this.next_question();
+};
+    
+
 //end @beehack
 
 
