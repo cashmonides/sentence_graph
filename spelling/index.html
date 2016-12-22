@@ -17,48 +17,151 @@
  <!--   <script src="../lib/sorting_utils.js"></script>-->
  <!--   <script src="../lib/string_utils.js"></script>-->
  <!--   <script src="../lib/random_utils.js"></script>-->
-	<!--<script src="../lib/html_utils.js"></script>-->
+	
 	<!--<script src="../lib/getting_util.js"></script>-->
 	<!--<script src="../lib/error_logging.js"></script>-->
 	<!--<script src="../lib/logging_utils.js"></script>-->
- <!--   <script src="../lib/persist.js"></script>-->
+ 
  <!--   <script src="../lib/make.js"></script>-->
  <!--   <script src="../lib/module.js"></script> -->
  <!--   <script src="../lib/user.js"></script>-->
  <!--   <script src="../lib/user_login_status.js"></script>   -->
     
     
-    <!--todo put the home script here-->
+    <script src="../lib/html_utils.js"></script>
+    <script src="../lib/persist.js"></script>
+    
+    
+    
     <script src="spelling_bee_match.js"></script>   
-
+    
     
 </head>
 <body>
 
 
-
 <table>
-    <tr><td>LEVEL</td><td><input type="text" id="spelling_match_level"></td></tr>
-    <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit"></td></tr>
+    <tr>
+        <!--LEFT COLUMN-->
+        
+        <td>
+            <table>
+                <tr><td>LEVEL</td><td><input type="text" id="spelling_match_level1"></td></tr>
+                <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit1"></td></tr>
+            </table>
+            
+            <button class="button" id="make_spelling_match_button1" onclick="make_spelling_match1()">MAKE GAME</button>
+              
+              
+            <div>
+                <table id="spelling_match_pin_table1">
+                <tr>
+                    <td>PIN number = </td>
+                    <td id="spelling_match_pin_cell1"></td>
+                </tr>
+                <tr>
+                    <td>timer = </td>
+                    <td id="spelling_match_timer_cell2"></td>
+                </tr>
+                </table>
+            </div>
+              
+            <div>
+                
+                <button class="button" id="show_results_button1" onclick="show_spelling_match_results1()">SHOW RESULTS OF ABOVE MATCH</button>
+            
+            </div>  
+        </td>
+        
+        <!--MIDDLE COLUMN-->
+        <td>__________</td>
+        <td>
+            <table>
+                <tr><td>LEVEL</td><td><input type="text" id="spelling_match_level2"></td></tr>
+                <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit2"></td></tr>
+            </table>
+            
+            <button class="button" id="make_spelling_match_button2" onclick="make_spelling_match2()">MAKE GAME</button>
+              
+              
+            <div>
+                <table id="spelling_match_pin_table2">
+                <tr>
+                    <td>PIN number = </td>
+                    <td id="spelling_match_pin_cell2"></td>
+                </tr>
+                
+                <tr>
+                    <td>timer = </td>
+                    <td id="spelling_match_timer_cell2"></td>
+                </tr>
+                </table>
+            </div>
+              
+            <div>
+                
+                <button class="button" id="show_results_button2" onclick="show_spelling_match_results2()">SHOW RESULTS OF ABOVE MATCH</button>
+            
+            </div>  
+        </td>
+        
+        <!--RIGHT-HAND COLUMN-->
+        <td>__________</td>
+        <td>
+            <table>
+                <tr><td>LEVEL</td><td><input type="text" id="spelling_match_level3"></td></tr>
+                <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit3"></td></tr>
+            </table>
+            
+            <button class="button" id="make_spelling_match_button3" onclick="make_spelling_match3()">MAKE GAME</button>
+              
+              
+            <div>
+                <table id="spelling_match_pin_table3">
+                <tr>
+                    <td>PIN number = </td>
+                    <td id="spelling_match_pin_cell3"></td>
+                </tr>
+                <tr>
+                    <td>timer = </td>
+                    <td id="spelling_match_timer_cell2"></td>
+                </tr>
+                </table>
+            </div>
+              
+            <div>
+                
+                <button class="button" id="show_results_button3" onclick="show_spelling_match_results3()">SHOW RESULTS OF ABOVE MATCH</button>
+            
+            </div>  
+        </td>
+        
+        
+    </tr>
 </table>
 
-<button class="button" id="make_spelling_match_button" onclick="make_spelling_match()">MAKE GAME</button>
-  
-  
-<div>
-    <table id="spelling_match_pin_table">
-    <tr>
-        <td>PIN number = </td>
-        <td id="spelling_match_pin_cell"></td>
-    </tr>
-    
-    </table>
-</div>
-  
-<div>
-    <table id="spelling_match_results_report">SPELLING BEE RESULTS</table>
-</div>  
-    
 
+
+<script>
+    while (true) {
+        var password = prompt('Type in the password.');
+        
+        var dummy_password = "hello";
+        if (password === dummy_password) {
+            break;
+        } else {
+            alert('Try again!');
+        }
+        
+        
+        // todo implement version with hash
+        // var correct_hash = 1942621097; // The correct value for the hash.
+        // if (password && (hash(password) === correct_hash)) {
+        //     break;
+        // } else {
+        //     alert('Try again!');
+        // }
+    }
+    </script>
 </body>
 </html>
