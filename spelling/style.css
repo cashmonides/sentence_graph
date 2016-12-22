@@ -1,0 +1,51 @@
+div {
+    /*border : solid 1px black;*/
+}
+
+body {
+    font-family: 'Baskerville', sans-serif;
+    font-size: 22px;
+    color: #666;
+    background:#bdc3c7;
+    padding: 10px;
+}
+
+#container {
+    font-family: 'Baskerville', sans-serif;
+    font-size: 22px;
+    color: #666;
+    padding: 10px;
+
+
+
+    vertical-align: middle;
+    max-width:100%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+    background:navajowhite;
+
+    /*max-height:100%;*/
+
+
+
+
+}
+
+
+#title {
+    font-family: 'Baskerville', sans-serif;
+    font-size: 57px;
+    color: #666;
+    background:#bdc3c7;
+    padding: 10px;
+    text-align: center;
+}
+
+.hoverable:hover {
+    color: red;
+
+}
+
+
+

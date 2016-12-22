@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <title>SPELLING BEE SETUP PAGE</title>
+   
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+
+    
+    <!-- utils in html here -->
+ <!--   <script src="../lib/utils.js"></script>-->
+ <!--   <script src="../lib/list_utils.js"></script>-->
+ <!--   <script src="../lib/sorting_utils.js"></script>-->
+ <!--   <script src="../lib/string_utils.js"></script>-->
+ <!--   <script src="../lib/random_utils.js"></script>-->
+	<!--<script src="../lib/html_utils.js"></script>-->
+	<!--<script src="../lib/getting_util.js"></script>-->
+	<!--<script src="../lib/error_logging.js"></script>-->
+	<!--<script src="../lib/logging_utils.js"></script>-->
+ <!--   <script src="../lib/persist.js"></script>-->
+ <!--   <script src="../lib/make.js"></script>-->
+ <!--   <script src="../lib/module.js"></script> -->
+ <!--   <script src="../lib/user.js"></script>-->
+ <!--   <script src="../lib/user_login_status.js"></script>   -->
+    
+    
+    <!--todo put the home script here-->
+    <script src="spelling_bee_match.js"></script>   
+
+    
+</head>
+<body>
+
+
+
+<table>
+    <tr><td>LEVEL</td><td><input type="text" id="spelling_match_level"></td></tr>
+    <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit"></td></tr>
+</table>
+
+<button class="button" id="make_spelling_match_button" onclick="make_spelling_match()">MAKE GAME</button>
+  
+  
+<div>
+    <table id="spelling_match_pin_table">
+    <tr>
+        <td>PIN number = </td>
+        <td id="spelling_match_pin_cell"></td>
+    </tr>
+    
+    </table>
+</div>
+  
+<div>
+    <table id="spelling_match_results_report">SPELLING BEE RESULTS</table>
+</div>  
+    
+
+</body>
+</html>

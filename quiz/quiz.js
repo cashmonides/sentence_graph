@@ -23,7 +23,7 @@ window.onload = start;
 
 
 
-process_slashes_bool = true;
+var process_slashes_bool = true;
 
 var Quiz = function () {
     
