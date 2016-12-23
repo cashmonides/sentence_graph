@@ -1,7 +1,9 @@
 // todo
 // todo on HEAD COMPUTER
+// the persist on the home computer should be done to a folder called games "in_progress"
 // add countdown timer to head computer page
 // when timer ends, it displays results in head computer
+// when timer ends, it copies the firebase match object to another folder called "finished"
 // generate deterministic questions, not just an etym level
 
 
@@ -38,33 +40,58 @@ var random_spelling_bee_number3;
 var make_spelling_match1 = function () {
     var level = el("spelling_match_level1").value;
     var time_limit = el("spelling_match_time_limit1").value;
-    if (typeof level != "number" || typeof time_limit != "number") {
+    
+        // todo debugging
+    console.log("LEVEL = ", level);
+    console.log("time_limit = ", time_limit);
+    console.log("typeof LEVEL = ", typeof level);
+    console.log("typeof time_limit = ", typeof time_limit);
+    console.log("level is valid = ", input_is_valid(level));
+    console.log("time_limit is valid = ", input_is_valid(time_limit));
+    
+    if (!input_is_valid(level) || !input_is_valid(time_limit)) {
         alert("missing level and/or time_limit");
         return;
     }
     var pin = autogenerate_spelling_match_pin();
     random_spelling_bee_number1 = pin;
+    
+    var stopping_time = create_stopping_time(time_limit);
+    
     if (pin != random_spelling_bee_number2 && pin != random_spelling_bee_number3) {
         console.log("NON-IDENTICAL PIN")
-        send_spelling_match_to_firebase(pin, level, time_limit, 1);
+        send_spelling_match_to_firebase(pin, level, stopping_time, 1);
     } else {
         alert("IDENTICAL PIN. REGENERATE");
     }
+    
+    
+    
 }
 
 var make_spelling_match2 = function () {
     var level = el("spelling_match_level2").value;
     var time_limit = el("spelling_match_time_limit2").value;
-    if (typeof level != "number" || typeof time_limit != "number") {
+    
+      // todo debugging
+    console.log("LEVEL = ", level);
+    console.log("time_limit = ", time_limit);
+    console.log("typeof LEVEL = ", typeof level);
+    console.log("typeof time_limit = ", typeof time_limit);
+    console.log("level is valid = ", input_is_valid(level));
+    console.log("time_limit is valid = ", input_is_valid(time_limit));
+    if (!input_is_valid(level) || !input_is_valid(time_limit)) {
         alert("missing level and/or time_limit");
         return;
     }
     var pin = autogenerate_spelling_match_pin();
     random_spelling_bee_number2 = pin;
     
+    var stopping_time = create_stopping_time(time_limit);
+    
     if (pin != random_spelling_bee_number1 && pin != random_spelling_bee_number3) {
         console.log("NON-IDENTICAL PIN")
-        send_spelling_match_to_firebase(pin, level, time_limit, 2);
+        send_spelling_match_to_firebase(pin, level, stopping_time, 2);
     } else {
         alert("IDENTICAL PIN. REGENERATE");
     }
@@ -74,27 +101,39 @@ var make_spelling_match2 = function () {
 var make_spelling_match3 = function () {
     var level = el("spelling_match_level3").value;
     var time_limit = el("spelling_match_time_limit3").value;
-    if (typeof level != "number" || typeof time_limit != "number") {
+    
+    // todo debugging
+    console.log("LEVEL = ", level);
+    console.log("time_limit = ", time_limit);
+    console.log("typeof LEVEL = ", typeof level);
+    console.log("typeof time_limit = ", typeof time_limit);
+    console.log("level is valid = ", input_is_valid(level));
+    console.log("time_limit is valid = ", input_is_valid(time_limit));
+    
+    if (!input_is_valid(level) || !input_is_valid(time_limit)) {
         alert("missing level and/or time_limit");
         return;
     }
     var pin = autogenerate_spelling_match_pin();
     random_spelling_bee_number3 = pin;
     
+    var stopping_time = create_stopping_time(time_limit);
+    
     if (pin != random_spelling_bee_number1 && pin != random_spelling_bee_number2) {
         console.log("NON-IDENTICAL PIN")
-        send_spelling_match_to_firebase(pin, level, time_limit, 3);
+        send_spelling_match_to_firebase(pin, level, stopping_time, 3);
     } else {
         alert("IDENTICAL PIN. REGENERATE");
     }
+
     
 }
 
 
-var send_spelling_match_to_firebase = function (pin, level, time_limit, column) {
+var send_spelling_match_to_firebase = function (pin, level, stopping_time, column) {
     console.log("PIN = ", pin);
     console.log("LEVEL = ", level);
-    console.log("TIME_LIMIT = ", time_limit);
+    console.log("stopping_time = ", stopping_time);
     
     
     // var data = {
@@ -104,7 +143,7 @@ var send_spelling_match_to_firebase = function (pin, level, time_limit, column) 
     
     var data = {
         "level": level,
-        "time_limit": time_limit,
+        "stopping_time": stopping_time,
     }
     
     
@@ -185,6 +224,29 @@ var display_spelling_match_pin = function (pin, column) {
     element.innerHTML = pin;
 }
 
+// checks if user-inputted string is valid
+    // is an integer between 1 and 1000
+var input_is_valid = function (string) {
+    var number = Number(string);
+    if (!Number.isInteger(number)) {
+        return false;
+    };
+    if (number < 1) {
+        return false;
+    }
+    if (number > 1000) {
+        return false;
+    }
+    return true;
+}
+
+var create_stopping_time = function (offset) {
+    var current_time = Date.now();
+    console.log("current_time = ", current_time);
+    var stopping_time = current_time + offset*1000*60;
+    console.log("stopping_time = ", stopping_time)
+    return stopping_time;
+}
 
 
 //////////////////////
