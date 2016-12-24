@@ -1,25 +1,44 @@
-// todo
-// todo on HEAD COMPUTER
+// todo on HEAD COMPUTER//////////////
 // the persist on the home computer should be done to a folder called games "in_progress"
 // add countdown timer to head computer page
 // when timer ends, it displays results in head computer
 // when timer ends, it copies the firebase match object to another folder called "finished"
+    //or maybe just rewrite the id as finished + pin
 // generate deterministic questions, not just an etym level
 
 
-// todo on DRONE COMPUTERS
+// todo on DRONE COMPUTERS//////////////////
+// new mode spelling_match_mode
+// read level from firebase
+    // ideally: load list of deterministic questions
+// read stop time from firebase
 // display countdown
+
 // when countdown ends, do something
     // stop quiz
     // give an alert
-    // display all right and wrong answers
+    // display all right and wrong answers for review
+        //e.g. arthropod -- arthopod
 // write accuracy dictionary to firebase
     // correct, incorrect, grand total
     // score = # (correct)
     // accuracy = percentage (correct/incorrect + correct)
     // i.e. a fast person might have a higher score but a lower accuracy
-// (ideally: write all right and wrong answers to firebase)
-// read level from firebase
+// (ideally: write a list of all right and wrong answers to firebase)
+    //e.g. arthropod -- arthopod
+// implement hint-penalty
+// implement stepwise hint
+    // bold words
+    // etym cheatsheet
+    // bold the roots in etym cheatsheet
+    // underscore
+
+
+// todo on SPELLING DATA///////////////////
+// set level for words
+// remove gynophobia, diarhea etc.
+// add synonym functionality
+// add bold words or span
 
 
 

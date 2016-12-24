@@ -1711,13 +1711,61 @@ Quiz.prototype.initialize_vocab_cheat_sheet = function () {
 }
 
 Quiz.prototype.initialize_etym_cheat_sheet = function () {
+    
+    // @beehack
+    
+    
+    // var embedded_root = document.getElementsByClassName("embedded_root");
+    
+    // set_font_weight_of_class("embedded_root", "bold");
+    // set_font_color_of_class("embedded_root", "red");
+    set_font_weight_of_class("embedded_root", "900");
+    set_case_of_class("embedded_root", "uppercase");
+    
+    // end beehack
+    
+    
+    
     var name = "etym_cheat_sheet"
     var etym_cheat = this.game.etymology_cheat_sheet;
+    
+    
+    // @beehack
+    // the mystery: <span ... etc. occurs on the html page
+    // below is the short term removal
+    // ideally we want the words to be able to be made bold in the cheat sheet as well
+
+    
+    var new_list = [];
+    for (var i = 0; i < etym_cheat.length; i++) {
+        var sublist = etym_cheat[i];
+        
+        var new_sublist = [];
+        
+        
+        for (var j = 0; j < sublist.length; j++) {
+            var item = sublist[j].replace("<span class=\"embedded_root\">", "");
+            item = item.replace("</span>", "");
+            new_sublist.push(item);
+        }
+        new_list.push(new_sublist);
+    } 
+    
+    
+    etym_cheat = new_list;
+    
+    // console.log("this.game.etym_cheat_sheet stringified = ", 
+    //     JSON.stringify(etym_cheat));
+        
+    
+    //end beehack
+        
+    
+    
     
     back.log("this.game.etym_cheat_sheet stringified = ", 
         JSON.stringify(etym_cheat));
     
-    // var outer_div = el("image_display_box");
     var outer_div = el(name + "_div");
     create_cheat_sheet_table(outer_div, name,
     null, null, etym_cheat, 2);

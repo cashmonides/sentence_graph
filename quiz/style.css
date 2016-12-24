@@ -37,6 +37,15 @@ body {
     /*width: 100px;*/
 }
 
+
+.embedded_root {
+    /*font-weight: bold;*/
+    /*color: black;*/
+    /*text-transform: uppercase;*/
+}
+
+
+
 .morphology_option_button {
     font-size: 26px;
 }

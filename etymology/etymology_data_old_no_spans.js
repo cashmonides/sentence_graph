@@ -1,7 +1,7 @@
 var words = {
     "december": {
         "grade": 12,
-        "meaning": "a month, formerly the <span class=\"embedded_root\">ten</span>th month of the Roman calendar",
+        "meaning": "a month, formerly the 10th month of the Roman calendar",
         "part of speech": "noun",
         "roots": [
             "DEC/DEKA"
@@ -4588,7 +4588,7 @@ var words = {
     },
     "herbal": {
         "grade": 12,
-        "meaning": "relating to <span class=\"embedded_root\">plant</span>s",
+        "meaning": "relating to plants",
         "part of speech": "adjective",
         "roots": [
             "HERB"
@@ -4598,7 +4598,7 @@ var words = {
     },
     "herbicide": {
         "grade": 12,
-        "meaning": "any chemical used to kill unwanted <span class=\"embedded_root\">plant</span>s",
+        "meaning": "any chemical used to kill unwanted plants",
         "part of speech": "noun",
         "roots": [
             "HERB",
@@ -4609,7 +4609,7 @@ var words = {
     },
     "herbivorous": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">plant</span>-eating",
+        "meaning": "plant-eating",
         "part of speech": "adjective",
         "roots": [
             "HERB",
@@ -7180,7 +7180,7 @@ var words = {
     },
     "omnipotent": {
         "grade": 12,
-        "meaning": "with <span class=\"embedded_root\">all</span> the power",
+        "meaning": "with all the power",
         "part of speech": "adjective",
         "roots": [
             "OMNI",
@@ -7191,7 +7191,7 @@ var words = {
     },
     "omnipresent": {
         "grade": 12,
-        "meaning": "present in <span class=\"embedded_root\">all</span> places at once",
+        "meaning": "present in all places at once",
         "part of speech": "adjective",
         "roots": [
             "OMNI"
@@ -7201,7 +7201,7 @@ var words = {
     },
     "omniscient": {
         "grade": 12,
-        "meaning": "knowing <span class=\"embedded_root\">all</span> things",
+        "meaning": "knowing all things",
         "part of speech": "adjective",
         "roots": [
             "OMNI",
@@ -7212,7 +7212,7 @@ var words = {
     },
     "omnivorous": {
         "grade": 12,
-        "meaning": "eating <span class=\"embedded_root\">all</span> foods",
+        "meaning": "eating all foods",
         "part of speech": "adjective",
         "roots": [
             "OMNI",
@@ -10252,7 +10252,7 @@ var words = {
     },
     "voracious": {
         "grade": 12,
-        "meaning": "desiring of <span class=\"embedded_root\">eat</span>ing food in great quantities / very hungry",
+        "meaning": "desiring of eating food in great quantities",
         "part of speech": "adjective",
         "roots": [
             "VOR/VOUR"
