@@ -45,31 +45,58 @@ _____DO NOW_____
 - link up bee levels to setting etymology levels DONE
 - reduce number of dummies in etymology cheat sheet for spelling mode DONE
 - increase number of drop down options in etymology mode DONE
-- BUG: new level button should lead to resetting of progress bar
+- BUG: new level button should lead to resetting of progress bar DONE
+- embedded roots turn bold DONE
+- check if pictures can be added to submodule complete (just pictures of bees) DONE
+- persist bee trainer score
+- hide training level buttons as they advance
+- write etymology and spelling results to sql
+- add synonym functionality
+- progressive hints
+- hint button changes (get a hint, get another hint, get a final hint, no more hints)
+- hint penalty
+- add word difficulty level functionality
+- check if metrics are fully disabled for spelling bee
+- switch bee level to 1000
 - turn number of drop downs into a module-specified parameter
 - pull out the beecatcher into an overall function if possible
-- check if metrics are fully disabled for spelling bee
-- check if pictures can be added to submodule complete (just pictures of bees) DONE
-- embedded roots turn bold DONE
 - solve mystery of the visible spans
-- add synonym functionality
-- add word difficulty functionality
 - add example sentence functionality
-- progressive hints
-- hint penalty
 - check on "no match found" bug
+
+
+
+
+
+
+- DO WITH DAN
+    - deterministic questions
+    - mystery of the visible spans
+    - implement counter to etym level
+
 - HEAD COMPUTER
     - rewrite completed games to a completed folder
     - display scores
     - 
 
-- DATA CHORES
+- OFFLINE DATA CHORES
     - add words
     - add spans
     - add roots
     - find and add example sentences
+    - add bee pictures
+ 
+- ONLINE DATA CHORES
+    - pictures of bees
+    - pictures for etymology slide shows
+    
+- MODULE CHORES
+    - set a more gradual ascent of level
 
 
+- SLIDESHOW CHORES
+    - word of the day slideshow
+    - 
 
 ____BEEBUG_____
 ???mystery???

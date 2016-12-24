@@ -109,8 +109,25 @@ var global_beehack_new_level_set = false;
 var global_beehack_level;
 
 
+var global_beehack_level_persistent;
+
+
+
 // @beehack
 var global_beehack_counter = 0;
+
+// @beehack
+
+
+
+var initial_bee_level;
+var session_bee_level;
+
+
+// @beehack
+var global_beehack_counter_persistent = 0;
+
+// @beehack
 
 
 // @beehack
@@ -295,6 +312,13 @@ SpellingModeGame.prototype.next_question = function(){
     console.log("entering next_question");
     console.log("BEEHACK initial this.level = ", this.level);
     
+    console.log("BEEHACK123 global_beehack_counter = ", global_beehack_counter);
+    
+    
+    // var level_to_persist = 123456;
+    var level_to_persist = global_beehack_counter;
+    this.quiz.set_spelling_bee_level(level_to_persist);
+    
 
     
     clear_input_box("input_box");
@@ -316,6 +340,11 @@ SpellingModeGame.prototype.next_question = function(){
     if (this.quiz.module.id === 0.5) {
         console.log("BEEHACK BEE MODE DETECTED, initiating beecatcher");
         
+        
+        // here's where we call our persist
+        global_beehack_level_persistent = this.quiz.get_spelling_bee_level();
+        console.log("global_beehack_level_persistent = ", global_beehack_level_persistent);
+    
         
         if (!global_beehack_new_level_set) {
             console.log("BEEHACK beehack bool is false, setting to default");

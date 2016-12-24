@@ -142,10 +142,19 @@ Quiz.prototype.user_loaded = function() {
     console.log("LOG: in user_loaded: this.module = ", this.module);
     
     
+    
+    
     this.user.start_module(id);
     
     // console.log("current module:", this.module);
 };
+
+
+
+
+
+
+
 
 //decides whether we go to current or some other module determined at profile page
 Quiz.prototype.get_start_module = function() {
@@ -1423,6 +1432,35 @@ Quiz.prototype.set_spelling_bee_level_queen = function () {
     div.innerHTML = "level=QUEEN";
 }
 
+
+
+Quiz.prototype.get_spelling_bee_level = function () {
+    var output = this.user.get_spelling_bee_level();
+    console.log("BEEHACK123 persistent level = ", output);
+    // global_beehack_level_persistent = output;
+    return output;
+}
+
+Quiz.prototype.get_initial_spelling_bee_level = function () {
+    var output = this.user.get_initial_spelling_bee_level();
+    console.log("BEEHACK123 persistent level = ", output);
+    // global_beehack_level_persistent = output;
+    return output;
+}
+
+
+// @beehack
+
+Quiz.prototype.set_spelling_bee_level = function (level) {
+    // level = 66666;
+    this.user.persist_spelling_bee_level(level);
+}
+
+
+// var set_persistent_spelling_bee_level = function (level) {
+//     console.log("BEEHACK123 quiz.set_persistent called, level = ", level);
+//     global_beehack_level_persistent = level;
+// }
 
 
 Quiz.set_question_text = function(question){
