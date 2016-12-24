@@ -800,17 +800,26 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 
 
 // @beehack
+// when a user sets spelling bee level it needs to reset the progress bar
+// if not, users can keep clicking a level until they get an easy question
 Quiz.prototype.reset_submodule_without_post = function () {
     el("fraction_header").innerHTML =  global_beehack_counter + "/100";
     
     
+    
+    
+    
+    this.progress_bar.change_number_correct(
+            {'change_value': -this.submodule.score,
+                'time_from_start': new Date() - this.began});
+    
+    // we reset the score to 0
     this.submodule = {
         score: 0, 
         count_correct: 0,
         count_incorrect: 0,
         incorrect_streak: 0
     };
-    
     
     this.next_question();
 };
@@ -1045,6 +1054,7 @@ Quiz.prototype.update_display = function() {
     // @beehack
     if (this.module.id === 0.5){
         // do nothing
+        // we don't display progress in header
     } else {
         el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     }

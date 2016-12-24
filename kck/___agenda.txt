@@ -45,10 +45,29 @@ _____DO NOW_____
 - link up bee levels to setting etymology levels DONE
 - reduce number of dummies in etymology cheat sheet for spelling mode DONE
 - increase number of drop down options in etymology mode DONE
+- BUG: new level button should lead to resetting of progress bar
 - turn number of drop downs into a module-specified parameter
 - pull out the beecatcher into an overall function if possible
-- disable metrics for spelling bee
-- check if pictures can be added to submodule complete (just pictures of bees)
+- check if metrics are fully disabled for spelling bee
+- check if pictures can be added to submodule complete (just pictures of bees) DONE
+- embedded roots turn bold DONE
+- solve mystery of the visible spans
+- add synonym functionality
+- add word difficulty functionality
+- add example sentence functionality
+- progressive hints
+- hint penalty
+- check on "no match found" bug
+- HEAD COMPUTER
+    - rewrite completed games to a completed folder
+    - display scores
+    - 
+
+- DATA CHORES
+    - add words
+    - add spans
+    - add roots
+    - find and add example sentences
 
 
 
