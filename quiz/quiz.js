@@ -870,6 +870,9 @@ Quiz.prototype.submodule_complete_without_post = function () {
     
     // add
     // persist level here
+    console.log("BEEHACK789 about to persist session_bee_counter");
+    console.log("BEEHACK789 session_bee_counter = ", session_bee_counter);
+    this.user.persist_spelling_bee_counter(session_bee_counter);
     
     
     
@@ -1348,156 +1351,302 @@ Quiz.prototype.decrement_score_via_hint = function() {
 
 /////////////OLD VERSIONS BELOW/////////
 
-// @beehack
-// Quiz.prototype.set_spelling_bee_level_egg = function () {
+// // @beehack
+// // Quiz.prototype.set_spelling_bee_level_egg = function () {
 
-//     var output = {"etym_level": 10}
+// //     var output = {"etym_level": 10}
+    
+// //     this.game.set_level(output);
+// //     global_beehack_new_level_set = true;
+// //     global_beehack_level = output;
+    
+    
+// //     this.reset_submodule_without_post();
+// //     var div = el("spelling_level_header");
+// //     div.innerHTML = "level=EGG";
+// // }
+
+
+// // @beehack
+// Quiz.prototype.set_spelling_bee_level_larva = function () {
+//     var output = {"etym_level": 40}
     
 //     this.game.set_level(output);
 //     global_beehack_new_level_set = true;
 //     global_beehack_level = output;
-    
-    
 //     this.reset_submodule_without_post();
 //     var div = el("spelling_level_header");
-//     div.innerHTML = "level=EGG";
+//     div.innerHTML = "level=LARVA";
 // }
 
 
-// @beehack
-Quiz.prototype.set_spelling_bee_level_larva = function () {
-    var output = {"etym_level": 40}
+// // @beehack
+// Quiz.prototype.set_spelling_bee_level_pupa = function () {
+//     var output = {"etym_level": 80}
     
-    this.game.set_level(output);
-    global_beehack_new_level_set = true;
-    global_beehack_level = output;
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=LARVA";
-}
+//     this.game.set_level(output);
+//     global_beehack_new_level_set = true;
+//     global_beehack_level = output;
+//     this.reset_submodule_without_post();
+//     var div = el("spelling_level_header");
+//     div.innerHTML = "level=PUPA";
+// }
+
+// // @beehack
+// Quiz.prototype.set_spelling_bee_level_drone = function () {
+//     var output = {"etym_level": 200}
+    
+//     this.game.set_level(output);
+//     global_beehack_new_level_set = true;
+//     global_beehack_level = output;
+//     // this.next_question();
+    
+//     this.reset_submodule_without_post();
+//     var div = el("spelling_level_header");
+//     div.innerHTML = "level=DRONE";
+// }
 
 
-// @beehack
-Quiz.prototype.set_spelling_bee_level_pupa = function () {
-    var output = {"etym_level": 80}
+// // @beehack
+// Quiz.prototype.set_spelling_bee_level_worker = function () {
+//     var output = {"etym_level": 300}
     
-    this.game.set_level(output);
-    global_beehack_new_level_set = true;
-    global_beehack_level = output;
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=PUPA";
-}
+//     this.game.set_level(output);
+//     global_beehack_new_level_set = true;
+//     global_beehack_level = output;
+//     this.reset_submodule_without_post();
+//     var div = el("spelling_level_header");
+//     div.innerHTML = "level=WORKER";
+// }
 
-// @beehack
-Quiz.prototype.set_spelling_bee_level_drone = function () {
-    var output = {"etym_level": 200}
+
+// // @beehack
+// Quiz.prototype.set_spelling_bee_level_warrior = function () {
+//     var output = {"etym_level": 400}
     
-    this.game.set_level(output);
-    global_beehack_new_level_set = true;
-    global_beehack_level = output;
-    // this.next_question();
+//     this.game.set_level(output);
+//     global_beehack_new_level_set = true;
+//     global_beehack_level = output;
+//     this.reset_submodule_without_post();
+//     var div = el("spelling_level_header");
+//     div.innerHTML = "level=WARRIOR";
+// }
+
+
+
+
+
+// // @beehack
+// Quiz.prototype.set_spelling_bee_level_queen = function () {
+//     var output = {"etym_level": 470}
     
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=DRONE";
-}
+//     this.game.set_level(output);
+//     global_beehack_new_level_set = true;
+//     global_beehack_level = output;
+//     this.reset_submodule_without_post();
+//     var div = el("spelling_level_header");
+//     div.innerHTML = "level=QUEEN";
+// }
 
 
 /////////////NEW VERSIONS BELOW/////////
 // @beehack
 Quiz.prototype.set_spelling_bee_level_egg = function () {
-    spelling_bee_training_counter = 100;
-    // this.game.set_level_by_counter(spelling_bee_training_counter);
-    this.game.set_level_by_counter(100);
+    console.log("BEEHACK789 setting spelling bee level to egg");
+    console.log("BEEHACK789 counter should be set to: ", 10);
+    
+    
+    // we alter globals
+    
+    // the old version get rid of
     global_beehack_new_level_set = true;
     
+    // the new version to keep
+    in_spelling_bee_training_mode = true;
+    
+    spelling_bee_training_counter = 10;
+    
+    
+    // we call the method to change level in the game
+    this.game.set_level_by_counter(spelling_bee_training_counter);
+    // this.game.set_level_by_counter(21);
+    
+    // we reset the submodule with the new level
+    // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=EGG";
 }
 
 
-// @beehack
 Quiz.prototype.set_spelling_bee_level_larva = function () {
-    var output = {"etym_level": 40}
+    console.log("BEEHACK789 setting spelling bee level to larva");
+    console.log("BEEHACK789 counter should be set to: ", 20);
     
-    this.game.set_level(output);
+    
+    // we alter globals
+    
+    // the old version get rid of
     global_beehack_new_level_set = true;
-    global_beehack_level = output;
+    
+    // the new version to keep
+    in_spelling_bee_training_mode = true;
+    
+    spelling_bee_training_counter = 20;
+    
+    
+    // we call the method to change level in the game
+    this.game.set_level_by_counter(spelling_bee_training_counter);
+    // this.game.set_level_by_counter(21);
+    
+    // we reset the submodule with the new level
+    // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=LARVA";
 }
 
 
-// @beehack
 Quiz.prototype.set_spelling_bee_level_pupa = function () {
-    var output = {"etym_level": 80}
+    console.log("BEEHACK789 setting spelling bee level to pupa");
+    console.log("BEEHACK789 counter should be set to: ", 20);
     
-    this.game.set_level(output);
+    
+    // we alter globals
+    
+    // the old version get rid of
     global_beehack_new_level_set = true;
-    global_beehack_level = output;
+    
+    // the new version to keep
+    in_spelling_bee_training_mode = true;
+    
+    spelling_bee_training_counter = 20;
+    
+    
+    // we call the method to change level in the game
+    this.game.set_level_by_counter(spelling_bee_training_counter);
+    
+    
+    // we reset the submodule with the new level
+    // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=PUPA";
 }
 
-// @beehack
+
 Quiz.prototype.set_spelling_bee_level_drone = function () {
-    var output = {"etym_level": 200}
+    console.log("BEEHACK789 setting spelling bee level to drone");
+    console.log("BEEHACK789 counter should be set to: ", 30);
     
-    this.game.set_level(output);
+    
+    // we alter globals
+    
+    // the old version get rid of
     global_beehack_new_level_set = true;
-    global_beehack_level = output;
-    // this.next_question();
     
+    // the new version to keep
+    in_spelling_bee_training_mode = true;
+    
+    spelling_bee_training_counter = 30;
+    
+    
+    // we call the method to change level in the game
+    this.game.set_level_by_counter(spelling_bee_training_counter);
+    
+    
+    // we reset the submodule with the new level
+    // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=DRONE";
 }
 
 
-// @beehack
 Quiz.prototype.set_spelling_bee_level_worker = function () {
-    var output = {"etym_level": 300}
+    console.log("BEEHACK789 setting spelling bee level to worker");
+    console.log("BEEHACK789 counter should be set to: ", 40);
     
-    this.game.set_level(output);
+    
+    // we alter globals
+    
+    // the old version get rid of
     global_beehack_new_level_set = true;
-    global_beehack_level = output;
+    
+    // the new version to keep
+    in_spelling_bee_training_mode = true;
+    
+    spelling_bee_training_counter = 40;
+    
+    
+    // we call the method to change level in the game
+    this.game.set_level_by_counter(spelling_bee_training_counter);
+    
+    
+    // we reset the submodule with the new level
+    // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=WORKER";
 }
 
 
-// @beehack
 Quiz.prototype.set_spelling_bee_level_warrior = function () {
-    var output = {"etym_level": 400}
+    console.log("BEEHACK789 setting spelling bee level to warrior");
+    console.log("BEEHACK789 counter should be set to: ", 41);
     
-    this.game.set_level(output);
+    
+    // we alter globals
+    
+    // the old version get rid of
     global_beehack_new_level_set = true;
-    global_beehack_level = output;
+    
+    // the new version to keep
+    in_spelling_bee_training_mode = true;
+    
+    spelling_bee_training_counter = 41;
+    
+    
+    // we call the method to change level in the game
+    this.game.set_level_by_counter(spelling_bee_training_counter);
+    
+    
+    // we reset the submodule with the new level
+    // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=WARRIOR";
 }
 
 
-
-
-
-// @beehack
 Quiz.prototype.set_spelling_bee_level_queen = function () {
-    var output = {"etym_level": 470}
+    console.log("BEEHACK789 setting spelling bee level to warrior");
+    console.log("BEEHACK789 counter should be set to: ", 42);
     
-    this.game.set_level(output);
+    
+    // we alter globals
+    
+    // the old version get rid of
     global_beehack_new_level_set = true;
-    global_beehack_level = output;
+    
+    // the new version to keep
+    in_spelling_bee_training_mode = true;
+    
+    spelling_bee_training_counter = 42;
+    
+    
+    // we call the method to change level in the game
+    this.game.set_level_by_counter(spelling_bee_training_counter);
+    
+    
+    // we reset the submodule with the new level
+    // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
     div.innerHTML = "level=QUEEN";
 }
+
+
 
 
 

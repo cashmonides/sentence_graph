@@ -228,6 +228,9 @@ var SpellingModeGame = function(){
     
     
     
+    
+    
+    
     // initiating functions
     // PSEUDOCODE: 
     // this.initial_bee_level = this.quiz.get_spelling_bee_level();
@@ -247,7 +250,7 @@ var SpellingModeGame = function(){
     // }
 };
 
-
+// attach is triggered whenever bee button is clicked
 SpellingModeGame.prototype.attach = function(){
     set_display("latin_answer_choices", 'none');
     set_display("drop_answer_choices", 'none');
@@ -270,7 +273,7 @@ SpellingModeGame.prototype.attach = function(){
     }
     
     
-    
+    console.log("BEEHACK789 attach triggered");
     if (this.quiz.module.id === 0.5) {
         this.initialize_bee_level();
     }
@@ -399,11 +402,30 @@ SpellingModeGame.prototype.set_beehack_level123 = function (counter) {
 
 
 SpellingModeGame.prototype.initialize_bee_level = function () {
-    console.log("initialize_bee_level entered")
+    console.log("BEEHACK789 initialize_bee_level entered")
     // below gets from firebase, should be an integer
-    session_bee_counter = this.quiz.get_initial_spelling_bee_counter();
-    console.log("session_bee_counter set from firebase = ", session_bee_counter);
-    this.set_level_by_counter(session_bee_counter);
+    
+    var counter_to_set;
+    var counter_from_firebase = this.quiz.get_initial_spelling_bee_counter();
+    
+    if (session_bee_counter > counter_from_firebase) {
+        counter_to_set = session_bee_counter;
+    } else {
+        counter_to_set = counter_from_firebase;
+    }
+    
+    if (in_spelling_bee_training_mode) {
+        counter_to_set = spelling_bee_training_counter;
+    }
+    
+    
+    console.log("BEEHACK789 counter_from_firebase = ", counter_from_firebase);
+    console.log("BEEHACK789 session_bee_counter = ", session_bee_counter);
+    console.log("BEEHACK789 spelling_bee_training_counter = ", spelling_bee_training_counter);
+    console.log("BEEHACK789 setting counter as  = ", counter_to_set);
+    
+    
+    this.set_level_by_counter(counter_to_set);
 }
 
 
