@@ -101,8 +101,7 @@ ISSUE 3 - what does etym level look like
 // autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" supposedly turns spellcheck off
 // maybe we want to be selective and do this, but presumably only in SpellingModeGame
 
-// @beehack
-var global_beehack_new_level_set = false;
+
 
 
 // @beehack
@@ -119,15 +118,39 @@ var global_beehack_counter = 0;
 // @beehack
 
 
-
-var initial_bee_level;
-var session_bee_level;
-
-
 // @beehack
 var global_beehack_counter_persistent = 0;
 
 // @beehack
+
+// below might be obsolete
+
+
+
+
+// @beehack
+// new variables
+// the level we pull from firebase
+var initial_bee_counter = 0;
+
+// the level we sometimes increment and persist to firebase
+var session_bee_counter = 0;
+
+// the artificial level set by the player
+// used to be called global_beehack_counter
+var spelling_bee_training_counter = 0;
+
+
+// a bool that determines whether we increment session_bee_level
+// if the clicked level is lower than their session_level we don't increment
+// else we do increment
+var clicked_spelling_bee_level_lower = false;
+
+
+// a bool that tells us whether we have a level set by a clicked button
+var in_spelling_bee_training_mode = false;
+// used to be called this:
+var global_beehack_new_level_set = false;
 
 
 // @beehack
@@ -187,9 +210,9 @@ var counter_to_etym_level_map = {
 
 }
 
-
-// below might be obsolete
+// a default lever for safety, hopefully we won't need it
 var default_level_for_beehack = {'etym_level': 10};
+
 
 
 
@@ -203,14 +226,25 @@ var SpellingModeGame = function(){
     // but it seems to reset to 0 every time mode starts
     // this.level = 0;
     
-    // so for a short term solution we just bypass it
-    // longer term we should make amore bulletproof bypass
-    if (!global_beehack_new_level_set) {
-        this.level = 0;
-    } else {
-        this.level = global_beehack_level;
-    }
     
+    
+    // initiating functions
+    // PSEUDOCODE: 
+    // this.initial_bee_level = this.quiz.get_spelling_bee_level();
+    // initial_bee_level = this.quiz.get_spelling_bee_level();
+    // this.session_bee_level = this.initial_bee_level
+    // // the global for easy testing, change to this.etc. when done testing
+    // session_bee_level = initial_bee_level;
+    
+    // old version 
+    // hopefully we can just set level in next question
+    // so for a short term solution we just bypass it
+    // longer term we should make a more bulletproof bypass
+    // if (!global_beehack_new_level_set) {
+    //     this.level = 0;
+    // } else {
+    //     this.level = global_beehack_level;
+    // }
 };
 
 
@@ -234,6 +268,13 @@ SpellingModeGame.prototype.attach = function(){
     } else {
         set_display_of_class("bee_button", 'none');
     }
+    
+    
+    
+    if (this.quiz.module.id === 0.5) {
+        this.initialize_bee_level();
+    }
+    
     
     //current best result for clearing morphology
     set_display_of_class("cleared_in_etymology", "none");
@@ -279,11 +320,94 @@ SpellingModeGame.prototype.attach = function(){
 
 
 // @common to all quiz modes
+// here it takes the form of e.g. {'etym_level': 50}
 SpellingModeGame.prototype.set_level = function (new_level) {
     this.level = new_level;
+    console.log("BEEHACK456 set_level initiated, this.level = ", this.level);
     back.log("set_level initiated, this.level = ", this.level);
 }
 
+
+
+
+// sometimes we want to set level not by usual means (i.e. from module)
+// but rather we want to set it by an increment or by training mode
+SpellingModeGame.prototype.set_level_by_counter = function (counter) {
+    console.log("BEEHACK456 set_level_by_counter entered");
+    console.log("BEEHACK456 counter = ", counter);
+    var output = counter_to_etym_level_map[counter];
+    console.log("BEEHACK456 output = ", output);
+    this.set_level(output);
+}
+
+
+
+// below can be used for initializing or incrementing
+// when initializing counter argument will be 0 or absent
+SpellingModeGame.prototype.set_beehack_level123 = function (counter) {
+    var increment;
+    
+    
+    
+    
+    ///// adding some flexibility in case we want to change the increment
+    if (!counter) {
+        increment = 0;
+    } else if (counter === "+1") {
+        increment = 1;
+    } else {
+        console.log("PROBLEM: counter should be +1 or null");
+        increment = 0;
+    }
+    
+    
+    
+    // some error-catching
+    if (!session_bee_counter) {
+        console.log("beehack123 PROBLEM: no session_bee_level");
+    }
+    if (!spelling_bee_training_counter) {
+        console.log("beehack123 PROBLEM: no spelling_bee_training_level");
+    }
+    
+    
+    ///////WHETHER WE INCREMENT OR NOT/////
+    // if player is on a level equal to or above his real level
+    // we increase his session level
+    // because session_level is that which persists
+    if (!clicked_spelling_bee_level_lower) {
+        session_bee_counter = session_bee_counter + increment;
+    }
+    // we always increment training level to make it progressively harder
+    spelling_bee_training_counter = spelling_bee_training_counter + increment;
+    
+    
+    
+    
+    //////WHAT WE SET LEVEL TO//////
+    // the default case, no bee level clicked in quiz
+    // so we set to session_bee_level
+    if (!in_spelling_bee_training_mode) {
+        this.set_level_by_counter(session_bee_counter);
+    } 
+    // when a bee level is clicked in quiz
+    // we set it to that level
+    else {
+        this.set_level_by_counter(spelling_bee_training_counter);
+    }
+}
+
+
+SpellingModeGame.prototype.initialize_bee_level = function () {
+    console.log("initialize_bee_level entered")
+    // below gets from firebase, should be an integer
+    session_bee_counter = this.quiz.get_initial_spelling_bee_counter();
+    console.log("session_bee_counter set from firebase = ", session_bee_counter);
+    this.set_level_by_counter(session_bee_counter);
+}
+
+
+// @! hopefully obsolete soon, get rid of
 // @beehack 
 // short term version to connect counter to level
 SpellingModeGame.prototype.set_default_beehack_level = function (counter) {
@@ -295,6 +419,9 @@ SpellingModeGame.prototype.set_default_beehack_level = function (counter) {
         this.level = {'etym_level': 50}
     }
 }
+
+
+
 
 
 
@@ -310,14 +437,14 @@ SpellingModeGame.prototype.get_mode_name = function() {
 SpellingModeGame.prototype.next_question = function(){
     
     console.log("entering next_question");
-    console.log("BEEHACK initial this.level = ", this.level);
+    console.log("BEEHACK123 this.level = ", this.level);
     
     console.log("BEEHACK123 global_beehack_counter = ", global_beehack_counter);
     
-    
+    // old, for testing
     // var level_to_persist = 123456;
-    var level_to_persist = global_beehack_counter;
-    this.quiz.set_spelling_bee_level(level_to_persist);
+    // var level_to_persist = global_beehack_counter;
+    // this.quiz.set_spelling_bee_level(level_to_persist);
     
 
     
@@ -341,9 +468,14 @@ SpellingModeGame.prototype.next_question = function(){
         console.log("BEEHACK BEE MODE DETECTED, initiating beecatcher");
         
         
+        
+        
+        // we set our beehack level with no increment
+        // this.set_beehack_level123();
+        
         // here's where we call our persist
-        global_beehack_level_persistent = this.quiz.get_spelling_bee_level();
-        console.log("global_beehack_level_persistent = ", global_beehack_level_persistent);
+        // global_beehack_level_persistent = this.quiz.get_spelling_bee_level();
+        // console.log("global_beehack_level_persistent = ", global_beehack_level_persistent);
     
         
         if (!global_beehack_new_level_set) {
@@ -353,7 +485,7 @@ SpellingModeGame.prototype.next_question = function(){
             // end old version
             
             // new version
-            this.set_default_beehack_level(global_beehack_counter);
+            // this.set_default_beehack_level(global_beehack_counter);
             
             console.log("BEEHACK level should be default", this.level);
         } else {
