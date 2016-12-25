@@ -134,7 +134,7 @@ var global_beehack_counter_persistent = 0;
 var initial_bee_counter = 0;
 
 // the level we sometimes increment and persist to firebase
-var session_bee_counter = 0;
+var session_bee_counter;
 
 // the artificial level set by the player
 // used to be called global_beehack_counter
@@ -408,10 +408,24 @@ SpellingModeGame.prototype.initialize_bee_level = function () {
     var counter_to_set;
     var counter_from_firebase = this.quiz.get_initial_spelling_bee_counter();
     
+    console.log("BEEHACK666 about to compare session to firebase");
+    console.log("BEEHACK666 session_bee_counter = ", session_bee_counter);
+    console.log("BEEHACK666 counter_from_firebase = ", counter_from_firebase);
+    console.log("BEEHACK666 equality comparison = ", session_bee_counter > counter_from_firebase);
+    
+    
+    
+    
+    
     if (session_bee_counter > counter_from_firebase) {
         counter_to_set = session_bee_counter;
+        console.log("BEEHACK666 session_bee_counter greater than firebase level = ", session_bee_counter);
+        
     } else {
+        session_bee_counter = counter_from_firebase;
         counter_to_set = counter_from_firebase;
+        console.log("BEEHACK666 session_bee_counter less than firebase level = ", session_bee_counter);
+        
     }
     
     if (in_spelling_bee_training_mode) {

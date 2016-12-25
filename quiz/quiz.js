@@ -870,8 +870,8 @@ Quiz.prototype.submodule_complete_without_post = function () {
     
     // add
     // persist level here
-    console.log("BEEHACK789 about to persist session_bee_counter");
-    console.log("BEEHACK789 session_bee_counter = ", session_bee_counter);
+    console.log("BEEHACK666 about to persist session_bee_counter");
+    console.log("BEEHACK666 session_bee_counter = ", session_bee_counter);
     this.user.persist_spelling_bee_counter(session_bee_counter);
     
     
