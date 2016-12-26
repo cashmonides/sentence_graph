@@ -95,6 +95,24 @@ Quiz.prototype.start = function() {
         // the next line actually loads the data
         // todo should it go before or after the anonymous stuff?
         self.user_loaded();
+        
+        Sentence.get_all_sentences(function (ss) {
+            self.sentences = ss.filter(function (sentence) {
+                var language = sentence.language_of_sentence;
+                // console.log("DEBUG 10-9-16 self.module = ", self.module);
+                var sentence_levels = self.module.sentence_levels;
+                return language in sentence_levels &&
+                sentence.difficulty_level <= sentence_levels[language];
+            });
+            
+            if (self.requires_callback_before_starting) {
+                self.callback_before_starting(function () {
+                    self.next_module();
+                })
+            } else {
+                self.next_module();
+            }
+        });
     }
     
     
@@ -105,8 +123,10 @@ Quiz.prototype.start = function() {
         el("logout_button").innerHTML = "login";
         this.user_loaded();
     }
-    
-    
+    // TODO dan moved this into callback so that next question is
+    // clearly guaranteed to happen after user loaded (it has to be afterwards
+    // since next question requires level from user loaded, at the very least)
+    /*
     Sentence.get_all_sentences(function (ss) {
         self.sentences = ss.filter(function (sentence) {
             var language = sentence.language_of_sentence;
@@ -118,7 +138,7 @@ Quiz.prototype.start = function() {
         
         self.next_module();
     });
-
+    */
 };
 
 // This should quite possibly be done second.
@@ -157,7 +177,7 @@ Quiz.prototype.user_loaded = function() {
 
 
 //decides whether we go to current or some other module determined at profile page
-Quiz.prototype.get_start_module = function() {
+Quiz.prototype.get_start_module = function () {
     // console.log("DEBUG 11-22 get_start_module entered");
     //todo
     //if (improving)
@@ -209,10 +229,30 @@ Quiz.prototype.get_start_module = function() {
     } else if ('path' in ups) {
         this.advance_improve_status = "mf";
         return ups;
-    } else if ('bee%20' in ups) {
+    } else if ('bee' in ups) {
         back.log("ups triggered and bee entered");
         return this.user.get_spelling_training_module();
         // return this.user.get_current_module();
+    } else if ('bee_match' in ups) {
+        var self = this;
+        this.pin = ups.pin;
+        this.requires_callback_before_starting = true;
+        this.callback_before_starting = function (function_after_callback) {
+            Persist.get(['test', self.pin], function (x) {
+                var val = x.val();
+                // case of invalid pin
+                if (val === null) {
+                    alert("Your pin " + self.pin + " doesn't match any current games. Try again.")
+                    return_to_profile();
+                } else {
+                    self.spelling_match_level = val.level;
+                    self.spelling_match_stopping_time = val.stopping_time;
+                    start_drone_timer(self.spelling_match_stopping_time);
+                    function_after_callback();
+                }
+            });
+        }
+        return this.user.get_spelling_match_module();
     } else {
         this.advance_improve_status = "advancing";
         return this.user.get_current_module();
@@ -267,6 +307,7 @@ Quiz.prototype.next_submodule = function() {
     } else {
         this.next_submodule_mf();
     }
+    
     this.next_question();
 };
 
@@ -310,7 +351,7 @@ Quiz.prototype.process_spelling_bee_level_buttons = function () {
         var level_to_hide = list_of_buttons_to_cut_off[i];
         var element = el("set_spelling_bee_level_button_" + level_to_hide);
         element.style.backgroundColor = "gray";
-        element.style.fontSize = "6px";
+        element.style.fontSize = "7px";
         element.style.color = "lightgray";
     }
     
@@ -592,8 +633,10 @@ Quiz.prototype.next_mode = function (error) {
         game = Quiz.get_mode(game_mode_map[mode]);
     }
     debug.log("checkpoint 3 game = ", game);
+    console.log("checkpoint 3 game = ", game);
     this.game = game;
     debug.log("checkpoint 4 this.game = ", this.game);
+    console.log("checkpoint 4 this.game = ", this.game);
     
     //todo understand the following
     
@@ -625,6 +668,7 @@ Quiz.get_mode = function(mode_number) {
         case 8 : return new KCKModeGame();
         case 9 : return new MorphologyModeGame();
         case 10 : return new SpellingModeGame();
+        case 11 : return new SpellingMatchModeGame();
         default : throw "no game mode triggered";
     }
     
@@ -916,6 +960,10 @@ Quiz.prototype.reset_submodule_without_post = function () {
 // @beehack
 Quiz.prototype.submodule_complete_without_post = function () {
     
+    if (this.module.id === 0.25) {
+        return;
+    }
+    
     
     // don't think we need these below
     // var mod = this.user.get_module_being_played();
@@ -941,6 +989,8 @@ Quiz.prototype.submodule_complete_without_post = function () {
     // above works
     // below is more modular
     // increments level of the game
+    
+    
     this.game.set_beehack_level123("+1");
     
     
@@ -1037,6 +1087,12 @@ Quiz.prototype.submodule_complete = function () {
     // if we are in spelling bee mode
     // we want to bypass post so this much simple
     if (this.module.id === 0.5) {
+        this.submodule_complete_without_post();
+        return;
+    }
+    
+    
+    if (this.module.id === 0.25) {
         this.submodule_complete_without_post();
         return;
     }
@@ -1649,34 +1705,6 @@ Quiz.prototype.set_spelling_bee_level_larva = function () {
 
 Quiz.prototype.set_spelling_bee_level_pupa = function () {
     console.log("BEEHACK789 setting spelling bee level to pupa");
-    console.log("BEEHACK789 counter should be set to: ", 20);
-    
-    
-    // we alter globals
-    
-    // the old version get rid of
-    global_beehack_new_level_set = true;
-    
-    // the new version to keep
-    in_spelling_bee_training_mode = true;
-    
-    spelling_bee_training_counter = 20;
-    
-    
-    // we call the method to change level in the game
-    this.game.set_level_by_counter(spelling_bee_training_counter);
-    
-    
-    // we reset the submodule with the new level
-    // in order to clear the progress bar and generate a new question
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=PUPA";
-}
-
-
-Quiz.prototype.set_spelling_bee_level_drone = function () {
-    console.log("BEEHACK789 setting spelling bee level to drone");
     console.log("BEEHACK789 counter should be set to: ", 30);
     
     
@@ -1699,12 +1727,12 @@ Quiz.prototype.set_spelling_bee_level_drone = function () {
     // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
-    div.innerHTML = "level=DRONE";
+    div.innerHTML = "level=PUPA";
 }
 
 
-Quiz.prototype.set_spelling_bee_level_worker = function () {
-    console.log("BEEHACK789 setting spelling bee level to worker");
+Quiz.prototype.set_spelling_bee_level_drone = function () {
+    console.log("BEEHACK789 setting spelling bee level to drone");
     console.log("BEEHACK789 counter should be set to: ", 40);
     
     
@@ -1727,12 +1755,12 @@ Quiz.prototype.set_spelling_bee_level_worker = function () {
     // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
-    div.innerHTML = "level=WORKER";
+    div.innerHTML = "level=DRONE";
 }
 
 
-Quiz.prototype.set_spelling_bee_level_warrior = function () {
-    console.log("BEEHACK789 setting spelling bee level to warrior");
+Quiz.prototype.set_spelling_bee_level_worker = function () {
+    console.log("BEEHACK789 setting spelling bee level to worker");
     console.log("BEEHACK789 counter should be set to: ", 41);
     
     
@@ -1755,11 +1783,11 @@ Quiz.prototype.set_spelling_bee_level_warrior = function () {
     // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
-    div.innerHTML = "level=WARRIOR";
+    div.innerHTML = "level=WORKER";
 }
 
 
-Quiz.prototype.set_spelling_bee_level_queen = function () {
+Quiz.prototype.set_spelling_bee_level_warrior = function () {
     console.log("BEEHACK789 setting spelling bee level to warrior");
     console.log("BEEHACK789 counter should be set to: ", 42);
     
@@ -1773,6 +1801,34 @@ Quiz.prototype.set_spelling_bee_level_queen = function () {
     in_spelling_bee_training_mode = true;
     
     spelling_bee_training_counter = 42;
+    
+    
+    // we call the method to change level in the game
+    this.game.set_level_by_counter(spelling_bee_training_counter);
+    
+    
+    // we reset the submodule with the new level
+    // in order to clear the progress bar and generate a new question
+    this.reset_submodule_without_post();
+    var div = el("spelling_level_header");
+    div.innerHTML = "level=WARRIOR";
+}
+
+
+Quiz.prototype.set_spelling_bee_level_queen = function () {
+    console.log("BEEHACK789 setting spelling bee level to warrior");
+    console.log("BEEHACK789 counter should be set to: ", 43);
+    
+    
+    // we alter globals
+    
+    // the old version get rid of
+    global_beehack_new_level_set = true;
+    
+    // the new version to keep
+    in_spelling_bee_training_mode = true;
+    
+    spelling_bee_training_counter = 43;
     
     
     // we call the method to change level in the game

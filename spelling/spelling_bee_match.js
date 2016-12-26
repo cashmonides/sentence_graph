@@ -1,3 +1,92 @@
+/*
+- refactor to arbitrary number of games
+- build spelling match mode
+    - read level from firebase
+    - set countdown
+- build countdown clock
+    - read from firebase in milliseconds stop time
+    - set timeout that triggers 
+        - alert
+        - function
+
+var main = function () {
+    read_firebase('endtime', start_timer);
+}
+
+var start_timer = function (end_time) {
+    // refresh_countdown_to_end_time is a function that, when called,
+    // refreshes the countdown to the amount of time remaining
+    // until the end time.
+    // e.g. 
+    // clock displays 1000 milliseconds remaining
+    // refresh_countdown_to_end_time happens and 
+    // clock display is reset to 950
+    var refresh_countdown_to_end_time = refresh_clock(end_time);
+    // We refresh the clock every 50 milliseconds.
+    // clock_refresh_id is an integer id (not a function),
+    // which we can pass to clearInterval to stop the function
+    // from continuing to run. We want to do this at the end of the game.
+    var clock_refresh_id = setInterval(refresh_countdown_to_end_time, 50);
+    setTimeout(end_game(clock_refresh_id), end_time - Date.now());
+}
+
+// refresh_clock is a function that takes a number (the time that
+// the countdown ends) and returns a function that, when called,
+// sets the countdown appropriately.
+// So (using clock times instead of numbers of milliseconds
+// in these examples), if the time is 9:00, then refresh_clock(9:10)()
+// will set the countdown to 10 minutes. After another minute,
+// the time is 9:01 and refresh_clock(9:10)()
+// will set the countdown to 9 minutes. refresh_clock(9:15)()
+// will set the countdown to 14 minutes at this time.
+
+// Note that the clock display is in a traditional time format,
+// not as a number of milliseconds. Why don't we refresh only every second?
+// Since sometimes functions might run and so the gap between refreshes
+// might be more than a second, causing the clock to skip a second.
+// Since we refresh every 50 milliseconds, the clock will instead
+// sometimes stay on a second for only 950 milliseconds,
+// which is hard to detect.
+var refresh_clock = function (end_time) {
+    return function () {
+        var seconds_left = (end_time - Date.now()) / 1000);
+        // Resets the timer.
+        set_timer(seconds_left);
+    }
+}
+
+var end_game = function (clock_refresh_id_to_cancel) {
+    // This line cancels the function that runs regularly
+    // with id clock_refresh_id_to_cancel.
+    // That function is the clock refreshing.
+    // We do this since we don't want the clock to continue
+    // to refresh after the end of the game.
+    clearInterval(clock_refresh_id_to_cancel);
+    // Clear the div with the clock.
+    clear_clock_div();
+    // Do other end-game cleanup (e.g., remove current question,
+    // stop new questions from coming up).
+    stop_game();
+    // Tell the user that the game is over.
+    alert('game over!!!');
+    // Tell the user what their score was.
+    display_match_score();
+}
+
+- read firebase
+    - setInterval (1) every 50 milliseconds
+        - reset the timer to the floor of the difference between current time and end,
+            divided by 1000
+    - set timeout (2)
+       - cancels setinterval (1)
+        - alert
+        - stops game
+
+*/
+
+
+
+
 // todo on HEAD COMPUTER//////////////
 // the persist on the home computer should be done to a folder called games "in_progress"
 // add countdown timer to head computer page
@@ -5,7 +94,7 @@
 // when timer ends, it copies the firebase match object to another folder called "finished"
     //or maybe just rewrite the id as finished + pin
 // generate deterministic questions, not just an etym level
-
+// refactor to give arbitrary number of games
 
 // todo on DRONE COMPUTERS//////////////////
 // new mode spelling_match_mode
@@ -26,12 +115,7 @@
     // i.e. a fast person might have a higher score but a lower accuracy
 // (ideally: write a list of all right and wrong answers to firebase)
     //e.g. arthropod -- arthopod
-// implement hint-penalty
-// implement stepwise hint
-    // bold words
-    // etym cheatsheet
-    // bold the roots in etym cheatsheet
-    // underscore
+
 
 
 // todo on SPELLING DATA///////////////////
@@ -75,15 +159,20 @@ var make_spelling_match1 = function () {
     var pin = autogenerate_spelling_match_pin();
     random_spelling_bee_number1 = pin;
     
-    var stopping_time = create_stopping_time(time_limit);
+    var level_as_num = Number(level);
+    var time_limit_as_num = Number(time_limit);
+    
+    var stopping_time = create_stopping_time(time_limit_as_num);
     
     if (pin != random_spelling_bee_number2 && pin != random_spelling_bee_number3) {
         console.log("NON-IDENTICAL PIN")
-        send_spelling_match_to_firebase(pin, level, stopping_time, 1);
+        send_spelling_match_to_firebase(pin, level_as_num, stopping_time, 1);
     } else {
         alert("IDENTICAL PIN. REGENERATE");
     }
     
+    
+    start_home_timer(1, stopping_time);
     
     
 }
@@ -106,14 +195,19 @@ var make_spelling_match2 = function () {
     var pin = autogenerate_spelling_match_pin();
     random_spelling_bee_number2 = pin;
     
-    var stopping_time = create_stopping_time(time_limit);
+    var level_as_num = Number(level);
+    var time_limit_as_num = Number(time_limit);
+    
+    var stopping_time = create_stopping_time(time_limit_as_num);
     
     if (pin != random_spelling_bee_number1 && pin != random_spelling_bee_number3) {
         console.log("NON-IDENTICAL PIN")
-        send_spelling_match_to_firebase(pin, level, stopping_time, 2);
+        send_spelling_match_to_firebase(pin, level_as_num, stopping_time, 2);
     } else {
         alert("IDENTICAL PIN. REGENERATE");
     }
+    
+    start_home_timer(2, stopping_time);
     
 }
 
@@ -136,15 +230,20 @@ var make_spelling_match3 = function () {
     var pin = autogenerate_spelling_match_pin();
     random_spelling_bee_number3 = pin;
     
-    var stopping_time = create_stopping_time(time_limit);
+    var level_as_num = Number(level);
+    var time_limit_as_num = Number(time_limit);
+    
+    var stopping_time = create_stopping_time(time_limit_as_num);
     
     if (pin != random_spelling_bee_number1 && pin != random_spelling_bee_number2) {
         console.log("NON-IDENTICAL PIN")
-        send_spelling_match_to_firebase(pin, level, stopping_time, 3);
+        send_spelling_match_to_firebase(pin, level_as_num, stopping_time, 3);
     } else {
         alert("IDENTICAL PIN. REGENERATE");
     }
 
+    
+    start_home_timer(3, stopping_time);
     
 }
 
@@ -230,6 +329,26 @@ var autogenerate_spelling_match_pin = function () {
     return Math.round(output);
 }
 
+// BEGIN dan
+
+var dan_autogenerate_spelling_match_pin = function () {
+    return dan_get_n_random_digits(6);
+}
+
+var dan_get_n_random_digits = function (n) {
+    var list_of_digits = [];
+    for (var i = 0; i < n; i++) {
+        list_of_digits.push(dan_random_digit());
+    }
+    return list_of_digits;
+}
+
+var dan_random_digit = function () {
+    return random_choice('0123456789');
+}
+
+// END dan
+
 var display_spelling_match_pin = function (pin, column) {
     //stringify pin if necessary
     var element;
@@ -258,6 +377,13 @@ var input_is_valid = function (string) {
     }
     return true;
 }
+
+// begin dan
+var dan_input_is_valid = function (string) {
+    var number = Number(string);
+    return Number.isInteger(number) && 1 <= number && number <= 1000;
+}
+// end dan
 
 var create_stopping_time = function (offset) {
     var current_time = Date.now();

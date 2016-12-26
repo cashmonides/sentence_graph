@@ -14,6 +14,7 @@ var random_from_inclusive_range = function (min, max) {
 }
 
 // This function, given a list, returns a random element from the list.
+// It does the same for a string.
 var random_choice = function (list) {
     return list[rand_int(list.length)];
 }

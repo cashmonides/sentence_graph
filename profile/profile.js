@@ -48,8 +48,14 @@ ProfilePage.enter_improve = function () {
 
 
 ProfilePage.enter_spelling_bee = function () {
-  back.log("enter_spelling_trainer triggered");
-  document.location = "../quiz/?bee =";
+    back.log("enter_spelling_trainer triggered");
+    document.location = "../quiz/?bee=true";
+};
+
+ProfilePage.enter_spelling_bee_match = function () {
+    back.log("enter_spelling_bee_match triggered");
+    var pin = prompt('Enter the pin of your game.');
+    document.location = "../quiz/?bee_match=true&pin=" + pin;
 };
 
 //global functions can be simply reference but for methods we have to bind the method to "this" 
@@ -383,7 +389,7 @@ ProfilePage.select_improvement_module = function(mod_id){
         } else if (improving_mod === mod_id) {
             status = 2;
         } else if (improving_mod !== mod_id) {
-            status = 3
+            status = 3;
         } else {
             throw new Error("no improvement status detected");
         }
