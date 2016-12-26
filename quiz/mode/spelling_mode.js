@@ -309,13 +309,13 @@ SpellingModeGame.prototype.attach = function(){
     if (this.quiz.module.submodule.spelling_mode_max_incorrect_streak) {
         
         this.temporary_max_incorrect_streak = this.quiz.module.submodule.spelling_mode_max_incorrect_streak;
-        console.log("temporary max incorrect streak = ", this.temporary_max_incorrect_streak);
+        back.log("temporary max incorrect streak = ", this.temporary_max_incorrect_streak);
         // debug2("test of new console log wrapper");
         // debug2("test of new console log wrapper", this.temporary_max_incorrect_streak);
         
     } else {
         this.temporary_max_incorrect_streak = this.quiz.module.submodule.max_incorrect_streak;
-        console.log("PROBLEM: no spelling_mode_max_incorrect_streak specified. spellingmode.attach");
+        back.log("PROBLEM: no spelling_mode_max_incorrect_streak specified. spellingmode.attach");
     }
     // the usual max_streak needs to be stored
     this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
@@ -326,8 +326,8 @@ SpellingModeGame.prototype.attach = function(){
 // here it takes the form of e.g. {'etym_level': 50}
 SpellingModeGame.prototype.set_level = function (new_level) {
     this.level = new_level;
-    console.log("BEEHACK456 set_level initiated, this.level = ", this.level);
-    back.log("set_level initiated, this.level = ", this.level);
+    console.log("BEEHACK999 set_level initiated, this.level = ", this.level);
+    back.log("setting level, this.level = ", this.level);
 }
 
 
@@ -336,10 +336,8 @@ SpellingModeGame.prototype.set_level = function (new_level) {
 // sometimes we want to set level not by usual means (i.e. from module)
 // but rather we want to set it by an increment or by training mode
 SpellingModeGame.prototype.set_level_by_counter = function (counter) {
-    console.log("BEEHACK456 set_level_by_counter entered");
-    console.log("BEEHACK456 counter = ", counter);
+    console.log("BEEHACK999 set_level_by_counter, counter = ", counter);
     var output = counter_to_etym_level_map[counter];
-    console.log("BEEHACK456 output = ", output);
     this.set_level(output);
 }
 
@@ -378,7 +376,12 @@ SpellingModeGame.prototype.set_beehack_level123 = function (counter) {
     // if player is on a level equal to or above his real level
     // we increase his session level
     // because session_level is that which persists
-    if (!clicked_spelling_bee_level_lower) {
+    
+    // todo @beehack, make into a function
+    var temporary_boolean = in_spelling_bee_training_mode && session_bee_counter > spelling_bee_training_counter;
+    
+    if (!temporary_boolean) {
+        console.log("BEEHACK770 boolean is false, incrementing session_bee_counter")
         session_bee_counter = session_bee_counter + increment;
     }
     // we always increment training level to make it progressively harder
@@ -419,24 +422,30 @@ SpellingModeGame.prototype.initialize_bee_level = function () {
     
     if (session_bee_counter > counter_from_firebase) {
         counter_to_set = session_bee_counter;
-        console.log("BEEHACK666 session_bee_counter greater than firebase level = ", session_bee_counter);
+        console.log("BEEHACK666 greater than,  level initialized at = ", session_bee_counter);
         
     } else {
         session_bee_counter = counter_from_firebase;
         counter_to_set = counter_from_firebase;
-        console.log("BEEHACK666 session_bee_counter less than firebase level = ", session_bee_counter);
+        console.log("BEEHACK666 less than, level initialized at = ", counter_from_firebase);
         
     }
     
+    
+    
+    
+    
+    
     if (in_spelling_bee_training_mode) {
+        console.log("BEEHACK 666 training mode, level initialized at: ", spelling_bee_training_counter);
         counter_to_set = spelling_bee_training_counter;
     }
     
     
-    console.log("BEEHACK789 counter_from_firebase = ", counter_from_firebase);
-    console.log("BEEHACK789 session_bee_counter = ", session_bee_counter);
-    console.log("BEEHACK789 spelling_bee_training_counter = ", spelling_bee_training_counter);
-    console.log("BEEHACK789 setting counter as  = ", counter_to_set);
+    console.log("BEEHACK666 counter_from_firebase = ", counter_from_firebase);
+    console.log("BEEHACK666 session_bee_counter = ", session_bee_counter);
+    console.log("BEEHACK666 spelling_bee_training_counter = ", spelling_bee_training_counter);
+    console.log("BEEHACK666 setting counter as  = ", counter_to_set);
     
     
     this.set_level_by_counter(counter_to_set);
@@ -472,8 +481,8 @@ SpellingModeGame.prototype.get_mode_name = function() {
 
 SpellingModeGame.prototype.next_question = function(){
     
-    console.log("entering next_question");
-    console.log("BEEHACK123 this.level = ", this.level);
+    console.log("BEEHACK999 entering next_question with this.level = ", this.level);
+    // console.log("BEEHACK123 this.level = ", this.level);
     
     console.log("BEEHACK123 global_beehack_counter = ", global_beehack_counter);
     
@@ -501,7 +510,7 @@ SpellingModeGame.prototype.next_question = function(){
     // @beehack
     // this is the short term solution
     if (this.quiz.module.id === 0.5) {
-        console.log("BEEHACK BEE MODE DETECTED, initiating beecatcher");
+        // console.log("BEEHACK BEE MODE DETECTED, initiating beecatcher");
         
         
         
@@ -515,7 +524,7 @@ SpellingModeGame.prototype.next_question = function(){
     
         
         if (!global_beehack_new_level_set) {
-            console.log("BEEHACK beehack bool is false, setting to default");
+            // console.log("BEEHACK beehack bool is false, setting to default");
             // old version that didn't connect counter to level
             // this.set_level(default_level_for_beehack);
             // end old version
@@ -523,11 +532,11 @@ SpellingModeGame.prototype.next_question = function(){
             // new version
             // this.set_default_beehack_level(global_beehack_counter);
             
-            console.log("BEEHACK level should be default", this.level);
+            // console.log("BEEHACK level should be default", this.level);
         } else {
             // we skip the usual set level operation
-            console.log("BEEHACK beehack bool is true, skipping set level");
-            console.log("BEEHACK level should be user-input", this.level);
+            // console.log("BEEHACK beehack bool is true, skipping set level");
+            // console.log("BEEHACK level should be user-input", this.level);
         }
         
     } else {
@@ -912,13 +921,13 @@ SpellingModeGame.prototype.inflict_spelling_hint_penalty = function () {
 SpellingModeGame.prototype.submit_to_green_red_master_with_slash = function(correct_answer_string, input_string, process_slashes_bool) {
     // new version, on the assumption that we always process slashes
     back.log("entering process slash block")
-    debug.log("correct_answer_string pre-mutation = ", correct_answer_string);
+    // console.log("correct_answer_string pre-mutation = ", correct_answer_string);
     correct_answer_string = correct_answer_string.toLowerCase();
-    debug.log("correct_answer_string in lower case = ", correct_answer_string);
+    // console.log("correct_answer_string in lower case = ", correct_answer_string);
     var red_green_result_list = [];
-    debug.log("red_green_result_list pre-addition = ", red_green_result_list);
+    // console.log("red_green_result_list pre-addition = ", red_green_result_list);
     var list_of_slash_options_to_process = correct_answer_string.split("/");
-    console.log("list_of_slash_options_to_process = ", list_of_slash_options_to_process);
+    back.log("list_of_slash_options_to_process = ", list_of_slash_options_to_process);
     for (var i = 0; i < list_of_slash_options_to_process.length; i++) {
         debug.log("list_of_slash_options_to_process[i] = ", list_of_slash_options_to_process[i]);
         var type_test = typeof list_of_slash_options_to_process[i];

@@ -769,11 +769,11 @@ Quiz.prototype.log_sentence = function (callback) {
 // for each mode name
 // e.g. accuracy_dictionary.etymology.4 ---> 5
 Quiz.prototype.update_accuracy_dict = function () {
-    console.log("[quiz.update_accuracy_dict] entering update_accuracy_dict");
+    back.log("[quiz.update_accuracy_dict] entering update_accuracy_dict");
     var mode_name = this.game.get_mode_name();
-    console.log("[quiz.update_accuracy] mode_name = ", mode_name);
+    back.log("[quiz.update_accuracy] mode_name = ", mode_name);
     var incorrect_streak = this.submodule.incorrect_streak;
-    console.log("[quiz.update_accuracy] incorrect_streak = ", incorrect_streak);
+    back.log("[quiz.update_accuracy] incorrect_streak = ", incorrect_streak);
     // update the accuracy dictionary 
     this.accuracy_dictionary[mode_name][incorrect_streak]++;
     
@@ -870,15 +870,40 @@ Quiz.prototype.submodule_complete_without_post = function () {
     
     // add
     // persist level here
-    console.log("BEEHACK666 about to persist session_bee_counter");
-    console.log("BEEHACK666 session_bee_counter = ", session_bee_counter);
-    this.user.persist_spelling_bee_counter(session_bee_counter);
+    console.log("BEEHACK999 about to persist session_bee_counter as: ", session_bee_counter);
     
     
     
-    this.fill_lightbox_without_post(0.5, global_beehack_counter);
+    // @beehack
+    // todo turn into a function
+    var test_boolean = in_spelling_bee_training_mode && session_bee_counter > spelling_bee_training_counter;
+    console.log("BEEHACK707 test_boolean = ", test_boolean);
     
-    el("fraction_header").innerHTML =  global_beehack_counter + "/100";
+    if (!test_boolean) {
+        console.log("BEEHACK707 about to persist with counter = ", session_bee_counter);
+        // this.user.persist_spelling_bee_counter(session_bee_counter);
+        
+        // session_bee_counter++;
+        
+        this.set_spelling_bee_counter(session_bee_counter);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    this.fill_lightbox_without_post(0.5, session_bee_counter);
+    
+    // old version
+    // el("fraction_header").innerHTML =  progress_to_display + "/100";
+    
+    
+    this.display_progress_fraction_bee_mode();
+    
     
     
     var dummy_function = this.next_submodule.bind(this);
@@ -890,6 +915,31 @@ Quiz.prototype.submodule_complete_without_post = function () {
     el('next_level_button').onclick = dummy_function;
 }
 //end @beehack
+
+
+Quiz.prototype.display_progress_fraction_bee_mode = function () {
+    
+    var intro_string;
+    var progress;
+    var separator;
+    var denominator;
+    
+    if (in_spelling_bee_training_mode && session_bee_counter > spelling_bee_training_counter) {
+            intro_string = "in training: score = ";
+            progress = global_beehack_counter;
+            separator = "";
+            denominator = "";
+    } else {
+        intro_string = "progress = ";
+        progress = session_bee_counter;
+        separator = "/";
+        denominator = "1000";
+    }
+    
+    
+    el("fraction_header").innerHTML =  intro_string + progress + separator + denominator;
+}
+
 
 Quiz.prototype.submodule_complete = function () {
     
@@ -1079,6 +1129,7 @@ Quiz.prototype.update_display = function() {
     if (this.module.id === 0.5){
         // do nothing
         // we don't display progress in header
+        this.display_progress_fraction_bee_mode();
     } else {
         el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     }
@@ -1453,7 +1504,7 @@ Quiz.prototype.decrement_score_via_hint = function() {
 // @beehack
 Quiz.prototype.set_spelling_bee_level_egg = function () {
     console.log("BEEHACK789 setting spelling bee level to egg");
-    console.log("BEEHACK789 counter should be set to: ", 10);
+    console.log("BEEHACK789 counter should be set to: ", 1);
     
     
     // we alter globals
@@ -1464,7 +1515,7 @@ Quiz.prototype.set_spelling_bee_level_egg = function () {
     // the new version to keep
     in_spelling_bee_training_mode = true;
     
-    spelling_bee_training_counter = 10;
+    spelling_bee_training_counter = 1;
     
     
     // we call the method to change level in the game
@@ -1649,7 +1700,7 @@ Quiz.prototype.set_spelling_bee_level_queen = function () {
 
 
 
-
+// @beehack
 Quiz.prototype.get_spelling_bee_level = function () {
     var output = this.user.get_spelling_bee_level();
     console.log("BEEHACK123 persistent level = ", output);
@@ -1657,6 +1708,8 @@ Quiz.prototype.get_spelling_bee_level = function () {
     return output;
 }
 
+
+// @beehack
 Quiz.prototype.get_initial_spelling_bee_counter = function () {
     console.log("BEEHACK123 entering quiz.get_initial_spelling_bee_counter");
     var output = this.user.get_initial_spelling_bee_counter();
@@ -1667,10 +1720,15 @@ Quiz.prototype.get_initial_spelling_bee_counter = function () {
 
 
 // @beehack
-
 Quiz.prototype.set_spelling_bee_level = function (level) {
     // level = 66666;
     this.user.persist_spelling_bee_level(level);
+}
+
+Quiz.prototype.set_spelling_bee_counter = function (level) {
+    // level = 66666;
+    this.user.persist_spelling_bee_counter(level);
+    // this.user.persist_spelling_bee_level(level);
 }
 
 
