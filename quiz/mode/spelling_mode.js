@@ -319,6 +319,10 @@ SpellingModeGame.prototype.attach = function(){
     }
     // the usual max_streak needs to be stored
     this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
+    
+    
+    
+    this.quiz.process_spelling_bee_level_buttons();
 };
 
 

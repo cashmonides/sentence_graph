@@ -91,13 +91,19 @@ body {
 }
 
 
-#set_spelling_bee_level_button {
+/*#set_spelling_bee_level_button {*/
+/*    font-size: 10px;*/
+/*    background-color: lightgray;*/
+/*    color: black*/
+/*    ;*/
+/*}*/
+
+.bee_button {
     font-size: 10px;
     background-color: lightgray;
     color: black
     ;
 }
-
 
 
 #equals_sign_in_morphology {

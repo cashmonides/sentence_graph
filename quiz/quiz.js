@@ -247,6 +247,11 @@ Quiz.prototype.next_module = function () {
 };
 
 Quiz.prototype.next_submodule = function() {
+    
+    
+    
+    
+    
     //initializes a default
     this.submodule = {
         score: 0, 
@@ -265,8 +270,79 @@ Quiz.prototype.next_submodule = function() {
     this.next_question();
 };
 
+
+Quiz.prototype.process_spelling_bee_level_buttons = function () {
+    
+    
+    var list_of_buttons_to_cut_off = [];
+    
+    var egg_cutoff = 9;
+    var larva_cutoff = 20;
+    var pupa_cutoff = 30;
+    var drone_cutoff = 40;
+    var worker_cutoff = 41;
+    var warrior_cutoff = 42;
+    var queen_cutoff = 500;
+    
+    
+    
+    
+    if (session_bee_counter > egg_cutoff) {
+        list_of_buttons_to_cut_off.push("egg")
+    }
+    if (session_bee_counter > larva_cutoff) {
+        list_of_buttons_to_cut_off.push("larva")
+    }
+    if (session_bee_counter > pupa_cutoff) {
+        list_of_buttons_to_cut_off.push("pupa")
+    }
+    if (session_bee_counter > drone_cutoff) {
+        list_of_buttons_to_cut_off.push("drone")
+    }
+    if (session_bee_counter > worker_cutoff) {
+        list_of_buttons_to_cut_off.push("worker")
+    }
+    if (session_bee_counter > warrior_cutoff) {
+        list_of_buttons_to_cut_off.push("warrior")
+    }
+    
+    for (var i=0; i < list_of_buttons_to_cut_off.length; i++) {
+        var level_to_hide = list_of_buttons_to_cut_off[i];
+        var element = el("set_spelling_bee_level_button_" + level_to_hide);
+        element.style.backgroundColor = "gray";
+        element.style.fontSize = "6px";
+        element.style.color = "lightgray";
+    }
+    
+    
+    // var test_boolean = session_bee_counter > cutoff;
+    // console.log("BEEHACK1999 test_boolean = ", test_boolean);
+    
+    
+    // var level_to_hide = "drone"
+    
+    // // @beehack
+    // // todo
+    // // put this somewhere up top
+    // if (test_boolean) {
+    //     var element = el("set_spelling_bee_level_button_" + level_to_hide);
+    //     element.style.backgroundColor = "red";
+    //     element.style.fontSize = "6px";
+    //     // element.style.color = "6px";
+    // }
+}
+
+
 // @beehack
 Quiz.prototype.next_submodule_without_post = function() {
+    
+    
+    
+    
+    
+    
+    
+    
     //initializes a default
     this.submodule = {
         score: 0, 
@@ -879,6 +955,8 @@ Quiz.prototype.submodule_complete_without_post = function () {
     var test_boolean = in_spelling_bee_training_mode && session_bee_counter > spelling_bee_training_counter;
     console.log("BEEHACK707 test_boolean = ", test_boolean);
     
+    
+    // this is our persistence step
     if (!test_boolean) {
         console.log("BEEHACK707 about to persist with counter = ", session_bee_counter);
         // this.user.persist_spelling_bee_counter(session_bee_counter);
@@ -886,6 +964,17 @@ Quiz.prototype.submodule_complete_without_post = function () {
         // session_bee_counter++;
         
         this.set_spelling_bee_counter(session_bee_counter);
+    }
+    
+    
+    // @beehack
+    // todo
+    // put this somewhere up top
+    if (test_boolean) {
+        var element = el("set_spelling_bee_level_button_egg");
+        element.style.backgroundColor = "red";
+        element.style.fontSize = "6px";
+        // element.style.color = "6px";
     }
     
     
