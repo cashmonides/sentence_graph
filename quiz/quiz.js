@@ -1,3 +1,6 @@
+var global_spelling_match_score_counter = 0;
+
+
 //submodule_progress = how close you are to getting from 5/10 to 6/10
 //module_progress = 5/10 in kangaroo
 
@@ -350,12 +353,11 @@ Quiz.prototype.end_drone_game2 = function (pin, user_name) {
     // something like the spelling bee counter
     
     
-    var score2 = get_spelling_match_score();
-    console.log("666 global_beehack_counter = ", score2);
-    // below is just a test
-    var score = 666; 
-    console.log("666 checkpoint 123");
-    // we seem to jump out of scope so we lose all access to this
+    var score = get_spelling_match_score();
+    console.log("666 global_spelling_match_score_counter = ", score);
+    
+    
+    // we seem to jump out of scope so we lose all access to "this."
     // therefore we can't use the below function
     // var callback = this.display_match_score(score);
     // instead we use this one
@@ -372,7 +374,7 @@ var display_match_score = function (score) {
 }
 
 var get_spelling_match_score = function () {
-    return global_beehack_counter;
+    return global_spelling_match_score_counter;
 }
 
 ///////////END AKIVA'S INTERVENTION
@@ -1028,7 +1030,13 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 // when a user sets spelling bee level it needs to reset the progress bar
 // if not, users can keep clicking a level until they get an easy question
 Quiz.prototype.reset_submodule_without_post = function () {
-    el("fraction_header").innerHTML =  global_beehack_counter + "/100";
+    if (this.module.id === 0.25) {
+        el("fraction_header").innerHTML =  global_spelling_match_score_counter;
+    } else {
+       el("fraction_header").innerHTML =  global_beehack_counter + "/100"; 
+    }
+    
+    
     
     
     

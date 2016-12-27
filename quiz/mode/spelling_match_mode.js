@@ -1,3 +1,6 @@
+
+
+
 var SpellingMatchModeGame = function () {
     this.data = null;
     this.quiz = null;
@@ -52,26 +55,30 @@ SpellingMatchModeGame.prototype.attach = function(){
 };
 
 
-SpellingMatchModeGame.prototype.start_drone_timer = function (stopping_time) {
-    return start_timer('countdown', 50, this.end_drone_game(clock_refresh_id_to_cancel, element_name), stopping_time);
-}
+// todo this is now otiose, replaced by 666 methods
+// SpellingMatchModeGame.prototype.start_drone_timer = function (stopping_time) {
+//     return start_timer('countdown', 50, this.end_drone_game(clock_refresh_id_to_cancel, element_name), stopping_time);
+// }
 
-SpellingMatchModeGame.prototype.end_drone_game = function (clock_refresh_id_to_cancel, element_name){
-    // Tell the user that the game is over.
-    alert('game over!!!');
+// todo this is now otiose, replaced by 666 methods
+// SpellingMatchModeGame.prototype.end_drone_game = function (clock_refresh_id_to_cancel, element_name){
+//     // Tell the user that the game is over.
+//     alert('game over!!!');
  
-    var path = ["test", this.quiz.pin, "scores", this.quiz.user.name];
+//     var path = ["test", this.quiz.pin, "scores", this.quiz.user.name];
     
-    var score = 666; //however we get score (this.match_score or something like that)
+//     var score = 666; //however we get score (this.match_score or something like that)
     
-    var callback = this.display_match_score(score);
+//     var callback = this.display_match_score(score);
     
-    Persist.set(path, score, callback);
-}
+//     Persist.set(path, score, callback);
+// }
 
-SpellingMatchModeGame.prototype.display_match_score = function (score) {
-    el("fraction_header").innerHTML = score.toString();
-}
+
+// todo this is now otiose, replaced by 666 methods
+// SpellingMatchModeGame.prototype.display_match_score = function (score) {
+//     el("fraction_header").innerHTML = score.toString();
+// }
 
 
 
@@ -315,6 +322,12 @@ SpellingMatchModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot.
 
 
 SpellingMatchModeGame.prototype.process_correct_answer = function() {
+    
+    // todo perhaps move the below functions to quiz
+    global_spelling_match_score_counter++;
+    el("fraction_header").innerHTML = "score=" + global_spelling_match_score_counter;
+    
+    
     
     this.quiz.increment_score();
     
