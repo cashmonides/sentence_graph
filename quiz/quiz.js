@@ -1031,8 +1031,10 @@ Quiz.prototype.convert_accuracy_dict2 = function () {
 // if not, users can keep clicking a level until they get an easy question
 Quiz.prototype.reset_submodule_without_post = function () {
     if (this.module.id === 0.25) {
+        console.log("DEBUGGING all is well");
         el("fraction_header").innerHTML =  global_spelling_match_score_counter;
     } else {
+        console.log("DEBUGGING shouldn't be triggered in bee match mode");
        el("fraction_header").innerHTML =  global_beehack_counter + "/100"; 
     }
     
@@ -1180,7 +1182,18 @@ Quiz.prototype.display_progress_fraction_bee_mode = function () {
     }
     
     
-    el("fraction_header").innerHTML =  intro_string + progress + separator + denominator;
+    
+    // todo hacky, make this more modular
+    
+    if (this.module.id = 0.25) {
+        console.log("DEBUGGING all is well");
+        el("fraction_header").innerHTML =  global_spelling_match_score_counter;
+    } else {
+        console.log("DEBUGGING shouldn't be triggered in bee match mode");
+        el("fraction_header").innerHTML =  intro_string + progress + separator + denominator;
+
+    }
+    
 }
 
 
@@ -1379,6 +1392,8 @@ Quiz.prototype.update_display = function() {
         // do nothing
         // we don't display progress in header
         this.display_progress_fraction_bee_mode();
+    } else if (this.module.id === 0.25) {
+        el("fraction_header").innerHTML = global_spelling_match_score_counter;
     } else {
         el("fraction_header").innerHTML = module_name + ": " + this.user.get_module(mod).progress + "/" + this.module.threshold;
     }

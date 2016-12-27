@@ -159,6 +159,8 @@ var make_spelling_match1 = function () {
     var pin = autogenerate_spelling_match_pin();
     random_spelling_bee_number1 = pin;
     
+    
+    
     var level_as_num = Number(level);
     var time_limit_as_num = Number(time_limit);
     
@@ -282,6 +284,29 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
     // Persist.set(path, data, final_callback);
     
 }
+
+
+
+var show_spelling_match_results1 = function () {
+    console.log("DEBUGGING show_spelling_match_results1 entered");
+    var pin = random_spelling_bee_number1;
+    console.log("DEBUGGING pin to get from firebase = ", pin);
+    var map_of_scores = Persist.get(["test", pin, "scores"], function (x) {
+        var val = x.val();
+        console.log("DEBUGGING val = ", val);
+        console.log("DEBUGGING val stringified = ", JSON.stringify(val));
+        sort_and_display_match_results1(val)
+    });
+}
+
+
+var sort_and_display_match_results1 = function (data) {
+    var element = el("spelling_match_score_results1");
+    
+    element.innerHTML = JSON.stringify(data);
+}
+
+
 
 // var fill_spelling_match_with_data = function (pin, level, time_limit) {
     
