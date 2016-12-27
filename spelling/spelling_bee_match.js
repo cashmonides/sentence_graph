@@ -304,16 +304,27 @@ var show_spelling_match_results1 = function () {
 var sort_and_display_match_results1 = function (data) {
     var element = el("spelling_match_score_results1");
     
+    // turn it into a sorted list (with higher values first)
     var sorted_data = sort_map_by_values(data);
     console.log("sorted_data = ", sorted_data);
-    element.innerHTML = JSON.stringify(sorted_data);
+    // element.innerHTML = JSON.stringify(sorted_data);
+    
+    for (var i = 0; i < sorted_data.length; i++) {
+        var score_display = process_score_for_display(sorted_data[i]);
+        var ranking = i + 1;
+        element.innerHTML += ranking + " " + "score: " + score_display;
+    }
     
     
-    // trying to add this
     move_game_to_completed1;
 }
 
-
+var process_score_for_display = function (list_item) {
+    var name = list_item[0];
+    name = name.replace("\"", "");
+    var score = list_item[1];
+    return score + " " + name + "<br />";
+}
 
 // var fill_spelling_match_with_data = function (pin, level, time_limit) {
     
