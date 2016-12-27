@@ -289,6 +289,7 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
 
 var show_spelling_match_results1 = function () {
     console.log("DEBUGGING show_spelling_match_results1 entered");
+    // we use a global to access the pin since we can't access it via quiz.pin
     var pin = random_spelling_bee_number1;
     console.log("DEBUGGING pin to get from firebase = ", pin);
     var map_of_scores = Persist.get(["test", pin, "scores"], function (x) {
@@ -306,6 +307,10 @@ var sort_and_display_match_results1 = function (data) {
     var sorted_data = sort_map_by_values(data);
     console.log("sorted_data = ", sorted_data);
     element.innerHTML = JSON.stringify(sorted_data);
+    
+    
+    // trying to add this
+    move_game_to_completed1;
 }
 
 
@@ -345,6 +350,39 @@ var sort_and_display_match_results1 = function (data) {
 var final_callback = function (pin, column) {
     display_spelling_match_pin(pin, column);
     // display_countdown(time_limit);
+}
+
+
+
+var move_game_to_completed1 = function () {
+    var pin = random_spelling_bee_number1;
+    var old_path = ["test", pin];
+    var new_path = ["test", "completed_games", pin];
+    
+    // callback is optional in set
+    Persist.get(old_path, function (x) {
+        var data = x.val();
+        console.log("VAL from get = ", data);
+        console.log("stringified VAL from get = ", JSON.stringify(data));
+        
+        
+        
+        var scores_map = data.scores
+        sort_and_display_match_results1(scores_map);
+        
+        Persist.set(new_path, data);
+        
+        
+        Persist.remove_node(old_path, function () {
+            console.log("NODE REMOVED")
+        });
+        
+        
+        // Persist.clear_node(old_path, function () {
+        //     console.log("NODE CLEARED")
+        // });
+        
+    }); 
 }
 
 
