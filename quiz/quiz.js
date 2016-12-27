@@ -236,6 +236,7 @@ Quiz.prototype.get_start_module = function () {
     } else if ('bee_match' in ups) {
         var self = this;
         this.pin = ups.pin;
+        var user_name = this.user.data.profile.name;
         this.requires_callback_before_starting = true;
         this.callback_before_starting = function (function_after_callback) {
             Persist.get(['test', self.pin], function (x) {
@@ -247,7 +248,16 @@ Quiz.prototype.get_start_module = function () {
                 } else {
                     self.spelling_match_level = val.level;
                     self.spelling_match_stopping_time = val.stopping_time;
-                    start_drone_timer(self.spelling_match_stopping_time);
+                    // original version
+                    // start_drone_timer(self.spelling_match_stopping_time);
+                    
+                    
+                    // @666
+                    //new version: to avoid a global function
+                    self.start_drone_timer(self.spelling_match_stopping_time, self.pin, user_name);
+                    
+                    
+                    // AS: below seems to usually be self.next_module when in spelling match mode
                     function_after_callback();
                 }
             });
@@ -278,8 +288,94 @@ Quiz.prototype.get_start_module = function () {
     
 };
 
+// @666
+Quiz.prototype.start_drone_timer = function (stopping_time, pin, user_name) {
+    console.log("666 quiz.start_drone_timer entered");
+    return this.start_timer3('countdown', 50, this.end_drone_game2, stopping_time, pin, user_name);
+}
 
 
+// @666
+Quiz.prototype.start_timer3 = function (
+    html_element_name, refresh_how_often, end_function, end_time, argument_to_pass_into_end_function1, argument_to_pass_into_end_function2) {
+    // error-checking
+    if (el(html_element_name) === null) {
+        throw 'Element ' + html_element_name + ' does not exist!';
+    }
+    // refresh_countdown_to_end_time is a function that, when called,
+    // creates a function that will refreshes the countdown 
+    // to the amount of time remaining
+    // e.g. (if refresh_how_often is 50),
+    // clock displays 1000 milliseconds remaining
+    // refresh_countdown_to_end_time happens and 
+    // clock display is reset to 950
+    var refresh_countdown_to_end_time = refresh_clock(
+        html_element_name, end_time);
+        
+    
+    // clock_refresh_id is an integer id (not a function),
+    // which we can pass to clearInterval to stop the function
+    // from continuing to run. We want to do this at the end of the game.
+    var clock_refresh_id = setInterval(
+        refresh_countdown_to_end_time, refresh_how_often);
+        
+    // the heart of the function    
+    setTimeout(function () {
+        // Stop the timer.
+        // This line cancels the function that runs regularly
+        // with id clock_refresh_id.
+        // That function is the clock refreshing.
+        // We do this since we don't want the clock to continue
+        // to refresh after the end of the game.
+        clearInterval(clock_refresh_id);
+        // Clear the timer (the div with the clock).
+        el(html_element_name).innerHTML = '';
+        // End the game.
+        end_function(argument_to_pass_into_end_function1, argument_to_pass_into_end_function2)
+    }, end_time - Date.now());
+}
+
+
+// @666
+Quiz.prototype.end_drone_game2 = function (pin, user_name) {
+    // Tell the user that the game is over.
+    // alert('game over!!!');
+    
+    console.log("666 pin as argument = ", pin);
+    console.log("666 user_name as argument = ", user_name);
+ 
+    var path = ["test", pin, "scores", user_name];
+    
+    //however we get score (this.match_score or something like that) 
+    // something like the spelling bee counter
+    
+    
+    var score2 = get_spelling_match_score();
+    console.log("666 global_beehack_counter = ", score2);
+    // below is just a test
+    var score = 666; 
+    console.log("666 checkpoint 123");
+    // we seem to jump out of scope so we lose all access to this
+    // therefore we can't use the below function
+    // var callback = this.display_match_score(score);
+    // instead we use this one
+    var callback = display_match_score(score);
+    
+    Persist.set(path, score, callback);
+}
+
+//@666
+// a perhaps unavoidable global function
+// since this.display_match_score is out of the scope of this
+var display_match_score = function (score) {
+    el("fraction_header").innerHTML = "your score: " + score.toString();
+}
+
+var get_spelling_match_score = function () {
+    return global_beehack_counter;
+}
+
+///////////END AKIVA'S INTERVENTION
 
 Quiz.prototype.next_module = function () {
     console.log("entering next_module");

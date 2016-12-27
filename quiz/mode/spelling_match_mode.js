@@ -52,6 +52,29 @@ SpellingMatchModeGame.prototype.attach = function(){
 };
 
 
+SpellingMatchModeGame.prototype.start_drone_timer = function (stopping_time) {
+    return start_timer('countdown', 50, this.end_drone_game(clock_refresh_id_to_cancel, element_name), stopping_time);
+}
+
+SpellingMatchModeGame.prototype.end_drone_game = function (clock_refresh_id_to_cancel, element_name){
+    // Tell the user that the game is over.
+    alert('game over!!!');
+ 
+    var path = ["test", this.quiz.pin, "scores", this.quiz.user.name];
+    
+    var score = 666; //however we get score (this.match_score or something like that)
+    
+    var callback = this.display_match_score(score);
+    
+    Persist.set(path, score, callback);
+}
+
+SpellingMatchModeGame.prototype.display_match_score = function (score) {
+    el("fraction_header").innerHTML = score.toString();
+}
+
+
+
 // @common to all quiz modes
 // here it takes the form of e.g. {'etym_level': 50}
 SpellingMatchModeGame.prototype.set_level = function (new_level) {
@@ -66,7 +89,7 @@ SpellingMatchModeGame.prototype.set_level_via_firebase = function () {
     this.level = this.convert_int_to_object(this.quiz.spelling_match_level);
 } 
 
-
+// todo turn below into full dictionary
 SpellingMatchModeGame.prototype.convert_int_to_object = function (level_as_int) {
     if (level_as_int < 50) {
         return {"etym_level": 60};

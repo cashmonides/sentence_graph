@@ -261,7 +261,7 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
     
     var data = {
         "level": level,
-        "stopping_time": stopping_time,
+        "stopping_time": stopping_time
     }
     
     

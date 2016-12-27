@@ -1,6 +1,17 @@
+
+
+
+
+
+
+
+
+
 var end_drone_game = function (clock_refresh_id_to_cancel, element_name) {
     // Tell the user that the game is over.
     alert('game over!!!');
+    //persist match score (callback should be display match score)
+    // Persist.set("test")
     // Tell the user what their score was.
     display_match_score();
 }
@@ -18,3 +29,4 @@ var start_home_timer = function (n, end_time) {
         end_home_game(n)
     }, end_time);
 }
+
