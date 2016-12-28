@@ -135,14 +135,12 @@ function start() {
 }
 
 
-var random_spelling_bee_number1;
-var random_spelling_bee_number2;
-var random_spelling_bee_number3;
+var random_spelling_bee_numbers = {};
 
 
-var make_spelling_match1 = function () {
-    var level = el("spelling_match_level1").value;
-    var time_limit = el("spelling_match_time_limit1").value;
+var make_spelling_match = function (n) {
+    var level = el("spelling_match_level" + n).value;
+    var time_limit = el("spelling_match_time_limit" + n).value;
     
         // todo debugging
     console.log("LEVEL = ", level);
@@ -157,7 +155,6 @@ var make_spelling_match1 = function () {
         return;
     }
     var pin = autogenerate_spelling_match_pin();
-    random_spelling_bee_number1 = pin;
     
     
     
@@ -166,87 +163,20 @@ var make_spelling_match1 = function () {
     
     var stopping_time = create_stopping_time(time_limit_as_num);
     
-    if (pin != random_spelling_bee_number2 && pin != random_spelling_bee_number3) {
-        console.log("NON-IDENTICAL PIN")
-        send_spelling_match_to_firebase(pin, level_as_num, stopping_time, 1);
-    } else {
+    if (!pin) {
+        alert("pin " + pin + " is bad (undefined, null, or maybe 0, which are not good pins)");
+    } else if (values(random_spelling_bee_numbers).indexOf(pin) !== -1) {
+        // pin is already in the random spelling bee numbers
         alert("IDENTICAL PIN. REGENERATE");
-    }
-    
-    
-    start_home_timer(1, stopping_time);
-    
-    
-}
-
-var make_spelling_match2 = function () {
-    var level = el("spelling_match_level2").value;
-    var time_limit = el("spelling_match_time_limit2").value;
-    
-      // todo debugging
-    console.log("LEVEL = ", level);
-    console.log("time_limit = ", time_limit);
-    console.log("typeof LEVEL = ", typeof level);
-    console.log("typeof time_limit = ", typeof time_limit);
-    console.log("level is valid = ", input_is_valid(level));
-    console.log("time_limit is valid = ", input_is_valid(time_limit));
-    if (!input_is_valid(level) || !input_is_valid(time_limit)) {
-        alert("missing level and/or time_limit");
-        return;
-    }
-    var pin = autogenerate_spelling_match_pin();
-    random_spelling_bee_number2 = pin;
-    
-    var level_as_num = Number(level);
-    var time_limit_as_num = Number(time_limit);
-    
-    var stopping_time = create_stopping_time(time_limit_as_num);
-    
-    if (pin != random_spelling_bee_number1 && pin != random_spelling_bee_number3) {
-        console.log("NON-IDENTICAL PIN")
-        send_spelling_match_to_firebase(pin, level_as_num, stopping_time, 2);
     } else {
-        alert("IDENTICAL PIN. REGENERATE");
-    }
-    
-    start_home_timer(2, stopping_time);
-    
-}
-
-var make_spelling_match3 = function () {
-    var level = el("spelling_match_level3").value;
-    var time_limit = el("spelling_match_time_limit3").value;
-    
-    // todo debugging
-    console.log("LEVEL = ", level);
-    console.log("time_limit = ", time_limit);
-    console.log("typeof LEVEL = ", typeof level);
-    console.log("typeof time_limit = ", typeof time_limit);
-    console.log("level is valid = ", input_is_valid(level));
-    console.log("time_limit is valid = ", input_is_valid(time_limit));
-    
-    if (!input_is_valid(level) || !input_is_valid(time_limit)) {
-        alert("missing level and/or time_limit");
-        return;
-    }
-    var pin = autogenerate_spelling_match_pin();
-    random_spelling_bee_number3 = pin;
-    
-    var level_as_num = Number(level);
-    var time_limit_as_num = Number(time_limit);
-    
-    var stopping_time = create_stopping_time(time_limit_as_num);
-    
-    if (pin != random_spelling_bee_number1 && pin != random_spelling_bee_number2) {
+        // pin is not in the random spelling bee numbers
+        // it seemed to make sense to not put this in an else
+        // in case it got longer.
         console.log("NON-IDENTICAL PIN")
-        send_spelling_match_to_firebase(pin, level_as_num, stopping_time, 3);
-    } else {
-        alert("IDENTICAL PIN. REGENERATE");
+        random_spelling_bee_numbers[n] = pin;
+        send_spelling_match_to_firebase(pin, level_as_num, stopping_time, n);
+        start_home_timer(n, stopping_time);
     }
-
-    
-    start_home_timer(3, stopping_time);
-    
 }
 
 
@@ -287,16 +217,26 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
 
 
 
-var show_spelling_match_results1 = function () {
-    console.log("DEBUGGING show_spelling_match_results1 entered");
+var show_spelling_match_results = function (n) {
+    console.log("DEBUGGING show_spelling_match_results entered");
+    if (!(n in random_spelling_bee_numbers)) {
+        alert('Game already removed so results cannot be shown.');
+        return;
+    }
     // we use a global to access the pin since we can't access it via quiz.pin
-    var pin = random_spelling_bee_number1;
+    var pin = random_spelling_bee_numbers[n];
+    // Note: This means pin cannot be the number 0. But under my system
+    // pin is always six digits and a string, so this is not a problem
+    // unless we revert.
+    if (!pin) {
+        throw 'Serious coding mistake: pin is not what it should be. It is ' + pin;
+    }
     console.log("DEBUGGING pin to get from firebase = ", pin);
     var map_of_scores = Persist.get(["test", pin, "scores"], function (x) {
         var val = x.val();
         console.log("DEBUGGING val = ", val);
         console.log("DEBUGGING val stringified = ", JSON.stringify(val));
-        sort_and_display_match_results1(val)
+        sort_and_display_match_results(val, n);
     });
 }
 
@@ -307,52 +247,58 @@ var show_spelling_match_results1 = function () {
 // var cut_off_all_but_top = false;
 var cut_off_all_but_top = 3;
 
-var sort_and_display_match_results1 = function (data) {
-    var element = el("spelling_match_score_results1");
+var sort_and_display_match_results = function (data, n) {
+    var element = el("spelling_match_score_results" + n);
     
     // turn it into a sorted list (with higher values first)
-    var sorted_data = sort_map_by_values(data);
+    // true here signifies reversal
+    var sorted_data = sort_map_by_values(data, true);
     console.log("sorted_data = ", sorted_data);
     // element.innerHTML = JSON.stringify(sorted_data);
     
-    for (var i = 0; i < sorted_data.length; i++) {
-        
-        
-        if (cut_off_all_but_top) {
-            if (i+1>cut_off_all_but_top) {
-                break;
-            }
-        }
-        
+    var how_many_items_to_take;
+    if (cut_off_all_but_top) {
+        // Minimum of how many there are and how many we show at most.
+        how_many_items_to_take = Math.min(sorted_data.length, cut_off_all_but_top);
+    } else {
+        how_many_items_to_take = sorted_data.length;
+    }
+    
+    for (var i = 0; i < how_many_items_to_take; i++) {
         var score_display = process_score_for_display(sorted_data[i]);
         // var ranking = i + 1;
         var ranking = generate_ranking_from_int(i+1);
         element.innerHTML += ranking + " " + "score: " + score_display;
     }
-    
-    
-    move_game_to_completed1;
+}
+
+var generate_ordinal_suffix = function (int) {
+    if ([11, 12, 13].indexOf(int % 100) !== -1) {
+        // 11, 12, 13 all take suffix th; 11th, 12th, 13th, 112th
+        return "th";
+    } else if (int % 10 === 1) {
+        // 1st, 21st
+        return "st";
+    } else if (int % 10 === 2) {
+        // 2nd, 22nd, 42nd
+        return "nd";
+    } else if (int % 10 === 3) {
+        // 3rd, 153rd
+        return "rd";
+    } else {
+        // 4th, 17th, 9th
+        return "th";
+    }
 }
 
 var generate_ranking_from_int = function (int) {
-    var suffix;
-    
-    if (int === 1) {
-        suffix = "st";
-    } else if (int === 2) {
-        suffix = "nd";
-    } else if (int === 3) {
-        suffix = "rd";
-    } else {
-        suffix = "th";
-    }
-    
-    return int + suffix;
+    return int + generate_ordinal_suffix(int);
 }
 
 var process_score_for_display = function (list_item) {
+    console.log('list_item =', list_item);
     var name = list_item[0];
-    name = name.replace("\"", "");
+    name = name.replace('"', '');
     var score = list_item[1];
     return score + " " + name + "<br />";
 }
@@ -396,8 +342,18 @@ var final_callback = function (pin, column) {
 
 
 
-var move_game_to_completed1 = function () {
-    var pin = random_spelling_bee_number1;
+var move_game_to_completed = function (n) {
+    // This happens if the game has already been removed.
+    if (!(n in random_spelling_bee_numbers)) {
+        alert('Game already removed.');
+        return;
+    }
+    
+    var pin = random_spelling_bee_numbers[n];
+    
+    // Remove all reference of the game's existance.
+    delete random_spelling_bee_numbers[n];
+    
     var old_path = ["test", pin];
     
     var date_id = Date.now();
@@ -417,8 +373,10 @@ var move_game_to_completed1 = function () {
         
         
         
-        var scores_map = data.scores
-        sort_and_display_match_results1(scores_map);
+        var scores_map = data.scores;
+        
+        // Very small bug: we might be doing this for the second time.
+        sort_and_display_match_results(scores_map, n);
         
         Persist.set(new_path, data);
         
@@ -435,48 +393,31 @@ var move_game_to_completed1 = function () {
     }); 
 }
 
-
-var autogenerate_spelling_match_pin = function () {
+/*
+var akiva_autogenerate_spelling_match_pin = function () {
     var max = 999999;
     var min = 000001;
     
     var output = Math.random() * (max - min) + min;
     return Math.round(output);
 }
+*/
 
 // BEGIN dan
 
-var dan_autogenerate_spelling_match_pin = function () {
-    return dan_get_n_random_digits(6);
-}
-
-var dan_get_n_random_digits = function (n) {
-    var list_of_digits = [];
-    for (var i = 0; i < n; i++) {
-        list_of_digits.push(dan_random_digit());
-    }
-    return list_of_digits;
-}
-
-var dan_random_digit = function () {
-    return random_choice('0123456789');
+var autogenerate_spelling_match_pin = function () {
+    return get_n_random_digits(6);
 }
 
 // END dan
 
 var display_spelling_match_pin = function (pin, column) {
     //stringify pin if necessary
-    var element;
-    if (column === 1) {
-       element = el("spelling_match_pin_cell1"); 
-    } else if (column === 2) {
-       element = el("spelling_match_pin_cell2"); 
-    } else if (column === 3) {
-       element = el("spelling_match_pin_cell3"); 
-    }
+    var element = el('spelling_match_pin_cell' + column);
     element.innerHTML = pin;
 }
 
+/*
 // checks if user-inputted string is valid
     // is an integer between 1 and 1000
 var input_is_valid = function (string) {
@@ -492,9 +433,10 @@ var input_is_valid = function (string) {
     }
     return true;
 }
+*/
 
 // begin dan
-var dan_input_is_valid = function (string) {
+var input_is_valid = function (string) {
     var number = Number(string);
     return Number.isInteger(number) && 1 <= number && number <= 1000;
 }

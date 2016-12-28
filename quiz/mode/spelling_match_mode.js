@@ -423,7 +423,7 @@ SpellingMatchModeGame.prototype.make_spelling_hint = function () {
 
 
 
-
+/*
 
 // todo convert the following into a global function in etymology mode
 // probably going to be of general usage later, not just in spelling mode
@@ -485,7 +485,7 @@ SpellingMatchModeGame.prototype.give_underscore_hint = function (word) {
     }
 };
 
-
+*/
 
 // todo development of below got interrupted
 // develop it later
@@ -1190,8 +1190,7 @@ SpellingMatchModeGame.prototype.give_underscore_hint = function (word) {
         
         
         // todo here's where we should put the error catching
-        var is_there_a_match = false;
-        is_there_a_match = test_match_from_slash_options(random_root_to_replace, word);
+        var is_there_a_match = test_match_from_slash_options(random_root_to_replace, word);
         if (!is_there_a_match) {
             bug.log("PROBLEM [spellingmode.give_underscore_hint] NO MATCH DISCOVERED where there should be a match, i.e. word should have root");
         } else {

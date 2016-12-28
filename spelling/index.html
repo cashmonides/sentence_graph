@@ -27,10 +27,12 @@
  <!--   <script src="../lib/user.js"></script>-->
  <!--   <script src="../lib/user_login_status.js"></script>   -->
     
-    
+    <script src="../lib/list_utils.js"></script>
+    <script src="../lib/random_utils.js"></script>
     <script src="../lib/html_utils.js"></script>
     <script src="../lib/clock_utils.js"></script>
     <script src="../lib/persist.js"></script>
+    
     
     
     
@@ -52,7 +54,7 @@
                 <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit1"></td></tr>
             </table>
             
-            <button class="button" id="make_spelling_match_button1" onclick="make_spelling_match1()">MAKE GAME</button>
+            <button class="button" id="make_spelling_match_button1" onclick="make_spelling_match(1)">MAKE GAME</button>
               
               
             <div>
@@ -70,8 +72,8 @@
               
             <div>
                 
-                <button class="button" id="show_results_button1" onclick="show_spelling_match_results1()">SHOW RESULTS OF ABOVE MATCH</button>
-                <button class="button" id="move_game_button" onclick="move_game_to_completed1()">MOVE GAME</button>
+                <button class="button" id="show_results_button1" onclick="show_spelling_match_results(1)">SHOW RESULTS OF ABOVE MATCH</button>
+                <button class="button" id="move_game_button1" onclick="move_game_to_completed(1)">MOVE GAME</button>
             
             </div>  
             
@@ -88,7 +90,7 @@
                 <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit2"></td></tr>
             </table>
             
-            <button class="button" id="make_spelling_match_button2" onclick="make_spelling_match2()">MAKE GAME</button>
+            <button class="button" id="make_spelling_match_button2" onclick="make_spelling_match(2)">MAKE GAME</button>
               
               
             <div>
@@ -107,8 +109,9 @@
               
             <div>
                 
-                <button class="button" id="show_results_button2" onclick="show_spelling_match_results2()">SHOW RESULTS OF ABOVE MATCH</button>
-            
+                <button class="button" id="show_results_button2" onclick="show_spelling_match_results(2)">SHOW RESULTS OF ABOVE MATCH</button>
+                <button class="button" id="move_game_button2" onclick="move_game_to_completed(2)">MOVE GAME</button>
+                
             </div>  
         </td>
         
@@ -120,7 +123,7 @@
                 <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit3"></td></tr>
             </table>
             
-            <button class="button" id="make_spelling_match_button3" onclick="make_spelling_match3()">MAKE GAME</button>
+            <button class="button" id="make_spelling_match_button3" onclick="make_spelling_match(3)">MAKE GAME</button>
               
               
             <div>
@@ -138,7 +141,8 @@
               
             <div>
                 
-                <button class="button" id="show_results_button3" onclick="show_spelling_match_results3()">SHOW RESULTS OF ABOVE MATCH</button>
+                <button class="button" id="show_results_button3" onclick="show_spelling_match_results(3)">SHOW RESULTS OF ABOVE MATCH</button>
+                <button class="button" id="move_game_button3" onclick="move_game_to_completed(3)">MOVE GAME</button>
             
             </div>  
         </td>

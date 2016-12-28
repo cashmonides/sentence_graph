@@ -251,7 +251,7 @@ var SpellingModeGame = function(){
 };
 
 // attach is triggered whenever bee button is clicked
-SpellingModeGame.prototype.attach = function(){
+SpellingModeGame.prototype.attach = function () {
     set_display("latin_answer_choices", 'none');
     set_display("drop_answer_choices", 'none');
     set_display("submit_button", 'initial');
@@ -413,7 +413,11 @@ SpellingModeGame.prototype.initialize_bee_level = function () {
     // below gets from firebase, should be an integer
     
     var counter_to_set;
+
     var counter_from_firebase = this.quiz.get_initial_spelling_bee_counter();
+    
+    console.log('counter from firebase =', counter_from_firebase);
+    
     
     console.log("BEEHACK666 about to compare session to firebase");
     console.log("BEEHACK666 session_bee_counter = ", session_bee_counter);
@@ -849,7 +853,6 @@ SpellingModeGame.prototype.make_spelling_hint = function () {
 
 
 
-
 // todo convert the following into a global function in etymology mode
 // probably going to be of general usage later, not just in spelling mode
 // below is a hackily hacked together version which basically does the job
@@ -909,7 +912,6 @@ SpellingModeGame.prototype.give_underscore_hint = function (word) {
         return word_with_root_replaced;
     }
 };
-
 
 
 // todo development of below got interrupted

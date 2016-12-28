@@ -51,6 +51,19 @@ var test_match_in_slash_options = function (input_word, slash_options_string) {
 
 // we want to return a bool (whether a match has been found or not)
 var test_match_from_slash_options = function (slash_options_string, query_word) {
+    var lowercase_query = query_word.toLowerCase();
+    var options = slash_options_string.toLowerCase().split('/');
+    // some list method: returns boolean
+    // if any items of list satisfy function
+    return options.some(function (option) {
+        // is the option in the lowercase query?
+        return lowercase_query.indexOf(option) !== -1;
+    });
+}
+
+/*
+// we want to return a bool (whether a match has been found or not)
+var test_match_from_slash_options = function (slash_options_string, query_word) {
     
     
     back.log("slash_options_string = ", slash_options_string);
@@ -76,7 +89,7 @@ var test_match_from_slash_options = function (slash_options_string, query_word) 
     }
     return boolean;
 };
-
+*/
 
 
 // this function returns either a string (the matched root)

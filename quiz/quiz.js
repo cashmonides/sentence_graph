@@ -111,7 +111,7 @@ Quiz.prototype.start = function() {
             if (self.requires_callback_before_starting) {
                 self.callback_before_starting(function () {
                     self.next_module();
-                })
+                });
             } else {
                 self.next_module();
             }
@@ -151,7 +151,7 @@ Quiz.prototype.start = function() {
 };
 
 // This should quite possibly be done second.
-Quiz.prototype.user_loaded = function() {
+Quiz.prototype.user_loaded = function () {
     // console.log("DEBUG 11-7 entering user_loaded = ");
     //todo var id will change depending on url parameters (given by profile page)
     var id = this.get_start_module();   //gets lowest uncompleted level (ADVANCE) or improving via url paramaters
@@ -811,10 +811,14 @@ Quiz.prototype.next_question = function (error) {
         set_display("set_spelling_bee_level_button", 'initial');
         
         
-        // todo fix, this is hacky
-        if (!this.user.data.spelling_level) {
-            this.user.intialize_spelling_bee_counter_if_it_does_not_already_exist();
-        }
+        // todo @999 fix, this is hacky
+        // what we really want to do is initialize the spelling_level
+        // at the time of the creation of the user
+        // but older users need to initialize at 0
+        // if (!this.user.data.spelling_level) {
+        //     this.user.intialize_spelling_bee_counter_if_it_does_not_already_exist();
+        //     this.user.data.spelling_level = 0;
+        // }
         
         
         // todo this is also hacky
@@ -1168,13 +1172,18 @@ Quiz.prototype.submodule_complete_without_post = function () {
     
     // @beehack
     // todo turn into a function
-    var test_boolean = in_spelling_bee_training_mode && session_bee_counter > spelling_bee_training_counter;
-    console.log("BEEHACK707 test_boolean = ", test_boolean);
+    var at_a_lower_level_boolean = session_bee_counter > spelling_bee_training_counter;
     
+    console.log("BEEHACK707 in_spelling_bee_training_mode = ", in_spelling_bee_training_mode);
+    console.log("BEEHACK707 at_a_lower_level_boolean = ", at_a_lower_level_boolean);
     
     // this is our persistence step
-    if (!test_boolean) {
-        console.log("BEEHACK707 about to persist with counter = ", session_bee_counter);
+    if (!in_spelling_bee_training_mode) {
+        console.log("BEEHACK707 not in spelling bee training mode, about to persist with counter = ", session_bee_counter);
+        this.set_spelling_bee_counter(session_bee_counter);
+    }
+    if (!at_a_lower_level_boolean) {
+        console.log("BEEHACK707 not at a lower level, about to persist with counter = ", session_bee_counter);
         // this.user.persist_spelling_bee_counter(session_bee_counter);
         
         // session_bee_counter++;
@@ -1182,16 +1191,27 @@ Quiz.prototype.submodule_complete_without_post = function () {
         this.set_spelling_bee_counter(session_bee_counter);
     }
     
+    // old
+    // if (!test_boolean) {
+    //     console.log("BEEHACK707 about to persist with counter = ", session_bee_counter);
+    //     // this.user.persist_spelling_bee_counter(session_bee_counter);
+        
+    //     // session_bee_counter++;
+        
+    //     this.set_spelling_bee_counter(session_bee_counter);
+    // }
+    
     
     // @beehack
     // todo
     // put this somewhere up top
-    if (test_boolean) {
-        var element = el("set_spelling_bee_level_button_egg");
-        element.style.backgroundColor = "red";
-        element.style.fontSize = "6px";
-        // element.style.color = "6px";
-    }
+    // generalize to all levels (egg, larva, etc.)
+    // if (test_boolean) {
+    //     var element = el("set_spelling_bee_level_button_egg");
+    //     element.style.backgroundColor = "red";
+    //     element.style.fontSize = "6px";
+    //     // element.style.color = "6px";
+    // }
     
     
     
@@ -1230,10 +1250,10 @@ Quiz.prototype.display_progress_fraction_bee_mode = function () {
     var denominator;
     
     if (in_spelling_bee_training_mode && session_bee_counter > spelling_bee_training_counter) {
-            intro_string = "in training: score = ";
-            progress = global_beehack_counter;
-            separator = "";
-            denominator = "";
+        intro_string = "in training: score = ";
+        progress = global_beehack_counter;
+        separator = "";
+        denominator = "";
     } else {
         intro_string = "progress = ";
         progress = session_bee_counter;
@@ -1245,7 +1265,11 @@ Quiz.prototype.display_progress_fraction_bee_mode = function () {
     
     // todo hacky, make this more modular
     
-    if (this.module.id = 0.25) {
+    // Originally:
+    // if (this.module.id = 0.25) {
+    // bug!!! Do not use = in if!!!
+    
+    if (this.module.id === 0.25) {
         console.log("DEBUGGING all is well");
         el("fraction_header").innerHTML =  global_spelling_match_score_counter;
     } else {
@@ -1448,7 +1472,7 @@ Quiz.prototype.update_display = function() {
     
     
     // @beehack
-    if (this.module.id === 0.5){
+    if (this.module.id === 0.5) {
         // do nothing
         // we don't display progress in header
         this.display_progress_fraction_bee_mode();
@@ -2110,9 +2134,16 @@ Quiz.prototype.get_selected_region = function(){
 
 
 Quiz.prototype.clean_up = function() {
-    // This is a functiom so that we can add more cleaning-up stuff if needed.
+    // This is a function so that we can add more cleaning-up stuff if needed.
     // The next two lines remove all cheat sheets.
-    remove_children(el('image_display_box'));
+    // remove_children(el('image_display_box'));
+    
+    // bugfix: clear text from image_display_box element
+    // replaced this line:
+    // remove_children(el('image_display_box'));
+    // with this one:
+    el('image_display_box').innerHTML = '';
+    
     remove_children(el('vocab_cheat_sheet_div'));
     remove_children(el('etym_cheat_sheet_div'));
     remove_children(el('etym_cheat_sheet_div'));
