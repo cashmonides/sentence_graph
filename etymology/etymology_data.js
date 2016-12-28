@@ -11,7 +11,7 @@ var words = {
     },
     "november": {
         "grade": 12,
-        "meaning": "a month, formerly the 9th month of the Roman calendar",
+        "meaning": "a month, formerly the <span class=\"embedded_root\">9</span>th month of the Roman calendar",
         "part of speech": "noun",
         "roots": [
             "NON/NOV"
@@ -21,7 +21,7 @@ var words = {
     },
     "heptateuch": {
         "grade": 12,
-        "meaning": "the first seven books of the Old Testament",
+        "meaning": "the first <span class=\"embedded_root\">seven</span> books of the Old Testament",
         "part of speech": "noun",
         "roots": [
             "HEPT/HEPTA"
@@ -31,7 +31,7 @@ var words = {
     },
     "mesoamerica": {
         "grade": 12,
-        "meaning": "Middle America",
+        "meaning": "<span class=\"embedded_root\">Middle</span> America - Guatemala, Nicaragua, Panama, etc.",
         "part of speech": "noun",
         "roots": [
             "MESO"
@@ -41,7 +41,7 @@ var words = {
     },
     "paleolithic": {
         "grade": 12,
-        "meaning": "period of the Stone Age",
+        "meaning": "the <span class=\"embedded_root\">oldest</span> period of the <span class=\"embedded_root\">Stone</span> Age",
         "part of speech": "noun",
         "roots": [
             "PALE/PALEO"
@@ -51,7 +51,7 @@ var words = {
     },
     "september": {
         "grade": 12,
-        "meaning": "a month, formerly the 7th month of the Roman calendar",
+        "meaning": "a month, formerly the <span class=\"embedded_root\">7</span>th month of the Roman calendar",
         "part of speech": "noun",
         "roots": [
             "SEPT"
@@ -61,7 +61,7 @@ var words = {
     },
     "abbreviate": {
         "grade": 12,
-        "meaning": "to shorten",
+        "meaning": "to <span class=\"embedded_root\">short</span>en",
         "part of speech": "verb",
         "roots": [
             "A/AB/ABS root 2",
@@ -72,7 +72,7 @@ var words = {
     },
     "abbreviation": {
         "grade": 12,
-        "meaning": "a shortened version",
+        "meaning": "a <span class=\"embedded_root\">short</span>ened version",
         "part of speech": "noun",
         "roots": [
             "A/AB/ABS root 2",
@@ -83,7 +83,7 @@ var words = {
     },
     "abduct": {
         "grade": 12,
-        "meaning": "to carry away by force",
+        "meaning": "to <span class=\"embedded_root\">carry</span> <span class=\"embedded_root\">away</span> by force, kidnap",
         "part of speech": "verb",
         "roots": [
             "A/AB/ABS root 2",
@@ -116,7 +116,7 @@ var words = {
     },
     "abnormal": {
         "grade": 12,
-        "meaning": "away from normal, not normal",
+        "meaning": "<span class=\"embedded_root\">not</span> normal",
         "part of speech": "adjective",
         "roots": [
             "A/AB/ABS root 2"
@@ -126,7 +126,7 @@ var words = {
     },
     "absent": {
         "grade": 12,
-        "meaning": "away, not present",
+        "meaning": "<span class=\"embedded_root\">not</span> present",
         "part of speech": "adjective",
         "roots": [
             "A/AB/ABS root 2"
@@ -136,7 +136,7 @@ var words = {
     },
     "abyss": {
         "grade": 12,
-        "meaning": "something without a bottom",
+        "meaning": "something that does <span class=\"embedded_root\">not</span> a bottom",
         "part of speech": "noun",
         "roots": [
             "A/AN root 3"
@@ -146,7 +146,7 @@ var words = {
     },
     "accelerate": {
         "grade": 12,
-        "meaning": "to increase the speed of",
+        "meaning": "to increase the <span class=\"embedded_root\">speed</span> of",
         "part of speech": "verb",
         "roots": [
             "AC/AD/AN/AS",
@@ -168,7 +168,7 @@ var words = {
     },
     "accumulate": {
         "grade": 12,
-        "meaning": "to gather or pile up",
+        "meaning": "to gather or <span class=\"embedded_root\">pile</span> up",
         "part of speech": "verb",
         "roots": [
             "AC/AD/AN/AS",
@@ -179,7 +179,7 @@ var words = {
     },
     "achromatic": {
         "grade": 12,
-        "meaning": "without color",
+        "meaning": "<span class=\"embedded_root\">without</span> <span class=\"embedded_root\">color</span>",
         "part of speech": "adjective",
         "roots": [
             "A/AN root 3",
@@ -190,7 +190,7 @@ var words = {
     },
     "acrobat": {
         "grade": 12,
-        "meaning": "a \"high walker\"",
+        "meaning": "one who walks on a <span class=\"embedded_root\">high</span> wire or performs other stunts",
         "part of speech": "noun",
         "roots": [
             "ACRO"
@@ -200,7 +200,7 @@ var words = {
     },
     "acronym": {
         "grade": 12,
-        "meaning": "a word formed from the first (capital) letters of a word",
+        "meaning": "a <span class=\"embedded_root\">name</span> formed from the first (or <span class=\"embedded_root\">high</span>est) letters of a word",
         "part of speech": "noun",
         "roots": [
             "ACRO",
@@ -211,7 +211,7 @@ var words = {
     },
     "acrophobia": {
         "grade": 12,
-        "meaning": "fear of height",
+        "meaning": "<span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">height</span>",
         "part of speech": "noun",
         "roots": [
             "ACRO",
@@ -222,7 +222,7 @@ var words = {
     },
     "act": {
         "grade": 12,
-        "meaning": "thing done",
+        "meaning": "thing <span class=\"embedded_root\">done</span>",
         "part of speech": "noun",
         "roots": [
             "ACT"
@@ -232,7 +232,7 @@ var words = {
     },
     "activity": {
         "grade": 12,
-        "meaning": "something that a person does",
+        "meaning": "something that a person <span class=\"embedded_root\">does</span>",
         "part of speech": "noun",
         "roots": [
             "ACT"
@@ -278,7 +278,7 @@ var words = {
     },
     "aerate": {
         "grade": 12,
-        "meaning": "to let air reach something",
+        "meaning": "to let <span class=\"embedded_root\">air</span> reach something",
         "part of speech": "verb",
         "roots": [
             "AER"
@@ -288,7 +288,7 @@ var words = {
     },
     "aerial": {
         "grade": 12,
-        "meaning": "relating to the air",
+        "meaning": "relating to the <span class=\"embedded_root\">air</span>",
         "part of speech": "adjective",
         "roots": [
             "AER"
@@ -298,7 +298,7 @@ var words = {
     },
     "aerospace": {
         "grade": 12,
-        "meaning": "the air and the surrounding space",
+        "meaning": "the <span class=\"embedded_root\">air</span> and the surrounding space",
         "part of speech": "noun",
         "roots": [
             "AER"
@@ -308,7 +308,7 @@ var words = {
     },
     "aesthetic": {
         "grade": 12,
-        "meaning": "a sense of beauty, or pertaining to a sense of beauty",
+        "meaning": "a <span class=\"embedded_root\">sensation</span> of beauty, or pertaining to a <span class=\"embedded_root\">sense</span> of beauty",
         "part of speech": [
             "noun",
             "adjective"
@@ -331,7 +331,7 @@ var words = {
     },
     "agrarian": {
         "grade": 12,
-        "meaning": "relating to the management of land",
+        "meaning": "relating to the management of land and <span class=\"embedded_root\">field</span>s where crops grow",
         "part of speech": "adjective",
         "roots": [
             "AGR"
@@ -341,7 +341,7 @@ var words = {
     },
     "agribusiness": {
         "grade": 12,
-        "meaning": "the act of making money by utilizing land",
+        "meaning": "making a profit by planting in land and <span class=\"embedded_root\">field</span>s",
         "part of speech": "noun",
         "roots": [
             "AGR"
@@ -351,7 +351,7 @@ var words = {
     },
     "agriculture": {
         "grade": 12,
-        "meaning": "management of the land",
+        "meaning": "management of the land and <span class=\"embedded_root\">field</span>s where crops grow",
         "part of speech": "noun",
         "roots": [
             "AGR"
@@ -361,7 +361,7 @@ var words = {
     },
     "alexia": {
         "grade": 12,
-        "meaning": "loss of the ability to read",
+        "meaning": "<span class=\"embedded_root\">lack</span> or loss of the ability to <span class=\"embedded_root\">read</span>",
         "part of speech": "noun",
         "roots": [
             "A/AN root 3",
@@ -372,7 +372,7 @@ var words = {
     },
     "alter ego": {
         "grade": 12,
-        "meaning": "a higher aspect of oneself",
+        "meaning": "an alternative identity; a different aspect of one's <span class=\"embedded_root\">self</span>",
         "part of speech": "noun",
         "roots": [
             "EGO"
@@ -382,7 +382,7 @@ var words = {
     },
     "ambidextrous": {
         "grade": 12,
-        "meaning": "able to use both hands equally",
+        "meaning": "able to use <span class=\"embedded_root\">both</span> hands equally",
         "part of speech": "adjective",
         "roots": [
             "AMBI/AMPHI"
@@ -392,7 +392,7 @@ var words = {
     },
     "ambiguous": {
         "grade": 12,
-        "meaning": "having more than one meaning",
+        "meaning": "uncertain, suggesting <span class=\"embedded_root\">both</span> of two alternative meanings",
         "part of speech": "adjective",
         "roots": [
             "AMBI/AMPHI"
@@ -402,7 +402,7 @@ var words = {
     },
     "ambivalence": {
         "grade": 12,
-        "meaning": "conflicting or opposite feelings toward a person or thing",
+        "meaning": "the quality of having <span class=\"embedded_root\">both</span> positive and negative feelings toward something",
         "part of speech": "noun",
         "roots": [
             "AMBI/AMPHI"
@@ -412,7 +412,7 @@ var words = {
     },
     "amble": {
         "grade": 12,
-        "meaning": "to walk in a slow, relaxed way",
+        "meaning": "to <span class=\"embedded_root\">walk</span> in a slow, relaxed way",
         "part of speech": "verb",
         "roots": [
             "AMBUL"
@@ -422,7 +422,7 @@ var words = {
     },
     "ambulance": {
         "grade": 12,
-        "meaning": "a vehicle that moves a patient",
+        "meaning": "a vehicle that transports people to hospitals (in the early days called a <span class=\"embedded_root\">walk</span>ing hospital",
         "part of speech": "noun",
         "roots": [
             "AMBUL"
@@ -432,7 +432,7 @@ var words = {
     },
     "ambulant": {
         "grade": 12,
-        "meaning": "walking or moving around",
+        "meaning": "able to <span class=\"embedded_root\">walk</span>",
         "part of speech": "adjective",
         "roots": [
             "AMBUL"
@@ -442,7 +442,7 @@ var words = {
     },
     "amiable": {
         "grade": 12,
-        "meaning": "friendly, pleasant, lovable",
+        "meaning": "friendly, pleasant, <span class=\"embedded_root\">lov</span>able",
         "part of speech": "adjective",
         "roots": [
             "AMI/AMO"
@@ -452,7 +452,7 @@ var words = {
     },
     "amity": {
         "grade": 12,
-        "meaning": "friendly and peaceful relations",
+        "meaning": "friendly and <span class=\"embedded_root\">lov</span>ing relations",
         "part of speech": "noun",
         "roots": [
             "AMI/AMO"
@@ -462,7 +462,7 @@ var words = {
     },
     "amorous": {
         "grade": 12,
-        "meaning": "showing romantic love",
+        "meaning": "showing romantic <span class=\"embedded_root\">love</span>",
         "part of speech": "adjective",
         "roots": [
             "AMI/AMO"
@@ -472,7 +472,7 @@ var words = {
     },
     "amorphous": {
         "grade": 12,
-        "meaning": "without distinct shape or form",
+        "meaning": "without distinct <span class=\"embedded_root\">shape</span> or <span class=\"embedded_root\">form</span>",
         "part of speech": "adjective",
         "roots": [
             "A/AN root 3",

@@ -118,6 +118,12 @@ Quiz.prototype.start = function() {
         });
     }
     
+    if (!this.module) {
+        console.log("DEBUGGING 999 this.module.id doesn't exist at this stage ");
+    } else {
+        console.log("DEBUGGING 999 this.module.id = ", this.module.id);
+    }
+    
     
     //the following line tests the conditional
     if (!this.user.load(callback)) {
@@ -233,6 +239,7 @@ Quiz.prototype.get_start_module = function () {
         this.advance_improve_status = "mf";
         return ups;
     } else if ('bee' in ups) {
+        console.log("ups triggered and bee entered");
         back.log("ups triggered and bee entered");
         return this.user.get_spelling_training_module();
         // return this.user.get_current_module();
@@ -381,13 +388,29 @@ var get_spelling_match_score = function () {
 
 Quiz.prototype.next_module = function () {
     console.log("entering next_module");
+    
+    
+    
+    
+    if (!this.module) {
+        console.log("DEBUGGING 999 this.module.id doesn't exist at this stage ");
+    } else {
+        console.log("DEBUGGING 999 this.module.id = ", this.module.id);
+    }
+    
+   
     this.next_submodule();
 };
 
 Quiz.prototype.next_submodule = function() {
     
+    console.log("entering next_submodule");
     
-    
+    if (!this.module) {
+        console.log("DEBUGGING 999 this.module.id doesn't exist at this stage ");
+    } else {
+        console.log("DEBUGGING 999 this.module.id = ", this.module.id);
+    }
     
     
     //initializes a default
@@ -410,75 +433,20 @@ Quiz.prototype.next_submodule = function() {
 };
 
 
-Quiz.prototype.process_spelling_bee_level_buttons = function () {
-    
-    
-    var list_of_buttons_to_cut_off = [];
-    
-    var egg_cutoff = 9;
-    var larva_cutoff = 20;
-    var pupa_cutoff = 30;
-    var drone_cutoff = 40;
-    var worker_cutoff = 41;
-    var warrior_cutoff = 42;
-    var queen_cutoff = 500;
-    
-    
-    
-    
-    if (session_bee_counter > egg_cutoff) {
-        list_of_buttons_to_cut_off.push("egg")
-    }
-    if (session_bee_counter > larva_cutoff) {
-        list_of_buttons_to_cut_off.push("larva")
-    }
-    if (session_bee_counter > pupa_cutoff) {
-        list_of_buttons_to_cut_off.push("pupa")
-    }
-    if (session_bee_counter > drone_cutoff) {
-        list_of_buttons_to_cut_off.push("drone")
-    }
-    if (session_bee_counter > worker_cutoff) {
-        list_of_buttons_to_cut_off.push("worker")
-    }
-    if (session_bee_counter > warrior_cutoff) {
-        list_of_buttons_to_cut_off.push("warrior")
-    }
-    
-    for (var i=0; i < list_of_buttons_to_cut_off.length; i++) {
-        var level_to_hide = list_of_buttons_to_cut_off[i];
-        var element = el("set_spelling_bee_level_button_" + level_to_hide);
-        element.style.backgroundColor = "gray";
-        element.style.fontSize = "7px";
-        element.style.color = "lightgray";
-    }
-    
-    
-    // var test_boolean = session_bee_counter > cutoff;
-    // console.log("BEEHACK1999 test_boolean = ", test_boolean);
-    
-    
-    // var level_to_hide = "drone"
-    
-    // // @beehack
-    // // todo
-    // // put this somewhere up top
-    // if (test_boolean) {
-    //     var element = el("set_spelling_bee_level_button_" + level_to_hide);
-    //     element.style.backgroundColor = "red";
-    //     element.style.fontSize = "6px";
-    //     // element.style.color = "6px";
-    // }
-}
 
 
 // @beehack
 Quiz.prototype.next_submodule_without_post = function() {
     
     
+    console.log("DEBUGGING 999 entering next_submodule without post, this.module.id = ", this.module.id);
     
     
-    
+    if (!this.module) {
+        console.log("DEBUGGING 999 this.module.id doesn't exist at this stage ");
+    } else {
+        console.log("DEBUGGING 999 this.module.id = ", this.module.id);
+    }
     
     
     
@@ -490,13 +458,7 @@ Quiz.prototype.next_submodule_without_post = function() {
         incorrect_streak: 0
     };
     
-    // this.initialize_accuracy_dictionary();
     
-    // if (!this.user.is_mf()) {
-    //     this.next_submodule_not_mf();
-    // } else {
-    //     this.next_submodule_mf();
-    // }
     this.next_question();
 };
 
@@ -589,6 +551,67 @@ Quiz.prototype.next_submodule_not_mf = function () {
     
     
     this.initialize_time_metrics('insert_time_data');
+}
+
+Quiz.prototype.process_spelling_bee_level_buttons = function () {
+    
+    
+    var list_of_buttons_to_cut_off = [];
+    
+    var egg_cutoff = 9;
+    var larva_cutoff = 20;
+    var pupa_cutoff = 30;
+    var drone_cutoff = 40;
+    var worker_cutoff = 41;
+    var warrior_cutoff = 42;
+    var queen_cutoff = 500;
+    
+    
+    
+    
+    if (session_bee_counter > egg_cutoff) {
+        list_of_buttons_to_cut_off.push("egg")
+    }
+    if (session_bee_counter > larva_cutoff) {
+        list_of_buttons_to_cut_off.push("larva")
+    }
+    if (session_bee_counter > pupa_cutoff) {
+        list_of_buttons_to_cut_off.push("pupa")
+    }
+    if (session_bee_counter > drone_cutoff) {
+        list_of_buttons_to_cut_off.push("drone")
+    }
+    if (session_bee_counter > worker_cutoff) {
+        list_of_buttons_to_cut_off.push("worker")
+    }
+    if (session_bee_counter > warrior_cutoff) {
+        list_of_buttons_to_cut_off.push("warrior")
+    }
+    
+    for (var i=0; i < list_of_buttons_to_cut_off.length; i++) {
+        var level_to_hide = list_of_buttons_to_cut_off[i];
+        var element = el("set_spelling_bee_level_button_" + level_to_hide);
+        element.style.backgroundColor = "gray";
+        element.style.fontSize = "7px";
+        element.style.color = "lightgray";
+    }
+    
+    
+    // var test_boolean = session_bee_counter > cutoff;
+    // console.log("BEEHACK1999 test_boolean = ", test_boolean);
+    
+    
+    // var level_to_hide = "drone"
+    
+    // // @beehack
+    // // todo
+    // // put this somewhere up top
+    // if (test_boolean) {
+    //     var element = el("set_spelling_bee_level_button_" + level_to_hide);
+    //     element.style.backgroundColor = "red";
+    //     element.style.fontSize = "6px";
+    //     // element.style.color = "6px";
+    // }
 }
 
 
@@ -778,10 +801,47 @@ Quiz.get_mode = function(mode_number) {
 
 Quiz.prototype.next_question = function (error) {
     
+    
+    console.log("999 this.module.id = ", this.module.id);
     // @beehack
-    if (this.module.id === 0.5) {
+    if (this.module.id === 0.5 || this.module.id === 0.25) {
+        
+        console.log("entering short term beehack interceptor");
+        
         set_display("set_spelling_bee_level_button", 'initial');
+        
+        
+        // todo fix, this is hacky
+        if (!this.user.data.spelling_level) {
+            this.user.intialize_spelling_bee_counter_if_it_does_not_already_exist();
+        }
+        
+        
+        // todo this is also hacky
+        back.log('LOG: entering try block in next question')
+        this.clean_up();
+        this.next_mode(error);
+        back.log('LOG: about to call next_question');
+        this.game.next_question(this);
+        back.log('LOG: no error after calling next_question')
+        
+        
+        // todo very important: need to figure out how to clear this box
+        // without calling some ad hoc step
+        // remove_children(el('spelling_hint_box'));
+        var div_to_clear_ad_hoc = el('spelling_hint_box');
+        div_to_clear_ad_hoc.innerHTML = "";
+        
+        
+        var div_to_clear_ad_hoc2 = el('dash_hint_box');
+        div_to_clear_ad_hoc2.innerHTML = "";
+        
+        return;
+        
     }
+    
+    
+    console.log("999 post bee interceptor")
     
     // todo very important: need to figure out how to clear this box
     // without calling some ad hoc step

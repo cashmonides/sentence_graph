@@ -518,7 +518,7 @@ SpellingModeGame.prototype.next_question = function(){
         
         
         
-        
+        /// @999 this was commented out, see if it's working via counter
         // we set our beehack level with no increment
         // this.set_beehack_level123();
         
@@ -597,6 +597,13 @@ SpellingModeGame.prototype.next_question = function(){
         bug.log("PROBLEM: invalid question type in spelling mode");
     }
     
+    
+    // @999
+    if (this.level) {
+        console.log("DEBUGGING 999 this.level = ", this.level);
+    } else {
+        console.log("DEBUGGING 999 this.level doesn't exist");
+    }
     
     
     
