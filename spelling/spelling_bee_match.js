@@ -301,6 +301,12 @@ var show_spelling_match_results1 = function () {
 }
 
 
+
+// sometimes we'll only want to display the top n finishers
+// to avoid bruising egos
+// var cut_off_all_but_top = false;
+var cut_off_all_but_top = 3;
+
 var sort_and_display_match_results1 = function (data) {
     var element = el("spelling_match_score_results1");
     
@@ -310,13 +316,38 @@ var sort_and_display_match_results1 = function (data) {
     // element.innerHTML = JSON.stringify(sorted_data);
     
     for (var i = 0; i < sorted_data.length; i++) {
+        
+        
+        if (cut_off_all_but_top) {
+            if (i+1>cut_off_all_but_top) {
+                break;
+            }
+        }
+        
         var score_display = process_score_for_display(sorted_data[i]);
-        var ranking = i + 1;
+        // var ranking = i + 1;
+        var ranking = generate_ranking_from_int(i+1);
         element.innerHTML += ranking + " " + "score: " + score_display;
     }
     
     
     move_game_to_completed1;
+}
+
+var generate_ranking_from_int = function (int) {
+    var suffix;
+    
+    if (int === 1) {
+        suffix = "st";
+    } else if (int === 2) {
+        suffix = "nd";
+    } else if (int === 3) {
+        suffix = "rd";
+    } else {
+        suffix = "th";
+    }
+    
+    return int + suffix;
 }
 
 var process_score_for_display = function (list_item) {
@@ -368,7 +399,15 @@ var final_callback = function (pin, column) {
 var move_game_to_completed1 = function () {
     var pin = random_spelling_bee_number1;
     var old_path = ["test", pin];
-    var new_path = ["test", "completed_games", pin];
+    
+    var date_id = Date.now();
+    
+    // we can't merely push the pin to firebase 
+    // or we will end up with non-unique reference ids
+    // so we make a unique id
+    var unique_id = pin + "@" + date_id;
+    
+    var new_path = ["test", "completed_games", unique_id];
     
     // callback is optional in set
     Persist.get(old_path, function (x) {
