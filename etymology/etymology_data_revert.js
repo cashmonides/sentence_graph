@@ -319,6 +319,16 @@ var words = {
         "type": "none",
         "word": "aesthetic"
     },
+    "afire": {
+        "grade": 12,
+        "meaning": "on fire",
+        "part of speech": "adjective",
+        "roots": [
+            "A root 1"
+        ],
+        "type": "none",
+        "word": "afire"
+    },
     "agrarian": {
         "grade": 12,
         "meaning": "relating to the management of land and <span class=\"embedded_root\">field</span>s where crops grow",
@@ -473,7 +483,7 @@ var words = {
     },
     "amphibian": {
         "grade": 12,
-        "meaning": "an type of animal that can live <span class=\"embedded_root\">both</span> in water and on land",
+        "meaning": "an type of animal that can live both in water and on land",
         "part of speech": "noun",
         "roots": [
             "AMBI/AMPHI",
@@ -484,7 +494,7 @@ var words = {
     },
     "anachronism": {
         "grade": 12,
-        "meaning": "something that is <span class=\"embedded_root\">not</span> in the right place in <span class=\"embedded_root\">time</span>, such as a television in ancient Greece",
+        "meaning": "something that is not in the right place in time",
         "part of speech": "noun",
         "roots": [
             "ANA",
@@ -495,7 +505,7 @@ var words = {
     },
     "analgesic": {
         "grade": 12,
-        "meaning": "a drug that makes a patient <span class=\"embedded_root\">not</span> experience <span class=\"embedded_root\">pain</span>",
+        "meaning": "a drug that makes one pain-free",
         "part of speech": "noun",
         "roots": [
             "A/AN root 3",
@@ -537,7 +547,7 @@ var words = {
     },
     "androgynous": {
         "grade": 12,
-        "meaning": "being both <span class=\"embedded_root\">male</span> and <span class=\"embedded_root\">female</span>",
+        "meaning": "being both male and female",
         "part of speech": "adjective",
         "roots": [
             "ANDR",
@@ -548,7 +558,7 @@ var words = {
     },
     "android": {
         "grade": 12,
-        "meaning": "resembling a <span class=\"embedded_root\">human</span>, or a robot resembling a <span class=\"embedded_root\">human</span>",
+        "meaning": "resembling a human, or a robot resembling a human",
         "part of speech": [
             "noun",
             "adjective"
@@ -561,7 +571,7 @@ var words = {
     },
     "anhydrous": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">without</span> <span class=\"embedded_root\">water</span>",
+        "meaning": "without water",
         "part of speech": "adjective",
         "roots": [
             "A/AN root 3",
@@ -572,7 +582,7 @@ var words = {
     },
     "animal": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">liv</span>ing organism that <span class=\"embedded_root\">breath</span>es, or, according to some, a living organism that possesses a <span class=\"embedded_root\">soul</span>",
+        "meaning": "a living organism",
         "part of speech": "noun",
         "roots": [
             "ANIM"
@@ -582,7 +592,7 @@ var words = {
     },
     "animate": {
         "grade": 12,
-        "meaning": "to make <span class=\"embedded_root\">alive</span>",
+        "meaning": "to make alive",
         "part of speech": "verb",
         "roots": [
             "ANIM"
@@ -592,7 +602,7 @@ var words = {
     },
     "anniversary": {
         "grade": 12,
-        "meaning": "a date observed once a <span class=\"embedded_root\">year</span> (i.e., when the year <span class=\"embedded_root\">turn</span>s)",
+        "meaning": "a date observed once a year (literally, when the year turns)",
         "part of speech": "noun",
         "roots": [
             "ANN/ENN",
@@ -603,7 +613,7 @@ var words = {
     },
     "annotate": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">mark</span> something with comments",
+        "meaning": "to add remarks to something",
         "part of speech": "verb",
         "roots": [
             "NOT"
@@ -613,7 +623,7 @@ var words = {
     },
     "announce": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">declare</span> publicly",
+        "meaning": "to declare (bring news to) the public",
         "part of speech": "verb",
         "roots": [
             "NOUN/NUNC"
@@ -623,7 +633,7 @@ var words = {
     },
     "annual": {
         "grade": 12,
-        "meaning": "happening once a <span class=\"embedded_root\">year</span>",
+        "meaning": "happening once a year",
         "part of speech": "adjective",
         "roots": [
             "ANN/ENN"
@@ -633,7 +643,7 @@ var words = {
     },
     "antecede": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">come</span> <span class=\"embedded_root\">before</span> something in time",
+        "meaning": "to come before something in time",
         "part of speech": "verb",
         "roots": [
             "ANTE",
@@ -644,7 +654,7 @@ var words = {
     },
     "antemeridian": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">before</span> noon",
+        "meaning": "before noon",
         "part of speech": "adjective",
         "roots": [
             "ANTE"
@@ -654,7 +664,7 @@ var words = {
     },
     "anteroom": {
         "grade": 12,
-        "meaning": "a small room <span class=\"embedded_root\">before</span> the main room",
+        "meaning": "a small room before the main room",
         "part of speech": "noun",
         "roots": [
             "ANTE"
@@ -664,7 +674,7 @@ var words = {
     },
     "anthology": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">collect</span>ion of treasured writings, gathered together in the same way as <span class=\"embedded_root\">flower</span>s are gathered",
+        "meaning": "a collection of treasured writings",
         "part of speech": "noun",
         "roots": [
             "ANTH",
@@ -675,7 +685,7 @@ var words = {
     },
     "anthozoan": {
         "grade": 12,
-        "meaning": "an <span class=\"embedded_root\">animal</span> that resembles a <span class=\"embedded_root\">flower</span>, such as sea anemones and corals",
+        "meaning": "half plant, half animal, like anemones and corals",
         "part of speech": "adjective",
         "roots": [
             "ANTH",
@@ -686,7 +696,7 @@ var words = {
     },
     "anthropology": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">man</span>kind",
+        "meaning": "the study of mankind",
         "part of speech": "noun",
         "roots": [
             "ANTHROP",
@@ -697,7 +707,7 @@ var words = {
     },
     "anthropomorphism": {
         "grade": 12,
-        "meaning": "giving <span class=\"embedded_root\">human</span> <span class=\"embedded_root\">form</span> to non-<span class=\"embedded_root\">human</span>s",
+        "meaning": "giving human form to non-human things",
         "part of speech": "noun",
         "roots": [
             "ANTHROP",
@@ -708,7 +718,7 @@ var words = {
     },
     "anthropophagy": {
         "grade": 12,
-        "meaning": "cannibalism, i.e. <span class=\"embedded_root\">eating</span> <span class=\"embedded_root\">human</span>s",
+        "meaning": "cannibalism, eating people",
         "part of speech": "noun",
         "roots": [
             "ANTHROP",
@@ -719,7 +729,7 @@ var words = {
     },
     "antibody": {
         "grade": 12,
-        "meaning": "a substance that destroys and acts <span class=\"embedded_root\">against</span> micro-organisms",
+        "meaning": "a substance that destroys micro-organisms",
         "part of speech": "noun",
         "roots": [
             "ANTI"
@@ -729,7 +739,7 @@ var words = {
     },
     "antipathy": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">feeling</span> of hostility or <span class=\"embedded_root\">opposition</span>",
+        "meaning": "a feeling of great dislike",
         "part of speech": "noun",
         "roots": [
             "ANTI",
@@ -740,7 +750,7 @@ var words = {
     },
     "antiseptic": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">prevent</span>ing infection",
+        "meaning": "preventing infection",
         "part of speech": "adjective",
         "roots": [
             "ANTI"
@@ -750,7 +760,7 @@ var words = {
     },
     "antisocial": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">oppos</span>ing social norms",
+        "meaning": "opposing social norms",
         "part of speech": "adjective",
         "roots": [
             "ANTI"
@@ -760,7 +770,7 @@ var words = {
     },
     "apathy": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">lack</span> of <span class=\"embedded_root\">feeling</span> or interest",
+        "meaning": "a lack of feeling or interest",
         "part of speech": "noun",
         "roots": [
             "A/AN root 3",
@@ -768,6 +778,16 @@ var words = {
         ],
         "type": "none",
         "word": "apathy"
+    },
+    "apatite": {
+        "grade": 12,
+        "meaning": "a group of common minerals",
+        "part of speech": "noun",
+        "roots": [
+            "LITE/ITE/LITH"
+        ],
+        "type": "none",
+        "word": "apatite"
     },
     "aphorism": {
         "grade": 12,
@@ -781,7 +801,7 @@ var words = {
     },
     "apology": {
         "grade": 12,
-        "meaning": "an explicit <span class=\"embedded_root\">expression</span> of regret",
+        "meaning": "an explicit expression of regret",
         "part of speech": "noun",
         "roots": [
             "APO/APHO",
@@ -802,7 +822,7 @@ var words = {
     },
     "aquamarine": {
         "grade": 12,
-        "meaning": "color of <span class=\"embedded_root\">sea</span> <span class=\"embedded_root\">water</span>",
+        "meaning": "color of sea water",
         "part of speech": [
             "noun",
             "adjective"
@@ -816,7 +836,7 @@ var words = {
     },
     "aquarium": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">water</span> container for fish",
+        "meaning": "a water container for fish",
         "part of speech": "noun",
         "roots": [
             "AQU/AQUA"
@@ -826,7 +846,7 @@ var words = {
     },
     "aquatic": {
         "grade": 12,
-        "meaning": "relating to <span class=\"embedded_root\">water</span>",
+        "meaning": "relating to water",
         "part of speech": "adjective",
         "roots": [
             "AQU/AQUA"
@@ -836,7 +856,7 @@ var words = {
     },
     "aqueduct": {
         "grade": 12,
-        "meaning": "a pipeline that <span class=\"embedded_root\">lead</span>s <span class=\"embedded_root\">water</span> from place to place",
+        "meaning": "a pipeline for water",
         "part of speech": "noun",
         "roots": [
             "AQU/AQUA",
@@ -847,7 +867,7 @@ var words = {
     },
     "aquifer": {
         "grade": 12,
-        "meaning": "an underground <span class=\"embedded_root\">water</span> supply",
+        "meaning": "an underground water supply",
         "part of speech": "n",
         "roots": [
             "AQU/AQUA",
@@ -858,7 +878,7 @@ var words = {
     },
     "arbor": {
         "grade": 12,
-        "meaning": "a shady area formed by <span class=\"embedded_root\">tree</span>s",
+        "meaning": "a shady area formed by trees",
         "part of speech": "noun",
         "roots": [
             "ARBOR"
@@ -868,7 +888,7 @@ var words = {
     },
     "arborist": {
         "grade": 12,
-        "meaning": "someone working with <span class=\"embedded_root\">tree</span>s",
+        "meaning": "someone working with trees",
         "part of speech": "noun",
         "roots": [
             "ARBOR"
@@ -878,7 +898,7 @@ var words = {
     },
     "arborous": {
         "grade": 12,
-        "meaning": "having many <span class=\"embedded_root\">tree</span>s",
+        "meaning": "having many trees",
         "part of speech": "adjective",
         "roots": [
             "ARBOR"
@@ -888,7 +908,7 @@ var words = {
     },
     "archaeology": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> cultures and humans",
+        "meaning": "the study of ancient cultures",
         "part of speech": "noun",
         "roots": [
             "ARCH root 2",
@@ -899,7 +919,7 @@ var words = {
     },
     "archaic": {
         "grade": 12,
-        "meaning": "belonging to an <span class=\"embedded_root\">ancient</span> period",
+        "meaning": "belonging to an earlier period",
         "part of speech": "adjective",
         "roots": [
             "ARCH root 2"
@@ -909,7 +929,7 @@ var words = {
     },
     "archbishop": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">high</span>est ranking bishop",
+        "meaning": "the highest ranking bishop",
         "part of speech": "noun",
         "roots": [
             "ARCH root 1"
@@ -919,7 +939,7 @@ var words = {
     },
     "archenemy": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">highest</span> or worst enemy",
+        "meaning": "chief or worst enemy",
         "part of speech": "noun",
         "roots": [
             "ARCH root 1"
@@ -929,7 +949,7 @@ var words = {
     },
     "archive": {
         "grade": 12,
-        "meaning": "a collection of <span class=\"embedded_root\">ancient</span> or historical materials and records",
+        "meaning": "a collection of historical materials",
         "part of speech": "noun",
         "roots": [
             "ARCH root 2"
@@ -939,7 +959,7 @@ var words = {
     },
     "arteriosclerosis": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">hard</span>ening of the arterial walls",
+        "meaning": "hardening of the arterial walls",
         "part of speech": "noun",
         "roots": [
             "SCLER/SCHLERO"
@@ -949,7 +969,7 @@ var words = {
     },
     "arthritis": {
         "grade": 12,
-        "meaning": "inflammation of a <span class=\"embedded_root\">joint</span>",
+        "meaning": "inflammation of a joint",
         "part of speech": "noun",
         "roots": [
             "ARTHR"
@@ -959,7 +979,7 @@ var words = {
     },
     "arthropod": {
         "grade": 12,
-        "meaning": "an invertebrate with <span class=\"embedded_root\">joint</span>ed <span class=\"embedded_root\">leg</span>s, like spiders, crustaceans, and insects",
+        "meaning": "an invertebrate with jointed legs, like spiders, crustaceans, and insects",
         "part of speech": "noun",
         "roots": [
             "ARTHR",
@@ -970,7 +990,7 @@ var words = {
     },
     "arthroscope": {
         "grade": 12,
-        "meaning": "a tool to see inside a <span class=\"embedded_root\">joint</span>",
+        "meaning": "a tool to see inside a joint",
         "part of speech": "noun",
         "roots": [
             "ARTHR"
@@ -980,7 +1000,7 @@ var words = {
     },
     "artifact": {
         "grade": 12,
-        "meaning": "an object <span class=\"embedded_root\">made</span> by the <span class=\"embedded_root\">skill</span> of a person, e.g. a stone axe or a coin",
+        "meaning": "an object made by a person",
         "part of speech": "noun",
         "roots": [
             "ART",
@@ -991,7 +1011,7 @@ var words = {
     },
     "artisan": {
         "grade": 12,
-        "meaning": "a person <span class=\"embedded_root\">skill</span>ed in a craft",
+        "meaning": "a person skilled in a craft",
         "part of speech": "noun",
         "roots": [
             "ART"
@@ -1001,7 +1021,7 @@ var words = {
     },
     "artist": {
         "grade": 12,
-        "meaning": "a person who uses <span class=\"embedded_root\">skill</span> to produce objects such as paintings or sculpture",
+        "meaning": "a person who creates skillfully",
         "part of speech": "noun",
         "roots": [
             "ART"
@@ -1011,7 +1031,7 @@ var words = {
     },
     "ascend": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">climb</span> upward",
+        "meaning": "to climb upward",
         "part of speech": "verb",
         "roots": [
             "SCEND"
@@ -1021,7 +1041,7 @@ var words = {
     },
     "ascertain": {
         "grade": 12,
-        "meaning": "to find out something with <span class=\"embedded_root\">confidence</span> and <span class=\"embedded_root\">cert</span>ainty",
+        "meaning": "to find out something with certainty",
         "part of speech": "verb",
         "roots": [
             "CERT"
@@ -1031,7 +1051,7 @@ var words = {
     },
     "ashore": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">on</span> the shore",
+        "meaning": "on the shore",
         "part of speech": "adjective",
         "roots": [
             "A root 1"
@@ -1041,7 +1061,7 @@ var words = {
     },
     "aside": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">on</span> the side",
+        "meaning": "on the side",
         "part of speech": "adjective",
         "roots": [
             "A root 1"
@@ -1051,7 +1071,7 @@ var words = {
     },
     "assist": {
         "grade": 12,
-        "meaning": "to help, i.e. to  <span class=\"embedded_root\">stand</span> <span class=\"embedded_root\">near</span>by in support",
+        "meaning": "to stand by (next to), to help",
         "part of speech": "verb",
         "roots": [
             "AC/AD/AN/AS",
@@ -1062,7 +1082,7 @@ var words = {
     },
     "asterisk": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">star</span>-shaped sign used in books to annotate words",
+        "meaning": "a star-shaped sign used as a reference tool",
         "part of speech": "noun",
         "roots": [
             "ASTRO/ASTER"
@@ -1072,7 +1092,7 @@ var words = {
     },
     "astronaut": {
         "grade": 12,
-        "meaning": "a person <span class=\"embedded_root\">travel</span>ing to the <span class=\"embedded_root\">star</span>s",
+        "meaning": "a person traveling to the stars",
         "part of speech": "noun",
         "roots": [
             "ASTRO/ASTER"
@@ -1082,7 +1102,7 @@ var words = {
     },
     "astronomer": {
         "grade": 12,
-        "meaning": "someone who studies the laws of the <span class=\"embedded_root\">star</span>s",
+        "meaning": "someone who studies the stars",
         "part of speech": "noun",
         "roots": [
             "ASTRO/ASTER"
@@ -1092,7 +1112,7 @@ var words = {
     },
     "ataxia": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">loss</span> of the ability to control one's <span class=\"embedded_root\">motion</span>",
+        "meaning": "loss of the ability to coordinate muscle action",
         "part of speech": "noun",
         "roots": [
             "A/AN root 3",
@@ -1103,7 +1123,7 @@ var words = {
     },
     "athlete": {
         "grade": 12,
-        "meaning": "a person who engages in a <span class=\"embedded_root\">competitive</span> sport",
+        "meaning": "someone good at a sport",
         "part of speech": "noun",
         "roots": [
             "ATHL"
@@ -1113,7 +1133,7 @@ var words = {
     },
     "attract": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">pull</span> objects nearer",
+        "meaning": "to pull objects nearer",
         "part of speech": "verb",
         "roots": [
             "TRACT"
@@ -1123,7 +1143,7 @@ var words = {
     },
     "audible": {
         "grade": 12,
-        "meaning": "loud enough to be <span class=\"embedded_root\">hear</span>d",
+        "meaning": "loud enough to be heard",
         "part of speech": "adjective",
         "roots": [
             "AUD/AUDI/AUDIO"
@@ -1133,7 +1153,7 @@ var words = {
     },
     "audience": {
         "grade": 12,
-        "meaning": "people who <span class=\"embedded_root\">listen</span> to a speech or performance",
+        "meaning": "people who listen to a program",
         "part of speech": "noun",
         "roots": [
             "AUD/AUDI/AUDIO"
@@ -1143,7 +1163,7 @@ var words = {
     },
     "audiometer": {
         "grade": 12,
-        "meaning": "an instrument that <span class=\"embedded_root\">measure</span>s one's ability to <span class=\"embedded_root\">hear</span>",
+        "meaning": "an instrument that measures hearing acuteness",
         "part of speech": "noun",
         "roots": [
             "AUD/AUDI/AUDIO",
@@ -1154,7 +1174,7 @@ var words = {
     },
     "audiovisual": {
         "grade": 12,
-        "meaning": "relating to <span class=\"embedded_root\">sound</span> and <span class=\"embedded_root\">vision</span>",
+        "meaning": "relating to sound and vision",
         "part of speech": "adjective",
         "roots": [
             "AUD/AUDI/AUDIO",
@@ -1165,7 +1185,7 @@ var words = {
     },
     "autocrat": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">rule</span>r who has all power concentrated in him<span class=\"embedded_root\">self</span>",
+        "meaning": "a person who governs with absolute power",
         "part of speech": "noun",
         "roots": [
             "AUTO",
@@ -1176,7 +1196,7 @@ var words = {
     },
     "autograph": {
         "grade": 12,
-        "meaning": "someone's signature, <span class=\"embedded_root\">writt</span>en with their <span class=\"embedded_root\">own</span> hand",
+        "meaning": "someone's signature, written with their own hand",
         "part of speech": "noun",
         "roots": [
             "AUTO",
@@ -1187,7 +1207,7 @@ var words = {
     },
     "automatic": {
         "grade": 12,
-        "meaning": "moving by it<span class=\"embedded_root\">self</span>",
+        "meaning": "moving by itself",
         "part of speech": "adjective",
         "roots": [
             "AUTO"
@@ -1197,7 +1217,7 @@ var words = {
     },
     "autopsy": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">visual</span> examination of a dead body by one's <span class=\"embedded_root\">self</span>, i.e. an eyewitness examination",
+        "meaning": "the examination of a dead body",
         "part of speech": "noun",
         "roots": [
             "AUTO",
@@ -1208,7 +1228,7 @@ var words = {
     },
     "aversion": {
         "grade": 12,
-        "meaning": "the act of <span class=\"embedded_root\">turn</span>ing <span class=\"embedded_root\">away</span> from",
+        "meaning": "the act of turning away from",
         "part of speech": "noun",
         "roots": [
             "A/AB/ABS root 2",
@@ -1219,7 +1239,7 @@ var words = {
     },
     "aviary": {
         "grade": 12,
-        "meaning": "a large enclosure for <span class=\"embedded_root\">bird</span>s",
+        "meaning": "a large enclosure for birds",
         "part of speech": "noun",
         "roots": [
             "AVI"
@@ -1229,7 +1249,7 @@ var words = {
     },
     "aviation": {
         "grade": 12,
-        "meaning": "the art of designing or operating aircraft (an aircraft is, in a sense, a mechanical <span class=\"embedded_root\">bird</span>",
+        "meaning": "the art of designing or operating aircraft",
         "part of speech": "noun",
         "roots": [
             "AVI"
@@ -1237,19 +1257,9 @@ var words = {
         "type": "none",
         "word": "aviation"
     },
-    "aviator": {
-        "grade": 12,
-        "meaning": "an airplane pilot, i.e. one who operates a mechanical <span class=\"embedded_root\">bird</span>",
-        "part of speech": "noun",
-        "roots": [
-            "AVI"
-        ],
-        "type": "none",
-        "word": "aviatrix"
-    },
     "aviatrix": {
         "grade": 12,
-        "meaning": "a female airplane pilot, i.e. one who operates a mechanical <span class=\"embedded_root\">bird</span>",
+        "meaning": "a female airplane pilot",
         "part of speech": "noun",
         "roots": [
             "AVI"
@@ -1259,7 +1269,7 @@ var words = {
     },
     "bankrupt": {
         "grade": 12,
-        "meaning": "unable to pay one's debt, i.e. <span class=\"embedded_root\">broke</span>",
+        "meaning": "unable to pay because you're \"broke\"",
         "part of speech": "adjective",
         "roots": [
             "RUPT"
@@ -1269,7 +1279,7 @@ var words = {
     },
     "baric": {
         "grade": 12,
-        "meaning": "pertaining to air pressure (i.e. <span class=\"embedded_root\">heaviness</span> of the air)",
+        "meaning": "pertaining to pressure, especially of the atmosphere",
         "part of speech": "adjective",
         "roots": [
             "BAR"
@@ -1279,7 +1289,7 @@ var words = {
     },
     "baryon": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">heavy</span> elementary particle",
+        "meaning": "heavy elementary particle",
         "part of speech": "noun",
         "roots": [
             "BAR"
@@ -1289,7 +1299,7 @@ var words = {
     },
     "bellicose": {
         "grade": 12,
-        "meaning": "hostile, <span class=\"embedded_root\">war</span>like",
+        "meaning": "warlike",
         "part of speech": "adjective",
         "roots": [
             "BEL/BELL"
@@ -1299,7 +1309,7 @@ var words = {
     },
     "belligerent": {
         "grade": 12,
-        "meaning": "hostile, <span class=\"embedded_root\">war</span>like, ready to fight",
+        "meaning": "hostile, ready to fight",
         "part of speech": "adjective",
         "roots": [
             "BEL/BELL"
@@ -1309,7 +1319,7 @@ var words = {
     },
     "benefactor": {
         "grade": 12,
-        "meaning": "person who <span class=\"embedded_root\">act</span>s to help or do <span class=\"embedded_root\">good</span>like for another",
+        "meaning": "person who gives money to a cause",
         "part of speech": "noun",
         "roots": [
             "BENE"
@@ -1319,7 +1329,7 @@ var words = {
     },
     "beneficial": {
         "grade": 12,
-        "meaning": "producing or <span class=\"embedded_root\">mak</span>ing a <span class=\"embedded_root\">good</span> effect",
+        "meaning": "producing a good effect",
         "part of speech": "adjective",
         "roots": [
             "BENE"
@@ -1329,7 +1339,7 @@ var words = {
     },
     "benevolent": {
         "grade": 12,
-        "meaning": "showing kindness or <span class=\"embedded_root\">XXX</span>-<span class=\"embedded_root\">will</span>",
+        "meaning": "showing kindness or goodwill",
         "part of speech": "adjective",
         "roots": [
             "BENE",
@@ -1340,7 +1350,7 @@ var words = {
     },
     "biannual": {
         "grade": 12,
-        "meaning": "happening <span class=\"embedded_root\">twice</span> a <span class=\"embedded_root\">year</span>",
+        "meaning": "happening twice a year",
         "part of speech": "adjective",
         "roots": [
             "BI/BIN",
@@ -1351,7 +1361,7 @@ var words = {
     },
     "bibliography": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">writ</span>ten list of <span class=\"embedded_root\">book</span>s used as sources",
+        "meaning": "a list of books used as sources",
         "part of speech": "noun",
         "roots": [
             "BIBLI"
@@ -1361,7 +1371,7 @@ var words = {
     },
     "bibliomania": {
         "grade": 12,
-        "meaning": "an <span class=\"embedded_root\">insane</span> love of collecting <span class=\"embedded_root\">book</span>s",
+        "meaning": "a crazy love of books",
         "part of speech": "noun",
         "roots": [
             "BIBLI",
@@ -1372,7 +1382,7 @@ var words = {
     },
     "bibliophile": {
         "grade": 12,
-        "meaning": "someone who <span class=\"embedded_root\">love</span>s <span class=\"embedded_root\">book</span>s",
+        "meaning": "someone who loves books",
         "part of speech": "noun",
         "roots": [
             "BIBLI",
@@ -1383,7 +1393,7 @@ var words = {
     },
     "bicentennial": {
         "grade": 12,
-        "meaning": "the 200th anniversary, or relating to an age or period of 200 years (200 = <span class=\"embedded_root\">two</span> times one <span class=\"embedded_root\">hundred</span>)",
+        "meaning": "the 200th anniversary, or relating to an age or period of 200 years",
         "part of speech": [
             "noun",
             "adjective"
@@ -1397,7 +1407,7 @@ var words = {
     },
     "bicycle": {
         "grade": 12,
-        "meaning": "a vehicle with <span class=\"embedded_root\">two</span> <span class=\"embedded_root\">wheel</span>s",
+        "meaning": "a vehicle with two wheels",
         "part of speech": "noun",
         "roots": [
             "BI/BIN",
@@ -1408,7 +1418,7 @@ var words = {
     },
     "bilateral": {
         "grade": 12,
-        "meaning": "of or involving <span class=\"embedded_root\">two</span> <span class=\"embedded_root\">side</span>s",
+        "meaning": "of or involving two sides",
         "part of speech": "adjective",
         "roots": [
             "BI/BIN",
@@ -1417,9 +1427,19 @@ var words = {
         "type": "none",
         "word": "bilateral"
     },
+    "bilirubin": {
+        "grade": 12,
+        "meaning": "reddish pigment in bile",
+        "part of speech": "noun",
+        "roots": [
+            "RUB"
+        ],
+        "type": "none",
+        "word": "bilirubin"
+    },
     "binoculars": {
         "grade": 12,
-        "meaning": "optical device with <span class=\"embedded_root\">two</span> lenses or <span class=\"embedded_root\">eye</span>pieces",
+        "meaning": "optical device with two lenses",
         "part of speech": "noun",
         "roots": [
             "BI/BIN",
@@ -1430,7 +1450,7 @@ var words = {
     },
     "biography": {
         "grade": 12,
-        "meaning": "the story of a person's <span class=\"embedded_root\">life</span> <span class=\"embedded_root\">writ</span>ten by another person",
+        "meaning": "a life story written by another person",
         "part of speech": "noun",
         "roots": [
             "BIO/BI"
@@ -1440,7 +1460,7 @@ var words = {
     },
     "biology": {
         "grade": 12,
-        "meaning": "the scientific <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">life</span>",
+        "meaning": "the science of life",
         "part of speech": "noun",
         "roots": [
             "BIO/BI",
@@ -1451,7 +1471,7 @@ var words = {
     },
     "biosphere": {
         "grade": 12,
-        "meaning": "the region of the earth's surface inhabited by <span class=\"embedded_root\">liv</span>ing things (i.e. not the layers of stone closer to the earth's core where nothing lives)",
+        "meaning": "Earth's surface inhabited by living things",
         "part of speech": "noun",
         "roots": [
             "BIO/BI",
@@ -1462,7 +1482,7 @@ var words = {
     },
     "biped": {
         "grade": 12,
-        "meaning": "an animal with <span class=\"embedded_root\">two</span> <span class=\"embedded_root\">leg</span>s",
+        "meaning": "an animal with two legs",
         "part of speech": "noun",
         "roots": [
             "BI/BIN",
@@ -1473,7 +1493,7 @@ var words = {
     },
     "bisect": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">cut</span> into <span class=\"embedded_root\">two</span> equal parts",
+        "meaning": "to cut into two equal parts",
         "part of speech": "verb",
         "roots": [
             "BI/BIN",
@@ -1504,7 +1524,7 @@ var words = {
     },
     "cacophony": {
         "grade": 12,
-        "meaning": "loud, unpleasant <span class=\"embedded_root\">sound</span>s",
+        "meaning": "loud, unpleasant sounds",
         "part of speech": "noun",
         "roots": [
             "PHON"
@@ -1514,7 +1534,7 @@ var words = {
     },
     "captivating": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">grab</span>bing one's attention",
+        "meaning": "taking hold of",
         "part of speech": "adjective",
         "roots": [
             "CAPT/CEPT/CEIVE"
@@ -1524,7 +1544,7 @@ var words = {
     },
     "cardiac": {
         "grade": 12,
-        "meaning": "relating to the <span class=\"embedded_root\">heart</span>",
+        "meaning": "relating to the heart",
         "part of speech": "adjective",
         "roots": [
             "CARDI"
@@ -1534,7 +1554,7 @@ var words = {
     },
     "cardiogenic": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">origin</span>ating in or caused by the heart, e.g. a medical condition resulting from heart disease",
+        "meaning": "resulting from heart disease",
         "part of speech": "adjective",
         "roots": [
             "CARDI",
@@ -1545,7 +1565,7 @@ var words = {
     },
     "cardiologist": {
         "grade": 12,
-        "meaning": "a doctor specialized in the treatment and <span class=\"embedded_root\">study</span> of the heart",
+        "meaning": "a heart doctor",
         "part of speech": "noun",
         "roots": [
             "CARDI",
@@ -1556,7 +1576,7 @@ var words = {
     },
     "carnivorous": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">meat</span>-<span class=\"embedded_root\">eat</span>ing",
+        "meaning": "meat-eating",
         "part of speech": "adjective",
         "roots": [
             "CARN",
@@ -1586,6 +1606,16 @@ var words = {
         "type": "none",
         "word": "catalog"
     },
+    "catarrh": {
+        "grade": 12,
+        "meaning": "inflammation of a mucous membrane, especially the nose and throat",
+        "part of speech": "noun",
+        "roots": [
+            "RRH/RREA/RROEA/RHAG"
+        ],
+        "type": "none",
+        "word": "catarrh"
+    },
     "catastrophe": {
         "grade": 12,
         "meaning": "something that turns for the worst, a substantial disaster",
@@ -1598,7 +1628,7 @@ var words = {
     },
     "caustic": {
         "grade": 12,
-        "meaning": "capable of <span class=\"embedded_root\">burn</span>ing or eating away",
+        "meaning": "capable of burning or eating away",
         "part of speech": "adjective",
         "roots": [
             "CAUST/CAUT"
@@ -1608,7 +1638,7 @@ var words = {
     },
     "cauterize": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">burn</span> with a hot instrument (used in medical procedures to close wounds)",
+        "meaning": "to burn with a hot instrument",
         "part of speech": "verb",
         "roots": [
             "CAUST/CAUT"
@@ -1618,7 +1648,7 @@ var words = {
     },
     "celerity": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">quick</span>ness (the c in E = mc-squared comes from this word)",
+        "meaning": "quickness",
         "part of speech": "noun",
         "roots": [
             "CELER"
@@ -1628,7 +1658,7 @@ var words = {
     },
     "centennial": {
         "grade": 12,
-        "meaning": "the one h<span class=\"embedded_root\">hundred</span>th anniversary, or relating to an age or period of one <span class=\"embedded_root\">hundred</span> <span class=\"embedded_root\">year</span>s",
+        "meaning": "the 100th anniversary, or relating to an age or period of 100 years",
         "part of speech": [
             "noun",
             "adjective"
@@ -1642,7 +1672,7 @@ var words = {
     },
     "centimeter": {
         "grade": 12,
-        "meaning": "1/<span class=\"embedded_root\">100</span>th of a meter",
+        "meaning": "1/100 of a meter",
         "part of speech": "noun",
         "roots": [
             "CENT"
@@ -1652,7 +1682,7 @@ var words = {
     },
     "centrifugal": {
         "grade": 12,
-        "meaning": "moving outward from a <span class=\"embedded_root\">center</span>",
+        "meaning": "moving outward from a center",
         "part of speech": "adjective",
         "roots": [
             "CENTR"
@@ -1662,7 +1692,7 @@ var words = {
     },
     "century": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">100</span> years",
+        "meaning": "100 years",
         "part of speech": "noun",
         "roots": [
             "CENT"
@@ -1672,7 +1702,7 @@ var words = {
     },
     "cephalic": {
         "grade": 12,
-        "meaning": "pertaining to the <span class=\"embedded_root\">head</span>",
+        "meaning": "pertaining to the head",
         "part of speech": "adjective",
         "roots": [
             "CEPHAL"
@@ -1682,7 +1712,7 @@ var words = {
     },
     "cephalopod": {
         "grade": 12,
-        "meaning": "marine mollusks like octopus and squid who have tentacles (i.e. their <span class=\"embedded_root\">feet</span>) growing from their head",
+        "meaning": "marine mollusks like octopus and squid who have tentacles growing from their head",
         "part of speech": "noun",
         "roots": [
             "CEPHAL",
@@ -1693,7 +1723,7 @@ var words = {
     },
     "cerebral": {
         "grade": 12,
-        "meaning": "pertaining to the <span class=\"embedded_root\">brain</span>",
+        "meaning": "pertaining to the brain",
         "part of speech": "adjective",
         "roots": [
             "CEREBR"
@@ -1703,7 +1733,7 @@ var words = {
     },
     "cerebrate": {
         "grade": 12,
-        "meaning": "to think or use the <span class=\"embedded_root\">brain</span>",
+        "meaning": "to use the brain",
         "part of speech": "verb",
         "roots": [
             "CEREBR"
@@ -1713,7 +1743,7 @@ var words = {
     },
     "cerebrospinal": {
         "grade": 12,
-        "meaning": "pertaining to the <span class=\"embedded_root\">brain</span> and the spinal cord",
+        "meaning": "pertaining to the brain and the spinal cord",
         "part of speech": "adjective",
         "roots": [
             "CEREBR"
@@ -1723,7 +1753,7 @@ var words = {
     },
     "certain": {
         "grade": 12,
-        "meaning": "being absolutely <span class=\"embedded_root\">sure</span>",
+        "meaning": "being absolutely sure",
         "part of speech": "adjective",
         "roots": [
             "CERT"
@@ -1733,7 +1763,7 @@ var words = {
     },
     "certify": {
         "grade": 12,
-        "meaning": "to state that something is <span class=\"embedded_root\">sure</span> or true",
+        "meaning": "to state that something is true",
         "part of speech": "verb",
         "roots": [
             "CERT"
@@ -1753,7 +1783,7 @@ var words = {
     },
     "chromatics": {
         "grade": 12,
-        "meaning": "the study of <span class=\"embedded_root\">color</span>",
+        "meaning": "the study of color",
         "part of speech": "noun",
         "roots": [
             "CHROM/CHROMAT/CHROS"
@@ -1773,7 +1803,7 @@ var words = {
     },
     "chronic": {
         "grade": 12,
-        "meaning": "lasting for a long <span class=\"embedded_root\">time</span>",
+        "meaning": "lasting for a long time",
         "part of speech": "adjective",
         "roots": [
             "CHRON"
@@ -1783,7 +1813,7 @@ var words = {
     },
     "chronological": {
         "grade": 12,
-        "meaning": "arranged in order in which events occured in <span class=\"embedded_root\">time</span> ",
+        "meaning": "arranged in temporal order",
         "part of speech": "adjective",
         "roots": [
             "CHRON",
@@ -1794,7 +1824,7 @@ var words = {
     },
     "chronometer": {
         "grade": 12,
-        "meaning": "an instrument that <span class=\"embedded_root\">measure</span>s <span class=\"embedded_root\">time</span>",
+        "meaning": "an instrument that measures time",
         "part of speech": "noun",
         "roots": [
             "CHRON",
@@ -1805,7 +1835,7 @@ var words = {
     },
     "chrysanthemum": {
         "grade": 12,
-        "meaning": "a type of <span class=\"embedded_root\">flower</span> that is sometimes golden or yellow in color",
+        "meaning": "a type of flower that is sometimes golden or yellow in color",
         "part of speech": "noun",
         "roots": [
             "ANTH",
@@ -1814,9 +1844,20 @@ var words = {
         "type": "none",
         "word": "chrysanthemum"
     },
+    "chrysolite": {
+        "grade": 12,
+        "meaning": "a yellowish gem",
+        "part of speech": "noun",
+        "roots": [
+            "CHRYS",
+            "LITE/ITE/LITH"
+        ],
+        "type": "none",
+        "word": "chrysolite"
+    },
     "cinematography": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">record</span>ing of <span class=\"embedded_root\">mov</span>ing images",
+        "meaning": "motion picture making",
         "part of speech": "noun",
         "roots": [
             "KINE/KINEMAT/CINE",
@@ -1827,7 +1868,7 @@ var words = {
     },
     "circumnavigate": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">sail</span> <span class=\"embedded_root\">around</span> a place",
+        "meaning": "to sail around a place",
         "part of speech": "verb",
         "roots": [
             "CIRCUM",
@@ -1838,7 +1879,7 @@ var words = {
     },
     "circumscribe": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">write</span> or draw <span class=\"embedded_root\">around</span> something",
+        "meaning": "to draw around",
         "part of speech": "verb",
         "roots": [
             "CIRCUM",
@@ -1849,7 +1890,7 @@ var words = {
     },
     "circumspect": {
         "grade": 12,
-        "meaning": "cautious, <span class=\"embedded_root\">look</span>ing all <span class=\"embedded_root\">around</span>",
+        "meaning": "cautious, looking all around",
         "part of speech": "adjective",
         "roots": [
             "CIRCUM",
@@ -1860,7 +1901,7 @@ var words = {
     },
     "circumvent": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">go</span> <span class=\"embedded_root\">around</span> or bypass restrictions",
+        "meaning": "to go around or bypass restrictions",
         "part of speech": "verb",
         "roots": [
             "CIRCUM",
@@ -1871,7 +1912,7 @@ var words = {
     },
     "clamor": {
         "grade": 12,
-        "meaning": "noise, <span class=\"embedded_root\">shout</span>ing",
+        "meaning": "a noise (often made by shouting); to shout and make noise",
         "part of speech": [
             "noun",
             "verb"
@@ -1884,7 +1925,7 @@ var words = {
     },
     "clarification": {
         "grade": 12,
-        "meaning": "an explanation, i.e. an account that <span class=\"embedded_root\">make</span>s something more <span class=\"embedded_root\">clear</span>",
+        "meaning": "an explanation",
         "part of speech": "noun",
         "roots": [
             "CLAR"
@@ -1894,7 +1935,7 @@ var words = {
     },
     "clarify": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">make</span> something <span class=\"embedded_root\">clear</span>",
+        "meaning": "to make something clear",
         "part of speech": "verb",
         "roots": [
             "CLAR"
@@ -1904,7 +1945,7 @@ var words = {
     },
     "coauthor": {
         "grade": 12,
-        "meaning": "writer who collaborates <span class=\"embedded_root\">with</span> another author",
+        "meaning": "writer who collaborates with another author",
         "part of speech": "noun",
         "roots": [
             "CO/COL/COM/CON"
@@ -1914,7 +1955,7 @@ var words = {
     },
     "coeducation": {
         "grade": 12,
-        "meaning": "educating males and females <span class=\"embedded_root\">together</span>",
+        "meaning": "educating males and females together",
         "part of speech": "noun",
         "roots": [
             "CO/COL/COM/CON"
@@ -1924,7 +1965,7 @@ var words = {
     },
     "cognition": {
         "grade": 12,
-        "meaning": "process of acquiring <span class=\"embedded_root\">knowledge</span>",
+        "meaning": "process of acquiring knowledge",
         "part of speech": "noun",
         "roots": [
             "COGN"
@@ -1932,9 +1973,19 @@ var words = {
         "type": "none",
         "word": "cognition"
     },
+    "cohousing": {
+        "grade": 12,
+        "meaning": "planning your neighborhood in an intentional neighborly fashion",
+        "part of speech": "noun",
+        "roots": [
+            "CO/COL/COM/CON"
+        ],
+        "type": "none",
+        "word": "cohousing"
+    },
     "collaborate": {
         "grade": 12,
-        "meaning": "to work <span class=\"embedded_root\">together</span> with a person",
+        "meaning": "to work with a person",
         "part of speech": "verb",
         "roots": [
             "CO/COL/COM/CON",
@@ -1945,7 +1996,7 @@ var words = {
     },
     "collision": {
         "grade": 12,
-        "meaning": "an instance of two or more objects smashing <span class=\"embedded_root\">together</span>",
+        "meaning": "an instance of two or more objects smashing together",
         "part of speech": "noun",
         "roots": [
             "CO/COL/COM/CON"
@@ -1955,7 +2006,7 @@ var words = {
     },
     "colloquial": {
         "grade": 12,
-        "meaning": "relating to the way people <span class=\"embedded_root\">speak</span> <span class=\"embedded_root\">together</span> with each other (often with the meaning of causal conversation as opposed to formal conversation)",
+        "meaning": "formed by everday interaction (usually concerning words)",
         "part of speech": "adjective",
         "roots": [
             "CO/COL/COM/CON",
@@ -1966,7 +2017,7 @@ var words = {
     },
     "command": {
         "grade": 12,
-        "meaning": "an <span class=\"embedded_root\">order</span> or instruction",
+        "meaning": "an order or instruction",
         "part of speech": "noun",
         "roots": [
             "MAND"
@@ -1976,7 +2027,7 @@ var words = {
     },
     "commemorate": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">remember</span> <span class=\"embedded_root\">together</span>",
+        "meaning": "to remember together",
         "part of speech": "verb",
         "roots": [
             "CO/COL/COM/CON",
@@ -1987,7 +2038,7 @@ var words = {
     },
     "commune": {
         "grade": 12,
-        "meaning": "a group of people living <span class=\"embedded_root\">together</span> and owning things in common",
+        "meaning": "a group of people living together and owning things in common",
         "part of speech": "noun",
         "roots": [
             "CO/COL/COM/CON"
@@ -1997,7 +2048,7 @@ var words = {
     },
     "compel": {
         "grade": 12,
-        "meaning": "to force someone to act, i.e. to <span class=\"embedded_root\">push</span> them into a course of action",
+        "meaning": "to force someone to act",
         "part of speech": "verb",
         "roots": [
             "PEL"
@@ -2007,7 +2058,7 @@ var words = {
     },
     "composition": {
         "grade": 12,
-        "meaning": "an arrangement or putting <span class=\"embedded_root\">together</span> of parts",
+        "meaning": "an arrangement or putting together of parts",
         "part of speech": "noun",
         "roots": [
             "CO/COL/COM/CON"
@@ -2017,7 +2068,7 @@ var words = {
     },
     "compulsion": {
         "grade": 12,
-        "meaning": "a very strong urge, a force <span class=\"embedded_root\">push</span>ing one towards a course of action",
+        "meaning": "a very strong urge",
         "part of speech": "noun",
         "roots": [
             "PUL"
@@ -2027,7 +2078,7 @@ var words = {
     },
     "computer": {
         "grade": 12,
-        "meaning": "an electronic <span class=\"embedded_root\">think</span>ing machine",
+        "meaning": "an electronic thinking device",
         "part of speech": "noun",
         "roots": [
             "PUT"
@@ -2037,7 +2088,7 @@ var words = {
     },
     "conclusion": {
         "grade": 12,
-        "meaning": "the end or last part, which <span class=\"embedded_root\">close</span>s a speech or a book",
+        "meaning": "the end or last part",
         "part of speech": "noun",
         "roots": [
             "CLUD/CLUS"
@@ -2047,7 +2098,7 @@ var words = {
     },
     "concur": {
         "grade": 12,
-        "meaning": "to agree <span class=\"embedded_root\">with</span> someone",
+        "meaning": "to agree with someone",
         "part of speech": "verb",
         "roots": [
             "CO/COL/COM/CON"
@@ -2057,7 +2108,7 @@ var words = {
     },
     "conduct": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">lead</span> musicians in playing music <span class=\"embedded_root\">together</span>",
+        "meaning": "to lead musicians in playing music",
         "part of speech": "verb",
         "roots": [
             "DUC/DUCT"
@@ -2067,7 +2118,7 @@ var words = {
     },
     "confer": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">bring</span> something to someone, such as an honor or a title",
+        "meaning": "to bring an honor to someone",
         "part of speech": "verb",
         "roots": [
             "FER"
@@ -2077,7 +2128,7 @@ var words = {
     },
     "confide": {
         "grade": 12,
-        "meaning": "to place <span class=\"embedded_root\">trust</span> in someone",
+        "meaning": "to place trust in someone",
         "part of speech": "verb",
         "roots": [
             "FID"
@@ -2087,7 +2138,7 @@ var words = {
     },
     "confusion": {
         "grade": 12,
-        "meaning": "lack of clarity, i.e. when information is <span class=\"embedded_root\">pour</span>ed <span class=\"embedded_root\">together</span> in such a way that it is hard to make sense of",
+        "meaning": "the state of being flooded with too much information that is hard to make sense of",
         "part of speech": "noun",
         "roots": [
             "FUS"
@@ -2097,7 +2148,7 @@ var words = {
     },
     "conjunction": {
         "grade": 12,
-        "meaning": "a word that <span class=\"embedded_root\">join</span>s <span class=\"embedded_root\">together</span> parts of sentences",
+        "meaning": "a word that joins together parts of sentences",
         "part of speech": "noun",
         "roots": [
             "CO/COL/COM/CON",
@@ -2108,7 +2159,7 @@ var words = {
     },
     "conscience": {
         "grade": 12,
-        "meaning": "the sense of <span class=\"embedded_root\">know</span>ing right from wrong",
+        "meaning": "sense of knowing right from wrong",
         "part of speech": "noun",
         "roots": [
             "SCI"
@@ -2118,7 +2169,7 @@ var words = {
     },
     "conscious": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">know</span>ing what is happening, i.e. not asleep or incapacitated",
+        "meaning": "knowing what is happening",
         "part of speech": "adjective",
         "roots": [
             "SCI"
@@ -2128,7 +2179,7 @@ var words = {
     },
     "conserve": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">protect</span> or keep something safe",
+        "meaning": "to save or keep something safe",
         "part of speech": "verb",
         "roots": [
             "SERV"
@@ -2138,7 +2189,7 @@ var words = {
     },
     "consonant": {
         "grade": 12,
-        "meaning": "a speech <span class=\"embedded_root\">sound</span> which is not a vowel (i.e. a sound formed by closing the passageway of air)",
+        "meaning": "a speech sound",
         "part of speech": "noun",
         "roots": [
             "SON"
@@ -2148,7 +2199,7 @@ var words = {
     },
     "constellation": {
         "grade": 12,
-        "meaning": "a group of <span class=\"embedded_root\">stars</span> that form a pattern <span class=\"embedded_root\">together</span>",
+        "meaning": "a group of stars that forms a pattern",
         "part of speech": "noun",
         "roots": [
             "STELL"
@@ -2158,7 +2209,7 @@ var words = {
     },
     "construct": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">build</span>",
+        "meaning": "to build",
         "part of speech": "verb",
         "roots": [
             "STRUCT"
@@ -2168,7 +2219,7 @@ var words = {
     },
     "contact": {
         "grade": 12,
-        "meaning": "a state in which two things <span class=\"embedded_root\">touch</span>",
+        "meaning": "a state in which two things touch",
         "part of speech": "noun",
         "roots": [
             "TACT/TANG"
@@ -2178,7 +2229,7 @@ var words = {
     },
     "contemporary": {
         "grade": 12,
-        "meaning": "of the same <span class=\"embedded_root\">time</span> period as others",
+        "meaning": "of the same time period as others",
         "part of speech": "adjective",
         "roots": [
             "CO/COL/COM/CON",
@@ -2189,7 +2240,7 @@ var words = {
     },
     "contortion": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">twist</span>ed shape or position",
+        "meaning": "a twisted shape or position",
         "part of speech": "noun",
         "roots": [
             "TORT"
@@ -2199,7 +2250,7 @@ var words = {
     },
     "contradict": {
         "grade": 12,
-        "meaning": "to argue with or <span class=\"embedded_root\">say</span> something <span class=\"embedded_root\">against</span> another statement",
+        "meaning": "to argue against",
         "part of speech": "verb",
         "roots": [
             "CONTR",
@@ -2210,7 +2261,7 @@ var words = {
     },
     "contrary": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">opposite</span>, not in agreement",
+        "meaning": "not in agreement",
         "part of speech": "adjective",
         "roots": [
             "CONTR"
@@ -2220,7 +2271,7 @@ var words = {
     },
     "controversy": {
         "grade": 12,
-        "meaning": "a conversation in which positions are <span class=\"embedded_root\">turn</span>ed <span class=\"embedded_root\">against</span> each other",
+        "meaning": "a conversation in which positions are turned against each other",
         "part of speech": "noun",
         "roots": [
             "CONTR",
@@ -2231,7 +2282,7 @@ var words = {
     },
     "convention": {
         "grade": 12,
-        "meaning": "a gathering or <span class=\"embedded_root\">com</span>ing <span class=\"embedded_root\">together</span> of people with a common interest",
+        "meaning": "a gathering or assembly of people with a common interest",
         "part of speech": "noun",
         "roots": [
             "CO/COL/COM/CON",
@@ -2242,7 +2293,7 @@ var words = {
     },
     "convince": {
         "grade": 12,
-        "meaning": "to cause someone to believe something, i.e. to <span class=\"embedded_root\">conquer</span> their uncertainty and win them over",
+        "meaning": "to win someone over",
         "part of speech": "verb",
         "roots": [
             "VINC/VIC"
@@ -2252,7 +2303,7 @@ var words = {
     },
     "corporal": {
         "grade": 12,
-        "meaning": "pertaining to the <span class=\"embedded_root\">body</span>",
+        "meaning": "pertaining to the body",
         "part of speech": "adjective",
         "roots": [
             "CORP"
@@ -2262,7 +2313,7 @@ var words = {
     },
     "corporation": {
         "grade": 12,
-        "meaning": "a company recognized by law as a single <span class=\"embedded_root\">body</span>",
+        "meaning": "a company recognized by law as a single body",
         "part of speech": "noun",
         "roots": [
             "CORP"
@@ -2272,7 +2323,7 @@ var words = {
     },
     "corpse": {
         "grade": 12,
-        "meaning": "a dead <span class=\"embedded_root\">body</span>",
+        "meaning": "a dead body",
         "part of speech": "noun",
         "roots": [
             "CORP"
@@ -2282,7 +2333,7 @@ var words = {
     },
     "cosmonaut": {
         "grade": 12,
-        "meaning": "one who sails across the universe (what the Russians call space travellers)",
+        "meaning": "a Russian astronaut",
         "part of speech": "noun",
         "roots": [
             "COSM"
@@ -2292,7 +2343,7 @@ var words = {
     },
     "cosmos": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">universe</span>",
+        "meaning": "the universe",
         "part of speech": "noun",
         "roots": [
             "COSM"
@@ -2302,7 +2353,7 @@ var words = {
     },
     "counteract": {
         "grade": 12,
-        "meaning": "to prevent or <span class=\"embedded_root\">act</span> <span class=\"embedded_root\">against</span> something",
+        "meaning": "to oppose the effects of an action",
         "part of speech": "verb",
         "roots": [
             "COUNTER",
@@ -2313,7 +2364,7 @@ var words = {
     },
     "countermand": {
         "grade": 12,
-        "meaning": "to issue an <span class=\"embedded_root\">order</span> <span class=\"embedded_root\">against</span> a previous order",
+        "meaning": "to cancel a previous order",
         "part of speech": "verb",
         "roots": [
             "COUNTER",
@@ -2324,7 +2375,7 @@ var words = {
     },
     "counteroffensive": {
         "grade": 12,
-        "meaning": "an attack made in response to and <span class=\"embedded_root\">against</span> an initial attack",
+        "meaning": "an attack against an attack",
         "part of speech": "noun",
         "roots": [
             "COUNTER"
@@ -2334,7 +2385,7 @@ var words = {
     },
     "cranial": {
         "grade": 12,
-        "meaning": "pertaining to the <span class=\"embedded_root\">skull</span>",
+        "meaning": "pertaining to the skull",
         "part of speech": "adjective",
         "roots": [
             "CRANI"
@@ -2344,7 +2395,7 @@ var words = {
     },
     "craniology": {
         "grade": 12,
-        "meaning": "the scientific <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">skull</span>",
+        "meaning": "the study of skull characteristics",
         "part of speech": "noun",
         "roots": [
             "CRANI",
@@ -2355,7 +2406,7 @@ var words = {
     },
     "cranium": {
         "grade": 12,
-        "meaning": "the technical term for the <span class=\"embedded_root\">skull</span>",
+        "meaning": "the skull of a vertebrate",
         "part of speech": "noun",
         "roots": [
             "CRANI"
@@ -2365,7 +2416,7 @@ var words = {
     },
     "credence": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">belief</span> that something is true or valid",
+        "meaning": "belief that something is true or valid",
         "part of speech": "noun",
         "roots": [
             "CRED"
@@ -2375,7 +2426,7 @@ var words = {
     },
     "credulous": {
         "grade": 12,
-        "meaning": "gullible, inclined to <span class=\"embedded_root\">believe</span> without sufficient proof",
+        "meaning": "believing things too easily, gullible",
         "part of speech": "adjective",
         "roots": [
             "CRED"
@@ -2385,7 +2436,7 @@ var words = {
     },
     "crescendo": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">climb</span>ing up of the volume of music",
+        "meaning": "a climbing up of the volume of music",
         "part of speech": "noun",
         "roots": [
             "SCEND"
@@ -2395,7 +2446,7 @@ var words = {
     },
     "cryptic": {
         "grade": 12,
-        "meaning": "mysterious, possessing a <span class=\"embedded_root\">hidden</span> meaning",
+        "meaning": "of hidden meaning",
         "part of speech": "adjective",
         "roots": [
             "CRYPT"
@@ -2405,7 +2456,7 @@ var words = {
     },
     "cryptography": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">writ</span>ing and decoding of <span class=\"embedded_root\">secret</span> codes",
+        "meaning": "science of secret codes",
         "part of speech": "noun",
         "roots": [
             "CRYPT",
@@ -2416,7 +2467,7 @@ var words = {
     },
     "cumulative": {
         "grade": 12,
-        "meaning": "gradually increasing or <span class=\"embedded_root\">pil</span>ing up",
+        "meaning": "gradually building up",
         "part of speech": "adjective",
         "roots": [
             "CUMUL"
@@ -2426,7 +2477,7 @@ var words = {
     },
     "cycle": {
         "grade": 12,
-        "meaning": "a sequence that is repeated in <span class=\"embedded_root\">circul</span>ar fashion, such as a year or a sequence of steps in a dance",
+        "meaning": "a sequence that is repeated",
         "part of speech": "noun",
         "roots": [
             "CYCL"
@@ -2436,7 +2487,7 @@ var words = {
     },
     "cyclone": {
         "grade": 12,
-        "meaning": "a storm with rapidly <span class=\"embedded_root\">circl</span>ing winds",
+        "meaning": "a storm with circling winds",
         "part of speech": "noun",
         "roots": [
             "CYCL"
@@ -2446,7 +2497,7 @@ var words = {
     },
     "debug": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">remove</span> computer bugs [errors in a computer system are called bugs because the original computers were often broken by moths who would fly into the system and clog the mechanisms]",
+        "meaning": "to remove bugs, especially from a computer program",
         "part of speech": "verb",
         "roots": [
             "DE"
@@ -2456,7 +2507,7 @@ var words = {
     },
     "decade": {
         "grade": 12,
-        "meaning": "a period of <span class=\"embedded_root\">ten</span> years",
+        "meaning": "10 years",
         "part of speech": "noun",
         "roots": [
             "DEC/DEKA"
@@ -2466,7 +2517,7 @@ var words = {
     },
     "decagon": {
         "grade": 12,
-        "meaning": "a geometrical figure with <span class=\"embedded_root\">ten</span> <span class=\"embedded_root\">angle</span>s (and thus ten sides)",
+        "meaning": "a polygon with 10 angles",
         "part of speech": "noun",
         "roots": [
             "DEC/DEKA",
@@ -2477,7 +2528,7 @@ var words = {
     },
     "decathlon": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">contest</span> that includes <span class=\"embedded_root\">ten</span> separate events, such as javelin or pole-vaulting",
+        "meaning": "athletic contest that includes 10 disciplines in which each participant competes",
         "part of speech": "noun",
         "roots": [
             "DEC/DEKA",
@@ -2488,7 +2539,7 @@ var words = {
     },
     "decelerate": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">reduce</span> the <span class=\"embedded_root\">speed</span> of something",
+        "meaning": "to reduce the speed of",
         "part of speech": "verb",
         "roots": [
             "CELER",
@@ -2499,7 +2550,7 @@ var words = {
     },
     "decibel": {
         "grade": 12,
-        "meaning": "a standard unit for measuring the volume of a sound, calibrated at one <span class=\"embedded_root\">ten</span>th of the unit called a bel",
+        "meaning": "one tenth of the sound volume unit bel",
         "part of speech": "noun",
         "roots": [
             "DECI"
@@ -2509,7 +2560,7 @@ var words = {
     },
     "deciliter": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">tenth</span>th of a liter",
+        "meaning": "a tenth of a liter",
         "part of speech": "noun",
         "roots": [
             "DECI"
@@ -2519,7 +2570,7 @@ var words = {
     },
     "decimate": {
         "grade": 12,
-        "meaning": "to reduce dramatically, to destroy one out of every <span class=\"embedded_root\">ten</span>th",
+        "meaning": "to reduce dramatically",
         "part of speech": "verb",
         "roots": [
             "DECI"
@@ -2529,7 +2580,7 @@ var words = {
     },
     "declare": {
         "grade": 12,
-        "meaning": "to state something <span class=\"embedded_root\">clear</span>ly",
+        "meaning": "to state something clearly",
         "part of speech": "verb",
         "roots": [
             "CLAR"
@@ -2539,7 +2590,7 @@ var words = {
     },
     "decrypt": {
         "grade": 12,
-        "meaning": "to discover the meaning of a message written in a code, i.e. to <span class=\"embedded_root\">remove</span> the <span class=\"embedded_root\">secr</span>ecy of a coded message",
+        "meaning": "to decode from a secret code",
         "part of speech": "verb",
         "roots": [
             "DE",
@@ -2550,7 +2601,7 @@ var words = {
     },
     "deduction": {
         "grade": 12,
-        "meaning": "a subtraction or lessening, i.e. to <span class=\"embedded_root\">lead</span> something <span class=\"embedded_root\">away</span> from the rest",
+        "meaning": "a subtraction of an amount",
         "part of speech": "noun",
         "roots": [
             "DE",
@@ -2561,7 +2612,7 @@ var words = {
     },
     "deflect": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">bend</span> the trajectory of something",
+        "meaning": "to bend course because of the possibility of hitting something",
         "part of speech": "verb",
         "roots": [
             "FLECT"
@@ -2571,7 +2622,7 @@ var words = {
     },
     "defunct": {
         "grade": 12,
-        "meaning": "no longer <span class=\"embedded_root\">work</span>ing or alive",
+        "meaning": "no longer working or alive",
         "part of speech": "adjective",
         "roots": [
             "FUNCT"
@@ -2591,7 +2642,7 @@ var words = {
     },
     "demand": {
         "grade": 12,
-        "meaning": "an <span class=\"embedded_root\">order</span>; to make an <span class=\"embedded_root\">order</span>",
+        "meaning": "a hard-to-ignore order; to make a hard-to-ignore order",
         "part of speech": [
             "noun",
             "verb"
@@ -2602,9 +2653,29 @@ var words = {
         "type": "none",
         "word": "demand"
     },
+    "demimonde": {
+        "grade": 12,
+        "meaning": "someone of a little-respected life style",
+        "part of speech": "noun",
+        "roots": [
+            "DEMI"
+        ],
+        "type": "none",
+        "word": "demimonde"
+    },
+    "demitasse": {
+        "grade": 12,
+        "meaning": "a small cup of coffee",
+        "part of speech": "noun",
+        "roots": [
+            "DEMI"
+        ],
+        "type": "none",
+        "word": "demitasse"
+    },
     "democracy": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">rule</span> by the <span class=\"embedded_root\">people</span>",
+        "meaning": "government of the people",
         "part of speech": "noun",
         "roots": [
             "DEM",
@@ -2615,7 +2686,7 @@ var words = {
     },
     "demographic": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">record</span>ing of facts about the <span class=\"embedded_root\">people</span> who live in a place",
+        "meaning": "the study of people",
         "part of speech": "noun",
         "roots": [
             "DEM",
@@ -2626,7 +2697,7 @@ var words = {
     },
     "dendriform": {
         "grade": 12,
-        "meaning": "in the <span class=\"embedded_root\">shape</span> of a <span class=\"embedded_root\">tree</span>",
+        "meaning": "in the shape of a tree",
         "part of speech": "adjective",
         "roots": [
             "DENDR"
@@ -2636,7 +2707,7 @@ var words = {
     },
     "dendrochronology": {
         "grade": 12,
-        "meaning": "a the scientific <span class=\"embedded_root\">study</span> of measuring <span class=\"embedded_root\">time</span> by the growth rings in <span class=\"embedded_root\">tree</span>s",
+        "meaning": "a method of dating events by studying growth rings in trees",
         "part of speech": "noun",
         "roots": [
             "DENDR",
@@ -2648,7 +2719,7 @@ var words = {
     },
     "denounce": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">proclaim</span> harsh criticism",
+        "meaning": "to proclaim harsh criticism",
         "part of speech": "verb",
         "roots": [
             "NOUN/NUNC"
@@ -2658,7 +2729,7 @@ var words = {
     },
     "dental": {
         "grade": 12,
-        "meaning": "relating to <span class=\"embedded_root\">teeth</span>",
+        "meaning": "relating to teeth",
         "part of speech": "adjective",
         "roots": [
             "DENT/DONT"
@@ -2668,7 +2739,7 @@ var words = {
     },
     "dentist": {
         "grade": 12,
-        "meaning": "a doctor for the <span class=\"embedded_root\">teeth</span>",
+        "meaning": "a doctor for the teeth",
         "part of speech": "noun",
         "roots": [
             "DENT/DONT"
@@ -2678,7 +2749,7 @@ var words = {
     },
     "dentures": {
         "grade": 12,
-        "meaning": "a set of false <span class=\"embedded_root\">teeth</span>",
+        "meaning": "a set of false teeth",
         "part of speech": "noun",
         "roots": [
             "DENT/DONT"
@@ -2688,7 +2759,7 @@ var words = {
     },
     "deposit": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">place</span> or drop something",
+        "meaning": "to place or drop something",
         "part of speech": "verb",
         "roots": [
             "PON/POS root 1"
@@ -2698,7 +2769,7 @@ var words = {
     },
     "deride": {
         "grade": 12,
-        "meaning": "to insult or <span class=\"embedded_root\">laugh</span> at someone",
+        "meaning": "to make fun of someone",
         "part of speech": "verb",
         "roots": [
             "RID"
@@ -2708,7 +2779,7 @@ var words = {
     },
     "dermatitis": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">inflammation</span> of the <span class=\"embedded_root\">skin</span>",
+        "meaning": "inflammation of the skin",
         "part of speech": "noun",
         "roots": [
             "DERM"
@@ -2718,7 +2789,7 @@ var words = {
     },
     "dermatologist": {
         "grade": 12,
-        "meaning": "a doctor or one who <span class=\"embedded_root\">stud</span>ies the <span class=\"embedded_root\">skin</span>",
+        "meaning": "a doctor for the skin",
         "part of speech": "noun",
         "roots": [
             "DERM",
@@ -2729,7 +2800,7 @@ var words = {
     },
     "descend": {
         "grade": 12,
-        "meaning": "to go or <span class=\"embedded_root\">climb</span> <span class=\"embedded_root\">down</span>",
+        "meaning": "to go or climb down",
         "part of speech": "verb",
         "roots": [
             "DE",
@@ -2740,9 +2811,10 @@ var words = {
     },
     "describe": {
         "grade": 12,
-        "meaning": "to represent in <span class=\"embedded_root\">writ</span>ing or pictures",
+        "meaning": "to represent with words or pictures",
         "part of speech": "verb",
         "roots": [
+            "DE",
             "SCRIB/SCRIPT"
         ],
         "type": "none",
@@ -2750,7 +2822,7 @@ var words = {
     },
     "destruction": {
         "grade": 12,
-        "meaning": "the act of destroying something that was <span class=\"embedded_root\">built</span>",
+        "meaning": "the act of destroying something that was built",
         "part of speech": "noun",
         "roots": [
             "DE",
@@ -2761,7 +2833,7 @@ var words = {
     },
     "determine": {
         "grade": 12,
-        "meaning": "to find something out at the <span class=\"embedded_root\">end</span> of an investigation",
+        "meaning": "to find something out at the end of an investigation",
         "part of speech": "verb",
         "roots": [
             "TERM/TERMIN"
@@ -2771,7 +2843,7 @@ var words = {
     },
     "dethrone": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">remove</span> from power",
+        "meaning": "to remove from power",
         "part of speech": "verb",
         "roots": [
             "DE"
@@ -2781,10 +2853,9 @@ var words = {
     },
     "detoxification": {
         "grade": 12,
-        "meaning": "the process of <span class=\"embedded_root\">remov</span>ing <span class=\"embedded_root\">poison</span>",
+        "meaning": "the process of removing poisons",
         "part of speech": "noun",
         "roots": [
-            "DE",
             "TOX"
         ],
         "type": "none",
@@ -2792,7 +2863,7 @@ var words = {
     },
     "devour": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">eat</span> quickly, to swallow <span class=\"embedded_root\">down</span>",
+        "meaning": "to eat quickly, to swallow down",
         "part of speech": "verb",
         "roots": [
             "DE",
@@ -2800,6 +2871,16 @@ var words = {
         ],
         "type": "none",
         "word": "devour"
+    },
+    "diabetes": {
+        "grade": 12,
+        "meaning": "disease characterized by excessive thirst and discharge of urine",
+        "part of speech": "noun",
+        "roots": [
+            "DIA"
+        ],
+        "type": "none",
+        "word": "diabetes"
     },
     "diagnosis": {
         "grade": 12,
@@ -2813,7 +2894,7 @@ var words = {
     },
     "diagonal": {
         "grade": 12,
-        "meaning": "a slanting line running <span class=\"embedded_root\">across</span> an <span class=\"embedded_root\">angle</span>",
+        "meaning": "a slanting line running across a space",
         "part of speech": "noun",
         "roots": [
             "DIA",
@@ -2824,9 +2905,10 @@ var words = {
     },
     "diagram": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">writ</span>ten or visual representation of a process",
+        "meaning": "a simple drawing",
         "part of speech": "noun",
         "roots": [
+            "DIA",
             "GRAM"
         ],
         "type": "none",
@@ -2834,7 +2916,7 @@ var words = {
     },
     "dialog": {
         "grade": 12,
-        "meaning": "conversation <span class=\"embedded_root\">spok</span>n <span class=\"embedded_root\">between</span> two people",
+        "meaning": "conversation between two people",
         "part of speech": "noun",
         "roots": [
             "DIA",
@@ -2843,9 +2925,20 @@ var words = {
         "type": "none",
         "word": "dialog"
     },
+    "diarrhea": {
+        "grade": 12,
+        "meaning": "abnormally excessive bowl movement",
+        "part of speech": "noun",
+        "roots": [
+            "DIA",
+            "RRH/RREA/RROEA/RHAG"
+        ],
+        "type": "none",
+        "word": "diarrhea"
+    },
     "dichromatic": {
         "grade": 12,
-        "meaning": "displaying <span class=\"embedded_root\">two</span> <span class=\"embedded_root\">color</span>s",
+        "meaning": "displaying two colors",
         "part of speech": "adjective",
         "roots": [
             "DI/DIPLO root 1",
@@ -2856,7 +2949,7 @@ var words = {
     },
     "dictate": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">speak</span> out loud for another person to write down",
+        "meaning": "to speak out loud for another person to write down",
         "part of speech": "verb",
         "roots": [
             "DICT"
@@ -2866,7 +2959,7 @@ var words = {
     },
     "digression": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">move</span>ment <span class=\"embedded_root\">away</span> from the main issue, subject, etc",
+        "meaning": "a departure from the main issue, subject, etc",
         "part of speech": "noun",
         "roots": [
             "DI/DIS root 2",
@@ -2877,7 +2970,7 @@ var words = {
     },
     "dilemma": {
         "grade": 12,
-        "meaning": "a situation that requires a choice between <span class=\"embedded_root\">two</span> alternatives",
+        "meaning": "a situation that requires a choice between two alternatives",
         "part of speech": "noun",
         "roots": [
             "DI/DIPLO root 1"
@@ -2887,7 +2980,7 @@ var words = {
     },
     "diploma": {
         "grade": 12,
-        "meaning": "a certificate of graduation, literally a <span class=\"embedded_root\">double</span>-folded letter",
+        "meaning": "a certificate, literally \"a letter folded double\"",
         "part of speech": "noun",
         "roots": [
             "DI/DIPLO root 1"
@@ -2897,7 +2990,7 @@ var words = {
     },
     "disappear": {
         "grade": 12,
-        "meaning": "to move <span class=\"embedded_root\">away</span> from sight",
+        "meaning": "to move out of sight",
         "part of speech": "verb",
         "roots": [
             "DI/DIS root 2"
@@ -2907,7 +3000,7 @@ var words = {
     },
     "disjunction": {
         "grade": 12,
-        "meaning": "a breaking <span class=\"embedded_root\">apart</span> of a <span class=\"embedded_root\">connect</span>ion",
+        "meaning": "a disconnection",
         "part of speech": "noun",
         "roots": [
             "JUNCT"
@@ -2917,7 +3010,7 @@ var words = {
     },
     "dislocate": {
         "grade": 12,
-        "meaning": "to put something <span class=\"embedded_root\">out of</span> its usual <span class=\"embedded_root\">place</span>",
+        "meaning": "to put something out of its usual place",
         "part of speech": "verb",
         "roots": [
             "LOC"
@@ -2927,7 +3020,7 @@ var words = {
     },
     "dismiss": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">send</span> someone <span class=\"embedded_root\">away</span>",
+        "meaning": "to send someone away",
         "part of speech": "verb",
         "roots": [
             "DI/DIS root 2",
@@ -2938,10 +3031,9 @@ var words = {
     },
     "dispute": {
         "grade": 12,
-        "meaning": "to assert something <span class=\"embedded_root\">different</span> than what another person <span class=\"embedded_root\">think</span>s",
+        "meaning": "to disagree with what another person thinks",
         "part of speech": "verb",
         "roots": [
-            "DIS",
             "PUT"
         ],
         "type": "none",
@@ -2949,7 +3041,7 @@ var words = {
     },
     "dissect": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">cut</span> <span class=\"embedded_root\">apart</span>",
+        "meaning": "to cut apart piece by piece",
         "part of speech": "verb",
         "roots": [
             "DI/DIS root 2",
@@ -2960,7 +3052,7 @@ var words = {
     },
     "distort": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">twist</span> <span class=\"embedded_root\">apart</span> or alter",
+        "meaning": "to alter the shape or condition of",
         "part of speech": "verb",
         "roots": [
             "DI/DIS root 2",
@@ -2971,7 +3063,7 @@ var words = {
     },
     "distract": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">drag</span> attention <span class=\"embedded_root\">away</span> from something",
+        "meaning": "to drag attention away from something",
         "part of speech": "verb",
         "roots": [
             "DI/DIS root 2",
@@ -2982,7 +3074,7 @@ var words = {
     },
     "dominate": {
         "grade": 12,
-        "meaning": "to control or be the <span class=\"embedded_root\">master</span> of",
+        "meaning": "to be the master of",
         "part of speech": "verb",
         "roots": [
             "DOMIN"
@@ -2992,7 +3084,7 @@ var words = {
     },
     "domineering": {
         "grade": 12,
-        "meaning": "excessively <span class=\"embedded_root\">master</span>ful or controlling",
+        "meaning": "excessively controlling",
         "part of speech": "adjective",
         "roots": [
             "DOMIN"
@@ -3002,7 +3094,7 @@ var words = {
     },
     "donation": {
         "grade": 12,
-        "meaning": "a contribution or <span class=\"embedded_root\">gift</span>",
+        "meaning": "a contribution or gift",
         "part of speech": "noun",
         "roots": [
             "DON/DONAT"
@@ -3012,7 +3104,7 @@ var words = {
     },
     "donor": {
         "grade": 12,
-        "meaning": "someone who <span class=\"embedded_root\">give</span>s something",
+        "meaning": "someone who gives something",
         "part of speech": "noun",
         "roots": [
             "DON/DONAT"
@@ -3022,7 +3114,7 @@ var words = {
     },
     "duet": {
         "grade": 12,
-        "meaning": "a musical composition for <span class=\"embedded_root\">two</span> voices or instruments",
+        "meaning": "a musical composition for two voices or instruments",
         "part of speech": "noun",
         "roots": [
             "DU"
@@ -3032,7 +3124,7 @@ var words = {
     },
     "duo": {
         "grade": 12,
-        "meaning": "a pair, or <span class=\"embedded_root\">two</span> people who work together",
+        "meaning": "a pair normally thought of as being together",
         "part of speech": "noun",
         "roots": [
             "DU"
@@ -3042,7 +3134,7 @@ var words = {
     },
     "duplicate": {
         "grade": 12,
-        "meaning": "to make a <span class=\"embedded_root\">second</span> copy; an identical copy",
+        "meaning": "to make an identical copy; an identical copy",
         "part of speech": [
             "noun",
             "verb"
@@ -3055,7 +3147,7 @@ var words = {
     },
     "durable": {
         "grade": 12,
-        "meaning": "having a <span class=\"embedded_root\">hard</span>ness that makes something last a long time",
+        "meaning": "having the quality of lasting",
         "part of speech": "adjective",
         "roots": [
             "DUR"
@@ -3075,7 +3167,7 @@ var words = {
     },
     "dynamic": {
         "grade": 12,
-        "meaning": "having physical energy or <span class=\"embedded_root\">power</span>",
+        "meaning": "having physical energy/power",
         "part of speech": "adjective",
         "roots": [
             "DYN/DYNAM"
@@ -3085,7 +3177,7 @@ var words = {
     },
     "dynamite": {
         "grade": 12,
-        "meaning": "an <span class=\"embedded_root\">energ</span>etic and powerful explosive",
+        "meaning": "a powerful explosive",
         "part of speech": "noun",
         "roots": [
             "DYN/DYNAM"
@@ -3095,7 +3187,7 @@ var words = {
     },
     "dynamo": {
         "grade": 12,
-        "meaning": "a mechanical generator of <span class=\"embedded_root\">energy</span>",
+        "meaning": "a generator of energy",
         "part of speech": "noun",
         "roots": [
             "DYN/DYNAM"
@@ -3126,7 +3218,7 @@ var words = {
     },
     "dyspnea": {
         "grade": 12,
-        "meaning": "difficulty <span class=\"embedded_root\">breath</span>ing",
+        "meaning": "difficulty breathing",
         "part of speech": "noun",
         "roots": [
             "DYS",
@@ -3137,7 +3229,7 @@ var words = {
     },
     "dystopia": {
         "grade": 12,
-        "meaning": "an imaginary <span class=\"embedded_root\">place</span> with <span class=\"embedded_root\">negative</span> features",
+        "meaning": "an imaginary place of total misery",
         "part of speech": "noun",
         "roots": [
             "DYS"
@@ -3147,7 +3239,7 @@ var words = {
     },
     "eccentric": {
         "grade": 12,
-        "meaning": "not having a common <span class=\"embedded_root\">center</span>, not according to norm",
+        "meaning": "not having a common center, not according to norm",
         "part of speech": "adjective",
         "roots": [
             "CENTR"
@@ -3157,7 +3249,7 @@ var words = {
     },
     "educate": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">lead</span> to knowledge",
+        "meaning": "to lead to knowledge",
         "part of speech": "verb",
         "roots": [
             "DUC/DUCT"
@@ -3167,7 +3259,7 @@ var words = {
     },
     "egocentric": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">self</span>-centered",
+        "meaning": "self-centered",
         "part of speech": "adjective",
         "roots": [
             "CENTR",
@@ -3178,7 +3270,7 @@ var words = {
     },
     "egoistic": {
         "grade": 12,
-        "meaning": "preoccupied with one's <span class=\"embedded_root\">self</span> and the gratification of one's own desires",
+        "meaning": "being centered in or preoccupied with oneself and the gratification of one's own desires",
         "part of speech": "adjective",
         "roots": [
             "EGO"
@@ -3188,7 +3280,7 @@ var words = {
     },
     "egomania": {
         "grade": 12,
-        "meaning": "an <span class=\"embedded_root\">insane</span> preoccupation with one's <span class=\"embedded_root\">self</span>",
+        "meaning": "excessive preoccupation with oneself",
         "part of speech": "noun",
         "roots": [
             "EGO",
@@ -3199,7 +3291,7 @@ var words = {
     },
     "eject": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">throw</span> someone/something <span class=\"embedded_root\">out</span>",
+        "meaning": "to throw someone/something out",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3210,7 +3302,7 @@ var words = {
     },
     "elaborate": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">work</span> <span class=\"embedded_root\">out</span> the details",
+        "meaning": "to work out the details",
         "part of speech": "verb",
         "roots": [
             "LAB"
@@ -3220,7 +3312,7 @@ var words = {
     },
     "elocution": {
         "grade": 12,
-        "meaning": "the art of public <span class=\"embedded_root\">speak</span>ing",
+        "meaning": "the art of public speaking",
         "part of speech": "noun",
         "roots": [
             "LOQU/LOCU"
@@ -3230,7 +3322,7 @@ var words = {
     },
     "eloquent": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">speak</span>ing beautifully and elegantly",
+        "meaning": "speaking beautifully and forcefully",
         "part of speech": "adjective",
         "roots": [
             "E/EX",
@@ -3241,7 +3333,7 @@ var words = {
     },
     "elucidate": {
         "grade": 12,
-        "meaning": "to explain, to cast <span class=\"embedded_root\">light</span> on",
+        "meaning": "to explain, to throw light on",
         "part of speech": "verb",
         "roots": [
             "LUC"
@@ -3251,21 +3343,19 @@ var words = {
     },
     "emissary": {
         "grade": 12,
-        "meaning": "a representative of a country or group <span class=\"embedded_root\">sent</span> on a mission",
+        "meaning": "a representative of a country or group sent on a mission",
         "part of speech": "noun",
         "roots": [
-            "E/EX",
-            "MISS/MIT"
+            "E/EX"
         ],
         "type": "none",
         "word": "emissary"
     },
     "emit": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">send</span> something <span class=\"embedded_root\">out</span>",
+        "meaning": "to send something out",
         "part of speech": "verb",
         "roots": [
-            "E/EX",
             "MISS/MIT"
         ],
         "type": "none",
@@ -3273,7 +3363,7 @@ var words = {
     },
     "empathy": {
         "grade": 12,
-        "meaning": "ability to understand another's <span class=\"embedded_root\">feel</span>ings",
+        "meaning": "ability to understand another's feelings, that is, put another's feelings into oneself",
         "part of speech": "noun",
         "roots": [
             "EM/EN/IL/IN root 1",
@@ -3294,7 +3384,7 @@ var words = {
     },
     "encephalitis": {
         "grade": 12,
-        "meaning": "inflammation of the <span class=\"embedded_root\">brain</span>",
+        "meaning": "inflammation of the brain",
         "part of speech": "noun",
         "roots": [
             "CEPHAL"
@@ -3314,7 +3404,7 @@ var words = {
     },
     "encrypt": {
         "grade": 12,
-        "meaning": "to en<span class=\"embedded_root\">code</span>",
+        "meaning": "to encode into a secret code",
         "part of speech": "verb",
         "roots": [
             "EM/EN/IL/IN root 1",
@@ -3335,7 +3425,7 @@ var words = {
     },
     "endogamy": {
         "grade": 12,
-        "meaning": "the custom to <span class=\"embedded_root\">marry</span> <span class=\"embedded_root\">inside</span> of one's clan, tribe etc.",
+        "meaning": "the custom to marry within one's clan, tribe etc.",
         "part of speech": "noun",
         "roots": [
             "ENDO"
@@ -3345,7 +3435,7 @@ var words = {
     },
     "endotherm": {
         "grade": 12,
-        "meaning": "a creature that can keep its <span class=\"embedded_root\">internal</span> <span class=\"embedded_root\">temperature</span> constant",
+        "meaning": "a creature that can keep its inside temperature fairly constant",
         "part of speech": "noun",
         "roots": [
             "ENDO",
@@ -3364,19 +3454,40 @@ var words = {
         "type": "none",
         "word": "enduring"
     },
-    "energy": {
+    "energetics": {
         "grade": 12,
-        "meaning": "the power to accomplish <span class=\"embedded_root\">work</span>",
+        "meaning": "science that looks at energy and its transformation",
         "part of speech": "noun",
         "roots": [
             "ERG"
         ],
         "type": "none",
+        "word": "energetics"
+    },
+    "energy": {
+        "grade": 12,
+        "meaning": "the power to accomplish work, usually associeted with (that is, in) something",
+        "part of speech": "noun",
+        "roots": [
+            "EM/EN/IL/IN root 1",
+            "ERG"
+        ],
+        "type": "none",
         "word": "energy"
+    },
+    "engorge": {
+        "grade": 12,
+        "meaning": "to make larger (originally, and still commonly, to eat a lot, that is, to put food into the throat)",
+        "part of speech": "verb",
+        "roots": [
+            "EM/EN/IL/IN root 1"
+        ],
+        "type": "none",
+        "word": "engorge"
     },
     "enumerate": {
         "grade": 12,
-        "meaning": "to name a <span class=\"embedded_root\">number</span> of items on a list",
+        "meaning": "to name a number of items on a list",
         "part of speech": "verb",
         "roots": [
             "NUMER"
@@ -3386,7 +3497,7 @@ var words = {
     },
     "enunciate": {
         "grade": 12,
-        "meaning": "to speak or <span class=\"embedded_root\">declare</span> something clearly",
+        "meaning": "to speak or declare something clearly",
         "part of speech": "verb",
         "roots": [
             "NOUN/NUNC"
@@ -3396,7 +3507,7 @@ var words = {
     },
     "envision": {
         "grade": 12,
-        "meaning": "to create a <span class=\"embedded_root\">vis</span>ual picture <span class=\"embedded_root\">inside</span> the mind",
+        "meaning": "to picture in the mind",
         "part of speech": "verb",
         "roots": [
             "EM/EN/IL/IN root 1",
@@ -3417,7 +3528,7 @@ var words = {
     },
     "epidemic": {
         "grade": 12,
-        "meaning": "an illness spreading among <span class=\"embedded_root\">people</span>",
+        "meaning": "something spreading among people in a region, usually a disease; spreading among people in a region",
         "part of speech": [
             "noun",
             "adjective"
@@ -3431,7 +3542,7 @@ var words = {
     },
     "epilogue": {
         "grade": 12,
-        "meaning": "a short <span class=\"embedded_root\">speech</span> delivered at the end of a play or book",
+        "meaning": "a short speech delivered after a play",
         "part of speech": "noun",
         "roots": [
             "EP/EPI",
@@ -3442,7 +3553,7 @@ var words = {
     },
     "epiphyte": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">plant</span> growing independently <span class=\"embedded_root\">on</span> the surface of another",
+        "meaning": "a plant growing independently on the surface of another",
         "part of speech": "noun",
         "roots": [
             "EP/EPI",
@@ -3453,7 +3564,7 @@ var words = {
     },
     "equanimity": {
         "grade": 12,
-        "meaning": "of <span class=\"embedded_root\">balance</span>d <span class=\"embedded_root\">spirit</span>",
+        "meaning": "of balanced spirit",
         "part of speech": "adjective",
         "roots": [
             "ANIM",
@@ -3464,7 +3575,7 @@ var words = {
     },
     "equation": {
         "grade": 12,
-        "meaning": "a mathematical statement of <span class=\"embedded_root\">equal</span>ity",
+        "meaning": "a statement of equality",
         "part of speech": "noun",
         "roots": [
             "EQU"
@@ -3474,7 +3585,7 @@ var words = {
     },
     "equidistant": {
         "grade": 12,
-        "meaning": "at an <span class=\"embedded_root\">equal</span> distance from two points",
+        "meaning": "at an equal distance from two points",
         "part of speech": "adjective",
         "roots": [
             "EQU"
@@ -3484,7 +3595,7 @@ var words = {
     },
     "equivocate": {
         "grade": 12,
-        "meaning": "to use misleading language that could be interpreted in at least two <span class=\"embedded_root\">equal</span>ly different ways",
+        "meaning": "to use misleading language that could be interpreted in at least two different ways",
         "part of speech": "verb",
         "roots": [
             "VOC"
@@ -3494,7 +3605,7 @@ var words = {
     },
     "eradicate": {
         "grade": 12,
-        "meaning": "to pull out at the <span class=\"embedded_root\">root</span>s",
+        "meaning": "to pull out at the roots",
         "part of speech": "verb",
         "roots": [
             "RADIC/RADIX"
@@ -3504,7 +3615,7 @@ var words = {
     },
     "ergonomics": {
         "grade": 12,
-        "meaning": "study of the <span class=\"embedded_root\">work</span>ing environment",
+        "meaning": "study of the working environment",
         "part of speech": "noun",
         "roots": [
             "ERG"
@@ -3524,7 +3635,7 @@ var words = {
     },
     "esthetician": {
         "grade": 12,
-        "meaning": "someone who makes <span class=\"embedded_root\">beautiful</span>",
+        "meaning": "someone who beautifies",
         "part of speech": "noun",
         "roots": [
             "ESTH/AESTH"
@@ -3534,7 +3645,7 @@ var words = {
     },
     "ethnic": {
         "grade": 12,
-        "meaning": "pertaining to a defined group of <span class=\"embedded_root\">people</span>",
+        "meaning": "pertaining to a defined group of people",
         "part of speech": "adjective",
         "roots": [
             "ETHN"
@@ -3544,7 +3655,7 @@ var words = {
     },
     "ethnocentric": {
         "grade": 12,
-        "meaning": "focusing on a certain group of <span class=\"embedded_root\">people</span>",
+        "meaning": "focusing on the ethnicity of people",
         "part of speech": "adjective",
         "roots": [
             "ETHN"
@@ -3554,7 +3665,7 @@ var words = {
     },
     "ethnology": {
         "grade": 12,
-        "meaning": "the scientific sctudy of <span class=\"embedded_root\">people</span> and races",
+        "meaning": "the science of people and races",
         "part of speech": "noun",
         "roots": [
             "ETHN",
@@ -3565,7 +3676,7 @@ var words = {
     },
     "euphemism": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">good</span> and inoffensive word which replaces an offensive one",
+        "meaning": "an inoffensive word which replaces an offensive one",
         "part of speech": "noun",
         "roots": [
             "EU"
@@ -3575,7 +3686,7 @@ var words = {
     },
     "euphonious": {
         "grade": 12,
-        "meaning": "having a <span class=\"embedded_root\">pleasant</span> sound",
+        "meaning": "having a pleasant sound",
         "part of speech": "adjective",
         "roots": [
             "EU"
@@ -3585,7 +3696,7 @@ var words = {
     },
     "euphoria": {
         "grade": 12,
-        "meaning": "a feeling of <span class=\"embedded_root\">well</span>-being",
+        "meaning": "a feeling of well-being",
         "part of speech": "noun",
         "roots": [
             "EU"
@@ -3595,7 +3706,7 @@ var words = {
     },
     "evacuate": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">empty</span> a dangerous place",
+        "meaning": "to empty a dangerous place",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3606,7 +3717,7 @@ var words = {
     },
     "evident": {
         "grade": 12,
-        "meaning": "clearly <span class=\"embedded_root\">see</span>n",
+        "meaning": "clearly seen, seen fully",
         "part of speech": "adjective",
         "roots": [
             "E/EX",
@@ -3617,7 +3728,7 @@ var words = {
     },
     "excavate": {
         "grade": 12,
-        "meaning": "to dig <span class=\"embedded_root\">out</span>",
+        "meaning": "to dig out",
         "part of speech": "verb",
         "roots": [
             "E/EX"
@@ -3627,7 +3738,7 @@ var words = {
     },
     "exceed": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">go</span> <span class=\"embedded_root\">beyond</span> the limits",
+        "meaning": "to go beyond the limits",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3638,7 +3749,7 @@ var words = {
     },
     "exclaim": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">shout</span> <span class=\"embedded_root\">out</span> loudly and suddenly",
+        "meaning": "to cry out loudly and suddenly",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3649,7 +3760,7 @@ var words = {
     },
     "exclusion": {
         "grade": 12,
-        "meaning": "the act of <span class=\"embedded_root\">clos</span>ing <span class=\"embedded_root\">out</span> or rejecting someone or something",
+        "meaning": "the act of shutting out or rejecting someone or something",
         "part of speech": "noun",
         "roots": [
             "CLUD/CLUS"
@@ -3659,7 +3770,7 @@ var words = {
     },
     "exhale": {
         "grade": 12,
-        "meaning": "to breathe <span class=\"embedded_root\">out</span>",
+        "meaning": "to breathe out",
         "part of speech": "verb",
         "roots": [
             "E/EX"
@@ -3669,7 +3780,7 @@ var words = {
     },
     "expel": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">push</span> or drive someone <span class=\"embedded_root\">out</span> of a place",
+        "meaning": "to drive someone out of a place",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3680,7 +3791,7 @@ var words = {
     },
     "export": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">carry</span> goods <span class=\"embedded_root\">out</span> of a place to another place",
+        "meaning": "to carry goods out of a place to another place",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3691,7 +3802,7 @@ var words = {
     },
     "expose": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">place</span> <span class=\"embedded_root\">out</span> into the open for all to see",
+        "meaning": "to place out into the open for all to see",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3702,7 +3813,7 @@ var words = {
     },
     "expulsion": {
         "grade": 12,
-        "meaning": "the act of <span class=\"embedded_root\">push</span>ing or throwing someone/something <span class=\"embedded_root\">out</span>",
+        "meaning": "the act of throwing someone out",
         "part of speech": "noun",
         "roots": [
             "E/EX",
@@ -3713,7 +3824,7 @@ var words = {
     },
     "expurgate": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">rempve</span> objectionable passages <span class=\"embedded_root\">out</span> of a publication",
+        "meaning": "to remove objectionable passages from a publication",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3724,7 +3835,7 @@ var words = {
     },
     "exterminate": {
         "grade": 12,
-        "meaning": "to destroy or <span class=\"embedded_root\">end</span> the existence of something",
+        "meaning": "to destroy or get rid of completely",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3735,7 +3846,7 @@ var words = {
     },
     "extract": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">pull</span> <span class=\"embedded_root\">out</span>",
+        "meaning": "to pull out",
         "part of speech": "verb",
         "roots": [
             "E/EX",
@@ -3746,7 +3857,7 @@ var words = {
     },
     "extraordinary": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">out</span>side of or beyond the ordinary",
+        "meaning": "beyond ordinary",
         "part of speech": "adjective",
         "roots": [
             "EXTRA/EXTRO"
@@ -3756,7 +3867,7 @@ var words = {
     },
     "extraterrestrial": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">out</span>side of or beyond the <span class=\"embedded_root\">earth</span>",
+        "meaning": "beyond the Earth",
         "part of speech": "adjective",
         "roots": [
             "EXTRA/EXTRO",
@@ -3767,7 +3878,7 @@ var words = {
     },
     "extrovert": {
         "grade": 12,
-        "meaning": "an <span class=\"embedded_root\">out</span>going person",
+        "meaning": "an outgoing person",
         "part of speech": "noun",
         "roots": [
             "EXTRA/EXTRO"
@@ -3777,7 +3888,7 @@ var words = {
     },
     "factory": {
         "grade": 12,
-        "meaning": "a place where things are <span class=\"embedded_root\">made</span>",
+        "meaning": "a place where things are made",
         "part of speech": "noun",
         "roots": [
             "FAC/FACT"
@@ -3787,7 +3898,7 @@ var words = {
     },
     "ferry": {
         "grade": 12,
-        "meaning": "a boat that <span class=\"embedded_root\">carries</span> passengers",
+        "meaning": "a boat that carries passengers",
         "part of speech": "noun",
         "roots": [
             "FER"
@@ -3807,7 +3918,7 @@ var words = {
     },
     "fidelity": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">trust</span>worthiness, faithfulness",
+        "meaning": "faithfulness",
         "part of speech": "noun",
         "roots": [
             "FID"
@@ -3817,7 +3928,7 @@ var words = {
     },
     "fiduciary": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">trust</span>ee, i.e. someone en<span class=\"embedded_root\">trust</span>ed with managing money",
+        "meaning": "a trustee",
         "part of speech": "noun",
         "roots": [
             "FID"
@@ -3827,7 +3938,7 @@ var words = {
     },
     "flexible": {
         "grade": 12,
-        "meaning": "able to <span class=\"embedded_root\">bend</span> easily",
+        "meaning": "easily bending",
         "part of speech": "adjective",
         "roots": [
             "FLECT"
@@ -3837,7 +3948,7 @@ var words = {
     },
     "flora": {
         "grade": 12,
-        "meaning": "the plant-life and <span class=\"embedded_root\">flowers</span> of a particular time or area",
+        "meaning": "the plant life of a particular time or area",
         "part of speech": "noun",
         "roots": [
             "FLOR/FLEUR"
@@ -3847,7 +3958,7 @@ var words = {
     },
     "floral": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">flower</span>-like, relating to <span class=\"embedded_root\">flower</span>s",
+        "meaning": "flower-like",
         "part of speech": "adjective",
         "roots": [
             "FLOR/FLEUR"
@@ -3857,7 +3968,7 @@ var words = {
     },
     "florist": {
         "grade": 12,
-        "meaning": "someone working with <span class=\"embedded_root\">flower</span>s",
+        "meaning": "someone working with flowers",
         "part of speech": "noun",
         "roots": [
             "FLOR/FLEUR"
@@ -3867,7 +3978,7 @@ var words = {
     },
     "forebear": {
         "grade": 12,
-        "meaning": "an ancestor, a relative who lived <span class=\"embedded_root\">before</span> one's self",
+        "meaning": "an ancestor",
         "part of speech": "noun",
         "roots": [
             "FORE"
@@ -3877,7 +3988,7 @@ var words = {
     },
     "forebode": {
         "grade": 12,
-        "meaning": "to give a warning of something bad <span class=\"embedded_root\">before</span> it happens",
+        "meaning": "to give an advance warning of something bad",
         "part of speech": "verb",
         "roots": [
             "FORE"
@@ -3887,7 +3998,7 @@ var words = {
     },
     "forecast": {
         "grade": 12,
-        "meaning": "a prediction of events <span class=\"embedded_root\">before</span> they happen; to predict future events",
+        "meaning": "a prediction of future events; to predict future events",
         "part of speech": [
             "noun",
             "verb"
@@ -3930,7 +4041,7 @@ var words = {
     },
     "fraction": {
         "grade": 12,
-        "meaning": "a part or element of a larger whole, <span class=\"embedded_root\">broken</span> off from the whole",
+        "meaning": "a part or element of a larger whole",
         "part of speech": "noun",
         "roots": [
             "FRACT/FRAG"
@@ -3940,7 +4051,7 @@ var words = {
     },
     "fracture": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">break</span>, e.g. in a bone or a building",
+        "meaning": "a break",
         "part of speech": "noun",
         "roots": [
             "FRACT/FRAG"
@@ -3950,7 +4061,7 @@ var words = {
     },
     "fragile": {
         "grade": 12,
-        "meaning": "easy to <span class=\"embedded_root\">break</span>",
+        "meaning": "easy to break",
         "part of speech": "adjective",
         "roots": [
             "FRACT/FRAG"
@@ -3960,7 +4071,7 @@ var words = {
     },
     "fragment": {
         "grade": 12,
-        "meaning": "a piece of something, usually something <span class=\"embedded_root\">broken</span> off from a larger part",
+        "meaning": "a piece of something, usually something broken",
         "part of speech": "noun",
         "roots": [
             "FRACT/FRAG"
@@ -3970,7 +4081,7 @@ var words = {
     },
     "fugitive": {
         "grade": 12,
-        "meaning": "a person <span class=\"embedded_root\">flee</span>ing a country or the police",
+        "meaning": "a person who is running away",
         "part of speech": "noun",
         "roots": [
             "FUG"
@@ -3980,7 +4091,7 @@ var words = {
     },
     "function": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">work</span> or perform a role normally",
+        "meaning": "to work or perform a role normally",
         "part of speech": "verb",
         "roots": [
             "FUNCT"
@@ -4000,7 +4111,7 @@ var words = {
     },
     "gastric": {
         "grade": 12,
-        "meaning": "pertaining to the <span class=\"embedded_root\">stomach</span>",
+        "meaning": "pertaining to the stomach",
         "part of speech": "adjective",
         "roots": [
             "GASTR"
@@ -4010,7 +4121,7 @@ var words = {
     },
     "gastritis": {
         "grade": 12,
-        "meaning": "inflammation of the <span class=\"embedded_root\">stomach</span>",
+        "meaning": "inflammation of the stomach",
         "part of speech": "noun",
         "roots": [
             "GASTR"
@@ -4020,7 +4131,7 @@ var words = {
     },
     "gastronomy": {
         "grade": 12,
-        "meaning": "the study of the <span class=\"embedded_root\">laws</span> of providing food to the <span class=\"embedded_root\">stomach</span>, i.e. cooking",
+        "meaning": "the act of serving the stomach by providing good food",
         "part of speech": "noun",
         "roots": [
             "GASTR"
@@ -4030,7 +4141,7 @@ var words = {
     },
     "genealogy": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">study</span> and recording of the history of a family, i.e. those who are <span class=\"embedded_root\">gene</span>tically related to each other",
+        "meaning": "the study of the history of a family",
         "part of speech": "noun",
         "roots": [
             "GEN/GENESIS",
@@ -4041,7 +4152,7 @@ var words = {
     },
     "generation": {
         "grade": 12,
-        "meaning": "all the people <span class=\"embedded_root\">born</span> at approximately the same time",
+        "meaning": "all the people born at approximately the same time",
         "part of speech": "noun",
         "roots": [
             "GEN/GENESIS"
@@ -4051,7 +4162,7 @@ var words = {
     },
     "genetic": {
         "grade": 12,
-        "meaning": "relating to heredity encoded in the <span class=\"embedded_root\">gene</span>s",
+        "meaning": "relating to heredity encoded in the genes",
         "part of speech": "adjective",
         "roots": [
             "GEN/GENESIS"

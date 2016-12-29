@@ -845,6 +845,16 @@ Quiz.get_mode = function(mode_number) {
 
 
 Quiz.prototype.next_question = function (error) {
+    ////// RESET THE HINT BUTTON AND ITS COUNTER
+    // the global_hint_counter needs to be reset to 0
+    // this counter inspects how many times the hint button has been pressed per question
+    // to control things like how many points are deducted and what kind of hint appears
+    global_hint_counter = 0;
+    console.log("GRIMES666 quiz.next_question reached, global_hint_counter reset");
+    el("spelling_hint_button_master").disabled = false;
+    el("spelling_hint_button_master").innerHTML = "get a HINT";
+    
+    
     
     
     console.log("999 this.module.id = ", this.module.id);
@@ -2200,9 +2210,18 @@ Quiz.prototype.clean_up = function() {
     el('vocab_cheat_button').onclick = this.initialize_vocab_cheat_sheet.bind(this);
     el('etym_cheat_button').onclick = this.initialize_etym_cheat_sheet.bind(this);
     el('spelling_hint_button').onclick = this.initialize_spelling_hint.bind(this);
-    //@GRIMES
-    // el('spelling_hint_button2').onclick = this.initialize_spelling_hint2.bind(this);
+    
+    
     el('dash_hint_button').onclick = this.initialize_dash_hint.bind(this);
+    
+    
+    //@GRIMES
+    el('spelling_hint_button_master').onclick = this.initialize_spelling_hint_master.bind(this);
+    
+    
+    
+    // el('spelling_hint_button2').onclick = this.initialize_spelling_hint2.bind(this);
+    
     // el("spelling_hint_button").onclick = this.initialize_spelling_hint.bind(this);
 
 
@@ -2321,7 +2340,7 @@ Quiz.prototype.initialize_spelling_hint = function () {
         // (example sentence - unimplemented)
         // show etym cheat sheet
         // show underscore hint
-// Quiz.prototype.initialize_spelling_hint_master_old = function () {
+// Quiz.prototype.initialize_spelling_hint_master_oldest = function () {
     
 //     // todo see if something like this simple error catcher can work
 //     //(some games won't have a spelling hint because they're not spelling mode)
@@ -2383,12 +2402,7 @@ Quiz.prototype.initialize_spelling_hint = function () {
 //     }
 // }
 
-
-
-
-
-
-Quiz.prototype.initialize_spelling_hint_master = function (n) {
+Quiz.prototype.initialize_spelling_hint_master_old = function (n) {
     
     // todo see if something like this simple error catcher can work
     //(some games won't have a spelling hint because they're not spelling mode)
@@ -2516,21 +2530,84 @@ Quiz.prototype.initialize_spelling_hint_master = function (n) {
 }
 
 
-/////// HINT #1
 
-Quiz.prototype.initialize_spelling_hint_subfunction_bold = function (n) {
-    el('spelling_hint_button' + n).onclick = function () {
-        set_font_weight_of_class("embedded_root", "900");
-        set_case_of_class("embedded_root", "uppercase");
-    };
+// @GRIMES
+// the final version
+Quiz.prototype.initialize_spelling_hint_master = function () {
+    
+    
+    // increment the counter
+    
+    global_hint_counter++;
+    console.log("GRIMES666 hint master has been pressed");
+    console.log("GRIMES666 global_hint_counter = ", global_hint_counter);
+    
+    
+    
+    
+    // manage the appearance and function of the buttons
+    
+    if (global_hint_counter === 1) {
+        el("spelling_hint_button_master").innerHTML = "another HINT";
+    } else if (global_hint_counter === 2) {
+        el("spelling_hint_button_master").innerHTML = "another HINT";
+    } else if (global_hint_counter === 3) {
+        el("spelling_hint_button_master").innerHTML = "no more HINTs";
+        el("spelling_hint_button_master").disabled = true;
+    } else if (global_hint_counter > 3) {
+        // should never be reached
+        // todo clean up into a real error catcher
+        alert("global hint counter > 3");
+    } else {
+        // should never be reached
+        // todo clean up into a real error catcher
+        alert("global hint counter is null or zero");
+    }
+    
+    
+    
+    // manage the behavior of the hint
+    
+    if (global_hint_counter === 1) {
+        // a word question makes words bold on step 1
+        if (this.game.chosen_question_type === "word_definition_to_word") {
+            console.log("GRIMES999 word 1 triggered");
+            // this.initialize_spelling_hint_subfunction_bold();
+            set_font_weight_of_class("embedded_root", "900");
+            set_case_of_class("embedded_root", "uppercase");
+        }
+        // a root question skips the bold stage
+        else if (this.game.chosen_question_type === "root_definition_to_root") {
+            console.log("GRIMES999 root 1 triggered");
+            this.initialize_spelling_hint_master();
+        } 
+    }
+    else if (global_hint_counter === 2) {
+        // a word question makes words bold on step 1
+        if (this.game.chosen_question_type === "word_definition_to_word") {
+            console.log("GRIMES999 word 2 triggered");
+            this.display_etym_cheat_sheet();
+        }
+        // a root question skips the bold stage
+        else if (this.game.chosen_question_type === "root_definition_to_root") {
+            console.log("GRIMES999 root 2 triggered");
+            this.display_etym_cheat_sheet();
+        } 
+    } else if (global_hint_counter === 3) {
+        if (this.game.chosen_question_type === "word_definition_to_word") {
+            this.display_spelling_hint_underscore_or_first_letter();
+        } else if (this.game.chosen_question_type === "root_definition_to_root") {
+            this.display_spelling_hint_underscore_or_first_letter();
+        }
+    }
+    
+    
+    
+    
 }
 
 
-/////// HINT #2
-
-Quiz.prototype.initialize_spelling_hint_subfunction_etym_cheat_sheet = function (n) {
-    
-    
+Quiz.prototype.display_etym_cheat_sheet = function () {
     
     var name = "etym_cheat_sheet"
     var etym_cheat = this.game.etymology_cheat_sheet;
@@ -2560,10 +2637,6 @@ Quiz.prototype.initialize_spelling_hint_subfunction_etym_cheat_sheet = function 
     
     etym_cheat = new_list;
     
-    // console.log("this.game.etym_cheat_sheet stringified = ", 
-    //     JSON.stringify(etym_cheat));
-        
-    
     //end beehack
         
     
@@ -2573,19 +2646,16 @@ Quiz.prototype.initialize_spelling_hint_subfunction_etym_cheat_sheet = function 
         JSON.stringify(etym_cheat));
     
     var outer_div = el(name + "_div");
-    // create_cheat_sheet_table(outer_div, name,
-    // null, null, etym_cheat, 2);
-    // el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(name)};
-    el('spelling_hint_button' + n).onclick = function () {
-        set_display(el(name)), 'initial'};
+    
+    create_cheat_sheet_table(outer_div, name, null, null, etym_cheat, 2);
 }
 
 
 
-/////// HINT #3
-Quiz.prototype.initialize_spelling_hint_subfunction_underscore = function (n) {
-    back.log("spelling_hint_subfunction_underscore entered");
-    console.log("GRIMES spelling_hint_subfunction_underscore entered");
+
+Quiz.prototype.display_spelling_hint_underscore_or_first_letter = function () {
+    back.log("display_spelling_hint_underscore_or_first_letter entered");
+    console.log("display_spelling_hint_underscore_or_first_letter entered");
     
     var div_to_inspect = el('spelling_hint_box');
     
@@ -2595,25 +2665,25 @@ Quiz.prototype.initialize_spelling_hint_subfunction_underscore = function (n) {
     
     var spelling_hint_string = this.game.spelling_hint;
     
-    console.log("GRIMES spelling_hint_string = ", spelling_hint_string);
+    console.log("GRIMES999 spelling_hint_string = ", spelling_hint_string);
     
     
     
     back.log("underscore_hint_output = ", spelling_hint_string);
-    console.log("GRIMES underscore_hint_output = ", spelling_hint_string);
+    console.log("GRIMES999 underscore_hint_output = ", spelling_hint_string);
     
     var div_string = 'spelling_hint_box'
     var div_name = el('spelling_hint_box');
     div_name.innerHTML = spelling_hint_string;
     
-    el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(div_string)};
+    // el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(div_string)};
 };    
   
-//////// HINT #4
 
-Quiz.prototype.initialize_spelling_hint_subfunction_first_letter = function (n) {
-    console.log("GRIMES first letter function STILL EMPTY");
-}
+
+
+
+
 
 
   
@@ -2868,4 +2938,117 @@ Quiz.prototype.toggle_element = function(id) {
 
 
 
+
+
+
+
+///////scorched earth below
+
+
+/////// HINT #1
+
+// Quiz.prototype.initialize_spelling_hint_subfunction_bold = function () {
+//     el('spelling_hint_button').onclick = function () {
+//         set_font_weight_of_class("embedded_root", "900");
+//         set_case_of_class("embedded_root", "uppercase");
+//     };
+// }
+
+
+// Quiz.prototype.initialize_spelling_hint_subfunction_bold_old = function (n) {
+//     el('spelling_hint_button' + n).onclick = function () {
+//         set_font_weight_of_class("embedded_root", "900");
+//         set_case_of_class("embedded_root", "uppercase");
+//     };
+// }
+
+
+/////// HINT #2
+
+// Quiz.prototype.initialize_spelling_hint_subfunction_etym_cheat_sheet_old = function (n) {
+    
+    
+    
+//     var name = "etym_cheat_sheet"
+//     var etym_cheat = this.game.etymology_cheat_sheet;
+    
+    
+//     // @beehack
+//     // the mystery: <span ... etc. occurs on the html page
+//     // below is the short term removal
+//     // ideally we want the words to be able to be made bold in the cheat sheet as well
+
+    
+//     var new_list = [];
+//     for (var i = 0; i < etym_cheat.length; i++) {
+//         var sublist = etym_cheat[i];
+        
+//         var new_sublist = [];
+        
+        
+//         for (var j = 0; j < sublist.length; j++) {
+//             var item = sublist[j].replace("<span class=\"embedded_root\">", "");
+//             item = item.replace("</span>", "");
+//             new_sublist.push(item);
+//         }
+//         new_list.push(new_sublist);
+//     } 
+    
+    
+//     etym_cheat = new_list;
+    
+//     // console.log("this.game.etym_cheat_sheet stringified = ", 
+//     //     JSON.stringify(etym_cheat));
+        
+    
+//     //end beehack
+        
+    
+    
+    
+//     back.log("this.game.etym_cheat_sheet stringified = ", 
+//         JSON.stringify(etym_cheat));
+    
+//     var outer_div = el(name + "_div");
+//     // create_cheat_sheet_table(outer_div, name,
+//     // null, null, etym_cheat, 2);
+//     // el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(name)};
+//     el('spelling_hint_button' + n).onclick = function () {
+//         set_display(el(name)), 'initial'};
+// }
+
+
+
+/////// HINT #3
+// Quiz.prototype.initialize_spelling_hint_subfunction_underscore_old = function (n) {
+//     back.log("spelling_hint_subfunction_underscore entered");
+//     console.log("GRIMES spelling_hint_subfunction_underscore entered");
+    
+//     var div_to_inspect = el('spelling_hint_box');
+    
+//     // var spelling_hint_string = this.game.spelling_hint;
+    
+    
+    
+//     var spelling_hint_string = this.game.spelling_hint;
+    
+//     console.log("GRIMES spelling_hint_string = ", spelling_hint_string);
+    
+    
+    
+//     back.log("underscore_hint_output = ", spelling_hint_string);
+//     console.log("GRIMES underscore_hint_output = ", spelling_hint_string);
+    
+//     var div_string = 'spelling_hint_box'
+//     var div_name = el('spelling_hint_box');
+//     div_name.innerHTML = spelling_hint_string;
+    
+//     el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(div_string)};
+// };    
+  
+//////// HINT #4
+
+// Quiz.prototype.initialize_spelling_hint_subfunction_first_letter = function (n) {
+//     console.log("GRIMES first letter function STILL EMPTY");
+// }
 
