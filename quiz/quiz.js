@@ -2536,13 +2536,45 @@ Quiz.prototype.initialize_spelling_hint_master_old = function (n) {
 Quiz.prototype.initialize_spelling_hint_master = function () {
     
     
-    // increment the counter
+    // increment the counters
     
     global_hint_counter++;
+    global_hint_alert_counter++;
+    
+    
     console.log("GRIMES666 hint master has been pressed");
     console.log("GRIMES666 global_hint_counter = ", global_hint_counter);
+    console.log("GRIMES666 global_hint_alert_counter = ", global_hint_alert_counter);
     
     
+    
+    // manage the behavior of hint penalties
+    
+    var level_at_which_hints_inflict_a_penalty = 10;
+    
+    if (session_bee_counter > level_at_which_hints_inflict_a_penalty) {
+        // reduce the progress bar slightly
+    } else {
+        // do nothing
+    }
+     
+    
+    // manage the behavior of alerts
+    // ready to be implemented, just set the integer to whatever
+    
+    // must be greater than 4
+    var maximum_number_of_spelling_hint_alerts = 5;
+    
+    
+    if (session_bee_counter > level_at_which_hints_inflict_a_penalty) {
+        if (global_hint_alert_counter === 1 || global_hint_alert_counter === 4) {
+            alert("At this advanced level, a hint will cost you one point");
+        } else if (global_hint_alert_counter === maximum_number_of_spelling_hint_alerts) {
+            alert("You won't see this message anymore but remember that from here on, hints will cost you one point");
+        } else if (global_hint_alert_counter > maximum_number_of_spelling_hint_alerts) {
+            //do nothing
+        }
+    }
     
     
     // manage the appearance and function of the buttons
