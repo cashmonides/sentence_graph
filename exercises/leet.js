@@ -336,3 +336,93 @@ function leet_136 (array) {
 function remove_item_from_array (array, item) {
     return array.filter(function(el){return el !== item});
 }
+
+
+
+
+
+
+
+
+//////DAN PUZZLE 1///////
+
+// write a function that counts the number of occurences of an item in a list
+
+function count_item_in_list (list, item) {
+    var counter = 0;
+    for (var i = 0; i < list.length; i++) {
+        if (item === list[i]) {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+
+function count_item_in_list_functional (list, item) {
+    return list.reduce(function(accumulator, item_from_list) {
+        if (item_from_list === item) {
+            return accumulator + 1;
+        } else {
+            return accumulator;
+        }
+    }, 0);
+} 
+
+function count_item_in_list_functional2 (list, query_item) {
+    var filtered_list = list.filter(function(item) {
+        return  item === query_item;
+    });
+    return filtered_list.length;
+}
+
+
+
+//////DAN PUZZLE 2//////
+
+// write a function that returns the factorial of a number
+
+function factorial (n) {
+    var list = [];
+    
+    for (var i = 0; i < n; i++) {
+        list.push(i+1);
+    }
+    
+    return list.reduce(function(item1, item2) {
+        return item1 * item2;
+    });
+}
+
+
+/////DAN PUZZLE 3///////////
+
+// write a function that detects whether a list is its own reverse
+
+
+function detect_palindrome (query_item) {
+    var input;
+    
+    if (typeof query_item === 'string') {
+        input = query_item.split("");
+    } else {
+        input = query_item;
+    }
+    
+    var reversed_input = input.reverse();
+    
+    compare_lists(input, reversed_input);
+}
+
+
+
+function compare_lists (list1, list2) {
+    for (var i; i < list1.length; i++) {
+        if (list1[i] != list2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+

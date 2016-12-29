@@ -848,6 +848,8 @@ SpellingModeGame.prototype.make_spelling_hint = function () {
         var underscore_hint = "HINT: " + this.give_underscore_hint(this.correct);
         this.spelling_hint = underscore_hint; 
     }
+    // @GRIMES
+    return this.spelling_hint;
 };
 
 

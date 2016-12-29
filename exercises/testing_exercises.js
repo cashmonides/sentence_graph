@@ -41,6 +41,6 @@
 
 
 
-var a = 5;
-var b = 10;
-add_text("LEET 371 = " + leet_371(a, b));
+// var a = 5;
+// var b = 10;
+// add_text("LEET 371 = " + leet_371(a, b));

@@ -48,21 +48,39 @@ _____DO NOW_____
 - BUG: new level button should lead to resetting of progress bar DONE
 - embedded roots turn bold DONE
 - check if pictures can be added to submodule complete (just pictures of bees) DONE
-- persist bee trainer score
-- hide training level buttons as they advance
+- persist bee trainer score DOME
+- hide training level buttons as they advance DONE
+- small things
+    - eliminate button from index DONE
+    - change text content of home computers DONE
+    - change behavior when drone computer stops game DONME
+        - alert
+        - make return to profile
+    - freeze out behavior of countdown bar for now
+    - email dan about progress bar countdown
+- medium things
+    - persist in user profile # of win/place/shows in spelling match
+- chore-like
+    - clear console logs, especially ones that give ans
+    - set up levels for matches
+    - set up dictionary of levels
+    - set up root progression
+- progressive hints
+    - hint button changes (get a hint, get another hint, get a final hint, no more hints)
+- hint penalty
 - write etymology and spelling results to sql
 - add synonym functionality
-- progressive hints
-- hint button changes (get a hint, get another hint, get a final hint, no more hints)
-- hint penalty
+
 - add word difficulty level functionality
 - check if metrics are fully disabled for spelling bee
 - switch bee level to 1000
+    - add bee pictures
+    - build up dictionary of levels
+    - use dan's range sampler
 - turn number of drop downs into a module-specified parameter
 - pull out the beecatcher into an overall function if possible
 - solve mystery of the visible spans
 - add example sentence functionality
-- check on "no match found" bug
 
 
 

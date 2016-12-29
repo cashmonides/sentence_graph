@@ -1,6 +1,10 @@
 var global_spelling_match_score_counter = 0;
 
 
+
+var global_hint_counter = 0;
+var global_hint_alert_counter = 0;
+
 //submodule_progress = how close you are to getting from 5/10 to 6/10
 //module_progress = 5/10 in kangaroo
 
@@ -258,6 +262,8 @@ Quiz.prototype.get_start_module = function () {
                 } else {
                     self.spelling_match_level = val.level;
                     self.spelling_match_stopping_time = val.stopping_time;
+                    self.total_match_time = val.stopping_time - Date.now();
+                    console.log("123456 self.total_match_time = ", self.total_match_time);
                     // original version
                     // start_drone_timer(self.spelling_match_stopping_time);
                     
@@ -321,14 +327,18 @@ Quiz.prototype.start_timer3 = function (
     // clock display is reset to 950
     var refresh_countdown_to_end_time = refresh_clock(
         html_element_name, end_time);
-        
+       
+       
+    
+    
     
     // clock_refresh_id is an integer id (not a function),
     // which we can pass to clearInterval to stop the function
     // from continuing to run. We want to do this at the end of the game.
     var clock_refresh_id = setInterval(
         refresh_countdown_to_end_time, refresh_how_often);
-        
+    
+    
     // the heart of the function    
     setTimeout(function () {
         // Stop the timer.
@@ -338,6 +348,11 @@ Quiz.prototype.start_timer3 = function (
         // We do this since we don't want the clock to continue
         // to refresh after the end of the game.
         clearInterval(clock_refresh_id);
+        
+        
+        
+
+        
         // Clear the timer (the div with the clock).
         el(html_element_name).innerHTML = '';
         // End the game.
@@ -348,11 +363,10 @@ Quiz.prototype.start_timer3 = function (
 
 // @666
 Quiz.prototype.end_drone_game2 = function (pin, user_name) {
-    // Tell the user that the game is over.
-    // alert('game over!!!');
     
-    console.log("666 pin as argument = ", pin);
-    console.log("666 user_name as argument = ", user_name);
+    
+    // console.log("666 pin as argument = ", pin);
+    // console.log("666 user_name as argument = ", user_name);
  
     var path = ["test", pin, "scores", user_name];
     
@@ -371,6 +385,12 @@ Quiz.prototype.end_drone_game2 = function (pin, user_name) {
     var callback = display_match_score(score);
     
     Persist.set(path, score, callback);
+    
+    
+    
+    
+    
+    
 }
 
 //@666
@@ -378,6 +398,31 @@ Quiz.prototype.end_drone_game2 = function (pin, user_name) {
 // since this.display_match_score is out of the scope of this
 var display_match_score = function (score) {
     el("fraction_header").innerHTML = "final score: " + score.toString();
+    
+    //clear all test boxes (question, hint, feedback, etc)
+    
+    
+    set_display("submit_button", 'none');
+    set_display("cheat_sheet_button", 'none');
+    set_display("vocab_cheat_button", 'none');
+    set_display("etym_cheat_button", 'none');
+    //input box will be used
+    set_display("input_box", 'none');
+    set_display("next_button", 'none');
+    set_display("skip_button", 'none');
+    set_display("spelling_hint_button", 'none');
+    set_display("dash_hint_button", 'none');
+    set_display("next_level_button", 'none');
+    
+    set_display_of_class("cleared_in_etymology", "none");
+    set_display_of_class("morphology_to_clear", "none");
+    // set_display_of_class("cleared_in_picture_display", "none");
+    // set_display_of_class("cleared_in_picture_display2", "none");
+    
+    
+    var message_string = "Match is over!!! Your final score = " + score.toString();
+    // Tell the user that the game is over.
+    alert(message_string);
 }
 
 var get_spelling_match_score = function () {
@@ -1715,7 +1760,7 @@ Quiz.prototype.increment_score = function() {
     // todo @12345
     if (this.module.id === 0.25) {
         console.log("12345 this.stopping_time = ", this.spelling_match_stopping_time);
-        this.progress_bar.decrement_as_countdown(this.spelling_match_stopping_time);
+        this.progress_bar.decrement_as_countdown(this.spelling_match_stopping_time, this.total_match_time);
     }
     
     
@@ -2155,8 +2200,18 @@ Quiz.prototype.clean_up = function() {
     el('vocab_cheat_button').onclick = this.initialize_vocab_cheat_sheet.bind(this);
     el('etym_cheat_button').onclick = this.initialize_etym_cheat_sheet.bind(this);
     el('spelling_hint_button').onclick = this.initialize_spelling_hint.bind(this);
+    //@GRIMES
+    // el('spelling_hint_button2').onclick = this.initialize_spelling_hint2.bind(this);
     el('dash_hint_button').onclick = this.initialize_dash_hint.bind(this);
     // el("spelling_hint_button").onclick = this.initialize_spelling_hint.bind(this);
+
+
+    //@GRIMES do we need to do these binding steps? they don't seem to work
+    // el('spelling_hint_button1').onclick = this.initialize_spelling_hint_master.bind(this)
+    // el('spelling_hint_button2').onclick = this.initialize_spelling_hint_master.bind(this)
+    // el('spelling_hint_button3').onclick = this.initialize_spelling_hint_master.bind(this)
+    
+    
 }
 
 
@@ -2246,8 +2301,324 @@ Quiz.prototype.initialize_spelling_hint = function () {
     // quiz.toggle_element takes as its argument a string, not the div
     el('spelling_hint_button').onclick = function () {quiz.toggle_element(div_string)};
 };    
-   
-   
+  
+  
+// @GRIMES 
+// we want to keep track of how many times they've hit the button
+// and do certain behaviors if we hit the threshold
+// we also want to keep track of how many alerts they've seen
+// so we don't show alerts annoyingly
+    // decrement score by some number
+    // give alert or not
+    // make letters bold
+    // show etym cheat sheet
+    // show underscore hint
+// something like this
+    // global_hint_counter++
+    // consult a map, give alert if under threshold
+    // consult a map, matching global_hint_counter (int) to a function
+        // make embedded roots bold
+        // (example sentence - unimplemented)
+        // show etym cheat sheet
+        // show underscore hint
+// Quiz.prototype.initialize_spelling_hint_master_old = function () {
+    
+//     // todo see if something like this simple error catcher can work
+//     //(some games won't have a spelling hint because they're not spelling mode)
+//     // if (!this.game.make_spelling_hint()) {
+//     //     console.log("PROBLEM: no spelling hint for this game");
+//     //     return;
+//     // } 
+    
+//     var hint_penalty_to_inflict;
+    
+    
+//     global_hint_counter++;
+//     global_hint_alert_counter++;
+    
+//     if (!this.module.submodule.spelling_hint_penalty) {
+//         // todo when spelling hint penalty is implemented, build a block of code here
+//         bug.log("no spelling hint penalty specified, penalty set to 1");
+//         console.log("GRIMES no spelling hint penalty specified, penalty set to 1");
+//         hint_penalty_to_inflict = 1;
+//     } else {
+//         hint_penalty_to_inflict = this.module.submodule.spelling_hint_penalty;
+//         console.log("GRIMES hint_penalty set to module parameter = ", hint_penalty_to_inflict);
+//     }
+    
+    
+//     // handle the alert behavior
+//     if (global_hint_alert_counter < 5) {
+        
+//         alert("At this advanced level a hint will cost you one point.");
+//     }
+    
+    
+//     if (this.game.chosen_question_type == "root_definition_to_root") {
+        
+//     }
+    
+//     // uncomment when implemented
+//     // decrement the score (unimplemented for now)
+//     // this.decrement_score_via_hint(penalty_to_inflict);
+    
+    
+//     // maybe move these into the if blocks below
+//     this.initialize_spelling_hint_subfunction_bold_roots();
+
+//     this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
+    
+//     this.initialize_spelling_hint_subfunction_underscore();
+
+    
+//     // handle the hint behavior
+//     if (global_hint_counter === 1) {
+//         // PSEUDOCODE: fade out hint_button_1, fade in hint_button_2
+//     } else if (global_hint_counter === 2) {
+//         // PSEUDOCODE: fade out hint_button_2, fade in hint_button_3
+//     } else if (global_hint_counter === 3) {
+//         // PSEUDOCODE: fade out hint_button_3
+//     } else {
+//         console.log("GRIMES global_hint_counter > 3, no action");
+//     }
+// }
+
+
+
+
+
+
+Quiz.prototype.initialize_spelling_hint_master = function (n) {
+    
+    // todo see if something like this simple error catcher can work
+    //(some games won't have a spelling hint because they're not spelling mode)
+    // if (!this.game.make_spelling_hint()) {
+    //     console.log("PROBLEM: no spelling hint for this game");
+    //     return;
+    // } 
+    
+    
+    
+    console.log("GRIMES this.game.spelling_hint = ", this.game.spelling_hint);
+    
+    
+    var hint_penalty_to_inflict;
+    
+    
+    global_hint_counter++;
+    global_hint_alert_counter++;
+    
+    if (!this.module.submodule.spelling_hint_penalty) {
+        // todo when spelling hint penalty is implemented, build a block of code here
+        bug.log("no spelling hint penalty specified, penalty set to 1");
+        console.log("GRIMES no spelling hint penalty specified, penalty set to 1");
+        hint_penalty_to_inflict = 1;
+    } else {
+        hint_penalty_to_inflict = this.module.submodule.spelling_hint_penalty;
+        console.log("GRIMES hint_penalty set to module parameter = ", hint_penalty_to_inflict);
+    }
+    
+    
+    // handle the alert behavior
+    // todo alerts disabled for testing, implement when done testing
+    if (global_hint_alert_counter < 0) {
+        
+        alert("At this advanced level a hint will cost you one point.");
+    }
+    
+    
+    
+    
+    // uncomment when implemented
+    // decrement the score (unimplemented for now)
+    // this.decrement_score_via_hint(penalty_to_inflict);
+    
+    
+    // maybe move these into the if blocks below
+    // this.initialize_spelling_hint_subfunction_bold_roots();
+    // this.initialize_spelling_hint_subfunction_underscore();
+    // this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
+    
+    
+    
+    // handle the hint behavior
+    
+    console.log("ENTERING GRIMES1");
+    
+    console.log("GRIMES1 this.game.chosen_question_type = ", this.game.chosen_question_type);
+    console.log("GRIMES1 number of button pressed = ", n);
+    
+    if (this.game.chosen_question_type === "root_definition_to_root") {
+        if (n === 1) {
+            console.log("GRIMES1, root n = 1");
+            // PSEUDOCODE: make etym cheat sheet
+            this.initialize_spelling_hint_subfunction_etym_cheat_sheet(1);
+        } else if (n === 2) {
+            console.log("GRIMES1, root n = 2");
+            // PSEUDOCODE: first letter hint
+            // todo underscore and first letter are presumabley the same, so rename
+            // this doesn't seem to work
+            this.initialize_spelling_hint_subfunction_underscore(2);
+        } else if (n === 3) {
+            console.log("GRIMES1, root n = 3");
+            // todo add some kind of super hint like, bolding the relevant roots in the cheat sheet
+            console.log("GRIMES no hint at this level")
+        } else {
+            console.log("GRIMES global_hint_counter > 3, no action");
+        }
+    } else if (this.game.chosen_question_type === "word_definition_to_word") {
+        if (n === 1) {
+            console.log("GRIMES1, word n = 1");
+            // PSEUDOCODE: bold words
+            this.initialize_spelling_hint_subfunction_bold(1);
+        } else if (n === 2) {
+            console.log("GRIMES1, word n = 2");
+            // PSEUDOCODE: etym cheat sheet
+            this.initialize_spelling_hint_subfunction_etym_cheat_sheet(2);
+        } else if (n === 3) {
+            console.log("GRIMES1, word n = 3");
+            // PSEUDOCODE: underscore
+            this.initialize_spelling_hint_subfunction_underscore(3);
+        } else {
+            console.log("GRIMES global_hint_counter > 3, no action");
+        }
+    } else {
+        console.log("PROBLEM neither root nor word, hopefully etym, setting up default (etym cheat sheet)")
+        if (n === 1) {
+            // PSEUDOCODE: bold words
+            this.initialize_spelling_hint_subfunction_bold();
+        } else if (n === 2) {
+            // PSEUDOCODE: etym cheat sheet
+            this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
+        } else if (n === 3) {
+            // PSEUDOCODE: underscore
+        } else {
+            console.log("GRIMES global_hint_counter > 3, no action");
+        }
+    }
+    
+    
+    
+    
+    
+
+    
+    // handle the button behavior
+    if (n === 1) {
+        // PSEUDOCODE: fade out hint_button_1, fade in hint_button_2
+    } else if (n === 2) {
+        // PSEUDOCODE: fade out hint_button_2, fade in hint_button_3
+    } else if (n === 3) {
+        // PSEUDOCODE: fade out hint_button_3
+    } else {
+        console.log("GRIMES global_hint_counter > 3, no action");
+    }
+}
+
+
+/////// HINT #1
+
+Quiz.prototype.initialize_spelling_hint_subfunction_bold = function (n) {
+    el('spelling_hint_button' + n).onclick = function () {
+        set_font_weight_of_class("embedded_root", "900");
+        set_case_of_class("embedded_root", "uppercase");
+    };
+}
+
+
+/////// HINT #2
+
+Quiz.prototype.initialize_spelling_hint_subfunction_etym_cheat_sheet = function (n) {
+    
+    
+    
+    var name = "etym_cheat_sheet"
+    var etym_cheat = this.game.etymology_cheat_sheet;
+    
+    
+    // @beehack
+    // the mystery: <span ... etc. occurs on the html page
+    // below is the short term removal
+    // ideally we want the words to be able to be made bold in the cheat sheet as well
+
+    
+    var new_list = [];
+    for (var i = 0; i < etym_cheat.length; i++) {
+        var sublist = etym_cheat[i];
+        
+        var new_sublist = [];
+        
+        
+        for (var j = 0; j < sublist.length; j++) {
+            var item = sublist[j].replace("<span class=\"embedded_root\">", "");
+            item = item.replace("</span>", "");
+            new_sublist.push(item);
+        }
+        new_list.push(new_sublist);
+    } 
+    
+    
+    etym_cheat = new_list;
+    
+    // console.log("this.game.etym_cheat_sheet stringified = ", 
+    //     JSON.stringify(etym_cheat));
+        
+    
+    //end beehack
+        
+    
+    
+    
+    back.log("this.game.etym_cheat_sheet stringified = ", 
+        JSON.stringify(etym_cheat));
+    
+    var outer_div = el(name + "_div");
+    // create_cheat_sheet_table(outer_div, name,
+    // null, null, etym_cheat, 2);
+    // el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(name)};
+    el('spelling_hint_button' + n).onclick = function () {
+        set_display(el(name)), 'initial'};
+}
+
+
+
+/////// HINT #3
+Quiz.prototype.initialize_spelling_hint_subfunction_underscore = function (n) {
+    back.log("spelling_hint_subfunction_underscore entered");
+    console.log("GRIMES spelling_hint_subfunction_underscore entered");
+    
+    var div_to_inspect = el('spelling_hint_box');
+    
+    // var spelling_hint_string = this.game.spelling_hint;
+    
+    
+    
+    var spelling_hint_string = this.game.spelling_hint;
+    
+    console.log("GRIMES spelling_hint_string = ", spelling_hint_string);
+    
+    
+    
+    back.log("underscore_hint_output = ", spelling_hint_string);
+    console.log("GRIMES underscore_hint_output = ", spelling_hint_string);
+    
+    var div_string = 'spelling_hint_box'
+    var div_name = el('spelling_hint_box');
+    div_name.innerHTML = spelling_hint_string;
+    
+    el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(div_string)};
+};    
+  
+//////// HINT #4
+
+Quiz.prototype.initialize_spelling_hint_subfunction_first_letter = function (n) {
+    console.log("GRIMES first letter function STILL EMPTY");
+}
+
+
+  
+// end @GRIMES  
+  
    
 Quiz.prototype.initialize_dash_hint = function () {
     
@@ -2447,9 +2818,6 @@ Quiz.prototype.initialize_etym_cheat_sheet = function () {
     
     //end beehack
         
-    
-    
-    
     back.log("this.game.etym_cheat_sheet stringified = ", 
         JSON.stringify(etym_cheat));
     
