@@ -19,7 +19,8 @@ TutorialModeGame.prototype.attach = function(){
     set_display("etym_cheat_button", 'none');
     set_display("input_box", 'none');
     set_display("next_level_button", 'none');
-    set_display("spelling_hint_button", 'none');
+    // @cleanup
+    // set_display("spelling_hint_button", 'none');
     set_display("spelling_hint_button_master", "none");
     set_display("dash_hint_button", 'none');
     

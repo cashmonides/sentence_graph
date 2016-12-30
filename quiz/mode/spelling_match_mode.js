@@ -20,8 +20,8 @@ SpellingMatchModeGame.prototype.attach = function(){
     set_display("input_box", 'initial');
     set_display("next_button", 'none');
     set_display("skip_button", 'none');
-    // todo get rid of this button altogether
-    set_display("spelling_hint_button", 'none');
+    // @cleanup
+    // set_display("spelling_hint_button", 'none');
     set_display("spelling_hint_button_master", "initial");
     set_display("dash_hint_button", 'none');
     set_display("next_level_button", 'none');

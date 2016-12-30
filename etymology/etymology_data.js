@@ -4059,9 +4059,11 @@ var words = {
         "type": "none",
         "word": "genetic"
     },
+    //todo done til here at last check in
+    
     "geography": {
         "grade": 12,
-        "meaning": "study of the earth's surface",
+        "meaning": "the study and <span class=\"embedded_root\">record</span>ing of the <span class=\"embedded_root\">earth</span>, especially the features of the land and water on its surface",
         "part of speech": "noun",
         "roots": [
             "GEO",
@@ -4072,7 +4074,7 @@ var words = {
     },
     "geology": {
         "grade": 12,
-        "meaning": "study of the structure of the earth",
+        "meaning": "scientific <span class=\"embedded_root\">study</span> of the structure of the <span class=\"embedded_root\">earth</span>, especially the layers of stone that make up the crust and core",
         "part of speech": "noun",
         "roots": [
             "GEO",
@@ -4083,7 +4085,7 @@ var words = {
     },
     "geoponics": {
         "grade": 12,
-        "meaning": "soil-based agriculture",
+        "meaning": "traditional agriculture in which plants grow in the <span class=\"embedded_root\">earth</span>",
         "part of speech": "noun",
         "roots": [
             "GEO"
@@ -4093,7 +4095,7 @@ var words = {
     },
     "geriatrics": {
         "grade": 12,
-        "meaning": "medical care of the elderly",
+        "meaning": "<span class=\"embedded_root\">medical</span> care of the <span class=\"embedded_root\">elder</span>ly",
         "part of speech": "noun",
         "roots": [
             "GER",
@@ -4104,7 +4106,7 @@ var words = {
     },
     "gerontocracy": {
         "grade": 12,
-        "meaning": "the rule of the elders",
+        "meaning": "the <span class=\"embedded_root\">rule</span> of the <span class=\"embedded_root\">elder</span>s",
         "part of speech": "noun",
         "roots": [
             "GER",
@@ -4115,7 +4117,7 @@ var words = {
     },
     "gerontology": {
         "grade": 12,
-        "meaning": "the science of aging",
+        "meaning": "the scientific <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">aging</span>",
         "part of speech": "noun",
         "roots": [
             "GER",
@@ -4126,7 +4128,7 @@ var words = {
     },
     "gigabyte": {
         "grade": 12,
-        "meaning": "unit of computer storage space",
+        "meaning": "a <span class=\"embedded_root\">large</span> unit of computer storage, equivalent to a <span class=\"embedded_root\">billion</span> bytes",
         "part of speech": "noun",
         "roots": [
             "GIGA"
@@ -4136,7 +4138,7 @@ var words = {
     },
     "gigahertz": {
         "grade": 12,
-        "meaning": "unit of frequency (one billion Hz/sec)",
+        "meaning": "a <span class=\"embedded_root\">large \</span> unit of frequency (one <span class=\"embedded_root\">billion</span> hertz/sec)",
         "part of speech": "noun",
         "roots": [
             "GIGA"
@@ -4146,7 +4148,7 @@ var words = {
     },
     "gigawatt": {
         "grade": 12,
-        "meaning": "unit of electric power (one billion watts)",
+        "meaning": "a <span class=\"embedded_root\">large</span>unit of electric power (one <span class=\"embedded_root\">billion</span> watts)",
         "part of speech": "noun",
         "roots": [
             "GIGA"
@@ -4156,7 +4158,7 @@ var words = {
     },
     "gradual": {
         "grade": 12,
-        "meaning": "step-by-step",
+        "meaning": "incremental, <span class=\"embedded_root\">step</span>-by-step",
         "part of speech": "adjective",
         "roots": [
             "GRESS/GRAD/GRADE/GRADI"
@@ -4166,7 +4168,7 @@ var words = {
     },
     "grammar": {
         "grade": 12,
-        "meaning": "rules of how to write words in sentences",
+        "meaning": "rules of how to <span class=\"embedded_root\">write</span> words in sentences",
         "part of speech": "noun",
         "roots": [
             "GRAM"
@@ -4176,7 +4178,7 @@ var words = {
     },
     "granite": {
         "grade": 12,
-        "meaning": "a hard, grainy rock",
+        "meaning": "a hard, grainy <span class=\"embedded_root\">stone</span>",
         "part of speech": "noun",
         "roots": [
             "GRAN",
@@ -4187,7 +4189,7 @@ var words = {
     },
     "granular": {
         "grade": 12,
-        "meaning": "made of grains",
+        "meaning": "made of <span class=\"embedded_root\">grain</span>s",
         "part of speech": "adjective",
         "roots": [
             "GRAN"
@@ -4197,7 +4199,7 @@ var words = {
     },
     "graphic": {
         "grade": 12,
-        "meaning": "a drawing or picture",
+        "meaning": "a drawing or other visual <span class=\"embedded_root\">recording</span>",
         "part of speech": "noun",
         "roots": [
             "GRAPH"
@@ -4207,7 +4209,7 @@ var words = {
     },
     "graphology": {
         "grade": 12,
-        "meaning": "the study of handwritings",
+        "meaning": "the scientific <span class=\"embedded_root\">study</span> of hand<span class=\"embedded_root\">writ</span>ing",
         "part of speech": "noun",
         "roots": [
             "GRAPH",
@@ -4218,7 +4220,7 @@ var words = {
     },
     "grateful": {
         "grade": 12,
-        "meaning": "feeling thankful",
+        "meaning": "feeling <span class=\"embedded_root\">thank</span>ful",
         "part of speech": "adjective",
         "roots": [
             "GRAT"
@@ -4228,7 +4230,7 @@ var words = {
     },
     "gratify": {
         "grade": 12,
-        "meaning": "to please someone",
+        "meaning": "to <span class=\"embedded_root\">please</span> someone",
         "part of speech": "verb",
         "roots": [
             "GRAT"
@@ -4238,34 +4240,13 @@ var words = {
     },
     "gratuity": {
         "grade": 12,
-        "meaning": "a tip, token of appreciation",
+        "meaning": "token of <span class=\"embedded_root\">thanks</span>, e.g. a tip given to a waiter",
         "part of speech": "noun",
         "roots": [
             "GRAT"
         ],
         "type": "none",
         "word": "gratuity"
-    },
-    "gynecoid": {
-        "grade": 12,
-        "meaning": "resembling a woman",
-        "part of speech": "adjective",
-        "roots": [
-            "GYN"
-        ],
-        "type": "none",
-        "word": "gynecoid"
-    },
-    "gynephobia": {
-        "grade": 12,
-        "meaning": "fear of women",
-        "part of speech": "noun",
-        "roots": [
-            "GYN",
-            "PHOB"
-        ],
-        "type": "none",
-        "word": "gynephobia"
     },
     "hectare": {
         "grade": 12,
@@ -4299,7 +4280,7 @@ var words = {
     },
     "helianthus": {
         "grade": 12,
-        "meaning": "genus of plants including sunflowers",
+        "meaning": "genus of plants including <span class=\"embedded_root\">sun</span>-<span class=\"embedded_root\">flower</span>s",
         "part of speech": "noun",
         "roots": [
             "HELI/HELIO root 2",

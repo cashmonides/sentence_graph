@@ -122,11 +122,7 @@ Quiz.prototype.start = function() {
         });
     }
     
-    if (!this.module) {
-        console.log("DEBUGGING 999 this.module.id doesn't exist at this stage ");
-    } else {
-        console.log("DEBUGGING 999 this.module.id = ", this.module.id);
-    }
+    
     
     
     //the following line tests the conditional
@@ -306,7 +302,7 @@ Quiz.prototype.get_start_module = function () {
 
 // @666
 Quiz.prototype.start_drone_timer = function (stopping_time, pin, user_name) {
-    console.log("666 quiz.start_drone_timer entered");
+    console.log("WEEZER666 quiz.start_drone_timer entered");
     return this.start_timer3('countdown', 50, this.end_drone_game2, stopping_time, pin, user_name);
 }
 
@@ -375,7 +371,6 @@ Quiz.prototype.end_drone_game2 = function (pin, user_name) {
     
     
     var score = get_spelling_match_score();
-    console.log("666 global_spelling_match_score_counter = ", score);
     
     
     // we seem to jump out of scope so we lose all access to "this."
@@ -383,6 +378,13 @@ Quiz.prototype.end_drone_game2 = function (pin, user_name) {
     // var callback = this.display_match_score(score);
     // instead we use this one
     var callback = display_match_score(score);
+    
+    
+    
+    console.log("WEEZER666 about to persist drone game with the following data");
+    console.log("WEEZER666 persisting drone game, path = ", path);
+    console.log("WEEZER666 persisting drone game, score = ", score);
+    
     
     Persist.set(path, score, callback);
     
@@ -410,7 +412,8 @@ var display_match_score = function (score) {
     set_display("input_box", 'none');
     set_display("next_button", 'none');
     set_display("skip_button", 'none');
-    set_display("spelling_hint_button", 'none');
+    // @cleanup
+    // set_display("spelling_hint_button", 'none');
     set_display("dash_hint_button", 'none');
     set_display("next_level_button", 'none');
     
@@ -850,14 +853,13 @@ Quiz.prototype.next_question = function (error) {
     // this counter inspects how many times the hint button has been pressed per question
     // to control things like how many points are deducted and what kind of hint appears
     global_hint_counter = 0;
-    console.log("GRIMES666 quiz.next_question reached, global_hint_counter reset");
     el("spelling_hint_button_master").disabled = false;
     el("spelling_hint_button_master").innerHTML = "get a HINT";
     
     
     
     
-    console.log("999 this.module.id = ", this.module.id);
+    console.log("this.module.id = ", this.module.id);
     // @beehack
     if (this.module.id === 0.5 || this.module.id === 0.25) {
         
@@ -900,7 +902,7 @@ Quiz.prototype.next_question = function (error) {
     }
     
     
-    console.log("999 post bee interceptor")
+    // console.log("999 post bee interceptor")
     
     // todo very important: need to figure out how to clear this box
     // without calling some ad hoc step
@@ -1221,7 +1223,7 @@ Quiz.prototype.submodule_complete_without_post = function () {
     
     // add
     // persist level here
-    console.log("BEEHACK999 about to persist session_bee_counter as: ", session_bee_counter);
+    // console.log("BEEHACK999 about to persist session_bee_counter as: ", session_bee_counter);
     
     
     
@@ -1229,16 +1231,16 @@ Quiz.prototype.submodule_complete_without_post = function () {
     // todo turn into a function
     var at_a_lower_level_boolean = session_bee_counter > spelling_bee_training_counter;
     
-    console.log("BEEHACK707 in_spelling_bee_training_mode = ", in_spelling_bee_training_mode);
-    console.log("BEEHACK707 at_a_lower_level_boolean = ", at_a_lower_level_boolean);
+    // console.log("BEEHACK707 in_spelling_bee_training_mode = ", in_spelling_bee_training_mode);
+    // console.log("BEEHACK707 at_a_lower_level_boolean = ", at_a_lower_level_boolean);
     
     // this is our persistence step
     if (!in_spelling_bee_training_mode) {
-        console.log("BEEHACK707 not in spelling bee training mode, about to persist with counter = ", session_bee_counter);
+        // console.log("BEEHACK707 not in spelling bee training mode, about to persist with counter = ", session_bee_counter);
         this.set_spelling_bee_counter(session_bee_counter);
     }
     if (!at_a_lower_level_boolean) {
-        console.log("BEEHACK707 not at a lower level, about to persist with counter = ", session_bee_counter);
+        // console.log("BEEHACK707 not at a lower level, about to persist with counter = ", session_bee_counter);
         // this.user.persist_spelling_bee_counter(session_bee_counter);
         
         // session_bee_counter++;
@@ -2197,23 +2199,43 @@ Quiz.prototype.clean_up = function() {
     // replaced this line:
     // remove_children(el('image_display_box'));
     // with this one:
+    
+    console.log("WEEZER666 checkpoint 1");
     el('image_display_box').innerHTML = '';
     
+    console.log("WEEZER666 checkpoint 2");
     remove_children(el('vocab_cheat_sheet_div'));
+    console.log("WEEZER666 checkpoint 3");
     remove_children(el('etym_cheat_sheet_div'));
+    console.log("WEEZER666 checkpoint 4");
     remove_children(el('etym_cheat_sheet_div'));
+    console.log("WEEZER666 checkpoint 5");
     remove_children(el("spelling_hint_box"));
     
     // remove_children(el("spelling_hint_div"));
     // remove_children(el('image_display_box1'));
+    console.log("WEEZER666 checkpoint 6");
     el('cheat_sheet_button').onclick = this.initialize_cheat_sheet.bind(this);
+    console.log("WEEZER666 checkpoint 7");
     el('vocab_cheat_button').onclick = this.initialize_vocab_cheat_sheet.bind(this);
-    el('etym_cheat_button').onclick = this.initialize_etym_cheat_sheet.bind(this);
-    el('spelling_hint_button').onclick = this.initialize_spelling_hint.bind(this);
     
+    
+    
+    console.log("WEEZER666 checkpoint 8");
+    // this seems to be bugging out
+    console.log("GRIMESBUG el('etym_cheat_button') =", el('etym_cheat_button'));
+    el('etym_cheat_button').onclick = this.initialize_etym_cheat_sheet.bind(this);
+    
+    
+    // @cleanup   below has been replaced by spelling_hint_button_master
+    // el('spelling_hint_button').onclick = this.initialize_spelling_hint.bind(this);
+    
+    console.log("WEEZER666 checkpoint 9");
     
     el('dash_hint_button').onclick = this.initialize_dash_hint.bind(this);
     
+    
+    console.log("WEEZER666 checkpoint 10");
     
     //@GRIMES
     el('spelling_hint_button_master').onclick = this.initialize_spelling_hint_master.bind(this);
@@ -2263,6 +2285,8 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
 
  
  
+ 
+ // @cleanup, below should be eliminated
 //a more advanced version being developed
 // goals:
 // toggle, not just append
@@ -2270,56 +2294,56 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
 // make sure we're not giving the actual word itself
 // make sure we're not producing multiple variations that give away the word
 // e.g. pod_____y     & __iatry
-Quiz.prototype.initialize_spelling_hint = function () {
+// Quiz.prototype.initialize_spelling_hint = function () {
     
-    // todo see if something like this simple error catcher can work
-    //(some games won't have a spelling hint because they're not spelling mode)
-    // if (!this.game.make_spelling_hint()) {
-    //     console.log("PROBLEM: no spelling hint for this game");
-    //     return;
-    // } 
-    
-    
-    if (!this.module.submodule.spelling_hint_penalty) {
-        // todo when spelling hint penalty is implemented, build a block of code here
-        // bug.log("no spelling hint penalty specified");
-    } else {
-      if (this.module.submodule.spelling_hint_penalty != 0) {
-        if (this.game.chosen_question_type == "root_definition_to_root") {
-            alert("At this advanced level hints will cost you one point.");
-            this.decrement_score_via_hint();
-            }
-        }  
-    }
+//     // todo see if something like this simple error catcher can work
+//     //(some games won't have a spelling hint because they're not spelling mode)
+//     // if (!this.game.make_spelling_hint()) {
+//     //     console.log("PROBLEM: no spelling hint for this game");
+//     //     return;
+//     // } 
     
     
+//     if (!this.module.submodule.spelling_hint_penalty) {
+//         // todo when spelling hint penalty is implemented, build a block of code here
+//         // bug.log("no spelling hint penalty specified");
+//     } else {
+//       if (this.module.submodule.spelling_hint_penalty != 0) {
+//         if (this.game.chosen_question_type == "root_definition_to_root") {
+//             alert("At this advanced level hints will cost you one point.");
+//             this.decrement_score_via_hint();
+//             }
+//         }  
+//     }
     
     
     
     
-    back.log("initialize_spelling_hint entered");
-    
-    var div_to_inspect = el('spelling_hint_box');
-    
-    var spelling_hint_string = this.game.spelling_hint;
     
     
-    console.log("[quiz.initialize_spelling_hint] hint_output = ", spelling_hint_string);
+//     back.log("initialize_spelling_hint entered");
     
-    //we first test A SIMPLE VERSION
-    // SUMMARY: works but doesn't remove old hint, doesn't give new hint
-    // simple because it doesn't use make, it just alters a pre-existing div
-    // does this work??
-    // yes this works but sometimes (seemingly more than usual)
-    // it produces the full word
-    var div_string = 'spelling_hint_box'
-    var div_name = el('spelling_hint_box');
-    div_name.innerHTML = spelling_hint_string;
-    //works
-    // el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div2')};
-    // quiz.toggle_element takes as its argument a string, not the div
-    el('spelling_hint_button').onclick = function () {quiz.toggle_element(div_string)};
-};    
+//     var div_to_inspect = el('spelling_hint_box');
+    
+//     var spelling_hint_string = this.game.spelling_hint;
+    
+    
+//     console.log("[quiz.initialize_spelling_hint] hint_output = ", spelling_hint_string);
+    
+//     //we first test A SIMPLE VERSION
+//     // SUMMARY: works but doesn't remove old hint, doesn't give new hint
+//     // simple because it doesn't use make, it just alters a pre-existing div
+//     // does this work??
+//     // yes this works but sometimes (seemingly more than usual)
+//     // it produces the full word
+//     var div_string = 'spelling_hint_box'
+//     var div_name = el('spelling_hint_box');
+//     div_name.innerHTML = spelling_hint_string;
+//     //works
+//     // el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div2')};
+//     // quiz.toggle_element takes as its argument a string, not the div
+//     el('spelling_hint_button').onclick = function () {quiz.toggle_element(div_string)};
+// };    
   
   
 // @GRIMES 
@@ -2603,26 +2627,26 @@ Quiz.prototype.initialize_spelling_hint_master = function () {
     if (global_hint_counter === 1) {
         // a word question makes words bold on step 1
         if (this.game.chosen_question_type === "word_definition_to_word") {
-            console.log("GRIMES999 word 1 triggered");
+            // console.log("GRIMES999 word 1 triggered");
             // this.initialize_spelling_hint_subfunction_bold();
             set_font_weight_of_class("embedded_root", "900");
             set_case_of_class("embedded_root", "uppercase");
         }
         // a root question skips the bold stage
         else if (this.game.chosen_question_type === "root_definition_to_root") {
-            console.log("GRIMES999 root 1 triggered");
+            // console.log("GRIMES999 root 1 triggered");
             this.initialize_spelling_hint_master();
         } 
     }
     else if (global_hint_counter === 2) {
         // a word question makes words bold on step 1
         if (this.game.chosen_question_type === "word_definition_to_word") {
-            console.log("GRIMES999 word 2 triggered");
+            // console.log("GRIMES999 word 2 triggered");
             this.display_etym_cheat_sheet();
         }
         // a root question skips the bold stage
         else if (this.game.chosen_question_type === "root_definition_to_root") {
-            console.log("GRIMES999 root 2 triggered");
+            // console.log("GRIMES999 root 2 triggered");
             this.display_etym_cheat_sheet();
         } 
     } else if (global_hint_counter === 3) {
@@ -2650,6 +2674,20 @@ Quiz.prototype.display_etym_cheat_sheet = function () {
     // below is the short term removal
     // ideally we want the words to be able to be made bold in the cheat sheet as well
 
+
+    console.log("SPANBUG entering problem area");
+    
+    var test_string = "to <span class=\"embedded_root\">shout</span> loudly";
+    var test_output = test_string.replace("<span class=\"embedded_root\">", "");
+    console.log("SPANBUG test_string = ", test_string);
+    console.log("SPANBUG test_output = ", test_output);
+    
+    // todo why isn't this working when the identical function is called from string_utils.js?????
+    var replace_all_substrings = function (string, substring, replacement) {
+        return string.split(substring).join(replacement);
+    };
+    
+    
     
     var new_list = [];
     for (var i = 0; i < etym_cheat.length; i++) {
@@ -2659,8 +2697,17 @@ Quiz.prototype.display_etym_cheat_sheet = function () {
         
         
         for (var j = 0; j < sublist.length; j++) {
-            var item = sublist[j].replace("<span class=\"embedded_root\">", "");
-            item = item.replace("</span>", "");
+            var item = sublist[j];
+            
+            
+            item = replace_all_substrings(item, "<span class=\"embedded_root\">", "");
+            
+            item = replace_all_substrings(item, "</span>", "");
+            
+            // item = sublist[j].replace("<span class=\"embedded_root\">", "");
+            // console.log("SPANBUG item step 2 = ", item);
+            // // item = item.replace("</span>", "");
+            // console.log("SPANBUG item step 3 = ", item);
             new_sublist.push(item);
         }
         new_list.push(new_sublist);
@@ -2669,7 +2716,7 @@ Quiz.prototype.display_etym_cheat_sheet = function () {
     
     etym_cheat = new_list;
     
-    //end beehack
+    
         
     
     
@@ -2687,7 +2734,6 @@ Quiz.prototype.display_etym_cheat_sheet = function () {
 
 Quiz.prototype.display_spelling_hint_underscore_or_first_letter = function () {
     back.log("display_spelling_hint_underscore_or_first_letter entered");
-    console.log("display_spelling_hint_underscore_or_first_letter entered");
     
     var div_to_inspect = el('spelling_hint_box');
     
@@ -2697,12 +2743,10 @@ Quiz.prototype.display_spelling_hint_underscore_or_first_letter = function () {
     
     var spelling_hint_string = this.game.spelling_hint;
     
-    console.log("GRIMES999 spelling_hint_string = ", spelling_hint_string);
     
     
     
     back.log("underscore_hint_output = ", spelling_hint_string);
-    console.log("GRIMES999 underscore_hint_output = ", spelling_hint_string);
     
     var div_string = 'spelling_hint_box'
     var div_name = el('spelling_hint_box');
