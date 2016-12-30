@@ -5,9 +5,6 @@ remove all logs from inside of if loops (to avoid clutter)
 
 ALERT MISSION CRITICAL
 
-spelling hint button still lingers
-
-incorportate countdown bar as a clock
 
 
 
@@ -43,6 +40,11 @@ DA.PUZZLES
 
 ATTACK PLAN FOR SPELLING BEE
 _____DO NOW_____
+- hide hint and everything else when drone game ends
+- freeze countdown bar
+- persist in user profile # of win/place/shows in spelling match
+
+
 
 - small things
     - eliminate button from index DONE

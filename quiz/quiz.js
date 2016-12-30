@@ -302,7 +302,6 @@ Quiz.prototype.get_start_module = function () {
 
 // @666
 Quiz.prototype.start_drone_timer = function (stopping_time, pin, user_name) {
-    console.log("WEEZER666 quiz.start_drone_timer entered");
     return this.start_timer3('countdown', 50, this.end_drone_game2, stopping_time, pin, user_name);
 }
 
@@ -2200,42 +2199,35 @@ Quiz.prototype.clean_up = function() {
     // remove_children(el('image_display_box'));
     // with this one:
     
-    console.log("WEEZER666 checkpoint 1");
+    
     el('image_display_box').innerHTML = '';
     
-    console.log("WEEZER666 checkpoint 2");
+    
     remove_children(el('vocab_cheat_sheet_div'));
-    console.log("WEEZER666 checkpoint 3");
     remove_children(el('etym_cheat_sheet_div'));
-    console.log("WEEZER666 checkpoint 4");
     remove_children(el('etym_cheat_sheet_div'));
-    console.log("WEEZER666 checkpoint 5");
     remove_children(el("spelling_hint_box"));
     
     // remove_children(el("spelling_hint_div"));
     // remove_children(el('image_display_box1'));
-    console.log("WEEZER666 checkpoint 6");
     el('cheat_sheet_button').onclick = this.initialize_cheat_sheet.bind(this);
-    console.log("WEEZER666 checkpoint 7");
     el('vocab_cheat_button').onclick = this.initialize_vocab_cheat_sheet.bind(this);
     
     
     
-    console.log("WEEZER666 checkpoint 8");
     // this seems to be bugging out
-    console.log("GRIMESBUG el('etym_cheat_button') =", el('etym_cheat_button'));
     el('etym_cheat_button').onclick = this.initialize_etym_cheat_sheet.bind(this);
     
     
     // @cleanup   below has been replaced by spelling_hint_button_master
     // el('spelling_hint_button').onclick = this.initialize_spelling_hint.bind(this);
     
-    console.log("WEEZER666 checkpoint 9");
+
     
     el('dash_hint_button').onclick = this.initialize_dash_hint.bind(this);
     
     
-    console.log("WEEZER666 checkpoint 10");
+
     
     //@GRIMES
     el('spelling_hint_button_master').onclick = this.initialize_spelling_hint_master.bind(this);
