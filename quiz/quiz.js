@@ -855,7 +855,7 @@ Quiz.prototype.next_question = function (error) {
     el("spelling_hint_button_master").innerHTML = "get a HINT";
     
     
-    
+    // set_display("spelling_hint_button_master", "none");
     
     console.log("999 this.module.id = ", this.module.id);
     // @beehack
