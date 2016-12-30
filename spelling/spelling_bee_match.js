@@ -1,133 +1,3 @@
-/*
-- refactor to arbitrary number of games
-- build spelling match mode
-    - read level from firebase
-    - set countdown
-- build countdown clock
-    - read from firebase in milliseconds stop time
-    - set timeout that triggers 
-        - alert
-        - function
-
-var main = function () {
-    read_firebase('endtime', start_timer);
-}
-
-var start_timer = function (end_time) {
-    // refresh_countdown_to_end_time is a function that, when called,
-    // refreshes the countdown to the amount of time remaining
-    // until the end time.
-    // e.g. 
-    // clock displays 1000 milliseconds remaining
-    // refresh_countdown_to_end_time happens and 
-    // clock display is reset to 950
-    var refresh_countdown_to_end_time = refresh_clock(end_time);
-    // We refresh the clock every 50 milliseconds.
-    // clock_refresh_id is an integer id (not a function),
-    // which we can pass to clearInterval to stop the function
-    // from continuing to run. We want to do this at the end of the game.
-    var clock_refresh_id = setInterval(refresh_countdown_to_end_time, 50);
-    setTimeout(end_game(clock_refresh_id), end_time - Date.now());
-}
-
-// refresh_clock is a function that takes a number (the time that
-// the countdown ends) and returns a function that, when called,
-// sets the countdown appropriately.
-// So (using clock times instead of numbers of milliseconds
-// in these examples), if the time is 9:00, then refresh_clock(9:10)()
-// will set the countdown to 10 minutes. After another minute,
-// the time is 9:01 and refresh_clock(9:10)()
-// will set the countdown to 9 minutes. refresh_clock(9:15)()
-// will set the countdown to 14 minutes at this time.
-
-// Note that the clock display is in a traditional time format,
-// not as a number of milliseconds. Why don't we refresh only every second?
-// Since sometimes functions might run and so the gap between refreshes
-// might be more than a second, causing the clock to skip a second.
-// Since we refresh every 50 milliseconds, the clock will instead
-// sometimes stay on a second for only 950 milliseconds,
-// which is hard to detect.
-var refresh_clock = function (end_time) {
-    return function () {
-        var seconds_left = (end_time - Date.now()) / 1000);
-        // Resets the timer.
-        set_timer(seconds_left);
-    }
-}
-
-var end_game = function (clock_refresh_id_to_cancel) {
-    // This line cancels the function that runs regularly
-    // with id clock_refresh_id_to_cancel.
-    // That function is the clock refreshing.
-    // We do this since we don't want the clock to continue
-    // to refresh after the end of the game.
-    clearInterval(clock_refresh_id_to_cancel);
-    // Clear the div with the clock.
-    clear_clock_div();
-    // Do other end-game cleanup (e.g., remove current question,
-    // stop new questions from coming up).
-    stop_game();
-    // Tell the user that the game is over.
-    alert('game over!!!');
-    // Tell the user what their score was.
-    display_match_score();
-}
-
-- read firebase
-    - setInterval (1) every 50 milliseconds
-        - reset the timer to the floor of the difference between current time and end,
-            divided by 1000
-    - set timeout (2)
-       - cancels setinterval (1)
-        - alert
-        - stops game
-
-*/
-
-
-
-
-// todo on HEAD COMPUTER//////////////
-// the persist on the home computer should be done to a folder called games "in_progress"
-// add countdown timer to head computer page
-// when timer ends, it displays results in head computer
-// when timer ends, it copies the firebase match object to another folder called "finished"
-    //or maybe just rewrite the id as finished + pin
-// generate deterministic questions, not just an etym level
-// refactor to give arbitrary number of games
-
-// todo on DRONE COMPUTERS//////////////////
-// new mode spelling_match_mode
-// read level from firebase
-    // ideally: load list of deterministic questions
-// read stop time from firebase
-// display countdown
-
-// when countdown ends, do something
-    // stop quiz
-    // give an alert
-    // display all right and wrong answers for review
-        //e.g. arthropod -- arthopod
-// write accuracy dictionary to firebase
-    // correct, incorrect, grand total
-    // score = # (correct)
-    // accuracy = percentage (correct/incorrect + correct)
-    // i.e. a fast person might have a higher score but a lower accuracy
-// (ideally: write a list of all right and wrong answers to firebase)
-    //e.g. arthropod -- arthopod
-
-
-
-// todo on SPELLING DATA///////////////////
-// set level for words
-// remove gynophobia, diarhea etc.
-// add synonym functionality
-// add bold words or span
-
-
-
-
-
 window.onload = start;
 
 function start() {
@@ -209,43 +79,101 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
     
     var path = ["test", pin]
     
-    // option 0
+    
+    // final_callback basically just has display_spelling_match_pin(pin, column)
+
     Persist.set(path, data, final_callback(pin, column));
-    // Persist.set(path, data, final_callback);
+    
+}
+
+
+// callback of the persist statement
+var final_callback = function (pin, column) {
+    display_spelling_match_pin(pin, column);
+    // display_countdown(time_limit);
+}
+
+
+// called ny the final callback
+var display_spelling_match_pin = function (pin, column) {
+    
+    var element = el('spelling_match_pin_cell' + column);
+    element.innerHTML = pin;
     
 }
 
 
 
-var show_spelling_match_results = function (n) {
-    console.log("DEBUGGING show_spelling_match_results entered");
+
+
+
+
+/////////ending the game,displaying resultsandmovinggame in firebase
+// sometimes we'll only want to display the top n finishers
+// to avoid bruising egos
+var cut_off_all_but_top = false;
+// var cut_off_all_but_top = 3;
+
+
+// this is the master function
+// it does a few important things
+    // removes pin
+    // gets the data from the game that just finished with three functions in the callback
+        // sort_and_display_match_results  on the home page
+        // sets the data in "completed_games"
+        // deletes the old node 
+var move_game_to_completed = function (n) {
+    // This happens if the game has already been removed.
     if (!(n in random_spelling_bee_numbers)) {
-        alert('Game already removed so results cannot be shown.');
+        alert('Game already removed.');
         return;
     }
-    // we use a global to access the pin since we can't access it via quiz.pin
+    
     var pin = random_spelling_bee_numbers[n];
-    // Note: This means pin cannot be the number 0. But under my system
-    // pin is always six digits and a string, so this is not a problem
-    // unless we revert.
-    if (!pin) {
-        throw 'Serious coding mistake: pin is not what it should be. It is ' + pin;
-    }
-    console.log("DEBUGGING pin to get from firebase = ", pin);
-    var map_of_scores = Persist.get(["test", pin, "scores"], function (x) {
-        var val = x.val();
-        console.log("DEBUGGING val = ", val);
-        console.log("DEBUGGING val stringified = ", JSON.stringify(val));
-        sort_and_display_match_results(val, n);
-    });
+    
+    // Remove all reference of the game's existance.
+    delete random_spelling_bee_numbers[n];
+    
+    var old_path = ["test", pin];
+    
+    var date_id = Date.now();
+    
+    // we can't merely push the pin to firebase 
+    // or we will end up with non-unique reference ids
+    // so we make a unique id
+    var unique_id = pin + "@" + date_id;
+    
+    var new_path = ["test", "completed_games", unique_id];
+    
+    // callback is optional in set
+    Persist.get(old_path, function (x) {
+        var data = x.val();
+        console.log("VAL from get = ", data);
+        console.log("stringified VAL from get = ", JSON.stringify(data));
+        
+        
+        
+        var scores_map = data.scores;
+        
+        // Very small bug: we might be doing this for the second time.
+        sort_and_display_match_results(scores_map, n);
+        
+        Persist.set(new_path, data);
+        
+        
+        Persist.remove_node(old_path, function () {
+            console.log("NODE REMOVED")
+        });
+        
+        
+        // Persist.clear_node(old_path, function () {
+        //     console.log("NODE CLEARED")
+        // });
+        
+    }); 
 }
 
 
-
-// sometimes we'll only want to display the top n finishers
-// to avoid bruising egos
-// var cut_off_all_but_top = false;
-var cut_off_all_but_top = 3;
 
 var sort_and_display_match_results = function (data, n) {
     var element = el("spelling_match_score_results" + n);
@@ -259,7 +187,6 @@ var sort_and_display_match_results = function (data, n) {
     var how_many_items_to_take;
     if (cut_off_all_but_top) {
         // Minimum of how many there are and how many we show at most.
-        how_many_items_to_take = Math.min(sorted_data.length, cut_off_all_but_top);
     } else {
         how_many_items_to_take = sorted_data.length;
     }
@@ -271,6 +198,41 @@ var sort_and_display_match_results = function (data, n) {
         element.innerHTML += ranking + " " + "score: " + score_display;
     }
 }
+
+
+
+
+// otiose I think
+// var show_spelling_match_results = function (n) {
+//     console.log("DEBUGGING show_spelling_match_results entered");
+//     if (!(n in random_spelling_bee_numbers)) {
+//         alert('Game already removed so results cannot be shown.');
+//         return;
+//     }
+//     // we use a global to access the pin since we can't access it via quiz.pin
+//     var pin = random_spelling_bee_numbers[n];
+//     // Note: This means pin cannot be the number 0. But under my system
+//     // pin is always six digits and a string, so this is not a problem
+//     // unless we revert.
+//     if (!pin) {
+//         throw 'Serious coding mistake: pin is not what it should be. It is ' + pin;
+//     }
+//     console.log("DEBUGGING pin to get from firebase = ", pin);
+//     var map_of_scores = Persist.get(["test", pin, "scores"], function (x) {
+//         var val = x.val();
+//         console.log("DEBUGGING val = ", val);
+//         console.log("DEBUGGING val stringified = ", JSON.stringify(val));
+//         sort_and_display_match_results(val, n);
+//     });
+// }
+
+
+
+
+
+
+
+
 
 var generate_ordinal_suffix = function (int) {
     if ([11, 12, 13].indexOf(int % 100) !== -1) {
@@ -335,63 +297,11 @@ var process_score_for_display = function (list_item) {
 // }
 
 
-var final_callback = function (pin, column) {
-    display_spelling_match_pin(pin, column);
-    // display_countdown(time_limit);
-}
 
 
 
-var move_game_to_completed = function (n) {
-    // This happens if the game has already been removed.
-    if (!(n in random_spelling_bee_numbers)) {
-        alert('Game already removed.');
-        return;
-    }
-    
-    var pin = random_spelling_bee_numbers[n];
-    
-    // Remove all reference of the game's existance.
-    delete random_spelling_bee_numbers[n];
-    
-    var old_path = ["test", pin];
-    
-    var date_id = Date.now();
-    
-    // we can't merely push the pin to firebase 
-    // or we will end up with non-unique reference ids
-    // so we make a unique id
-    var unique_id = pin + "@" + date_id;
-    
-    var new_path = ["test", "completed_games", unique_id];
-    
-    // callback is optional in set
-    Persist.get(old_path, function (x) {
-        var data = x.val();
-        console.log("VAL from get = ", data);
-        console.log("stringified VAL from get = ", JSON.stringify(data));
-        
-        
-        
-        var scores_map = data.scores;
-        
-        // Very small bug: we might be doing this for the second time.
-        sort_and_display_match_results(scores_map, n);
-        
-        Persist.set(new_path, data);
-        
-        
-        Persist.remove_node(old_path, function () {
-            console.log("NODE REMOVED")
-        });
-        
-        
-        // Persist.clear_node(old_path, function () {
-        //     console.log("NODE CLEARED")
-        // });
-        
-    }); 
-}
+
+
 
 /*
 var akiva_autogenerate_spelling_match_pin = function () {
@@ -411,11 +321,6 @@ var autogenerate_spelling_match_pin = function () {
 
 // END dan
 
-var display_spelling_match_pin = function (pin, column) {
-    //stringify pin if necessary
-    var element = el('spelling_match_pin_cell' + column);
-    element.innerHTML = pin;
-}
 
 /*
 // checks if user-inputted string is valid
@@ -575,3 +480,138 @@ var create_stopping_time = function (offset) {
 //     var element = el("spelling_match_pin_cell");
 //     element.innerHTML = pin;
 // }
+
+
+
+
+
+
+
+
+/*
+- refactor to arbitrary number of games
+- build spelling match mode
+    - read level from firebase
+    - set countdown
+- build countdown clock
+    - read from firebase in milliseconds stop time
+    - set timeout that triggers 
+        - alert
+        - function
+
+var main = function () {
+    read_firebase('endtime', start_timer);
+}
+
+var start_timer = function (end_time) {
+    // refresh_countdown_to_end_time is a function that, when called,
+    // refreshes the countdown to the amount of time remaining
+    // until the end time.
+    // e.g. 
+    // clock displays 1000 milliseconds remaining
+    // refresh_countdown_to_end_time happens and 
+    // clock display is reset to 950
+    var refresh_countdown_to_end_time = refresh_clock(end_time);
+    // We refresh the clock every 50 milliseconds.
+    // clock_refresh_id is an integer id (not a function),
+    // which we can pass to clearInterval to stop the function
+    // from continuing to run. We want to do this at the end of the game.
+    var clock_refresh_id = setInterval(refresh_countdown_to_end_time, 50);
+    setTimeout(end_game(clock_refresh_id), end_time - Date.now());
+}
+
+// refresh_clock is a function that takes a number (the time that
+// the countdown ends) and returns a function that, when called,
+// sets the countdown appropriately.
+// So (using clock times instead of numbers of milliseconds
+// in these examples), if the time is 9:00, then refresh_clock(9:10)()
+// will set the countdown to 10 minutes. After another minute,
+// the time is 9:01 and refresh_clock(9:10)()
+// will set the countdown to 9 minutes. refresh_clock(9:15)()
+// will set the countdown to 14 minutes at this time.
+
+// Note that the clock display is in a traditional time format,
+// not as a number of milliseconds. Why don't we refresh only every second?
+// Since sometimes functions might run and so the gap between refreshes
+// might be more than a second, causing the clock to skip a second.
+// Since we refresh every 50 milliseconds, the clock will instead
+// sometimes stay on a second for only 950 milliseconds,
+// which is hard to detect.
+var refresh_clock = function (end_time) {
+    return function () {
+        var seconds_left = (end_time - Date.now()) / 1000);
+        // Resets the timer.
+        set_timer(seconds_left);
+    }
+}
+
+var end_game = function (clock_refresh_id_to_cancel) {
+    // This line cancels the function that runs regularly
+    // with id clock_refresh_id_to_cancel.
+    // That function is the clock refreshing.
+    // We do this since we don't want the clock to continue
+    // to refresh after the end of the game.
+    clearInterval(clock_refresh_id_to_cancel);
+    // Clear the div with the clock.
+    clear_clock_div();
+    // Do other end-game cleanup (e.g., remove current question,
+    // stop new questions from coming up).
+    stop_game();
+    // Tell the user that the game is over.
+    alert('game over!!!');
+    // Tell the user what their score was.
+    display_match_score();
+}
+
+- read firebase
+    - setInterval (1) every 50 milliseconds
+        - reset the timer to the floor of the difference between current time and end,
+            divided by 1000
+    - set timeout (2)
+       - cancels setinterval (1)
+        - alert
+        - stops game
+
+*/
+
+
+
+
+// todo on HEAD COMPUTER//////////////
+// the persist on the home computer should be done to a folder called games "in_progress"
+// add countdown timer to head computer page
+// when timer ends, it displays results in head computer
+// when timer ends, it copies the firebase match object to another folder called "finished"
+    //or maybe just rewrite the id as finished + pin
+// generate deterministic questions, not just an etym level
+// refactor to give arbitrary number of games
+
+// todo on DRONE COMPUTERS//////////////////
+// new mode spelling_match_mode
+// read level from firebase
+    // ideally: load list of deterministic questions
+// read stop time from firebase
+// display countdown
+
+// when countdown ends, do something
+    // stop quiz
+    // give an alert
+    // display all right and wrong answers for review
+        //e.g. arthropod -- arthopod
+// write accuracy dictionary to firebase
+    // correct, incorrect, grand total
+    // score = # (correct)
+    // accuracy = percentage (correct/incorrect + correct)
+    // i.e. a fast person might have a higher score but a lower accuracy
+// (ideally: write a list of all right and wrong answers to firebase)
+    //e.g. arthropod -- arthopod
+
+
+
+// todo on SPELLING DATA///////////////////
+// set level for words
+// remove gynophobia, diarhea etc.
+// add synonym functionality
+// add bold words or span
+
+

@@ -3,11 +3,15 @@ REFACTORING
 remove all logs from inside of if loops (to avoid clutter)
 
 
+ALERT MISSION CRITICAL
 
-CURRENT ISSUES
+spelling hint button still lingers
+
+incorportate countdown bar as a clock
+
+
 
 HIGHEST PRIORITY
-very important: make number of etym dummies a module-specified parameter
 enter grades
 create individual tag users for final week and letter to parents
 time control for team play and solo play
@@ -39,25 +43,13 @@ DA.PUZZLES
 
 ATTACK PLAN FOR SPELLING BEE
 _____DO NOW_____
-- priorities
-    - get Dan prepped for meeting
-        - build content agnostic graph DONE
-        - age-appropriate content from greek myth DONE
-        - web-scraping theoi
-        - machine learning aspect of matching karuta sentences
-        - using actual japanese and chinese poetry for karuta
-    - start building up data, prep for meeting with dan
-    - build levels for game
-    - build info 
-    - avatar choice
-- persist word-based data to sql (etymology & spelling)
+
 - small things
     - eliminate button from index DONE
     - change text content of home computers DONE
     - change behavior when drone computer stops game DONME
         - alert
         - make return to profile
-    - hide etymology cheat sheet in spelling modes DONE
     - freeze out behavior of countdown bar for now
     - email dan about progress bar countdown
 - medium things
@@ -67,7 +59,7 @@ _____DO NOW_____
     - set up levels for matches
     - set up dictionary of levels
     - set up root progression
-- progressive hints DONE
+- progressive hints
     - hint button changes (get a hint, get another hint, get a final hint, no more hints)
 - hint penalty
 - write etymology and spelling results to sql
@@ -85,23 +77,9 @@ _____DO NOW_____
 - add example sentence functionality
 
 
-DONE THINGS IN SPELLING BEE
-- change size and cosmetics of spelling bee buttons DONE
-- clear hint and etymology display box in spelling bee mode DONE
-- display drone, queen level in header DONE
-- hide display of spelling bee buttons in other modes DONE
-- move hint (first letter or underscore) to above etymology cheat sheet DONE
-- wrong guesses should kick out earlier levels DONE
-- add etymology mode to spelling bee module DONE
-- link up bee levels to setting etymology levels DONE
-- reduce number of dummies in etymology cheat sheet for spelling mode DONE
-- increase number of drop down options in etymology mode DONE
-- BUG: new level button should lead to resetting of progress bar DONE
-- embedded roots turn bold DONE
-- check if pictures can be added to submodule complete (just pictures of bees) DONE
-- persist bee trainer score DOME
-- hide training level buttons as they advance DONE
 
+
+DONE
 
 
 

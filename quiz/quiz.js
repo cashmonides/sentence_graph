@@ -855,7 +855,7 @@ Quiz.prototype.next_question = function (error) {
     el("spelling_hint_button_master").innerHTML = "get a HINT";
     
     
-    // set_display("spelling_hint_button_master", "none");
+    
     
     console.log("999 this.module.id = ", this.module.id);
     // @beehack
@@ -2402,114 +2402,114 @@ Quiz.prototype.initialize_spelling_hint = function () {
 //     }
 // }
 
-Quiz.prototype.initialize_spelling_hint_master_old = function (n) {
+// Quiz.prototype.initialize_spelling_hint_master_old = function (n) {
     
-    // todo see if something like this simple error catcher can work
-    //(some games won't have a spelling hint because they're not spelling mode)
-    // if (!this.game.make_spelling_hint()) {
-    //     console.log("PROBLEM: no spelling hint for this game");
-    //     return;
-    // } 
-    
-    
-    
-    console.log("GRIMES this.game.spelling_hint = ", this.game.spelling_hint);
+//     // todo see if something like this simple error catcher can work
+//     //(some games won't have a spelling hint because they're not spelling mode)
+//     // if (!this.game.make_spelling_hint()) {
+//     //     console.log("PROBLEM: no spelling hint for this game");
+//     //     return;
+//     // } 
     
     
-    var hint_penalty_to_inflict;
+    
+//     console.log("GRIMES this.game.spelling_hint = ", this.game.spelling_hint);
     
     
-    global_hint_counter++;
-    global_hint_alert_counter++;
-    
-    if (!this.module.submodule.spelling_hint_penalty) {
-        // todo when spelling hint penalty is implemented, build a block of code here
-        bug.log("no spelling hint penalty specified, penalty set to 1");
-        console.log("GRIMES no spelling hint penalty specified, penalty set to 1");
-        hint_penalty_to_inflict = 1;
-    } else {
-        hint_penalty_to_inflict = this.module.submodule.spelling_hint_penalty;
-        console.log("GRIMES hint_penalty set to module parameter = ", hint_penalty_to_inflict);
-    }
+//     var hint_penalty_to_inflict;
     
     
-    // handle the alert behavior
-    // todo alerts disabled for testing, implement when done testing
-    if (global_hint_alert_counter < 0) {
+//     global_hint_counter++;
+//     global_hint_alert_counter++;
+    
+//     if (!this.module.submodule.spelling_hint_penalty) {
+//         // todo when spelling hint penalty is implemented, build a block of code here
+//         bug.log("no spelling hint penalty specified, penalty set to 1");
+//         console.log("GRIMES no spelling hint penalty specified, penalty set to 1");
+//         hint_penalty_to_inflict = 1;
+//     } else {
+//         hint_penalty_to_inflict = this.module.submodule.spelling_hint_penalty;
+//         console.log("GRIMES hint_penalty set to module parameter = ", hint_penalty_to_inflict);
+//     }
+    
+    
+//     // handle the alert behavior
+//     // todo alerts disabled for testing, implement when done testing
+//     if (global_hint_alert_counter < 0) {
         
-        alert("At this advanced level a hint will cost you one point.");
-    }
+//         alert("At this advanced level a hint will cost you one point.");
+//     }
     
     
     
     
-    // uncomment when implemented
-    // decrement the score (unimplemented for now)
-    // this.decrement_score_via_hint(penalty_to_inflict);
+//     // uncomment when implemented
+//     // decrement the score (unimplemented for now)
+//     // this.decrement_score_via_hint(penalty_to_inflict);
     
     
-    // maybe move these into the if blocks below
-    // this.initialize_spelling_hint_subfunction_bold_roots();
-    // this.initialize_spelling_hint_subfunction_underscore();
-    // this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
+//     // maybe move these into the if blocks below
+//     // this.initialize_spelling_hint_subfunction_bold_roots();
+//     // this.initialize_spelling_hint_subfunction_underscore();
+//     // this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
     
     
     
-    // handle the hint behavior
+//     // handle the hint behavior
     
-    console.log("ENTERING GRIMES1");
+//     console.log("ENTERING GRIMES1");
     
-    console.log("GRIMES1 this.game.chosen_question_type = ", this.game.chosen_question_type);
-    console.log("GRIMES1 number of button pressed = ", n);
+//     console.log("GRIMES1 this.game.chosen_question_type = ", this.game.chosen_question_type);
+//     console.log("GRIMES1 number of button pressed = ", n);
     
-    if (this.game.chosen_question_type === "root_definition_to_root") {
-        if (n === 1) {
-            console.log("GRIMES1, root n = 1");
-            // PSEUDOCODE: make etym cheat sheet
-            this.initialize_spelling_hint_subfunction_etym_cheat_sheet(1);
-        } else if (n === 2) {
-            console.log("GRIMES1, root n = 2");
-            // PSEUDOCODE: first letter hint
-            // todo underscore and first letter are presumabley the same, so rename
-            // this doesn't seem to work
-            this.initialize_spelling_hint_subfunction_underscore(2);
-        } else if (n === 3) {
-            console.log("GRIMES1, root n = 3");
-            // todo add some kind of super hint like, bolding the relevant roots in the cheat sheet
-            console.log("GRIMES no hint at this level")
-        } else {
-            console.log("GRIMES global_hint_counter > 3, no action");
-        }
-    } else if (this.game.chosen_question_type === "word_definition_to_word") {
-        if (n === 1) {
-            console.log("GRIMES1, word n = 1");
-            // PSEUDOCODE: bold words
-            this.initialize_spelling_hint_subfunction_bold(1);
-        } else if (n === 2) {
-            console.log("GRIMES1, word n = 2");
-            // PSEUDOCODE: etym cheat sheet
-            this.initialize_spelling_hint_subfunction_etym_cheat_sheet(2);
-        } else if (n === 3) {
-            console.log("GRIMES1, word n = 3");
-            // PSEUDOCODE: underscore
-            this.initialize_spelling_hint_subfunction_underscore(3);
-        } else {
-            console.log("GRIMES global_hint_counter > 3, no action");
-        }
-    } else {
-        console.log("PROBLEM neither root nor word, hopefully etym, setting up default (etym cheat sheet)")
-        if (n === 1) {
-            // PSEUDOCODE: bold words
-            this.initialize_spelling_hint_subfunction_bold();
-        } else if (n === 2) {
-            // PSEUDOCODE: etym cheat sheet
-            this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
-        } else if (n === 3) {
-            // PSEUDOCODE: underscore
-        } else {
-            console.log("GRIMES global_hint_counter > 3, no action");
-        }
-    }
+//     if (this.game.chosen_question_type === "root_definition_to_root") {
+//         if (n === 1) {
+//             console.log("GRIMES1, root n = 1");
+//             // PSEUDOCODE: make etym cheat sheet
+//             this.initialize_spelling_hint_subfunction_etym_cheat_sheet(1);
+//         } else if (n === 2) {
+//             console.log("GRIMES1, root n = 2");
+//             // PSEUDOCODE: first letter hint
+//             // todo underscore and first letter are presumabley the same, so rename
+//             // this doesn't seem to work
+//             this.initialize_spelling_hint_subfunction_underscore(2);
+//         } else if (n === 3) {
+//             console.log("GRIMES1, root n = 3");
+//             // todo add some kind of super hint like, bolding the relevant roots in the cheat sheet
+//             console.log("GRIMES no hint at this level")
+//         } else {
+//             console.log("GRIMES global_hint_counter > 3, no action");
+//         }
+//     } else if (this.game.chosen_question_type === "word_definition_to_word") {
+//         if (n === 1) {
+//             console.log("GRIMES1, word n = 1");
+//             // PSEUDOCODE: bold words
+//             this.initialize_spelling_hint_subfunction_bold(1);
+//         } else if (n === 2) {
+//             console.log("GRIMES1, word n = 2");
+//             // PSEUDOCODE: etym cheat sheet
+//             this.initialize_spelling_hint_subfunction_etym_cheat_sheet(2);
+//         } else if (n === 3) {
+//             console.log("GRIMES1, word n = 3");
+//             // PSEUDOCODE: underscore
+//             this.initialize_spelling_hint_subfunction_underscore(3);
+//         } else {
+//             console.log("GRIMES global_hint_counter > 3, no action");
+//         }
+//     } else {
+//         console.log("PROBLEM neither root nor word, hopefully etym, setting up default (etym cheat sheet)")
+//         if (n === 1) {
+//             // PSEUDOCODE: bold words
+//             this.initialize_spelling_hint_subfunction_bold();
+//         } else if (n === 2) {
+//             // PSEUDOCODE: etym cheat sheet
+//             this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
+//         } else if (n === 3) {
+//             // PSEUDOCODE: underscore
+//         } else {
+//             console.log("GRIMES global_hint_counter > 3, no action");
+//         }
+//     }
     
     
     
@@ -2517,17 +2517,17 @@ Quiz.prototype.initialize_spelling_hint_master_old = function (n) {
     
 
     
-    // handle the button behavior
-    if (n === 1) {
-        // PSEUDOCODE: fade out hint_button_1, fade in hint_button_2
-    } else if (n === 2) {
-        // PSEUDOCODE: fade out hint_button_2, fade in hint_button_3
-    } else if (n === 3) {
-        // PSEUDOCODE: fade out hint_button_3
-    } else {
-        console.log("GRIMES global_hint_counter > 3, no action");
-    }
-}
+//     // handle the button behavior
+//     if (n === 1) {
+//         // PSEUDOCODE: fade out hint_button_1, fade in hint_button_2
+//     } else if (n === 2) {
+//         // PSEUDOCODE: fade out hint_button_2, fade in hint_button_3
+//     } else if (n === 3) {
+//         // PSEUDOCODE: fade out hint_button_3
+//     } else {
+//         console.log("GRIMES global_hint_counter > 3, no action");
+//     }
+// }
 
 
 
@@ -2638,27 +2638,8 @@ Quiz.prototype.initialize_spelling_hint_master = function () {
     
 }
 
-// @debug current
-// makes and displays etym cheat sheet
-// but span seems preserved
+
 Quiz.prototype.display_etym_cheat_sheet = function () {
-    
-    // begin WEEZER comment
-    // at some point spans were appearing in cheat sheets
-    // cause was mysterious
-    // below was a test but during the course of testing
-    // the bug turned into a schrodingers bug and disappeared
-    // console.log("WEEZER entering problem area");
-    // var test_string = "desiring of <span class=\"embedded_root\">eat</span>ing food in great quantities / very hungry";
-    
-    // console.log("WEEZER test string = ", test_string);
-    
-    // var test_output = test_string.replace("<span class=\"embedded_root\">", "");
-    // console.log("WEEZER output of replace span = ", test_output);
-    
-    // end WEEZER comment
-    
-    
     
     var name = "etym_cheat_sheet"
     var etym_cheat = this.game.etymology_cheat_sheet;
@@ -2669,9 +2650,6 @@ Quiz.prototype.display_etym_cheat_sheet = function () {
     // below is the short term removal
     // ideally we want the words to be able to be made bold in the cheat sheet as well
 
-    
-    
-    
     
     var new_list = [];
     for (var i = 0; i < etym_cheat.length; i++) {
