@@ -3,6 +3,9 @@ REFACTORING
 remove all logs from inside of if loops (to avoid clutter)
 
 
+
+CURRENT ISSUES
+
 HIGHEST PRIORITY
 enter grades
 create individual tag users for final week and letter to parents
@@ -56,6 +59,7 @@ _____DO NOW_____
     - change behavior when drone computer stops game DONME
         - alert
         - make return to profile
+    - hide etymology cheat sheet in spelling modes
     - freeze out behavior of countdown bar for now
     - email dan about progress bar countdown
 - medium things
@@ -65,7 +69,7 @@ _____DO NOW_____
     - set up levels for matches
     - set up dictionary of levels
     - set up root progression
-- progressive hints
+- progressive hints DONE
     - hint button changes (get a hint, get another hint, get a final hint, no more hints)
 - hint penalty
 - write etymology and spelling results to sql

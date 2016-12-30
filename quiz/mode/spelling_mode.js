@@ -257,12 +257,16 @@ SpellingModeGame.prototype.attach = function () {
     set_display("submit_button", 'initial');
     set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'none');
-    set_display("etym_cheat_button", 'initial');
+    // etym_cheat_sheet is replaced with the incremental hint button
+    // so we don't want access to the button
+    set_display("etym_cheat_button", 'none');
     //input box will be used
     set_display("input_box", 'initial');
     set_display("next_button", 'none');
     set_display("skip_button", 'none');
-    set_display("spelling_hint_button", 'initial');
+    //  todo get rid of this button altogether
+    set_display("spelling_hint_button", 'none');
+    set_display("spelling_hint_button_master", "initial");
     set_display("dash_hint_button", 'none');
     set_display("next_level_button", 'none');
     

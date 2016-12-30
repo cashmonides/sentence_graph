@@ -2638,8 +2638,27 @@ Quiz.prototype.initialize_spelling_hint_master = function () {
     
 }
 
-
+// @debug current
+// makes and displays etym cheat sheet
+// but span seems preserved
 Quiz.prototype.display_etym_cheat_sheet = function () {
+    
+    // begin WEEZER comment
+    // at some point spans were appearing in cheat sheets
+    // cause was mysterious
+    // below was a test but during the course of testing
+    // the bug turned into a schrodingers bug and disappeared
+    // console.log("WEEZER entering problem area");
+    // var test_string = "desiring of <span class=\"embedded_root\">eat</span>ing food in great quantities / very hungry";
+    
+    // console.log("WEEZER test string = ", test_string);
+    
+    // var test_output = test_string.replace("<span class=\"embedded_root\">", "");
+    // console.log("WEEZER output of replace span = ", test_output);
+    
+    // end WEEZER comment
+    
+    
     
     var name = "etym_cheat_sheet"
     var etym_cheat = this.game.etymology_cheat_sheet;
@@ -2650,6 +2669,9 @@ Quiz.prototype.display_etym_cheat_sheet = function () {
     // below is the short term removal
     // ideally we want the words to be able to be made bold in the cheat sheet as well
 
+    
+    
+    
     
     var new_list = [];
     for (var i = 0; i < etym_cheat.length; i++) {
