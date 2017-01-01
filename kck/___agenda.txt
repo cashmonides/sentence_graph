@@ -37,7 +37,9 @@ IMMEDIATE PRIORITY
 - time control for team play and solo play
 - bug: "I will have loved" appeared in morphology level 240
 - make sure number of spelling hint cheat sheet dummies is set in all modules
-
+- Akiva ask Dan
+    - what is the meaning of the following in quiz:
+        - el('spelling_hint_button_master').onclick = this.initialize_spelling_hint_master.bind(this);
 
 
 DA.PUZZLES
@@ -46,6 +48,9 @@ DA.PUZZLES
 - convert word to x and non-x
 - 
 
+
+????AS QUESTIONS FOR DAN????
+- why is the string prototype not working
 
 
 PERSIST ACCURACY ON INDIVIDUAL WORDS
@@ -102,6 +107,7 @@ _____DO NOW_____
 
 
 - small things
+    - write code to build book of roots
     - add etymology to spelling bee mode and test thoroughly
     - refactor temporary_incorrect_streak
     - hide hint and everything else when drone game ends
@@ -118,6 +124,7 @@ _____DO NOW_____
     - organize admin to output by grade and in order of highest module reached and highest accuracy
     - feedback in morphology and etymology should repeat question
     - move development_status to module
+    - divide roots and words into separate files
 - medium things
     - persist in user profile # of win/place/shows in spelling match
     - hint penalty
