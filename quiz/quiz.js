@@ -380,19 +380,30 @@ Quiz.prototype.end_drone_game2 = function (pin, user_name) {
     
     
     
-    console.log("WEEZER666 about to persist drone game with the following data");
-    console.log("WEEZER666 persisting drone game, path = ", path);
-    console.log("WEEZER666 persisting drone game, score = ", score);
+    
+    back.log("persisting drone spelling game, path = ", path);
+    back.log("persisting drone spelling game, score = ", score);
     
     
     Persist.set(path, score, callback);
     
     
-    
+    //////// here we want to persist the ranking
     
     
     
 }
+
+/////////////// a mutation of display_match_score which also recovers the rank of each person
+var display_match_score2 = function (score) {
+    // do everything we normally do
+    display_match_score(score);
+    
+    // but also persist.get the rank and persist.set to the student's firebase account
+    
+}
+
+
 
 //@666
 // a perhaps unavoidable global function
@@ -420,6 +431,11 @@ var display_match_score = function (score) {
     set_display_of_class("morphology_to_clear", "none");
     // set_display_of_class("cleared_in_picture_display", "none");
     // set_display_of_class("cleared_in_picture_display2", "none");
+    
+    
+    
+    
+    
     
     
     var message_string = "Match is over!!! Your final score = " + score.toString();

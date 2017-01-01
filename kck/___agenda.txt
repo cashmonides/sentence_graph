@@ -1,6 +1,27 @@
-Agenda for future (made in mid-september 2016)
-REFACTORING
-remove all logs from inside of if loops (to avoid clutter)
+Agenda (updated jan 1, 2017)
+
+
+IN PROGRESS
+- root dictionary
+    - button on quiz page (visible only in etymology, spelling and spelling match mode)
+    - toggles
+    - displays root + derivative words
+        - ___ARTHR___
+        - arthropod - an invertebrate with jointed legs
+        - arthritis - inflammation
+        - arthroscope - 
+    - possible malicious hack:
+        - user gets the question: spell the word that means "invertebrate with jointed legs"
+        - clicks on root dictionary button
+        - searches for "invertebrate with jointed..."
+        - cuts and pastes answer into input box
+        - possible solution:
+            - allow this behavior in initial levels
+            - as score progresses, the definitions disappear
+            - click on definition but only with a penalty
+
+
+
 
 
 ALERT MISSION CRITICAL
@@ -8,28 +29,16 @@ ALERT MISSION CRITICAL
 
 
 
-HIGHEST PRIORITY
-enter grades
-create individual tag users for final week and letter to parents
-time control for team play and solo play
-tweak modules for tuesday
-bug: "I will have loved" appeared in morphology level 240
-make sure number of spelling hint cheat sheet dummies is set in all modules
-make a "set module" secret access button in profile
-bug in spelling mode    
-    - PROBLEM [spellingmode.give_underscore_hint] NO MATCH DISCOVERED where there should be a match, i.e. word should have root
-    - probably due to high etym level and some word having bad data
-move development status to module
-add etymology and spelling data posting to a new database
 
-MAPPING CONTROL FLOW & CLEANING UP
-- map the overall flow
-    - login -> profile -> quiz
-- map the basic quiz flow
-    - decision tree for different options
-        - e.g. process correct process incorrect submodule complete check for rollover etc.
-- move a lot of the things in lib to utils
-    - e.g. make.js
+IMMEDIATE PRIORITY
+- enter grades
+- make sure modules are set up for week 1 spelling match testing
+- create more users for spelling bee testing
+- time control for team play and solo play
+- bug: "I will have loved" appeared in morphology level 240
+- make sure number of spelling hint cheat sheet dummies is set in all modules
+
+
 
 DA.PUZZLES
 - mutate random characteristic
@@ -38,74 +47,51 @@ DA.PUZZLES
 - 
 
 
+
+PERSIST ACCURACY ON INDIVIDUAL WORDS
+- this should be roughly how it works as a SQL command
+    
+    UPDATE TheTable SET RevisionId = RevisionId + 1 WHERE Id=@id\
+- explanation:
+    UPDATE <name of table>
+    SET id = id + 1
+    WHERE id = <name of id>  
+    
+- fields
+    - userid (primary key)
+    - word/root (string)
+    - question type (could be an integer enumeration)
+    - correct count (int - initialized at 0)
+    - incorrect count (int - initialized at 0)
+    - threshold for incorrect (i.e. 7 attempts max)  (int)
+
+
 ATTACK PLAN FOR SPELLING BEE
 _____DO NOW_____
-- hide hint and everything else when drone game ends
-- freeze countdown bar
-- persist in user profile # of win/place/shows in spelling match
-
-
-
-- small things
-    - eliminate button from index DONE
-    - change text content of home computers DONE
-    - change behavior when drone computer stops game DONME
-        - alert
-        - make return to profile
-    - freeze out behavior of countdown bar for now
-    - email dan about progress bar countdown
-- medium things
-    - persist in user profile # of win/place/shows in spelling match
 - chore-like
-    - clear console logs, especially ones that give ans
+    - clear console logs, especially ones that give answers
     - set up levels for matches
     - set up dictionary of levels
     - set up root progression
-- progressive hints
-    - hint button changes (get a hint, get another hint, get a final hint, no more hints)
-- hint penalty
-- write etymology and spelling results to sql
-- add synonym functionality
-
-- add word difficulty level functionality
-- check if metrics are fully disabled for spelling bee
-- switch bee level to 1000
+    - build bee level to 1000
     - add bee pictures
     - build up dictionary of levels
     - use dan's range sampler
-- turn number of drop downs into a module-specified parameter
-- pull out the beecatcher into an overall function if possible
-- solve mystery of the visible spans
-- add example sentence functionality
-
-
-
-
-DONE
-
-
-
-
-- DO WITH DAN
-    - deterministic questions
-    - mystery of the visible spans
-    - implement counter to etym level
-
-- HEAD COMPUTER
-    - rewrite completed games to a completed folder
-    - display scores
-    - 
-
-- OFFLINE DATA CHORES
+- OFFLINE CHORE-LIKE
     - add words
     - add spans
     - add roots
     - find and add example sentences
     - add bee pictures
- 
-- ONLINE DATA CHORES
-    - pictures of bees
+    - add images to modules that don't have them
+- ONLINE CHORE-LIKE
+    - get bee pictures
     - pictures for etymology slide shows
+    - get images for animals that are missing
+- CODING CHORE-LIKE
+    - clean up logs 
+        - build up fronstage logs and backstage logs
+        - convert all console.logss
     
 - MODULE CHORES
     - set a more gradual ascent of level
@@ -113,91 +99,28 @@ DONE
 
 - SLIDESHOW CHORES
     - word of the day slideshow
-    - 
-
-____BEEBUG_____
-???mystery???
-    BEEBUG checkpoint #3
-    spelling_mode.js:336 this.clue =  the act of growing plants in a liquid nutrient solution
-    string_utils.js:56 BEEBUG slash_options_string =  HYDR
-    string_utils.js:57 BEEBUG query_word =  hydroponics
-    string_utils.js:66 BEEBUG slash_options_list =  ["HYDR"]
-    string_utils.js:76 BEEBUG match not found continuing iteration
-    spelling_mode.js:577 PROBLEM [spellingmode.give_underscore_hint] NO MATCH DISCOVERED where there should be a match, i.e. word should have root
-- MILLI seems to be lingering hidden somewhere
-- BIO also seems to be hiding urgent log_error initiated root not found in roots: BIO
-- seems to have something to do with upper case words
-    - short term: november, mesoamerica, december, paleolithic turned to lower case
-    - at some point go through control flow and add tolowercase where appropriate
 
 
-___WITH DAN____
-high priority bug and long term solution (BEEBUG is the tag)  
-    NO MATCH DISCOVERED where there should be a match, i.e. word should have root
-    etymology data checker
-refactor hacky parts of beehack
-turn etym cheat sheet into 2 columns
-
-
-- 
-
-____STEP 1____
-- make a testing file for etymology data
-- add synonyms for quad, quint
-- test synonyms
-- add example sentences for quad, quint, pod
-- test display example sentence with word removed
-    - e.g. "The ________ usually have exoskeletons and are carnivorous"
-    - e.g. "One example of an ________ is the beetle"
-- test read and booleanize example sentence THEN etymology
-- test example picture
-
-_____STEP 2_______
-- button in profile that leads to spelling trainer DONE
-
-- add a bee catcher (if it's in bee mode it's not counted as improvement)
-    - improve and advance all should ignore the bee
-- build a student-set level for spelling trainer
-- build a lean version of quiz for spelling bee mode
-    - without any firebase posting
-    - with a user set
-    - without any finishing, maybe upper threshhold is a million and the symbol is infinity
-
-
-HIGH PRIORITY
-- frontstage log
-- gameification acquisitive psychology
-    - add picture to gallery everytime they win
-- spelling mode for january release
-    - separate spelling bee trainer with student-set level
-    - bee mode with a very high threshold (maybe the infinity sign) 
-        - many bee pictures and a very very high threshold
-    - timer counting down
-    - add spans to root words in definition 
-        - e.g. a creature with <span>joint</span>ed <span>feet</span>
-        - in css we change the display (upper case, bold, etc.)
-    - player competition mode
-    - hint penalty
-    - first letter hint should go above the etymology cheat sheet
-    - etymology cheat sheet should be in two columns
-    - etymology cheat sheet left item (e.g. word) should be bold
-    - reduce size of first letter hint
-    - increase size of etymology cheat sheet
+- small things
+    - add etymology to spelling bee mode and test thoroughly
+    - refactor temporary_incorrect_streak
+    - hide hint and everything else when drone game ends
+    - increase submodule threshold slightly
+    - freeze out behavior of countdown bar temporarily
+    - fix countdown bar with Dan
+    - freeze out hint penalties for now
+    - check if metrics are fully disabled for spelling bee
+    - pull out the beecatcher into an overall function if possible
+    - solve mystery of the visible spans
     - backstage tester for etymology data
         - find words that don't contain root
         - find words whose roots don't match anything on the root list
-    - at some point they should be able to collect a lot of bees
-    - at some point the notion of magical spells should appear
-    - different hint types
-        - make root words in definition bold/underlined/upper case etc.
-        - gradual hint (adding letters one by one)
-        - use it in a sentence (with multiple clicks)
-        - contains these letters (they disappear as you spell the word)
-    - green and red should replace items on the list so it's not so long
-    - add example sentences
-    - question type: example sentence   
-        - the following highlighted word
-    - add words and roots
+    - organize admin to output by grade and in order of highest module reached and highest accuracy
+    - feedback in morphology and etymology should repeat question
+    - move development_status to module
+- medium things
+    - persist in user profile # of win/place/shows in spelling match
+    - hint penalty
     - add synonym functionality
         - short term: give each root & word a synonym field
         - longer term: 
@@ -205,116 +128,167 @@ HIGH PRIORITY
             - with subcategorization as to language
             - e.g. ped/pod/pus
             - e.g. quart / quad / quadr
-    - question type: distinguish between root and non-root substring
+    - add word difficulty level functionality
+    - turn number of drop downs into a module-specified parameter
+    - tweak display of etym cheat sheet 
+        - turn etym cheat sheet into 2 columns
+        - etymology cheat sheet left item (e.g. word) should be bold
+    - add example sentence functionality
+        - e.g. "The ________ usually have exoskeletons and are carnivorous"
+        - e.g. "One example of an ________ is the beetle"
+        - select a root of the highlighted word "most ARTHROPODS begin life as an egg" 
+        - choices: arth / vert / ped / mono
+        - semi-automated in sites such as http://sentence.yourdictionary.com/
+        - e.g. 
+        - select the definition of the root ARTHR
+        - example sentence: "All arthropods are invertebrates but not all invertebrates are arthropods"
+        - or
+        - example sentence: "Despite the remarkable variety of arthropod species, 
+                all share aspects of a single basic body plan. 
+                All arthropods possess a stiff exoskeleton composed primarily of chitin." 
+
+    - different kinds of hints
+        - contains these letters (they disappear as you spell the word)
+            - e.g. spell the WORD that means an invertebrate with JOINted LEGs
+            - contains these words A D H O P R T
+    - new question type (biPED vs. flipPED)
+        - i.e. distinguish between root and non-root substring
         - e.g. all of the following words contain the letters PED
         - click on the word that has the root PED = foot
-- reading comprehension THEN etymology
-    - read the following sentence (an example sentence from etymology data)
-    - then click on whether you think it's true, false or you don't know
-    - the sentence is e.g. true
-    - now do etymology exercise on the highlighted word
-- ??? mysterious bug in improvement located where console.log says BUGCHECK
+    - add picture to gallery everytime they win a submodule
+    - there should be an easier kind of cheat sheet called something like root + word list
+        - the hint looks like this:
+        - ROOT: [words_with_root]   // some dummies included
+        - e.g. spell the word that means "animal with jointed legs"
+        - click hint
+        - displayed on screen: 
+        - ARTHR: arthritis, arthroscope (the real item)
+        - IN: invisible, invertebrate, immutable  (a dummy item)
+        - PED/POD: pedestrian, arthropod, pseudopod (the real item)
+        - POLY: polyglot, polychrome (a dummy item)
+        - etc.
+    - make a "set module" secret access button in profile
+- big things
+    - write etymology and spelling results to sql
+    - deterministic questions for spelling match mode
+    - generalize match mode to things besides spelling
+    - turn etymology drop down into a clickable word selector
+    - new mode:
+        - reading comprehension THEN etymology
+        - read the following sentence (an example sentence from etymology data)
+        - then click on whether you think it's true, false or you don't know
+        - the sentence is e.g. true
+        - now do etymology exercise on the highlighted word
+    - at some point the notion of magical spells should appear (pun on the word spell)
+    
+    - in quick mode, add "find N subjects" functionality
+        - using the same sentence the following steps:
+        - "in the following sentence, click on at least 3 subjects"
+        - then "now click on at least 2 objects"
+        - then "what is the root of the highlighted word"
+        - then "what tense is the highlighted verb"
+        - then "is the highlighted word active or passive"
+    
+    - convert etymology words to x.y.z format
+        - quadruped --> quadr.u.ped
+        - with categories   
+            - root
+            - formation element
+            - connector element (e.g. vowel between roots)
+            - unknown
+        - e.g. 
+        - root.connector.root  (quadr.u.ped)
+        - root.formation (herb.al)
+        - root.root.formation.formation (bin.ocul.ar.s)
+        (obviously if we don't know how to classify an element or its data hasn't been
+         loaded then we would need to classify it as unknown)
+         - e.g. perhaps we don't know what to make pusill. in pusill.anim.ous
+            it would end up as unknown.root.formation
+        - the utility of this would be:
+            - to display a word in x.y.z form could serve as a sort of hint
+            - they see quadruped
+            - it's confusing
+            - they hit hint
+            - the word gets turned into quadr.u.ped
+            - with the quadr and ped in bold or otherwise graphically distinguished
+            - they hit a second layer of hint and it tells them the meaning of the roots quadr and ped
+    - build up new dictionary traverser model
+
+    - in quick mode, add some sentences that are both english and latin
+        - e.g. 
+        - click on 2 verbs (in english and latin)
+        - aliis volat propriis
+        - she flies with her own wing
+        - or e.g.
+        - click on the subject in the latin sentence
+        - Veritas vos liberabit
+        - the truth shall set you free
+        - in quick mode, add "find N subjects" functionality
+    
+
+
+________MAPPING CONTROL FLOW AND REFACTORING________
+- map the overall flow
+    - login -> profile -> quiz
+- divide into game engine and display engine
+- map the basic quiz flow
+    - decision tree for different options
+        - e.g. process correct process incorrect submodule complete check for rollover etc.
+- refactor quiz
+- move a lot of the things in lib to utils
+    - e.g. make.js
+
+
+____BEEBUGS_____
+- MILLI seems to be lingering hidden somewhere
+- BIO also seems to be hiding urgent log_error initiated root not found in roots: BIO
+- upper case words crash
+    - short term: november, mesoamerica, december, paleolithic turned to lower case
+    - at some point go through control flow and add tolowercase where appropriate
+
+
+
+_______BUGS_________
+- in inflect_latin dashes vs. !dashes does not seem to be working 
+    - (not hugely consequential but should be gotten to the bottom of)
+    - akiva added a global hack to make the dashes work in both drop down answer and student's answer
+        remove_dashes_global_hack
+- test implicit latin   
+    - above latin_level 220 there's a bug, probably tied to either
+    - the switch to implicit latin or the mixture of implicit and explicit
+    - the message is: initiated TypeError: Cannot read property 'j' of undefined
+
+
+
+______DATA SCRAPING______
+- theoi.com
+- sheri amsel exploring nature
+- http://sentence.yourdictionary.com/
+- etymonline
+
+
+HIGH PRIORITY
+
 - the 9/10 profile bug
     - this bug has been reported by some users but doesn't seem very common
     - its behavior appears to be:
     - when you're at 9/10 and you finish, if you don't hit next level and isntead hit profile  
     - it doesn't register submodule 9 as finished so you return to profile as 9/10
     - i.e. you need to hit next level
-- feedback in morphology and etymology should repeat question
-- add images to modules that don't have them
-- in inflect_latin dashes vs. !dashes does not seem to be working 
-    - (not hugely consequential but should be gotten to the bottom of)
 
 
 
-MID PRIORITY
-- put a counter of sick modes in the header DONE
-    - e.g. if a mode is sick it will show up as a symbol in the header
-    - the symbol shouldn't mean anything to the students (maybe just a dot)
-    - the goal is to alert akiva to problems during class
-- spelling green and red results shouldn't be so long a list
-    - as more guesses are made, and the list gets long, the uppermost guesses are removed
-- organize admin to output by grade and in order of highest module reached and highest accuracy
-- test implicit latin   
-    - above latin_level 220 there's a bug, probably tied to either
-    - the switch to implicit latin or the mixture of implicit and explicit
-    - the message is: initiated TypeError: Cannot read property 'j' of undefined
-- daily challenge
-- player vs player mode- daily challenge
-- player vs player mode
 
 
-LOW PRIORITY
-- add words
-- there should be an easier kind of cheat sheet called something like root + word list
-    - the hint looks like this:
-    - ROOT: [words_with_root]   // some dummies included
-    - e.g. spell the word that means "animal with jointed legs"
-    - click hint
-    - see: 
-    - IN: invisible, invertebrate, immutable
-    - PED/POD: pedestrian, arthropod, pseudopod
-    - POLY: polyglot, polychrome
-    - etc.
-- example sentences for spelling and etymology mode
-- hint penalty
-- systematize console logs (nearing completion)
-- in quick mode, add "find N subjects" functionality
-    - i.e. 
-- in quick mode, add some sentences that are both english and latin
-    - e.g. 
-    - click on 2 verbs (in english and latin)
-    - aliis volat propriis
-    - she flies with her own wing
-    - or e.g.
-    - click on the subject in the latin sentence
-    - Veritas vos liberabit
-    - the truth shall set you free
-    - in quick mode, add "find N subjects" functionality
-    - i.e. 
-- in quick mode, add some sentences that are both english and latin
-    - e.g. 
-    - click on 2 verbs (in english and latin)
-    - aliis volat propriis
-    - she flies with her own wing
-    - or e.g.
-    - click on the subject in the latin sentence
-    - Veritas vos liberabit
-    - the truth shall set you free
+
+
+
     
-BIG BUG
-- etymology cheat sheet for spell root mode gives irrelevant clues
-    e.g. spell the root that means "four"
-        cheat sheat = [quiz.initialize_etym_cheat_sheet] this.game.etym_cheat_sheet stringified =  [["bicycle","a vehicle with two wheels"],["encephalitis","inflammation of the brain"],["gradual","step-by-step"],["immortal","living forever, unable to die"],["inappropriate","not appropriate"],["incredible","unbelievable"],["missile","a weapon sent into the air"],["phonetic","relating to human speech sounds"]]
-    - the current short-term solution is to adjust it so it only gives one relevamt word
-    - occuring because current behavior is that the constraint 'words that contain root'
-        only checks whether the words contain one of the answer choices
+
 
 
 DESIDERATA
-- there should be a bunch of example sentences that are used both
-    - as example sentences for spelling and etymology
-    - as grammatically tagged
-- a nice addition to spelling mode would be a sequence of hints
-    - each hint adds a letter (probably consoonants at first)
-    - but of course each hint lowers the prize
-        - e.g.:
-        - 'to turn into stone'
-        - hint1 -->  ______f_
-        - hint2 -->  ____r_f_
-        - hint3 ---> p___r_f_
-        - etc.
-- example sentences for spelling and etymology mode 
-    - select a root of the highlighted word "most ARTHROPODS begin life as an egg" 
-        - choices: arth / vert / ped / mono
-    - semi-automated in sites such as http://sentence.yourdictionary.com/
-    - e.g. 
-    - select the definition of the root ARTHR
-    - example sentence: "All arthropods are invertebrates but not all invertebrates are arthropods"
-    - or
-    - example sentence: "Despite the remarkable variety of arthropod species, 
-            all share aspects of a single basic body plan. 
-            All arthropods possess a stiff exoskeleton composed primarily of chitin." 
+
 - venn diagrams in words and images
     - given: "All arthropods are invertebrates but not all invertebrates are arthropods"
     - true or false: the spider is an arthropod, therefore it is an invertebrate
@@ -330,54 +304,14 @@ SMALLISH ALGORITHM THINGS
 
 
 
-A POSSIBLY FUN LITTLE PROJECT
-- convert etymology words to x.y.z format
-    - quadruped --> quadr.u.ped
-    - with categories   
-        - root
-        - formation element
-        - connector element (e.g. vowel between roots)
-        - unknown
-    - e.g. 
-    - root.connector.root  (quadr.u.ped)
-    - root.formation (herb.al)
-    - root.root.formation.formation (bin.ocul.ar.s)
-    (obviously if we don't know how to classify an element or its data hasn't been
-     loaded then we would need to classify it as unknown)
-     - e.g. perhaps we don't know what to make pusill. in pusill.anim.ous
-        it would end up as unknown.root.formation
-    - the utility of this would be:
-        - to display a word in x.y.z form could serve as a sort of hint
-        - they see quadruped
-        - it's confusing
-        - they hit hint
-        - the word gets turned into quadr.u.ped
-        - with the quadr and ped in bold or otherwise graphically distinguished
-        - they hit a second layer of hint and it tells them the meaning of the roots quadr and ped
-
-
-LITTLE THING
-- refactor temporary_incorrect_streak
-
-LITTLE THING
-- add a hint penalty at higher level (especially useful for spelling mode)
 
 
 
-BIRD'S EYE AGENDA
+LATIN AND KCK AGENDA
 step 1
-    dash removal (done)
-    fix admin (done)
-    test (done)
-    commit (done)
-    test basic functionality after commiting
-    test SQL posting after commiting
-    
-FIX in step 1
     fix bad macrons and dash removal
         (no bad macrons so far) 
-    akiva added a global hack to make the dashes work in both drop down answer and student's answer
-        remove_dashes_global_hack
+    
     ideally we don't want certain verbs to become passive  
         I am shouted doesn't make a lot of sense
         so we don't want this to be passive except when the mental clause itself is the subject
@@ -386,13 +320,6 @@ FIX in step 1
         (it's a little too easy for more advanced students when it's all lined up)
 
 step 2
-    disable change password DONE
-    clean out console log DONE
-    change 1s 2s 3s to I you he DONE
-    narrow drop downs except at final string DONE
-    make names and password for LLS DONE
-    enter accounts DONE
-    change citation form of latin lexemes (e.g. iub- (2) not iubere) DONE
     move submit button and cheat sheets to the right (won't overlap with hoverable drop downs) DONE
     tweak drop_levels so that there are more drops
     make kck levels
@@ -433,10 +360,7 @@ AKIVA'S QUESTIONS FOR HIS CONTROL FLOW
     main.js generate_sentence has a simple error catching mode right? (the success variable)
     
   
-AKIVA MISC QUESTIONS
-- what is this in spelling mode?
-    // autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" supposedly turns spellcheck off
-    // maybe we want to be selective and do this, but presumably only in SpellingModeGame
+
 
     
 MORPHOLOGY MODE

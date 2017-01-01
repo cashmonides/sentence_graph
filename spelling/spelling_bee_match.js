@@ -155,6 +155,30 @@ var move_game_to_completed = function (n) {
         
         var scores_map = data.scores;
         
+        // WEEZER123 
+        //here we should add the place (1st, 2nd, 3rd) to the data so we can persist
+        // to user account (i.e. you have won 1st place 30 times, 2nd place 40 times, etc.)
+        
+        
+        var sorted_data = sort_map_by_values(data, true);
+        console.log("WEEZER123 sorted_data = ", sorted_data);
+        
+        
+        for (var i = 0; i < sorted_data.length; i++) {
+            var score_display = process_score_for_display(sorted_data[i]);
+            var ranking = generate_ranking_from_int(i+1);
+            var test_output = sorted_data[i] + ":" + ranking;
+            console.log("WEEZER123 test_output = ", test_output);
+            return test_output;
+        }
+        
+        // END WEEZER123
+        
+        
+        
+        
+        
+        
         // Very small bug: we might be doing this for the second time.
         sort_and_display_match_results(scores_map, n);
         
