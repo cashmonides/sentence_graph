@@ -380,9 +380,9 @@ Quiz.prototype.end_drone_game2 = function (pin, user_name) {
     
     
     
-    
-    back.log("persisting drone spelling game, path = ", path);
-    back.log("persisting drone spelling game, score = ", score);
+    console.log("WEEZER666 about to persist drone game with the following data");
+    console.log("WEEZER666 persisting drone game, path = ", path);
+    console.log("WEEZER666 persisting drone game, score = ", score);
     
     
     Persist.set(path, score, callback);
@@ -2250,12 +2250,6 @@ Quiz.prototype.clean_up = function() {
     
     
     
-    // LALA
-    console.log("LALA about to do the binding of root_dictionary_button");
-    el('root_dictionary_button').onclick = this.initialize_root_dictionary_display.bind(this);
-    
-    
-    
     // el('spelling_hint_button2').onclick = this.initialize_spelling_hint2.bind(this);
     
     // el("spelling_hint_button").onclick = this.initialize_spelling_hint.bind(this);
@@ -2299,6 +2293,275 @@ Quiz.prototype.get_vocab_cheat_sheet_map = function () {
 
  
  
+ 
+ // @cleanup, below should be eliminated
+//a more advanced version being developed
+// goals:
+// toggle, not just append
+// catch errors
+// make sure we're not giving the actual word itself
+// make sure we're not producing multiple variations that give away the word
+// e.g. pod_____y     & __iatry
+// Quiz.prototype.initialize_spelling_hint = function () {
+    
+//     // todo see if something like this simple error catcher can work
+//     //(some games won't have a spelling hint because they're not spelling mode)
+//     // if (!this.game.make_spelling_hint()) {
+//     //     console.log("PROBLEM: no spelling hint for this game");
+//     //     return;
+//     // } 
+    
+    
+//     if (!this.module.submodule.spelling_hint_penalty) {
+//         // todo when spelling hint penalty is implemented, build a block of code here
+//         // bug.log("no spelling hint penalty specified");
+//     } else {
+//       if (this.module.submodule.spelling_hint_penalty != 0) {
+//         if (this.game.chosen_question_type == "root_definition_to_root") {
+//             alert("At this advanced level hints will cost you one point.");
+//             this.decrement_score_via_hint();
+//             }
+//         }  
+//     }
+    
+    
+    
+    
+    
+    
+//     back.log("initialize_spelling_hint entered");
+    
+//     var div_to_inspect = el('spelling_hint_box');
+    
+//     var spelling_hint_string = this.game.spelling_hint;
+    
+    
+//     console.log("[quiz.initialize_spelling_hint] hint_output = ", spelling_hint_string);
+    
+//     //we first test A SIMPLE VERSION
+//     // SUMMARY: works but doesn't remove old hint, doesn't give new hint
+//     // simple because it doesn't use make, it just alters a pre-existing div
+//     // does this work??
+//     // yes this works but sometimes (seemingly more than usual)
+//     // it produces the full word
+//     var div_string = 'spelling_hint_box'
+//     var div_name = el('spelling_hint_box');
+//     div_name.innerHTML = spelling_hint_string;
+//     //works
+//     // el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div2')};
+//     // quiz.toggle_element takes as its argument a string, not the div
+//     el('spelling_hint_button').onclick = function () {quiz.toggle_element(div_string)};
+// };    
+  
+  
+// @GRIMES 
+// we want to keep track of how many times they've hit the button
+// and do certain behaviors if we hit the threshold
+// we also want to keep track of how many alerts they've seen
+// so we don't show alerts annoyingly
+    // decrement score by some number
+    // give alert or not
+    // make letters bold
+    // show etym cheat sheet
+    // show underscore hint
+// something like this
+    // global_hint_counter++
+    // consult a map, give alert if under threshold
+    // consult a map, matching global_hint_counter (int) to a function
+        // make embedded roots bold
+        // (example sentence - unimplemented)
+        // show etym cheat sheet
+        // show underscore hint
+// Quiz.prototype.initialize_spelling_hint_master_oldest = function () {
+    
+//     // todo see if something like this simple error catcher can work
+//     //(some games won't have a spelling hint because they're not spelling mode)
+//     // if (!this.game.make_spelling_hint()) {
+//     //     console.log("PROBLEM: no spelling hint for this game");
+//     //     return;
+//     // } 
+    
+//     var hint_penalty_to_inflict;
+    
+    
+//     global_hint_counter++;
+//     global_hint_alert_counter++;
+    
+//     if (!this.module.submodule.spelling_hint_penalty) {
+//         // todo when spelling hint penalty is implemented, build a block of code here
+//         bug.log("no spelling hint penalty specified, penalty set to 1");
+//         console.log("GRIMES no spelling hint penalty specified, penalty set to 1");
+//         hint_penalty_to_inflict = 1;
+//     } else {
+//         hint_penalty_to_inflict = this.module.submodule.spelling_hint_penalty;
+//         console.log("GRIMES hint_penalty set to module parameter = ", hint_penalty_to_inflict);
+//     }
+    
+    
+//     // handle the alert behavior
+//     if (global_hint_alert_counter < 5) {
+        
+//         alert("At this advanced level a hint will cost you one point.");
+//     }
+    
+    
+//     if (this.game.chosen_question_type == "root_definition_to_root") {
+        
+//     }
+    
+//     // uncomment when implemented
+//     // decrement the score (unimplemented for now)
+//     // this.decrement_score_via_hint(penalty_to_inflict);
+    
+    
+//     // maybe move these into the if blocks below
+//     this.initialize_spelling_hint_subfunction_bold_roots();
+
+//     this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
+    
+//     this.initialize_spelling_hint_subfunction_underscore();
+
+    
+//     // handle the hint behavior
+//     if (global_hint_counter === 1) {
+//         // PSEUDOCODE: fade out hint_button_1, fade in hint_button_2
+//     } else if (global_hint_counter === 2) {
+//         // PSEUDOCODE: fade out hint_button_2, fade in hint_button_3
+//     } else if (global_hint_counter === 3) {
+//         // PSEUDOCODE: fade out hint_button_3
+//     } else {
+//         console.log("GRIMES global_hint_counter > 3, no action");
+//     }
+// }
+
+// Quiz.prototype.initialize_spelling_hint_master_old = function (n) {
+    
+//     // todo see if something like this simple error catcher can work
+//     //(some games won't have a spelling hint because they're not spelling mode)
+//     // if (!this.game.make_spelling_hint()) {
+//     //     console.log("PROBLEM: no spelling hint for this game");
+//     //     return;
+//     // } 
+    
+    
+    
+//     console.log("GRIMES this.game.spelling_hint = ", this.game.spelling_hint);
+    
+    
+//     var hint_penalty_to_inflict;
+    
+    
+//     global_hint_counter++;
+//     global_hint_alert_counter++;
+    
+//     if (!this.module.submodule.spelling_hint_penalty) {
+//         // todo when spelling hint penalty is implemented, build a block of code here
+//         bug.log("no spelling hint penalty specified, penalty set to 1");
+//         console.log("GRIMES no spelling hint penalty specified, penalty set to 1");
+//         hint_penalty_to_inflict = 1;
+//     } else {
+//         hint_penalty_to_inflict = this.module.submodule.spelling_hint_penalty;
+//         console.log("GRIMES hint_penalty set to module parameter = ", hint_penalty_to_inflict);
+//     }
+    
+    
+//     // handle the alert behavior
+//     // todo alerts disabled for testing, implement when done testing
+//     if (global_hint_alert_counter < 0) {
+        
+//         alert("At this advanced level a hint will cost you one point.");
+//     }
+    
+    
+    
+    
+//     // uncomment when implemented
+//     // decrement the score (unimplemented for now)
+//     // this.decrement_score_via_hint(penalty_to_inflict);
+    
+    
+//     // maybe move these into the if blocks below
+//     // this.initialize_spelling_hint_subfunction_bold_roots();
+//     // this.initialize_spelling_hint_subfunction_underscore();
+//     // this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
+    
+    
+    
+//     // handle the hint behavior
+    
+//     console.log("ENTERING GRIMES1");
+    
+//     console.log("GRIMES1 this.game.chosen_question_type = ", this.game.chosen_question_type);
+//     console.log("GRIMES1 number of button pressed = ", n);
+    
+//     if (this.game.chosen_question_type === "root_definition_to_root") {
+//         if (n === 1) {
+//             console.log("GRIMES1, root n = 1");
+//             // PSEUDOCODE: make etym cheat sheet
+//             this.initialize_spelling_hint_subfunction_etym_cheat_sheet(1);
+//         } else if (n === 2) {
+//             console.log("GRIMES1, root n = 2");
+//             // PSEUDOCODE: first letter hint
+//             // todo underscore and first letter are presumabley the same, so rename
+//             // this doesn't seem to work
+//             this.initialize_spelling_hint_subfunction_underscore(2);
+//         } else if (n === 3) {
+//             console.log("GRIMES1, root n = 3");
+//             // todo add some kind of super hint like, bolding the relevant roots in the cheat sheet
+//             console.log("GRIMES no hint at this level")
+//         } else {
+//             console.log("GRIMES global_hint_counter > 3, no action");
+//         }
+//     } else if (this.game.chosen_question_type === "word_definition_to_word") {
+//         if (n === 1) {
+//             console.log("GRIMES1, word n = 1");
+//             // PSEUDOCODE: bold words
+//             this.initialize_spelling_hint_subfunction_bold(1);
+//         } else if (n === 2) {
+//             console.log("GRIMES1, word n = 2");
+//             // PSEUDOCODE: etym cheat sheet
+//             this.initialize_spelling_hint_subfunction_etym_cheat_sheet(2);
+//         } else if (n === 3) {
+//             console.log("GRIMES1, word n = 3");
+//             // PSEUDOCODE: underscore
+//             this.initialize_spelling_hint_subfunction_underscore(3);
+//         } else {
+//             console.log("GRIMES global_hint_counter > 3, no action");
+//         }
+//     } else {
+//         console.log("PROBLEM neither root nor word, hopefully etym, setting up default (etym cheat sheet)")
+//         if (n === 1) {
+//             // PSEUDOCODE: bold words
+//             this.initialize_spelling_hint_subfunction_bold();
+//         } else if (n === 2) {
+//             // PSEUDOCODE: etym cheat sheet
+//             this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
+//         } else if (n === 3) {
+//             // PSEUDOCODE: underscore
+//         } else {
+//             console.log("GRIMES global_hint_counter > 3, no action");
+//         }
+//     }
+    
+    
+    
+    
+    
+
+    
+//     // handle the button behavior
+//     if (n === 1) {
+//         // PSEUDOCODE: fade out hint_button_1, fade in hint_button_2
+//     } else if (n === 2) {
+//         // PSEUDOCODE: fade out hint_button_2, fade in hint_button_3
+//     } else if (n === 3) {
+//         // PSEUDOCODE: fade out hint_button_3
+//     } else {
+//         console.log("GRIMES global_hint_counter > 3, no action");
+//     }
+// }
+
+
 
 // @GRIMES
 // the final version
@@ -2420,11 +2683,12 @@ Quiz.prototype.display_etym_cheat_sheet = function () {
     // ideally we want the words to be able to be made bold in the cheat sheet as well
 
 
-    
+    console.log("SPANBUG entering problem area");
     
     var test_string = "to <span class=\"embedded_root\">shout</span> loudly";
     var test_output = test_string.replace("<span class=\"embedded_root\">", "");
-    
+    console.log("SPANBUG test_string = ", test_string);
+    console.log("SPANBUG test_output = ", test_output);
     
     // todo why isn't this working when the identical function is called from string_utils.js?????
     var replace_all_substrings = function (string, substring, replacement) {
@@ -2472,6 +2736,8 @@ Quiz.prototype.display_etym_cheat_sheet = function () {
     
     create_cheat_sheet_table(outer_div, name, null, null, etym_cheat, 2);
 }
+
+
 
 
 Quiz.prototype.display_spelling_hint_underscore_or_first_letter = function () {
@@ -2715,17 +2981,6 @@ Quiz.prototype.initialize_etym_cheat_sheet = function () {
     el('etym_cheat_button').onclick = function () {quiz.toggle_element(name)};
 }
 
-
-
-
-
-
-
-
-
-
-
-
 // argument is a string
 Quiz.prototype.toggle_element = function(id) {
     // var button = el("cheat_sheet_button");
@@ -2768,37 +3023,116 @@ Quiz.prototype.toggle_element = function(id) {
 
 
 
-Quiz.prototype.initialize_root_dictionary_display = function () {
-    
-    var name_of_div = "root_dictionary_display_div";
-    
-    
-    // real output
-    // var raw_output = generate_root_dictionary();
-    
-    // dummy output
-    var dummy_test_string = "CLAIM/CLAM: exclaim = to <span class=\"embedded_root\">shout</span> <span class=\"embedded_root\">out</span> loudly and suddenly";
-    var raw_output = dummy_test_string;
-    console.log("LALA raw output = ", raw_output);
-    
-    var processed_output = replace_all_substrings(raw_output, "span", "REPLACEMENT");
-    console.log("LALA processed output = ", processed_output);
-    
-    
-    
-    console.log("LALA full div_name = ", name_of_div);
-    var outer_div = el(name_of_div);
-    console.log("LALA outer div");
-    
-    outer_div.innerHTML = processed_output;
-    
-    el('root_dictionary_button').onclick = function () {quiz.toggle_element(name_of_div)};
-}
 
 
-// todo move this to etym_utils at some point
-var generate_root_dictionary = function () {
-    
-}
 
+///////scorched earth below
+
+
+/////// HINT #1
+
+// Quiz.prototype.initialize_spelling_hint_subfunction_bold = function () {
+//     el('spelling_hint_button').onclick = function () {
+//         set_font_weight_of_class("embedded_root", "900");
+//         set_case_of_class("embedded_root", "uppercase");
+//     };
+// }
+
+
+// Quiz.prototype.initialize_spelling_hint_subfunction_bold_old = function (n) {
+//     el('spelling_hint_button' + n).onclick = function () {
+//         set_font_weight_of_class("embedded_root", "900");
+//         set_case_of_class("embedded_root", "uppercase");
+//     };
+// }
+
+
+/////// HINT #2
+
+// Quiz.prototype.initialize_spelling_hint_subfunction_etym_cheat_sheet_old = function (n) {
+    
+    
+    
+//     var name = "etym_cheat_sheet"
+//     var etym_cheat = this.game.etymology_cheat_sheet;
+    
+    
+//     // @beehack
+//     // the mystery: <span ... etc. occurs on the html page
+//     // below is the short term removal
+//     // ideally we want the words to be able to be made bold in the cheat sheet as well
+
+    
+//     var new_list = [];
+//     for (var i = 0; i < etym_cheat.length; i++) {
+//         var sublist = etym_cheat[i];
+        
+//         var new_sublist = [];
+        
+        
+//         for (var j = 0; j < sublist.length; j++) {
+//             var item = sublist[j].replace("<span class=\"embedded_root\">", "");
+//             item = item.replace("</span>", "");
+//             new_sublist.push(item);
+//         }
+//         new_list.push(new_sublist);
+//     } 
+    
+    
+//     etym_cheat = new_list;
+    
+//     // console.log("this.game.etym_cheat_sheet stringified = ", 
+//     //     JSON.stringify(etym_cheat));
+        
+    
+//     //end beehack
+        
+    
+    
+    
+//     back.log("this.game.etym_cheat_sheet stringified = ", 
+//         JSON.stringify(etym_cheat));
+    
+//     var outer_div = el(name + "_div");
+//     // create_cheat_sheet_table(outer_div, name,
+//     // null, null, etym_cheat, 2);
+//     // el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(name)};
+//     el('spelling_hint_button' + n).onclick = function () {
+//         set_display(el(name)), 'initial'};
+// }
+
+
+
+/////// HINT #3
+// Quiz.prototype.initialize_spelling_hint_subfunction_underscore_old = function (n) {
+//     back.log("spelling_hint_subfunction_underscore entered");
+//     console.log("GRIMES spelling_hint_subfunction_underscore entered");
+    
+//     var div_to_inspect = el('spelling_hint_box');
+    
+//     // var spelling_hint_string = this.game.spelling_hint;
+    
+    
+    
+//     var spelling_hint_string = this.game.spelling_hint;
+    
+//     console.log("GRIMES spelling_hint_string = ", spelling_hint_string);
+    
+    
+    
+//     back.log("underscore_hint_output = ", spelling_hint_string);
+//     console.log("GRIMES underscore_hint_output = ", spelling_hint_string);
+    
+//     var div_string = 'spelling_hint_box'
+//     var div_name = el('spelling_hint_box');
+//     div_name.innerHTML = spelling_hint_string;
+    
+//     el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(div_string)};
+// };    
+  
+//////// HINT #4
+
+// Quiz.prototype.initialize_spelling_hint_subfunction_first_letter = function (n) {
+//     console.log("GRIMES first letter function STILL EMPTY");
+// }
 

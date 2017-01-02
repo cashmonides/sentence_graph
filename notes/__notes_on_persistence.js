@@ -1,3 +1,4 @@
+/*
 // PERSISTENCE TO SQL
 
 
@@ -5,10 +6,56 @@
 /// http = hyper text transfer protocol, a paradigm as opposed to a thing or an action
 
 
+//////////VERY SIMPLE CONTROL FLOW
+the basics are:
+    a javascript posting function
+    CREATES
+    ups - ??presumably: a dictionary passed via the url params
+    
+    
+    POST
+    the default API is .../lib/sql.py and that's where it calls the python function
+    
+    
+    PYTHON
+    - received ups as its argument
+    - python function performs c.execute
+    - which translates into a SQL query (e.g. INSERT INTO x VALUES y)
+
+
+/////// MORE DETAILED CONTROL FLOW
+- JAVASCRIPT function #1 (outer wrapper, calls the js post function)
+    the basic anatomy looks like this:
+    - create a JSON object called data
+        - e.g. {'completed': 10, 'skipped': 8}
+    - somewhere in there (perhaps inside the JSON object), is a type of operation
+        - e.g. type: "update_mf_metrics"
+    - create a callback if necessary (log the sentence et sim.)
+    - put object and callback into the arguments of the post function:
+        - post({data: data, type: "update_mf_metrics"}, ajax_callback);
+
+- JAVASCRIPT function #2 (post)
+
+- PYTHON function (c.execute)
+    calls c.execute and passes it a SQL command
+
+
+
 
 ////////// THE ENTITIES IN PLAY
-/*
 
+
+POST
+
+
+
+
+PYTHON FUNCTION
+the python function (e.g. update accuracy new)
+
+
+
+XMLHTTPREQUEST
 "XMLHttpRequest"
     "XMLHttpRequest makes sending HTTP requests very easy. You simply create an instance of the object, open a URL, and send the request.  The HTTP status of the result, as well as the result's contents, are available in the request object when the transaction is completed.",
     async argument
@@ -159,14 +206,14 @@ def update_accuracy_new(ups):
         // cursor.execute has 3 arguments
         // cursor.execute(operation, params, multi)
         // operation (mandatory) is what function you want the cursor to do
-        // params () is the data you want to put in
+        // params () is the data you want to put in???
         // multi (optional) if multi is true, it returns an iterator
             // i.e. If multi is set to True, 
             // execute() is able to execute multiple statements specified in the operation string.
         
         
         // in our example it looks like this:
-        // c.execute(insert_into_accuracy_metrics, empty_list, multi-omitted)
+        // c.execute(insert_into_accuracy_metrics, empty_list, <<multi-omitted>>)
         
         // # This should work.
         for j in accuracy_dictionary:

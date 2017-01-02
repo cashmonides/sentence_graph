@@ -220,3 +220,24 @@ FUNCTIONAL BIG STEPS
 haskell
 a mini haskell project doing string manipulation of latin elements (e.g. aba, abi) and etymological elements (e.g. quadr.u.ped.al = root.connector.root.for
 
+
+
+
+/*
+some REBIRTH text below
+var rebirth_1 = {
+    "id": 1,
+    "book_text": "Crossed double vajras bar your exit from this very special hell. This is the destination of those who abuse the tantric path, who break their tantric vows through distraction or selfishness. Here the fierce dharma protectors turn upon one in wrath. This is a hell of the most frightful demonic images, the most fearful hell, for its suffering is paranoia rather than physical pain - difficult for anyone else ot assuage. Fear for oneself makes it almost impossible to see through the images and escape. Milarepa: To become my disciple you must observe the precepts, / Violate not the rules of Vajrayāna, / Debase not the great compassion, / Afflict not the body, word, and mind of Buddhists. / If you ever violaate tyhese rules / You can be assured of plummeting to the Vajra Hell!",
+    "outcome_map": {
+        "6 times 6": 9
+    },
+    "look": "Here the fierce dharma protectors turn upon one in wrath. This is a hell of the most frightful demonic images, the most fearful hell, for its suffering is paranoia rather than physical pain - difficult for anyone else ot assuage. Fear for oneself makes it almost impossible to see through the images and escape.",
+    "ask": "This is the destination of those who abuse the tantric path, who break their tantric vows through distraction or selfishness."
+    "doors": {
+        "exit": "Crossed double vajras bar your exit."
+    },
+    "inscription": "Milarepa: To become my disciple you must observe the precepts, / Violate not the rules of Vajrayāna, / Debase not the great compassion, / Afflict not the body, word, and mind of Buddhists. / If you ever violate these rules / You can be assured of plummeting to the Vajra Hell!"
+}
+
+
+*/

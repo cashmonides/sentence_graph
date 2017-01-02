@@ -175,8 +175,11 @@ _____DO NOW_____
         - POLY: polyglot, polychrome (a dummy item)
         - etc.
     - make a "set module" secret access button in profile
+
+
 - big things
     - write etymology and spelling results to sql
+        - c.execute c.execute(string, table)
     - deterministic questions for spelling match mode
     - generalize match mode to things besides spelling
     - turn etymology drop down into a clickable word selector

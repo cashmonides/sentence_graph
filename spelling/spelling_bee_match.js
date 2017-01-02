@@ -223,7 +223,36 @@ var sort_and_display_match_results = function (data, n) {
     }
 }
 
+var process_score_for_display = function (list_item) {
+    console.log('list_item =', list_item);
+    var name = list_item[0];
+    name = name.replace('"', '');
+    var score = list_item[1];
+    return score + " " + name + "<br />";
+}
 
+// begin dan
+
+var autogenerate_spelling_match_pin = function () {
+    return get_n_random_digits(6);
+}
+
+// end dan
+
+// begin dan
+var input_is_valid = function (string) {
+    var number = Number(string);
+    return Number.isInteger(number) && 1 <= number && number <= 1000;
+}
+// end dan
+
+var create_stopping_time = function (offset) {
+    var current_time = Date.now();
+    console.log("current_time = ", current_time);
+    var stopping_time = current_time + offset*1000*60;
+    console.log("stopping_time = ", stopping_time)
+    return stopping_time;
+}
 
 
 // otiose I think
@@ -257,7 +286,7 @@ var sort_and_display_match_results = function (data, n) {
 
 
 
-
+/*
 var generate_ordinal_suffix = function (int) {
     if ([11, 12, 13].indexOf(int % 100) !== -1) {
         // 11, 12, 13 all take suffix th; 11th, 12th, 13th, 112th
@@ -280,7 +309,10 @@ var generate_ordinal_suffix = function (int) {
 var generate_ranking_from_int = function (int) {
     return int + generate_ordinal_suffix(int);
 }
+*/
 
+/*
+// moved above for easier access
 var process_score_for_display = function (list_item) {
     console.log('list_item =', list_item);
     var name = list_item[0];
@@ -288,6 +320,7 @@ var process_score_for_display = function (list_item) {
     var score = list_item[1];
     return score + " " + name + "<br />";
 }
+*/
 
 // var fill_spelling_match_with_data = function (pin, level, time_limit) {
     
@@ -337,6 +370,8 @@ var akiva_autogenerate_spelling_match_pin = function () {
 }
 */
 
+/*
+// moved above for easier access
 // BEGIN dan
 
 var autogenerate_spelling_match_pin = function () {
@@ -344,6 +379,7 @@ var autogenerate_spelling_match_pin = function () {
 }
 
 // END dan
+*/
 
 
 /*
@@ -364,6 +400,9 @@ var input_is_valid = function (string) {
 }
 */
 
+/*
+// moved above for easier access
+
 // begin dan
 var input_is_valid = function (string) {
     var number = Number(string);
@@ -378,6 +417,7 @@ var create_stopping_time = function (offset) {
     console.log("stopping_time = ", stopping_time)
     return stopping_time;
 }
+*/
 
 
 //////////////////////

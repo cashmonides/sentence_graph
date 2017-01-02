@@ -12,6 +12,9 @@
     <script src="/libs/jquery-1.11.3.min.js"></script>
     <script src="/libs/featherlight.min.js"></script>
     
+    <!--format algorithm-->
+    <script src="../algorithms/simple/fits_format.js"></script>
+    
     <!-- utils in html here -->
     <script src="../lib/utils.js"></script>
     <script src="/lib/logging_utils.js"></script>  
@@ -43,6 +46,7 @@
 
         <input name="user_option" type="radio" onchange="set_mode(1)" checked>I already have an account <br>
         <input name="user_option" type="radio" onchange="set_mode(2)">I want to create an account <br>
+        <input name="user_option" type="radio" onchange="set_mode(5)">Choose an avatar <br>
         <!--anonymous mode is not yet supported so anonymous game is disabled for now-->
         <!--<input name="user_option" type="radio" onchange="enter_anonymous_game()">I want to play without logging in <br>-->
         <!--change password is not workable if students have firewall so we're disabling change password functionality-->
@@ -53,13 +57,15 @@
         <table>
             <tr id="email_row"><td>USER NAME</td><td><input type="text" id="email"></td></tr>
             <tr id="password_row"><td>PASSWORD</td><td><input type="password" id="password"></td></tr>
-            <tr id="name_row" style="display:none"><td>NAME</td><td><input type="text" id="name"><br></td></tr>
+            <tr id="name_row" style="display:none"><td>YOUR NAME</td><td><input type="text" id="name"><br></td></tr>
             <tr id="school_row" style="display:none"><td>SCHOOL</td><td><input type="text" id="school"></td></tr>
             <tr id="grade_row" style="display:none"><td>GRADE</td><td><input type="text" id="grade"></td></tr>
             <tr id="class_row" style="display:none"><td>CLASS #</td><td><input type="text" id="class_number"></td></tr>
             <tr id="old_password_row" style="display:none"><td>OLD PASSWORD</td><td><input type="password" id="old_password"></td></tr>
             <tr id="new_password_row" style="display:none"><td>NEW PASSWORD</td><td><input type="password" id="new_password"></td></tr>
             <tr id="access_code_row" style="display:none"><td>ACCESS CODE (ask Akiva)</td><td><input type="password" id="access_code"></td></tr>
+            <!--AVATAR NEW STUFF BELOW-->
+            <tr id="name_of_avatar_row" style="display:none"><td id='avatar_choice_text'>1st Choice for Avatar name</td><td><input type="text" id="avatar_choice"></td></tr>
             
 
 
@@ -70,6 +76,10 @@
         <!--forgot password is not yet supported so disabled for now-->
         <!--<button id="forgot_password_button" type="button" class="hoverable" style="font-family:baskerville" onclick="reset_password()">I forgot my password</button>-->
         <button id="change_password_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="initiate_change_password()" style="display:none">change password</button>
+        
+        
+        <!--AVATAR STUFF BELOW-->
+        <button id="submit_avatar_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="submit_avatar_choice()" style="display:none">submit avatar</button>
         
         <!--<button id="email_new_password_button" style="display:none; font-family:baskerville" type="button" class="hoverable" onclick="reset_password()">email me a temporary password</button>-->
         <br>

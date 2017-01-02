@@ -24,20 +24,25 @@ end documentation
     // 2 creating account
     // 3 forgot password
     // 4 change password (currently disabled)
+    // 5 create avatar
 // mode map sets up what aspects of the interface will be visible in each mode
 var mode_map = {
     "email_row": [[1, 2, 3, 4], "table-row"],
     "password_row": [[1, 2], "table-row"],
     "old_password_row": [[4], "table-row"],
     "new_password_row": [[4], "table-row"],
-    "name_row": [[2], "table-row"],
-    "school_row": [[2], "table-row"],
-    "grade_row": [[2], "table-row"],
-    "class_row": [[2], "table-row"],
+    //name is shown in choose avatar mode
+    "name_row": [[2, 5], "table-row"],
+    "school_row": [[2, 5], "table-row"],
+    "grade_row": [[2, 5], "table-row"],
+    "class_row": [[2, 5], "table-row"],
     "access_code_row": [[2], "table-row"],
 
     "login_button": [[1], "inline"],
     "create_account_button": [[2], "inline"],
+    
+    "name_of_avatar_row": [[5], 'table-row'],
+    "submit_avatar_button": [[5], 'inline']
     
     //password changing is disabled until a later time, when students use regular email accounts
     // "forgot_password_button": [[1], "inline"],
@@ -51,7 +56,7 @@ var mode_map = {
 function set_mode(mode){
     back.log("profile set mode entered, mode = ", mode);
     
-    for(id in mode_map){
+    for(var id in mode_map) {
         var data = mode_map[id];
         var e = el(id);
         e.style.display = contains(data[0], mode) ? data[1] : "none";
@@ -102,7 +107,7 @@ function login() {
     Persist.login_user(e, p, success);
 }
 
-function success(authData){
+function success(authData) {
     //console.log"Success triggered authData= ", authData);
     //console.log"authData.uid = ", authData.auth.uid);
     User.set_cookie(authData.auth.uid);
@@ -198,6 +203,106 @@ function reset_password() {
 
     Persist.reset_password(email, callback);
 }
+
+
+
+var avatar_selection_count = 0;
+
+var avatar_choices = {};
+
+
+function submit_avatar_choice () {
+    var name = el("name").value;
+    var avatar_choice = el("avatar_choice").value;
+    
+    var path = ["avatars", name, avatar_selection_count];
+    
+    if (!is_valid_avatar(avatar_choice)) {
+        alert("Not a valid avatar name. Must be a COLOR from the list + SPACE + ANIMAL from the list");
+    } else if (avatar_choice in avatar_choices) {
+        alert('Not a valid avatar name. Cannot repeat previous avatar choices.');
+    } else {
+        // actually do a persist and increment
+        if (avatar_selection_count === 0) {
+            // persist grade
+            Persist.set(["avatars", name, 'grade'], convert_string_to_number(el('grade').value));
+        
+            set_display('name_row', 'none');
+            set_display('grade_row', 'none');
+            set_display('class_row', 'none');
+            set_display('school_row', 'none');
+        }
+        Persist.set(path, avatar_choice);
+        /*
+        if (avatar_selection_count === 0) {
+            Persist.set(path, [avatar_choice]);
+        } else if (avatar_selection_count > 0 && avatar_selection_count <= 11) {
+            Persist.push_value(path, avatar_choice);
+        }
+        */
+        // avatar_selection_count++;
+        // increment_avatar_choice_display(avatar_selection_count);
+        clear_input_box("avatar_choice");
+        if (avatar_selection_count >= 9) {
+            set_display('name_of_avatar_row', 'none');
+            set_display('submit_avatar_button', 'none');
+            alert("YOU'VE MADE TEN CHOICES, YOU'RE DONE, START TRAINING ON THE SPELLING BEE");
+        } else {
+            // Add the avatar choice.
+            avatar_choices[avatar_choice] = true;
+            avatar_selection_count++;
+            increment_avatar_choice_display(avatar_selection_count);
+            clear_input_box("avatar_choice");
+        }
+    }
+}
+
+
+
+var increment_avatar_choice_display = function (avatar_selection_count) {
+    var ordinal = generate_ranking_from_int(avatar_selection_count + 1);
+    el('avatar_choice_text').innerHTML = ordinal + " choice for Avatar name";
+    
+}
+
+
+
+var valid_avatar_colors = ['red', 'blue', 'green', 'silver', 'gold', 'orange', 'pink', 'purple'];
+
+var valid_avatar_animals = [
+    'aardvark', 'albatross', 'ant',
+    'baboon', 'badger', 'bear', 'bee', 'beetle', 'boar', 'buffalo',
+    'camel', 'cat', 'caterpillar', 'centipede', 'chameleon', 'cheetah', 'chicken',
+    'cobra', 'coyote', 'crab', 'crocodile',
+    'deer', 'dog', 'donkey', 'dove', 'dragonfly', 'duck',
+    'eel', 'elephant', 'elk',
+    'ferret', 'flamingo', 'fly', 'gibbon',
+    'giraffe', 'gnat', 'goose', 'gorilla', 'grasshopper',
+    'hamster', 'hawk', 'hedgehog', 'heron', 'hippopotamus',
+    'hummingbird', 'hyena',
+    'ibex', 'ibis', 'jaguar', 'jellyfish', 'kangaroo', 'koala', 'lizard', 
+    'lemur', 'leopard', 'lobster',
+    'manatee', 'millipede', 'mole', 'mongoose', 'monkey', 'moose',
+    'narwhal', 'newt', 'nightingale',
+    'octopus', 'orangutan', 'ostrich', 'otter', 'otter', 'oyster',
+    'panda', 'panther', 'parrot', 'partridge', 'penguin', 'pheasant',
+    'pigeon', 'porcupine', 'possum',
+    'quail', 'raccoon', 'ram', 'rhinoceros',
+    'salamander', 'salmon', 'sardine', 'scorpion', 'seahorse', 'seal',
+    'shark', 'sheep', 'shrew', 'skunk', 'sloth', 'snail',
+    'sparrow', 'spider', 'squirrel', 'starling', 'swan',
+    'tapir', 'tarsier', 'termite', 'tiger', 'toad', 'turkey', 'turtle',
+    'vulture', 'walrus', 'wasp', 'weasel', 'whale',
+    'wolverine', 'wombat', 'worm', 'yak', 'zebra'
+];
+
+
+var is_valid_avatar = function (input) {
+    return fits_format(input, [valid_avatar_colors, valid_avatar_animals]);
+}
+
+
+
 
 function check_time_stamp() {
     var d = new Date();
