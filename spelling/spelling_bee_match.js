@@ -161,16 +161,17 @@ var move_game_to_completed = function (n) {
         
         
         var sorted_data = sort_map_by_values(data, true);
+        var sorted_data = sort_map_by_values(scores_map, true);
         console.log("WEEZER123 sorted_data = ", sorted_data);
         
         
-        for (var i = 0; i < sorted_data.length; i++) {
-            var score_display = process_score_for_display(sorted_data[i]);
-            var ranking = generate_ranking_from_int(i+1);
-            var test_output = sorted_data[i] + ":" + ranking;
-            console.log("WEEZER123 test_output = ", test_output);
-            return test_output;
-        }
+        // for (var i = 0; i < sorted_data.length; i++) {
+        //     var score_display = process_score_for_display(sorted_data[i]);
+        //     var ranking = generate_ranking_from_int(i+1);
+        //     var test_output = sorted_data[i] + ":" + ranking;
+        //     console.log("WEEZER123 test_output = ", test_output);
+        //     return test_output;
+        // }
         
         // END WEEZER123
         
@@ -202,57 +203,33 @@ var move_game_to_completed = function (n) {
 var sort_and_display_match_results = function (data, n) {
     var element = el("spelling_match_score_results" + n);
     
+    
+    
     // turn it into a sorted list (with higher values first)
     // true here signifies reversal
     var sorted_data = sort_map_by_values(data, true);
     console.log("sorted_data = ", sorted_data);
     // element.innerHTML = JSON.stringify(sorted_data);
     
-    var how_many_items_to_take;
-    if (cut_off_all_but_top) {
-        // Minimum of how many there are and how many we show at most.
-    } else {
-        how_many_items_to_take = sorted_data.length;
-    }
+    var how_many_items_to_take = sorted_data.length;
+    // if (cut_off_all_but_top) {
+    //     // Minimum of how many there are and how many we show at most.
+    // } else {
+    //     how_many_items_to_take = sorted_data.length;
+    // }
     
     for (var i = 0; i < how_many_items_to_take; i++) {
         var score_display = process_score_for_display(sorted_data[i]);
         // var ranking = i + 1;
         var ranking = generate_ranking_from_int(i+1);
-        element.innerHTML += ranking + " " + "score: " + score_display;
+        console.log("SCORE_DISPLAY = ", score_display);
+        console.log("ranking = ", ranking);
+        var output = ranking + " " + "score: " + score_display;
+        element.innerHTML += output;
     }
 }
 
-var process_score_for_display = function (list_item) {
-    console.log('list_item =', list_item);
-    var name = list_item[0];
-    name = name.replace('"', '');
-    var score = list_item[1];
-    return score + " " + name + "<br />";
-}
 
-// begin dan
-
-var autogenerate_spelling_match_pin = function () {
-    return get_n_random_digits(6);
-}
-
-// end dan
-
-// begin dan
-var input_is_valid = function (string) {
-    var number = Number(string);
-    return Number.isInteger(number) && 1 <= number && number <= 1000;
-}
-// end dan
-
-var create_stopping_time = function (offset) {
-    var current_time = Date.now();
-    console.log("current_time = ", current_time);
-    var stopping_time = current_time + offset*1000*60;
-    console.log("stopping_time = ", stopping_time)
-    return stopping_time;
-}
 
 
 // otiose I think
@@ -286,7 +263,7 @@ var create_stopping_time = function (offset) {
 
 
 
-/*
+
 var generate_ordinal_suffix = function (int) {
     if ([11, 12, 13].indexOf(int % 100) !== -1) {
         // 11, 12, 13 all take suffix th; 11th, 12th, 13th, 112th
@@ -309,10 +286,7 @@ var generate_ordinal_suffix = function (int) {
 var generate_ranking_from_int = function (int) {
     return int + generate_ordinal_suffix(int);
 }
-*/
 
-/*
-// moved above for easier access
 var process_score_for_display = function (list_item) {
     console.log('list_item =', list_item);
     var name = list_item[0];
@@ -320,7 +294,6 @@ var process_score_for_display = function (list_item) {
     var score = list_item[1];
     return score + " " + name + "<br />";
 }
-*/
 
 // var fill_spelling_match_with_data = function (pin, level, time_limit) {
     
@@ -370,8 +343,6 @@ var akiva_autogenerate_spelling_match_pin = function () {
 }
 */
 
-/*
-// moved above for easier access
 // BEGIN dan
 
 var autogenerate_spelling_match_pin = function () {
@@ -379,7 +350,6 @@ var autogenerate_spelling_match_pin = function () {
 }
 
 // END dan
-*/
 
 
 /*
@@ -400,9 +370,6 @@ var input_is_valid = function (string) {
 }
 */
 
-/*
-// moved above for easier access
-
 // begin dan
 var input_is_valid = function (string) {
     var number = Number(string);
@@ -417,7 +384,6 @@ var create_stopping_time = function (offset) {
     console.log("stopping_time = ", stopping_time)
     return stopping_time;
 }
-*/
 
 
 //////////////////////

@@ -102,10 +102,40 @@ SpellingMatchModeGame.prototype.set_level_via_firebase = function () {
 
 // todo turn below into full dictionary
 SpellingMatchModeGame.prototype.convert_int_to_object = function (level_as_int) {
-    if (level_as_int < 50) {
+    if (level_as_int = 10) {
+        return {"etym_level": 10};
+    } else if (level_as_int = 20) {
+        return {"etym_level": 20};
+    } else if (level_as_int = 30) {
+        return {"etym_level": 30};
+    } else if (level_as_int = 40) {
+        return {"etym_level": 40};
+    } else if (level_as_int = 50) {
+        return {"etym_level": 50};
+    } else if (level_as_int = 60) {
         return {"etym_level": 60};
-    } else {
+    } else if (level_as_int = 70) {
+        return {"etym_level": 70};
+    } else if (level_as_int = 80) {
         return {"etym_level": 80};
+    } else if (level_as_int = 90) {
+        return {"etym_level": 90};
+    } else if (level_as_int = 100) {
+        return {"etym_level": 100};
+    } else if (level_as_int = 200) {
+        return {"etym_level": 200};
+    } else if (level_as_int = 250) {
+        return {"etym_level": 250};
+    } else if (level_as_int = 300) {
+        return {"etym_level": 300};
+    } else if (level_as_int = 350) {
+        return {"etym_level": 350};
+    } else if (level_as_int = 400) {
+        return {"etym_level": 400};
+    } else if (level_as_int = 450) {
+        return {"etym_level": 450};
+    } else {
+        return {"etym_level": 60};
     }
 }
 

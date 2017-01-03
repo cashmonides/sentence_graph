@@ -1783,11 +1783,11 @@ Quiz.prototype.increment_score = function() {
     console.log("[quiz.increment_score] this.get_reward = ", this.get_reward);
     
     
-    
+    // todo implement decrement countdown bar when ready
     // todo @12345
     if (this.module.id === 0.25) {
         console.log("12345 this.stopping_time = ", this.spelling_match_stopping_time);
-        this.progress_bar.decrement_as_countdown(this.spelling_match_stopping_time, this.total_match_time);
+        // this.progress_bar.decrement_as_countdown(this.spelling_match_stopping_time, this.total_match_time);
     }
     
     
