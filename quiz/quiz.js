@@ -1330,7 +1330,7 @@ Quiz.prototype.display_progress_fraction_bee_mode = function () {
         intro_string = "progress = ";
         progress = session_bee_counter;
         separator = "/";
-        denominator = "1000";
+        denominator = "200";
     }
     
     
