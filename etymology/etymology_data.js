@@ -4545,7 +4545,7 @@ var words = {
     },
     "hexapod": {
         "grade": 12,
-        "meaning": "something having six legs",
+        "meaning": "a creature having <span class=\"embedded_root\">six</span> <span class=\"embedded_root\">leg</span>s",
         "part of speech": "noun",
         "roots": [
             "HEX/HEXA",
@@ -7208,7 +7208,7 @@ var words = {
     },
     "osteoarthritis": {
         "grade": 12,
-        "meaning": "inflammation caused by degeneration of the joints",
+        "meaning": "an inflammation of the <span class=\"embedded_root\">joint</span>s that causes damage to the <span class=\"embedded_root\">bone</span>s",
         "part of speech": "noun",
         "roots": [
             "OSTEO",
@@ -7451,7 +7451,7 @@ var words = {
     },
     "pedal": {
         "grade": 12,
-        "meaning": "a lever pushed by the foot",
+        "meaning": "a lever pushed by the <span class=\"embedded_root\">foot</span>",
         "part of speech": "noun",
         "roots": [
             "PED/POD"
@@ -7461,7 +7461,7 @@ var words = {
     },
     "pedestrian": {
         "grade": 12,
-        "meaning": "one who walks",
+        "meaning": "one who walks, i.e. moves around using his <span class=\"embedded_root\">legs</span>",
         "part of speech": "noun",
         "roots": [
             "PED/POD"
@@ -7481,7 +7481,7 @@ var words = {
     },
     "pedicure": {
         "grade": 12,
-        "meaning": "cosmetic treatment of feet and toes",
+        "meaning": "cosmetic treatment of the <span class=\"embedded_root\">feet</span> and toes",
         "part of speech": "noun",
         "roots": [
             "PED/POD"
@@ -7848,7 +7848,7 @@ var words = {
     },
     "podiatrist": {
         "grade": 12,
-        "meaning": "a doctor for the feet",
+        "meaning": "a <span class=\"embedded_root\">doctor</span> for the <span class=\"embedded_root\">foot</span>",
         "part of speech": "noun",
         "roots": [
             "PED/POD",
@@ -7859,7 +7859,7 @@ var words = {
     },
     "podiatry": {
         "grade": 12,
-        "meaning": "medical care for feet",
+        "meaning": "<span class=\"embedded_root\">medical</span> care for <span class=\"embedded_root\">feet</span>",
         "part of speech": "noun",
         "roots": [
             "PED/POD",
@@ -7870,7 +7870,7 @@ var words = {
     },
     "podium": {
         "grade": 12,
-        "meaning": "a small platform to stand on",
+        "meaning": "a small platform to <span class=\"embedded_root\">stand</span> on",
         "part of speech": "noun",
         "roots": [
             "PED/POD"
@@ -8386,7 +8386,7 @@ var words = {
     },
     "quadruped": {
         "grade": 12,
-        "meaning": "a 4-footed animal",
+        "meaning": "a <span class=\"embedded_root\">four</span>-<span class=\"embedded_root\">foot</span>ed animal",
         "part of speech": "noun",
         "roots": [
             "QUAD/QUADR",
@@ -8397,7 +8397,7 @@ var words = {
     },
     "quart": {
         "grade": 12,
-        "meaning": "a fourth of a gallon",
+        "meaning": "a <span class=\"embedded_root\">four</span>th of a gallon",
         "part of speech": "noun",
         "roots": [
             "QUART"
@@ -8783,7 +8783,7 @@ var words = {
     },
     "retrogress": {
         "grade": 12,
-        "meaning": "to go back to an earlier condition",
+        "meaning": "to <span class=\"embedded_root\">move</span> <span class=\"embedded_root\">back</span> to an earlier condition",
         "part of speech": "verb",
         "roots": [
             "RETRO",
@@ -8794,7 +8794,7 @@ var words = {
     },
     "retrospective": {
         "grade": 12,
-        "meaning": "the act of looking back on past events",
+        "meaning": "the act of <span class=\"embedded_root\">look</span>ing <span class=\"embedded_root\">back</span> on past events",
         "part of speech": "noun",
         "roots": [
             "RETRO",
@@ -8805,7 +8805,7 @@ var words = {
     },
     "reverse": {
         "grade": 12,
-        "meaning": "to turn around",
+        "meaning": "to <span class=\"embedded_root\">turn</span> <span class=\"embedded_root\">back</span>",
         "part of speech": "verb",
         "roots": [
             "RE",
@@ -8816,7 +8816,7 @@ var words = {
     },
     "revival": {
         "grade": 12,
-        "meaning": "the act of bringing back to life",
+        "meaning": "the act of bringing <span class=\"embedded_root\">back</span> to <span class=\"embedded_root\">life</span>",
         "part of speech": "noun",
         "roots": [
             "RE",
@@ -8827,7 +8827,7 @@ var words = {
     },
     "rewind": {
         "grade": 12,
-        "meaning": "to wind something backward",
+        "meaning": "to wind something <span class=\"embedded_root\">backward</span>",
         "part of speech": "verb",
         "roots": [
             "RE"
@@ -8837,7 +8837,7 @@ var words = {
     },
     "rhinoceros": {
         "grade": 12,
-        "meaning": "a family of animals with a big horn on their snouts",
+        "meaning": "a family of animals with a large <span class=\"embedded_root\">horn</span> near their <span class=\"embedded_root\">nose</span>",
         "part of speech": "noun",
         "roots": [
             "RHIN"
@@ -8847,7 +8847,7 @@ var words = {
     },
     "rhinoplasty": {
         "grade": 12,
-        "meaning": "surgery of the nose",
+        "meaning": "surgery of the <span class=\"embedded_root\">nose</span>",
         "part of speech": "noun",
         "roots": [
             "RHIN"
@@ -8857,7 +8857,7 @@ var words = {
     },
     "rhinovirus": {
         "grade": 12,
-        "meaning": "viruses that are causing the common cold",
+        "meaning": "a virus that causes one's <span class=\"embedded_root\">nose</span> to run",
         "part of speech": "noun",
         "roots": [
             "RHIN"
@@ -8865,41 +8865,9 @@ var words = {
         "type": "none",
         "word": "rhinovirus"
     },
-    "rhodium": {
-        "grade": 12,
-        "meaning": "an element which produces a red solution",
-        "part of speech": "noun",
-        "roots": [
-            "RHOD"
-        ],
-        "type": "none",
-        "word": "rhodium"
-    },
-    "rhododendron": {
-        "grade": 12,
-        "meaning": "a flower with red/pink flowers",
-        "part of speech": "noun",
-        "roots": [
-            "RHOD",
-            "DENDR"
-        ],
-        "type": "none",
-        "word": "rhododendron"
-    },
-    "rhodopsin": {
-        "grade": 12,
-        "meaning": "a purple pigment in the retina that is needed for vision",
-        "part of speech": "noun",
-        "roots": [
-            "RHOD",
-            "OP/OPS/OPT root 2"
-        ],
-        "type": "none",
-        "word": "rhodopsin"
-    },
     "ridicule": {
         "grade": 12,
-        "meaning": "to make fun or mock",
+        "meaning": "to make fun of or <span class=\"embedded_root\">laugh</span> at",
         "part of speech": "verb",
         "roots": [
             "RID"
@@ -8909,7 +8877,7 @@ var words = {
     },
     "ridiculous": {
         "grade": 12,
-        "meaning": "silly, causing laughter",
+        "meaning": "silly, causing <span class=\"embedded_root\">laugh</span>ter",
         "part of speech": "adjective",
         "roots": [
             "RID"
@@ -8919,7 +8887,7 @@ var words = {
     },
     "rubella": {
         "grade": 12,
-        "meaning": "measles",
+        "meaning": "a type of measles characterized by <span class=\"embedded_root\">red</span> spots",
         "part of speech": "noun",
         "roots": [
             "RUB"
@@ -8929,7 +8897,7 @@ var words = {
     },
     "ruby": {
         "grade": 12,
-        "meaning": "a deep red color and a precious stone of the same color",
+        "meaning": "a deep <span class=\"embedded_root\">red</span> color and a precious stone of the same color",
         "part of speech": [
             "noun",
             "adjective"
@@ -8942,7 +8910,7 @@ var words = {
     },
     "rupture": {
         "grade": 12,
-        "meaning": "a break in something",
+        "meaning": "a <span class=\"embedded_root\">break</span> in something",
         "part of speech": "noun",
         "roots": [
             "RUPT"
@@ -8952,7 +8920,7 @@ var words = {
     },
     "sane": {
         "grade": 12,
-        "meaning": "mentally healthy",
+        "meaning": "mentally <span class=\"embedded_root\">health</span>y",
         "part of speech": "adjective",
         "roots": [
             "SAN"
@@ -8962,7 +8930,7 @@ var words = {
     },
     "sanitary": {
         "grade": 12,
-        "meaning": "relating to cleanliness and health",
+        "meaning": "relating to <span class=\"embedded_root\">health</span>, clean",
         "part of speech": "adjective",
         "roots": [
             "SAN"
@@ -8972,7 +8940,7 @@ var words = {
     },
     "sanitation": {
         "grade": 12,
-        "meaning": "maintenance of public health and cleanliness",
+        "meaning": "maintenance of public <span class=\"embedded_root\">health</span> and cleanliness",
         "part of speech": "noun",
         "roots": [
             "SAN"
@@ -8980,19 +8948,9 @@ var words = {
         "type": "none",
         "word": "sanitation"
     },
-    "sarcophagy": {
-        "grade": 12,
-        "meaning": "cannibalism, eating flesh",
-        "part of speech": "noun",
-        "roots": [
-            "PHAG"
-        ],
-        "type": "none",
-        "word": "sarcophagy"
-    },
     "sclerometer": {
         "grade": 12,
-        "meaning": "instrument for measuring hardness",
+        "meaning": "instrument for <span class=\"embedded_root\">measur</span>ing <span class=\"embedded_root\">hard</span>ness",
         "part of speech": "noun",
         "roots": [
             "SCLER/SCHLERO",
@@ -9003,7 +8961,7 @@ var words = {
     },
     "scribe": {
         "grade": 12,
-        "meaning": "a person who writes out documents",
+        "meaning": "a person who <span class=\"embedded_root\">writespan>s out documents",
         "part of speech": "noun",
         "roots": [
             "SCRIB/SCRIPT"
@@ -9013,7 +8971,7 @@ var words = {
     },
     "secede": {
         "grade": 12,
-        "meaning": "to formally break away from",
+        "meaning": "to formally break <span class=\"embedded_root\">away</span> from",
         "part of speech": "verb",
         "roots": [
             "SE"
@@ -9023,7 +8981,7 @@ var words = {
     },
     "seclude": {
         "grade": 12,
-        "meaning": "to keep away from",
+        "meaning": "to keep <span class=\"embedded_root\">away</span> from",
         "part of speech": "verb",
         "roots": [
             "SE",
@@ -9034,7 +8992,7 @@ var words = {
     },
     "section": {
         "grade": 12,
-        "meaning": "a piece of something",
+        "meaning": "a piece <span class=\"embedded_root\">cut</span> off of a larger piece",
         "part of speech": "noun",
         "roots": [
             "SECT"
@@ -9044,7 +9002,7 @@ var words = {
     },
     "seismograph": {
         "grade": 12,
-        "meaning": "a machine noting strength and duration of earthquakes",
+        "meaning": "a machine that <span class=\"embedded_root\">record</span>s the strength and duration of earthquakes",
         "part of speech": "noun",
         "roots": [
             "GRAPH"
@@ -9052,29 +9010,9 @@ var words = {
         "type": "none",
         "word": "seismograph"
     },
-    "self-discipline": {
-        "grade": 12,
-        "meaning": "the ability to discipline yourself",
-        "part of speech": "noun",
-        "roots": [
-            "SELF"
-        ],
-        "type": "none",
-        "word": "self-discipline"
-    },
-    "self-respect": {
-        "grade": 12,
-        "meaning": "respect for yourself",
-        "part of speech": "noun",
-        "roots": [
-            "SELF"
-        ],
-        "type": "none",
-        "word": "self-respect"
-    },
     "selfish": {
         "grade": 12,
-        "meaning": "concerned only with your own interests",
+        "meaning": "concerned only with one's own interests",
         "part of speech": "adjective",
         "roots": [
             "SELF"
@@ -9084,7 +9022,7 @@ var words = {
     },
     "semiannual": {
         "grade": 12,
-        "meaning": "happening every half year",
+        "meaning": "happening every <span class=\"embedded_root\">half</span> year",
         "part of speech": "adjective",
         "roots": [
             "SEMI",
@@ -9095,7 +9033,7 @@ var words = {
     },
     "semicircle": {
         "grade": 12,
-        "meaning": "half a circle",
+        "meaning": "<span class=\"embedded_root\">part</span> of a circle",
         "part of speech": "noun",
         "roots": [
             "SEMI"
@@ -9105,7 +9043,7 @@ var words = {
     },
     "semiconscious": {
         "grade": 12,
-        "meaning": "partly conscious",
+        "meaning": "<span class=\"embedded_root\">partly</span> <span class=\"embedded_root\">aware</span> of one's surroundings",
         "part of speech": "adjective",
         "roots": [
             "SEMI",
@@ -9116,7 +9054,7 @@ var words = {
     },
     "septet": {
         "grade": 12,
-        "meaning": "a group of seven musicians",
+        "meaning": "a group of <span class=\"embedded_root\">seven</span> musicians",
         "part of speech": "noun",
         "roots": [
             "SEPT"
@@ -9126,7 +9064,7 @@ var words = {
     },
     "septuagenarian": {
         "grade": 12,
-        "meaning": "a person in his/her seventies",
+        "meaning": "a person in his/her <span class=\"embedded_root\">seven</span>ties",
         "part of speech": "noun",
         "roots": [
             "SEPT",
@@ -9147,7 +9085,7 @@ var words = {
     },
     "sexagenarian": {
         "grade": 12,
-        "meaning": "person in his/her sixties",
+        "meaning": "person in his/her <span class=\"embedded_root\">six</span>ties",
         "part of speech": "noun",
         "roots": [
             "SEX",
@@ -9158,7 +9096,7 @@ var words = {
     },
     "sextet": {
         "grade": 12,
-        "meaning": "a composition or group of six",
+        "meaning": "a group of <span class=\"embedded_root\">six</span> musicians",
         "part of speech": "noun",
         "roots": [
             "SEX"
@@ -9168,7 +9106,7 @@ var words = {
     },
     "sextuple": {
         "grade": 12,
-        "meaning": "sixfold",
+        "meaning": "<span class=\"embedded_root\">six</span>fold",
         "part of speech": "adjective",
         "roots": [
             "SEX"
@@ -9178,7 +9116,7 @@ var words = {
     },
     "solar": {
         "grade": 12,
-        "meaning": "involving the sun",
+        "meaning": "involving the <span class=\"embedded_root\">sun</span>",
         "part of speech": "adjective",
         "roots": [
             "SOL"
@@ -9188,7 +9126,7 @@ var words = {
     },
     "solarium": {
         "grade": 12,
-        "meaning": "a room where one is exposed to sunlight",
+        "meaning": "a room made of glass where one can be exposed to <span class=\"embedded_root\">sun</span>light",
         "part of speech": "noun",
         "roots": [
             "SOL"
@@ -9198,7 +9136,7 @@ var words = {
     },
     "somniloquy": {
         "grade": 12,
-        "meaning": "the act of talking in your sleep",
+        "meaning": "the act of <span class=\"embedded_root\">talk</span>ing in one's <span class=\"embedded_root\">sleep</span>",
         "part of speech": "noun",
         "roots": [
             "SOMN/SOMNI",
@@ -9209,7 +9147,7 @@ var words = {
     },
     "somnolent": {
         "grade": 12,
-        "meaning": "feeling sleepy",
+        "meaning": "feeling <span class=\"embedded_root\">sleep</span>y",
         "part of speech": "adjective",
         "roots": [
             "SOMN/SOMNI"
@@ -9219,7 +9157,7 @@ var words = {
     },
     "sonorous": {
         "grade": 12,
-        "meaning": "producing loud, full, rich sounds",
+        "meaning": "producing a loud, full, rich <span class=\"embedded_root\">sound</span>",
         "part of speech": "adjective",
         "roots": [
             "SON"
@@ -9239,7 +9177,7 @@ var words = {
     },
     "sophisticated": {
         "grade": 12,
-        "meaning": "wise about the ways of the world",
+        "meaning": "<span class=\"embedded_root\">wise</span> about the ways of the world",
         "part of speech": "adjective",
         "roots": [
             "SOPH"
@@ -9249,7 +9187,7 @@ var words = {
     },
     "spectator": {
         "grade": 12,
-        "meaning": "a person who sees an event",
+        "meaning": "a person who <span class=\"embedded_root\">sees</span> an event",
         "part of speech": "noun",
         "roots": [
             "SPEC/SPECT/SPIC"
@@ -9259,7 +9197,7 @@ var words = {
     },
     "spirit": {
         "grade": 12,
-        "meaning": "invisible life force",
+        "meaning": "the concept of life force, conceived by the ancients as one's <span class=\"embedded_root\">breath</span>",
         "part of speech": "noun",
         "roots": [
             "SPIR"
@@ -9269,7 +9207,7 @@ var words = {
     },
     "stable": {
         "grade": 12,
-        "meaning": "standing steady and firm",
+        "meaning": "<span class=\"embedded_root\">standing</span>ing steady and firm",
         "part of speech": "adjective",
         "roots": [
             "STA"
@@ -9299,7 +9237,7 @@ var words = {
     },
     "stellar": {
         "grade": 12,
-        "meaning": "relating to stars",
+        "meaning": "relating to <span class=\"embedded_root\">star</span>s",
         "part of speech": "adjective",
         "roots": [
             "STELL"
@@ -9392,7 +9330,7 @@ var words = {
     },
     "superior": {
         "grade": 12,
-        "meaning": "above average, better in quality",
+        "meaning": "<span class=\"embedded_root\">above</span> average, better in quality",
         "part of speech": "adjective",
         "roots": [
             "SUPER"
@@ -9402,7 +9340,7 @@ var words = {
     },
     "supersonic": {
         "grade": 12,
-        "meaning": "faster than the speed of sound",
+        "meaning": "<span class=\"embedded_root\">above</span> the speed of <span class=\"embedded_root\">sound</span>",
         "part of speech": "adjective",
         "roots": [
             "SUPER",
@@ -9413,7 +9351,7 @@ var words = {
     },
     "symmetry": {
         "grade": 12,
-        "meaning": "similarity in size, form or arrangement",
+        "meaning": "<span class=\"embedded_root\">similarity</span> in <span class=\"embedded_root\">measure</span>ment, form or arrangement",
         "part of speech": "noun",
         "roots": [
             "SYM/SYN",
@@ -9424,7 +9362,7 @@ var words = {
     },
     "synchronize": {
         "grade": 12,
-        "meaning": "to cause to be happening at the same time",
+        "meaning": "to cause to be happening at the <span class=\"embedded_root\">same</span> <span class=\"embedded_root\">time</span>",
         "part of speech": "verb",
         "roots": [
             "SYM/SYN",
@@ -9457,7 +9395,7 @@ var words = {
     },
     "tactile": {
         "grade": 12,
-        "meaning": "relating to the sense of touch",
+        "meaning": "relating to the sense of <span class=\"embedded_root\">touch</span>",
         "part of speech": "adjective",
         "roots": [
             "TACT/TANG"
@@ -9467,7 +9405,7 @@ var words = {
     },
     "tangible": {
         "grade": 12,
-        "meaning": "able to be touched",
+        "meaning": "able to be <span class=\"embedded_root\">touch</span>ed",
         "part of speech": "adjective",
         "roots": [
             "TACT/TANG"
@@ -9509,7 +9447,7 @@ var words = {
     },
     "technology": {
         "grade": 12,
-        "meaning": "the practical application of knowledge",
+        "meaning": "the <span class=\"embedded_root\">study</span> and practice of <span class=\"embedded_root\">scientific</span> devices",
         "part of speech": "noun",
         "roots": [
             "LOG",
@@ -9520,7 +9458,7 @@ var words = {
     },
     "technophobia": {
         "grade": 12,
-        "meaning": "fear of technology, computer anxiety",
+        "meaning": "<span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">technology</span>, computer anxiety",
         "part of speech": "noun",
         "roots": [
             "TECHNO",
@@ -9531,7 +9469,7 @@ var words = {
     },
     "telecommuting": {
         "grade": 12,
-        "meaning": "the act of working remotely and bridging the distance via virtual devices",
+        "meaning": "the act of working at a job from a <span class=\"embedded_root\">distance</span>",
         "part of speech": "noun",
         "roots": [
             "TEL/TELE"
@@ -9541,7 +9479,7 @@ var words = {
     },
     "telegram": {
         "grade": 12,
-        "meaning": "a message sent by telegraph",
+        "meaning": "a <span class=\"embedded_root\">writtenspan> message sent across a <span class=\"embedded_root\">distance</span> using wires",
         "part of speech": "noun",
         "roots": [
             "TEL/TELE",
@@ -9552,7 +9490,7 @@ var words = {
     },
     "telekinesis": {
         "grade": 12,
-        "meaning": "the ability to move objects at a distance",
+        "meaning": "the ability to <span class=\"embedded_root\">move</span> objects at a <span class=\"embedded_root\">distance</span>",
         "part of speech": "noun",
         "roots": [
             "TEL/TELE",
@@ -9563,7 +9501,7 @@ var words = {
     },
     "telephone": {
         "grade": 12,
-        "meaning": "a device to talk to a distant person",
+        "meaning": "a device to transmit <span class=\"embedded_root\">sound</span> across <span class=\"embedded_root\">distances</span>",
         "part of speech": "noun",
         "roots": [
             "TEL/TELE",
@@ -9574,7 +9512,7 @@ var words = {
     },
     "telescope": {
         "grade": 12,
-        "meaning": "a device to view distant objects",
+        "meaning": "a device with lenses to <span class=\"embedded_root\">view</span> <span class=\"embedded_root\">distant</span> objects",
         "part of speech": "noun",
         "roots": [
             "TEL/TELE",
@@ -9585,7 +9523,7 @@ var words = {
     },
     "television": {
         "grade": 12,
-        "meaning": "a device to receive pictures from afar",
+        "meaning": "a device to <span class=\"embedded_root\">see</span> <span class=\"embedded_root\">images</span> from afar",
         "part of speech": "noun",
         "roots": [
             "TEL/TELE"
@@ -9595,7 +9533,7 @@ var words = {
     },
     "temporal": {
         "grade": 12,
-        "meaning": "relating to time",
+        "meaning": "relating to <span class=\"embedded_root\">time</span>",
         "part of speech": "adjective",
         "roots": [
             "TEMP/TEMPOR"
@@ -9605,7 +9543,7 @@ var words = {
     },
     "temporary": {
         "grade": 12,
-        "meaning": "lasting for a limited time",
+        "meaning": "lasting for a limited <span class=\"embedded_root\">time</span>",
         "part of speech": "adjective",
         "roots": [
             "TEMP/TEMPOR"
@@ -9615,7 +9553,7 @@ var words = {
     },
     "terminate": {
         "grade": 12,
-        "meaning": "to end",
+        "meaning": "to <span class=\"embedded_root\">finish</span> or end",
         "part of speech": "verb",
         "roots": [
             "TERM/TERMIN"
@@ -9635,7 +9573,7 @@ var words = {
     },
     "territory": {
         "grade": 12,
-        "meaning": "an area of land",
+        "meaning": "an area of <span class=\"embedded_root\">land</span>",
         "part of speech": "noun",
         "roots": [
             "TERR"
@@ -9645,7 +9583,7 @@ var words = {
     },
     "tetrapod": {
         "grade": 12,
-        "meaning": "an animal with 4 limbs (either a quadruped with 4 legs or a biped with 2 legs and 2 arms)",
+        "meaning": "an animal with <span class=\"embedded_root\">four</span> <span class=\"embedded_root\">limb</span>s (either a quadruped with 4 legs or a biped with 2 legs and 2 arms)",
         "part of speech": "noun",
         "roots": [
             "TETRA",
@@ -9656,7 +9594,7 @@ var words = {
     },
     "tetrarchy": {
         "grade": 12,
-        "meaning": "government by 4 rulers",
+        "meaning": "government by <span class=\"embedded_root\">four</span> <span class=\"embedded_root\">rule</span>rs",
         "part of speech": "noun",
         "roots": [
             "TETRA",
@@ -9664,16 +9602,6 @@ var words = {
         ],
         "type": "none",
         "word": "tetrarchy"
-    },
-    "tetrose": {
-        "grade": 12,
-        "meaning": "a monosaccharide with four carbon atoms",
-        "part of speech": "noun",
-        "roots": [
-            "TETRA"
-        ],
-        "type": "none",
-        "word": "tetrose"
     },
     "theology": {
         "grade": 12,
@@ -9688,7 +9616,7 @@ var words = {
     },
     "thermal": {
         "grade": 12,
-        "meaning": "relating to heat",
+        "meaning": "relating to <span class=\"embedded_root\">heat</span>",
         "part of speech": "adjective",
         "roots": [
             "THERM"
@@ -9698,7 +9626,7 @@ var words = {
     },
     "thermos": {
         "grade": 12,
-        "meaning": "an insulated jar that keeps heat in",
+        "meaning": "an insulated jar that keeps <span class=\"embedded_root\">heat</span> in",
         "part of speech": "noun",
         "roots": [
             "THERM"
@@ -9708,7 +9636,7 @@ var words = {
     },
     "thermostat": {
         "grade": 12,
-        "meaning": "a device that controls heat",
+        "meaning": "a device that controls <span class=\"embedded_root\">heat</span>",
         "part of speech": "noun",
         "roots": [
             "THERM"
@@ -9718,7 +9646,7 @@ var words = {
     },
     "toxic": {
         "grade": 12,
-        "meaning": "poisonous",
+        "meaning": "<span class=\"embedded_root\">poison</span>ous",
         "part of speech": "adjective",
         "roots": [
             "TOX"
@@ -9739,7 +9667,7 @@ var words = {
     },
     "tractor": {
         "grade": 12,
-        "meaning": "a motor vehicle that pulls things",
+        "meaning": "a motor vehicle that <span class=\"embedded_root\">pull</span>s things",
         "part of speech": "noun",
         "roots": [
             "TRACT"
@@ -11800,6 +11728,9 @@ ones used at 470 below:
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILLI', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         , ' 'MAL', 'MAGN', 'MACRO', 'LUN/LUNA', 'KINE/KINEMAT/CINE', 'HYPER', 'HYDR', 
         'CHRON', 'CEPHAL', 'CENT', 'BIO', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'
+
+
+
 
 
 problematic roots hex

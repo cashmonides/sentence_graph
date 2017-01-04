@@ -87,7 +87,7 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
 }
 
 
-// callback of the persist statement
+// callback of the persist statement called by send_spelling_match_to_firebase
 var final_callback = function (pin, column) {
     display_spelling_match_pin(pin, column);
     // display_countdown(time_limit);
@@ -111,11 +111,11 @@ var display_spelling_match_pin = function (pin, column) {
 /////////ending the game,displaying resultsandmovinggame in firebase
 // sometimes we'll only want to display the top n finishers
 // to avoid bruising egos
-var cut_off_all_but_top = false;
+// var cut_off_all_but_top = false;
 // var cut_off_all_but_top = 3;
 
 
-// this is the master function
+// this is the 2nd master function
 // it does a few important things
     // removes pin
     // gets the data from the game that just finished with three functions in the callback
@@ -131,7 +131,7 @@ var move_game_to_completed = function (n) {
     
     var pin = random_spelling_bee_numbers[n];
     
-    // Remove all reference of the game's existance.
+    // Remove all reference of the game's existence.
     delete random_spelling_bee_numbers[n];
     
     var old_path = ["test", pin];
@@ -154,6 +154,10 @@ var move_game_to_completed = function (n) {
         
         
         var scores_map = data.scores;
+        console.log("SCORES_MAP = ", scores_map);
+        
+        var sorted_scores = sort_map_by_values(scores_map, true);
+        console.log("SORTED SCORES = ", sorted_scores);
         
         // WEEZER123 
         //here we should add the place (1st, 2nd, 3rd) to the data so we can persist
@@ -200,34 +204,80 @@ var move_game_to_completed = function (n) {
 
 
 
+
 var sort_and_display_match_results = function (data, n) {
     var element = el("spelling_match_score_results" + n);
-    
-    
     
     // turn it into a sorted list (with higher values first)
     // true here signifies reversal
     var sorted_data = sort_map_by_values(data, true);
     console.log("sorted_data = ", sorted_data);
+    console.log("sorted_data stringified = ", JSON.stringify(sorted_data));
     // element.innerHTML = JSON.stringify(sorted_data);
     
     var how_many_items_to_take = sorted_data.length;
-    // if (cut_off_all_but_top) {
-    //     // Minimum of how many there are and how many we show at most.
-    // } else {
-    //     how_many_items_to_take = sorted_data.length;
-    // }
     
-    for (var i = 0; i < how_many_items_to_take; i++) {
+    
+    for (var i = 0; i < sorted_data.length; i++) {
         var score_display = process_score_for_display(sorted_data[i]);
         // var ranking = i + 1;
         var ranking = generate_ranking_from_int(i+1);
         console.log("SCORE_DISPLAY = ", score_display);
         console.log("ranking = ", ranking);
-        var output = ranking + " " + "score: " + score_display;
+        var output = ranking + ": " + score_display;
+        console.log("OUTPUT = ", output);
         element.innerHTML += output;
     }
 }
+
+var remove_uid_suffix = function (string) {
+    console.log("input of remove uid = ", string);
+    var output = string.split("=", 1);
+    console.log("output of remove uid = ", output);
+    return output;
+}
+
+
+var process_score_for_display = function (list_item) {
+    console.log('process_score_for_display, list_item =', list_item);
+    var name = list_item[0];
+    name = name.replace('"', '');
+    name = remove_uid_suffix(name);
+    var score = list_item[1];
+    console.log()
+    var output = score + " points - " + name + "<br />";
+    console.log("process_score_for_display, output = ", output);
+    return output;
+}
+
+// var sort_and_display_match_results_old = function (data, n) {
+//     var element = el("spelling_match_score_results" + n);
+    
+    
+    
+//     // turn it into a sorted list (with higher values first)
+//     // true here signifies reversal
+//     var sorted_data = sort_map_by_values(data, true);
+//     console.log("sorted_data = ", sorted_data);
+//     // element.innerHTML = JSON.stringify(sorted_data);
+    
+//     var how_many_items_to_take = sorted_data.length;
+//     // if (cut_off_all_but_top) {
+//     //     // Minimum of how many there are and how many we show at most.
+//     // } else {
+//     //     how_many_items_to_take = sorted_data.length;
+//     // }
+    
+//     for (var i = 0; i < how_many_items_to_take; i++) {
+//         var score_display = process_score_for_display(sorted_data[i]);
+//         // var ranking = i + 1;
+//         var ranking = generate_ranking_from_int(i+1);
+//         console.log("SCORE_DISPLAY = ", score_display);
+//         console.log("ranking = ", ranking);
+//         var output = ranking + " " + "score: " + score_display;
+//         element.innerHTML += output;
+//     }
+// }
 
 
 
@@ -287,95 +337,17 @@ var generate_ranking_from_int = function (int) {
     return int + generate_ordinal_suffix(int);
 }
 
-var process_score_for_display = function (list_item) {
-    console.log('list_item =', list_item);
-    var name = list_item[0];
-    name = name.replace('"', '');
-    var score = list_item[1];
-    return score + " " + name + "<br />";
-}
-
-// var fill_spelling_match_with_data = function (pin, level, time_limit) {
-    
-//     // persist - push map to the pin
-//     var data = {
-//         "level": level,
-//         "time_limit": time_limit,
-//     }
-    
-//     // path will be ["spelling_matches", pin]
-//     // e.g. ["spelling_matches", 1456323]
-    
-//     // callback will be something like a combo of
-//         // display_spelling_match_pin
-//         // begin countdown
-    
-//     var path = ["test", "spelling_matches", pin];
-    
-    
-    
-//     // option 0
-//     Persist.set(path, data);
-    
-//     // option 1
-//     // var callback = final_callback;
-//     // Persist.set(path, data, final_callback(pin, level, time_limit));
-    
-//     // // option 2
-//     // var callback = final_callback(pin, level, time_limit);
-//     // Persist.set(path, data, final_callback);
-// }
 
 
-
-
-
-
-
-
-/*
-var akiva_autogenerate_spelling_match_pin = function () {
-    var max = 999999;
-    var min = 000001;
-    
-    var output = Math.random() * (max - min) + min;
-    return Math.round(output);
-}
-*/
-
-// BEGIN dan
 
 var autogenerate_spelling_match_pin = function () {
     return get_n_random_digits(6);
 }
 
-// END dan
-
-
-/*
-// checks if user-inputted string is valid
-    // is an integer between 1 and 1000
-var input_is_valid = function (string) {
-    var number = Number(string);
-    if (!Number.isInteger(number)) {
-        return false;
-    };
-    if (number < 1) {
-        return false;
-    }
-    if (number > 1000) {
-        return false;
-    }
-    return true;
-}
-*/
-
-// begin dan
 var input_is_valid = function (string) {
     var number = Number(string);
     return Number.isInteger(number) && 1 <= number && number <= 1000;
 }
-// end dan
 
 var create_stopping_time = function (offset) {
     var current_time = Date.now();
@@ -384,6 +356,16 @@ var create_stopping_time = function (offset) {
     console.log("stopping_time = ", stopping_time)
     return stopping_time;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 //////////////////////
@@ -645,3 +627,57 @@ var end_game = function (clock_refresh_id_to_cancel) {
 // add bold words or span
 
 
+
+
+
+
+
+// var fill_spelling_match_with_data = function (pin, level, time_limit) {
+    
+//     // persist - push map to the pin
+//     var data = {
+//         "level": level,
+//         "time_limit": time_limit,
+//     }
+    
+//     // path will be ["spelling_matches", pin]
+//     // e.g. ["spelling_matches", 1456323]
+    
+//     // callback will be something like a combo of
+//         // display_spelling_match_pin
+//         // begin countdown
+    
+//     var path = ["test", "spelling_matches", pin];
+    
+    
+    
+//     // option 0
+//     Persist.set(path, data);
+    
+//     // option 1
+//     // var callback = final_callback;
+//     // Persist.set(path, data, final_callback(pin, level, time_limit));
+    
+//     // // option 2
+//     // var callback = final_callback(pin, level, time_limit);
+//     // Persist.set(path, data, final_callback);
+// }
+
+
+
+
+
+
+
+
+/*
+var akiva_autogenerate_spelling_match_pin = function () {
+    var max = 999999;
+    var min = 000001;
+    
+    var output = Math.random() * (max - min) + min;
+    return Math.round(output);
+}
+*/
+
+// BEGIN dan

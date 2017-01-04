@@ -246,7 +246,10 @@ Quiz.prototype.get_start_module = function () {
     } else if ('bee_match' in ups) {
         var self = this;
         this.pin = ups.pin;
-        var user_name = this.user.data.profile.name;
+        // below might create collisions if two people have the same name
+        // and their data is sent to firebase
+        // var user_name = this.user.data.profile.name;
+        var user_name = this.user.data.profile.name + "=" + this.user.uid
         this.requires_callback_before_starting = true;
         this.callback_before_starting = function (function_after_callback) {
             Persist.get(['test', self.pin], function (x) {
