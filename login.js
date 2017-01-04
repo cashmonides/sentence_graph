@@ -215,7 +215,7 @@ function submit_avatar_choice () {
     var name = el("name").value;
     var avatar_choice = el("avatar_choice").value;
     
-    var path = ["avatars", name, avatar_selection_count];
+    var path = ["avatars_lls", name, avatar_selection_count];
     
     if (!is_valid_avatar(avatar_choice)) {
         alert("Not a valid avatar name. Must be a COLOR from the list + SPACE + ANIMAL from the list");
@@ -225,7 +225,7 @@ function submit_avatar_choice () {
         // actually do a persist and increment
         if (avatar_selection_count === 0) {
             // persist grade
-            Persist.set(["avatars", name, 'grade'], convert_string_to_number(el('grade').value));
+            Persist.set(["avatars_lls", name, 'grade'], convert_string_to_number(el('grade').value));
         
             set_display('name_row', 'none');
             set_display('grade_row', 'none');
