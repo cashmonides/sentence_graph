@@ -105,14 +105,17 @@ _____DO NOW_____
 - SLIDESHOW CHORES
     - word of the day slideshow
 
+- SUPER IMPORTANT
+    - switch firebase
 
 - small things
     - letter to Ms. C and Mr. Dascal
     - make slideshow presentation for Ms. C.
     - make sure no etymology cheat sheet appears on any spelling page
-    - turn into two columns
     - change display of spelling bee
-    - build a tie-detection algorithm
+    - remove span from feedback display
+    - remove duplicates from spelling_match_mode.js
+    - connect tie-detection algorithm to the ranking system
     - run Dan's algorithm on lls avatars
     - test an avatar display on admin
     - add etymology to spelling bee mode and test thoroughly

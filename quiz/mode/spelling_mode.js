@@ -766,6 +766,13 @@ SpellingModeGame.prototype.process_correct_answer = function() {
     
     var spelling_feedback = this.clue + " = " + this.correct;
     
+    
+    
+    spelling_feedback = replace_all_substrings(spelling_feedback, "<span class=\"embedded_root\">", "");
+    spelling_feedback = replace_all_substrings(spelling_feedback, "</span>", "");
+    
+    
+    
     var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_right) + " " + spelling_feedback;
     var fbox = el("feedbackbox");
     fbox.innerHTML = cell_1;
@@ -1032,6 +1039,15 @@ SpellingModeGame.prototype.display_red_green_result = function (list) {
 
 SpellingModeGame.prototype.give_away_answer = function(){
     var fbox = el("feedbackbox");
+    // todo
+    this.clue = replace_all_substrings(this.clue, "<span class=\"embedded_root\">", "");
+    this.clue = replace_all_substrings(this.clue, "</span>", "");
+    
+    this.correct = replace_all_substrings(this.correct, "<span class=\"embedded_root\">", "");
+    this.correct = replace_all_substrings(this.correct, "</span>", "");
+    
+    
+    
     fbox.innerHTML = "The correct answer is \"" + this.clue + " = " + this.correct + '"';
     
     this.quiz.question_complete();

@@ -281,6 +281,9 @@ SpellingMatchModeGame.prototype.next_question = function() {
 
 
 SpellingMatchModeGame.prototype.process_answer = function(){
+    
+    console.log("sanity check process answer");
+    
     var self = this;
     var raw_input_string = el("input_box").value;
     back.log("raw input string = ", raw_input_string);
@@ -357,6 +360,9 @@ SpellingMatchModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot.
 
 SpellingMatchModeGame.prototype.process_correct_answer = function() {
     
+    console.log("sanity check process correct answer");
+    
+    
     // todo perhaps move the below functions to quiz
     global_spelling_match_score_counter++;
     el("fraction_header").innerHTML = "score=" + global_spelling_match_score_counter;
@@ -366,6 +372,18 @@ SpellingMatchModeGame.prototype.process_correct_answer = function() {
     this.quiz.increment_score();
     
     var spelling_feedback = this.clue + " = " + this.correct;
+    
+    
+    
+    // new material
+    console.log("PHANTOGRAM spelling_feedback pre = ", spelling_feedback);
+    // spelling_feedback = remove_embedded_root_span(spelling_feedback);
+    
+    spelling_feedback = replace_all_substrings(spelling_feedback, "<span class=\"embedded_root\">", "");
+    spelling_feedback = replace_all_substrings(spelling_feedback, "</span>", "");
+    
+    console.log("PHANTOGRAM spelling_feedback pre = ", spelling_feedback);
+    
     
     var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_right) + " " + spelling_feedback;
     var fbox = el("feedbackbox");
@@ -379,6 +397,8 @@ SpellingMatchModeGame.prototype.process_correct_answer = function() {
 
 
 SpellingMatchModeGame.prototype.process_incorrect_answer = function() {
+    console.log("sanity check process incorrect answer");
+    
     back.log("entering process_incorrect_answer");
     this.quiz.submodule.incorrect_streak ++;
     
@@ -629,6 +649,14 @@ SpellingMatchModeGame.prototype.display_red_green_result = function (list) {
 
 SpellingMatchModeGame.prototype.give_away_answer = function(){
     var fbox = el("feedbackbox");
+    
+    this.clue = replace_all_substrings(this.clue, "<span class=\"embedded_root\">", "");
+    this.clue = replace_all_substrings(this.clue, "</span>", "");
+    
+    this.correct = replace_all_substrings(this.correct, "<span class=\"embedded_root\">", "");
+    this.correct = replace_all_substrings(this.correct, "</span>", "");
+    
+    
     fbox.innerHTML = "The correct answer is \"" + this.clue + " = " + this.correct + '"';
     
     this.quiz.question_complete();
@@ -771,6 +799,7 @@ SpellingMatchModeGame.prototype.give_away_answer = function(){
 
 
 
+
 var SpellingMatchModeGame = function () {
     this.data = null;
     this.quiz = null;
@@ -783,7 +812,7 @@ SpellingMatchModeGame.prototype.attach = function(){
     set_display("submit_button", 'initial');
     set_display("cheat_sheet_button", 'none');
     set_display("vocab_cheat_button", 'none');
-    set_display("etym_cheat_button", 'initial');
+    set_display("etym_cheat_button", 'none');
     //input box will be used
     set_display("input_box", 'initial');
     set_display("next_button", 'none');
@@ -1102,6 +1131,17 @@ SpellingMatchModeGame.prototype.process_correct_answer = function() {
     this.quiz.increment_score();
     
     var spelling_feedback = this.clue + " = " + this.correct;
+    
+    
+    console.log("PHANTOGRAM spelling_feedback pre = ", spelling_feedback);
+    // spelling_feedback = remove_embedded_root_span(spelling_feedback);
+    
+    spelling_feedback = replace_all_substrings(spelling_feedback, "<span class=\"embedded_root\">", "");
+    spelling_feedback = replace_all_substrings(spelling_feedback, "</span>", "");
+    
+    console.log("PHANTOGRAM spelling_feedback pre = ", spelling_feedback);
+    
+    
     
     var cell_1 = random_choice(SpellingModeGame.cell_1_feedback_right) + " " + spelling_feedback;
     var fbox = el("feedbackbox");
@@ -1502,4 +1542,5 @@ SpellingMatchModeGame.prototype.give_away_answer = function(){
 //         this.level = {'etym_level': 50}
 //     }
 // }
+
 
