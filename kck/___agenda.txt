@@ -107,8 +107,20 @@ _____DO NOW_____
 
 
 - small things
-    - write code to build book of roots
+    - letter to Ms. C and Mr. Dascal
+    - make slideshow presentation for Ms. C.
+    - make sure no etymology cheat sheet appears on any spelling page
+    - turn into two columns
+    - change display of spelling bee
+    - build a tie-detection algorithm
+    - run Dan's algorithm on lls avatars
+    - test an avatar display on admin
     - add etymology to spelling bee mode and test thoroughly
+    - get silhouettes for missing animals
+    - make a "turn on avatar generation button"
+    - make a lock button (lock spelling bee, lock module, etc)
+    - write code to build book of roots
+    
     - refactor temporary_incorrect_streak
     - hide hint and everything else when drone game ends
     - increase submodule threshold slightly
@@ -175,7 +187,7 @@ _____DO NOW_____
         - POLY: polyglot, polychrome (a dummy item)
         - etc.
     - make a "set module" secret access button in profile
-
+    
 
 - big things
     - write etymology and spelling results to sql

@@ -888,14 +888,26 @@ var find_non_matching_words = function (query_list, master_list) {
 Quiz.prototype.next_question = function (error) {
     
     
-    // var testmap = words;
-    // var keys = Object.keys(testmap);
-    // console.log("KEYS = ", keys);
-    // console.log("KEYS stringified = ", JSON.stringify(keys));
+    // var avatar_image = "../resources/Wolf.png";
+    // var avatar_image = "../resources/deer.jpg";
     
-    var test_output = find_non_matching_words(new_words_list, words_as_list);
-    console.log("TEST_OUTPUT = ", JSON.stringify(test_output));
+    // el("avatar_image").innerHTML = "<img src=" + avatar_image + ">";;
+    // el("avatar_wrapper").style.backgroundColor = "grey";
     
+    
+    var score_map_test = {
+        "john": 5,
+        "julie": 6,
+        "william": 5,
+        "laura": 1
+    }
+    
+    
+    var test_output2 = sort_map_by_values(score_map_test, true);
+    
+    var test_output3 = group_ties_in_ranked_list(test_output2);
+    
+    // var test_output = assign_rank_to_map_with_ties(score_map_test);
     
     
     ////// RESET THE HINT BUTTON AND ITS COUNTER
