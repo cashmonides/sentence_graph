@@ -42,7 +42,10 @@ var mode_map = {
     "create_account_button": [[2], "inline"],
     
     "name_of_avatar_row": [[5], 'table-row'],
-    "submit_avatar_button": [[5], 'inline']
+    
+    
+    "submit_avatar_button": [[5], 'inline'],
+    "unlock_avatar_button": [[1, 2, 3, 4, 5], 'inline']
     
     //password changing is disabled until a later time, when students use regular email accounts
     // "forgot_password_button": [[1], "inline"],
@@ -210,8 +213,24 @@ var avatar_selection_count = 0;
 
 var avatar_choices = {};
 
+var global_avatar_permission = false;
+
+function unlock_avatar_selection () {
+    var input = prompt('Enter the avatar unlock code given by your teacher.');
+    if (input === "orange") {
+        global_avatar_permission = true;
+    } else {
+        alert("Invalid unlock code. Try again.");
+    }
+}
 
 function submit_avatar_choice () {
+    
+    if (!global_avatar_permission) {
+        alert("avatar creation not permitted at this time. Wait until next Latin class to make an avatar.")
+        return;
+    }
+    
     var name = el("name").value;
     var avatar_choice = el("avatar_choice").value;
     
