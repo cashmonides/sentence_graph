@@ -12,6 +12,7 @@ var cmp = function (a, b) {
         return 0;
     } else {
         // We want to catch weird cases, like NaN.
-        throw 'Impossible ordering!'
+        throw 'Impossible ordering for ' + JSON.stringify(a) +
+        ' and ' + JSON.stringify(b) + '!';
     }
 }
