@@ -263,6 +263,8 @@ EtymologyModeGame.prototype.next_question = function(){
     this.chosen_question_type = weighted(this.legal_question_types);
     
     
+    console.log("BIRD this.chosen_question_type = ", this.chosen_question_type);
+    
     //the parameters for the following function is:
     // etym_level, question_type, number_of_answer_choices, number_of_dummies, number_of_mandatory)
     // so the numbers are number_of_answer_choices, number_of_dummies, number_of_mandatory

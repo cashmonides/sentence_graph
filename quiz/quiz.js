@@ -772,6 +772,7 @@ Quiz.prototype.next_mode = function (error) {
         // console.log("DEBUG 11-18-16 this.sick_modes = ", this.sick_modes);
         
         debug.log("checkpoint 1");
+        console.log("BIRDBUG checkpoint 1");
         
         for (var i = 0; i < this.sick_modes.length; i++) {
             this.display_sick_mode_in_header();
@@ -800,11 +801,12 @@ Quiz.prototype.next_mode = function (error) {
         
         debug.log("checkpoint 2");
         var mode = weighted(allowed);
-        debug.log("checkpoint 2.1 mode = ", mode);
+        back.log("checkpoint mode from weighted(allowed) = ", mode);
         // console.log("DEBUG 5-6 game_mode_map[mode] = ", game_mode_map[mode]);
     }
     var game;
     debug.log("checkpoint 2.1");
+    console.log("BIRDBUG checkpoint 2.1");
         
     if (this.user.is_mf()) {
         var modes_map = {
@@ -816,11 +818,32 @@ Quiz.prototype.next_mode = function (error) {
         game = new current_mode(Path.from_url_params(this.id));
     } else {
         debug.log("checkpoint 2.4 mode = ", mode);
-        debug.log("checkpoint 2.5 Quiz.get_mode(game_mode_map[mode]) = ", Quiz.get_mode(game_mode_map[mode]));
+        console.log("BIRDBUG checkpoint 2.4 mode = ", mode);
+        
+        //////////BIRDBUG PROBLEM HERE
+        console.log("BIRDBUG game_mode_map = ", game_mode_map);
+        console.log("BIRDBUG game_mode_map stringified = ", JSON.stringify(game_mode_map));
+        
+        
+        
+        // debug.log("checkpoint 2.5 Quiz.get_mode(game_mode_map[mode]) = ", Quiz.get_mode(game_mode_map[mode]));
+        // console.log("BIRDBUG checkpoint 2.5 Quiz.get_mode(game_mode_map[mode]) = ", Quiz.get_mode(game_mode_map[mode]));
+        ///// BIRDBUG insanity check
+        // the following is what it said for a long time and seems to work
+        // game = Quiz.get_mode(game_mode_map[mode]);
+        // but there's no function called get_mode, only get_modes
+        // game = Quiz.get_modes(game_mode_map[mode]);
+        
+        //but below is what I'm leaving it at to not court disaster
         game = Quiz.get_mode(game_mode_map[mode]);
+        back.log("checkpoint game set at: ", game);
     }
     debug.log("checkpoint 3 game = ", game);
     console.log("checkpoint 3 game = ", game);
+    
+    // this.game should be an object e.g.
+    // MorphologyModeGame {data: ....etc}
+    
     this.game = game;
     debug.log("checkpoint 4 this.game = ", this.game);
     console.log("checkpoint 4 this.game = ", this.game);
@@ -856,6 +879,7 @@ Quiz.get_mode = function(mode_number) {
         case 9 : return new MorphologyModeGame();
         case 10 : return new SpellingModeGame();
         case 11 : return new SpellingMatchModeGame();
+        case 12 : return new DefinitionInputModeGame();
         default : throw "no game mode triggered";
     }
     
@@ -888,26 +912,36 @@ var find_non_matching_words = function (query_list, master_list) {
 Quiz.prototype.next_question = function (error) {
     
     
-    // var avatar_image = "../resources/Wolf.png";
-    // var avatar_image = "../resources/deer.jpg";
     
-    // el("avatar_image").innerHTML = "<img src=" + avatar_image + ">";;
-    // el("avatar_wrapper").style.backgroundColor = "grey";
     
     
     var score_map_test = {
-        "john": 5,
-        "julie": 6,
-        "william": 5,
-        "laura": 1
+        "bob": 5,
+        "alice": 6,
+        "beth": 5,
+        "cindy": 1
     }
     
     
+    // var score_map_test = {
+    //     "bob": 6,
+    //     "alice": 6,
+    //     "beth": 6,
+    //     "cindy": 6
+    // }
+    // var score_list_test = [["bob", 5], ["allen", 6], ["beth", 5], ["cindy", 1]];
+    
+    
     var test_output2 = sort_map_by_values(score_map_test, true);
+    var test_output4 = tie_detector(test_output2, compare_nth_item_of_list, 1);
+    console.log("TIE DETECTOR test_output4 = ", test_output4);
+    console.log("TIE DETECTOR test_output4 stringified= ", JSON.stringify(test_output4));
     
-    var test_output3 = group_ties_in_ranked_list(test_output2);
+    // var test_output2 = sort_map_by_values(score_map_test, true);
     
-    // var test_output = assign_rank_to_map_with_ties(score_map_test);
+    // var test_output3 = group_ties_in_ranked_list(test_output2);
+    
+    // // var test_output = assign_rank_to_map_with_ties(score_map_test);
     
     
     ////// RESET THE HINT BUTTON AND ITS COUNTER

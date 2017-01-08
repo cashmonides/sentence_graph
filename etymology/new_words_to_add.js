@@ -1,3 +1,118 @@
+
+
+var fy_words_with_transparent_meanings = [
+ beautify
+ complexify
+ purify
+ falsify
+ ]
+
+var fy_words = [
+RED HERRINGS
+fluffy vs fluffify
+defy/???
+
+
+amplify
+beautify
+carnify
+certify
+fortify
+clarify
+qualify
+codify
+commodify
+complexify
+purify
+crucify????
+decalcify
+declassify
+dehumidify
+humidify
+deify
+demystify
+densify
+dignify
+disqualify
+dissatisfy
+diversify
+edify
+electrify
+exemplify
+falsify
+fancify
+gentrify
+gratify
+horrify
+humidify
+identify
+intensify
+justify
+liquify
+lithify vs petrify
+magnify
+misclassify
+modify
+mollify
+mortify
+mummify
+mystify
+notify
+nullify
+objectify
+opacify
+ossify'
+oversimplify
+pacify
+personify
+petrify
+precertify
+prequalify
+prespecify
+purify
+putrefy
+qualify
+quantify
+ramify
+rarify
+ratify
+recertify
+reclassify
+rectify
+reqaulify
+revivify
+sanctify
+satisfy
+signify
+simplify
+solemnify
+solidify
+specify
+stellify
+stratify
+stultify
+stupefy
+subclassify
+syllabify
+terrify
+testify
+transmogrify
+uglify
+versify
+vilify
+vitrify
+vivify
+zombify
+
+satisfying
+unsatisfying
+"
+]
+
+
+var new_words_not_checked = [
+
+
 'align'
  'alleviate'
  'altitude'

@@ -2,6 +2,7 @@ var main = function (avatar_folder_name) {
     // get the path from firebase
     Persist.get([avatar_folder_name], function (x) {
         var data = x.val();
+        console.log(data);
         var sorted_list_of_values_without_test_users = get_sorted_list_of_values_without_test_users(data);
         var sorted_list_of_users = sorted_list_of_values_without_test_users.map(get_user_from_value);
         var choices_from_each_value = sorted_list_of_values_without_test_users.map(get_choices);
@@ -58,19 +59,30 @@ var get_grade = function (item) {
     var grade = item[1].grade;
     if (grade === 'no match') {
         if (!(item[0] in exceptional_grades)) {
-            throw 'no grade for ' + item[0] + '!';
+            throw 'no grade (no match) for ' + item[0] + '!';
         }
         return exceptional_grades[item[0]];
+    } else if (typeof grade !== 'number') {
+        throw 'no grade (maybe not there at all, much worse) for ' + item[0] + '!';
     } else {
         return grade;
     }
 }
 
-var exceptional_test_users = ['joe johnson', 'john doe 3', 'john johnson']
+var exceptional_test_users = ['joe johnson', 'john johnson', 'john dixon', 'john dumont'];
+
+var broken_duplicate_users = ['lopen'];
 
 var is_not_test_user = function (user) {
     // test is not in the user's name
-    return user.indexOf('test') === -1 && exceptional_test_users.indexOf(user) === -1;
+    return !is_test_user(user);
+}
+
+// Lump the broken duplicate users with the test users.
+var is_test_user = function (user) {
+    return starts_with(user, 'test') || starts_with(user, 'john doe') ||
+    exceptional_test_users.indexOf(user) !== -1 ||
+    broken_duplicate_users.indexOf(user) !== -1;
 }
 
 var write_utility_result = function (users, choices, rankings, name) {

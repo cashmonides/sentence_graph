@@ -108,17 +108,67 @@ _____DO NOW_____
 - SUPER IMPORTANT
     - switch firebase
 
+- NEW QUESTION TYPES
+    - an example sentence with a query word
+        - prompt: this word has been flagged by some librarians as properly spelled but others have flagged this as misspelled
+        - hint -> highlights the word
+        - (normal hint progression to get the proper spelling)
+        - when spelled properly, a set of potential definitions comes up
+        - again: "some librarians have flagged this as...others as..."
+        - user chooses the proper definition
+    - type in your definition
+        - hints:
+            - "four" "foot" 
+            - what part of speech it is
+            - used in a sentence
+        - might have to run it through a profanity detector
+        - check for inclusion of key words
+            - if it contains the key words it passes, with minimal point gain
+        - once it passes a basic check, it's compared side by side with the dictionary definition
+            - words that occur in both definitions are green
+            - maybe 
+        - their definition is stored in firebase
+        - later they are presented with the same question
+            - this time, their current definition is compared side-by-side with their last definition
+        - at some point the master user checks all definitions and tags them as good or bad 
+            - if they are tagged as bad, that user has to keep answering that question
+
+- ONLINE CHORES
+    - create user accounts with avatars
+
+- OFFLINE CHORES
+    - add words
+    - color avatars
+ 
+- WITH DAN
+    - conceptualize a captcha functionality
+    
 - small things
+    - fy/fic/fiction slideshow
+        stupefy & stultify
+        magnify
+        petrify
+        classify
+        specify
+        mortify (draco est mortuus)
+        
+    - add skip functionality to spelling and spelling match mode
+    - persist skips
+    - Mr. Darriea letter
+    - produce a list of all avatar combos
+    - write a unit test that checks if avatars exist
+    - create a field in initialize user with avatar
     - letter to Ms. C and Mr. Dascal
     - make slideshow presentation for Ms. C.
-    - run Dan's algorithm on lls avatars
-    - change display of spelling bee
+    - start pseudocoding input definition mode
+    - finalize avatars
+    - add etymology to spelling bee mode and test thoroughly
+    - make_game button should clear the score display
     - remove duplicates from spelling_match_mode.js
     - connect tie-detection algorithm to the ranking system
     - test an avatar display on admin
-    - add etymology to spelling bee mode and test thoroughly
     - get silhouettes for missing animals
-    - make a "turn on avatar generation button"
+    - persist win/place/show for spelling bee match games
     - make a lock button (lock spelling bee, lock module, lock avatar generation, etc)
     - write code to build book of roots
     - refactor temporary_incorrect_streak
@@ -126,7 +176,7 @@ _____DO NOW_____
     - increase submodule threshold slightly
     - freeze out behavior of countdown bar temporarily
     - fix countdown bar with Dan
-    - freeze out hint penalties for now
+    - start to build in hint penalties at higher levels (but leave disabled)
     - check if metrics are fully disabled for spelling bee
     - pull out the beecatcher into an overall function if possible
     - solve mystery of the visible spans
@@ -138,7 +188,9 @@ _____DO NOW_____
     - move development_status to module
     - divide roots and words into separate files
 - medium things
+    - add misspelled word in the library functionality
     - persist in user profile # of win/place/shows in spelling match
+    - autogenerate html elements with a colored border and animal sillhouette inside
     - hint penalty
     - add synonym functionality
         - short term: give each root & word a synonym field

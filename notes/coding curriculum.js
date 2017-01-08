@@ -1,3 +1,13 @@
+
+
+var the_language_of_law = [
+    "CONVERT INSTAGRAM TERMS OF USE TO PLAIN ENGLISH",
+    "build a spectrum from simplest english to the actual text"
+]
+
+
+
+
 var terms_and_concepts = {
     'semantic versioning'
 }
