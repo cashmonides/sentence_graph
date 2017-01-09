@@ -772,7 +772,6 @@ Quiz.prototype.next_mode = function (error) {
         // console.log("DEBUG 11-18-16 this.sick_modes = ", this.sick_modes);
         
         debug.log("checkpoint 1");
-        console.log("BIRDBUG checkpoint 1");
         
         for (var i = 0; i < this.sick_modes.length; i++) {
             this.display_sick_mode_in_header();
@@ -806,7 +805,6 @@ Quiz.prototype.next_mode = function (error) {
     }
     var game;
     debug.log("checkpoint 2.1");
-    console.log("BIRDBUG checkpoint 2.1");
         
     if (this.user.is_mf()) {
         var modes_map = {
@@ -818,11 +816,7 @@ Quiz.prototype.next_mode = function (error) {
         game = new current_mode(Path.from_url_params(this.id));
     } else {
         debug.log("checkpoint 2.4 mode = ", mode);
-        console.log("BIRDBUG checkpoint 2.4 mode = ", mode);
         
-        //////////BIRDBUG PROBLEM HERE
-        console.log("BIRDBUG game_mode_map = ", game_mode_map);
-        console.log("BIRDBUG game_mode_map stringified = ", JSON.stringify(game_mode_map));
         
         
         
@@ -839,14 +833,12 @@ Quiz.prototype.next_mode = function (error) {
         back.log("checkpoint game set at: ", game);
     }
     debug.log("checkpoint 3 game = ", game);
-    console.log("checkpoint 3 game = ", game);
     
     // this.game should be an object e.g.
     // MorphologyModeGame {data: ....etc}
     
     this.game = game;
     debug.log("checkpoint 4 this.game = ", this.game);
-    console.log("checkpoint 4 this.game = ", this.game);
     
     //todo understand the following
     
@@ -904,7 +896,7 @@ var find_non_matching_words = function (query_list, master_list) {
         }
     }
     
-    console.log("NON_MATCHING_LIST = ", non_matching_list);
+    back.log("NON_MATCHING_LIST = ", non_matching_list);
     return non_matching_list;
 }
 
@@ -955,7 +947,7 @@ Quiz.prototype.next_question = function (error) {
     
     
     
-    console.log("this.module.id = ", this.module.id);
+    back.log("this.module.id = ", this.module.id);
     // @beehack
     if (this.module.id === 0.5 || this.module.id === 0.25) {
         
@@ -1306,7 +1298,7 @@ Quiz.prototype.submodule_complete_without_post = function () {
     // we need mod and counter,
     
     ++global_beehack_counter;
-    console.log("BEEHACK global_beehack_counter = ", global_beehack_counter);
+    // console.log("BEEHACK global_beehack_counter = ", global_beehack_counter);
     
     
     // above works
@@ -1452,23 +1444,23 @@ Quiz.prototype.submodule_complete = function () {
     }
     
     if (this.user.uid !== null) {
-        console.log("[quiz.submodule_complete] entering post #2");
-        console.log("[quiz.submodule_complete] accuracy dictionary raw  = ", this.accuracy_dictionary);
-        console.log("[quiz.submodule_complete] accuracy dictionary converted = ", this.convert_accuracy_dict2());
-        console.log("[quiz.submodule_complete] this.time_data = ", this.time_data);
+        back.log("[quiz.submodule_complete] entering post #2");
+        back.log("[quiz.submodule_complete] accuracy dictionary raw  = ", this.accuracy_dictionary);
+        back.log("[quiz.submodule_complete] accuracy dictionary converted = ", this.convert_accuracy_dict2());
+        back.log("[quiz.submodule_complete] this.time_data = ", this.time_data);
         
         post({data: this.time_data_id, type: "update_time_data"});
         
         
-        console.log("[quiz.submodule_complete] just finished update_time_data");
+        back.log("[quiz.submodule_complete] just finished update_time_data");
         
-        console.log("[quiz.submodule_complete] about to enter update_accuracy_new");
+        back.log("[quiz.submodule_complete] about to enter update_accuracy_new");
         
         post({data: this.time_data_id, accuracy_dictionary: this.convert_accuracy_dict2(),
         type: "update_accuracy_new"});
         
-        console.log("[quiz.submodule_complete] just finished update_accuracy_new");
-        console.log("[quiz.submodule_complete] exiting post #2");
+        back.log("[quiz.submodule_complete] just finished update_accuracy_new");
+        back.log("[quiz.submodule_complete] exiting post #2");
     } else {
         // The user was anonymous for the first post, so if this second post continued,
         // it would also fail.
@@ -1480,11 +1472,11 @@ Quiz.prototype.submodule_complete = function () {
     //improving returns improving module
     var mod = this.user.get_module_being_played();
     
-    console.log("[quiz.submodule_complete] mod being played = ", mod);
+    back.log("[quiz.submodule_complete] mod being played = ", mod);
     
     var gotten_module = this.user.get_module(mod);
     
-    console.log("[quiz.submodule_complete] gotten_module = ", gotten_module);
+    back.log("[quiz.submodule_complete] gotten_module = ", gotten_module);
     
     var submodule_id = gotten_module.progress;
     
@@ -1515,12 +1507,12 @@ Quiz.prototype.submodule_complete = function () {
     // console.log("DEBUGGING entering problem lightbox area 11-19");
     
     
-    console.log("[quiz.submodule_complete] about to make callback - should be null until submodule is complete");
+    back.log("[quiz.submodule_complete] about to make callback - should be null until submodule is complete");
     //callback is null when submodule is not yet complete
     var callback = this.user.submodule_complete(this.module.id);
-    console.log("[quiz.submodule_complete] this.module.id = ", this.module.id);
-    console.log("[quiz.submodule_complete] is submodule complete? = ", callback);
-    console.log("[quiz.submodule_complete] callback = ", callback);
+    back.log("[quiz.submodule_complete] this.module.id = ", this.module.id);
+    back.log("[quiz.submodule_complete] is submodule complete? = ", callback);
+    back.log("[quiz.submodule_complete] callback = ", callback);
     
     var new_callback = debug_via_log(callback, 'callback');
     

@@ -240,7 +240,7 @@ var sort_and_display_match_results_old = function (data, n) {
 
 
 
-// this version tries to deal with ties
+// this version didn't quite succeed with ties
 var sort_and_display_match_results = function (data, n) {
     var element = el("spelling_match_score_results" + n);
     
@@ -276,6 +276,50 @@ var sort_and_display_match_results = function (data, n) {
         }
     }
 }
+
+
+
+// the newest version attempts to display ties
+var sort_and_display_match_results_newest = function (data, n) {
+    var element = el("spelling_match_score_results" + n);
+    
+    // turn it into a sorted list (with higher values first)
+    // true here signifies reversal
+    var sorted_list = sort_map_by_values(data, true);
+    console.log("sorted_data = ", sorted_list);
+    console.log("sorted_data stringified = ", JSON.stringify(sorted_list));
+    
+
+
+    // we create a list of lists with each sublist grouping together those who have a tied score
+    // three arguments:
+    // the list we process
+    // the comparison function (compare list or compare tuple or whatever)
+    // what index we compare (e.g. we want index 1 in ["John Doe", 4])
+    var list_with_ties = tie_detector(sorted_list, compare_nth_item_of_list, 1);
+    console.log("LIST_WITH_TIES = ", list_with_ties);
+    
+    
+    
+    for (var i = 0; i < list_with_ties.length; i++) {
+        
+        // var ranking = i + 1;
+        var ranking = generate_ranking_from_int(i+1);
+        var sub_list = list_with_ties[i];
+        console.log("sub_list = ", sub_list);
+        // another for loop
+        for (var j = 0; j < sub_list.length; j++) {
+            console.log("sub_list[j] = ", sub_list[j]);
+            var score_display = process_score_for_display(sub_list[j]);
+            console.log("SCORE_DISPLAY = ", score_display);
+            console.log("ranking = ", ranking);
+            var output = ranking + ": " + score_display;
+            console.log("OUTPUT = ", output);
+            element.innerHTML += output;
+        }
+    }
+}
+
 
 
 

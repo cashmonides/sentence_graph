@@ -420,13 +420,11 @@ SpellingModeGame.prototype.initialize_bee_level = function () {
 
     var counter_from_firebase = this.quiz.get_initial_spelling_bee_counter();
     
-    console.log('counter from firebase =', counter_from_firebase);
-    
-    
-    console.log("BEEHACK666 about to compare session to firebase");
-    console.log("BEEHACK666 session_bee_counter = ", session_bee_counter);
-    console.log("BEEHACK666 counter_from_firebase = ", counter_from_firebase);
-    console.log("BEEHACK666 equality comparison = ", session_bee_counter > counter_from_firebase);
+    // console.log('counter from firebase =', counter_from_firebase);
+    // console.log("BEEHACK666 about to compare session to firebase");
+    // console.log("BEEHACK666 session_bee_counter = ", session_bee_counter);
+    // console.log("BEEHACK666 counter_from_firebase = ", counter_from_firebase);
+    // console.log("BEEHACK666 equality comparison = ", session_bee_counter > counter_from_firebase);
     
     
     
@@ -434,12 +432,12 @@ SpellingModeGame.prototype.initialize_bee_level = function () {
     
     if (session_bee_counter > counter_from_firebase) {
         counter_to_set = session_bee_counter;
-        console.log("BEEHACK666 greater than,  level initialized at = ", session_bee_counter);
+        // console.log("BEEHACK666 greater than,  level initialized at = ", session_bee_counter);
         
     } else {
         session_bee_counter = counter_from_firebase;
         counter_to_set = counter_from_firebase;
-        console.log("BEEHACK666 less than, level initialized at = ", counter_from_firebase);
+        // console.log("BEEHACK666 less than, level initialized at = ", counter_from_firebase);
         
     }
     
@@ -449,15 +447,15 @@ SpellingModeGame.prototype.initialize_bee_level = function () {
     
     
     if (in_spelling_bee_training_mode) {
-        console.log("BEEHACK 666 training mode, level initialized at: ", spelling_bee_training_counter);
+        // console.log("BEEHACK 666 training mode, level initialized at: ", spelling_bee_training_counter);
         counter_to_set = spelling_bee_training_counter;
     }
     
     
-    console.log("BEEHACK666 counter_from_firebase = ", counter_from_firebase);
-    console.log("BEEHACK666 session_bee_counter = ", session_bee_counter);
-    console.log("BEEHACK666 spelling_bee_training_counter = ", spelling_bee_training_counter);
-    console.log("BEEHACK666 setting counter as  = ", counter_to_set);
+    // console.log("BEEHACK666 counter_from_firebase = ", counter_from_firebase);
+    // console.log("BEEHACK666 session_bee_counter = ", session_bee_counter);
+    // console.log("BEEHACK666 spelling_bee_training_counter = ", spelling_bee_training_counter);
+    // console.log("BEEHACK666 setting counter as  = ", counter_to_set);
     
     
     this.set_level_by_counter(counter_to_set);
@@ -493,10 +491,10 @@ SpellingModeGame.prototype.get_mode_name = function() {
 
 SpellingModeGame.prototype.next_question = function(){
     
-    console.log("BEEHACK999 entering next_question with this.level = ", this.level);
+    // console.log("BEEHACK999 entering next_question with this.level = ", this.level);
     // console.log("BEEHACK123 this.level = ", this.level);
     
-    console.log("BEEHACK123 global_beehack_counter = ", global_beehack_counter);
+    //  console.log("BEEHACK123 global_beehack_counter = ", global_beehack_counter);
     
     // old, for testing
     // var level_to_persist = 123456;

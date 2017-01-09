@@ -1,4 +1,8 @@
 Agenda (updated jan 1, 2017)
+- MISSION CRITICAL
+    - scrub console logs for correct answers displayed
+
+
 
 
 IN PROGRESS
@@ -141,9 +145,30 @@ _____DO NOW_____
     - color avatars
  
 - WITH DAN
+    - test most recent update with tie detector
+    - develop a match_score between two strings
+        - if the correct definition is "a vehicle with two wheels"
+        - and the user inputs "something with two wheels"
+        - the user should get a match score of 3
+        - or alternately:
+            - two and wheels both have spans around them
+            - if they match those they get two points
+        - maybe like this:
+            - they're given both versions side by side
+            - they have to keep revising their version until it reaches a threshold
+            - perhaps a somewhat mysterious threshold
+            - big points for the two embedded spans
+            - extr
     - conceptualize a captcha functionality
+
+
     
 - small things
+    - connect tie-detection algorithm to the ranking system
+    - test single root mode in spelling bee and spelling match
+    - fix input definition mode
+    - create a field in initialize user with avatar
+    - add etymology to spelling bee mode and test thoroughly
     - fy/fic/fiction slideshow
         stupefy & stultify
         magnify
@@ -157,15 +182,14 @@ _____DO NOW_____
     - Mr. Darriea letter
     - produce a list of all avatar combos
     - write a unit test that checks if avatars exist
-    - create a field in initialize user with avatar
+    
     - letter to Ms. C and Mr. Dascal
     - make slideshow presentation for Ms. C.
-    - start pseudocoding input definition mode
+    
     - finalize avatars
-    - add etymology to spelling bee mode and test thoroughly
+    
     - make_game button should clear the score display
     - remove duplicates from spelling_match_mode.js
-    - connect tie-detection algorithm to the ranking system
     - test an avatar display on admin
     - get silhouettes for missing animals
     - persist win/place/show for spelling bee match games
@@ -321,6 +345,15 @@ ____BEEBUGS_____
     - at some point go through control flow and add tolowercase where appropriate
 
 
+______ADD TO NOTES___________
+the saga of adding a game mode
+create a STRING name for the mode in the mode itself
+go to module.js
+add STRING to game_mode_list
+link STRING to INT in game_mode_map
+add new scr file to INDEX of quiz.js
+in quiz.js add map from INT to STRING to Quiz.get_modema
+
 
 _______BUGS_________
 - in inflect_latin dashes vs. !dashes does not seem to be working 
@@ -332,13 +365,58 @@ _______BUGS_________
     - the switch to implicit latin or the mixture of implicit and explicit
     - the message is: initiated TypeError: Cannot read property 'j' of undefined
 
-
-
 ______DATA SCRAPING______
 - theoi.com
 - sheri amsel exploring nature
 - http://sentence.yourdictionary.com/
 - etymonline
+
+
+_______CALENDAR__________
+JAN-FEB
+persist spelling bee stats better
+build spelling bee with nicky stats
+parallel-shadow nicky
+create slideshow carrot/stick structure for tag and lls (spelling bee winners can win slideshow/movies for their class)
+start creating grammar game for pre-mailer
+start improving morphology game (stem vowel in grey, sandhi, change ____ to _____ functionality, irregular verbs, chapter by chapter progression, cumulative vs chapter specific mode)
+hire ______ for jquery for drop down
+hire elizabeth to code syntax for weekend syntax review (possibly redo MF talmud as well and flashcards)
+day-by-day playbook
+meet with katherine to discuss innovation fatigue
+redo mf talmud, caesar talmud, cicero talmud, sallust talmud, vergil talmud, horace talmud
+
+MARCH
+build hoplite challenge with nicky stats
+parallel-shadow nicky
+
+DEADLINE PRE-VACATION
+- grammar game mailer final version for teacher review
+- hoplite challenge beta for teacher review
+- weekend syntax review beta for teacher review
+
+MAY-AUGUST
+implement and monitor hoplite challenge
+build a computer representation of all the tasks in the institute (run in office, create demand)
+dan passion project hexagon game
+
+
+SEP-NOV      d3 BOOTCAMP
+split cost with mom
+go in with extremely specific projects
+
+
+DEC-MAY
+redo website with d3 from scratch
+build infinite library hexagon game
+identify pain points
+study react and other paradigms 
+evaluate wisdom of attending full stack
+save money
+
+
+
+
 
 
 HIGH PRIORITY
