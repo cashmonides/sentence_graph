@@ -366,6 +366,13 @@ Quiz.prototype.end_drone_game2 = function (pin, user_name) {
     // console.log("666 pin as argument = ", pin);
     // console.log("666 user_name as argument = ", user_name);
  
+    // firebase can't receive strings with "."
+    user_name = user_name.split(".").join("-");
+    console.log("PROCESSED user_name 1 = ", user_name);
+    
+    
+    
+ 
     var path = ["test", pin, "scores", user_name];
     
     //however we get score (this.match_score or something like that) 
