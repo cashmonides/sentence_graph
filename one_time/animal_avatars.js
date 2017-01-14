@@ -1,9 +1,9 @@
-var main = function (avatar_folder_name) {
+var main = function (school_name) {
     // get the path from firebase
-    Persist.get([avatar_folder_name], function (x) {
+    Persist.get(['avatars_all'], function (x) {
         var data = x.val();
         console.log(data);
-        var sorted_list_of_values_without_test_users = get_sorted_list_of_values_without_test_users(data);
+        var sorted_list_of_values_without_test_users = get_sorted_list_of_values_without_test_users(data, school_name);
         var sorted_list_of_users = sorted_list_of_values_without_test_users.map(get_user_from_value);
         var choices_from_each_value = sorted_list_of_values_without_test_users.map(get_choices);
         var utilty_result_1 = maximise_utility_1(choices_from_each_value);
@@ -33,9 +33,9 @@ var get_choices = function (value) {
     return a;
 }
 
-var get_sorted_list_of_values_without_test_users = function (data) {
+var get_sorted_list_of_values_without_test_users = function (data, school_name) {
     return key_value_pairs(data).filter(function (pair) {
-        return is_not_test_user(pair[0]);
+        return is_not_test_user(pair[0]) && pair[1].school === school_name; // test for school here too
     }).sort(compare_values);
 }
 
@@ -52,16 +52,19 @@ var compare_values = function (item_1, item_2) {
 
 var exceptional_grades = {
     'auden sorensen': 4,
-    'georgia hoseman': 4
+    'georgia hoseman': 4,
+    'Jasharat Bhuiyan': 3,
+    'Riley Ruiz': 5,
+    'jacob gutierrez': 2
 }
 
 var get_grade = function (item) {
+    if (item[0] in exceptional_grades) {
+        return exceptional_grades[item[0]];
+    }
     var grade = item[1].grade;
     if (grade === 'no match') {
-        if (!(item[0] in exceptional_grades)) {
-            throw 'no grade (no match) for ' + item[0] + '!';
-        }
-        return exceptional_grades[item[0]];
+        throw 'no grade (no match) for ' + item[0] + '!';
     } else if (typeof grade !== 'number') {
         throw 'no grade (maybe not there at all, much worse) for ' + item[0] + '!';
     } else {
@@ -71,7 +74,11 @@ var get_grade = function (item) {
 
 var exceptional_test_users = ['joe johnson', 'john johnson', 'john dixon', 'john dumont'];
 
-var broken_duplicate_users = ['lopen'];
+var broken_duplicate_users = ['lopen', 'teymur', 'Juan-Diego Castro', 'Torosa', 'Marilyn Shi ', 'janiyah c'];
+
+var kid_created_fake_users = ['bsjk'];
+
+var users_that_are_scientific_establishment_hoaxes = []; // global warming is bsjk
 
 var is_not_test_user = function (user) {
     // test is not in the user's name
@@ -82,7 +89,9 @@ var is_not_test_user = function (user) {
 var is_test_user = function (user) {
     return starts_with(user, 'test') || starts_with(user, 'john doe') ||
     exceptional_test_users.indexOf(user) !== -1 ||
-    broken_duplicate_users.indexOf(user) !== -1;
+    broken_duplicate_users.indexOf(user) !== -1 ||
+    kid_created_fake_users.indexOf(user) !== -1 ||
+    users_that_are_scientific_establishment_hoaxes.indexOf(user) !== -1;
 }
 
 var write_utility_result = function (users, choices, rankings, name) {

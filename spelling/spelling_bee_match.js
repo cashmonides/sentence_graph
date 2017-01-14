@@ -28,8 +28,8 @@ var make_spelling_match = function (n) {
     
     
     
-    var level_as_num = Number(level);
-    var time_limit_as_num = Number(time_limit);
+    var level_as_num = convert_input_to_num(level);
+    var time_limit_as_num = convert_input_to_num(time_limit);
     
     var stopping_time = create_stopping_time(time_limit_as_num);
     
@@ -230,8 +230,9 @@ var sort_and_display_match_results_old = function (data, n) {
         // var ranking = i + 1;
         var ranking = generate_ranking_from_int(i+1);
         console.log("SCORE_DISPLAY = ", score_display);
-        console.log("ranking = ", ranking);
-        var output = ranking + ": " + score_display;
+        // removing ranking for now
+        // console.log("ranking = ", ranking);
+        // var output = ranking + ": " + score_display;
         console.log("OUTPUT = ", output);
         element.innerHTML += output;
     }
@@ -241,7 +242,8 @@ var sort_and_display_match_results_old = function (data, n) {
 
 
 // this version didn't quite succeed with ties
-var sort_and_display_match_results = function (data, n) {
+var sort_and_display_match_results_medium_old = function (data, n) {
+    console.log("SHOULD NOT BE CALLED");
     var element = el("spelling_match_score_results" + n);
     
     // turn it into a sorted list (with higher values first)
@@ -269,8 +271,9 @@ var sort_and_display_match_results = function (data, n) {
             console.log("sub_list[j] = ", sub_list[j]);
             var score_display = process_score_for_display(sub_list[j]);
             console.log("SCORE_DISPLAY = ", score_display);
-            console.log("ranking = ", ranking);
-            var output = ranking + ": " + score_display;
+            // removing ranking for now
+            // console.log("ranking = ", ranking);
+            // var output = ranking + ": " + score_display;
             console.log("OUTPUT = ", output);
             element.innerHTML += output;
         }
@@ -280,7 +283,7 @@ var sort_and_display_match_results = function (data, n) {
 
 
 // the newest version attempts to display ties
-var sort_and_display_match_results_newest = function (data, n) {
+var sort_and_display_match_results = function (data, n) {
     var element = el("spelling_match_score_results" + n);
     
     // turn it into a sorted list (with higher values first)
@@ -312,6 +315,8 @@ var sort_and_display_match_results_newest = function (data, n) {
             console.log("sub_list[j] = ", sub_list[j]);
             var score_display = process_score_for_display(sub_list[j]);
             console.log("SCORE_DISPLAY = ", score_display);
+            // perhaps turning off ranking until fixed
+            console.log("skipping ranking for now");
             console.log("ranking = ", ranking);
             var output = ranking + ": " + score_display;
             console.log("OUTPUT = ", output);
@@ -438,8 +443,20 @@ var autogenerate_spelling_match_pin = function () {
 }
 
 var input_is_valid = function (string) {
-    var number = Number(string);
-    return Number.isInteger(number) && 1 <= number && number <= 1000;
+    if (starts_with(string, 'test ')) {
+        return true;
+    } else {
+        var number = Number(string);
+        return Number.isInteger(number) && 1 <= number && number <= 1000;
+    }
+}
+
+var convert_input_to_num = function (string) {
+    if (starts_with(string, 'test ')) {
+        return Number(cut_off(string, 'test '));
+    } else {
+        return Number(string);
+    }
 }
 
 var create_stopping_time = function (offset) {
