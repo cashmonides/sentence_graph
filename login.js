@@ -37,6 +37,8 @@ var mode_map = {
     "grade_row": [[2, 5], "table-row"],
     "class_row": [[2, 5], "table-row"],
     "access_code_row": [[2], "table-row"],
+    "avatar_row666": [[2], "table-row"],
+    "year_of_initialization_row": [[2], "table-row"],
 
     "login_button": [[1], "inline"],
     "create_account_button": [[2], "inline"],
@@ -75,6 +77,8 @@ function create_account() {
     var s = el("school").value;
     var g = el("grade").value;
     var c = el("class_number").value;
+    var a = el("avatar666").value;
+    var y_o_i = el("year_of_initialization").value;
     var ac = el("access_code").value;
     
     // we use a password to prevent users from making their own accounts without Akiva's permission
@@ -93,7 +97,7 @@ function create_account() {
             alert(error);
         } else {
             console.log("Successfully created user account with uid:", userData);
-            User.set_initial_data(userData.uid, n, s, g, c, e, login);
+            User.set_initial_data(userData.uid, n, s, g, c, e, a, y_o_i, login);
         }
     };
     Persist.create_user(e, p, callback);
@@ -217,7 +221,7 @@ var global_avatar_permission = false;
 
 function unlock_avatar_selection () {
     var input = prompt('Enter the avatar unlock code given by your teacher.');
-    if (input === "orange") {
+    if (input === "purple666") {
         global_avatar_permission = true;
     } else {
         alert("Invalid unlock code. Try again.");

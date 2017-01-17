@@ -911,6 +911,7 @@ var find_non_matching_words = function (query_list, master_list) {
 Quiz.prototype.next_question = function (error) {
     
     
+    Persist.move_firebase_record("obsolete_mf", ["mf_translation_logs", "obsolete_mf2"]);
     
     
     
@@ -2662,7 +2663,7 @@ Quiz.prototype.initialize_spelling_hint_master = function () {
     
     // manage the behavior of hint penalties
     
-    var level_at_which_hints_inflict_a_penalty = 10;
+    var level_at_which_hints_inflict_a_penalty = 1000;
     
     if (session_bee_counter > level_at_which_hints_inflict_a_penalty) {
         // reduce the progress bar slightly
