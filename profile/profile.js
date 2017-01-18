@@ -73,8 +73,15 @@ ProfilePage.start = function(){
 
 ProfilePage.display_profile = function() {
     var player_name = this.user.data.profile.name;
+    
     var e1 = el("name_box");
-    e1.innerHTML = "Welcome " + player_name;
+    if (this.user.data.profile.avatar) {
+        var avatar_name = this.user.data.profile.avatar;
+        e1.innerHTML = "Welcome " + player_name + " (" + avatar_name + ")";
+    } else {
+        e1.innerHTML = "Welcome " + player_name;
+    }
+    
     
     // This is currently disabled for mf users because the whole idea
     // of a level doesn't make complete sense.

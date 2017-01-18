@@ -2663,7 +2663,7 @@ Quiz.prototype.initialize_spelling_hint_master = function () {
     
     // manage the behavior of hint penalties
     
-    var level_at_which_hints_inflict_a_penalty = 1000;
+    var level_at_which_hints_inflict_a_penalty = 10;
     
     if (session_bee_counter > level_at_which_hints_inflict_a_penalty) {
         // reduce the progress bar slightly
