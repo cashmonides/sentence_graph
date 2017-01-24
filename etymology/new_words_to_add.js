@@ -1,3 +1,194 @@
+new words below
+
+var fic_fy_words_added_jan23= [
+amplification
+amplified
+amplify
+artifact****
+artificial
+beautification
+beautify
+benefactor****
+beneficial*****
+beneficially
+beneficiary
+calcification
+certification
+certify
+clarify****
+classification
+classify
+codification
+codify
+cofactor
+commodify
+complexify
+counterfactor
+counterfactual
+dehumidify
+deification
+deify
+demystify
+densify
+dignify
+disqualify
+dissatisfy
+diversify
+exemplify
+exemplify
+facile
+facilitate
+facilitation
+facilitator
+facility
+facsimile
+factoid
+factor
+factorial
+factorization
+factory
+factotum
+factual
+factual
+factuality
+faculty
+falsify******
+fiction****
+fictional
+fortification
+fortify********
+gentrification*****
+gentrify
+gratification*****
+gratify*****
+horrify
+humidification
+humidify
+humidify
+identification  (ident = same)
+identify*****
+insignificant
+intensify
+justification
+justify
+liquify
+lithification
+lithify 
+magnification
+magnificence
+magnify*****
+malefactor*****
+maleficent
+manufacture****
+manufacturer
+misclassification
+misclassify
+misidentification
+modificiation
+modify
+mollification
+mollify****
+mortify
+mummification
+mummify*****
+munificence
+mystification
+mystification
+mystify
+nonfiction
+notification
+notify
+nullification
+nullify*****
+objectify
+olfaction
+opacify
+ossification
+ossify****
+oversimplification
+oversimplify
+pacific
+pacification
+pacifism
+pacifist
+pacify*****
+personification
+personify
+petrification****
+petrify****
+prequalify
+purification****
+purify****
+putrefaction
+qualification
+qualify
+qualify
+quantification
+quantify****
+ramify*****
+rarify
+ratification
+ratify
+recertify
+reclassification
+reclassify
+revivification
+revivify*****
+rubefacient
+sacrifice
+sacrificial
+sanctification
+sanctify
+satisfaction*****
+satisfactory
+satisfy*****
+scientific
+significant
+signification
+signify
+simplification***
+simplify****
+solemnify
+solidify****
+soporific****
+specific*****
+specification****
+specificity
+specify****
+stellification*****
+stellify*****
+stratification******
+stratify*********
+stultificaton
+stultify
+stupefaction
+stupefy
+subclassification
+subclassify
+syllabification
+syllabify
+terrific*****
+terrifying****
+terrify*****
+testify***
+tumefacient 
+unification
+unscientific
+verification****
+verify****
+versification
+versify
+vilification
+vilify
+vitrify
+vivify
+zombify
+ ]
+
+
+_---------------------
+
+
 var roots_involved_in_fy = [
 ampl full, abundant
 art created by the human skill
@@ -74,89 +265,18 @@ vil     cheap, worthless
 vitr   glass
 viv     alive
 ]
-ampl full, abundant
-art created by the human skill
-ben good
-calc SKIP
-cert sure, secure confident
-clar clear
-class category
-cod written down in a book (literally tree trunk, 
-commod comfortable, useful
-con/com together
-de  away, opposite
-de2 = god
-dens thick, closely packed
-dign worthy
-dis away, opposite
-divers  SKIP
-exempl  example
-fals untrue
-fort strong, safe, secure
-gentr wealthy, noble
-grat pleasing
-horr frightening
-humid moist, wet
-ident same
-just  right, legal
-liqu    liquid
-lith  stone
-magn large, great
-mal evil
-mis  wrong
-mod   type, category
-moll  soft, gentle
-mort  dead
-mun    gift
-myst  secret, unknown, difficult to understand 
-non  not
-not  mark, register
-null    nothing, not
-opaq/opac   not able to be seen through
-oss  bone
-pac  peaceful
-person  mask, i.e. the identity one presents to the world
-petr stone
-ply/plic/plex bend
-pre ahead of time
-pur  clean
-qual  characteristic, not numerical
-quant   number, numerical
-ram  branch, subcategory
-rar   not thick, loosely woven
-rat  approve 
-re  again
-sacr   sacred
-sanct    sacred
-sat/satis   enough
-sign   meaning
-simpl   not complex, basic
-solemn   dignified
-solid    stable, compact
-sopor     sleep
-spec      subcategory
-stell   star
-strat   layer
-stult  dumb, senseless
-stup   dumb, senseless
-syllab   an element of a word "taken together", usually a consonant and a vowel
-terr2  scar
-test    witness
-un      not
-ver      true
-vers    a "turning" in a poem, i.e. a line of petry
-vil     cheap, worthless
-vitr   glass
-viv     alive
+
 
 
 var fic_fy_words_to_add = [
- amplification
+amplification
 amplify
+artifact
 artifiicial
 beautification
 beautify
 beautify
+benefactor
 beneficial
 beneficially
 beneficiary
@@ -167,8 +287,11 @@ clarify
 classification
 codification
 codify
+cofactor
 commodify
 complexify
+counterfactor
+counterfactual
 dehumidify
 deification
 deify
@@ -180,6 +303,22 @@ dissatisfy
 diversify
 exemplify
 exemplify
+facile
+facilitate
+facilitation
+facilitator
+facility
+facsimile
+factoid
+factor
+factorial
+factorization
+factory
+factotum
+factual
+factual
+factuality
+faculty
 falsify
 falsify
 fiction
@@ -206,7 +345,10 @@ lithify
 magnification
 magnificence
 magnify
+malefactor
 maleficent
+manufacture
+manufacturer
 misclassification
 misclassify
 misidentification
@@ -227,6 +369,7 @@ notify
 nullification
 nullify
 objectify
+olfaction
 opacify
 ossification
 ossify
@@ -246,6 +389,7 @@ prequalify
 purification
 purify
 purify
+putrefaction
 qualification
 qualify
 qualify
@@ -260,10 +404,13 @@ reclassification
 reclassify
 revivification
 revivify
+rubefacient
 sacrifice
 sacrificial
 sanctification
 sanctify
+satisfaction
+satisfactory
 satisfy
 scientific
 significant
@@ -284,6 +431,7 @@ stratification
 stratify
 stultificaton
 stultify
+stupefaction
 stupefy
 subclassification
 subclassify
@@ -292,6 +440,7 @@ syllabify
 terrific
 terrify
 testify
+tumefacient 
 unification
 unscientific
 verification

@@ -205,7 +205,7 @@ SpellingMatchModeGame.prototype.next_question = function() {
     //     'root_definition_to_root': 0.5};
     // // this.legal_question_types = {'word_definition_to_word': 0.5,
     //     'root_definition_to_root': 0.5};
-    this.legal_question_types = {'word_definition_to_word': 0.5, 'root_definition_to_root': 0.5};
+    this.legal_question_types = {'word_definition_to_word': 0.8, 'root_definition_to_root': 0.3};
     // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     this.chosen_question_type = weighted(this.legal_question_types);

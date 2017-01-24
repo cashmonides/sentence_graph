@@ -960,7 +960,7 @@ var etym_levels = {
         }
     },
     1000: {
-        roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'FY'],
+        roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'FIC/FAC/FY'],
         question_types: {
             'word_to_latin_root': .00001,
             'word_to_english_root': .0001,
@@ -973,7 +973,7 @@ var etym_levels = {
         }
     },
     2000: {
-        roots: ['FY'],
+        roots: ['FIC/FAC/FY'],
         question_types: {
             'word_to_latin_root': .00001,
             'word_to_english_root': .0001,

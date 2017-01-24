@@ -984,10 +984,21 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "ART",
-            "FAC/FACT"
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "artifact"
+    },
+    "artificial": {
+        "grade": 12,
+        "meaning": "not natural, <span class=\"embedded_root\">made</span> by the <span class=\"embedded_root\">skill</span> of a person, e.g. a stone axe or a coin",
+        "part of speech": "adjective",
+        "roots": [
+            "ART",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "artificial"
     },
     "artisan": {
         "grade": 12,
@@ -1309,10 +1320,11 @@ var words = {
     },
     "benefactor": {
         "grade": 12,
-        "meaning": "person who <span class=\"embedded_root\">act</span>s to help or do <span class=\"embedded_root\">good</span>like for another",
+        "meaning": "a person who <span class=\"embedded_root\">does</span> <span class=\"embedded_root\">good</span> things for another",
         "part of speech": "noun",
         "roots": [
-            "BENE"
+            "BENE",
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "benefactor"
@@ -1322,7 +1334,8 @@ var words = {
         "meaning": "producing or <span class=\"embedded_root\">mak</span>ing a <span class=\"embedded_root\">good</span> effect",
         "part of speech": "adjective",
         "roots": [
-            "BENE"
+            "BENE",
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "beneficial"
@@ -1737,7 +1750,7 @@ var words = {
         "part of speech": "verb",
         "roots": [
             "CERT",
-            "FY"
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "certify"
@@ -1888,7 +1901,8 @@ var words = {
         "meaning": "an explanation, i.e. an account that <span class=\"embedded_root\">make</span>s something more <span class=\"embedded_root\">clear</span>",
         "part of speech": "noun",
         "roots": [
-            "CLAR"
+            "CLAR",
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "clarification"
@@ -1899,7 +1913,7 @@ var words = {
         "part of speech": "verb",
         "roots": [
             "CLAR",
-            "FY"
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "clarify"
@@ -3782,10 +3796,21 @@ var words = {
         "meaning": "a place where things are <span class=\"embedded_root\">made</span>",
         "part of speech": "noun",
         "roots": [
-            "FAC/FACT"
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "factory"
+    },
+    "falsify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> something <span class=\"embedded_root\">untrue</span> or to show that something is <span class=\"embedded_root\">untrue</span>",
+        "part of speech": "verb",
+        "roots": [
+            "FALS",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "falsify"
     },
     "ferry": {
         "grade": 12,
@@ -3806,6 +3831,16 @@ var words = {
         ],
         "type": "none",
         "word": "fibroblast"
+    },
+    "fiction": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">made</span>-up story",
+        "part of speech": "noun",
+        "roots": [
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "fiction"
     },
     "fidelity": {
         "grade": 12,
@@ -3929,6 +3964,17 @@ var words = {
         ],
         "type": "none",
         "word": "forsaken"
+    },
+    "fortify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> something <span class=\"embedded_root\">strong</span>",
+        "part of speech": "verb",
+        "roots": [
+            "FORT",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "fortify"
     },
     "fraction": {
         "grade": 12,
@@ -4062,6 +4108,17 @@ var words = {
         "word": "genetic"
     },
     //todo done til here at last check in
+    "gentrification": {
+        "grade": 12,
+        "meaning": "the action of <span class=\"embedded_root\">making</span> a neighborhood more <span class=\"embedded_root\">wealthy</span>, with higher rent",
+        "part of speech": "verb",
+        "roots": [
+            "PETR",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "gentrification"
+    },
     
     "geography": {
         "grade": 12,
@@ -4232,11 +4289,11 @@ var words = {
     },
     "gratify": {
         "grade": 12,
-        "meaning": "to <span class=\"embedded_root\">please</span> someone",
+        "meaning": "to <span class=\"embedded_root\">do</span> something that <span class=\"embedded_root\">pleases</span> another",
         "part of speech": "verb",
         "roots": [
             "GRAT",
-            "FY"
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "gratify"
@@ -4786,6 +4843,17 @@ var words = {
         ],
         "type": "none",
         "word": "iconology"
+    },
+    "identify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> sure that something is the <span class=\"embedded_root\">same</span> as something else",
+        "part of speech": "verb",
+        "roots": [
+            "IDENT",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "identify"
     },
     "idiomatic": {
         "grade": 12,
@@ -5795,7 +5863,8 @@ var words = {
         "meaning": "to make larger",
         "part of speech": "verb",
         "roots": [
-            "MAGN"
+            "MAGN",
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "magnify"
@@ -5825,10 +5894,11 @@ var words = {
     },
     "malefactor": {
         "grade": 12,
-        "meaning": "a person who does wrong",
+        "meaning": "a person who <span class=\"embedded_root\">does</span> <span class=\"embedded_root\">bad</span> things",
         "part of speech": "noun",
         "roots": [
-            "FAC/FACT"
+            "MAL",
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "malefactor"
@@ -5892,6 +5962,17 @@ var words = {
         ],
         "type": "none",
         "word": "manual"
+    },
+    "manufacture": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> something by <span class=\"embedded_root\">hand</span>",
+        "part of speech": "verb",
+        "roots": [
+            "MAN",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "manufacture"
     },
     "manuscript": {
         "grade": 12,
@@ -6415,6 +6496,17 @@ var words = {
         "type": "none",
         "word": "mobility"
     },
+    "mollify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> something <span class=\"embedded_root\">soft</span>",
+        "part of speech": "verb",
+        "roots": [
+            "MOLL",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "mollify"
+    },
     "monarch": {
         "grade": 12,
         "meaning": "a king or queen (that is, someone who rules alone)",
@@ -6565,17 +6657,6 @@ var words = {
         "type": "none",
         "word": "multiple"
     },
-    "multiple sclerosis": {
-        "grade": 12,
-        "meaning": "disease which causes the tissue of the brain and spinal cord to harden",
-        "part of speech": "noun",
-        "roots": [
-            "MULTI",
-            "SCLER/SCHLERO"
-        ],
-        "type": "none",
-        "word": "multiple sclerosis"
-    },
     "multitasking": {
         "grade": 12,
         "meaning": "the performance of many things at once",
@@ -6585,6 +6666,16 @@ var words = {
         ],
         "type": "none",
         "word": "multitasking"
+    },
+    "mummify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> a person or animal into a mummy",
+        "part of speech": "verb",
+        "roots": [
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "mummify"
     },
     "mutant": {
         "grade": 12,
@@ -6964,6 +7055,17 @@ var words = {
         "type": "none",
         "word": "novice"
     },
+    "nullify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> something into <span class=\"embedded_root\">nothing</span>",
+        "part of speech": "verb",
+        "roots": [
+            "NULL",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "nullify"
+    },
     "numerology": {
         "grade": 12,
         "meaning": "the study of magical uses of numbers",
@@ -7209,6 +7311,17 @@ var words = {
         "type": "none",
         "word": "orthopedic"
     },
+    "ossify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> something into <span class=\"embedded_root\">bone</span>",
+        "part of speech": "verb",
+        "roots": [
+            "OSS",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "ossify"
+    },
     "osteoarthritis": {
         "grade": 12,
         "meaning": "an inflammation of the <span class=\"embedded_root\">joint</span>s that causes damage to the <span class=\"embedded_root\">bone</span>s",
@@ -7301,6 +7414,17 @@ var words = {
         ],
         "type": "none",
         "word": "pachyderm"
+    },
+    "pacify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> <span class=\"embedded_root\">peaceful</span>",
+        "part of speech": "verb",
+        "roots": [
+            "PAC",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "pacify"
     },
     "paleography": {
         "grade": 12,
@@ -7637,6 +7761,28 @@ var words = {
         ],
         "type": "none",
         "word": "persist"
+    },
+    "petrification": {
+        "grade": 12,
+        "meaning": "the action of <span class=\"embedded_root\">making</span> something into <span class=\"embedded_root\">stone</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PETR",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "petrification"
+    },
+    "petrify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> something into <span class=\"embedded_root\">stone</span>",
+        "part of speech": "verb",
+        "roots": [
+            "PETR",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "petrify"
     },
     "philanthropy": {
         "grade": 12,
@@ -8316,6 +8462,27 @@ var words = {
         "type": "none",
         "word": "pungent"
     },
+    "purification": {
+        "grade": 12,
+        "meaning": "the action of <span class=\"embedded_root\">making</span> something <span class=\"embedded_root\">clean</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PUR",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "purification"
+    },
+    "purify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> something <span class=\"embedded_root\">clean</span>",
+        "part of speech": "verb",
+        "roots": [
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "purify"
+    },
     "purgatory": {
         "grade": 12,
         "meaning": "according to Roman Catholics a place where souls must clean themselves of sin",
@@ -8397,6 +8564,17 @@ var words = {
         ],
         "type": "none",
         "word": "quadruped"
+    },
+    "quantify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> or change something into an <span class=\"embedded_root\">amount</span>",
+        "part of speech": "verb",
+        "roots": [
+            "QUANT",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "quantify"
     },
     "quart": {
         "grade": 12,
@@ -8502,34 +8680,25 @@ var words = {
     },
     "ramification": {
         "grade": 12,
-        "meaning": "the resulting consequence of a decision",
+        "meaning": "the action of <span class=\"embedded_root\">making</span> <span class=\"embedded_root\">branches</span>, i.e. the consequences of a decision",
         "part of speech": "noun",
         "roots": [
-            "RAM"
+            "RAM",
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "ramification"
     },
     "ramify": {
         "grade": 12,
-        "meaning": "to spread or branch out",
+        "meaning": "to spread or <span class=\"embedded_root\">make</span> <span class=\"embedded_root\">branches</span>",
         "part of speech": "verb",
         "roots": [
             "RAM",
-            "FY"
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "ramify"
-    },
-    "ramus": {
-        "grade": 12,
-        "meaning": "a branchlike part",
-        "part of speech": "noun",
-        "roots": [
-            "RAM"
-        ],
-        "type": "none",
-        "word": "ramus"
     },
     "react": {
         "grade": 12,
@@ -8829,6 +8998,18 @@ var words = {
         "type": "none",
         "word": "revival"
     },
+    "revivify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> someone come <span class=\"embedded_root\">back</span> to <span class=\"embedded_root\">life</span>",
+        "part of speech": "verb",
+        "roots": [
+            "RE",
+            "VIV/VIT",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "revivify"
+    },
     "rewind": {
         "grade": 12,
         "meaning": "to wind something <span class=\"embedded_root\">backward</span>",
@@ -8951,6 +9132,28 @@ var words = {
         ],
         "type": "none",
         "word": "sanitation"
+    },
+    "satisfaction": {
+        "grade": 12,
+        "meaning": "the action of <span class=\"embedded_root\">making</span> someone have <span class=\"embedded_root\">enough</span>",
+        "part of speech": "noun",
+        "roots": [
+            "SAT",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "satisfaction"
+    },
+    "satisfy": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> someone have <span class=\"embedded_root\">enough</span>",
+        "part of speech": "verb",
+        "roots": [
+            "SAT",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "satisfy"
     },
     "sclerometer": {
         "grade": 12,
@@ -9118,6 +9321,26 @@ var words = {
         "type": "none",
         "word": "sextuple"
     },
+    "simplification": {
+        "grade": 12,
+        "meaning": "the action of <span class=\"embedded_root\">making</span> more simple",
+        "part of speech": "noun",
+        "roots": [
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "simplification"
+    },
+    "simplify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> simple",
+        "part of speech": "verb",
+        "roots": [
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "simplify"
+    },
     "solar": {
         "grade": 12,
         "meaning": "involving the <span class=\"embedded_root\">sun</span>",
@@ -9137,6 +9360,16 @@ var words = {
         ],
         "type": "none",
         "word": "solarium"
+    },
+    "solidify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> more solid",
+        "part of speech": "verb",
+        "roots": [
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "solidify"
     },
     "somniloquy": {
         "grade": 12,
@@ -9188,6 +9421,50 @@ var words = {
         ],
         "type": "none",
         "word": "sophisticated"
+    },
+    "soporific": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">making</span> one <span class=\"embedded_root\">sleepy</span>",
+        "part of speech": "adjective",
+        "roots": [
+            "SOPOR",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "soporific"
+    },
+    "specific": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">made</span> into a <span class=\"embedded_root\">subcategory</span>",
+        "part of speech": "adjective",
+        "roots": [
+            "SPEC",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "specific"
+    },
+    "specification": {
+        "grade": 12,
+        "meaning": "the acton of making into a subcategory",
+        "part of speech": "noun",
+        "roots": [
+            "SPEC",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "specification"
+    },
+    "specify": {
+        "grade": 12,
+        "meaning": "to make into a subcategory",
+        "part of speech": "verb",
+        "roots": [
+            "SPEC",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "specify"
     },
     "spectator": {
         "grade": 12,
@@ -9248,6 +9525,50 @@ var words = {
         ],
         "type": "none",
         "word": "stellar"
+    },
+    "stellification": {
+        "grade": 12,
+        "meaning": "the action of <span class=\"embedded_root\">making</span> into a <span class=\"embedded_root\">star</span>",
+        "part of speech": "noun",
+        "roots": [
+            "STELL",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "stellification"
+    },
+    "stellify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> into a <span class=\"embedded_root\">star</span>",
+        "part of speech": "verb",
+        "roots": [
+            "STELL",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "stellify"
+    },
+    "stratification": {
+        "grade": 12,
+        "meaning": "the action of <span class=\"embedded_root\">making</span> into <span class=\"embedded_root\">layers</span>",
+        "part of speech": "noun",
+        "roots": [
+            "STRAT",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "stratification"
+    },
+    "stratify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> into <span class=\"embedded_root\">layers</span>",
+        "part of speech": "verb",
+        "roots": [
+            "STRAT",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "stratify"
     },
     "structure": {
         "grade": 12,
@@ -9575,6 +9896,39 @@ var words = {
         "type": "none",
         "word": "terrain"
     },
+    "terrific": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">making</span> one <span class=\"embedded_root\">frightened</span> (today used to describe something so good that it's scary)",
+        "part of speech": "adjective",
+        "roots": [
+            "TERR root 2",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "terrific"
+    },
+    "terrifying": {
+        "grade": 12,
+        "meaning": "having the properties of <span class=\"embedded_root\">making</span> one <span class=\"embedded_root\">frightened</span>",
+        "part of speech": "adjective",
+        "roots": [
+            "TERR root 2",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "terrifying"
+    },
+    "terrify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> <span class=\"embedded_root\">frightened</span>",
+        "part of speech": "verb",
+        "roots": [
+            "TERR root 2",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "terrify"
+    },
     "territory": {
         "grade": 12,
         "meaning": "an area of <span class=\"embedded_root\">land</span>",
@@ -9584,6 +9938,17 @@ var words = {
         ],
         "type": "none",
         "word": "territory"
+    },
+    "testify": {
+        "grade": 12,
+        "meaning": "to <span class=\"embedded_root\">make</span> a statement as a <span class=\"embedded_root\">witness</span> in a court of law",
+        "part of speech": "verb",
+        "roots": [
+            "TEST",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "testify"
     },
     "tetrapod": {
         "grade": 12,
@@ -9941,13 +10306,24 @@ var words = {
         "type": "none",
         "word": "verbalize"
     },
+    "verification": {
+        "grade": 12,
+        "meaning": "the action of <span class=\"embedded_root\">making</span> sure something is <span class=\"embedded_root\">true</span>",
+        "part of speech": "noun",
+        "roots": [
+            "VER",
+            "FIC/FAC/FY"
+        ],
+        "type": "none",
+        "word": "verification"
+    },
     "verify": {
         "grade": 12,
-        "meaning": "to make sure that something is true",
+        "meaning": "to <span class=\"embedded_root\">make</span> sure something is <span class=\"embedded_root\">true</span>",
         "part of speech": "verb",
         "roots": [
             "VER",
-            "FY"
+            "FIC/FAC/FY"
         ],
         "type": "none",
         "word": "verify"
@@ -10257,6 +10633,10 @@ var roots = {
         "meaning": "love",
         "root": "AMI/AMO"
     },
+    "AMPL": {
+        "meaning": "full, abundant",
+        "root": "AMPL"
+    },
     "ANA": {
         "meaning": "up, back, against, again, throughout",
         "root": "ANA"
@@ -10310,7 +10690,7 @@ var roots = {
         "root": "ARCH root 2"
     },
     "ART": {
-        "meaning": "skill",
+        "meaning": "unnatural, made by human skill",
         "root": "ART"
     },
     "ARTHR": {
@@ -10414,7 +10794,7 @@ var roots = {
         "root": "CEREBR"
     },
     "CERT": {
-        "meaning": "sure",
+        "meaning": "sure, secure, confident",
         "root": "CERT"
     },
     "CHROM/CHROMAT/CHROS": {
@@ -10442,8 +10822,12 @@ var roots = {
         "root": "CLAIM/CLAM"
     },
     "CLAR": {
-        "meaning": "clear",
+        "meaning": "clear, bright",
         "root": "CLAR"
+    },
+    "CLASS": {
+        "meaning": "category",
+        "root": "CLASS"
     },
     "CLIN": {
         "meaning": "lean",
@@ -10457,9 +10841,17 @@ var roots = {
         "meaning": "with, together, joint, jointly, common",
         "root": "CO/COL/COM/CON"
     },
+    "COD": {
+        "meaning": "book, a secret recorded in a book (lit. tree trunk)",
+        "root": "COD"
+    },
     "COGN": {
         "meaning": "know",
         "root": "COGN"
+    },
+    "COMMOD": {
+        "meaning": "useful, convenient",
+        "root": "COMMOD"
     },
     "CONTR": {
         "meaning": "against, opposite",
@@ -10501,9 +10893,13 @@ var roots = {
         "meaning": "circle, ring",
         "root": "CYCL"
     },
-    "DE": {
+    "DE root 1": {
         "meaning": "reduce, away, down, remove, undo",
-        "root": "DE"
+        "root": "DE root 1"
+    },
+    "DE root 2": {
+        "meaning": "god",
+        "root": "DE root 2"
     },
     "DEC/DEKA": {
         "meaning": "ten",
@@ -10524,6 +10920,10 @@ var roots = {
     "DENDR": {
         "meaning": "tree",
         "root": "DENDR"
+    },
+    "DENS": {
+        "meaning": "thick, closely packed",
+        "root": "DENS"
     },
     "DENT/DONT": {
         "meaning": "tooth",
@@ -10548,6 +10948,10 @@ var roots = {
     "DICT": {
         "meaning": "speak",
         "root": "DICT"
+    },
+    "DIGN": {
+        "meaning": "worthy",
+        "root": "DIGN"
     },
     "DOMIN": {
         "meaning": "master",
@@ -10625,13 +11029,21 @@ var roots = {
         "meaning": "good, well",
         "root": "EU"
     },
+    "EXEMPL": {
+        "meaning": "model, example",
+        "root": "EXEMPL"
+    },
     "EXTRA/EXTRO": {
         "meaning": "outside, beyond",
         "root": "EXTRA/EXTRO"
     },
-    "FAC/FACT": {
+    "FIC/FAC/FY": {
         "meaning": "make, do",
-        "root": "FAC/FACT"
+        "root": "FIC/FAC/FY"
+    },
+    "FALS": {
+        "meaning": "untrue",
+        "root": "FALS"
     },
     "FER": {
         "meaning": "bear, bring, carry",
@@ -10661,6 +11073,10 @@ var roots = {
         "meaning": "in front of, previous, earlier",
         "root": "FORE"
     },
+    "FORT": {
+        "meaning": "strong, brave",
+        "root": "FORT"
+    },
     "FRACT/FRAG": {
         "meaning": "break",
         "root": "FRACT/FRAG"
@@ -10677,10 +11093,6 @@ var roots = {
         "meaning": "pour",
         "root": "FUS"
     },
-    "FY": {
-        "meaning": "make",
-        "root": "FY"
-    },
     "GASTR": {
         "meaning": "stomach",
         "root": "GASTR"
@@ -10692,6 +11104,10 @@ var roots = {
     "GEO": {
         "meaning": "earth, soil, global",
         "root": "GEO"
+    },
+    "GENTR": {
+        "meaning": "noble, wealthy",
+        "root": "GENTR"
     },
     "GER": {
         "meaning": "old age",
@@ -10785,6 +11201,14 @@ var roots = {
         "meaning": "like, alike, same",
         "root": "HOMO/HOMEO"
     },
+    "HORR": {
+        "meaning": "frighten, causing one to shudder",
+        "root": "HORR"
+    },
+    "HUMID": {
+        "meaning": "moist, wet",
+        "root": "HUMID"
+    },
     "HYDR": {
         "meaning": "liquid, water",
         "root": "HYDR"
@@ -10808,6 +11232,10 @@ var roots = {
     "ICON": {
         "meaning": "image",
         "root": "ICON"
+    },
+    "IDENT": {
+        "meaning": "same",
+        "root": "IDENT"
     },
     "IDIO": {
         "meaning": "peculiar, personal, distinct",
@@ -10842,6 +11270,7 @@ var roots = {
         "root": "JECT"
     },
     // todo change to jud/jur
+    // maybe assimilate with just
     "JUD": {
         "meaning": "law",
         "root": "JUD"
@@ -10849,6 +11278,10 @@ var roots = {
     "JUNCT": {
         "meaning": "join",
         "root": "JUNCT"
+    },
+    "JUST": {
+        "meaning": "lawful, right",
+        "root": "JUST"
     },
     "JUVEN": {
         "meaning": "young",
@@ -10895,7 +11328,7 @@ var roots = {
         "root": "LIP"
     },
     "LITE/ITE/LITH": {
-        "meaning": "mineral, rock, fossil",
+        "meaning": "stone",
         "root": "LITE/ITE/LITH"
     },
     "LOC": {
@@ -10935,7 +11368,7 @@ var roots = {
         "root": "MAGN"
     },
     "MAL": {
-        "meaning": "bad, ill, wrong",
+        "meaning": "evil, bad, ill, wrong",
         "root": "MAL"
     },
     "MAN": {
@@ -11019,7 +11452,7 @@ var roots = {
         "root": "MIR"
     },
     "MIS": {
-        "meaning": "bad, badly, wrong, wrongly, to hate",
+        "meaning": "bad, wrong, to hate",
         "root": "MIS"
     },
     "MISS/MIT": {
@@ -11030,6 +11463,10 @@ var roots = {
         "meaning": "move",
         "root": "MOB/MOT/MOV"
     },
+    "MOD": {
+        "meaning": "method, moderation, type",
+        "root": "MOD"
+    },
     "MON/MONO": {
         "meaning": "one, single, alone",
         "root": "MON/MONO"
@@ -11038,17 +11475,25 @@ var roots = {
         "meaning": "warn",
         "root": "MON"
     },
+    "MOLL": {
+        "meaning": "soft, gentle",
+        "root": "MOLL"
+    },
     "MORPH": {
         "meaning": "form",
         "root": "MORPH"
     },
     "MORT": {
-        "meaning": "death",
+        "meaning": "death, dead",
         "root": "MORT"
     },
     "MULTI": {
         "meaning": "many, more than one or two",
         "root": "MULTI"
+    },
+    "MUN": {
+        "meaning": "gift",
+        "root": "MUN"
     },
     "MUT": {
         "meaning": "change",
@@ -11057,6 +11502,10 @@ var roots = {
     "MY/MYO": {
         "meaning": "muscle",
         "root": "MY/MYO"
+    },
+    "MYST": {
+        "meaning": "secret, unknown, difficult to understand",
+        "root": "MYST"
     },
     "NARR": {
         "meaning": "tell",
@@ -11100,7 +11549,7 @@ var roots = {
     },
     "NON/NOV": {
         "meaning": "nine",
-        "root": "NON/NON"
+        "root": "NON/NOV"
     },
     "NOT": {
         "meaning": "mark",
@@ -11113,6 +11562,10 @@ var roots = {
     "NOV": {
         "meaning": "new",
         "root": "NOV"
+    },
+    "NULL": {
+        "meaning": "nothing, not",
+        "root": "NULL"
     },
     "NUMER": {
         "meaning": "number",
@@ -11150,6 +11603,11 @@ var roots = {
         "meaning": "straight",
         "root": "ORTHO"
     },
+    // todo probably join oss and osteo
+    "OSS": {
+        "meaning": "bone",
+        "root": "OSS"
+    },
     "OSTEO": {
         "meaning": "bone",
         "root": "OSTEO"
@@ -11161,6 +11619,10 @@ var roots = {
     "OXY": {
         "meaning": "sharp",
         "root": "OXY"
+    },
+    "PAC": {
+        "meaning": "peace",
+        "root": "PAC"
     },
     "PALE/PALEO": {
         "meaning": "ancient",
@@ -11202,9 +11664,17 @@ var roots = {
         "meaning": "through, throughout",
         "root": "PER"
     },
+    "PERSON": {
+        "meaning": "character, literally \'mask\' - i.e. how one relates to others",
+        "root": "PERSON"
+    },
     "PERI": {
         "meaning": "around, enclosing",
         "root": "PERI"
+    },
+    "PETR": {
+        "meaning": "stone",
+        "root": "PETR"
     },
     "PHAG": {
         "meaning": "to eat",
@@ -11242,6 +11712,10 @@ var roots = {
         "meaning": "to form, development, forming cells",
         "root": "PLAS/PLAST/PLASM"
     },
+    "PLY/PLI/PLEX": {
+        "meaning": "bend",
+        "root": "PLY/PLI/PLEX"
+    },
     "PNE/PNEUM": {
         "meaning": "breathing, lung, air, spirit",
         "root": "PNE/PNEUM"
@@ -11275,7 +11749,7 @@ var roots = {
         "root": "POST"
     },
     "PRE": {
-        "meaning": "earlier, before, in front of",
+        "meaning": "earlier, before, in front of, ahead of time",
         "root": "PRE"
     },
     "PRO": {
@@ -11302,6 +11776,10 @@ var roots = {
         "meaning": "urge",
         "root": "PUL"
     },
+    "PUR": {
+        "meaning": "clean",
+        "root": "PUR"
+    },
     "PURG": {
         "meaning": "clean",
         "root": "PURG"
@@ -11317,6 +11795,14 @@ var roots = {
     "QUAD/QUADR": {
         "meaning": "four",
         "root": "QUAD/QUADR"
+    },
+    "QUAL": {
+        "meaning": "attribute (a characteristic not expressible as a number)",
+        "root": "QUAL"
+    },
+    "QUANT": {
+        "meaning": "amount (a characteristic expressible as a number)",
+        "root": "QUANT"
     },
     "QUART": {
         "meaning": "fourth",
@@ -11337,6 +11823,10 @@ var roots = {
     "RAM": {
         "meaning": "branch",
         "root": "RAM"
+    },
+    "RAR": {
+        "meaning": "loose, sparse, not thick",
+        "root": "RAR"
     },
     "RE": {
         "meaning": "again, back, backward, against",
@@ -11374,9 +11864,17 @@ var roots = {
         "meaning": "break, burst",
         "root": "RUPT"
     },
+    "SACR": {
+        "meaning": "holy",
+        "root": "SACR"
+    },
     "SAN": {
         "meaning": "health",
         "root": "SAN"
+    },
+    "SAT": {
+        "meaning": "enough, sufficient",
+        "root": "SAT"
     },
     "SCEND": {
         "meaning": "climb, go",
@@ -11426,6 +11924,10 @@ var roots = {
         "meaning": "six",
         "root": "SEX"
     },
+    "SIGN": {
+        "meaning": "meaning, symbol",
+        "root": "SIGN"
+    },
     "SIST": {
         "meaning": "to stand",
         "root": "SIST"
@@ -11450,6 +11952,14 @@ var roots = {
         "meaning": "wise",
         "root": "SOPH"
     },
+    "SOPOR": {
+        "meaning": "sleep",
+        "root": "SOPOR"
+    },
+    "SPEC": {
+        "meaning": "subcategory",
+        "root": "SPEC"
+    },
     "SPEC/SPECT/SPIC": {
         "meaning": "see, look",
         "root": "SPEC/SPECT/SPIC"
@@ -11470,9 +11980,17 @@ var roots = {
         "meaning": "star",
         "root": "STELL"
     },
+    "STRAT": {
+        "meaning": "layer",
+        "root": "STRAT"
+    },
     "STRUCT": {
         "meaning": "build",
         "root": "STRUCT"
+    },
+    "STULT/STUP": {
+        "meaning": "dumb, senseless",
+        "root": "STULT/STUP"
     },
     "SUB": {
         "meaning": "under, lower than, inferior to, near to",
@@ -11489,6 +12007,10 @@ var roots = {
     "SYM/SYN": {
         "meaning": "together, with, same",
         "root": "SYM/SYN"
+    },
+    "SYLLAB": {
+        "meaning": "A group of sounds in a word that are literally \'taken together\' and treated as a unit. E.g. hip-po-po-ta-mus has 5 such groups.",
+        "root": "SYLLAB"
     },
     "TACT/TANG": {
         "meaning": "touch",
@@ -11517,6 +12039,14 @@ var roots = {
     "TERR": {
         "meaning": "land, earth",
         "root": "TERR"
+    },
+    "TERR root 2": {
+        "meaning": "scare",
+        "root": "TERR root 2"
+    },
+    "TEST": {
+        "meaning": "witness",
+        "root": "TEST"
     },
     "TETRA": {
         "meaning": "four",
@@ -11594,9 +12124,17 @@ var roots = {
         "meaning": "see",
         "root": "VID/VIS"
     },
+    "VIL": {
+        "meaning": "cheap, worthless",
+        "root": "VIL"
+    },
     "VINC/VIC": {
         "meaning": "conquer",
         "root": "VINC/VIC"
+    },
+    "VITR": {
+        "meaning": "glass",
+        "root": "VITR"
     },
     "VIV/VIT": {
         "meaning": "live, life",

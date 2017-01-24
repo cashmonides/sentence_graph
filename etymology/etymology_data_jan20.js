@@ -10257,10 +10257,6 @@ var roots = {
         "meaning": "love",
         "root": "AMI/AMO"
     },
-    "AMPL": {
-        "meaning": "full, abundant",
-        "root": "AMPL"
-    },
     "ANA": {
         "meaning": "up, back, against, again, throughout",
         "root": "ANA"
@@ -10314,7 +10310,7 @@ var roots = {
         "root": "ARCH root 2"
     },
     "ART": {
-        "meaning": "unnatural, made by human skill",
+        "meaning": "skill",
         "root": "ART"
     },
     "ARTHR": {
@@ -10418,7 +10414,7 @@ var roots = {
         "root": "CEREBR"
     },
     "CERT": {
-        "meaning": "sure, secure, confident",
+        "meaning": "sure",
         "root": "CERT"
     },
     "CHROM/CHROMAT/CHROS": {
@@ -10446,12 +10442,8 @@ var roots = {
         "root": "CLAIM/CLAM"
     },
     "CLAR": {
-        "meaning": "clear, bright",
+        "meaning": "clear",
         "root": "CLAR"
-    },
-    "CLASS": {
-        "meaning": "category",
-        "root": "CLASS"
     },
     "CLIN": {
         "meaning": "lean",
@@ -10465,17 +10457,9 @@ var roots = {
         "meaning": "with, together, joint, jointly, common",
         "root": "CO/COL/COM/CON"
     },
-    "COD": {
-        "meaning": "book, a secret recorded in a book (lit. tree trunk)",
-        "root": "COD"
-    },
     "COGN": {
         "meaning": "know",
         "root": "COGN"
-    },
-    "COMMOD": {
-        "meaning": "useful, convenient",
-        "root": "COMMOD"
     },
     "CONTR": {
         "meaning": "against, opposite",
@@ -10517,13 +10501,9 @@ var roots = {
         "meaning": "circle, ring",
         "root": "CYCL"
     },
-    "DE root 1": {
+    "DE": {
         "meaning": "reduce, away, down, remove, undo",
-        "root": "DE root 1"
-    },
-    "DE root 2": {
-        "meaning": "god",
-        "root": "DE root 2"
+        "root": "DE"
     },
     "DEC/DEKA": {
         "meaning": "ten",
@@ -10544,10 +10524,6 @@ var roots = {
     "DENDR": {
         "meaning": "tree",
         "root": "DENDR"
-    },
-    "DENS": {
-        "meaning": "thick, closely packed",
-        "root": "DENS"
     },
     "DENT/DONT": {
         "meaning": "tooth",
@@ -10572,10 +10548,6 @@ var roots = {
     "DICT": {
         "meaning": "speak",
         "root": "DICT"
-    },
-    "DIGN": {
-        "meaning": "worthy",
-        "root": "DIGN"
     },
     "DOMIN": {
         "meaning": "master",
@@ -10653,10 +10625,6 @@ var roots = {
         "meaning": "good, well",
         "root": "EU"
     },
-    "EXEMPL": {
-        "meaning": "model, example",
-        "root": "EXEMPL"
-    },
     "EXTRA/EXTRO": {
         "meaning": "outside, beyond",
         "root": "EXTRA/EXTRO"
@@ -10664,10 +10632,6 @@ var roots = {
     "FAC/FACT": {
         "meaning": "make, do",
         "root": "FAC/FACT"
-    },
-    "FALS": {
-        "meaning": "untrue",
-        "root": "FALS"
     },
     "FER": {
         "meaning": "bear, bring, carry",
@@ -10696,10 +10660,6 @@ var roots = {
     "FORE": {
         "meaning": "in front of, previous, earlier",
         "root": "FORE"
-    },
-    "FORT": {
-        "meaning": "strong, brave",
-        "root": "FORT"
     },
     "FRACT/FRAG": {
         "meaning": "break",
@@ -10732,10 +10692,6 @@ var roots = {
     "GEO": {
         "meaning": "earth, soil, global",
         "root": "GEO"
-    },
-    "GENTR": {
-        "meaning": "noble, wealthy",
-        "root": "GENTR"
     },
     "GER": {
         "meaning": "old age",
@@ -10829,14 +10785,6 @@ var roots = {
         "meaning": "like, alike, same",
         "root": "HOMO/HOMEO"
     },
-    "HORR": {
-        "meaning": "frighten, causing one to shudder",
-        "root": "HORR"
-    },
-    "HUMID": {
-        "meaning": "moist, wet",
-        "root": "HUMID"
-    },
     "HYDR": {
         "meaning": "liquid, water",
         "root": "HYDR"
@@ -10860,10 +10808,6 @@ var roots = {
     "ICON": {
         "meaning": "image",
         "root": "ICON"
-    },
-    "IDENT": {
-        "meaning": "same",
-        "root": "IDENT"
     },
     "IDIO": {
         "meaning": "peculiar, personal, distinct",
@@ -10898,7 +10842,6 @@ var roots = {
         "root": "JECT"
     },
     // todo change to jud/jur
-    // maybe assimilate with just
     "JUD": {
         "meaning": "law",
         "root": "JUD"
@@ -10906,10 +10849,6 @@ var roots = {
     "JUNCT": {
         "meaning": "join",
         "root": "JUNCT"
-    },
-    "JUST": {
-        "meaning": "lawful, right",
-        "root": "JUST"
     },
     "JUVEN": {
         "meaning": "young",
@@ -10956,7 +10895,7 @@ var roots = {
         "root": "LIP"
     },
     "LITE/ITE/LITH": {
-        "meaning": "stone",
+        "meaning": "mineral, rock, fossil",
         "root": "LITE/ITE/LITH"
     },
     "LOC": {
@@ -10996,7 +10935,7 @@ var roots = {
         "root": "MAGN"
     },
     "MAL": {
-        "meaning": "evil, bad, ill, wrong",
+        "meaning": "bad, ill, wrong",
         "root": "MAL"
     },
     "MAN": {
@@ -11080,7 +11019,7 @@ var roots = {
         "root": "MIR"
     },
     "MIS": {
-        "meaning": "bad, wrong, to hate",
+        "meaning": "bad, badly, wrong, wrongly, to hate",
         "root": "MIS"
     },
     "MISS/MIT": {
@@ -11091,10 +11030,6 @@ var roots = {
         "meaning": "move",
         "root": "MOB/MOT/MOV"
     },
-    "MOD": {
-        "meaning": "method, moderation, type",
-        "root": "MOD"
-    },
     "MON/MONO": {
         "meaning": "one, single, alone",
         "root": "MON/MONO"
@@ -11103,25 +11038,17 @@ var roots = {
         "meaning": "warn",
         "root": "MON"
     },
-    "MOLL": {
-        "meaning": "soft, gentle",
-        "root": "MOLL"
-    },
     "MORPH": {
         "meaning": "form",
         "root": "MORPH"
     },
     "MORT": {
-        "meaning": "death, dead",
+        "meaning": "death",
         "root": "MORT"
     },
     "MULTI": {
         "meaning": "many, more than one or two",
         "root": "MULTI"
-    },
-    "MUN": {
-        "meaning": "gift",
-        "root": "MUN"
     },
     "MUT": {
         "meaning": "change",
@@ -11130,10 +11057,6 @@ var roots = {
     "MY/MYO": {
         "meaning": "muscle",
         "root": "MY/MYO"
-    },
-    "MYST": {
-        "meaning": "secret, unknown, difficult to understand",
-        "root": "MYST"
     },
     "NARR": {
         "meaning": "tell",
@@ -11177,7 +11100,7 @@ var roots = {
     },
     "NON/NOV": {
         "meaning": "nine",
-        "root": "NON/NOV"
+        "root": "NON/NON"
     },
     "NOT": {
         "meaning": "mark",
@@ -11190,10 +11113,6 @@ var roots = {
     "NOV": {
         "meaning": "new",
         "root": "NOV"
-    },
-    "NULL": {
-        "meaning": "nothing, not",
-        "root": "NULL"
     },
     "NUMER": {
         "meaning": "number",
@@ -11231,11 +11150,6 @@ var roots = {
         "meaning": "straight",
         "root": "ORTHO"
     },
-    // todo probably join oss and osteo
-    "OSS": {
-        "meaning": "bone",
-        "root": "OSS"
-    },
     "OSTEO": {
         "meaning": "bone",
         "root": "OSTEO"
@@ -11247,10 +11161,6 @@ var roots = {
     "OXY": {
         "meaning": "sharp",
         "root": "OXY"
-    },
-    "PAC": {
-        "meaning": "peace",
-        "root": "PAC"
     },
     "PALE/PALEO": {
         "meaning": "ancient",
@@ -11292,17 +11202,9 @@ var roots = {
         "meaning": "through, throughout",
         "root": "PER"
     },
-    "PERSON": {
-        "meaning": "character, literally \'mask\' - i.e. how one relates to others",
-        "root": "PERSON"
-    },
     "PERI": {
         "meaning": "around, enclosing",
         "root": "PERI"
-    },
-    "PETR": {
-        "meaning": "stone",
-        "root": "PETR"
     },
     "PHAG": {
         "meaning": "to eat",
@@ -11340,10 +11242,6 @@ var roots = {
         "meaning": "to form, development, forming cells",
         "root": "PLAS/PLAST/PLASM"
     },
-    "PLY/PLI/PLEX": {
-        "meaning": "bend",
-        "root": "PLY/PLI/PLEX"
-    },
     "PNE/PNEUM": {
         "meaning": "breathing, lung, air, spirit",
         "root": "PNE/PNEUM"
@@ -11377,7 +11275,7 @@ var roots = {
         "root": "POST"
     },
     "PRE": {
-        "meaning": "earlier, before, in front of, ahead of time",
+        "meaning": "earlier, before, in front of",
         "root": "PRE"
     },
     "PRO": {
@@ -11404,10 +11302,6 @@ var roots = {
         "meaning": "urge",
         "root": "PUL"
     },
-    "PUR": {
-        "meaning": "clean",
-        "root": "PUR"
-    },
     "PURG": {
         "meaning": "clean",
         "root": "PURG"
@@ -11423,14 +11317,6 @@ var roots = {
     "QUAD/QUADR": {
         "meaning": "four",
         "root": "QUAD/QUADR"
-    },
-    "QUAL": {
-        "meaning": "attribute (a characteristic not expressible as a number)",
-        "root": "QUAL"
-    },
-    "QUANT": {
-        "meaning": "amount (a characteristic expressible as a number)",
-        "root": "QUANT"
     },
     "QUART": {
         "meaning": "fourth",
@@ -11451,10 +11337,6 @@ var roots = {
     "RAM": {
         "meaning": "branch",
         "root": "RAM"
-    },
-    "RAR": {
-        "meaning": "loose, sparse, not thick",
-        "root": "RAR"
     },
     "RE": {
         "meaning": "again, back, backward, against",
@@ -11492,17 +11374,9 @@ var roots = {
         "meaning": "break, burst",
         "root": "RUPT"
     },
-    "SACR": {
-        "meaning": "holy",
-        "root": "SACR"
-    },
     "SAN": {
         "meaning": "health",
         "root": "SAN"
-    },
-    "SAT": {
-        "meaning": "enough, sufficient",
-        "root": "SAT"
     },
     "SCEND": {
         "meaning": "climb, go",
@@ -11552,10 +11426,6 @@ var roots = {
         "meaning": "six",
         "root": "SEX"
     },
-    "SIGN": {
-        "meaning": "meaning, symbol",
-        "root": "SIGN"
-    },
     "SIST": {
         "meaning": "to stand",
         "root": "SIST"
@@ -11580,14 +11450,6 @@ var roots = {
         "meaning": "wise",
         "root": "SOPH"
     },
-    "SOPOR": {
-        "meaning": "sleep",
-        "root": "SOPOR"
-    },
-    "SPEC": {
-        "meaning": "subcategory",
-        "root": "SPEC"
-    },
     "SPEC/SPECT/SPIC": {
         "meaning": "see, look",
         "root": "SPEC/SPECT/SPIC"
@@ -11608,17 +11470,9 @@ var roots = {
         "meaning": "star",
         "root": "STELL"
     },
-    "STRAT": {
-        "meaning": "layer",
-        "root": "STRAT"
-    },
     "STRUCT": {
         "meaning": "build",
         "root": "STRUCT"
-    },
-    "STULT/STUP": {
-        "meaning": "dumb, senseless",
-        "root": "STULT/STUP"
     },
     "SUB": {
         "meaning": "under, lower than, inferior to, near to",
@@ -11635,10 +11489,6 @@ var roots = {
     "SYM/SYN": {
         "meaning": "together, with, same",
         "root": "SYM/SYN"
-    },
-    "SYLLAB": {
-        "meaning": "A group of sounds in a word that are literally \'taken together\' and treated as a unit. E.g. hip-po-po-ta-mus has 5 such groups.",
-        "root": "SYLLAB"
     },
     "TACT/TANG": {
         "meaning": "touch",
@@ -11664,17 +11514,9 @@ var roots = {
         "meaning": "end, limit",
         "root": "TERM/TERMIN"
     },
-    "TERR root 1": {
+    "TERR": {
         "meaning": "land, earth",
-        "root": "TERR root 1"
-    },
-    "TERR root 2": {
-        "meaning": "scare",
-        "root": "TERR root 2"
-    },
-    "TEST": {
-        "meaning": "witness",
-        "root": "TEST"
+        "root": "TERR"
     },
     "TETRA": {
         "meaning": "four",
@@ -11752,17 +11594,9 @@ var roots = {
         "meaning": "see",
         "root": "VID/VIS"
     },
-    "VIL": {
-        "meaning": "cheap, worthless",
-        "root": "VIL"
-    },
     "VINC/VIC": {
         "meaning": "conquer",
         "root": "VINC/VIC"
-    },
-    "VITR": {
-        "meaning": "glass",
-        "root": "VITR"
     },
     "VIV/VIT": {
         "meaning": "live, life",
