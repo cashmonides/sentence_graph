@@ -461,16 +461,15 @@ var fy_words_with_transparent_meanings = [
  complexify
  purify
  falsify
+ solidify
  ]
  
  
 
  
 var fic_words_with_transparent_meanings = {
-beautify
 certification
-exemplify
-falsify
+falsification
 mummification
 purification
  }

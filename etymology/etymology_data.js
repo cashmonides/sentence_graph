@@ -9446,7 +9446,7 @@ var words = {
     },
     "specification": {
         "grade": 12,
-        "meaning": "the acton of making into a subcategory",
+        "meaning": "the acton of <span class=\"embedded_root\">making</span> into a <span class=\"embedded_root\">subcategory</span>",
         "part of speech": "noun",
         "roots": [
             "SPEC",
