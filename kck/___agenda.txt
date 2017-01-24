@@ -5,6 +5,124 @@ Agenda (updated jan 1, 2017)
 
 
 
+PERSISTENCE OF INDIVIDUAL-WORD DATA
+
+final answer:
+    data structure looks like this:
+        key: a number (e.g. .7 or .754)
+        value: a word (e.g. arthropod, which points to an object word, definition, roots, etc.)
+    persist statement looks ike this:
+        correct --> increase both x and y field
+        incorrect ---> increase y field
+        
+
+questions:
+	where do we store the data?
+		- firebase
+		- sql
+2 choices:
+	- unseen word
+	- seen word
+		- preferences
+			- low total
+			- low quotient
+
+// ideal # of times X happens before we reduce its occurences
+imagine:
+x-ideal = factor
+
+
+john johnson: {
+	word_accuracy: {
+		arthropod: [4, 10],          // -1/10
+		pedestrian: [98, 101],       // 93/101
+		phlebotomy: [1, 1] ,          // -4
+        podium: [20, 25]			// 15/25 = 3/5
+        herbivore: [5, 5]			// 0
+        old carnivore: [10, 10]         // 5/10 = 1/2
+        carnivore: [30, 35]         // 25/35 = 5/7
+	},
+	root_accuracy: {
+
+	}
+}
+
+
+
+pick seen or unseen (weighted)
+
+
+
+if seen,
+if seen is empty
+
+if seen is initialized
+go to firebase
+choose_seen
+
+
+
+persist.set (new entry for word)
+
+
+
+
+
+
+
+DATASTRUCTURE
+
+
+-9
+-8
+-7
+-6
+-5
+-4
+-3
+-2
+-1
+0
+.1
+.2
+.3
+.4
+.5
+.6
+.7 {
+	0.75: [arthropod, 4, 10]
+}
+.8
+.9
+
+
+
+
+
+key: knowledge_weighting (e.g. .75)
+value: string, x, y
+
+knowledge/weighting = ideal#-x/y
+x = number of correct 
+y = number of attempts
+
+
+.75 ---
+
+
+
+arthropod: [4, 10],          
+		93/101: pedestrian: [98, 101],       
+		-4: phlebotomy: [1, 1] ,          
+        3/5: podium: [20, 25]			
+        0: herbivore: [5, 5]			
+        1/2: old carnivore: [10, 10]         
+        5/7: carnivore: [30, 35]         
+
+
+
+
+
 IN PROGRESS
 - root dictionary
     - button on quiz page (visible only in etymology, spelling and spelling match mode)
@@ -35,10 +153,11 @@ ALERT MISSION CRITICAL
 
 
 IMMEDIATE PRIORITY
+- word-knowledge parameter
 - enter grades
 - make sure modules are set up for week 1 spelling match testing
 - create more users for spelling bee testing
-- time control for team play and solo play
+- time control solo play (mirror mode)
 - bug: "I will have loved" appeared in morphology level 240
 - make sure number of spelling hint cheat sheet dummies is set in all modules
 - Akiva ask Dan

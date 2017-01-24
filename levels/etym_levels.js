@@ -958,5 +958,31 @@ var etym_levels = {
             'root_to_root_definition': 1,
             'root_definition_to_root': 1
         }
-    }
+    },
+    1000: {
+        roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'FY'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .0001,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
+    2000: {
+        roots: ['FY'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .9,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
 }

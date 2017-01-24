@@ -447,7 +447,7 @@ var input_is_valid = function (string) {
         return true;
     } else {
         var number = Number(string);
-        return Number.isInteger(number) && 1 <= number && number <= 1000;
+        return Number.isInteger(number) && 1 <= number && number <= 5000;
     }
 }
 

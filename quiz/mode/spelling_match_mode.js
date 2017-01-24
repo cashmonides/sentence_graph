@@ -102,6 +102,17 @@ SpellingMatchModeGame.prototype.set_level_via_firebase = function () {
 
 // todo turn below into full dictionary
 SpellingMatchModeGame.prototype.convert_int_to_object = function (level_as_int) {
+    
+    console.log("DEBUGGING-TWIXT level_as_int = ", level_as_int);
+    
+    var output = {"etym_level": level_as_int};
+    console.log("DEBUGGING-TWIXT output= ", output);
+    
+    return output;
+    
+    
+    /*
+    @twixt
     if (level_as_int = 10) {
         return {"etym_level": 10};
     } else if (level_as_int = 20) {
@@ -137,6 +148,7 @@ SpellingMatchModeGame.prototype.convert_int_to_object = function (level_as_int) 
     } else {
         return {"etym_level": 60};
     }
+    */
 }
 
 
@@ -166,6 +178,7 @@ SpellingMatchModeGame.prototype.next_question = function() {
     
     
     if (this.quiz.module.id === 0.25) {
+        console.log("TWIXT spelling bee match triggered, setting final level");
         //level is set by the pin
         this.set_level_via_firebase();
         
@@ -477,7 +490,7 @@ SpellingMatchModeGame.prototype.make_spelling_hint = function () {
 
 
 
-/*
+
 
 // todo convert the following into a global function in etymology mode
 // probably going to be of general usage later, not just in spelling mode
@@ -539,7 +552,7 @@ SpellingMatchModeGame.prototype.give_underscore_hint = function (word) {
     }
 };
 
-*/
+
 
 // todo development of below got interrupted
 // develop it later
@@ -798,7 +811,7 @@ SpellingMatchModeGame.prototype.give_away_answer = function(){
 
 
 
-
+/*
 
 var SpellingMatchModeGame = function () {
     this.data = null;
@@ -1543,4 +1556,5 @@ SpellingMatchModeGame.prototype.give_away_answer = function(){
 //     }
 // }
 
+*/
 
