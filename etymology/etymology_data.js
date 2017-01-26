@@ -10893,9 +10893,9 @@ var roots = {
         "meaning": "circle, ring",
         "root": "CYCL"
     },
-    "DE root 1": {
+    "DE": {
         "meaning": "reduce, away, down, remove, undo",
-        "root": "DE root 1"
+        "root": "DE"
     },
     "DE root 2": {
         "meaning": "god",
