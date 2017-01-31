@@ -1,6 +1,346 @@
 Agenda (updated jan 1, 2017)
-- MISSION CRITICAL
+- MISSION CRITICAL (PURE CHORE, MIGHT BE DONE)
     - scrub console logs for correct answers displayed
+
+
+------------------------------------------------------
+------SPELLING BEE OPERATIONS-------------
+
+GET 
+get raw data to make quiz.available_words_and_root_map
+output --> seen_words_map 
+e.g. {
+	arthropod: ['word', 21, 42],
+	amoeba: ['word', 3, 14],
+	biped: ['word', 40, 41],
+	bi: ['root', 50, 56]
+}
+(signature is [root-word-type, times_correct_on_first_try, total_times])
+
+get unseen but usable words/roots
+output --> unseen_words_list & unseen_roots_list
+
+
+
+TRANSFORM DATA
+separate into words and roots
+calculate mastery score for each seen word and root
+rank words/roots based on mastery and visibility range
+combine/merge seen and unseen for words/roots
+output --> map of lists
+e.g. {
+	words: [str, str, str, str, ...], 
+	roots: [str, str, str, str, ...]
+}
+
+
+INTERNAL BOOKKEEPING
+initialize quiz.current_indices (at 0)  
+initialize quiz.word_scores_update_list (as {})
+
+
+
+PREP FOR PICKING
+determine question_type by weighted choice from module > etymology_level
+determine desired_item_type (word or root) from question_type
+
+
+PICK
+pick word from quiz.available_words_and_root_list (based on quiz.current_indices)
+
+
+(PROCESS ANSWER)
+
+
+UPDATE INTERNAL METRICS
+make item to put in quiz.word_scores_update_list
+    item(str): {
+        word: str,              //e.g. 'arthropod'
+        type: str,              //'word' || 'root'
+        correct_on_first: bool,
+        max_attempts_reached: bool,
+        attempts_made: int,
+        hints_received: int
+    }
+    
+push item to quiz.word_scores_update_list
+
+INTERNAL BOOKKEEPING
+increment quiz.current_indices.word or quiz.current_indices.root
+
+PERSIST
+iterate over quiz.word_scores_update_list
+for each item: 
+	do GET operation
+	alter GET result
+	SET with altered result
+
+CALLBACK
+when all operations are finished run whatever comes next (e.g. next_submodule/submodule_complete/return_to_profile)
+
+
+
+--------------------------------------------------------------------------------
+
+"FINISHING" SPELLING BEE
+
+DONE
+- bad-data-detector routine for etymology data
+
+UNDONE
+
+- *creation of word-data
+    - at question_complete we update a locally stored variable:
+        - correct or incorrect on first attempt
+        - whether max attempts was reached
+        - how many hints were requested
+        - (perhaps: whether any text was entered at all
+            - attempt to short-circuit the "hit enter ten times trick" of skipping a question)
+    
+    when we call some question_complete method in our game:
+        for word/root in this.relevant_words_roots:
+            data = quiz.usable_words/roots[word/root]
+            if this.correct_on_first_attempt: # Comment: Maybe this.attempts === 1 or something.
+                data.correct++
+            data.encounters++
+            if this.used_all_attempts: # Comment: Maybe this.attempts === this.max_attempts
+                data.max_attempts_reached++
+            data.hints += this.hints_received
+    
+    - at submodule_complete updates a data structure in firebase:
+        - user -> key-word/root: [a, b, c, d, e]
+        - a: correct on first attempt
+        - b: total encounters (always increments)
+        - c: # of times max attempts reached (detecting skip/frustration)
+        - d: number of hints requested
+        - e: root || word
+    
+    in submodule_complete
+    Persist.set(['spelling_bee_data', user_id], this.usable_words/roots)
+        
+
+quiz.word_scores_update_list:
+list of maps of form {item: string, type: "word" or "root", correct: bool, used_all_attempts: bool, hints: integer, attempts: integer}
+
+quiz.available_words_and_root_map.words:
+list of strings
+
+quiz.available_words_and_root_map.roots:
+list of strings
+
+quiz.current_indices.word:
+integer
+
+quiz.current_indices.root:
+integer
+
+types of interactions:
+
+get
+*GET data to eventually turn into quiz.available_words_and_root_map (largely done)
+--> map of maps 
+
+
+initialize quiz.current_indices and quiz.word_scores_update_list
+transform gotten data
+separate words from roots
+find unseen but usable words/roots
+calculate mastery
+rank words/roots based on mastery and visibility range
+combine/merge seen and unseen for words/roots
+
+
+--> map of lists
+
+pick
+determine question type ("word" or "root") from whatever mess is in our etymology or whatever we use
+pick word from quiz.available_words_and_root_map based on quiz.current_indices and question type
+fit word into question (whatever mess creates a question)
+
+update
+make item to put in quiz.word_scores_update_list
+push item to quiz.word_scores_update_list
+add one to quiz.current_indices.word or quiz.current_indices.root
+
+persist
+*iterate over quiz.word_scores_update_list
+*do GET operation (starting with dummy)
+*alter GET result
+*SET with altered result
+when all operations are finished run whatever comes next (e.g. next_submodule/submodule_complete/return_to_profile)
+
+
+
+
+this.quiz.word_scores_update_list = [
+    {item: "arthropod", type: "word", correct: true, used_all_attempts: false, hints: 2, attempts: 2},
+    {item: "amoeba", type: "word", correct: false, used_all_attempts: true, hints: 3, attempts: 10},
+    {item: "biped", type: "word", correct: true, used_all_attempts: false, hints: 0, attempts: 1},
+  
+]
+
+
+
+
+
+- *get that data at new_submodule
+    in new_submodule
+    var self = this;
+    Persist.get(['spelling_bee_data', user_id], function (x) {
+        var data = x.val();
+        (if null, replace by empty dictionary)
+        self.usable_words/roots = data;
+    });
+    
+- *filter that raw data down to a usable set e.g. 100 random seen words + 100 random unseen words
+    
+    /////////seen words
+    // get #_of_seen_words_desired (total X weighting)
+    // pick randomly from words in range until # reached
+    // if # not reached
+        // order remaining by distance
+        // picking least distant until # reached
+    
+    // get #_of_unseen_words_desired
+    // pick randomly from unseen_words && have_acceptable_root
+    
+    // if we run out of either seen or unseen, just pull from the inverse
+    
+    var filtered_spelling_bee_data = function (data) {
+        var words/roots = Object.keys(data);
+        var seen_words/roots = words/roots.filter(is_seen);
+        var unseen_words/roots = words/roots.filter(is_unseen);
+        var available_words/roots = pick_random(seen_words/roots, 100).concat(
+            pick_random(unseen_words/roots, 100));
+        var result = {};
+        for (var i = 0; i < available_words/roots.length; i++) {
+            var item = available_words/roots[i]
+            result[i] = data[item];
+        }
+        return result;
+    }
+    
+    - calculate the visibility_score via a weighting of seen and unseen
+        - e.g. chicken: 
+            {seen_unseen_ratio: [seen: 0.6, unseen 0.1]
+             visibility_weighting_range: [0.3, 1]}
+    
+    - build into the data
+    - store as quiz.usable_words/roots
+
+- *at next_question: 
+    - old option: weight-based choosing of words from quiz.usable_words/roots
+    - new option: iterate through list
+
+************mvp***********************
+    
+- *display of this data in human-readable format
+    - for user: 
+        - gets user > word-scores
+        - upon button_click in profile page
+    - for admin: 
+        - gets users > user > word-scores
+        - upon button-click in admin page
+
+
+
+- *while testing, check console log for accidental correct answers
+
+- x is minimum_exposure_rate
+  mastery score =
+ (correct - X / total) * 10
+
+
+- mastery-score (-5 to 1) --> 
+visibility calculator (ranges from modules e.g. [0.3-0.7]) --> 
+visibility-weighting (0-1)
+
+if in_range(mastery_score, visibility_range) {
+    visibility_weighting = 1
+} else {
+    // visibility_weighting = 1/ (distance between mastery_score and middle_of_range / distance between edge of range and middle of range)
+}
+
+
+0.04                0.11            1
+0.5                 1               0.73
+1                   1               0.89
+
+
+-----MORE AMBITIOUS------
+
+- *false mirror mode (play a previous result)
+    - play against past encounters
+    - pick a challenge level (
+    - iterate through your word-scores
+    - pick a visibility weighting
+
+
+- *iterate persistence in sql
+
+
+
+- true mirror mode
+    - exactly your previus encounters, same order, same time limit
+
+- ^^^^ password protect in-class spelling bee making ability
+- ^^^^ return the third column and put a heading at each (hero, titan, olympian)
+- ^^^^ add button for spelling bee at home mode (click on division and level, autogenerate pin, log score)
+- ^^^^ check hint behavior (why is it showing a hint penalty?)
+- ^^^^ change display to include and embolden top 4, possibly add a hero/titan/olympian icon
+- ^^^^ add span bold words in hint
+
+
+- plant seeds
+    - talk about defense against the "hit the enter button ten times trick"
+
+
+
+- mid-term
+    - change hint behavior when levels advance
+        - 1-200 no penalty
+        - 200-400 small penalty for underscore hint
+        - 400-600 big penalty for underscore hint
+        - 600-800 small penalty for any hint
+        - 800-900 big penalty for any hint
+        - 900-1000 no hints at all
+    - add question type field (e.g. morphology, latin, grammar etc.)
+    
+    
+    
+    
+- down the road
+    - identical words mode (true spelling bee matchup)
+    - specific root in training mode (e.g. can choose queen or -fy)
+
+
+
+- chores:
+    - add words & slideshow for next three weeks
+        - phobia
+        - ology & onomy
+        - cracy & archy
+        - terr & aqu/hydr & pyr/ign & vent/aer
+    - slideshow on heros titans and olympians
+
+
+
+- online chores:
+    - add bee pictures up to 200
+    
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+
+
+
+
 
 
 

@@ -10706,7 +10706,7 @@ var roots = {
         "root": "ATHL"
     },
     "AUD/AUDI/AUDIO": {
-        "meaning": "hear",
+        "meaning": "hear, listen",
         "root": "AUD/AUDI/AUDIO"
     },
     "AUTO": {
@@ -10933,6 +10933,7 @@ var roots = {
         "meaning": "skin",
         "root": "DERM"
     },
+    //@todo consolidate with du
     "DI/DIPLO root 1": {
         "meaning": "two, twice",
         "root": "DI/DIPLO root 1"
@@ -11265,6 +11266,10 @@ var roots = {
         "meaning": "equal",
         "root": "ISO"
     },
+    "IST": {
+        "meaning": "a person engaged in",
+        "root": "IST"
+    },
     "JECT": {
         "meaning": "throw, put",
         "root": "JECT"
@@ -11336,7 +11341,7 @@ var roots = {
         "root": "LOC"
     },
     "LOG": {
-        "meaning": "word, doctrine, discourse",
+        "meaning": "study, word, doctrine, speech",
         "root": "LOG"
     },
     "LOQU/LOCU": {

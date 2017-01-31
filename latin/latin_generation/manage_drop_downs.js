@@ -12,9 +12,15 @@
                 //eg. intersection of SVO & SV -> SV
                 //eg intersection of SVO & VOS -> SVO
 function manage_drop_downs(choice, output, english_template, language_enum, drop_non_drop_map) {
-    var r = concat_arrays(english_template.map(function (x) {return (drop_non_drop_map[x] === 'drop' ?
-            create_drop_down_object : create_non_drop_object)
-        (x, output, choice, language_enum)}));
+    var r = concat_map(english_template, function (x) {
+        var function_to_use;
+        if (drop_non_drop_map[x] === 'drop') {
+            function_to_use = create_drop_down_object;
+        } else {
+            function_to_use = create_non_drop_object;
+        }
+        return function_to_use(x, output, choice, language_enum);
+    });
     // console.log('DEBUG 12-23 manage_drop_downs result = ', r);
     return r;
 }

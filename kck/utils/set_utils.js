@@ -1,7 +1,7 @@
 // This file contains utils relating to sets.
 // Since sets are not a built-in type until es6 and many people
 // still use es5 browsers, some of which do not implement sets,
-// we use dictionaries as sets
+// we use dictionaries as sets rather than using any built-in type of set.
 
 // This function creates a set from a list or dictionary (or other set).
 // It can also be used to copy a set.
@@ -62,6 +62,20 @@ var set_intersection = function (a, b) {
     // Add every item in both sets to it.
     for (var i in a) {
         if (i in b) {
+            s[i] = true;
+        }
+    }
+    // Return the new set.
+    return s;
+}
+
+// Take the difference of two sets.
+var set_intersection = function (a, b) {
+    // Make an empty set.
+    var s = {};
+    // Add every item in the first set but not the second to it.
+    for (var i in a) {
+        if (!(i in b)) {
             s[i] = true;
         }
     }

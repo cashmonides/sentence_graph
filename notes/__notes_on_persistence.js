@@ -10,7 +10,7 @@
 the basics are:
     a javascript posting function
     CREATES
-    ups - ??presumably: a dictionary passed via the url params
+    ups - a dictionary passed via the url params
     
     
     POST

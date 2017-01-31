@@ -132,7 +132,7 @@ var morphology_dictionary_traverser = function (dictionary, list_of_keywords) {
     // when we push an item to current match list, that item is an array of matches
     // so current match list is an array of arrays of matches
     // we have to concatinate it to return an array
-    return concat_arrays(current_match_list);
+    return concat_all(current_match_list);
 }
 
 // this is the main function

@@ -7363,7 +7363,8 @@ var words = {
         "meaning": "the belief that all the universe is god",
         "part of speech": "noun",
         "roots": [
-            "PAN"
+            "PAN",
+            "THE"
         ],
         "type": "none",
         "word": "pantheism"
@@ -7939,6 +7940,7 @@ var words = {
         "meaning": "the act of worshiping more than one god",
         "part of speech": "noun",
         "roots": [
+            "POLY",
             "THE"
         ],
         "type": "none",

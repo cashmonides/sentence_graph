@@ -445,7 +445,7 @@ var cheat_sheet = function (master_lexeme_list) {
     // We push the part of speach to each item (as a header).
     lexemes_sorted_by_root.forEach(function (x) {
         x.unshift(x[0].properties.core.part_of_speech + 's')});
-    return concat_arrays(lexemes_sorted_by_root).map(function (x) {
+    return concat_all(lexemes_sorted_by_root).map(function (x) {
         if (typeof x === 'object') {
             
             

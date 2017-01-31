@@ -44,7 +44,23 @@ var remove_duplicates = function (list, f) {
 
 // This function concatenates a list of lists.
 var concat_all = function (list_of_lists) {
-    return [].concat.apply([], list_of_lists);
+    if (list_of_lists.length < 10) {
+        return [].concat.apply([], list_of_lists);
+    } else {
+        // There is a limit to the number of arguments a function can take
+        // according to the JavaScript standard.
+        // With apply, we are basicly feeding every item in list_of_lists in
+        // as an argument of the concat method.
+        // It's easy to see how this could be disastrous.
+        // So we use some loops instead.
+        var l = [];
+        for (var i = 0; i < list_of_lists.length; i++) {
+            for (var j = 0; j < list_of_lists[i].length; j++) {
+                l.push(list_of_lists[i][j]);
+            }
+        }
+        return l;
+    }
 }
 
 // This function maps a list, then concatenates the results.

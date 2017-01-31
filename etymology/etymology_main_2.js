@@ -357,7 +357,7 @@ question_data, number_of_mandatory) {
             question_data, number_of_mandatory);
         // my_roots is a list of lists.
         var my_roots = my_words.map(get_roots);
-        return unique_items(concat_arrays(my_roots));
+        return unique_items(concat_all(my_roots));
     } else if (mandatory_type.indexOf('s_which_')) {
         new_mandatory_type = mandatory_type.split('s_which_')[0];
         // This is only a string.

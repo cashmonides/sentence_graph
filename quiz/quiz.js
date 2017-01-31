@@ -1,12 +1,7 @@
 var global_spelling_match_score_counter = 0;
-
-
-
 var global_hint_counter = 0;
 var global_hint_alert_counter = 0;
 
-//submodule_progress = how close you are to getting from 5/10 to 6/10
-//module_progress = 5/10 in kangaroo
 
 var quiz = null;
 
@@ -305,13 +300,17 @@ Quiz.prototype.get_start_module = function () {
 
 // @666
 Quiz.prototype.start_drone_timer = function (stopping_time, pin, user_name) {
-    return this.start_timer3('countdown', 50, this.end_drone_game2, stopping_time, pin, user_name);
+    var self = this;
+    var callback = function () {
+        self.end_drone_game2(pin, user_name);
+    }
+    return this.start_timer3('countdown', 50, callback, stopping_time);
 }
 
 
 // @666
 Quiz.prototype.start_timer3 = function (
-    html_element_name, refresh_how_often, end_function, end_time, argument_to_pass_into_end_function1, argument_to_pass_into_end_function2) {
+    html_element_name, refresh_how_often, end_callback, end_time) {
     // error-checking
     if (el(html_element_name) === null) {
         throw 'Element ' + html_element_name + ' does not exist!';
@@ -354,15 +353,21 @@ Quiz.prototype.start_timer3 = function (
         // Clear the timer (the div with the clock).
         el(html_element_name).innerHTML = '';
         // End the game.
-        end_function(argument_to_pass_into_end_function1, argument_to_pass_into_end_function2)
+        end_callback();
     }, end_time - Date.now());
 }
 
 
 // @666
 Quiz.prototype.end_drone_game2 = function (pin, user_name) {
-    
-    
+    // persist word scores
+    var self = this;
+    this.set_word_scores(function () {
+        self.end_drone_game_meat(pin, user_name);
+    });
+}
+
+Quiz.prototype.end_drone_game_meat = function (pin, user_name) {
     // console.log("666 pin as argument = ", pin);
     // console.log("666 user_name as argument = ", user_name);
  
@@ -399,8 +404,6 @@ Quiz.prototype.end_drone_game2 = function (pin, user_name) {
     
     
     //////// here we want to persist the ranking
-    
-    
     
 }
 
@@ -475,9 +478,10 @@ Quiz.prototype.next_module = function () {
     this.next_submodule();
 };
 
-Quiz.prototype.next_submodule = function() {
+Quiz.prototype.next_submodule = function () {
     
     console.log("entering next_submodule");
+    
     
     if (!this.module) {
         console.log("DEBUGGING 999 this.module.id doesn't exist at this stage ");
@@ -494,20 +498,44 @@ Quiz.prototype.next_submodule = function() {
         incorrect_streak: 0
     };
     
-    this.initialize_accuracy_dictionary();
-    
     if (!this.user.is_mf()) {
         this.next_submodule_not_mf();
     } else {
         this.next_submodule_mf();
     }
     
+    
+    if (this.module.id === 0.5 || this.module.id === 0.25) {
+        // callback of this get operation will be next_question
+        this.get_word_scores();
+        // so we just return
+        return;
+    }
+    
+    this.initialize_accuracy_dictionary();
+    
     this.next_question();
 };
 
 
+Quiz.prototype.get_word_scores = function () {
+    var self = this;
+    this.user.get_word_scores(function (x) {
+        // standard firebase-required method call
+        var data = x.val();
+        // initial case - if the user has never answered a question about a word
+        if (data === null) {
+            data = {};
+        }
+        // todo set properties
+        // finally go to the next question
+        self.next_question();
+    });
+}
 
 
+
+/*
 // @beehack
 Quiz.prototype.next_submodule_without_post = function() {
     
@@ -534,6 +562,7 @@ Quiz.prototype.next_submodule_without_post = function() {
     
     this.next_question();
 };
+*/
 
 
 Quiz.prototype.next_submodule_not_mf = function () {
@@ -911,16 +940,15 @@ var find_non_matching_words = function (query_list, master_list) {
 Quiz.prototype.next_question = function (error) {
     
     
-    Persist.move_firebase_record("obsolete_mf", ["mf_translation_logs", "obsolete_mf2"]);
     
     
     
-    var score_map_test = {
-        "bob": 5,
-        "alice": 6,
-        "beth": 5,
-        "cindy": 1
-    }
+    // var score_map_test = {
+    //     "bob": 5,
+    //     "alice": 6,
+    //     "beth": 5,
+    //     "cindy": 1
+    // }
     
     
     // var score_map_test = {
@@ -932,10 +960,10 @@ Quiz.prototype.next_question = function (error) {
     // var score_list_test = [["bob", 5], ["allen", 6], ["beth", 5], ["cindy", 1]];
     
     
-    var test_output2 = sort_map_by_values(score_map_test, true);
-    var test_output4 = tie_detector(test_output2, compare_nth_item_of_list, 1);
-    console.log("TIE DETECTOR test_output4 = ", test_output4);
-    console.log("TIE DETECTOR test_output4 stringified= ", JSON.stringify(test_output4));
+    // var test_output2 = sort_map_by_values(score_map_test, true);
+    // var test_output4 = tie_detector(test_output2, compare_nth_item_of_list, 1);
+    // console.log("TIE DETECTOR test_output4 = ", test_output4);
+    // console.log("TIE DETECTOR test_output4 stringified= ", JSON.stringify(test_output4));
     
     // var test_output2 = sort_map_by_values(score_map_test, true);
     
@@ -1104,7 +1132,11 @@ Quiz.prototype.question_complete = function (button_name) {
     // clear_input_feedback_box("feedback_for_input");
     
     set_display("feedback_for_input", 'none');
-    this.update_accuracy();
+    
+    // anti- @beehack
+    if (this.module.id !== .25 && this.module.id !== .5) {
+        this.update_accuracy();
+    }
     
     this.submodule.incorrect_streak = 0;
     // We reset the incorrect streak
@@ -1277,7 +1309,19 @@ Quiz.prototype.reset_submodule_without_post = function () {
 };
     
 
-//end @beehack
+// end @beehack
+
+// @beehack
+Quiz.prototype.set_word_scores = function (callback) {
+    // dummy data
+    this.word_scores_update_list = [
+        {item: "arthropod", type: "word", correct: true, used_all_attempts: false, hints: 2, attempts: 2},
+        {item: "amoeba", type: "word", correct: false, used_all_attempts: true, hints: 3, attempts: 10},
+        {item: "biped", type: "word", correct: true, used_all_attempts: false, hints: 0, attempts: 2},
+    ];
+    this.user.persist_word_scores(this.word_scores_update_list, callback);
+}
+// end @beehack
 
 
 // @beehack
@@ -1439,15 +1483,13 @@ Quiz.prototype.submodule_complete = function () {
     
     // @beehack
     // if we are in spelling bee mode
-    // we want to bypass post so this much simple
-    if (this.module.id === 0.5) {
-        this.submodule_complete_without_post();
-        return;
-    }
-    
-    
-    if (this.module.id === 0.25) {
-        this.submodule_complete_without_post();
+    // we want to bypass post so this is much simpler
+    // we also want to set some spelling bee data
+    if (this.module.id === 0.5 || this.module.id === 0.25) {
+        var self = this;
+        this.set_word_scores(function () {
+            self.submodule_complete_without_post();
+        });
         return;
     }
     
@@ -1859,7 +1901,7 @@ Quiz.prototype.get_reward = function () {
 
 
 // todo this is an older function based on progress bars, check if it's useful or should be scrapped
-Quiz.prototype.increment_score = function() {
+Quiz.prototype.increment_score = function () {
     console.log("[quiz.increment_score] entering increment_score");
     console.log("[quiz.increment_score] this.get_reward = ", this.get_reward);
     

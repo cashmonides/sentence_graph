@@ -33,7 +33,7 @@ var master_cartesian = function (level, order, type) {
             states = states.map(function (state) {return add_property(
                 state, order[i].split('!')[0],  order[i].split('!')[1])})
         } else {
-            states = concat_arrays(states.map(function (state) {
+            states = concat_all(states.map(function (state) {
                 return set_cartesian_property(order[i], state, level)}))}
     }
     return states;
