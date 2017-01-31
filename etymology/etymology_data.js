@@ -1268,6 +1268,16 @@ var words = {
         "type": "none",
         "word": "aviatrix"
     },
+    "bacteriology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of bacteria",
+        "part of speech": "noun",
+        "roots": [
+            "LOG"
+        ],
+        "type": "none",
+        "word": "bacteriology"
+    },
     "bankrupt": {
         "grade": 12,
         "meaning": "unable to pay one's debt, i.e. <span class=\"embedded_root\">broke</span>",
@@ -10439,6 +10449,16 @@ var words = {
         "type": "none",
         "word": "voracious"
     },
+    "vulcanology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">volcanoes</span>",
+        "part of speech": "noun",
+        "roots": [
+            "LOG"
+        ],
+        "type": "none",
+        "word": "vulcanology"
+    },
     "xenogenesis": {
         "grade": 12,
         "meaning": "the creation of offspring that is completely different from either parent",
@@ -10538,7 +10558,7 @@ var words = {
     },
     "zoology": {
         "grade": 12,
-        "meaning": "study of animals",
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">animals</span>",
         "part of speech": "noun",
         "roots": [
             "ZO",

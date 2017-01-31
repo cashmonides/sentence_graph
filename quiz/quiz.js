@@ -380,7 +380,7 @@ Quiz.prototype.end_drone_game_meat = function (pin, user_name) {
  
     var path = ["test", pin, "scores", user_name];
     
-    //however we get score (this.match_score or something like that) 
+    // however we get score (this.match_score or something like that) 
     // something like the spelling bee counter
     
     
@@ -1949,114 +1949,12 @@ Quiz.prototype.decrement_score_via_hint = function() {
 // @beehack
 
 
-
-
-
-/////////////OLD VERSIONS BELOW/////////
-
-// // @beehack
-// // Quiz.prototype.set_spelling_bee_level_egg = function () {
-
-// //     var output = {"etym_level": 10}
-    
-// //     this.game.set_level(output);
-// //     global_beehack_new_level_set = true;
-// //     global_beehack_level = output;
-    
-    
-// //     this.reset_submodule_without_post();
-// //     var div = el("spelling_level_header");
-// //     div.innerHTML = "level=EGG";
-// // }
-
-
-// // @beehack
-// Quiz.prototype.set_spelling_bee_level_larva = function () {
-//     var output = {"etym_level": 40}
-    
-//     this.game.set_level(output);
-//     global_beehack_new_level_set = true;
-//     global_beehack_level = output;
-//     this.reset_submodule_without_post();
-//     var div = el("spelling_level_header");
-//     div.innerHTML = "level=LARVA";
-// }
-
-
-// // @beehack
-// Quiz.prototype.set_spelling_bee_level_pupa = function () {
-//     var output = {"etym_level": 80}
-    
-//     this.game.set_level(output);
-//     global_beehack_new_level_set = true;
-//     global_beehack_level = output;
-//     this.reset_submodule_without_post();
-//     var div = el("spelling_level_header");
-//     div.innerHTML = "level=PUPA";
-// }
-
-// // @beehack
-// Quiz.prototype.set_spelling_bee_level_drone = function () {
-//     var output = {"etym_level": 200}
-    
-//     this.game.set_level(output);
-//     global_beehack_new_level_set = true;
-//     global_beehack_level = output;
-//     // this.next_question();
-    
-//     this.reset_submodule_without_post();
-//     var div = el("spelling_level_header");
-//     div.innerHTML = "level=DRONE";
-// }
-
-
-// // @beehack
-// Quiz.prototype.set_spelling_bee_level_worker = function () {
-//     var output = {"etym_level": 300}
-    
-//     this.game.set_level(output);
-//     global_beehack_new_level_set = true;
-//     global_beehack_level = output;
-//     this.reset_submodule_without_post();
-//     var div = el("spelling_level_header");
-//     div.innerHTML = "level=WORKER";
-// }
-
-
-// // @beehack
-// Quiz.prototype.set_spelling_bee_level_warrior = function () {
-//     var output = {"etym_level": 400}
-    
-//     this.game.set_level(output);
-//     global_beehack_new_level_set = true;
-//     global_beehack_level = output;
-//     this.reset_submodule_without_post();
-//     var div = el("spelling_level_header");
-//     div.innerHTML = "level=WARRIOR";
-// }
-
-
-
-
-
-// // @beehack
-// Quiz.prototype.set_spelling_bee_level_queen = function () {
-//     var output = {"etym_level": 470}
-    
-//     this.game.set_level(output);
-//     global_beehack_new_level_set = true;
-//     global_beehack_level = output;
-//     this.reset_submodule_without_post();
-//     var div = el("spelling_level_header");
-//     div.innerHTML = "level=QUEEN";
-// }
-
-
 /////////////NEW VERSIONS BELOW/////////
 // @beehack
-Quiz.prototype.set_spelling_bee_level_egg = function () {
-    console.log("BEEHACK789 setting spelling bee level to egg");
-    console.log("BEEHACK789 counter should be set to: ", 1);
+Quiz.prototype.set_spelling_bee_level = function (new_level) {
+    // console.log("BEEHACK789 setting spelling bee level to " + new_level);
+    // console.log("BEEHACK789 counter should be set to: ",
+    //    level_name_to_counter_value[new_level]);
     
     
     // we alter globals
@@ -2067,7 +1965,7 @@ Quiz.prototype.set_spelling_bee_level_egg = function () {
     // the new version to keep
     in_spelling_bee_training_mode = true;
     
-    spelling_bee_training_counter = 1;
+    spelling_bee_training_counter = level_name_to_counter_value[new_level];
     
     
     // we call the method to change level in the game
@@ -2078,179 +1976,19 @@ Quiz.prototype.set_spelling_bee_level_egg = function () {
     // in order to clear the progress bar and generate a new question
     this.reset_submodule_without_post();
     var div = el("spelling_level_header");
-    div.innerHTML = "level=EGG";
+    div.innerHTML = "level=" + new_level;
 }
 
-
-Quiz.prototype.set_spelling_bee_level_larva = function () {
-    console.log("BEEHACK789 setting spelling bee level to larva");
-    console.log("BEEHACK789 counter should be set to: ", 20);
-    
-    
-    // we alter globals
-    
-    // the old version get rid of
-    global_beehack_new_level_set = true;
-    
-    // the new version to keep
-    in_spelling_bee_training_mode = true;
-    
-    spelling_bee_training_counter = 20;
-    
-    
-    // we call the method to change level in the game
-    this.game.set_level_by_counter(spelling_bee_training_counter);
-    // this.game.set_level_by_counter(21);
-    
-    // we reset the submodule with the new level
-    // in order to clear the progress bar and generate a new question
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=LARVA";
+// @beehack
+var level_name_to_counter_value = {
+    'egg': 1,
+    'larva': 20,
+    'pupa': 30,
+    'drone': 40,
+    'worker': 41,
+    'warrior': 42,
+    'queen': 43
 }
-
-
-Quiz.prototype.set_spelling_bee_level_pupa = function () {
-    console.log("BEEHACK789 setting spelling bee level to pupa");
-    console.log("BEEHACK789 counter should be set to: ", 30);
-    
-    
-    // we alter globals
-    
-    // the old version get rid of
-    global_beehack_new_level_set = true;
-    
-    // the new version to keep
-    in_spelling_bee_training_mode = true;
-    
-    spelling_bee_training_counter = 30;
-    
-    
-    // we call the method to change level in the game
-    this.game.set_level_by_counter(spelling_bee_training_counter);
-    
-    
-    // we reset the submodule with the new level
-    // in order to clear the progress bar and generate a new question
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=PUPA";
-}
-
-
-Quiz.prototype.set_spelling_bee_level_drone = function () {
-    console.log("BEEHACK789 setting spelling bee level to drone");
-    console.log("BEEHACK789 counter should be set to: ", 40);
-    
-    
-    // we alter globals
-    
-    // the old version get rid of
-    global_beehack_new_level_set = true;
-    
-    // the new version to keep
-    in_spelling_bee_training_mode = true;
-    
-    spelling_bee_training_counter = 40;
-    
-    
-    // we call the method to change level in the game
-    this.game.set_level_by_counter(spelling_bee_training_counter);
-    
-    
-    // we reset the submodule with the new level
-    // in order to clear the progress bar and generate a new question
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=DRONE";
-}
-
-
-Quiz.prototype.set_spelling_bee_level_worker = function () {
-    console.log("BEEHACK789 setting spelling bee level to worker");
-    console.log("BEEHACK789 counter should be set to: ", 41);
-    
-    
-    // we alter globals
-    
-    // the old version get rid of
-    global_beehack_new_level_set = true;
-    
-    // the new version to keep
-    in_spelling_bee_training_mode = true;
-    
-    spelling_bee_training_counter = 41;
-    
-    
-    // we call the method to change level in the game
-    this.game.set_level_by_counter(spelling_bee_training_counter);
-    
-    
-    // we reset the submodule with the new level
-    // in order to clear the progress bar and generate a new question
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=WORKER";
-}
-
-
-Quiz.prototype.set_spelling_bee_level_warrior = function () {
-    console.log("BEEHACK789 setting spelling bee level to warrior");
-    console.log("BEEHACK789 counter should be set to: ", 42);
-    
-    
-    // we alter globals
-    
-    // the old version get rid of
-    global_beehack_new_level_set = true;
-    
-    // the new version to keep
-    in_spelling_bee_training_mode = true;
-    
-    spelling_bee_training_counter = 42;
-    
-    
-    // we call the method to change level in the game
-    this.game.set_level_by_counter(spelling_bee_training_counter);
-    
-    
-    // we reset the submodule with the new level
-    // in order to clear the progress bar and generate a new question
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=WARRIOR";
-}
-
-
-Quiz.prototype.set_spelling_bee_level_queen = function () {
-    console.log("BEEHACK789 setting spelling bee level to warrior");
-    console.log("BEEHACK789 counter should be set to: ", 43);
-    
-    
-    // we alter globals
-    
-    // the old version get rid of
-    global_beehack_new_level_set = true;
-    
-    // the new version to keep
-    in_spelling_bee_training_mode = true;
-    
-    spelling_bee_training_counter = 43;
-    
-    
-    // we call the method to change level in the game
-    this.game.set_level_by_counter(spelling_bee_training_counter);
-    
-    
-    // we reset the submodule with the new level
-    // in order to clear the progress bar and generate a new question
-    this.reset_submodule_without_post();
-    var div = el("spelling_level_header");
-    div.innerHTML = "level=QUEEN";
-}
-
-
-
 
 // @beehack
 Quiz.prototype.get_spelling_bee_level = function () {
@@ -2271,23 +2009,11 @@ Quiz.prototype.get_initial_spelling_bee_counter = function () {
 }
 
 
-// @beehack
-Quiz.prototype.set_spelling_bee_level = function (level) {
-    // level = 66666;
-    this.user.persist_spelling_bee_level(level);
-}
-
 Quiz.prototype.set_spelling_bee_counter = function (level) {
     // level = 66666;
     this.user.persist_spelling_bee_counter(level);
     // this.user.persist_spelling_bee_level(level);
 }
-
-
-// var set_persistent_spelling_bee_level = function (level) {
-//     console.log("BEEHACK123 quiz.set_persistent called, level = ", level);
-//     global_beehack_level_persistent = level;
-// }
 
 
 Quiz.set_question_text = function(question){
@@ -2319,8 +2045,7 @@ Quiz.prototype.add_question_text = function(sentence){
     this.sentence = sentence;
 };
 
-Quiz.prototype.get_selected_region = function(){
-    
+Quiz.prototype.get_selected_region = function() {
     var answer_indices = this.word_selector.get_selected_indices();
     //console.log"answer_indices = ", answer_indices);
     return this.sentence.get_region(answer_indices);
@@ -2412,277 +2137,6 @@ Quiz.prototype.clear_cheat_sheet = function () {
 Quiz.prototype.get_vocab_cheat_sheet_map = function () {
     return this.game.cheat_sheet || 'no cheat sheet for this mode';
 };
- 
-
- 
- 
- 
- // @cleanup, below should be eliminated
-//a more advanced version being developed
-// goals:
-// toggle, not just append
-// catch errors
-// make sure we're not giving the actual word itself
-// make sure we're not producing multiple variations that give away the word
-// e.g. pod_____y     & __iatry
-// Quiz.prototype.initialize_spelling_hint = function () {
-    
-//     // todo see if something like this simple error catcher can work
-//     //(some games won't have a spelling hint because they're not spelling mode)
-//     // if (!this.game.make_spelling_hint()) {
-//     //     console.log("PROBLEM: no spelling hint for this game");
-//     //     return;
-//     // } 
-    
-    
-//     if (!this.module.submodule.spelling_hint_penalty) {
-//         // todo when spelling hint penalty is implemented, build a block of code here
-//         // bug.log("no spelling hint penalty specified");
-//     } else {
-//       if (this.module.submodule.spelling_hint_penalty != 0) {
-//         if (this.game.chosen_question_type == "root_definition_to_root") {
-//             alert("At this advanced level hints will cost you one point.");
-//             this.decrement_score_via_hint();
-//             }
-//         }  
-//     }
-    
-    
-    
-    
-    
-    
-//     back.log("initialize_spelling_hint entered");
-    
-//     var div_to_inspect = el('spelling_hint_box');
-    
-//     var spelling_hint_string = this.game.spelling_hint;
-    
-    
-//     console.log("[quiz.initialize_spelling_hint] hint_output = ", spelling_hint_string);
-    
-//     //we first test A SIMPLE VERSION
-//     // SUMMARY: works but doesn't remove old hint, doesn't give new hint
-//     // simple because it doesn't use make, it just alters a pre-existing div
-//     // does this work??
-//     // yes this works but sometimes (seemingly more than usual)
-//     // it produces the full word
-//     var div_string = 'spelling_hint_box'
-//     var div_name = el('spelling_hint_box');
-//     div_name.innerHTML = spelling_hint_string;
-//     //works
-//     // el('spelling_hint_button').onclick = function () {quiz.toggle_element('spelling_hint_div2')};
-//     // quiz.toggle_element takes as its argument a string, not the div
-//     el('spelling_hint_button').onclick = function () {quiz.toggle_element(div_string)};
-// };    
-  
-  
-// @GRIMES 
-// we want to keep track of how many times they've hit the button
-// and do certain behaviors if we hit the threshold
-// we also want to keep track of how many alerts they've seen
-// so we don't show alerts annoyingly
-    // decrement score by some number
-    // give alert or not
-    // make letters bold
-    // show etym cheat sheet
-    // show underscore hint
-// something like this
-    // global_hint_counter++
-    // consult a map, give alert if under threshold
-    // consult a map, matching global_hint_counter (int) to a function
-        // make embedded roots bold
-        // (example sentence - unimplemented)
-        // show etym cheat sheet
-        // show underscore hint
-// Quiz.prototype.initialize_spelling_hint_master_oldest = function () {
-    
-//     // todo see if something like this simple error catcher can work
-//     //(some games won't have a spelling hint because they're not spelling mode)
-//     // if (!this.game.make_spelling_hint()) {
-//     //     console.log("PROBLEM: no spelling hint for this game");
-//     //     return;
-//     // } 
-    
-//     var hint_penalty_to_inflict;
-    
-    
-//     global_hint_counter++;
-//     global_hint_alert_counter++;
-    
-//     if (!this.module.submodule.spelling_hint_penalty) {
-//         // todo when spelling hint penalty is implemented, build a block of code here
-//         bug.log("no spelling hint penalty specified, penalty set to 1");
-//         console.log("GRIMES no spelling hint penalty specified, penalty set to 1");
-//         hint_penalty_to_inflict = 1;
-//     } else {
-//         hint_penalty_to_inflict = this.module.submodule.spelling_hint_penalty;
-//         console.log("GRIMES hint_penalty set to module parameter = ", hint_penalty_to_inflict);
-//     }
-    
-    
-//     // handle the alert behavior
-//     if (global_hint_alert_counter < 5) {
-        
-//         alert("At this advanced level a hint will cost you one point.");
-//     }
-    
-    
-//     if (this.game.chosen_question_type == "root_definition_to_root") {
-        
-//     }
-    
-//     // uncomment when implemented
-//     // decrement the score (unimplemented for now)
-//     // this.decrement_score_via_hint(penalty_to_inflict);
-    
-    
-//     // maybe move these into the if blocks below
-//     this.initialize_spelling_hint_subfunction_bold_roots();
-
-//     this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
-    
-//     this.initialize_spelling_hint_subfunction_underscore();
-
-    
-//     // handle the hint behavior
-//     if (global_hint_counter === 1) {
-//         // PSEUDOCODE: fade out hint_button_1, fade in hint_button_2
-//     } else if (global_hint_counter === 2) {
-//         // PSEUDOCODE: fade out hint_button_2, fade in hint_button_3
-//     } else if (global_hint_counter === 3) {
-//         // PSEUDOCODE: fade out hint_button_3
-//     } else {
-//         console.log("GRIMES global_hint_counter > 3, no action");
-//     }
-// }
-
-// Quiz.prototype.initialize_spelling_hint_master_old = function (n) {
-    
-//     // todo see if something like this simple error catcher can work
-//     //(some games won't have a spelling hint because they're not spelling mode)
-//     // if (!this.game.make_spelling_hint()) {
-//     //     console.log("PROBLEM: no spelling hint for this game");
-//     //     return;
-//     // } 
-    
-    
-    
-//     console.log("GRIMES this.game.spelling_hint = ", this.game.spelling_hint);
-    
-    
-//     var hint_penalty_to_inflict;
-    
-    
-//     global_hint_counter++;
-//     global_hint_alert_counter++;
-    
-//     if (!this.module.submodule.spelling_hint_penalty) {
-//         // todo when spelling hint penalty is implemented, build a block of code here
-//         bug.log("no spelling hint penalty specified, penalty set to 1");
-//         console.log("GRIMES no spelling hint penalty specified, penalty set to 1");
-//         hint_penalty_to_inflict = 1;
-//     } else {
-//         hint_penalty_to_inflict = this.module.submodule.spelling_hint_penalty;
-//         console.log("GRIMES hint_penalty set to module parameter = ", hint_penalty_to_inflict);
-//     }
-    
-    
-//     // handle the alert behavior
-//     // todo alerts disabled for testing, implement when done testing
-//     if (global_hint_alert_counter < 0) {
-        
-//         alert("At this advanced level a hint will cost you one point.");
-//     }
-    
-    
-    
-    
-//     // uncomment when implemented
-//     // decrement the score (unimplemented for now)
-//     // this.decrement_score_via_hint(penalty_to_inflict);
-    
-    
-//     // maybe move these into the if blocks below
-//     // this.initialize_spelling_hint_subfunction_bold_roots();
-//     // this.initialize_spelling_hint_subfunction_underscore();
-//     // this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
-    
-    
-    
-//     // handle the hint behavior
-    
-//     console.log("ENTERING GRIMES1");
-    
-//     console.log("GRIMES1 this.game.chosen_question_type = ", this.game.chosen_question_type);
-//     console.log("GRIMES1 number of button pressed = ", n);
-    
-//     if (this.game.chosen_question_type === "root_definition_to_root") {
-//         if (n === 1) {
-//             console.log("GRIMES1, root n = 1");
-//             // PSEUDOCODE: make etym cheat sheet
-//             this.initialize_spelling_hint_subfunction_etym_cheat_sheet(1);
-//         } else if (n === 2) {
-//             console.log("GRIMES1, root n = 2");
-//             // PSEUDOCODE: first letter hint
-//             // todo underscore and first letter are presumabley the same, so rename
-//             // this doesn't seem to work
-//             this.initialize_spelling_hint_subfunction_underscore(2);
-//         } else if (n === 3) {
-//             console.log("GRIMES1, root n = 3");
-//             // todo add some kind of super hint like, bolding the relevant roots in the cheat sheet
-//             console.log("GRIMES no hint at this level")
-//         } else {
-//             console.log("GRIMES global_hint_counter > 3, no action");
-//         }
-//     } else if (this.game.chosen_question_type === "word_definition_to_word") {
-//         if (n === 1) {
-//             console.log("GRIMES1, word n = 1");
-//             // PSEUDOCODE: bold words
-//             this.initialize_spelling_hint_subfunction_bold(1);
-//         } else if (n === 2) {
-//             console.log("GRIMES1, word n = 2");
-//             // PSEUDOCODE: etym cheat sheet
-//             this.initialize_spelling_hint_subfunction_etym_cheat_sheet(2);
-//         } else if (n === 3) {
-//             console.log("GRIMES1, word n = 3");
-//             // PSEUDOCODE: underscore
-//             this.initialize_spelling_hint_subfunction_underscore(3);
-//         } else {
-//             console.log("GRIMES global_hint_counter > 3, no action");
-//         }
-//     } else {
-//         console.log("PROBLEM neither root nor word, hopefully etym, setting up default (etym cheat sheet)")
-//         if (n === 1) {
-//             // PSEUDOCODE: bold words
-//             this.initialize_spelling_hint_subfunction_bold();
-//         } else if (n === 2) {
-//             // PSEUDOCODE: etym cheat sheet
-//             this.initialize_spelling_hint_subfunction_etym_cheat_sheet();
-//         } else if (n === 3) {
-//             // PSEUDOCODE: underscore
-//         } else {
-//             console.log("GRIMES global_hint_counter > 3, no action");
-//         }
-//     }
-    
-    
-    
-    
-    
-
-    
-//     // handle the button behavior
-//     if (n === 1) {
-//         // PSEUDOCODE: fade out hint_button_1, fade in hint_button_2
-//     } else if (n === 2) {
-//         // PSEUDOCODE: fade out hint_button_2, fade in hint_button_3
-//     } else if (n === 3) {
-//         // PSEUDOCODE: fade out hint_button_3
-//     } else {
-//         console.log("GRIMES global_hint_counter > 3, no action");
-//     }
-// }
 
 
 
@@ -3142,120 +2596,4 @@ Quiz.prototype.toggle_element = function(id) {
         element.style.display = 'block';
     }
 };
-
-
-
-
-
-
-
-///////scorched earth below
-
-
-/////// HINT #1
-
-// Quiz.prototype.initialize_spelling_hint_subfunction_bold = function () {
-//     el('spelling_hint_button').onclick = function () {
-//         set_font_weight_of_class("embedded_root", "900");
-//         set_case_of_class("embedded_root", "uppercase");
-//     };
-// }
-
-
-// Quiz.prototype.initialize_spelling_hint_subfunction_bold_old = function (n) {
-//     el('spelling_hint_button' + n).onclick = function () {
-//         set_font_weight_of_class("embedded_root", "900");
-//         set_case_of_class("embedded_root", "uppercase");
-//     };
-// }
-
-
-/////// HINT #2
-
-// Quiz.prototype.initialize_spelling_hint_subfunction_etym_cheat_sheet_old = function (n) {
-    
-    
-    
-//     var name = "etym_cheat_sheet"
-//     var etym_cheat = this.game.etymology_cheat_sheet;
-    
-    
-//     // @beehack
-//     // the mystery: <span ... etc. occurs on the html page
-//     // below is the short term removal
-//     // ideally we want the words to be able to be made bold in the cheat sheet as well
-
-    
-//     var new_list = [];
-//     for (var i = 0; i < etym_cheat.length; i++) {
-//         var sublist = etym_cheat[i];
-        
-//         var new_sublist = [];
-        
-        
-//         for (var j = 0; j < sublist.length; j++) {
-//             var item = sublist[j].replace("<span class=\"embedded_root\">", "");
-//             item = item.replace("</span>", "");
-//             new_sublist.push(item);
-//         }
-//         new_list.push(new_sublist);
-//     } 
-    
-    
-//     etym_cheat = new_list;
-    
-//     // console.log("this.game.etym_cheat_sheet stringified = ", 
-//     //     JSON.stringify(etym_cheat));
-        
-    
-//     //end beehack
-        
-    
-    
-    
-//     back.log("this.game.etym_cheat_sheet stringified = ", 
-//         JSON.stringify(etym_cheat));
-    
-//     var outer_div = el(name + "_div");
-//     // create_cheat_sheet_table(outer_div, name,
-//     // null, null, etym_cheat, 2);
-//     // el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(name)};
-//     el('spelling_hint_button' + n).onclick = function () {
-//         set_display(el(name)), 'initial'};
-// }
-
-
-
-/////// HINT #3
-// Quiz.prototype.initialize_spelling_hint_subfunction_underscore_old = function (n) {
-//     back.log("spelling_hint_subfunction_underscore entered");
-//     console.log("GRIMES spelling_hint_subfunction_underscore entered");
-    
-//     var div_to_inspect = el('spelling_hint_box');
-    
-//     // var spelling_hint_string = this.game.spelling_hint;
-    
-    
-    
-//     var spelling_hint_string = this.game.spelling_hint;
-    
-//     console.log("GRIMES spelling_hint_string = ", spelling_hint_string);
-    
-    
-    
-//     back.log("underscore_hint_output = ", spelling_hint_string);
-//     console.log("GRIMES underscore_hint_output = ", spelling_hint_string);
-    
-//     var div_string = 'spelling_hint_box'
-//     var div_name = el('spelling_hint_box');
-//     div_name.innerHTML = spelling_hint_string;
-    
-//     el('spelling_hint_button' + n).onclick = function () {quiz.toggle_element(div_string)};
-// };    
-  
-//////// HINT #4
-
-// Quiz.prototype.initialize_spelling_hint_subfunction_first_letter = function (n) {
-//     console.log("GRIMES first letter function STILL EMPTY");
-// }
 
