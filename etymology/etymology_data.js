@@ -7,7 +7,7 @@ var words = {
             "DEC/DEKA"
         ],
         "type": "none",
-        "word": "December"
+        "word": "december"
     },
     "november": {
         "grade": 12,
@@ -17,7 +17,7 @@ var words = {
             "NON/NOV"
         ],
         "type": "none",
-        "word": "November"
+        "word": "november"
     },
     "heptateuch": {
         "grade": 12,
@@ -27,7 +27,7 @@ var words = {
             "HEPT/HEPTA"
         ],
         "type": "none",
-        "word": "Heptateuch"
+        "word": "heptateuch"
     },
     "mesoamerica": {
         "grade": 12,
@@ -37,7 +37,7 @@ var words = {
             "MESO"
         ],
         "type": "none",
-        "word": "Mesoamerica"
+        "word": "mesoamerica"
     },
     "paleolithic": {
         "grade": 12,
@@ -47,7 +47,7 @@ var words = {
             "PALE/PALEO"
         ],
         "type": "none",
-        "word": "Paleolithic"
+        "word": "paleolithic"
     },
     "september": {
         "grade": 12,
@@ -57,7 +57,7 @@ var words = {
             "SEPT"
         ],
         "type": "none",
-        "word": "September"
+        "word": "september"
     },
     "abbreviate": {
         "grade": 12,
@@ -354,8 +354,7 @@ var words = {
         "meaning": "<span class=\"embedded_root\">lack</span> or loss of the ability to <span class=\"embedded_root\">read</span>",
         "part of speech": "noun",
         "roots": [
-            "A/AN root 3",
-            "LEX"
+            "A/AN root 3"
         ],
         "type": "none",
         "word": "alexia"
@@ -1256,7 +1255,7 @@ var words = {
             "AVI"
         ],
         "type": "none",
-        "word": "aviatrix"
+        "word": "aviator"
     },
     "aviatrix": {
         "grade": 12,
@@ -2967,7 +2966,6 @@ var words = {
         "meaning": "to assert something <span class=\"embedded_root\">different</span> than what another person <span class=\"embedded_root\">think</span>s",
         "part of speech": "verb",
         "roots": [
-            "DIS",
             "PUT"
         ],
         "type": "none",
@@ -5652,7 +5650,6 @@ var words = {
         "meaning": "the study and history of words",
         "part of speech": "noun",
         "roots": [
-            "LEX",
             "LOG"
         ],
         "type": "none",
@@ -9319,7 +9316,7 @@ var words = {
             "SEX"
         ],
         "type": "none",
-        "word": "sextet or sextette"
+        "word": "sextet"
     },
     "sextuple": {
         "grade": 12,
@@ -9610,7 +9607,7 @@ var words = {
             "MERGE/MERS"
         ],
         "type": "none",
-        "word": "submerge or submerse"
+        "word": "submerge"
     },
     "substandard": {
         "grade": 12,
