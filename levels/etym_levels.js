@@ -14,45 +14,6 @@ var etym_levels = {
             'root_definition_to_root': .9
         }
     },
-    33: {
-        roots: ['FIC/FAC/FY'],
-        question_types: {
-            'word_to_latin_root': .00001,
-            'word_to_english_root': .0001,
-            'word_to_translated_root': .0001,
-            'english_root_to_word': .0001,
-            'word_to_word_definition': .0001,
-            'word_definition_to_word': .9,
-            'root_to_root_definition': .0001,
-            'root_definition_to_root': .9
-        }
-    },
-    34: {
-        roots: ['LOG'],
-        question_types: {
-            'word_to_latin_root': .00001,
-            'word_to_english_root': .0001,
-            'word_to_translated_root': .0001,
-            'english_root_to_word': .0001,
-            'word_to_word_definition': .0001,
-            'word_definition_to_word': .9,
-            'root_to_root_definition': .0001,
-            'root_definition_to_root': .9
-        }
-    },
-    35: {
-        roots: ['FIC/FAC/FY', 'LOG'],
-        question_types: {
-            'word_to_latin_root': .00001,
-            'word_to_english_root': .0001,
-            'word_to_translated_root': .0001,
-            'english_root_to_word': .0001,
-            'word_to_word_definition': .0001,
-            'word_definition_to_word': .9,
-            'root_to_root_definition': .0001,
-            'root_definition_to_root': .9
-        }
-    },
     5 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR'],
         question_types: {
@@ -120,6 +81,71 @@ var etym_levels = {
             'word_definition_to_word': 1.5,
             'root_to_root_definition': 1,
             'root_definition_to_root': 1
+        }
+    },
+    33: {
+        roots: ['FIC/FAC/FY'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .9,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
+    34: {
+        roots: ['LOG'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .9,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
+    35: {
+        roots: ['FIC/FAC/FY', 'LOG'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .9,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
+    36: {
+        roots: ['PHIL', 'PHOB'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .9,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
+    37: {
+        roots: ['FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .9,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
         }
     },
     40 : {
