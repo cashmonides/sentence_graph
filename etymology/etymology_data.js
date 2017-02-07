@@ -188,6 +188,28 @@ var words = {
         "type": "none",
         "word": "achromatic"
     },
+    "acousticophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> loud <span class=\"embedded_root\">sounds</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ACOU",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "acousticophobe"
+    },
+    "acousticophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of loud <span class=\"embedded_root\">sounds</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ACOU",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "acousticophobia"
+    },
     "acrobat": {
         "grade": 12,
         "meaning": "one who walks on a <span class=\"embedded_root\">high</span> wire or performs other stunts",
@@ -197,6 +219,28 @@ var words = {
         ],
         "type": "none",
         "word": "acrobat"
+    },
+    "acrophobe": {
+        "grade": 12,
+        "meaning": "one who has a <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">heights</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ACRO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "acrophobe"
+    },
+    "acrophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">heights</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ACRO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "acrophobia"
     },
     "acronym": {
         "grade": 12,
@@ -296,6 +340,28 @@ var words = {
         "type": "none",
         "word": "aerial"
     },
+    "aerophobe": {
+        "grade": 12,
+        "meaning": "one who has a <span class=\"embedded_root\">fear</span> of flying on <span class=\"embedded_root\">air</span>planes",
+        "part of speech": "noun",
+        "roots": [
+            "AER",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "aerophobe"
+    },
+    "aerophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of flying on <span class=\"embedded_root\">air</span>planes",
+        "part of speech": "noun",
+        "roots": [
+            "AER",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "aerophobia"
+    },
     "aerospace": {
         "grade": 12,
         "meaning": "the <span class=\"embedded_root\">air</span> and the surrounding space",
@@ -318,6 +384,28 @@ var words = {
         ],
         "type": "none",
         "word": "aesthetic"
+    },
+    "agoraphobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> the <span class=\"embedded_root\">marketplace</span> and other crowded public places",
+        "part of speech": "noun",
+        "roots": [
+            "AGOR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "agoraphobe"
+    },
+    "agoraphobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of the <span class=\"embedded_root\">marketplace</span> and other crowded public places",
+        "part of speech": "noun",
+        "roots": [
+            "AGOR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "agoraphobia"
     },
     "agrarian": {
         "grade": 12,
@@ -358,6 +446,28 @@ var words = {
         ],
         "type": "none",
         "word": "alexia"
+    },
+    "algophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">pain</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ALG",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "algophobe"
+    },
+    "algophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">pain</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ALG",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "algophobia"
     },
     "alter ego": {
         "grade": 12,
@@ -558,6 +668,35 @@ var words = {
         "type": "none",
         "word": "android"
     },
+    "anesthesiologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of creating the <span class=\"embedded_root\">lack</span> of <span class=\"embedded_root\">sensation</span>, especially before a surgical operation",
+        "part of speech": [
+            "noun"
+        ],
+        "roots": [
+            "A/AN root 3",
+            "ESTH/AESTH",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "anesthesiologist"
+    },
+    "anesthesiology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of creating the <span class=\"embedded_root\">lack</span> of <span class=\"embedded_root\">sensation</span>, especially before a surgical operation",
+        "part of speech": [
+            "noun"
+        ],
+        "roots": [
+            "A/AN root 3",
+            "ESTH/AESTH",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "anesthesiology"
+    },
     "anhydrous": {
         "grade": 12,
         "meaning": "<span class=\"embedded_root\">without</span> <span class=\"embedded_root\">water</span>",
@@ -661,9 +800,21 @@ var words = {
         "type": "none",
         "word": "anteroom"
     },
+    "anthologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the collection of <span class=\"embedded_root\">words</span> or writings, gathered together in the same way as <span class=\"embedded_root\">flower</span>s are gathered",
+        "part of speech": "noun",
+        "roots": [
+            "ANTH",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "anthologist"
+    },
     "anthology": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">collect</span>ion of treasured writings, gathered together in the same way as <span class=\"embedded_root\">flower</span>s are gathered",
+        "meaning": "a collection of <span class=\"embedded_root\">words</span> or writings, gathered together in the same way as <span class=\"embedded_root\">flowers</span> are gathered",
         "part of speech": "noun",
         "roots": [
             "ANTH",
@@ -671,6 +822,28 @@ var words = {
         ],
         "type": "none",
         "word": "anthology"
+    },
+    "anthophile": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">loves</span> <span class=\"embedded_root\">flowers</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ANTH",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "anthophile"
+    },
+    "anthophilia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">love</span> of <span class=\"embedded_root\">flowers</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ANTH",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "anthophilia"
     },
     "anthozoan": {
         "grade": 12,
@@ -682,6 +855,18 @@ var words = {
         ],
         "type": "none",
         "word": "anthozoan"
+    },
+    "anthropologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">man</span>kind",
+        "part of speech": "noun",
+        "roots": [
+            "ANTHROP",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "anthropologist"
     },
     "anthropology": {
         "grade": 12,
@@ -715,6 +900,28 @@ var words = {
         ],
         "type": "none",
         "word": "anthropophagy"
+    },
+    "anthropophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">humans</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ANTHROP",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "anthropophobe"
+    },
+    "anthropophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">humans</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ANTHROP",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "anthropophobia"
     },
     "antibody": {
         "grade": 12,
@@ -855,6 +1062,28 @@ var words = {
         "type": "none",
         "word": "aquifer"
     },
+    "arachnophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">spiders</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ARACHN",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "arachnophobe"
+    },
+    "arachnophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">spiders</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ARACHN",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "arachnophobia"
+    },
     "arbor": {
         "grade": 12,
         "meaning": "a shady area formed by <span class=\"embedded_root\">tree</span>s",
@@ -884,6 +1113,18 @@ var words = {
         ],
         "type": "none",
         "word": "arborous"
+    },
+    "archaeologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> cultures",
+        "part of speech": "noun",
+        "roots": [
+            "ARCH root 2",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "archaeologist"
     },
     "archaeology": {
         "grade": 12,
@@ -1080,6 +1321,54 @@ var words = {
         "type": "none",
         "word": "asterisk"
     },
+    "astrobiologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">life</span> amongst the <span class=\"embedded_root\">stars</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ASTRO/ASTER",
+            "BIO/BI",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "astrobiologist"
+    },
+    "astrobiology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">life</span> amongst the <span class=\"embedded_root\">stars</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ASTRO/ASTER",
+            "BIO/BI",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "astrobiology"
+    },
+    "astrologer": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person who performs</span> the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">stars</span> and their supposed supernatural effect on human destinies",
+        "part of speech": "noun",
+        "roots": [
+            "ASTRO/ASTER",
+            "LOG",
+            "ER"
+        ],
+        "type": "none",
+        "word": "astrologer"
+    },
+    "astrology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">stars</span> and their supposed supernatural effect on human destinies",
+        "part of speech": "noun",
+        "roots": [
+            "ASTRO/ASTER",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "astrology"
+    },
     "astronaut": {
         "grade": 12,
         "meaning": "a person <span class=\"embedded_root\">travel</span>ing to the <span class=\"embedded_root\">star</span>s",
@@ -1090,9 +1379,10 @@ var words = {
         "type": "none",
         "word": "astronaut"
     },
+    //@todo add NOM root
     "astronomer": {
         "grade": 12,
-        "meaning": "someone who studies the laws of the <span class=\"embedded_root\">star</span>s",
+        "meaning": "a <span class=\"embedded_root\">person who performs</span> the study of the laws of the <span class=\"embedded_root\">stars</span>",
         "part of speech": "noun",
         "roots": [
             "ASTRO/ASTER"
@@ -1151,6 +1441,29 @@ var words = {
         "type": "none",
         "word": "audience"
     },
+    "audiologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">hearing</span>",
+        "part of speech": "noun",
+        "roots": [
+            "AUD/AUDI/AUDIO",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "audiologist"
+    },
+    "audiology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">hearing</span>",
+        "part of speech": "noun",
+        "roots": [
+            "AUD/AUDI/AUDIO",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "audiology"
+    },
     "audiometer": {
         "grade": 12,
         "meaning": "an instrument that <span class=\"embedded_root\">measure</span>s one's ability to <span class=\"embedded_root\">hear</span>",
@@ -1161,6 +1474,28 @@ var words = {
         ],
         "type": "none",
         "word": "audiometer"
+    },
+    "audiophile": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">loves</span> <span class=\"embedded_root\">listening</span> to music, especially using sophisticated sound equipment",
+        "part of speech": "noun",
+        "roots": [
+            "AUD/AUDI/AUDIO",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "audiophile"
+    },
+    "anthophilia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">love</span> of <span class=\"embedded_root\">flowers</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ANTH",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "anthophilia"
     },
     "audiovisual": {
         "grade": 12,
@@ -1403,6 +1738,39 @@ var words = {
         "type": "none",
         "word": "bibliophile"
     },
+    "bibliophilia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">love</span> of <span class=\"embedded_root\">books</span>",
+        "part of speech": "noun",
+        "roots": [
+            "BIBLI",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "bibliophilia"
+    },
+    "bibliophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">books</span>",
+        "part of speech": "noun",
+        "roots": [
+            "BIBLI",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "bibliophobe"
+    },
+    "bbliophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">books</span>",
+        "part of speech": "noun",
+        "roots": [
+            "BIBLI",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "bibliophobia"
+    },
     "bicentennial": {
         "grade": 12,
         "meaning": "the 200th anniversary, or relating to an age or period of 200 years (200 = <span class=\"embedded_root\">two</span> times one <span class=\"embedded_root\">hundred</span>)",
@@ -1460,9 +1828,21 @@ var words = {
         "type": "none",
         "word": "biography"
     },
+    "biologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">life</span>",
+        "part of speech": "noun",
+        "roots": [
+            "BIO/BI",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "biologist"
+    },
     "biology": {
         "grade": 12,
-        "meaning": "the scientific <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">life</span>",
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">life</span>",
         "part of speech": "noun",
         "roots": [
             "BIO/BI",
@@ -1567,14 +1947,26 @@ var words = {
     },
     "cardiologist": {
         "grade": 12,
-        "meaning": "a doctor specialized in the treatment and <span class=\"embedded_root\">study</span> of the heart",
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the treatment and <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">heart</span>",
+        "part of speech": "noun",
+        "roots": [
+            "CARDI",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "cardiologist"
+    },
+    "cardiology": {
+        "grade": 12,
+        "meaning": "the treatment and <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">heart</span>",
         "part of speech": "noun",
         "roots": [
             "CARDI",
             "LOG"
         ],
         "type": "none",
-        "word": "cardiologist"
+        "word": "cardiology"
     },
     "carnivorous": {
         "grade": 12,
@@ -1815,6 +2207,17 @@ var words = {
         "type": "none",
         "word": "chronological"
     },
+    "chronology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">time</span>, especially the order in which events occurred in history",
+        "part of speech": "noun",
+        "roots": [
+            "CHRON",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "chronology"
+    },
     "chronometer": {
         "grade": 12,
         "meaning": "an instrument that <span class=\"embedded_root\">measure</span>s <span class=\"embedded_root\">time</span>",
@@ -1825,6 +2228,28 @@ var words = {
         ],
         "type": "none",
         "word": "chronometer"
+    },
+    "chronophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> the passage of <span class=\"embedded_root\">time</span>, especially the future",
+        "part of speech": "noun",
+        "roots": [
+            "CHRON",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "chronophobe"
+    },
+    "chronophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of the passage of <span class=\"embedded_root\">time</span>, especially the future",
+        "part of speech": "noun",
+        "roots": [
+            "CHRON",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "chronophobia"
     },
     "chrysanthemum": {
         "grade": 12,
@@ -1926,6 +2351,28 @@ var words = {
         ],
         "type": "none",
         "word": "clarify"
+    },
+    "claustrophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">enclosed</span> and small spaces",
+        "part of speech": "noun",
+        "roots": [
+            "CLAUD/CLAUS",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "claustrophobe"
+    },
+    "claustrophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">enclosed</span> and small spaces",
+        "part of speech": "noun",
+        "roots": [
+            "CLAUD/CLAUS",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "claustrophobia"
     },
     "coauthor": {
         "grade": 12,
@@ -2305,6 +2752,52 @@ var words = {
         "type": "none",
         "word": "corpse"
     },
+    "cosmetologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">beauty</span>, such as make-up and hair-styling",
+        "part of speech": "noun",
+        "roots": [
+            "COSM",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "cosmetologist"
+    },
+    "cosmetology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">beautu</span>, such as make-up and hair-styling",
+        "part of speech": "noun",
+        "roots": [
+            "COSM",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "cosmetology"
+    },
+    "cosmologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">universe</span>",
+        "part of speech": "noun",
+        "roots": [
+            "COSM",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "cosmologist"
+    },
+    "cosmology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">universe</span>",
+        "part of speech": "noun",
+        "roots": [
+            "COSM",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "cosmology"
+    },
     "cosmonaut": {
         "grade": 12,
         "meaning": "one who sails across the universe (what the Russians call space travellers)",
@@ -2439,6 +2932,31 @@ var words = {
         "type": "none",
         "word": "cryptography"
     },
+    "cryptozoologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">secret</span> or non-existent <span class=\"embedded_root\">animals</span>, such as Bigfoot or The Loch Ness Monster",
+        "part of speech": "noun",
+        "roots": [
+            "CRYPT",
+            "ZO",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "cryptozoologist"
+    },
+    "cryptozoology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">secret</span> or non-existent <span class=\"embedded_root\">animals</span>, such as Bigfoot or The Loch Ness Monster",
+        "part of speech": "noun",
+        "roots": [
+            "CRYPT",
+            "ZO",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "cryptozoology"
+    },
     "cumulative": {
         "grade": 12,
         "meaning": "gradually increasing or <span class=\"embedded_root\">pil</span>ing up",
@@ -2468,6 +2986,28 @@ var words = {
         ],
         "type": "none",
         "word": "cyclone"
+    },
+    "cynophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">dogs</span>",
+        "part of speech": "noun",
+        "roots": [
+            "CAN/CYN",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "cynophobe"
+    },
+    "cynophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">dogs</span>",
+        "part of speech": "noun",
+        "roots": [
+            "CAN/CYN",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "cynophobia"
     },
     "debug": {
         "grade": 12,
@@ -2499,6 +3039,17 @@ var words = {
         ],
         "type": "none",
         "word": "decagon"
+    },
+    "decalogue": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">ten</span> commandments, i.e. the <span class=\"embedded_root\">words</span> carved onto the tablets in the story of Exodus in the Bible",
+        "part of speech": "noun",
+        "roots": [
+            "DEC/DEKA",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "decalogue"
     },
     "decathlon": {
         "grade": 12,
@@ -2659,9 +3210,22 @@ var words = {
         "type": "none",
         "word": "dendriform"
     },
+    "dendrochronologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of measuring <span class=\"embedded_root\">time</span> by the growth rings in <span class=\"embedded_root\">tree</span>s",
+        "part of speech": "noun",
+        "roots": [
+            "DENDR",
+            "CHRON",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "dendrochronologist"
+    },
     "dendrochronology": {
         "grade": 12,
-        "meaning": "a the scientific <span class=\"embedded_root\">study</span> of measuring <span class=\"embedded_root\">time</span> by the growth rings in <span class=\"embedded_root\">tree</span>s",
+        "meaning": "the <span class=\"embedded_root\">study</span> of measuring <span class=\"embedded_root\">time</span> by the growth rings in <span class=\"embedded_root\">tree</span>s",
         "part of speech": "noun",
         "roots": [
             "DENDR",
@@ -2670,6 +3234,28 @@ var words = {
         ],
         "type": "none",
         "word": "dendrochronology"
+    },
+    "dendrologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">tree</span>s",
+        "part of speech": "noun",
+        "roots": [
+            "DENDR",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "dendrologist"
+    },
+    "dendrology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">tree</span>s",
+        "part of speech": "noun",
+        "roots": [
+            "DENDR",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "dendrology"
     },
     "denounce": {
         "grade": 12,
@@ -2700,6 +3286,28 @@ var words = {
         ],
         "type": "none",
         "word": "dentist"
+    },
+    "dentophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">teeth</span>, teeth pain and the doctors who work on the teeth",
+        "part of speech": "noun",
+        "roots": [
+            "DENT/DONT",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "dentophobe"
+    },
+    "dentophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">teeth</span>, tooth pain and the doctors who work on the teeth",
+        "part of speech": "noun",
+        "roots": [
+            "DENT/DONT",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "dentophobia"
     },
     "dentures": {
         "grade": 12,
@@ -2743,14 +3351,26 @@ var words = {
     },
     "dermatologist": {
         "grade": 12,
-        "meaning": "a doctor or one who <span class=\"embedded_root\">stud</span>ies the <span class=\"embedded_root\">skin</span>",
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> and medical treatment of the <span class=\"embedded_root\">skin</span>",
+        "part of speech": "noun",
+        "roots": [
+            "DERM",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "dermatologist"
+    },
+    "dermatology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> and medical treatment of the <span class=\"embedded_root\">skin</span>",
         "part of speech": "noun",
         "roots": [
             "DERM",
             "LOG"
         ],
         "type": "none",
-        "word": "dermatologist"
+        "word": "dermatology"
     },
     "descend": {
         "grade": 12,
@@ -2857,16 +3477,16 @@ var words = {
         "type": "none",
         "word": "diagram"
     },
-    "dialog": {
+    "dialogue": {
         "grade": 12,
-        "meaning": "conversation <span class=\"embedded_root\">spok</span>n <span class=\"embedded_root\">between</span> two people",
+        "meaning": "conversation or <span class=\"embedded_root\">words</span> <span class=\"embedded_root\">between</span> two people",
         "part of speech": "noun",
         "roots": [
             "DIA",
             "LOG"
         ],
         "type": "none",
-        "word": "dialog"
+        "word": "dialogue"
     },
     "dichromatic": {
         "grade": 12,
@@ -3505,6 +4125,28 @@ var words = {
         ],
         "type": "none",
         "word": "equidistant"
+    },
+    "equinophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">horses</span>",
+        "part of speech": "noun",
+        "roots": [
+            "EQU root 2",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "equinophobe"
+    },
+    "equinophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">horses</span>",
+        "part of speech": "noun",
+        "roots": [
+            "EQU root 2",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "equinophobia"
     },
     "equivocate": {
         "grade": 12,
@@ -4150,6 +4792,17 @@ var words = {
         "type": "none",
         "word": "geology"
     },
+    "geophile": {
+        "grade": 12,
+        "meaning": "an animal that <span class=\"embedded_root\">loves</span> the <span class=\"embedded_root\">earth</span> and makes its home in the soil",
+        "part of speech": "noun",
+        "roots": [
+            "GEO",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "geophile"
+    },
     "geoponics": {
         "grade": 12,
         "meaning": "traditional agriculture in which plants grow in the <span class=\"embedded_root\">earth</span>",
@@ -4170,6 +4823,26 @@ var words = {
         ],
         "type": "none",
         "word": "geriatrics"
+    },
+    "germophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> germs",
+        "part of speech": "noun",
+        "roots": [
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "germophobe"
+    },
+    "germophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of germs",
+        "part of speech": "noun",
+        "roots": [
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "germophobia"
     },
     "gerontocracy": {
         "grade": 12,
@@ -4222,6 +4895,28 @@ var words = {
         ],
         "type": "none",
         "word": "gigawatt"
+    },
+    "glossophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">speaking</span> in public",
+        "part of speech": "noun",
+        "roots": [
+            "GLOSS",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "glossophobe"
+    },
+    "glossophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">speaking</span> in public",
+        "part of speech": "noun",
+        "roots": [
+            "GLOSS",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "glossophobia"
     },
     "gradual": {
         "grade": 12,
@@ -4316,6 +5011,17 @@ var words = {
         "type": "none",
         "word": "gratuity"
     },
+    "halophile": {
+        "grade": 12,
+        "meaning": "an animal that <span class=\"embedded_root\">loves</span> <span class=\"embedded_root\">salt</span> and makes its home in salty environments",
+        "part of speech": "noun",
+        "roots": [
+            "HAL",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "halophile"
+    },
     "hectare": {
         "grade": 12,
         "meaning": "metric unit equaling 100 ares or 10,000 square meters",
@@ -4399,6 +5105,28 @@ var words = {
         "type": "none",
         "word": "heliograph"
     },
+    "heliophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> the <span class=\"embedded_root\">sun</span> and sunlight",
+        "part of speech": "noun",
+        "roots": [
+            "CAN/CYN",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "heliophobe"
+    },
+    "heliophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of the <span class=\"embedded_root\">sun</span> and sunlight",
+        "part of speech": "noun",
+        "roots": [
+            "HELI/HELIO root 2",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "heliophobia"
+    },
     "heliotropism": {
         "grade": 12,
         "meaning": "movement or growth in relating to the sun",
@@ -4460,6 +5188,39 @@ var words = {
         ],
         "type": "none",
         "word": "hemoglobin"
+    },
+    "hemophilia": {
+        "grade": 12,
+        "meaning": "a medical condition in which the <span class=\"embedded_root\">blood</span> has a tendency (or <span class=\"embedded_root\">love</span>) to keep flowing without stopping <span class=\"embedded_root\">blood</span>",
+        "part of speech": "noun",
+        "roots": [
+            "HEM/HEMO",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "hemophilia"
+    },
+    "hemophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">blood</span>",
+        "part of speech": "noun",
+        "roots": [
+            "HEM/HEMO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "hemophobe"
+    },
+    "hemophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">blood</span>",
+        "part of speech": "noun",
+        "roots": [
+            "HEM/HEMO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "hemophobia"
     },
     "hemorrhage": {
         "grade": 12,
@@ -4706,9 +5467,20 @@ var words = {
         "type": "none",
         "word": "hydraulic"
     },
+    "hydrophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">water</span>",
+        "part of speech": "noun",
+        "roots": [
+            "HYDR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "hydrophobe"
+    },
     "hydrophobia": {
         "grade": 12,
-        "meaning": "intense fear of water",
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">water</span>",
         "part of speech": "noun",
         "roots": [
             "HYDR",
@@ -4790,6 +5562,28 @@ var words = {
         "type": "none",
         "word": "hypertension"
     },
+    "hypnophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">sleep</span>",
+        "part of speech": "noun",
+        "roots": [
+            "HYPN",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "hypnophobe"
+    },
+    "hypnophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">sleep</span>",
+        "part of speech": "noun",
+        "roots": [
+            "HYPN",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "hypnophobia"
+    },
     "hypoglycemia": {
         "grade": 12,
         "meaning": "an abnormally low level of sugar in the blood",
@@ -4820,6 +5614,28 @@ var words = {
         ],
         "type": "none",
         "word": "hypothesis"
+    },
+    "iatrophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">doctors</span>",
+        "part of speech": "noun",
+        "roots": [
+            "IATR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "iatrophobe"
+    },
+    "iatrophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">doctors</span>",
+        "part of speech": "noun",
+        "roots": [
+            "IATR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "iatrophobia"
     },
     "icon": {
         "grade": 12,
@@ -5615,6 +6431,28 @@ var words = {
         "type": "none",
         "word": "lactose"
     },
+    "lepidopterophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">butterflies</span>",
+        "part of speech": "noun",
+        "roots": [
+            "LEPIDOPTER",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "lepidopterophobe"
+    },
+    "lepidopterophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">butterflies</span>",
+        "part of speech": "noun",
+        "roots": [
+            "LEPIDOPTER",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "lepidopterophobia"
+    },
     "leucine": {
         "grade": 12,
         "meaning": "a white, crystalline amino acid",
@@ -5647,7 +6485,7 @@ var words = {
     },
     "lexicology": {
         "grade": 12,
-        "meaning": "the study and history of words",
+        "meaning": "the study and history of dictionaries, also known as lexicons",
         "part of speech": "noun",
         "roots": [
             "LOG"
@@ -6268,6 +7106,31 @@ var words = {
         "type": "none",
         "word": "microbe"
     },
+    "microbiologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">life</span> on very <span class=\"embedded_root\">small</span> scales, such as bacteria and viruses",
+        "part of speech": "noun",
+        "roots": [
+            "MICRO",
+            "BIO/BI",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "microbiologist"
+    },
+    "microbiology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">life</span> on very <span class=\"embedded_root\">small</span> scales, such as bacteria and viruses",
+        "part of speech": "noun",
+        "roots": [
+            "MICRO",
+            "BIO/BI",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "microbiology"
+    },
     "microchip": {
         "grade": 12,
         "meaning": "a tiny wafer with an integrated circuit",
@@ -6684,6 +7547,28 @@ var words = {
         "type": "none",
         "word": "mummify"
     },
+    "murophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">mice</span>",
+        "part of speech": "noun",
+        "roots": [
+            "MUR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "murophobe"
+    },
+    "murophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">mice</span>",
+        "part of speech": "noun",
+        "roots": [
+            "MUR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "murophobia"
+    },
     "mutant": {
         "grade": 12,
         "meaning": "an organism that has undergone change",
@@ -6733,6 +7618,28 @@ var words = {
         ],
         "type": "none",
         "word": "myosin"
+    },
+    "myrmecophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">ants</span>",
+        "part of speech": "noun",
+        "roots": [
+            "MYRMEC",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "myrmecophobe"
+    },
+    "myrmecophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">ants</span>",
+        "part of speech": "noun",
+        "roots": [
+            "MYRMEC",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "myrmecophobia"
     },
     "narrate": {
         "grade": 12,
@@ -6886,6 +7793,39 @@ var words = {
         ],
         "type": "none",
         "word": "neonatal"
+    },
+    "neophile": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">loves</span> <span class=\"embedded_root\">new</span> things",
+        "part of speech": "noun",
+        "roots": [
+            "NEO",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "neophile"
+    },
+    "neophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">new</span> things",
+        "part of speech": "noun",
+        "roots": [
+            "NEO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "neophobe"
+    },
+    "neophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">new</span> things",
+        "part of speech": "noun",
+        "roots": [
+            "NEO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "neophobia"
     },
     "neophyte": {
         "grade": 12,
@@ -7094,6 +8034,39 @@ var words = {
         "type": "none",
         "word": "numerous"
     },
+    "nyctophile": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">loves</span> the <span class=\"embedded_root\">night</span> and darkness",
+        "part of speech": "noun",
+        "roots": [
+            "NYX/NYCT",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "nyctophile"
+    },
+    "nyctophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> the <span class=\"embedded_root\">night</span> and darkness",
+        "part of speech": "noun",
+        "roots": [
+            "NYX/NYCT",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "nyctophobe"
+    },
+    "nyctophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of the <span class=\"embedded_root\">night</span> and darkness",
+        "part of speech": "noun",
+        "roots": [
+            "NYX/NYCT",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "nyctophobia"
+    },
     "object": {
         "grade": 12,
         "meaning": "to be against something; a thing (put in front of someone)",
@@ -7202,6 +8175,28 @@ var words = {
         ],
         "type": "none",
         "word": "omnivorous"
+    },
+    "oneirophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">dreams</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ONEIR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "oneirophobe"
+    },
+    "oneirophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">dreams</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ONEIR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "oneirophobia"
     },
     "opponent": {
         "grade": 12,
@@ -7433,9 +8428,59 @@ var words = {
         "type": "none",
         "word": "pacify"
     },
+    "paleoanthropologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> <span class=\"embedded_root\">man</span>kind",
+        "part of speech": "noun",
+        "roots": [
+            "PALE/PALEO",
+            "ANTHROP",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "paleoanthropologist"
+    },
+    "paleoanthropology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> <span class=\"embedded_root\">man</span>kind",
+        "part of speech": "noun",
+        "roots": [
+            "PALE/PALEO",
+            "ANTHROP",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "paleoanthropology"
+    },
+    "paleobiologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> <span class=\"embedded_root\">life</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PALE/PALEO",
+            "BIO/BI",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "paleobiologist"
+    },
+    "paleobiology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> <span class=\"embedded_root\">life</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PALE/PALEO",
+            "BIO/BI",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "paleobiology"
+    },
     "paleography": {
         "grade": 12,
-        "meaning": "the study of ancient forms of writing",
+        "meaning": "<span class=\"embedded_root\">ancient</span> forms of <span class=\"embedded_root\">writing</span> and the academic discipline that studies it",
         "part of speech": "noun",
         "roots": [
             "PALE/PALEO",
@@ -7446,7 +8491,7 @@ var words = {
     },
     "paleontology": {
         "grade": 12,
-        "meaning": "study of ancient fossils",
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> fossils",
         "part of speech": "noun",
         "roots": [
             "PALE/PALEO",
@@ -7454,6 +8499,31 @@ var words = {
         ],
         "type": "none",
         "word": "paleontology"
+    },
+    "paleozoologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">animals</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PALE/PALEO",
+            "ZO",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "paleozoologist"
+    },
+    "paleozoology": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">animals</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PALE/PALEO",
+            "ZO",
+            "LOG"
+        ],
+        "type": "none",
+        "word": "paleozoology"
     },
     "panacea": {
         "grade": 12,
@@ -7478,6 +8548,28 @@ var words = {
         ],
         "type": "none",
         "word": "pandemic"
+    },
+    "panophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">all</span> things",
+        "part of speech": "noun",
+        "roots": [
+            "PAN",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "panophobe"
+    },
+    "panophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">all</span> things",
+        "part of speech": "noun",
+        "roots": [
+            "PAN",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "panophobia"
     },
     "panorama": {
         "grade": 12,
@@ -7791,9 +8883,21 @@ var words = {
         "type": "none",
         "word": "petrify"
     },
+    "philanthropist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person engaged in</span> the <span class=\"embedded_root\">love</span> of mankind and <span class=\"embedded_root\">humans</span> (expressed through good deeds)",
+        "part of speech": "noun",
+        "roots": [
+            "PHIL",
+            "ANTHROP",
+            "IST"
+        ],
+        "type": "none",
+        "word": "philanthropist"
+    },
     "philanthropy": {
         "grade": 12,
-        "meaning": "the love to mankind (expressed through good deeds)",
+        "meaning": "the <span class=\"embedded_root\">love</span> of mankind and <span class=\"embedded_root\">humans</span> (expressed through good deeds)",
         "part of speech": "noun",
         "roots": [
             "ANTHROP",
@@ -7897,13 +9001,24 @@ var words = {
         "type": "none",
         "word": "photon"
     },
-    "photophobia": {
+    "photophobe": {
         "grade": 12,
-        "meaning": "an abnormal intolerance of light",
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">light</span>, especially bright light",
         "part of speech": "noun",
         "roots": [
-            "PHOB",
-            "PHOT/PHOTO"
+            "PHOT/PHOTO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "photophobe"
+    },
+    "photophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">light</span>, especially bright light",
+        "part of speech": "noun",
+        "roots": [
+            "PHOT/PHOTO",
+            "PHOB"
         ],
         "type": "none",
         "word": "photophobia"
@@ -8438,6 +9553,18 @@ var words = {
         "type": "none",
         "word": "psychokinesis"
     },
+    "psychologist": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">mind</span>",
+        "part of speech": "noun",
+        "roots": [
+            "LOG",
+            "PSYCH",
+            "IST"
+        ],
+        "type": "none",
+        "word": "psychologist"
+    },
     "psychology": {
         "grade": 12,
         "meaning": "the study of the mind",
@@ -8519,6 +9646,28 @@ var words = {
         ],
         "type": "none",
         "word": "pyretic"
+    },
+    "pyrophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">fire</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PYR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "pyrophobe"
+    },
+    "pyrophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">fire</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PYR",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "pyrophobia"
     },
     "pyrometer": {
         "grade": 12,
@@ -9788,9 +10937,20 @@ var words = {
         "type": "none",
         "word": "technology"
     },
+    "technophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">mechanical devices</span>",
+        "part of speech": "noun",
+        "roots": [
+            "TECHNO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "technophobe"
+    },
     "technophobia": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">technology</span>, computer anxiety",
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">mechanical devices</span>",
         "part of speech": "noun",
         "roots": [
             "TECHNO",
@@ -10000,6 +11160,39 @@ var words = {
         "type": "none",
         "word": "thermal"
     },
+    "thermophile": {
+        "grade": 12,
+        "meaning": "an animal that <span class=\"embedded_root\">loves</span> the <span class=\"embedded_root\">heat</span> and makes its home in hot environments",
+        "part of speech": "noun",
+        "roots": [
+            "THERM",
+            "PHIL"
+        ],
+        "type": "none",
+        "word": "thermophile"
+    },
+    "thermophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">heat</span>",
+        "part of speech": "noun",
+        "roots": [
+            "THERM",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "thermophobe"
+    },
+    "thermophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">heat</span>",
+        "part of speech": "noun",
+        "roots": [
+            "THERM",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "thermophobia"
+    },
     "thermos": {
         "grade": 12,
         "meaning": "an insulated jar that keeps <span class=\"embedded_root\">heat</span> in",
@@ -10147,6 +11340,30 @@ var words = {
         ],
         "type": "none",
         "word": "tripod"
+    },
+    "triskadekaphobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> the number thirteen (thirteen =<span class=\"embedded_root\">ten</span> + <span class=\"embedded_root\">three</span>)",
+        "part of speech": "noun",
+        "roots": [
+            "TRI",
+            "DEC/DEKA",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "triskadekaphobe"
+    },
+    "triskadekaphobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of the number thirteen, (thirteen = <span class=\"embedded_root\">ten</span> + <span class=\"embedded_root\">three</span>",
+        "part of speech": "noun",
+        "roots": [
+            "TRI",
+            "DEC/DEKA",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "triskadekaphobia"
     },
     "ultramodern": {
         "grade": 12,
@@ -10478,16 +11695,27 @@ var words = {
         "type": "none",
         "word": "xenophile"
     },
-    "xenophobic": {
+    "xenophobe": {
         "grade": 12,
-        "meaning": "afraid of foreigners",
-        "part of speech": "adjective",
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">foreigners</span>",
+        "part of speech": "noun",
         "roots": [
-            "PHOB",
-            "XEN/XENO"
+            "XEN/XENO",
+            "PHOB"
         ],
         "type": "none",
-        "word": "xenophobic"
+        "word": "xenophobe"
+    },
+    "xenophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">foreigners</span>",
+        "part of speech": "noun",
+        "roots": [
+            "XEN/XENO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "xenophobia"
     },
     "xeric": {
         "grade": 12,
@@ -10553,6 +11781,18 @@ var words = {
         "type": "none",
         "word": "zooid"
     },
+    "zoologist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">animals</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ZO",
+            "LOG",
+            "IST"
+        ],
+        "type": "none",
+        "word": "zoologist"
+    },
     "zoology": {
         "grade": 12,
         "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">animals</span>",
@@ -10573,6 +11813,28 @@ var words = {
         ],
         "type": "none",
         "word": "zooplankton"
+    },
+    "zoophobe": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">animals</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ZO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "zoophobe"
+    },
+    "zoophobia": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">animals</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ZO",
+            "PHOB"
+        ],
+        "type": "none",
+        "word": "zoophobia"
     },
     "zygomorphic": {
         "grade": 12,
@@ -10607,12 +11869,16 @@ var roots = {
         "root": "A/AB/ABS root 2"
     },
     "A/AN root 3": {
-        "meaning": "not, without",
+        "meaning": "not, without, lack",
         "root": "A/AN root 3"
     },
     "AC/AD/AN/AS": {
         "meaning": "to, toward, near",
         "root": "AC/AD/AN/AS"
+    },
+    "ACOU": {
+        "meaning": "hear, listen",
+        "root": "ACOU"
     },
     "ACRO": {
         "meaning": "top, height, tip, beginning",
@@ -10622,9 +11888,17 @@ var roots = {
         "meaning": "do",
         "root": "ACT"
     },
+    "ADELPH": {
+        "meaning": "brother",
+        "root": "ADELPH"
+    },
     "AER": {
         "meaning": "air",
         "root": "AER"
+    },
+    "AGOR": {
+        "meaning": "marketplace",
+        "root": "AGOR"
     },
     "AGR": {
         "meaning": "farming",
@@ -10698,6 +11972,10 @@ var roots = {
         "meaning": "tree",
         "root": "ARBOR"
     },
+    "ARACHN": {
+        "meaning": "spider",
+        "root": "ARACHN"
+    },
     "ARCH root 1": {
         "meaning": "chief, most important, rule",
         "root": "ARCH root 1"
@@ -10733,6 +12011,10 @@ var roots = {
     "AVI": {
         "meaning": "bird",
         "root": "AVI"
+    },
+    "BACTER": {
+        "meaning": "rod, cane",
+        "root": "BACTER"
     },
     "BAR": {
         "meaning": "pressure, weight",
@@ -10814,6 +12096,10 @@ var roots = {
         "meaning": "sure, secure, confident",
         "root": "CERT"
     },
+    "CHIROPT": {
+        "meaning": "bat",
+        "root": "CHIROPT"
+    },
     "CHROM/CHROMAT/CHROS": {
         "meaning": "color, pigment",
         "root": "CHROM/CHROMAT/CHROS"
@@ -10845,6 +12131,11 @@ var roots = {
     "CLASS": {
         "meaning": "category",
         "root": "CLASS"
+    },
+    //@todo merge with clud/clus
+    "CLAUD/CLAUS": {
+        "meaning": "confine, enclose",
+        "root": "CLAUD/CLAUS"
     },
     "CLIN": {
         "meaning": "lean",
@@ -10879,7 +12170,7 @@ var roots = {
         "root": "CORP"
     },
     "COSM": {
-        "meaning": "universe",
+        "meaning": "beauty, order, the universe (conceived of as a mechanism that is both orderly and beautiful)",
         "root": "COSM"
     },
     "COUNTER": {
@@ -10905,6 +12196,10 @@ var roots = {
     "CUMUL": {
         "meaning": "mass, heap",
         "root": "CUMUL"
+    },
+    "CAN/CYN": {
+        "meaning": "dog",
+        "root": "CAN/CYN"
     },
     "CYCL": {
         "meaning": "circle, ring",
@@ -11023,9 +12318,18 @@ var roots = {
         "meaning": "on, upon, over, among, at, after, to, outside",
         "root": "EP/EPI"
     },
+    //@todo turn equ into equ root 1
     "EQU": {
         "meaning": "equal, equally",
         "root": "EQU"
+    },
+    "EQU root 2": {
+        "meaning": "horse",
+        "root": "EQU root 2"
+    },
+    "ER": {
+        "meaning": "a person who performs a particular action",
+        "root": "ER"
     },
     "ERG": {
         "meaning": "work",
@@ -11131,9 +12435,17 @@ var roots = {
         "meaning": "old age",
         "root": "GER"
     },
+    "GERM": {
+        "meaning": "seed, sprout",
+        "root": "GERM"
+    },
     "GIGA": {
         "meaning": "a billion",
         "root": "GIGA"
+    },
+    "GLOSS": {
+        "meaning": "tongue, speech, language",
+        "root": "GLOSS"
     },
     "GON": {
         "meaning": "angle",
@@ -11171,6 +12483,10 @@ var roots = {
         "meaning": "woman, female",
         "root": "GYN"
     },
+    "HAL": {
+        "meaning": "salt",
+        "root": "HAL"
+    },
     "HECT/HECTO/HECAT": {
         "meaning": "hundred",
         "root": "HECT/HECTO/HECAT"
@@ -11183,6 +12499,7 @@ var roots = {
         "meaning": "sun",
         "root": "HELI/HELIO root 2"
     },
+    //@todo change into hem
     "HEM/HEMO": {
         "meaning": "blood",
         "root": "HEM/HEMO"
@@ -11242,6 +12559,10 @@ var roots = {
     "HYPER": {
         "meaning": "too much, over, excessive, beyond",
         "root": "HYPER"
+    },
+    "HYPN": {
+        "meaning": "sleep, dream",
+        "root": "HYPN"
     },
     "IATR": {
         "meaning": "medical care",
@@ -11329,10 +12650,15 @@ var roots = {
         "meaning": "side",
         "root": "LATER"
     },
+    "LEPIDOPTER": {
+        "meaning": "butterfly",
+        "root": "LEPIDOPTER"
+    },
     "LEUK/LEUC": {
         "meaning": "white, colorless",
         "root": "LEUK/LEUC"
     },
+    //@todo add lex = read for alexia anddyslexia
     "LEX/LEG": {
         "meaning": "word, law, reading",
         "root": "LEX/LEG"
@@ -11517,6 +12843,10 @@ var roots = {
         "meaning": "gift",
         "root": "MUN"
     },
+    "MUR": {
+        "meaning": "mouse",
+        "root": "MUR"
+    },
     "MUT": {
         "meaning": "change",
         "root": "MUT"
@@ -11524,6 +12854,10 @@ var roots = {
     "MY/MYO": {
         "meaning": "muscle",
         "root": "MY/MYO"
+    },
+    "MYRMEC": {
+        "meaning": "ant",
+        "root": "MYST"
     },
     "MYST": {
         "meaning": "secret, unknown, difficult to understand",
@@ -11597,6 +12931,10 @@ var roots = {
         "meaning": "word, name",
         "root": "NYM/ONYM"
     },
+    "NYX/NYCT": {
+        "meaning": "night",
+        "root": "NYX/NYCT"
+    },
     "OB/OP root 1": {
         "meaning": "in the way, against, in front of",
         "root": "OB/OP root 1"
@@ -11612,6 +12950,10 @@ var roots = {
     "OMNI": {
         "meaning": "all",
         "root": "OMNI"
+    },
+    "ONEIR": {
+        "meaning": "dream",
+        "root": "ONEIR"
     },
     "OP/OPS/OPT root 2": {
         "meaning": "eye, visual condition, sight",
@@ -11714,6 +13056,7 @@ var roots = {
         "meaning": "sound",
         "root": "PHON"
     },
+    //@todo change to phot
     "PHOT/PHOTO": {
         "meaning": "light",
         "root": "PHOT/PHOTO"
@@ -11971,7 +13314,7 @@ var roots = {
         "root": "SON"
     },
     "SOPH": {
-        "meaning": "wise",
+        "meaning": "wise, wisdom",
         "root": "SOPH"
     },
     "SOPOR": {
@@ -12043,7 +13386,7 @@ var roots = {
         "root": "TAX"
     },
     "TECHNO": {
-        "meaning": "technique, skill",
+        "meaning": "technique, skill, mechanical device, scientific mechanism",
         "root": "TECHNO"
     },
     "TEL/TELE": {
@@ -12187,7 +13530,7 @@ var roots = {
         "root": "XYL"
     },
     "ZO": {
-        "meaning": "animal life",
+        "meaning": "a living being, especially an animal",
         "root": "ZO"
     },
     "ZYG/ZYGO": {
