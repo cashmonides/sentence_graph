@@ -337,6 +337,32 @@ var etym_levels = {
             'root_definition_to_root': .9
         }
     },
+    136: {
+        roots: ['PHIL', "PHOB"],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .9,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
+    137: {
+        roots: ['PHIL', "PHOB", 'FIC/FAC/FY', 'LOG'],
+        question_types: {
+            'word_to_latin_root': .00001,
+            'word_to_english_root': .0001,
+            'word_to_translated_root': .0001,
+            'english_root_to_word': .0001,
+            'word_to_word_definition': .0001,
+            'word_definition_to_word': .9,
+            'root_to_root_definition': .0001,
+            'root_definition_to_root': .9
+        }
+    },
     140 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
         "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
