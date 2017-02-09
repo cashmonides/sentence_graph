@@ -634,6 +634,40 @@ var words = {
         "type": "none",
         "word": "analysis"
     },
+    "anarchic": {
+        "grade": 12,
+        "meaning": "having the quality of the <span class=\"embedded_root\">lack</span> of government or <span class=\"embedded_root\">rulers</span>",
+        "part of speech": "noun",
+        "roots": [
+            "A/AN root 3",
+            "ARCH"
+        ],
+        "type": "none",
+        "word": "anarchic"
+    },
+    "anarchist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in or espousing the <span class=\"embedded_root\">lack</span> of government or <span class=\"embedded_root\">rulers</span>",
+        "part of speech": "noun",
+        "roots": [
+            "A/AN root 3",
+            "ARCH",
+            "IST"
+        ],
+        "type": "none",
+        "word": "anarchist"
+    },
+    "anarchy": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">lack</span> of government or <span class=\"embedded_root\">rulers</span>",
+        "part of speech": "noun",
+        "roots": [
+            "A/AN root 3",
+            "ARCH"
+        ],
+        "type": "none",
+        "word": "anarchy"
+    },
     "anatomy": {
         "grade": 12,
         "meaning": "the structure of something as visible when cut up for analysis",
@@ -1119,7 +1153,7 @@ var words = {
         "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> cultures",
         "part of speech": "noun",
         "roots": [
-            "ARCH root 2",
+            "ARCHAE/ARCHAI",
             "LOG",
             "IST"
         ],
@@ -1131,7 +1165,7 @@ var words = {
         "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> cultures and humans",
         "part of speech": "noun",
         "roots": [
-            "ARCH root 2",
+            "ARCHAE/ARCHAI",
             "LOG"
         ],
         "type": "none",
@@ -1142,7 +1176,7 @@ var words = {
         "meaning": "belonging to an <span class=\"embedded_root\">ancient</span> period",
         "part of speech": "adjective",
         "roots": [
-            "ARCH root 2"
+            "ARCHAE/ARCHAI"
         ],
         "type": "none",
         "word": "archaic"
@@ -1152,7 +1186,7 @@ var words = {
         "meaning": "the <span class=\"embedded_root\">high</span>est ranking bishop",
         "part of speech": "noun",
         "roots": [
-            "ARCH root 1"
+            "ARCH"
         ],
         "type": "none",
         "word": "archbishop"
@@ -1162,20 +1196,42 @@ var words = {
         "meaning": "<span class=\"embedded_root\">highest</span> or worst enemy",
         "part of speech": "noun",
         "roots": [
-            "ARCH root 1"
+            "ARCH"
         ],
         "type": "none",
         "word": "archenemy"
     },
     "archive": {
         "grade": 12,
-        "meaning": "a collection of <span class=\"embedded_root\">ancient</span> or historical materials and records",
+        "meaning": "a collection of <span class=\"embedded_root\">government</span> documents or historical materials and records",
         "part of speech": "noun",
         "roots": [
-            "ARCH root 2"
+            "ARCH"
         ],
         "type": "none",
         "word": "archive"
+    },
+    "aristocracy": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">government</span> by the <span class=\"embedded_root\">nobility</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ARIST",
+            "CRAC/CRAT"
+        ],
+        "type": "none",
+        "word": "aristocracy"
+    },
+    "aristocrat": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">rules</span> based on his wealth or <span class=\"embedded_root\">nobility</span>",
+        "part of speech": "noun",
+        "roots": [
+            "ARIST",
+            "CRAC/CRAT"
+        ],
+        "type": "none",
+        "word": "aristocrat"
     },
     "arteriosclerosis": {
         "grade": 12,
@@ -3178,9 +3234,20 @@ var words = {
         "type": "none",
         "word": "demand"
     },
+     "democrat": {
+        "grade": 12,
+        "meaning": "one who participates in a <span class=\"embedded_root\">government</span> by the <span class=\"embedded_root\">people</span>",
+        "part of speech": "noun",
+        "roots": [
+            "DEM",
+            "CRAC/CRAT"
+        ],
+        "type": "none",
+        "word": "democrat"
+    },
     "democracy": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">rule</span> by the <span class=\"embedded_root\">people</span>",
+        "meaning": "<span class=\"embedded_root\">government</span> by the <span class=\"embedded_root\">people</span>",
         "part of speech": "noun",
         "roots": [
             "DEM",
@@ -4846,7 +4913,7 @@ var words = {
     },
     "gerontocracy": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">rule</span> of the <span class=\"embedded_root\">elder</span>s",
+        "meaning": "<span class=\"embedded_root\">government</span> by the <span class=\"embedded_root\">elderly</span>",
         "part of speech": "noun",
         "roots": [
             "GER",
@@ -6411,6 +6478,17 @@ var words = {
         "type": "none",
         "word": "kinetics"
     },
+    "kleptocracy": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">government</span> where those in power are <span class=\"embedded_root\">thieves</span>, such as those who steal the wealth of the people or natural resources",
+        "part of speech": "noun",
+        "roots": [
+            "KLEPT",
+            "CRAC/CRAT"
+        ],
+        "type": "none",
+        "word": "kleptocracy"
+    },
     "laborious": {
         "grade": 12,
         "meaning": "requiring a lot of hard work",
@@ -6872,14 +6950,25 @@ var words = {
     },
     "matriarch": {
         "grade": 12,
-        "meaning": "a woman head of a household",
+        "meaning": "a <span class=\"embedded_root\">ruler</span> who is a woman, usually a <span class=\"embedded_root\">mother</span>",
         "part of speech": "noun",
         "roots": [
-            "ARCH root 1",
-            "MATER/MATR/MATRI"
+            "MATER/MATR/MATRI",
+            "ARCH"
         ],
         "type": "none",
         "word": "matriarch"
+    },
+    "matriarchy": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">government</span> by women, usually by <span class=\"embedded_root\">mothers</span>",
+        "part of speech": "noun",
+        "roots": [
+            "MATER/MATR/MATRI",
+            "ARCH"
+        ],
+        "type": "none",
+        "word": "matriarchy"
     },
     "maximal": {
         "grade": 12,
@@ -7091,7 +7180,7 @@ var words = {
         "meaning": "a large city",
         "part of speech": "noun",
         "roots": [
-            "POLI"
+            "POL"
         ],
         "type": "none",
         "word": "metropolis"
@@ -7379,14 +7468,37 @@ var words = {
     },
     "monarch": {
         "grade": 12,
-        "meaning": "a king or queen (that is, someone who rules alone)",
+        "meaning": "a king or queen (that is, someone who <span class=\"embedded_root\">rules</span> <span class=\"embedded_root\">alone</span>)",
         "part of speech": "noun",
         "roots": [
             "MON/MONO",
-            "ARCH root 1"
+            "ARCH"
         ],
         "type": "none",
         "word": "monarch"
+    },
+    "monarchist": {
+        "grade": 12,
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in, or an advocate <span class=\"embedded_root\">government</span> with <span class=\"embedded_root\">one</span> ruler, such as a king or queen",
+        "part of speech": "noun",
+        "roots": [
+            "MON/MONO",
+            "ARCH",
+            "IST"
+        ],
+        "type": "none",
+        "word": "monarchist"
+    },
+    "monarchy": {
+        "grade": 12,
+        "meaning": "a form of <span class=\"embedded_root\">government</span> with <span class=\"embedded_root\">one</span> ruler, such as a king or queen",
+        "part of speech": "noun",
+        "roots": [
+            "MON/MONO",
+            "ARCH"
+        ],
+        "type": "none",
+        "word": "monarchy"
     },
     "monochrome": {
         "grade": 12,
@@ -7728,7 +7840,7 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "NECR/NECRO",
-            "POLI"
+            "POL"
         ],
         "type": "none",
         "word": "necropolis"
@@ -8133,6 +8245,28 @@ var words = {
         "type": "none",
         "word": "oculist"
     },
+    "oligarch": {
+        "grade": 12,
+        "meaning": "one who participates in a <span class=\"embedded_root\">government</span> where only a <span class=\"embedded_root\">few</span> people are in charge",
+        "part of speech": "noun",
+        "roots": [
+            "OLIG",
+            "ARCH"
+        ],
+        "type": "none",
+        "word": "oligarch"
+    },
+    "oligarchy": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">government</span> by only a <span class=\"embedded_root\">few</span> people",
+        "part of speech": "noun",
+        "roots": [
+            "OLIG",
+            "ARCH"
+        ],
+        "type": "none",
+        "word": "oligarchy"
+    },
     "omnipotent": {
         "grade": 12,
         "meaning": "with <span class=\"embedded_root\">all</span> the power",
@@ -8502,7 +8636,7 @@ var words = {
     },
     "paleozoologist": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">animals</span>",
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> <span class=\"embedded_root\">animals</span>",
         "part of speech": "noun",
         "roots": [
             "PALE/PALEO",
@@ -8666,14 +8800,25 @@ var words = {
     },
     "patriarch": {
         "grade": 12,
-        "meaning": "a man who rules a group",
+        "meaning": "a <span class=\"embedded_root\">ruler</span> who is a man, usually a <span class=\"embedded_root\">father</span>",
         "part of speech": "noun",
         "roots": [
             "PATER/PATR/PATRI",
-            "ARCH root 1"
+            "ARCH"
         ],
         "type": "none",
         "word": "patriarch"
+    },
+    "patriarchy": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">government</span> by men, usually by <span class=\"embedded_root\">fathers</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PATER/PATR/PATRI",
+            "ARCH"
+        ],
+        "type": "none",
+        "word": "patriarchy"
     },
     "pedal": {
         "grade": 12,
@@ -9097,6 +9242,28 @@ var words = {
         "type": "none",
         "word": "plastic"
     },
+    "plutocracy": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">government</span> by the <span class=\"embedded_root\">wealthy</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PLUTO",
+            "CRAC/CRAT"
+        ],
+        "type": "none",
+        "word": "plutocracy"
+    },
+    "plutocrat": {
+        "grade": 12,
+        "meaning": "one who <span class=\"embedded_root\">rules</span> because of his <span class=\"embedded_root\">wealth</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PLUTO",
+            "CRAC/CRAT"
+        ],
+        "type": "none",
+        "word": "plutocrat"
+    },
     "pneumatic": {
         "grade": 12,
         "meaning": "using the force of air",
@@ -9154,7 +9321,7 @@ var words = {
         "meaning": "people who work for the government to maintain order in a city",
         "part of speech": "noun",
         "roots": [
-            "POLI"
+            "POL"
         ],
         "type": "none",
         "word": "police"
@@ -9164,7 +9331,7 @@ var words = {
         "meaning": "actions of a government or political party",
         "part of speech": "noun",
         "roots": [
-            "POLI"
+            "POL"
         ],
         "type": "none",
         "word": "politics"
@@ -11134,10 +11301,32 @@ var words = {
         "part of speech": "noun",
         "roots": [
             "TETRA",
-            "ARCH root 1"
+            "ARCH"
         ],
         "type": "none",
         "word": "tetrarchy"
+    },
+    "theocracy": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">government</span> in which priest rule in the name of <span class=\"embedded_root\">god</span>",
+        "part of speech": "noun",
+        "roots": [
+            "THEO",
+            "CRAC/CRAT"
+        ],
+        "type": "none",
+        "word": "theocracy"
+    },
+    "theocrat": {
+        "grade": 12,
+        "meaning": "one who participates in a <span class=\"embedded_root\">government</span> in which priests rule in the name of <span class=\"embedded_root\">god</span>",
+        "part of speech": "noun",
+        "roots": [
+            "THEO",
+            "CRAC/CRAT"
+        ],
+        "type": "none",
+        "word": "theocrat"
     },
     "theology": {
         "grade": 12,
@@ -11976,13 +12165,17 @@ var roots = {
         "meaning": "spider",
         "root": "ARACHN"
     },
-    "ARCH root 1": {
-        "meaning": "chief, most important, rule",
-        "root": "ARCH root 1"
+    "ARCH": {
+        "meaning": "ruler, government, chief, most important",
+        "root": "ARCH"
     },
-    "ARCH root 2": {
+    "ARCHAE/ARCHAI": {
         "meaning": "primitive, ancient",
-        "root": "ARCH root 2"
+        "root": "ARCHAE/ARCHAI"
+    },
+    "ARIST": {
+        "meaning": "noble",
+        "root": "ARIST"
     },
     "ART": {
         "meaning": "unnatural, made by human skill",
@@ -12047,6 +12240,14 @@ var roots = {
     "BREV": {
         "meaning": "brief, of short duration",
         "root": "BREV"
+    },
+    "BUREAU": {
+        "meaning": "office",
+        "root": "BUREAU"
+    },
+    "CAN/CYN": {
+        "meaning": "dog",
+        "root": "CAN/CYN"
     },
     "CAPT/CEPT/CEIVE": {
         "meaning": "take, hold",
@@ -12197,10 +12398,6 @@ var roots = {
         "meaning": "mass, heap",
         "root": "CUMUL"
     },
-    "CAN/CYN": {
-        "meaning": "dog",
-        "root": "CAN/CYN"
-    },
     "CYCL": {
         "meaning": "circle, ring",
         "root": "CYCL"
@@ -12344,7 +12541,7 @@ var roots = {
         "root": "ESTH/AESTH"
     },
     "ETHN": {
-        "meaning": "race, people",
+        "meaning": "race, people, tribe",
         "root": "ETHN"
     },
     "EU": {
@@ -12528,6 +12725,10 @@ var roots = {
         "meaning": "six",
         "root": "HEX/HEXA"
     },
+    "HIER": {
+        "meaning": "sacred, priest",
+        "root": "HIER"
+    },
     "HISTO": {
         "meaning": "tissue",
         "root": "HISTO"
@@ -12637,6 +12838,10 @@ var roots = {
     "KINE/KINEMAT/CINE": {
         "meaning": "motion, division",
         "root": "KINE/KINEMAT/CINE"
+    },
+    "KLEPT": {
+        "meaning": "steal",
+        "root": "KLEPT"
     },
     "LAB": {
         "meaning": "work",
@@ -12758,6 +12963,10 @@ var roots = {
     "MEMOR": {
         "meaning": "remember",
         "root": "MEMOR"
+    },
+    "MER": {
+        "meaning": "earn, deserve",
+        "root": "MER"
     },
     "MERGE/MERS": {
         "meaning": "dip, dive",
@@ -12947,6 +13156,10 @@ var roots = {
         "meaning": "eye",
         "root": "OCUL"
     },
+    "OLIG": {
+        "meaning": "few",
+        "root": "OLIG"
+    },
     "OMNI": {
         "meaning": "all",
         "root": "OMNI"
@@ -13077,6 +13290,10 @@ var roots = {
         "meaning": "to form, development, forming cells",
         "root": "PLAS/PLAST/PLASM"
     },
+    "PLUTO": {
+        "meaning": "underground (the realm of Hades) and the wealth found there, such as gold and diamonds",
+        "root": "PLUTO"
+    },
     "PLY/PLI/PLEX": {
         "meaning": "bend",
         "root": "PLY/PLI/PLEX"
@@ -13085,9 +13302,9 @@ var roots = {
         "meaning": "breathing, lung, air, spirit",
         "root": "PNE/PNEUM"
     },
-    "POLI": {
+    "POL": {
         "meaning": "city",
-        "root": "POLI"
+        "root": "POL"
     },
     "POLY": {
         "meaning": "many, more than one",
@@ -13388,6 +13605,10 @@ var roots = {
     "TECHNO": {
         "meaning": "technique, skill, mechanical device, scientific mechanism",
         "root": "TECHNO"
+    },
+    "TECT": {
+        "meaning": "build",
+        "root": "TECT"
     },
     "TEL/TELE": {
         "meaning": "far, distant, complete",

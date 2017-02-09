@@ -1209,12 +1209,16 @@ Quiz.prototype.update_accuracy = function () {
     // below would be an option very hacky
     // this.submodule.incorrect_streak = this.regularize_accuracy_dictionary_input(this.submodule.incorrect_streak);
     
+    console.log("FEBRUARY BUG checkpoint 5");
+    
     
     //todo merge - below is a hacky way to stop bugs in week 1-2 of institute
     if (!this.user.is_mf()) {
         this.user.update_question_metrics(this.submodule.incorrect_streak, this.module.id);
         this.update_accuracy_dict();
     };
+    
+    console.log("FEBRUARY BUG checkpoint 9");
 }
 
 Quiz.prototype.get_mf_game_status = function () {
@@ -1481,6 +1485,8 @@ Quiz.prototype.display_progress_fraction_bee_mode = function () {
 Quiz.prototype.submodule_complete = function () {
     
     
+    console.log("FEBRUARY BUG checkpoint 1");
+    
     // @beehack
     // if we are in spelling bee mode
     // we want to bypass post so this is much simpler
@@ -1493,11 +1499,24 @@ Quiz.prototype.submodule_complete = function () {
         return;
     }
     
+    
+    console.log("FEBRUARY BUG checkpoint 2");
+    
     if (this.user.uid !== null) {
         back.log("[quiz.submodule_complete] entering post #2");
         back.log("[quiz.submodule_complete] accuracy dictionary raw  = ", this.accuracy_dictionary);
         back.log("[quiz.submodule_complete] accuracy dictionary converted = ", this.convert_accuracy_dict2());
         back.log("[quiz.submodule_complete] this.time_data = ", this.time_data);
+        
+        console.log("[quiz.submodule_complete] entering post #2");
+        console.log("[quiz.submodule_complete] accuracy dictionary raw  = ", this.accuracy_dictionary);
+        console.log("[quiz.submodule_complete] accuracy dictionary converted = ", this.convert_accuracy_dict2());
+        console.log("[quiz.submodule_complete] this.time_data = ", this.time_data);
+        
+        
+        
+        
+        
         
         post({data: this.time_data_id, type: "update_time_data"});
         
@@ -1563,6 +1582,13 @@ Quiz.prototype.submodule_complete = function () {
     back.log("[quiz.submodule_complete] this.module.id = ", this.module.id);
     back.log("[quiz.submodule_complete] is submodule complete? = ", callback);
     back.log("[quiz.submodule_complete] callback = ", callback);
+    
+    
+    console.log("[quiz.submodule_complete] this.module.id = ", this.module.id);
+    console.log("[quiz.submodule_complete] is submodule complete? = ", callback);
+    console.log("[quiz.submodule_complete] callback = ", callback);
+    
+    
     
     var new_callback = debug_via_log(callback, 'callback');
     
@@ -1904,6 +1930,9 @@ Quiz.prototype.get_reward = function () {
 Quiz.prototype.increment_score = function () {
     console.log("[quiz.increment_score] entering increment_score");
     console.log("[quiz.increment_score] this.get_reward = ", this.get_reward);
+    console.log("[quiz.increment_score] this.module = ", this.module);
+    console.log("[quiz.increment_score] this.module.submodule = ", this.module.submodule);
+    
     
     
     // todo implement decrement countdown bar when ready
@@ -1915,10 +1944,14 @@ Quiz.prototype.increment_score = function () {
     
     
     if (!this.user.is_mf()) {
+        console.log("FEBRUARY BUG checkpoint 0.1");
+        console.log("FEBRUARY BUG checkpoint 0.2");
         this.progress_bar.change_number_correct(
             {'change_value': this.get_reward(),
                 'time_from_start': new Date() - this.began});
+        console.log("FEBRUARY BUG: entering problem area");
         this.submodule.score += this.get_reward();
+        console.log("FEBRUARY BUG: this.submodule.score = ", this.submodule.score);
     }
 };
 
