@@ -9722,7 +9722,7 @@ var words = {
     },
     "psychologist": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">mind</span>",
+        "meaning": "a <span class=\"embedded_root\">person involved</span> in the <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">mind</span>",
         "part of speech": "noun",
         "roots": [
             "LOG",

@@ -663,6 +663,13 @@ SpellingMatchModeGame.prototype.display_red_green_result = function (list) {
 SpellingMatchModeGame.prototype.give_away_answer = function(){
     var fbox = el("feedbackbox");
     
+    
+    
+    // @todo very important - this is a short-term hack to prevent the students
+    // from hitting submit ten times in a row
+    global_spelling_match_score_counter--;
+    // end short-term hack
+    
     this.clue = replace_all_substrings(this.clue, "<span class=\"embedded_root\">", "");
     this.clue = replace_all_substrings(this.clue, "</span>", "");
     
