@@ -38,6 +38,7 @@ produce total_desired of each category
 sort: for seen items read parameter from module and either (shuffle || sort from lowest || sort from highest)
  
 
+we decided we could do this
 ---step 3---
 concatenate by consulting the weighting (x, y, z)
     e.g. targeted: 80, unseen: 20, untargeted: 0

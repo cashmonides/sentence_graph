@@ -1,0 +1,77 @@
+// uncompleted 
+    // real persistence of word scores
+
+
+
+
+// FINAL OUTPUT
+
+
+// values will be sorted list of data rich objects
+var example_of_final_output = {
+    'words': available_words,
+    'roots': available_roots
+};
+
+// values will be sorted list of data rich objects
+// e.g. [{'name': 'arthropod', 'mastery': 0.7}, etc.]
+// two versions of this, one words and one roots
+var example_of_intermediate_output_of_roots_or_words = {
+    'unseen': unseen,
+    'targeted': targeted,
+    'untargeted': untargeted
+}
+
+
+
+/////////// QUESTION CHOOSING OPERATION //////////////
+
+
+
+var example_of_weighting_ratio = {
+    'unseen': 0.4,
+    'targeted': 0.8,
+    'untargeted': 0.001
+}
+
+
+var next_type = {
+    'unseen': 'targeted',
+    'targeted': 'untargeted',
+    'untargeted': 'unseen'
+}
+
+var indices = {
+    'root': {
+        'unseen': 0,
+        'untargeted': 0,
+        'targeted': 0
+    },
+    'word': {
+        'unseen': 0,
+        'untargeted': 0,
+        'targeted': 0
+    }
+}
+
+// question_type = unseen||targeted||untargeted
+initial question type = pick from weighting_map
+question type = initial question type
+
+while (output[root|word][question type] is empty) {
+    question type = next_type[question type]
+    if question type === initial question type {
+        panic! blame cat!
+    }
+}
+
+// pick word
+our index = indices[root|word][question type]
+use root or word at index our index in output[root|word][question type]
+
+// increment index for internal bookkeeping
+indices[root|word][question type]++
+
+// if we reach the end start over
+if indices[root|word][question type] === output[root|word][question type].length
+     indices[root|word][question type] = 0
