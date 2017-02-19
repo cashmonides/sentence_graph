@@ -4,6 +4,10 @@ Agenda (updated jan 1, 2017)
 
 FUTURE DESIDERATA
 - development_status that reads URL
+- messages from your teacher button (great job! it looks like you beat 9 levels. OR you seem to be starting games and abandoning them. Is there any way I can help?
+- english block of text (paraphrase or translation) with word missing - read latin text - answer structural questions - fill in blank
+    - e.g. Draco was king of _____ / Vulcan is the god of ________
+
 
 -----------------------CURRENT AGENDA--------------------------------
 
