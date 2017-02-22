@@ -1,3 +1,19 @@
+// ---------------THE SHORTEST POSSIBLE VERSION----------
+// a single object called language_words_data
+	// e.g. latin_words_data, english_words_data, sanskrit_words_data
+	// with at least three members
+	// 1) list/dictionary of word objects
+	// 2) list/dictionary of roots
+	// 3) a dictionary of roots to words (string to list of strings)
+	// in all cases, strings point to canonical forms
+	// all variant forms are a property of the word||root object (a list of strings)
+	// e.g. 'ped' points to 'ped': {'form_list': ['ped', 'pod', 'pus']
+// a set of utils that operates on the word object
+// a set of utils that operates on strings (language-agnostic)
+// a game engine that takes question-data and game-settings
+
+
+
 // --------------THE GOAL----------------
 
 // in short:

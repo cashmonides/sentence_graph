@@ -1,64 +1,7 @@
 var words = {
-    "december": {
-        "grade": 12,
-        "meaning": "a month, formerly the <span class=\"embedded_root\">ten</span>th month of the Roman calendar",
-        "part of speech": "noun",
-        "roots": [
-            "DEC/DEKA"
-        ],
-        "type": "none",
-        "word": "december"
-    },
-    "november": {
-        "grade": 12,
-        "meaning": "a month, formerly the <span class=\"embedded_root\">9</span>th month of the Roman calendar",
-        "part of speech": "noun",
-        "roots": [
-            "NON/NOV"
-        ],
-        "type": "none",
-        "word": "november"
-    },
-    "heptateuch": {
-        "grade": 12,
-        "meaning": "the first <span class=\"embedded_root\">seven</span> books of the Old Testament",
-        "part of speech": "noun",
-        "roots": [
-            "HEPT/HEPTA"
-        ],
-        "type": "none",
-        "word": "heptateuch"
-    },
-    "mesoamerica": {
-        "grade": 12,
-        "meaning": "<span class=\"embedded_root\">Middle</span> America - Guatemala, Nicaragua, Panama, etc.",
-        "part of speech": "noun",
-        "roots": [
-            "MESO"
-        ],
-        "type": "none",
-        "word": "mesoamerica"
-    },
-    "paleolithic": {
-        "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">oldest</span> period of the <span class=\"embedded_root\">Stone</span> Age",
-        "part of speech": "noun",
-        "roots": [
-            "PALE/PALEO"
-        ],
-        "type": "none",
-        "word": "paleolithic"
-    },
-    "september": {
-        "grade": 12,
-        "meaning": "a month, formerly the <span class=\"embedded_root\">7</span>th month of the Roman calendar",
-        "part of speech": "noun",
-        "roots": [
-            "SEPT"
-        ],
-        "type": "none",
-        "word": "september"
-    },
+    
+    
+    
     "abbreviate": {
         "grade": 12,
         "meaning": "to <span class=\"embedded_root\">short</span>en",
@@ -3129,6 +3072,16 @@ var words = {
         "type": "none",
         "word": "decelerate"
     },
+    "december": {
+        "grade": 12,
+        "meaning": "a month, formerly the <span class=\"embedded_root\">ten</span>th month of the Roman calendar",
+        "part of speech": "noun",
+        "roots": [
+            "DEC/DEKA"
+        ],
+        "type": "none",
+        "word": "december"
+    },
     "decibel": {
         "grade": 12,
         "meaning": "a standard unit for measuring the volume of a sound, calibrated at one <span class=\"embedded_root\">ten</span>th of the unit called a bel",
@@ -5352,6 +5305,16 @@ var words = {
         "type": "none",
         "word": "heptameter"
     },
+    "heptateuch": {
+        "grade": 12,
+        "meaning": "the first <span class=\"embedded_root\">seven</span> books of the Old Testament",
+        "part of speech": "noun",
+        "roots": [
+            "HEPT/HEPTA"
+        ],
+        "type": "none",
+        "word": "heptateuch"
+    },
     "herbal": {
         "grade": 12,
         "meaning": "relating to <span class=\"embedded_root\">plant</span>s",
@@ -7124,6 +7087,16 @@ var words = {
         "type": "none",
         "word": "memory"
     },
+    "mesoamerica": {
+        "grade": 12,
+        "meaning": "<span class=\"embedded_root\">Middle</span> America - Guatemala, Nicaragua, Panama, etc.",
+        "part of speech": "noun",
+        "roots": [
+            "MESO"
+        ],
+        "type": "none",
+        "word": "mesoamerica"
+    },
     "meson": {
         "grade": 12,
         "meaning": "elementary particle with a mass between an electron and a proton",
@@ -8104,6 +8077,16 @@ var words = {
         "type": "none",
         "word": "novelty"
     },
+    "november": {
+        "grade": 12,
+        "meaning": "a month, formerly the <span class=\"embedded_root\">9</span>th month of the Roman calendar",
+        "part of speech": "noun",
+        "roots": [
+            "NON/NOV"
+        ],
+        "type": "none",
+        "word": "november"
+    },
     "novice": {
         "grade": 12,
         "meaning": "a person who is new at a job",
@@ -8622,6 +8605,16 @@ var words = {
         ],
         "type": "none",
         "word": "paleography"
+    },
+    "paleolithic": {
+        "grade": 12,
+        "meaning": "the <span class=\"embedded_root\">oldest</span> period of the <span class=\"embedded_root\">Stone</span> Age",
+        "part of speech": "noun",
+        "roots": [
+            "PALE/PALEO"
+        ],
+        "type": "none",
+        "word": "paleolithic"
     },
     "paleontology": {
         "grade": 12,
@@ -10582,6 +10575,16 @@ var words = {
         "type": "none",
         "word": "semiconscious"
     },
+    "september": {
+        "grade": 12,
+        "meaning": "a month, formerly the <span class=\"embedded_root\">7</span>th month of the Roman calendar",
+        "part of speech": "noun",
+        "roots": [
+            "SEPT"
+        ],
+        "type": "none",
+        "word": "september"
+    },
     "septet": {
         "grade": 12,
         "meaning": "a group of <span class=\"embedded_root\">seven</span> musicians",
@@ -11138,7 +11141,7 @@ var words = {
     },
     "telegram": {
         "grade": 12,
-        "meaning": "a <span class=\"embedded_root\">writtenspan> message sent across a <span class=\"embedded_root\">distance</span> using wires",
+        "meaning": "a <span class=\"embedded_root\">written</span message sent across a <span class=\"embedded_root\">distance</span> using wires (19th century technology)",
         "part of speech": "noun",
         "roots": [
             "TEL/TELE",

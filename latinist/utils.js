@@ -1,6 +1,20 @@
+/// ELEMENTAL ETYMOLOGY FUNCTIONS (aka word functions)
+////// this file is a collection of all utils relating to the february 2017 reboot
+////// it started with a focus on etymological operations
+///// ultimately it seek to be a general format for other operations involving button clicks
+
+//// some examples: find root, find word with root, replace root
+
+
+
+// some notes
+
+
+
+
 // ELEMENTAL FUNCTIONS
 
-// --separate component--
+///////////////// --separate component--/////////////////////
 // add metacharacter separator between components
 //     verify --> ver.if.y
 
@@ -25,11 +39,8 @@ function init_util (dictionary) {
 
 
 // string-utils
+///add utils here
 
-
-
-
-// MVC model = data    view = output      controller = input
 // model-utils
 function init_util (dictionary) {
     return {
