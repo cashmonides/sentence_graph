@@ -1759,7 +1759,7 @@ var words = {
         "type": "none",
         "word": "bibliophobe"
     },
-    "bbliophobia": {
+    "bibliophobia": {
         "grade": 12,
         "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">books</span>",
         "part of speech": "noun",

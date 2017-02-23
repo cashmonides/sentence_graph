@@ -21,12 +21,17 @@
 
 
 
+// some details
+// the irregular plural field is null either if: no plural possible, plural is regular
+
+
 var english_word_data = {
 /////////////words/////////
 'words' : {
     'archaeology': {	
         'variant_list': ['archeology'],
         'british_variant': null,
+        'irregular_plural': ['archaeologies'],
     	'component_map': {
     		'1': 'ver',
     		'2': 'i#',
@@ -41,6 +46,7 @@ var english_word_data = {
     'verify': {	
         'variant_list': null,
         'british_variant': null,
+        'irregular_plural': null,
     	'component_map': {
     		'1': 'ver',
     		'2': 'i#',
@@ -55,6 +61,7 @@ var english_word_data = {
     'cryptozoologist': {
         'variant_list': null,
         'british_variant': null,
+        'irregular_plural': null,
     	'component_map': {
     		'1': 'crypt',
     		'2': 'o#',
@@ -72,6 +79,7 @@ var english_word_data = {
     'quadruped': {		
         'variant_list': null,
         'british_variant': null,
+        'irregular_plural': null,
     	'component_map': {
     		'1': 'quadr',
     		'2': 'u#',
@@ -90,6 +98,7 @@ var english_word_data = {
     'cryptophobia': {	
         'variant_list': null,
         'british_variant': null,
+        'irregular_plural': null,
     	'component_map': {
     		'1': 'crypt',
     		'2': 'o#',
@@ -108,6 +117,7 @@ var english_word_data = {
     'anthropod': {	
         'variant_list': null,
         'british_variant': null,
+        'irregular_plural': null,
     	'component_map': {
     		'1': 'anthr',
     		'2': 'o#',
