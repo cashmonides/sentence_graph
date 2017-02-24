@@ -168,3 +168,45 @@ var new_dictionary_template1 = {
     	'field_list': null,
     	'xyz9': 'xyz',
     };
+
+
+
+
+{  
+   "canonical_form":"bibliophobia",
+   "component_list":[  
+      {  
+         "_1":"bibli"
+      },
+      {  
+         "_2":"phob"
+      }
+   ],
+   "definition":"the @fear@ of @books@",
+   "variant_list":null,
+   "british_variant_list":null,
+   "irregular_plural_list":null,
+   "part_of_speech":"noun",
+   "level":null,
+   "sense_type":null,
+   "field_list":null
+},
+{  
+   "canonical_form":"bibliophobia",
+   "component_list":[  
+      {  
+         "_1":"bibli"
+      },
+      {  
+         "_2":"phob"
+      }
+   ],
+   "definition":"the @fear@ of @books@",
+   "variant_list":null,
+   "british_variant_list":null,
+   "irregular_plural_list":null,
+   "part_of_speech":"noun",
+   "level":null,
+   "sense_type":null,
+   "field_list":null
+}

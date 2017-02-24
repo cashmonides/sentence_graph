@@ -8776,17 +8776,19 @@ var words = {
         "meaning": "relating to fathers",
         "part of speech": "adjective",
         "roots": [
-            "PATER/PATR/PATRI"
+            "PATER/PATR/PATRI",
+            "AL"
         ],
         "type": "none",
         "word": "paternal"
     },
     "paternity": {
         "grade": 12,
-        "meaning": "fatherhood",
+        "meaning": "the quality of fatherhood",
         "part of speech": "noun",
         "roots": [
-            "PATER/PATR/PATRI"
+            "PATER/PATR/PATRI",
+            "ITY"
         ],
         "type": "none",
         "word": "paternity"
@@ -8812,6 +8814,92 @@ var words = {
         ],
         "type": "none",
         "word": "patriarchy"
+    },
+    "patricide": {
+        "grade": 12,
+        "meaning": "the killing of one's <span class=\"embedded_root\">father</span>-land",
+        "part of speech": "noun",
+        "roots": [
+            "PATER/PATR/PATRI",
+            "CIDE/CISE"
+        ],
+        "type": "none",
+        "word": "patricide"
+    },
+    "patrilineal": {
+        "grade": 12,
+        "meaning": "based on the family relationship to one's <span class=\"embedded_root\">father</span>",
+        "part of speech": "noun",
+        "roots": [
+            "PATER/PATR/PATRI",
+            "LIN"
+        ],
+        "type": "none",
+        "word": "patrilineal"
+    },
+    "patriot": {
+        "grade": 12,
+        "meaning": "a lover and supporter of one's <span class=\"embedded_root\">father</span>-land",
+        "part of speech": "noun",
+        "roots": [
+            "PATER/PATR/PATRI"
+        ],
+        "type": "none",
+        "word": "patriot"
+    },
+    "patriotic": {
+        "grade": 12,
+        "meaning": "having the quality of being a lover and supporter of one's <span class=\"embedded_root\">father</span>-land",
+        "part of speech": "adjective",
+        "roots": [
+            "PATER/PATR/PATRI",
+            "IC"
+        ],
+        "type": "none",
+        "word": "patriotic"
+    },
+    "patriotism": {
+        "grade": 12,
+        "meaning": "the practice or system of being a lover and supporter of one's <span class=\"embedded_root\">father</span>-land",
+        "part of speech": "adjective",
+        "roots": [
+            "PATER/PATR/PATRI",
+            "ISM"
+        ],
+        "type": "none",
+        "word": "patriotism"
+    },
+    "patron": {
+        "grade": 12,
+        "meaning": "a person who gives financial support to someone, much like a <span class=\"embedded_root\">father</span> supports his children",
+        "part of speech": "adjective",
+        "roots": [
+            "PATER/PATR/PATRI"
+        ],
+        "type": "none",
+        "word": "patron"
+    },
+    "patronage": {
+        "grade": 12,
+        "meaning": "the action of giving financial support to someone, much like a <span class=\"embedded_root\">father</span> supports his children",
+        "part of speech": "adjective",
+        "roots": [
+            "PATER/PATR/PATRI",
+            "AGE"
+        ],
+        "type": "none",
+        "word": "patronage"
+    },
+    "patronym": {
+        "grade": 12,
+        "meaning": "a name built from the name of one's <span class=\"embedded_root\">father</span>, such as richardson or richard jr.",
+        "part of speech": "adjective",
+        "roots": [
+            "PATER/PATR/PATRI",
+            "NYM/ONYM"
+        ],
+        "type": "none",
+        "word": "patronym"
     },
     "pedal": {
         "grade": 12,
@@ -10192,6 +10280,17 @@ var words = {
         ],
         "type": "none",
         "word": "renovate"
+    },
+    "repatriate": {
+        "grade": 12,
+        "meaning": "to return a person or thing back to its homeland or father-land",
+        "part of speech": "verb",
+        "roots": [
+            "RE",
+            "PATER/PATR/PATRI"
+        ],
+        "type": "none",
+        "word": "repatriate"
     },
     "repel": {
         "grade": 12,
@@ -11651,6 +11750,17 @@ var words = {
         "type": "none",
         "word": "unison"
     },
+    "unpatriotic": {
+        "grade": 12,
+        "meaning": "not having the qualities of loving and supporting one's country or father-land",
+        "part of speech": "adjective",
+        "roots": [
+            "UN",
+            "PATER/PATR/PATRI"
+        ],
+        "type": "none",
+        "word": "unpatriotic"
+    },
     "urban": {
         "grade": 12,
         "meaning": "relating to a city",
@@ -12088,6 +12198,10 @@ var roots = {
         "meaning": "air",
         "root": "AER"
     },
+    "AGE": {
+        "meaning": "the action of",
+        "root": "AGE"
+    },
     "AGOR": {
         "meaning": "marketplace",
         "root": "AGOR"
@@ -12095,6 +12209,10 @@ var roots = {
     "AGR": {
         "meaning": "farming",
         "root": "AGR"
+    },
+    "AL": {
+        "meaning": "relating to",
+        "root": "AL"
     },
     "ALG": {
         "meaning": "pain",
@@ -12499,7 +12617,7 @@ var roots = {
         "root": "DYS"
     },
     "E/EX": {
-        "meaning": "from, out, away, fully",
+        "meaning": "out, from, away, fully",
         "root": "E/EX"
     },
     "EGO": {
@@ -12808,9 +12926,25 @@ var roots = {
         "meaning": "equal",
         "root": "ISO"
     },
+    "ISM": {
+        "meaning": "practice, system or philosophy",
+        "root": "ISM"
+    },
     "IST": {
         "meaning": "a person engaged in",
         "root": "IST"
+    },
+    "ISTIC": {
+        "meaning": "relating to",
+        "root": "ISTIC"
+    },
+    "ITY": {
+        "meaning": "the quality of",
+        "root": "ITY"
+    },
+    "IZE": {
+        "meaning": "to make or convert",
+        "root": "IZE"
     },
     "JECT": {
         "meaning": "throw, put",
@@ -12874,6 +13008,10 @@ var roots = {
     "LIBER": {
         "meaning": "free",
         "root": "LIBER"
+    },
+    "LIN": {
+        "meaning": "line, thread (including the line of descendants in a family)",
+        "root": "LIN"
     },
     "LINGU": {
         "meaning": "language, tongue",
@@ -13540,6 +13678,10 @@ var roots = {
     "SOPOR": {
         "meaning": "sleep",
         "root": "SOPOR"
+    },
+    "SOROR": {
+        "meaning": "sister",
+        "root": "SOROR"
     },
     "SPEC": {
         "meaning": "subcategory",

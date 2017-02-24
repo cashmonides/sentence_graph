@@ -940,117 +940,7 @@ var find_non_matching_words = function (query_list, master_list) {
 Quiz.prototype.next_question = function (error) {
     
     
-    // var test_dictionary_to_alter1 = {
-    //     "grade": 12,
-    //     "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">books</span>",
-    //     "part of speech": "noun",
-    //     "roots": [
-    //         "BIBLI",
-    //         "PHOB"
-    //     ],
-    //     "type": "none",
-    //     "word": "bibliophobia"
-    // };
-    
-    
-    // var change_key_map = {
-    //     'meaning': 'definition',
-    //     'part of speech': 'part_of_speech',
-    //     'word': 'canonical_form'
-    // }
-    
-    
-    // // var new_dictionary_template1 = {
-    // //     'variant_list': null,
-    // //     'british_variant': null,
-    // //     'irregular_plural': null,
-    // // 	'component_map': null,
-    // // 	'definition': null,
-    // // 	'part_of_speech': null,
-    // // 	'level': null,
-    // // 	'sense_type': null,
-    // // 	'field_list': null
-    // // };
-    
-    // var new_dictionary_template1 = {
-    //     'variant_list': null,
-    //     'xyz1': 'xyz',
-    //     'british_variant': null,
-    //     'xyz2': 'xyz',
-    //     'irregular_plural': null,
-    //     'xyz3': 'xyz',
-    // 	'component_map': null,
-    // 	'xyz4': 'xyz',
-    // 	'definition': null,
-    // 	'xyz5': 'xyz',
-    // 	'part_of_speech': null,
-    // 	'xyz6': 'xyz',
-    // 	'level': null,
-    // 	'xyz7': 'xyz',
-    // 	'sense_type': null,
-    // 	'xyz8': 'xyz',
-    // 	'field_list': null,
-    // 	'xyz9': 'xyz',
-    // };
-    
-    
-    // var change_dictionary_key = function (unaltered_dictionary, old_key, new_key) {
-	   // var altered_dictionary = {};
-	   // var value = unaltered_dictionary[old_key];
-    //     altered_dictionary[new_key] = value;
-	   // return altered_dictionary;
-    // }
-    
-    // // attempt 1 with random order
-    // // var change_dictionary_keys = function (unaltered_dictionary, change_map) {
-    // //     var altered_dictionary = {};
-    // //     for (var old_key in change_map) {
-    // //         if (change_map.hasOwnProperty(old_key)) {
-    // //             var value = unaltered_dictionary[old_key];
-    // //             var new_key = change_map[old_key];
-    // //             altered_dictionary[new_key] = value;
-    // //         }
-    // //     }
-    // //     return altered_dictionary;
-    // // }
-    
-    // // attempt 2 with prespecified order
-    // // var change_dictionary_keys = function (unaltered_dictionary, change_map) {
-    // //     var altered_dictionary = {
-    // //         "canonical_form": "dummy",
-    // //         "definition": "dummy",
-    // //         "part_of_speech": "dummy"
-    // //     };
-    // //     for (var old_key in change_map) {
-    // //         if (change_map.hasOwnProperty(old_key)) {
-    // //             var value = unaltered_dictionary[old_key];
-    // //             var new_key = change_map[old_key];
-    // //             altered_dictionary[new_key] = value;
-    // //         }
-    // //     }
-    // //     return altered_dictionary;
-    // // }
-    
-    
-    // // attempt 3 with blank template
-    // var change_dictionary_keys = function (unaltered_dictionary, change_map, altered_dictionary_template) {
-    //     var altered_dictionary = altered_dictionary_template
-    //     for (var old_key in change_map) {
-    //         if (change_map.hasOwnProperty(old_key)) {
-    //             var value = unaltered_dictionary[old_key];
-    //             var new_key = change_map[old_key];
-    //             altered_dictionary[new_key] = value;
-    //         }
-    //     }
-    //     return altered_dictionary;
-    // }
-    
-    //IAN
-    // changing order of keys in map
-    // adding line break and indentation to output of map
-    
-    
-    
+  
     var new_dictionary_template1 = {
       	'canonical_form': null,
         'component_list': [],
@@ -1066,22 +956,255 @@ Quiz.prototype.next_question = function (error) {
 
 
     var change_key_map = {
-            'meaning': 'definition',
-            'part of speech': 'part_of_speech'
+        'meaning': 'definition',
+        'part of speech': 'part_of_speech'
     }
+    
+    // var old_dictionary = {
+    //     "cardiology": {
+    //         "grade": 12,
+    //         "meaning": "the treatment and <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">heart</span>",
+    //         "part of speech": "noun",
+    //         "roots": [
+    //             "CARDI",
+    //             "LOG"
+    //         ],
+    //         "type": "none",
+    //         "word": "cardiology"
+    //     },
+    //     "bibliophobia": {
+    //         "grade": 12,
+    //         "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">books</span>",
+    //         "part of speech": "noun",
+    //         "roots": [
+    //             "BIBLI",
+    //             "PHOB"
+    //         ],
+    //         "type": "none",
+    //         "word": "bibliophobia"
+    //     }
+    // };
+    var old_dictionary = {
+        "cardiology": {
+            "grade": 12,
+            "meaning": "the treatment and <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">heart</span>",
+            "part of speech": "noun",
+            "roots": [
+                "CARDI",
+                "LOG"
+            ],
+            "type": "none",
+            "word": "cardiology"
+        },
+        "carnivorous": {
+            "grade": 12,
+            "meaning": "<span class=\"embedded_root\">meat</span>-<span class=\"embedded_root\">eat</span>ing",
+            "part of speech": "adjective",
+            "roots": [
+                "CARN",
+                "VOR/VOUR"
+            ],
+            "type": "none",
+            "word": "carnivorous"
+        },
+    };
+    
+    
+    var test_dictionary = {
+        "humpty": {
+            "grade": 12,
+            "meaning": "the treatment and <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">heart</span>",
+            "part of speech": "noun",
+            "roots": [
+                "CARDI",
+                "LOG"
+            ],
+            "type": "none",
+            "word": "cardiology"
+        },
+        "carnivorous": {
+            "grade": 12,
+            "meaning": "<span class=\"embedded_root\">meat</span>-<span class=\"embedded_root\">eat</span>ing",
+            "part of speech": "adjective",
+            "roots": [
+                "CARN",
+                "VOR/VOUR"
+            ],
+            "type": "none",
+            "word": "carnivorous"
+        },
+    };
 
-
+    // master function
     var change_big_dictionary_of_dictionaries = function (big_dictionary, change_map, altered_dictionary_template) {
+        // initialize an empty list, to which we will push all changed dictionaries
         var new_list = [];
-        for (let item in big_dictionary) {
-            new_list.push(change_dictionary_keys(item, change_map, altered_dictionary_template));
+        var obj = big_dictionary;
+        
+        //reboot
+        var output_list = [];
+        // just a shorthand
+        // this refers to the dictionary of all the sub-dictionaries
+        // var dictionary = big_dictionary;
+        var dictionary = old_dictionary;
+        
+        
+        
+        // sanity check
+        var dictionary = {
+            "humpty": {
+                "action": "sat on a wall",
+                "response": "none"
+            },
+            "dumpty": {
+                "action": "had a great fall",
+                "response": "none"
+            },
         }
-        console.log("NEW LIST = ", new_list);
-        return new_list;
-    }
+        
+        var list_of_key_strings = Object.keys(dictionary);
+        
+        
+        console.log("SANITY obj = ", dictionary);
+        console.log("SANITY obj stringified = ", JSON.stringify(dictionary));
+        console.log('SANITY list_of_key_strings = ', list_of_key_strings);
+        
+        
+        
+        for (var i=0; i < list_of_key_strings.length; i++) {
+            console.log("BEGIN ITERATION");
+            console.log("INSIDE ITERATION i = ", i);
+            var key_string = list_of_key_strings[i];
+            console.log("INSIDE ITERATION key_string = ", key_string);
+            var sub_object = dictionary[key_string];
+            // console.log("INSIDE ITERATION sub_object = ", sub_object);
+            console.log("INSIDE ITERATION sub_object stringified = ", JSON.stringify(sub_object));
+            
+            
+            //////////////commenting out for sanity check
+            // var output = change_dictionary(sub_object, change_map, altered_dictionary_template);
+            
+            ////////////sanity check below
+            var output = sub_object[action];
+            
+            
+            // console.log("INSIDE ITERATION output = ", output);
+            console.log("INSIDE ITERATION output stringified = ", JSON.stringify(output));
+            output_list.push(output);
+            // console.log("INSIDE ITERATION output_list = ", output_list);
+            console.log("INSIDE ITERATION output_list stringified = ", JSON.stringify(output_list));
+            console.log("END ITERATION");
+        }
+        
+        console.log("SANITY output_list = ", output_list);
+        return output_list;
+        
+        
+        
+        // a dictionary can't be iterated over
+        // turn the keys into something that can be iterated over
+        // var list_of_objects = Object.keys(obj);
+        // console.log('WELL list_of_objects = ', list_of_objects);
+        
+        
+        // sanity check
+        // for (var i = 0; i < list_of_objects.length; i++) {
+        //     console.log("i = ", i);
+        //     console.log("key = ", list_of_objects[i]);
+        //     var key = big_dictionary[list_of_sanity_check_objects[i]];
+        //     console.log("object_key = ", object_key);
+        //     new_list.push(object_key);
+        //     console.log("NEW LIST inside iteration = ", new_list);
+        // }
+        
+        
+        // var list_of_sanity_check_objects = ['humpty', 'dumpty'];
+        
+        // var sanity_check_map = {
+        //     'humpty': 'sat on a wall',
+        //     'dumpty': 'had a great fall'
+        // }
+        
+        // sanity check
+        // for (var i = 0; i < list_of_sanity_check_objects.length; i++) {
+        //     console.log("i = ", i);
+        //     console.log("obj[i] = ", list_of_sanity_check_objects[i]);
+        //     var object_key = sanity_check_map[list_of_sanity_check_objects[i]];
+        //     console.log("object_key = ", object_key);
+        //     new_list.push(object_key);
+        //     console.log("NEW LIST inside iteration = ", new_list);
+        // }
+        
+        // sanity check
+        // for (var i = 0; i < list_of_objects.length; i++) {
+        //     console.log("i = ", i);
+        //     console.log("obj[i] = ", list_of_objects[i]);
+        //     var object_key = old_dictionary[list_of_objects[i]];
+        //     console.log("object_key = ", object_key);
+        //     var sub_dictionary = change_dictionary(object_key, change_map, altered_dictionary_template);
+        //     console.log("sub_dictionary = ", sub_dictionary);
+        //     new_list.push(sub_dictionary);
+        //     console.log("NEW LIST inside iteration = ", new_list);
+        // }
+        
+        
+        
+        // iterate through keys attempt 2
+        // for (var i = 0; i < list_of_objects.length; i++) {
+        //     console.log("i = ", i);
+        //     console.log("obj[i] = ", list_of_objects[i]);
+        //     var object_key = old_dictionary[list_of_objects[i]];
+        //     console.log("object_key = ", object_key);
+        //     var sub_dictionary = change_dictionary(object_key, change_map, altered_dictionary_template);
+        //     console.log("sub_dictionary = ", sub_dictionary);
+        //     new_list.push(sub_dictionary);
+        //     console.log("NEW LIST inside iteration = ", new_list);
+        // }
+        
+        
+        
+        // // iterate through keys attempt 1 failed
+        // // for (var i = 0; i < list_of_objects.length; i++) {
+        // //     console.log("i = ", i);
+        // //     console.log("obj[i] = ", list_of_objects[i]);
+        // //     var object_key = obj[list_of_objects[i]];
+        // //     console.log("object_key = ", object_key);
+        // //     var sub_dictionary = change_dictionary(object_key, change_map, altered_dictionary_template);
+        // //     console.log("sub_dictionary = ", sub_dictionary);
+        // //     new_list.push(sub_dictionary);
+        // //     console.log("NEW LIST inside iteration = ", new_list);
+        // // }
+        
+        
+        // // doesn't work mysteriously
+        // // Object.keys(obj).forEach(function(key) {
+        // //     // var little_dictionary = obj[key];
+        // //     // console.log("key = ", key);
+        // //     // console.log("obj[key] = ", obj[key]);
+        // //     // console.log("obj[key] stringified = ", JSON.stringify(obj[key]));
+        // //     // var altered_dictionary = change_dictionary(obj[key], change_map, altered_dictionary_template);
+        // //     // console.log("altered_little_dictionary = ", altered_dictionary);
+            
+            
+            
+        // //     // new_list.push(key);
+        // //     // new_list.push(obj[key]);
+        // //     // not working
+        // //     new_list.push(change_dictionary(obj[key], change_map, altered_dictionary_template));
+            
+        // //     // new_list.push(change_dictionary(little_dictionary, change_map, altered_dictionary_template));
+        // //     console.log("NEW LIST inside iteration = ", new_list);
+        // // });
+        
+        // console.log("NEW LIST = ", new_list);
+        // return new_list;
+        
+    }   
+        
+        
 
 
-    var change_dictionary_keys = function (unaltered_dictionary, change_map, altered_dictionary_template) {
+    var change_dictionary = function (unaltered_dictionary, change_map, altered_dictionary_template) {
   		var altered_dictionary = altered_dictionary_template;
  		for (let old_key in change_map) {
             if (change_map.hasOwnProperty(old_key)) {
@@ -1090,8 +1213,11 @@ Quiz.prototype.next_question = function (error) {
                 altered_dictionary[new_key] = value;
             }
         }
-        altered_dictionary.canonical_form = unaltered_dictionary.meaning
+        altered_dictionary.canonical_form = unaltered_dictionary.word;
+        // console.log("WELL unaltered_dictionary.roots = ", unaltered_dictionary.roots);
   		altered_dictionary.component_list = convert_list_to_list_of_objects(unaltered_dictionary.roots);
+        // console.log("WELL altered_dictionary.definition = ", altered_dictionary.definition);
+        altered_dictionary.definition = replace_span_with_metacharacter(altered_dictionary.definition, '@');
   
         return altered_dictionary;
     }
@@ -1099,11 +1225,23 @@ Quiz.prototype.next_question = function (error) {
     // starting_list ['BIBLI', 'MANI']
     // component_list: [{'_1' : 'bibli'}, {'_2': 'o#'}, {'_3': 'man'}, {'_4': 'ia'}]
     var convert_list_to_list_of_objects = function (list) {
-         return list.map(function (string, index){
-         	var obj = {};
-           //	var converted_index = '_' + (++index);
+         var output = list.map(function (string, index){
+            //  console.log("WELL STRING = ", string);
+            //  console.log("WELL INDEX = ", index);
+             var obj = {};
+             //	var converted_index = '_' + (++index);
              obj['_' + (++index)] = string.toLowerCase();
+             return obj;
          });
+        //  console.log("WELL OUTPUT of convert list = ", output);
+         return output;
+    }
+    
+    
+    var replace_span_with_metacharacter = function (string, metacharacter) {
+        string = replace_all_substrings(string, '<span class=\"embedded_root\">', metacharacter);
+        string = replace_all_substrings(string, '</span>', metacharacter);
+        return string;
     }
     
     
@@ -1116,30 +1254,7 @@ Quiz.prototype.next_question = function (error) {
     // var test_change_dictionary_output = change_dictionary_keys(test_dictionary_to_alter1, 
     // change_key_map, new_dictionary_template1);
     
-    var old_dictionary = {
-        "bibliophobe": {
-            "grade": 12,
-            "meaning": "one who <span class=\"embedded_root\">fears</span> <span class=\"embedded_root\">books</span>",
-            "part of speech": "noun",
-            "roots": [
-                "BIBLI",
-                "PHOB"
-            ],
-            "type": "none",
-            "word": "bibliophobe"
-        },
-        "bibliophobia": {
-            "grade": 12,
-            "meaning": "the <span class=\"embedded_root\">fear</span> of <span class=\"embedded_root\">books</span>",
-            "part of speech": "noun",
-            "roots": [
-                "BIBLI",
-                "PHOB"
-            ],
-            "type": "none",
-            "word": "bibliophobia"
-        }
-    };
+    
     
     
     var test_change_dictionary_output = change_big_dictionary_of_dictionaries(old_dictionary, change_key_map, new_dictionary_template1);
