@@ -5339,7 +5339,7 @@ var words = {
     },
     "herbicide": {
         "grade": 12,
-        "meaning": "any chemical used to kill unwanted <span class=\"embedded_root\">plant</span>s",
+        "meaning": "a chemical used to <span class=\"embedded_root\">kill</span> unwanted <span class=\"embedded_root\">plants</span>",
         "part of speech": "noun",
         "roots": [
             "HERB",
