@@ -1209,10 +1209,11 @@ var words = {
     },
     "arthroscope": {
         "grade": 12,
-        "meaning": "a tool to see inside a <span class=\"embedded_root\">joint</span>",
+        "meaning": "a tool to <span class=\"embedded_root\">see</span> inside a <span class=\"embedded_root\">joint</span>",
         "part of speech": "noun",
         "roots": [
-            "ARTHR"
+            "ARTHR",
+            "SCOP/SCOPE"
         ],
         "type": "none",
         "word": "arthroscope"
@@ -1966,6 +1967,17 @@ var words = {
         ],
         "type": "none",
         "word": "cardiology"
+    },
+    "carnivore": {
+        "grade": 12,
+        "meaning": "an animal that <span class=\"embedded_root\">eats</span> <span class=\"embedded_root\">meat</span>",
+        "part of speech": "noun",
+        "roots": [
+            "CARN",
+            "VOR/VOUR"
+        ],
+        "type": "none",
+        "word": "carnivore"
     },
     "carnivorous": {
         "grade": 12,
@@ -5336,9 +5348,20 @@ var words = {
         "type": "none",
         "word": "herbicide"
     },
+    "herbivore": {
+        "grade": 12,
+        "meaning": "an animal that <span class=\"embedded_root\">eats</span> <span class=\"embedded_root\">plants</span>",
+        "part of speech": "adjective",
+        "roots": [
+            "HERB",
+            "VOR/VOUR"
+        ],
+        "type": "none",
+        "word": "herbivore"
+    },
     "herbivorous": {
         "grade": 12,
-        "meaning": "<span class=\"embedded_root\">plant</span>-eating",
+        "meaning": "<span class=\"embedded_root\">plant</span> <span class=\"embedded_root\">eating</span>",
         "part of speech": "adjective",
         "roots": [
             "HERB",
@@ -5888,7 +5911,7 @@ var words = {
     },
     "incarnate": {
         "grade": 12,
-        "meaning": "given bodily form",
+        "meaning": "given bodily form, inhabiting <span class=\"embedded_root\">flesh</span>",
         "part of speech": "adjective",
         "roots": [
             "CARN"
@@ -8252,7 +8275,7 @@ var words = {
     },
     "omnipotent": {
         "grade": 12,
-        "meaning": "with <span class=\"embedded_root\">all</span> the power",
+        "meaning": "with <span class=\"embedded_root\">all</span> the <span class=\"embedded_root\">power</span>",
         "part of speech": "adjective",
         "roots": [
             "OMNI",
@@ -8273,7 +8296,7 @@ var words = {
     },
     "omniscient": {
         "grade": 12,
-        "meaning": "knowing <span class=\"embedded_root\">all</span> things",
+        "meaning": "<span class=\"embedded_root\">knowing</span> <span class=\"embedded_root\">all</span> things",
         "part of speech": "adjective",
         "roots": [
             "OMNI",
@@ -8282,9 +8305,20 @@ var words = {
         "type": "none",
         "word": "omniscient"
     },
+    "omnivore": {
+        "grade": 12,
+        "meaning": "an animal that <span class=\"embedded_root\">eats</span> <span class=\"embedded_root\">all</span> foods",
+        "part of speech": "adjective",
+        "roots": [
+            "OMNI",
+            "VOR/VOUR"
+        ],
+        "type": "none",
+        "word": "omnivore"
+    },
     "omnivorous": {
         "grade": 12,
-        "meaning": "eating <span class=\"embedded_root\">all</span> foods",
+        "meaning": "<span class=\"embedded_root\">eating</span> <span class=\"embedded_root\">all</span> foods",
         "part of speech": "adjective",
         "roots": [
             "OMNI",
@@ -9389,7 +9423,7 @@ var words = {
     },
     "podium": {
         "grade": 12,
-        "meaning": "a small platform to <span class=\"embedded_root\">stand</span> on",
+        "meaning": "a small platform or base which serves as a <span class=\"embedded_root\">foot</span> to stand on ",
         "part of speech": "noun",
         "roots": [
             "PED/POD"
