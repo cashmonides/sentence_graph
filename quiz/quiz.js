@@ -940,7 +940,7 @@ var find_non_matching_words = function (query_list, master_list) {
 Quiz.prototype.next_question = function (error) {
     
     
-  
+  /*
     var new_dictionary_template1 = {
       	'canonical_form': null,
         'component_list': [],
@@ -1262,6 +1262,7 @@ Quiz.prototype.next_question = function (error) {
     console.log("WELL output = ", test_change_dictionary_output);
     console.log("WELL output stringified = ", JSON.stringify(test_change_dictionary_output));
     
+    */
     
     
     
