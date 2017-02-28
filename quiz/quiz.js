@@ -940,7 +940,7 @@ var find_non_matching_words = function (query_list, master_list) {
 Quiz.prototype.next_question = function (error) {
     
     
-  /*
+    /*
     var new_dictionary_template1 = {
       	'canonical_form': null,
         'component_list': [],
@@ -951,7 +951,7 @@ Quiz.prototype.next_question = function (error) {
      	'part_of_speech': null,
      	'level': null,
      	'sense_type': null,
-     	'field_list': null     
+     	'field_list': null
     };
 
 
@@ -1010,57 +1010,49 @@ Quiz.prototype.next_question = function (error) {
     };
     
     
-    var test_dictionary = {
-        "humpty": {
-            "grade": 12,
-            "meaning": "the treatment and <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">heart</span>",
-            "part of speech": "noun",
-            "roots": [
-                "CARDI",
-                "LOG"
-            ],
-            "type": "none",
-            "word": "cardiology"
-        },
-        "carnivorous": {
-            "grade": 12,
-            "meaning": "<span class=\"embedded_root\">meat</span>-<span class=\"embedded_root\">eat</span>ing",
-            "part of speech": "adjective",
-            "roots": [
-                "CARN",
-                "VOR/VOUR"
-            ],
-            "type": "none",
-            "word": "carnivorous"
-        },
-    };
+    // var test_dictionary = {
+    //     "humpty": {
+    //         "grade": 12,
+    //         "meaning": "the treatment and <span class=\"embedded_root\">study</span> of the <span class=\"embedded_root\">heart</span>",
+    //         "part of speech": "noun",
+    //         "roots": [
+    //             "CARDI",
+    //             "LOG"
+    //         ],
+    //         "type": "none",
+    //         "word": "cardiology"
+    //     },
+    //     "carnivorous": {
+    //         "grade": 12,
+    //         "meaning": "<span class=\"embedded_root\">meat</span>-<span class=\"embedded_root\">eat</span>ing",
+    //         "part of speech": "adjective",
+    //         "roots": [
+    //             "CARN",
+    //             "VOR/VOUR"
+    //         ],
+    //         "type": "none",
+    //         "word": "carnivorous"
+    //     },
+    // };
 
     // master function
     var change_big_dictionary_of_dictionaries = function (big_dictionary, change_map, altered_dictionary_template) {
         // initialize an empty list, to which we will push all changed dictionaries
         var new_list = [];
-        var obj = big_dictionary;
+        // var obj = big_dictionary;
         
         //reboot
         var output_list = [];
-        // just a shorthand
-        // this refers to the dictionary of all the sub-dictionaries
-        // var dictionary = big_dictionary;
-        var dictionary = old_dictionary;
         
         
         
-        // sanity check
-        var dictionary = {
-            "humpty": {
-                "action": "sat on a wall",
-                "response": "none"
-            },
-            "dumpty": {
-                "action": "had a great fall",
-                "response": "none"
-            },
-        }
+        // var dictionary = old_dictionary;
+        var dictionary = big_dictionary;
+        
+        
+        
+        
+
         
         var list_of_key_strings = Object.keys(dictionary);
         
@@ -1070,7 +1062,7 @@ Quiz.prototype.next_question = function (error) {
         console.log('SANITY list_of_key_strings = ', list_of_key_strings);
         
         
-        
+        //////// for loop approach
         for (var i=0; i < list_of_key_strings.length; i++) {
             console.log("BEGIN ITERATION");
             console.log("INSIDE ITERATION i = ", i);
@@ -1082,21 +1074,21 @@ Quiz.prototype.next_question = function (error) {
             
             
             //////////////commenting out for sanity check
-            // var output = change_dictionary(sub_object, change_map, altered_dictionary_template);
-            
-            ////////////sanity check below
-            var output = sub_object[action];
-            
+            // should return new object
+            var output = change_dictionary(sub_object, change_map, altered_dictionary_template);
             
             // console.log("INSIDE ITERATION output = ", output);
             console.log("INSIDE ITERATION output stringified = ", JSON.stringify(output));
+            
+            
+            // should be a list of objects
             output_list.push(output);
             // console.log("INSIDE ITERATION output_list = ", output_list);
             console.log("INSIDE ITERATION output_list stringified = ", JSON.stringify(output_list));
             console.log("END ITERATION");
         }
         
-        console.log("SANITY output_list = ", output_list);
+        // console.log("SANITY output_list = ", output_list);
         return output_list;
         
         
@@ -1176,7 +1168,7 @@ Quiz.prototype.next_question = function (error) {
         // // }
         
         
-        // // doesn't work mysteriously
+        // //////////// for each approach
         // // Object.keys(obj).forEach(function(key) {
         // //     // var little_dictionary = obj[key];
         // //     // console.log("key = ", key);
@@ -1205,7 +1197,30 @@ Quiz.prototype.next_question = function (error) {
 
 
     var change_dictionary = function (unaltered_dictionary, change_map, altered_dictionary_template) {
-  		var altered_dictionary = altered_dictionary_template;
+  		// a single equals sign
+  		// e.g. var altered_dictionary = altered_dictionary_template;
+        // produces not a new object
+        // but a reference to an existing object
+        // the problem with this: 
+        // every time we iterate through a loop
+        // we're creating a new reference to the existing object
+        // when the existing object gets changed (i.e. on the last loop of the iteration)
+        // all the previous references now point to that changed object
+        // the existing object may have properties already assigned to it
+        // e.g. 
+        // 
+        // rather we want to create a new object, a shallow clone
+        // a shallow clone only goes one layer deep
+        // a deep clone would go into nested properties
+        // and create a new object out of that nested object
+        
+        // below seemed ot be skipping those properties with a null value
+        //  var altered_dictionary = Object.create(altered_dictionary_template);
+  		
+  		
+  		var altered_dictionary = JSON.parse(JSON.stringify(altered_dictionary_template));
+  		
+  		console.log("ALTERED_DICTIONARY = ", altered_dictionary);
  		for (let old_key in change_map) {
             if (change_map.hasOwnProperty(old_key)) {
                 let value = unaltered_dictionary[old_key];
@@ -1257,13 +1272,16 @@ Quiz.prototype.next_question = function (error) {
     
     
     
-    var test_change_dictionary_output = change_big_dictionary_of_dictionaries(old_dictionary, change_key_map, new_dictionary_template1);
     
-    console.log("WELL output = ", test_change_dictionary_output);
-    console.log("WELL output stringified = ", JSON.stringify(test_change_dictionary_output));
+    
+    // var test_change_dictionary_output = change_big_dictionary_of_dictionaries(old_dictionary, change_key_map, new_dictionary_template1);
+    // var test_change_dictionary_output = change_big_dictionary_of_dictionaries(words, change_key_map, new_dictionary_template1);
+    
+    // console.log("WELL output = ", test_change_dictionary_output);
+    // console.log("WELL output stringified = ", JSON.stringify(test_change_dictionary_output));
+    
     
     */
-    
     
     
     ////// RESET THE HINT BUTTON AND ITS COUNTER

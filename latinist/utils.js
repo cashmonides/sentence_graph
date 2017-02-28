@@ -44,25 +44,64 @@ function init_util (dictionary) {
 // model-utils
 function init_util (dictionary) {
     return {
-        // input: string
-        // e.g. 'verify'
-        // output: array of strings, some of which have metacharacters
-        // e.g. ['ver', 'i#', 'fy']
+        
+        // input: a single word
+        // output: a list of component_maps which is an array (usually only 1)
+        // e.g. [{'_1': 'ver', '_2': 'i#', '_3': 'fy'}]
         word_to_components: function (word) {
-            // look up word
-            // creates an array of objects
-            return dictionary.words.filter(function (form) {
-                return word === form.canonical_form;
-            }).map(function (form) {
+            
+            return this.word_from_canonical_form(word).map(function (form) {
                 // values is ES6 returns just the values as an array
                 // if the filter produces more than one output
                 // map would produce an array of array
                 return form.component_map.values();
             });
         },
-        root_to_words: function (root) {
-            // pseudocode
+        // input: string (e.g. 'verify')
+        // output: list of word-object (hopefully only one)
+        // 0 - when the input is bad or word is missing
+        // more than 1 - when either
+        // data is bad with duplicate words
+        // or edge case: word that is both a verb and noun
+        word_from_canonical_form: function (word) {
+            return dictionary.words.filter(function (form) {
+                return word === form.canonical_form;
+            });
         },
+        
+        
+        // input: one or more strings separated by commas ('ped') or ('ped', 'pod')
+        // output: 
+        
+        // multiple arguments
+        // gather
+        // ...x if x is not a list, gathers all arguments of x into an array
+        root_to_words: function (...roots) {
+            roots.map(function (root) {
+                return dictionary.filter(function (word){
+                    // convert word.component_map from object to list of values
+                    // what Object.values does but workable on mobile devices
+                    // MDN polyfill
+                    // also we want to roll our own array.contains
+                    // essentially
+                    // return word.component_map.values.includes(root);
+                });
+            });
+        },
+        
+        // input: string    'ped'
+        // output: list of word-objects [{biped},{octopus}]
+        all_root_variants_to_words: function (root) {
+            // spread
+            // if x is a list, spreads into comma-separated values
+            // we want to send a comma-separated values to root_to_words
+            return this.root_to_words(...this.all_root_variants(root));
+        }, 
+        // input: string 'pod'
+        // output: list of strings ['ped', 'pod', 'pus']
+        all_root_variants: function (root) {
+            
+        }
         
     };
     

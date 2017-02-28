@@ -1167,7 +1167,7 @@ var words = {
     },
     "aristocrat": {
         "grade": 12,
-        "meaning": "one who <span class=\"embedded_root\">rules</span> based on his wealth or <span class=\"embedded_root\">nobility</span>",
+        "meaning": "one who <span class=\"embedded_root\">rules</span> based on his <span class=\"embedded_root\">nobility</span>",
         "part of speech": "noun",
         "roots": [
             "ARIST",
@@ -11447,7 +11447,7 @@ var words = {
         "meaning": "<span class=\"embedded_root\">government</span> in which priest rule in the name of <span class=\"embedded_root\">god</span>",
         "part of speech": "noun",
         "roots": [
-            "THEO",
+            "THE",
             "CRAC/CRAT"
         ],
         "type": "none",
@@ -11458,7 +11458,7 @@ var words = {
         "meaning": "one who participates in a <span class=\"embedded_root\">government</span> in which priests rule in the name of <span class=\"embedded_root\">god</span>",
         "part of speech": "noun",
         "roots": [
-            "THEO",
+            "THE",
             "CRAC/CRAT"
         ],
         "type": "none",
