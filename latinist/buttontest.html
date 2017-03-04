@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <title>BUTTON TEST</title>
    
+   
+   <script src='latinist_main.js'></script>
+   <script src='word_data.js'></script>
+   <script src='utils.js'></script>
+   
+   
+   
+   
     <style>
     
         body {
@@ -36,14 +44,26 @@
     
 </head>
 <body>
-
-    <button>BUTTONBUTTONBUTTONBUTTONBUTTON</button>
-    <button>BUTTON 2</button>
-    <button>BUTTON 3</button>
-    <button>BUTTON 4</button>
-    <button>BUTTON 5</button>
-    <button>BUTTON 6</button>
-    <button class="fancy">BUTTON 7</button>
+    
+    <table>
+      <tr id="string_input_row"><td>ENTER STRING</td><td><input type="text" id="string_input"></td></tr>
+    </table>
+    
+    <button id='set_spanish_button'>switch to spanish</button>
+    
+    <button id='root_to_words_button'>get word-objects containing root X</button>
+    
+    <button>get word-objects not containing root X</button>
+    <button>get component-maps of word X (list of objects)</button>
+    
+    
+    <button>get variants-objects of word X</button>
+    <button>get variants-strings of root X</button>
+    <button>get word-strings overlapping roots with words X</button>
+    <button>get word-objects overlapping roots with words X</button>
+    <button>get word-strings not overlapping roots with words X</button>
+    <button>get word-objects not overlapping roots with words X</button>
+    <button class="fancy">BUTTON</button>
     
     
     <a href="#" class="hex">lapicidium</a>

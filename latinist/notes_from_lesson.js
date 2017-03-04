@@ -210,3 +210,92 @@ var new_dictionary_template1 = {
    "sense_type":null,
    "field_list":null
 }
+
+
+
+
+
+DATA STRUCTURE ????
+we have a bunch of forms bi, tri, carn, herb
+we want them to be able to point to/access a root object
+the root object will have canonical form and variants
+do we use metacharacters
+
+
+ped1
+ped2
+
+and if we hit
+
+
+
+
+IN GENERAL
+... arguments vs list
+
+
+
+
+
+
+
+
+
+IN GENERAL
+
+different approaches to buttons:
+on_click vs something_else
+(e.g. quiz > index lines 224-227
+
+
+html properties on______
+potentially overwriting
+you can only have one on____ behavior per element
+
+vs. add event listener
+can do multiple functions
+
+keeping logic out of the data structure 
+(html is a data structure)
+(relevant to seo)
+(relevant to accessibility)
+
+
+dom content load must happen first
+(otherwise you're clicking on a button that hasn't fully loaded)
+- dom content load
+- init function
+- 
+
+
+the on_click approach:
+how do we pass parameters into it:
+e.g. use latin dictionary
+
+
+SPECIFICALLY 
+
+
+
+
+
+bubbling phase vs capture phase
+
+
+
+default is the bubbling phase
+but if true is the 
+
+
+
+
+benefit of querySelector vs document.getElementById
+
+query selector allows us to use css selectors and html selectors
+
+
+
+more general note
+lots of divs and classes lose semantic-ness
+better to have tags describe 
+

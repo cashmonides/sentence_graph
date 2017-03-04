@@ -940,7 +940,7 @@ var find_non_matching_words = function (query_list, master_list) {
 Quiz.prototype.next_question = function (error) {
     
     
-    /*
+    
     var new_dictionary_template1 = {
       	'canonical_form': null,
         'component_list': [],
@@ -1057,20 +1057,20 @@ Quiz.prototype.next_question = function (error) {
         var list_of_key_strings = Object.keys(dictionary);
         
         
-        console.log("SANITY obj = ", dictionary);
-        console.log("SANITY obj stringified = ", JSON.stringify(dictionary));
-        console.log('SANITY list_of_key_strings = ', list_of_key_strings);
+        // console.log("SANITY obj = ", dictionary);
+        // console.log("SANITY obj stringified = ", JSON.stringify(dictionary));
+        // console.log('SANITY list_of_key_strings = ', list_of_key_strings);
         
         
         //////// for loop approach
         for (var i=0; i < list_of_key_strings.length; i++) {
-            console.log("BEGIN ITERATION");
-            console.log("INSIDE ITERATION i = ", i);
+            // console.log("BEGIN ITERATION");
+            // console.log("INSIDE ITERATION i = ", i);
             var key_string = list_of_key_strings[i];
-            console.log("INSIDE ITERATION key_string = ", key_string);
+            // console.log("INSIDE ITERATION key_string = ", key_string);
             var sub_object = dictionary[key_string];
             // console.log("INSIDE ITERATION sub_object = ", sub_object);
-            console.log("INSIDE ITERATION sub_object stringified = ", JSON.stringify(sub_object));
+            // console.log("INSIDE ITERATION sub_object stringified = ", JSON.stringify(sub_object));
             
             
             //////////////commenting out for sanity check
@@ -1078,14 +1078,14 @@ Quiz.prototype.next_question = function (error) {
             var output = change_dictionary(sub_object, change_map, altered_dictionary_template);
             
             // console.log("INSIDE ITERATION output = ", output);
-            console.log("INSIDE ITERATION output stringified = ", JSON.stringify(output));
+            // console.log("INSIDE ITERATION output stringified = ", JSON.stringify(output));
             
             
             // should be a list of objects
             output_list.push(output);
             // console.log("INSIDE ITERATION output_list = ", output_list);
-            console.log("INSIDE ITERATION output_list stringified = ", JSON.stringify(output_list));
-            console.log("END ITERATION");
+            // console.log("INSIDE ITERATION output_list stringified = ", JSON.stringify(output_list));
+            // console.log("END ITERATION");
         }
         
         // console.log("SANITY output_list = ", output_list);
@@ -1275,13 +1275,13 @@ Quiz.prototype.next_question = function (error) {
     
     
     // var test_change_dictionary_output = change_big_dictionary_of_dictionaries(old_dictionary, change_key_map, new_dictionary_template1);
-    // var test_change_dictionary_output = change_big_dictionary_of_dictionaries(words, change_key_map, new_dictionary_template1);
+    var test_change_dictionary_output = change_big_dictionary_of_dictionaries(words, change_key_map, new_dictionary_template1);
     
     // console.log("WELL output = ", test_change_dictionary_output);
-    // console.log("WELL output stringified = ", JSON.stringify(test_change_dictionary_output));
+    console.log("WELL output stringified = ", JSON.stringify(test_change_dictionary_output));
     
     
-    */
+    
     
     
     ////// RESET THE HINT BUTTON AND ITS COUNTER
@@ -1629,13 +1629,15 @@ Quiz.prototype.reset_submodule_without_post = function () {
 
 // @beehack
 Quiz.prototype.set_word_scores = function (callback) {
+    // commented out for testing (pending testing whether firebase can handle the traffic)
     // dummy data
-    this.word_scores_update_list = [
-        {item: "arthropod", type: "word", correct: true, used_all_attempts: false, hints: 2, attempts: 2},
-        {item: "amoeba", type: "word", correct: false, used_all_attempts: true, hints: 3, attempts: 10},
-        {item: "biped", type: "word", correct: true, used_all_attempts: false, hints: 0, attempts: 2},
-    ];
-    this.user.persist_word_scores(this.word_scores_update_list, callback);
+    // this.word_scores_update_list = [
+    //     {item: "arthropod", type: "word", correct: true, used_all_attempts: false, hints: 2, attempts: 2},
+    //     {item: "amoeba", type: "word", correct: false, used_all_attempts: true, hints: 3, attempts: 10},
+    //     {item: "biped", type: "word", correct: true, used_all_attempts: false, hints: 0, attempts: 2},
+    // ];
+    // commented out for testing (pending testing whether firebase can handle the traffic)
+    // this.user.persist_word_scores(this.word_scores_update_list, callback);
 }
 // end @beehack
 

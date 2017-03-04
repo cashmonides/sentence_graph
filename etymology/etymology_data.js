@@ -1,3 +1,6 @@
+
+
+
 var words = {
     
     
@@ -8676,7 +8679,7 @@ var words = {
     },
     "paleozoology": {
         "grade": 12,
-        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">animals</span>",
+        "meaning": "the <span class=\"embedded_root\">study</span> of <span class=\"embedded_root\">ancient</span> <span class=\"embedded_root\">animals</span>",
         "part of speech": "noun",
         "roots": [
             "PALE/PALEO",
