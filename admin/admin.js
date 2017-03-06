@@ -2,8 +2,13 @@ window.onload = start;
 
 var user = new User(false); // Not anonomous.
 
-var email_termination_to_include = "test.team";
+var email_termination_to_include = "tag.play";
+// var email_termination_to_include = "test.team";
 // var email_termination_to_include = "lls.team";
+
+
+var min_spelling_level_to_include = 20;
+
 
 function start() {
     //console.log"start triggered");
@@ -27,6 +32,11 @@ function callback2(data) {
     var old_users = {};
     var old_users2 = {};
     var non_sick_users = {};
+    
+    
+    
+    var spelling_rankings_list = [];
+    var sorted_spelling_rankings_list = [];
     
     // For each key (a uid) in users...
     for (var uid in users) {
@@ -53,6 +63,11 @@ function callback2(data) {
     // make({tag:"tr", children: [{tag: "td"}]}, e);
     
     for (var uid in non_sick_users) {
+        
+        
+        
+        //end short term spelling level display
+        
         var user = non_sick_users[uid];
         // console.log('10/16 user =', user);
         // console.log("DEBUG 3-16 logging begin");
@@ -61,21 +76,58 @@ function callback2(data) {
         // console.log("REPORT ACCURACY?? report_accuracy(users[key])", max_module(users[key]));
         // console.log("DEBUG 3-16 logging end");
         
+        
+        // filtering out to include only high spelling scores
+        
+        if (!user.spelling_level) {
+            continue;
+        }
+        
+        if (user.spelling_level < min_spelling_level_to_include) {
+            continue;
+        }
+        
+        
+        // todo
+        // short term spelling level display
+        var user_name = user.profile.name;
+        var spelling_score = user.spelling_level;
+        var tuple = [];
+        tuple.push(spelling_score);
+        tuple.push(user_name);
+        tuple.push("grade: " + user.profile.grade);
+        tuple.push('$');
+        
+        spelling_rankings_list.push(tuple);
+        console.log("SPELLING_RANKINGS_LIST = ", spelling_rankings_list);
+        console.log("SPELLING_RANKINGS_LIST stringified = ", JSON.stringify(spelling_rankings_list));
+        
+        
+        // sorted_spelling_rankings_list = spelling_rankings_list.sort(compare_by_first_element());
+        var sorted_spelling_rankings_list = spelling_rankings_list.sort(function(a,b){return b[0] - a[0]});
+        
+        
+        
+        // to sort in sublime text: replace $ with \n
+        // then enable regex and replace \\n with \n
+        
         //DEFENSIVE BLOCK
         
         
         make({
             tag:"ul",
             children: [
-                // {tag: "li", text: "name = " + user.profile.name},
-                {tag: "li", text: "user name = " + user.profile.email},
+                {tag: "li", text: "name = " + user.profile.name},
+                // {tag: "li", text: "user name = " + user.profile.email},
                 // {tag: "li", text: "uid = " + uid},
                 // {tag: "li", text: "grade = " + user.profile.grade},
                 // {tag: "li", text: "school = " + user.profile.school},
-                {tag: "li", text: "max module = " + max_module(user)},
+                // {tag: "li", text: "max module = " + max_module(user)},
+                {tag: "li", text: "spelling level = " + get_spelling_level(user)},
                 // {tag: "li", text: report_accuracy(user)},
-                {tag: "li", text: "aggregate accuracy = " +
-                get_aggregate_accuracy(user)}
+                // {tag: "li", text: "aggregate accuracy = " + get_aggregate_accuracy(user)},
+                {tag: "li", text: "unsorted = " + spelling_rankings_list},
+                {tag: "li", text: "sorted = " + sorted_spelling_rankings_list}
             ]
         }, e);
     }
@@ -128,6 +180,24 @@ function callback2(data) {
 
 
 function detect_old_user (user, uid, email_termination) {
+    
+    // todo below is short term debugging
+    if (!user) {
+        console.log("NO USER DETECTED, returning");
+        return 'old user';
+    }
+    
+    if (!user.profile) {
+        console.log("NO PROFILE DETECTED, returning");
+        return 'old user';
+    }
+    
+    if (!user.profile.email) {
+        console.log("NO EMAIL DETECTED, returning uid = ", uid);
+        return 'old user';
+    };
+    // todo
+    //end short term debugging
     if (ends_with(user.profile.email, email_termination)) {
         return false;
     } else {
@@ -154,11 +224,14 @@ function detect_sick_user (user, uid) {
         return 'no email';
     } else if (ends_with(user.profile.email, 'test.mf')) {
         return 'is mf user';
-    } else if (!user.history) {
-        return 'no history';
-    } else if ('sentence_logs' in user.history) {
-        return 'sentence_logs in history';
-    } else {
+    } else if (!user.history && !user.spelling_level) {
+        return 'no history or spelling_level';
+    }
+    // todo short term fix: we want to catch those who have spelling level but no history
+    // else if ('sentence_logs' in user.history && !user.spelling_level) {
+    //     return 'sentence_logs in history';
+    // } 
+    else {
         return false;
     }
 }
@@ -419,3 +492,86 @@ var get_avg_initial_accuracy = function (mod, users) {
     
     return Math.floor(average_accuracy * 100 / accuracy_list.length);
 }
+
+
+
+function get_spelling_level(user) {
+    return user.spelling_level;
+};
+
+
+
+//// a short term sorting util for spelling levels
+
+function compare_by_first_element(a, b) {
+    
+    
+    // console.log("a in sort = ", a);
+    // console.log("b in sort = ", b);
+    
+    // console.log('b[0] = ', b[0]);
+    // console.log('a[0] = ', a[0]);
+    
+    // console.log('b[1] = ', b[1]);
+    // console.log('a[1] = ', a[1]);
+    
+    
+    
+    
+    if (!a || !b) {
+        return 0;
+    }
+    
+    console.log("COMPARE CALLED");
+    
+    
+    
+    console.log('check b[0] = ', b[0]);
+    console.log('a[0] = ', a[0]);
+    
+    console.log('b[1] = ', b[1]);
+    console.log('a[1] = ', a[1]);
+    
+    return b[1] - a[1];
+    
+    // ascending
+    // if (a[1] < b[1]) return -1;
+    // if (a[1] > b[1]) return 1;
+    
+    // descending - works but puts 101 first as if its 1 
+    // if (a[1] > b[1]) return -1;
+    // if (a[1] < b[1]) return 1;
+    
+    // return 0;
+ }
+
+
+
+
+function compare_by_first_element2(a, b) {
+    
+    
+    
+    
+    console.log("COMPARE CALLED");
+    
+    
+    
+    console.log('check b[0] = ', b[0]);
+    console.log('a[0] = ', a[0]);
+    
+    console.log('b[1] = ', b[1]);
+    console.log('a[1] = ', a[1]);
+    
+    return b[1] - a[1];
+    
+    // ascending
+    // if (a[1] < b[1]) return -1;
+    // if (a[1] > b[1]) return 1;
+    
+    // descending - works but puts 101 first as if its 1 
+    // if (a[1] > b[1]) return -1;
+    // if (a[1] < b[1]) return 1;
+    
+    // return 0;
+ }

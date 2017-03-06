@@ -1,18 +1,29 @@
-// 'DOMContentLoaded' is a reserved string for a browser event
-// means all DOM content has been loaded (but not necessarily rendered)
-// load (parsing characters in the html template and creating the elements)
-// --> render (via css, turns elements into pixels)
+// 'DOMContentLoaded' is a reserved-string for a browser event
+// it is an event produced by ______ and passed to ______
+// it means all DOM content has been loaded (but not necessarily rendered)
+    // load (parsing characters in the html template and creating the elements)
+    // --> render (via css, turns elements into pixels)
 // this is downstream from window.onload which is too early to run start
 // the optional third argument sets it as capture phase if true, default is bubbling phase
 document.addEventListener('DOMContentLoaded', start);
 document.addEventListener('DOMContentLoaded', sanity_check);
 
 
-
+// settings will represent all state that changes
+// e.g. target language
 var Settings = {
   'lang': null
 };
 
+
+
+var Utils = {
+};
+
+
+
+// todo problem:
+// Uncaught TypeError: Function.prototype.apply was called on undefined, which is a undefined and not a function
 
 
 // todo english_words is popping up as undefined
@@ -30,6 +41,7 @@ function set_language (flag) {
   Settings.lang = flag || 'english';
   console.log("Settings.lang = ", Settings.lang);
   Settings.dictionary = set_dictionary(Settings.lang);
+  set_utils(Settings.dictionary);
 };
 
 
@@ -58,6 +70,9 @@ function set_utils () {
     console.log("setting utils, Settings.dictionary = ", Settings.dictionary);
     Settings.utils = init_util(Settings.dictionary); 
     console.log("Settings.utils = ", Settings.utils);
+    
+    
+    
 };
 
 
@@ -66,7 +81,7 @@ function start () {
     
     set_language(); 
     ////////////new///////////
-    set_utils();
+    
     
     
     // # = css selector for the id

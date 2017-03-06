@@ -22,23 +22,9 @@
 // ELEMENTAL FUNCTIONS
 
 ///////////////// --separate component--/////////////////////
-// add metacharacter separator between components
-//     verify --> ver.if.y
 
 
 
-// input: 
-    // string (point to a word in the word list) e.g. 'verify'
-// output: array of strings   ['ver', 'i', 'fy']
-
-// OPTION 1
-// currying, returning a single function
-function init_util (dictionary) {
-    return function word_to_roots (word) {
-        // look up word
-        // return array of roots
-    }
-}
 
 //OPTION 2
 // returning an object whose properties are functions
@@ -199,6 +185,17 @@ function init_util (dictionary) {
 }
 
 
+////////////// an example of how we access this util library/////////
+
+// we pass the dictionary (list of word-objects) as an argument
+// this creates a new object (example_english_util)
+// which has some functions as properties (e.g. word_to_components)
+var example_english_util = init_util(english_dictionary);
+
+// we can now call those functions with dot notation
+var example_output = example_english_util.word_to_components('quadruped');
+
+
 
 /*
 
@@ -274,3 +271,21 @@ var verify_roots = sanskrit_word_to_root_function('avatar');
 
 // --find a similar root--
 // 	log --> [ling, cogn] 
+
+
+
+//////////////// some very basic housekeeping utils
+
+
+// convert component_map to root_map (i.e. remove the connecting elements that are tagged by metacharacters)
+
+
+
+// cosmetic: add metacharacter separator between components
+// input: component map, bool
+// output: string
+//     verify --> ver.i.fy    quadruped --> quadr.u.ped
+
+
+// 
+
