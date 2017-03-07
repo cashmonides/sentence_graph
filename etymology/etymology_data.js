@@ -12927,6 +12927,10 @@ var roots = {
         "meaning": "medical care",
         "root": "IATR"
     },
+    "IC": {
+        "meaning": "relating to (forms an adjective)",
+        "root": "IC"
+    },
     "ICON": {
         "meaning": "image",
         "root": "ICON"

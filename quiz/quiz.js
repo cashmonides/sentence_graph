@@ -360,6 +360,8 @@ Quiz.prototype.start_timer3 = function (
 
 // @666
 Quiz.prototype.end_drone_game2 = function (pin, user_name) {
+    
+    
     // persist word scores
     var self = this;
     this.set_word_scores(function () {
@@ -660,12 +662,12 @@ Quiz.prototype.process_spelling_bee_level_buttons = function () {
     
     var list_of_buttons_to_cut_off = [];
     
-    var egg_cutoff = 9;
-    var larva_cutoff = 20;
-    var pupa_cutoff = 30;
-    var drone_cutoff = 40;
-    var worker_cutoff = 41;
-    var warrior_cutoff = 42;
+    var egg_cutoff = 10;
+    var larva_cutoff = 30;
+    var pupa_cutoff = 50;
+    var drone_cutoff = 100;
+    var worker_cutoff = 140;
+    var warrior_cutoff = 190;
     var queen_cutoff = 500;
     
     
@@ -939,6 +941,8 @@ var find_non_matching_words = function (query_list, master_list) {
 
 Quiz.prototype.next_question = function (error) {
     
+    
+    /*
     
     
     var new_dictionary_template1 = {
@@ -1281,6 +1285,10 @@ Quiz.prototype.next_question = function (error) {
     console.log("WELL output stringified = ", JSON.stringify(test_change_dictionary_output));
     
     
+    
+    //////end of dictionary alteration
+    
+    */
     
     
     
@@ -1629,6 +1637,7 @@ Quiz.prototype.reset_submodule_without_post = function () {
 
 // @beehack
 Quiz.prototype.set_word_scores = function (callback) {
+    console.log("This is where set word scores will go when operational");
     // commented out for testing (pending testing whether firebase can handle the traffic)
     // dummy data
     // this.word_scores_update_list = [
@@ -1644,6 +1653,9 @@ Quiz.prototype.set_word_scores = function (callback) {
 
 // @beehack
 Quiz.prototype.submodule_complete_without_post = function () {
+    
+    
+    console.log("entering submodule_complete_without_post");
     
     if (this.module.id === 0.25) {
         return;
@@ -1806,10 +1818,17 @@ Quiz.prototype.submodule_complete = function () {
     // we want to bypass post so this is much simpler
     // we also want to set some spelling bee data
     if (this.module.id === 0.5 || this.module.id === 0.25) {
-        var self = this;
-        this.set_word_scores(function () {
-            self.submodule_complete_without_post();
-        });
+        console.log("beehack: about to set word scores");
+        
+        // // todo commenting out set_word_scores for now
+        // var self = this;
+        // this.set_word_scores(function () {
+        //     self.submodule_complete_without_post();
+        // });
+        
+        
+        // todo desparate measure
+        this.submodule_complete_without_post();
         return;
     }
     
@@ -2257,6 +2276,8 @@ Quiz.prototype.increment_score = function () {
     }
     
     
+    
+    
     if (!this.user.is_mf()) {
         console.log("FEBRUARY BUG checkpoint 0.1");
         console.log("FEBRUARY BUG checkpoint 0.2");
@@ -2329,12 +2350,12 @@ Quiz.prototype.set_spelling_bee_level = function (new_level) {
 // @beehack
 var level_name_to_counter_value = {
     'egg': 1,
-    'larva': 20,
-    'pupa': 30,
-    'drone': 40,
-    'worker': 41,
-    'warrior': 42,
-    'queen': 43
+    'larva': 40,
+    'pupa': 60,
+    'drone': 80,
+    'worker': 100,
+    'warrior': 140,
+    'queen': 160
 }
 
 // @beehack
@@ -2506,7 +2527,7 @@ Quiz.prototype.initialize_spelling_hint_master = function () {
     
     // manage the behavior of hint penalties
     
-    var level_at_which_hints_inflict_a_penalty = 10;
+    var level_at_which_hints_inflict_a_penalty = 10000;
     
     if (session_bee_counter > level_at_which_hints_inflict_a_penalty) {
         // reduce the progress bar slightly

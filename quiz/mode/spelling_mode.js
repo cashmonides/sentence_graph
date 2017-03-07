@@ -378,7 +378,7 @@ var counter_to_etym_level_map = {
     198: {"etym_level": 460},
     199: {"etym_level": 480}, 
     
-    200: {"etym_level": 300}
+    200: {"etym_level": 480}
     
 
 }
@@ -1187,22 +1187,29 @@ SpellingModeGame.prototype.display_red_green_result = function (list) {
     var fbox = el("image_display_box");
     fbox.appendChild(parent_el);
     
-    
-    console.log("HAIL MARY ENTERING");
-
-    // todo convert below into a parameter set module by module
-    var max_number_of_red_green_display = 4
-
-    if (fbox.childNodes[max_number_of_red_green_display]) {
-        // @currentchanges
-        console.log("HAIL MARY TRIGGERED");
-        console.log("fbox.childNodes[0] = ", fbox.childNodes[0]);
-        fbox.removeChild(fbox.childNodes[0]); 
-    }
-    
-    
-    
     return parent_el;
+    
+    // todo very important below was an attempt to replace the red/green feedback
+    // so it wouldn't clog up the screen
+    // but it seemed to be producing a bug
+    // 
+    
+    
+    // console.log("HAIL MARY ENTERING");
+
+    // // todo convert below into a parameter set module by module
+    // var max_number_of_red_green_display = 4
+
+    // if (fbox.childNodes[max_number_of_red_green_display]) {
+    //     // @currentchanges
+    //     console.log("HAIL MARY TRIGGERED");
+    //     console.log("fbox.childNodes[0] = ", fbox.childNodes[0]);
+    //     fbox.removeChild(fbox.childNodes[0]); 
+    // }
+    
+    
+    // return parent_el;
+    
 }
 
 

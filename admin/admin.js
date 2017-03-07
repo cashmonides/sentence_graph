@@ -7,7 +7,7 @@ var email_termination_to_include = "tag.play";
 // var email_termination_to_include = "lls.team";
 
 
-var min_spelling_level_to_include = 20;
+var min_spelling_level_to_include = 10;
 
 
 function start() {

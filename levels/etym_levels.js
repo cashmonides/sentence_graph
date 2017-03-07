@@ -83,7 +83,7 @@ var etym_levels = {
             'root_definition_to_root': 1
         }
     },
-    33: {
+    40: {
         roots: ['FIC/FAC/FY'],
         question_types: {
             'word_to_latin_root': .00001,
@@ -96,7 +96,7 @@ var etym_levels = {
             'root_definition_to_root': .9
         }
     },
-    34: {
+    50: {
         roots: ['LOG'],
         question_types: {
             'word_to_latin_root': .00001,
@@ -109,7 +109,7 @@ var etym_levels = {
             'root_definition_to_root': .9
         }
     },
-    35: {
+    60: {
         roots: ['FIC/FAC/FY', 'LOG'],
         question_types: {
             'word_to_latin_root': .00001,
@@ -122,7 +122,7 @@ var etym_levels = {
             'root_definition_to_root': .9
         }
     },
-    36: {
+    70: {
         roots: ['PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .00001,
@@ -135,7 +135,7 @@ var etym_levels = {
             'root_definition_to_root': .9
         }
     },
-    37: {
+    80: {
         roots: ['FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .00001,
@@ -148,7 +148,7 @@ var etym_levels = {
             'root_definition_to_root': .9
         }
     },
-    38: {
+    90: {
         roots: ['CRAC/CRAT', 'ARCH'],
         question_types: {
             'word_to_latin_root': .00001,
@@ -161,7 +161,7 @@ var etym_levels = {
             'root_definition_to_root': .9
         }
     },
-    39: {
+    100: {
         roots: ['CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .00001,
@@ -174,9 +174,9 @@ var etym_levels = {
             'root_definition_to_root': .9
         }
     },
-    40 : {
+    110 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'PED/POD', 'ARTHR',
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': 0,
             'word_to_english_root': 0,
@@ -188,9 +188,9 @@ var etym_levels = {
             'root_definition_to_root': 1.2
         }
     },
-    50 : {
+    120 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'PED/POD', 'ARTHR',
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': 0,
             'word_to_english_root': 0,
@@ -202,9 +202,9 @@ var etym_levels = {
             'root_definition_to_root': 1.5
         }
     },
-    60 : {
+    130 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': 0,
             'word_to_english_root': 0,
@@ -216,9 +216,9 @@ var etym_levels = {
             'root_definition_to_root': 2
         }
     },
-    70 : {
+    140 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .2,
             'word_to_english_root': .2,
@@ -230,10 +230,10 @@ var etym_levels = {
             'root_definition_to_root': 1.7
         }
     },
-    80 : {
+    150 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
         "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
-        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA'],
+        'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -249,9 +249,9 @@ var etym_levels = {
     /////////////////////////added stuff below - check for errors
     
     
-    90 : {
+    160 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
-        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO'],
+        "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -263,10 +263,10 @@ var etym_levels = {
             'root_definition_to_root': 1
         }
     },
-    100 : {
+    170 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
         "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
-        'POLY', 'METER/METR'],
+        'POLY', 'METER/METR', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -278,10 +278,10 @@ var etym_levels = {
             'root_definition_to_root': 1
         }
     },
-    110 : {
+    180 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
         "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA'],
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -296,7 +296,7 @@ var etym_levels = {
     120 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
         "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
-        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'VID/VIS'],
+        'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'VID/VIS', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -312,7 +312,7 @@ var etym_levels = {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
         "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
         'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
-        'VID/VIS'],
+        'VID/VIS', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -419,7 +419,7 @@ var etym_levels = {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
         "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
         'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
-        'VID/VIS', 'SCOP/SCOPE', 'QUIN/QUINT'],
+        'VID/VIS', 'SCOP/SCOPE', 'QUIN/QUINT', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -539,7 +539,7 @@ var etym_levels = {
         'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
-        'MACRO', 'HEX/HEXA', 'GASTR', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'MACRO', 'HEX/HEXA', 'GASTR', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -557,7 +557,7 @@ var etym_levels = {
         'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
-        'MACRO', 'HEX/HEXA', 'GASTR', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'MACRO', 'HEX/HEXA', 'GASTR', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -575,7 +575,7 @@ var etym_levels = {
         'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
-        'MACRO', 'HEX/HEXA', 'GASTR', 'DU',  'CEPHAL', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'MACRO', 'HEX/HEXA', 'GASTR', 'DU',  'CEPHAL', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -593,7 +593,7 @@ var etym_levels = {
         'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
-        'MACRO', 'HEX/HEXA', 'GASTR', 'DU',  'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'MACRO', 'HEX/HEXA', 'GASTR', 'DU',  'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -611,7 +611,7 @@ var etym_levels = {
         'POLY', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 
-        'MACRO', 'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU',  'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'MACRO', 'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU',  'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -630,7 +630,7 @@ var etym_levels = {
         'VID/VIS', 'VAC', 'UNI', 'UN', 'THERM', 'TERR', 'SOL', 'SEPT', 'SCOP/SCOPE', 'QUIN/QUINT', 
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'POLY',
         'PHOT/PHOTO', 'MULTI', 'MICRO', 'METER/METR', 'MAGN', 'MACRO', 'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU',  
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -650,7 +650,7 @@ var etym_levels = {
         'QUART', 'QUAD/QUADR', 'PSEUD/PSEUDO', 'PROT/PROTO', 'POLY',
         'PHOT/PHOTO', 'PENT/PENTA', 'OCT/OCTA/OCTO', 
         'MULTI', 'MICRO', 'METER/METR', 'MAGN', 'MACRO', 'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU',  
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -671,7 +671,7 @@ var etym_levels = {
         'PHOT/PHOTO', 'PENT/PENTA', 'PATER/PATR/PATRI', 'OCT/OCTA/OCTO', 
         'MULTI', 'MICRO', 'METER/METR', 'MATER/MATR/MATRI', 
         'MAGN', 'MACRO', 'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU',  
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -692,7 +692,7 @@ var etym_levels = {
         'PHOT/PHOTO', 'PENT/PENTA', 'PATER/PATR/PATRI', 'OCT/OCTA/OCTO', 
         'MULTI', 'MILL', 'MICRO', 'METER/METR', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU',  
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -715,7 +715,7 @@ var etym_levels = {
         'MULTI', 'MILL', 'MICRO', 'METER/METR', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU',  
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -738,7 +738,7 @@ var etym_levels = {
         'MULTI', 'MILL', 'MICRO', 'METER/METR', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -761,7 +761,7 @@ var etym_levels = {
         'MULTI', 'MILL', 'MICRO', 'METER/METR', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -784,7 +784,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MILL', 'MICRO', 'METER/METR', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -807,7 +807,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MILL', 'MICRO', 'METER/METR', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -830,7 +830,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MILL', 'MICRO', 'METER/METR', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -853,7 +853,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MILL', 'MICRO', 'METER/METR', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -876,7 +876,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -899,7 +899,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -922,7 +922,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -945,7 +945,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -968,7 +968,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'FRACT/FRAG', 'EXTRA/EXTRO', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -991,7 +991,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MANIA', 'MAL', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'FRACT/FRAG', 'EXTRA/EXTRO', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -1014,7 +1014,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MANIA', 'MAL', 'MAGN', 'MACRO', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'FRACT/FRAG', 'EXTRA/EXTRO', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -1037,7 +1037,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MANIA', 'MAL', 'MAGN', 'MACRO', 'LUN/LUNA', 'HYPER', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'FRACT/FRAG', 'EXTRA/EXTRO', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -1060,7 +1060,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MANIA', 'MAL', 'MAGN', 'MACRO', 'LUN/LUNA', 'HYPER', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GEO', 'GASTR', 'FRACT/FRAG', 'EXTRA/EXTRO', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -1083,7 +1083,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MANIA', 'MAL', 'MAGN', 'MACRO', 'LUN/LUNA', 'HYPER', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GON', 'GEO', 'GASTR', 'FRACT/FRAG', 'EXTRA/EXTRO', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'CENT', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'CENT', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -1106,7 +1106,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MANIA', 'MAL', 'MAGN', 'MACRO', 'LUN/LUNA', 'KINE/KINEMAT/CINE', 'HYPER', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GON', 'GEO', 'GASTR', 'FRACT/FRAG', 'EXTRA/EXTRO', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'CENT', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'CENT', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
@@ -1129,7 +1129,7 @@ var etym_levels = {
         'NOV', 'NEG', 'MULTI', 'MORPH', 'MILL', 'MICRO', 'METER/METR', 'MEGA', 'MEDI', 'MAX', 'MATER/MATR/MATRI', 
         'MAR/MARI/MARIN', 'MANIA', 'MAL', 'MAGN', 'MACRO', 'LUN/LUNA', 'KINE/KINEMAT/CINE', 'KILO', 'HYPER', 'HYDR', 
         'HEX/HEXA', 'HEPT/HEPTA', 'GON', 'GEO', 'GASTR', 'FRACT/FRAG', 'FLOR/FLEUR', 'EXTRA/EXTRO', 'DU', 'DECI', 
-        'CHRON', 'CEPHAL', 'CENT', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI'],
+        'CHRON', 'CEPHAL', 'CENT', 'BIO/BI', 'BI/BIN', 'AVI', 'AUD/AUDI/AUDIO', 'ASTRO/ASTER', 'AQU/AQUA', 'ANIM', 'AMBI/AMPHI', 'CRAC/CRAT', 'ARCH', 'FIC/FAC/FY', 'LOG', 'PHIL', 'PHOB'],
         question_types: {
             'word_to_latin_root': .4,
             'word_to_english_root': .4,
