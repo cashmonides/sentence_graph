@@ -2,12 +2,23 @@ window.onload = start;
 
 var user = new User(false); // Not anonomous.
 
-var email_termination_to_include = "tag.play";
+// var email_termination_to_include = "tag.play";
 // var email_termination_to_include = "test.team";
 // var email_termination_to_include = "lls.team";
+var email_termination_to_include = "lls.solo";
+// var email_termination_to_include = "lls.play";
 
 
 var min_spelling_level_to_include = 10;
+
+
+var email_termination_list_to_include = ['lls.solo', 'lls.play'];
+
+function custom_validate_email (email, valid_email_list) {
+    for (var i; i < valid_email_list.length; i++) {
+        return ends_with(email, valid_email_list[i]);
+    }
+};
 
 
 function start() {
@@ -107,6 +118,12 @@ function callback2(data) {
         var sorted_spelling_rankings_list = spelling_rankings_list.sort(function(a,b){return b[0] - a[0]});
         
         
+        
+        var final_output = sort_and_display_match_results_presorted(sorted_spelling_rankings_list, 0);
+        console.log("FINAL OUTPUT = ", final_output);
+        
+        
+          
         
         // to sort in sublime text: replace $ with \n
         // then enable regex and replace \\n with \n
@@ -575,3 +592,166 @@ function compare_by_first_element2(a, b) {
     
     // return 0;
  }
+
+
+
+
+/// dragged over from sorting_utils.js
+
+var group_ties_in_ranked_list_item_1 = function (list) {
+    
+    var master_list = [];
+    for (var i = 0; i < list.length; i++) {
+        
+        var sub_list = [];
+        
+        // test whether the current item is tied with the previous item
+        // if so we push both items to a sublist and push that sublist to the master list
+        if (i != 0 && list[i][1] === list[i-1][1]) {
+            console.log("TIE FOUND, GROUPING INTO SUBLIST");
+            
+            sub_list.push(list[i-1]);
+            sub_list.push(list[i]);
+            master_list.push(sub_list);
+            
+            // remove the tied item
+            var index_of_item_to_remove = master_list.indexOf(list[i-1]);
+            if (index_of_item_to_remove > -1) {
+                master_list.splice(index_of_item_to_remove, 1);
+            }
+            
+        } else {
+            master_list.push([list[i]]);
+        }
+        
+        // remove duplicates from sub_list
+        
+    }
+    
+    
+    console.log("LIST WITH TIES = ", master_list)
+    return master_list;
+    
+}
+
+
+/// dragged over from sorting_utils.js
+
+var process_score_for_display = function (list_item) {
+    console.log('process_score_for_display, list_item =', list_item);
+    var name = list_item[1];
+    name = name.replace('"', '');
+    var score = list_item[0];
+    // console.log()
+    var output = score + " points - " + name + "<br />";
+    console.log("process_score_for_display, output = ", output);
+    return output;
+}
+
+
+/// dragged over from sorting_utils.js
+
+var generate_ranking_from_int = function (int) {
+    return int + generate_ordinal_suffix(int);
+}
+
+
+/// dragged over from sorting_utils.js
+
+var sort_and_display_match_results_presorted = function (sorted_list, n) {
+    
+    console.log("sorted_data = ", sorted_list);
+    console.log("sorted_data stringified = ", JSON.stringify(sorted_list));
+    
+
+
+    // we create a list of lists with each sublist grouping together those who have a tied score
+    // three arguments:
+    // the list we process
+    // the comparison function (compare list or compare tuple or whatever)
+    // what index we compare (e.g. we want index 1 in ["John Doe", 4])
+    var list_with_ties = tie_detector(sorted_list, compare_nth_item_of_list, 1);
+    console.log("LIST_WITH_TIES = ", list_with_ties);
+    
+    
+    
+    for (var i = 0; i < list_with_ties.length; i++) {
+        
+        // var ranking = i + 1;
+        var ranking = generate_ranking_from_int(i+1);
+        var sub_list = list_with_ties[i];
+        console.log("sub_list = ", sub_list);
+        // another for loop
+        for (var j = 0; j < sub_list.length; j++) {
+            console.log("sub_list[j] = ", sub_list[j]);
+            var score_display = process_score_for_display(sub_list[j]);
+            console.log("SCORE_DISPLAY = ", score_display);
+            // perhaps turning off ranking until fixed
+            console.log("skipping ranking for now");
+            console.log("ranking = ", ranking);
+            var output = ranking + ": " + score_display;
+            console.log("FINAL OUTPUT = ", output);
+            // element.innerHTML += output;
+        }
+    }
+}
+
+
+
+
+var tie_detector = function (master_list, comparison_function, n) {
+    // iterate through master_list
+    // at each step we 
+        // set current item (i)
+        // set previous item (i-1)
+        // set populated sublist
+        // compare
+            // is current tied with previous item (master_list index i-1)?
+        // push
+            // if no tie detected
+                // push populated sublist to master_list
+                // push current item to a new empty sublist
+            // if tie detected
+                // push current item to a populated sublist (if tie detected)
+        // clean-up
+            // if tie detected on final item, need to push final populated sublist to master_list 
+    var previous_item;
+    var current_item;
+    var sublist = [];
+    var ranked_list = [];
+    for (var i = 0; i < master_list.length; i++) {
+        
+        current_item = master_list[i];
+        
+        // the first item has no previous item to compare to
+        // so we push it to a list
+        if (i === 0) {
+            sublist.push(current_item);
+            continue;
+        }
+        
+        previous_item = master_list[i-1];
+        
+        // tie detection
+        if (comparison_function(previous_item, current_item, n)) {
+            // a tie has been detected
+            // so we push current item to sublist
+            sublist.push(current_item);
+        } else {
+            // no tie has been detected
+            // so we push our sublist to master_list
+            ranked_list.push(sublist);
+            // and we reset the sublist to empty
+            sublist = [];
+            // and push our current item to that
+            sublist.push(current_item);
+        }
+    }
+    
+    // clean-up
+    // push our last sub_list
+    ranked_list.push(sublist);
+
+    return ranked_list;
+}
+

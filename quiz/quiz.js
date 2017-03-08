@@ -362,11 +362,16 @@ Quiz.prototype.start_timer3 = function (
 Quiz.prototype.end_drone_game2 = function (pin, user_name) {
     
     
+    
+    this.end_drone_game_meat(pin, user_name);
+    
+    
+    /// commenting out persist word scores for now
     // persist word scores
-    var self = this;
-    this.set_word_scores(function () {
-        self.end_drone_game_meat(pin, user_name);
-    });
+    // var self = this;
+    // this.set_word_scores(function () {
+    //     self.end_drone_game_meat(pin, user_name);
+    // });
 }
 
 Quiz.prototype.end_drone_game_meat = function (pin, user_name) {
