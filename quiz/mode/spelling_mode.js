@@ -383,6 +383,235 @@ var counter_to_etym_level_map = {
 
 }
 
+
+var counter_to_threshold_map = {
+    0: 10,
+    1: 10,
+    2: 10,
+    3: 10,
+    4: 10,
+    5: 10,
+    6: 10,
+    7: 10,
+    8: 10,
+    9: 10,
+    
+    10: 10,
+    11: 12,
+    12: 12,
+    13: 12,
+    14: 12,
+    15: 12,
+    16: 12,
+    17: 12,
+    18: 12,
+    19: 12,
+    
+    20: 10,
+    21: 12,
+    22: 12,
+    23: 12,
+    24: 12,
+    25: 12,
+    26: 12,
+    27: 12,
+    28: 12,
+    29: 12,
+    
+    30: 10,
+    31: 12,
+    32: 12,
+    33: 12,
+    34: 12,
+    35: 12,
+    36: 12,
+    37: 12,
+    38: 12,
+    39: 12,
+    
+    40: 10,
+    41: 12,
+    42: 12,
+    43: 12,
+    44: 12,
+    45: 12,
+    46: 60,
+    47: 12,
+    48: 12,
+    49: 12,
+    
+    50: 10,
+    51: 12,
+    52: 12,
+    53: 12,
+    54: 12,
+    55: 12,
+    56: 12,
+    57: 12,
+    58: 12,
+    59: 12,
+
+    60: 10,
+    61: 12,
+    62: 12,
+    63: 12,
+    64: 12,
+    65: 12,
+    66: 12,
+    67: 12,
+    68: 12,
+    69: 12,
+    
+    70: 10,
+    71: 12,
+    72: 12,
+    73: 12,
+    74: 12,
+    75: 12,
+    76: 12,
+    77: 12,
+    78: 12,
+    79: 12,
+    
+    80: 10,
+    81: 12,
+    82: 12,
+    83: 12,
+    84: 12,
+    85: 12,
+    86: 12,
+    87: 12,
+    88: 12,
+    89: 12,
+
+    90: 10,
+    91: 12,
+    92: 12,
+    93: 12,
+    94: 12,
+    95: 12,
+    96: 12,
+    97: 12,
+    98: 12,
+    99: 12,
+ 
+    100: 10,
+    101: 10,
+    102: 10,
+    103: 10,
+    104: 10,
+    105: 10,
+    106: 10,
+    107: 10,
+    108: 10,
+    109: 10,
+    
+    110: 10,
+    111: 12,
+    112: 12,
+    113: 12,
+    114: 12,
+    115: 12,
+    116: 12,
+    117: 12,
+    118: 12,
+    119: 12,
+    
+    120: 10,
+    121: 12,
+    122: 12,
+    123: 12,
+    124: 12,
+    125: 12,
+    126: 12,
+    127: 12,
+    128: 12,
+    129: 12,
+    
+    130: 10,
+    131: 12,
+    132: 12,
+    133: 12,
+    134: 12,
+    135: 12,
+    136: 12,
+    137: 12,
+    138: 12,
+    139: 12,
+    
+    140: 10,
+    141: 12,
+    142: 12,
+    143: 12,
+    144: 12,
+    145: 12,
+    146: 12,
+    147: 12,
+    148: 12,
+    149: 12,
+    
+    150: 10,
+    151: 12,
+    152: 12,
+    153: 12,
+    154: 12,
+    155: 12,
+    156: 12,
+    157: 12,
+    158: 12,
+    159: 12,
+
+    160: 10,
+    161: 12,
+    162: 12,
+    163: 12,
+    164: 12,
+    165: 12,
+    166: 12,
+    167: 12,
+    168: 12,
+    169: 12,
+    
+    170: 10,
+    171: 12,
+    172: 12,
+    173: 12,
+    174: 12,
+    175: 12,
+    176: 12,
+    177: 12,
+    178: 12,
+    179: 12,
+    
+    180: 10,
+    181: 12,
+    182: 12,
+    183: 12,
+    184: 12,
+    185: 12,
+    186: 12,
+    187: 12,
+    188: 12,
+    189: 12,
+
+    190: 10,
+    191: 12,
+    192: 12,
+    193: 12,
+    194: 12,
+    195: 12,
+    196: 12,
+    197: 12,
+    198: 12,
+    199: 12,
+    
+    
+    200: 12
+    
+
+}
+
+
 // a default lever for safety, hopefully we won't need it
 var default_level_for_beehack = {'etym_level': 10};
 
@@ -659,10 +888,26 @@ SpellingModeGame.prototype.get_mode_name = function() {
 }
 
 
+ 
 
-
+SpellingModeGame.prototype.adjust_threshold = function () {
+    
+    // console.log("session_bee_counter = ", session_bee_counter);
+    
+    
+    
+    // console.log("1234 session_bee_counter = ", session_bee_counter);
+    // this.quiz.module.submodule.threshold = counter_to_threshold_map[session_bee_counter];
+    // console.log("RESET threshold = ", this.quiz.module.submodule.threshold);
+    
+    
+}
 
 SpellingModeGame.prototype.next_question = function(){
+    
+    
+    
+    
     
     // console.log("BEEHACK999 entering next_question with this.level = ", this.level);
     // console.log("BEEHACK123 this.level = ", this.level);
@@ -696,6 +941,8 @@ SpellingModeGame.prototype.next_question = function(){
         // console.log("BEEHACK BEE MODE DETECTED, initiating beecatcher");
         
         
+        // an attempt to make threshold higher as score increases
+        this.adjust_threshold();
         
         /// @999 this was commented out, see if it's working via counter
         // we set our beehack level with no increment

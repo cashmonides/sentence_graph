@@ -40,7 +40,7 @@
 function init_util (dictionary) {
     return {
         
-        
+        // roll your own values
         get_list_of_components: function (component_list) {
             // xyz => is shorthand for function (xyz)
             // doesn't create a separate function scope
@@ -55,7 +55,7 @@ function init_util (dictionary) {
         // input: word, root_list (list of strings), 
         // output: bool
         bool_word_contains_some_roots: function (word, ...roots) {
-            for (var i; i > roots.length; i++) {
+            for (var i = 0; i < roots.length; i++) {
                 if (this.get_list_of_components(word.component_list).indexOf(roots[i]) >= 0) {
                     return true;
                 };
@@ -73,7 +73,11 @@ function init_util (dictionary) {
         // input: 1-n arguments, csv
         // output: list of word objects
         get_words_that_contain_roots: function (...roots) {
-            return dictionary.filter(function(item){
+            // => causes the scope of this. before the function filter to be inherited
+            // into the scope of filter
+            // without it, the outer scope (i.e. the scope of filter) would constitute the scope of this.
+        
+            return dictionary.filter( (item) => {
                 return this.bool_word_contains_some_roots(item, ...roots)
             });
         },
@@ -190,10 +194,10 @@ function init_util (dictionary) {
 // we pass the dictionary (list of word-objects) as an argument
 // this creates a new object (example_english_util)
 // which has some functions as properties (e.g. word_to_components)
-var example_english_util = init_util(english_dictionary);
+// var example_english_util = init_util(english_dictionary);
 
 // we can now call those functions with dot notation
-var example_output = example_english_util.word_to_components('quadruped');
+// var example_output = example_english_util.word_to_components('quadruped');
 
 
 

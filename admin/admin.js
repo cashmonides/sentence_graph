@@ -31,6 +31,7 @@ function start() {
 
 
 function produce_spelling_bee_results (email_filter) {
+    console.log("Produce spelling bee result called");
     if (email_filter) {
       email_termination_to_include = email_filter;  
     };
@@ -38,9 +39,14 @@ function produce_spelling_bee_results (email_filter) {
 }
 
 
+function go_to_leaderboard () {
+    Persist.get(["users"], callback2);
+    // document.location = '../leaderboard';
+}
+
 function callback() {
     //console.log"callback triggered");
-    Persist.get(["users"], callback2);
+    Persist.get(["users"], callback3);
 }
 
 function callback2(data) {

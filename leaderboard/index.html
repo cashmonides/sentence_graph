@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <title>BUTTON TEST</title>
+   
+   
+   <!--<script src='latinist_main.js'></script>-->
+   <!--<script src='word_data.js'></script>-->
+   <!--<script src='utils.js'></script>-->
+   
+   
+   <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+    <script src="../libs/jquery-1.11.3.min.js"></script>
+    <script src="../libs/featherlight.min.js"></script>
+
+    <!-- utils in html here -->
+    <script src="../lib/utils.js"></script>
+    <script src="../lib/list_utils.js"></script>
+    <script src="../lib/sorting_utils.js"></script>
+    <script src="../lib/logging_utils.js"></script>
+    <script src="../lib/string_utils.js"></script>
+    <script src="../lib/random_utils.js"></script>
+	<script src="../lib/html_utils.js"></script>
+	<script src="../lib/getting_util.js"></script>
+	<script src="../lib/error_logging.js"></script>
+    <script src="../lib/persist.js"></script>
+    <script src="../lib/module.js"></script>
+    
+    <script src="../lib/interfaces.js"></script>
+    
+    <script src="../lib/in_production.js"></script>
+    
+    <script src="../lib/sentence_path_utils.js"></script>
+    
+    <script src="../mf/mf.js"></script>
+    <script src="../mf/syntax.js"></script>
+    
+    <!-- todo this is dirty research cleaner way -->
+    <script src="../quiz/mode/mf_mode.js"></script>
+    <script src="../quiz/mode/syntax_mode.js"></script>
+    
+    <script src="../syntax_mode_utils/answer_type.js"></script>
+    <script src="../syntax_mode_utils/get_syntax_question.js"></script>
+    
+    <script src="../lib/user.js"></script>
+    <script src="../lib/user_login_status.js"></script>
+    <script src="../lib/make.js"></script>
+    <script src="../lib/lightbox.js"></script>
+    
+    
+    
+    <script src="../admin/admin.js"></script>
+    
+
+    <script src="../profile/profile_utils.js"></script>
+    <script src="../profile/profile.js"></script>
+    
+    <script src="leaderboard.js"></script>
+   
+   
+    <style>
+    
+        body {
+            text-align: center;
+            /*font-size 0 removes the default behavior of wordspacing*/
+            font-size: 0;
+        }
+    
+         /*= any element*/
+        body * {
+            /*resets the font size*/
+            font-size: 18px;
+        }
+    
+        button {
+            padding: 25px;
+            border-radius: 10px;
+            /*sets the all-side margin*/
+            margin: 5px;
+            /*establishes default width*/
+            width: 50%;
+            max-width: 200px;
+        }
+        
+        button.fancy {
+            background-color: pink;
+        }
+    </style>
+    
+</head>
+<body>
+    <button class="button" id='check_leaderboard_button2' onclick='get_leaderboard123()'>check leaderboard</button>
+        
+    <div id="spelling_bee_leaderboard"></div>
+    
+
+</body>
+</html>

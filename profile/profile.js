@@ -77,6 +77,15 @@ ProfilePage.start = function(){
 
 
 
+function go_to_leaderboard () {
+    // short term: we display on the same page
+    produce_spelling_bee_results();
+    
+    // longer term, we display on another page
+    // document.location = "../leaderboard"
+}
+
+
 // added march 9 2017 to set the school for each profile page
 ProfilePage.set_school = function (email) {
     // var captured_email = this.user.data.profile.email;

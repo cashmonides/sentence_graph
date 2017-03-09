@@ -17,8 +17,7 @@ var Settings = {
 
 
 
-var Utils = {
-};
+
 
 
 
@@ -37,11 +36,31 @@ function sanity_check () {
 }
 
 
+function start () {
+    console.log("LATINIST beginning");
+    
+    set_language(); 
+    ////////////new///////////
+    
+    
+    
+    // # = css selector for the id
+    // give me the first element you find that has the id xyz
+    // document.querySelector('#root_to_words_button').addEventListener('click', root_to_words);
+    document.querySelector('#set_spanish_button').addEventListener('click', set_spanish);
+    document.querySelector('#root_to_words_button').addEventListener('click', roots_to_words);
+    document.querySelector('#words_to_roots_button').addEventListener('click', words_to_roots);
+    
+}
+
+
 function set_language (flag) {
   Settings.lang = flag || 'english';
   console.log("Settings.lang = ", Settings.lang);
+  // we expect Settings.dictionary to be a list of objects [{}, {},...]
   Settings.dictionary = set_dictionary(Settings.lang);
-  set_utils(Settings.dictionary);
+  Settings.utils = set_utils(Settings.dictionary);
+  console.log("Settings.utils = ", Settings.utils);
 };
 
 
@@ -68,29 +87,11 @@ function set_dictionary (language) {
 
 function set_utils () {
     console.log("setting utils, Settings.dictionary = ", Settings.dictionary);
-    Settings.utils = init_util(Settings.dictionary); 
-    console.log("Settings.utils = ", Settings.utils);
-    
-    
-    
+    return init_util(Settings.dictionary); 
 };
 
 
-function start () {
-    console.log("LATINIST beginning");
-    
-    set_language(); 
-    ////////////new///////////
-    
-    
-    
-    // # = css selector for the id
-    // give me the first element you find that has the id xyz
-    // document.querySelector('#root_to_words_button').addEventListener('click', root_to_words);
-    document.querySelector('#set_spanish_button').addEventListener('click', set_spanish);
-    document.querySelector('#root_to_words_button').addEventListener('click', roots_to_words);
-    
-}
+
 
 
 
@@ -114,7 +115,17 @@ function roots_to_words () {
     var processed_input = get_input();
     console.log("processed_input = ", processed_input);
     var output = Settings.utils.get_words_that_contain_roots(processed_input);
-    console.log("OUTPUT = ", output);
+    console.log("roots_to_words output = ", output);
+    console.log("roots_to_words output stringified = ", JSON.stringify(output));
+    return output;
+};
+
+function words_to_roots () {
+  var processed_input = get_input();  
+  console.log("processed_input = ", processed_input);
+  var component_list = Settings.utils.word_to_components(processed_input);
+  var components_as_list = Settings.utils.get_list_of_components(component_list);
+  console.log("words_to_roots output = ", components_as_list);
 };
 
 

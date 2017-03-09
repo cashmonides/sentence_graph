@@ -1463,6 +1463,10 @@ Quiz.prototype.question_complete = function (button_name) {
         this.update_accuracy();
     }
     
+    
+    console.log("1234 this.module.submodule.threshold in quiz = ", this.module.submodule.threshold)
+    
+    
     this.submodule.incorrect_streak = 0;
     // We reset the incorrect streak
     // due to the fact that there is a new question.
