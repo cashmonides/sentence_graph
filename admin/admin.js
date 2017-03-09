@@ -1,12 +1,13 @@
 window.onload = start;
 
-var user = new User(false); // Not anonomous.
+var user = new User(false); // Not anonymous.
 
 // var email_termination_to_include = "tag.play";
 // var email_termination_to_include = "test.team";
 // var email_termination_to_include = "lls.team";
-var email_termination_to_include = "lls.solo";
+// var email_termination_to_include = "lls.solo";
 // var email_termination_to_include = "lls.play";
+// var email_termination_to_include = "default";
 
 
 var min_spelling_level_to_include = 10;
@@ -26,6 +27,14 @@ function start() {
     if (!user.load(callback)) {
         alert("Not logged in!");
     } 
+}
+
+
+function produce_spelling_bee_results (email_filter) {
+    if (email_filter) {
+      email_termination_to_include = email_filter;  
+    };
+    Persist.get(["users"], callback3);
 }
 
 
@@ -102,10 +111,12 @@ function callback2(data) {
         // todo
         // short term spelling level display
         var user_name = user.profile.name;
+        var avatar = user.profile.avatar;
         var spelling_score = user.spelling_level;
         var tuple = [];
         tuple.push(spelling_score);
         tuple.push(user_name);
+        tuple.push(avatar);
         tuple.push("grade: " + user.profile.grade);
         tuple.push('$');
         
@@ -179,6 +190,99 @@ function callback2(data) {
         }, e)
     })
     
+}
+
+
+
+function callback3(data) {
+    console.log("callback3 triggered");
+    var users = data.val();
+    
+    // Create a sick and non-sick users dictionary.
+    var sick_users = {};
+    var old_users = {};
+    var old_users2 = {};
+    var non_sick_users = {};
+    
+    
+    
+    var spelling_rankings_list = [];
+    var sorted_spelling_rankings_list = [];
+    
+    // For each key (a uid) in users...
+    for (var uid in users) {
+        // Get the user that is the corresponding value.
+        var user = users[uid];
+        var sick = detect_sick_user(user, uid);
+        var old = detect_old_user(user, uid, email_termination_to_include);
+        // If the user is sick...
+        if (sick) {
+            // Add the user to the sick users.
+            sick_users[uid] = {'user': user, 'why_sick': sick};
+        } else if (old) {
+            // add the user to the old users
+            old_users[uid] = {'user': user, 'why_old': old};
+        } else {
+            // Otherwise add the user to the non-sick users dictionary
+            // (with the key of uid).
+            non_sick_users[uid] = user;
+        }
+    }
+    
+    // this will be a div where we keep all the scored 
+    var e = el("spelling_bee_leaderboard");
+    // make({tag:"tr", children: [{tag: "td"}]}, e);
+    
+    for (var uid in non_sick_users) {
+        
+        
+        
+        
+        
+        var user = non_sick_users[uid];
+        
+        
+        
+        
+        
+        if (!user.spelling_level) {
+            continue;
+        }
+        // filtering out to include only high spelling scores
+        if (user.spelling_level < min_spelling_level_to_include) {
+            continue;
+        }
+        
+        
+        // todo
+        // short term spelling level display
+        var user_name = user.profile.name;
+        var avatar = user.profile.avatar;
+        var spelling_score = user.spelling_level;
+        var tuple = [];
+        tuple.push(spelling_score);
+        tuple.push(user_name);
+        tuple.push(avatar);
+        tuple.push("grade: " + user.profile.grade);
+        tuple.push('$');
+        
+        spelling_rankings_list.push(tuple);
+        // console.log("SPELLING_RANKINGS_LIST = ", spelling_rankings_list);
+        // console.log("SPELLING_RANKINGS_LIST stringified = ", JSON.stringify(spelling_rankings_list));
+        
+        
+        // sorted_spelling_rankings_list = spelling_rankings_list.sort(compare_by_first_element());
+        var sorted_spelling_rankings_list = spelling_rankings_list.sort(function(a,b){return b[0] - a[0]});
+        
+        
+        
+        var final_output = sort_and_display_match_results_presorted(sorted_spelling_rankings_list, 0);
+        console.log("FINAL OUTPUT = ", final_output);
+    
+        // to sort in sublime text: replace $ with \n
+        // then enable regex and replace \\n with \n
+    }
+    e.innerHTML = final_output;
 }
 
 // function detect_old_user (user, uid) {
@@ -638,16 +742,35 @@ var group_ties_in_ranked_list_item_1 = function (list) {
 /// dragged over from sorting_utils.js
 
 var process_score_for_display = function (list_item) {
-    console.log('process_score_for_display, list_item =', list_item);
+    // console.log('process_score_for_display, list_item =', list_item);
     var name = list_item[1];
     name = name.replace('"', '');
+    name = name.replace('\'', '');
+    
+    name = replace_all_substrings(name, '\'', '');
+    name = replace_all_substrings(name, '"', '');
+    var initials = create_initials(name);
+    var avatar = list_item[2].toUpperCase();
     var score = list_item[0];
     // console.log()
-    var output = score + " points - " + name + "<br />";
-    console.log("process_score_for_display, output = ", output);
+    var output = score + " points - " + avatar + " (" + initials + ")" + '\'<br />\'';
+    // console.log("process_score_for_display, output = ", output);
     return output;
 }
 
+
+
+var create_initials = function (name) {
+    var list_of_words = name.split(' ');
+    // console.log("@ list_of_words = ", list_of_words);
+    var first_initial = list_of_words[0].charAt(0);
+    first_initial = first_initial.toLowerCase();
+    // console.log("@ first_initial = ", first_initial);
+    var second_initial = list_of_words[1].charAt(0);
+    second_initial = second_initial.toLowerCase();
+    // console.log("@ second_initial = ", second_initial);
+    return first_initial + '.' + second_initial + '.';
+};
 
 /// dragged over from sorting_utils.js
 
@@ -660,8 +783,8 @@ var generate_ranking_from_int = function (int) {
 
 var sort_and_display_match_results_presorted = function (sorted_list, n) {
     
-    console.log("sorted_data = ", sorted_list);
-    console.log("sorted_data stringified = ", JSON.stringify(sorted_list));
+    // console.log("sorted_data = ", sorted_list);
+    // console.log("sorted_data stringified = ", JSON.stringify(sorted_list));
     
 
 
@@ -670,30 +793,39 @@ var sort_and_display_match_results_presorted = function (sorted_list, n) {
     // the list we process
     // the comparison function (compare list or compare tuple or whatever)
     // what index we compare (e.g. we want index 1 in ["John Doe", 4])
-    var list_with_ties = tie_detector(sorted_list, compare_nth_item_of_list, 1);
-    console.log("LIST_WITH_TIES = ", list_with_ties);
+    var list_with_ties = tie_detector(sorted_list, compare_nth_item_of_list, 0);
+    // console.log("LIST_WITH_TIES = ", list_with_ties);
     
-    
+    var ranked_list_with_ties = [];
     
     for (var i = 0; i < list_with_ties.length; i++) {
         
         // var ranking = i + 1;
         var ranking = generate_ranking_from_int(i+1);
         var sub_list = list_with_ties[i];
-        console.log("sub_list = ", sub_list);
+        // console.log("sub_list = ", sub_list);
         // another for loop
         for (var j = 0; j < sub_list.length; j++) {
-            console.log("sub_list[j] = ", sub_list[j]);
+            // console.log("sub_list[j] = ", sub_list[j]);
             var score_display = process_score_for_display(sub_list[j]);
-            console.log("SCORE_DISPLAY = ", score_display);
+            // console.log("SCORE_DISPLAY = ", score_display);
             // perhaps turning off ranking until fixed
-            console.log("skipping ranking for now");
-            console.log("ranking = ", ranking);
+            // console.log("skipping ranking for now");
+            // console.log("ranking = ", ranking);
             var output = ranking + ": " + score_display;
-            console.log("FINAL OUTPUT = ", output);
+            // console.log("FINAL OUTPUT 123 = ", output);
+            
+            ranked_list_with_ties.push(output);
+            
             // element.innerHTML += output;
         }
     }
+    
+    
+    // console.log("FINAL FINAL RANKED LIST = ", ranked_list_with_ties);
+    // console.log("FINAL FINAL RANKED LIST STRINGIFIED = ", JSON.stringify(ranked_list_with_ties));
+    
+    return ranked_list_with_ties;
 }
 
 

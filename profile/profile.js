@@ -11,6 +11,10 @@ var ProfilePage = {
 // var global_improvement_suspension = true;
 var global_improvement_suspension = false;
 
+
+
+var email_termination_to_include = "default";
+
 ProfilePage.logout = function () {
     this.user.logout();
     document.location = "..";
@@ -71,6 +75,20 @@ ProfilePage.start = function(){
     // equivalent to: this.user.load(function(){ this.display_profile(); });
 };
 
+
+
+// added march 9 2017 to set the school for each profile page
+ProfilePage.set_school = function (email) {
+    // var captured_email = this.user.data.profile.email;
+    console.log("CAPTURED EMAIL  = ", email);
+    if (email.indexOf('@tag.') !== -1) {
+        email_termination_to_include = 'tag.play';
+    } else if (email.indexOf('@lls.') !== -1) {
+        email_termination_to_include = 'lls.solo';
+    }
+    console.log('set_school triggered email_termination_to_include = ', email_termination_to_include);
+};
+
 ProfilePage.display_profile = function() {
     var player_name = this.user.data.profile.name;
     
@@ -82,6 +100,8 @@ ProfilePage.display_profile = function() {
         e1.innerHTML = "Welcome " + player_name;
     }
     
+    // added so that profile page has access to information as to what school the student is at
+    this.set_school(this.user.data.profile.email);
     
     // This is currently disabled for mf users because the whole idea
     // of a level doesn't make complete sense.
