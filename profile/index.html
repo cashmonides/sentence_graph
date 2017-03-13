@@ -50,6 +50,10 @@
     
     <script src="../admin/admin.js"></script>
     <script src="../leaderboard/leaderboard.js"></script>
+    
+    
+    <script src="../history/history_query.js"></script>
+    <script src="../history/history_utils.js"></script>
 
     <script src="profile_utils.js"></script>
     <script src="profile.js"></script>
@@ -70,6 +74,7 @@
         <button class="button" id="spelling_bee_button" type="button" class="hoverable" onclick="ProfilePage.enter_spelling_bee_match()">SPELLING BEE MATCH</button>
         <!--<button class="button" id='check_leaderboard_button' onclick='produce_spelling_bee_results()'>check leaderboard</button>-->
         <button class="button" id='check_leaderboard_button' onclick='go_to_leaderboard()'>display leaderboard at bottom of page</button>
+        <button class="button" id='display_word_scores_button' onclick='ProfilePage.display_word_scores()'>display word scores at bottom of page</button>
         <button class="button" id="logout_button" onclick="ProfilePage.logout()">logout</button>
         <!--<button class="button" id="display_skipped_sentences_button" onclick="ProfilePage.display_skipped_sentences()">display skipped sentences</button>-->
     </div>
@@ -100,6 +105,7 @@
     <!--end of new material-->
     
     <div id="spelling_bee_leaderboard"></div>
+    <div id="word_score_display"></div>
     
     
     

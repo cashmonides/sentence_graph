@@ -1645,17 +1645,37 @@ Quiz.prototype.reset_submodule_without_post = function () {
 // end @beehack
 
 // @beehack
+Quiz.prototype.add_word_score = function (word_data) {
+    if (!this.word_scores_update_list) {
+        this.word_scores_update_list = [];
+    }
+    this.word_scores_update_list.push(word_data);
+}
+
 Quiz.prototype.set_word_scores = function (callback) {
     console.log("This is where set word scores will go when operational");
-    // commented out for testing (pending testing whether firebase can handle the traffic)
+    
+    
     // dummy data
     // this.word_scores_update_list = [
     //     {item: "arthropod", type: "word", correct: true, used_all_attempts: false, hints: 2, attempts: 2},
     //     {item: "amoeba", type: "word", correct: false, used_all_attempts: true, hints: 3, attempts: 10},
     //     {item: "biped", type: "word", correct: true, used_all_attempts: false, hints: 0, attempts: 2},
     // ];
-    // commented out for testing (pending testing whether firebase can handle the traffic)
-    // this.user.persist_word_scores(this.word_scores_update_list, callback);
+    
+    // test of an updated version
+    
+    // this.word_scores_update_list = [
+    //     {item: "arthropod", type: "word", correct: false, used_all_attempts: false, hints: 3, attempts: 1},
+    //     {item: "herbicide", type: "word", correct: true, used_all_attempts: true, hints: 3, attempts: 10}
+    // ];
+    
+    // commented out since now false
+    // // commented out for testing (pending testing whether firebase can handle the traffic)
+    this.user.persist_word_scores(this.word_scores_update_list, callback);
+    
+    // might need to be cleared
+    this.word_scores_update_list = [];
 }
 // end @beehack
 
@@ -1830,14 +1850,14 @@ Quiz.prototype.submodule_complete = function () {
         console.log("beehack: about to set word scores");
         
         // // todo commenting out set_word_scores for now
-        // var self = this;
-        // this.set_word_scores(function () {
-        //     self.submodule_complete_without_post();
-        // });
+        var self = this;
+        this.set_word_scores(function () {
+            self.submodule_complete_without_post();
+        });
         
         
         // todo desparate measure
-        this.submodule_complete_without_post();
+        // this.submodule_complete_without_post();
         return;
     }
     

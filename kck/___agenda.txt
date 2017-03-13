@@ -9,7 +9,6 @@ FUTURE DESIDERATA
     - e.g. Draco was king of _____ / Vulcan is the god of ________
 
 -------------------------CHICAGO AGENDA-----------------------------
-- ian question and scheduling
 - rewrite the problematic push
 - check levels (wolf, etc.)
 - add bee levels

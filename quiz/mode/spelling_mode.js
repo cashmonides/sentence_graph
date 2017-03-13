@@ -725,6 +725,7 @@ SpellingModeGame.prototype.attach = function () {
         this.temporary_max_incorrect_streak = this.quiz.module.submodule.max_incorrect_streak;
         back.log("PROBLEM: no spelling_mode_max_incorrect_streak specified. spellingmode.attach");
     }
+    
     // the usual max_streak needs to be stored
     this.dummy_limit_to_streak = this.quiz.module.submodule.max_incorrect_streak;
     
@@ -875,7 +876,8 @@ SpellingModeGame.prototype.set_default_beehack_level = function (counter) {
     if (output) {
         this.level = output;
     } else {
-        this.level = {'etym_level': 50}
+        console.log('problem: default bee level triggered');
+        this.level = {'etym_level': 10}
     }
 }
 
@@ -893,6 +895,8 @@ SpellingModeGame.prototype.get_mode_name = function() {
  
 
 SpellingModeGame.prototype.adjust_threshold = function () {
+    
+    /////// currently disabled because not working
     
     // console.log("session_bee_counter = ", session_bee_counter);
     
@@ -1068,9 +1072,6 @@ SpellingModeGame.prototype.next_question = function(){
     back.log("this.clue = ", this.clue);
     back.log("this.correct = ", this.correct);
     
-    
-    
-    
     if (this.chosen_question_type == 'root_definition_to_root') {
         this.etymology_cheat_sheet = alphabetize_dict(
             question_with_cheat_sheet['cheat_sheet']);
@@ -1177,7 +1178,21 @@ SpellingModeGame.cell_3_feedback_wrong = ["Try again!", "Take another shot."];
 
 
 
-
+SpellingModeGame.prototype.create_word_score_object = function (correct) {
+    var type;
+    if (this.chosen_question_type == 'root_definition_to_root') {
+        type = 'root';
+    } else {
+        type = 'word';
+    };
+    return {
+        'item': this.correct.replace(/\//g, '%'),
+        'type': type,
+        'correct': correct,
+        'used_all_attempts': false,
+        'hints': 0
+    }
+}
 
 
 SpellingModeGame.prototype.process_correct_answer = function() {
@@ -1198,6 +1213,20 @@ SpellingModeGame.prototype.process_correct_answer = function() {
     fbox.innerHTML = cell_1;
     
     clear_input_box("input_box");
+    
+    // old 
+    // this.quiz.word_score.item = this.correct;
+    
+    //old 
+    // if (this.chosen_question_type === 'root_definition_to_root') {
+    //     this.quiz.word_score.type = 'root';
+    // } else {
+    //     this.quiz.word_score.type = 'word';
+    // }
+    
+    var correct_on_first_try = this.quiz.submodule.incorrect_streak === 0;
+    
+    this.quiz.add_word_score(this.create_word_score_object(correct_on_first_try));
     
     this.quiz.question_complete();
 };
@@ -1476,6 +1505,8 @@ SpellingModeGame.prototype.give_away_answer = function(){
     
     
     fbox.innerHTML = "The correct answer is \"" + this.clue + " = " + this.correct + '"';
+    
+    this.quiz.add_word_score(this.create_word_score_object(false));
     
     this.quiz.question_complete();
 };

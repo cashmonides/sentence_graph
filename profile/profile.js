@@ -86,6 +86,14 @@ function go_to_leaderboard () {
 }
 
 
+ProfilePage.display_word_scores = function () {
+    var uid = this.user.uid;
+    console.log("UID in word_score display = ", uid);
+    var element = el('word_score_display');
+    history_display(uid, element);
+}
+
+
 // added march 9 2017 to set the school for each profile page
 ProfilePage.set_school = function (email) {
     // var captured_email = this.user.data.profile.email;
