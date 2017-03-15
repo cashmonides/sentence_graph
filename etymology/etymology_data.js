@@ -2161,7 +2161,7 @@ var words = {
     },
     "certify": {
         "grade": 12,
-        "meaning": "to state that something is <span class=\"embedded_root\">sure</span> or true",
+        "meaning": "to state that something is <span class=\"embedded_root\">sure</span>",
         "part of speech": "verb",
         "roots": [
             "CERT",
