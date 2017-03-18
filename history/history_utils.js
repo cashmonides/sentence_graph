@@ -22,6 +22,33 @@ var convert_mastery = function (mastery) {
 }
 
 
+function get_word_or_root_definition (string) {
+    var word_data_item = words[string];
+    console.log("WORD DATA ITEM = ", word_data_item);
+    
+    var output = "DEFAULT";
+    var definition_string = "NO STRING YET";
+    
+    if (word_data_item) {
+        definition_string = word_data_item.meaning;
+        output = definition_string;
+    } else {
+        word_data_item = roots[string];
+        definition_string = word_data_item.meaning;
+        output = definition_string;
+    }
+    
+    
+    if (output) {
+        return output;
+    } else {
+        
+        return "NO MEANING FOUND";
+    }
+}
+
+
+
 // below is march 9th version, doesn't create object, creates a string
 // var convert_word_score_accuracy_and_mastery_old = function (correct, total, mastery) {
     
@@ -68,10 +95,13 @@ var convert_word_score_accuracy_and_mastery = function (word, correct, total, ma
     
     
     
-    // var definition = get_word_definition(word);
+    
     // var definition = 'dummy definition';
     // below is a dummy example of what the data pulled from dictionary will look like
-    var definition = 'to state that something is <span class=\"embedded_root\">sure</span>';
+    // var definition = 'to state that something is <span class=\"embedded_root\">sure</span>';
+    var definition = get_word_or_root_definition(word);
+    
+    console.log("DEFINITION  = ", definition);
     
     // now we want to use regex to pull out the embedded root and make it capitalized
     // g = global don't stop at first match
