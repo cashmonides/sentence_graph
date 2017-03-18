@@ -236,7 +236,8 @@ function callback3(data) {
     }
     
     // this will be a div where we keep all the scored 
-    var e = el("spelling_bee_leaderboard");
+    // var e = el("spelling_bee_leaderboard");
+    var e = el("profile_display");
     // make({tag:"tr", children: [{tag: "td"}]}, e);
     
     for (var uid in non_sick_users) {

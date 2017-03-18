@@ -89,7 +89,7 @@ function go_to_leaderboard () {
 ProfilePage.display_word_scores = function () {
     var uid = this.user.uid;
     console.log("UID in word_score display = ", uid);
-    var element = el('word_score_display');
+    var element = el('profile_display');
     history_display(uid, element);
 }
 

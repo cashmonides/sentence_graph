@@ -33,6 +33,24 @@
    border: none;
 }
 
+
+/*^= means 'anything that has the class attribute that starts with'*/
+/*square brackets means attribute selector, selecting by attribute*/
+[class^=word_score_display_item] {
+    /*cursor:pointer;*/
+    cursor:help;
+}
+
+.word_score_display_item_above_threshold {
+    color: green;
+}
+
+.word_score_display_item_below_threshold {
+    color: red;
+}
+
+
+
 /* akiva disabled below for testing
 /*.progress_cell:hover {*/
 /*    background: red;*/
