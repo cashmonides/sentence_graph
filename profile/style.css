@@ -38,6 +38,23 @@ p {
     font-size: 10px;
 }
 
+
+section {
+    display: inline-block;
+    /*below produces two fixed columns*/
+    /*width: 200px;*/
+    /*another approach mix min-width and percentage*/
+    min-width: 200px;
+    width: 45%;
+    
+    
+    font-size: 10px;
+    padding: 0;
+    margin: 0;
+    
+}
+
+
 /*^= means 'anything that has the class attribute that starts with'*/
 /*square brackets means attribute selector, selecting by attribute*/
 [class^=word_score_display_item] {

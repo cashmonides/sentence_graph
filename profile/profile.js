@@ -79,6 +79,7 @@ ProfilePage.start = function(){
 
 function go_to_leaderboard () {
     // short term: we display on the same page
+    console.log("CALLED 1");
     produce_spelling_bee_results();
     
     // longer term, we display on another page

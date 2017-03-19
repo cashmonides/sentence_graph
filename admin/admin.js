@@ -40,6 +40,7 @@ function produce_spelling_bee_results (email_filter) {
 
 
 function go_to_leaderboard () {
+    console.log("CALLED 2");
     Persist.get(["users"], callback2);
     // document.location = '../leaderboard';
 }
@@ -289,7 +290,11 @@ function callback3(data) {
         // to sort in sublime text: replace $ with \n
         // then enable regex and replace \\n with \n
     }
-    e.innerHTML = final_output;
+    // old version ust one column
+    // e.innerHTML = final_output;
+    
+    
+    e.innerHTML = '<section>' + '_____POINTS_____' + '<br>' + final_output + '</section><section>' + '_____ACCURACY_____' + '<br>' + final_output + '</section>';
 }
 
 // function detect_old_user (user, uid) {
