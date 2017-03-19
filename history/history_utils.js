@@ -22,32 +22,27 @@ var convert_mastery = function (mastery) {
 }
 
 
-function get_word_or_root_definition (string) {
-    var word_data_item = words[string];
-    console.log("WORD DATA ITEM = ", word_data_item);
+// input: either word or root
+// output: definition string
+var get_word_or_root_definition = function (string) {
+    // get dictionary[string].meaning
+    // attempt dictionary = words
+    // if that doesn't work, attempt dictionary = roots
+    // if that doesn't work give up and return "no meaning found"
     
-    var output = "DEFAULT";
-    var definition_string = "NO STRING YET";
+    // var output = "DEFAULT MEANING";
     
-    if (word_data_item) {
-        definition_string = word_data_item.meaning;
-        output = definition_string;
-    } else {
-        word_data_item = roots[string];
-        definition_string = word_data_item.meaning;
-        output = definition_string;
-    }
+    // output = words[string].meaning;
+    // if (output) {
+    //     return output;
+    // } else {
+    //     output = roots[string].meaning;
+    // }
     
+    // return X ? Y : Z    =     if X is truthy return Y, else return Z
+    return (string in words) ? words[string].meaning : (string in roots) ? roots[string].meaning : "NO MEANING FOUND";
     
-    if (output) {
-        return output;
-    } else {
-        
-        return "NO MEANING FOUND";
-    }
 }
-
-
 
 // below is march 9th version, doesn't create object, creates a string
 // var convert_word_score_accuracy_and_mastery_old = function (correct, total, mastery) {
@@ -93,22 +88,40 @@ var convert_word_score_accuracy_and_mastery = function (word, correct, total, ma
     
     
     
+    var definition = get_word_or_root_definition(word);
     
+    console.log("definition = ", definition);
     
     
     // var definition = 'dummy definition';
     // below is a dummy example of what the data pulled from dictionary will look like
-    // var definition = 'to state that something is <span class=\"embedded_root\">sure</span>';
-    var definition = get_word_or_root_definition(word);
+    // var definition = 'to <span class=\"embedded_root\">make</span> something <span class=\"embedded_root\">sure</span>';
     
-    console.log("DEFINITION  = ", definition);
+    //       /X/g = match with all occurences of X
+    //       /<span.+>   = <span + any character + >
+    
+    
+    //      [^X]+    =    1 or more characters that's not X
+    
     
     // now we want to use regex to pull out the embedded root and make it capitalized
-    // g = global don't stop at first match
+    // /X/g = global don't stop at first match, match every occurence of X
     // () = remember this part
-    definition = definition.replace(/<span.+>(.+)<\/span>/g, function(_, a) {
-        return a.toUpperCase();
-    });
+    //   {int} = match with exactly int number of instances
+                // otherwise, if we have two e.g. span> it might match with the last one
+    /// ...X groups all the elements into an array
+    // normally first argument would be the original string
+    //// _ in argument = unused parameter, _, being a valid variable name, is just a sign that we're not using the 
+    // definition = definition.replace(/<span.+>([^<]+)<\/span>/g, function(_, ...a) {
+    //     return a.map(function (b) {
+    //         console.log("_ = ", _);
+    //         console.log("a = ", a);
+    //         // console.log(arguments);
+    //     }).join('');
+    // });
+    
+    
+    
     
     
     
@@ -151,8 +164,12 @@ var convert_word_score_accuracy_and_mastery = function (word, correct, total, ma
     
     console.log("WORD SCORE OBJECT stringified = ", JSON.stringify(word_score_display_object));
     
+    // below version was for title attribute tool tip
+    // return 'completion: ' + completion + ' ||| ' + 'accuracy: ' + percentage_string + ': <span class="' + threshold_status +  '" title="' + definition + '">' + word.replace(/%/g, '/') + '</span>';
+
+    return 'progress: ' + completion + ' ||| ' + percentage_string + ': <span class="' + threshold_status + '">' + word.replace(/%/g, '/') + '<span>' + definition + '</span></span>';
+
     
-    return 'completion: ' + completion + ' ||| ' + 'accuracy: ' + percentage_string + ': <span class="' + threshold_status +  '" title="' + definition + '">' + word.replace(/%/g, '/') + '</span>';
 }
 
 

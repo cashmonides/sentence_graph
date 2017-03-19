@@ -34,19 +34,53 @@
 }
 
 
+p {
+    font-size: 10px;
+}
+
 /*^= means 'anything that has the class attribute that starts with'*/
 /*square brackets means attribute selector, selecting by attribute*/
 [class^=word_score_display_item] {
     /*cursor:pointer;*/
     cursor:help;
+    
+}
+
+
+/*any span inside of this span*/
+/*> means direct child selector, i.e. not spans inside of spans */
+[class^=word_score_display_item] > span {
+    display: none;
+    font-size: 20px;
+    vertical-align: top;
+}
+
+/*X > Y > Z selects the second child (grandchild) of X*/
+[class^=word_score_display_item] > span > span{
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+
+
+/*  : = pseudo-selector selects for the pseudo-state of hover */
+[class^=word_score_display_item]:hover > span {
+    display: inline-block;
+    color: black;
+    margin-left: 5px;
+    font-size: 20px;
+    max-width: 400px;
 }
 
 .word_score_display_item_above_threshold {
     color: green;
+    font-size: 20px;
 }
 
 .word_score_display_item_below_threshold {
     color: red;
+    font-size: 20px;
 }
 
 
