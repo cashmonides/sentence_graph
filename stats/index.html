@@ -1,0 +1,148 @@
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Stats</title>
+    
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+    <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+    <script src="../libs/jquery-1.11.3.min.js"></script>
+    <script src="../libs/featherlight.min.js"></script>
+
+    <!-- utils in html here -->
+    <script src="../lib/utils.js"></script>
+    <script src="../lib/list_utils.js"></script>
+    <script src="../lib/sorting_utils.js"></script>
+    <script src="../lib/logging_utils.js"></script>
+    <script src="../lib/string_utils.js"></script>
+    <script src="../lib/random_utils.js"></script>
+	<script src="../lib/html_utils.js"></script>
+	<script src="../lib/getting_util.js"></script>
+	<script src="../lib/error_logging.js"></script>
+    <script src="../lib/persist.js"></script>
+    <script src="../lib/module.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    
+    <script src="../lib/interfaces.js"></script>
+    
+    <script src="../lib/in_production.js"></script>
+    
+    <script src="../lib/sentence_path_utils.js"></script>
+    
+    <script src="../mf/mf.js"></script>
+    <script src="../mf/syntax.js"></script>
+    
+    <!-- todo this is dirty research cleaner way -->
+    <script src="../quiz/mode/mf_mode.js"></script>
+    <script src="../quiz/mode/syntax_mode.js"></script>
+    
+    <script src="../syntax_mode_utils/answer_type.js"></script>
+    <script src="../syntax_mode_utils/get_syntax_question.js"></script>
+    
+    <script src="../lib/user.js"></script>
+    <script src="../lib/user_login_status.js"></script>
+    <script src="../lib/make.js"></script>
+    <script src="../lib/lightbox.js"></script>
+    
+    
+    
+    <script src="../admin/admin.js"></script>
+    <script src="../leaderboard/leaderboard.js"></script>
+    
+    
+    <script src="../history/history_query.js"></script>
+    <script src="../history/history_utils.js"></script>
+
+
+    <script src="../etymology/etymology_data.js"></script>
+    
+    <script src="profile_utils.js"></script>
+    <script src="profile.js"></script>
+    
+
+    <script src="../stats/stats.js"></script>
+
+</head>
+
+
+<body>
+    <div>STATS</div>
+    
+    <svg id='plot'></svg>
+    <svg id='text'></svg>
+    
+    <script>
+        console.log(user.uid)
+        console.log('here')
+        var d = get_word_scores();
+        console.log(d)    
+        var bins = {0:[], .1: [], .2: [], .3: [], .4: [], .5: [], .6: [], .7: [], .8: [],.9: [], 1: []}
+        var lists = {0:[], .1: [], .2: [], .3: [], .4: [], .5: [], .6: [], .7: [], .8: [],.9: [], 1: []}
+
+        for (k in keys) {
+            pct = data[keys[k]]['correct'] / data[keys[k]]['total']
+            bins[pct].push(data[keys[k]])
+            lists[pct].push(k)
+        }
+
+        var data = []
+        var ticks = []
+        
+        for (b in bins){
+          data.push(bins[b])
+          ticks.push(b)
+        }
+        
+        var svg = d3.select('#plot');
+        var t = d3.select('#text');
+        
+        svg.attr('height',300)
+        .attr('width',250);
+        
+        t.attr('height',100)
+        .attr('width',100)
+        .attr('y',-50);
+        
+        svg.selectAll('g')
+            .data(data)
+            .enter().append('g')
+            .attr('class','bar')
+            .attr('transform', function(d,i) {
+                return 'translate(' 
+                       + (i*17 +30) + ',' + (300 - d*10) + ')';
+            })
+            .append('rect')
+            .attr('height',function(d) { 
+                  return d*10;
+                })
+            .attr('width', 8)
+            .attr('fill',d3.rgb('#b0c4dc'))
+        		.on("mouseover", show_list);
+        
+        function show_list(d,i) {
+        	var w = lists[ticks[i]]
+          if (w === undefined) {
+          	w = ['']
+          }
+          t.selectAll('text').remove()
+          
+        	var div = t.selectAll("text")
+          						.data(w)
+         							.enter().append('text')
+              .attr('fill','black')
+              .attr('x', 10)
+              .attr('y', function(d,i) {
+              		return (i+1)*25;
+              })
+              .attr("dy", "-.6em")
+              .text(function(d) { return d + '\n';})
+            
+        }
+    </script>
+    
+</body>
+
+</html>

@@ -31,9 +31,10 @@ function start() {
 
 
 function produce_spelling_bee_results (email_filter) {
-    console.log("Produce spelling bee result called");
+    console.log("Produce spelling bee result called 123");
     if (email_filter) {
-      email_termination_to_include = email_filter;  
+      email_termination_to_include = email_filter;
+      console.log("email filter triggered 123");
     };
     Persist.get(["users"], callback3);
 }
@@ -49,6 +50,7 @@ function callback() {
     //console.log"callback triggered");
     Persist.get(["users"], callback3);
 }
+
 
 function callback2(data) {
     //console.log"callback2 triggered");
@@ -216,6 +218,10 @@ function callback3(data) {
     var spelling_rankings_list = [];
     var sorted_spelling_rankings_list = [];
     
+    
+    var word_score_accuracy_rankings_list = [];
+    var sorted_word_score_accuracy_rankings_list = [];
+    
     // For each key (a uid) in users...
     for (var uid in users) {
         // Get the user that is the corresponding value.
@@ -268,6 +274,15 @@ function callback3(data) {
         var avatar = user.profile.avatar;
         var spelling_score = user.spelling_level;
         var tuple = [];
+        
+        // we want to add a feature which detects the current user and highlights their avatar
+        // short term global variable, set in 
+        
+        if (user_name === current_user_logged_in) {
+            avatar = '<span class="highlighted_avatar">' + avatar + '</span>';
+        }
+        
+        
         tuple.push(spelling_score);
         tuple.push(user_name);
         tuple.push(avatar);
@@ -287,14 +302,44 @@ function callback3(data) {
         var final_output = sort_and_display_match_results_presorted(sorted_spelling_rankings_list, 0);
         console.log("FINAL OUTPUT = ", final_output);
     
-        // to sort in sublime text: replace $ with \n
-        // then enable regex and replace \\n with \n
+        // // we get data from firebase and convert it
+        // console.log("USER.PROFILE.AVATAR = ", user.profile.avatar);
+        // console.log("USER.WORD_SCORES = ", user.word_scores);
+        
+        // var word_score_average_accuracy = generate_word_score_avg_accuracy(user.word_scores);
+        // console.log("WORD SCORE FINAL = ", word_score_average_accuracy);
+        
+        // tuple.push(word_score_average_accuracy);
+        // tuple.push(user_name);
+        // tuple.push(avatar);
+        // tuple.push("grade: " + user.profile.grade);
+        // tuple.push('$');
+        
+        // word_score_accuracy_rankings_list.push()
+        
+        // we push to list
+        
+        // we sort list
+    
     }
     // old version ust one column
     // e.innerHTML = final_output;
     
+    // current version   
+    e.innerHTML = '<section>' + final_output + '</section>';
+    // advanced version to be implemented when accuracy metrics are online
+    // e.innerHTML = '<section>' + '_____POINTS_____' + '<br>' + final_output + '</section><section>' + '_____ACCURACY_____' + '<br>' + final_output + '</section>';
+
+    // super advanced version will feed both
     
-    e.innerHTML = '<section>' + '_____POINTS_____' + '<br>' + final_output + '</section><section>' + '_____ACCURACY_____' + '<br>' + final_output + '</section>';
+    
+}
+
+
+
+function callback4 (points_leaderboard_list, accuracy_leaderboard_list) {
+    var e = el("profile_display");
+    e.innerHTML = '<section>' + '_____POINTS_____' + '<br>' + points_leaderboard_list + '</section><section>' + '_____ACCURACY_____' + '<br>' + accuracy_leaderboard_list + '</section>';
 }
 
 // function detect_old_user (user, uid) {

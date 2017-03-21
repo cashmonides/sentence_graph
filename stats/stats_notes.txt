@@ -1,0 +1,38 @@
+WEBSITE TALKS TO DATA IN 2 WAYS
+- talks to sql via lib/ajax.js  ---> lib/sql.py  ---> databse
+- talks to firebase with Persist library (Persist.get, Persist.set)
+
+
+
+GOOD FIRST STEP
+- bar graph with 
+- x-axis = accuracy
+- y-axis = number of words or roots with that accuracy
+- broken down into 10% ranges
+- so there are ten columns
+- maybe color runs the spectrum from red to yellow to green
+- hover on each bar --> list of words displayed at that level
+- e.g. hover on 1-10% ---> sidebar lists all words whose accuracy is between 1 and 10%
+
+
+DATA IS IN FIREBASE
+- path = word_scores --> uid --> list of objects ---> properties: correct, total, item
+
+
+FIREBASE FUNCTIONS
+
+- bulk of firebase persist operations are in lib/persist
+- get word_scores and get word_scores_accuract is in history/history_utils.js
+
+
+
+CONTROL FLOW FOR WORD SCORES DATABASE QUERY
+- button on profile "display word scores"
+----> calls the function  ProfilePage.display_word_scores in Persist
+----> calls the function history_display    in history
+
+
+
+/////////////////////////////
+
+//////////////////////////

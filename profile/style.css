@@ -54,6 +54,12 @@ section {
     
 }
 
+.highlighted_avatar {
+    font-weight: bold;
+    font-size: 20px;
+    color: green;
+}
+
 
 /*^= means 'anything that has the class attribute that starts with'*/
 /*square brackets means attribute selector, selecting by attribute*/

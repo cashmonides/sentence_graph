@@ -107,6 +107,10 @@ ProfilePage.set_school = function (email) {
     console.log('set_school triggered email_termination_to_include = ', email_termination_to_include);
 };
 
+ProfilePage.set_current_user = function (user_name) {
+    current_user_logged_in = user_name;
+}
+
 ProfilePage.display_profile = function() {
     var player_name = this.user.data.profile.name;
     
@@ -120,7 +124,7 @@ ProfilePage.display_profile = function() {
     
     // added so that profile page has access to information as to what school the student is at
     this.set_school(this.user.data.profile.email);
-    
+    this.set_current_user(this.user.data.profile.name);
     // This is currently disabled for mf users because the whole idea
     // of a level doesn't make complete sense.
     if (!(this.user.is_mf())) {

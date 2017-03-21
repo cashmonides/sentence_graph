@@ -173,6 +173,27 @@ var convert_word_score_accuracy_and_mastery = function (word, correct, total, ma
 }
 
 
+var generate_word_score_avg_accuracy = function (data) {
+    var accuracy_list = values(data).filter(function (x) {
+            return typeof x === 'object'
+        }).map(function (data_item) {
+            console.log("AVERAGE WORD SCORE ACCURACY = ", data_item.correct / data_item.total);
+            return data_item.correct / data_item.total;
+        });
+    console.log("accuracy list = ", accuracy_list);
+    var average_accuracy = calculate_word_score_aggregate_accuracy(accuracy_list);
+    console.log("average accuracy = ", average_accuracy);
+    return average_accuracy;
+}
+
+var calculate_word_score_aggregate_accuracy = function (accuracy_list) {
+    var sum = accuracy_list.reduce(add, 0);
+    return sum / accuracy_list.length;
+}
+
+var add = function (a, b) {
+    return a + b;
+}
 
 function sort_number2(a,b) {
     return a - b;
@@ -202,6 +223,13 @@ var history_display = function (uid, e) {
         //     return convert_word_score_accuracy_and_mastery(data_item.correct, data_item.total, data_item.mastery) + ': ' + data_item.item.replace(/%/g, '/');
         // }).sort();
         
+        
+        console.log("ABOUT TO AVERAGE");
+        var aggregate_word_score_accuracy = generate_word_score_avg_accuracy(data);
+        
+        
+        aggregate_word_score_accuracy = Math.round(aggregate_word_score_accuracy * 100);
+        console.log("FINISHED AVERAGING");
         
         var data_list = values(data).filter(function (x) {
             return typeof x === 'object'
@@ -240,9 +268,11 @@ var history_display = function (uid, e) {
         });
         
         
-        e.innerHTML = sorted_data_list.join('');
+        e.innerHTML = "AVERAGE ACCURACY = " + aggregate_word_score_accuracy + '%' + sorted_data_list.join('');
     });
 }
+
+
 
 
 
