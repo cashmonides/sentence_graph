@@ -59,26 +59,51 @@
 
     <script src="../etymology/etymology_data.js"></script>
     
-    <script src="profile_utils.js"></script>
-    <script src="profile.js"></script>
+    <script src="../profile/profile_utils.js"></script>
+    <script src="../profile/profile.js"></script>
     
 
-    <script src="../stats/stats.js"></script>
+    <script src="stats.js"></script>
 
 </head>
 
 
 <body>
-    <div>STATS</div>
+    <div></div>
     
     <svg id='plot'></svg>
     <svg id='text'></svg>
     
+    
+    <tr id="stats_query"><td>USER NAME</td><td><input type="text" id="stats_query_input"></td></tr>
+    <button class="button" id="display_stats_button" onclick="display_accuracy_graph()">display accuracy graph</button>
+        
+    
+    <div id="stats_display"></div>
+    
+    
     <script>
-        console.log(user.uid)
+    
+        
+        
         console.log('here')
-        var d = get_word_scores();
-        console.log(d)    
+        
+        
+        //@dummy 
+        // probably because of asynchronous persist statement
+        // we have to wrap everything in a callback
+        // so it would look something like:
+        // var data = get_word_scores();
+        // get_data_and_display(data, callback);
+        // console.log("DATA in index = ", d);
+        
+        
+        // var d = get_dummy_data();
+        // console.log("DATA in index = ", d);
+        
+        
+        
+        
         var bins = {0:[], .1: [], .2: [], .3: [], .4: [], .5: [], .6: [], .7: [], .8: [],.9: [], 1: []}
         var lists = {0:[], .1: [], .2: [], .3: [], .4: [], .5: [], .6: [], .7: [], .8: [],.9: [], 1: []}
 
@@ -142,6 +167,9 @@
             
         }
     </script>
+    
+    
+    
     
 </body>
 
