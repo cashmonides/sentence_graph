@@ -39,9 +39,14 @@
     <script src="spelling_bee_match.js"></script>   
     <script src="spelling_bee_match_utils.js"></script>   
     
-    
+    <script src="../history/history_query.js"></script>
+    <script src="../history/history_utils.js"></script>
+    <script src="../history/word_score_manager.js"></script>
 </head>
 <body>
+
+
+<button class="button" id="set_spelling_tournament_mode_button" onclick="toggle_tournament_spelling_mode()">TOURNAMENT MODE: OFF (CLICK FOR ON)</button>
 
 
 <table>
@@ -49,9 +54,10 @@
         <!--LEFT COLUMN-->
         
         <td>
-            <table>
-                <tr><td>LEVEL</td><td><input type="text" id="spelling_match_level1"></td></tr>
-                <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit1"></td></tr>
+            <table id="table1">
+                <!--tables created by JavaScript-->
+                <!--<tr><td>LEVEL</td><td><input type="text" id="spelling_match_level1"></td></tr>-->
+                <!--<tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit1"></td></tr>-->
             </table>
             
             <button class="button" id="make_spelling_match_button1" onclick="make_spelling_match(1)">MAKE GAME</button>
@@ -84,9 +90,10 @@
         <!--MIDDLE COLUMN-->
         <td>__________</td>
         <td>
-            <table>
-                <tr><td>LEVEL</td><td><input type="text" id="spelling_match_level2"></td></tr>
-                <tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit2"></td></tr>
+            <table id="table2">
+                <!--tables created by JavaScript-->
+                <!--<tr><td>LEVEL</td><td><input type="text" id="spelling_match_level2"></td></tr>-->
+                <!--<tr><td>TIME LIMIT</td><td><input type="text" id="spelling_match_time_limit2"></td></tr>-->
             </table>
             
             <button class="button" id="make_spelling_match_button2" onclick="make_spelling_match(2)">MAKE GAME</button>

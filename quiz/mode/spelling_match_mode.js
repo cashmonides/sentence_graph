@@ -7,7 +7,9 @@ var SpellingMatchModeGame = function () {
 };
 
 
-SpellingMatchModeGame.prototype.attach = function(){
+
+
+SpellingMatchModeGame.prototype.attach = function () {
     set_display("latin_answer_choices", 'none');
     set_display("drop_answer_choices", 'none');
     set_display("submit_button", 'initial');
@@ -34,9 +36,37 @@ SpellingMatchModeGame.prototype.attach = function(){
     set_display_of_class("cleared_in_picture_display2", "initial");
     //end current best result
     
+    //@tournament
+    if (this.quiz.module.id === 0.1) {
+        this.tournament_mode = true;
+        // todo turn into callback
+        this.tournament_item_list = this.quiz.tournament_item_list;
+        
+        
+        
+        // short term hack
+        this.tournament_item_list = remove_upper_case_items(this.tournament_item_list);
+        console.log("TOURNAMENT LIST post root removal = ", this.tournament_item_list);
+        // this makes it so we start with word at position 0 and go from there.
+        // hacky
+        if (this.tournament_item_list_position >= 1) {
+            console.log("13 no action triggered");
+        } else {
+            this.tournament_item_list_position = 0;
+        }
+        
+    } else {
+        this.tournament_mode = false;
+    }
+    
+    // end @tournament
+    
     
     // todo get rid of below
     this.secret_streak = 0;
+    
+    
+    
     
     
     //we first check whether a  mode-specific max-streak exists
@@ -165,19 +195,20 @@ SpellingMatchModeGame.prototype.get_mode_name = function() {
 
 SpellingMatchModeGame.prototype.next_question = function() {
 
+    
+
     clear_input_box("input_box");
     
     
 
     // todo separate spelling level from etymology level
+    
     var types_of_level = ['etym_level'];
     var post_sampling_level = range_sampler(this.quiz.module.id, types_of_level);
-        
     
     
-    
-    
-    if (this.quiz.module.id === 0.25) {
+    // todo make this better
+    if (this.quiz.module.id === 0.25 || this.quiz.module.id === 0.1) {
         console.log("TWIXT spelling bee match triggered, setting final level");
         //level is set by the pin
         this.set_level_via_firebase();
@@ -208,7 +239,12 @@ SpellingMatchModeGame.prototype.next_question = function() {
     this.legal_question_types = {'word_definition_to_word': 0.8, 'root_definition_to_root': 0.3};
     // this.legal_question_types = {'word_definition_to_word': 0.5};
     
-    this.chosen_question_type = weighted(this.legal_question_types);
+    
+    if (this.quiz.module.id === 0.25) {
+        this.chosen_question_type = weighted(this.legal_question_types);
+    } else if (this.quiz.module.id === 0.1) {
+        this.chosen_question_type = 'word_definition_to_word';
+    }
     
     
     
@@ -237,23 +273,97 @@ SpellingMatchModeGame.prototype.next_question = function() {
     
     // for root-definition-to-root we must have the number of answer choice set to 0
     
-    if (this.chosen_question_type == 'root_definition_to_root') {
+    
+    
+    /////////////// DATA GENERATION begin /////////////
+    ///////////// all of our data generation happens below
+    
+    // todo read from firebase and produce list of mandatory items
+    // todo 
+    //@tournament
+    // todo make sure to set this.tournament_mode to true if required
+    // also set this.tournament_item_list and this.tournament_item_list_position (to 0)
+    
+    
+    // we establish our state (whether we want to give them a fixed word list or not)
+    // we base this on what kind of pin they enter
+    // if they enter a pin that indicates they are in tournament mode
+    // then fixed_word_list is set as true, based on what kind of pin they entered
+    var fixed_word_list = this.tournament_mode;
+    
+    
+    if (fixed_word_list) {
+        
+        // @tournament
+        //select one by one from the list we've generated
+        // var mandatory_item = "DUMMY ITEM";
+        // use modulus so that when we get to the end of the list we start at the beginning again.
+        
+        
+        ///// old version, not incrementing for some reason////
+        /*
+        console.log("position before increment = ", this.tournament_item_list_position);
+        var mandatory_item = this.tournament_item_list[
+            this.tournament_item_list_position % this.tournament_item_list.length];
+        // go to next item on item list
+        this.tournament_item_list_position++;
+        
+        console.log("position after increment = ", this.tournament_item_list_position);
+        console.log("13 mandatory item = ", mandatory_item);
+        */
+        
+        
+        //////////////////////
+        console.log("position before increment = ", global_hack_tournament_item_list_position);
+        var mandatory_item = this.tournament_item_list[
+            global_hack_tournament_item_list_position % this.tournament_item_list.length];
+        // go to next item on item list
+        global_hack_tournament_item_list_position++;
+        
+        console.log("position after increment = ", global_hack_tournament_item_list_position);
+        console.log("13 mandatory item = ", mandatory_item);
+        
+        
+        
+        
+        /////////////
+        
+        var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet_deterministic(
+        this.level.etym_level, this.chosen_question_type, 0, this.quiz.module.spell_root_cheat_sheet_dummies, 3, mandatory_item);
+        // console.log(question_with_cheat_sheet['question_data']);
+        var question = question_with_cheat_sheet['question_data'];
+        this.etymology_cheat_sheet = alphabetize_dict(
+            question_with_cheat_sheet['cheat_sheet']);
+        
+        console.log("13 new position = ", this.tournament_item_list_position);
+        // end @tournament
+    } else {
+        if (this.chosen_question_type == 'root_definition_to_root') {
         var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
         this.level.etym_level, this.chosen_question_type, 0, this.quiz.module.spell_root_cheat_sheet_dummies, 3);
         // console.log(question_with_cheat_sheet['question_data']);
         var question = question_with_cheat_sheet['question_data'];
         this.etymology_cheat_sheet = alphabetize_dict(
             question_with_cheat_sheet['cheat_sheet']);
-    } else {
-        var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
-        this.level.etym_level, this.chosen_question_type, 2, this.quiz.module.spell_word_cheat_sheet_dummies, 1);
-        // console.log(question_with_cheat_sheet['question_data']);
-        var question = question_with_cheat_sheet['question_data'];
-        this.etymology_cheat_sheet = alphabetize_dict(
-            question_with_cheat_sheet['cheat_sheet']);
+        } else {
+            var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet(
+            this.level.etym_level, this.chosen_question_type, 2, this.quiz.module.spell_word_cheat_sheet_dummies, 1);
+            // console.log(question_with_cheat_sheet['question_data']);
+            var question = question_with_cheat_sheet['question_data'];
+            this.etymology_cheat_sheet = alphabetize_dict(
+                question_with_cheat_sheet['cheat_sheet']);
+        }
     }
     
     
+    
+    
+    
+    
+    
+    
+    
+    /////////////// DATA GENERATION end /////////////
     
     
     this.correct = question.correct_answer;

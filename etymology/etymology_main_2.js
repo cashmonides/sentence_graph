@@ -73,6 +73,8 @@ var cheat_sheet_map = {
 
 //chooses all available roots as specified for each module
 var select_available_roots = function (etym_level) {
+    console.log("13 etym_level = ", etym_level);
+    console.log("13 etym_levels = ", etym_levels);
     return map_level_to_allowed(etym_level, etym_levels).roots;
 }
 
@@ -230,6 +232,144 @@ available_words, available_roots, number_of_answer_choices) {
     }
 }
 
+
+// @tournament
+
+var make_question_data_deterministic = function (question_type,
+available_words, available_roots, number_of_answer_choices, mandatory_item) {
+    // available_words and available_roots are lists.
+    // var question_type = random_choice(available_question_types);
+    if (legal_question_types.indexOf(question_type) === -1) {
+        throw new Error('Illegal question type.');
+    }
+    var question_template = question_template_dict[question_type];
+    var clue;
+    var correct_answer;
+    var choices;
+    switch (question_type) {
+        case 'word_to_latin_root':
+        case 'word_to_english_root':
+        case 'word_to_translated_root':
+            
+            var root = random_choice(available_roots);
+            
+            var words_with_root = get_words_with_root(root, available_words);
+            
+            
+            clue = random_choice(words_with_root);
+            
+            
+            var roots_of_clue = get_roots(clue);
+            choices = push_random_disjoint(
+                [root], available_roots, similar_enough,
+                function (x) {return roots_of_clue.indexOf(x) === -1},
+                number_of_answer_choices - 1);
+            if (question_type == 'word_to_latin_root') {
+                correct_answer = root;
+            } else if (question_type == 'word_to_english_root') {
+                correct_answer = get_root_meaning(root);
+                choices = choices.map(get_root_meaning);
+            } else if (question_type == 'word_to_translated_root') {
+                correct_answer = get_translated_root(root);
+                choices = choices.map(get_translated_root);
+            };
+            break;
+        case 'english_root_to_word':
+            var root = random_choice(available_roots);
+            clue = get_root_meaning(root);
+            var words_with_root = get_words_with_root(root, available_words);
+            correct_answer = random_choice(words_with_root);
+            choices = push_random_n_satisfying_constraint(
+                [correct_answer], available_words, function (x) {
+                    return words_with_root.indexOf(x) === -1},
+                number_of_answer_choices - 1);
+            break;
+        case 'word_to_word_definition':
+        case 'word_definition_to_word':
+            ////////////
+            // @ tournament
+            // old non-deterministic version
+            // var word = random_choice(available_words);
+            // new deterministic version
+            var word = mandatory_item;
+            
+            console.log("13 word mode mandatory override triggered setting word = ", word);
+            
+            // end @tournament
+            ////////////////////
+            
+            
+            
+            var meaning = get_word_meaning(word);
+            var word_choices = push_random_n_satisfying_constraint(
+                [word], available_words, function (x) {return x !== clue},
+            number_of_answer_choices - 1);
+            var word_meaning_choices = word_choices.map(get_word_meaning);
+            if (question_type === 'word_to_word_definition') {
+                clue = word;
+                correct_answer = meaning;
+                choices = word_meaning_choices;
+            } else if (question_type === 'word_definition_to_word') {
+                clue = meaning;
+                correct_answer = word;
+                choices = word_choices;
+            }
+            
+            break;
+        case 'root_to_root_definition':
+        //@tournament - tournament should use this
+        case 'root_definition_to_root':
+            
+            ////////////
+            // @ tournament
+            // old non-deterministic version
+            // var root = random_choice(available_roots);
+            // new deterministic version
+            var root = mandatory_item;
+            
+            
+            console.log("13 root mode mandatory override triggered setting root = ", root);
+            
+            
+            // end @tournament
+            ////////////////////
+            
+            var meaning = get_root_meaning(root);
+            // Some changes occured here.
+            // The "push random disjoint" function takes a custom equality tester.
+            // Here, the equality test tests whether there is a common word
+            // in the root's descriptions of length at least 4.
+            var root_choices = push_random_disjoint(
+                [root], available_roots, similar_enough,
+                    constant(true), number_of_answer_choices - 1);
+            var root_meaning_choices = root_choices.map(get_root_meaning);
+            if (question_type === 'root_to_root_definition') {
+                clue = root;
+                correct_answer = meaning;
+                choices = root_meaning_choices;
+            } else if (question_type === 'root_definition_to_root') {
+                clue = meaning;
+                correct_answer = root;
+                choices = root_choices;
+            }
+    };
+    //akiva_damage_control 10-21-16
+    // console.log("ETYM.CSV output = ", question_template + clue + JSON.stringify(choices) + correct_answer); 
+    // console.log("ETYM.CSV correct_answer = ", correct_answer);
+    // console.log("ETYM.CSV choices = ", JSON.stringify(choices));
+    // console.log("ETYM.CSV clue = ", clue);
+    // console.log("ETYM.CSV question_template = ", question_template); 
+    // console.log("ETYM.CSV question_type = ", question_type); 
+    return {
+        'question_type': question_type,
+        'question_template': question_template,
+        'clue': clue,
+        'correct_answer': correct_answer,
+        'choices': choices
+    }
+}
+
+
 // signature:
 // takes as arguments:
 // x: string
@@ -321,6 +461,19 @@ number_of_answer_choices) {
     return make_question_data(question_type, available_words,
     available_roots, number_of_answer_choices);
 }
+
+// below is a slightly modified version of above
+// instead of picking a random word or root
+// it picks only one (taken one by one from a list)
+var make_etymology_question_deterministic = function (etym_level, question_type, 
+number_of_answer_choices, mandatory_item) {
+    console.log("13 etym_level = ", etym_level);
+    var available_roots = select_available_roots(etym_level);
+    var available_words = get_words_from_roots(available_roots);
+    return make_question_data_deterministic(question_type, available_words,
+    available_roots, number_of_answer_choices, mandatory_item);
+}
+
 
 
 // Add more entries as needed.
@@ -422,6 +575,41 @@ number_of_dummies, number_of_mandatory) {
         'cheat_sheet': cheat_sheet
     }
 }
+
+
+// a deterministic version of above
+var make_etymology_question_with_cheat_sheet_deterministic = function (
+etym_level, question_type, number_of_answer_choices,
+number_of_dummies, number_of_mandatory, mandatory_item) {
+    console.log("13 etym_level = ", etym_level);
+    var question_data = make_etymology_question_deterministic(
+       etym_level, question_type, number_of_answer_choices, mandatory_item);
+        
+        
+    debug.log("BEEBUG question_data = ", question_data);
+    debug.log("BEEBUG question_data stringified = ", JSON.stringify(question_data));
+
+        
+    var cheat_sheet_type = cheat_sheet_map[question_type];
+    var x = cheat_sheet_type['type'].split('_to_')[0];
+    var y = cheat_sheet_type['type'].split('_to_')[1];
+    x = etym_standardize(x);
+    y = etym_standardize(y);
+    var mandatory = [];
+    var mandatory_types = cheat_sheet_type['mandatory'].split(' + ');
+    for (var i = 0; i < mandatory_types.length; i++) {
+        mandatory = mandatory.concat(get_mandatory(
+            mandatory_types[i], question_data, number_of_mandatory));
+    };
+    number_of_dummies = get_number_of_dummies(
+        number_of_dummies, cheat_sheet_type['dummies']);
+    var cheat_sheet = cheat_sheet_x_to_y(x, y, mandatory, number_of_dummies);
+    return {
+        'question_data': question_data,
+        'cheat_sheet': cheat_sheet
+    }
+}
+
 
 
 // we want a cheat sheet that will help when we are trying to go

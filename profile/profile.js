@@ -62,6 +62,13 @@ ProfilePage.enter_spelling_bee_match = function () {
     document.location = "../quiz/?bee_match=true&pin=" + pin;
 };
 
+
+ProfilePage.enter_spelling_bee_tournament = function () {
+    back.log("enter_spelling_bee_tournament triggered");
+    var pin = prompt('Enter the pin of your tournament.');
+    document.location = "../quiz/?bee_match=true&bee_tournament=true&pin=" + pin;
+};
+
 //global functions can be simply reference but for methods we have to bind the method to "this" 
 // this.user points to the user object
 // this.display_profile - the this = ProfilePage -

@@ -1,12 +1,60 @@
 window.onload = start;
 
 function start() {
-    
+    create_tables();
 }
 
+table_dictionary = {
+    'LEVEL': 'spelling_match_level',
+    'TIME LIMIT': 'spelling_match_time_limit',
+    'number of non-random words': 'spelling_match_num_hard',
+    'total number of non-random words': 'spelling_match_num_hard_picked_from',
+    'number of random words': 'spelling_match_num_random'
+}
+
+table_dictionary_reverse = reverse_dict(table_dictionary);
+
+var create_tables = function () {
+    var column = 1;
+    while (true) {
+        var e = el('table' + column);
+        if (!e) {
+            return;
+        }
+        for (var i in table_dictionary) {
+            if (table_dictionary.hasOwnProperty(i)) {
+                e.innerHTML += '<tr><td>' + i + '</td><td><input type="text" id="' +
+                    table_dictionary[i] + column+ '"></td></tr>';
+            }
+        }
+        column++;
+    }
+}
 
 var random_spelling_bee_numbers = {};
 
+var toggle_tournament_spelling_mode = function () {
+    var toggle_button = document.getElementById('set_spelling_tournament_mode_button');
+    if (toggle_button.textContent === "TOURNAMENT MODE: ON (CLICK FOR OFF)") {
+        toggle_button.textContent = "TOURNAMENT MODE: OFF (CLICK FOR ON)";
+        
+    } else if (toggle_button.textContent === "TOURNAMENT MODE: OFF (CLICK FOR ON)") {
+        toggle_button.textContent = "TOURNAMENT MODE: ON (CLICK FOR OFF)";
+    } else {
+        throw new Error('bad toggle_button.textContent');
+    }
+}
+
+var get_tournament_status = function () {
+    var toggle_button = document.getElementById('set_spelling_tournament_mode_button');
+    if (toggle_button.textContent === "TOURNAMENT MODE: ON (CLICK FOR OFF)") {
+        return true;
+    } else if (toggle_button.textContent === "TOURNAMENT MODE: OFF (CLICK FOR ON)") {
+        return false;
+    } else {
+        throw new Error('bad toggle_button.textContent');
+    }
+}
 
 var make_spelling_match = function (n) {
     var level = el("spelling_match_level" + n).value;
@@ -49,6 +97,15 @@ var make_spelling_match = function (n) {
     }
 }
 
+var num_here = function (id, column) {
+    var e = el(id + column);
+    return input_is_valid(e.value);
+}
+
+var get_num_from = function (id, column) {
+    var e = el(id + column);
+    return convert_input_to_num(e.value);
+}
 
 var send_spelling_match_to_firebase = function (pin, level, stopping_time, column) {
     console.log("PIN = ", pin);
@@ -61,13 +118,39 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
     //     "time_limit": time_limit,
     // }
     
+    var in_tournament = get_tournament_status();
+    
     var data = {
         "level": level,
-        "stopping_time": stopping_time
+        "stopping_time": stopping_time,
+        "in_tournament": in_tournament
     }
     
+    if (in_tournament) {
+        var missing_nums = ['spelling_match_num_hard', 'spelling_match_num_hard_picked_from', 'spelling_match_num_random'].filter(function (x) {
+            return !num_here(x, column);
+        });
+        if (missing_nums.length > 0) {
+            alert('The following entries are not numbers: ' + missing_nums.map(function (x) {
+                return table_dictionary_reverse[x];
+            }).join(', '));
+        }
+        pick_spelling_bee_words_with_persist_get(
+            get_num_from('spelling_match_num_hard', column),
+            get_num_from('spelling_match_num_hard_picked_from', column),
+            get_num_from('spelling_match_num_random', column),
+            function (words_and_roots) {
+                data.tournament_item_list = words_and_roots;
+                finish_sending_spelling_bee_match_to_firebase(data, pin, column)
+            }
+        );
+    } else {
+        finish_sending_spelling_bee_match_to_firebase(data, pin, column);
+    }
+}
     
     
+var finish_sending_spelling_bee_match_to_firebase = function (data, pin, column) {
     // path will be ["spelling_matches", pin]
     // e.g. ["spelling_matches", 1456323]
     
@@ -80,21 +163,23 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
     var path = ["test", pin]
     
     
-    // final_callback basically just has display_spelling_match_pin(pin, column)
+    // // final_callback basically just has display_spelling_match_pin(pin, column)
+    // I will risk the wrath of the gods by changing code we know to work.
+    display_spelling_match_pin(pin, column);
 
-    Persist.set(path, data, final_callback(pin, column));
+    Persist.set(path, data);
     
 }
 
 
-// callback of the persist statement called by send_spelling_match_to_firebase
-var final_callback = function (pin, column) {
-    display_spelling_match_pin(pin, column);
-    // display_countdown(time_limit);
-}
+// // callback of the persist statement called by send_spelling_match_to_firebase
+// var final_callback = function (pin, column) {
+//     display_spelling_match_pin(pin, column);
+//     // display_countdown(time_limit);
+// }
 
 
-// called ny the final callback
+// called by the final callback
 var display_spelling_match_pin = function (pin, column) {
     
     var element = el('spelling_match_pin_cell' + column);

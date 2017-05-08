@@ -23,11 +23,20 @@ var start = function () {
 
 window.onload = start;
 
+////////
+// short term hack 
+var global_hack_tournament_item_list_position;
 
+global_hack_tournament_item_list_position = 0;
+//////
 
 var process_slashes_bool = true;
 
 var Quiz = function () {
+    
+    
+    
+    
     
     this.user = null;
     
@@ -102,9 +111,13 @@ Quiz.prototype.start = function() {
             self.sentences = ss.filter(function (sentence) {
                 var language = sentence.language_of_sentence;
                 // console.log("DEBUG 10-9-16 self.module = ", self.module);
-                var sentence_levels = self.module.sentence_levels;
-                return language in sentence_levels &&
-                sentence.difficulty_level <= sentence_levels[language];
+                // @beehack
+                if (!is_spelling_mod_id(self.module.id)) {
+                    var sentence_levels = self.module.sentence_levels;
+                    return language in sentence_levels &&
+                    sentence.difficulty_level <= sentence_levels[language];
+                }
+                
             });
             
             if (self.requires_callback_before_starting) {
@@ -246,6 +259,8 @@ Quiz.prototype.get_start_module = function () {
         // var user_name = this.user.data.profile.name;
         var user_name = this.user.data.profile.name + "=" + this.user.uid
         this.requires_callback_before_starting = true;
+        // @tournament
+        var in_tournament_via_ups = 'bee_tournament' in ups;
         this.callback_before_starting = function (function_after_callback) {
             Persist.get(['test', self.pin], function (x) {
                 var val = x.val();
@@ -254,10 +269,32 @@ Quiz.prototype.get_start_module = function () {
                     alert("Your pin " + self.pin + " doesn't match any current games. Try again.")
                     return_to_profile();
                 } else {
+                    var in_tournament_via_firebase = val.in_tournament;
+                    // checking to see whether they've tried to enter a tournament 
+                    // either by entering the tournament button but no tournament exists
+                    // or if they've entered a tournament pin but not hit the tournament button
+                    
+                    // @tournament
+                    if (in_tournament_via_firebase !== in_tournament_via_ups) {
+                        alert("Your pin " + self.pin + " matches a game of the wrong type. Try again.")
+                        return_to_profile();
+                        // I don't think this return is needed but I'm putting it in just in case.
+                        return;
+                    }
                     self.spelling_match_level = val.level;
                     self.spelling_match_stopping_time = val.stopping_time;
                     self.total_match_time = val.stopping_time - Date.now();
                     console.log("123456 self.total_match_time = ", self.total_match_time);
+                    
+                    // put the bool on the quiz object.
+                    self.in_tournament = in_tournament_via_ups;
+                    // do tournament checking
+                    if (self.in_tournament) {
+                        // the conversion is needed due to the fact that firebase can't handle slashes
+                        self.tournament_item_list = convert_words_from_firebase_to_normal(
+                            val.tournament_item_list);
+                    }
+                    
                     // original version
                     // start_drone_timer(self.spelling_match_stopping_time);
                     
@@ -272,7 +309,12 @@ Quiz.prototype.get_start_module = function () {
                 }
             });
         }
-        return this.user.get_spelling_match_module();
+        // @tournament
+        if (in_tournament_via_ups) {
+            return this.user.get_spelling_tournament_module();
+        } else {
+            return this.user.get_spelling_match_module();
+        }
     } else {
         this.advance_improve_status = "advancing";
         return this.user.get_current_module();
@@ -511,13 +553,22 @@ Quiz.prototype.next_submodule = function () {
         this.next_submodule_mf();
     }
     
+    // old version
+    // if (this.module.id === 0.1 || this.module.id === 0.5 || this.module.id === 0.25) {
+    //     // callback of this get operation will be next_question
+    //     this.get_word_scores();
+    //     // so we just return
+    //     return;
+    // }
     
-    if (this.module.id === 0.5 || this.module.id === 0.25) {
+    // new version
+    if (is_spelling_mod_id(this.module.id)) {
         // callback of this get operation will be next_question
         this.get_word_scores();
         // so we just return
         return;
     }
+    
     
     this.initialize_accuracy_dictionary();
     
@@ -1310,7 +1361,12 @@ Quiz.prototype.next_question = function (error) {
     
     back.log("this.module.id = ", this.module.id);
     // @beehack
-    if (this.module.id === 0.5 || this.module.id === 0.25) {
+    
+    // old version
+    // if (this.module.id === 0.5 || this.module.id === 0.25) {
+        
+    // new version
+    if (is_spelling_mod_id(this.module.id)) {
         
         console.log("entering short term beehack interceptor");
         
@@ -1459,7 +1515,7 @@ Quiz.prototype.question_complete = function (button_name) {
     set_display("feedback_for_input", 'none');
     
     // anti- @beehack
-    if (this.module.id !== .25 && this.module.id !== .5) {
+    if (this.module.id !== .25 && this.module.id !== .5  && this.module.id !== .1) {
         this.update_accuracy();
     }
     
@@ -1846,7 +1902,12 @@ Quiz.prototype.submodule_complete = function () {
     // if we are in spelling bee mode
     // we want to bypass post so this is much simpler
     // we also want to set some spelling bee data
-    if (this.module.id === 0.5 || this.module.id === 0.25) {
+    
+    // old version
+    // if (this.module.id === 0.5 || this.module.id === 0.25) {
+      
+    // new version    
+    if (is_spelling_mod_id(this.module.id)) {
         console.log("beehack: about to set word scores");
         
         // // todo commenting out set_word_scores for now

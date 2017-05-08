@@ -84,6 +84,8 @@ var display_accuracy_graph = function () {
 // the callback is currently a dummy, but will be a d3 funciton
 var get_scores_and_display = function (uid) {
     
+    console.log('test of console log here 3');
+    
     if (!uid) {
         uid = dummy_uid
         console.log("NO uid entered, using dummy uid = ", uid);
@@ -94,7 +96,7 @@ var get_scores_and_display = function (uid) {
     
     
     Persist.get(['word_scores', uid], function (x) {
-        console.log('entering callback');
+        console.log('entering callback__');
         var data = x.val();
         if (!data || (typeof data !== 'object')) {
             console.log('PROBLEM: data undefined or data not an object')
@@ -126,6 +128,7 @@ var get_scores_and_display = function (uid) {
         // here is the dummy callback function
         // takes data_list as the input
         // to be replaced by the d3 function
+        console.log("about to call callback");
         d3_dummy_callback(processed_data);
         return;
     })}
@@ -134,7 +137,11 @@ var get_scores_and_display = function (uid) {
 // a dummy function, to be replaced by the d3 function    
 var d3_dummy_callback = function (data) {
     var div_test_display = el('stats_display');
+    console.log('here')
+    console.log('hello');
     div_test_display.innerHTML = JSON.stringify(data);
+
+    console.log('done')
 };
 
 

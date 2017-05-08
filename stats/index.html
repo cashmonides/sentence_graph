@@ -86,7 +86,7 @@
     
         
         
-        console.log('here')
+        console.log('here2')
         
         
         //@dummy 
@@ -104,68 +104,7 @@
         
         
         
-        var bins = {0:[], .1: [], .2: [], .3: [], .4: [], .5: [], .6: [], .7: [], .8: [],.9: [], 1: []}
-        var lists = {0:[], .1: [], .2: [], .3: [], .4: [], .5: [], .6: [], .7: [], .8: [],.9: [], 1: []}
-
-        for (k in keys) {
-            pct = data[keys[k]]['correct'] / data[keys[k]]['total']
-            bins[pct].push(data[keys[k]])
-            lists[pct].push(k)
-        }
-
-        var data = []
-        var ticks = []
-        
-        for (b in bins){
-          data.push(bins[b])
-          ticks.push(b)
-        }
-        
-        var svg = d3.select('#plot');
-        var t = d3.select('#text');
-        
-        svg.attr('height',300)
-        .attr('width',250);
-        
-        t.attr('height',100)
-        .attr('width',100)
-        .attr('y',-50);
-        
-        svg.selectAll('g')
-            .data(data)
-            .enter().append('g')
-            .attr('class','bar')
-            .attr('transform', function(d,i) {
-                return 'translate(' 
-                       + (i*17 +30) + ',' + (300 - d*10) + ')';
-            })
-            .append('rect')
-            .attr('height',function(d) { 
-                  return d*10;
-                })
-            .attr('width', 8)
-            .attr('fill',d3.rgb('#b0c4dc'))
-        		.on("mouseover", show_list);
-        
-        function show_list(d,i) {
-        	var w = lists[ticks[i]]
-          if (w === undefined) {
-          	w = ['']
-          }
-          t.selectAll('text').remove()
-          
-        	var div = t.selectAll("text")
-          						.data(w)
-         							.enter().append('text')
-              .attr('fill','black')
-              .attr('x', 10)
-              .attr('y', function(d,i) {
-              		return (i+1)*25;
-              })
-              .attr("dy", "-.6em")
-              .text(function(d) { return d + '\n';})
-            
-        }
+       
     </script>
     
     

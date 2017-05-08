@@ -1118,7 +1118,7 @@ var etym_levels = {
             'root_definition_to_root': 1
         }
     },
-    480 : {
+    500 : {
         roots: ['CARN', 'HERB', 'OMNI', 'VOR/VOUR', 'BI/BIN', 'QUAD/QUADR', 'TRI', 'PED/POD', 'ARTHR', 
         "IG/IL/IM/IN/IR root 2", 'VERTEBR', 'GASTR', 'MACRO', 'MICRO', 'MULTI', 'UNI', 'MON/MONO', 
         'POLY', 'GON', 'METER/METR', 'PENT/PENTA', 'HEX/HEXA', 'OCT/OCTA/OCTO', 'DEC/DEKA', 'XEN/XENO', 
