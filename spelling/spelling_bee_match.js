@@ -9,7 +9,8 @@ table_dictionary = {
     'TIME LIMIT': 'spelling_match_time_limit',
     'number of non-random words': 'spelling_match_num_hard',
     'total number of non-random words': 'spelling_match_num_hard_picked_from',
-    'number of random words': 'spelling_match_num_random'
+    'number of random words': 'spelling_match_num_random',
+    'word list to use': 'spelling_match_word_list'
 }
 
 table_dictionary_reverse = reverse_dict(table_dictionary);
@@ -126,7 +127,16 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
         "in_tournament": in_tournament
     }
     
-    if (in_tournament) {
+    if (el('spelling_match_word_list' + column).value !== '') {
+        Persist.get(['word_lists', el('spelling_match_word_list' + column).value], function (x) {
+            if (data.in_tournament === false) {
+                alert('switching tournament mode to true (just for this game)');
+            }
+            data.in_tournament = true;
+            data.tournament_item_list = x.val();
+            finish_sending_spelling_bee_match_to_firebase(data, pin, column);
+        })
+    } else if (in_tournament) {
         var missing_nums = ['spelling_match_num_hard', 'spelling_match_num_hard_picked_from', 'spelling_match_num_random'].filter(function (x) {
             return !num_here(x, column);
         });
@@ -141,7 +151,7 @@ var send_spelling_match_to_firebase = function (pin, level, stopping_time, colum
             get_num_from('spelling_match_num_random', column),
             function (words_and_roots) {
                 data.tournament_item_list = words_and_roots;
-                finish_sending_spelling_bee_match_to_firebase(data, pin, column)
+                finish_sending_spelling_bee_match_to_firebase(data, pin, column);
             }
         );
     } else {

@@ -6,7 +6,14 @@ var SpellingMatchModeGame = function () {
     this.quiz = null;
 };
 
+// Note: The two functions below are only used in tournament mode.
+SpellingMatchModeGame.prototype.are_words_allowed = function () {
+    return true;
+}
 
+SpellingMatchModeGame.prototype.are_roots_allowed = function () {
+    return false;
+}
 
 
 SpellingMatchModeGame.prototype.attach = function () {
@@ -40,10 +47,27 @@ SpellingMatchModeGame.prototype.attach = function () {
     if (this.quiz.module.id === 0.1) {
         this.tournament_mode = true;
         // todo turn into callback
-        this.tournament_item_list = this.quiz.tournament_item_list;
+        // still hacky. Apparently the game is regenerated every answer.
+        // Since this may be wise we store our data in the quiz instead.
+        // Yes, I know it basically has the same issues as a global.
+        // It would be nice to have some object dedicated to persistent game state.
+        if (!this.quiz.spelling_tournament_data) {
+             this.quiz.spelling_tournament_data = {};
+             var are_words_allowed = this.are_words_allowed();
+             var are_roots_allowed = this.are_roots_allowed();
+             if (!(are_words_allowed || are_roots_allowed)) {
+                 throw new Error('neither words nor roots are allowed');
+             }
+             this.quiz.spelling_tournament_data.tournament_item_list = this.quiz.tournament_item_list.filter(
+                 function (word_or_root) {
+                     return (are_words_allowed && word_or_root in words)
+                     || (are_roots_allowed && word_or_root in roots);
+                 }
+             );
+             this.quiz.spelling_tournament_data.tournament_item_list_position = 0;
+        }
         
-        
-        
+        /*
         // short term hack
         this.tournament_item_list = remove_upper_case_items(this.tournament_item_list);
         console.log("TOURNAMENT LIST post root removal = ", this.tournament_item_list);
@@ -54,6 +78,7 @@ SpellingMatchModeGame.prototype.attach = function () {
         } else {
             this.tournament_item_list_position = 0;
         }
+        */
         
     } else {
         this.tournament_mode = false;
@@ -190,7 +215,18 @@ SpellingMatchModeGame.prototype.get_mode_name = function() {
 }
 
 
-
+SpellingMatchModeGame.prototype.get_spelling_intro_question = function () {
+    var spelling_intro_question;
+    if (this.chosen_question_type == 'root_definition_to_root') {
+        spelling_intro_question = "Spell the ROOT that means: "
+    } else if (this.chosen_question_type == 'word_definition_to_word') {
+        spelling_intro_question = "Spell the WORD that means: "
+    } else {
+        spelling_intro_question = "Type the closest match to: "
+        bug.log("PROBLEM: invalid question type in spelling mode");
+    }
+    return spelling_intro_question;
+}
 
 
 SpellingMatchModeGame.prototype.next_question = function() {
@@ -240,26 +276,16 @@ SpellingMatchModeGame.prototype.next_question = function() {
     // this.legal_question_types = {'word_definition_to_word': 0.5};
     
     
-    if (this.quiz.module.id === 0.25) {
-        this.chosen_question_type = weighted(this.legal_question_types);
-    } else if (this.quiz.module.id === 0.1) {
-        this.chosen_question_type = 'word_definition_to_word';
-    }
+    // overwritten in hack later for tournament mode
+    this.chosen_question_type = weighted(this.legal_question_types);
+    
     
     
     
     back.log("this.chosen_question_type = ", this.chosen_question_type);
     
     
-    var spelling_intro_question;
-    if (this.chosen_question_type == 'root_definition_to_root') {
-        spelling_intro_question = "Spell the ROOT that means: "
-    } else if (this.chosen_question_type == 'word_definition_to_word') {
-        spelling_intro_question = "Spell the WORD that means: "
-    } else {
-        spelling_intro_question = "Type the closest match to: "
-        bug.log("PROBLEM: invalid question type in spelling mode");
-    }
+    var spelling_intro_question = this.get_spelling_intro_question();
     
     
     
@@ -312,21 +338,42 @@ SpellingMatchModeGame.prototype.next_question = function() {
         console.log("13 mandatory item = ", mandatory_item);
         */
         
+        // console.log("position before increment = ",
+        // this.quiz.spelling_tournament_data.tournament_item_list_position);
+        var mandatory_item = this.quiz.spelling_tournament_data.tournament_item_list[
+            this.quiz.spelling_tournament_data.tournament_item_list_position %
+            this.quiz.spelling_tournament_data.tournament_item_list.length];
+        // go to next item on item list
+        this.quiz.spelling_tournament_data.tournament_item_list_position++;
         
+        // console.log("position after increment = ",
+        // this.quiz.spelling_tournament_data.tournament_item_list_position);
+        // console.log("13 mandatory item = ", mandatory_item);
+        /*
         //////////////////////
         console.log("position before increment = ", global_hack_tournament_item_list_position);
         var mandatory_item = this.tournament_item_list[
             global_hack_tournament_item_list_position % this.tournament_item_list.length];
         // go to next item on item list
         global_hack_tournament_item_list_position++;
+        */
         
-        console.log("position after increment = ", global_hack_tournament_item_list_position);
-        console.log("13 mandatory item = ", mandatory_item);
+        // console.log("position after increment = ", global_hack_tournament_item_list_position);
+        // console.log("13 mandatory item = ", mandatory_item);
         
         
         
         
         /////////////
+        // EXTREMELY hacky
+        if (mandatory_item in roots) {
+            this.chosen_question_type = 'root_definition_to_root';
+        } else if (mandatory_item in words) {
+            this.chosen_question_type = 'word_definition_to_word';
+        } else {
+            throw new Error('I have no idea how we ended up with something that\'s neither a word nor a word.');
+        }
+        var spelling_intro_question = this.get_spelling_intro_question();
         
         var question_with_cheat_sheet = make_etymology_question_with_cheat_sheet_deterministic(
         this.level.etym_level, this.chosen_question_type, 0, this.quiz.module.spell_root_cheat_sheet_dummies, 3, mandatory_item);
@@ -335,7 +382,7 @@ SpellingMatchModeGame.prototype.next_question = function() {
         this.etymology_cheat_sheet = alphabetize_dict(
             question_with_cheat_sheet['cheat_sheet']);
         
-        console.log("13 new position = ", this.tournament_item_list_position);
+        // console.log("13 new position = ", this.tournament_item_list_position);
         // end @tournament
     } else {
         if (this.chosen_question_type == 'root_definition_to_root') {

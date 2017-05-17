@@ -1,3 +1,21 @@
+AGENDA FOR WEDNESDAY IN MAY SPELLING BEE
+- test current setup in random deterministic list mode
+- decide whether we want to change
+- ***generate random words_only list
+- ***manually prune
+- ***store in firebase
+- ***tweak spelling bee setup page to get word_list from firebase
+- disable hint button??? for final solo spelling mode
+- test with multiple computers
+
+- daily archive of word scores
+
+
+
+
+
+
+
 DONE
 - no sequence or relative time for jussive, potential, optative, deliberative and all conditionals
 

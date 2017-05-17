@@ -407,7 +407,7 @@ KCKModeGame.prototype.kck_cheat_sheet = function (chosen_lexemes) {
     });
     // We sort each group.
     var lexemes_sorted_by_root = lexemes_sorted_by_part_of_speech.map(function (x) {
-        return quick_sort(x, sort_by_func(function (x) {
+        return x.sort(sort_by_func(function (x) {
             return x.get_citation_form_in(source_language);
         }))
     });

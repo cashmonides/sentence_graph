@@ -1,0 +1,17 @@
+explanation of archive.js
+
+var archive = function () {
+    var p = prompt('Password?');
+    if (hash(p) === 1327021495) { // matches for 'beast666'
+        var penguin = 'archive';
+        var security_through_obscurity = 'word_scores';
+        var variable = 'Persist'
+        var method_1 = 'get';
+        var method_3 = 'set';
+        var method_2 = 'val';
+        this[variable][method_1]([security_through_obscurity], function (param) {
+            var brillig = security_through_obscurity + '_' + (new Date()).toString().split(' ').slice(0, 4).join('_');
+            this[variable][method_3]([penguin, brillig], param[method_2]())
+        })
+    }
+}

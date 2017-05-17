@@ -441,7 +441,7 @@ var cheat_sheet = function (master_lexeme_list) {
             return x.properties.core.part_of_speech});
     // We sort each group.
     var lexemes_sorted_by_root = lexemes_by_part_of_speech.map(
-        function (x) {return quick_sort(x, sort_by_func(get_pure_latin_root))});
+        function (x) {return x.sort(sort_by_func(get_pure_latin_root))});
     // We push the part of speach to each item (as a header).
     lexemes_sorted_by_root.forEach(function (x) {
         x.unshift(x[0].properties.core.part_of_speech + 's')});

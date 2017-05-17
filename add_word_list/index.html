@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <title>SPELLING BEE WORDLIST SETUP PAGE</title>
+
+	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+
+    
+    <!-- utils in html here -->
+ <!--   <script src="../lib/utils.js"></script>-->
+ <!--   <script src="../lib/list_utils.js"></script>-->
+    <script src="../lib/sorting_utils.js"></script>
+ <!--   <script src="../lib/string_utils.js"></script>-->
+ <!--   <script src="../lib/random_utils.js"></script>-->
+	
+	<!--<script src="../lib/getting_util.js"></script>-->
+	<!--<script src="../lib/error_logging.js"></script>-->
+	<script src="../lib/logging_utils.js"></script>
+ 
+ <!--   <script src="../lib/make.js"></script>-->
+ <!--   <script src="../lib/module.js"></script> -->
+ <!--   <script src="../lib/user.js"></script>-->
+ <!--   <script src="../lib/user_login_status.js"></script>   -->
+    <script src="../lib/string_utils.js"></script>
+    <script src="../lib/list_utils.js"></script>
+    <script src="../lib/random_utils.js"></script>
+    <script src="../lib/html_utils.js"></script>
+    <script src="../lib/clock_utils.js"></script>
+    <script src="../lib/persist.js"></script>
+    <script src="../history/history_query.js"></script>
+    <script src="../history/history_utils.js"></script>
+    <script src="../history/word_score_manager.js"></script>
+    <script>
+    var generate_word_list = function () {
+        var word_list_name = el('word_list_name').value;
+        var word_list_content = el('word_list_content').value.split(/ *, */).map(function (x) {return x.replace(/[;"\[\]]/g, '')});
+        console.log(word_list_name, word_list_content)
+        if (confirm('create word list')) {
+            Persist.set(['word_lists', word_list_name], word_list_content.map(function (x) {return x.replace(/\//g, '%')}))
+        }
+    }
+    </script>
+</head>
+<body>
+    Name
+    <input type="text" id="word_list_name"></input>
+    <br/><br/>
+    Words
+    <br/>
+    <textarea id="word_list_content" style='height: 300px; width: 300px;'></textarea>
+    <br/>
+    <button onclick="generate_word_list()">Generate Word List</button>
+</body>
+</html>

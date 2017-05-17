@@ -24,13 +24,31 @@ var start = function () {
 window.onload = start;
 
 ////////
-// short term hack 
-var global_hack_tournament_item_list_position;
+// UHHHH??? This hack seemed to have no effect vecrus the better way.
+// short term hack
+// var global_hack_tournament_item_list_position;
 
-global_hack_tournament_item_list_position = 0;
+// global_hack_tournament_item_list_position = 0;
 //////
 
 var process_slashes_bool = true;
+
+
+// for head-to-head spelling bee mode we want a button that clears all the hints
+var clear_all_hints = function () {
+    set_font_weight_of_class("embedded_root", "normal");
+    set_case_of_class("embedded_root", "lowercase");
+    set_inner_html_of_class("cleared_in_picture_display2", "");
+    set_inner_html_of_class("hint_div", "");
+    el('input_box').value = '';
+    
+    global_hint_counter = 0;
+    el("spelling_hint_button_master").innerHTML = "get a HINT";
+    el("spelling_hint_button_master").disabled = false;
+}
+
+
+
 
 var Quiz = function () {
     
@@ -293,6 +311,8 @@ Quiz.prototype.get_start_module = function () {
                         // the conversion is needed due to the fact that firebase can't handle slashes
                         self.tournament_item_list = convert_words_from_firebase_to_normal(
                             val.tournament_item_list);
+                        console.log("TOURNAMENT ITEM LIST before conversion = ", val.tournament_item_list);
+                        console.log("TOURNAMENT ITEM LIST after conversion = ", JSON.stringify(self.tournament_item_list));
                     }
                     
                     // original version
@@ -444,9 +464,9 @@ Quiz.prototype.end_drone_game_meat = function (pin, user_name) {
     
     
     
-    console.log("WEEZER666 about to persist drone game with the following data");
-    console.log("WEEZER666 persisting drone game, path = ", path);
-    console.log("WEEZER666 persisting drone game, score = ", score);
+    // console.log("WEEZER666 about to persist drone game with the following data");
+    // console.log("WEEZER666 persisting drone game, path = ", path);
+    // console.log("WEEZER666 persisting drone game, score = ", score);
     
     
     Persist.set(path, score, callback);

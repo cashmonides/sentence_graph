@@ -73,8 +73,7 @@ var cheat_sheet_map = {
 
 //chooses all available roots as specified for each module
 var select_available_roots = function (etym_level) {
-    console.log("13 etym_level = ", etym_level);
-    console.log("13 etym_levels = ", etym_levels);
+    console.log("etym_level = ", etym_level);
     return map_level_to_allowed(etym_level, etym_levels).roots;
 }
 
@@ -250,7 +249,9 @@ available_words, available_roots, number_of_answer_choices, mandatory_item) {
         case 'word_to_latin_root':
         case 'word_to_english_root':
         case 'word_to_translated_root':
-            
+            // remove when implemented
+            throw new Error('not yet implemented!');
+            /*
             var root = random_choice(available_roots);
             
             var words_with_root = get_words_with_root(root, available_words);
@@ -274,7 +275,11 @@ available_words, available_roots, number_of_answer_choices, mandatory_item) {
                 choices = choices.map(get_translated_root);
             };
             break;
+            */
         case 'english_root_to_word':
+            // remove when implemented
+            throw new Error('not yet implemented!');
+            /*
             var root = random_choice(available_roots);
             clue = get_root_meaning(root);
             var words_with_root = get_words_with_root(root, available_words);
@@ -284,6 +289,7 @@ available_words, available_roots, number_of_answer_choices, mandatory_item) {
                     return words_with_root.indexOf(x) === -1},
                 number_of_answer_choices - 1);
             break;
+            */
         case 'word_to_word_definition':
         case 'word_definition_to_word':
             ////////////
@@ -293,7 +299,7 @@ available_words, available_roots, number_of_answer_choices, mandatory_item) {
             // new deterministic version
             var word = mandatory_item;
             
-            console.log("13 word mode mandatory override triggered setting word = ", word);
+            // console.log("13 word mode mandatory override triggered setting word = ", word);
             
             // end @tournament
             ////////////////////
