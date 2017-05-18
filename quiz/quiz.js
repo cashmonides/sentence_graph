@@ -311,8 +311,8 @@ Quiz.prototype.get_start_module = function () {
                         // the conversion is needed due to the fact that firebase can't handle slashes
                         self.tournament_item_list = convert_words_from_firebase_to_normal(
                             val.tournament_item_list);
-                        console.log("TOURNAMENT ITEM LIST before conversion = ", val.tournament_item_list);
-                        console.log("TOURNAMENT ITEM LIST after conversion = ", JSON.stringify(self.tournament_item_list));
+                        // console.log("TOURNAMENT ITEM LIST before conversion = ", val.tournament_item_list);
+                        // console.log("TOURNAMENT ITEM LIST after conversion = ", JSON.stringify(self.tournament_item_list));
                     }
                     
                     // original version
